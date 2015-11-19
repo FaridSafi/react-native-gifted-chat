@@ -2,8 +2,8 @@
 Ready-to-use chat interface for iOS and Android React-Native apps
 
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/1.png)
-![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/2.png)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/3.png)
+![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/2.png)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/4.png)
 
 ### Simple example
@@ -68,61 +68,54 @@ var GiftedMessengerExample = React.createClass({
 ### Props
 
 
-| Props name                    | Platform | Description                                                                | Default                          | Type     |
-| ----------------------------- | -------- | -------------------------------------------------------------------------- | -------------------------------- | -------- |
-| displayNames                  | Both     | Display or not the name of the interlocutor(s)                             | true                             | Boolean  |
-| placeholder                   | Both     | TextInput placeholder                                                      | 'Type a message...'              | String   |
-| styles                        | Both     | Styles of children components - See GiftedMessenger.js/componentWillMount  | {}                               | Function |
-| autoFocus                     | Both     | TextInput auto focus                                                       | true                             | Boolean  |
-| onErrorButtonPress            | Both     | Called when the re-send button is pressed                                  | (message, rowID) => {}           | Function |
-| loadEarlierMessagesButton     | Both     | Display or not the button to load earlier message                          | false                            | Boolean  |
-| loadEarlierMessagesButtonText | Both     | Label of the 'Load Earlier Messages' button                                | 'Load earlier messages'          | String   |
-| onLoadEarlierMessages         | Both     | Called when 'Load Earlier Message' button is pressed                       | (oldestMessage, callback) => {}  | Function |
-| initialMessages               | Both     | List of initial messages                                                   | []                               | Array    |
-| handleSend                    | Both     | Called when a message is Sent                                              | (message, rowID) => {}           | Function |
-| maxHeight                     | Both     | Max height of the component                                                | Dimensions.get('window').height  | Integer  |
-| senderName                    | Both     | Name of the sender of the messages                                         | 'Sender'                         | String   |
-| senderImage                   | Both     | Image of the sender                                                        | null                             | Object   |
-| sendButtonText                | Both     | 'Send' button label                                                        | 'Send'                           | String   |
-| onImagePress                  | Both     | Called when the image of a message is pressed                              | (rowData, rowID) => {}           | Function |
-| parseText                     | iOS      | If the text has to be parsed with taskrabbit/react-native-parsed-text      | true                             | Boolean  |
-| handleUrlPress                | iOS      | Called when a parsed url is pressed                                        | (url) => {}                      | Function |
-| handlePhonePress              | iOS      | Called when a parsed phone number is pressed                               | (phone) => {}                    | Function |
-| handleEmailPress              | iOS      | Called when a parsed email is pressed                                      | (email) => {}                    | Function |
-| inverted                      | Both     | Invert vertically the orientation of the chat                              | true                             | Boolean  |
+| Props name                    | Type     | Description                                                                | Platform | Default                          |
+| ----------------------------- | -------- | -------------------------------------------------------------------------- | -------- | -------------------------------- |
+| displayNames                  | Boolean  | Display or not the name of the interlocutor(s)                             | Both     | true                             |
+| placeholder                   | String   | TextInput placeholder                                                      | Both     | 'Type a message...'              |
+| styles                        | Function | Styles of children components - See GiftedMessenger.js/componentWillMount  | Both     | {}                               |
+| autoFocus                     | Boolean  | TextInput auto focus                                                       | Both     | true                             |
+| onErrorButtonPress            | Function | Called when the re-send button is pressed                                  | Both     | (message, rowID) => {}           |
+| loadEarlierMessagesButton     | Boolean  | Display or not the button to load earlier message                          | Both     | false                            |
+| loadEarlierMessagesButtonText | String   | Label of the 'Load Earlier Messages' button                                | Both     | 'Load earlier messages'          |
+| onLoadEarlierMessages         | Function | Called when 'Load Earlier Message' button is pressed                       | Both     | (oldestMessage, callback) => {}  |
+| initialMessages               | Array    | List of initial messages                                                   | Both     | []                               |
+| handleSend                    | Function | Called when a message is Sent                                              | Both     | (message, rowID) => {}           |
+| maxHeight                     | Integer  | Max height of the component                                                | Both     | Dimensions.get('window').height  |
+| senderName                    | String   | Name of the sender of the messages                                         | Both     | 'Sender'                         |
+| senderImage                   | Object   | Image of the sender                                                        | Both     | null                             |
+| sendButtonText                | String   | 'Send' button label                                                        | Both     | 'Send'                           |
+| onImagePress                  | Function | Called when the image of a message is pressed                              | Both     | (rowData, rowID) => {}           |
+| parseText                     | Boolean  | If the text has to be parsed with taskrabbit/react-native-parsed-text      | iOS      | true                             |
+| handleUrlPress                | Function | Called when a parsed url is pressed                                        | iOS      | (url) => {}                      |
+| handlePhonePress              | Function | Called when a parsed phone number is pressed                               | iOS      | (phone) => {}                    |
+| handleEmailPress              | Function | Called when a parsed email is pressed                                      | iOS      | (email) => {}                    |
+| inverted                      | Boolean  | Invert vertically the orientation of the chat                              | Both     | true                             |
 
-* In React-Native 0.14.2, I recommend to use inverted={false} in Android until issue [#3557](https://github.com/facebook/react-native/issues/3557) is fixed 
+* In Android React-Native 0.14.2, I recommend to use inverted={false} until issue [#3557](https://github.com/facebook/react-native/issues/3557) is fixed 
 
 
 ### API
 
-- Add messages at the end of the list view
-```appendMessages(messages = [])```
+- ```appendMessages(messages = [])``` // Add messages at the end of the list view
 
-- Add 1 message at the end of the list view
-```appendMessage(message = {})```
+- ```appendMessage(message = {})``` // Add 1 message at the end of the list view
 
-- Add messages at the begining of the list view
-```prependMessages(messages = [])```
+- ```prependMessages(messages = [])``` // Add messages at the begining of the list view
 
-- Add 1 message at the begining of the list view
-```prependMessage(message = {})```
+- ```prependMessage(message = {})``` // Add 1 message at the begining of the list view
 
-- Set the status of a message ('ErrorButton', 'Sent', 'Seen', 'Anything you want')
-```setMessageStatus(status = '', rowID)```
+- ```setMessageStatus(status = '', rowID)``` // Set the status of a message ('ErrorButton', 'Sent', 'Seen', 'Anything you want')
 
-- Get message object by rowID
-```getMessage(rowID)```
+- ```getMessage(rowID)``` // Get message object by rowID
 
-- Get previous message object of a rowID
-```getPreviousMessage(rowID)```
+- ```getPreviousMessage(rowID)``` // Get previous message object of a rowID
 
-- Get next message object of a rowID
-```getNextMessage(rowID)```
+- ```getNextMessage(rowID)``` // Get next message object of a rowID
 
 
 ### Message object
 
+```js
 var message = {
   text: 'Message content', 
   name: "Sender's name", 
@@ -131,6 +124,7 @@ var message = {
   date: new Date(),
   // ...any attributes you want
 };
+```
 
 ### License
 

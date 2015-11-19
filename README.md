@@ -1,10 +1,10 @@
-# react-native-gifted-messenger
+# Gifted Messenger
 Ready-to-use chat interface for iOS and Android React-Native apps
 
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-1.png)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-2.png)
 
-### Simple example
+### Example
 
 ```js
 var GiftedMessenger = require('react-native-gifted-messenger');

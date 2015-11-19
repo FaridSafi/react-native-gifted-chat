@@ -421,7 +421,7 @@ var GiftedMessenger = React.createClass({
       if (this._data[rowID].position === 'right') {
         this._data[rowID].status = status;
       
-        // only 1 message can have a custom status
+        // only 1 message can have a status
         for (let i = 0; i < this._data.length; i++) {
           if (i !== rowID && this._data[i].status !== 'ErrorButton') {
             this._data[i].status = '';
@@ -508,8 +508,6 @@ var GiftedMessenger = React.createClass({
         style={this.styles.container}
         ref='container'
       >        
-        {/* TextInput is displayed at the top of screen in Android - Because if at bottom, when the keyboard appears, the screen will be forced to scroll to the textinput */}
-        {/* Also, onKeyboardWillShow is not triggered in React-Native 0.14.2 - so we can't manage properly the size of the listview */}
         {(this.props.inverted === true ? this.renderAnimatedView() : null)}
         {this.renderTextInput()}
         {(this.props.inverted === false ? this.renderAnimatedView() : null)}            

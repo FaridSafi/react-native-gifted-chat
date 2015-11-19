@@ -1,0 +1,97 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:1:1-22:12
+	xmlns:android
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:1:11-69
+	package
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:2:5-41
+		INJECTED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:4:5-67
+	android:name
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:4:22-64
+application
+ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:6:5-20:19
+MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:22:5-20
+MERGED from [com.facebook.react:react-native:0.14.0] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.14.0/AndroidManifest.xml:13:5-20
+MERGED from [org.webkit:android-jsc:r174650] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/AndroidManifest.xml:2:3-17
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:22:5-20
+	android:label
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:8:7-39
+	android:allowBackup
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:7:7-33
+	android:icon
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:9:7-41
+	android:theme
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:10:7-38
+activity#com.giftedmessengerexample.MainActivity
+ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:11:7-18:18
+	android:label
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:13:9-41
+	android:name
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:12:9-37
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:14:9-17:25
+action#android.intent.action.MAIN
+ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:15:13-65
+	android:name
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:15:21-62
+category#android.intent.category.LAUNCHER
+ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:16:13-73
+	android:name
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:16:23-70
+activity#com.facebook.react.devsupport.DevSettingsActivity
+ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:19:7-84
+	android:name
+		ADDED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:19:17-81
+uses-sdk
+INJECTED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:20:5-43
+MERGED from [com.facebook.react:react-native:0.14.0] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.14.0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.fresco:fresco:0.6.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/0.6.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:0.6.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/0.6.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:0.6.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.6.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:20:5-43
+MERGED from [com.facebook.fresco:imagepipeline:0.6.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.6.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:0.6.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.6.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:20:5-43
+MERGED from [com.facebook.fresco:fbcore:0.6.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.6.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp:0.6.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp/0.6.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:0.6.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.6.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:0.6.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.6.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:20:5-43
+MERGED from [com.facebook.fresco:fbcore:0.6.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.6.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:recyclerview-v7:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.0.1] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:20:5-43
+	android:targetSdkVersion
+		INJECTED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from [com.facebook.react:react-native:0.14.0] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.14.0/AndroidManifest.xml:11:5-78
+	android:name
+		ADDED from [com.facebook.react:react-native:0.14.0] /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.14.0/AndroidManifest.xml:11:22-75
+android:uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+IMPLIED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:1:1-22:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+android:uses-permission#android.permission.READ_PHONE_STATE
+IMPLIED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:1:1-22:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
+IMPLIED from /Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/src/main/AndroidManifest.xml:1:1-22:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/farid/Github/react-native-gifted-messenger/GiftedMessengerExample/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-v18/values-v18.xml -->
+    <eat-comment/>
+    <dimen name="abc_switch_padding">0px</dimen>
+</resources>

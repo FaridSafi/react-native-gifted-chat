@@ -1,0 +1,3 @@
+rootProject.name = 'GiftedMessengerExample'
+
+include ':app'

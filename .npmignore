@@ -1,0 +1,5 @@
+.DS_Store
+node_modules/
+GiftedMessengerExample/
+screenshots/
+npm-debug.log

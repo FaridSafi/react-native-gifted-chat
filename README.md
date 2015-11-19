@@ -1,10 +1,8 @@
 # react-native-gifted-messenger
 Ready-to-use chat interface for iOS and Android React-Native apps
 
-![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/1.png)
-![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/3.png)
-![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/2.png)
-![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/4.png)
+![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-1.png)
+![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-2.png)
 
 ### Simple example
 
@@ -57,7 +55,7 @@ var GiftedMessengerExample = React.createClass({
 
 ### Advanced example
 
-[See GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerExample.js)
+See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerExample.js)
 
 
 ### Installation

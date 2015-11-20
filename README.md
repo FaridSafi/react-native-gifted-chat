@@ -93,7 +93,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | inverted                      | Boolean  | Invert vertically the orientation of the chat                              | Both     | true                             |
 | hideTextInput                 | Boolean  | Hide or not the text input                                                 | Both     | false                            |
 
-* In React-Native 0.14.2, I recommend to use inverted={false} only in Android until issue [#3557](https://github.com/facebook/react-native/issues/3557) is fixed 
+* In React-Native 0.14.2, I recommend to use inverted={false} in Android until issue [#3557](https://github.com/facebook/react-native/issues/3557) is fixed 
 
 
 ### API

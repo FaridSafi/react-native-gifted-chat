@@ -45,6 +45,7 @@ var GiftedMessenger = React.createClass({
       sendButtonText: 'Send',
       onImagePress: null,
       inverted: true,
+      hideTextInput: false,
     };
   },
   
@@ -69,13 +70,19 @@ var GiftedMessenger = React.createClass({
     sendButtonText: React.PropTypes.string,
     onImagePress: React.PropTypes.func,
     inverted: React.PropTypes.bool,
+    hideTextInput: React.PropTypes.bool,
   },
 
   getInitialState: function() {
     this._data = [];
     this._rowIds = [];
     
-    this.listViewMaxHeight = this.props.maxHeight - 44; // 44 is height of textInput
+    var textInputHeight = 0;
+    if (this.props.hideTextInput === false) {
+      textInputHeight = 44;
+    }
+    
+    this.listViewMaxHeight = this.props.maxHeight - textInputHeight;
     
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => {
       if (typeof r1.status !== 'undefined') {
@@ -173,18 +180,33 @@ var GiftedMessenger = React.createClass({
   
   renderImage(rowData = {}, rowID = null) {
     if (rowData.image !== null) {
-      if (typeof this.props.onImagePress === 'function') {
-        return (
-          <TouchableHighlight 
-            underlayColor='transparent'
-            onPress={() => this.props.onImagePress(rowData, rowID)}
-          >
-            <Image source={rowData.image} style={[this.styles.image, (rowData.position === 'left' ? this.styles.imageLeft : this.styles.imageRight)]}/>
-          </TouchableHighlight>
-        );        
+      
+      var diffMessage = null;
+      if (this.props.inverted === false) {
+        diffMessage = null; // force rendering
+      } else {
+        diffMessage = this.getNextMessage(rowID);
+      }
+      
+      if (diffMessage === null || (this._data[rowID].name !== diffMessage.name || this._data[rowID].id !== diffMessage.id)) {
+        if (typeof this.props.onImagePress === 'function') {
+          return (
+            <TouchableHighlight 
+              underlayColor='transparent'
+              onPress={() => this.props.onImagePress(rowData, rowID)}
+              style={this.styles.imagePosition}
+            >
+              <Image source={rowData.image} style={[this.styles.imagePosition, this.styles.image, (rowData.position === 'left' ? this.styles.imageLeft : this.styles.imageRight)]}/>
+            </TouchableHighlight>
+          );
+        } else {
+          return (
+            <Image source={rowData.image} style={[this.styles.imagePosition, this.styles.image, (rowData.position === 'left' ? this.styles.imageLeft : this.styles.imageRight)]}/>
+          );
+        }
       } else {
         return (
-          <Image source={rowData.image} style={[this.styles.image, (rowData.position === 'left' ? this.styles.imageLeft : this.styles.imageRight)]}/>
+          <View style={this.styles.imagePosition}/>
         );
       }
     }
@@ -516,25 +538,28 @@ var GiftedMessenger = React.createClass({
   },
   
   renderTextInput() {
-    return (
-      <View style={this.styles.textInputContainer}>
-        <TextInput
-          style={this.styles.textInput}
-          placeholder={this.props.placeholder}
-          ref='textInput'
-          onChangeText={this.onChangeText}
-          value={this.state.text}
-          autoFocus={this.props.autoFocus}
-        />
-        <Button
-          style={this.styles.sendButton}
-          onPress={this.onSend}
-          disabled={this.state.disabled}
-        >
-          {this.props.sendButtonText}
-        </Button>
-      </View>
-    );
+    if (this.props.hideTextInput === false) {
+      return (
+        <View style={this.styles.textInputContainer}>
+          <TextInput
+            style={this.styles.textInput}
+            placeholder={this.props.placeholder}
+            ref='textInput'
+            onChangeText={this.onChangeText}
+            value={this.state.text}
+            autoFocus={this.props.autoFocus}
+          />
+          <Button
+            style={this.styles.sendButton}
+            onPress={this.onSend}
+            disabled={this.state.disabled}
+          >
+            {this.props.sendButtonText}
+          </Button>
+        </View>
+      ); 
+    }
+    return null;
   },
 
   componentWillMount() {
@@ -585,13 +610,16 @@ var GiftedMessenger = React.createClass({
         flexDirection: 'row',
         marginBottom: 10,
       },
-      image: {
+      imagePosition: {
         height: 30,
         width: 30,
-        borderRadius: 15,
         alignSelf: 'flex-end',
         marginLeft: 8,
-        marginRight: 8,
+        marginRight: 8,        
+      },
+      image: {
+        alignSelf: 'center',
+        borderRadius: 15,
       },
       imageLeft: {
       },

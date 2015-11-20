@@ -4,6 +4,9 @@ Ready-to-use chat interface for iOS and Android React-Native apps
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-1.png)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-2.png)
 
+### Changelog
+- 0.0.3 Fix image position, Add hideTextInput prop
+
 ### Example
 
 ```js
@@ -35,7 +38,7 @@ var GiftedMessengerExample = React.createClass({
         ref='GiftedMessenger'
         initialMessages={this.getInitialMessages()}
         handleSend={this.handleSend}
-        maxHeight={Dimensions.get('window').height - navBarHeight} // 64 for the navBar
+        maxHeight={Dimensions.get('window').height - 64} // 64 for the navBar
         
         styles={{
           bubbleLeft: {
@@ -88,8 +91,9 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | handlePhonePress              | Function | Called when a parsed phone number is pressed                               | iOS      | (phone) => {}                    |
 | handleEmailPress              | Function | Called when a parsed email is pressed                                      | iOS      | (email) => {}                    |
 | inverted                      | Boolean  | Invert vertically the orientation of the chat                              | Both     | true                             |
+| hideTextInput                 | Boolean  | Hide or not the text input                                                 | Both     | false                            |
 
-* In Android React-Native 0.14.2, I recommend to use inverted={false} until issue [#3557](https://github.com/facebook/react-native/issues/3557) is fixed 
+* In React-Native 0.14.2, I recommend to use inverted={false} only in Android until issue [#3557](https://github.com/facebook/react-native/issues/3557) is fixed 
 
 
 ### API

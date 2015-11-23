@@ -5,7 +5,7 @@ Ready-to-use chat interface for iOS and Android React-Native apps
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-2.png)
 
 ### Changelog
-- 0.0.4 update doc and example
+- 0.0.4 Update doc and example
 - 0.0.3 Fix image position, Add hideTextInput prop
 
 ### Example
@@ -25,7 +25,7 @@ var GiftedMessengerExample = React.createClass({
     // Send message.text to your server
   },
   handleReceive() {
-    this.GiftedMessenger.appendMessage({
+    this._GiftedMessenger.appendMessage({
       text: 'Received message', 
       name: 'Friend', 
       image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
@@ -36,7 +36,7 @@ var GiftedMessengerExample = React.createClass({
   render() {
     return (
       <GiftedMessenger
-        ref={(c) => this.GiftedMessenger = c}
+        ref={(c) => this._GiftedMessenger = c}
 
         initialMessages={this.getInitialMessages()}
         handleSend={this.handleSend}

@@ -34,10 +34,10 @@ var GiftedMessengerExample = React.createClass({
     // Your logic here
     // Send message.text to your server
     
-    // this.refs.GiftedMessenger.setMessageStatus('Sent', rowID);
-    // this.refs.GiftedMessenger.setMessageStatus('Seen', rowID);
-    // this.refs.GiftedMessenger.setMessageStatus('Custom label status', rowID);
-    this.refs.GiftedMessenger.setMessageStatus('ErrorButton', rowID); // => In this case, you need also to set onErrorButtonPress
+    // this.GiftedMessenger.setMessageStatus('Sent', rowID);
+    // this.GiftedMessenger.setMessageStatus('Seen', rowID);
+    // this.GiftedMessenger.setMessageStatus('Custom label status', rowID);
+    this.GiftedMessenger.setMessageStatus('ErrorButton', rowID); // => In this case, you need also to set onErrorButtonPress
   },
   
   // @oldestMessage is the oldest message already added to the list
@@ -69,7 +69,7 @@ var GiftedMessengerExample = React.createClass({
   },
   
   handleReceive(message = {}) {
-    this.refs.GiftedMessenger.appendMessage(message);
+    this.GiftedMessenger.appendMessage(message);
   },
   
   onErrorButtonPress(message = {}, rowID = null) {
@@ -78,10 +78,10 @@ var GiftedMessengerExample = React.createClass({
     
     setTimeout(() => {
       // will set the message to a custom status 'Sent' (you can replace 'Sent' by what you want - it will be displayed under the row)
-      this.refs.GiftedMessenger.setMessageStatus('Sent', rowID);
+      this.GiftedMessenger.setMessageStatus('Sent', rowID);
       setTimeout(() => {
         // will set the message to a custom status 'Seen' (you can replace 'Seen' by what you want - it will be displayed under the row)
-        this.refs.GiftedMessenger.setMessageStatus('Seen', rowID);
+        this.GiftedMessenger.setMessageStatus('Seen', rowID);
         setTimeout(() => {
           // append an answer
           this.handleReceive({text: 'I saw your message', name: 'React-Native', image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, position: 'left', date: new Date()});
@@ -99,7 +99,7 @@ var GiftedMessengerExample = React.createClass({
   render() {
     return (
       <GiftedMessenger
-        ref='GiftedMessenger'
+        ref={(c) => this.GiftedMessenger = c}
     
         styles={{
           bubbleRight: {

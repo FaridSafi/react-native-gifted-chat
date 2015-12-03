@@ -548,6 +548,8 @@ var GiftedMessenger = React.createClass({
             onChangeText={this.onChangeText}
             value={this.state.text}
             autoFocus={this.props.autoFocus}
+            returnKeyType='send'
+            onSubmitEditing={this.onSend}
           />
           <Button
             style={this.styles.sendButton}

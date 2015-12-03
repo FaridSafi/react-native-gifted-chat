@@ -95,6 +95,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | inverted                      | Boolean  | Invert vertically the orientation of the chat                              | Both     | true                             |
 | hideTextInput                 | Boolean  | Hide or not the text input                                                 | Both     | false                            |
 | keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | on-drag                          |
+| returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |
 
 * In React-Native 0.14.2+, I recommend to use inverted={false} in Android until issue [#3557](https://github.com/facebook/react-native/issues/3557) is fixed
 

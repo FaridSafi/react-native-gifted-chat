@@ -37,7 +37,7 @@ var GiftedMessenger = React.createClass({
       handleUrlPress: (url) => {},
       handlePhonePress: (phone) => {},
       handleEmailPress: (email) => {},
-      initialMessages: [],
+      messages: [],
       handleSend: (message, rowID) => {},
       maxHeight: Dimensions.get('window').height,
       senderName: 'Sender',
@@ -63,7 +63,7 @@ var GiftedMessenger = React.createClass({
     handleUrlPress: React.PropTypes.func,
     handlePhonePress: React.PropTypes.func,
     handleEmailPress: React.PropTypes.func,
-    initialMessages: React.PropTypes.array,
+    messages: React.PropTypes.array,
     handleSend: React.PropTypes.func,
     maxHeight: React.PropTypes.number,
     senderName: React.PropTypes.string,
@@ -306,15 +306,21 @@ var GiftedMessenger = React.createClass({
 
   componentDidMount() {
     this.scrollResponder = this.refs.listView.getScrollResponder();
-    if (this.props.initialMessages.length > 0) {
-      this.appendMessages(this.props.initialMessages);      
+    if (this.props.messages.length > 0) {
+      this.appendMessages(this.props.messages);
     } else {
       this.setState({
         allLoaded: true
       });
     }
   },
-  
+
+  componentWillReceiveProps(nextProps) {
+    this._data = [];
+    this._rowIds = [];
+    this.appendMessages(nextProps.messages);
+  },
+
   onKeyboardWillHide(e) {
     Animated.timing(this.state.height, {
       toValue: this.listViewMaxHeight,

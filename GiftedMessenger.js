@@ -37,6 +37,7 @@ var GiftedMessenger = React.createClass({
       handleUrlPress: (url) => {},
       handlePhonePress: (phone) => {},
       handleEmailPress: (email) => {},
+      initialMessages: [],
       messages: [],
       handleSend: (message, rowID) => {},
       maxHeight: Dimensions.get('window').height,
@@ -63,6 +64,7 @@ var GiftedMessenger = React.createClass({
     handleUrlPress: React.PropTypes.func,
     handlePhonePress: React.PropTypes.func,
     handleEmailPress: React.PropTypes.func,
+    initialMessages: React.PropTypes.array,
     messages: React.PropTypes.array,
     handleSend: React.PropTypes.func,
     maxHeight: React.PropTypes.number,
@@ -306,8 +308,11 @@ var GiftedMessenger = React.createClass({
 
   componentDidMount() {
     this.scrollResponder = this.refs.listView.getScrollResponder();
+    
     if (this.props.messages.length > 0) {
       this.appendMessages(this.props.messages);
+    } else if (this.props.initialMessages.length > 0) {
+      this.appendMessages(this.props.initialMessages);
     } else {
       this.setState({
         allLoaded: true
@@ -336,6 +341,7 @@ var GiftedMessenger = React.createClass({
   },
   
   onSend() {
+
     var message = {
       text: this.state.text.trim(),
       name: this.props.senderName,
@@ -347,7 +353,6 @@ var GiftedMessenger = React.createClass({
     this.props.handleSend(message, rowID);
     this.onChangeText('');
     this.scrollResponder.scrollTo(0);
-
   },
   
   postLoadEarlierMessages(messages = [], allLoaded = false) {
@@ -557,6 +562,8 @@ var GiftedMessenger = React.createClass({
             autoFocus={this.props.autoFocus}
             returnKeyType={this.props.submitOnReturn ? 'send' : 'default'}
             onSubmitEditing={this.props.submitOnReturn ? this.onSend : null}
+            
+            blurOnSubmit={false}
           />
           <Button
             style={this.styles.sendButton}

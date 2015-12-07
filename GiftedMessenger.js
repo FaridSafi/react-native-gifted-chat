@@ -284,7 +284,7 @@ var GiftedMessenger = React.createClass({
         <View style={[this.styles.bubble, (rowData.position === 'left' ? this.styles.bubbleLeft : this.styles.bubbleRight), (rowData.status === 'ErrorButton' ? this.styles.bubbleError : null)]}>
           {this.renderText(rowData, rowID)}
         </View>
-        {rowData.position === 'right' ? this.renderImage(rowData) : null}
+        {rowData.position === 'right' ? this.renderImage(rowData, rowID) : null}
       </View>
       {rowData.position === 'right' ? this.renderStatus(rowData, rowID) : null}
       </View>

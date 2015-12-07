@@ -4,7 +4,9 @@ Ready-to-use chat interface for iOS and Android React-Native apps
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-1.png)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-2.png)
 
+
 ### Changelog
+- 0.0.5 The UI is now updated when receiving new ```messages``` prop. Thanks @burgalon for PR
 - 0.0.4 Update doc and example
 - 0.0.3 Fix image position, Add hideTextInput prop
 
@@ -15,7 +17,7 @@ var GiftedMessenger = require('react-native-gifted-messenger');
 var {Dimensions} = React;
 
 var GiftedMessengerExample = React.createClass({
-  getInitialMessages() {
+  getMessages() {
     return [
       {text: 'Are you building a chat app?', name: 'React-Native', image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, position: 'left', date: new Date(2015, 0, 16, 19, 0)},
       {text: "Yes, and I use Gifted Messenger!", name: 'Developer', image: null, position: 'right', date: new Date(2015, 0, 17, 19, 0)},
@@ -38,7 +40,7 @@ var GiftedMessengerExample = React.createClass({
       <GiftedMessenger
         ref={(c) => this._GiftedMessenger = c}
 
-        initialMessages={this.getInitialMessages()}
+        messages={this.getMessages()}
         handleSend={this.handleSend}
         maxHeight={Dimensions.get('window').height - 64} // 64 for the navBar
         
@@ -73,6 +75,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 
 | Props name                    | Type     | Description                                                                | Platform | Default                          |
 | ----------------------------- | -------- | -------------------------------------------------------------------------- | -------- | -------------------------------- |
+| messages                      | Array    | List of messages to display                                                | Both     | []                               |
 | displayNames                  | Boolean  | Display or not the name of the interlocutor(s)                             | Both     | true                             |
 | placeholder                   | String   | TextInput placeholder                                                      | Both     | 'Type a message...'              |
 | styles                        | Function | Styles of children components - See GiftedMessenger.js/componentWillMount  | Both     | {}                               |
@@ -81,7 +84,6 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | loadEarlierMessagesButton     | Boolean  | Display or not the button to load earlier message                          | Both     | false                            |
 | loadEarlierMessagesButtonText | String   | Label of the 'Load Earlier Messages' button                                | Both     | 'Load earlier messages'          |
 | onLoadEarlierMessages         | Function | Called when 'Load Earlier Message' button is pressed                       | Both     | (oldestMessage, callback) => {}  |
-| initialMessages               | Array    | List of initial messages                                                   | Both     | []                               |
 | handleSend                    | Function | Called when a message is Sent                                              | Both     | (message, rowID) => {}           |
 | maxHeight                     | Integer  | Max height of the component                                                | Both     | Dimensions.get('window').height  |
 | senderName                    | String   | Name of the sender of the messages                                         | Both     | 'Sender'                         |
@@ -97,7 +99,10 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | on-drag                          |
 | returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |
 
-* In React-Native 0.14.2+, I recommend to use inverted={false} in Android until issue [#3557](https://github.com/facebook/react-native/issues/3557) is fixed
+
+### Props update
+
+The UI is updated when receiving new ```messages``` prop.
 
 
 ### API

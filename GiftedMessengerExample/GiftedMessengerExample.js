@@ -16,7 +16,7 @@ var Communications = require('react-native-communications');
 
 var GiftedMessengerExample = React.createClass({
   
-  getInitialMessages() {
+  getMessages() {
     return [
       {text: 'Are you building a chat app?', name: 'React-Native', image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, position: 'left', date: new Date(2015, 10, 16, 19, 0)},
       {
@@ -109,7 +109,7 @@ var GiftedMessengerExample = React.createClass({
         }}
         
         autoFocus={false}
-        initialMessages={this.getInitialMessages()}
+        messages={this.getMessages()}
         handleSend={this.handleSend}
         onErrorButtonPress={this.onErrorButtonPress}
         maxHeight={Dimensions.get('window').height - navBarHeight - statusBarHeight}

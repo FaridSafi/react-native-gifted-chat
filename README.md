@@ -99,6 +99,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | hideTextInput                 | Boolean  | Hide or not the text input                                                 | Both     | false                            |
 | keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | on-drag                          |
 | returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |
+| submitOnReturn                | Boolean  | Send message when clicking on submit                                       | Both     | false                            |
 
 
 ### Props update

@@ -6,6 +6,7 @@ Ready-to-use chat interface for iOS and Android React-Native apps
 
 
 ### Changelog
+- 0.0.7 Temporary disabling react-native-parsed-text plugin until RN 0.17.0
 - 0.0.6 Fix renderImage() exception
 - 0.0.5 The UI is now updated when receiving new ```messages``` prop. Thanks @burgalon for PR
 - 0.0.4 Update doc and example

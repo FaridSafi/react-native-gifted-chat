@@ -18,7 +18,6 @@ var extend = require('extend');
 
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
 var GiftedSpinner = require('react-native-gifted-spinner');
-var ParsedText = require('react-native-parsed-text');
 var Button = require('react-native-button');
 
 var GiftedMessenger = React.createClass({
@@ -33,7 +32,7 @@ var GiftedMessenger = React.createClass({
       loadEarlierMessagesButton: false,
       loadEarlierMessagesButtonText: 'Load earlier messages',      
       onLoadEarlierMessages: (oldestMessage, callback) => {},
-      parseText: true,
+      parseText: false,
       handleUrlPress: (url) => {},
       handlePhonePress: (phone) => {},
       handleEmailPress: (email) => {},
@@ -249,6 +248,7 @@ var GiftedMessenger = React.createClass({
   },
 
   renderText(rowData = {}, rowID = null) {
+    /*
     if (this.props.parseText === true && Platform.OS !== 'android') {
       let parse = [
         {type: 'url', style: [this.styles.link, (rowData.position === 'left' ? this.styles.linkLeft : this.styles.linkRight)], onPress: this.props.handleUrlPress},
@@ -264,6 +264,7 @@ var GiftedMessenger = React.createClass({
         </ParsedText>
       );
     }
+    */
     return (
       <Text
         style={[this.styles.text, (rowData.position === 'left' ? this.styles.textLeft : this.styles.textRight)]}

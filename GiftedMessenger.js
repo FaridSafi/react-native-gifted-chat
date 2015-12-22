@@ -10,7 +10,8 @@ var {
   Animated,
   Image,
   TouchableHighlight,
-  Platform
+  Platform,
+  PixelRatio
 } = React;
 
 var moment = require('moment');
@@ -590,7 +591,7 @@ var GiftedMessenger = React.createClass({
       },
       textInputContainer: {
         height: 44,
-        borderTopWidth: 0.5,
+        borderTopWidth: 1 / PixelRatio.get(),
         borderColor: '#b2b2b2',
         flexDirection: 'row',
         paddingLeft: 10,

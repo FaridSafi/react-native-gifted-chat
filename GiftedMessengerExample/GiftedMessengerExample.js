@@ -172,6 +172,7 @@ var GiftedMessengerExample = React.createClass({
 var navBarHeight = (Platform.OS === 'android' ? 56 : 64);
 // warning: height of android statusbar depends of the resolution of the device
 // http://stackoverflow.com/questions/3407256/height-of-status-bar-in-android
+// @todo check Navigator.NavigationBar.Styles.General.NavBarHeight
 var statusBarHeight = (Platform.OS === 'android' ? 25 : 0);
 
 

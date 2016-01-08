@@ -6,9 +6,10 @@ Ready-to-use chat interface for iOS and Android React-Native apps
 
 
 ### Changelog
-- 0.0.9 Fix iPhone 6 Plus textInput border
-- 0.0.8 Fix issue with RN 0.16.0 Thanks @wenkesj for PR
-- 0.0.7 Temporary disabling react-native-parsed-text plugin
+- 0.0.10 forceRenderImage, onCustomSend, renderCustomText props (PR @oney)
+- 0.0.9  Fix iPhone 6 Plus textInput border
+- 0.0.8  Fix issue with RN 0.16.0 Thanks @wenkesj for PR
+- 0.0.7  Temporary disabling react-native-parsed-text plugin
 
 ### Example
 
@@ -99,6 +100,9 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | on-drag                          |
 | returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |
 | submitOnReturn                | Boolean  | Send message when clicking on submit                                       | Both     | false                            |
+| forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |
+| onCustomSend                  | Function | If you want to implement a progress bar. See PR #16                        | Both     | (message) => {}                  |
+| renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData, rowID) => {}           |
 
 
 ### Props update

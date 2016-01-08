@@ -67,6 +67,8 @@ var GiftedMessenger = React.createClass({
     initialMessages: React.PropTypes.array,
     messages: React.PropTypes.array,
     handleSend: React.PropTypes.func,
+    onCustomSend: React.PropTypes.func,
+    renderCustomText: React.PropTypes.func,
     maxHeight: React.PropTypes.number,
     senderName: React.PropTypes.string,
     senderImage: React.PropTypes.object,
@@ -266,6 +268,9 @@ var GiftedMessenger = React.createClass({
       );
     }
     */
+    if (this.props.renderCustomText) {
+      return this.props.renderCustomText(rowData, rowID);
+    }
     return (
       <Text
         style={[this.styles.text, (rowData.position === 'left' ? this.styles.textLeft : this.styles.textRight)]}
@@ -351,10 +356,14 @@ var GiftedMessenger = React.createClass({
       position: 'right',
       date: new Date(),
     };
-    var rowID = this.appendMessage(message);
-    this.props.handleSend(message, rowID);
-    this.onChangeText('');
-    this.scrollResponder.scrollTo(0);
+    if (this.props.onCustomSend) {
+      this.props.onCustomSend(message);
+    } else {
+      var rowID = this.appendMessage(message);
+      this.props.handleSend(message, rowID);
+      this.onChangeText('');
+      this.scrollResponder.scrollTo(0);
+    }
   },
   
   postLoadEarlierMessages(messages = [], allLoaded = false) {

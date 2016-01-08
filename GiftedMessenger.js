@@ -48,6 +48,7 @@ var GiftedMessenger = React.createClass({
       inverted: true,
       hideTextInput: false,
       submitOnReturn: false,
+      forceRenderImage: false,
     };
   },
   
@@ -76,6 +77,7 @@ var GiftedMessenger = React.createClass({
     onImagePress: React.PropTypes.func,
     inverted: React.PropTypes.bool,
     hideTextInput: React.PropTypes.bool,
+    forceRenderImage: React.PropTypes.bool,
   },
 
   getInitialState: function() {
@@ -187,7 +189,7 @@ var GiftedMessenger = React.createClass({
     if (rowData.image !== null) {
       
       var diffMessage = null;
-      if (this.props.inverted === false) {
+      if (this.props.inverted === false || this.props.forceRenderImage === true) {
         diffMessage = null; // force rendering
       } else {
         diffMessage = this.getNextMessage(rowID);

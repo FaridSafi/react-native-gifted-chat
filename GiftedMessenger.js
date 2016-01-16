@@ -283,14 +283,25 @@ var GiftedMessenger = React.createClass({
   },
   
   renderRow(rowData = {}, sectionID = null, rowID = null) {
+     var flexStyle = {};
+
+    if ( rowData.text.length > 40 ) {
+      flexStyle.flex = 1;
+    }
+
     return (
       <View>
       {this.renderDate(rowData, rowID)}
       {rowData.position === 'left' ? this.renderName(rowData, rowID) : null}
-      <View style={this.styles.rowContainer}>
+      <View style={[this.styles.rowContainer, {
+          justifyContent: rowData.position==='left'?"flex-start":"flex-end"
+        }]}>
         {rowData.position === 'left' ? this.renderImage(rowData, rowID) : null}
         {rowData.position === 'right' ? this.renderErrorButton(rowData, rowID) : null}
-        <View style={[this.styles.bubble, (rowData.position === 'left' ? this.styles.bubbleLeft : this.styles.bubbleRight), (rowData.status === 'ErrorButton' ? this.styles.bubbleError : null)]}>
+        <View style={[this.styles.bubble, 
+            (rowData.position === 'left' ? this.styles.bubbleLeft : this.styles.bubbleRight), 
+            (rowData.status === 'ErrorButton' ? this.styles.bubbleError : null),
+            flexStyle]}>
           {this.renderText(rowData, rowID)}
         </View>
         {rowData.position === 'right' ? this.renderImage(rowData, rowID) : null}
@@ -625,7 +636,7 @@ var GiftedMessenger = React.createClass({
       name: {
         color: '#aaaaaa',
         fontSize: 12,
-        marginLeft: 60,
+        marginLeft: 20,
         marginBottom: 5,
       },
       date: {
@@ -660,7 +671,6 @@ var GiftedMessenger = React.createClass({
         paddingRight: 14,
         paddingBottom: 10,
         paddingTop: 8,
-        flex: 1,
       },
       text: {
         color: '#000',
@@ -673,10 +683,12 @@ var GiftedMessenger = React.createClass({
       bubbleLeft: {
         marginRight: 70,
         backgroundColor: '#e6e6eb',
+        alignSelf: "flex-start",
       },
       bubbleRight: {
         marginLeft: 70,
         backgroundColor: '#007aff',
+        alignSelf: "flex-end"
       },
       bubbleError: {
         backgroundColor: '#e01717'

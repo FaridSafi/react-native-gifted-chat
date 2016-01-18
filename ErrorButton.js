@@ -1,4 +1,5 @@
-import React, {View, Text} from 'react-native';
+import React, {View, Text, TouchableHighlight} from 'react-native';
+import GiftedSpinner from 'react-native-gifted-spinner';
 
 export default class ErrorButton extends React.Component {
 
@@ -42,7 +43,7 @@ export default class ErrorButton extends React.Component {
       <View style={this.props.styles.errorButtonContainer}>
         <TouchableHighlight
           underlayColor='transparent'
-          onPress={this.onPress}
+          onPress={this.onPress.bind(this)}
         >
           <Text style={this.props.styles.errorButton}>↻</Text>
         </TouchableHighlight>

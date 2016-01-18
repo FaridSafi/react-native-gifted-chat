@@ -19,7 +19,6 @@ var moment = require('moment');
 var extend = require('extend');
 
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
-var GiftedSpinner = require('react-native-gifted-spinner');
 var Button = require('react-native-button');
 
 var GiftedMessenger = React.createClass({

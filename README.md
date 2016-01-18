@@ -1,6 +1,9 @@
 # Gifted Messenger
 Ready-to-use chat interface for iOS and Android React-Native apps
 
+Dependency: React-Native >= v0.18.0-rc (onLayout prop on ListView)
+
+
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-1.png)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-2.png)
 

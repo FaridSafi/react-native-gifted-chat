@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var Bubble = require('./Bubble');
 var {
   Text,
   View,
@@ -22,7 +23,7 @@ var GiftedSpinner = require('react-native-gifted-spinner');
 var Button = require('react-native-button');
 
 var GiftedMessenger = React.createClass({
-  
+
   getDefaultProps() {
     return {
       displayNames: true,
@@ -31,7 +32,7 @@ var GiftedMessenger = React.createClass({
       autoFocus: true,
       onErrorButtonPress: (message, rowID) => {},
       loadEarlierMessagesButton: false,
-      loadEarlierMessagesButtonText: 'Load earlier messages',      
+      loadEarlierMessagesButtonText: 'Load earlier messages',
       onLoadEarlierMessages: (oldestMessage, callback) => {},
       parseText: false,
       handleUrlPress: (url) => {},
@@ -51,7 +52,7 @@ var GiftedMessenger = React.createClass({
       forceRenderImage: false,
     };
   },
-  
+
   propTypes: {
     displayNames: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
@@ -59,7 +60,7 @@ var GiftedMessenger = React.createClass({
     autoFocus: React.PropTypes.bool,
     onErrorButtonPress: React.PropTypes.func,
     loadEarlierMessagesButton: React.PropTypes.bool,
-    loadEarlierMessagesButtonText: React.PropTypes.string,      
+    loadEarlierMessagesButtonText: React.PropTypes.string,
     onLoadEarlierMessages: React.PropTypes.func,
     parseText: React.PropTypes.bool,
     handleUrlPress: React.PropTypes.func,
@@ -83,14 +84,14 @@ var GiftedMessenger = React.createClass({
   getInitialState: function() {
     this._data = [];
     this._rowIds = [];
-    
+
     var textInputHeight = 0;
     if (this.props.hideTextInput === false) {
       textInputHeight = 44;
     }
-    
+
     this.listViewMaxHeight = this.props.maxHeight - textInputHeight;
-    
+
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => {
       if (typeof r1.status !== 'undefined') {
         return true;
@@ -106,7 +107,7 @@ var GiftedMessenger = React.createClass({
       allLoaded: false,
     };
   },
-  
+
   getMessage(rowID) {
     if (typeof this._rowIds[this._rowIds.indexOf(rowID)] !== 'undefined') {
       if (typeof this._data[this._rowIds[this._rowIds.indexOf(rowID)]] !== 'undefined') {
@@ -124,7 +125,7 @@ var GiftedMessenger = React.createClass({
     }
     return null;
   },
-  
+
   getNextMessage(rowID) {
     if (typeof this._rowIds[this._rowIds.indexOf(rowID + 1)] !== 'undefined') {
       if (typeof this._data[this._rowIds[this._rowIds.indexOf(rowID + 1)]] !== 'undefined') {
@@ -184,21 +185,21 @@ var GiftedMessenger = React.createClass({
     }
     return null;
   },
-  
+
   renderImage(rowData = {}, rowID = null) {
     if (rowData.image !== null) {
-      
+
       var diffMessage = null;
       if (this.props.inverted === false || this.props.forceRenderImage === true) {
         diffMessage = null; // force rendering
       } else {
         diffMessage = this.getNextMessage(rowID);
       }
-      
+
       if (diffMessage === null || (this._data[rowID].name !== diffMessage.name || this._data[rowID].id !== diffMessage.id)) {
         if (typeof this.props.onImagePress === 'function') {
           return (
-            <TouchableHighlight 
+            <TouchableHighlight
               underlayColor='transparent'
               onPress={() => this.props.onImagePress(rowData, rowID)}
               style={this.styles.imagePosition}
@@ -221,7 +222,7 @@ var GiftedMessenger = React.createClass({
       <View style={this.styles.spacer}/>
     );
   },
-  
+
   renderErrorButton(rowData = {}, rowID = null) {
     if (rowData.status === 'ErrorButton') {
       return (
@@ -238,7 +239,7 @@ var GiftedMessenger = React.createClass({
     }
     return null;
   },
-  
+
   renderStatus(rowData = {}, rowID = null) {
     if (rowData.status !== 'ErrorButton' && typeof rowData.status === 'string') {
       if (rowData.status.length > 0) {
@@ -252,43 +253,7 @@ var GiftedMessenger = React.createClass({
     return null;
   },
 
-  renderText(rowData = {}, rowID = null) {
-    /*
-    if (this.props.parseText === true && Platform.OS !== 'android') {
-      let parse = [
-        {type: 'url', style: [this.styles.link, (rowData.position === 'left' ? this.styles.linkLeft : this.styles.linkRight)], onPress: this.props.handleUrlPress},
-        {type: 'phone', style: [this.styles.link, (rowData.position === 'left' ? this.styles.linkLeft : this.styles.linkRight)], onPress: this.props.handlePhonePress},
-        {type: 'email', style: [this.styles.link, (rowData.position === 'left' ? this.styles.linkLeft : this.styles.linkRight)], onPress: this.props.handleEmailPress},
-      ];
-      return (
-        <ParsedText
-          style={[this.styles.text, (rowData.position === 'left' ? this.styles.textLeft : this.styles.textRight)]}
-          parse={parse}
-        >
-          {rowData.text}
-        </ParsedText>
-      );
-    }
-    */
-    if (this.props.renderCustomText) {
-      return this.props.renderCustomText(rowData, rowID);
-    }
-    return (
-      <Text
-        style={[this.styles.text, (rowData.position === 'left' ? this.styles.textLeft : this.styles.textRight)]}
-      >
-        {rowData.text}
-      </Text>
-    );
-  },
-  
   renderRow(rowData = {}, sectionID = null, rowID = null) {
-     var flexStyle = {};
-
-    if ( rowData.text.length > 40 ) {
-      flexStyle.flex = 1;
-    }
-
     return (
       <View>
       {this.renderDate(rowData, rowID)}
@@ -298,12 +263,12 @@ var GiftedMessenger = React.createClass({
         }]}>
         {rowData.position === 'left' ? this.renderImage(rowData, rowID) : null}
         {rowData.position === 'right' ? this.renderErrorButton(rowData, rowID) : null}
-        <View style={[this.styles.bubble, 
-            (rowData.position === 'left' ? this.styles.bubbleLeft : this.styles.bubbleRight), 
-            (rowData.status === 'ErrorButton' ? this.styles.bubbleError : null),
-            flexStyle]}>
-          {this.renderText(rowData, rowID)}
-        </View>
+        <Bubble
+          position={rowData.position}
+          status={rowData.status}
+          text={rowData.text}
+          renderCustomText={this.props.renderCustomText}
+          />
         {rowData.position === 'right' ? this.renderImage(rowData, rowID) : null}
       </View>
       {rowData.position === 'right' ? this.renderStatus(rowData, rowID) : null}
@@ -328,7 +293,7 @@ var GiftedMessenger = React.createClass({
 
   componentDidMount() {
     this.scrollResponder = this.refs.listView.getScrollResponder();
-    
+
     if (this.props.messages.length > 0) {
       this.appendMessages(this.props.messages);
     } else if (this.props.initialMessages.length > 0) {
@@ -352,14 +317,14 @@ var GiftedMessenger = React.createClass({
       duration: 150,
     }).start();
   },
-  
+
   onKeyboardWillShow(e) {
     Animated.timing(this.state.height, {
       toValue: this.listViewMaxHeight - (e.endCoordinates ? e.endCoordinates.height : e.end.height),
       duration: 200,
     }).start();
   },
-  
+
   onSend() {
 
     var message = {
@@ -378,7 +343,7 @@ var GiftedMessenger = React.createClass({
       this.scrollResponder.scrollTo(0);
     }
   },
-  
+
   postLoadEarlierMessages(messages = [], allLoaded = false) {
     this.prependMessages(messages);
     this.setState({
@@ -390,14 +355,14 @@ var GiftedMessenger = React.createClass({
       });
     }
   },
-  
+
   preLoadEarlierMessages() {
     this.setState({
       isLoadingEarlierMessages: true
     });
     this.props.onLoadEarlierMessages(this._data[this._rowIds[this._rowIds.length - 1]], this.postLoadEarlierMessages);
   },
-  
+
   renderLoadEarlierMessages() {
     if (this.props.loadEarlierMessagesButton === true) {
       if (this.state.allLoaded === false) {
@@ -432,19 +397,19 @@ var GiftedMessenger = React.createClass({
       this._rowIds.push(this._data.length - 1);
       rowID = this._data.length - 1;
     }
-    
+
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._data, this._rowIds),
     });
-    
+
     return rowID;
   },
-  
+
   prependMessage(message = {}) {
     var rowID = this.prependMessages([message]);
     return rowID;
   },
-  
+
   appendMessages(messages = []) {
     var rowID = null;
     for (let i = 0; i < messages.length; i++) {
@@ -457,7 +422,7 @@ var GiftedMessenger = React.createClass({
     });
     return rowID;
   },
-  
+
   appendMessage(message = {}) {
     var rowID = this.appendMessages([message]);
     return rowID;
@@ -468,7 +433,7 @@ var GiftedMessenger = React.createClass({
       dataSource: this.state.dataSource.cloneWithRows(this._data, this._rowIds),
     });
   },
-  
+
   setMessageStatus(status = '', rowID) {
     if (status === 'ErrorButton') {
       if (this._data[rowID].position === 'right') {
@@ -478,7 +443,7 @@ var GiftedMessenger = React.createClass({
     } else {
       if (this._data[rowID].position === 'right') {
         this._data[rowID].status = status;
-      
+
         // only 1 message can have a status
         for (let i = 0; i < this._data.length; i++) {
           if (i !== rowID && this._data[i].status !== 'ErrorButton') {
@@ -489,7 +454,7 @@ var GiftedMessenger = React.createClass({
       }
     }
   },
-  
+
   renderAnimatedView() {
     if (this.props.inverted === true) {
       return (
@@ -505,24 +470,24 @@ var GiftedMessenger = React.createClass({
             renderRow={this.renderRow}
             renderFooter={this.renderLoadEarlierMessages}
             style={this.styles.listView}
-    
+
             renderScrollComponent={props => <InvertibleScrollView {...props} inverted />}
-    
+
             // not working android RN 0.14.2
             onKeyboardWillShow={this.onKeyboardWillShow}
             onKeyboardWillHide={this.onKeyboardWillHide}
-    
+
             /*
               keyboardShouldPersistTaps={false} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
               keyboardDismissMode='interactive'
             */
-        
+
             keyboardShouldPersistTaps={true}
             keyboardDismissMode='on-drag'
-        
+
             {...this.props}
           />
-  
+
         </Animated.View>
       );
     }
@@ -539,19 +504,19 @@ var GiftedMessenger = React.createClass({
           renderRow={this.renderRow}
           renderFooter={this.renderLoadEarlierMessages}
           style={this.styles.listView}
-  
+
           // When not inverted: Using Did instead of Will because onKeyboardWillShow is not working in Android RN 0.14.2
           onKeyboardDidShow={this.onKeyboardWillShow}
           onKeyboardDidHide={this.onKeyboardWillHide}
-  
+
           /*
             keyboardShouldPersistTaps={false} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
             keyboardDismissMode='interactive'
           */
-      
+
           keyboardShouldPersistTaps={true}
           keyboardDismissMode='on-drag'
-      
+
           {...this.props}
         />
 
@@ -559,20 +524,20 @@ var GiftedMessenger = React.createClass({
     );
 
   },
-  
+
   render() {
     return (
       <View
         style={this.styles.container}
         ref='container'
-      >        
+      >
         {(this.props.inverted === true ? this.renderAnimatedView() : null)}
         {this.renderTextInput()}
-        {(this.props.inverted === false ? this.renderAnimatedView() : null)}            
+        {(this.props.inverted === false ? this.renderAnimatedView() : null)}
       </View>
     )
   },
-  
+
   renderTextInput() {
     if (this.props.hideTextInput === false) {
       return (
@@ -586,7 +551,7 @@ var GiftedMessenger = React.createClass({
             autoFocus={this.props.autoFocus}
             returnKeyType={this.props.submitOnReturn ? 'send' : 'default'}
             onSubmitEditing={this.props.submitOnReturn ? this.onSend : null}
-            
+
             blurOnSubmit={false}
           />
           <Button
@@ -597,7 +562,7 @@ var GiftedMessenger = React.createClass({
             {this.props.sendButtonText}
           </Button>
         </View>
-      ); 
+      );
     }
     return null;
   },
@@ -655,7 +620,7 @@ var GiftedMessenger = React.createClass({
         width: 30,
         alignSelf: 'flex-end',
         marginLeft: 8,
-        marginRight: 8,        
+        marginRight: 8,
       },
       image: {
         alignSelf: 'center',
@@ -664,34 +629,6 @@ var GiftedMessenger = React.createClass({
       imageLeft: {
       },
       imageRight: {
-      },
-      bubble: {
-        borderRadius: 15,
-        paddingLeft: 14,
-        paddingRight: 14,
-        paddingBottom: 10,
-        paddingTop: 8,
-      },
-      text: {
-        color: '#000',
-      },
-      textLeft: {
-      },
-      textRight: {
-        color: '#fff',
-      },
-      bubbleLeft: {
-        marginRight: 70,
-        backgroundColor: '#e6e6eb',
-        alignSelf: "flex-start",
-      },
-      bubbleRight: {
-        marginLeft: 70,
-        backgroundColor: '#007aff',
-        alignSelf: "flex-end"
-      },
-      bubbleError: {
-        backgroundColor: '#e01717'
       },
       link: {
         color: '#007aff',
@@ -725,7 +662,7 @@ var GiftedMessenger = React.createClass({
         marginTop: -5,
       },
       loadEarlierMessages: {
-        height: 44, 
+        height: 44,
         justifyContent: 'center',
         alignItems: 'center',
       },
@@ -736,9 +673,9 @@ var GiftedMessenger = React.createClass({
         width: 10,
       },
     };
-    
+
     extend(this.styles, this.props.styles);
-  },  
+  },
 });
 
 var ErrorButton = React.createClass({
@@ -759,7 +696,7 @@ var ErrorButton = React.createClass({
     this.setState({
       isLoading: true,
     });
-    
+
     this.props.onErrorButtonPress(this.props.rowData, this.props.rowID);
   },
   render() {
@@ -775,7 +712,7 @@ var ErrorButton = React.createClass({
     }
     return (
       <View style={this.props.styles.errorButtonContainer}>
-        <TouchableHighlight 
+        <TouchableHighlight
           underlayColor='transparent'
           onPress={this.onPress}
         >

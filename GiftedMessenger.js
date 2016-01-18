@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var Message = require('./Message');
+var GiftedSpinner = require('react-native-gifted-spinner');
 var {
   Text,
   View,

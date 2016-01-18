@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-messenger",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "The chat of your next React-Native Apps",
   "main": "GiftedMessenger.js",
   "scripts": {

@@ -247,13 +247,17 @@ var GiftedMessenger = React.createClass({
   },
   
   scrollToBottom() {
-    var scrollDistance = this.listHeight - this.footerY;
-    this.scrollResponder.scrollTo(-scrollDistance);
+    if (this.listHeight && this.footerY && this.footerY > this.listHeight) {
+      var scrollDistance = this.listHeight - this.footerY;
+      this.scrollResponder.scrollTo(-scrollDistance);
+    }
   },
 
   scrollWithoutAnimationToBottom() {
-    var scrollDistance = this.listHeight - this.footerY;
-    this.scrollResponder.scrollWithoutAnimationTo(-scrollDistance);    
+    if (this.listHeight && this.footerY && this.footerY > this.listHeight) {
+      var scrollDistance = this.listHeight - this.footerY;
+      this.scrollResponder.scrollWithoutAnimationTo(-scrollDistance);
+    }
   },
   
   onSend() {
@@ -358,9 +362,7 @@ var GiftedMessenger = React.createClass({
     if (scrollToBottom === true) {
       setTimeout(() => {
         // inspired by http://stackoverflow.com/a/34838513/1385109
-        if(this.listHeight && this.footerY && this.footerY > this.listHeight) {
-          this.scrollToBottom();
-        }   
+        this.scrollToBottom();
       }, 100);
     }
     

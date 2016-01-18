@@ -1,6 +1,8 @@
 'use strict';
 
 var React = require('react-native');
+var Message = require('./Message');
+var GiftedSpinner = require('react-native-gifted-spinner');
 var {
   Text,
   View,
@@ -18,11 +20,10 @@ var moment = require('moment');
 var extend = require('extend');
 
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
-var GiftedSpinner = require('react-native-gifted-spinner');
 var Button = require('react-native-button');
 
 var GiftedMessenger = React.createClass({
-  
+
   getDefaultProps() {
     return {
       displayNames: true,
@@ -31,7 +32,7 @@ var GiftedMessenger = React.createClass({
       autoFocus: true,
       onErrorButtonPress: (message, rowID) => {},
       loadEarlierMessagesButton: false,
-      loadEarlierMessagesButtonText: 'Load earlier messages',      
+      loadEarlierMessagesButtonText: 'Load earlier messages',
       onLoadEarlierMessages: (oldestMessage, callback) => {},
       parseText: false,
       handleUrlPress: (url) => {},
@@ -51,7 +52,7 @@ var GiftedMessenger = React.createClass({
       forceRenderImage: false,
     };
   },
-  
+
   propTypes: {
     displayNames: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
@@ -59,7 +60,7 @@ var GiftedMessenger = React.createClass({
     autoFocus: React.PropTypes.bool,
     onErrorButtonPress: React.PropTypes.func,
     loadEarlierMessagesButton: React.PropTypes.bool,
-    loadEarlierMessagesButtonText: React.PropTypes.string,      
+    loadEarlierMessagesButtonText: React.PropTypes.string,
     onLoadEarlierMessages: React.PropTypes.func,
     parseText: React.PropTypes.bool,
     handleUrlPress: React.PropTypes.func,
@@ -83,14 +84,14 @@ var GiftedMessenger = React.createClass({
   getInitialState: function() {
     this._data = [];
     this._rowIds = [];
-    
+
     var textInputHeight = 0;
     if (this.props.hideTextInput === false) {
       textInputHeight = 44;
     }
-    
+
     this.listViewMaxHeight = this.props.maxHeight - textInputHeight;
-    
+
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => {
       if (typeof r1.status !== 'undefined') {
         return true;
@@ -104,9 +105,10 @@ var GiftedMessenger = React.createClass({
       height: new Animated.Value(this.listViewMaxHeight),
       isLoadingEarlierMessages: false,
       allLoaded: false,
+      appearAnim: new Animated.Value(0),
     };
   },
-  
+
   getMessage(rowID) {
     if (typeof this._rowIds[this._rowIds.indexOf(rowID)] !== 'undefined') {
       if (typeof this._data[this._rowIds[this._rowIds.indexOf(rowID)]] !== 'undefined') {
@@ -124,32 +126,11 @@ var GiftedMessenger = React.createClass({
     }
     return null;
   },
-  
+
   getNextMessage(rowID) {
     if (typeof this._rowIds[this._rowIds.indexOf(rowID + 1)] !== 'undefined') {
       if (typeof this._data[this._rowIds[this._rowIds.indexOf(rowID + 1)]] !== 'undefined') {
         return this._data[this._rowIds[this._rowIds.indexOf(rowID + 1)]];
-      }
-    }
-    return null;
-  },
-
-  renderName(rowData = {}, rowID = null) {
-    if (this.props.displayNames === true) {
-      var diffMessage = null;
-      if (this.props.inverted === false) {
-        diffMessage = null; // force rendering
-      } else if (rowData.isOld === true) {
-        diffMessage = this.getNextMessage(rowID);
-      } else {
-        diffMessage = this.getPreviousMessage(rowID);
-      }
-      if (diffMessage === null || (this._data[rowID].name !== diffMessage.name || this._data[rowID].id !== diffMessage.id)) {
-        return (
-          <Text style={[this.styles.name]}>
-            {rowData.name}
-          </Text>
-        );
       }
     }
     return null;
@@ -184,131 +165,34 @@ var GiftedMessenger = React.createClass({
     }
     return null;
   },
-  
-  renderImage(rowData = {}, rowID = null) {
-    if (rowData.image !== null) {
-      
-      var diffMessage = null;
-      if (this.props.inverted === false || this.props.forceRenderImage === true) {
-        diffMessage = null; // force rendering
-      } else {
-        diffMessage = this.getNextMessage(rowID);
-      }
-      
-      if (diffMessage === null || (this._data[rowID].name !== diffMessage.name || this._data[rowID].id !== diffMessage.id)) {
-        if (typeof this.props.onImagePress === 'function') {
-          return (
-            <TouchableHighlight 
-              underlayColor='transparent'
-              onPress={() => this.props.onImagePress(rowData, rowID)}
-              style={this.styles.imagePosition}
-            >
-              <Image source={rowData.image} style={[this.styles.imagePosition, this.styles.image, (rowData.position === 'left' ? this.styles.imageLeft : this.styles.imageRight)]}/>
-            </TouchableHighlight>
-          );
-        } else {
-          return (
-            <Image source={rowData.image} style={[this.styles.imagePosition, this.styles.image, (rowData.position === 'left' ? this.styles.imageLeft : this.styles.imageRight)]}/>
-          );
-        }
-      } else {
-        return (
-          <View style={this.styles.imagePosition}/>
-        );
-      }
-    }
-    return (
-      <View style={this.styles.spacer}/>
-    );
-  },
-  
-  renderErrorButton(rowData = {}, rowID = null) {
-    if (rowData.status === 'ErrorButton') {
-      return (
-        <ErrorButton
-          onErrorButtonPress={this.props.onErrorButtonPress}
-          rowData={rowData}
-          rowID={rowID}
-          styles={{
-            errorButtonContainer: this.styles.errorButtonContainer,
-            errorButton: this.styles.errorButton,
-          }}
-        />
-      )
-    }
-    return null;
-  },
-  
-  renderStatus(rowData = {}, rowID = null) {
-    if (rowData.status !== 'ErrorButton' && typeof rowData.status === 'string') {
-      if (rowData.status.length > 0) {
-        return (
-          <View>
-            <Text style={this.styles.status}>{rowData.status}</Text>
-          </View>
-        );
-      }
-    }
-    return null;
-  },
 
-  renderText(rowData = {}, rowID = null) {
-    /*
-    if (this.props.parseText === true && Platform.OS !== 'android') {
-      let parse = [
-        {type: 'url', style: [this.styles.link, (rowData.position === 'left' ? this.styles.linkLeft : this.styles.linkRight)], onPress: this.props.handleUrlPress},
-        {type: 'phone', style: [this.styles.link, (rowData.position === 'left' ? this.styles.linkLeft : this.styles.linkRight)], onPress: this.props.handlePhonePress},
-        {type: 'email', style: [this.styles.link, (rowData.position === 'left' ? this.styles.linkLeft : this.styles.linkRight)], onPress: this.props.handleEmailPress},
-      ];
-      return (
-        <ParsedText
-          style={[this.styles.text, (rowData.position === 'left' ? this.styles.textLeft : this.styles.textRight)]}
-          parse={parse}
-        >
-          {rowData.text}
-        </ParsedText>
-      );
-    }
-    */
-    if (this.props.renderCustomText) {
-      return this.props.renderCustomText(rowData, rowID);
-    }
-    return (
-      <Text
-        style={[this.styles.text, (rowData.position === 'left' ? this.styles.textLeft : this.styles.textRight)]}
-      >
-        {rowData.text}
-      </Text>
-    );
-  },
-  
   renderRow(rowData = {}, sectionID = null, rowID = null) {
-     var flexStyle = {};
 
-    if ( rowData.text.length > 40 ) {
-      flexStyle.flex = 1;
+    var diffMessage = null;
+    if (this.props.inverted === false) {
+      diffMessage = null; // force rendering
+    } else if (rowData.isOld === true) {
+      diffMessage = this.getNextMessage(rowID);
+    } else {
+      diffMessage = this.getPreviousMessage(rowID);
     }
 
     return (
       <View>
-      {this.renderDate(rowData, rowID)}
-      {rowData.position === 'left' ? this.renderName(rowData, rowID) : null}
-      <View style={[this.styles.rowContainer, {
-          justifyContent: rowData.position==='left'?"flex-start":"flex-end"
-        }]}>
-        {rowData.position === 'left' ? this.renderImage(rowData, rowID) : null}
-        {rowData.position === 'right' ? this.renderErrorButton(rowData, rowID) : null}
-        <View style={[this.styles.bubble, 
-            (rowData.position === 'left' ? this.styles.bubbleLeft : this.styles.bubbleRight), 
-            (rowData.status === 'ErrorButton' ? this.styles.bubbleError : null),
-            flexStyle]}>
-          {this.renderText(rowData, rowID)}
-        </View>
-        {rowData.position === 'right' ? this.renderImage(rowData, rowID) : null}
+        {this.renderDate(rowData, rowID)}
+        <Message
+          rowData={rowData}
+          rowID={rowID}
+          onErrorButtonPress={this.props.onErrorButtonPress}
+          displayNames={this.props.displayNames}
+          inverted={this.props.inverted}
+          diffMessage={diffMessage}
+          position={rowData.position}
+          forceRenderImage={this.props.forceRenderImage}
+          onImagePress={this.props.onImagePress}
+        />
       </View>
-      {rowData.position === 'right' ? this.renderStatus(rowData, rowID) : null}
-      </View>
-    );
+    )
   },
 
   onChangeText(text) {
@@ -328,7 +212,7 @@ var GiftedMessenger = React.createClass({
 
   componentDidMount() {
     this.scrollResponder = this.refs.listView.getScrollResponder();
-    
+
     if (this.props.messages.length > 0) {
       this.appendMessages(this.props.messages);
     } else if (this.props.initialMessages.length > 0) {
@@ -352,14 +236,14 @@ var GiftedMessenger = React.createClass({
       duration: 150,
     }).start();
   },
-  
+
   onKeyboardWillShow(e) {
     Animated.timing(this.state.height, {
       toValue: this.listViewMaxHeight - (e.endCoordinates ? e.endCoordinates.height : e.end.height),
       duration: 200,
     }).start();
   },
-  
+
   onSend() {
 
     var message = {
@@ -378,7 +262,7 @@ var GiftedMessenger = React.createClass({
       this.scrollResponder.scrollTo(0);
     }
   },
-  
+
   postLoadEarlierMessages(messages = [], allLoaded = false) {
     this.prependMessages(messages);
     this.setState({
@@ -390,14 +274,14 @@ var GiftedMessenger = React.createClass({
       });
     }
   },
-  
+
   preLoadEarlierMessages() {
     this.setState({
       isLoadingEarlierMessages: true
     });
     this.props.onLoadEarlierMessages(this._data[this._rowIds[this._rowIds.length - 1]], this.postLoadEarlierMessages);
   },
-  
+
   renderLoadEarlierMessages() {
     if (this.props.loadEarlierMessagesButton === true) {
       if (this.state.allLoaded === false) {
@@ -432,19 +316,19 @@ var GiftedMessenger = React.createClass({
       this._rowIds.push(this._data.length - 1);
       rowID = this._data.length - 1;
     }
-    
+
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._data, this._rowIds),
     });
-    
+
     return rowID;
   },
-  
+
   prependMessage(message = {}) {
     var rowID = this.prependMessages([message]);
     return rowID;
   },
-  
+
   appendMessages(messages = []) {
     var rowID = null;
     for (let i = 0; i < messages.length; i++) {
@@ -457,7 +341,7 @@ var GiftedMessenger = React.createClass({
     });
     return rowID;
   },
-  
+
   appendMessage(message = {}) {
     var rowID = this.appendMessages([message]);
     return rowID;
@@ -468,7 +352,7 @@ var GiftedMessenger = React.createClass({
       dataSource: this.state.dataSource.cloneWithRows(this._data, this._rowIds),
     });
   },
-  
+
   setMessageStatus(status = '', rowID) {
     if (status === 'ErrorButton') {
       if (this._data[rowID].position === 'right') {
@@ -478,7 +362,7 @@ var GiftedMessenger = React.createClass({
     } else {
       if (this._data[rowID].position === 'right') {
         this._data[rowID].status = status;
-      
+
         // only 1 message can have a status
         for (let i = 0; i < this._data.length; i++) {
           if (i !== rowID && this._data[i].status !== 'ErrorButton') {
@@ -489,7 +373,7 @@ var GiftedMessenger = React.createClass({
       }
     }
   },
-  
+
   renderAnimatedView() {
     if (this.props.inverted === true) {
       return (
@@ -505,24 +389,24 @@ var GiftedMessenger = React.createClass({
             renderRow={this.renderRow}
             renderFooter={this.renderLoadEarlierMessages}
             style={this.styles.listView}
-    
+
             renderScrollComponent={props => <InvertibleScrollView {...props} inverted />}
-    
+
             // not working android RN 0.14.2
             onKeyboardWillShow={this.onKeyboardWillShow}
             onKeyboardWillHide={this.onKeyboardWillHide}
-    
+
             /*
               keyboardShouldPersistTaps={false} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
               keyboardDismissMode='interactive'
             */
-        
+
             keyboardShouldPersistTaps={true}
             keyboardDismissMode='on-drag'
-        
+
             {...this.props}
           />
-  
+
         </Animated.View>
       );
     }
@@ -539,19 +423,19 @@ var GiftedMessenger = React.createClass({
           renderRow={this.renderRow}
           renderFooter={this.renderLoadEarlierMessages}
           style={this.styles.listView}
-  
+
           // When not inverted: Using Did instead of Will because onKeyboardWillShow is not working in Android RN 0.14.2
           onKeyboardDidShow={this.onKeyboardWillShow}
           onKeyboardDidHide={this.onKeyboardWillHide}
-  
+
           /*
             keyboardShouldPersistTaps={false} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
             keyboardDismissMode='interactive'
           */
-      
+
           keyboardShouldPersistTaps={true}
           keyboardDismissMode='on-drag'
-      
+
           {...this.props}
         />
 
@@ -559,20 +443,20 @@ var GiftedMessenger = React.createClass({
     );
 
   },
-  
+
   render() {
     return (
       <View
         style={this.styles.container}
         ref='container'
-      >        
+      >
         {(this.props.inverted === true ? this.renderAnimatedView() : null)}
         {this.renderTextInput()}
-        {(this.props.inverted === false ? this.renderAnimatedView() : null)}            
+        {(this.props.inverted === false ? this.renderAnimatedView() : null)}
       </View>
     )
   },
-  
+
   renderTextInput() {
     if (this.props.hideTextInput === false) {
       return (
@@ -586,7 +470,7 @@ var GiftedMessenger = React.createClass({
             autoFocus={this.props.autoFocus}
             returnKeyType={this.props.submitOnReturn ? 'send' : 'default'}
             onSubmitEditing={this.props.submitOnReturn ? this.onSend : null}
-            
+
             blurOnSubmit={false}
           />
           <Button
@@ -597,7 +481,7 @@ var GiftedMessenger = React.createClass({
             {this.props.sendButtonText}
           </Button>
         </View>
-      ); 
+      );
     }
     return null;
   },
@@ -646,53 +530,6 @@ var GiftedMessenger = React.createClass({
         fontWeight: 'bold',
         marginBottom: 8,
       },
-      rowContainer: {
-        flexDirection: 'row',
-        marginBottom: 10,
-      },
-      imagePosition: {
-        height: 30,
-        width: 30,
-        alignSelf: 'flex-end',
-        marginLeft: 8,
-        marginRight: 8,        
-      },
-      image: {
-        alignSelf: 'center',
-        borderRadius: 15,
-      },
-      imageLeft: {
-      },
-      imageRight: {
-      },
-      bubble: {
-        borderRadius: 15,
-        paddingLeft: 14,
-        paddingRight: 14,
-        paddingBottom: 10,
-        paddingTop: 8,
-      },
-      text: {
-        color: '#000',
-      },
-      textLeft: {
-      },
-      textRight: {
-        color: '#fff',
-      },
-      bubbleLeft: {
-        marginRight: 70,
-        backgroundColor: '#e6e6eb',
-        alignSelf: "flex-start",
-      },
-      bubbleRight: {
-        marginLeft: 70,
-        backgroundColor: '#007aff',
-        alignSelf: "flex-end"
-      },
-      bubbleError: {
-        backgroundColor: '#e01717'
-      },
       link: {
         color: '#007aff',
         textDecorationLine: 'underline',
@@ -703,87 +540,18 @@ var GiftedMessenger = React.createClass({
       linkRight: {
         color: '#fff',
       },
-      errorButtonContainer: {
-        marginLeft: 8,
-        alignSelf: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#e6e6eb',
-        borderRadius: 15,
-        width: 30,
-        height: 30,
-      },
-      errorButton: {
-        fontSize: 22,
-        textAlign: 'center',
-      },
-      status: {
-        color: '#aaaaaa',
-        fontSize: 12,
-        textAlign: 'right',
-        marginRight: 15,
-        marginBottom: 10,
-        marginTop: -5,
-      },
       loadEarlierMessages: {
-        height: 44, 
+        height: 44,
         justifyContent: 'center',
         alignItems: 'center',
       },
       loadEarlierMessagesButton: {
         fontSize: 14,
       },
-      spacer: {
-        width: 10,
-      },
     };
-    
-    extend(this.styles, this.props.styles);
-  },  
-});
 
-var ErrorButton = React.createClass({
-  getInitialState() {
-    return {
-      isLoading: false,
-    };
+    extend(this.styles, this.props.styles);
   },
-  getDefaultProps() {
-    return {
-      onErrorButtonPress: () => {},
-      rowData: {},
-      rowID: null,
-      styles: {},
-    };
-  },
-  onPress() {
-    this.setState({
-      isLoading: true,
-    });
-    
-    this.props.onErrorButtonPress(this.props.rowData, this.props.rowID);
-  },
-  render() {
-    if (this.state.isLoading === true) {
-      return (
-        <View style={[this.props.styles.errorButtonContainer, {
-          backgroundColor: 'transparent',
-          borderRadius: 0,
-        }]}>
-          <GiftedSpinner />
-        </View>
-      );
-    }
-    return (
-      <View style={this.props.styles.errorButtonContainer}>
-        <TouchableHighlight 
-          underlayColor='transparent'
-          onPress={this.onPress}
-        >
-          <Text style={this.props.styles.errorButton}>↻</Text>
-        </TouchableHighlight>
-      </View>
-    );
-  }
 });
 
 module.exports = GiftedMessenger;

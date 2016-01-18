@@ -96,7 +96,6 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | handleUrlPress                | Function | Called when a parsed url is pressed                                        | iOS      | (url) => {}                      |
 | handlePhonePress              | Function | Called when a parsed phone number is pressed                               | iOS      | (phone) => {}                    |
 | handleEmailPress              | Function | Called when a parsed email is pressed                                      | iOS      | (email) => {}                    |
-| inverted                      | Boolean  | Invert vertically the orientation of the chat                              | Both     | true                             |
 | hideTextInput                 | Boolean  | Hide or not the text input                                                 | Both     | false                            |
 | keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | on-drag                          |
 | returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |

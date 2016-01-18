@@ -6,6 +6,7 @@ Ready-to-use chat interface for iOS and Android React-Native apps
 
 
 ### Changelog
+- 0.0.11 Split into separate components (PR @Froelund), better performance by removing react-native-invertible-scroll-view
 - 0.0.10 forceRenderImage, onCustomSend, renderCustomText props (PR @oney)
 - 0.0.9  Fix iPhone 6 Plus textInput border
 - 0.0.8  Fix issue with RN 0.16.0 Thanks @wenkesj for PR

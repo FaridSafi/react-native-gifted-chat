@@ -19,10 +19,13 @@ var {
 var moment = require('moment');
 var extend = require('extend');
 
-import InvertibleScrollView from 'react-native-invertible-scroll-view';
 var Button = require('react-native-button');
 
 var GiftedMessenger = React.createClass({
+
+  firstDisplay: true,
+  listHeight: 0,
+  footerY: 0,
 
   getDefaultProps() {
     return {
@@ -46,7 +49,6 @@ var GiftedMessenger = React.createClass({
       senderImage: null,
       sendButtonText: 'Send',
       onImagePress: null,
-      inverted: true,
       hideTextInput: false,
       submitOnReturn: false,
       forceRenderImage: false,
@@ -76,7 +78,6 @@ var GiftedMessenger = React.createClass({
     senderImage: React.PropTypes.object,
     sendButtonText: React.PropTypes.string,
     onImagePress: React.PropTypes.func,
-    inverted: React.PropTypes.bool,
     hideTextInput: React.PropTypes.bool,
     forceRenderImage: React.PropTypes.bool,
   },
@@ -138,12 +139,10 @@ var GiftedMessenger = React.createClass({
 
   renderDate(rowData = {}, rowID = null) {
     var diffMessage = null;
-    if (this.props.inverted === false) {
-      diffMessage = null; // force rendering
-    } else if (rowData.isOld === true) {
-      diffMessage = this.getNextMessage(rowID);
-    } else {
+    if (rowData.isOld === true) {
       diffMessage = this.getPreviousMessage(rowID);
+    } else {
+      diffMessage = this.getNextMessage(rowID);
     }
     if (rowData.date instanceof Date) {
       if (diffMessage === null) {
@@ -169,12 +168,10 @@ var GiftedMessenger = React.createClass({
   renderRow(rowData = {}, sectionID = null, rowID = null) {
 
     var diffMessage = null;
-    if (this.props.inverted === false) {
-      diffMessage = null; // force rendering
-    } else if (rowData.isOld === true) {
-      diffMessage = this.getNextMessage(rowID);
-    } else {
+    if (rowData.isOld === true) {
       diffMessage = this.getPreviousMessage(rowID);
+    } else {
+      diffMessage = this.getNextMessage(rowID);
     }
 
     return (
@@ -185,11 +182,11 @@ var GiftedMessenger = React.createClass({
           rowID={rowID}
           onErrorButtonPress={this.props.onErrorButtonPress}
           displayNames={this.props.displayNames}
-          inverted={this.props.inverted}
           diffMessage={diffMessage}
           position={rowData.position}
           forceRenderImage={this.props.forceRenderImage}
           onImagePress={this.props.onImagePress}
+          renderCustomText={this.props.renderCustomText}
         />
       </View>
     )
@@ -222,6 +219,7 @@ var GiftedMessenger = React.createClass({
         allLoaded: true
       });
     }
+    
   },
 
   componentWillReceiveProps(nextProps) {
@@ -243,9 +241,22 @@ var GiftedMessenger = React.createClass({
       duration: 200,
     }).start();
   },
+  
+  onKeyboardDidShow(e) {
+    this.scrollToBottom();
+  },
+  
+  scrollToBottom() {
+    var scrollDistance = this.listHeight - this.footerY;
+    this.scrollResponder.scrollTo(-scrollDistance);
+  },
 
+  scrollWithoutAnimationToBottom() {
+    var scrollDistance = this.listHeight - this.footerY;
+    this.scrollResponder.scrollWithoutAnimationTo(-scrollDistance);    
+  },
+  
   onSend() {
-
     var message = {
       text: this.state.text.trim(),
       name: this.props.senderName,
@@ -259,10 +270,9 @@ var GiftedMessenger = React.createClass({
       var rowID = this.appendMessage(message);
       this.props.handleSend(message, rowID);
       this.onChangeText('');
-      this.scrollResponder.scrollTo(0);
     }
   },
-
+  
   postLoadEarlierMessages(messages = [], allLoaded = false) {
     this.prependMessages(messages);
     this.setState({
@@ -311,6 +321,24 @@ var GiftedMessenger = React.createClass({
   prependMessages(messages = []) {
     var rowID = null;
     for (let i = 0; i < messages.length; i++) {
+      this._data.push(messages[i]);
+      this._rowIds.unshift(this._data.length - 1);
+      rowID = this._data.length - 1;
+    }
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(this._data, this._rowIds),
+    });
+    return rowID;
+  },
+
+  prependMessage(message = {}) {
+    var rowID = this.prependMessages([message]);
+    return rowID;
+  },
+
+  appendMessages(messages = []) {
+    var rowID = null;
+    for (let i = 0; i < messages.length; i++) {
       messages[i].isOld = true;
       this._data.push(messages[i]);
       this._rowIds.push(this._data.length - 1);
@@ -324,26 +352,18 @@ var GiftedMessenger = React.createClass({
     return rowID;
   },
 
-  prependMessage(message = {}) {
-    var rowID = this.prependMessages([message]);
-    return rowID;
-  },
-
-  appendMessages(messages = []) {
-    var rowID = null;
-    for (let i = 0; i < messages.length; i++) {
-      this._data.push(messages[i]);
-      this._rowIds.unshift(this._data.length - 1);
-      rowID = this._data.length - 1;
-    }
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this._data, this._rowIds),
-    });
-    return rowID;
-  },
-
-  appendMessage(message = {}) {
+  appendMessage(message = {}, scrollToBottom = true) {
     var rowID = this.appendMessages([message]);
+    
+    if (scrollToBottom === true) {
+      setTimeout(() => {
+        // inspired by http://stackoverflow.com/a/34838513/1385109
+        if(this.listHeight && this.footerY && this.footerY > this.listHeight) {
+          this.scrollToBottom();
+        }   
+      }, 100);
+    }
+    
     return rowID;
   },
 
@@ -375,41 +395,6 @@ var GiftedMessenger = React.createClass({
   },
 
   renderAnimatedView() {
-    if (this.props.inverted === true) {
-      return (
-        <Animated.View
-          style={{
-            height: this.state.height,
-          }}
-
-        >
-          <ListView
-            ref='listView'
-            dataSource={this.state.dataSource}
-            renderRow={this.renderRow}
-            renderFooter={this.renderLoadEarlierMessages}
-            style={this.styles.listView}
-
-            renderScrollComponent={props => <InvertibleScrollView {...props} inverted />}
-
-            // not working android RN 0.14.2
-            onKeyboardWillShow={this.onKeyboardWillShow}
-            onKeyboardWillHide={this.onKeyboardWillHide}
-
-            /*
-              keyboardShouldPersistTaps={false} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
-              keyboardDismissMode='interactive'
-            */
-
-            keyboardShouldPersistTaps={true}
-            keyboardDismissMode='on-drag'
-
-            {...this.props}
-          />
-
-        </Animated.View>
-      );
-    }
     return (
       <Animated.View
         style={{
@@ -421,12 +406,37 @@ var GiftedMessenger = React.createClass({
           ref='listView'
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
-          renderFooter={this.renderLoadEarlierMessages}
+          renderHeader={this.renderLoadEarlierMessages}
+          onLayout={(event) => {
+            var layout = event.nativeEvent.layout;
+            console.log('listHeight '+layout.height);
+            this.listHeight = layout.height;
+            if (this.firstDisplay === true) {
+              requestAnimationFrame(() => {
+                this.firstDisplay = false;
+                this.scrollWithoutAnimationToBottom();
+              });
+            }
+            
+          }}
+          renderFooter={() => {
+            return <View onLayout={(event)=>{
+              var layout = event.nativeEvent.layout;
+              console.log('footerY '+layout.y);
+              this.footerY = layout.y;
+            }}></View>
+          }}
+          
+          
+          
+          
           style={this.styles.listView}
 
-          // When not inverted: Using Did instead of Will because onKeyboardWillShow is not working in Android RN 0.14.2
-          onKeyboardDidShow={this.onKeyboardWillShow}
-          onKeyboardDidHide={this.onKeyboardWillHide}
+
+          // not working android RN 0.14.2
+          onKeyboardWillShow={this.onKeyboardWillShow}
+          onKeyboardDidShow={this.onKeyboardDidShow}
+          onKeyboardWillHide={this.onKeyboardWillHide}
 
           /*
             keyboardShouldPersistTaps={false} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
@@ -434,14 +444,18 @@ var GiftedMessenger = React.createClass({
           */
 
           keyboardShouldPersistTaps={true}
-          keyboardDismissMode='on-drag'
+          keyboardDismissMode='interactive'
+          
+          
+          initialListSize={10}
+          pageSize={this.props.messages.length}
+          
 
           {...this.props}
         />
 
       </Animated.View>
     );
-
   },
 
   render() {
@@ -450,9 +464,8 @@ var GiftedMessenger = React.createClass({
         style={this.styles.container}
         ref='container'
       >
-        {(this.props.inverted === true ? this.renderAnimatedView() : null)}
+        {this.renderAnimatedView()}
         {this.renderTextInput()}
-        {(this.props.inverted === false ? this.renderAnimatedView() : null)}
       </View>
     )
   },

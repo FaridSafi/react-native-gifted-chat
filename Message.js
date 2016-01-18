@@ -60,7 +60,7 @@ export default class Message extends React.Component {
     super(props);
   }
 
-  renderName(name, displayNames, inverted, diffMessage){
+  renderName(name, displayNames, diffMessage){
     if (displayNames === true) {
       if (diffMessage === null || name !== diffMessage.name) {
         return (
@@ -144,7 +144,6 @@ export default class Message extends React.Component {
       onErrorButtonPress,
       position,
       displayNames,
-      inverted,
       diffMessage,
       forceRenderImage,
       onImagePress
@@ -157,7 +156,7 @@ export default class Message extends React.Component {
 
     return (
       <View>
-      {position === 'left' ? this.renderName(rowData.name, displayNames, inverted, diffMessage) : null}
+      {position === 'left' ? this.renderName(rowData.name, displayNames, diffMessage) : null}
       <View style={[styles.rowContainer, {
           justifyContent: position==='left'?"flex-start":"flex-end"
         }]}>

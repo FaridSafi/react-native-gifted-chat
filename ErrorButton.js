@@ -10,15 +10,6 @@ export default class ErrorButton extends React.Component {
     };
   }
 
-  getDefaultProps() {
-    return {
-      onErrorButtonPress: () => {},
-      rowData: {},
-      rowID: null,
-      styles: {},
-    };
-  }
-
   onPress() {
 
     this.setState({
@@ -51,3 +42,10 @@ export default class ErrorButton extends React.Component {
     );
   }
 }
+
+ErrorButton.defaultProps = {
+  onErrorButtonPress: () => {},
+  rowData: {},
+  rowID: null,
+  styles: {},
+};

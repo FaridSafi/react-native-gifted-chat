@@ -409,7 +409,6 @@ var GiftedMessenger = React.createClass({
           renderHeader={this.renderLoadEarlierMessages}
           onLayout={(event) => {
             var layout = event.nativeEvent.layout;
-            console.log('listHeight '+layout.height);
             this.listHeight = layout.height;
             if (this.firstDisplay === true) {
               requestAnimationFrame(() => {
@@ -422,7 +421,6 @@ var GiftedMessenger = React.createClass({
           renderFooter={() => {
             return <View onLayout={(event)=>{
               var layout = event.nativeEvent.layout;
-              console.log('footerY '+layout.y);
               this.footerY = layout.y;
             }}></View>
           }}

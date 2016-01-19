@@ -52,6 +52,7 @@ var GiftedMessenger = React.createClass({
       hideTextInput: false,
       submitOnReturn: false,
       forceRenderImage: false,
+      onChangeText: (text) => {},
     };
   },
 
@@ -80,6 +81,7 @@ var GiftedMessenger = React.createClass({
     onImagePress: React.PropTypes.func,
     hideTextInput: React.PropTypes.bool,
     forceRenderImage: React.PropTypes.bool,
+    onChangeText: React.PropTypes.func,
   },
 
   getInitialState: function() {
@@ -205,6 +207,8 @@ var GiftedMessenger = React.createClass({
         disabled: true
       })
     }
+
+      this.props.onChangeText(text);
   },
 
   componentDidMount() {

@@ -106,6 +106,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |
 | onCustomSend                  | Function | If you want to implement a progress bar. See PR #16                        | Both     | (message) => {}                  |
 | renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData, rowID) => {}           |
+| onChangeText                  | Function | Called on every keypress in the TextInput                                  | Both     | (text) => {}                     |
 
 
 ### Props update

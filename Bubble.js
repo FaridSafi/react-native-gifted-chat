@@ -38,6 +38,10 @@ export default class Bubble extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    Object.assign(styles, this.props.styles);
+  }
+
   renderText(text = "", position) {
 
     if (this.props.renderCustomText) {

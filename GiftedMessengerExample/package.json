@@ -6,8 +6,8 @@
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
-    "react-native": "^0.14.2",
-    "react-native-communications": "0.0.6",
-    "react-native-gifted-messenger": "*"
+    "react-native": "^0.18.0",
+    "react-native-gifted-messenger": "*",
+    "react-native-communications": "0.0.6"
   }
 }

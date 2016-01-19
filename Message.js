@@ -31,19 +31,6 @@ var styles = StyleSheet.create({
   spacer: {
     width: 10,
   },
-  errorButtonContainer: {
-    marginLeft: 8,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#e6e6eb',
-    borderRadius: 15,
-    width: 30,
-    height: 30,
-  },
-  errorButton: {
-    fontSize: 22,
-    textAlign: 'center',
-  },
   status: {
     color: '#aaaaaa',
     fontSize: 12,
@@ -58,6 +45,10 @@ export default class Message extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+  
+  componentWillMount() {
+    Object.assign(styles, this.props.styles);
   }
 
   renderName(name, displayNames, diffMessage){
@@ -113,10 +104,7 @@ export default class Message extends React.Component {
           onErrorButtonPress={onErrorButtonPress}
           rowData={rowData}
           rowID={rowID}
-          styles={{
-            errorButtonContainer: styles.errorButtonContainer,
-            errorButton: styles.errorButton,
-          }}
+          styles={styles}
         />
       )
     }
@@ -167,6 +155,8 @@ export default class Message extends React.Component {
           status={rowData.status}
           text={rowData.text}
           renderCustomText={this.props.renderCustomText}
+          
+          styles={styles}
           />
         {rowData.position === 'right' ? this.renderImage(rowData, rowID) : null}
       </View>

@@ -1,7 +1,7 @@
 # Gifted Messenger
 Ready-to-use chat interface for iOS and Android React-Native apps
 
-Dependency: React-Native >= v0.18.0-rc (onLayout prop on ListView is required)
+Dependency: React-Native >= v0.18.0 (onLayout prop on ListView is required)
 
 
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-1.png)
@@ -9,6 +9,7 @@ Dependency: React-Native >= v0.18.0-rc (onLayout prop on ListView is required)
 
 
 ### Changelog
+- 0.0.14 Bugs fixes
 - 0.0.11 Split into separate components (PR @Froelund), better performance by removing react-native-invertible-scroll-view
 - 0.0.10 forceRenderImage, onCustomSend, renderCustomText props (PR @oney)
 - 0.0.9  Fix iPhone 6 Plus textInput border
@@ -106,7 +107,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |
 | onCustomSend                  | Function | If you want to implement a progress bar. See PR #16                        | Both     | (message) => {}                  |
 | renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData, rowID) => {}           |
-
+| onChangeText                  | Function | Called on every keypress in the TextInput                                  | Both     | (text) => {}                     |
 
 ### Props update
 

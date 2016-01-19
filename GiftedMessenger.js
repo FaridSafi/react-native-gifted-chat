@@ -17,7 +17,6 @@ var {
 } = React;
 
 var moment = require('moment');
-var extend = require('extend');
 
 var Button = require('react-native-button');
 
@@ -52,6 +51,7 @@ var GiftedMessenger = React.createClass({
       hideTextInput: false,
       submitOnReturn: false,
       forceRenderImage: false,
+      onChangeText: (text) => {},
     };
   },
 
@@ -80,6 +80,7 @@ var GiftedMessenger = React.createClass({
     onImagePress: React.PropTypes.func,
     hideTextInput: React.PropTypes.bool,
     forceRenderImage: React.PropTypes.bool,
+    onChangeText: React.PropTypes.func,
   },
 
   getInitialState: function() {
@@ -187,6 +188,8 @@ var GiftedMessenger = React.createClass({
           forceRenderImage={this.props.forceRenderImage}
           onImagePress={this.props.onImagePress}
           renderCustomText={this.props.renderCustomText}
+          
+          styles={this.styles}
         />
       </View>
     )
@@ -205,6 +208,8 @@ var GiftedMessenger = React.createClass({
         disabled: true
       })
     }
+    
+    this.props.onChangeText(text);
   },
 
   componentDidMount() {
@@ -563,7 +568,7 @@ var GiftedMessenger = React.createClass({
       },
     };
 
-    extend(this.styles, this.props.styles);
+    Object.assign(this.styles, this.props.styles);
   },
 });
 

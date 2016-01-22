@@ -10,7 +10,7 @@ var styles = StyleSheet.create({
   name: {
     color: '#aaaaaa',
     fontSize: 12,
-    marginLeft: 20,
+    marginLeft: 55,
     marginBottom: 5,
   },
   imagePosition: {

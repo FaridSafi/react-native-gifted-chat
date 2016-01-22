@@ -535,12 +535,6 @@ var GiftedMessenger = React.createClass({
         marginTop: 11,
         marginLeft: 10,
       },
-      name: {
-        color: '#aaaaaa',
-        fontSize: 12,
-        marginLeft: 20,
-        marginBottom: 5,
-      },
       date: {
         color: '#aaaaaa',
         fontSize: 12,

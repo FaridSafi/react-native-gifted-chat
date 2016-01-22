@@ -368,7 +368,7 @@ var GiftedMessenger = React.createClass({
       setTimeout(() => {
         // inspired by http://stackoverflow.com/a/34838513/1385109
         this.scrollToBottom();
-      }, 100);
+      }, (Platform.OS === 'android' ? 200 : 100));
     }
     
     return rowID;

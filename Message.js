@@ -70,7 +70,7 @@ export default class Message extends React.Component {
         diffMessage = null; // force rendering
       }
 
-      if (diffMessage === null || (rowData.name !== diffMessage.name || rowData.id !== diffMessage.id)) {
+      if (diffMessage === null || (diffMessage != null && (rowData.name !== diffMessage.name || rowData.id !== diffMessage.id))) {
         if (typeof onImagePress === 'function') {
           return (
             <TouchableHighlight

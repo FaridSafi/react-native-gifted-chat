@@ -158,9 +158,9 @@ export default class Message extends React.Component {
           
           styles={styles}
           />
-        {rowData.position === 'right' ? this.renderImage(rowData, rowID) : null}
+        {rowData.position === 'right' ? this.renderImage(rowData, rowID, diffMessage, forceRenderImage, onImagePress) : null}
       </View>
-      {rowData.position === 'right' ? this.renderStatus(rowData, rowID) : null}
+      {rowData.position === 'right' ? this.renderStatus(rowData.status) : null}
       </View>
     )
   }

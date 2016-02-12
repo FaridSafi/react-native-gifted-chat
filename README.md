@@ -143,6 +143,7 @@ var message = {
   image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
   position: 'left', // left if received, right if sent
   date: new Date(),
+  view: null, // A custom Bubble view
   // ...any attributes you want
 };
 ```

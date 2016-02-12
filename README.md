@@ -9,6 +9,7 @@ Dependency: React-Native >= v0.18.0 (onLayout prop on ListView is required)
 
 
 ### Changelog
+- 0.0.18 Simply pass a view property with the rowData to render a custom component, defaults to Bubble (PR @tommoor)
 - 0.0.14 Bugs fixes
 - 0.0.11 Split into separate components (PR @Froelund), better performance by removing react-native-invertible-scroll-view
 - 0.0.10 forceRenderImage, onCustomSend, renderCustomText props (PR @oney)

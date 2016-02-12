@@ -138,14 +138,13 @@ export default class Message extends React.Component {
     } = this.props;
 
     var flexStyle = {};
-    var rowView = Bubble;
+    var RowView = Bubble;
     if ( rowData.text.length > 40 ) {
       flexStyle.flex = 1;
     }
-    
+
     if ( rowData.view ) {
-      rowView = rowData.view;
-      delete rowData.view;
+      RowView = rowData.view;
     }
 
     return (
@@ -156,7 +155,7 @@ export default class Message extends React.Component {
         }]}>
         {position === 'left' ? this.renderImage(rowData, rowID, diffMessage, forceRenderImage, onImagePress) : null}
         {position === 'right' ? this.renderErrorButton(rowData, rowID, onErrorButtonPress) : null}
-        <rowView
+        <RowView
           {...rowData}
           renderCustomText={this.props.renderCustomText}
           styles={styles}

@@ -261,7 +261,7 @@ var GiftedMessenger = React.createClass({
   scrollWithoutAnimationToBottom() {
     if (this.listHeight && this.footerY && this.footerY > this.listHeight) {
       var scrollDistance = this.listHeight - this.footerY;
-      this.scrollResponder.scrollWithoutAnimationTo(0, -scrollDistance);
+      this.scrollResponder.scrollTo(-scrollDistance, 0, false);
     }
   },
 

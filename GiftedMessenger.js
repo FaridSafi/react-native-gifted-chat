@@ -499,6 +499,7 @@ var GiftedMessenger = React.createClass({
           />
           <Button
             style={this.styles.sendButton}
+            styleDisabled={this.styles.sendButtonDisabled}
             onPress={this.onSend}
             disabled={this.state.disabled}
           >

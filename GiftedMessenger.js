@@ -484,7 +484,7 @@ var GiftedMessenger = React.createClass({
   renderTextInput() {
     if (this.props.hideTextInput === false) {
       return (
-        <View style={this.styles.textInputContainer}>
+        <Animated.View style={this.styles.textInputContainer}>
           <TextInput
             style={this.styles.textInput}
             placeholder={this.props.placeholder}
@@ -504,7 +504,7 @@ var GiftedMessenger = React.createClass({
           >
             {this.props.sendButtonText}
           </Button>
-        </View>
+        </Animated.View>
       );
     }
     return null;

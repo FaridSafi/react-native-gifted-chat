@@ -176,7 +176,7 @@ var GiftedMessenger = React.createClass({
     }
 
     return (
-      <View>
+      <Animated.View>
         {this.renderDate(rowData, rowID)}
         <Message
           rowData={rowData}
@@ -191,7 +191,7 @@ var GiftedMessenger = React.createClass({
 
           styles={this.styles}
         />
-      </View>
+      </Animated.View>
     )
   },
 

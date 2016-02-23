@@ -61,6 +61,7 @@ var GiftedMessenger = React.createClass({
     styles: React.PropTypes.object,
     autoFocus: React.PropTypes.bool,
     onErrorButtonPress: React.PropTypes.func,
+    loadMessagesLater: React.PropTypes.bool,
     loadEarlierMessagesButton: React.PropTypes.bool,
     loadEarlierMessagesButtonText: React.PropTypes.string,
     onLoadEarlierMessages: React.PropTypes.func,
@@ -220,9 +221,12 @@ var GiftedMessenger = React.createClass({
     } else if (this.props.initialMessages.length > 0) {
       this.appendMessages(this.props.initialMessages);
     } else {
-      this.setState({
-        allLoaded: true
-      });
+      // Set allLoaded, unless props.loadMessagesLater is set
+      if (!this.props.loadMessagesLater) {
+        this.setState({
+          allLoaded: true
+        });
+      }
     }
 
   },
@@ -264,8 +268,8 @@ var GiftedMessenger = React.createClass({
     if (this.listHeight && this.footerY && this.footerY > this.listHeight) {
       var scrollDistance = this.listHeight - this.footerY;
       this.scrollResponder.scrollTo({
-        y: -scrollDistance, 
-        x: 0, 
+        y: -scrollDistance,
+        x: 0,
         animated: false,
       });
     }

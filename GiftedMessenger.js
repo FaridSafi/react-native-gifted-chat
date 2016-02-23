@@ -176,7 +176,7 @@ var GiftedMessenger = React.createClass({
     }
 
     return (
-      <Animated.View>
+      <View>
         {this.renderDate(rowData, rowID)}
         <Message
           rowData={rowData}
@@ -191,7 +191,7 @@ var GiftedMessenger = React.createClass({
 
           styles={this.styles}
         />
-      </Animated.View>
+      </View>
     )
   },
 
@@ -405,7 +405,7 @@ var GiftedMessenger = React.createClass({
 
   renderAnimatedView() {
     return (
-      <Animated.View
+      <View
         style={{
           height: this.state.height,
         }}
@@ -461,26 +461,26 @@ var GiftedMessenger = React.createClass({
           {...this.props}
         />
 
-      </Animated.View>
+      </View>
     );
   },
 
   render() {
     return (
-      <Animated.View
+      <View
         style={this.styles.container}
         ref='container'
       >
         {this.renderAnimatedView()}
         {this.renderTextInput()}
-      </Animated.View>
+      </View>
     )
   },
 
   renderTextInput() {
     if (this.props.hideTextInput === false) {
       return (
-        <Animated.View style={this.styles.textInputContainer}>
+        <View style={this.styles.textInputContainer}>
           <TextInput
             style={this.styles.textInput}
             placeholder={this.props.placeholder}
@@ -500,7 +500,7 @@ var GiftedMessenger = React.createClass({
           >
             {this.props.sendButtonText}
           </Button>
-        </Animated.View>
+        </View>
       );
     }
     return null;

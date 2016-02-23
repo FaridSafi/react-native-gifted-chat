@@ -405,7 +405,7 @@ var GiftedMessenger = React.createClass({
 
   renderAnimatedView() {
     return (
-      <View
+      <Animated.View
         style={{
           height: this.state.height,
         }}
@@ -461,7 +461,7 @@ var GiftedMessenger = React.createClass({
           {...this.props}
         />
 
-      </View>
+      </Animated.View>
     );
   },
 

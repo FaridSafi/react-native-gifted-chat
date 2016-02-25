@@ -30,6 +30,7 @@ var GiftedMessenger = React.createClass({
     return {
       displayNames: true,
       placeholder: 'Type a message...',
+      typingText: 'Your friend is typing...',
       styles: {},
       autoFocus: true,
       onErrorButtonPress: (message, rowID) => {},
@@ -57,6 +58,7 @@ var GiftedMessenger = React.createClass({
 
   propTypes: {
     displayNames: React.PropTypes.bool,
+    typingText: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     styles: React.PropTypes.object,
     autoFocus: React.PropTypes.bool,
@@ -102,6 +104,8 @@ var GiftedMessenger = React.createClass({
     }});
     return {
       dataSource: ds.cloneWithRows([]),
+      typing: false,
+      typingOpacity: new Animated.Value(0),
       text: '',
       disabled: true,
       height: new Animated.Value(this.listViewMaxHeight),
@@ -233,6 +237,25 @@ var GiftedMessenger = React.createClass({
     this.appendMessages(nextProps.messages);
   },
 
+  componentWillUpdate(nextProps, nextState) {
+    if( this.state.typing !== nextState.typing ) {
+      switch( nextState.typing ) {
+        case true: {
+          return Animated.timing(this.state.typingOpacity, {
+            toValue: 1,
+            duration: 250,
+          }).start();
+        };
+        case false: {
+          return Animated.timing(this.state.typingOpacity, {
+            toValue: 0,
+            duration: 250,
+          }).start();
+        };
+      }
+    }
+  },
+
   onKeyboardWillHide(e) {
     Animated.timing(this.state.height, {
       toValue: this.listViewMaxHeight,
@@ -263,7 +286,11 @@ var GiftedMessenger = React.createClass({
   scrollWithoutAnimationToBottom() {
     if (this.listHeight && this.footerY && this.footerY > this.listHeight) {
       var scrollDistance = this.listHeight - this.footerY;
-      this.scrollResponder.scrollResponderScrollWithoutAnimationTo(0, -scrollDistance)
+      this.scrollResponder.scrollTo({
+        y: -scrollDistance,
+        x: 0,
+        animated: false,
+      });
     }
   },
 
@@ -477,29 +504,46 @@ var GiftedMessenger = React.createClass({
     )
   },
 
+  renderTyping() {
+    if( this.props.typingText.length ) {
+      return (
+        <Animated.Text style={[
+            this.styles.typingContainer,
+            {opacity: this.state.typingOpacity}
+          ]}>
+          {this.props.typingText}
+        </Animated.Text>
+      )
+    }
+  },
+
   renderTextInput() {
     if (this.props.hideTextInput === false) {
       return (
-        <View style={this.styles.textInputContainer}>
-          <TextInput
-            style={this.styles.textInput}
-            placeholder={this.props.placeholder}
-            ref='textInput'
-            onChangeText={this.onChangeText}
-            value={this.state.text}
-            autoFocus={this.props.autoFocus}
-            returnKeyType={this.props.submitOnReturn ? 'send' : 'default'}
-            onSubmitEditing={this.props.submitOnReturn ? this.onSend : null}
+        <View>
+          {this.renderTyping()}
+          <View style={this.styles.textInputContainer}>
+            <TextInput
+              style={this.styles.textInput}
+              placeholder={this.props.placeholder}
+              ref='textInput'
+              onChangeText={this.onChangeText}
+              value={this.state.text}
+              autoFocus={this.props.autoFocus}
+              returnKeyType={this.props.submitOnReturn ? 'send' : 'default'}
+              onSubmitEditing={this.props.submitOnReturn ? this.onSend : null}
 
-            blurOnSubmit={false}
-          />
-          <Button
-            style={this.styles.sendButton}
-            onPress={this.onSend}
-            disabled={this.state.disabled}
-          >
-            {this.props.sendButtonText}
-          </Button>
+              blurOnSubmit={false}
+            />
+            <Button
+              style={this.styles.sendButton}
+              styleDisabled={this.styles.sendButtonDisabled}
+              onPress={this.onSend}
+              disabled={this.state.disabled}
+            >
+              {this.props.sendButtonText}
+            </Button>
+          </View>
         </View>
       );
     }
@@ -514,6 +558,12 @@ var GiftedMessenger = React.createClass({
       },
       listView: {
         flex: 1,
+      },
+      typingContainer: {
+        flex: 1,
+        textAlign: 'center',
+        color: '#aaaaaa',
+        marginBottom: 5,
       },
       textInputContainer: {
         height: 44,

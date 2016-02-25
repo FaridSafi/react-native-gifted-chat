@@ -282,7 +282,7 @@ var GiftedMessenger = React.createClass({
     if (this.props.onCustomSend) {
       this.props.onCustomSend(message);
     } else {
-      var rowID = this.appendMessage(message);
+      var rowID = this.appendMessage(message, true);
       this.props.handleSend(message, rowID);
       this.onChangeText('');
     }

@@ -45,7 +45,7 @@ export default class Bubble extends React.Component {
   renderText(text = "", position) {
 
     if (this.props.renderCustomText) {
-      return this.props.renderCustomText(rowData, rowID);
+      return this.props.renderCustomText(text, position);
     }
     return (
       <Text style={[styles.text, (position === 'left' ? styles.textLeft : styles.textRight)]}>

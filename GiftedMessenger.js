@@ -188,7 +188,7 @@ var GiftedMessenger = React.createClass({
           forceRenderImage={this.props.forceRenderImage}
           onImagePress={this.props.onImagePress}
           renderCustomText={this.props.renderCustomText}
-          
+
           styles={this.styles}
         />
       </View>
@@ -208,7 +208,7 @@ var GiftedMessenger = React.createClass({
         disabled: true
       })
     }
-    
+
     this.props.onChangeText(text);
   },
 
@@ -224,7 +224,7 @@ var GiftedMessenger = React.createClass({
         allLoaded: true
       });
     }
-    
+
   },
 
   componentWillReceiveProps(nextProps) {
@@ -246,25 +246,31 @@ var GiftedMessenger = React.createClass({
       duration: 200,
     }).start();
   },
-  
+
   onKeyboardDidShow(e) {
     this.scrollToBottom();
   },
-  
+
   scrollToBottom() {
     if (this.listHeight && this.footerY && this.footerY > this.listHeight) {
       var scrollDistance = this.listHeight - this.footerY;
-      this.scrollResponder.scrollTo(-scrollDistance);
+      this.scrollResponder.scrollTo({
+        y: -scrollDistance,
+      });
     }
   },
 
   scrollWithoutAnimationToBottom() {
     if (this.listHeight && this.footerY && this.footerY > this.listHeight) {
       var scrollDistance = this.listHeight - this.footerY;
-      this.scrollResponder.scrollWithoutAnimationTo(-scrollDistance);
+      this.scrollResponder.scrollTo({
+        y: -scrollDistance, 
+        x: 0, 
+        animated: false,
+      });
     }
   },
-  
+
   onSend() {
     var message = {
       text: this.state.text.trim(),
@@ -281,7 +287,7 @@ var GiftedMessenger = React.createClass({
       this.onChangeText('');
     }
   },
-  
+
   postLoadEarlierMessages(messages = [], allLoaded = false) {
     this.prependMessages(messages);
     this.setState({
@@ -363,14 +369,14 @@ var GiftedMessenger = React.createClass({
 
   appendMessage(message = {}, scrollToBottom = true) {
     var rowID = this.appendMessages([message]);
-    
+
     if (scrollToBottom === true) {
       setTimeout(() => {
         // inspired by http://stackoverflow.com/a/34838513/1385109
         this.scrollToBottom();
-      }, 100);
+      }, (Platform.OS === 'android' ? 200 : 100));
     }
-    
+
     return rowID;
   },
 
@@ -423,7 +429,7 @@ var GiftedMessenger = React.createClass({
                 this.scrollWithoutAnimationToBottom();
               });
             }
-            
+
           }}
           renderFooter={() => {
             return <View onLayout={(event)=>{
@@ -431,10 +437,10 @@ var GiftedMessenger = React.createClass({
               this.footerY = layout.y;
             }}></View>
           }}
-          
-          
-          
-          
+
+
+
+
           style={this.styles.listView}
 
 
@@ -450,11 +456,11 @@ var GiftedMessenger = React.createClass({
 
           keyboardShouldPersistTaps={true}
           keyboardDismissMode='interactive'
-          
-          
+
+
           initialListSize={10}
           pageSize={this.props.messages.length}
-          
+
 
           {...this.props}
         />
@@ -493,6 +499,7 @@ var GiftedMessenger = React.createClass({
           />
           <Button
             style={this.styles.sendButton}
+            styleDisabled={this.styles.sendButtonDisabled}
             onPress={this.onSend}
             disabled={this.state.disabled}
           >
@@ -534,12 +541,6 @@ var GiftedMessenger = React.createClass({
       sendButton: {
         marginTop: 11,
         marginLeft: 10,
-      },
-      name: {
-        color: '#aaaaaa',
-        fontSize: 12,
-        marginLeft: 20,
-        marginBottom: 5,
       },
       date: {
         color: '#aaaaaa',

@@ -1,7 +1,7 @@
 # Gifted Messenger
 Ready-to-use chat interface for iOS and Android React-Native apps
 
-Dependency: React-Native >= v0.18.0 (onLayout prop on ListView is required)
+Dependency: React-Native >= v0.20.0 (scrollTo is now using {x, y, animated})
 
 
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-1.png)
@@ -9,6 +9,9 @@ Dependency: React-Native >= v0.18.0 (onLayout prop on ListView is required)
 
 
 ### Changelog
+- 0.0.20 scrollTo support for react-native 0.20.0
+- 0.0.19 Fix scrollWithoutAnimationTo for react-native 0.19.0
+- 0.0.18 Simply pass a view property with the rowData to render a custom component, defaults to Bubble (PR @tommoor)
 - 0.0.14 Bugs fixes
 - 0.0.11 Split into separate components (PR @Froelund), better performance by removing react-native-invertible-scroll-view
 - 0.0.10 forceRenderImage, onCustomSend, renderCustomText props (PR @oney)
@@ -101,7 +104,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | handlePhonePress              | Function | Called when a parsed phone number is pressed                               | iOS      | (phone) => {}                    |
 | handleEmailPress              | Function | Called when a parsed email is pressed                                      | iOS      | (email) => {}                    |
 | hideTextInput                 | Boolean  | Hide or not the text input                                                 | Both     | false                            |
-| keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | on-drag                          |
+| keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | interactive                      |
 | returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |
 | submitOnReturn                | Boolean  | Send message when clicking on submit                                       | Both     | false                            |
 | forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |
@@ -142,6 +145,7 @@ var message = {
   image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
   position: 'left', // left if received, right if sent
   date: new Date(),
+  view: null, // A custom Bubble view
   // ...any attributes you want
 };
 ```

@@ -248,7 +248,15 @@ var GiftedMessenger = React.createClass({
   },
 
   onKeyboardDidShow(e) {
+    if(React.Platform.OS == 'android') {
+      this.onKeyboardWillShow(e);
+    }
     this.scrollToBottom();
+  },
+  onKeyboardDidHide(e) {
+    if(React.Platform.OS == 'android') {
+      this.onKeyboardWillHide(e);
+    }
   },
 
   scrollToBottom() {
@@ -264,8 +272,8 @@ var GiftedMessenger = React.createClass({
     if (this.listHeight && this.footerY && this.footerY > this.listHeight) {
       var scrollDistance = this.listHeight - this.footerY;
       this.scrollResponder.scrollTo({
-        y: -scrollDistance, 
-        x: 0, 
+        y: -scrollDistance,
+        x: 0,
         animated: false,
       });
     }
@@ -448,6 +456,7 @@ var GiftedMessenger = React.createClass({
           onKeyboardWillShow={this.onKeyboardWillShow}
           onKeyboardDidShow={this.onKeyboardDidShow}
           onKeyboardWillHide={this.onKeyboardWillHide}
+          onKeyboardDidHide={this.onKeyboardDidHide}
 
           /*
             keyboardShouldPersistTaps={false} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links

@@ -294,7 +294,7 @@ var GiftedMessenger = React.createClass({
     if (this.props.onCustomSend) {
       this.props.onCustomSend(message);
     } else {
-      var rowID = this.appendMessage(message);
+      var rowID = this.appendMessage(message, true);
       this.props.handleSend(message, rowID);
       this.onChangeText('');
     }
@@ -507,6 +507,7 @@ var GiftedMessenger = React.createClass({
             autoFocus={this.props.autoFocus}
             returnKeyType={this.props.submitOnReturn ? 'send' : 'default'}
             onSubmitEditing={this.props.submitOnReturn ? this.onSend : null}
+            enablesReturnKeyAutomatically={true}
 
             blurOnSubmit={false}
           />

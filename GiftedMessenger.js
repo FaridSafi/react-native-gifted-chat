@@ -48,6 +48,7 @@ var GiftedMessenger = React.createClass({
       senderImage: null,
       sendButtonText: 'Send',
       onImagePress: null,
+      onMessageLongPress: null,
       hideTextInput: false,
       submitOnReturn: false,
       forceRenderImage: false,
@@ -79,6 +80,7 @@ var GiftedMessenger = React.createClass({
     senderImage: React.PropTypes.object,
     sendButtonText: React.PropTypes.string,
     onImagePress: React.PropTypes.func,
+    onMessageLongPress: React.PropTypes.func,
     hideTextInput: React.PropTypes.bool,
     forceRenderImage: React.PropTypes.bool,
     onChangeText: React.PropTypes.func,
@@ -188,6 +190,7 @@ var GiftedMessenger = React.createClass({
           position={rowData.position}
           forceRenderImage={this.props.forceRenderImage}
           onImagePress={this.props.onImagePress}
+          onMessageLongPress={this.props.onMessageLongPress}
           renderCustomText={this.props.renderCustomText}
 
           styles={this.styles}

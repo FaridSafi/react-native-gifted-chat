@@ -133,7 +133,8 @@ export default class Message extends React.Component {
       displayNames,
       diffMessage,
       forceRenderImage,
-      onImagePress
+      onImagePress,
+      onMessageLongPress,
     } = this.props;
 
     var flexStyle = {};
@@ -146,23 +147,35 @@ export default class Message extends React.Component {
       RowView = rowData.view;
     }
 
-    return (
+    var messageView = (
       <View>
-      {position === 'left' ? this.renderName(rowData.name, displayNames, diffMessage) : null}
-      <View style={[styles.rowContainer, {
-          justifyContent: position==='left'?"flex-start":"flex-end"
-        }]}>
-        {position === 'left' ? this.renderImage(rowData, rowID, diffMessage, forceRenderImage, onImagePress) : null}
-        {position === 'right' ? this.renderErrorButton(rowData, rowID, onErrorButtonPress) : null}
-        <RowView
-          {...rowData}
-          renderCustomText={this.props.renderCustomText}
-          styles={styles}
-          />
-        {rowData.position === 'right' ? this.renderImage(rowData, rowID, diffMessage, forceRenderImage, onImagePress) : null}
+        {position === 'left' ? this.renderName(rowData.name, displayNames, diffMessage) : null}
+        <View style={[styles.rowContainer, {
+            justifyContent: position==='left'?"flex-start":"flex-end"
+          }]}>
+          {position === 'left' ? this.renderImage(rowData, rowID, diffMessage, forceRenderImage, onImagePress) : null}
+          {position === 'right' ? this.renderErrorButton(rowData, rowID, onErrorButtonPress) : null}
+          <RowView
+            {...rowData}
+            renderCustomText={this.props.renderCustomText}
+            styles={styles}
+            />
+          {rowData.position === 'right' ? this.renderImage(rowData, rowID, diffMessage, forceRenderImage, onImagePress) : null}
+        </View>
+        {rowData.position === 'right' ? this.renderStatus(rowData.status) : null}
       </View>
-      {rowData.position === 'right' ? this.renderStatus(rowData.status) : null}
-      </View>
-    )
+    );
+    
+    if (typeof onMessageLongPress === 'function') {
+      return (
+        <TouchableHighlight
+          underlayColor='transparent'
+          onLongPress={() => onMessageLongPress(rowData, rowID)}>
+          {messageView}
+        </TouchableHighlight>
+      );
+    } else {
+      return messageView;
+    }
   }
 }

@@ -9,6 +9,7 @@ Dependency: React-Native >= v0.20.0 (scrollTo is now using {x, y, animated})
 
 
 ### Changelog
+- 0.0.21 Updating example for RN 0.20.0
 - 0.0.20 scrollTo support for react-native 0.20.0
 - 0.0.19 Fix scrollWithoutAnimationTo for react-native 0.19.0
 - 0.0.18 Simply pass a view property with the rowData to render a custom component, defaults to Bubble (PR @tommoor)

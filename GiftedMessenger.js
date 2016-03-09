@@ -53,6 +53,7 @@ var GiftedMessenger = React.createClass({
       submitOnReturn: false,
       forceRenderImage: false,
       onChangeText: (text) => {},
+      autoScroll: false,
     };
   },
 
@@ -84,6 +85,7 @@ var GiftedMessenger = React.createClass({
     hideTextInput: React.PropTypes.bool,
     forceRenderImage: React.PropTypes.bool,
     onChangeText: React.PropTypes.func,
+    autoScroll: React.PropTypes.bool,
   },
 
   getInitialState: function() {
@@ -241,13 +243,17 @@ var GiftedMessenger = React.createClass({
 
     if (nextProps.hideTextInput && !this.props.hideTextInput) {
       this.listViewMaxHeight += 44;
+
+      this.setState({
+        height: new Animated.Value(this.listViewMaxHeight),
+      });
     } else if (!nextProps.hideTextInput && this.props.hideTextInput) {
       this.listViewMaxHeight -= 44;
-    }
 
-    this.setState({
-      height: new Animated.Value(this.listViewMaxHeight),
-    });
+      this.setState({
+        height: new Animated.Value(this.listViewMaxHeight),
+      });
+    }
   },
 
   onKeyboardWillHide(e) {
@@ -460,6 +466,10 @@ var GiftedMessenger = React.createClass({
             return <View onLayout={(event)=>{
               var layout = event.nativeEvent.layout;
               this.footerY = layout.y;
+
+              if (this.props.autoScroll) {
+                this.scrollToBottom();
+              }
             }}></View>
           }}
 

@@ -112,7 +112,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | onCustomSend                  | Function | If you want to implement a progress bar. See PR #16                        | Both     | (message) => {}                  |
 | renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData, rowID) => {}           |
 | onChangeText                  | Function | Called on every keypress in the TextInput                                  | Both     | (text) => {}                     |
-
+| typingText | String | Showed when using `this._GiftedMessenger.setState(typing: true)`. Set "" to prevent allocate space for "typing" text | Both | Your friend is typing...
 ### Props update
 
 The UI is updated when receiving new ```messages``` prop.

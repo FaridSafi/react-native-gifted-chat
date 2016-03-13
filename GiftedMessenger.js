@@ -29,6 +29,7 @@ var GiftedMessenger = React.createClass({
   getDefaultProps() {
     return {
       displayNames: true,
+      displayNamesInsideBubble: false,
       placeholder: 'Type a message...',
       styles: {},
       autoFocus: true,
@@ -58,6 +59,7 @@ var GiftedMessenger = React.createClass({
 
   propTypes: {
     displayNames: React.PropTypes.bool,
+    displayNamesInsideBubble: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
     styles: React.PropTypes.object,
     autoFocus: React.PropTypes.bool,
@@ -186,6 +188,7 @@ var GiftedMessenger = React.createClass({
           rowID={rowID}
           onErrorButtonPress={this.props.onErrorButtonPress}
           displayNames={this.props.displayNames}
+          displayNamesInsideBubble={this.props.displayNamesInsideBubble}
           diffMessage={diffMessage}
           position={rowData.position}
           forceRenderImage={this.props.forceRenderImage}

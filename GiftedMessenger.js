@@ -243,6 +243,10 @@ var GiftedMessenger = React.createClass({
 
     let textInputHeight = this.props.style.textInputContainer.height || 44;
 
+    if (nextProps.maxHeight !== this.props.maxHeight) {
+      this.listViewMaxHeight = nextProps.maxHeight;
+    }
+
     if (nextProps.hideTextInput && !this.props.hideTextInput) {
       this.listViewMaxHeight += textInputHeight;
 

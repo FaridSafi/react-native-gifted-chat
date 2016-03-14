@@ -51,6 +51,8 @@ var GiftedMessenger = React.createClass({
       onImagePress: null,
       onMessageLongPress: null,
       hideTextInput: false,
+      keyboardDismissMode: 'interactive',
+      keyboardShouldPersistTaps: true,
       submitOnReturn: false,
       forceRenderImage: false,
       onChangeText: (text) => {},
@@ -84,6 +86,8 @@ var GiftedMessenger = React.createClass({
     onImagePress: React.PropTypes.func,
     onMessageLongPress: React.PropTypes.func,
     hideTextInput: React.PropTypes.bool,
+    keyboardDismissMode: React.PropTypes.string,
+    keyboardShouldPersistTaps: React.PropTypes.bool,
     forceRenderImage: React.PropTypes.bool,
     onChangeText: React.PropTypes.func,
   },
@@ -468,13 +472,9 @@ var GiftedMessenger = React.createClass({
           onKeyboardWillHide={this.onKeyboardWillHide}
           onKeyboardDidHide={this.onKeyboardDidHide}
 
-          /*
-            keyboardShouldPersistTaps={false} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
-            keyboardDismissMode='interactive'
-          */
 
-          keyboardShouldPersistTaps={true}
-          keyboardDismissMode='interactive'
+          keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
+          keyboardDismissMode={this.props.keyboardDismissMode}
 
 
           initialListSize={10}

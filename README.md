@@ -38,10 +38,10 @@ var GiftedMessengerExample = React.createClass({
   },
   handleReceive() {
     this._GiftedMessenger.appendMessage({
-      text: 'Received message', 
-      name: 'Friend', 
-      image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
-      position: 'left', 
+      text: 'Received message',
+      name: 'Friend',
+      image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
+      position: 'left',
       date: new Date(),
     });
   },
@@ -53,7 +53,7 @@ var GiftedMessengerExample = React.createClass({
         messages={this.getMessages()}
         handleSend={this.handleSend}
         maxHeight={Dimensions.get('window').height - 64} // 64 for the navBar
-        
+
         styles={{
           bubbleLeft: {
             backgroundColor: '#e6e6eb',
@@ -106,6 +106,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | handlePhonePress              | Function | Called when a parsed phone number is pressed                               | iOS      | (phone) => {}                    |
 | handleEmailPress              | Function | Called when a parsed email is pressed                                      | iOS      | (email) => {}                    |
 | hideTextInput                 | Boolean  | Hide or not the text input                                                 | Both     | false                            |
+| keyboardShouldPersistTaps     | Boolean  | When false, tapping the scrollview dismisses the keyboard.                 | Both     | true                             |
 | keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | interactive                      |
 | returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |
 | submitOnReturn                | Boolean  | Send message when clicking on submit                                       | Both     | false                            |
@@ -142,9 +143,9 @@ The UI is updated when receiving new ```messages``` prop.
 
 ```js
 var message = {
-  text: 'Message content', 
-  name: "Sender's name", 
-  image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
+  text: 'Message content',
+  name: "Sender's name",
+  image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
   position: 'left', // left if received, right if sent
   date: new Date(),
   view: null, // A custom Bubble view

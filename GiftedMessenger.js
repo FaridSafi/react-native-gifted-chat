@@ -56,6 +56,7 @@ var GiftedMessenger = React.createClass({
       submitOnReturn: false,
       forceRenderImage: false,
       onChangeText: (text) => {},
+      autoScroll: false,
     };
   },
 
@@ -90,6 +91,7 @@ var GiftedMessenger = React.createClass({
     keyboardShouldPersistTaps: React.PropTypes.bool,
     forceRenderImage: React.PropTypes.bool,
     onChangeText: React.PropTypes.func,
+    autoScroll: React.PropTypes.bool,
   },
 
   getInitialState: function() {
@@ -98,7 +100,7 @@ var GiftedMessenger = React.createClass({
 
     var textInputHeight = 0;
     if (this.props.hideTextInput === false) {
-      textInputHeight = 44;
+      textInputHeight = this.props.style.textInputContainer.height || 44;
     }
 
     this.listViewMaxHeight = this.props.maxHeight - textInputHeight;
@@ -245,6 +247,26 @@ var GiftedMessenger = React.createClass({
     this._data = [];
     this._rowIds = [];
     this.appendMessages(nextProps.messages);
+
+    var textInputHeight = nextProps.style.textInputContainer.height || 44;
+
+    if (nextProps.maxHeight !== this.props.maxHeight) {
+      this.listViewMaxHeight = nextProps.maxHeight;
+    }
+
+    if (nextProps.hideTextInput && !this.props.hideTextInput) {
+      this.listViewMaxHeight += textInputHeight;
+
+      this.setState({
+        height: new Animated.Value(this.listViewMaxHeight),
+      });
+    } else if (!nextProps.hideTextInput && this.props.hideTextInput) {
+      this.listViewMaxHeight -= textInputHeight;
+
+      this.setState({
+        height: new Animated.Value(this.listViewMaxHeight),
+      });
+    }
   },
 
   onKeyboardWillHide(e) {
@@ -457,6 +479,10 @@ var GiftedMessenger = React.createClass({
             return <View onLayout={(event)=>{
               var layout = event.nativeEvent.layout;
               this.footerY = layout.y;
+
+              if (this.props.autoScroll) {
+                this.scrollToBottom();
+              }
             }}></View>
           }}
 

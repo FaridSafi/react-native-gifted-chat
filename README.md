@@ -112,7 +112,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | submitOnReturn                | Boolean  | Send message when clicking on submit                                       | Both     | false                            |
 | forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |
 | onCustomSend                  | Function | If you want to implement a progress bar. See PR #16                        | Both     | (message) => {}                  |
-| renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData, rowID) => {}           |
+| renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}           |
 | onChangeText                  | Function | Called on every keypress in the TextInput                                  | Both     | (text) => {}                     |
 
 ### Props update

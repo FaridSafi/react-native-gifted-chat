@@ -9,22 +9,12 @@ Dependency: React-Native >= v0.20.0 (scrollTo is now using {x, y, animated})
 
 
 ### Changelog
-- 0.0.23
-Scroll to bottom after onSend, Add enablesReturnKeyAutomatically setting to end on return key (PR @alizbazar)
-New prop onMessageLongPress (PR @corymsmith)
-displayNamesInsideBubble and keyboardShouldPersistTaps props (PR @koppelaar)
-Expose full rowData to renderCustomText and add dynamic hide/show text input (PR @bpeters)
+#### 0.0.23
+- Scroll to bottom after onSend, Add enablesReturnKeyAutomatically setting to end on return key (PR @alizbazar)
+- New prop onMessageLongPress (PR @corymsmith)
+- displayNamesInsideBubble and keyboardShouldPersistTaps props (PR @koppelaar)
+- Expose full rowData to renderCustomText and add dynamic hide/show text input (PR @bpeters)
 
-- 0.0.21 Updating example for RN 0.20.0
-- 0.0.20 scrollTo support for react-native 0.20.0
-- 0.0.19 Fix scrollWithoutAnimationTo for react-native 0.19.0
-- 0.0.18 Simply pass a view property with the rowData to render a custom component, defaults to Bubble (PR @tommoor)
-- 0.0.14 Bugs fixes
-- 0.0.11 Split into separate components (PR @Froelund), better performance by removing react-native-invertible-scroll-view
-- 0.0.10 forceRenderImage, onCustomSend, renderCustomText props (PR @oney)
-- 0.0.9  Fix iPhone 6 Plus textInput border
-- 0.0.8  Fix issue with RN 0.16.0 Thanks @wenkesj for PR
-- 0.0.7  Temporary disabling react-native-parsed-text plugin
 
 ### Example
 

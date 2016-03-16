@@ -9,6 +9,8 @@ Dependency: React-Native >= v0.20.0 (scrollTo is now using {x, y, animated})
 
 
 ### Changelog
+#### 0.0.24
+- Fix textInputContainer issue #83
 #### 0.0.23
 - Scroll to bottom after onSend, Add enablesReturnKeyAutomatically setting to end on return key (PR @alizbazar)
 - New prop onMessageLongPress (PR @corymsmith)

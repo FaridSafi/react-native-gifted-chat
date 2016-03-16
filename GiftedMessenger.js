@@ -98,9 +98,11 @@ var GiftedMessenger = React.createClass({
     this._data = [];
     this._rowIds = [];
 
-    var textInputHeight = 0;
+    var textInputHeight = 44;
     if (this.props.hideTextInput === false) {
-      textInputHeight = this.props.style.textInputContainer.height || 44;
+      if (this.props.styles.hasOwnProperty('textInputContainer')) {
+        textInputHeight = this.props.styles.textInputContainer.height || textInputHeight;
+      }
     }
 
     this.listViewMaxHeight = this.props.maxHeight - textInputHeight;
@@ -248,7 +250,10 @@ var GiftedMessenger = React.createClass({
     this._rowIds = [];
     this.appendMessages(nextProps.messages);
 
-    var textInputHeight = nextProps.style.textInputContainer.height || 44;
+    var textInputHeight = 44;
+    if (nextProps.styles.hasOwnProperty('textInputContainer')) {
+      textInputHeight = nextProps.styles.textInputContainer.height || textInputHeight;
+    }
 
     if (nextProps.maxHeight !== this.props.maxHeight) {
       this.listViewMaxHeight = nextProps.maxHeight;

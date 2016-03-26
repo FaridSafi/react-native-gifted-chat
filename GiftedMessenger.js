@@ -31,6 +31,7 @@ var GiftedMessenger = React.createClass({
       displayNames: true,
       displayNamesInsideBubble: false,
       placeholder: 'Type a message...',
+      typingText: 'Your friend is typing...',
       styles: {},
       autoFocus: true,
       onErrorButtonPress: (message, rowID) => {},
@@ -62,6 +63,7 @@ var GiftedMessenger = React.createClass({
 
   propTypes: {
     displayNames: React.PropTypes.bool,
+    typingText: React.PropTypes.string,
     displayNamesInsideBubble: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
     styles: React.PropTypes.object,
@@ -115,6 +117,8 @@ var GiftedMessenger = React.createClass({
     }});
     return {
       dataSource: ds.cloneWithRows([]),
+      typing: false,
+      typingOpacity: new Animated.Value(0),
       text: '',
       disabled: true,
       height: new Animated.Value(this.listViewMaxHeight),
@@ -271,6 +275,25 @@ var GiftedMessenger = React.createClass({
       this.setState({
         height: new Animated.Value(this.listViewMaxHeight),
       });
+    }
+  },
+
+  componentWillUpdate(nextProps, nextState) {
+    if( this.state.typing !== nextState.typing ) {
+      switch( nextState.typing ) {
+        case true: {
+          return Animated.timing(this.state.typingOpacity, {
+            toValue: 1,
+            duration: 250,
+          }).start();
+        };
+        case false: {
+          return Animated.timing(this.state.typingOpacity, {
+            toValue: 0,
+            duration: 250,
+          }).start();
+        };
+      }
     }
   },
 
@@ -531,31 +554,47 @@ var GiftedMessenger = React.createClass({
     )
   },
 
+  renderTyping() {
+    if( this.props.typingText.length ) {
+      return (
+        <Animated.Text style={[
+            this.styles.typingContainer,
+            {opacity: this.state.typingOpacity}
+          ]}>
+          {this.props.typingText}
+        </Animated.Text>
+      )
+    }
+  },
+
   renderTextInput() {
     if (this.props.hideTextInput === false) {
       return (
-        <View style={this.styles.textInputContainer}>
-          <TextInput
-            style={this.styles.textInput}
-            placeholder={this.props.placeholder}
-            ref='textInput'
-            onChangeText={this.onChangeText}
-            value={this.state.text}
-            autoFocus={this.props.autoFocus}
-            returnKeyType={this.props.submitOnReturn ? 'send' : 'default'}
-            onSubmitEditing={this.props.submitOnReturn ? this.onSend : null}
-            enablesReturnKeyAutomatically={true}
+        <View>
+          {this.renderTyping()}
+          <View style={this.styles.textInputContainer}>
+            <TextInput
+              style={this.styles.textInput}
+              placeholder={this.props.placeholder}
+              ref='textInput'
+              onChangeText={this.onChangeText}
+              value={this.state.text}
+              autoFocus={this.props.autoFocus}
+              returnKeyType={this.props.submitOnReturn ? 'send' : 'default'}
+              onSubmitEditing={this.props.submitOnReturn ? this.onSend : null}
+              enablesReturnKeyAutomatically={true}
 
-            blurOnSubmit={false}
-          />
-          <Button
-            style={this.styles.sendButton}
-            styleDisabled={this.styles.sendButtonDisabled}
-            onPress={this.onSend}
-            disabled={this.state.disabled}
-          >
-            {this.props.sendButtonText}
-          </Button>
+              blurOnSubmit={false}
+            />
+            <Button
+              style={this.styles.sendButton}
+              styleDisabled={this.styles.sendButtonDisabled}
+              onPress={this.onSend}
+              disabled={this.state.disabled}
+            >
+              {this.props.sendButtonText}
+            </Button>
+          </View>
         </View>
       );
     }
@@ -570,6 +609,12 @@ var GiftedMessenger = React.createClass({
       },
       listView: {
         flex: 1,
+      },
+      typingContainer: {
+        flex: 1,
+        textAlign: 'center',
+        color: '#aaaaaa',
+        marginBottom: 5,
       },
       textInputContainer: {
         height: 44,

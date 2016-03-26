@@ -75,8 +75,14 @@ var GiftedMessenger = React.createClass({
     handleUrlPress: React.PropTypes.func,
     handlePhonePress: React.PropTypes.func,
     handleEmailPress: React.PropTypes.func,
-    initialMessages: React.PropTypes.array,
-    messages: React.PropTypes.array,
+    initialMessages: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
+    messages: React.PropTypes.oneOfType([
+        React.PropTypes.array,
+        React.PropTypes.object
+    ]),
     handleSend: React.PropTypes.func,
     onCustomSend: React.PropTypes.func,
     renderCustomText: React.PropTypes.func,

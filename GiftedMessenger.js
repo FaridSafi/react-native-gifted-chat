@@ -384,11 +384,11 @@ var GiftedMessenger = React.createClass({
 
   prependMessages(messages = []) {
     var rowID = null;
-    for (let i = 0; i < messages.length; i++) {
-      this._data.push(messages[i]);
+    messages.forEach((message, i)=>{
+      this._data.push(message);
       this._rowIds.unshift(this._data.length - 1);
       rowID = this._data.length - 1;
-    }
+    });
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._data, this._rowIds),
     });
@@ -402,12 +402,12 @@ var GiftedMessenger = React.createClass({
 
   appendMessages(messages = []) {
     var rowID = null;
-    for (let i = 0; i < messages.length; i++) {
-      messages[i].isOld = true;
-      this._data.push(messages[i]);
+    messages.forEach((message, i)=>{
+      message.isOld = true;
+      this._data.push(message);
       this._rowIds.push(this._data.length - 1);
       rowID = this._data.length - 1;
-    }
+    });
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._data, this._rowIds),

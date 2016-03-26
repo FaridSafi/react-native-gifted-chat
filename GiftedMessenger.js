@@ -29,6 +29,7 @@ var GiftedMessenger = React.createClass({
   getDefaultProps() {
     return {
       displayNames: true,
+      displayNamesInsideBubble: false,
       placeholder: 'Type a message...',
       typingText: 'Your friend is typing...',
       styles: {},
@@ -51,15 +52,19 @@ var GiftedMessenger = React.createClass({
       onImagePress: null,
       onMessageLongPress: null,
       hideTextInput: false,
+      keyboardDismissMode: 'interactive',
+      keyboardShouldPersistTaps: true,
       submitOnReturn: false,
       forceRenderImage: false,
       onChangeText: (text) => {},
+      autoScroll: false,
     };
   },
 
   propTypes: {
     displayNames: React.PropTypes.bool,
     typingText: React.PropTypes.string,
+    displayNamesInsideBubble: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
     styles: React.PropTypes.object,
     autoFocus: React.PropTypes.bool,
@@ -84,17 +89,22 @@ var GiftedMessenger = React.createClass({
     onImagePress: React.PropTypes.func,
     onMessageLongPress: React.PropTypes.func,
     hideTextInput: React.PropTypes.bool,
+    keyboardDismissMode: React.PropTypes.string,
+    keyboardShouldPersistTaps: React.PropTypes.bool,
     forceRenderImage: React.PropTypes.bool,
     onChangeText: React.PropTypes.func,
+    autoScroll: React.PropTypes.bool,
   },
 
   getInitialState: function() {
     this._data = [];
     this._rowIds = [];
 
-    var textInputHeight = 0;
+    var textInputHeight = 44;
     if (this.props.hideTextInput === false) {
-      textInputHeight = 44;
+      if (this.props.styles.hasOwnProperty('textInputContainer')) {
+        textInputHeight = this.props.styles.textInputContainer.height || textInputHeight;
+      }
     }
 
     this.listViewMaxHeight = this.props.maxHeight - textInputHeight;
@@ -190,6 +200,7 @@ var GiftedMessenger = React.createClass({
           rowID={rowID}
           onErrorButtonPress={this.props.onErrorButtonPress}
           displayNames={this.props.displayNames}
+          displayNamesInsideBubble={this.props.displayNamesInsideBubble}
           diffMessage={diffMessage}
           position={rowData.position}
           forceRenderImage={this.props.forceRenderImage}
@@ -242,6 +253,29 @@ var GiftedMessenger = React.createClass({
     this._data = [];
     this._rowIds = [];
     this.appendMessages(nextProps.messages);
+
+    var textInputHeight = 44;
+    if (nextProps.styles.hasOwnProperty('textInputContainer')) {
+      textInputHeight = nextProps.styles.textInputContainer.height || textInputHeight;
+    }
+
+    if (nextProps.maxHeight !== this.props.maxHeight) {
+      this.listViewMaxHeight = nextProps.maxHeight;
+    }
+
+    if (nextProps.hideTextInput && !this.props.hideTextInput) {
+      this.listViewMaxHeight += textInputHeight;
+
+      this.setState({
+        height: new Animated.Value(this.listViewMaxHeight),
+      });
+    } else if (!nextProps.hideTextInput && this.props.hideTextInput) {
+      this.listViewMaxHeight -= textInputHeight;
+
+      this.setState({
+        height: new Animated.Value(this.listViewMaxHeight),
+      });
+    }
   },
 
   componentWillUpdate(nextProps, nextState) {
@@ -473,6 +507,10 @@ var GiftedMessenger = React.createClass({
             return <View onLayout={(event)=>{
               var layout = event.nativeEvent.layout;
               this.footerY = layout.y;
+
+              if (this.props.autoScroll) {
+                this.scrollToBottom();
+              }
             }}></View>
           }}
 
@@ -488,13 +526,9 @@ var GiftedMessenger = React.createClass({
           onKeyboardWillHide={this.onKeyboardWillHide}
           onKeyboardDidHide={this.onKeyboardDidHide}
 
-          /*
-            keyboardShouldPersistTaps={false} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
-            keyboardDismissMode='interactive'
-          */
 
-          keyboardShouldPersistTaps={true}
-          keyboardDismissMode='interactive'
+          keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
+          keyboardDismissMode={this.props.keyboardDismissMode}
 
 
           initialListSize={10}

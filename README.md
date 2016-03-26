@@ -9,16 +9,14 @@ Dependency: React-Native >= v0.20.0 (scrollTo is now using {x, y, animated})
 
 
 ### Changelog
-- 0.0.21 Updating example for RN 0.20.0
-- 0.0.20 scrollTo support for react-native 0.20.0
-- 0.0.19 Fix scrollWithoutAnimationTo for react-native 0.19.0
-- 0.0.18 Simply pass a view property with the rowData to render a custom component, defaults to Bubble (PR @tommoor)
-- 0.0.14 Bugs fixes
-- 0.0.11 Split into separate components (PR @Froelund), better performance by removing react-native-invertible-scroll-view
-- 0.0.10 forceRenderImage, onCustomSend, renderCustomText props (PR @oney)
-- 0.0.9  Fix iPhone 6 Plus textInput border
-- 0.0.8  Fix issue with RN 0.16.0 Thanks @wenkesj for PR
-- 0.0.7  Temporary disabling react-native-parsed-text plugin
+#### 0.0.24
+- Fix textInputContainer issue #83
+#### 0.0.23
+- Scroll to bottom after onSend, Add enablesReturnKeyAutomatically setting to end on return key (PR @alizbazar)
+- New prop onMessageLongPress (PR @corymsmith)
+- displayNamesInsideBubble and keyboardShouldPersistTaps props (PR @koppelaar)
+- Expose full rowData to renderCustomText and add dynamic hide/show text input (PR @bpeters)
+
 
 ### Example
 
@@ -38,10 +36,10 @@ var GiftedMessengerExample = React.createClass({
   },
   handleReceive() {
     this._GiftedMessenger.appendMessage({
-      text: 'Received message', 
-      name: 'Friend', 
-      image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
-      position: 'left', 
+      text: 'Received message',
+      name: 'Friend',
+      image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
+      position: 'left',
       date: new Date(),
     });
   },
@@ -53,7 +51,7 @@ var GiftedMessengerExample = React.createClass({
         messages={this.getMessages()}
         handleSend={this.handleSend}
         maxHeight={Dimensions.get('window').height - 64} // 64 for the navBar
-        
+
         styles={{
           bubbleLeft: {
             backgroundColor: '#e6e6eb',
@@ -87,6 +85,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | ----------------------------- | -------- | -------------------------------------------------------------------------- | -------- | -------------------------------- |
 | messages                      | Array    | List of messages to display                                                | Both     | []                               |
 | displayNames                  | Boolean  | Display or not the name of the interlocutor(s)                             | Both     | true                             |
+| displayNamesInsideBubble      | Boolean  | Display the name of the interlocutor(s) inside the bubble                  | Both     | false                             |
 | placeholder                   | String   | TextInput placeholder                                                      | Both     | 'Type a message...'              |
 | styles                        | Function | Styles of children components - See GiftedMessenger.js/componentWillMount  | Both     | {}                               |
 | autoFocus                     | Boolean  | TextInput auto focus                                                       | Both     | true                             |
@@ -105,12 +104,13 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | handlePhonePress              | Function | Called when a parsed phone number is pressed                               | iOS      | (phone) => {}                    |
 | handleEmailPress              | Function | Called when a parsed email is pressed                                      | iOS      | (email) => {}                    |
 | hideTextInput                 | Boolean  | Hide or not the text input                                                 | Both     | false                            |
+| keyboardShouldPersistTaps     | Boolean  | When false, tapping the scrollview dismisses the keyboard.                 | Both     | true                             |
 | keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | interactive                      |
 | returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |
 | submitOnReturn                | Boolean  | Send message when clicking on submit                                       | Both     | false                            |
 | forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |
 | onCustomSend                  | Function | If you want to implement a progress bar. See PR #16                        | Both     | (message) => {}                  |
-| renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData, rowID) => {}           |
+| renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}           |
 | onChangeText                  | Function | Called on every keypress in the TextInput                                  | Both     | (text) => {}                     |
 | typingText | String | Showed when using `this._GiftedMessenger.setState(typing: true)`. Set "" to prevent allocate space for "typing" text | Both | Your friend is typing...
 ### Props update
@@ -141,9 +141,9 @@ The UI is updated when receiving new ```messages``` prop.
 
 ```js
 var message = {
-  text: 'Message content', 
-  name: "Sender's name", 
-  image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
+  text: 'Message content',
+  name: "Sender's name",
+  image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
   position: 'left', // left if received, right if sent
   date: new Date(),
   view: null, // A custom Bubble view

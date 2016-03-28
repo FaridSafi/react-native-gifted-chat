@@ -57,6 +57,7 @@ var GiftedMessenger = React.createClass({
       forceRenderImage: false,
       onChangeText: (text) => {},
       autoScroll: false,
+      automaticallyAdjustContentInsets:true
     };
   },
 
@@ -98,6 +99,7 @@ var GiftedMessenger = React.createClass({
     forceRenderImage: React.PropTypes.bool,
     onChangeText: React.PropTypes.func,
     autoScroll: React.PropTypes.bool,
+    automaticallyAdjustContentInsets:React.PropTypes.bool
   },
 
   getInitialState: function() {
@@ -509,6 +511,7 @@ var GiftedMessenger = React.createClass({
           onKeyboardWillHide={this.onKeyboardWillHide}
           onKeyboardDidHide={this.onKeyboardDidHide}
 
+          automaticallyAdjustContentInsets={this.props.automaticallyAdjustContentInsets}
 
           keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
           keyboardDismissMode={this.props.keyboardDismissMode}

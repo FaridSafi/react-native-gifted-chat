@@ -25,6 +25,7 @@ var GiftedMessenger = React.createClass({
   firstDisplay: true,
   listHeight: 0,
   footerY: 0,
+  readedMessages:[],
 
   getDefaultProps() {
     return {
@@ -161,7 +162,7 @@ var GiftedMessenger = React.createClass({
 
   renderDate(rowData = {}, rowID = null) {
     var diffMessage = null;
-    if (rowData.isOld === true) {
+    if (this.readedMessages[rowData.id] === true) {
       diffMessage = this.getPreviousMessage(rowID);
     } else {
       diffMessage = this.getNextMessage(rowID);
@@ -190,7 +191,7 @@ var GiftedMessenger = React.createClass({
   renderRow(rowData = {}, sectionID = null, rowID = null) {
 
     var diffMessage = null;
-    if (rowData.isOld === true) {
+    if (this.readedMessages[rowData.id] === true) {
       diffMessage = this.getPreviousMessage(rowID);
     } else {
       diffMessage = this.getNextMessage(rowID);
@@ -411,7 +412,7 @@ var GiftedMessenger = React.createClass({
   appendMessages(messages = []) {
     var rowID = null;
     messages.forEach((message, i)=>{
-      message.isOld = true;
+      this.readedMessages[message.id] = true;
       this._data.push(message);
       this._rowIds.push(this._data.length - 1);
       rowID = this._data.length - 1;

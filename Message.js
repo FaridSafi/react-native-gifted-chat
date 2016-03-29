@@ -145,7 +145,7 @@ export default class Message extends React.Component {
 
     var flexStyle = {};
     var RowView = Bubble;
-    if ( rowData.text.length > 40 ) {
+    if ( rowData.text && rowData.text.length > 40 ) {
       flexStyle.flex = 1;
     }
 

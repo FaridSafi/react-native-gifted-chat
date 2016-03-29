@@ -25,6 +25,7 @@ var GiftedMessenger = React.createClass({
   firstDisplay: true,
   listHeight: 0,
   footerY: 0,
+  readedMessages:[],
 
   getDefaultProps() {
     return {
@@ -57,6 +58,7 @@ var GiftedMessenger = React.createClass({
       forceRenderImage: false,
       onChangeText: (text) => {},
       autoScroll: false,
+      automaticallyAdjustContentInsets:true
     };
   },
 
@@ -75,8 +77,14 @@ var GiftedMessenger = React.createClass({
     handleUrlPress: React.PropTypes.func,
     handlePhonePress: React.PropTypes.func,
     handleEmailPress: React.PropTypes.func,
-    initialMessages: React.PropTypes.array,
-    messages: React.PropTypes.array,
+    initialMessages: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
+    messages: React.PropTypes.oneOfType([
+        React.PropTypes.array,
+        React.PropTypes.object
+    ]),
     handleSend: React.PropTypes.func,
     onCustomSend: React.PropTypes.func,
     renderCustomText: React.PropTypes.func,
@@ -92,6 +100,7 @@ var GiftedMessenger = React.createClass({
     forceRenderImage: React.PropTypes.bool,
     onChangeText: React.PropTypes.func,
     autoScroll: React.PropTypes.bool,
+    automaticallyAdjustContentInsets:React.PropTypes.bool
   },
 
   getInitialState: function() {
@@ -153,7 +162,7 @@ var GiftedMessenger = React.createClass({
 
   renderDate(rowData = {}, rowID = null) {
     var diffMessage = null;
-    if (rowData.isOld === true) {
+    if (this.readedMessages[rowData.id] === true) {
       diffMessage = this.getPreviousMessage(rowID);
     } else {
       diffMessage = this.getNextMessage(rowID);
@@ -182,7 +191,7 @@ var GiftedMessenger = React.createClass({
   renderRow(rowData = {}, sectionID = null, rowID = null) {
 
     var diffMessage = null;
-    if (rowData.isOld === true) {
+    if (this.readedMessages[rowData.id] === true) {
       diffMessage = this.getPreviousMessage(rowID);
     } else {
       diffMessage = this.getNextMessage(rowID);
@@ -384,11 +393,11 @@ var GiftedMessenger = React.createClass({
 
   prependMessages(messages = []) {
     var rowID = null;
-    for (let i = 0; i < messages.length; i++) {
-      this._data.push(messages[i]);
+    messages.forEach((message, i)=>{
+      this._data.push(message);
       this._rowIds.unshift(this._data.length - 1);
       rowID = this._data.length - 1;
-    }
+    });
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._data, this._rowIds),
     });
@@ -402,12 +411,12 @@ var GiftedMessenger = React.createClass({
 
   appendMessages(messages = []) {
     var rowID = null;
-    for (let i = 0; i < messages.length; i++) {
-      messages[i].isOld = true;
-      this._data.push(messages[i]);
+    messages.forEach((message, i)=>{
+      this.readedMessages[message.id] = true;
+      this._data.push(message);
       this._rowIds.push(this._data.length - 1);
       rowID = this._data.length - 1;
-    }
+    });
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._data, this._rowIds),
@@ -503,6 +512,7 @@ var GiftedMessenger = React.createClass({
           onKeyboardWillHide={this.onKeyboardWillHide}
           onKeyboardDidHide={this.onKeyboardDidHide}
 
+          automaticallyAdjustContentInsets={this.props.automaticallyAdjustContentInsets}
 
           keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
           keyboardDismissMode={this.props.keyboardDismissMode}

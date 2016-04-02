@@ -57,6 +57,7 @@ var GiftedMessenger = React.createClass({
       forceRenderImage: false,
       onChangeText: (text) => {},
       autoScroll: false,
+      scrollAnimated: true,
     };
   },
 
@@ -92,6 +93,7 @@ var GiftedMessenger = React.createClass({
     forceRenderImage: React.PropTypes.bool,
     onChangeText: React.PropTypes.func,
     autoScroll: React.PropTypes.bool,
+    scrollAnimated: React.PropTypes.bool,
   },
 
   getInitialState: function() {
@@ -300,22 +302,13 @@ var GiftedMessenger = React.createClass({
     }
   },
 
-  scrollToBottom() {
-    if (this.listHeight && this.footerY && this.footerY > this.listHeight) {
-      var scrollDistance = this.listHeight - this.footerY;
-      this.scrollResponder.scrollTo({
-        y: -scrollDistance,
-      });
-    }
-  },
-
-  scrollWithoutAnimationToBottom() {
+  scrollToBottom(animated = null) {
     if (this.listHeight && this.footerY && this.footerY > this.listHeight) {
       var scrollDistance = this.listHeight - this.footerY;
       this.scrollResponder.scrollTo({
         y: -scrollDistance,
         x: 0,
-        animated: false,
+        animated: typeof animated === 'boolean' ? animated : this.props.scrollAnimated,
       });
     }
   },
@@ -475,7 +468,7 @@ var GiftedMessenger = React.createClass({
             if (this.firstDisplay === true) {
               requestAnimationFrame(() => {
                 this.firstDisplay = false;
-                this.scrollWithoutAnimationToBottom();
+                this.scrollToBottom(false);
               });
             }
 

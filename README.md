@@ -112,6 +112,8 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | onCustomSend                  | Function | If you want to implement a progress bar. See PR #16                        | Both     | (message) => {}                  |
 | renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}           |
 | onChangeText                  | Function | Called on every keypress in the TextInput                                  | Both     | (text) => {}                     |
+| autoScroll                    | Boolean  | scroll to bottom when receiving new messages                               | Both     | false                            |
+| scrollAnimated                | Boolean  | do animation when scrolling                                                | Both     | true                                  |
 
 ### Props update
 

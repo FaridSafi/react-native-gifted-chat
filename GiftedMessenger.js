@@ -273,6 +273,10 @@ var GiftedMessenger = React.createClass({
       this.setState({
         height: new Animated.Value(this.listViewMaxHeight),
       });
+    } else if (nextProps.maxHeight !== this.props.maxHeight) {
+      this.setState({
+        height: new Animated.Value(this.listViewMaxHeight),
+      });
     }
   },
 

@@ -87,6 +87,7 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | displayNames                  | Boolean  | Display or not the name of the interlocutor(s)                             | Both     | true                             |
 | displayNamesInsideBubble      | Boolean  | Display the name of the interlocutor(s) inside the bubble                  | Both     | false                             |
 | placeholder                   | String   | TextInput placeholder                                                      | Both     | 'Type a message...'              |
+placeholderTextColor                   | String   | TextInput text color placeholder                                                      | Both     | '#ccc'              |
 | styles                        | Function | Styles of children components - See GiftedMessenger.js/componentWillMount  | Both     | {}                               |
 | autoFocus                     | Boolean  | TextInput auto focus                                                       | Both     | true                             |
 | onErrorButtonPress            | Function | Called when the re-send button is pressed                                  | Both     | (message, rowID) => {}           |

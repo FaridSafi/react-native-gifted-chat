@@ -58,6 +58,7 @@ var GiftedMessenger = React.createClass({
       onChangeText: (text) => {},
       autoScroll: false,
       scrollAnimated: true,
+      placeholderTextColor: '#ccc'
     };
   },
 
@@ -94,6 +95,7 @@ var GiftedMessenger = React.createClass({
     onChangeText: React.PropTypes.func,
     autoScroll: React.PropTypes.bool,
     scrollAnimated: React.PropTypes.bool,
+    placeholderTextColor: React.PropTypes.string
   },
 
   getInitialState: function() {
@@ -259,6 +261,10 @@ var GiftedMessenger = React.createClass({
 
     if (nextProps.maxHeight !== this.props.maxHeight) {
       this.listViewMaxHeight = nextProps.maxHeight;
+      Animated.timing(this.state.height, {
+        toValue: this.listViewMaxHeight,
+        duration: 150,
+      }).start();
     }
 
     if (nextProps.hideTextInput && !this.props.hideTextInput) {
@@ -531,6 +537,7 @@ var GiftedMessenger = React.createClass({
           <TextInput
             style={this.styles.textInput}
             placeholder={this.props.placeholder}
+            placeholderTextColor={this.props.placeholderTextColor}
             ref='textInput'
             onChangeText={this.onChangeText}
             value={this.state.text}

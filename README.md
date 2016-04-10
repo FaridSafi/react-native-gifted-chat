@@ -99,6 +99,7 @@ placeholderTextColor                   | String   | TextInput text color placeho
 | senderName                    | String   | Name of the sender of the messages                                         | Both     | 'Sender'                         |
 | senderImage                   | Object   | Image of the sender                                                        | Both     | null                             |
 | sendButtonText                | String   | 'Send' button label                                                        | Both     | 'Send'                           |
+| leftControlBar                | Element  | Optional control element displayed left of the TextInput                   | Both     | null                             |
 | onImagePress                  | Function | Called when the image of a message is pressed                              | Both     | (rowData, rowID) => {}           |
 | parseText                     | Boolean  | If the text has to be parsed with taskrabbit/react-native-parsed-text      | iOS      | true                             |
 | handleUrlPress                | Function | Called when a parsed url is pressed                                        | iOS      | (url) => {}                      |

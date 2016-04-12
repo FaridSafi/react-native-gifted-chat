@@ -48,6 +48,7 @@ var GiftedMessenger = React.createClass({
       senderName: 'Sender',
       senderImage: null,
       sendButtonText: 'Send',
+      leftControlBar: null,
       onImagePress: null,
       onMessageLongPress: null,
       hideTextInput: false,
@@ -86,6 +87,7 @@ var GiftedMessenger = React.createClass({
     senderName: React.PropTypes.string,
     senderImage: React.PropTypes.object,
     sendButtonText: React.PropTypes.string,
+    leftControlBar: React.PropTypes.element,
     onImagePress: React.PropTypes.func,
     onMessageLongPress: React.PropTypes.func,
     hideTextInput: React.PropTypes.bool,
@@ -534,6 +536,7 @@ var GiftedMessenger = React.createClass({
     if (this.props.hideTextInput === false) {
       return (
         <View style={this.styles.textInputContainer}>
+          {this.props.leftControlBar}
           <TextInput
             style={this.styles.textInput}
             placeholder={this.props.placeholder}

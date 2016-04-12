@@ -7,11 +7,19 @@ var {
   ActionSheetIOS,
   Dimensions,
   View,
-  Text
+  Text,
+  Navigator,
 } = React;
 
 var GiftedMessenger = require('react-native-gifted-messenger');
 var Communications = require('react-native-communications');
+
+
+var STATUS_BAR_HEIGHT = Navigator.NavigationBar.Styles.General.StatusBarHeight;
+if (Platform.OS === 'android') {
+  var ExtraDimensions = require('react-native-extra-dimensions-android');
+  var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
+}
 
 
 var GiftedMessengerExample = React.createClass({
@@ -37,7 +45,9 @@ var GiftedMessengerExample = React.createClass({
     // this._GiftedMessenger.setMessageStatus('Sent', rowID);
     // this._GiftedMessenger.setMessageStatus('Seen', rowID);
     // this._GiftedMessenger.setMessageStatus('Custom label status', rowID);
-    this._GiftedMessenger.setMessageStatus('ErrorButton', rowID); // => In this case, you need also to set onErrorButtonPress
+    if (this.isMounted()) {
+      this._GiftedMessenger.setMessageStatus('ErrorButton', rowID); // => In this case, you need also to set onErrorButtonPress
+    }
   },
   
   // @oldestMessage is the oldest message already added to the list
@@ -69,7 +79,9 @@ var GiftedMessengerExample = React.createClass({
   },
   
   handleReceive(message = {}) {
-    this._GiftedMessenger.appendMessage(message);
+    if (this.isMounted()) {
+      this._GiftedMessenger.appendMessage(message);
+    }
   },
   
   onErrorButtonPress(message = {}, rowID = null) {
@@ -78,10 +90,14 @@ var GiftedMessengerExample = React.createClass({
     
     setTimeout(() => {
       // will set the message to a custom status 'Sent' (you can replace 'Sent' by what you want - it will be displayed under the row)
-      this._GiftedMessenger.setMessageStatus('Sent', rowID);
+      if (this.isMounted()) {
+        this._GiftedMessenger.setMessageStatus('Sent', rowID);
+      }
       setTimeout(() => {
         // will set the message to a custom status 'Seen' (you can replace 'Seen' by what you want - it will be displayed under the row)
-        this._GiftedMessenger.setMessageStatus('Seen', rowID);
+        if (this.isMounted()) {        
+          this._GiftedMessenger.setMessageStatus('Seen', rowID);
+        }
         setTimeout(() => {
           // append an answer
           this.handleReceive({text: 'I saw your message', name: 'React-Native', image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, position: 'left', date: new Date()});
@@ -110,21 +126,21 @@ var GiftedMessengerExample = React.createClass({
         
         autoFocus={false}
         messages={this.getMessages()}
-        handleSend={this.handleSend}
-        onErrorButtonPress={this.onErrorButtonPress}
-        maxHeight={Dimensions.get('window').height - navBarHeight - statusBarHeight}
+        handleSend={this.handleSend.bind(this)}
+        onErrorButtonPress={this.onErrorButtonPress.bind(this)}
+        maxHeight={Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT}
         loadEarlierMessagesButton={true}
-        onLoadEarlierMessages={this.onLoadEarlierMessages}
+        onLoadEarlierMessages={this.onLoadEarlierMessages.bind(this)}
 
         senderName='Developer'
         senderImage={null}
-        onImagePress={this.onImagePress}
+        onImagePress={this.onImagePress.bind(this)}
         displayNames={true}
         
         parseText={true} // enable handlePhonePress and handleUrlPress
-        handlePhonePress={this.handlePhonePress}
-        handleUrlPress={this.handleUrlPress}
-        handleEmailPress={this.handleEmailPress}
+        handlePhonePress={this.handlePhonePress.bind(this)}
+        handleUrlPress={this.handleUrlPress.bind(this)}
+        handleEmailPress={this.handleEmailPress.bind(this)}
         
         inverted={true}
       />
@@ -168,12 +184,6 @@ var GiftedMessengerExample = React.createClass({
     Communications.email(email, null, null, null, null);
   },
 });
-
-var navBarHeight = (Platform.OS === 'android' ? 56 : 64);
-// warning: height of android statusbar depends of the resolution of the device
-// http://stackoverflow.com/questions/3407256/height-of-status-bar-in-android
-// @todo check Navigator.NavigationBar.Styles.General.NavBarHeight
-var statusBarHeight = (Platform.OS === 'android' ? 25 : 0);
 
 
 module.exports = GiftedMessengerExample;

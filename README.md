@@ -114,6 +114,7 @@ placeholderTextColor                   | String   | TextInput text color placeho
 | keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | interactive                      |
 | returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |
 | submitOnReturn                | Boolean  | Send message when clicking on submit                                       | Both     | false                            |
+| blurOnSubmit                  | Boolean  | Dismiss the keyboard when clicking on submit                               | Both     | false                            |
 | forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |
 | onCustomSend                  | Function | If you want to implement a progress bar. See PR #16                        | Both     | (message) => {}                  |
 | renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}           |
@@ -158,6 +159,10 @@ var message = {
   // ...any attributes you want
 };
 ```
+
+### Android
+- Add in android/app/src/main/AndroidManifest.xml ```android:windowSoftInputMode="adjustResize"```
+- Calculate the maxHeight prop using https://github.com/jaysoo/react-native-extra-dimensions-android ```Dimensions.get('window').height - React.Navigator.NavigationBar.Styles.General.NavBarHeight - ExtraDimensions.get('STATUS_BAR_HEIGHT')```
 
 ### License
 

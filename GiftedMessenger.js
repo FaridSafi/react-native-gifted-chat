@@ -54,6 +54,7 @@ var GiftedMessenger = React.createClass({
       keyboardDismissMode: 'interactive',
       keyboardShouldPersistTaps: true,
       submitOnReturn: false,
+      blurOnSubmit: false,
       forceRenderImage: false,
       onChangeText: (text) => {},
       autoScroll: false,
@@ -89,6 +90,8 @@ var GiftedMessenger = React.createClass({
     hideTextInput: React.PropTypes.bool,
     keyboardDismissMode: React.PropTypes.string,
     keyboardShouldPersistTaps: React.PropTypes.bool,
+    submitOnReturn: React.PropTypes.bool,
+    blurOnSubmit: React.PropTypes.bool,
     forceRenderImage: React.PropTypes.bool,
     onChangeText: React.PropTypes.func,
     autoScroll: React.PropTypes.bool,
@@ -245,6 +248,7 @@ var GiftedMessenger = React.createClass({
 
   },
 
+  // TODO appendMessages only if nextProps.messages is different from current messages
   componentWillReceiveProps(nextProps) {
     this._data = [];
     this._rowIds = [];
@@ -281,23 +285,28 @@ var GiftedMessenger = React.createClass({
     }).start();
   },
 
+  
+  onKeyboardDidHide(e) {
+    if (Platform.OS === 'android') {
+      this.onKeyboardWillHide(e);
+    }
+  },
+  
   onKeyboardWillShow(e) {
     Animated.timing(this.state.height, {
-      toValue: this.listViewMaxHeight - (e.endCoordinates ? e.endCoordinates.height : e.end.height),
+      toValue: this.listViewMaxHeight - e.endCoordinates.height,
       duration: 200,
     }).start();
   },
 
   onKeyboardDidShow(e) {
-    if(React.Platform.OS == 'android') {
+    if (Platform.OS === 'android') {
       this.onKeyboardWillShow(e);
     }
-    this.scrollToBottom();
-  },
-  onKeyboardDidHide(e) {
-    if(React.Platform.OS == 'android') {
-      this.onKeyboardWillHide(e);
-    }
+    
+    setTimeout(() => {
+      this.scrollToBottom();
+    }, (Platform.OS === 'android' ? 200 : 100));
   },
 
   scrollToBottom() {
@@ -452,6 +461,10 @@ var GiftedMessenger = React.createClass({
           }
         }
         this.refreshRows();
+        
+        requestAnimationFrame(() => {
+          this.scrollToBottom();
+        });
       }
     }
   },
@@ -492,21 +505,15 @@ var GiftedMessenger = React.createClass({
           }}
 
 
-
-
           style={this.styles.listView}
 
-
-          // not working android RN 0.14.2
-          onKeyboardWillShow={this.onKeyboardWillShow}
+          onKeyboardWillShow={this.onKeyboardWillShow} // not supported in Android - to fix this issue in Android, onKeyboardWillShow is called inside onKeyboardDidShow
           onKeyboardDidShow={this.onKeyboardDidShow}
-          onKeyboardWillHide={this.onKeyboardWillHide}
+          onKeyboardWillHide={this.onKeyboardWillHide} // not supported in Android - to fix this issue in Android, onKeyboardWillHide is called inside onKeyboardDidHide
           onKeyboardDidHide={this.onKeyboardDidHide}
-
 
           keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
           keyboardDismissMode={this.props.keyboardDismissMode}
-
 
           initialListSize={10}
           pageSize={this.props.messages.length}
@@ -546,7 +553,9 @@ var GiftedMessenger = React.createClass({
             onSubmitEditing={this.props.submitOnReturn ? this.onSend : null}
             enablesReturnKeyAutomatically={true}
 
-            blurOnSubmit={false}
+            blurOnSubmit={this.props.blurOnSubmit}
+            
+            
           />
           <Button
             style={this.styles.sendButton}

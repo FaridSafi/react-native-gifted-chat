@@ -9,6 +9,10 @@ Dependency: React-Native >= v0.20.0 (scrollTo is now using {x, y, animated})
 
 
 ### Changelog
+#### 0.0.25
+- Android improvements
+- New leftControlBar prop (PR @gnl)
+- Various fixes and improvements by @swapkats, @ianlin, @zxcpoiu, @cnjon
 #### 0.0.24
 - Fix textInputContainer issue #83
 #### 0.0.23

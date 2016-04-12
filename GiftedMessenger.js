@@ -421,6 +421,8 @@ var GiftedMessenger = React.createClass({
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this._data, this._rowIds),
+    }, ()=>{
+      this.scrollToBottom();
     });
 
     return rowID;

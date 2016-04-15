@@ -87,7 +87,7 @@ var message = {
 
 ### Android installation
 - Add in your Android Manifest (`android/app/src/main/AndroidManifest.xml`) `android:windowSoftInputMode="adjustResize"`
-- Calculate the maxHeight prop using [react-native-extra-dimensions-android](https://github.com/jaysoo/react-native-extra-dimensions-android) - See [example](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)
+- Calculate the maxHeight prop using [react-native-extra-dimensions-android](https://github.com/jaysoo/react-native-extra-dimensions-android)
 ```js
   <GiftedMessenger
     // ...

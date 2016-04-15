@@ -1,14 +1,14 @@
 # Gifted Messenger
 Ready-to-use chat interface for iOS and Android React-Native apps
 
-![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/0.1.0/screenshots/capture.gif)
+![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/capture.gif)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-1.png)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-2.png)
 
 
 ### Changelog
 #### 0.1.0 - Breaking changes for a better Gifted Messenger
-- Breaking: API is now deprecated, messages list are now managed only using states - See [example](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)
+- Breaking: `appendMessage`, `prependMessage` are now deprecated, messages list are now managed only using states - See [example](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)
 - Breaking: All messages should now contain a `uniqueId` property
 - Breaking: `setMessageStatus` is now deprecated, use the message attribute `status` instead
 - Breaking: New prop `isLoadingEarlierMessages` to display a loader when loading earlier messages

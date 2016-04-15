@@ -1,5 +1,7 @@
 import React, {Text, View, Animated, Image, StyleSheet} from 'react-native';
 
+import ParsedText from 'react-native-parsed-text';
+
 let styles = StyleSheet.create({
   bubble: {
     borderRadius: 15,
@@ -43,10 +45,27 @@ export default class Bubble extends React.Component {
   }
 
   renderText(text = "", position) {
-
     if (this.props.renderCustomText) {
       return this.props.renderCustomText(this.props);
     }
+    
+    if (this.props.parseText === true) {
+      return (
+        <ParsedText
+          style={[styles.text, (position === 'left' ? styles.textLeft : styles.textRight)]}
+          parse={
+            [
+              {type: 'url', style: {textDecorationLine: 'underline'}, onPress: this.props.handleUrlPress},
+              {type: 'phone', style: {textDecorationLine: 'underline'}, onPress: this.props.handlePhonePress},
+              {type: 'email', style: {textDecorationLine: 'underline'}, onPress: this.props.handleEmailPress},
+            ]
+          }
+        >
+          {text}
+        </ParsedText>
+      );      
+    }
+    
     return (
       <Text style={[styles.text, (position === 'left' ? styles.textLeft : styles.textRight)]}>
         {text}
@@ -56,8 +75,10 @@ export default class Bubble extends React.Component {
 
   render(){
     var flexStyle = {};
-    if ( this.props.text.length > 40 ) {
-     flexStyle.flex = 1;
+    if (this.props.text) {
+      if (this.props.text.length > 40) {
+        flexStyle.flex = 1;
+      }      
     }
 
     return (
@@ -73,7 +94,7 @@ export default class Bubble extends React.Component {
 }
 
 Bubble.propTypes = {
-  position: React.PropTypes.oneOf(['left','right']),
+  position: React.PropTypes.oneOf(['left', 'right']),
   status: React.PropTypes.string,
   text: React.PropTypes.string,
   renderCustomText: React.PropTypes.func,

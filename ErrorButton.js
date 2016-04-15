@@ -37,7 +37,7 @@ export default class ErrorButton extends React.Component {
       isLoading: true,
     });
 
-    this.props.onErrorButtonPress(this.props.rowData, this.props.rowID);
+    this.props.onErrorButtonPress(this.props.rowData);
   }
 
   render() {
@@ -67,6 +67,5 @@ export default class ErrorButton extends React.Component {
 ErrorButton.defaultProps = {
   onErrorButtonPress: () => {},
   rowData: {},
-  rowID: null,
   styles: {},
 };

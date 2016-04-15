@@ -1,18 +1,23 @@
 # Gifted Messenger
 Ready-to-use chat interface for iOS and Android React-Native apps
 
-Dependency: React-Native >= v0.20.0 (scrollTo is now using {x, y, animated})
-
-
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-1.png)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-2.png)
 
 
 ### Changelog
-#### 0.0.25
+#### 0.1.0 - Breaking changes for a better Gifted Messenger
+- Breaking: API is now deprecated, messages list are now managed only using states - See advanced example
+- Breaking: `status` is now an attribute of messages 
+- Breaking: All messages should now contain a uniqueId property
+- Breaking: New prop `isLoadingEarlierMessages` to display a loader when loading earlier messages
 - Android improvements
+- New prop `typingMessage`
+- Fixing scroll when loading earlier messages
 - New leftControlBar prop (PR @gnl)
+- react-native-parsed-text has been re-implemented
 - Various fixes and improvements by @swapkats, @ianlin, @zxcpoiu, @cnjon
+- Advanced example refactoring
 #### 0.0.24
 - Fix textInputContainer issue #83
 #### 0.0.23
@@ -22,59 +27,9 @@ Dependency: React-Native >= v0.20.0 (scrollTo is now using {x, y, animated})
 - Expose full rowData to renderCustomText and add dynamic hide/show text input (PR @bpeters)
 
 
-### Example
-
-```js
-var GiftedMessenger = require('react-native-gifted-messenger');
-var {Dimensions} = React;
-
-var GiftedMessengerExample = React.createClass({
-  getMessages() {
-    return [
-      {text: 'Are you building a chat app?', name: 'React-Native', image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, position: 'left', date: new Date(2015, 0, 16, 19, 0)},
-      {text: "Yes, and I use Gifted Messenger!", name: 'Developer', image: null, position: 'right', date: new Date(2015, 0, 17, 19, 0)},
-    ];
-  },
-  handleSend(message = {}, rowID = null) {
-    // Send message.text to your server
-  },
-  handleReceive() {
-    this._GiftedMessenger.appendMessage({
-      text: 'Received message',
-      name: 'Friend',
-      image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
-      position: 'left',
-      date: new Date(),
-    });
-  },
-  render() {
-    return (
-      <GiftedMessenger
-        ref={(c) => this._GiftedMessenger = c}
-
-        messages={this.getMessages()}
-        handleSend={this.handleSend}
-        maxHeight={Dimensions.get('window').height - 64} // 64 for the navBar
-
-        styles={{
-          bubbleLeft: {
-            backgroundColor: '#e6e6eb',
-            marginRight: 70,
-          },
-          bubbleRight: {
-            backgroundColor: '#007aff',
-            marginLeft: 70,
-          },
-        }}
-      />
-    );
-  },
-});
-```
-
 ### Advanced example
 
-See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerExample.js)
+See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)
 
 
 ### Installation
@@ -89,9 +44,9 @@ See [GiftedMessengerExample/GiftedMessengerExample.js](https://raw.githubusercon
 | ----------------------------- | -------- | -------------------------------------------------------------------------- | -------- | -------------------------------- |
 | messages                      | Array    | List of messages to display                                                | Both     | []                               |
 | displayNames                  | Boolean  | Display or not the name of the interlocutor(s)                             | Both     | true                             |
-| displayNamesInsideBubble      | Boolean  | Display the name of the interlocutor(s) inside the bubble                  | Both     | false                             |
+| displayNamesInsideBubble      | Boolean  | Display the name of the interlocutor(s) inside the bubble                  | Both     | false                            |
 | placeholder                   | String   | TextInput placeholder                                                      | Both     | 'Type a message...'              |
-placeholderTextColor                   | String   | TextInput text color placeholder                                                      | Both     | '#ccc'              |
+| placeholderTextColor          | String   | TextInput text color placeholder                                           | Both     | '#ccc'                           |
 | styles                        | Function | Styles of children components - See GiftedMessenger.js/componentWillMount  | Both     | {}                               |
 | autoFocus                     | Boolean  | TextInput auto focus                                                       | Both     | true                             |
 | onErrorButtonPress            | Function | Called when the re-send button is pressed                                  | Both     | (message, rowID) => {}           |
@@ -117,45 +72,29 @@ placeholderTextColor                   | String   | TextInput text color placeho
 | blurOnSubmit                  | Boolean  | Dismiss the keyboard when clicking on submit                               | Both     | false                            |
 | forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |
 | onCustomSend                  | Function | If you want to implement a progress bar. See PR #16                        | Both     | (message) => {}                  |
-| renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}           |
+| renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}                  |
 | onChangeText                  | Function | Called on every keypress in the TextInput                                  | Both     | (text) => {}                     |
-| autoScroll                    | Boolean  | scroll to bottom when receiving new messages                               | Both     | false                            |
-| scrollAnimated                | Boolean  | do animation when scrolling                                                | Both     | true                                  |
+| scrollAnimated                | Boolean  | do animation when scrolling                                                | Both     | true                             |
+| typingMessage                 | String   | Display a text at the bottom of the list. Eg: 'User is typing a message'   | Both     | ''                               |
+| isLoadingEarlierMessages      | Boolean  | Display a loader when loading earlier messages                             | Both     | false                            |
 
 ### Props update
 
 The UI is updated when receiving new ```messages``` prop.
 
 
-### API
-
-- ```appendMessages(messages = [])``` // Add messages at the end of the list view
-
-- ```appendMessage(message = {})``` // Add 1 message at the end of the list view
-
-- ```prependMessages(messages = [])``` // Add messages at the begining of the list view
-
-- ```prependMessage(message = {})``` // Add 1 message at the begining of the list view
-
-- ```setMessageStatus(status = '', rowID)``` // Set the status of a message ('ErrorButton', 'Sent', 'Seen', 'Anything you want')
-
-- ```getMessage(rowID)``` // Get message object by rowID
-
-- ```getPreviousMessage(rowID)``` // Get previous message object of a rowID
-
-- ```getNextMessage(rowID)``` // Get next message object of a rowID
-
-
 ### Message object
 
 ```js
 var message = {
+  uniqueId: XXXXX // mandatory
   text: 'Message content',
   name: "Sender's name",
   image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
   position: 'left', // left if received, right if sent
   date: new Date(),
   view: null, // A custom Bubble view
+  status: 'Seen', // if status is 'ErrorButton', a re-send button will be displayed
   // ...any attributes you want
 };
 ```

@@ -1,4 +1,4 @@
-import React, {View, Text, StyleSheet, TouchableHighlight, Image} from 'react-native';
+import React, {View, Text, StyleSheet, TouchableHighlight, Image, Component} from 'react-native';
 import Bubble from './Bubble';
 import ErrorButton from './ErrorButton';
 
@@ -45,7 +45,7 @@ var styles = StyleSheet.create({
   },
 });
 
-export default class Message extends React.Component {
+export default class Message extends Component {
 
   constructor(props) {
     super(props);
@@ -70,7 +70,7 @@ export default class Message extends React.Component {
     return null;
   }
 
-  renderImage(rowData, rowID, diffMessage, forceRenderImage, onImagePress){
+  renderImage(rowData, diffMessage, forceRenderImage, onImagePress){
     if (rowData.image !== undefined && rowData.image !== null) {
       if (forceRenderImage === true) {
         diffMessage = null; // force rendering
@@ -81,7 +81,7 @@ export default class Message extends React.Component {
           return (
             <TouchableHighlight
               underlayColor='transparent'
-              onPress={() => onImagePress(rowData, rowID)}
+              onPress={() => onImagePress(rowData)}
             >
               <Image source={rowData.image} style={[styles.imagePosition, styles.image, (rowData.position === 'left' ? styles.imageLeft : styles.imageRight)]}/>
             </TouchableHighlight>
@@ -102,13 +102,12 @@ export default class Message extends React.Component {
     );
   }
 
-  renderErrorButton(rowData, rowID, onErrorButtonPress){
+  renderErrorButton(rowData, onErrorButtonPress){
     if (rowData.status === 'ErrorButton') {
       return (
         <ErrorButton
           onErrorButtonPress={onErrorButtonPress}
           rowData={rowData}
-          rowID={rowID}
           styles={styles}
         />
       )
@@ -133,7 +132,6 @@ export default class Message extends React.Component {
 
     var {
       rowData,
-      rowID,
       onErrorButtonPress,
       position,
       displayNames,
@@ -145,8 +143,10 @@ export default class Message extends React.Component {
 
     var flexStyle = {};
     var RowView = Bubble;
-    if ( rowData.text.length > 40 ) {
-      flexStyle.flex = 1;
+    if (rowData.text) {
+      if (rowData.text.length > 40) {
+        flexStyle.flex = 1;
+      }      
     }
 
     if ( rowData.view ) {
@@ -159,15 +159,20 @@ export default class Message extends React.Component {
         <View style={[styles.rowContainer, {
             justifyContent: position==='left'?"flex-start":"flex-end"
           }]}>
-          {position === 'left' ? this.renderImage(rowData, rowID, diffMessage, forceRenderImage, onImagePress) : null}
-          {position === 'right' ? this.renderErrorButton(rowData, rowID, onErrorButtonPress) : null}
+          {position === 'left' ? this.renderImage(rowData, diffMessage, forceRenderImage, onImagePress) : null}
+          {position === 'right' ? this.renderErrorButton(rowData, onErrorButtonPress) : null}
           <RowView
             {...rowData}
             renderCustomText={this.props.renderCustomText}
             styles={styles}
             name={position === 'left' && this.props.displayNamesInsideBubble ? this.renderName(rowData.name, displayNames, diffMessage) : null}
-            />
-          {rowData.position === 'right' ? this.renderImage(rowData, rowID, diffMessage, forceRenderImage, onImagePress) : null}
+            
+            parseText={this.props.parseText}
+            handlePhonePress={this.props.handlePhonePress}
+            handleUrlPress={this.props.handleUrlPress}
+            handleEmailPress={this.props.handleEmailPress}
+          />
+          {rowData.position === 'right' ? this.renderImage(rowData, diffMessage, forceRenderImage, onImagePress) : null}
         </View>
         {rowData.position === 'right' ? this.renderStatus(rowData.status) : null}
       </View>
@@ -177,7 +182,7 @@ export default class Message extends React.Component {
       return (
         <TouchableHighlight
           underlayColor='transparent'
-          onLongPress={() => onMessageLongPress(rowData, rowID)}>
+          onLongPress={() => onMessageLongPress(rowData)}>
           {messageView}
         </TouchableHighlight>
       );

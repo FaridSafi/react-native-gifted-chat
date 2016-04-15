@@ -1,6 +1,7 @@
 # Gifted Messenger
 Ready-to-use chat interface for iOS and Android React-Native apps
 
+![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/0.1.0/screenshots/capture.gif)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-1.png)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/screenshots/messenger-2.png)
 

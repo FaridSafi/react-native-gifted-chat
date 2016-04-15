@@ -1,5 +1,3 @@
-'use strict';
-
 import React, {
   Text,
   View,
@@ -7,19 +5,16 @@ import React, {
   TextInput,
   Dimensions,
   Animated,
-  Image,
-  TouchableHighlight,
   Platform,
   PixelRatio,
-  Component
+  Component,
 } from 'react-native';
 
 import Message from './Message';
-var GiftedSpinner = require('react-native-gifted-spinner');
-
-var moment = require('moment');
-var _ = require('lodash');
-var Button = require('react-native-button');
+import GiftedSpinner from 'react-native-gifted-spinner';
+import moment from 'moment';
+import _ from 'lodash';
+import Button from 'react-native-button';
 
 class GiftedMessenger extends Component {
 
@@ -31,10 +26,10 @@ class GiftedMessenger extends Component {
     this._footerY = 0;
     this._scrollToBottomOnNextRender = false;
     this._scrollToPreviousPosition = false;
-    this._visibleRows = {s1: {}};
-    
+    this._visibleRows = { s1: { } };
+
     let textInputHeight = 44;
-    if (this.props.hideTextInput === false) {
+    if (!this.props.hideTextInput) {
       if (this.props.styles.hasOwnProperty('textInputContainer')) {
         textInputHeight = this.props.styles.textInputContainer.height || textInputHeight;
       }
@@ -42,13 +37,15 @@ class GiftedMessenger extends Component {
 
     this.listViewMaxHeight = this.props.maxHeight - textInputHeight;
 
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => {
-      if (r1.status !== r2.status) {
-        return true;
-      }
-      return false;
-    }});
-    
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => {
+        if (r1.status !== r2.status) {
+          return true;
+        }
+        return false;
+      },
+    });
+
     this.state = {
       dataSource: ds.cloneWithRows([]),
       text: '',
@@ -62,7 +59,7 @@ class GiftedMessenger extends Component {
   getPreviousMessage(message) {
     for (let i = 0; i < this.props.messages.length; i++) {
       if (message.uniqueId === this.props.messages[i].uniqueId) {
-        if (typeof this.props.messages[i - 1] !== 'undefined') {
+        if (this.props.messages[i - 1]) {
           return this.props.messages[i - 1];
         }
       }
@@ -73,8 +70,8 @@ class GiftedMessenger extends Component {
   getNextMessage(message) {
     for (let i = 0; i < this.props.messages.length; i++) {
       if (message.uniqueId === this.props.messages[i].uniqueId) {
-        if (typeof this.props.messages[i + 1] !== 'undefined') {
-          return this.props.messages[i + 1];          
+        if (this.props.messages[i + 1]) {
+          return this.props.messages[i + 1];
         }
       }
     }
@@ -84,7 +81,7 @@ class GiftedMessenger extends Component {
   renderDate(rowData = {}) {
     let diffMessage = null;
     diffMessage = this.getPreviousMessage(rowData);
-    
+
     if (rowData.date instanceof Date) {
       if (diffMessage === null) {
         return (
@@ -124,7 +121,7 @@ class GiftedMessenger extends Component {
           onImagePress={this.props.onImagePress}
           onMessageLongPress={this.props.onMessageLongPress}
           renderCustomText={this.props.renderCustomText}
-          
+
           parseText={this.props.parseText}
           handlePhonePress={this.props.handlePhonePress}
           handleUrlPress={this.props.handleUrlPress}
@@ -152,7 +149,7 @@ class GiftedMessenger extends Component {
 
     this.props.onChangeText(text);
   }
-  
+
   // Keep only the status of the last 'right' message
   filterStatus(messages) {
     let lastStatusIndex = 0;
@@ -161,7 +158,7 @@ class GiftedMessenger extends Component {
         lastStatusIndex = i;
       }
     }
-    
+
     for (let i = 0; i < lastStatusIndex; i++) {
       if (messages[i].position === 'right') {
         if (messages[i].status !== 'ErrorButton') {
@@ -170,11 +167,11 @@ class GiftedMessenger extends Component {
       }
     }
   }
-  
+
   setMessages(messages, isAppended = null) {
 
-    this.filterStatus(messages);    
-    
+    this.filterStatus(messages);
+
     let rows = {};
     let identities = [];
     for (let i = 0; i < messages.length; i++) {
@@ -184,17 +181,17 @@ class GiftedMessenger extends Component {
       rows[messages[i].uniqueId] = Object.assign({}, messages[i]);
       identities.push(messages[i].uniqueId);
     }
-    
+
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(rows, identities),
     });
-    
+
     if (isAppended === true) {
       this._scrollToBottomOnNextRender = true;
     } else if (isAppended === false) {
       this._scrollToPreviousPosition = true;
     }
-    
+
   }
 
   componentDidMount() {
@@ -216,7 +213,7 @@ class GiftedMessenger extends Component {
 
   getLastMessageUniqueId() {
     if (this.props.messages.length > 0) {
-      return this.props.messages[this.props.messages.length - 1].uniqueId;      
+      return this.props.messages[this.props.messages.length - 1].uniqueId;
     }
     return null;
   }
@@ -229,13 +226,12 @@ class GiftedMessenger extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    
     if (nextProps.typingMessage !== this.props.typingMessage) {
       if (this.isLastMessageVisible()) {
         this._scrollToBottomOnNextRender = true;
       }
     }
-    
+
     if (_.isEqual(nextProps.messages, this.props.messages) === false) {
       let isAppended = null;
       if (nextProps.messages.length === this.props.messages.length) {
@@ -289,12 +285,12 @@ class GiftedMessenger extends Component {
       duration: 150,
     }).start();
   }
-  
+
   onKeyboardDidHide(e) {
     if (Platform.OS === 'android') {
-      this.onKeyboardWillHide(e);      
+      this.onKeyboardWillHide(e);
     }
-    
+
     // TODO test in android
     if (this.props.keyboardShouldPersistTaps === false) {
       if (this.isLastMessageVisible()) {
@@ -302,7 +298,7 @@ class GiftedMessenger extends Component {
       }
     }
   }
-  
+
   onKeyboardWillShow(e) {
     Animated.timing(this.state.height, {
       toValue: this.listViewMaxHeight - e.endCoordinates.height,
@@ -314,7 +310,7 @@ class GiftedMessenger extends Component {
     if (Platform.OS === 'android') {
       this.onKeyboardWillShow(e);
     }
-    
+
     setTimeout(() => {
       this.scrollToBottom();
     }, (Platform.OS === 'android' ? 200 : 100));
@@ -326,15 +322,15 @@ class GiftedMessenger extends Component {
       if (this.props.typingMessage) {
         scrollDistance -= 44;
       }
-      
+
       this.scrollResponder.scrollTo({
         y: -scrollDistance,
         x: 0,
         animated: typeof animated === 'boolean' ? animated : this.props.scrollAnimated,
-      });      
+      });
     }
   }
-  
+
   onSend() {
     var message = {
       text: this.state.text.trim(),
@@ -355,7 +351,7 @@ class GiftedMessenger extends Component {
     if (this.props.onLoadEarlierMessages) {
       console.warn('`onLoadEarlierMessages` is deprecated, please use `onLoadEarlierMessagesPress` - Example in README');
     } else {
-      this.props.onLoadEarlierMessagesPress();      
+      this.props.onLoadEarlierMessagesPress();
     }
   }
 
@@ -396,7 +392,7 @@ class GiftedMessenger extends Component {
       });
     }
   }
-  
+
   onFooterLayout(event) {
     const layout = event.nativeEvent.layout;
     const oldFooterY = this._footerY;
@@ -416,7 +412,7 @@ class GiftedMessenger extends Component {
       });
     }
   }
-  
+
   renderTypingMessage() {
     if (this.props.typingMessage) {
       return (
@@ -436,7 +432,7 @@ class GiftedMessenger extends Component {
     }
     return null;
   }
-    
+
   renderFooter() {
     return (
       <View
@@ -469,7 +465,7 @@ class GiftedMessenger extends Component {
           onLayout={this.onLayout.bind(this)}
           renderFooter={this.renderFooter.bind(this)}
           onChangeVisibleRows={this.onChangeVisibleRows.bind(this)}
-          
+
           style={this.styles.listView}
 
           onKeyboardWillShow={this.onKeyboardWillShow.bind(this)} // not supported in Android - to fix this issue in Android, onKeyboardWillShow is called inside onKeyboardDidShow
@@ -502,7 +498,7 @@ class GiftedMessenger extends Component {
       </View>
     )
   }
-  
+
   renderTextInput() {
     if (this.props.hideTextInput === false) {
       return (

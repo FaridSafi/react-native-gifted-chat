@@ -103,6 +103,10 @@ var message = {
   />
 ```
 
+### Known issues
+- Android: When updating a message status, scroll to bottom is not triggered - Related to https://github.com/facebook/react-native/issues/5688
+
+
 ### License
 
 [MIT](LICENSE)

@@ -19,7 +19,7 @@ Ready-to-use chat interface for iOS and Android React-Native apps
 - ES6 & Example refactoring
 - Fixing scroll when loading earlier messages
 - Various fixes and improvements by [@swapkats](https://github.com/swapkats), [@ianlin](https://github.com/ianlin), [@zxcpoiu](https://github.com/zxcpoiu), [@cnjon](https://github.com/cnjon)
-- Special thanks to [@yogiben](https://github.com/yogiben), [@koppelaar](https://github.com/koppelaar) & [@sethx](https://github.com/sethx) for their help
+- Special thanks to [@yogiben](https://github.com/yogiben), [@koppelaar](https://github.com/koppelaar) & [@sethx](https://github.com/sethx) for their contributions
 
 ### Example
 See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)

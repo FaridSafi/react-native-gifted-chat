@@ -64,7 +64,6 @@ class GiftedMessenger extends Component {
       text: '',
       disabled: true,
       height: new Animated.Value(this.listViewMaxHeight),
-      allLoaded: false,
       appearAnim: new Animated.Value(0),
     };
   }
@@ -137,13 +136,6 @@ class GiftedMessenger extends Component {
       this.setMessages(this.props.messages);
     } else if (this.props.initialMessages) {
       console.warn('`initialMessages` is deprecated, please use `messages`');
-    } else {
-      // Set allLoaded, unless props.loadMessagesLater is set
-      if (!this.props.loadMessagesLater) {
-        this.setState({
-          allLoaded: true,
-        });
-      }
     }
   }
 
@@ -405,31 +397,29 @@ class GiftedMessenger extends Component {
   }
 
   renderLoadEarlierMessages() {
-    if (this.props.loadEarlierMessagesButton === true) {
-      if (this.state.allLoaded === false) {
-        if (this.props.isLoadingEarlierMessages === true) {
-          return (
-            <View style={this.styles.loadEarlierMessages}>
-              <GiftedSpinner />
-            </View>
-          );
-        }
-
+    if (this.props.loadEarlierMessagesButton) {
+      if (this.props.isLoadingEarlierMessages) {
         return (
           <View style={this.styles.loadEarlierMessages}>
-            <Button
-              style={this.styles.loadEarlierMessagesButton}
-              onPress={() => {this.preLoadEarlierMessages();}}
-            >
-              {this.props.loadEarlierMessagesButtonText}
-            </Button>
+            <GiftedSpinner />
           </View>
         );
       }
+      return (
+        <View style={this.styles.loadEarlierMessages}>
+          <Button
+            style={this.styles.loadEarlierMessagesButton}
+            onPress={() => {this.preLoadEarlierMessages();}}
+          >
+            {this.props.loadEarlierMessagesButtonText}
+          </Button>
+        </View>
+      );
     }
-    return null;
+    return (
+      <View style={ { height: 10 } } />
+    );
   }
-
 
   renderTypingMessage() {
     if (this.props.typingMessage) {
@@ -541,17 +531,18 @@ class GiftedMessenger extends Component {
 
           style={this.styles.listView}
 
-          onKeyboardWillShow={this.onKeyboardWillShow} // not supported in Android - to fix this issue in Android, onKeyboardWillShow is called inside onKeyboardDidShow
+          // not supported in Android - to fix this issue in Android, onKeyboardWillShow is called inside onKeyboardDidShow
+          onKeyboardWillShow={this.onKeyboardWillShow}
           onKeyboardDidShow={this.onKeyboardDidShow}
-          onKeyboardWillHide={this.onKeyboardWillHide} // not supported in Android - to fix this issue in Android, onKeyboardWillHide is called inside onKeyboardDidHide
+          // not supported in Android - to fix this issue in Android, onKeyboardWillHide is called inside onKeyboardDidHide
+          onKeyboardWillHide={this.onKeyboardWillHide}
           onKeyboardDidHide={this.onKeyboardDidHide}
-
-          keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
+          // @issue keyboardShouldPersistTaps={false} + textInput focused = 2 taps are needed to trigger the ParsedText links
+          keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}
           keyboardDismissMode={this.props.keyboardDismissMode}
 
           initialListSize={10}
           pageSize={this.props.messages.length}
-
 
           {...this.props}
         />
@@ -658,7 +649,6 @@ GiftedMessenger.propTypes = {
   leftControlBar: React.PropTypes.element,
   loadEarlierMessagesButton: React.PropTypes.bool,
   loadEarlierMessagesButtonText: React.PropTypes.string,
-  loadMessagesLater: React.PropTypes.bool,
   maxHeight: React.PropTypes.number,
   messages: React.PropTypes.array,
   onChangeText: React.PropTypes.func,

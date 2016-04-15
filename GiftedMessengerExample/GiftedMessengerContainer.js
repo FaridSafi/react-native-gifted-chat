@@ -34,18 +34,17 @@ class GiftedMessengerContainer extends Component {
       messages: this._messages,
       isLoadingEarlierMessages: false,
       typingMessage: '',
+      allLoaded: false,
     };
     
   }
   
-  // TODO check if we always use isMounted when necessary (including in the component)
   componentDidMount() {
-    this._isMounted = true;
-    
+    this._isMounted = true;    
     
     setTimeout(() => {
       this.setState({
-        typingMessage: 'Bot is typing a message...',
+        typingMessage: 'React-Bot is typing a message...',
       });
     }, 1000); // simulating network
 
@@ -59,7 +58,7 @@ class GiftedMessengerContainer extends Component {
     setTimeout(() => {
       this.handleReceive({
         text: 'Hello Awesome Developer', 
-        name: 'React-Native', 
+        name: 'React-Bot', 
         image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
         position: 'left', 
         date: new Date(),
@@ -76,7 +75,7 @@ class GiftedMessengerContainer extends Component {
     return [
       {
         text: 'Are you building a chat app?', 
-        name: 'React-Native', 
+        name: 'React-Bot', 
         image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
         position: 'left', 
         date: new Date(2015, 10, 16, 19, 0),
@@ -154,7 +153,7 @@ class GiftedMessengerContainer extends Component {
     var earlierMessages = [
       {
         text: 'React Native enables you to build world-class application experiences on native platforms using a consistent developer experience based on JavaScript and React. https://github.com/facebook/react-native', 
-        name: 'React-Native', 
+        name: 'React-Bot', 
         image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
         position: 'left', 
         date: new Date(2013, 0, 2, 12, 0),
@@ -173,6 +172,7 @@ class GiftedMessengerContainer extends Component {
       this.setMessages(earlierMessages.concat(this._messages)); // prepend the earlier messages to your list
       this.setState({
         isLoadingEarlierMessages: false, // hide the loader
+        allLoaded: true, // hide the `Load earlier messages` button
       });
     }, 1000); // simulating network
     
@@ -216,7 +216,7 @@ class GiftedMessengerContainer extends Component {
         onErrorButtonPress={this.onErrorButtonPress.bind(this)}
         maxHeight={Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT}
 
-        loadEarlierMessagesButton={true}
+        loadEarlierMessagesButton={!this.state.allLoaded}
         onLoadEarlierMessagesPress={this.onLoadEarlierMessagesPress.bind(this)}
 
         senderName='Awesome Developer'

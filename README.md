@@ -16,7 +16,7 @@ Ready-to-use chat interface for iOS and Android React-Native apps
 - Android improvements
 - `react-native-parsed-text` has been re-implemented
 - ESLint implementation - PR [@sethx](https://github.com/sethx)
-- Example refactoring
+- ES6 & Example refactoring
 - Fixing scroll when loading earlier messages
 - Various fixes and improvements by [@swapkats](https://github.com/swapkats), [@ianlin](https://github.com/ianlin), [@zxcpoiu](https://github.com/zxcpoiu), [@cnjon](https://github.com/cnjon)
 - Special thanks to [@yogiben](https://github.com/yogiben), [@koppelaar](https://github.com/koppelaar) & [@sethx](https://github.com/sethx) for their help
@@ -86,7 +86,14 @@ var message = {
 ```
 
 ### Android installation
-- Add in your Android Manifest (`android/app/src/main/AndroidManifest.xml`) `android:windowSoftInputMode="adjustResize"`
+- Add `windowSoftInputMode` in your Android Manifest `android/app/src/main/AndroidManifest.xml`
+```
+<!-- ... -->
+  android:label="@string/app_name"
+  android:windowSoftInputMode="adjustResize"
+  android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+<!-- ... -->
+```
 - Calculate the maxHeight prop using [react-native-extra-dimensions-android](https://github.com/jaysoo/react-native-extra-dimensions-android)
 ```js
   <GiftedMessenger
@@ -95,6 +102,10 @@ var message = {
     // ...
   />
 ```
+
+### Known issues
+- Android: When updating a message status, scroll to bottom is not triggered - Related to https://github.com/facebook/react-native/issues/5688
+
 
 ### License
 

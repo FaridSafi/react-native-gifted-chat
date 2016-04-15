@@ -32,41 +32,41 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 
 | Props name                    | Type     | Description                                                                | Platform | Default                          |
 | ----------------------------- | -------- | -------------------------------------------------------------------------- | -------- | -------------------------------- |
-| messages                      | Array    | List of messages to display                                                | Both     | []                               |
+| autoFocus                     | Boolean  | TextInput auto focus                                                       | Both     | true                             |
+| blurOnSubmit                  | Boolean  | Dismiss the keyboard when clicking on submit                               | Both     | false                            |
 | displayNames                  | Boolean  | Display or not the name of the interlocutor(s)                             | Both     | true                             |
 | displayNamesInsideBubble      | Boolean  | Display the name of the interlocutor(s) inside the bubble                  | Both     | false                            |
-| placeholder                   | String   | TextInput placeholder                                                      | Both     | 'Type a message...'              |
-| placeholderTextColor          | String   | TextInput text color placeholder                                           | Both     | '#ccc'                           |
-| styles                        | Function | Styles of children components - See GiftedMessenger.js/componentWillMount  | Both     | {}                               |
-| autoFocus                     | Boolean  | TextInput auto focus                                                       | Both     | true                             |
-| onErrorButtonPress            | Function | Called when the re-send button is pressed                                  | Both     | (message, rowID) => {}           |
+| forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |
+| handleEmailPress              | Function | Called when a parsed email is pressed                                      | iOS      | (email) => {}                    |
+| handlePhonePress              | Function | Called when a parsed phone number is pressed                               | iOS      | (phone) => {}                    |
+| handleSend                    | Function | Called when a message is Sent                                              | Both     | (message, rowID) => {}           |
+| handleUrlPress                | Function | Called when a parsed url is pressed                                        | iOS      | (url) => {}                      |
+| hideTextInput                 | Boolean  | Hide or not the text input                                                 | Both     | false                            |
+| isLoadingEarlierMessages      | Boolean  | Display a loader when loading earlier messages                             | Both     | false                            |
+| keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | interactive                      |
+| keyboardShouldPersistTaps     | Boolean  | When false, tapping the scrollview dismisses the keyboard.                 | Both     | true                             |
+| leftControlBar                | Element  | Optional control element displayed left of the TextInput                   | Both     | null                             |
 | loadEarlierMessagesButton     | Boolean  | Display or not the button to load earlier message                          | Both     | false                            |
 | loadEarlierMessagesButtonText | String   | Label of the 'Load Earlier Messages' button                                | Both     | 'Load earlier messages'          |
-| onLoadEarlierMessages         | Function | Called when 'Load Earlier Message' button is pressed                       | Both     | (oldestMessage, callback) => {}  |
-| handleSend                    | Function | Called when a message is Sent                                              | Both     | (message, rowID) => {}           |
 | maxHeight                     | Integer  | Max height of the component                                                | Both     | Dimensions.get('window').height  |
-| senderName                    | String   | Name of the sender of the messages                                         | Both     | 'Sender'                         |
-| senderImage                   | Object   | Image of the sender                                                        | Both     | null                             |
-| sendButtonText                | String   | 'Send' button label                                                        | Both     | 'Send'                           |
-| leftControlBar                | Element  | Optional control element displayed left of the TextInput                   | Both     | null                             |
-| onImagePress                  | Function | Called when the image of a message is pressed                              | Both     | (rowData, rowID) => {}           |
-| parseText                     | Boolean  | If the text has to be parsed with taskrabbit/react-native-parsed-text      | iOS      | true                             |
-| handleUrlPress                | Function | Called when a parsed url is pressed                                        | iOS      | (url) => {}                      |
-| handlePhonePress              | Function | Called when a parsed phone number is pressed                               | iOS      | (phone) => {}                    |
-| handleEmailPress              | Function | Called when a parsed email is pressed                                      | iOS      | (email) => {}                    |
-| hideTextInput                 | Boolean  | Hide or not the text input                                                 | Both     | false                            |
-| keyboardShouldPersistTaps     | Boolean  | When false, tapping the scrollview dismisses the keyboard.                 | Both     | true                             |
-| keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | interactive                      |
-| returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |
-| submitOnReturn                | Boolean  | Send message when clicking on submit                                       | Both     | false                            |
-| blurOnSubmit                  | Boolean  | Dismiss the keyboard when clicking on submit                               | Both     | false                            |
-| forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |
-| onCustomSend                  | Function | If you want to implement a progress bar. See PR #16                        | Both     | (message) => {}                  |
-| renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}                  |
+| messages                      | Array    | List of messages to display                                                | Both     | []                               |
 | onChangeText                  | Function | Called on every keypress in the TextInput                                  | Both     | (text) => {}                     |
+| onCustomSend                  | Function | If you want to implement a progress bar. See PR #16                        | Both     | (message) => {}                  |
+| onErrorButtonPress            | Function | Called when the re-send button is pressed                                  | Both     | (message, rowID) => {}           |
+| onImagePress                  | Function | Called when the image of a message is pressed                              | Both     | (rowData, rowID) => {}           |
+| onLoadEarlierMessages         | Function | Called when 'Load Earlier Message' button is pressed                       | Both     | (oldestMessage, callback) => {}  |
+| parseText                     | Boolean  | If the text has to be parsed with taskrabbit/react-native-parsed-text      | iOS      | true                             |
+| placeholder                   | String   | TextInput placeholder                                                      | Both     | 'Type a message...'              |
+| placeholderTextColor          | String   | TextInput text color placeholder                                           | Both     | '#ccc'                           |
+| renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}                  |
+| returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |
 | scrollAnimated                | Boolean  | do animation when scrolling                                                | Both     | true                             |
+| sendButtonText                | String   | 'Send' button label                                                        | Both     | 'Send'                           |
+| senderImage                   | Object   | Image of the sender                                                        | Both     | null                             |
+| senderName                    | String   | Name of the sender of the messages                                         | Both     | 'Sender'                         |
+| styles                        | Function | Styles of children components - See GiftedMessenger.js/componentWillMount  | Both     | {}                               |
+| submitOnReturn                | Boolean  | Send message when clicking on submit                                       | Both     | false                            |
 | typingMessage                 | String   | Display a text at the bottom of the list. Eg: 'User is typing a message'   | Both     | ''                               |
-| isLoadingEarlierMessages      | Boolean  | Display a loader when loading earlier messages                             | Both     | false                            |
 
 
 ### Message object

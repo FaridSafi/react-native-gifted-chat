@@ -51,7 +51,6 @@ class GiftedMessenger extends Component {
       text: '',
       disabled: true,
       height: new Animated.Value(this.listViewMaxHeight),
-      allLoaded: false,
       appearAnim: new Animated.Value(0),
     };
   }
@@ -201,13 +200,6 @@ class GiftedMessenger extends Component {
       this.setMessages(this.props.messages);
     } else if (this.props.initialMessages) {
       console.warn('`initialMessages` is deprecated, please use `messages`');
-    } else {
-      // Set allLoaded, unless props.loadMessagesLater is set
-      if (!this.props.loadMessagesLater) {
-        this.setState({
-          allLoaded: true
-        });
-      }
     }
   }
 
@@ -357,28 +349,28 @@ class GiftedMessenger extends Component {
 
   renderLoadEarlierMessages() {
     if (this.props.loadEarlierMessagesButton === true) {
-      if (this.state.allLoaded === false) {
-        if (this.props.isLoadingEarlierMessages === true) {
-          return (
-            <View style={this.styles.loadEarlierMessages}>
-              <GiftedSpinner />
-            </View>
-          );
-        } else {
-          return (
-            <View style={this.styles.loadEarlierMessages}>
-              <Button
-                style={this.styles.loadEarlierMessagesButton}
-                onPress={() => {this.preLoadEarlierMessages()}}
-              >
-                {this.props.loadEarlierMessagesButtonText}
-              </Button>
-            </View>
-          );
-        }
+      if (this.props.isLoadingEarlierMessages === true) {
+        return (
+          <View style={this.styles.loadEarlierMessages}>
+            <GiftedSpinner />
+          </View>
+        );
+      } else {
+        return (
+          <View style={this.styles.loadEarlierMessages}>
+            <Button
+              style={this.styles.loadEarlierMessagesButton}
+              onPress={() => {this.preLoadEarlierMessages()}}
+            >
+              {this.props.loadEarlierMessagesButtonText}
+            </Button>
+          </View>
+        );
       }
     }
-    return null;
+    return (
+      <View style={{height: 10}} />
+    );
   }
 
   onLayout(event) {
@@ -640,7 +632,6 @@ GiftedMessenger.propTypes = {
   styles: React.PropTypes.object,
   autoFocus: React.PropTypes.bool,
   onErrorButtonPress: React.PropTypes.func,
-  loadMessagesLater: React.PropTypes.bool,
   loadEarlierMessagesButton: React.PropTypes.bool,
   loadEarlierMessagesButtonText: React.PropTypes.string,
   onLoadEarlierMessages: React.PropTypes.func, // deprecated

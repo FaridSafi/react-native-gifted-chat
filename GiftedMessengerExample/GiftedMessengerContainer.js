@@ -41,6 +41,31 @@ class GiftedMessengerContainer extends Component {
   // TODO check if we always use isMounted when necessary (including in the component)
   componentDidMount() {
     this._isMounted = true;
+    
+    
+    setTimeout(() => {
+      this.setState({
+        typingMessage: 'Bot is typing a message...',
+      });
+    }, 1000); // simulating network
+
+    setTimeout(() => {
+      this.setState({
+        typingMessage: '',
+      });
+    }, 3000); // simulating network
+    
+    
+    setTimeout(() => {
+      this.handleReceive({
+        text: 'Hello Awesome Developer', 
+        name: 'React-Native', 
+        image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
+        position: 'left', 
+        date: new Date(),
+        uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
+      });
+    }, 3300); // simulating network
   }
 
   componentWillUnmount() {
@@ -55,15 +80,15 @@ class GiftedMessengerContainer extends Component {
         image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
         position: 'left', 
         date: new Date(2015, 10, 16, 19, 0),
-        uniqueId: Math.round(Math.random() * 1000), // simulating server-side unique id generation
+        uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       },
       {
         text: "Yes, and I use Gifted Messenger!", 
-        name: 'Developer', 
+        name: 'Awesome Developer', 
         image: null, 
         position: 'right', 
         date: new Date(2015, 10, 17, 19, 0),
-        uniqueId: Math.round(Math.random() * 1000), // simulating server-side unique id generation
+        uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       },
     ];
   }
@@ -102,43 +127,25 @@ class GiftedMessengerContainer extends Component {
     // Your logic here
     // Send message.text to your server
     
-    message.uniqueId = Math.round(Math.random() * 1000); // simulating server-side unique id generation
+    message.uniqueId = Math.round(Math.random() * 10000); // simulating server-side unique id generation
     this.setMessages(this._messages.concat(message));
     
-    
+    // mark the sent message as Seen
     setTimeout(() => {
-      this.setMessageStatus(message.uniqueId, 'ErrorButton');
-    }, 500); // simulating network
+      this.setMessageStatus(message.uniqueId, 'Seen'); // here you can replace 'Seen' by any string you want
+    }, 1000);
 
-
-    setTimeout(() => {
-      this.setState({
-        typingMessage: 'Bot is typing a message...',
-      });
-    }, 1000); // simulating network
-
-    setTimeout(() => {
-      this.setState({
-        typingMessage: '',
-      });
-    }, 3000); // simulating network
-    
-    
-    setTimeout(() => {
-      this.handleReceive({
-        text: 'I saw your message', 
-        name: 'React-Native', 
-        image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
-        position: 'left', 
-        date: new Date(),
-        uniqueId: Math.round(Math.random() * 1000), // simulating server-side unique id generation
-      });
-    }, 3300); // simulating network
-    
+    // if you couldn't send the message to your server :
+    // this.setMessageStatus(message.uniqueId, 'ErrorButton');
   }
   
   onLoadEarlierMessagesPress() {
 
+    // display a loader until you retrieve the messages from your server
+    this.setState({
+      isLoadingEarlierMessages: true,
+    });
+    
     // Your logic here
     // Eg: Retrieve old messages from your server
 
@@ -151,25 +158,21 @@ class GiftedMessengerContainer extends Component {
         image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
         position: 'left', 
         date: new Date(2013, 0, 2, 12, 0),
-        uniqueId: Math.round(Math.random() * 1000), // simulating server-side unique id generation
+        uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       }, {
         text: 'This is a touchable phone number 0606060606 parsed by taskrabbit/react-native-parsed-text', 
-        name: 'Developer', 
+        name: 'Awesome Developer', 
         image: null, 
         position: 'right', 
         date: new Date(2014, 0, 1, 20, 0),
-        uniqueId: Math.round(Math.random() * 1000), // simulating server-side unique id generation
+        uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       },
     ];
 
-    this.setState({
-      isLoadingEarlierMessages: true,
-    });
-
     setTimeout(() => {
-      this.setMessages(earlierMessages.concat(this._messages));
+      this.setMessages(earlierMessages.concat(this._messages)); // prepend the earlier messages to your list
       this.setState({
-        isLoadingEarlierMessages: false,
+        isLoadingEarlierMessages: false, // hide the loader
       });
     }, 1000); // simulating network
     
@@ -185,6 +188,7 @@ class GiftedMessengerContainer extends Component {
     // Your logic here
     // re-send the failed message
 
+    // remove the status
     this.setMessageStatus(message.uniqueId, '');
   }
   
@@ -215,7 +219,7 @@ class GiftedMessengerContainer extends Component {
         loadEarlierMessagesButton={true}
         onLoadEarlierMessagesPress={this.onLoadEarlierMessagesPress.bind(this)}
 
-        senderName='Developer'
+        senderName='Awesome Developer'
         senderImage={null}
         onImagePress={this.onImagePress}
         displayNames={true}
@@ -236,6 +240,8 @@ class GiftedMessengerContainer extends Component {
     Linking.openURL(url);
   }
 
+  // TODO
+  // make this compatible with Android
   handlePhonePress(phone) {
     if (Platform.OS !== 'android') {
       var BUTTONS = [

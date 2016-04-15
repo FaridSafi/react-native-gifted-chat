@@ -138,7 +138,7 @@ class GiftedMessengerContainer extends Component {
     // this.setMessageStatus(message.uniqueId, 'ErrorButton');
   }
   
-  onLoadEarlierMessagesPress() {
+  onLoadEarlierMessages() {
 
     // display a loader until you retrieve the messages from your server
     this.setState({
@@ -217,7 +217,7 @@ class GiftedMessengerContainer extends Component {
         maxHeight={Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT}
 
         loadEarlierMessagesButton={!this.state.allLoaded}
-        onLoadEarlierMessagesPress={this.onLoadEarlierMessagesPress.bind(this)}
+        onLoadEarlierMessages={this.onLoadEarlierMessages.bind(this)}
 
         senderName='Awesome Developer'
         senderImage={null}

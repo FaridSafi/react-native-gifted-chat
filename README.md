@@ -55,11 +55,11 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 | onErrorButtonPress            | Function | Called when the re-send button is pressed                                  | Both     | (message, rowID) => {}           |
 | onImagePress                  | Function | Called when the image of a message is pressed                              | Both     | (rowData, rowID) => {}           |
 | onLoadEarlierMessages         | Function | Called when 'Load Earlier Message' button is pressed                       | Both     | (oldestMessage, callback) => {}  |
+| onMessageLongPress            | Function | Called when doing long press on a message                                  | Both     | () => {}                         |
 | parseText                     | Boolean  | If the text has to be parsed with taskrabbit/react-native-parsed-text      | iOS      | true                             |
 | placeholder                   | String   | TextInput placeholder                                                      | Both     | 'Type a message...'              |
 | placeholderTextColor          | String   | TextInput text color placeholder                                           | Both     | '#ccc'                           |
 | renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}                  |
-| returnKeyType                 | Boolean  | Determine if pressing 'send' will trigger handleSend                       | iOS      | false                            |
 | scrollAnimated                | Boolean  | do animation when scrolling                                                | Both     | true                             |
 | sendButtonText                | String   | 'Send' button label                                                        | Both     | 'Send'                           |
 | senderImage                   | Object   | Image of the sender                                                        | Both     | null                             |

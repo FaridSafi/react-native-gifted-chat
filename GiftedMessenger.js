@@ -134,8 +134,6 @@ class GiftedMessenger extends Component {
 
     if (this.props.messages.length > 0) {
       this.setMessages(this.props.messages);
-    } else if (this.props.initialMessages) {
-      console.warn('`initialMessages` is deprecated, please use `messages`');
     }
   }
 
@@ -389,11 +387,7 @@ class GiftedMessenger extends Component {
   }
 
   preLoadEarlierMessages() {
-    if (this.props.onLoadEarlierMessages) {
-      console.warn('`onLoadEarlierMessages` is deprecated, please use `onLoadEarlierMessagesPress` - Example in README');
-    } else {
-      this.props.onLoadEarlierMessagesPress();
-    }
+    this.props.onLoadEarlierMessages();
   }
 
   renderLoadEarlierMessages() {
@@ -604,7 +598,6 @@ GiftedMessenger.defaultProps = {
   handleSend: () => {},
   handleUrlPress: () => {},
   hideTextInput: false,
-  initialMessages: [],
   isLoadingEarlierMessages: false,
   keyboardDismissMode: 'interactive',
   keyboardShouldPersistTaps: true,
@@ -616,9 +609,8 @@ GiftedMessenger.defaultProps = {
   onChangeText: () => {},
   onErrorButtonPress: () => {},
   onImagePress: null,
-  onLoadEarlierMessages: null, // deprecated
-  onLoadEarlierMessagesPress: () => {},
-  onMessageLongPress: null,
+  onLoadEarlierMessages: () => {},
+  onMessageLongPress: () => {},
   parseText: false,
   placeholder: 'Type a message...',
   placeholderTextColor: '#ccc',
@@ -642,7 +634,6 @@ GiftedMessenger.propTypes = {
   handleSend: React.PropTypes.func,
   handleUrlPress: React.PropTypes.func,
   hideTextInput: React.PropTypes.bool,
-  initialMessages: React.PropTypes.array,
   isLoadingEarlierMessages: React.PropTypes.bool,
   keyboardDismissMode: React.PropTypes.string,
   keyboardShouldPersistTaps: React.PropTypes.bool,
@@ -655,8 +646,7 @@ GiftedMessenger.propTypes = {
   onCustomSend: React.PropTypes.func,
   onErrorButtonPress: React.PropTypes.func,
   onImagePress: React.PropTypes.func,
-  onLoadEarlierMessages: React.PropTypes.func, // deprecated
-  onLoadEarlierMessagesPress: React.PropTypes.func,
+  onLoadEarlierMessages: React.PropTypes.func,
   onMessageLongPress: React.PropTypes.func,
   parseText: React.PropTypes.bool,
   placeholder: React.PropTypes.string,

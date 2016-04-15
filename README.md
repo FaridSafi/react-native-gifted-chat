@@ -86,7 +86,14 @@ var message = {
 ```
 
 ### Android installation
-- Add in your Android Manifest (`android/app/src/main/AndroidManifest.xml`) `android:windowSoftInputMode="adjustResize"`
+- Add `windowSoftInputMode` in your Android Manifest `android/app/src/main/AndroidManifest.xml`
+```
+<!-- ... -->
+  android:label="@string/app_name"
+  android:windowSoftInputMode="adjustResize"
+  android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+<!-- ... -->
+```
 - Calculate the maxHeight prop using [react-native-extra-dimensions-android](https://github.com/jaysoo/react-native-extra-dimensions-android)
 ```js
   <GiftedMessenger

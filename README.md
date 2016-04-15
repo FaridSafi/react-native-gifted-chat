@@ -7,28 +7,24 @@ Ready-to-use chat interface for iOS and Android React-Native apps
 
 ### Changelog
 #### 0.1.0 - Breaking changes for a better Gifted Messenger
-- Breaking: API is now deprecated, messages list are now managed only using states - See example
-- Breaking: All messages should now contain a uniqueId property
-- Breaking: `status` is now an attribute of messages - `setMessageStatus` is deprecated
+- Breaking: API is now deprecated, messages list are now managed only using states - See [example](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)
+- Breaking: All messages should now contain a `uniqueId` property
+- Breaking: `setMessageStatus` is now deprecated, use the message attribute `status` instead
 - Breaking: New prop `isLoadingEarlierMessages` to display a loader when loading earlier messages
+- New prop `typingMessage` for displaying 'User is typing a message...'
+- New prop `leftControlBar` - PR [@gnl](https://github.com/gnl)
 - Android improvements
-- New prop `typingMessage`
-- Fixing scroll when loading earlier messages
-- eslint implementation
-- Example refactoring
 - react-native-parsed-text has been re-implemented
-- New leftControlBar prop (PR @gnl)
-- Various fixes and improvements by @swapkats, @ianlin, @zxcpoiu, @cnjon
+- ESLint implementation - PR [@sethx](https://github.com/sethx)
+- Example refactoring
+- Fixing scroll when loading earlier messages
+- Various fixes and improvements by [@swapkats](https://github.com/swapkats), [@ianlin](https://github.com/ianlin), [@zxcpoiu](https://github.com/zxcpoiu), [@cnjon](https://github.com/cnjon)
 
 ### Example
-
 See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)
 
-
 ### Installation
-
 ```npm install react-native-gifted-messenger --save```
-
 
 ### Props
 
@@ -90,12 +86,11 @@ var message = {
 
 ### Android installation
 - Add in android/app/src/main/AndroidManifest.xml ```android:windowSoftInputMode="adjustResize"```
-- Calculate the maxHeight prop using https://github.com/jaysoo/react-native-extra-dimensions-android ```Dimensions.get('window').height - React.Navigator.NavigationBar.Styles.General.NavBarHeight - ExtraDimensions.get('STATUS_BAR_HEIGHT')``` - See example
+- Calculate the maxHeight prop using https://github.com/jaysoo/react-native-extra-dimensions-android ```Dimensions.get('window').height - React.Navigator.NavigationBar.Styles.General.NavBarHeight - ExtraDimensions.get('STATUS_BAR_HEIGHT')``` - See [example](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)
 
 ### License
 
 [MIT](LICENSE)
-
 
 
 Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi) !

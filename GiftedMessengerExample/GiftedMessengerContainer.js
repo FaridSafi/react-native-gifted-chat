@@ -41,6 +41,31 @@ class GiftedMessengerContainer extends Component {
   // TODO check if we always use isMounted when necessary (including in the component)
   componentDidMount() {
     this._isMounted = true;
+    
+    
+    setTimeout(() => {
+      this.setState({
+        typingMessage: 'Bot is typing a message...',
+      });
+    }, 1000); // simulating network
+
+    setTimeout(() => {
+      this.setState({
+        typingMessage: '',
+      });
+    }, 3000); // simulating network
+    
+    
+    setTimeout(() => {
+      this.handleReceive({
+        text: 'Hello', 
+        name: 'React-Native', 
+        image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
+        position: 'left', 
+        date: new Date(),
+        uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
+      });
+    }, 3300); // simulating network
   }
 
   componentWillUnmount() {
@@ -55,7 +80,7 @@ class GiftedMessengerContainer extends Component {
         image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
         position: 'left', 
         date: new Date(2015, 10, 16, 19, 0),
-        uniqueId: Math.round(Math.random() * 1000), // simulating server-side unique id generation
+        uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       },
       {
         text: "Yes, and I use Gifted Messenger!", 
@@ -63,7 +88,7 @@ class GiftedMessengerContainer extends Component {
         image: null, 
         position: 'right', 
         date: new Date(2015, 10, 17, 19, 0),
-        uniqueId: Math.round(Math.random() * 1000), // simulating server-side unique id generation
+        uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       },
     ];
   }
@@ -102,39 +127,12 @@ class GiftedMessengerContainer extends Component {
     // Your logic here
     // Send message.text to your server
     
-    message.uniqueId = Math.round(Math.random() * 1000); // simulating server-side unique id generation
+    message.uniqueId = Math.round(Math.random() * 10000); // simulating server-side unique id generation
     this.setMessages(this._messages.concat(message));
     
-    
-    setTimeout(() => {
-      this.setMessageStatus(message.uniqueId, 'ErrorButton');
-    }, 500); // simulating network
 
-
-    setTimeout(() => {
-      this.setState({
-        typingMessage: 'Bot is typing a message...',
-      });
-    }, 1000); // simulating network
-
-    setTimeout(() => {
-      this.setState({
-        typingMessage: '',
-      });
-    }, 3000); // simulating network
-    
-    
-    setTimeout(() => {
-      this.handleReceive({
-        text: 'I saw your message', 
-        name: 'React-Native', 
-        image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
-        position: 'left', 
-        date: new Date(),
-        uniqueId: Math.round(Math.random() * 1000), // simulating server-side unique id generation
-      });
-    }, 3300); // simulating network
-    
+    // if you couldn't send message to your server
+    // this.setMessageStatus(message.uniqueId, 'ErrorButton');    
   }
   
   onLoadEarlierMessagesPress() {
@@ -151,14 +149,14 @@ class GiftedMessengerContainer extends Component {
         image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
         position: 'left', 
         date: new Date(2013, 0, 2, 12, 0),
-        uniqueId: Math.round(Math.random() * 1000), // simulating server-side unique id generation
+        uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       }, {
         text: 'This is a touchable phone number 0606060606 parsed by taskrabbit/react-native-parsed-text', 
         name: 'Developer', 
         image: null, 
         position: 'right', 
         date: new Date(2014, 0, 1, 20, 0),
-        uniqueId: Math.round(Math.random() * 1000), // simulating server-side unique id generation
+        uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       },
     ];
 

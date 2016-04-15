@@ -130,9 +130,12 @@ class GiftedMessengerContainer extends Component {
     message.uniqueId = Math.round(Math.random() * 10000); // simulating server-side unique id generation
     this.setMessages(this._messages.concat(message));
     
+    setTimeout(() => {
+      this.setMessageStatus(message.uniqueId, 'Seen');
+    }, 1000);
 
     // if you couldn't send message to your server
-    // this.setMessageStatus(message.uniqueId, 'ErrorButton');    
+    // this.setMessageStatus(message.uniqueId, 'Seen');
   }
   
   onLoadEarlierMessagesPress() {

@@ -239,8 +239,12 @@ class GiftedMessenger extends Component {
     if (_.isEqual(nextProps.messages, this.props.messages) === false) {
       let isAppended = null;
       if (nextProps.messages.length === this.props.messages.length) {
-        // we assume that only a status has been changed
-        isAppended = null;
+        // we assume that only a status has been changed        
+        if (this.isLastMessageVisible()) {
+          isAppended = true; // will scroll to bottom
+        } else {
+          isAppended = null;
+        }
       } else if (_.isEqual(nextProps.messages[nextProps.messages.length - 1], this.props.messages[this.props.messages.length - 1]) === false) {
         // we assume the messages were appended
         isAppended = true;

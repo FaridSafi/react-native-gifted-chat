@@ -14,11 +14,12 @@ Ready-to-use chat interface for iOS and Android React-Native apps
 - New prop `typingMessage` for displaying 'User is typing a message...'
 - New prop `leftControlBar` - PR [@gnl](https://github.com/gnl)
 - Android improvements
-- react-native-parsed-text has been re-implemented
+- `react-native-parsed-text` has been re-implemented
 - ESLint implementation - PR [@sethx](https://github.com/sethx)
 - Example refactoring
 - Fixing scroll when loading earlier messages
 - Various fixes and improvements by [@swapkats](https://github.com/swapkats), [@ianlin](https://github.com/ianlin), [@zxcpoiu](https://github.com/zxcpoiu), [@cnjon](https://github.com/cnjon)
+- Special thanks to [@yogiben](https://github.com/yogiben), [@koppelaar](https://github.com/koppelaar) & [@sethx](https://github.com/sethx) for their help
 
 ### Example
 See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)
@@ -72,7 +73,7 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 
 ```js
 var message = {
-  uniqueId: XXXXX // each messages should have an unique identifer - mandatory
+  uniqueId: 'XXXXX' // each messages should have an unique identifer - mandatory
   text: 'Message content',
   name: "Sender's name",
   image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
@@ -85,8 +86,15 @@ var message = {
 ```
 
 ### Android installation
-- Add in android/app/src/main/AndroidManifest.xml ```android:windowSoftInputMode="adjustResize"```
-- Calculate the maxHeight prop using https://github.com/jaysoo/react-native-extra-dimensions-android ```Dimensions.get('window').height - React.Navigator.NavigationBar.Styles.General.NavBarHeight - ExtraDimensions.get('STATUS_BAR_HEIGHT')``` - See [example](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)
+- Add in `android/app/src/main/AndroidManifest.xml` : `android:windowSoftInputMode="adjustResize"`
+- Calculate the maxHeight prop using https://github.com/jaysoo/react-native-extra-dimensions-android - See [example](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)
+```js
+  <GiftedMessenger
+    // ...
+    maxHeight={Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - ExtraDimensions.get('STATUS_BAR_HEIGHT')}
+    // ...
+  />
+```
 
 ### License
 

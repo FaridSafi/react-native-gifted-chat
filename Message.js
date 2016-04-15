@@ -146,7 +146,7 @@ export default class Message extends Component {
     if (rowData.text) {
       if (rowData.text.length > 40) {
         flexStyle.flex = 1;
-      }      
+      }
     }
 
     if ( rowData.view ) {
@@ -166,7 +166,7 @@ export default class Message extends Component {
             renderCustomText={this.props.renderCustomText}
             styles={styles}
             name={position === 'left' && this.props.displayNamesInsideBubble ? this.renderName(rowData.name, displayNames, diffMessage) : null}
-            
+
             parseText={this.props.parseText}
             handlePhonePress={this.props.handlePhonePress}
             handleUrlPress={this.props.handleUrlPress}

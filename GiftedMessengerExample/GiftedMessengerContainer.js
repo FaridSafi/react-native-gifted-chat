@@ -78,7 +78,7 @@ class GiftedMessengerContainer extends Component {
         name: 'React-Bot', 
         image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
         position: 'left', 
-        date: new Date(2015, 10, 16, 19, 0),
+        date: new Date(2016, 3, 14, 13, 0),
         uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       },
       {
@@ -86,7 +86,7 @@ class GiftedMessengerContainer extends Component {
         name: 'Awesome Developer', 
         image: null, 
         position: 'right', 
-        date: new Date(2015, 10, 17, 19, 0),
+        date: new Date(2016, 3, 14, 13, 1),
         uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       },
     ];
@@ -149,21 +149,21 @@ class GiftedMessengerContainer extends Component {
     // Eg: Retrieve old messages from your server
 
     // IMPORTANT
-    // Newest messages have to be at the begining of the array
+    // Oldest messages have to be at the begining of the array
     var earlierMessages = [
       {
         text: 'React Native enables you to build world-class application experiences on native platforms using a consistent developer experience based on JavaScript and React. https://github.com/facebook/react-native', 
         name: 'React-Bot', 
         image: {uri: 'https://facebook.github.io/react/img/logo_og.png'}, 
         position: 'left', 
-        date: new Date(2013, 0, 2, 12, 0),
+        date: new Date(2016, 0, 1, 20, 0),
         uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       }, {
         text: 'This is a touchable phone number 0606060606 parsed by taskrabbit/react-native-parsed-text', 
         name: 'Awesome Developer', 
         image: null, 
         position: 'right', 
-        date: new Date(2014, 0, 1, 20, 0),
+        date: new Date(2016, 0, 2, 12, 0),
         uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       },
     ];

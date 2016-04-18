@@ -63,6 +63,7 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 | placeholder                   | String   | TextInput placeholder                                                      | Both     | 'Type a message...'              |
 | placeholderTextColor          | String   | TextInput text color placeholder                                           | Both     | '#ccc'                           |
 | renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}                  |
+| renderCustomDate              | Function | Implement your own date rendering                                          | Both     | (rowData, previousData) => {}                  |
 | scrollAnimated                | Boolean  | do animation when scrolling                                                | Both     | true                             |
 | sendButtonText                | String   | 'Send' button label                                                        | Both     | 'Send'                           |
 | senderImage                   | Object   | Image of the sender                                                        | Both     | null                             |

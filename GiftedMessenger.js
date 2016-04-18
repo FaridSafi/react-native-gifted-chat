@@ -452,6 +452,11 @@ class GiftedMessenger extends Component {
   renderDate(rowData = {}) {
     let diffMessage = null;
     diffMessage = this.getPreviousMessage(rowData);
+
+    if (this.props.renderCustomDate) {
+      return this.props.renderCustomDate(rowData, diffMessage)
+    }
+
     if (rowData.date instanceof Date) {
       if (diffMessage === null) {
         return (
@@ -651,6 +656,7 @@ GiftedMessenger.propTypes = {
   placeholder: React.PropTypes.string,
   placeholderTextColor: React.PropTypes.string,
   renderCustomText: React.PropTypes.func,
+  renderCustomDate: React.PropTypes.func,
   scrollAnimated: React.PropTypes.bool,
   sendButtonText: React.PropTypes.string,
   senderImage: React.PropTypes.object,

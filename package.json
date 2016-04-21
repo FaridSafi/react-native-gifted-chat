@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-messenger",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Chat UI for iOS and Android React-Native apps",
   "main": "GiftedMessenger.js",
   "scripts": {

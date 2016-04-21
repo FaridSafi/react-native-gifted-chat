@@ -13,6 +13,7 @@ import React, {
 import Message from './Message';
 import GiftedSpinner from 'react-native-gifted-spinner';
 import moment from 'moment';
+import {setLocale} from './Locale';
 import _ from 'lodash';
 import Button from 'react-native-button';
 
@@ -127,6 +128,8 @@ class GiftedMessenger extends Component {
     };
 
     Object.assign(this.styles, this.props.styles);
+
+    setLocale(this.props.dateLocale);
   }
 
   componentDidMount() {
@@ -625,6 +628,7 @@ GiftedMessenger.defaultProps = {
 GiftedMessenger.propTypes = {
   autoFocus: React.PropTypes.bool,
   blurOnSubmit: React.PropTypes.bool,
+  dateLocale: React.PropTypes.string,
   displayNames: React.PropTypes.bool,
   displayNamesInsideBubble: React.PropTypes.bool,
   forceRenderImage: React.PropTypes.bool,

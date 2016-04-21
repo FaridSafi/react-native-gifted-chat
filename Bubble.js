@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
   textRight: {
     color: '#fff',
   },
+  textCenter: {
+  },
   bubbleLeft: {
     marginRight: 70,
     backgroundColor: '#e6e6eb',
@@ -27,6 +29,10 @@ const styles = StyleSheet.create({
     marginLeft: 70,
     backgroundColor: '#007aff',
     alignSelf: 'flex-end',
+  },
+  bubbleCenter: {
+    backgroundColor: '#007aff',
+    alignSelf: 'center',
   },
   bubbleError: {
     backgroundColor: '#e01717',
@@ -47,7 +53,7 @@ export default class Bubble extends React.Component {
     if (this.props.parseText === true) {
       return (
         <ParsedText
-          style={[styles.text, (position === 'left' ? styles.textLeft : styles.textRight)]}
+          style={[styles.text, (position === 'left' ? styles.textLeft : position === 'right' ? styles.textRight : styles.textCenter)]}
           parse={
             [
               {
@@ -80,7 +86,7 @@ export default class Bubble extends React.Component {
     }
 
     return (
-      <Text style={[styles.text, (position === 'left' ? styles.textLeft : styles.textRight)]}>
+      <Text style={[styles.text, (position === 'left' ? styles.textLeft : position === 'right' ? styles.textRight : styles.textCenter)]}>
         {text}
       </Text>
     );
@@ -96,7 +102,7 @@ export default class Bubble extends React.Component {
 
     return (
       <View style={[styles.bubble,
-        (this.props.position === 'left' ? styles.bubbleLeft : styles.bubbleRight),
+        (this.props.position === 'left' ? styles.bubbleLeft : this.props.position === 'right' ? styles.bubbleRight : styles.bubbleCenter),
         (this.props.status === 'ErrorButton' ? styles.bubbleError : null),
         flexStyle]}
       >
@@ -108,7 +114,7 @@ export default class Bubble extends React.Component {
 }
 
 Bubble.propTypes = {
-  position: React.PropTypes.oneOf(['left', 'right']),
+  position: React.PropTypes.oneOf(['left', 'right', 'center']),
   status: React.PropTypes.string,
   text: React.PropTypes.string,
   renderCustomText: React.PropTypes.func,

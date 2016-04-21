@@ -80,7 +80,7 @@ var message = {
   text: 'Message content',
   name: "Sender's name",
   image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
-  position: 'left', // left for received messages, right for sent messages
+  position: 'left', // left for received messages, right for sent messages, center for server messages
   date: new Date(),
   view: null, // A custom Bubble view - the view will receive the message attributes as props
   status: 'Seen', // if status is 'ErrorButton', a re-send button will be displayed

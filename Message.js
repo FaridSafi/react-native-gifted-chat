@@ -160,7 +160,7 @@ export default class Message extends Component {
         {position === 'left' && !this.props.displayNamesInsideBubble ? this.renderName(rowData.name, displayNames, diffMessage) : null}
         <View
           style={[styles.rowContainer, {
-            justifyContent: position === 'left' ? 'flex-start' : 'flex-end',
+            justifyContent: position === 'left' ? 'flex-start' : position === 'right' ? 'flex-end' : 'center',
           }]}
         >
           {position === 'left' ? this.renderImage(rowData, diffMessage, forceRenderImage, onImagePress) : null}

@@ -129,7 +129,8 @@ class GiftedMessenger extends Component {
 
     Object.assign(this.styles, this.props.styles);
 
-    setLocale(this.props.dateLocale);
+    if (this.props.dateLocale !== '')
+      setLocale(this.props.dateLocale);
   }
 
   componentDidMount() {
@@ -592,6 +593,7 @@ class GiftedMessenger extends Component {
 GiftedMessenger.defaultProps = {
   autoFocus: true,
   blurOnSubmit: false,
+  dateLocale: '',
   displayNames: true,
   displayNamesInsideBubble: false,
   forceRenderImage: false,

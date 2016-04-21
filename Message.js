@@ -75,7 +75,7 @@ export default class Message extends Component {
         diffMessage = null; // force rendering
       }
 
-      if (diffMessage === null || (diffMessage !== null && (rowData.name !== diffMessage.name || rowData.id !== diffMessage.id))) {
+      if (diffMessage === null || (diffMessage !== null && (rowData.name !== diffMessage.name || rowData.uniqueId !== diffMessage.uniqueId))) {
         if (typeof onImagePress === 'function') {
           return (
             <TouchableHighlight
@@ -160,7 +160,7 @@ export default class Message extends Component {
         {position === 'left' && !this.props.displayNamesInsideBubble ? this.renderName(rowData.name, displayNames, diffMessage) : null}
         <View
           style={[styles.rowContainer, {
-            justifyContent: position === 'left' ? 'flex-start' : 'flex-end',
+            justifyContent: position === 'left' ? 'flex-start' : position === 'right' ? 'flex-end' : 'center',
           }]}
         >
           {position === 'left' ? this.renderImage(rowData, diffMessage, forceRenderImage, onImagePress) : null}

@@ -37,6 +37,7 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 | ----------------------------- | -------- | -------------------------------------------------------------------------- | -------- | -------------------------------- |
 | autoFocus                     | Boolean  | TextInput auto focus                                                       | Both     | true                             |
 | blurOnSubmit                  | Boolean  | Dismiss the keyboard when clicking on submit                               | Both     | false                            |
+| dateLocale                    | String   | The moment.js locale used for displaying timestamps (see Locale.js)        | Both     | ''                               |
 | displayNames                  | Boolean  | Display or not the name of the interlocutor(s)                             | Both     | true                             |
 | displayNamesInsideBubble      | Boolean  | Display the name of the interlocutor(s) inside the bubble                  | Both     | false                            |
 | forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |
@@ -63,6 +64,7 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 | placeholder                   | String   | TextInput placeholder                                                      | Both     | 'Type a message...'              |
 | placeholderTextColor          | String   | TextInput text color placeholder                                           | Both     | '#ccc'                           |
 | renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}                  |
+| renderCustomDate              | Function | Implement your own date rendering                                          | Both     | (rowData, previousData) => {}                  |
 | scrollAnimated                | Boolean  | do animation when scrolling                                                | Both     | true                             |
 | sendButtonText                | String   | 'Send' button label                                                        | Both     | 'Send'                           |
 | senderImage                   | Object   | Image of the sender                                                        | Both     | null                             |
@@ -80,7 +82,7 @@ var message = {
   text: 'Message content',
   name: "Sender's name",
   image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
-  position: 'left', // left for received messages, right for sent messages
+  position: 'left', // left for received messages, right for sent messages, center for server messages
   date: new Date(),
   view: null, // A custom Bubble view - the view will receive the message attributes as props
   status: 'Seen', // if status is 'ErrorButton', a re-send button will be displayed

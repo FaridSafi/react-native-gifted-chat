@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   textCenter: {
+    textAlign: 'center',
   },
   bubbleLeft: {
     marginRight: 70,

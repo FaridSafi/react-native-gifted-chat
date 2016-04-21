@@ -37,7 +37,7 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 | ----------------------------- | -------- | -------------------------------------------------------------------------- | -------- | -------------------------------- |
 | autoFocus                     | Boolean  | TextInput auto focus                                                       | Both     | true                             |
 | blurOnSubmit                  | Boolean  | Dismiss the keyboard when clicking on submit                               | Both     | false                            |
-| dateLocale                    | String   | The moment.js locale used for displaying the message timestamps            | Both     | ''                               |
+| dateLocale                    | String   | The moment.js locale used for displaying timestamps (see Locale.js)        | Both     | ''                               |
 | displayNames                  | Boolean  | Display or not the name of the interlocutor(s)                             | Both     | true                             |
 | displayNamesInsideBubble      | Boolean  | Display the name of the interlocutor(s) inside the bubble                  | Both     | false                            |
 | forceRenderImage              | Boolean  | Always render the users images (avatar)                                    | Both     | false                            |

@@ -281,16 +281,10 @@ class GiftedMessenger extends Component {
   }
 
   onChangeText(text) {
-    this.setState({ text });
-    if (text.trim().length > 0) {
-      this.setState({
-        disabled: false,
-      });
-    } else {
-      this.setState({
-        disabled: true,
-      });
-    }
+    this.setState({
+      text,
+      disabled: text.trim().length <= 0
+    });
 
     this.props.onChangeText(text);
   }
@@ -542,6 +536,14 @@ class GiftedMessenger extends Component {
 
       </Animated.View>
     );
+  }
+
+  setTextInputValue(text) {
+    text = text || this.state.text
+    this.setState({
+      text,
+      disabled: text.trim().length <= 0,
+    });
   }
 
   renderTextInput() {

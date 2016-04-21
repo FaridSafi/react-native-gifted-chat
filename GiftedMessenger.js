@@ -14,7 +14,7 @@ import Message from './Message';
 import GiftedSpinner from 'react-native-gifted-spinner';
 import moment from 'moment';
 import {setLocale} from './Locale';
-import _ from 'lodash';
+import deepEqual from 'deep-equal';
 import Button from 'react-native-button';
 
 class GiftedMessenger extends Component {
@@ -148,7 +148,7 @@ class GiftedMessenger extends Component {
       }
     }
 
-    if (_.isEqual(nextProps.messages, this.props.messages) === false) {
+    if (deepEqual(nextProps.messages, this.props.messages) === false) {
       let isAppended = null;
       if (nextProps.messages.length === this.props.messages.length) {
         // we assume that only a status has been changed
@@ -157,7 +157,7 @@ class GiftedMessenger extends Component {
         } else {
           isAppended = null;
         }
-      } else if (_.isEqual(nextProps.messages[nextProps.messages.length - 1], this.props.messages[this.props.messages.length - 1]) === false) {
+      } else if (deepEqual(nextProps.messages[nextProps.messages.length - 1], this.props.messages[this.props.messages.length - 1]) === false) {
         // we assume the messages were appended
         isAppended = true;
       } else {

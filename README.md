@@ -65,7 +65,7 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 | onErrorButtonPress            | Function | Called when the re-send button is pressed                                  | Both     | (message, rowID) => {}           |
 | onImagePress                  | Function | Called when the image of a message is pressed                              | Both     | (rowData, rowID) => {}           |
 | onLoadEarlierMessages         | Function | Called when 'Load Earlier Message' button is pressed                       | Both     | (oldestMessage, callback) => {}  |
-| onMessageLongPress            | Function | Called when doing long press on a message                                  | Both     | () => {}                         |
+| onMessageLongPress            | Function | Called when doing long press on a message                                  | Both     | (rowData) => {}                       |
 | parseText                     | Boolean  | If the text has to be parsed with taskrabbit/react-native-parsed-text      | iOS      | true                             |
 | placeholder                   | String   | TextInput placeholder                                                      | Both     | 'Type a message...'              |
 | placeholderTextColor          | String   | TextInput text color placeholder                                           | Both     | '#ccc'                           |

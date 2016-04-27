@@ -62,7 +62,7 @@ class GiftedMessenger extends Component {
 
     this.state = {
       dataSource: ds.cloneWithRows([]),
-      text: '',
+      text: props.text,
       disabled: true,
       height: new Animated.Value(this.listViewMaxHeight),
       appearAnim: new Animated.Value(0),
@@ -631,6 +631,7 @@ GiftedMessenger.defaultProps = {
   senderName: 'Sender',
   styles: {},
   submitOnReturn: false,
+  text: '',
   typingMessage: '',
 };
 

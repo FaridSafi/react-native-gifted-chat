@@ -537,7 +537,7 @@ class GiftedMessenger extends Component {
           keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}
           keyboardDismissMode={this.props.keyboardDismissMode}
 
-          initialListSize={10}
+          initialListSize={this.props.messages.length}
           pageSize={this.props.messages.length}
 
           {...this.props}

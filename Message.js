@@ -43,11 +43,31 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: -5,
   },
+  initialContainerStyle: {
+    backgroundColor: 'rgb(1, 43, 219)',
+    borderRadius: 15,
+    width: 30,
+    height: 30,
+    paddingTop: 7,
+    marginHorizontal: 3,
+    marginTop: 2,
+  },
+  initialsStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica',
+    fontSize: 15,
+    textAlign: 'center',
+    backgroundColor: 'transparent',
+  }
 });
 
 export default class Message extends Component {
 
   componentWillMount() {
+    Object.assign(styles, this.props.styles);
+  }
+  componentWillReceiveProps() {
     Object.assign(styles, this.props.styles);
   }
 
@@ -69,9 +89,13 @@ export default class Message extends Component {
     return null;
   }
 
-  renderImage(rowData, diffMessage, forceRenderImage, onImagePress) {
+  renderImage(rowData, diffMessage, forceRenderImage, onImagePress, useInitials=false) {
     const ImageView = rowData.imageView || Image;
-    if (rowData.image) {
+    let shouldUseInitials = useInitials && (rowData.name || rowData.initials);
+
+console.log('USE INITIALS', useInitials, shouldUseInitials, rowData)
+
+    if (rowData.image || shouldUseInitials) {
       if (forceRenderImage) {
         diffMessage = null; // force rendering
       }
@@ -83,18 +107,27 @@ export default class Message extends Component {
               underlayColor='transparent'
               onPress={() => onImagePress(rowData)}
             >
-              <ImageView
-                source={rowData.image}
-                style={[styles.imagePosition, styles.image, (rowData.position === 'left' ? styles.imageLeft : styles.imageRight)]}
-              />
+              {shouldUseInitials
+                ? <View style={styles.initialContainerStyle}>
+                    <Text style={styles.initialsStyle}>{this.getInitials(rowData)}</Text>
+                  </View>
+                : <ImageView
+                    source={rowData.image}
+                    style={[styles.imagePosition, styles.image, (rowData.position === 'left' ? styles.imageLeft : styles.imageRight)]}
+                  />
+              }
             </TouchableHighlight>
           );
         }
         return (
-          <ImageView
-            source={rowData.image}
-            style={[styles.imagePosition, styles.image, (rowData.position === 'left' ? styles.imageLeft : styles.imageRight)]}
-          />
+          shouldUseInitials
+            ? <View style={styles.initialContainerStyle}>
+                <Text style={styles.initialsStyle}>{this.getInitials(rowData)}</Text>
+              </View>
+            : <ImageView
+                source={rowData.image}
+                style={[styles.imagePosition, styles.image, (rowData.position === 'left' ? styles.imageLeft : styles.imageRight)]}
+              />
         );
       }
       return (
@@ -104,6 +137,18 @@ export default class Message extends Component {
     return (
       <View style={styles.spacer} />
     );
+  }
+
+  getInitials({initials, name}) {
+    if(initials) return initials;
+    else if(name) {
+      let parts = name.split(' ');
+      let first = parts[0];
+      let last = parts[parts.length-1];
+      initials = first[0] + (last !== first ? last[0] : '');
+      return initials.toUpperCase();
+    }
+    else return '?';
   }
 
   renderErrorButton(rowData, onErrorButtonPress) {
@@ -142,6 +187,7 @@ export default class Message extends Component {
       forceRenderImage,
       onImagePress,
       onMessageLongPress,
+      useInitials,
     } = this.props;
 
     const flexStyle = {};
@@ -177,7 +223,7 @@ export default class Message extends Component {
             handleUrlPress={this.props.handleUrlPress}
             handleEmailPress={this.props.handleEmailPress}
           />
-          {rowData.position === 'right' ? this.renderImage(rowData, diffMessage, forceRenderImage, onImagePress) : null}
+          {rowData.position === 'right' ? this.renderImage(rowData, diffMessage, forceRenderImage, onImagePress, useInitials) : null}
         </View>
         {rowData.position === 'right' ? this.renderStatus(rowData.status) : null}
       </View>

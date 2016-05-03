@@ -93,8 +93,6 @@ export default class Message extends Component {
     const ImageView = rowData.imageView || Image;
     let shouldUseInitials = useInitials && (rowData.name || rowData.initials);
 
-console.log('USE INITIALS', useInitials, shouldUseInitials, rowData)
-
     if (rowData.image || shouldUseInitials) {
       if (forceRenderImage) {
         diffMessage = null; // force rendering

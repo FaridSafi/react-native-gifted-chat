@@ -81,7 +81,12 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 | senderName                    | String   | Name of the sender of the messages                                         | Both     | 'Sender'                         |
 | styles                        | Function | Styles of children components - See GiftedMessenger.js/componentWillMount  | Both     | {}                               |
 | submitOnReturn                | Boolean  | Send message when clicking on submit                                       | Both     | false                            |
-| typingMessage                 | String   | Display a text at the bottom of the list. Eg: 'User is typing a message'   | Both     | ''                               |
+| typingMessage                 | String   | Display a text at the bottom of the list. Eg: 'User is typing a message'   | Both     | ''    
+| textInputProps                | Object   | Props passed to Textinput                                                  | Both     | {}  
+| multiline                     | Boolean  | When true, textinput expands vertically on return                          | Both     | false  
+| maxInputHeight                | Number   | Maximum height the textinput can grow to                                   | Both     | 250  
+| onTextInputHeightChanged      | Function | Called when textinput grows. **Params:** *newHeight, oldHeight, delta*     | Both     | null  
+| useInitials                   | Boolean  | When true, `name` or `initials` prop of `rowData` used to generate initials| Both     | false  
 
 
 ### Message object

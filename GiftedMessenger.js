@@ -534,26 +534,33 @@ class GiftedMessenger extends Component {
       </View>
     );
   }
-  renderMessage(rowData, diffMessage) {
+  renderRow(rowData = {}) {
+    let diffMessage = null;
+    diffMessage = this.getPreviousMessage(rowData);
+
     return (
-      <Message
-        rowData={rowData}
-        onErrorButtonPress={this.props.onErrorButtonPress}
-        displayNames={this.props.displayNames}
-        displayNamesInsideBubble={this.props.displayNamesInsideBubble}
-        diffMessage={diffMessage}
-        position={rowData.position}
-        forceRenderImage={this.props.forceRenderImage}
-        onImagePress={this.props.onImagePress}
-        onMessageLongPress={this.props.onMessageLongPress}
-        renderCustomText={this.props.renderCustomText}
-        parseText={this.props.parseText}
-        handlePhonePress={this.props.handlePhonePress}
-        handleUrlPress={this.props.handleUrlPress}
-        handleEmailPress={this.props.handleEmailPress}
-        useInitials={this.props.useInitials}
-        styles={this.styles}
-      />
+      <View>
+        {this.renderDate(rowData)}
+        <Message
+          rowData={rowData}
+          onErrorButtonPress={this.props.onErrorButtonPress}
+          displayNames={this.props.displayNames}
+          displayNamesInsideBubble={this.props.displayNamesInsideBubble}
+          diffMessage={diffMessage}
+          position={rowData.position}
+          forceRenderImage={this.props.forceRenderImage}
+          onImagePress={this.props.onImagePress}
+          onMessageLongPress={this.props.onMessageLongPress}
+          renderCustomText={this.props.renderCustomText}
+
+          parseText={this.props.parseText}
+          handlePhonePress={this.props.handlePhonePress}
+          handleUrlPress={this.props.handleUrlPress}
+          handleEmailPress={this.props.handleEmailPress}
+
+          styles={this.styles}
+        />
+      </View>
     );
   }
 

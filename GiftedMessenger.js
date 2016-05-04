@@ -648,7 +648,7 @@ class GiftedMessenger extends Component {
   //of the page if the height taken up by the messages is less than the height available, but if the messages take up more than the available
   //height, the bottom of the messages should align with the top of the textinput. See `this.hasMoreContentThanSpaceAvailable()`.
   onTextInputHeightChanged(newHeight, oldHeight, heightDelta) {
-    if(heightDelta > -5 && heightDelta < 5) return; //after typing the first character in the input, a small height increase occurs, which isn't compensating by a height decrease when it's deleted, so we disregard it
+    if(heightDelta > -10 && heightDelta < 10) return; //after typing the first character in the input, a small height increase occurs, which isn't compensating by a height decrease when it's deleted, so we disregard it
 
     this.totalInputHeightDelta += heightDelta;
 

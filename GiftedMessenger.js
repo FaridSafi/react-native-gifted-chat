@@ -184,9 +184,9 @@ class GiftedMessenger extends Component {
     let textInputHeight = 44;
     if (nextProps.styles.hasOwnProperty('textInputContainer')) {
       textInputHeight = nextProps.styles.textInputContainer.height || textInputHeight;
-      this.textInputHeight = textInputHeight;
     }
-
+    this.textInputHeight = textInputHeight;
+    
     if (nextProps.maxHeight !== this.props.maxHeight) {
       this.listViewMaxHeight = nextProps.maxHeight;
       Animated.timing(this.state.height, {

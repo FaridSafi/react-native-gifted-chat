@@ -1,4 +1,5 @@
-import React, { Text, View, StyleSheet } from 'react-native';
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
 
 import ParsedText from 'react-native-parsed-text';
 

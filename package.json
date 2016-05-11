@@ -31,7 +31,7 @@
   "dependencies": {
     "deep-equal": "^1.0.1",
     "moment": "^2.10.6",
-    "react-native-button": "^1.3.1",
+    "react-native-button": "^1.5.0",
     "react-native-gifted-spinner": "0.0.3",
     "react-native-parsed-text": "0.0.12"
   },

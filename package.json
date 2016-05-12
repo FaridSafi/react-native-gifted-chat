@@ -40,5 +40,9 @@
     "eslint-config-airbnb": "^7.0.0",
     "eslint-plugin-react": "^4.3.0",
     "eslint-plugin-jsx-a11y": "^0.6.2"
+  },
+  "peerDependencies": {
+    "react": "^0.14.5",
+    "react-native": "^0.25.0"
   }
 }

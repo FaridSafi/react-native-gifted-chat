@@ -1,4 +1,7 @@
 import React, {
+  Component,
+} from 'react';
+import {
   Text,
   View,
   ListView,
@@ -7,7 +10,6 @@ import React, {
   Animated,
   Platform,
   PixelRatio,
-  Component,
 } from 'react-native';
 
 import Message from './Message';
@@ -62,7 +64,7 @@ class GiftedMessenger extends Component {
 
     this.state = {
       dataSource: ds.cloneWithRows([]),
-      text: '',
+      text: props.text,
       disabled: true,
       height: new Animated.Value(this.listViewMaxHeight),
       appearAnim: new Animated.Value(0),
@@ -537,7 +539,7 @@ class GiftedMessenger extends Component {
           keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}
           keyboardDismissMode={this.props.keyboardDismissMode}
 
-          initialListSize={10}
+          initialListSize={this.props.messages.length}
           pageSize={this.props.messages.length}
 
           {...this.props}
@@ -631,6 +633,7 @@ GiftedMessenger.defaultProps = {
   senderName: 'Sender',
   styles: {},
   submitOnReturn: false,
+  text: '',
   typingMessage: '',
 };
 

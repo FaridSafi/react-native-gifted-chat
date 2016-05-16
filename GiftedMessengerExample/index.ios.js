@@ -1,9 +1,9 @@
 'use strict';
 
-var React = require('react-native');
+var ReactNative = require('react-native');
 var {
   AppRegistry
-} = React;
+} = ReactNative;
 
 
 AppRegistry.registerComponent('GiftedMessengerExample', () => require('./Navigation'));

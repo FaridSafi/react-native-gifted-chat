@@ -29,6 +29,10 @@ Ready-to-use chat interface for iOS and Android React-Native apps
 - Method `setTextInputValue` - @wenkesj
 - Replace `lodash` with `deep-equal` - @austinkelleher
 
+#### 0.1.3
+- Fix initial `scrollToBottom` issue
+- Allow custom view for images - @aksonov
+
 
 ### Example
 See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-messenger/master/GiftedMessengerExample/GiftedMessengerContainer.js)
@@ -91,6 +95,7 @@ var message = {
   position: 'left', // left for received messages, right for sent messages, center for server messages
   date: new Date(),
   view: null, // A custom Bubble view - the view will receive the message attributes as props
+  imageView: null, // Returns custom Image view to display image (avatar) for the message
   status: 'Seen', // if status is 'ErrorButton', a re-send button will be displayed
   // ...any attributes you want
 };

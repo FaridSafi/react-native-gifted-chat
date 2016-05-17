@@ -96,8 +96,11 @@ export default class Bubble extends React.Component {
 
   render() {
     const flexStyle = {};
+    const realLength = function(str) {
+      return str.replace(/[^\x00-\xff]/g, "**").length; // [^\x00-\xff] - Matching non double byte character
+    };
     if (this.props.text) {
-      if (this.props.text.length > 40) {
+      if (realLength(this.props.text) > 40) {
         flexStyle.flex = 1;
       }
     }

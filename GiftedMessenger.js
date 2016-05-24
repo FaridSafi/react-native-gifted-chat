@@ -575,14 +575,22 @@ class GiftedMessenger extends Component {
 
             blurOnSubmit={this.props.blurOnSubmit}
           />
-          <Button
-            style={this.styles.sendButton}
-            styleDisabled={this.styles.sendButtonDisabled}
-            onPress={this.onSend}
-            disabled={this.state.disabled}
-          >
-            {this.props.sendButtonText}
-          </Button>
+          {this.props.sendButton ?
+            React.cloneElement(this.props.sendButton, {
+              style: this.styles.sendButton,
+              styleDisabled: this.styles.sendButtonDisabled,
+              onPress: this.onSend,
+              disabled: this.state.disabled
+            }) :
+            (<Button
+              style={this.styles.sendButton}
+              styleDisabled={this.styles.sendButtonDisabled}
+              onPress={this.onSend}
+              disabled={this.state.disabled}
+            >
+              {this.props.sendButtonText}
+            </Button>)
+          }
         </View>
       );
     }
@@ -628,6 +636,7 @@ GiftedMessenger.defaultProps = {
   placeholder: 'Type a message...',
   placeholderTextColor: '#ccc',
   scrollAnimated: true,
+  sendButton: null,
   sendButtonText: 'Send',
   senderImage: null,
   senderName: 'Sender',
@@ -669,6 +678,7 @@ GiftedMessenger.propTypes = {
   renderCustomText: React.PropTypes.func,
   renderCustomDate: React.PropTypes.func,
   scrollAnimated: React.PropTypes.bool,
+  sendButton: React.PropTypes.element,
   sendButtonText: React.PropTypes.string,
   senderImage: React.PropTypes.object,
   senderName: React.PropTypes.string,

@@ -42,7 +42,7 @@ class GiftedMessenger extends Component {
     this._footerY = 0;
     this._scrollToBottomOnNextRender = false;
     this._scrollToPreviousPosition = false;
-    this._visibleRows = { s1: { } };
+    this._visibleRows = {s1: {}};
 
     let textInputHeight = 44;
     if (!this.props.hideTextInput) {
@@ -101,6 +101,9 @@ class GiftedMessenger extends Component {
       sendButton: {
         marginTop: 11,
         marginLeft: 10,
+      },
+      dateContainer: {
+
       },
       date: {
         color: '#aaaaaa',
@@ -331,7 +334,7 @@ class GiftedMessenger extends Component {
     const identities = [];
     for (let i = 0; i < messages.length; i++) {
       if (typeof messages[i].uniqueId === 'undefined') {
-        console.warn('messages['+i+'].uniqueId is missing');
+        console.warn('messages[' + i + '].uniqueId is missing');
       }
       rows[messages[i].uniqueId] = Object.assign({}, messages[i]);
       identities.push(messages[i].uniqueId);
@@ -411,7 +414,7 @@ class GiftedMessenger extends Component {
       );
     }
     return (
-      <View style={ { height: 10 } } />
+      <View style={ { height: 10 } }/>
     );
   }
 
@@ -449,6 +452,23 @@ class GiftedMessenger extends Component {
     );
   }
 
+  shouldShowDate(rowData) {
+    if (!(rowData.date instanceof Date)) return false
+
+    let diffMessage = this.getPreviousMessage(rowData);
+
+    if (diffMessage === null) {
+      return true;
+    } else if (diffMessage.date instanceof Date) {
+      const diff = moment(rowData.date).diff(moment(diffMessage.date), 'minutes');
+      if (diff > 5) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   renderDate(rowData = {}) {
     let diffMessage = null;
     diffMessage = this.getPreviousMessage(rowData);
@@ -457,23 +477,14 @@ class GiftedMessenger extends Component {
       return this.props.renderCustomDate(rowData, diffMessage)
     }
 
-    if (rowData.date instanceof Date) {
-      if (diffMessage === null) {
-        return (
+    if (this.shouldShowDate(rowData)) {
+      return (
+        <View style={this.styles.dateContainer}>
           <Text style={[this.styles.date]}>
             {moment(rowData.date).calendar()}
           </Text>
-        );
-      } else if (diffMessage.date instanceof Date) {
-        const diff = moment(rowData.date).diff(moment(diffMessage.date), 'minutes');
-        if (diff > 5) {
-          return (
-            <Text style={[this.styles.date]}>
-              {moment(rowData.date).calendar()}
-            </Text>
-          );
-        }
-      }
+        </View>
+      );
     }
     return null;
   }
@@ -497,6 +508,9 @@ class GiftedMessenger extends Component {
           onMessageLongPress={this.props.onMessageLongPress}
           renderCustomText={this.props.renderCustomText}
 
+          beginsDateGroup={this.shouldShowDate(rowData)}
+          spacer={this.props.spacer}
+
           parseText={this.props.parseText}
           handlePhonePress={this.props.handlePhonePress}
           handleUrlPress={this.props.handleUrlPress}
@@ -505,7 +519,7 @@ class GiftedMessenger extends Component {
           styles={this.styles}
         />
       </View>
-  );
+    );
   }
 
   renderAnimatedView() {
@@ -606,10 +620,14 @@ GiftedMessenger.defaultProps = {
   displayNames: true,
   displayNamesInsideBubble: false,
   forceRenderImage: false,
-  handleEmailPress: () => {},
-  handlePhonePress: () => {},
-  handleSend: () => {},
-  handleUrlPress: () => {},
+  handleEmailPress: () => {
+  },
+  handlePhonePress: () => {
+  },
+  handleSend: () => {
+  },
+  handleUrlPress: () => {
+  },
   hideTextInput: false,
   isLoadingEarlierMessages: false,
   keyboardDismissMode: 'interactive',
@@ -619,11 +637,15 @@ GiftedMessenger.defaultProps = {
   loadEarlierMessagesButtonText: 'Load earlier messages',
   maxHeight: Dimensions.get('window').height,
   messages: [],
-  onChangeText: () => {},
-  onErrorButtonPress: () => {},
+  onChangeText: () => {
+  },
+  onErrorButtonPress: () => {
+  },
   onImagePress: null,
-  onLoadEarlierMessages: () => {},
-  onMessageLongPress: () => {},
+  onLoadEarlierMessages: () => {
+  },
+  onMessageLongPress: () => {
+  },
   parseText: false,
   placeholder: 'Type a message...',
   placeholderTextColor: '#ccc',

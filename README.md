@@ -76,6 +76,7 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 | renderCustomText              | Function | Implement your own text rendering                                          | Both     | (rowData) => {}                  |
 | renderCustomDate              | Function | Implement your own date rendering                                          | Both     | (rowData, previousData) => {}                  |
 | scrollAnimated                | Boolean  | do animation when scrolling                                                | Both     | true                             |
+| sendButton                    | Element  | Your own send button element to override the default button                | Both     | null                             |
 | sendButtonText                | String   | 'Send' button label                                                        | Both     | 'Send'                           |
 | senderImage                   | Object   | Image of the sender                                                        | Both     | null                             |
 | senderName                    | String   | Name of the sender of the messages                                         | Both     | 'Sender'                         |

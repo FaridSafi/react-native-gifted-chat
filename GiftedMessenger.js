@@ -1,4 +1,7 @@
 import React, {
+  Component,
+} from 'react';
+import {
   Text,
   View,
   ListView,
@@ -7,7 +10,6 @@ import React, {
   Animated,
   Platform,
   PixelRatio,
-  Component,
 } from 'react-native';
 
 import Message from './Message';

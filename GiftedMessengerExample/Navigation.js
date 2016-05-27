@@ -1,8 +1,10 @@
 'use strict';
 
 import React, {
-  Navigator,
   Component,
+} from 'react';
+import {
+  Navigator,
   StatusBar,
   Platform,
 } from 'react-native';

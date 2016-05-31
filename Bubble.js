@@ -48,7 +48,7 @@ export default class Bubble extends React.Component {
   }
 
   renderText(text = '', position) {
-    if (this.props.renderCustomText) {
+    if (this.props.renderCustomText && this.props.renderCustomText(this.props) !==false) {
       return this.props.renderCustomText(this.props);
     }
 
@@ -96,8 +96,11 @@ export default class Bubble extends React.Component {
 
   render() {
     const flexStyle = {};
+    const realLength = function(str) {
+      return str.replace(/[^\x00-\xff]/g, "**").length; // [^\x00-\xff] - Matching non double byte character
+    };
     if (this.props.text) {
-      if (this.props.text.length > 40) {
+      if (realLength(this.props.text) > 40) {
         flexStyle.flex = 1;
       }
     }

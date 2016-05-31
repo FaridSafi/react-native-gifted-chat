@@ -572,6 +572,14 @@ class GiftedMessenger extends Component {
   }
 
   renderTextInput() {
+    if (this.props.renderTextInput){
+      return this.props.renderTextInput({
+        ...this.props,
+        ...this.state,
+        onSend:this.onSend,
+        onChangeText:this.onChangeText
+      });
+    }
     if (this.props.hideTextInput === false) {
       return (
         <View style={this.styles.textInputContainer}>

@@ -86,7 +86,7 @@ export default class Message extends Component {
               underlayColor='transparent'
               onPress={() => onImagePress(rowData)}
             >
-              <ImageView
+              <ImageView {...rowData}
                 source={rowData.image}
                 style={[styles.imagePosition, styles.image, (rowData.position === 'left' ? styles.imageLeft : styles.imageRight)]}
               />
@@ -94,7 +94,7 @@ export default class Message extends Component {
           );
         }
         return (
-          <ImageView
+          <ImageView {...rowData}
             source={rowData.image}
             style={[styles.imagePosition, styles.image, (rowData.position === 'left' ? styles.imageLeft : styles.imageRight)]}
           />

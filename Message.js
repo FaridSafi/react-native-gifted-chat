@@ -1,7 +1,7 @@
 import React, {
   Component,
 } from 'react';
-import { View, Text, StyleSheet, TouchableHighlight, Image } from 'react-native';
+import {View, Text, StyleSheet, TouchableHighlight, Image} from 'react-native';
 import Bubble from './Bubble';
 import ErrorButton from './ErrorButton';
 
@@ -31,10 +31,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 15,
   },
-  imageLeft: {
-  },
-  imageRight: {
-  },
+  imageLeft: {},
+  imageRight: {},
   spacer: {
     width: 10,
   },
@@ -54,20 +52,44 @@ export default class Message extends Component {
     Object.assign(styles, this.props.styles);
   }
 
-  renderName(name, displayNames, diffMessage){
-    if (displayNames === true) {
-      if (diffMessage === null || name !== diffMessage.name) {
-        return (
-          <Text
-            style={[
+
+  shouldShowImage() {
+    var {rowData, forceRenderImage, diffMessage, beginsDateGroup} = this.props;
+
+    if (!rowData.image) return false;
+    if (forceRenderImage) return true;
+    return (beginsDateGroup || diffMessage === null || (diffMessage !== null && (rowData.name !== diffMessage.name)))
+  }
+
+  shouldShowName() {
+    var {rowData, displayNames, diffMessage, beginsDateGroup} = this.props;
+
+    if (!displayNames) return false;
+
+    return (beginsDateGroup || diffMessage === null || rowData.name !== diffMessage.name);
+  }
+
+
+  renderSpacer() {
+    if (!this.props.spacer) return;
+
+    if (this.shouldShowImage() || this.shouldShowName() || this.props.beginsDateGroup) {
+      return this.props.spacer;
+    }
+  }
+
+  renderName(name, displayNames, diffMessage) {
+    if (this.shouldShowName()) {
+      return (
+        <Text
+          style={[
               styles.name,
               this.props.displayNamesInsideBubble ? styles.nameInsideBubble : null,
             ]}
-          >
-            {name}
-          </Text>
-        );
-      }
+        >
+          {name}
+        </Text>
+      );
     }
     return null;
   }
@@ -75,11 +97,7 @@ export default class Message extends Component {
   renderImage(rowData, diffMessage, forceRenderImage, onImagePress) {
     const ImageView = rowData.imageView || Image;
     if (rowData.image) {
-      if (forceRenderImage) {
-        diffMessage = null; // force rendering
-      }
-
-      if (diffMessage === null || (diffMessage !== null && (rowData.name !== diffMessage.name || rowData.uniqueId !== diffMessage.uniqueId))) {
+      if (this.shouldShowImage()) {
         if (typeof onImagePress === 'function') {
           return (
             <TouchableHighlight
@@ -101,11 +119,11 @@ export default class Message extends Component {
         );
       }
       return (
-        <View style={styles.imagePosition} />
+        <View style={styles.imagePosition}/>
       );
     }
     return (
-      <View style={styles.spacer} />
+      <View style={styles.spacer}/>
     );
   }
 
@@ -161,6 +179,7 @@ export default class Message extends Component {
 
     let messageView = (
       <View>
+        {this.renderSpacer()}
         {position === 'left' && !this.props.displayNamesInsideBubble ? this.renderName(rowData.name, displayNames, diffMessage) : null}
         <View
           style={[styles.rowContainer, {

@@ -234,6 +234,8 @@ class GiftedMessenger extends Component {
   }
 
   onKeyboardWillShow(e) {
+    if (!e.endCoordinates) return;
+
     Animated.timing(this.state.height, {
       toValue: this.listViewMaxHeight - e.endCoordinates.height,
       duration: 200,

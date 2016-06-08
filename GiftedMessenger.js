@@ -127,6 +127,11 @@ class GiftedMessenger extends Component {
       loadEarlierMessagesButton: {
         fontSize: 14,
       },
+      typingMessage: {
+        marginLeft: 10,
+        marginRight: 10,
+        color: '#aaaaaa',
+      },
     };
 
     Object.assign(this.styles, this.props.styles);
@@ -425,11 +430,7 @@ class GiftedMessenger extends Component {
           }}
         >
           <Text
-            style={{
-              marginLeft: 10,
-              marginRight: 10,
-              color: '#aaaaaa',
-            }}
+            style={this.styles.typingMessage}
           >
             {this.props.typingMessage}
           </Text>

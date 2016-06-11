@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import {
-  Dimensions,
 } from 'react-native';
 
-import {GiftedMessenger, Message, Composer, Time} from './react-native-gifted-messenger/GiftedMessenger';
+import GiftedMessenger from './react-native-gifted-messenger/GiftedMessenger';
 
 class App extends Component {
   constructor(props) {
@@ -52,13 +51,6 @@ class App extends Component {
   render() {
     return (
       <GiftedMessenger
-        maxHeight={Dimensions.get('window').height}
-        components={{
-          Composer: Composer,
-          Message: Message,
-          Time: Time,
-        }}
-
         messages={this.state.messages}
         onSend={this.onSend.bind(this)}
       />

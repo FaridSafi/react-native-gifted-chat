@@ -88,9 +88,15 @@ class GiftedMessenger extends Component {
           {this.props.messages.map((message, index) => {
             const messageProps = {
               ...message,
-              key: 'message_'+index,
+              // key: index,
+              previousMessage: this.props.messages[index - 1],
+              nextMessage: this.props.messages[index + 1],
             };
-            return this.props.renderMessage(messageProps);
+
+            return [
+              this.props.renderMessage(messageProps),
+              this.props.renderTime(messageProps),
+            ];
           })}
         </InvertibleScrollView>
       </Animated.View>
@@ -170,7 +176,7 @@ GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
 
-  renderMessage: (props) => <Message {...props} />,
+  renderMessage: (props) => <Message {...props}/>,
   renderComposer: (props) => <Composer {...props}/>,
   renderTime: (props) => <Time {...props}/>,
 

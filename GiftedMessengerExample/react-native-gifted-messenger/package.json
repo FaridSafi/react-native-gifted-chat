@@ -33,6 +33,7 @@
     "eslint-plugin-react-native": "^1.1.0-beta"
   },
   "dependencies": {
+    "moment": "^2.13.0",
     "react-native-invertible-scroll-view": "^1.0.0"
   }
 }

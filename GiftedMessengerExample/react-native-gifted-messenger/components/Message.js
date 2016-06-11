@@ -4,7 +4,6 @@ import {
   View,
 } from 'react-native';
 
-
 class Message extends Component {
   constructor(props) {
     super(props);
@@ -42,14 +41,14 @@ class Message extends Component {
         justifyContent: 'flex-start',
         marginLeft: 5,
         marginRight: 0,
-      }
+      };
     } else {
       this._styles.container = {
         ...this._styles.container,
         justifyContent: 'flex-end',
         marginLeft: 0,
         marginRight: 5,
-      }
+      };
     }
   }
 

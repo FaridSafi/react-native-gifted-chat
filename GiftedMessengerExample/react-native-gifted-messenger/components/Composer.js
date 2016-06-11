@@ -8,8 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-
-class Message extends Component {
+class Composer extends Component {
   constructor(props) {
     super(props);
   }
@@ -80,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Message;
+export default Composer;

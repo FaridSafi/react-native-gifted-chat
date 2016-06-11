@@ -53,6 +53,7 @@ class App extends Component {
       <GiftedMessenger
         messages={this.state.messages}
         onSend={this.onSend.bind(this)}
+
       />
     );
   }

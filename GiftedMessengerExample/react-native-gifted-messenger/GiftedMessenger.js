@@ -1,205 +1,144 @@
 import React, { Component } from 'react';
 import {
-  View,
-  ScrollView,
-  StyleSheet,
   Animated,
+  StyleSheet,
+  View,
 } from 'react-native';
 
 import Message from './components/Message';
 import Composer from './components/Composer';
+import Time from './components/Time';
 
-const KEYBOARD_VELOCITY = 27;
-
-// TODO
-// use maxHeight, do not use setinterval
+import InvertibleScrollView from 'react-native-invertible-scroll-view';
 
 class GiftedMessenger extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this._scrollY = 0;
-    this._contentHeight = 0;
-    this._scrollViewHeight = 0;
-    this._composerHeight = 44;
-    this._onKeyboardWillShowInterval = null;
-    this._onKeyboardWillHideInterval = null;
+    // TODO
+    // try to calculate maxHeight automatically
+
+    // TODO
+    // 35 and 10 as props
+
+    const textInputContainerHeight = 55; // 55 = 35(min height) + 10(marginBottom) + 10(marginTop)
+
+    // TODO getter & setter for listViewMaxHeight
+    this.listViewMaxHeight = this.props.maxHeight - textInputContainerHeight;
+
+    this._keyboardHeight = 0;
 
     this.state = {
-      keyboardHeight: 0,
-      contentInsetTop: 0,
-      contentInsetBottom: 0,
-      marginTop: 0,
-      composerBottomOffset: new Animated.Value(0),
+      text: '',
+      textInputHeight: 0,
+      messagesContainerHeight: new Animated.Value(this.listViewMaxHeight),
     };
   }
-  componentWillUnmount() {
-    if (this._onKeyboardWillShowInterval) {
-      clearInterval(this._onKeyboardWillShowInterval);
-    }
-    if (this._onKeyboardWillHideInterval) {
-      clearInterval(this._onKeyboardWillHideInterval);
-    }
-  }
-  _isContentSmallerThanHeight() {
-    return this._contentHeight > this._scrollViewHeight;
-  }
-  onLayout(e) {
-    this._scrollViewHeight = e.nativeEvent.layout.height;
-  }
-  // TODO
-  // doesnt scroll when append message
-  onContentSizeChange(contentWidth, contentHeight) {
-    requestAnimationFrame(() => {
-      this._contentHeight = contentHeight;
-      if (this.isContentBiggerThanHeight()) {
-        this._scrollView.scrollTo({
-          y: contentHeight - this._scrollViewHeight,
-          animated: false,
-        });
 
-        this._scrollY = contentHeight - this._scrollViewHeight;
-      }
-    });
+  componentDidMount() {
+    // this._scrollView.scrollTo({
+    //   y: 0,
+    // });
   }
-  onScroll(e) {
-    // TODO move contentInsetTop to this._ instead of state maybe
-    this._scrollY = e.nativeEvent.contentOffset.y + this.state.contentInsetTop;
+
+  setKeyboardHeight(height) {
+    this._keyboardHeight = height;
   }
-  isContentBiggerThanHeight() {
-    return this._contentHeight > this._scrollViewHeight;
+
+  getKeyboardHeight() {
+    return this._keyboardHeight;
   }
+
   onKeyboardWillShow(e) {
-    if (this._onKeyboardWillShowInterval) return;
+    this.setKeyboardHeight(e.endCoordinates.height);
 
-    let stickToTop = false;
-    if (this._scrollY < this.state.keyboardHeight) {
-      stickToTop = true;
-    }
-
-    // TODO move to function
-    Animated.timing(this.state.composerBottomOffset, {
-      toValue: e.endCoordinates.height,
+    Animated.timing(this.state.messagesContainerHeight, {
+      toValue: this.listViewMaxHeight - this.getKeyboardHeight(),
       duration: 200,
     }).start();
-
-    this._onKeyboardWillShowInterval = setInterval(() => {
-      if (this.state.keyboardHeight < e.endCoordinates.height) {
-        const keyboardHeight = (this.state.keyboardHeight + KEYBOARD_VELOCITY > e.endCoordinates.height ? e.endCoordinates.height : this.state.keyboardHeight + KEYBOARD_VELOCITY);
-        if (this.isContentBiggerThanHeight()) {
-          if (stickToTop === true) {
-            this.setState({
-              keyboardHeight: keyboardHeight,
-              // contentInsetTop: keyboardHeight,
-              contentInsetBottom: keyboardHeight,
-              // marginTop: keyboardHeight * -1,
-            })
-          } else {
-            this.setState({
-              keyboardHeight: keyboardHeight,
-              contentInsetTop: keyboardHeight,
-              contentInsetBottom: keyboardHeight,
-              marginTop: keyboardHeight * -1,
-            })
-          }
-        } else {
-          this.setState({
-            keyboardHeight: keyboardHeight,
-            contentInsetTop: 0,
-            contentInsetBottom: keyboardHeight,
-            marginTop: 0,
-          })
-        }
-      } else {
-        clearInterval(this._onKeyboardWillShowInterval);
-        this._onKeyboardWillShowInterval = null;
-      }
-    }, 1000 / 30);
   }
-  onKeyboardWillHide(e) {
-    if (this._onKeyboardWillHideInterval) return;
-    // TODO rename state.keyboardheight to something else, related to current offset
 
-    let stickToTop = false;
-    if (this._scrollY < this.state.keyboardHeight) {
-      stickToTop = true;
-    }
+  onKeyboardWillHide() {
+    this.setKeyboardHeight(0);
 
-    // TODO move to function
-    Animated.timing(this.state.composerBottomOffset, {
-      toValue: 0,
+    Animated.timing(this.state.messagesContainerHeight, {
+      toValue: this.props.maxHeight - (this.state.textInputHeight + 10 + 10),
       duration: 200,
     }).start();
+  }
 
-    this._onKeyboardWillHideInterval = setInterval(() => {
-      if (this.state.keyboardHeight > 0) {
-        const keyboardHeight = (this.state.keyboardHeight - KEYBOARD_VELOCITY < 0 ? 0 : this.state.keyboardHeight - KEYBOARD_VELOCITY);
-        if (this.isContentBiggerThanHeight()) {
-          if (stickToTop === true) {
-            this.setState({
-              keyboardHeight: keyboardHeight,
-              contentInsetBottom: keyboardHeight,
-            });
-          } else {
-            this.setState({
-              keyboardHeight: keyboardHeight,
-              contentInsetTop: keyboardHeight,
-              contentInsetBottom: keyboardHeight,
-              marginTop: keyboardHeight * -1,
-            });
-          }
-        } else {
+  renderMessages() {
+    return (
+      <Animated.View style={{
+        height: this.state.messagesContainerHeight,
+      }}>
+        <InvertibleScrollView
+          style={[styles.messagesContainer, {
+          }]}
+          onKeyboardWillShow={this.onKeyboardWillShow.bind(this)}
+          onKeyboardWillHide={this.onKeyboardWillHide.bind(this)}
+
+          ref={(r) => {
+            this._scrollView = r;
+          }}
+
+          inverted={true}
+        >
+          {this.props.messages.map((message, index) => {
+            return (
+              <this.props.components.Message
+                {...message}
+                key={'message'+index}
+              />
+            );
+          })}
+        </InvertibleScrollView>
+      </Animated.View>
+    );
+  }
+
+  renderComposer() {
+    return (
+      <this.props.components.Composer
+        text={this.state.text}
+        textInputHeight={Math.max(35, this.state.textInputHeight)}
+
+        onType={(e) => {
+          const newTextInputHeight = Math.min(100, e.nativeEvent.contentSize.height);
+
+          const newMessagesContainerHeight =
+            this.state.messagesContainerHeight.__getValue() +
+            (this.props.maxHeight
+            - this.state.messagesContainerHeight.__getValue()
+            - (Math.max(35, newTextInputHeight) + 10 + 10)
+            - this.getKeyboardHeight())
+          ;
+
           this.setState({
-            keyboardHeight: keyboardHeight,
-            contentInsetTop: 0,
-            contentInsetBottom: keyboardHeight,
-            marginTop: 0,
+            text: e.nativeEvent.text,
+            textInputHeight: newTextInputHeight,
+            messagesContainerHeight: new Animated.Value(newMessagesContainerHeight),
           });
-        }
-      } else {
-        clearInterval(this._onKeyboardWillHideInterval);
-        this._onKeyboardWillHideInterval = null;
-      }
-    }, 1000 / 30);
+        }}
+        onSend={() => {
+          this.props.onSend({
+            text: this.state.text,
+          });
+          this.setState({
+            text: '',
+            textInputHeight: 35,
+            messagesContainerHeight: new Animated.Value(this.listViewMaxHeight - this.getKeyboardHeight()),
+          });
+        }}
+      />
+    );
   }
+
   render() {
     return (
       <View style={styles.container}>
-
-        <ScrollView
-          ref={(c) => this._scrollView = c}
-          onLayout={this.onLayout.bind(this)}
-          onContentSizeChange={this.onContentSizeChange.bind(this)}
-          onKeyboardWillShow={this.onKeyboardWillShow.bind(this)}
-          onKeyboardWillHide={this.onKeyboardWillHide.bind(this)}
-          onScroll={this.onScroll.bind(this)}
-          scrollEventThrottle={500}
-
-          automaticallyAdjustContentInsets={false}
-          contentInset={{
-            top: this.state.contentInsetTop,
-            bottom: this.state.contentInsetBottom,
-          }}
-          style={{
-            marginTop: this.state.marginTop,
-            marginBottom: this._composerHeight,
-          }}
-        >
-          {this.props.messages.map((message) => {
-            return message();
-          })}
-        </ScrollView>
-
-        <Animated.View style={{
-          position: 'absolute',
-          bottom: this.state.composerBottomOffset,
-          left: 0,
-          right: 0,
-          height: this._composerHeight,
-        }}>
-          <Composer />
-        </Animated.View>
-
+        {this.renderMessages()}
+        {this.renderComposer()}
       </View>
     );
   }
@@ -209,9 +148,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  messagesContainer: {
+    // flex: 1,
+    // backgroundColor: 'red',
+  },
 });
 
 export {
   GiftedMessenger,
   Message,
+  Composer,
+  Time,
 };

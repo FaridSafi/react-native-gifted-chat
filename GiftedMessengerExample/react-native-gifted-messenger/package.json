@@ -28,8 +28,11 @@
   "homepage": "https://github.com/FaridSafi/react-native-gifted-messenger#readme",
   "devDependencies": {
     "babel-eslint": "^6.0.4",
-    "eslint": "^2.10.2",
+    "eslint": "^2.12.0",
     "eslint-plugin-react": "^5.1.1",
     "eslint-plugin-react-native": "^1.1.0-beta"
+  },
+  "dependencies": {
+    "react-native-invertible-scroll-view": "^1.0.0"
   }
 }

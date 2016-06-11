@@ -14,5 +14,6 @@
   "rules": {
     "comma-dangle": 0,
     "semi": 2,
+    "no-console": 1,
   }
 }

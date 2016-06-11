@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  View,
   Text,
-} from 'react-native'
+  View,
+} from 'react-native';
+
 
 class Message extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>{this.props.text}</Text>
+        <Text style={styles.text}>
+          {this.props.text}
+        </Text>
       </View>
     );
   }
@@ -17,9 +24,14 @@ class Message extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#00cccc',
-    height: 50,
-  }
+    backgroundColor: 'blue',
+    padding: 10,
+    margin: 10,
+    borderRadius: 10,
+  },
+  text: {
+    color: 'white',
+  },
 });
 
 export default Message;

@@ -2,6 +2,6 @@ import {
   AppRegistry,
 } from 'react-native';
 
-import Example from './Example';
+import App from './App';
 
-AppRegistry.registerComponent('GiftedMessengerExample', () => Example);
+AppRegistry.registerComponent('GiftedMessengerExample', () => App);

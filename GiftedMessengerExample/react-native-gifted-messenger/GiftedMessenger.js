@@ -24,21 +24,21 @@ class GiftedMessenger extends Component {
     const textInputContainerHeight = 55; // 55 = 35(min height) + 10(marginBottom) + 10(marginTop)
 
     // TODO getter & setter for listViewMaxHeight
+    // TODO
+    // is listViewMaxHeight still useful?
     this.listViewMaxHeight = this.props.maxHeight - textInputContainerHeight;
+
 
     this._keyboardHeight = 0;
 
     this.state = {
       text: '',
-      textInputHeight: 0,
+      textInputHeight: 35,
       messagesContainerHeight: new Animated.Value(this.listViewMaxHeight),
     };
   }
 
   componentDidMount() {
-    // this._scrollView.scrollTo({
-    //   y: 0,
-    // });
   }
 
   setKeyboardHeight(height) {
@@ -53,7 +53,7 @@ class GiftedMessenger extends Component {
     this.setKeyboardHeight(e.endCoordinates.height);
 
     Animated.timing(this.state.messagesContainerHeight, {
-      toValue: this.listViewMaxHeight - this.getKeyboardHeight(),
+      toValue: (this.props.maxHeight - (this.state.textInputHeight + 10 + 10)) - this.getKeyboardHeight(),
       duration: 200,
     }).start();
   }
@@ -65,6 +65,13 @@ class GiftedMessenger extends Component {
       toValue: this.props.maxHeight - (this.state.textInputHeight + 10 + 10),
       duration: 200,
     }).start();
+  }
+
+  scrollToBottom(animated = true) {
+    this._scrollView.scrollTo({
+      y: 0,
+      animated,
+    });
   }
 
   renderMessages() {
@@ -116,7 +123,7 @@ class GiftedMessenger extends Component {
 
           this.setState({
             text: e.nativeEvent.text,
-            textInputHeight: newTextInputHeight,
+            textInputHeight: Math.max(35, newTextInputHeight),
             messagesContainerHeight: new Animated.Value(newMessagesContainerHeight),
           });
         }}
@@ -129,6 +136,8 @@ class GiftedMessenger extends Component {
             textInputHeight: 35,
             messagesContainerHeight: new Animated.Value(this.listViewMaxHeight - this.getKeyboardHeight()),
           });
+
+          this.scrollToBottom();
         }}
       />
     );

@@ -47,7 +47,7 @@ class GiftedMessenger extends Component {
     this.setKeyboardHeight(e.endCoordinates.height);
 
     Animated.timing(this.state.messagesContainerHeight, {
-      toValue: (this.getMaxHeight() - (this.state.textInputHeight + (this.props.composerMinimumHeight - this.props.composerTextInputMinimumHeight))) - this.getKeyboardHeight(),
+      toValue: (this.getMaxHeight() - (this.state.textInputHeight + (this.props.composerHeightMin - this.props.composerTextInputHeightMin))) - this.getKeyboardHeight(),
       duration: 200,
     }).start();
   }
@@ -56,7 +56,7 @@ class GiftedMessenger extends Component {
     this.setKeyboardHeight(0);
 
     Animated.timing(this.state.messagesContainerHeight, {
-      toValue: this.getMaxHeight() - (this.state.textInputHeight + (this.props.composerMinimumHeight - this.props.composerTextInputMinimumHeight)),
+      toValue: this.getMaxHeight() - (this.state.textInputHeight + (this.props.composerHeightMin - this.props.composerTextInputHeightMin)),
       duration: 200,
     }).start();
   }
@@ -74,6 +74,8 @@ class GiftedMessenger extends Component {
         height: this.state.messagesContainerHeight,
       }}>
         <InvertibleScrollView
+          inverted={true}
+
           style={[styles.messagesContainer, {
           }]}
           onKeyboardWillShow={this.onKeyboardWillShow.bind(this)}
@@ -82,8 +84,6 @@ class GiftedMessenger extends Component {
           ref={(r) => {
             this._scrollView = r;
           }}
-
-          inverted={true}
         >
           {this.props.messages.map((message, index) => {
             const messageProps = {
@@ -100,21 +100,24 @@ class GiftedMessenger extends Component {
   renderComposer() {
     const composerProps = {
       text: this.state.text,
-      textInputHeight: Math.max(this.props.composerTextInputMinimumHeight, this.state.textInputHeight),
+      heightMin: this.props.composerHeightMin,
+      textInputHeightMin: this.props.composerTextInputHeightMin,
+      textInputHeightMax: this.props.composerTextInputHeightMax,
+      textInputHeight: Math.max(this.props.composerTextInputHeightMin, this.state.textInputHeight),
       onType: (e) => {
-        const newTextInputHeight = Math.min(this.props.composerTextInputMaximumHeight, e.nativeEvent.contentSize.height);
+        const newTextInputHeight = Math.min(this.props.composerTextInputHeightMax, e.nativeEvent.contentSize.height);
 
         const newMessagesContainerHeight =
           this.state.messagesContainerHeight.__getValue() +
           (this.getMaxHeight()
           - this.state.messagesContainerHeight.__getValue()
-          - (Math.max(this.props.composerTextInputMinimumHeight, newTextInputHeight) + (this.props.composerMinimumHeight - this.props.composerTextInputMinimumHeight))
+          - (Math.max(this.props.composerTextInputHeightMin, newTextInputHeight) + (this.props.composerHeightMin - this.props.composerTextInputHeightMin))
           - this.getKeyboardHeight())
         ;
 
         this.setState({
           text: e.nativeEvent.text,
-          textInputHeight: Math.max(this.props.composerTextInputMinimumHeight, newTextInputHeight),
+          textInputHeight: Math.max(this.props.composerTextInputHeightMin, newTextInputHeight),
           messagesContainerHeight: new Animated.Value(newMessagesContainerHeight),
         });
       },
@@ -124,8 +127,8 @@ class GiftedMessenger extends Component {
         });
         this.setState({
           text: '',
-          textInputHeight: this.props.composerTextInputMinimumHeight,
-          messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.props.composerMinimumHeight - this.getKeyboardHeight()),
+          textInputHeight: this.props.composerTextInputHeightMin,
+          messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.props.composerHeightMin - this.getKeyboardHeight()),
         });
         this.scrollToBottom();
       }
@@ -153,8 +156,8 @@ class GiftedMessenger extends Component {
             this.setState({
               isInitialized: true,
               text: '',
-              textInputHeight: this.props.composerTextInputMinimumHeight,
-              messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.props.composerMinimumHeight),
+              textInputHeight: this.props.composerTextInputHeightMin,
+              messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.props.composerHeightMin),
             });
           });
         }}
@@ -164,21 +167,16 @@ class GiftedMessenger extends Component {
 }
 
 GiftedMessenger.defaultProps = {
-  renderMessage: (props) => <Message {...props }/>,
-  renderComposer: (props) => <Composer {...props }/>,
-  renderTime: (props) => <Time {...props }/>,
-
-  composerMinimumHeight: 55,
-  composerTextInputMinimumHeight: 35,
-  composerTextInputMaximumHeight: 100,
-
   messages: [],
   onSend: () => {},
 
-  // textInputMinimalHeight: 35,
-  // composer: 35,
+  renderMessage: (props) => <Message {...props} />,
+  renderComposer: (props) => <Composer {...props}/>,
+  renderTime: (props) => <Time {...props}/>,
 
-
+  composerHeightMin: 55,
+  composerTextInputHeightMin: 35,
+  composerTextInputHeightMax: 100,
 };
 
 const styles = StyleSheet.create({

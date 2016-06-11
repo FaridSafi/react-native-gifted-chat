@@ -15,7 +15,7 @@ class App extends Component {
     setTimeout(() => {
       this.setState({
         messages: [
-          {text: 'Newest Message',  time: new Date(Date.UTC(2016, 6, 11, 17, 30, 0))},
+          {position: 'left', text: 'Newest Message',  time: new Date(Date.UTC(2016, 6, 11, 17, 30, 0))},
           {text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 10, 0))},
           {text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 9, 0))},
           {text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 0, 0))},

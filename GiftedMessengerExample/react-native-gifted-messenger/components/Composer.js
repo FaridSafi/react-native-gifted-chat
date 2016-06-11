@@ -33,6 +33,8 @@ class Message extends Component {
         onChange={this.props.onType}
         style={[styles.textInput, {
           height: this.props.textInputHeight,
+          marginTop: (this.props.heightMin - this.props.textInputHeightMin) / 2,
+          marginBottom: (this.props.heightMin - this.props.textInputHeightMin) / 2,
         }]}
         value={this.props.text}
         enablesReturnKeyAutomatically={true}
@@ -63,10 +65,6 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    // TODO
-    // marginTop & bottom should be props
-    marginTop: 10,
-    marginBottom: 10,
     paddingLeft: 15,
     fontSize: 17,
   },

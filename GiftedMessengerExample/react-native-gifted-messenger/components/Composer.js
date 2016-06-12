@@ -92,7 +92,6 @@ class Composer extends Component {
   }
 
   render() {
-    console.log('render composer');
     return (
       <View style={styles.container}>
         {this.renderAccessoryButton()}

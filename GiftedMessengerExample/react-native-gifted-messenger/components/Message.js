@@ -14,18 +14,47 @@ class Message extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // return true;
+    if (this.props.status !== nextProps.status) {
+      return true;
+    }
     return false;
   }
 
   componentWillMount() {
   }
 
+  renderDay() {
+    let diff = 0;
+    if (this.props.previousMessage) {
+      diff = Math.abs(moment(this.props.previousMessage.time).startOf('day').diff(moment(this.props.time).startOf('day'), 'days'));
+    } else {
+      diff = 1;
+    }
+
+    if (diff > 0) {
+      return (
+        <View style={styles[this.props.position].day}>
+          <Text style={styles[this.props.position].dayText}>
+            {moment(this.props.time).calendar(null, {
+              sameDay: '[Today]',
+              nextDay: '[Tomorrow]',
+              nextWeek: 'dddd',
+              lastDay: '[Yesterday]',
+              lastWeek: 'LL',
+              sameElse: 'LL'
+            })}
+          </Text>
+        </View>
+      );
+    }
+    return null;
+  }
+
   renderTime() {
     return (
       <View style={styles[this.props.position].time}>
-        <Text>
-          {moment(this.props.time).calendar()}
+        <Text style={styles[this.props.position].timeText}>
+          {moment(this.props.time).format('LT')}
         </Text>
       </View>
     );
@@ -41,23 +70,19 @@ class Message extends Component {
   renderLocation() {
     if (this.props.location) {
       return (
-        <View>
-          <MapView
-            style={{
-              width: 150,
-              height: 100,
-              borderRadius: 10,
-            }}
-            region={{
-              latitude: this.props.location.latitude,
-              longitude: this.props.location.longitude,
-            }}
-            annotations={[{
-              latitude: this.props.location.latitude,
-              longitude: this.props.location.longitude,
-            }]}
-          />
-        </View>
+        <MapView
+          style={styles[this.props.position].mapView}
+          region={{
+            latitude: this.props.location.latitude,
+            longitude: this.props.location.longitude,
+          }}
+          annotations={[{
+            latitude: this.props.location.latitude,
+            longitude: this.props.location.longitude,
+          }]}
+          scrollEnabled={false}
+          zoomEnabled={false}
+        />
       );
     }
     return null;
@@ -79,15 +104,15 @@ class Message extends Component {
       <View style={styles[this.props.position].bubble}>
         {this.renderLocation()}
         {this.renderText()}
+        {this.renderTime()}
       </View>
     );
   }
 
   render() {
-    console.log('render message');
     return (
       <View>
-        {this.renderTime()}
+        {this.renderDay()}
         <View style={styles[this.props.position].container}>
           {this.props.position === 'left' ? this.renderAvatar() : null}
           {this.renderBubble()}
@@ -109,10 +134,24 @@ const stylesCommon = {
     marginBottom: 5,
     marginTop: 5,
   },
-  time: {
+  day: {
     alignItems: 'center',
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  dayText: {
+    fontSize: 12,
+  },
+  time: {
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 5,
   },
   timeText: {
+    fontSize: 11,
+    color: '#fff',
+    backgroundColor: 'transparent',
+    textAlign: 'right',
   },
   bubble: {
     backgroundColor: 'blue',
@@ -122,13 +161,22 @@ const stylesCommon = {
   },
   bubbleText: {
     color: 'white',
-    margin: 10,
+    marginTop: 5,
+    marginBottom: 5,
+    marginLeft: 10,
+    marginRight: 10,
   },
   avatar: {
     width: 40,
     height: 40,
     borderRadius: 20,
     backgroundColor: 'green',
+  },
+  mapView: {
+    width: 150,
+    height: 100,
+    borderRadius: 8,
+    margin: 3,
   },
 };
 

@@ -8,23 +8,34 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [],
+      messages: [
+      ],
     };
   }
+
   componentWillMount() {
     setTimeout(() => {
       this.setState({
         messages: [
-          {key: Math.round(Math.random() * 10000), position: 'left', text: 'Newest Message', time: new Date(Date.UTC(2016, 6, 11, 17, 30, 0))},
-          {key: Math.round(Math.random() * 10000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 6, 11, 17, 10, 0))},
-          {key: Math.round(Math.random() * 10000), position: 'left', text: 'Message', time: new Date(Date.UTC(2016, 6, 11, 17, 9, 0))},
-          {key: Math.round(Math.random() * 10000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 6, 11, 17, 0, 0))},
-          {key: Math.round(Math.random() * 10000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 6, 11, 17, 0, 0))},
-          {key: Math.round(Math.random() * 10000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 6, 11, 17, 0, 0))},
-          {key: Math.round(Math.random() * 10000), position: 'left', text: 'Oldest Message', time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Newest Message', time: new Date(Date.UTC(2016, 5, 11, 17, 30, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', location: {longitude: -122.04120235, latitude: 37.33756603}, time: new Date(Date.UTC(2016, 5, 11, 17, 10, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Yesterday', time: new Date(Date.UTC(2016, 5, 11, 17, 9, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 11, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 9, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 8, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 7, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 6, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 5, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 4, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 3, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 2, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', text: '1 june', time: new Date(Date.UTC(2016, 5, 1, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'right', text: '20 may', time: new Date(Date.UTC(2016, 4, 20, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Oldest Message', time: new Date(Date.UTC(2016, 4, 1, 17, 0, 0))},
         ]
       });
     }, 0); // simulating network
+
   }
 
   componentDidMount() {
@@ -52,7 +63,8 @@ class App extends Component {
     this.setState({
       messages: GiftedMessenger.append(this.state.messages, {
         ...message,
-        key: Math.round(Math.random() * 10000),
+        time: new Date(),
+        key: Math.round(Math.random() * 100000),
       }),
     });
   }

@@ -51,6 +51,24 @@ class GiftedMessenger extends Component {
     return currentMessages.concat(messages);
   }
 
+  componentWillMount() {
+    this.setMessages(this.props.messages.sort((a, b) => {
+      return new Date(b.time) - new Date(a.time);
+    }));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setMessages(nextProps.messages);
+  }
+
+  setMessages(messages) {
+    this._messages = messages;
+  }
+
+  getMessages() {
+    return this._messages;
+  }
+
   setMaxHeight(height) {
     this._maxHeight = height;
   }
@@ -109,11 +127,11 @@ class GiftedMessenger extends Component {
             this._scrollView = r;
           }}
         >
-          {this.props.messages.map((message, index) => {
+          {this.getMessages().map((message, index) => {
             const messageProps = {
               ...message,
-              previousMessage: this.props.messages[index - 1],
-              nextMessage: this.props.messages[index + 1],
+              previousMessage: this.getMessages()[index + 1],
+              nextMessage: this.getMessages()[index - 1],
             };
 
             return (
@@ -169,7 +187,6 @@ class GiftedMessenger extends Component {
   }
 
   render() {
-    console.log('render gifted messenger');
     if (this.state.isInitialized === true) {
 
       // TODO

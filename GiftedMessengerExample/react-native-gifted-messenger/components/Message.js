@@ -61,9 +61,8 @@ class Message extends Component {
   }
 
   renderAvatar() {
-    // TODO replace by image from props
     return (
-      <View style={styles[this.props.position].avatar} />
+      <Avatar {...this.props}/>
     );
   }
 
@@ -110,13 +109,14 @@ class Message extends Component {
   }
 
   render() {
+    const {renderAvatar, ...other} = this.props;
     return (
       <View>
         {this.renderDay()}
         <View style={styles[this.props.position].container}>
-          {this.props.position === 'left' ? this.renderAvatar() : null}
+          {this.props.position === 'left' ? this.props.renderAvatar(other) : null}
           {this.renderBubble()}
-          {this.props.position === 'right' ? this.renderAvatar() : null}
+          {this.props.position === 'right' ? this.props.renderAvatar(other) : null}
         </View>
       </View>
     );
@@ -125,6 +125,7 @@ class Message extends Component {
 
 Message.defaultProps = {
   position: 'right',
+  name: '',
 };
 
 const stylesCommon = {
@@ -165,12 +166,6 @@ const stylesCommon = {
     marginBottom: 5,
     marginLeft: 10,
     marginRight: 10,
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'green',
   },
   mapView: {
     width: 150,

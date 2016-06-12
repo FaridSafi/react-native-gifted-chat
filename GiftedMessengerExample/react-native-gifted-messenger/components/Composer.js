@@ -61,11 +61,17 @@ class Composer extends Component {
     return (
       <TouchableOpacity
         style={styles.sendButton}
-        onPress={() => this.props.onSend({
-          text: this.props.text,
-        })}
+        onPress={() => {
+          if (this.props.text.trim().length > 0) {
+            this.props.onSend({
+              text: this.props.text,
+            });
+          }
+        }}
       >
-        <Text style={styles.sendButtonText}>Send</Text>
+        <Text style={[styles.sendButtonText, {
+          opacity: (this.props.text.trim().length > 0 ? 1 : 0.5),
+        }]}>Send</Text>
       </TouchableOpacity>
     );
   }

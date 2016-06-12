@@ -11,6 +11,7 @@ import ActionSheet from '@exponent/react-native-action-sheet';
 
 import Message from './components/Message';
 import Composer from './components/Composer';
+import Avatar from './components/Avatar';
 
 class GiftedMessenger extends Component {
   constructor(props) {
@@ -132,6 +133,7 @@ class GiftedMessenger extends Component {
               ...message,
               previousMessage: this.getMessages()[index + 1],
               nextMessage: this.getMessages()[index - 1],
+              renderAvatar: this.props.renderAvatar,
             };
 
             return (
@@ -226,6 +228,7 @@ GiftedMessenger.defaultProps = {
 
   renderMessage: (props) => <Message {...props}/>,
   renderComposer: (props) => <Composer {...props}/>,
+  renderAvatar: (props) => <Avatar {...props}/>,
 
   composerHeightMin: 55,
   composerTextInputHeightMin: 35,

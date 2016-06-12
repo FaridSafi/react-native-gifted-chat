@@ -15,10 +15,10 @@ class App extends Component {
     setTimeout(() => {
       this.setState({
         messages: [
-          {uniqueId: 1, position: 'left', text: 'Newest Message',  time: new Date(Date.UTC(2016, 6, 11, 17, 30, 0))},
-          {uniqueId: 2, position: 'right', text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 10, 0))},
-          {uniqueId: 3, position: 'left', text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 9, 0))},
-          {uniqueId: 4, position: 'right', text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 0, 0))},
+          {position: 'left', text: 'Newest Message',  time: new Date(Date.UTC(2016, 6, 11, 17, 30, 0))},
+          {position: 'right', text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 10, 0))},
+          {position: 'left', text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 9, 0))},
+          {position: 'right', text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 0, 0))},
           // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 10, 17, 0, 0))},
           // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 10, 17, 0, 0))},
           // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 10, 17, 0, 0))},
@@ -70,8 +70,11 @@ class App extends Component {
       />
     );
   }
+
   onSend(message) {
-    console.log(message.text);
+    this.setState({
+      messages: GiftedMessenger.append(this.state.messages, message),
+    });
   }
 }
 

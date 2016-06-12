@@ -7,6 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
+import md5 from 'md5';
 
 import Message from './components/Message';
 import Composer from './components/Composer';
@@ -22,6 +23,20 @@ class GiftedMessenger extends Component {
     this.state = {
       isInitialized: false,
     };
+  }
+
+  static append(currentMessages, messages) {
+    if (!Array.isArray(messages)) {
+      messages = [messages];
+    }
+    return messages.concat(currentMessages);
+  }
+
+  static prepend(currentMessages, messages) {
+    if (!Array.isArray(messages)) {
+      messages = [messages];
+    }
+    return currentMessages.concat(messages);
   }
 
   setMaxHeight(height) {
@@ -89,8 +104,9 @@ class GiftedMessenger extends Component {
               nextMessage: this.props.messages[index + 1],
             };
 
+            const key = md5(JSON.stringify(message));
             return (
-              <View key={message.uniqueId}>
+              <View key={key}>
                 {this.props.renderMessage(messageProps)}
               </View>
             );

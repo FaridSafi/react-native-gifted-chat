@@ -10,11 +10,11 @@ import InvertibleScrollView from 'react-native-invertible-scroll-view';
 
 import Message from './components/Message';
 import Composer from './components/Composer';
-import Time from './components/Time';
 
 class GiftedMessenger extends Component {
   constructor(props) {
     super(props);
+
     // default values
     this._keyboardHeight = 0;
     this._maxHeight = Dimensions.get('window').height;
@@ -22,9 +22,6 @@ class GiftedMessenger extends Component {
     this.state = {
       isInitialized: false,
     };
-  }
-
-  componentDidMount() {
   }
 
   setMaxHeight(height) {
@@ -88,15 +85,15 @@ class GiftedMessenger extends Component {
           {this.props.messages.map((message, index) => {
             const messageProps = {
               ...message,
-              // key: index,
               previousMessage: this.props.messages[index - 1],
               nextMessage: this.props.messages[index + 1],
             };
 
-            return [
-              this.props.renderMessage(messageProps),
-              this.props.renderTime(messageProps),
-            ];
+            return (
+              <View key={message.uniqueId}>
+                {this.props.renderMessage(messageProps)}
+              </View>
+            );
           })}
         </InvertibleScrollView>
       </Animated.View>
@@ -144,6 +141,7 @@ class GiftedMessenger extends Component {
   }
 
   render() {
+    console.log('render gifted messenger');
     if (this.state.isInitialized === true) {
       return (
         <View style={styles.container}>
@@ -178,7 +176,6 @@ GiftedMessenger.defaultProps = {
 
   renderMessage: (props) => <Message {...props}/>,
   renderComposer: (props) => <Composer {...props}/>,
-  renderTime: (props) => <Time {...props}/>,
 
   composerHeightMin: 55,
   composerTextInputHeightMin: 35,

@@ -6,11 +6,10 @@ import {
   Image,
 } from 'react-native';
 
-
 class Avatar extends Component {
 
   componentWillMount() {
-    const name = this.props.name.split(' ');
+    const name = this.props.name.toUpperCase().split(' ');
     if (name.length === 1) {
       this.avatarName = `${name[0].charAt(0)}`;
     } else if (name.length > 1) {
@@ -18,6 +17,24 @@ class Avatar extends Component {
     } else {
       this.avatarName = '';
     }
+
+    let sumChars = 0;
+    for(let i = 0; i < this.avatarName.length; i++) {
+      sumChars += this.avatarName.charCodeAt(i);
+    }
+
+    // from https://flatuicolors.com/
+    const colors = [
+      '#2ecc71', // emerald
+      '#3498db', // peter river
+      '#8e44ad', // wisteria
+      '#e67e22', // carrot
+      '#e74c3c', // alizarin
+      '#1abc9c', // turquoise
+      '#2c3e50', // midnight blue
+    ];
+
+    this.avatarColor = colors[sumChars % colors.length];
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -39,7 +56,7 @@ class Avatar extends Component {
         style={[styles.avatar, {
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#731eb5',
+          backgroundColor: this.avatarColor,
         }]}
       >
         <Text style={{

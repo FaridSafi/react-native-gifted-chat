@@ -61,6 +61,22 @@ class App extends Component {
     //     messages: messages,
     //   })
     // }, 2000);
+
+
+    setTimeout(() => {
+      this.setState({
+        messages: GiftedMessenger.append(this.state.messages, {
+          text: 'Hello Farid',
+          time: new Date(),
+          user: {
+            id: 1,
+            name: 'React Native',
+            avatar: 'https://facebook.github.io/react/img/logo_og.png',
+          },
+          key: Math.round(Math.random() * 100000),
+        }),
+      });
+    }, 2000);
   }
 
   render() {

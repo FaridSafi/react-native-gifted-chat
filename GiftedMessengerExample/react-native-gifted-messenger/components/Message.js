@@ -32,14 +32,7 @@ class Message extends Component {
 
   renderDay() {
     if (this.props.time) {
-      let diff = 0;
-      if (this.props.previousMessage && this.props.previousMessage.time) {
-        diff = Math.abs(moment(this.props.previousMessage.time).startOf('day').diff(moment(this.props.time).startOf('day'), 'days'));
-      } else {
-        diff = 1;
-      }
-
-      if (diff > 0) {
+      if (!this.isPreviousMessageSameDay()) {
         return (
           <View style={styles[this.props.position].day}>
             <Text style={styles[this.props.position].dayText}>
@@ -106,13 +99,13 @@ class Message extends Component {
 
   handleBubbleCorners() {
     let cornerStyles = {};
-    if (this.isNextMessageSameUser()) {
+    if (this.isNextMessageSameUser() && this.isNextMessageSameDay()) {
       cornerStyles = {
         ...cornerStyles,
         ...styles[this.props.position].bubbleToNext,
       };
     }
-    if (this.isPreviousMessageSameUser()) {
+    if (this.isPreviousMessageSameUser() && this.isPreviousMessageSameDay()) {
       cornerStyles = {
         ...cornerStyles,
         ...styles[this.props.position].bubbleToPrevious,
@@ -141,6 +134,32 @@ class Message extends Component {
     } else {
       return this.props.renderAvatar(this.props.user);
     }
+  }
+
+  isNextMessageSameDay() {
+    let diff = 0;
+    if (this.props.nextMessage && this.props.nextMessage.time) {
+      diff = Math.abs(moment(this.props.nextMessage.time).startOf('day').diff(moment(this.props.time).startOf('day'), 'days'));
+    } else {
+      diff = 1;
+    }
+    if (diff === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  isPreviousMessageSameDay() {
+    let diff = 0;
+    if (this.props.previousMessage && this.props.previousMessage.time) {
+      diff = Math.abs(moment(this.props.previousMessage.time).startOf('day').diff(moment(this.props.time).startOf('day'), 'days'));
+    } else {
+      diff = 1;
+    }
+    if (diff === 0) {
+      return true;
+    }
+    return false;
   }
 
   isNextMessageSameUser() {
@@ -178,7 +197,7 @@ class Message extends Component {
 }
 
 Message.defaultProps = {
-  position: 'right',
+  position: 'left',
   user: null,
   time: null,
 };

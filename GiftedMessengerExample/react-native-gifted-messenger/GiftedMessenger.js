@@ -172,6 +172,8 @@ class GiftedMessenger extends Component {
         });
       },
       onSend: (message) => {
+        message.position = 'right';
+
         this.props.onSend(message);
         const newState = {
           textInputHeight: this.props.composerTextInputHeightMin,

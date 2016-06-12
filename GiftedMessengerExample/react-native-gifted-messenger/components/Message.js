@@ -60,12 +60,6 @@ class Message extends Component {
     );
   }
 
-  renderAvatar() {
-    return (
-      <Avatar {...this.props}/>
-    );
-  }
-
   renderLocation() {
     if (this.props.location) {
       return (

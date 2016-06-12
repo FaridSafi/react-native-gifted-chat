@@ -23,9 +23,9 @@ class Avatar extends Component {
       sumChars += this.avatarName.charCodeAt(i);
     }
 
-    // from https://flatuicolors.com/
+    // inspired by https://github.com/wbinnssmith/react-user-avatar
     const colors = [
-      '#2ecc71', // emerald
+      '#27ae60', // nephritis
       '#3498db', // peter river
       '#8e44ad', // wisteria
       '#e67e22', // carrot
@@ -63,6 +63,7 @@ class Avatar extends Component {
           color: '#fff',
           fontSize: 16,
           backgroundColor: 'transparent',
+          fontWeight: '100',
         }}>
           {this.avatarName}
         </Text>

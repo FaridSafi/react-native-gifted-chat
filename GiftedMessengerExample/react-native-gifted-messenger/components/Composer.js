@@ -5,18 +5,35 @@ import {
   View,
   TextInput,
   PixelRatio,
+  Modal,
+  Image,
   TouchableOpacity,
 } from 'react-native';
 
+import CameraRollPicker from 'react-native-camera-roll-picker';
+import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
+
+// TODO
+// disable CameraRollPicker by default because native module needed
+
 class Composer extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   // required by @exponent/react-native-action-sheet
   static contextTypes = {
     actionSheet: PropTypes.func,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      modalVisible: false,
+    }
+  }
+
+  _setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
 
   onAccessory() {
     let options = ['Take Photo', 'Choose From Library', 'Send Location', 'Cancel'];
@@ -27,6 +44,9 @@ class Composer extends Component {
     },
     (buttonIndex) => {
       switch (buttonIndex) {
+        case 1:
+          this._setModalVisible(true);
+          break;
         case 2:
           navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -52,7 +72,29 @@ class Composer extends Component {
         style={styles.accessoryButton}
         onPress={this.onAccessory.bind(this)}
       >
-        <Text style={styles.accessoryText}>+</Text>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {this._setModalVisible(false)}}
+        >
+          {this.renderNavBar()}
+          <CameraRollPicker
+            maximum={10}
+            imagesPerRow={4}
+            callback={this.getSelectedImages.bind(this)}
+          />
+        </Modal>
+
+        <Image
+          style={{
+            width: 30 * 60 / 66,
+            height: 30,
+            tintColor: '#ccc'
+          }}
+          resizeMode="contain"
+          source={require('../assets/paperclip.png')}
+        />
       </TouchableOpacity>
     );
   }
@@ -64,7 +106,7 @@ class Composer extends Component {
         onPress={() => {
           if (this.props.text.trim().length > 0) {
             this.props.onSend({
-              text: this.props.text,
+              text: this.props.text.trim(),
             });
           }
         }}
@@ -97,6 +139,32 @@ class Composer extends Component {
     );
   }
 
+  renderNavBar() {
+    return (
+      <NavBar>
+        <NavButton onPress={() => {
+          this._setModalVisible(false);
+        }}>
+          <NavButtonText>
+            Cancel
+          </NavButtonText>
+        </NavButton>
+        <NavTitle>
+          Camera Roll
+        </NavTitle>
+        <NavButton>
+          <NavButtonText>
+            Send
+          </NavButtonText>
+        </NavButton>
+      </NavBar>
+    );
+  }
+
+  getSelectedImages(image) {
+    console.log('selected', image);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -127,9 +195,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 30,
     height: 30,
-    borderRadius: 15,
-    borderWidth: 2,
-    borderColor: '#6699CC',
+    // borderRadius: 15,
+    // borderWidth: 2,
+    // borderColor: '#6699CC',
     marginLeft: 10,
     marginBottom: 12,
   },

@@ -35,6 +35,7 @@
   "dependencies": {
     "@exponent/react-native-action-sheet": "^0.1.3",
     "moment": "^2.13.0",
-    "react-native-invertible-scroll-view": "^1.0.0"
+    "react-native-invertible-scroll-view": "^1.0.0",
+    "react-native-nav": "^1.1.4"
   }
 }

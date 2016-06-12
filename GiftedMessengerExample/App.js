@@ -19,8 +19,8 @@ class App extends Component {
         messages: [
           {key: Math.round(Math.random() * 100000), avatar: 'https://facebook.github.io/react/img/logo_og.png', position: 'left', text: 'Newest Message', time: new Date(Date.UTC(2016, 5, 11, 17, 30, 0))},
           {key: Math.round(Math.random() * 100000), name: 'Farid Safi', position: 'right', location: {longitude: -122.04120235, latitude: 37.33756603}, time: new Date(Date.UTC(2016, 5, 11, 17, 10, 0))},
-          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Yesterday', time: new Date(Date.UTC(2016, 5, 11, 17, 9, 0))},
-          {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 11, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), name: 'Hello You', position: 'left', text: 'Yesterday', time: new Date(Date.UTC(2016, 5, 11, 17, 9, 0))},
+          {key: Math.round(Math.random() * 100000), name: 'Club Mate', position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 11, 17, 0, 0))},
           {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 9, 17, 0, 0))},
           {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 8, 17, 0, 0))},
           {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 7, 17, 0, 0))},

@@ -131,8 +131,8 @@ class GiftedMessenger extends Component {
           {this.getMessages().map((message, index) => {
             const messageProps = {
               ...message,
-              previousMessage: this.getMessages()[index + 1],
-              nextMessage: this.getMessages()[index - 1],
+              previousMessage: this.getMessages()[index + 1] ? this.getMessages()[index + 1] : null,
+              nextMessage: this.getMessages()[index - 1] ? this.getMessages()[index - 1] : null,
               renderAvatar: this.props.renderAvatar,
             };
 
@@ -228,7 +228,7 @@ GiftedMessenger.defaultProps = {
 
   renderMessage: (props) => <Message {...props}/>,
   renderComposer: (props) => <Composer {...props}/>,
-  renderAvatar: (props) => <Avatar {...props}/>,
+  renderAvatar: (user) => <Avatar user={user}/>,
 
   composerHeightMin: 55,
   composerTextInputHeightMin: 35,

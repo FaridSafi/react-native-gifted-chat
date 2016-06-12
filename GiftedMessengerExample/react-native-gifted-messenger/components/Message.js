@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  StyleSheet,
   MapView,
 } from 'react-native';
 
@@ -17,6 +16,14 @@ class Message extends Component {
     if (this.props.status !== nextProps.status) {
       return true;
     }
+    if (this.props.nextMessage !== nextProps.nextMessage) {
+      return true;
+    }
+    if (this.props.previousMessage !== nextProps.previousMessage) {
+      return true;
+    }
+
+
     return false;
   }
 
@@ -24,40 +31,45 @@ class Message extends Component {
   }
 
   renderDay() {
-    let diff = 0;
-    if (this.props.previousMessage) {
-      diff = Math.abs(moment(this.props.previousMessage.time).startOf('day').diff(moment(this.props.time).startOf('day'), 'days'));
-    } else {
-      diff = 1;
-    }
+    if (this.props.time) {
+      let diff = 0;
+      if (this.props.previousMessage && this.props.previousMessage.time) {
+        diff = Math.abs(moment(this.props.previousMessage.time).startOf('day').diff(moment(this.props.time).startOf('day'), 'days'));
+      } else {
+        diff = 1;
+      }
 
-    if (diff > 0) {
-      return (
-        <View style={styles[this.props.position].day}>
-          <Text style={styles[this.props.position].dayText}>
-            {moment(this.props.time).calendar(null, {
-              sameDay: '[Today]',
-              nextDay: '[Tomorrow]',
-              nextWeek: 'dddd',
-              lastDay: '[Yesterday]',
-              lastWeek: 'LL',
-              sameElse: 'LL'
-            })}
-          </Text>
-        </View>
-      );
+      if (diff > 0) {
+        return (
+          <View style={styles[this.props.position].day}>
+            <Text style={styles[this.props.position].dayText}>
+              {moment(this.props.time).calendar(null, {
+                sameDay: '[Today]',
+                nextDay: '[Tomorrow]',
+                nextWeek: 'dddd',
+                lastDay: '[Yesterday]',
+                lastWeek: 'LL',
+                sameElse: 'LL'
+              })}
+            </Text>
+          </View>
+        );
+      }
     }
     return null;
   }
 
   renderTime() {
-    return (
-      <View style={styles[this.props.position].time}>
-        <Text style={styles[this.props.position].timeText}>
-          {moment(this.props.time).format('LT')}
-        </Text>
-      </View>
-    );
+    if (this.props.time) {
+      return (
+        <View style={styles[this.props.position].time}>
+          <Text style={styles[this.props.position].timeText}>
+            {moment(this.props.time).format('LT')}
+          </Text>
+        </View>
+      );
+    }
+    return null;
   }
 
   renderLocation() {
@@ -92,9 +104,26 @@ class Message extends Component {
     return null;
   }
 
+  handleBubbleCorners() {
+    let cornerStyles = {};
+    if (this.isNextMessageSameUser()) {
+      cornerStyles = {
+        ...cornerStyles,
+        ...styles[this.props.position].bubbleToNext,
+      };
+    }
+    if (this.isPreviousMessageSameUser()) {
+      cornerStyles = {
+        ...cornerStyles,
+        ...styles[this.props.position].bubbleToPrevious,
+      };
+    }
+    return cornerStyles;
+  }
+
   renderBubble() {
     return (
-      <View style={styles[this.props.position].bubble}>
+      <View style={[styles[this.props.position].bubble, this.handleBubbleCorners()]}>
         {this.renderLocation()}
         {this.renderText()}
         {this.renderTime()}
@@ -102,15 +131,46 @@ class Message extends Component {
     );
   }
 
+  renderAvatar() {
+    if (!this.props.user) {
+      return null;
+    }
+
+    if (this.isNextMessageSameUser()) {
+      return this.props.renderAvatar(null);
+    } else {
+      return this.props.renderAvatar(this.props.user);
+    }
+  }
+
+  isNextMessageSameUser() {
+    if (this.props.nextMessage && this.props.nextMessage.user && this.props.user) {
+      if (this.props.nextMessage.user.id === this.props.user.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isPreviousMessageSameUser() {
+    if (this.props.previousMessage && this.props.previousMessage.user && this.props.user) {
+      if (this.props.previousMessage.user.id === this.props.user.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   render() {
-    const {renderAvatar, ...other} = this.props;
     return (
       <View>
         {this.renderDay()}
-        <View style={styles[this.props.position].container}>
-          {this.props.position === 'left' ? this.props.renderAvatar(other) : null}
+        <View style={[styles[this.props.position].container, {
+          marginBottom: this.isNextMessageSameUser() ? 2 : 10,
+        }]}>
+          {this.props.position === 'left' ? this.renderAvatar() : null}
           {this.renderBubble()}
-          {this.props.position === 'right' ? this.props.renderAvatar(other) : null}
+          {this.props.position === 'right' ? this.renderAvatar() : null}
         </View>
       </View>
     );
@@ -119,15 +179,16 @@ class Message extends Component {
 
 Message.defaultProps = {
   position: 'right',
-  name: '',
+  user: null,
+  time: null,
 };
 
 const stylesCommon = {
   container: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    marginBottom: 5,
-    marginTop: 5,
+    // marginBottom: 5,
+    // marginTop: 5,
   },
   day: {
     alignItems: 'center',
@@ -176,6 +237,14 @@ const stylesLeft = {
     marginLeft: 5,
     marginRight: 0,
   },
+  bubbleToNext: {
+    ...stylesCommon.bubbleToNext,
+    borderBottomLeftRadius: 0,
+  },
+  bubbleToPrevious: {
+    ...stylesCommon.bubbleToPrevious,
+    borderTopLeftRadius: 0,
+  },
 };
 
 const stylesRight = {
@@ -185,11 +254,19 @@ const stylesRight = {
     marginLeft: 0,
     marginRight: 5,
   },
+  bubbleToNext: {
+    ...stylesCommon.bubbleToNext,
+    borderBottomRightRadius: 0,
+  },
+  bubbleToPrevious: {
+    ...stylesCommon.bubbleToPrevious,
+    borderTopRightRadius: 0,
+  },
 };
 
 const styles = {
-  left: StyleSheet.create(Object.assign({}, stylesCommon, stylesLeft)),
-  right: StyleSheet.create(Object.assign({}, stylesCommon, stylesRight)),
+  left: Object.assign({}, stylesCommon, stylesLeft),
+  right: Object.assign({}, stylesCommon, stylesRight),
 };
 
 export default Message;

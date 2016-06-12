@@ -9,7 +9,15 @@ import {
 class Avatar extends Component {
 
   componentWillMount() {
-    const name = this.props.name.toUpperCase().split(' ');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
+  }
+
+  setAvatarColor() {
+    const userName = this.props.user.name || '';
+    const name = userName.toUpperCase().split(' ');
     if (name.length === 1) {
       this.avatarName = `${name[0].charAt(0)}`;
     } else if (name.length > 1) {
@@ -19,8 +27,8 @@ class Avatar extends Component {
     }
 
     let sumChars = 0;
-    for(let i = 0; i < this.avatarName.length; i++) {
-      sumChars += this.avatarName.charCodeAt(i);
+    for(let i = 0; i < userName.length; i++) {
+      sumChars += userName.charCodeAt(i);
     }
 
     // inspired by https://github.com/wbinnssmith/react-user-avatar
@@ -37,18 +45,26 @@ class Avatar extends Component {
     this.avatarColor = colors[sumChars % colors.length];
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  }
-
   render() {
-    if (this.props.avatar) {
+    if (this.props.user === null) {
+      return (
+        <View style={[styles.avatar, {
+          backgroundColor: 'transparent',
+        }]}/>
+      )
+    }
+
+    if (this.props.user.avatar) {
       return (
         <Image
-          source={{uri: this.props.avatar}}
+          source={{uri: this.props.user.avatar}}
           style={styles.avatar}
         />
       );
+    }
+
+    if (!this.avatarColor) {
+      this.setAvatarColor();
     }
 
     return (
@@ -72,11 +88,16 @@ class Avatar extends Component {
   }
 }
 
+Avatar.defaultProps = {
+  user: null,
+};
+
 const styles = StyleSheet.create({
   avatar: {
     width: 40,
     height: 40,
     borderRadius: 20,
+    backgroundColor: '#ccc',
   },
 });
 

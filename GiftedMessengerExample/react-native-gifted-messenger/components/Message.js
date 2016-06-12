@@ -3,6 +3,7 @@ import {
   Text,
   View,
   StyleSheet,
+  MapView,
 } from 'react-native';
 
 import moment from 'moment';
@@ -40,9 +41,23 @@ class Message extends Component {
   renderLocation() {
     if (this.props.location) {
       return (
-        <Text style={styles[this.props.position].bubbleText}>
-          {this.props.location.latitude}, {this.props.location.longitude}
-        </Text>
+        <View>
+          <MapView
+            style={{
+              width: 150,
+              height: 100,
+              borderRadius: 10,
+            }}
+            region={{
+              latitude: this.props.location.latitude,
+              longitude: this.props.location.longitude,
+            }}
+            annotations={[{
+              latitude: this.props.location.latitude,
+              longitude: this.props.location.longitude,
+            }]}
+          />
+        </View>
       );
     }
     return null;
@@ -101,13 +116,13 @@ const stylesCommon = {
   },
   bubble: {
     backgroundColor: 'blue',
-    padding: 10,
     marginLeft: 10,
     marginRight: 10,
     borderRadius: 10,
   },
   bubbleText: {
     color: 'white',
+    margin: 10,
   },
   avatar: {
     width: 40,

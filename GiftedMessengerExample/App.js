@@ -15,51 +15,28 @@ class App extends Component {
     setTimeout(() => {
       this.setState({
         messages: [
-          {position: 'left', text: 'Newest Message',  time: new Date(Date.UTC(2016, 6, 11, 17, 30, 0))},
-          {position: 'right', text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 10, 0))},
-          {position: 'left', text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 9, 0))},
-          {position: 'right', text: 'Message',         time: new Date(Date.UTC(2016, 6, 11, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 10, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 10, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 10, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          // {text: 'Message',         time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
-          {uniqueId: 5, position: 'left', text: 'Oldest Message',  time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
+          {key: Math.round(Math.random() * 10000), position: 'left', text: 'Newest Message', time: new Date(Date.UTC(2016, 6, 11, 17, 30, 0))},
+          {key: Math.round(Math.random() * 10000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 6, 11, 17, 10, 0))},
+          {key: Math.round(Math.random() * 10000), position: 'left', text: 'Message', time: new Date(Date.UTC(2016, 6, 11, 17, 9, 0))},
+          {key: Math.round(Math.random() * 10000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 6, 11, 17, 0, 0))},
+          {key: Math.round(Math.random() * 10000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 6, 11, 17, 0, 0))},
+          {key: Math.round(Math.random() * 10000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 6, 11, 17, 0, 0))},
+          {key: Math.round(Math.random() * 10000), position: 'left', text: 'Oldest Message', time: new Date(Date.UTC(2016, 6, 1, 17, 0, 0))},
         ]
       });
     }, 0); // simulating network
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      const messages = this.state.messages.slice(0);
-      messages.shift();
-
-      this.setState({
-        messages: messages,
-      })
-    }, 2000);
+    // setTimeout(() => {
+    //   const messages = this.state.messages.slice(0);
+    //   messages.shift();
+    //
+    //   this.setState({
+    //     messages: messages,
+    //   })
+    // }, 2000);
   }
-
 
   render() {
     return (
@@ -73,7 +50,10 @@ class App extends Component {
 
   onSend(message) {
     this.setState({
-      messages: GiftedMessenger.append(this.state.messages, message),
+      messages: GiftedMessenger.append(this.state.messages, {
+        ...message,
+        key: Math.round(Math.random() * 10000),
+      }),
     });
   }
 }

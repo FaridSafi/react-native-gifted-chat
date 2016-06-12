@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Animated,
   StyleSheet,
@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
-import md5 from 'md5';
+import ActionSheet from '@exponent/react-native-action-sheet';
 
 import Message from './components/Message';
 import Composer from './components/Composer';
@@ -21,7 +21,19 @@ class GiftedMessenger extends Component {
     this._maxHeight = Dimensions.get('window').height;
 
     this.state = {
-      isInitialized: false,
+      isInitialized: false, // needed to calculate the maxHeight before rendering the chat
+    };
+  }
+
+  // required by @exponent/react-native-action-sheet
+  static childContextTypes = {
+    actionSheet: PropTypes.func,
+  };
+
+  // required by @exponent/react-native-action-sheet
+  getChildContext() {
+    return {
+      actionSheet: () => this._actionSheetRef,
     };
   }
 
@@ -104,9 +116,8 @@ class GiftedMessenger extends Component {
               nextMessage: this.props.messages[index + 1],
             };
 
-            const key = md5(JSON.stringify(message));
             return (
-              <View key={key}>
+              <View key={message.key}>
                 {this.props.renderMessage(messageProps)}
               </View>
             );
@@ -140,15 +151,16 @@ class GiftedMessenger extends Component {
           messagesContainerHeight: new Animated.Value(newMessagesContainerHeight),
         });
       },
-      onSend: () => {
-        this.props.onSend({
-          text: this.state.text,
-        });
-        this.setState({
-          text: '',
+      onSend: (message) => {
+        this.props.onSend(message);
+        const newState = {
           textInputHeight: this.props.composerTextInputHeightMin,
           messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.props.composerHeightMin - this.getKeyboardHeight()),
-        });
+        };
+        if (message.text) {
+          newState.text = '';
+        }
+        this.setState(newState);
         this.scrollToBottom();
       }
     };
@@ -159,11 +171,16 @@ class GiftedMessenger extends Component {
   render() {
     console.log('render gifted messenger');
     if (this.state.isInitialized === true) {
+
+      // TODO
+      // what if I don't want action sheet?
       return (
-        <View style={styles.container}>
-          {this.renderMessages()}
-          {this.renderComposer()}
-        </View>
+        <ActionSheet ref={component => this._actionSheetRef = component}>
+          <View style={styles.container}>
+            {this.renderMessages()}
+            {this.renderComposer()}
+          </View>
+        </ActionSheet>
       );
     }
     return (

@@ -37,12 +37,33 @@ class Message extends Component {
     );
   }
 
-  renderBubble() {
-    return (
-      <View style={styles[this.props.position].bubble}>
+  renderLocation() {
+    if (this.props.location) {
+      return (
+        <Text style={styles[this.props.position].bubbleText}>
+          {this.props.location.latitude}, {this.props.location.longitude}
+        </Text>
+      );
+    }
+    return null;
+  }
+
+  renderText() {
+    if (this.props.text) {
+      return (
         <Text style={styles[this.props.position].bubbleText}>
           {this.props.text}
         </Text>
+      );
+    }
+    return null;
+  }
+
+  renderBubble() {
+    return (
+      <View style={styles[this.props.position].bubble}>
+        {this.renderLocation()}
+        {this.renderText()}
       </View>
     );
   }

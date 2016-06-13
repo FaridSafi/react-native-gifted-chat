@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 
 class Avatar extends Component {
@@ -56,10 +57,14 @@ class Avatar extends Component {
 
     if (this.props.user.avatar) {
       return (
-        <Image
-          source={{uri: this.props.user.avatar}}
-          style={styles.avatar}
-        />
+        <TouchableOpacity onPress={() => {
+          this.props.onPress(this.props.user);
+        }}>
+          <Image
+            source={{uri: this.props.user.avatar}}
+            style={styles.avatar}
+          />
+        </TouchableOpacity>
       );
     }
 
@@ -68,7 +73,10 @@ class Avatar extends Component {
     }
 
     return (
-      <View
+      <TouchableOpacity
+        onPress={() => {
+          this.props.onPress(this.props.user);
+        }}
         style={[styles.avatar, {
           justifyContent: 'center',
           alignItems: 'center',
@@ -83,13 +91,14 @@ class Avatar extends Component {
         }}>
           {this.avatarName}
         </Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
 
 Avatar.defaultProps = {
   user: null,
+  onPress: () => {},
 };
 
 const styles = StyleSheet.create({

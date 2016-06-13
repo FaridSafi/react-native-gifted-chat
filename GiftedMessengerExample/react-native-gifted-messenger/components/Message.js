@@ -131,19 +131,25 @@ class Message extends Component {
     }
 
     if (this.isNextMessageSameUser()) {
+      // will display a placeholder (empty space)
       if (this.props.renderAvatar) {
         return this.props.renderAvatar(null);
       }
       return (
-        <GiftedAvatar user={null}/>
+        <GiftedAvatar/>
       );
     } else {
+      const avatarProps = {
+        user: this.props.user,
+        onPress: this.props.onPressAvatar,
+      };
 
+      // will display the avatar
       if (this.props.renderAvatar) {
-        return this.props.renderAvatar(this.props.user);
+        return this.props.renderAvatar(avatarProps);
       }
       return (
-        <GiftedAvatar user={this.props.user}/>
+        <GiftedAvatar {...avatarProps}/>
       );
     }
   }

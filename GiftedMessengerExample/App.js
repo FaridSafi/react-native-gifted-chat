@@ -53,14 +53,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      const messages = this.state.messages.slice(0);
-      messages.shift();
-
-      this.setState({
-        messages: messages,
-      })
-    }, 2000);
+    // setTimeout(() => {
+    //   const messages = this.state.messages.slice(0);
+    //   messages.shift();
+    //
+    //   this.setState({
+    //     messages: messages,
+    //   })
+    // }, 2000);
 
     //
     // setTimeout(() => {
@@ -83,13 +83,21 @@ class App extends Component {
     return (
       <GiftedMessenger
         messages={this.state.messages}
-        onSend={this.onSend.bind(this)}
-
+        onPress={this.onSend.bind(this)}
+        onPressAvatar={(user) => {
+          console.log(user);
+        }}
       />
     );
   }
+  // onPressUrl
+  // onPressEmail
+  // onPressAccessory
 
   onSend(message) {
+    console.log(message);
+
+
     this.setState({
       messages: GiftedMessenger.append(this.state.messages, {
         ...message,

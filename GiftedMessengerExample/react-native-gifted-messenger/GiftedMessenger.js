@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import ActionSheet from '@exponent/react-native-action-sheet';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 import Message from './components/Message';
 import Composer from './components/Composer';
@@ -110,6 +111,23 @@ class GiftedMessenger extends Component {
     });
   }
 
+  onTouchStart() {
+    this._touchStarted = true;
+  }
+
+  onTouchMove() {
+    this._touchStarted = false;
+  }
+
+  // handle Tap event to dismiss keyboard
+  // TODO test android
+  onTouchEnd() {
+    if (this._touchStarted === true) {
+      dismissKeyboard();
+    }
+    this._touchStarted = false;
+  }
+
   renderMessages() {
     return (
       <Animated.View style={{
@@ -117,6 +135,11 @@ class GiftedMessenger extends Component {
       }}>
         <InvertibleScrollView
           inverted={true}
+          keyboardShouldPersistTaps={false}
+
+          onTouchStart={this.onTouchStart.bind(this)}
+          onTouchMove={this.onTouchMove.bind(this)}
+          onTouchEnd={this.onTouchEnd.bind(this)}
 
           style={[styles.messagesContainer, {
           }]}
@@ -126,6 +149,8 @@ class GiftedMessenger extends Component {
           ref={(r) => {
             this._scrollView = r;
           }}
+
+          {...this.props}
         >
           {this.getMessages().map((message, index) => {
             const messageProps = {
@@ -133,6 +158,7 @@ class GiftedMessenger extends Component {
               previousMessage: this.getMessages()[index + 1] ? this.getMessages()[index + 1] : null,
               nextMessage: this.getMessages()[index - 1] ? this.getMessages()[index - 1] : null,
               renderAvatar: this.props.renderAvatar,
+              onPressAvatar: this.props.onPressAvatar,
             };
 
             if (!messageProps.key) {
@@ -236,6 +262,8 @@ class GiftedMessenger extends Component {
 GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
+
+  onPressAvatar: null,
 
   renderMessage: null,
   renderComposer: null,

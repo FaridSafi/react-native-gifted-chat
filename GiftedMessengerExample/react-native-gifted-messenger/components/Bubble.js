@@ -40,6 +40,7 @@ class Bubble extends Component {
         <BubbleText
           text={this.props.text}
           theme={this.props.theme}
+          locale={this.props.locale}
         />
       );
     }
@@ -58,6 +59,7 @@ class Bubble extends Component {
         <Location
           location={this.props.location}
           theme={this.props.theme}
+          locale={this.props.locale}
         />
       );
     }
@@ -92,6 +94,7 @@ class Bubble extends Component {
         <Time
           time={this.props.time}
           theme={this.props.theme}
+          locale={this.props.locale}
         />
       );
     }

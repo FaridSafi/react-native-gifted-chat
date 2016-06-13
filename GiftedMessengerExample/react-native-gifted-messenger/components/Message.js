@@ -62,6 +62,7 @@ class Message extends Component {
           <Day
             time={this.props.time}
             theme={this.props.theme}
+            locale={this.props.locale}
           />
         );
       }

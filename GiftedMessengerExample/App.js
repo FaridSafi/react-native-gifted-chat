@@ -108,6 +108,7 @@ class App extends Component {
         theme={Theme}
         messages={this.state.messages}
         onSend={this.onSend.bind(this)}
+        locale={'fr'}
         renderAvatar={(props) => {
           return (
             <Avatar {...props} onPress={(user) => {

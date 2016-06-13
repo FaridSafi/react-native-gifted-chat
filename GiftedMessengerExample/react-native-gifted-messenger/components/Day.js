@@ -5,8 +5,14 @@ import {
 } from 'react-native';
 
 import moment from 'moment';
+import {setLocale} from '../Locale';
 
 class Day extends Component {
+  componentWillMount() {
+    if (this.props.locale) {
+      setLocale(this.props.locale);
+    }
+  }
   render() {
     return (
       <View style={this.props.theme.Day.container}>

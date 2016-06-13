@@ -166,6 +166,7 @@ class GiftedMessenger extends Component {
               renderBubbleText: this.props.renderBubbleText,
 
               theme: this.props.theme,
+              locale: this.props.locale,
             };
 
             if (!messageProps.key) {
@@ -223,6 +224,7 @@ class GiftedMessenger extends Component {
         this.scrollToBottom();
       },
       theme: this.props.theme,
+      locale: this.props.locale,
     };
 
     if (this.props.renderComposer) {
@@ -271,6 +273,8 @@ GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
   theme: Theme,
+  locale: 'en',
+
   // Message related
   // TODO re order like in the code
   renderMessage: null,

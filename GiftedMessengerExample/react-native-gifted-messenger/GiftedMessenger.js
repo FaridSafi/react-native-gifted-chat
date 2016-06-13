@@ -5,12 +5,14 @@ import {
   View,
   InteractionManager,
   Dimensions,
+  PixelRatio,
 } from 'react-native';
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 import GiftedAvatar from 'react-native-gifted-avatar';
 
+import Theme from './Theme';
 import Message from './components/Message';
 import Composer from './components/Composer';
 
@@ -296,4 +298,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {GiftedMessenger, Message, Composer, GiftedAvatar};
+export {GiftedMessenger, Message, Composer, GiftedAvatar, Theme};

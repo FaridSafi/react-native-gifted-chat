@@ -22,7 +22,7 @@ class App extends Component {
           {key: Math.round(Math.random() * 100000), user: {
             avatar: 'https://facebook.github.io/react/img/logo_og.png',
             id: 1,
-          }, position: 'left', text: 'See you soon', time: new Date(Date.UTC(2016, 5, 11, 17, 30, 0))},
+          }, position: 'left', text: 'See you soon', time: new Date(Date.UTC(2016, 5, 13, 17, 30, 0))},
 
 
           // {key: Math.round(Math.random() * 100000), user: {
@@ -37,7 +37,7 @@ class App extends Component {
               id: 2,
             },
             position: 'right',
-            time: new Date(Date.UTC(2016, 5, 11, 17, 0, 0)),
+            time: new Date(Date.UTC(2016, 5, 12, 17, 0, 0)),
             text: 'Some text',
             renderCustomView: (message) => {
               return (
@@ -59,15 +59,15 @@ class App extends Component {
           {key: Math.round(Math.random() * 100000), user: {
             name: 'Club Mate',
             id: 3,
-          }, position: 'left', text: 'Where are you?', time: new Date(Date.UTC(2016, 5, 11, 17, 0, 0))},
+          }, position: 'left', text: 'Where are you?', time: new Date(Date.UTC(2016, 5, 12, 17, 0, 0))},
 
 
-          // {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 5, 17, 0, 0))},
-          // {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 4, 17, 0, 0))},
-          // {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 3, 17, 0, 0))},
-          // {key: Math.round(Math.random() * 100000), position: 'right', text: 'Message', time: new Date(Date.UTC(2016, 5, 2, 17, 0, 0))},
-          // {key: Math.round(Math.random() * 100000), position: 'right', text: '1 june', time: new Date(Date.UTC(2016, 5, 1, 17, 0, 0))},
-          // {key: Math.round(Math.random() * 100000), position: 'right', text: '20 may', time: new Date(Date.UTC(2016, 4, 20, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Message', time: new Date(Date.UTC(2016, 5, 11, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Message', time: new Date(Date.UTC(2016, 5, 10, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Message', time: new Date(Date.UTC(2016, 5, 9, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Message', time: new Date(Date.UTC(2016, 5, 8, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'left', text: '1 june', time: new Date(Date.UTC(2016, 5, 7, 17, 0, 0))},
+          {key: Math.round(Math.random() * 100000), position: 'left', text: '20 may', time: new Date(Date.UTC(2016, 4, 20, 17, 0, 0))},
           {key: Math.round(Math.random() * 100000), position: 'left', text: 'Oldest Message', time: new Date(Date.UTC(2016, 4, 1, 17, 0, 0))},
         ]
       });

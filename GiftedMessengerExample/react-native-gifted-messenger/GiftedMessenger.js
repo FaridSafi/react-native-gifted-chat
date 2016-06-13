@@ -9,6 +9,7 @@ import {
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
+import moment from 'moment/min/moment-with-locales';
 import GiftedAvatar from 'react-native-gifted-avatar';
 
 import Theme from './Theme';
@@ -22,6 +23,9 @@ class GiftedMessenger extends Component {
     // default values
     this._keyboardHeight = 0;
     this._maxHeight = Dimensions.get('window').height;
+
+    // TODO
+    // check if missing default values (starting by _)
 
     this.state = {
       isInitialized: false, // needed to calculate the maxHeight before rendering the chat
@@ -55,6 +59,12 @@ class GiftedMessenger extends Component {
   }
 
   componentWillMount() {
+    if (moment.locales().indexOf(this.props.locale) === -1) {
+      this.setLocale('en');
+    } else {
+      this.setLocale(this.props.locale);
+    }
+
     this.setMessages(this.props.messages.sort((a, b) => {
       return new Date(b.time) - new Date(a.time);
     }));
@@ -62,6 +72,14 @@ class GiftedMessenger extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setMessages(nextProps.messages);
+  }
+
+  setLocale(locale) {
+    this._locale = locale;
+  }
+
+  getLocale() {
+    return this._locale;
   }
 
   setMessages(messages) {
@@ -166,7 +184,7 @@ class GiftedMessenger extends Component {
               renderBubbleText: this.props.renderBubbleText,
 
               theme: this.props.theme,
-              locale: this.props.locale,
+              locale: this.getLocale(),
             };
 
             if (!messageProps.key) {
@@ -224,7 +242,7 @@ class GiftedMessenger extends Component {
         this.scrollToBottom();
       },
       theme: this.props.theme,
-      locale: this.props.locale,
+      locale: this.getLocale(),
     };
 
     if (this.props.renderComposer) {
@@ -273,7 +291,7 @@ GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
   theme: Theme,
-  locale: 'en',
+  locale: null,
 
   // Message related
   // TODO re order like in the code

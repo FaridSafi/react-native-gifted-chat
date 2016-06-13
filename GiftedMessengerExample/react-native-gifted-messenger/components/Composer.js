@@ -69,7 +69,7 @@ class Composer extends Component {
     if (this.props.actions === true) {
       return (
         <TouchableOpacity
-          style={this.props.componentStyles.actionsButton}
+          style={this.props.theme.Composer.actionsButton}
           onPress={this.onActionsPress.bind(this)}
         >
           <Modal
@@ -104,7 +104,7 @@ class Composer extends Component {
   renderSendButton() {
     return (
       <TouchableOpacity
-        style={this.props.componentStyles.sendButton}
+        style={this.props.theme.Composer.sendButton}
         onPress={() => {
           if (this.props.text.trim().length > 0) {
             this.props.onSend({
@@ -113,7 +113,7 @@ class Composer extends Component {
           }
         }}
       >
-        <Text style={[this.props.componentStyles.sendButtonText, {
+        <Text style={[this.props.theme.Composer.sendButtonText, {
           opacity: (this.props.text.trim().length > 0 ? 1 : 0.5),
         }]}>Send</Text>
       </TouchableOpacity>
@@ -126,7 +126,7 @@ class Composer extends Component {
         placeholder={'Type a message...'}
         multiline={true}
         onChange={this.props.onType}
-        style={[this.props.componentStyles.textInput, {
+        style={[this.props.theme.Composer.textInput, {
           height: this.props.textInputHeight,
           marginTop: (this.props.heightMin - this.props.textInputHeightMin) / 2,
           marginBottom: (this.props.heightMin - this.props.textInputHeightMin) / 2,
@@ -169,7 +169,7 @@ class Composer extends Component {
 
   render() {
     return (
-      <View style={this.props.componentStyles.container}>
+      <View style={this.props.theme.Composer.container}>
         {this.renderActionsButton()}
         {this.renderTextInput()}
         {this.renderSendButton()}
@@ -179,7 +179,7 @@ class Composer extends Component {
 }
 
 Composer.defaultProps = {
-  componentStyles: {},
+  theme: {},
   actions: false,
 };
 

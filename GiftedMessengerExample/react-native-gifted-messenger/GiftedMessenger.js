@@ -160,12 +160,14 @@ class GiftedMessenger extends Component {
               ...message,
               previousMessage: this.getMessages()[index + 1] ? this.getMessages()[index + 1] : null,
               nextMessage: this.getMessages()[index - 1] ? this.getMessages()[index - 1] : null,
-              renderAvatar: this.props.renderAvatar,
 
+              renderAvatar: this.props.renderAvatar,
               renderDay: this.props.renderDay,
               renderTime: this.props.renderTime,
               renderLocation: this.props.renderLocation,
-              renderText: this.props.renderText,
+              renderBubbleText: this.props.renderBubbleText,
+
+              theme: this.props.theme,
             };
 
             if (!messageProps.key) {
@@ -186,7 +188,7 @@ class GiftedMessenger extends Component {
 
   renderComposer() {
     const composerProps = {
-      componentStyles: this.props.theme.Composer,
+      theme: this.props.theme,
       text: this.state.text,
       heightMin: this.props.composerHeightMin,
       textInputHeightMin: this.props.composerTextInputHeightMin,
@@ -271,14 +273,28 @@ GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
 
-  renderMessage: null,
-  renderComposer: null,
-  renderAvatar: null,
+  // ALL COMPONENTS
 
+  // Message related
+  renderMessage: null,
+  renderAvatar: null,
   renderDay: null,
   renderTime: null,
+
+
   renderLocation: null,
-  renderText: null,
+  renderBubbleText: null,
+  // renderBubble?
+
+  // Composer related
+  renderComposer: null,
+  renderActionsButton: null,
+  renderSendButton: null,
+  renderNavBar: null,
+  // renderTextInput?
+
+
+
 
   // TODO
   // render components of composer

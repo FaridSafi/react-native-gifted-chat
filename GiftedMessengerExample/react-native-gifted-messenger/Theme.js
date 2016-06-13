@@ -3,6 +3,47 @@ import {
 } from 'react-native';
 
 const Theme = {
+  Day: {
+    container: {
+      alignItems: 'center',
+      marginTop: 5,
+      marginBottom: 5,
+    },
+    text: {
+      fontSize: 12,
+    },
+  },
+  Time: {
+    container: {
+      marginLeft: 10,
+      marginRight: 10,
+      marginBottom: 5,
+    },
+    text: {
+      fontSize: 11,
+      color: '#fff',
+      backgroundColor: 'transparent',
+      textAlign: 'right',
+    },
+  },
+  Location: {
+    mapView: {
+      width: 150,
+      height: 100,
+      borderRadius: 8,
+      margin: 3,
+    },
+  },
+  BubbleText: {
+    text: {
+      color: 'white',
+      marginTop: 5,
+      marginBottom: 5,
+      marginLeft: 10,
+      marginRight: 10,
+    },
+  },
+
   Composer: {
     container: {
       borderTopWidth: 1 / PixelRatio.get(),
@@ -13,7 +54,6 @@ const Theme = {
     },
     textInput: {
       flex: 1,
-      // paddingLeft: 15,
       marginLeft: 10,
       fontSize: 17,
     },
@@ -22,9 +62,6 @@ const Theme = {
       alignItems: 'center',
       width: 30,
       height: 30,
-      // borderRadius: 15,
-      // borderWidth: 2,
-      // borderColor: '#6699CC',
       marginLeft: 10,
       marginBottom: 12,
     },

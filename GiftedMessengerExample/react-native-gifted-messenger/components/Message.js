@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  MapView,
-  Linking,
-  TouchableOpacity,
 } from 'react-native';
 
 import moment from 'moment';
 import GiftedAvatar from 'react-native-gifted-avatar';
+import Day from './Day';
+import Time from './Time';
+import Location from './Location';
+import BubbleText from './BubbleText';
 
 class Message extends Component {
   constructor(props) {
@@ -44,42 +45,10 @@ class Message extends Component {
         // marginBottom: 5,
         // marginTop: 5,
       },
-      day: {
-        alignItems: 'center',
-        marginTop: 5,
-        marginBottom: 5,
-      },
-      dayText: {
-        fontSize: 12,
-      },
-      time: {
-        marginLeft: 10,
-        marginRight: 10,
-        marginBottom: 5,
-      },
-      timeText: {
-        fontSize: 11,
-        color: '#fff',
-        backgroundColor: 'transparent',
-        textAlign: 'right',
-      },
       bubble: {
         marginLeft: 0,
         marginRight: 0,
         borderRadius: 10,
-      },
-      bubbleText: {
-        color: 'white',
-        marginTop: 5,
-        marginBottom: 5,
-        marginLeft: 10,
-        marginRight: 10,
-      },
-      mapView: {
-        width: 150,
-        height: 100,
-        borderRadius: 8,
-        margin: 3,
       },
     };
 
@@ -197,85 +166,12 @@ class Message extends Component {
           return this.props.renderDay(this.props.time);
         }
         return (
-          <View style={this.styles.day}>
-            <Text style={this.styles.dayText}>
-              {moment(this.props.time).calendar(null, {
-                sameDay: '[Today]',
-                nextDay: '[Tomorrow]',
-                nextWeek: 'dddd',
-                lastDay: '[Yesterday]',
-                lastWeek: 'LL',
-                sameElse: 'LL'
-              })}
-            </Text>
-          </View>
+          <Day
+            time={this.props.time}
+            theme={this.props.theme}
+          />
         );
       }
-    }
-    return null;
-  }
-
-  renderTime() {
-    if (this.props.time) {
-      if (this.props.renderTime) {
-        return this.props.renderTime(this.props.time);
-      }
-      return (
-        <View style={this.styles.time}>
-          <Text style={this.styles.timeText}>
-            {moment(this.props.time).format('LT')}
-          </Text>
-        </View>
-      );
-    }
-    return null;
-  }
-
-  renderLocation() {
-    if (this.props.location) {
-      if (this.props.renderLocation) {
-        this.props.renderLocation(this.props.location);
-      }
-      return (
-        <TouchableOpacity onPress={() => {
-          // TODO test android
-          // TODO implement google map url
-          const url = `http://maps.apple.com/?ll=${this.props.location.latitude},${this.props.location.longitude}`;
-          Linking.canOpenURL(url).then(supported => {
-            if (supported) {
-              return Linking.openURL(url);
-            }
-          }).catch(err => console.error('An error occurred', err));
-        }}>
-          <MapView
-            style={this.styles.mapView}
-            region={{
-              latitude: this.props.location.latitude,
-              longitude: this.props.location.longitude,
-            }}
-            annotations={[{
-              latitude: this.props.location.latitude,
-              longitude: this.props.location.longitude,
-            }]}
-            scrollEnabled={false}
-            zoomEnabled={false}
-          />
-        </TouchableOpacity>
-      );
-    }
-    return null;
-  }
-
-  renderText() {
-    if (this.props.text) {
-      if (this.props.renderText) {
-        this.props.renderText(this.props.text);
-      }
-      return (
-        <Text style={this.styles.bubbleText}>
-          {this.props.text}
-        </Text>
-      );
     }
     return null;
   }
@@ -301,10 +197,55 @@ class Message extends Component {
     return (
       <View style={[this.styles.bubble, this.handleBubbleCorners()]}>
         {this.renderLocation()}
-        {this.renderText()}
+        {this.renderBubbleText()}
         {this.renderTime()}
       </View>
     );
+  }
+
+  renderBubbleText() {
+    if (this.props.text) {
+      if (this.props.renderBubbleText) {
+        this.props.renderBubbleText(this.props.text);
+      }
+      return (
+        <BubbleText
+          text={this.props.text}
+          theme={this.props.theme}
+        />
+      );
+    }
+    return null;
+  }
+
+  renderLocation() {
+    if (this.props.location) {
+      if (this.props.renderLocation) {
+        this.props.renderLocation(this.props.location);
+      }
+      return (
+        <Location
+          location={this.props.location}
+          theme={this.props.theme}
+        />
+      );
+    }
+    return null;
+  }
+
+  renderTime() {
+    if (this.props.time) {
+      if (this.props.renderTime) {
+        return this.props.renderTime(this.props.time);
+      }
+      return (
+        <Time
+          time={this.props.time}
+          theme={this.props.theme}
+        />
+      );
+    }
+    return null;
   }
 
   renderAvatar() {
@@ -376,7 +317,7 @@ Message.defaultProps = {
   renderDay: null,
   renderTime: null,
   renderLocation: null,
-  renderText: null,
+  renderBubbleText: null,
 };
 
 export default Message;

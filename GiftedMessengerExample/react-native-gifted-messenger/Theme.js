@@ -43,6 +43,66 @@ const Theme = {
       marginRight: 10,
     },
   },
+  Bubble: {
+    left: {
+      container: {
+        borderRadius: 10,
+        backgroundColor: 'blue',
+      },
+      containerToNext: {
+        borderBottomLeftRadius: 0,
+      },
+      containerToPrevious: {
+        borderTopLeftRadius: 0,
+      },
+    },
+    right: {
+      container: {
+        borderRadius: 10,
+        backgroundColor: 'purple',
+      },
+      containerToNext: {
+        borderBottomRightRadius: 0,
+      },
+      containerToPrevious: {
+        borderTopRightRadius: 0,
+      },
+    }
+  },
+  Message: {
+    left: {
+      container: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-start',
+        marginLeft: 5,
+        marginRight: 0,
+      },
+    },
+    right: {
+      container: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        marginLeft: 0,
+        marginRight: 5,
+      },
+    },
+  },
+  Avatar: {
+    left: {
+      container: {
+        marginRight: 5,
+      },
+    },
+    right: {
+      container: {
+        marginLeft: 5,
+      },
+    },
+  },
+  
+
 
   Composer: {
     container: {

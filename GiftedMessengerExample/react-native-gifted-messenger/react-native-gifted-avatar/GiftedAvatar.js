@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  StyleSheet,
   Image,
   TouchableOpacity,
 } from 'react-native';
 
 class Avatar extends Component {
-
-  componentWillMount() {
-  }
 
   shouldComponentUpdate(nextProps, nextState) {
     return false;
@@ -33,8 +29,9 @@ class Avatar extends Component {
     }
 
     // inspired by https://github.com/wbinnssmith/react-user-avatar
+    // colors from https://flatuicolors.com/
     const colors = [
-      '#27ae60', // nephritis
+      '#2ecc71', // emerald
       '#3498db', // peter river
       '#8e44ad', // wisteria
       '#e67e22', // carrot
@@ -50,21 +47,23 @@ class Avatar extends Component {
     if (!this.props.name && !this.props.avatar) {
       // render placeholder
       return (
-        <View style={[{
-          backgroundColor: 'transparent',
-        }, this.props.avatarStyle]}/>
+        <View style={[
+          defaultStyles.avatarStyle,
+          {backgroundColor: 'transparent'},
+          this.props.avatarStyle,
+        ]}/>
       )
     }
 
     if (this.props.avatar) {
       return (
         <TouchableOpacity onPress={() => {
-          const {onPress, avatarStyle, textStyle, ...other} = this.props;
+          const {onPress, ...other} = this.props;
           this.props.onPress && this.props.onPress(other);
         }}>
           <Image
             source={{uri: this.props.avatar}}
-            style={[this.props.avatarStyle]}
+            style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
           />
         </TouchableOpacity>
       );
@@ -77,14 +76,16 @@ class Avatar extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          const {onPress, avatarStyle, textStyle, ...other} = this.props;
+          const {onPress, ...other} = this.props;
           this.props.onPress && this.props.onPress(other);
         }}
-        style={[{
-          backgroundColor: this.avatarColor,
-        }, this.props.avatarStyle]}
+        style={[
+          defaultStyles.avatarStyle,
+          {backgroundColor: this.avatarColor},
+          this.props.avatarStyle,
+        ]}
       >
-        <Text style={this.props.textStyle}>
+        <Text style={[defaultStyles.textStyle, this.props.textStyle]}>
           {this.avatarName}
         </Text>
       </TouchableOpacity>
@@ -97,6 +98,12 @@ Avatar.defaultProps = {
   avatar: null,
   onPress: null,
 
+  avatarStyle: {},
+  textStyle: {},
+};
+
+
+const defaultStyles = {
   avatarStyle: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -111,7 +118,6 @@ Avatar.defaultProps = {
     fontWeight: '100',
   },
 };
-
 
 
 export default Avatar;

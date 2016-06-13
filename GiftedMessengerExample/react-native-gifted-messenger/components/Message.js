@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Text,
   View,
 } from 'react-native';
 
 import moment from 'moment';
+
 import GiftedAvatar from 'react-native-gifted-avatar';
 import Day from './Day';
-import Time from './Time';
-import Location from './Location';
-import BubbleText from './BubbleText';
+import Bubble from './Bubble';
 
 class Message extends Component {
   constructor(props) {
@@ -37,80 +35,10 @@ class Message extends Component {
     }
   }
 
-  componentWillMount() {
-    const stylesCommon = {
-      container: {
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        // marginBottom: 5,
-        // marginTop: 5,
-      },
-      bubble: {
-        marginLeft: 0,
-        marginRight: 0,
-        borderRadius: 10,
-      },
-    };
-
-    this.applyStyles(stylesCommon, this.props.stylesCommon);
-
-    const stylesLeft = {
-      container: {
-        justifyContent: 'flex-start',
-        marginLeft: 5,
-        marginRight: 0,
-      },
-      bubble: {
-        backgroundColor: 'blue',
-      },
-      bubbleToNext: {
-        borderBottomLeftRadius: 0,
-      },
-      bubbleToPrevious: {
-        borderTopLeftRadius: 0,
-      },
-      avatarContainer: {
-        marginRight: 5,
-      },
-    };
-
-    this.applyStyles(stylesLeft, stylesCommon);
-
-    const stylesRight = {
-      container: {
-        justifyContent: 'flex-end',
-        marginLeft: 0,
-        marginRight: 5,
-      },
-      bubble: {
-        backgroundColor: 'purple',
-      },
-      bubbleToNext: {
-        borderBottomRightRadius: 0,
-      },
-      bubbleToPrevious: {
-        borderTopRightRadius: 0,
-      },
-      avatarContainer: {
-        marginLeft: 5,
-      },
-    };
-
-    this.applyStyles(stylesRight, stylesCommon);
-
-    if (this.props.position === 'right') {
-      this.styles = Object.assign({}, stylesCommon, stylesRight);
-      this.applyStyles(this.styles, this.props.stylesRight);
-    } else {
-      this.styles = Object.assign({}, stylesCommon, stylesLeft);
-      this.applyStyles(this.styles, this.props.stylesLeft);
-    }
-  }
-
-  isNextMessageSameDay() {
+  isSameDay(currentMessage, diffMessage) {
     let diff = 0;
-    if (this.props.nextMessage && this.props.nextMessage.time) {
-      diff = Math.abs(moment(this.props.nextMessage.time).startOf('day').diff(moment(this.props.time).startOf('day'), 'days'));
+    if (diffMessage && diffMessage.time && currentMessage && currentMessage.time) {
+      diff = Math.abs(moment(diffMessage.time).startOf('day').diff(moment(currentMessage.time).startOf('day'), 'days'));
     } else {
       diff = 1;
     }
@@ -120,39 +48,12 @@ class Message extends Component {
     return false;
   }
 
-  isPreviousMessageSameDay() {
-    let diff = 0;
-    if (this.props.previousMessage && this.props.previousMessage.time) {
-      diff = Math.abs(moment(this.props.previousMessage.time).startOf('day').diff(moment(this.props.time).startOf('day'), 'days'));
-    } else {
-      diff = 1;
-    }
-    if (diff === 0) {
+  isSameUser(currentMessage, diffMessage) {
+    if ((diffMessage === null || diffMessage.user === null) && currentMessage.user === null) {
       return true;
     }
-    return false;
-  }
-
-  isNextMessageSameUser() {
-    if ((this.props.nextMessage === null || this.props.nextMessage.user === null) && this.props.user === null) {
-      return true;
-    }
-
-    if (this.props.nextMessage && this.props.nextMessage.user && this.props.user) {
-      if (this.props.nextMessage.user.id === this.props.user.id) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  isPreviousMessageSameUser() {
-    if ((this.props.previousMessage === null || this.props.previousMessage.user === null) && this.props.user === null) {
-      return true;
-    }
-
-    if (this.props.previousMessage && this.props.previousMessage.user && this.props.user) {
-      if (this.props.previousMessage.user.id === this.props.user.id) {
+    if (diffMessage && diffMessage.user && currentMessage.user) {
+      if (diffMessage.user.id === currentMessage.user.id) {
         return true;
       }
     }
@@ -161,7 +62,7 @@ class Message extends Component {
 
   renderDay() {
     if (this.props.time) {
-      if (!this.isPreviousMessageSameDay()) {
+      if (!this.isSameDay(this.props, this.props.previousMessage)) {
         if (this.props.renderDay) {
           return this.props.renderDay(this.props.time);
         }
@@ -176,76 +77,21 @@ class Message extends Component {
     return null;
   }
 
-  handleBubbleCorners() {
-    let cornerStyles = {};
-    if (this.isNextMessageSameUser() && this.isNextMessageSameDay()) {
-      cornerStyles = {
-        ...cornerStyles,
-        ...this.styles.bubbleToNext,
-      };
-    }
-    if (this.isPreviousMessageSameUser() && this.isPreviousMessageSameDay()) {
-      cornerStyles = {
-        ...cornerStyles,
-        ...this.styles.bubbleToPrevious,
-      };
-    }
-    return cornerStyles;
-  }
-
   renderBubble() {
+    if (this.props.renderBubble) {
+      return this.props.renderBubble({
+        ...this.props,
+        isSameUser: this.isSameUser,
+        isSameDay: this.isSameDay,
+      });
+    }
     return (
-      <View style={[this.styles.bubble, this.handleBubbleCorners()]}>
-        {this.renderLocation()}
-        {this.renderBubbleText()}
-        {this.renderTime()}
-      </View>
+      <Bubble
+        {...this.props}
+        isSameUser={this.isSameUser}
+        isSameDay={this.isSameDay}
+      />
     );
-  }
-
-  renderBubbleText() {
-    if (this.props.text) {
-      if (this.props.renderBubbleText) {
-        this.props.renderBubbleText(this.props.text);
-      }
-      return (
-        <BubbleText
-          text={this.props.text}
-          theme={this.props.theme}
-        />
-      );
-    }
-    return null;
-  }
-
-  renderLocation() {
-    if (this.props.location) {
-      if (this.props.renderLocation) {
-        this.props.renderLocation(this.props.location);
-      }
-      return (
-        <Location
-          location={this.props.location}
-          theme={this.props.theme}
-        />
-      );
-    }
-    return null;
-  }
-
-  renderTime() {
-    if (this.props.time) {
-      if (this.props.renderTime) {
-        return this.props.renderTime(this.props.time);
-      }
-      return (
-        <Time
-          time={this.props.time}
-          theme={this.props.theme}
-        />
-      );
-    }
-    return null;
   }
 
   renderAvatar() {
@@ -253,17 +99,17 @@ class Message extends Component {
       return null;
     }
 
-    if (this.isNextMessageSameUser()) {
+    if (this.isSameUser(this.props, this.props.nextMessage)) {
       // will display a placeholder (empty space)
       if (this.props.renderAvatar) {
         return (
-          <View style={this.styles.avatarContainer}>
+          <View style={this.props.theme.Avatar[this.props.position].container}>
             {this.props.renderAvatar(null)}
           </View>
         );
       }
       return (
-        <View style={this.styles.avatarContainer}>
+        <View style={this.props.theme.Avatar[this.props.position].container}>
           <GiftedAvatar/>
         </View>
       );
@@ -272,13 +118,13 @@ class Message extends Component {
     // will display the avatar
     if (this.props.renderAvatar) {
       return (
-        <View style={this.styles.avatarContainer}>
+        <View style={this.props.theme.Avatar[this.props.position].container}>
           {this.props.renderAvatar(this.props.user)}
         </View>
       );
     }
     return (
-      <View style={this.styles.avatarContainer}>
+      <View style={this.props.theme.Avatar[this.props.position].container}>
         <GiftedAvatar {...this.props.user}/>
       </View>
     );
@@ -289,8 +135,8 @@ class Message extends Component {
     return (
       <View>
         {this.renderDay()}
-        <View style={[this.styles.container, {
-          marginBottom: this.isNextMessageSameUser() ? 2 : 10,
+        <View style={[this.props.theme.Message[this.props.position].container, {
+          marginBottom: this.isSameUser(this.props, this.props.nextMessage) ? 2 : 10,
         }]}>
           {this.props.position === 'left' ? this.renderAvatar() : null}
           {this.renderBubble()}

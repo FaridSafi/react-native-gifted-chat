@@ -100,23 +100,7 @@ class App extends Component {
         }}
         renderMessage={(props) => {
           return (
-            <Message {...props}
-              stylesCommon={{
-                bubble: {
-                  // borderRadius: 30,
-                }
-              }}
-              stylesLeft={{
-                bubble: {
-                  // backgroundColor: 'red',
-                }
-              }}
-              stylesRight={{
-                bubble: {
-                  // backgroundColor: 'green',
-                }
-              }}
-            />
+            <Message {...props}/>
           );
         }}
       />

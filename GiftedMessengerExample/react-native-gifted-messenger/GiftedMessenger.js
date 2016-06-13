@@ -135,7 +135,7 @@ class GiftedMessenger extends Component {
       }}>
         <InvertibleScrollView
           inverted={true}
-          keyboardShouldPersistTaps={false}
+          keyboardShouldPersistTaps={true}
 
           onTouchStart={this.onTouchStart.bind(this)}
           onTouchMove={this.onTouchMove.bind(this)}

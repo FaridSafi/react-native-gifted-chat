@@ -83,7 +83,7 @@ class App extends Component {
     return (
       <GiftedMessenger
         messages={this.state.messages}
-        onPress={this.onSend.bind(this)}
+        onSend={this.onSend.bind(this)}
         onPressAvatar={(user) => {
           console.log(user);
         }}

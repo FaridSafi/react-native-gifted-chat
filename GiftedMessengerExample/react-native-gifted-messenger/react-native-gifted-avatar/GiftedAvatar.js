@@ -51,18 +51,18 @@ class Avatar extends Component {
       return (
         <View style={[styles.avatar, {
           backgroundColor: 'transparent',
-        }]}/>
+        }, this.props.style]}/>
       )
     }
 
     if (this.props.user.avatar) {
       return (
         <TouchableOpacity onPress={() => {
-          this.props.onPress(this.props.user);
+          this.props.onPress && this.props.onPress(this.props.user);
         }}>
           <Image
             source={{uri: this.props.user.avatar}}
-            style={styles.avatar}
+            style={[styles.avatar, this.props.style]}
           />
         </TouchableOpacity>
       );
@@ -75,13 +75,13 @@ class Avatar extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          this.props.onPress(this.props.user);
+          this.props.onPress && this.props.onPress(this.props.user);
         }}
         style={[styles.avatar, {
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: this.avatarColor,
-        }]}
+        }, this.props.style]}
       >
         <Text style={{
           color: '#fff',
@@ -98,7 +98,7 @@ class Avatar extends Component {
 
 Avatar.defaultProps = {
   user: null,
-  onPress: () => {},
+  onPress: null,
 };
 
 const styles = StyleSheet.create({

@@ -136,7 +136,7 @@ class Message extends Component {
         return this.props.renderAvatar(null);
       }
       return (
-        <GiftedAvatar/>
+        <GiftedAvatar style={styles[this.props.position].avatar}/>
       );
     } else {
       const avatarProps = {
@@ -149,7 +149,7 @@ class Message extends Component {
         return this.props.renderAvatar(avatarProps);
       }
       return (
-        <GiftedAvatar {...avatarProps}/>
+        <GiftedAvatar {...avatarProps} style={styles[this.props.position].avatar}/>
       );
     }
   }
@@ -199,7 +199,7 @@ class Message extends Component {
   }
 
   render() {
-    console.log('render message');
+    // console.log('render message');
     return (
       <View>
         {this.renderDay()}
@@ -249,8 +249,8 @@ const stylesCommon = {
   },
   bubble: {
     backgroundColor: 'blue',
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 0,
+    marginRight: 0,
     borderRadius: 10,
   },
   bubbleText: {
@@ -283,6 +283,10 @@ const stylesLeft = {
     ...stylesCommon.bubbleToPrevious,
     borderTopLeftRadius: 0,
   },
+  avatar: {
+    ...stylesCommon.avatar,
+    marginRight: 5,
+  },
 };
 
 const stylesRight = {
@@ -299,6 +303,10 @@ const stylesRight = {
   bubbleToPrevious: {
     ...stylesCommon.bubbleToPrevious,
     borderTopRightRadius: 0,
+  },
+  avatar: {
+    ...stylesCommon.avatar,
+    marginLeft: 5,
   },
 };
 

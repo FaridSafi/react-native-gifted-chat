@@ -53,30 +53,30 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // setTimeout(() => {
-    //   const messages = this.state.messages.slice(0);
-    //   messages.shift();
-    //
-    //   this.setState({
-    //     messages: messages,
-    //   })
-    // }, 2000);
-
-
     setTimeout(() => {
+      const messages = this.state.messages.slice(0);
+      messages.shift();
+
       this.setState({
-        messages: GiftedMessenger.append(this.state.messages, {
-          text: 'Hello Farid',
-          time: new Date(),
-          user: {
-            id: 1,
-            name: 'React Native',
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
-          },
-          key: Math.round(Math.random() * 100000),
-        }),
-      });
+        messages: messages,
+      })
     }, 2000);
+
+    //
+    // setTimeout(() => {
+    //   this.setState({
+    //     messages: GiftedMessenger.append(this.state.messages, {
+    //       text: 'Hello Farid',
+    //       time: new Date(),
+    //       user: {
+    //         id: 1,
+    //         name: 'React Native',
+    //         avatar: 'https://facebook.github.io/react/img/logo_og.png',
+    //       },
+    //       key: Math.round(Math.random() * 100000),
+    //     }),
+    //   });
+    // }, 2000);
   }
 
   render() {

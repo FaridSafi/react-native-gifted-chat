@@ -11,7 +11,6 @@ import ActionSheet from '@exponent/react-native-action-sheet';
 
 import Message from './components/Message';
 import Composer from './components/Composer';
-import Avatar from './components/Avatar';
 
 class GiftedMessenger extends Component {
   constructor(props) {
@@ -136,10 +135,15 @@ class GiftedMessenger extends Component {
               renderAvatar: this.props.renderAvatar,
             };
 
+            if (!messageProps.key) {
+              console.warn('GiftedMessenger: key is missing for message', JSON.stringify(message));
+            }
+
+            if (this.props.renderMessage) {
+              return this.props.renderMessage(messageProps);
+            }
             return (
-              <View key={message.key}>
-                {this.props.renderMessage(messageProps)}
-              </View>
+              <Message {...messageProps}/>
             );
           })}
         </InvertibleScrollView>
@@ -187,7 +191,12 @@ class GiftedMessenger extends Component {
       }
     };
 
-    return this.props.renderComposer(composerProps);
+    if (this.props.renderComposer) {
+      return this.props.renderComposer(composerProps);
+    }
+    return (
+      <Composer {...composerProps}/>
+    );
   }
 
   render() {
@@ -228,9 +237,9 @@ GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
 
-  renderMessage: (props) => <Message {...props}/>,
-  renderComposer: (props) => <Composer {...props}/>,
-  renderAvatar: (user) => <Avatar user={user}/>,
+  renderMessage: null,
+  renderComposer: null,
+  renderAvatar: null,
 
   composerHeightMin: 55,
   composerTextInputHeightMin: 35,

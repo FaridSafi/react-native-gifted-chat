@@ -1,0 +1,19 @@
+{
+  "name": "react-native-gifted-avatar",
+  "version": "0.0.1",
+  "description": "",
+  "main": "GiftedAvatar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FaridSafi/react-native-gifted-avatar.git"
+  },
+  "author": "Farid from Safi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FaridSafi/react-native-gifted-avatar/issues"
+  },
+  "homepage": "https://github.com/FaridSafi/react-native-gifted-avatar#readme"
+}

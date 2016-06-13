@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import moment from 'moment';
+import GiftedAvatar from 'react-native-gifted-avatar';
 
 class Message extends Component {
   constructor(props) {
@@ -130,9 +131,20 @@ class Message extends Component {
     }
 
     if (this.isNextMessageSameUser()) {
-      return this.props.renderAvatar(null);
+      if (this.props.renderAvatar) {
+        return this.props.renderAvatar(null);
+      }
+      return (
+        <GiftedAvatar user={null}/>
+      );
     } else {
-      return this.props.renderAvatar(this.props.user);
+
+      if (this.props.renderAvatar) {
+        return this.props.renderAvatar(this.props.user);
+      }
+      return (
+        <GiftedAvatar user={this.props.user}/>
+      );
     }
   }
 
@@ -181,6 +193,7 @@ class Message extends Component {
   }
 
   render() {
+    console.log('render message');
     return (
       <View>
         {this.renderDay()}

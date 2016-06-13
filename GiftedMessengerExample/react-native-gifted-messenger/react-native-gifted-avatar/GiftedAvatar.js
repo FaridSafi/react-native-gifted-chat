@@ -57,10 +57,13 @@ class Avatar extends Component {
 
     if (this.props.avatar) {
       return (
-        <TouchableOpacity onPress={() => {
-          const {onPress, ...other} = this.props;
-          this.props.onPress && this.props.onPress(other);
-        }}>
+        <TouchableOpacity
+          disabled={this.props.onPress ? false : true}
+          onPress={() => {
+            const {onPress, ...other} = this.props;
+            this.props.onPress && this.props.onPress(other);
+          }}
+        >
           <Image
             source={{uri: this.props.avatar}}
             style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
@@ -75,6 +78,7 @@ class Avatar extends Component {
 
     return (
       <TouchableOpacity
+        disabled={this.props.onPress ? false : true}
         onPress={() => {
           const {onPress, ...other} = this.props;
           this.props.onPress && this.props.onPress(other);

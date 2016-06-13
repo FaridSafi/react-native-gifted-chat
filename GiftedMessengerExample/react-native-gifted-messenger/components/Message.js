@@ -27,14 +27,6 @@ class Message extends Component {
     return false;
   }
 
-  applyStyles(defaultStyles, customStyles) {
-    for (let key in defaultStyles) {
-      if (defaultStyles.hasOwnProperty(key)) {
-        Object.assign(defaultStyles[key], customStyles[key]);
-      }
-    }
-  }
-
   isSameDay(currentMessage, diffMessage) {
     let diff = 0;
     if (diffMessage && diffMessage.time && currentMessage && currentMessage.time) {
@@ -131,7 +123,6 @@ class Message extends Component {
   }
 
   render() {
-    // console.log('render message');
     return (
       <View>
         {this.renderDay()}
@@ -148,12 +139,10 @@ class Message extends Component {
 }
 
 Message.defaultProps = {
+  theme: {},
   position: 'left',
   user: null,
   time: null,
-  stylesCommon: {},
-  stylesLeft: {},
-  stylesRight: {},
 
   previousMessage: null,
   nextMessage: null,

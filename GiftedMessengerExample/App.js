@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-  PixelRatio,
+  View,
+  Text,
 } from 'react-native';
 
 import {GiftedMessenger, Message, Composer, GiftedAvatar as Avatar, Theme} from './react-native-gifted-messenger/GiftedMessenger';
@@ -24,15 +25,30 @@ class App extends Component {
           }, position: 'left', text: 'See you soon', time: new Date(Date.UTC(2016, 5, 11, 17, 30, 0))},
 
 
-          {key: Math.round(Math.random() * 100000), user: {
-            name: 'Farid Safi',
-            id: 2,
-          }, position: 'right', location: {longitude: -122.04120235, latitude: 37.33756603}, time: new Date(Date.UTC(2016, 5, 11, 17, 10, 0))},
+          // {key: Math.round(Math.random() * 100000), user: {
+          //   name: 'Farid Safi',
+          //   id: 2,
+          // }, position: 'right', location: {longitude: -122.04120235, latitude: 37.33756603}, time: new Date(Date.UTC(2016, 5, 11, 17, 10, 0))},
 
-          {key: Math.round(Math.random() * 100000), user: {
-            name: 'Farid Safi',
-            id: 2,
-          }, position: 'right', text: 'I am here', time: new Date(Date.UTC(2016, 5, 11, 17, 0, 0))},
+          {
+            key: Math.round(Math.random() * 100000),
+            user: {
+              name: 'Farid Safi',
+              id: 2,
+            },
+            position: 'right',
+            time: new Date(Date.UTC(2016, 5, 11, 17, 0, 0)),
+            renderCustomView: (message) => {
+              return (
+                <View>
+                  <Text style={{
+                    backgroundColor: 'transparent',
+                    margin: 5,
+                  }}>Custom View</Text>
+                </View>
+              );
+            },
+          },
 
           {key: Math.round(Math.random() * 100000), user: {
             name: 'Club Mate',

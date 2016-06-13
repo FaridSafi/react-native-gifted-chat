@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {
   Animated,
-  StyleSheet,
   View,
   InteractionManager,
   Dimensions,
@@ -144,8 +143,6 @@ class GiftedMessenger extends Component {
           onTouchMove={this.onTouchMove.bind(this)}
           onTouchEnd={this.onTouchEnd.bind(this)}
 
-          style={[styles.messagesContainer, {
-          }]}
           onKeyboardWillShow={this.onKeyboardWillShow.bind(this)}
           onKeyboardWillHide={this.onKeyboardWillHide.bind(this)}
 
@@ -188,7 +185,6 @@ class GiftedMessenger extends Component {
 
   renderComposer() {
     const composerProps = {
-      theme: this.props.theme,
       text: this.state.text,
       heightMin: this.props.composerHeightMin,
       textInputHeightMin: this.props.composerTextInputHeightMin,
@@ -224,7 +220,8 @@ class GiftedMessenger extends Component {
         }
         this.setState(newState);
         this.scrollToBottom();
-      }
+      },
+      theme: this.props.theme,
     };
 
     if (this.props.renderComposer) {
@@ -242,7 +239,7 @@ class GiftedMessenger extends Component {
       // what if I don't want action sheet?
       return (
         <ActionSheet ref={component => this._actionSheetRef = component}>
-          <View style={styles.container}>
+          <View style={{flex: 1}}>
             {this.renderMessages()}
             {this.renderComposer()}
           </View>
@@ -272,46 +269,27 @@ class GiftedMessenger extends Component {
 GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
-
-  // ALL COMPONENTS
-
+  theme: Theme,
   // Message related
+  // TODO re order like in the code
   renderMessage: null,
+  renderBubble: null,
   renderAvatar: null,
   renderDay: null,
   renderTime: null,
-
-
   renderLocation: null,
   renderBubbleText: null,
-  // renderBubble?
 
   // Composer related
   renderComposer: null,
   renderActionsButton: null,
   renderSendButton: null,
   renderNavBar: null,
-  // renderTextInput?
-
-
-
-
-  // TODO
-  // render components of composer
+  renderTextInput: null,
 
   composerHeightMin: 55,
   composerTextInputHeightMin: 35,
   composerTextInputHeightMax: 100,
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  messagesContainer: {
-    // flex: 1,
-    // backgroundColor: 'red',
-  },
-});
 
 export {GiftedMessenger, Message, Composer, GiftedAvatar, Theme};

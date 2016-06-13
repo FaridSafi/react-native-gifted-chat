@@ -3,7 +3,6 @@ import {
   Text,
   View,
   TextInput,
-  PixelRatio,
   Modal,
   Image,
   TouchableOpacity,
@@ -11,9 +10,6 @@ import {
 
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
-
-// TODO
-// disable CameraRollPicker by default because native module needed
 
 class Composer extends Component {
 
@@ -27,10 +23,10 @@ class Composer extends Component {
 
     this.state = {
       modalVisible: false,
-    }
+    };
   }
 
-  _setModalVisible(visible) {
+  setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
 
@@ -44,7 +40,7 @@ class Composer extends Component {
     (buttonIndex) => {
       switch (buttonIndex) {
         case 1:
-          this._setModalVisible(true);
+          this.setModalVisible(true);
           break;
         case 2:
           navigator.geolocation.getCurrentPosition(
@@ -76,7 +72,7 @@ class Composer extends Component {
             animationType={'slide'}
             transparent={false}
             visible={this.state.modalVisible}
-            onRequestClose={() => {this._setModalVisible(false)}}
+            onRequestClose={() => {this.setModalVisible(false)}}
           >
             {this.renderNavBar()}
             <CameraRollPicker
@@ -145,7 +141,7 @@ class Composer extends Component {
     return (
       <NavBar>
         <NavButton onPress={() => {
-          this._setModalVisible(false);
+          this.setModalVisible(false);
         }}>
           <NavButtonText>
             Cancel

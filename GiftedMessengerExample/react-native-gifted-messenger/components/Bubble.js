@@ -64,6 +64,22 @@ class Bubble extends Component {
     return null;
   }
 
+  renderCustomView() {
+    if (this.props.renderCustomView) {
+      const {
+        renderAvatar,
+        renderDay,
+        renderTime,
+        renderLocation,
+        renderBubbleText,
+        renderCustomView,
+        ...other,
+      } = this.props;
+      return this.props.renderCustomView(other);
+    }
+    return null;
+  }
+
   renderTime() {
     if (this.props.time) {
       if (this.props.renderTime) {
@@ -87,6 +103,7 @@ class Bubble extends Component {
       <View style={[this.props.theme.Bubble[this.props.position].container, this.handleBubbleCorners()]}>
         {this.renderLocation()}
         {this.renderBubbleText()}
+        {this.renderCustomView()}
         {this.renderTime()}
       </View>
     );

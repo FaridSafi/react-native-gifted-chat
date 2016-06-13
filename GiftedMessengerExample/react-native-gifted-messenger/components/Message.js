@@ -3,6 +3,8 @@ import {
   Text,
   View,
   MapView,
+  Linking,
+  TouchableOpacity,
 } from 'react-native';
 
 import moment from 'moment';
@@ -98,7 +100,7 @@ class Message extends Component {
       bubbleToPrevious: {
         borderTopLeftRadius: 0,
       },
-      avatar: {
+      avatarContainer: {
         marginRight: 5,
       },
     };
@@ -120,7 +122,7 @@ class Message extends Component {
       bubbleToPrevious: {
         borderTopRightRadius: 0,
       },
-      avatar: {
+      avatarContainer: {
         marginLeft: 5,
       },
     };
@@ -133,129 +135,6 @@ class Message extends Component {
     } else {
       this.styles = Object.assign({}, stylesCommon, stylesLeft);
       this.applyStyles(this.styles, this.props.stylesLeft);
-    }
-  }
-
-  renderDay() {
-    if (this.props.time) {
-      if (!this.isPreviousMessageSameDay()) {
-        return (
-          <View style={this.styles.day}>
-            <Text style={this.styles.dayText}>
-              {moment(this.props.time).calendar(null, {
-                sameDay: '[Today]',
-                nextDay: '[Tomorrow]',
-                nextWeek: 'dddd',
-                lastDay: '[Yesterday]',
-                lastWeek: 'LL',
-                sameElse: 'LL'
-              })}
-            </Text>
-          </View>
-        );
-      }
-    }
-    return null;
-  }
-
-  renderTime() {
-    if (this.props.time) {
-      return (
-        <View style={this.styles.time}>
-          <Text style={this.styles.timeText}>
-            {moment(this.props.time).format('LT')}
-          </Text>
-        </View>
-      );
-    }
-    return null;
-  }
-
-  renderLocation() {
-    if (this.props.location) {
-      return (
-        <MapView
-          style={this.styles.mapView}
-          region={{
-            latitude: this.props.location.latitude,
-            longitude: this.props.location.longitude,
-          }}
-          annotations={[{
-            latitude: this.props.location.latitude,
-            longitude: this.props.location.longitude,
-          }]}
-          scrollEnabled={false}
-          zoomEnabled={false}
-        />
-      );
-    }
-    return null;
-  }
-
-  renderText() {
-    if (this.props.text) {
-      return (
-        <Text style={this.styles.bubbleText}>
-          {this.props.text}
-        </Text>
-      );
-    }
-    return null;
-  }
-
-  handleBubbleCorners() {
-    let cornerStyles = {};
-    if (this.isNextMessageSameUser() && this.isNextMessageSameDay()) {
-      cornerStyles = {
-        ...cornerStyles,
-        ...this.styles.bubbleToNext,
-      };
-    }
-    if (this.isPreviousMessageSameUser() && this.isPreviousMessageSameDay()) {
-      cornerStyles = {
-        ...cornerStyles,
-        ...this.styles.bubbleToPrevious,
-      };
-    }
-    return cornerStyles;
-  }
-
-  renderBubble() {
-    return (
-      <View style={[this.styles.bubble, this.handleBubbleCorners()]}>
-        {this.renderLocation()}
-        {this.renderText()}
-        {this.renderTime()}
-      </View>
-    );
-  }
-
-  renderAvatar() {
-    if (!this.props.user) {
-      return null;
-    }
-
-    if (this.isNextMessageSameUser()) {
-      // will display a placeholder (empty space)
-      if (this.props.renderAvatar) {
-        return this.props.renderAvatar(null);
-      }
-      return (
-        <GiftedAvatar style={this.styles.avatar}/>
-      );
-    } else {
-      const avatarProps = {
-        user: this.props.user,
-        onPress: this.props.onPressAvatar,
-      };
-
-      // will display the avatar
-      if (this.props.renderAvatar) {
-        return this.props.renderAvatar(avatarProps);
-      }
-      return (
-        <GiftedAvatar {...avatarProps} style={this.styles.avatar}/>
-      );
     }
   }
 
@@ -311,6 +190,164 @@ class Message extends Component {
     return false;
   }
 
+  renderDay() {
+    if (this.props.time) {
+      if (!this.isPreviousMessageSameDay()) {
+        if (this.props.renderDay) {
+          return this.props.renderDay(this.props.time);
+        }
+        return (
+          <View style={this.styles.day}>
+            <Text style={this.styles.dayText}>
+              {moment(this.props.time).calendar(null, {
+                sameDay: '[Today]',
+                nextDay: '[Tomorrow]',
+                nextWeek: 'dddd',
+                lastDay: '[Yesterday]',
+                lastWeek: 'LL',
+                sameElse: 'LL'
+              })}
+            </Text>
+          </View>
+        );
+      }
+    }
+    return null;
+  }
+
+  renderTime() {
+    if (this.props.time) {
+      if (this.props.renderTime) {
+        return this.props.renderTime(this.props.time);
+      }
+      return (
+        <View style={this.styles.time}>
+          <Text style={this.styles.timeText}>
+            {moment(this.props.time).format('LT')}
+          </Text>
+        </View>
+      );
+    }
+    return null;
+  }
+
+  renderLocation() {
+    if (this.props.location) {
+      if (this.props.renderLocation) {
+        this.props.renderLocation(this.props.location);
+      }
+      return (
+        <TouchableOpacity onPress={() => {
+          // TODO test android
+          // TODO implement google map url
+          const url = `http://maps.apple.com/?ll=${this.props.location.latitude},${this.props.location.longitude}`;
+          Linking.canOpenURL(url).then(supported => {
+            if (supported) {
+              return Linking.openURL(url);
+            }
+          }).catch(err => console.error('An error occurred', err));
+        }}>
+          <MapView
+            style={this.styles.mapView}
+            region={{
+              latitude: this.props.location.latitude,
+              longitude: this.props.location.longitude,
+            }}
+            annotations={[{
+              latitude: this.props.location.latitude,
+              longitude: this.props.location.longitude,
+            }]}
+            scrollEnabled={false}
+            zoomEnabled={false}
+          />
+        </TouchableOpacity>
+      );
+    }
+    return null;
+  }
+
+  renderText() {
+    if (this.props.text) {
+      if (this.props.renderText) {
+        this.props.renderText(this.props.text);
+      }
+      return (
+        <Text style={this.styles.bubbleText}>
+          {this.props.text}
+        </Text>
+      );
+    }
+    return null;
+  }
+
+  handleBubbleCorners() {
+    let cornerStyles = {};
+    if (this.isNextMessageSameUser() && this.isNextMessageSameDay()) {
+      cornerStyles = {
+        ...cornerStyles,
+        ...this.styles.bubbleToNext,
+      };
+    }
+    if (this.isPreviousMessageSameUser() && this.isPreviousMessageSameDay()) {
+      cornerStyles = {
+        ...cornerStyles,
+        ...this.styles.bubbleToPrevious,
+      };
+    }
+    return cornerStyles;
+  }
+
+  renderBubble() {
+    return (
+      <View style={[this.styles.bubble, this.handleBubbleCorners()]}>
+        {this.renderLocation()}
+        {this.renderText()}
+        {this.renderTime()}
+      </View>
+    );
+  }
+
+  renderAvatar() {
+    if (!this.props.user) {
+      return null;
+    }
+
+    if (this.isNextMessageSameUser()) {
+      // will display a placeholder (empty space)
+      if (this.props.renderAvatar) {
+        return (
+          <View style={this.styles.avatarContainer}>
+            {this.props.renderAvatar(null)}
+          </View>
+        );
+      }
+      return (
+        <View style={this.styles.avatarContainer}>
+          <GiftedAvatar/>
+        </View>
+      );
+    }
+
+    const avatarProps = {
+      user: this.props.user,
+      onPress: this.props.onPressAvatar,
+    };
+
+    // will display the avatar
+    if (this.props.renderAvatar) {
+      return (
+        <View style={this.styles.avatarContainer}>
+          {this.props.renderAvatar(avatarProps)}
+        </View>
+      );
+    }
+    return (
+      <View style={this.styles.avatarContainer}>
+        <GiftedAvatar {...avatarProps}/>
+      </View>
+    );
+  }
+
   render() {
     // console.log('render message');
     return (
@@ -335,6 +372,17 @@ Message.defaultProps = {
   stylesCommon: {},
   stylesLeft: {},
   stylesRight: {},
+
+  previousMessage: null,
+  nextMessage: null,
+
+  onPressAvatar: null,
+  renderAvatar: null,
+
+  renderDay: null,
+  renderTime: null,
+  renderLocation: null,
+  renderText: null,
 };
 
 export default Message;

@@ -159,6 +159,11 @@ class GiftedMessenger extends Component {
               nextMessage: this.getMessages()[index - 1] ? this.getMessages()[index - 1] : null,
               renderAvatar: this.props.renderAvatar,
               onPressAvatar: this.props.onPressAvatar,
+
+              renderDay: this.props.renderDay,
+              renderTime: this.props.renderTime,
+              renderLocation: this.props.renderLocation,
+              renderText: this.props.renderText,
             };
 
             if (!messageProps.key) {
@@ -268,6 +273,14 @@ GiftedMessenger.defaultProps = {
   renderMessage: null,
   renderComposer: null,
   renderAvatar: null,
+
+  renderDay: null,
+  renderTime: null,
+  renderLocation: null,
+  renderText: null,
+
+  // TODO
+  // render components of composer
 
   composerHeightMin: 55,
   composerTextInputHeightMin: 35,

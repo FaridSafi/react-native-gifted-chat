@@ -47,11 +47,11 @@ class Avatar extends Component {
   }
 
   render() {
-    if (this.props.user === null) {
+    if (this.props.user === null || (!this.props.user.name && !this.props.user.avatar)) {
       return (
-        <View style={[styles.avatar, {
+        <View style={[{
           backgroundColor: 'transparent',
-        }, this.props.style]}/>
+        }, this.props.avatarStyle]}/>
       )
     }
 
@@ -62,7 +62,7 @@ class Avatar extends Component {
         }}>
           <Image
             source={{uri: this.props.user.avatar}}
-            style={[styles.avatar, this.props.style]}
+            style={[this.props.avatarStyle]}
           />
         </TouchableOpacity>
       );
@@ -77,18 +77,11 @@ class Avatar extends Component {
         onPress={() => {
           this.props.onPress && this.props.onPress(this.props.user);
         }}
-        style={[styles.avatar, {
-          justifyContent: 'center',
-          alignItems: 'center',
+        style={[{
           backgroundColor: this.avatarColor,
-        }, this.props.style]}
+        }, this.props.avatarStyle]}
       >
-        <Text style={{
-          color: '#fff',
-          fontSize: 16,
-          backgroundColor: 'transparent',
-          fontWeight: '100',
-        }}>
+        <Text style={this.props.textStyle}>
           {this.avatarName}
         </Text>
       </TouchableOpacity>
@@ -99,15 +92,22 @@ class Avatar extends Component {
 Avatar.defaultProps = {
   user: null,
   onPress: null,
-};
 
-const styles = StyleSheet.create({
-  avatar: {
+  avatarStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#ccc',
   },
-});
+  textStyle: {
+    color: '#fff',
+    fontSize: 16,
+    backgroundColor: 'transparent',
+    fontWeight: '100',
+  },
+};
+
+
 
 export default Avatar;

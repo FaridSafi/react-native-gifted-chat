@@ -8,10 +8,6 @@ import {
 
 class Avatar extends Component {
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  }
-
   setAvatarColor() {
     const userName = this.props.name || '';
     const name = userName.toUpperCase().split(' ');
@@ -44,6 +40,10 @@ class Avatar extends Component {
   }
 
   render() {
+
+    console.log('render avatar');
+
+
     if (!this.props.name && !this.props.avatar) {
       // render placeholder
       return (

@@ -38,14 +38,20 @@ class App extends Component {
             },
             position: 'right',
             time: new Date(Date.UTC(2016, 5, 11, 17, 0, 0)),
+            text: 'Some text',
             renderCustomView: (message) => {
               return (
-                <View>
-                  <Text style={{
-                    backgroundColor: 'transparent',
-                    margin: 5,
-                  }}>Custom View</Text>
-                </View>
+                <View
+                  style={{
+                    position: 'absolute',
+                    left: -10,
+                    top: 8,
+                    backgroundColor: 'green',
+                    width: 20,
+                    height: 20,
+                    borderRadius: 10,
+                  }}
+                />
               );
             },
           },
@@ -129,14 +135,13 @@ class App extends Component {
   // onPressAccessory
 
   onSend(message) {
-    console.log(message);
-
     this.setState({
       messages: GiftedMessenger.append(this.state.messages, {
         ...message,
         time: new Date(),
         user: {
-          name: 'Developer',
+          id: 2,
+          name: 'Farid Safi',
           // avatar: 'https://facebook.github.io/react/img/logo_og.png',
         },
         key: Math.round(Math.random() * 100000),

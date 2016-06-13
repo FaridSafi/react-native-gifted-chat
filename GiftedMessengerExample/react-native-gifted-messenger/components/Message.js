@@ -123,6 +123,7 @@ class Message extends Component {
   }
 
   render() {
+    // console.log('render message', this.props.text);
     return (
       <View>
         {this.renderDay()}

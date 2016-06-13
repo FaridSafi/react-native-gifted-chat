@@ -284,4 +284,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GiftedMessenger;
+export {GiftedMessenger, Message, Composer};

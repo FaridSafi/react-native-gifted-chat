@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
 } from 'react-native';
 
-import GiftedMessenger from './react-native-gifted-messenger/GiftedMessenger';
+import {GiftedMessenger, Message, Composer} from './react-native-gifted-messenger/GiftedMessenger';
 
 class App extends Component {
   constructor(props) {
@@ -87,6 +87,27 @@ class App extends Component {
         onPressAvatar={(user) => {
           console.log(user);
         }}
+        renderMessage={(props) => {
+          return (
+            <Message {...props}
+              stylesCommon={{
+                bubble: {
+                  // borderRadius: 30,
+                }
+              }}
+              stylesLeft={{
+                bubble: {
+                  // backgroundColor: 'red',
+                }
+              }}
+              stylesRight={{
+                bubble: {
+                  // backgroundColor: 'green',
+                }
+              }}
+            />
+          );
+        }}
       />
     );
   }
@@ -97,7 +118,6 @@ class App extends Component {
   onSend(message) {
     console.log(message);
 
-
     this.setState({
       messages: GiftedMessenger.append(this.state.messages, {
         ...message,
@@ -106,6 +126,7 @@ class App extends Component {
           name: 'Developer',
           avatar: 'https://facebook.github.io/react/img/logo_og.png',
         },
+        user: null,
         key: Math.round(Math.random() * 100000),
       }),
     });

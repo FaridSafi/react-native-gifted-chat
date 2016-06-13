@@ -23,20 +23,125 @@ class Message extends Component {
     if (this.props.previousMessage !== nextProps.previousMessage) {
       return true;
     }
-
-
     return false;
   }
 
+  applyStyles(defaultStyles, customStyles) {
+    for (let key in defaultStyles) {
+      if (defaultStyles.hasOwnProperty(key)) {
+        Object.assign(defaultStyles[key], customStyles[key]);
+      }
+    }
+  }
+
   componentWillMount() {
+    const stylesCommon = {
+      container: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        // marginBottom: 5,
+        // marginTop: 5,
+      },
+      day: {
+        alignItems: 'center',
+        marginTop: 5,
+        marginBottom: 5,
+      },
+      dayText: {
+        fontSize: 12,
+      },
+      time: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 5,
+      },
+      timeText: {
+        fontSize: 11,
+        color: '#fff',
+        backgroundColor: 'transparent',
+        textAlign: 'right',
+      },
+      bubble: {
+        marginLeft: 0,
+        marginRight: 0,
+        borderRadius: 10,
+      },
+      bubbleText: {
+        color: 'white',
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 10,
+        marginRight: 10,
+      },
+      mapView: {
+        width: 150,
+        height: 100,
+        borderRadius: 8,
+        margin: 3,
+      },
+    };
+
+    this.applyStyles(stylesCommon, this.props.stylesCommon);
+
+    const stylesLeft = {
+      container: {
+        justifyContent: 'flex-start',
+        marginLeft: 5,
+        marginRight: 0,
+      },
+      bubble: {
+        backgroundColor: 'blue',
+      },
+      bubbleToNext: {
+        borderBottomLeftRadius: 0,
+      },
+      bubbleToPrevious: {
+        borderTopLeftRadius: 0,
+      },
+      avatar: {
+        marginRight: 5,
+      },
+    };
+
+    this.applyStyles(stylesLeft, stylesCommon);
+
+    const stylesRight = {
+      container: {
+        justifyContent: 'flex-end',
+        marginLeft: 0,
+        marginRight: 5,
+      },
+      bubble: {
+        backgroundColor: 'purple',
+      },
+      bubbleToNext: {
+        borderBottomRightRadius: 0,
+      },
+      bubbleToPrevious: {
+        borderTopRightRadius: 0,
+      },
+      avatar: {
+        marginLeft: 5,
+      },
+    };
+
+    this.applyStyles(stylesRight, stylesCommon);
+
+    if (this.props.position === 'right') {
+      this.styles = Object.assign({}, stylesCommon, stylesRight);
+      this.applyStyles(this.styles, this.props.stylesRight);
+    } else {
+      this.styles = Object.assign({}, stylesCommon, stylesLeft);
+      this.applyStyles(this.styles, this.props.stylesLeft);
+    }
   }
 
   renderDay() {
     if (this.props.time) {
       if (!this.isPreviousMessageSameDay()) {
         return (
-          <View style={styles[this.props.position].day}>
-            <Text style={styles[this.props.position].dayText}>
+          <View style={this.styles.day}>
+            <Text style={this.styles.dayText}>
               {moment(this.props.time).calendar(null, {
                 sameDay: '[Today]',
                 nextDay: '[Tomorrow]',
@@ -56,8 +161,8 @@ class Message extends Component {
   renderTime() {
     if (this.props.time) {
       return (
-        <View style={styles[this.props.position].time}>
-          <Text style={styles[this.props.position].timeText}>
+        <View style={this.styles.time}>
+          <Text style={this.styles.timeText}>
             {moment(this.props.time).format('LT')}
           </Text>
         </View>
@@ -70,7 +175,7 @@ class Message extends Component {
     if (this.props.location) {
       return (
         <MapView
-          style={styles[this.props.position].mapView}
+          style={this.styles.mapView}
           region={{
             latitude: this.props.location.latitude,
             longitude: this.props.location.longitude,
@@ -90,7 +195,7 @@ class Message extends Component {
   renderText() {
     if (this.props.text) {
       return (
-        <Text style={styles[this.props.position].bubbleText}>
+        <Text style={this.styles.bubbleText}>
           {this.props.text}
         </Text>
       );
@@ -103,13 +208,13 @@ class Message extends Component {
     if (this.isNextMessageSameUser() && this.isNextMessageSameDay()) {
       cornerStyles = {
         ...cornerStyles,
-        ...styles[this.props.position].bubbleToNext,
+        ...this.styles.bubbleToNext,
       };
     }
     if (this.isPreviousMessageSameUser() && this.isPreviousMessageSameDay()) {
       cornerStyles = {
         ...cornerStyles,
-        ...styles[this.props.position].bubbleToPrevious,
+        ...this.styles.bubbleToPrevious,
       };
     }
     return cornerStyles;
@@ -117,7 +222,7 @@ class Message extends Component {
 
   renderBubble() {
     return (
-      <View style={[styles[this.props.position].bubble, this.handleBubbleCorners()]}>
+      <View style={[this.styles.bubble, this.handleBubbleCorners()]}>
         {this.renderLocation()}
         {this.renderText()}
         {this.renderTime()}
@@ -136,7 +241,7 @@ class Message extends Component {
         return this.props.renderAvatar(null);
       }
       return (
-        <GiftedAvatar style={styles[this.props.position].avatar}/>
+        <GiftedAvatar style={this.styles.avatar}/>
       );
     } else {
       const avatarProps = {
@@ -149,7 +254,7 @@ class Message extends Component {
         return this.props.renderAvatar(avatarProps);
       }
       return (
-        <GiftedAvatar {...avatarProps} style={styles[this.props.position].avatar}/>
+        <GiftedAvatar {...avatarProps} style={this.styles.avatar}/>
       );
     }
   }
@@ -181,6 +286,10 @@ class Message extends Component {
   }
 
   isNextMessageSameUser() {
+    if ((this.props.nextMessage === null || this.props.nextMessage.user === null) && this.props.user === null) {
+      return true;
+    }
+
     if (this.props.nextMessage && this.props.nextMessage.user && this.props.user) {
       if (this.props.nextMessage.user.id === this.props.user.id) {
         return true;
@@ -190,6 +299,10 @@ class Message extends Component {
   }
 
   isPreviousMessageSameUser() {
+    if ((this.props.previousMessage === null || this.props.previousMessage.user === null) && this.props.user === null) {
+      return true;
+    }
+
     if (this.props.previousMessage && this.props.previousMessage.user && this.props.user) {
       if (this.props.previousMessage.user.id === this.props.user.id) {
         return true;
@@ -203,7 +316,7 @@ class Message extends Component {
     return (
       <View>
         {this.renderDay()}
-        <View style={[styles[this.props.position].container, {
+        <View style={[this.styles.container, {
           marginBottom: this.isNextMessageSameUser() ? 2 : 10,
         }]}>
           {this.props.position === 'left' ? this.renderAvatar() : null}
@@ -219,100 +332,9 @@ Message.defaultProps = {
   position: 'left',
   user: null,
   time: null,
-};
-
-const stylesCommon = {
-  container: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    // marginBottom: 5,
-    // marginTop: 5,
-  },
-  day: {
-    alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  dayText: {
-    fontSize: 12,
-  },
-  time: {
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 5,
-  },
-  timeText: {
-    fontSize: 11,
-    color: '#fff',
-    backgroundColor: 'transparent',
-    textAlign: 'right',
-  },
-  bubble: {
-    backgroundColor: 'blue',
-    marginLeft: 0,
-    marginRight: 0,
-    borderRadius: 10,
-  },
-  bubbleText: {
-    color: 'white',
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  mapView: {
-    width: 150,
-    height: 100,
-    borderRadius: 8,
-    margin: 3,
-  },
-};
-
-const stylesLeft = {
-  container: {
-    ...stylesCommon.container,
-    justifyContent: 'flex-start',
-    marginLeft: 5,
-    marginRight: 0,
-  },
-  bubbleToNext: {
-    ...stylesCommon.bubbleToNext,
-    borderBottomLeftRadius: 0,
-  },
-  bubbleToPrevious: {
-    ...stylesCommon.bubbleToPrevious,
-    borderTopLeftRadius: 0,
-  },
-  avatar: {
-    ...stylesCommon.avatar,
-    marginRight: 5,
-  },
-};
-
-const stylesRight = {
-  container: {
-    ...stylesCommon.container,
-    justifyContent: 'flex-end',
-    marginLeft: 0,
-    marginRight: 5,
-  },
-  bubbleToNext: {
-    ...stylesCommon.bubbleToNext,
-    borderBottomRightRadius: 0,
-  },
-  bubbleToPrevious: {
-    ...stylesCommon.bubbleToPrevious,
-    borderTopRightRadius: 0,
-  },
-  avatar: {
-    ...stylesCommon.avatar,
-    marginLeft: 5,
-  },
-};
-
-const styles = {
-  left: Object.assign({}, stylesCommon, stylesLeft),
-  right: Object.assign({}, stylesCommon, stylesRight),
+  stylesCommon: {},
+  stylesLeft: {},
+  stylesRight: {},
 };
 
 export default Message;

@@ -162,6 +162,7 @@ class GiftedMessenger extends Component {
               renderDay: this.props.renderDay,
               renderTime: this.props.renderTime,
               renderLocation: this.props.renderLocation,
+              renderBubble: this.props.renderBubble,
               renderBubbleText: this.props.renderBubbleText,
 
               theme: this.props.theme,
@@ -273,12 +274,12 @@ GiftedMessenger.defaultProps = {
   // Message related
   // TODO re order like in the code
   renderMessage: null,
-  renderBubble: null,
-  renderAvatar: null,
   renderDay: null,
+  renderBubble: null,
+  renderBubbleText: null,
+  renderAvatar: null,
   renderTime: null,
   renderLocation: null,
-  renderBubbleText: null,
 
   // Composer related
   renderComposer: null,

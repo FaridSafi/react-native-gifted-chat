@@ -6,10 +6,22 @@ const Theme = {
   Day: {
     container: {
       alignItems: 'center',
+      justifyContent: 'center',
       marginTop: 5,
       marginBottom: 5,
     },
+    wrapper: {
+      alignItems: 'center',
+      backgroundColor: '#ccc',
+      borderRadius: 10,
+      paddingLeft: 10,
+      paddingRight: 10,
+      paddingTop: 5,
+      paddingBottom: 5,
+    },
     text: {
+      backgroundColor: 'transparent',
+      color: '#fff',
       fontSize: 12,
     },
   },
@@ -101,7 +113,7 @@ const Theme = {
       },
     },
   },
-  
+
 
 
   Composer: {

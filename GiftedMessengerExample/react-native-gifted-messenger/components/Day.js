@@ -10,16 +10,18 @@ class Day extends Component {
   render() {
     return (
       <View style={this.props.theme.Day.container}>
-        <Text style={this.props.theme.Day.text}>
-          {moment(this.props.time).calendar(null, {
-            sameDay: '[Today]',
-            nextDay: '[Tomorrow]',
-            nextWeek: 'dddd',
-            lastDay: '[Yesterday]',
-            lastWeek: 'LL',
-            sameElse: 'LL'
-          })}
-        </Text>
+        <View style={this.props.theme.Day.wrapper}>
+          <Text style={this.props.theme.Day.text}>
+            {moment(this.props.time).calendar(null, {
+              sameDay: '[Today]',
+              nextDay: '[Tomorrow]',
+              nextWeek: 'dddd',
+              lastDay: '[Yesterday]',
+              lastWeek: 'LL',
+              sameElse: 'LL'
+            })}
+          </Text>
+        </View>
       </View>
     );
   }

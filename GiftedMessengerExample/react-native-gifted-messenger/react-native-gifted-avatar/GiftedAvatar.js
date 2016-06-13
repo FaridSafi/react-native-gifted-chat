@@ -40,10 +40,6 @@ class Avatar extends Component {
   }
 
   render() {
-
-    console.log('render avatar');
-
-
     if (!this.props.name && !this.props.avatar) {
       // render placeholder
       return (
@@ -106,7 +102,6 @@ Avatar.defaultProps = {
   textStyle: {},
 };
 
-
 const defaultStyles = {
   avatarStyle: {
     justifyContent: 'center',
@@ -122,6 +117,5 @@ const defaultStyles = {
     fontWeight: '100',
   },
 };
-
 
 export default Avatar;

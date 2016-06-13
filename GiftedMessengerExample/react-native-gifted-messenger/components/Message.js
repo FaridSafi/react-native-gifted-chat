@@ -328,22 +328,17 @@ class Message extends Component {
       );
     }
 
-    const avatarProps = {
-      user: this.props.user,
-      onPress: this.props.onPressAvatar,
-    };
-
     // will display the avatar
     if (this.props.renderAvatar) {
       return (
         <View style={this.styles.avatarContainer}>
-          {this.props.renderAvatar(avatarProps)}
+          {this.props.renderAvatar(this.props.user)}
         </View>
       );
     }
     return (
       <View style={this.styles.avatarContainer}>
-        <GiftedAvatar {...avatarProps}/>
+        <GiftedAvatar {...this.props.user}/>
       </View>
     );
   }
@@ -376,7 +371,6 @@ Message.defaultProps = {
   previousMessage: null,
   nextMessage: null,
 
-  onPressAvatar: null,
   renderAvatar: null,
 
   renderDay: null,

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   TextInput,
@@ -35,7 +34,7 @@ class Composer extends Component {
     this.setState({modalVisible: visible});
   }
 
-  onAccessory() {
+  onActionsPress() {
     let options = ['Take Photo', 'Choose From Library', 'Send Location', 'Cancel'];
     let cancelButtonIndex = options.length - 1;
     this.context.actionSheet().showActionSheetWithOptions({
@@ -66,43 +65,46 @@ class Composer extends Component {
     });
   }
 
-  renderAccessoryButton() {
-    return (
-      <TouchableOpacity
-        style={styles.accessoryButton}
-        onPress={this.onAccessory.bind(this)}
-      >
-        <Modal
-          animationType={'slide'}
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {this._setModalVisible(false)}}
+  renderActionsButton() {
+    if (this.props.actions === true) {
+      return (
+        <TouchableOpacity
+          style={this.props.componentStyles.actionsButton}
+          onPress={this.onActionsPress.bind(this)}
         >
-          {this.renderNavBar()}
-          <CameraRollPicker
-            maximum={10}
-            imagesPerRow={4}
-            callback={this.getSelectedImages.bind(this)}
-          />
-        </Modal>
+          <Modal
+            animationType={'slide'}
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {this._setModalVisible(false)}}
+          >
+            {this.renderNavBar()}
+            <CameraRollPicker
+              maximum={10}
+              imagesPerRow={4}
+              callback={this.getSelectedImages.bind(this)}
+            />
+          </Modal>
 
-        <Image
-          style={{
-            width: 30 * 60 / 66,
-            height: 30,
-            tintColor: '#ccc'
-          }}
-          resizeMode="contain"
-          source={require('../assets/paperclip.png')}
-        />
-      </TouchableOpacity>
-    );
+          <Image
+            style={{
+              width: 27,
+              height: 30,
+              tintColor: '#ccc'
+            }}
+            resizeMode="contain"
+            source={require('../assets/paperclip.png')}
+          />
+        </TouchableOpacity>
+      );
+    }
+    return null;
   }
 
   renderSendButton() {
     return (
       <TouchableOpacity
-        style={styles.sendButton}
+        style={this.props.componentStyles.sendButton}
         onPress={() => {
           if (this.props.text.trim().length > 0) {
             this.props.onSend({
@@ -111,7 +113,7 @@ class Composer extends Component {
           }
         }}
       >
-        <Text style={[styles.sendButtonText, {
+        <Text style={[this.props.componentStyles.sendButtonText, {
           opacity: (this.props.text.trim().length > 0 ? 1 : 0.5),
         }]}>Send</Text>
       </TouchableOpacity>
@@ -124,7 +126,7 @@ class Composer extends Component {
         placeholder={'Type a message...'}
         multiline={true}
         onChange={this.props.onType}
-        style={[styles.textInput, {
+        style={[this.props.componentStyles.textInput, {
           height: this.props.textInputHeight,
           marginTop: (this.props.heightMin - this.props.textInputHeightMin) / 2,
           marginBottom: (this.props.heightMin - this.props.textInputHeightMin) / 2,
@@ -167,8 +169,8 @@ class Composer extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.renderAccessoryButton()}
+      <View style={this.props.componentStyles.container}>
+        {this.renderActionsButton()}
         {this.renderTextInput()}
         {this.renderSendButton()}
       </View>
@@ -176,47 +178,9 @@ class Composer extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    borderTopWidth: 1 / PixelRatio.get(),
-    borderTopColor: '#E6E6E6',
-    backgroundColor: '#FFFFFF',
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-  },
-  textInput: {
-    flex: 1,
-    // paddingLeft: 15,
-    marginLeft: 10,
-    fontSize: 17,
-  },
-  accessoryButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 30,
-    height: 30,
-    // borderRadius: 15,
-    // borderWidth: 2,
-    // borderColor: '#6699CC',
-    marginLeft: 10,
-    marginBottom: 12,
-  },
-  accessoryText: {
-    fontSize: 20,
-    fontWeight: '700',
-    lineHeight: 20,
-    color: '#6699CC',
-  },
-  sendButton: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginBottom: 17,
-  },
-  sendButtonText: {
-    color: '#6699CC',
-    fontWeight: '600',
-    fontSize: 17,
-  },
-});
+Composer.defaultProps = {
+  componentStyles: {},
+  actions: false,
+};
 
 export default Composer;

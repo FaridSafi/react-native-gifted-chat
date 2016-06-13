@@ -9,6 +9,7 @@ import {
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
+import GiftedAvatar from 'react-native-gifted-avatar';
 
 import Message from './components/Message';
 import Composer from './components/Composer';
@@ -158,7 +159,6 @@ class GiftedMessenger extends Component {
               previousMessage: this.getMessages()[index + 1] ? this.getMessages()[index + 1] : null,
               nextMessage: this.getMessages()[index - 1] ? this.getMessages()[index - 1] : null,
               renderAvatar: this.props.renderAvatar,
-              onPressAvatar: this.props.onPressAvatar,
 
               renderDay: this.props.renderDay,
               renderTime: this.props.renderTime,
@@ -184,6 +184,7 @@ class GiftedMessenger extends Component {
 
   renderComposer() {
     const composerProps = {
+      componentStyles: this.props.theme.Composer,
       text: this.state.text,
       heightMin: this.props.composerHeightMin,
       textInputHeightMin: this.props.composerTextInputHeightMin,
@@ -268,8 +269,6 @@ GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
 
-  onPressAvatar: null,
-
   renderMessage: null,
   renderComposer: null,
   renderAvatar: null,
@@ -297,4 +296,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {GiftedMessenger, Message, Composer};
+export {GiftedMessenger, Message, Composer, GiftedAvatar};

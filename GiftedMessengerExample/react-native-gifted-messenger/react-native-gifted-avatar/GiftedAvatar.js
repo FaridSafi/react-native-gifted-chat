@@ -17,7 +17,7 @@ class Avatar extends Component {
   }
 
   setAvatarColor() {
-    const userName = this.props.user.name || '';
+    const userName = this.props.name || '';
     const name = userName.toUpperCase().split(' ');
     if (name.length === 1) {
       this.avatarName = `${name[0].charAt(0)}`;
@@ -47,7 +47,8 @@ class Avatar extends Component {
   }
 
   render() {
-    if (this.props.user === null || (!this.props.user.name && !this.props.user.avatar)) {
+    if (!this.props.name && !this.props.avatar) {
+      // render placeholder
       return (
         <View style={[{
           backgroundColor: 'transparent',
@@ -55,13 +56,14 @@ class Avatar extends Component {
       )
     }
 
-    if (this.props.user.avatar) {
+    if (this.props.avatar) {
       return (
         <TouchableOpacity onPress={() => {
-          this.props.onPress && this.props.onPress(this.props.user);
+          const {onPress, avatarStyle, textStyle, ...other} = this.props;
+          this.props.onPress && this.props.onPress(other);
         }}>
           <Image
-            source={{uri: this.props.user.avatar}}
+            source={{uri: this.props.avatar}}
             style={[this.props.avatarStyle]}
           />
         </TouchableOpacity>
@@ -75,7 +77,8 @@ class Avatar extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          this.props.onPress && this.props.onPress(this.props.user);
+          const {onPress, avatarStyle, textStyle, ...other} = this.props;
+          this.props.onPress && this.props.onPress(other);
         }}
         style={[{
           backgroundColor: this.avatarColor,
@@ -90,7 +93,8 @@ class Avatar extends Component {
 }
 
 Avatar.defaultProps = {
-  user: null,
+  name: null,
+  avatar: null,
   onPress: null,
 
   avatarStyle: {

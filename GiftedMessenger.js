@@ -685,7 +685,7 @@ GiftedMessenger.propTypes = {
   styles: React.PropTypes.object,
   submitOnReturn: React.PropTypes.bool,
   typingMessage: React.PropTypes.string,
-  showBubbleTriangles: React.PropTypes.showBubbleTriangles
+  showBubbleTriangles: React.PropTypes.bool
 };
 
 

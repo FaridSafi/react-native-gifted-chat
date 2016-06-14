@@ -179,6 +179,7 @@ export default class Message extends Component {
             handlePhonePress={this.props.handlePhonePress}
             handleUrlPress={this.props.handleUrlPress}
             handleEmailPress={this.props.handleEmailPress}
+            showBubbleTriangles={this.props.showBubbleTriangles}
           />
           {rowData.position === 'right' ? this.renderImage(rowData, diffMessage, forceRenderImage, onImagePress) : null}
         </View>

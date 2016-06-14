@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
   bubbleError: {
     backgroundColor: '#e01717',
   },
-<<<<<<< HEAD
   triangleCorner: {
     position: 'absolute',
     width: 0,
@@ -51,8 +50,6 @@ const styles = StyleSheet.create({
     borderRightColor: 'transparent',
     borderTopColor: '#e6e6eb'
   }
-=======
->>>>>>> master
 });
 
 export default class Bubble extends React.Component {
@@ -145,16 +142,16 @@ export default class Bubble extends React.Component {
 
     return (
       <View style={styles.bubbleWrapper}>
-        {this.props.position === 'left' ? this.renderTriangle('left') : null}
+        {this.props.position === 'left' && this.props.showBubbleTriangles ? this.renderTriangle('left') : null}
         <View style={[styles.bubble,
           (this.props.position === 'left' ? styles.bubbleLeft : this.props.position === 'right' ? styles.bubbleRight : styles.bubbleCenter),
           (this.props.status === 'ErrorButton' ? styles.bubbleError : null),
           flexStyle]}
-        >
+          >
           {this.props.name}
           {this.renderText(this.props.text, this.props.position)}
         </View>
-        {this.props.position === 'right' ? this.renderTriangle('right') : null}
+        {this.props.position === 'right' && this.props.showBubbleTriangles ? this.renderTriangle('right') : null}
         </View>
   );
   }
@@ -171,4 +168,5 @@ Bubble.propTypes = {
   handleUrlPress: React.PropTypes.func,
   handlePhonePress: React.PropTypes.func,
   handleEmailPress: React.PropTypes.func,
+  showBubbleTriangles: React.PropTypes.bool
 };

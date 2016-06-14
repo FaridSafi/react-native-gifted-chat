@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
-  View,
   Image,
+  View,
 } from 'react-native';
 
 import {

@@ -4,10 +4,11 @@ import {
   View,
   InteractionManager,
 } from 'react-native';
-import moment from 'moment/min/moment-with-locales.min';
-import InvertibleScrollView from 'react-native-invertible-scroll-view';
+
 import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
+import InvertibleScrollView from 'react-native-invertible-scroll-view';
+import moment from 'moment/min/moment-with-locales.min';
 
 import Actions from './components/Actions';
 import Avatar from './components/Avatar';
@@ -20,13 +21,12 @@ import Location from './components/Location';
 import Message from './components/Message';
 import Send from './components/Send';
 import Time from './components/Time';
-
 import DefaultStyles from './DefaultStyles';
 
 // TODO
 // onPressUrl
+// onPressPhone
 // onPressEmail
-// onPressAccessory
 
 class GiftedMessenger extends Component {
   constructor(props) {
@@ -54,14 +54,14 @@ class GiftedMessenger extends Component {
     };
   }
 
-  static append(currentMessages, messages) {
+  static append(currentMessages = [], messages) {
     if (!Array.isArray(messages)) {
       messages = [messages];
     }
     return messages.concat(currentMessages);
   }
 
-  static prepend(currentMessages, messages) {
+  static prepend(currentMessages = [], messages) {
     if (!Array.isArray(messages)) {
       messages = [messages];
     }
@@ -87,10 +87,14 @@ class GiftedMessenger extends Component {
   }
 
   initCustomStyles() {
-    this.setCustomStyles(this.props.customStyles);
+    if (this.props.customStyles) {
+      this.setCustomStyles(this.props.customStyles);
+    } else {
+      this.setCustomStyles(DefaultStyles);
+    }
   }
 
-  initMessages(messages, sort = false) {
+  initMessages(messages = [], sort = false) {
     if (sort === true) {
       this.setMessages(messages.sort((a, b) => {
         return new Date(b.time) - new Date(a.time);
@@ -224,9 +228,12 @@ class GiftedMessenger extends Component {
     );
   }
 
-  onSend(message) {
+  onSend(message = {}) {
     message.position = 'right';
-    this.props.onSend(message);
+    if (this.props.onSend) {
+      this.props.onSend(message);
+    }
+
     const newState = {
       composerHeight: this.getCustomStyles().minComposerHeight,
       messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getCustomStyles().minInputToolbarHeight - this.getKeyboardHeight()),
@@ -308,7 +315,7 @@ GiftedMessenger.defaultProps = {
   onSend: () => {},
 
   locale: null,
-  customStyles: DefaultStyles,
+  customStyles: null,
 
   renderActions: null,
   renderAvatar: null,

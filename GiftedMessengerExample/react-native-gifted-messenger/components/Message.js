@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   View,
 } from 'react-native';
@@ -6,14 +6,16 @@ import {
 import moment from 'moment';
 
 import Avatar from './Avatar';
-import Day from './Day';
 import Bubble from './Bubble';
+import Day from './Day';
 
 class Message extends Component {
+
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.status !== nextProps.status) {
-      return true;
-    }
+    // not implemented yet
+    // if (this.props.status !== nextProps.status) {
+    //   return true;
+    // }
     if (this.props.nextMessage !== nextProps.nextMessage) {
       return true;
     }
@@ -23,7 +25,7 @@ class Message extends Component {
     return false;
   }
 
-  isSameDay(currentMessage, diffMessage) {
+  isSameDay(currentMessage = {}, diffMessage = null) {
     let diff = 0;
     if (diffMessage && diffMessage.time && currentMessage && currentMessage.time) {
       diff = Math.abs(moment(diffMessage.time).startOf('day').diff(moment(currentMessage.time).startOf('day'), 'days'));
@@ -36,7 +38,7 @@ class Message extends Component {
     return false;
   }
 
-  isSameUser(currentMessage, diffMessage) {
+  isSameUser(currentMessage = {}, diffMessage = null) {
     if ((diffMessage === null || diffMessage.user === null) && currentMessage.user === null) {
       return true;
     }
@@ -108,22 +110,16 @@ class Message extends Component {
 }
 
 Message.defaultProps = {
-  customStyles: {},
-  // locale: 'en',
-
-  position: 'left',
-  user: null,
-  time: null,
-
-  previousMessage: null,
-  nextMessage: null,
-
-  renderAvatar: null,
-
-  renderDay: null,
-  renderTime: null,
-  renderLocation: null,
-  renderBubbleText: null,
+  'nextMessage': null,
+  'previousMessage': null,
+  'time': null,
+  'renderDay': null,
+  'renderBubble': null,
+  'user': null,
+  'renderAvatar': null,
+  'customStyles': null,
+  'position': null,
+  // locale
 };
 
 export default Message;

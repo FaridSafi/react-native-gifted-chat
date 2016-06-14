@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
 } from 'react-native';
 
-import {GiftedMessenger, Message, Composer, GiftedAvatar as Avatar, Theme} from './react-native-gifted-messenger/GiftedMessenger';
+import {
+  GiftedMessenger,
+  Message,
+  InputToolbar,
+  Avatar,
+  Theme,
+  Actions,
+  Send,
+} from './react-native-gifted-messenger/GiftedMessenger';
 
 class App extends Component {
   constructor(props) {
@@ -106,9 +113,16 @@ class App extends Component {
     return (
       <GiftedMessenger
         theme={Theme}
+        locale={'fr'}
+
         messages={this.state.messages}
         onSend={this.onSend.bind(this)}
-        locale={'fr'}
+
+        renderMessage={(props) => {
+          return (
+            <Message {...props}/>
+          );
+        }}
         renderAvatar={(props) => {
           return (
             <Avatar {...props} onPress={(user) => {
@@ -116,14 +130,20 @@ class App extends Component {
             }}/>
           );
         }}
-        renderComposer={(props) => {
+
+        renderInputToolbar={(props) => {
           return (
-            <Composer {...props} actions={true}/>
+            <InputToolbar {...props}/>
           );
         }}
-        renderMessage={(props) => {
+        renderActions={(props) => {
           return (
-            <Message {...props}/>
+            <Actions {...props}/>
+          );
+        }}
+        renderSend={(props) => {
+          return (
+            <Send {...props}/>
           );
         }}
       />

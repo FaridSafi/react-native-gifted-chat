@@ -10,11 +10,12 @@ import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
-import GiftedAvatar from 'react-native-gifted-avatar';
-
-import Theme from './Theme';
+import Avatar from 'react-native-gifted-avatar';
 import Message from './components/Message';
-import Composer from './components/Composer';
+import InputToolbar from './components/InputToolbar';
+import Actions from './components/Actions';
+import Send from './components/Send';
+import Theme from './themes/default';
 
 class GiftedMessenger extends Component {
   constructor(props) {
@@ -134,7 +135,7 @@ class GiftedMessenger extends Component {
     this.setKeyboardHeight(e.endCoordinates.height);
 
     Animated.timing(this.state.messagesContainerHeight, {
-      toValue: (this.getMaxHeight() - (this.state.textInputHeight + (this.props.composerHeightMin - this.props.composerTextInputHeightMin))) - this.getKeyboardHeight(),
+      toValue: (this.getMaxHeight() - (this.state.composerHeight + (this.props.inputToolbarHeightMin - this.props.inputToolbarComposerHeightMin))) - this.getKeyboardHeight(),
       duration: 200,
     }).start();
   }
@@ -143,7 +144,7 @@ class GiftedMessenger extends Component {
     this.setKeyboardHeight(0);
 
     Animated.timing(this.state.messagesContainerHeight, {
-      toValue: this.getMaxHeight() - (this.state.textInputHeight + (this.props.composerHeightMin - this.props.composerTextInputHeightMin)),
+      toValue: this.getMaxHeight() - (this.state.composerHeight + (this.props.inputToolbarHeightMin - this.props.inputToolbarComposerHeightMin)),
       duration: 200,
     }).start();
   }
@@ -227,27 +228,33 @@ class GiftedMessenger extends Component {
     );
   }
 
-  renderComposer() {
-    const composerProps = {
+  renderInputToolbar() {
+    const inputToolbarProps = {
+
+      renderActions: this.props.renderActions,
+      renderSend: this.props.renderSend,
+      renderComposer: this.props.renderComposer,
+
       text: this.state.text,
-      heightMin: this.props.composerHeightMin,
-      textInputHeightMin: this.props.composerTextInputHeightMin,
-      textInputHeightMax: this.props.composerTextInputHeightMax,
-      textInputHeight: Math.max(this.props.composerTextInputHeightMin, this.state.textInputHeight),
-      onType: (e) => {
-        const newTextInputHeight = Math.min(this.props.composerTextInputHeightMax, e.nativeEvent.contentSize.height);
+
+      heightMin: this.props.inputToolbarHeightMin,
+      composerHeightMin: this.props.inputToolbarComposerHeightMin,
+      composerHeightMax: this.props.inputToolbarComposerHeightMax,
+      composerHeight: Math.max(this.props.inputToolbarComposerHeightMin, this.state.composerHeight),
+      onChangeText: (e) => {
+        const newComposerHeight = Math.min(this.props.inputToolbarComposerHeightMax, e.nativeEvent.contentSize.height);
 
         const newMessagesContainerHeight =
           this.state.messagesContainerHeight.__getValue() +
           (this.getMaxHeight()
           - this.state.messagesContainerHeight.__getValue()
-          - (Math.max(this.props.composerTextInputHeightMin, newTextInputHeight) + (this.props.composerHeightMin - this.props.composerTextInputHeightMin))
+          - (Math.max(this.props.inputToolbarComposerHeightMin, newComposerHeight) + (this.props.inputToolbarHeightMin - this.props.inputToolbarComposerHeightMin))
           - this.getKeyboardHeight())
         ;
 
         this.setState({
           text: e.nativeEvent.text,
-          textInputHeight: Math.max(this.props.composerTextInputHeightMin, newTextInputHeight),
+          composerHeight: Math.max(this.props.inputToolbarComposerHeightMin, newComposerHeight),
           messagesContainerHeight: new Animated.Value(newMessagesContainerHeight),
         });
       },
@@ -256,8 +263,8 @@ class GiftedMessenger extends Component {
 
         this.props.onSend(message);
         const newState = {
-          textInputHeight: this.props.composerTextInputHeightMin,
-          messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.props.composerHeightMin - this.getKeyboardHeight()),
+          composerHeight: this.props.inputToolbarComposerHeightMin,
+          messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.props.inputToolbarHeightMin - this.getKeyboardHeight()),
         };
         if (message.text) {
           newState.text = '';
@@ -270,11 +277,11 @@ class GiftedMessenger extends Component {
       locale: this.getLocale(),
     };
 
-    if (this.props.renderComposer) {
-      return this.props.renderComposer(composerProps);
+    if (this.props.renderInputToolbar) {
+      return this.props.renderInputToolbar(inputToolbarProps);
     }
     return (
-      <Composer {...composerProps}/>
+      <InputToolbar {...inputToolbarProps}/>
     );
   }
 
@@ -288,7 +295,7 @@ class GiftedMessenger extends Component {
         <ActionSheet ref={component => this._actionSheetRef = component}>
           <View style={{flex: 1}}>
             {this.renderMessages()}
-            {this.renderComposer()}
+            {this.renderInputToolbar()}
           </View>
         </ActionSheet>
       );
@@ -303,8 +310,8 @@ class GiftedMessenger extends Component {
             this.setState({
               isInitialized: true,
               text: '',
-              textInputHeight: this.props.composerTextInputHeightMin,
-              messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.props.composerHeightMin),
+              composerHeight: this.props.inputToolbarComposerHeightMin,
+              messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.props.inputToolbarHeightMin),
             });
           });
         }}
@@ -330,16 +337,23 @@ GiftedMessenger.defaultProps = {
   renderTime: null,
   renderLocation: null,
 
-  // Composer related
+  // InputToolbar related
+  renderActions: null,
+  renderSend: null,
   renderComposer: null,
-  renderActionsButton: null,
-  renderSendButton: null,
-  renderNavBar: null,
-  renderTextInput: null,
 
-  composerHeightMin: 55,
-  composerTextInputHeightMin: 35,
-  composerTextInputHeightMax: 100,
+
+  inputToolbarHeightMin: 55,
+  inputToolbarComposerHeightMin: 35,
+  inputToolbarComposerHeightMax: 100,
 };
 
-export {GiftedMessenger, Message, Composer, GiftedAvatar, Theme};
+export {
+  GiftedMessenger,
+  Message,
+  InputToolbar,
+  Avatar,
+  Theme,
+  Actions,
+  Send,
+};

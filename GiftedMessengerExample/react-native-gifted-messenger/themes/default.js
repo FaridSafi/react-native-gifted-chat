@@ -3,6 +3,9 @@ import {
 } from 'react-native';
 
 const Theme = {
+  /*
+  ** Message components
+  */
   Day: {
     container: {
       alignItems: 'center',
@@ -113,10 +116,10 @@ const Theme = {
       },
     },
   },
-
-
-
-  Composer: {
+  /*
+  ** ToolbarInput components
+  */
+  InputToolbar: {
     container: {
       borderTopWidth: 1 / PixelRatio.get(),
       borderTopColor: '#E6E6E6',
@@ -124,12 +127,16 @@ const Theme = {
       flexDirection: 'row',
       alignItems: 'flex-end',
     },
+  },
+  Composer: {
     textInput: {
       flex: 1,
       marginLeft: 10,
       fontSize: 17,
     },
-    actionsButton: {
+  },
+  Actions: {
+    container: {
       justifyContent: 'center',
       alignItems: 'center',
       width: 30,
@@ -137,23 +144,19 @@ const Theme = {
       marginLeft: 10,
       marginBottom: 12,
     },
-    actionsText: {
-      fontSize: 20,
-      fontWeight: '700',
-      lineHeight: 20,
-      color: '#6699CC',
-    },
-    sendButton: {
+  },
+  Send: {
+    container: {
       paddingLeft: 10,
       paddingRight: 10,
       marginBottom: 17,
     },
-    sendButtonText: {
+    text: {
       color: '#6699CC',
       fontWeight: '600',
       fontSize: 17,
     },
-  }
+  },
 };
 
 export default Theme;

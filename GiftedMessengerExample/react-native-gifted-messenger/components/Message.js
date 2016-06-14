@@ -54,16 +54,17 @@ class Message extends Component {
 
   renderDay() {
     if (this.props.time) {
+      const dayProps = {
+        time: this.props.time,
+        theme: this.props.theme,
+        locale: this.props.locale,
+      };
       if (!this.isSameDay(this.props, this.props.previousMessage)) {
         if (this.props.renderDay) {
-          return this.props.renderDay(this.props.time);
+          return this.props.renderDay(dayProps);
         }
         return (
-          <Day
-            time={this.props.time}
-            theme={this.props.theme}
-            locale={this.props.locale}
-          />
+          <Day {...dayProps}/>
         );
       }
     }
@@ -71,22 +72,22 @@ class Message extends Component {
   }
 
   renderBubble() {
+    const bubbleProps = {
+      ...this.props,
+      isSameUser: this.isSameUser,
+      isSameDay: this.isSameDay,
+    };
     if (this.props.renderBubble) {
-      return this.props.renderBubble({
-        ...this.props,
-        isSameUser: this.isSameUser,
-        isSameDay: this.isSameDay,
-      });
+      return this.props.renderBubble(bubbleProps);
     }
     return (
-      <Bubble
-        {...this.props}
-        isSameUser={this.isSameUser}
-        isSameDay={this.isSameDay}
-      />
+      <Bubble {...bubbleProps}/>
     );
   }
 
+  // TODO
+  // pass props like others components (include theme and locale?)
+  // and move the container to the Avatar component itself
   renderAvatar() {
     if (!this.props.user) {
       return null;

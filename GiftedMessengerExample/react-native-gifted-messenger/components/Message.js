@@ -110,16 +110,21 @@ class Message extends Component {
 }
 
 Message.defaultProps = {
+  'locale': null,
+  'customStyles': {},
+
+  'renderAvatar': null,
+  'renderBubble': null,
+  'renderDay': null,
+
+  'position': 'left',
+  'time': null,
+  'user': null,
+
   'nextMessage': null,
   'previousMessage': null,
-  'time': null,
-  'renderDay': null,
-  'renderBubble': null,
-  'user': null,
-  'renderAvatar': null,
-  'customStyles': null,
-  'position': null,
-  // locale
 };
 
 export default Message;
+
+// clean

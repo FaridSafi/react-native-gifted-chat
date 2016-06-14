@@ -315,7 +315,7 @@ GiftedMessenger.defaultProps = {
   onSend: () => {},
 
   locale: null,
-  customStyles: null,
+  customStyles: null, // initCustomStyles will check null value
 
   renderActions: null,
   renderAvatar: null,
@@ -347,3 +347,5 @@ export {
   Time,
   DefaultStyles,
 };
+
+// clean

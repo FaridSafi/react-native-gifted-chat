@@ -3,23 +3,26 @@ import {
   View,
 } from 'react-native';
 
-import Time from './Time';
-import Location from './Location';
 import BubbleText from './BubbleText';
+import Location from './Location';
+import Time from './Time';
 
 class Bubble extends Component {
+
   handleBubbleToNext() {
     if (this.props.isSameUser(this.props, this.props.nextMessage) && this.props.isSameDay(this.props, this.props.nextMessage)) {
       return this.props.customStyles.Bubble[this.props.position].containerToNext;
     }
     return null;
   }
+
   handleBubbleToPrevious() {
     if (this.props.isSameUser(this.props, this.props.previousMessage) && this.props.isSameDay(this.props, this.props.previousMessage)) {
       return this.props.customStyles.Bubble[this.props.position].containerToPrevious;
     }
     return null;
   }
+
   renderBubbleText() {
     if (this.props.text) {
       if (this.props.renderBubbleText) {
@@ -77,4 +80,27 @@ class Bubble extends Component {
   }
 }
 
+Bubble.defaultProps = {
+  'locale': null,
+  'customStyles': {},
+
+  'isSameUser': () => {},
+  'isSameDay': () => {},
+
+  'location': null,
+  'position': 'left',
+  'text': null,
+  'time': null,
+
+  'nextMessage': null,
+  'previousMessage': null,
+
+  'renderBubbleText': null,
+  'renderCustomView': null,
+  'renderLocation': null,
+  'renderTime': null,
+};
+
 export default Bubble;
+
+// clean

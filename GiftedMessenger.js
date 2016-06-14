@@ -501,6 +501,7 @@ class GiftedMessenger extends Component {
           handlePhonePress={this.props.handlePhonePress}
           handleUrlPress={this.props.handleUrlPress}
           handleEmailPress={this.props.handleEmailPress}
+          showBubbleTriangles={this.props.showBubbleTriangles}
 
           styles={this.styles}
         />
@@ -643,6 +644,7 @@ GiftedMessenger.defaultProps = {
   submitOnReturn: false,
   text: '',
   typingMessage: '',
+  showBubbleTriangles: true
 };
 
 GiftedMessenger.propTypes = {
@@ -683,6 +685,7 @@ GiftedMessenger.propTypes = {
   styles: React.PropTypes.object,
   submitOnReturn: React.PropTypes.bool,
   typingMessage: React.PropTypes.string,
+  showBubbleTriangles: React.PropTypes.bool
 };
 
 

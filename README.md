@@ -83,7 +83,7 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 | styles                        | Function | Styles of children components - See GiftedMessenger.js/componentWillMount  | Both     | {}                               |
 | submitOnReturn                | Boolean  | Send message when clicking on submit                                       | Both     | false                            |
 | typingMessage                 | String   | Display a text at the bottom of the list. Eg: 'User is typing a message'   | Both     | ''                               |
-
+| showBubbleTriangles                 | Boolean   | Display a triangle next to the message bubble   | Both     | True                               |
 
 ### Message object
 

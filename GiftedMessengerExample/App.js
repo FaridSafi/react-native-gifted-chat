@@ -8,9 +8,14 @@ import {
   Message,
   InputToolbar,
   Avatar,
-  Theme,
+  Styles,
   Actions,
   Send,
+  Day,
+  Time,
+  Bubble,
+  BubbleText,
+  Composer,
 } from './react-native-gifted-messenger/GiftedMessenger';
 
 class App extends Component {
@@ -112,8 +117,10 @@ class App extends Component {
   render() {
     return (
       <GiftedMessenger
-        theme={Theme}
-        locale={'fr'}
+        config={{
+          locale: 'fr',
+          styles: Styles,
+        }}
 
         messages={this.state.messages}
         onSend={this.onSend.bind(this)}
@@ -130,7 +137,6 @@ class App extends Component {
             }}/>
           );
         }}
-
         renderInputToolbar={(props) => {
           return (
             <InputToolbar {...props}/>
@@ -146,6 +152,33 @@ class App extends Component {
             <Send {...props}/>
           );
         }}
+
+
+        renderDay={(props) => {
+          return (
+            <Day {...props}/>
+          );
+        }}
+        renderTime={(props) => {
+          return (
+            <Time {...props}/>
+          );
+        }}
+        renderBubble={(props) => {
+          return (
+            <Bubble {...props}/>
+          );
+        }}
+        renderBubbleText={(props) => {
+          return (
+            <BubbleText {...props}/>
+          );
+        }}
+        renderComposer={(props) => {
+          return (
+            <Composer {...props}/>
+          );
+        }}        
       />
     );
   }

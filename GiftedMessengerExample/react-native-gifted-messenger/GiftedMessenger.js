@@ -10,12 +10,18 @@ import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
-import Avatar from 'react-native-gifted-avatar';
-import Message from './components/Message';
-import InputToolbar from './components/InputToolbar';
 import Actions from './components/Actions';
+import Avatar from 'react-native-gifted-avatar';
+import Bubble from './components/Bubble';
+import BubbleText from './components/BubbleText';
+import Composer from './components/Composer';
+import Day from './components/Day';
+import InputToolbar from './components/InputToolbar';
+import Location from './components/Location';
+import Message from './components/Message';
 import Send from './components/Send';
-import Theme from './themes/default';
+import Styles from './styles/default';
+import Time from './components/Time';
 
 class GiftedMessenger extends Component {
   constructor(props) {
@@ -325,7 +331,7 @@ GiftedMessenger.defaultProps = {
   onSend: () => {},
 
   locale: null,
-  theme: Theme,
+  theme: Styles,
 
   // Message related
   // TODO re order like in the code
@@ -350,10 +356,16 @@ GiftedMessenger.defaultProps = {
 
 export {
   GiftedMessenger,
-  Message,
-  InputToolbar,
-  Avatar,
-  Theme,
   Actions,
+  Avatar,
+  Bubble,
+  BubbleText,
+  Composer,
+  Day,
+  InputToolbar,
+  Location,
+  Message,
   Send,
+  Styles,
+  Time,
 };

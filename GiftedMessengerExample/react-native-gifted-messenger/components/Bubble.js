@@ -3,14 +3,11 @@ import {
   View,
 } from 'react-native';
 
-import moment from 'moment';
-
 import Time from './Time';
 import Location from './Location';
 import BubbleText from './BubbleText';
 
 class Bubble extends Component {
-
   handleBubbleCorners() {
     let cornerStyles = {};
     if (this.props.isSameUser(this.props, this.props.nextMessage) && this.props.isSameDay(this.props, this.props.nextMessage)) {
@@ -34,6 +31,7 @@ class Bubble extends Component {
         this.props.renderBubbleText({
           text: this.props.text,
           theme: this.props.theme,
+          locale: this.props.locale,
         });
       }
       return (
@@ -53,6 +51,7 @@ class Bubble extends Component {
         this.props.renderLocation({
           ...this.props.location,
           theme: this.props.theme,
+          locale: this.props.locale,
         });
       }
       return (
@@ -66,28 +65,13 @@ class Bubble extends Component {
     return null;
   }
 
-  renderCustomView() {
-    if (this.props.renderCustomView) {
-      const {
-        renderAvatar,
-        renderDay,
-        renderTime,
-        renderLocation,
-        renderBubbleText,
-        renderCustomView,
-        ...other,
-      } = this.props;
-      return this.props.renderCustomView(other);
-    }
-    return null;
-  }
-
   renderTime() {
     if (this.props.time) {
       if (this.props.renderTime) {
         return this.props.renderTime({
           time: this.props.time,
           theme: this.props.theme,
+          locale: this.props.locale,
         });
       }
       return (
@@ -97,6 +81,21 @@ class Bubble extends Component {
           locale={this.props.locale}
         />
       );
+    }
+    return null;
+  }
+
+  renderCustomView() {
+    if (this.props.renderCustomView) {
+      const customViewProps = {};
+      for (let key in this.props) {
+        if (this.props.hasOwnProperty[key]) {
+          if (key.indexOf('render') !== 0) { // customView is not meant to be used to render other built-in components
+            customViewProps[key] = this.props[key];
+          }
+        }
+      }
+      return this.props.renderCustomView(customViewProps);
     }
     return null;
   }

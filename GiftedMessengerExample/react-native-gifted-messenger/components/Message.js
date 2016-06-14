@@ -58,9 +58,7 @@ class Message extends Component {
       if (this.props.renderDay) {
         return this.props.renderDay(dayProps);
       }
-      return (
-        <Day {...dayProps}/>
-      );
+      return <Day {...dayProps}/>;
     }
     return null;
   }
@@ -74,9 +72,7 @@ class Message extends Component {
     if (this.props.renderBubble) {
       return this.props.renderBubble(bubbleProps);
     }
-    return (
-      <Bubble {...bubbleProps}/>
-    );
+    return <Bubble {...bubbleProps}/>;
   }
 
   renderAvatar() {
@@ -89,9 +85,7 @@ class Message extends Component {
       if (this.props.renderAvatar) {
         return this.props.renderAvatar(avatarProps);
       }
-      return (
-        <Avatar {...avatarProps}/>
-      );
+      return <Avatar {...avatarProps}/>;
     }
     return null;
   }

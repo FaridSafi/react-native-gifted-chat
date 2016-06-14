@@ -23,19 +23,9 @@ class Bubble extends Component {
   renderBubbleText() {
     if (this.props.text) {
       if (this.props.renderBubbleText) {
-        this.props.renderBubbleText({
-          text: this.props.text,
-          theme: this.props.theme,
-          locale: this.props.locale,
-        });
+        this.props.renderBubbleText(this.props);
       }
-      return (
-        <BubbleText
-          text={this.props.text}
-          theme={this.props.theme}
-          locale={this.props.locale}
-        />
-      );
+      return <BubbleText {...this.props}/>;
     }
     return null;
   }
@@ -43,19 +33,9 @@ class Bubble extends Component {
   renderLocation() {
     if (this.props.location) {
       if (this.props.renderLocation) {
-        this.props.renderLocation({
-          ...this.props.location,
-          theme: this.props.theme,
-          locale: this.props.locale,
-        });
+        this.props.renderLocation(this.props);
       }
-      return (
-        <Location
-          location={this.props.location}
-          theme={this.props.theme}
-          locale={this.props.locale}
-        />
-      );
+      return <Location {...this.props}/>;
     }
     return null;
   }
@@ -63,34 +43,24 @@ class Bubble extends Component {
   renderTime() {
     if (this.props.time) {
       if (this.props.renderTime) {
-        return this.props.renderTime({
-          time: this.props.time,
-          theme: this.props.theme,
-          locale: this.props.locale,
-        });
+        return this.props.renderTime(this.props);
       }
-      return (
-        <Time
-          time={this.props.time}
-          theme={this.props.theme}
-          locale={this.props.locale}
-        />
-      );
+      return <Time {...this.props}/>;
     }
     return null;
   }
 
   renderCustomView() {
     if (this.props.renderCustomView) {
-      const customViewProps = {};
-      for (let key in this.props) {
-        if (this.props.hasOwnProperty[key]) {
-          if (key.indexOf('render') !== 0) { // customView is not meant to be used to render other built-in components
-            customViewProps[key] = this.props[key];
-          }
-        }
-      }
-      return this.props.renderCustomView(customViewProps);
+      // const customViewProps = {};
+      // for (let key in this.props) {
+      //   if (this.props.hasOwnProperty[key]) {
+      //     if (key.indexOf('render') !== 0) {
+      //       customViewProps[key] = this.props[key];
+      //     }
+      //   }
+      // }
+      return this.props.renderCustomView(this.props);
     }
     return null;
   }

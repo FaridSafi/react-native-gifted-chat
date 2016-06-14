@@ -10,49 +10,24 @@ class InputToolbar extends Component {
 
   renderActions() {
     if (this.props.renderActions) {
-      return this.props.renderActions({
-        onSend: this.props.onSend,
-        theme: this.props.theme,
-        locale: this.props.locale,
-      });
+      return this.props.renderActions(this.props);
     }
     return null;
   }
 
   renderSend() {
-    const sendProps = {
-      theme: this.props.theme,
-      locale: this.props.locale,
-      onSend: this.props.onSend,
-      text: this.props.text,
-    };
     if (this.props.renderSend) {
-      return this.props.renderSend(sendProps);
+      return this.props.renderSend(this.props);
     }
-
-    return (
-      <Send {...sendProps}/>
-    );
+    return <Send {...this.props}/>;
   }
 
   renderComposer() {
-    const composerProps = {
-      theme: this.props.theme,
-      locale: this.props.locale,
-      onChange: this.props.onChangeText,
-      composerHeight: this.props.composerHeight,
-      heightMin: this.props.heightMin,
-      composerHeightMin: this.props.composerHeightMin,
-      text: this.props.text,
-    };
-
     if (this.props.renderComposer) {
-      return this.props.renderComposer(composerProps);
+      return this.props.renderComposer(this.props);
     }
 
-    return (
-      <Composer {...composerProps}/>
-    );
+    return <Composer {...this.props}/>;
   }
 
   render() {

@@ -247,7 +247,7 @@ class GiftedMessenger extends Component {
       composerHeightMin: this.props.inputToolbarComposerHeightMin,
       composerHeightMax: this.props.inputToolbarComposerHeightMax,
       composerHeight: Math.max(this.props.inputToolbarComposerHeightMin, this.state.composerHeight),
-      onChangeText: (e) => {
+      onChange: (e) => {
         const newComposerHeight = Math.min(this.props.inputToolbarComposerHeightMax, e.nativeEvent.contentSize.height);
 
         const newMessagesContainerHeight =

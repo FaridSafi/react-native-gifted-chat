@@ -13,4 +13,9 @@ class BubbleText extends Component {
   }
 }
 
+BubbleText.defaultProps = {
+  'customStyles': {},
+  'text': null,
+};
+
 export default BubbleText;

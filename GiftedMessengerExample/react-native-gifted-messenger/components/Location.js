@@ -16,7 +16,9 @@ class Location extends Component {
           if (supported) {
             return Linking.openURL(url);
           }
-        }).catch(err => console.error('An error occurred', err));
+        }).catch(err => {
+          console.error('An error occurred', err);
+        });
       }}>
         <MapView
           style={this.props.customStyles.Location.mapView}
@@ -35,5 +37,13 @@ class Location extends Component {
     );
   }
 }
+
+Location.defaultProps = {
+  'customStyles': {},
+  'location': {
+    latitude: 0,
+    longitude: 0,
+  },
+};
 
 export default Location;

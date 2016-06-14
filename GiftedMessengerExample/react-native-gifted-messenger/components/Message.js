@@ -10,7 +10,6 @@ import Bubble from './Bubble';
 import Day from './Day';
 
 class Message extends Component {
-
   shouldComponentUpdate(nextProps, nextState) {
     // not implemented yet
     // if (this.props.status !== nextProps.status) {
@@ -110,21 +109,15 @@ class Message extends Component {
 }
 
 Message.defaultProps = {
-  'locale': null,
-  'customStyles': {},
-
-  'renderAvatar': null,
-  'renderBubble': null,
-  'renderDay': null,
-
-  'position': 'left',
-  'time': null,
-  'user': null,
-
-  'nextMessage': null,
-  'previousMessage': null,
+  customStyles: {},
+  renderAvatar: null,
+  renderBubble: null,
+  renderDay: null,
+  position: 'left',
+  time: null,
+  user: null,
+  nextMessage: null,
+  previousMessage: null,
 };
 
 export default Message;
-
-// clean

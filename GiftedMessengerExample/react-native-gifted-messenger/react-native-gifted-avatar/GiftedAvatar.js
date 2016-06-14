@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import {
-  Text,
-  View,
   Image,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 
 class GiftedAvatar extends Component {
-
   setAvatarColor() {
     const userName = this.props.name || '';
     const name = userName.toUpperCase().split(' ');
@@ -97,7 +96,6 @@ GiftedAvatar.defaultProps = {
   name: null,
   avatar: null,
   onPress: null,
-
   avatarStyle: {},
   textStyle: {},
 };

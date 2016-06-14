@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   View,
 } from 'react-native';
+
 import GiftedAvatar from 'react-native-gifted-avatar';
 
 class Avatar extends Component {
@@ -21,5 +22,14 @@ class Avatar extends Component {
     );
   }
 }
+
+Avatar.defaultProps = {
+  'customStyles': {},
+  'isSameDay': () => {},
+  'isSameUser': () => {},
+  'position': null,
+  'user': null,
+  'nextMessage': null,
+};
 
 export default Avatar;

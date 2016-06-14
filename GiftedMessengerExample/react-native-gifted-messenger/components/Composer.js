@@ -22,4 +22,11 @@ class Composer extends Component {
   }
 }
 
+Composer.defaultProps = {
+  customStyles: {},
+  onChange: () => {},
+  composerHeight: 35,
+  text: '',
+};
+
 export default Composer;

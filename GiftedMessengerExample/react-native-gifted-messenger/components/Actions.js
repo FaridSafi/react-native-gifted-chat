@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  TouchableOpacity,
-  Modal,
   Image,
+  Modal,
+  TouchableOpacity,
 } from 'react-native';
+
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 
 class Actions extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -21,7 +21,7 @@ class Actions extends Component {
     actionSheet: PropTypes.func,
   };
 
-  setModalVisible(visible) {
+  setModalVisible(visible = false) {
     this.setState({modalVisible: visible});
   }
 
@@ -91,7 +91,7 @@ class Actions extends Component {
     return (
       <Image
         style={this.props.customStyles.Actions.icon}
-        resizeMode="contain"
+        resizeMode='contain'
         source={require('../assets/paperclip.png')}
       />
     );
@@ -125,6 +125,9 @@ class Actions extends Component {
 }
 
 Actions.defaultProps = {
+  onSend: () => {},
+  customStyles: {},
+  icon: null,
 };
 
 export default Actions;

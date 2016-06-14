@@ -3,8 +3,8 @@ import {
   View,
 } from 'react-native';
 
-import Send from './Send';
 import Composer from './Composer';
+import Send from './Send';
 
 class InputToolbar extends Component {
 
@@ -43,6 +43,9 @@ class InputToolbar extends Component {
 
 InputToolbar.defaultProps = {
   customStyles: {},
+  renderActions: null,
+  renderSend: null,
+  renderComposer: null,
 };
 
 export default InputToolbar;

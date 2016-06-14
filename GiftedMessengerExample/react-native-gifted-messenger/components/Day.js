@@ -3,6 +3,7 @@ import {
   View,
   Text,
 } from 'react-native';
+
 import moment from 'moment/min/moment-with-locales.min';
 
 class Day extends Component {
@@ -21,5 +22,14 @@ class Day extends Component {
     return null;
   }
 }
+
+Day.defaultProps = {
+  'locale': 'en',
+  'customStyles': {},
+  'isSameDay': () => {},
+  // TODO test if it crash if time = null
+  time: null,
+  'previousMessage': null,
+};
 
 export default Day;

@@ -230,9 +230,7 @@ class GiftedMessenger extends Component {
 
   onSend(message = {}) {
     message.position = 'right';
-    if (this.props.onSend) {
-      this.props.onSend(message);
-    }
+    this.props.onSend(message);
 
     const newState = {
       composerHeight: this.getCustomStyles().minComposerHeight,
@@ -313,10 +311,10 @@ class GiftedMessenger extends Component {
 GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
-
   locale: null,
+  // TODO TEST:
+  // customStyles: {},
   customStyles: null, // initCustomStyles will check null value
-
   renderActions: null,
   renderAvatar: null,
   renderBubble: null,
@@ -328,7 +326,6 @@ GiftedMessenger.defaultProps = {
   renderMessage: null,
   renderSend: null,
   renderTime: null,
-
   scrollViewProps: null,
 };
 

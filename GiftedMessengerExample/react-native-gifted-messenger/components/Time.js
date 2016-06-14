@@ -3,6 +3,7 @@ import {
   View,
   Text,
 } from 'react-native';
+
 import moment from 'moment/min/moment-with-locales.min';
 
 class Time extends Component {
@@ -16,5 +17,11 @@ class Time extends Component {
     );
   }
 }
+
+Time.defaultProps = {
+  'locale': 'en',
+  'customStyles': {},
+  'time': null,
+};
 
 export default Time;

@@ -25,4 +25,11 @@ class Send extends Component {
   }
 }
 
+Send.defaultProps = {
+  customStyles: {},
+  text: '',
+  onSend: () => {},
+};
+
+
 export default Send;

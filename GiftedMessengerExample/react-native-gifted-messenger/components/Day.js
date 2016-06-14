@@ -3,7 +3,6 @@ import {
   View,
   Text,
 } from 'react-native';
-
 import moment from 'moment/min/moment-with-locales.min';
 
 class Day extends Component {

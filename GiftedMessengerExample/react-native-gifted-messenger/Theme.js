@@ -8,7 +8,7 @@ const Theme = {
       alignItems: 'center',
       justifyContent: 'center',
       marginTop: 5,
-      marginBottom: 5,
+      marginBottom: 10,
     },
     wrapper: {
       alignItems: 'center',

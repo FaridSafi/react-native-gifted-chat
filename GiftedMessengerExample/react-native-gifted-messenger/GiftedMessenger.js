@@ -4,12 +4,12 @@ import {
   View,
   InteractionManager,
   Dimensions,
-  PixelRatio,
 } from 'react-native';
+import moment from 'moment/min/moment-with-locales.min';
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
-import moment from 'moment/min/moment-with-locales';
+
 import GiftedAvatar from 'react-native-gifted-avatar';
 
 import Theme from './Theme';
@@ -59,19 +59,35 @@ class GiftedMessenger extends Component {
   }
 
   componentWillMount() {
-    if (moment.locales().indexOf(this.props.locale) === -1) {
+    this.initLocale();
+    this.initTheme();
+    this.initMessages(this.props.messages, true);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.initMessages(nextProps.messages, false);
+  }
+
+  initLocale() {
+    if (this.props.locale === 'en' || moment.locales().indexOf(this.props.locale) === -1) {
       this.setLocale('en');
     } else {
       this.setLocale(this.props.locale);
     }
-
-    this.setMessages(this.props.messages.sort((a, b) => {
-      return new Date(b.time) - new Date(a.time);
-    }));
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setMessages(nextProps.messages);
+  initTheme() {
+    this.setTheme(this.props.theme);
+  }
+
+  initMessages(messages, sort = false) {
+    if (sort === true) {
+      this.setMessages(messages.sort((a, b) => {
+        return new Date(b.time) - new Date(a.time);
+      }));
+    } else {
+      this.setMessages(messages);
+    }
   }
 
   setLocale(locale) {
@@ -80,6 +96,14 @@ class GiftedMessenger extends Component {
 
   getLocale() {
     return this._locale;
+  }
+
+  setTheme(theme) {
+    this._theme = theme;
+  }
+
+  getTheme() {
+    return this._theme;
   }
 
   setMessages(messages) {
@@ -183,7 +207,7 @@ class GiftedMessenger extends Component {
               renderBubble: this.props.renderBubble,
               renderBubbleText: this.props.renderBubbleText,
 
-              theme: this.props.theme,
+              theme: this.getTheme(),
               locale: this.getLocale(),
             };
 
@@ -241,7 +265,8 @@ class GiftedMessenger extends Component {
         this.setState(newState);
         this.scrollToBottom();
       },
-      theme: this.props.theme,
+
+      theme: this.getTheme(),
       locale: this.getLocale(),
     };
 
@@ -258,6 +283,7 @@ class GiftedMessenger extends Component {
 
       // TODO
       // what if I don't want action sheet?
+      // maybe an option?
       return (
         <ActionSheet ref={component => this._actionSheetRef = component}>
           <View style={{flex: 1}}>
@@ -290,8 +316,9 @@ class GiftedMessenger extends Component {
 GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
-  theme: Theme,
+
   locale: null,
+  theme: Theme,
 
   // Message related
   // TODO re order like in the code

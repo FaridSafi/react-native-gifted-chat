@@ -142,6 +142,8 @@ class Message extends Component {
 
 Message.defaultProps = {
   theme: {},
+  // locale: 'en',
+
   position: 'left',
   user: null,
   time: null,

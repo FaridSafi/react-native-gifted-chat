@@ -3,7 +3,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-const Theme = {
+const DefaultStyles = {
   /*
   ** Message components
   */
@@ -160,4 +160,4 @@ const Theme = {
   }),
 };
 
-export default Theme;
+export default DefaultStyles;

@@ -62,7 +62,7 @@ class Actions extends Component {
   }
 
   // TODO
-  // use theme styles
+  // use customStyles styles
   renderNavBar() {
     return (
       <NavBar>
@@ -88,7 +88,7 @@ class Actions extends Component {
   render() {
     return (
       <TouchableOpacity
-        style={this.props.theme.Actions.container}
+        style={this.props.customStyles.Actions.container}
         onPress={this.onActionsPress.bind(this)}
       >
         <Modal
@@ -114,11 +114,15 @@ class Actions extends Component {
             tintColor: '#ccc'
           }}
           resizeMode="contain"
-          source={require('../assets/paperclip.png')}
+          source={this.props.icon}
         />
       </TouchableOpacity>
     );
   }
 }
+
+Actions.defaultProps = {
+  icon: require('../assets/paperclip.png'),
+};
 
 export default Actions;

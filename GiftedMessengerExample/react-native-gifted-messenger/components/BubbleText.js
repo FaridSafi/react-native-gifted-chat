@@ -6,7 +6,7 @@ import {
 class BubbleText extends Component {
   render() {
     return (
-      <Text style={this.props.theme.BubbleText.text}>
+      <Text style={this.props.customStyles.BubbleText.text}>
         {this.props.text}
       </Text>
     );

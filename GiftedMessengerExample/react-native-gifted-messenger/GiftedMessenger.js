@@ -20,8 +20,10 @@ import InputToolbar from './components/InputToolbar';
 import Location from './components/Location';
 import Message from './components/Message';
 import Send from './components/Send';
-import Styles from './styles/default';
 import Time from './components/Time';
+
+import DefaultStyles from './DefaultStyles';
+
 
 class GiftedMessenger extends Component {
   constructor(props) {
@@ -67,7 +69,7 @@ class GiftedMessenger extends Component {
 
   componentWillMount() {
     this.initLocale();
-    this.initTheme();
+    this.initCustomStyles();
     this.initMessages(this.props.messages, true);
   }
 
@@ -83,8 +85,8 @@ class GiftedMessenger extends Component {
     }
   }
 
-  initTheme() {
-    this.setTheme(this.props.customStyles);
+  initCustomStyles() {
+    this.setCustomStyles(this.props.customStyles);
   }
 
   initMessages(messages, sort = false) {
@@ -105,12 +107,12 @@ class GiftedMessenger extends Component {
     return this._locale;
   }
 
-  setTheme(theme) {
-    this._theme = theme;
+  setCustomStyles(customStyles) {
+    this._customStyles = customStyles;
   }
 
-  getTheme() {
-    return this._theme;
+  getCustomStyles() {
+    return this._customStyles;
   }
 
   setMessages(messages) {
@@ -214,7 +216,7 @@ class GiftedMessenger extends Component {
               renderBubble: this.props.renderBubble,
               renderBubbleText: this.props.renderBubbleText,
 
-              theme: this.getTheme(),
+              customStyles: this.getCustomStyles(),
               locale: this.getLocale(),
             };
 
@@ -279,7 +281,7 @@ class GiftedMessenger extends Component {
         this.scrollToBottom();
       },
 
-      theme: this.getTheme(),
+      customStyles: this.getCustomStyles(),
       locale: this.getLocale(),
     };
 
@@ -331,7 +333,7 @@ GiftedMessenger.defaultProps = {
   onSend: () => {},
 
   locale: null,
-  customStyles: Styles,
+  customStyles: DefaultStyles,
 
   // Message related
   // TODO re order like in the code
@@ -366,6 +368,6 @@ export {
   Location,
   Message,
   Send,
-  Styles,
+  DefaultStyles,
   Time,
 };

@@ -8,8 +8,8 @@ import moment from 'moment/min/moment-with-locales.min';
 class Time extends Component {
   render() {
     return (
-      <View style={this.props.theme.Time.container}>
-        <Text style={this.props.theme.Time.text}>
+      <View style={this.props.customStyles.Time.container}>
+        <Text style={this.props.customStyles.Time.text}>
           {moment(this.props.time).locale(this.props.locale).format('LT')}
         </Text>
       </View>

@@ -32,7 +32,7 @@ class InputToolbar extends Component {
 
   render() {
     return (
-      <View style={this.props.theme.InputToolbar.container}>
+      <View style={this.props.customStyles.InputToolbar.container}>
         {this.renderActions()}
         {this.renderComposer()}
         {this.renderSend()}
@@ -42,7 +42,7 @@ class InputToolbar extends Component {
 }
 
 InputToolbar.defaultProps = {
-  theme: {},
+  customStyles: {},
 };
 
 export default InputToolbar;

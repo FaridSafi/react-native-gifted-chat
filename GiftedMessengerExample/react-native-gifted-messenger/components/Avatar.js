@@ -9,13 +9,13 @@ class Avatar extends Component {
     if (this.props.isSameUser(this.props, this.props.nextMessage) && this.props.isSameDay(this.props, this.props.nextMessage)) {
       // will display a placeholder
       return (
-        <View style={this.props.theme.Avatar[this.props.position].container}>
+        <View style={this.props.customStyles.Avatar[this.props.position].container}>
           <GiftedAvatar/>
         </View>
       );
     }
     return (
-      <View style={this.props.theme.Avatar[this.props.position].container}>
+      <View style={this.props.customStyles.Avatar[this.props.position].container}>
         <GiftedAvatar {...this.props.user}/>
       </View>
     );

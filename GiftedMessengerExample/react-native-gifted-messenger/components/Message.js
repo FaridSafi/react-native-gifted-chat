@@ -95,7 +95,7 @@ class Message extends Component {
     return (
       <View>
         {this.renderDay()}
-        <View style={[this.props.theme.Message[this.props.position].container, {
+        <View style={[this.props.customStyles.Message[this.props.position].container, {
           marginBottom: this.isSameUser(this.props, this.props.nextMessage) ? 2 : 10,
         }]}>
           {this.props.position === 'left' ? this.renderAvatar() : null}
@@ -108,7 +108,7 @@ class Message extends Component {
 }
 
 Message.defaultProps = {
-  theme: {},
+  customStyles: {},
   // locale: 'en',
 
   position: 'left',

@@ -19,7 +19,7 @@ class Location extends Component {
         }).catch(err => console.error('An error occurred', err));
       }}>
         <MapView
-          style={this.props.theme.Location.mapView}
+          style={this.props.customStyles.Location.mapView}
           region={{
             latitude: this.props.location.latitude,
             longitude: this.props.location.longitude,

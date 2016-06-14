@@ -10,13 +10,13 @@ import BubbleText from './BubbleText';
 class Bubble extends Component {
   handleBubbleToNext() {
     if (this.props.isSameUser(this.props, this.props.nextMessage) && this.props.isSameDay(this.props, this.props.nextMessage)) {
-      return this.props.theme.Bubble[this.props.position].containerToNext;
+      return this.props.customStyles.Bubble[this.props.position].containerToNext;
     }
     return null;
   }
   handleBubbleToPrevious() {
     if (this.props.isSameUser(this.props, this.props.previousMessage) && this.props.isSameDay(this.props, this.props.previousMessage)) {
-      return this.props.theme.Bubble[this.props.position].containerToPrevious;
+      return this.props.customStyles.Bubble[this.props.position].containerToPrevious;
     }
     return null;
   }
@@ -67,7 +67,7 @@ class Bubble extends Component {
 
   render() {
     return (
-      <View style={[this.props.theme.Bubble[this.props.position].container, this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
+      <View style={[this.props.customStyles.Bubble[this.props.position].container, this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
         {this.renderLocation()}
         {this.renderBubbleText()}
         {this.renderCustomView()}

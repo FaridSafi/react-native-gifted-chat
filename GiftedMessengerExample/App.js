@@ -8,7 +8,7 @@ import {
   Message,
   InputToolbar,
   Avatar,
-  Styles,
+  DefaultStyles,
   Actions,
   Send,
   Day,
@@ -123,7 +123,7 @@ class App extends Component {
     return (
       <GiftedMessenger
         locale={'fr'}
-        customStyles={Styles}
+        customStyles={DefaultStyles}
 
         messages={this.state.messages}
         onSend={this.onSend.bind(this)}

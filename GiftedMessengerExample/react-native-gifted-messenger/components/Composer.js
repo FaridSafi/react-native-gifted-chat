@@ -10,7 +10,7 @@ class Composer extends Component {
         placeholder={'Type a message...'}
         multiline={true}
         onChange={this.props.onChange}
-        style={[this.props.theme.Composer.textInput, {
+        style={[this.props.customStyles.Composer.textInput, {
           height: this.props.composerHeight,
           marginTop: (this.props.heightMin - this.props.composerHeightMin) / 2,
           marginBottom: (this.props.heightMin - this.props.composerHeightMin) / 2,

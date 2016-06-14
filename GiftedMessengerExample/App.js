@@ -34,6 +34,11 @@ class App extends Component {
           {key: Math.round(Math.random() * 100000), user: {
             avatar: 'https://facebook.github.io/react/img/logo_og.png',
             id: 1,
+          }, position: 'left', text: 'Hi avatar', time: new Date(Date.UTC(2016, 5, 14, 17, 30, 0))},
+
+          {key: Math.round(Math.random() * 100000), user: {
+            avatar: 'https://facebook.github.io/react/img/logo_og.png',
+            id: 1,
           }, position: 'left', text: 'See you soon', time: new Date(Date.UTC(2016, 5, 13, 17, 30, 0))},
 
 
@@ -117,10 +122,8 @@ class App extends Component {
   render() {
     return (
       <GiftedMessenger
-        config={{
-          locale: 'fr',
-          styles: Styles,
-        }}
+        locale={'fr'}
+        customStyles={Styles}
 
         messages={this.state.messages}
         onSend={this.onSend.bind(this)}
@@ -178,7 +181,7 @@ class App extends Component {
           return (
             <Composer {...props}/>
           );
-        }}        
+        }}
       />
     );
   }

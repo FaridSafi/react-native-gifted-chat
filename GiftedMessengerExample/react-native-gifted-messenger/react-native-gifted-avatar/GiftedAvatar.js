@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-class Avatar extends Component {
+class GiftedAvatar extends Component {
 
   setAvatarColor() {
     const userName = this.props.name || '';
@@ -93,7 +93,7 @@ class Avatar extends Component {
   }
 }
 
-Avatar.defaultProps = {
+GiftedAvatar.defaultProps = {
   name: null,
   avatar: null,
   onPress: null,
@@ -118,4 +118,4 @@ const defaultStyles = {
   },
 };
 
-export default Avatar;
+export default GiftedAvatar;

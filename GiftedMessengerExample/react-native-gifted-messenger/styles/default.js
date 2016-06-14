@@ -1,12 +1,33 @@
 import {
   PixelRatio,
+  StyleSheet,
 } from 'react-native';
 
 const Theme = {
   /*
   ** Message components
   */
-  Day: {
+  Message: {
+    left: StyleSheet.create({
+      container: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-start',
+        marginLeft: 5,
+        marginRight: 0,
+      },
+    }),
+    right: StyleSheet.create({
+      container: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        marginLeft: 0,
+        marginRight: 5,
+      },
+    }),
+  },
+  Day: StyleSheet.create({
     container: {
       alignItems: 'center',
       justifyContent: 'center',
@@ -27,8 +48,63 @@ const Theme = {
       color: '#fff',
       fontSize: 12,
     },
+  }),
+  Avatar: {
+    left: StyleSheet.create({
+      container: {
+        marginRight: 5,
+      },
+    }),
+    right: StyleSheet.create({
+      container: {
+        marginLeft: 5,
+      },
+    }),
   },
-  Time: {
+  Bubble: {
+    left: StyleSheet.create({
+      container: {
+        borderRadius: 10,
+        backgroundColor: 'blue',
+      },
+      containerToNext: {
+        borderBottomLeftRadius: 0,
+      },
+      containerToPrevious: {
+        borderTopLeftRadius: 0,
+      },
+    }),
+    right: StyleSheet.create({
+      container: {
+        borderRadius: 10,
+        backgroundColor: 'purple',
+      },
+      containerToNext: {
+        borderBottomRightRadius: 0,
+      },
+      containerToPrevious: {
+        borderTopRightRadius: 0,
+      },
+    }),
+  },
+  BubbleText: StyleSheet.create({
+    text: {
+      color: 'white',
+      marginTop: 5,
+      marginBottom: 5,
+      marginLeft: 10,
+      marginRight: 10,
+    },
+  }),
+  Location: StyleSheet.create({
+    mapView: {
+      width: 150,
+      height: 100,
+      borderRadius: 8,
+      margin: 3,
+    },
+  }),
+  Time: StyleSheet.create({
     container: {
       marginLeft: 10,
       marginRight: 10,
@@ -40,86 +116,11 @@ const Theme = {
       backgroundColor: 'transparent',
       textAlign: 'right',
     },
-  },
-  Location: {
-    mapView: {
-      width: 150,
-      height: 100,
-      borderRadius: 8,
-      margin: 3,
-    },
-  },
-  BubbleText: {
-    text: {
-      color: 'white',
-      marginTop: 5,
-      marginBottom: 5,
-      marginLeft: 10,
-      marginRight: 10,
-    },
-  },
-  Bubble: {
-    left: {
-      container: {
-        borderRadius: 10,
-        backgroundColor: 'blue',
-      },
-      containerToNext: {
-        borderBottomLeftRadius: 0,
-      },
-      containerToPrevious: {
-        borderTopLeftRadius: 0,
-      },
-    },
-    right: {
-      container: {
-        borderRadius: 10,
-        backgroundColor: 'purple',
-      },
-      containerToNext: {
-        borderBottomRightRadius: 0,
-      },
-      containerToPrevious: {
-        borderTopRightRadius: 0,
-      },
-    }
-  },
-  Message: {
-    left: {
-      container: {
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-start',
-        marginLeft: 5,
-        marginRight: 0,
-      },
-    },
-    right: {
-      container: {
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-end',
-        marginLeft: 0,
-        marginRight: 5,
-      },
-    },
-  },
-  Avatar: {
-    left: {
-      container: {
-        marginRight: 5,
-      },
-    },
-    right: {
-      container: {
-        marginLeft: 5,
-      },
-    },
-  },
+  }),
   /*
   ** ToolbarInput components
   */
-  InputToolbar: {
+  InputToolbar: StyleSheet.create({
     container: {
       borderTopWidth: 1 / PixelRatio.get(),
       borderTopColor: '#E6E6E6',
@@ -127,15 +128,8 @@ const Theme = {
       flexDirection: 'row',
       alignItems: 'flex-end',
     },
-  },
-  Composer: {
-    textInput: {
-      flex: 1,
-      marginLeft: 10,
-      fontSize: 17,
-    },
-  },
-  Actions: {
+  }),
+  Actions: StyleSheet.create({
     container: {
       justifyContent: 'center',
       alignItems: 'center',
@@ -144,8 +138,15 @@ const Theme = {
       marginLeft: 10,
       marginBottom: 12,
     },
-  },
-  Send: {
+  }),
+  Composer: StyleSheet.create({
+    textInput: {
+      flex: 1,
+      marginLeft: 10,
+      fontSize: 17,
+    },
+  }),
+  Send: StyleSheet.create({
     container: {
       paddingLeft: 10,
       paddingRight: 10,
@@ -156,7 +157,7 @@ const Theme = {
       fontWeight: '600',
       fontSize: 17,
     },
-  },
+  }),
 };
 
 export default Theme;

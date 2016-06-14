@@ -7,15 +7,18 @@ import moment from 'moment/min/moment-with-locales.min';
 
 class Day extends Component {
   render() {
-    return (
-      <View style={this.props.theme.Day.container}>
-        <View style={this.props.theme.Day.wrapper}>
-          <Text style={this.props.theme.Day.text}>
-            {moment(this.props.time).locale(this.props.locale).format('LL')}
-          </Text>
+    if (!this.props.isSameDay(this.props, this.props.previousMessage)) {
+      return (
+        <View style={this.props.theme.Day.container}>
+          <View style={this.props.theme.Day.wrapper}>
+            <Text style={this.props.theme.Day.text}>
+              {moment(this.props.time).locale(this.props.locale).format('LL')}
+            </Text>
+          </View>
         </View>
-      </View>
-    );
+      );
+    }
+    return null;
   }
 }
 

@@ -8,23 +8,18 @@ import Location from './Location';
 import BubbleText from './BubbleText';
 
 class Bubble extends Component {
-  handleBubbleCorners() {
-    let cornerStyles = {};
+  handleBubbleToNext() {
     if (this.props.isSameUser(this.props, this.props.nextMessage) && this.props.isSameDay(this.props, this.props.nextMessage)) {
-      cornerStyles = {
-        ...cornerStyles,
-        ...this.props.theme.Bubble[this.props.position].containerToNext,
-      };
+      return this.props.theme.Bubble[this.props.position].containerToNext;
     }
-    if (this.props.isSameUser(this.props, this.props.previousMessage) && this.props.isSameDay(this.props, this.props.previousMessage)) {
-      cornerStyles = {
-        ...cornerStyles,
-        ...this.props.theme.Bubble[this.props.position].containerToPrevious,
-      };
-    }
-    return cornerStyles;
+    return null;
   }
-
+  handleBubbleToPrevious() {
+    if (this.props.isSameUser(this.props, this.props.previousMessage) && this.props.isSameDay(this.props, this.props.previousMessage)) {
+      return this.props.theme.Bubble[this.props.position].containerToPrevious;
+    }
+    return null;
+  }
   renderBubbleText() {
     if (this.props.text) {
       if (this.props.renderBubbleText) {
@@ -102,7 +97,7 @@ class Bubble extends Component {
 
   render() {
     return (
-      <View style={[this.props.theme.Bubble[this.props.position].container, this.handleBubbleCorners()]}>
+      <View style={[this.props.theme.Bubble[this.props.position].container, this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
         {this.renderLocation()}
         {this.renderBubbleText()}
         {this.renderCustomView()}

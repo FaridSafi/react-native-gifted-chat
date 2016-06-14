@@ -5,15 +5,11 @@ import {
 
 import moment from 'moment';
 
-import GiftedAvatar from 'react-native-gifted-avatar';
+import Avatar from './Avatar';
 import Day from './Day';
 import Bubble from './Bubble';
 
 class Message extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.status !== nextProps.status) {
       return true;
@@ -55,18 +51,16 @@ class Message extends Component {
   renderDay() {
     if (this.props.time) {
       const dayProps = {
-        time: this.props.time,
-        theme: this.props.theme,
-        locale: this.props.locale,
+        ...this.props,
+        isSameUser: this.isSameUser,
+        isSameDay: this.isSameDay,
       };
-      if (!this.isSameDay(this.props, this.props.previousMessage)) {
-        if (this.props.renderDay) {
-          return this.props.renderDay(dayProps);
-        }
-        return (
-          <Day {...dayProps}/>
-        );
+      if (this.props.renderDay) {
+        return this.props.renderDay(dayProps);
       }
+      return (
+        <Day {...dayProps}/>
+      );
     }
     return null;
   }
@@ -85,43 +79,21 @@ class Message extends Component {
     );
   }
 
-  // TODO
-  // pass props like others components (include theme and locale?)
-  // and move the container to the Avatar component itself
   renderAvatar() {
-    if (!this.props.user) {
-      return null;
-    }
-
-    if (this.isSameUser(this.props, this.props.nextMessage)) {
-      // will display a placeholder (empty space)
+    if (this.props.user) {
+      const avatarProps = {
+        ...this.props,
+        isSameUser: this.isSameUser,
+        isSameDay: this.isSameDay,
+      };
       if (this.props.renderAvatar) {
-        return (
-          <View style={this.props.theme.Avatar[this.props.position].container}>
-            {this.props.renderAvatar(null)}
-          </View>
-        );
+        return this.props.renderAvatar(avatarProps);
       }
       return (
-        <View style={this.props.theme.Avatar[this.props.position].container}>
-          <GiftedAvatar/>
-        </View>
+        <Avatar {...avatarProps}/>
       );
     }
-
-    // will display the avatar
-    if (this.props.renderAvatar) {
-      return (
-        <View style={this.props.theme.Avatar[this.props.position].container}>
-          {this.props.renderAvatar(this.props.user)}
-        </View>
-      );
-    }
-    return (
-      <View style={this.props.theme.Avatar[this.props.position].container}>
-        <GiftedAvatar {...this.props.user}/>
-      </View>
-    );
+    return null;
   }
 
   render() {

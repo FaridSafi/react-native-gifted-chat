@@ -11,7 +11,7 @@ import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 import Actions from './components/Actions';
-import Avatar from 'react-native-gifted-avatar';
+import Avatar from './components/Avatar';
 import Bubble from './components/Bubble';
 import BubbleText from './components/BubbleText';
 import Composer from './components/Composer';
@@ -84,7 +84,7 @@ class GiftedMessenger extends Component {
   }
 
   initTheme() {
-    this.setTheme(this.props.theme);
+    this.setTheme(this.props.customStyles);
   }
 
   initMessages(messages, sort = false) {
@@ -331,7 +331,7 @@ GiftedMessenger.defaultProps = {
   onSend: () => {},
 
   locale: null,
-  theme: Styles,
+  customStyles: Styles,
 
   // Message related
   // TODO re order like in the code

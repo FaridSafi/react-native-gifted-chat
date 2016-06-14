@@ -1,0 +1,5 @@
+rootProject.name = 'GiftedMessengerExample'
+
+include ':app'
+include ':ExtraDimensions', ':app'
+project(':ExtraDimensions').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-extra-dimensions-android/android')

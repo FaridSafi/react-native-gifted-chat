@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import {
   View,
+  Image,
 } from 'react-native';
 
 import {
   GiftedMessenger,
-  Message,
-  InputToolbar,
-  Avatar,
-  DefaultStyles,
   Actions,
-  Send,
-  Day,
-  Time,
+  Avatar,
   Bubble,
   BubbleText,
   Composer,
+  Day,
+  InputToolbar,
+  Location,
+  Message,
+  Send,
+  Time,
+  DefaultStyles,
 } from './react-native-gifted-messenger/GiftedMessenger';
 
 class App extends Component {
@@ -128,9 +130,22 @@ class App extends Component {
         messages={this.state.messages}
         onSend={this.onSend.bind(this)}
 
-        renderMessage={(props) => {
+        renderActions={(props) => {
+          // icon={() => {
+          //   return (
+          //     <Image
+          //       style={{
+          //         width: 20,
+          //         height: 20,
+          //       }}
+          //       source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
+          //     />
+          //   );
+          // }}
           return (
-            <Message {...props}/>
+            <Actions
+              {...props}
+            />
           );
         }}
         renderAvatar={(props) => {
@@ -138,33 +153,6 @@ class App extends Component {
             <Avatar {...props} onPress={(user) => {
               console.log(user);
             }}/>
-          );
-        }}
-        renderInputToolbar={(props) => {
-          return (
-            <InputToolbar {...props}/>
-          );
-        }}
-        renderActions={(props) => {
-          return (
-            <Actions {...props}/>
-          );
-        }}
-        renderSend={(props) => {
-          return (
-            <Send {...props}/>
-          );
-        }}
-
-
-        renderDay={(props) => {
-          return (
-            <Day {...props}/>
-          );
-        }}
-        renderTime={(props) => {
-          return (
-            <Time {...props}/>
           );
         }}
         renderBubble={(props) => {
@@ -182,14 +170,41 @@ class App extends Component {
             <Composer {...props}/>
           );
         }}
+        renderDay={(props) => {
+          return (
+            <Day {...props}/>
+          );
+        }}
+        renderInputToolbar={(props) => {
+          return (
+            <InputToolbar {...props}/>
+          );
+        }}
+        renderLocation={(props) => {
+          return (
+            <Location {...props}/>
+          );
+        }}
+        renderMessage={(props) => {
+          return (
+            <Message {...props}/>
+          );
+        }}
+        renderSend={(props) => {
+          return (
+            <Send {...props}/>
+          );
+        }}
+        renderTime={(props) => {
+          return (
+            <Time {...props}/>
+          );
+        }}
+
+
       />
     );
   }
-
-  // TODO
-  // onPressUrl
-  // onPressEmail
-  // onPressAccessory
 
   onSend(message) {
     this.setState({

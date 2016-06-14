@@ -3,7 +3,6 @@ import {
   Animated,
   View,
   InteractionManager,
-  Dimensions,
 } from 'react-native';
 import moment from 'moment/min/moment-with-locales.min';
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
@@ -24,6 +23,10 @@ import Time from './components/Time';
 
 import DefaultStyles from './DefaultStyles';
 
+// TODO
+// onPressUrl
+// onPressEmail
+// onPressAccessory
 
 class GiftedMessenger extends Component {
   constructor(props) {
@@ -31,10 +34,8 @@ class GiftedMessenger extends Component {
 
     // default values
     this._keyboardHeight = 0;
-    this._maxHeight = Dimensions.get('window').height;
-
-    // TODO
-    // check if missing default values (starting by _)
+    this._maxHeight = null;
+    this.touchStarted = false;
 
     this.state = {
       isInitialized: false, // needed to calculate the maxHeight before rendering the chat
@@ -78,7 +79,7 @@ class GiftedMessenger extends Component {
   }
 
   initLocale() {
-    if (this.props.locale === 'en' || moment.locales().indexOf(this.props.locale) === -1) {
+    if (this.props.locale === null || moment.locales().indexOf(this.props.locale) === -1) {
       this.setLocale('en');
     } else {
       this.setLocale(this.props.locale);
@@ -141,24 +142,22 @@ class GiftedMessenger extends Component {
 
   onKeyboardWillShow(e) {
     this.setKeyboardHeight(e.endCoordinates.height);
-
     Animated.timing(this.state.messagesContainerHeight, {
-      toValue: (this.getMaxHeight() - (this.state.composerHeight + (this.props.inputToolbarHeightMin - this.props.inputToolbarComposerHeightMin))) - this.getKeyboardHeight(),
+      toValue: (this.getMaxHeight() - (this.state.composerHeight + (this.getCustomStyles().minInputToolbarHeight - this.getCustomStyles().minComposerHeight))) - this.getKeyboardHeight(),
       duration: 200,
     }).start();
   }
 
   onKeyboardWillHide() {
     this.setKeyboardHeight(0);
-
     Animated.timing(this.state.messagesContainerHeight, {
-      toValue: this.getMaxHeight() - (this.state.composerHeight + (this.props.inputToolbarHeightMin - this.props.inputToolbarComposerHeightMin)),
+      toValue: this.getMaxHeight() - (this.state.composerHeight + (this.getCustomStyles().minInputToolbarHeight - this.getCustomStyles().minComposerHeight)),
       duration: 200,
     }).start();
   }
 
   scrollToBottom(animated = true) {
-    this._scrollView.scrollTo({
+    this._scrollViewRef.scrollTo({
       y: 0,
       animated,
     });
@@ -197,90 +196,71 @@ class GiftedMessenger extends Component {
           onKeyboardWillShow={this.onKeyboardWillShow.bind(this)}
           onKeyboardWillHide={this.onKeyboardWillHide.bind(this)}
 
-          ref={(r) => {
-            this._scrollView = r;
-          }}
+          ref={component => this._scrollViewRef = component}
 
-          {...this.props}
+          {...this.props.scrollViewProps}
         >
           {this.getMessages().map((message, index) => {
+            if (!message.key) {
+              console.warn('GiftedMessenger: `key` is missing for message', JSON.stringify(message));
+            }
+
             const messageProps = {
+              ...this.props,
               ...message,
               previousMessage: this.getMessages()[index + 1] ? this.getMessages()[index + 1] : null,
               nextMessage: this.getMessages()[index - 1] ? this.getMessages()[index - 1] : null,
-
-              renderAvatar: this.props.renderAvatar,
-              renderDay: this.props.renderDay,
-              renderTime: this.props.renderTime,
-              renderLocation: this.props.renderLocation,
-              renderBubble: this.props.renderBubble,
-              renderBubbleText: this.props.renderBubbleText,
-
               customStyles: this.getCustomStyles(),
               locale: this.getLocale(),
             };
 
-            if (!messageProps.key) {
-              console.warn('GiftedMessenger: key is missing for message', JSON.stringify(message));
-            }
-
             if (this.props.renderMessage) {
               return this.props.renderMessage(messageProps);
             }
-            return (
-              <Message {...messageProps}/>
-            );
+            return <Message {...messageProps}/>;
           })}
         </InvertibleScrollView>
       </Animated.View>
     );
   }
 
+  onSend(message) {
+    message.position = 'right';
+    this.props.onSend(message);
+    const newState = {
+      composerHeight: this.getCustomStyles().minComposerHeight,
+      messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getCustomStyles().minInputToolbarHeight - this.getKeyboardHeight()),
+    };
+    if (message.text) {
+      newState.text = '';
+    }
+    this.setState(newState);
+    this.scrollToBottom();
+  }
+
+  onType(e) {
+    const newComposerHeight = Math.min(this.getCustomStyles().maxComposerHeight, e.nativeEvent.contentSize.height);
+    const newMessagesContainerHeight =
+      this.state.messagesContainerHeight.__getValue() +
+      (this.getMaxHeight()
+      - this.state.messagesContainerHeight.__getValue()
+      - (Math.max(this.getCustomStyles().minComposerHeight, newComposerHeight) + (this.getCustomStyles().minInputToolbarHeight - this.getCustomStyles().minComposerHeight))
+      - this.getKeyboardHeight())
+    ;
+    this.setState({
+      text: e.nativeEvent.text,
+      composerHeight: Math.max(this.getCustomStyles().minComposerHeight, newComposerHeight),
+      messagesContainerHeight: new Animated.Value(newMessagesContainerHeight),
+    });
+  }
+
   renderInputToolbar() {
     const inputToolbarProps = {
-
-      renderActions: this.props.renderActions,
-      renderSend: this.props.renderSend,
-      renderComposer: this.props.renderComposer,
-
+      ...this.props,
       text: this.state.text,
-
-      heightMin: this.props.inputToolbarHeightMin,
-      composerHeightMin: this.props.inputToolbarComposerHeightMin,
-      composerHeightMax: this.props.inputToolbarComposerHeightMax,
-      composerHeight: Math.max(this.props.inputToolbarComposerHeightMin, this.state.composerHeight),
-      onChange: (e) => {
-        const newComposerHeight = Math.min(this.props.inputToolbarComposerHeightMax, e.nativeEvent.contentSize.height);
-
-        const newMessagesContainerHeight =
-          this.state.messagesContainerHeight.__getValue() +
-          (this.getMaxHeight()
-          - this.state.messagesContainerHeight.__getValue()
-          - (Math.max(this.props.inputToolbarComposerHeightMin, newComposerHeight) + (this.props.inputToolbarHeightMin - this.props.inputToolbarComposerHeightMin))
-          - this.getKeyboardHeight())
-        ;
-
-        this.setState({
-          text: e.nativeEvent.text,
-          composerHeight: Math.max(this.props.inputToolbarComposerHeightMin, newComposerHeight),
-          messagesContainerHeight: new Animated.Value(newMessagesContainerHeight),
-        });
-      },
-      onSend: (message) => {
-        message.position = 'right';
-
-        this.props.onSend(message);
-        const newState = {
-          composerHeight: this.props.inputToolbarComposerHeightMin,
-          messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.props.inputToolbarHeightMin - this.getKeyboardHeight()),
-        };
-        if (message.text) {
-          newState.text = '';
-        }
-        this.setState(newState);
-        this.scrollToBottom();
-      },
-
+      composerHeight: Math.max(this.getCustomStyles().minComposerHeight, this.state.composerHeight),
+      onChange: this.onType.bind(this),
+      onSend: this.onSend.bind(this),
       customStyles: this.getCustomStyles(),
       locale: this.getLocale(),
     };
@@ -288,17 +268,11 @@ class GiftedMessenger extends Component {
     if (this.props.renderInputToolbar) {
       return this.props.renderInputToolbar(inputToolbarProps);
     }
-    return (
-      <InputToolbar {...inputToolbarProps}/>
-    );
+    return <InputToolbar {...inputToolbarProps}/>;
   }
 
   render() {
     if (this.state.isInitialized === true) {
-
-      // TODO
-      // what if I don't want action sheet?
-      // maybe an option?
       return (
         <ActionSheet ref={component => this._actionSheetRef = component}>
           <View style={{flex: 1}}>
@@ -308,6 +282,7 @@ class GiftedMessenger extends Component {
         </ActionSheet>
       );
     }
+    // Initialization
     return (
       <View
         style={{flex: 1}}
@@ -318,8 +293,8 @@ class GiftedMessenger extends Component {
             this.setState({
               isInitialized: true,
               text: '',
-              composerHeight: this.props.inputToolbarComposerHeightMin,
-              messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.props.inputToolbarHeightMin),
+              composerHeight: this.getCustomStyles().minComposerHeight,
+              messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getCustomStyles().minInputToolbarHeight),
             });
           });
         }}
@@ -335,25 +310,19 @@ GiftedMessenger.defaultProps = {
   locale: null,
   customStyles: DefaultStyles,
 
-  // Message related
-  // TODO re order like in the code
-  renderMessage: null,
-  renderDay: null,
+  renderActions: null,
+  renderAvatar: null,
   renderBubble: null,
   renderBubbleText: null,
-  renderAvatar: null,
-  renderTime: null,
-  renderLocation: null,
-
-  // InputToolbar related
-  renderActions: null,
-  renderSend: null,
   renderComposer: null,
+  renderDay: null,
+  renderInputToolbar: null,
+  renderLocation: null,
+  renderMessage: null,
+  renderSend: null,
+  renderTime: null,
 
-
-  inputToolbarHeightMin: 55,
-  inputToolbarComposerHeightMin: 35,
-  inputToolbarComposerHeightMax: 100,
+  scrollViewProps: null,
 };
 
 export {
@@ -368,6 +337,6 @@ export {
   Location,
   Message,
   Send,
-  DefaultStyles,
   Time,
+  DefaultStyles,
 };

@@ -3,10 +3,10 @@ import {
   StyleSheet,
 } from 'react-native';
 
-const DefaultStyles = {
-  /*
-  ** Message components
-  */
+/*
+** Message styles
+*/
+let DefaultStyles = {
   Message: {
     left: StyleSheet.create({
       container: {
@@ -117,9 +117,19 @@ const DefaultStyles = {
       textAlign: 'right',
     },
   }),
-  /*
-  ** ToolbarInput components
-  */
+};
+
+/*
+** ToolbarInput styles
+*/
+DefaultStyles = Object.assign(DefaultStyles, {
+
+  // Min and max heights of ToolbarInput and Composer
+  // Needed for handling Composer's auto grow and ScrollView animation
+  minInputToolbarHeight: 55,
+  minComposerHeight: 35,
+  maxComposerHeight: 100,
+
   InputToolbar: StyleSheet.create({
     container: {
       borderTopWidth: 1 / PixelRatio.get(),
@@ -134,9 +144,14 @@ const DefaultStyles = {
       justifyContent: 'center',
       alignItems: 'center',
       width: 30,
-      height: 30,
+      height: 27,
       marginLeft: 10,
       marginBottom: 12,
+    },
+    icon: {
+      width: 27,
+      height: 30,
+      tintColor: '#ccc',
     },
   }),
   Composer: StyleSheet.create({
@@ -158,6 +173,6 @@ const DefaultStyles = {
       fontSize: 17,
     },
   }),
-};
+});
 
 export default DefaultStyles;

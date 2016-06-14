@@ -12,8 +12,8 @@ class Composer extends Component {
         onChange={this.props.onChange}
         style={[this.props.customStyles.Composer.textInput, {
           height: this.props.composerHeight,
-          marginTop: (this.props.heightMin - this.props.composerHeightMin) / 2,
-          marginBottom: (this.props.heightMin - this.props.composerHeightMin) / 2,
+          marginTop: (this.props.customStyles.minInputToolbarHeight - this.props.customStyles.minComposerHeight) / 2,
+          marginBottom: (this.props.customStyles.minInputToolbarHeight - this.props.customStyles.minComposerHeight) / 2,
         }]}
         value={this.props.text}
         enablesReturnKeyAutomatically={true}

@@ -11,7 +11,6 @@ class Actions extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       modalVisible: false,
     };
@@ -85,6 +84,19 @@ class Actions extends Component {
     );
   }
 
+  renderIcon() {
+    if (this.props.icon) {
+      return this.props.icon();
+    }
+    return (
+      <Image
+        style={this.props.customStyles.Actions.icon}
+        resizeMode="contain"
+        source={require('../assets/paperclip.png')}
+      />
+    );
+  }
+
   render() {
     return (
       <TouchableOpacity
@@ -106,23 +118,13 @@ class Actions extends Component {
             callback={this.getSelectedImages.bind(this)}
           />
         </Modal>
-
-        <Image
-          style={{
-            width: 27,
-            height: 30,
-            tintColor: '#ccc'
-          }}
-          resizeMode="contain"
-          source={this.props.icon}
-        />
+        {this.renderIcon()}
       </TouchableOpacity>
     );
   }
 }
 
 Actions.defaultProps = {
-  icon: require('../assets/paperclip.png'),
 };
 
 export default Actions;

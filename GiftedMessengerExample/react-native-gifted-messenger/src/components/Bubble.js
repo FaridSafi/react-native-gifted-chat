@@ -3,7 +3,7 @@ import {
   View,
 } from 'react-native';
 
-import BubbleText from './BubbleText';
+import ParsedText from './ParsedText';
 import BubbleImage from './BubbleImage';
 import Location from './Location';
 import Time from './Time';
@@ -23,12 +23,12 @@ class Bubble extends Component {
     return null;
   }
 
-  renderBubbleText() {
+  renderParsedText() {
     if (this.props.text) {
-      if (this.props.renderBubbleText) {
-        this.props.renderBubbleText(this.props);
+      if (this.props.renderParsedText) {
+        this.props.renderParsedText(this.props);
       }
-      return <BubbleText {...this.props}/>;
+      return <ParsedText {...this.props}/>;
     }
     return null;
   }
@@ -76,7 +76,7 @@ class Bubble extends Component {
         <View style={[this.props.customStyles.Bubble[this.props.position].wrapper, this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
           {this.renderCustomView()}
           {this.renderBubbleImage()}
-          {this.renderBubbleText()}
+          {this.renderParsedText()}
           {this.renderLocation()}
           {this.renderTime()}
         </View>
@@ -88,7 +88,7 @@ class Bubble extends Component {
 Bubble.defaultProps = {
   'customStyles': {},
   'renderBubbleImage': null,
-  'renderBubbleText': null,
+  'renderParsedText': null,
   'renderCustomView': null,
   'renderLocation': null,
   'renderTime': null,

@@ -14,7 +14,7 @@ import Actions from './components/Actions';
 import Avatar from './components/Avatar';
 import Bubble from './components/Bubble';
 import BubbleImage from './components/BubbleImage';
-import BubbleText from './components/BubbleText';
+import ParsedText from './components/ParsedText';
 import Composer from './components/Composer';
 import Day from './components/Day';
 import InputToolbar from './components/InputToolbar';
@@ -378,7 +378,7 @@ GiftedMessenger.defaultProps = {
   renderActions: null,
   renderAvatar: null,
   renderBubble: null,
-  renderBubbleText: null,
+  renderParsedText: null,
   renderBubbleImage: null,
   renderComposer: null,
   renderDay: null,
@@ -397,7 +397,7 @@ export {
   Avatar,
   Bubble,
   BubbleImage,
-  BubbleText,
+  ParsedText,
   Composer,
   Day,
   InputToolbar,

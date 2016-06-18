@@ -4,10 +4,10 @@ import {
   View,
 } from 'react-native';
 
-import ParsedText from 'react-native-parsed-text';
+import RNParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
 
-class BubbleText extends Component {
+class ParsedText extends Component {
 
   // required by @exponent/react-native-action-sheet
   static contextTypes = {
@@ -47,25 +47,25 @@ class BubbleText extends Component {
 
   render() {
     return (
-      <View style={this.props.customStyles.BubbleText.container}>
-        <ParsedText
-          style={this.props.customStyles.BubbleText.text}
+      <View style={this.props.customStyles.ParsedText.container}>
+        <RNParsedText
+          style={this.props.customStyles.ParsedText.text}
           parse={[
-            {type: 'url', style: this.props.customStyles.BubbleText.link, onPress: this.handleUrlPress.bind(this)},
-            {type: 'phone', style: this.props.customStyles.BubbleText.link, onPress: this.handlePhonePress.bind(this)},
-            {type: 'email', style: this.props.customStyles.BubbleText.link, onPress: this.handleEmailPress.bind(this)},
+            {type: 'url', style: this.props.customStyles.ParsedText.link, onPress: this.handleUrlPress.bind(this)},
+            {type: 'phone', style: this.props.customStyles.ParsedText.link, onPress: this.handlePhonePress.bind(this)},
+            {type: 'email', style: this.props.customStyles.ParsedText.link, onPress: this.handleEmailPress.bind(this)},
           ]}
         >
           {this.props.text}
-        </ParsedText>
+        </RNParsedText>
       </View>
     );
   }
 }
 
-BubbleText.defaultProps = {
+ParsedText.defaultProps = {
   'customStyles': {},
   'text': null,
 };
 
-export default BubbleText;
+export default ParsedText;

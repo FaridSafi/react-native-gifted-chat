@@ -130,7 +130,7 @@ const messageStyles = {
       resizeMode: 'cover',
     },
   }),
-  BubbleText: StyleSheet.create({
+  ParsedText: StyleSheet.create({
     container: {
     },
     text: {

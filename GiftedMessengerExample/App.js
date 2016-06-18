@@ -10,7 +10,7 @@ import {
   Avatar,
   Bubble,
   BubbleImage,
-  BubbleText,
+  ParsedText,
   Composer,
   Day,
   InputToolbar,
@@ -156,9 +156,9 @@ class App extends Component {
             <BubbleImage {...props}/>
           );
         }}
-        renderBubbleText={(props) => {
+        renderParsedText={(props) => {
           return (
-            <BubbleText {...props}/>
+            <ParsedText {...props}/>
           );
         }}
         renderComposer={(props) => {

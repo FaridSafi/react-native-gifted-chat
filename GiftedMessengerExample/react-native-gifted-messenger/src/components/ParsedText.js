@@ -47,13 +47,13 @@ class ParsedText extends Component {
 
   render() {
     return (
-      <View style={this.props.customStyles.ParsedText.container}>
+      <View style={this.props.customStyles.ParsedText[this.props.position].container}>
         <RNParsedText
-          style={this.props.customStyles.ParsedText.text}
+          style={this.props.customStyles.ParsedText[this.props.position].text}
           parse={[
-            {type: 'url', style: this.props.customStyles.ParsedText.link, onPress: this.onUrlPress.bind(this)},
-            {type: 'phone', style: this.props.customStyles.ParsedText.link, onPress: this.onPhonePress.bind(this)},
-            {type: 'email', style: this.props.customStyles.ParsedText.link, onPress: this.onEmailPress.bind(this)},
+            {type: 'url', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onUrlPress.bind(this)},
+            {type: 'phone', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onPhonePress.bind(this)},
+            {type: 'email', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onEmailPress.bind(this)},
           ]}
         >
           {this.props.text}

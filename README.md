@@ -10,3 +10,7 @@ The most complete chat UI for React Native
 - ...
 
 # Dependencies
+
+
+# License
+- MIT

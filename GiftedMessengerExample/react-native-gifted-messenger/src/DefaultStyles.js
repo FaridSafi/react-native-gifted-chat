@@ -91,7 +91,7 @@ const messageStyles = {
       },
       wrapper: {
         borderRadius: 10,
-        backgroundColor: 'blue',
+        backgroundColor: '#F1F0F0',
         marginRight: 60,
       },
       containerToNext: {
@@ -108,7 +108,7 @@ const messageStyles = {
       },
       wrapper: {
         borderRadius: 10,
-        backgroundColor: 'purple',
+        backgroundColor: '#0084FF',
         marginLeft: 60,
       },
       containerToNext: {
@@ -130,21 +130,38 @@ const messageStyles = {
       resizeMode: 'cover',
     },
   }),
-  ParsedText: StyleSheet.create({
-    container: {
+  ParsedText: {
+    left: {
+      container: {
+      },
+      text: {
+        color: 'black',
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 10,
+        marginRight: 10,
+      },
+      link: {
+        color: 'black',
+        textDecorationLine: 'underline',
+      },
     },
-    text: {
-      color: 'white',
-      marginTop: 5,
-      marginBottom: 5,
-      marginLeft: 10,
-      marginRight: 10,
+    right: {
+      container: {
+      },
+      text: {
+        color: 'white',
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 10,
+        marginRight: 10,
+      },
+      link: {
+        color: 'white',
+        textDecorationLine: 'underline',
+      },
     },
-    link: {
-      color: 'white',
-      textDecorationLine: 'underline',
-    },
-  }),
+  },
   Location: StyleSheet.create({
     mapView: {
       width: 150,

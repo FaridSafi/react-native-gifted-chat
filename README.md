@@ -2,3 +2,11 @@
 
 # Gifted Messenger
 The most complete chat UI for React Native
+
+
+# Features
+- Touchable url, email, phone number
+- Copy text to clipboard
+- ...
+
+# Dependencies

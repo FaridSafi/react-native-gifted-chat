@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
+  Clipboard,
   View,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 import ParsedText from './ParsedText';
@@ -9,6 +11,11 @@ import Location from './Location';
 import Time from './Time';
 
 class Bubble extends Component {
+  // required by @exponent/react-native-action-sheet
+  static contextTypes = {
+    actionSheet: PropTypes.func,
+  };
+
   handleBubbleToNext() {
     if (this.props.isSameUser(this.props, this.props.nextMessage) && this.props.isSameDay(this.props, this.props.nextMessage)) {
       return this.props.customStyles.Bubble[this.props.position].containerToNext;
@@ -70,15 +77,42 @@ class Bubble extends Component {
     return null;
   }
 
+  onLongPress() {
+    if (this.props.text) {
+      let options = [
+        'Copy Text',
+        'Cancel',
+      ];
+      let cancelButtonIndex = options.length - 1;
+      this.context.actionSheet().showActionSheetWithOptions({
+        options,
+        cancelButtonIndex,
+      },
+      (buttonIndex) => {
+        switch (buttonIndex) {
+          case 0:
+            Clipboard.setString(this.props.text);
+            break;
+        }
+      });
+    }
+  }
+
   render() {
     return (
       <View style={[this.props.customStyles.Bubble[this.props.position].container]}>
         <View style={[this.props.customStyles.Bubble[this.props.position].wrapper, this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
-          {this.renderCustomView()}
-          {this.renderBubbleImage()}
-          {this.renderParsedText()}
-          {this.renderLocation()}
-          {this.renderTime()}
+          <TouchableWithoutFeedback
+            onLongPress={this.onLongPress.bind(this)}
+          >
+            <View>
+              {this.renderCustomView()}
+              {this.renderBubbleImage()}
+              {this.renderParsedText()}
+              {this.renderLocation()}
+              {this.renderTime()}
+            </View>
+          </TouchableWithoutFeedback>
         </View>
       </View>
     );

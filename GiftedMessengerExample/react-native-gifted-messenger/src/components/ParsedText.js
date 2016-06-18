@@ -14,13 +14,13 @@ class ParsedText extends Component {
     actionSheet: PropTypes.func,
   };
 
-  handleUrlPress(url) {
+  onUrlPress(url) {
     Linking.openURL(url);
   }
 
-  handlePhonePress(phone) {
+  onPhonePress(phone) {
     let options = [
-      'Text message',
+      'Text',
       'Call',
       'Cancel',
     ];
@@ -41,7 +41,7 @@ class ParsedText extends Component {
     });
   }
 
-  handleEmailPress(email) {
+  onEmailPress(email) {
     Communications.email(email, null, null, null, null);
   }
 
@@ -51,9 +51,9 @@ class ParsedText extends Component {
         <RNParsedText
           style={this.props.customStyles.ParsedText.text}
           parse={[
-            {type: 'url', style: this.props.customStyles.ParsedText.link, onPress: this.handleUrlPress.bind(this)},
-            {type: 'phone', style: this.props.customStyles.ParsedText.link, onPress: this.handlePhonePress.bind(this)},
-            {type: 'email', style: this.props.customStyles.ParsedText.link, onPress: this.handleEmailPress.bind(this)},
+            {type: 'url', style: this.props.customStyles.ParsedText.link, onPress: this.onUrlPress.bind(this)},
+            {type: 'phone', style: this.props.customStyles.ParsedText.link, onPress: this.onPhonePress.bind(this)},
+            {type: 'email', style: this.props.customStyles.ParsedText.link, onPress: this.onEmailPress.bind(this)},
           ]}
         >
           {this.props.text}

@@ -1,8 +1,8 @@
 {
   "name": "react-native-gifted-messenger",
   "version": "0.2.0",
-  "description": "Chat UI for iOS and Android React-Native apps",
-  "main": "GiftedMessenger.js",
+  "description": "The most complete chat UI for React Native",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -36,10 +36,12 @@
     "@exponent/react-native-action-sheet": "^0.1.3",
     "moment": "^2.13.0",
     "react-native-camera-roll-picker": "^1.0.8",
+    "react-native-communications": "^2.0.0",
     "react-native-dismiss-keyboard": "^1.0.0",
     "react-native-gifted-avatar": "file://react-native-gifted-avatar/",
     "react-native-invertible-scroll-view": "^1.0.0",
     "react-native-lightbox": "^0.6.0",
-    "react-native-nav": "^1.1.4"
+    "react-native-nav": "^1.1.4",
+    "react-native-parsed-text": "0.0.13"
   }
 }

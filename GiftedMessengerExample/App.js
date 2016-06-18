@@ -20,7 +20,7 @@ import {
   Send,
   Time,
   DefaultStyles,
-} from './react-native-gifted-messenger/GiftedMessenger';
+} from './react-native-gifted-messenger';
 
 class App extends Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class App extends Component {
               avatar: 'https://facebook.github.io/react/img/logo_og.png',
               id: 1,
             },
-            image: 'assets-library://asset/asset.JPG?id=106E99A1-4F6A-45A2-B320-B0AD4A8E8473&ext=JPG',
+            text: 'hello http://google.fr',
             time: new Date(Date.UTC(2016, 5, 14, 17, 30, 0)),
           },
           {
@@ -65,15 +65,6 @@ class App extends Component {
             id: Math.round(Math.random() * 1000000),
             text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
             time: new Date(Date.UTC(2016, 5, 11, 17, 30, 0)),
-            user: {
-              avatar: 'https://facebook.github.io/react/img/logo_og.png',
-              id: 1,
-            },
-          },
-          {
-            id: Math.round(Math.random() * 1000000),
-            text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
-            time: new Date(Date.UTC(2016, 5, 10, 17, 30, 0)),
             user: {
               avatar: 'https://facebook.github.io/react/img/logo_og.png',
               id: 1,

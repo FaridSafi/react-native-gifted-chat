@@ -37,10 +37,10 @@ class GiftedMessenger extends Component {
     // default values
     this._keyboardHeight = 0;
     this._maxHeight = null;
-    this.touchStarted = false;
+    this._touchStarted = false;
 
     this.state = {
-      isInitialized: false, // needed to calculate the maxHeight before rendering the chat
+      isInitialized: false, // initialization will calculate maxHeight before rendering the chat
     };
   }
 

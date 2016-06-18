@@ -24,7 +24,6 @@ class Actions extends Component {
     actionSheet: PropTypes.func,
   };
 
-
   setImages(images) {
     this._images = images;
   }
@@ -110,7 +109,7 @@ class Actions extends Component {
       <Image
         style={this.props.customStyles.Actions.icon}
         resizeMode='contain'
-        source={require('../assets/paperclip.png')}
+        source={require('../../assets/paperclip.png')}
       />
     );
   }

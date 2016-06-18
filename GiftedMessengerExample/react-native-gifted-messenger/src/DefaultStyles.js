@@ -6,7 +6,7 @@ import {
 /*
 ** Message styles
 */
-let DefaultStyles = {
+const messageStyles = {
   LoadEarlier: StyleSheet.create({
     container: {
       alignItems: 'center',
@@ -140,6 +140,10 @@ let DefaultStyles = {
       marginLeft: 10,
       marginRight: 10,
     },
+    link: {
+      color: 'white',
+      textDecorationLine: 'underline',
+    },
   }),
   Location: StyleSheet.create({
     mapView: {
@@ -167,7 +171,7 @@ let DefaultStyles = {
 /*
 ** ToolbarInput styles
 */
-DefaultStyles = Object.assign(DefaultStyles, {
+const toolbarInputStyles = {
 
   // Min and max heights of ToolbarInput and Composer
   // Needed for handling Composer's auto grow and ScrollView animation
@@ -218,13 +222,13 @@ DefaultStyles = Object.assign(DefaultStyles, {
       fontSize: 17,
     },
   }),
-});
+};
 
 
 /*
 ** Global styles
 */
-DefaultStyles = Object.assign(DefaultStyles, {
+const globalStyles = {
   NavBar: {
     statusBar: {
       backgroundColor: '#FFF',
@@ -239,6 +243,7 @@ DefaultStyles = Object.assign(DefaultStyles, {
       color: '#000',
     },
   },
-});
+};
 
-export default DefaultStyles;
+
+export default Object.assign({}, messageStyles, toolbarInputStyles, globalStyles);

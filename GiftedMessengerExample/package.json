@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "react": "^15.1.0",
-    "react-native": "^0.27.2"
+    "react-native": "^0.27.2",
+    "react-native-parsed-text": "0.0.13"
   }
 }

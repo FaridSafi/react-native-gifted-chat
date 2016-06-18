@@ -29,7 +29,7 @@ Day.defaultProps = {
   'isSameDay': () => {},
   // TODO test if it crash if time = null
   time: null,
-  'previousMessage': null,
+  'previousMessage': {},
 };
 
 export default Day;

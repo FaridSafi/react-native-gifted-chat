@@ -11,9 +11,7 @@ class Send extends Component {
         style={this.props.customStyles.Send.container}
         onPress={() => {
           if (this.props.text.trim().length > 0) {
-            this.props.onSend({
-              text: this.props.text.trim(),
-            });
+            this.props.onSend({text: this.props.text.trim()}, true);
           }
         }}
       >

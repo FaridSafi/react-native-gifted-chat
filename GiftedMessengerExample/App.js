@@ -9,10 +9,12 @@ import {
   Actions,
   Avatar,
   Bubble,
+  BubbleImage,
   BubbleText,
   Composer,
   Day,
   InputToolbar,
+  LoadEarlier,
   Location,
   Message,
   Send,
@@ -24,8 +26,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [
-      ],
+      messages: [],
     };
   }
 
@@ -33,61 +34,51 @@ class App extends Component {
     setTimeout(() => {
       this.setState({
         messages: [
-          {key: Math.round(Math.random() * 100000), user: {
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
-            id: 1,
-          }, position: 'left', text: 'Hi avatar', time: new Date(Date.UTC(2016, 5, 14, 17, 30, 0))},
-
-          {key: Math.round(Math.random() * 100000), user: {
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
-            id: 1,
-          }, position: 'left', text: 'See you soon', time: new Date(Date.UTC(2016, 5, 13, 17, 30, 0))},
-
-
-          // {key: Math.round(Math.random() * 100000), user: {
-          //   name: 'Farid Safi',
-          //   id: 2,
-          // }, position: 'right', location: {longitude: -122.04120235, latitude: 37.33756603}, time: new Date(Date.UTC(2016, 5, 11, 17, 10, 0))},
-
           {
-            key: Math.round(Math.random() * 100000),
+            id: Math.round(Math.random() * 1000000),
             user: {
-              name: 'Farid Safi',
-              id: 2,
+              avatar: 'https://facebook.github.io/react/img/logo_og.png',
+              id: 1,
             },
-            position: 'right',
-            time: new Date(Date.UTC(2016, 5, 12, 17, 0, 0)),
-            text: 'Some text',
-            renderCustomView: (message) => {
-              return (
-                <View
-                  style={{
-                    position: 'absolute',
-                    left: -10,
-                    top: 8,
-                    backgroundColor: 'green',
-                    width: 20,
-                    height: 20,
-                    borderRadius: 10,
-                  }}
-                />
-              );
+            image: 'assets-library://asset/asset.JPG?id=106E99A1-4F6A-45A2-B320-B0AD4A8E8473&ext=JPG',
+            time: new Date(Date.UTC(2016, 5, 14, 17, 30, 0)),
+          },
+          {
+            id: Math.round(Math.random() * 1000000),
+            user: {
+              avatar: 'https://facebook.github.io/react/img/logo_og.png',
+              id: 1,
+            },
+            image: 'assets-library://asset/asset.JPG?id=99D53A1F-FEEF-40E1-8BB3-7DD55A43C8B7&ext=JPG',
+            time: new Date(Date.UTC(2016, 5, 13, 17, 30, 0)),
+          },
+          {
+            id: Math.round(Math.random() * 1000000),
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            time: new Date(Date.UTC(2016, 5, 11, 17, 30, 0)),
+            user: {
+              id: 2,
+              name: 'Farid Safi',
             },
           },
-
-          {key: Math.round(Math.random() * 100000), user: {
-            name: 'Club Mate',
-            id: 3,
-          }, position: 'left', text: 'Where are you?', time: new Date(Date.UTC(2016, 5, 12, 17, 0, 0))},
-
-
-          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Message', time: new Date(Date.UTC(2016, 5, 11, 17, 0, 0))},
-          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Message', time: new Date(Date.UTC(2016, 5, 10, 17, 0, 0))},
-          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Message', time: new Date(Date.UTC(2016, 5, 9, 17, 0, 0))},
-          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Message', time: new Date(Date.UTC(2016, 5, 8, 17, 0, 0))},
-          {key: Math.round(Math.random() * 100000), position: 'left', text: '1 june', time: new Date(Date.UTC(2016, 5, 7, 17, 0, 0))},
-          {key: Math.round(Math.random() * 100000), position: 'left', text: '20 may', time: new Date(Date.UTC(2016, 4, 20, 17, 0, 0))},
-          {key: Math.round(Math.random() * 100000), position: 'left', text: 'Oldest Message', time: new Date(Date.UTC(2016, 4, 1, 17, 0, 0))},
+          {
+            id: Math.round(Math.random() * 1000000),
+            text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
+            time: new Date(Date.UTC(2016, 5, 11, 17, 30, 0)),
+            user: {
+              avatar: 'https://facebook.github.io/react/img/logo_og.png',
+              id: 1,
+            },
+          },
+          {
+            id: Math.round(Math.random() * 1000000),
+            text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
+            time: new Date(Date.UTC(2016, 5, 10, 17, 30, 0)),
+            user: {
+              avatar: 'https://facebook.github.io/react/img/logo_og.png',
+              id: 1,
+            },
+          },
         ]
       });
     }, 0); // simulating network
@@ -115,7 +106,7 @@ class App extends Component {
     //         name: 'React Native',
     //         avatar: 'https://facebook.github.io/react/img/logo_og.png',
     //       },
-    //       key: Math.round(Math.random() * 100000),
+    //       id: Math.round(Math.random() * 1000000),
     //     }),
     //   });
     // }, 2000);
@@ -129,6 +120,15 @@ class App extends Component {
 
         messages={this.state.messages}
         onSend={this.onSend.bind(this)}
+
+        loadEarlier={true}
+        onLoadEarlier={this.onLoadEarlier.bind(this)}
+
+        user={{
+          id: 2,
+          name: 'Farid Safi',
+          // avatar:
+        }}
 
         renderActions={(props) => {
           // icon={() => {
@@ -160,6 +160,11 @@ class App extends Component {
             <Bubble {...props}/>
           );
         }}
+        renderBubbleImage={(props) => {
+          return (
+            <BubbleImage {...props}/>
+          );
+        }}
         renderBubbleText={(props) => {
           return (
             <BubbleText {...props}/>
@@ -178,6 +183,14 @@ class App extends Component {
         renderInputToolbar={(props) => {
           return (
             <InputToolbar {...props}/>
+          );
+        }}
+        renderLoadEarlier={(props) => {
+          return (
+            <LoadEarlier
+              {...props}
+              // `onLoadEarlier` SHOULD NOT BE PASSED HERE i think
+            />
           );
         }}
         renderLocation={(props) => {
@@ -200,24 +213,83 @@ class App extends Component {
             <Time {...props}/>
           );
         }}
-
-
       />
     );
   }
 
-  onSend(message) {
+
+  // TODO
+  // handle receive
+
+
+  onSend(messages = []) {
+
+    // messages have a temporary id tempId
+
+    /* Send the message(s) to your server here */
+
+    // setTimeout(() => {
+    //   // Update the temporary key
+    //   // Why ? TODO
+    //
+    //   // TODO test render triggering opti
+    //   this.setState({
+    //     messages: GiftedMessenger.update(this.state.messages, [
+    //       {
+    //         find: {
+    //           tempId: 1000,
+    //         },
+    //         set: {
+    //           id: 1001,
+    //         }
+    //       }
+    //     ]),
+    //   });
+    // }, 1000); // simulating networking
+
     this.setState({
-      messages: GiftedMessenger.append(this.state.messages, {
-        ...message,
-        time: new Date(),
-        user: {
-          id: 2,
-          name: 'Farid Safi',
-          // avatar: 'https://facebook.github.io/react/img/logo_og.png',
+      messages: GiftedMessenger.append(this.state.messages, messages),
+    });
+
+  }
+
+  onLoadEarlier() {
+    this.setState({
+      messages: GiftedMessenger.prepend(this.state.messages, [
+        {
+          id: Math.round(Math.random() * 1000000),
+          // position: 'right',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+
+          time: new Date(Date.UTC(2016, 5, 9, 17, 30, 0)),
+          user: {
+            id: 2,
+            name: 'Farid Safi',
+          },
         },
-        key: Math.round(Math.random() * 100000),
-      }),
+        {
+          id: Math.round(Math.random() * 1000000),
+          // position: 'left',
+          text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
+
+          time: new Date(Date.UTC(2016, 5, 9, 17, 30, 0)),
+          user: {
+            avatar: 'https://facebook.github.io/react/img/logo_og.png',
+            id: 1,
+          },
+        },
+        {
+          id: Math.round(Math.random() * 1000000),
+          // position: 'left',
+          text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
+
+          time: new Date(Date.UTC(2016, 5, 9, 17, 30, 0)),
+          user: {
+            avatar: 'https://facebook.github.io/react/img/logo_og.png',
+            id: 1,
+          },
+        },
+      ]),
     });
   }
 }

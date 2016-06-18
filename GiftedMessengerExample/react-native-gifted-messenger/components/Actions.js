@@ -11,6 +11,9 @@ import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 class Actions extends Component {
   constructor(props) {
     super(props);
+
+    this._images = [];
+
     this.state = {
       modalVisible: false,
     };
@@ -20,6 +23,15 @@ class Actions extends Component {
   static contextTypes = {
     actionSheet: PropTypes.func,
   };
+
+
+  setImages(images) {
+    this._images = images;
+  }
+
+  getImages() {
+    return this._images;
+  }
 
   setModalVisible(visible = false) {
     this.setState({modalVisible: visible});
@@ -56,28 +68,34 @@ class Actions extends Component {
     });
   }
 
-  getSelectedImages(image) {
-    console.log('selected', image);
+  selectImages(images) {
+    this.setImages(images);
   }
 
-  // TODO
-  // use customStyles styles
   renderNavBar() {
     return (
-      <NavBar>
+      <NavBar style={this.props.customStyles.NavBar}>
         <NavButton onPress={() => {
           this.setModalVisible(false);
         }}>
-          <NavButtonText>
-            Cancel
+          <NavButtonText style={this.props.customStyles.NavBar.buttonText}>
+            {"Cancel"}
           </NavButtonText>
         </NavButton>
-        <NavTitle>
-          Camera Roll
+        <NavTitle style={this.props.customStyles.NavBar.title}>
+          {"Camera Roll"}
         </NavTitle>
-        <NavButton>
-          <NavButtonText>
-            Send
+        <NavButton onPress={() => {
+          this.setModalVisible(false);
+          const images = this.getImages().map((image) => {
+            return {
+              image: image,
+            };
+          });
+          this.props.onSend(images);
+        }}>
+          <NavButtonText style={this.props.customStyles.NavBar.buttonText}>
+            {"Send"}
           </NavButtonText>
         </NavButton>
       </NavBar>
@@ -115,7 +133,7 @@ class Actions extends Component {
           <CameraRollPicker
             maximum={10}
             imagesPerRow={4}
-            callback={this.getSelectedImages.bind(this)}
+            callback={this.selectImages.bind(this)}
           />
         </Modal>
         {this.renderIcon()}

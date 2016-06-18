@@ -7,6 +7,28 @@ import {
 ** Message styles
 */
 let DefaultStyles = {
+  LoadEarlier: StyleSheet.create({
+    container: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: 5,
+      marginBottom: 10,
+    },
+    wrapper: {
+      alignItems: 'center',
+      backgroundColor: '#ccc',
+      borderRadius: 10,
+      paddingLeft: 10,
+      paddingRight: 10,
+      paddingTop: 5,
+      paddingBottom: 5,
+    },
+    text: {
+      backgroundColor: 'transparent',
+      color: '#fff',
+      fontSize: 12,
+    },
+  }),
   Message: {
     left: StyleSheet.create({
       container: {
@@ -64,8 +86,13 @@ let DefaultStyles = {
   Bubble: {
     left: StyleSheet.create({
       container: {
+        flex: 1,
+        alignItems: 'flex-start',
+      },
+      wrapper: {
         borderRadius: 10,
         backgroundColor: 'blue',
+        marginRight: 60,
       },
       containerToNext: {
         borderBottomLeftRadius: 0,
@@ -76,8 +103,13 @@ let DefaultStyles = {
     }),
     right: StyleSheet.create({
       container: {
+        flex: 1,
+        alignItems: 'flex-end',
+      },
+      wrapper: {
         borderRadius: 10,
         backgroundColor: 'purple',
+        marginLeft: 60,
       },
       containerToNext: {
         borderBottomRightRadius: 0,
@@ -87,7 +119,20 @@ let DefaultStyles = {
       },
     }),
   },
+  BubbleImage: StyleSheet.create({
+    container: {
+    },
+    image: {
+      width: 150,
+      height: 100,
+      borderRadius: 8,
+      margin: 3,
+      resizeMode: 'cover',
+    },
+  }),
   BubbleText: StyleSheet.create({
+    container: {
+    },
     text: {
       color: 'white',
       marginTop: 5,
@@ -173,6 +218,27 @@ DefaultStyles = Object.assign(DefaultStyles, {
       fontSize: 17,
     },
   }),
+});
+
+
+/*
+** Global styles
+*/
+DefaultStyles = Object.assign(DefaultStyles, {
+  NavBar: {
+    statusBar: {
+      backgroundColor: '#FFF',
+    },
+    navBar: {
+      backgroundColor: '#FFF',
+    },
+    title: {
+      color: '#000',
+    },
+    buttonText: {
+      color: '#000',
+    },
+  },
 });
 
 export default DefaultStyles;

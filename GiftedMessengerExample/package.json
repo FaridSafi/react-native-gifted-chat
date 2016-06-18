@@ -5,9 +5,14 @@
   "scripts": {
     "start": "node_modules/react-native/packager/packager.sh"
   },
+  "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "eslint": "^2.12.0",
+    "eslint-plugin-react": "^5.1.1",
+    "eslint-plugin-react-native": "^1.1.0-beta"
+  },
   "dependencies": {
     "react": "^15.1.0",
-    "react-native": "^0.27.2",
-    "react-native-camera-roll-picker": "^1.0.8"
+    "react-native": "^0.27.2"
   }
 }

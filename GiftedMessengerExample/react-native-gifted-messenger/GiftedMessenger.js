@@ -13,10 +13,12 @@ import moment from 'moment/min/moment-with-locales.min';
 import Actions from './components/Actions';
 import Avatar from './components/Avatar';
 import Bubble from './components/Bubble';
+import BubbleImage from './components/BubbleImage';
 import BubbleText from './components/BubbleText';
 import Composer from './components/Composer';
 import Day from './components/Day';
 import InputToolbar from './components/InputToolbar';
+import LoadEarlier from './components/LoadEarlier';
 import Location from './components/Location';
 import Message from './components/Message';
 import Send from './components/Send';
@@ -67,6 +69,22 @@ class GiftedMessenger extends Component {
     }
     return currentMessages.concat(messages);
   }
+
+  // static update(currentMessages = [], options) {
+  //   if (!Array.isArray(options)) {
+  //     options = [options];
+  //   }
+  //
+  //   return currentMessages.map((message) => {
+  //     for (let i = 0; i < options.length; i++) {
+  //       const {find, set} = options;
+  //       if () {
+  //         return
+  //       }
+  //     }
+  //     return message;
+  //   });
+  // }
 
   componentWillMount() {
     this.initLocale();
@@ -205,17 +223,19 @@ class GiftedMessenger extends Component {
           {...this.props.scrollViewProps}
         >
           {this.getMessages().map((message, index) => {
-            if (!message.key) {
-              console.warn('GiftedMessenger: `key` is missing for message', JSON.stringify(message));
+            if (!message.id) {
+              console.warn('GiftedMessenger: `id` is missing for message', JSON.stringify(message));
             }
 
             const messageProps = {
               ...this.props,
               ...message,
-              previousMessage: this.getMessages()[index + 1] ? this.getMessages()[index + 1] : null,
-              nextMessage: this.getMessages()[index - 1] ? this.getMessages()[index - 1] : null,
+              key: message.id,
+              previousMessage: this.getMessages()[index + 1] || {},
+              nextMessage: this.getMessages()[index - 1] || {},
               customStyles: this.getCustomStyles(),
               locale: this.getLocale(),
+              position: message.user.id === this.props.user.id ? 'right' : 'left',
             };
 
             if (this.props.renderMessage) {
@@ -223,24 +243,64 @@ class GiftedMessenger extends Component {
             }
             return <Message {...messageProps}/>;
           })}
+
+          {this.renderLoadEarlier()}
         </InvertibleScrollView>
       </Animated.View>
     );
   }
 
-  onSend(message = {}) {
-    message.position = 'right';
-    this.props.onSend(message);
+  onLoadEarlier() {
+    if (this.props.onLoadEarlier) {
+      this.props.onLoadEarlier();
+    }
+  }
 
-    const newState = {
+  renderLoadEarlier() {
+    if (this.props.loadEarlier === true) {
+      const loadEarlierProps = {
+        ...this.props,
+        customStyles: this.getCustomStyles(),
+        locale: this.getLocale(),
+        onLoadEarlier: this.onLoadEarlier.bind(this),
+      };
+      if (this.props.renderLoadEarlier) {
+        return this.props.renderLoadEarlier(loadEarlierProps);
+      }
+      return (
+        <LoadEarlier {...loadEarlierProps}/>
+      );
+    }
+    return null;
+  }
+
+  onSend(messages = [], shouldResetInputToolbar = false) {
+    if (!Array.isArray(messages)) {
+      messages = [messages];
+    }
+
+    messages = messages.map((message) => {
+      return {
+        ...message,
+        user: this.props.user,
+        time: new Date(),
+        id: 'temp-id-'+Math.round(Math.random() * 1000000),
+      };
+    });
+
+    if (shouldResetInputToolbar === true) {
+      this.resetInputToolbar();
+    }
+    this.props.onSend(messages);
+    this.scrollToBottom();
+  }
+
+  resetInputToolbar() {
+    this.setState({
+      text: '',
       composerHeight: this.getCustomStyles().minComposerHeight,
       messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getCustomStyles().minInputToolbarHeight - this.getKeyboardHeight()),
-    };
-    if (message.text) {
-      newState.text = '';
-    }
-    this.setState(newState);
-    this.scrollToBottom();
+    });
   }
 
   onType(e) {
@@ -311,6 +371,8 @@ class GiftedMessenger extends Component {
 GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
+  loadEarlier: false,
+  onLoadEarlier: () => {},
   locale: null,
   // TODO TEST:
   // customStyles: {},
@@ -319,6 +381,7 @@ GiftedMessenger.defaultProps = {
   renderAvatar: null,
   renderBubble: null,
   renderBubbleText: null,
+  renderBubbleImage: null,
   renderComposer: null,
   renderDay: null,
   renderInputToolbar: null,
@@ -327,6 +390,7 @@ GiftedMessenger.defaultProps = {
   renderSend: null,
   renderTime: null,
   scrollViewProps: null,
+  user: {},
 };
 
 export {
@@ -334,15 +398,15 @@ export {
   Actions,
   Avatar,
   Bubble,
+  BubbleImage,
   BubbleText,
   Composer,
   Day,
   InputToolbar,
+  LoadEarlier,
   Location,
   Message,
   Send,
   Time,
   DefaultStyles,
 };
-
-// clean

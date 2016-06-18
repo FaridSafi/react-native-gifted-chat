@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 
 import BubbleText from './BubbleText';
+import BubbleImage from './BubbleImage';
 import Location from './Location';
 import Time from './Time';
 
@@ -32,6 +33,16 @@ class Bubble extends Component {
     return null;
   }
 
+  renderBubbleImage() {
+    if (this.props.image) {
+      if (this.props.renderBubbleImage) {
+        this.props.renderBubbleImage(this.props);
+      }
+      return <BubbleImage {...this.props}/>;
+    }
+    return null;
+  }
+
   renderLocation() {
     if (this.props.location) {
       if (this.props.renderLocation) {
@@ -54,14 +65,6 @@ class Bubble extends Component {
 
   renderCustomView() {
     if (this.props.renderCustomView) {
-      // const customViewProps = {};
-      // for (let key in this.props) {
-      //   if (this.props.hasOwnProperty[key]) {
-      //     if (key.indexOf('render') !== 0) {
-      //       customViewProps[key] = this.props[key];
-      //     }
-      //   }
-      // }
       return this.props.renderCustomView(this.props);
     }
     return null;
@@ -69,11 +72,14 @@ class Bubble extends Component {
 
   render() {
     return (
-      <View style={[this.props.customStyles.Bubble[this.props.position].container, this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
-        {this.renderLocation()}
-        {this.renderBubbleText()}
-        {this.renderCustomView()}
-        {this.renderTime()}
+      <View style={[this.props.customStyles.Bubble[this.props.position].container]}>
+        <View style={[this.props.customStyles.Bubble[this.props.position].wrapper, this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
+          {this.renderCustomView()}
+          {this.renderBubbleImage()}
+          {this.renderBubbleText()}
+          {this.renderLocation()}
+          {this.renderTime()}
+        </View>
       </View>
     );
   }
@@ -81,6 +87,7 @@ class Bubble extends Component {
 
 Bubble.defaultProps = {
   'customStyles': {},
+  'renderBubbleImage': null,
   'renderBubbleText': null,
   'renderCustomView': null,
   'renderLocation': null,
@@ -91,8 +98,8 @@ Bubble.defaultProps = {
   'position': 'left',
   'text': null,
   'time': null,
-  'nextMessage': null,
-  'previousMessage': null,
+  'nextMessage': {},
+  'previousMessage': {},
 };
 
 export default Bubble;

@@ -15,18 +15,18 @@ class Message extends Component {
     // if (this.props.status !== nextProps.status) {
     //   return true;
     // }
-    if (this.props.nextMessage !== nextProps.nextMessage) {
+    if (this.props.nextMessage.id !== nextProps.nextMessage.id) {
       return true;
     }
-    if (this.props.previousMessage !== nextProps.previousMessage) {
+    if (this.props.previousMessage.id !== nextProps.previousMessage.id) {
       return true;
     }
     return false;
   }
 
-  isSameDay(currentMessage = {}, diffMessage = null) {
+  isSameDay(currentMessage = {}, diffMessage = {}) {
     let diff = 0;
-    if (diffMessage && diffMessage.time && currentMessage && currentMessage.time) {
+    if (diffMessage.time && currentMessage.time) {
       diff = Math.abs(moment(diffMessage.time).startOf('day').diff(moment(currentMessage.time).startOf('day'), 'days'));
     } else {
       diff = 1;
@@ -37,11 +37,11 @@ class Message extends Component {
     return false;
   }
 
-  isSameUser(currentMessage = {}, diffMessage = null) {
-    if ((diffMessage === null || diffMessage.user === null) && currentMessage.user === null) {
-      return true;
-    }
-    if (diffMessage && diffMessage.user && currentMessage.user) {
+  isSameUser(currentMessage = {}, diffMessage = {}) {
+    // if (diffMessage.user === null && currentMessage.user === null) {
+    //   return true;
+    // }
+    if (diffMessage.user && currentMessage.user) {
       if (diffMessage.user.id === currentMessage.user.id) {
         return true;
       }
@@ -116,8 +116,8 @@ Message.defaultProps = {
   position: 'left',
   time: null,
   user: null,
-  nextMessage: null,
-  previousMessage: null,
+  nextMessage: {},
+  previousMessage: {},
 };
 
 export default Message;

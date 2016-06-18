@@ -29,7 +29,7 @@ Avatar.defaultProps = {
   'isSameUser': () => {},
   'position': null,
   'user': null,
-  'nextMessage': null,
+  'nextMessage': {},
 };
 
 export default Avatar;

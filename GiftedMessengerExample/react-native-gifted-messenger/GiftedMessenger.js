@@ -303,18 +303,16 @@ class GiftedMessenger extends Component {
     });
   }
 
+  calculateInputToolbarHeight(newComposerHeight) {
+    return newComposerHeight + (this.getCustomStyles().minInputToolbarHeight - this.getCustomStyles().minComposerHeight);
+  }
+
   onType(e) {
-    const newComposerHeight = Math.min(this.getCustomStyles().maxComposerHeight, e.nativeEvent.contentSize.height);
-    const newMessagesContainerHeight =
-      this.state.messagesContainerHeight.__getValue() +
-      (this.getMaxHeight()
-      - this.state.messagesContainerHeight.__getValue()
-      - (Math.max(this.getCustomStyles().minComposerHeight, newComposerHeight) + (this.getCustomStyles().minInputToolbarHeight - this.getCustomStyles().minComposerHeight))
-      - this.getKeyboardHeight())
-    ;
+    const newComposerHeight = Math.max(this.getCustomStyles().minComposerHeight, Math.min(this.getCustomStyles().maxComposerHeight, e.nativeEvent.contentSize.height));
+    const newMessagesContainerHeight = this.getMaxHeight() - this.calculateInputToolbarHeight(newComposerHeight) - this.getKeyboardHeight();
     this.setState({
       text: e.nativeEvent.text,
-      composerHeight: Math.max(this.getCustomStyles().minComposerHeight, newComposerHeight),
+      composerHeight: newComposerHeight,
       messagesContainerHeight: new Animated.Value(newMessagesContainerHeight),
     });
   }

@@ -234,8 +234,9 @@ class GiftedMessenger extends Component {
   }
 
   onKeyboardWillShow(e) {
+    const bottomHeight = this.props.paddingBottom ? this.props.paddingBottom : 0;
     Animated.timing(this.state.height, {
-      toValue: this.listViewMaxHeight - e.endCoordinates.height,
+      toValue: this.listViewMaxHeight - e.endCoordinates.height + bottomHeight,
       duration: 200,
     }).start();
   }
@@ -672,6 +673,7 @@ GiftedMessenger.propTypes = {
   onLoadEarlierMessages: React.PropTypes.func,
   onMessageLongPress: React.PropTypes.func,
   parseText: React.PropTypes.bool,
+  paddingBottom: React.PropTypes.number,
   placeholder: React.PropTypes.string,
   placeholderTextColor: React.PropTypes.string,
   renderCustomText: React.PropTypes.func,

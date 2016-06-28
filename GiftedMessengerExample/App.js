@@ -42,6 +42,14 @@ class App extends Component {
             },
             text: 'hello http://google.fr',
             time: new Date(Date.UTC(2016, 5, 14, 17, 30, 0)),
+            answers: [
+              {
+                text: "Yes, indeed",
+              },
+              {
+                text: "No, what are you talking about?"
+              },
+            ],
           },
           {
             id: Math.round(Math.random() * 1000000),

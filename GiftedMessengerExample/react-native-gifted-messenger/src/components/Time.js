@@ -10,7 +10,7 @@ class Time extends Component {
   render() {
     return (
       <View style={this.props.customStyles.Time.container}>
-        <Text style={this.props.customStyles.Time.text}>
+        <Text style={[this.props.customStyles.Time.text, (this.props.position === "left" ? {color: 'black'} : {})]}>
           {moment(this.props.time).locale(this.props.locale).format('LT')}
         </Text>
       </View>

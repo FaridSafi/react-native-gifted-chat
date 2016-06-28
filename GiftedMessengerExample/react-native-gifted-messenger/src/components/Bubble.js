@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import ParsedText from './ParsedText';
+import Answers from './Answers';
 import BubbleImage from './BubbleImage';
 import Location from './Location';
 import Time from './Time';
@@ -77,6 +78,13 @@ class Bubble extends Component {
     return null;
   }
 
+  renderAnswers() {
+    if (this.props.answers) {
+      return <Answers {...this.props} />;
+    }
+    return null;
+  }
+
   onLongPress() {
     if (this.props.text) {
       let options = [
@@ -109,6 +117,7 @@ class Bubble extends Component {
               {this.renderCustomView()}
               {this.renderBubbleImage()}
               {this.renderParsedText()}
+              {this.renderAnswers()}
               {this.renderLocation()}
               {this.renderTime()}
             </View>

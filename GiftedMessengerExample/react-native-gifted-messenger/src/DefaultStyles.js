@@ -83,6 +83,20 @@ const messageStyles = {
       },
     }),
   },
+  Answers: StyleSheet.create({
+    container: {
+      marginTop: 8,
+      backgroundColor: '#f6f6f6',
+    },
+    answer: {
+      borderTopWidth: 1,
+      borderColor: '#666',
+      paddingTop: 5,
+      paddingBottom: 5,
+      paddingLeft: 10,
+      paddingRight: 10,
+    },
+  }),
   Bubble: {
     left: StyleSheet.create({
       container: {

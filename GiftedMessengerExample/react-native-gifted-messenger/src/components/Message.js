@@ -109,6 +109,7 @@ class Message extends Component {
 }
 
 Message.defaultProps = {
+  anwers: null,
   customStyles: {},
   renderAvatar: null,
   renderBubble: null,

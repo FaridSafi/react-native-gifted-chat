@@ -298,6 +298,15 @@ class GiftedMessenger extends Component {
   }
 
   onAnswerPress(answer) {
+    if (answer.action) {
+      const {dispatch} = this.props;
+      if (dispatch) {
+        dispatch({type: answer.action, action: answer});
+        if (this.preventSendMessage) {
+          return;
+        }
+      }
+    }
     this.onSend({
       text: answer.text.trim()
     });

@@ -22,6 +22,17 @@ import {
   DefaultStyles,
 } from './react-native-gifted-messenger';
 
+let dispatcher = function(args) {
+  console.log("dispatcher received args:", args);
+  switch (args.type) {
+    case 'OPEN_LOGIN':
+      alert("Open login");
+      break;
+    default:
+
+  }
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +56,7 @@ class App extends Component {
             answers: [
               {
                 text: "Yes, indeed",
+                action: 'OPEN_LOGIN',
               },
               {
                 text: "No, what are you talking about?"
@@ -128,6 +140,8 @@ class App extends Component {
           name: 'Farid Safi',
           // avatar:
         }}
+
+        dispatch={dispatcher}
 
         renderActions={(props) => {
           // icon={() => {

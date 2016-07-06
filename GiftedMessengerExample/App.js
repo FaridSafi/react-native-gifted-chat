@@ -22,6 +22,17 @@ import {
   DefaultStyles,
 } from './react-native-gifted-messenger';
 
+let dispatcher = function(args) {
+  console.log("dispatcher received args:", args);
+  switch (args.type) {
+    case 'OPEN_LOGIN':
+      alert("Open login");
+      break;
+    default:
+
+  }
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +53,16 @@ class App extends Component {
             },
             text: 'hello http://google.fr',
             time: new Date(Date.UTC(2016, 5, 14, 17, 30, 0)),
+            answers: [
+              {
+                text: "Yes, indeed",
+                action: 'OPEN_LOGIN',
+                preventSendMessage: true,
+              },
+              {
+                text: "No, what are you talking about?"
+              },
+            ],
           },
           {
             id: Math.round(Math.random() * 1000000),
@@ -120,6 +141,8 @@ class App extends Component {
           name: 'Farid Safi',
           // avatar:
         }}
+
+        dispatch={dispatcher}
 
         renderActions={(props) => {
           // icon={() => {

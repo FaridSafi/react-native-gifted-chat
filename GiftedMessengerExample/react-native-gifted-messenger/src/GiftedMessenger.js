@@ -11,6 +11,7 @@ import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import moment from 'moment/min/moment-with-locales.min';
 
 import Actions from './components/Actions';
+import Answers from './components/Answers';
 import Avatar from './components/Avatar';
 import Bubble from './components/Bubble';
 import BubbleImage from './components/BubbleImage';
@@ -235,6 +236,7 @@ class GiftedMessenger extends Component {
               nextMessage: this.getMessages()[index - 1] || {},
               customStyles: this.getCustomStyles(),
               locale: this.getLocale(),
+              onAnswerPress: this.onAnswerPress.bind(this),
               position: message.user.id === this.props.user.id ? 'right' : 'left',
             };
 
@@ -293,6 +295,21 @@ class GiftedMessenger extends Component {
     }
     this.props.onSend(messages);
     this.scrollToBottom();
+  }
+
+  onAnswerPress(answer) {
+    if (answer.action) {
+      const {dispatch} = this.props;
+      if (dispatch) {
+        dispatch({type: answer.action, action: answer});
+        if (answer.preventSendMessage) {
+          return;
+        }
+      }
+    }
+    this.onSend({
+      text: answer.text.trim()
+    });
   }
 
   resetInputToolbar() {
@@ -394,6 +411,7 @@ GiftedMessenger.defaultProps = {
 export {
   GiftedMessenger,
   Actions,
+  Answers,
   Avatar,
   Bubble,
   BubbleImage,

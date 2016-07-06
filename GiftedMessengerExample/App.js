@@ -57,6 +57,7 @@ class App extends Component {
               {
                 text: "Yes, indeed",
                 action: 'OPEN_LOGIN',
+                preventSendMessage: true,
               },
               {
                 text: "No, what are you talking about?"

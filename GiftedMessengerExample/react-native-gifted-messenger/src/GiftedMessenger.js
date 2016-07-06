@@ -302,7 +302,7 @@ class GiftedMessenger extends Component {
       const {dispatch} = this.props;
       if (dispatch) {
         dispatch({type: answer.action, action: answer});
-        if (this.preventSendMessage) {
+        if (answer.preventSendMessage) {
           return;
         }
       }

@@ -18,6 +18,7 @@ import moment from 'moment';
 import {setLocale} from './Locale';
 import deepEqual from 'deep-equal';
 import Button from 'react-native-button';
+import * as _ from 'lodash';
 
 class GiftedMessenger extends Component {
 
@@ -129,7 +130,7 @@ class GiftedMessenger extends Component {
       },
     };
 
-    Object.assign(this.styles, this.props.styles);
+    _.merge(this.styles, this.props.styles);
 
     if (this.props.dateLocale !== '')
       setLocale(this.props.dateLocale);

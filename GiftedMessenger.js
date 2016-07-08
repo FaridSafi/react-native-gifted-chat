@@ -576,6 +576,28 @@ class GiftedMessenger extends Component {
 
             blurOnSubmit={this.props.blurOnSubmit}
           />
+          {this.renderSendButton()}
+          </View>
+      );
+    }
+    return null;
+  }
+
+  renderSendButton() {
+    if (this.props.hideSendButton) {
+      if (!this.state.disabled) {
+        return (
+            <Button
+              style={this.styles.sendButton}
+              onPress={this.onSend}
+            >
+              {this.props.sendButtonText}
+            </Button>
+        );
+      }
+      return null;
+    } else {
+      return (
           <Button
             style={this.styles.sendButton}
             styleDisabled={this.styles.sendButtonDisabled}
@@ -584,10 +606,8 @@ class GiftedMessenger extends Component {
           >
             {this.props.sendButtonText}
           </Button>
-        </View>
       );
     }
-    return null;
   }
 
   render() {

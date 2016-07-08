@@ -56,6 +56,7 @@ See [GiftedMessengerExample/GiftedMessengerContainer.js](https://raw.githubuserc
 | handleSend                    | Function | Called when a message is Sent                                              | Both     | (message, rowID) => {}           |
 | handleUrlPress                | Function | Called when a parsed url is pressed                                        | iOS      | (url) => {}                      |
 | hideTextInput                 | Boolean  | Hide or not the text input                                                 | Both     | false                            |
+| hideSendButton                | Boolean  | Hide the send button when there is nothing in the text input               | Both     | false                            |
 | isLoadingEarlierMessages      | Boolean  | Display a loader when loading earlier messages                             | Both     | false                            |
 | keyboardDismissMode           | String   | Method to dismiss the keyboard when dragging (none, interactive, on-drag)  | Both     | interactive                      |
 | keyboardShouldPersistTaps     | Boolean  | When false, tapping the scrollview dismisses the keyboard.                 | Both     | true                             |

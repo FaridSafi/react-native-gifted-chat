@@ -595,7 +595,7 @@ class GiftedMessenger extends Component {
             onPress={this.onSend}
             disabled={this.state.disabled}
           >
-            {this.props.sendButtonText}
+            { this.props.renderCustomSendButton ? this.props.renderCustomSendButton() : this.props.sendButtonText }
           </Button>
         </View>
       );
@@ -653,6 +653,7 @@ GiftedMessenger.defaultProps = {
   onImagePress: null,
   onLoadEarlierMessages: () => {},
   onMessageLongPress: () => {},
+  renderCustomSendButton: null,
   parseText: false,
   placeholder: 'Type a message...',
   placeholderTextColor: '#ccc',
@@ -696,6 +697,7 @@ GiftedMessenger.propTypes = {
   parseText: React.PropTypes.bool,
   placeholder: React.PropTypes.string,
   placeholderTextColor: React.PropTypes.string,
+  renderCustomSendButton: React.PropTypes.func,
   renderCustomText: React.PropTypes.func,
   renderCustomDate: React.PropTypes.func,
   scrollAnimated: React.PropTypes.bool,

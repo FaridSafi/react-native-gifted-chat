@@ -7,6 +7,7 @@ import {
   ListView,
   TextInput,
   Dimensions,
+  Image,
   Animated,
   Platform,
   PixelRatio,
@@ -79,6 +80,12 @@ class GiftedMessenger extends Component {
       },
       listView: {
         flex: 1,
+      },
+      backgroundImage: {
+        flex: 1,
+        width: null,
+        alignSelf: 'stretch',
+        height: null,
       },
       textInputContainer: {
         height: 44,
@@ -515,7 +522,6 @@ class GiftedMessenger extends Component {
           height: this.state.height,
           justifyContent: 'flex-end',
         }}
-
       >
         <ListView
           ref="listView"
@@ -597,18 +603,33 @@ class GiftedMessenger extends Component {
     return null;
   }
 
+  renderContent(children) {
+
+    children = children.map((child, i) => <View key={ i }>{ child }</View>);
+
+    if (this.props.backgroundImage) {
+      return (
+        <Image source={ this.props.backgroundImage } style={ this.styles.backgroundImage }>
+          { children }
+        </Image>
+      );
+    }
+
+    return <View style={ this.styles.container }>{ children }</View>;
+
+  }
+
   render() {
-    return (
-      <View style={this.styles.container}>
-        {this.renderAnimatedView()}
-        {this.renderTextInput()}
-      </View>
-    );
+    return this.renderContent([
+      this.renderAnimatedView(), 
+      this.renderTextInput()
+    ])
   }
 }
 
 GiftedMessenger.defaultProps = {
   autoFocus: true,
+  backgroundImage: null,
   blurOnSubmit: false,
   dateLocale: '',
   displayNames: true,
@@ -647,6 +668,7 @@ GiftedMessenger.defaultProps = {
 
 GiftedMessenger.propTypes = {
   autoFocus: React.PropTypes.bool,
+  backgroundImage: React.PropTypes.number,
   blurOnSubmit: React.PropTypes.bool,
   dateLocale: React.PropTypes.string,
   displayNames: React.PropTypes.bool,

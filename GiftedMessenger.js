@@ -577,6 +577,7 @@ class GiftedMessenger extends Component {
             onChangeText={this.onChangeText}
             value={this.state.text}
             autoFocus={this.props.autoFocus}
+            onFocus={this.props.onFocus}
             returnKeyType={this.props.submitOnReturn ? 'send' : 'default'}
             onSubmitEditing={this.props.submitOnReturn ? this.onSend : () => {}}
             enablesReturnKeyAutomatically={true}
@@ -629,6 +630,7 @@ GiftedMessenger.defaultProps = {
   messages: [],
   onChangeText: () => {},
   onErrorButtonPress: () => {},
+  onFocus: () => {},
   onImagePress: null,
   onLoadEarlierMessages: () => {},
   onMessageLongPress: () => {},
@@ -668,6 +670,7 @@ GiftedMessenger.propTypes = {
   onChangeText: React.PropTypes.func,
   onCustomSend: React.PropTypes.func,
   onErrorButtonPress: React.PropTypes.func,
+  onFocus: React.PropTypes.func,
   onImagePress: React.PropTypes.func,
   onLoadEarlierMessages: React.PropTypes.func,
   onMessageLongPress: React.PropTypes.func,

@@ -10,10 +10,6 @@ class Composer extends Component {
         placeholder={'Type a message...'}
         multiline={true}
         onChange={(e) => {
-          // this._textInputRef.setNativeProps({
-          //   editable: false,
-          // });
-          // this._textInputRef.focus();
           this.props.onChange(e);
         }}
         style={[this.props.customStyles.Composer.textInput, {
@@ -23,8 +19,6 @@ class Composer extends Component {
         }]}
         value={this.props.text}
         enablesReturnKeyAutomatically={true}
-
-        ref={component => this._textInputRef = component}
       />
     );
   }

@@ -17,14 +17,12 @@ class Avatar extends Component {
       />
     );
   }
-
   render() {
     if (this.props.isSameUser(this.props.currentMessage, this.props.nextMessage) && this.props.isSameDay(this.props.currentMessage, this.props.nextMessage)) {
       return (
         <View style={this.props.customStyles.Avatar[this.props.position].container}>
           <GiftedAvatar
             avatarStyle={this.props.customStyles.Avatar.image}
-            user={null}
           />
         </View>
       );

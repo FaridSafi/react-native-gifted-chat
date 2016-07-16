@@ -47,18 +47,6 @@ class GiftedMessenger extends Component {
     };
   }
 
-  // required by @exponent/react-native-action-sheet
-  static childContextTypes = {
-    actionSheet: PropTypes.func,
-  };
-
-  // required by @exponent/react-native-action-sheet
-  getChildContext() {
-    return {
-      actionSheet: () => this._actionSheetRef,
-    };
-  }
-
   static append(currentMessages = [], messages) {
     if (!Array.isArray(messages)) {
       messages = [messages];
@@ -89,6 +77,13 @@ class GiftedMessenger extends Component {
   //   });
   // }
 
+  // required by @exponent/react-native-action-sheet
+  getChildContext() {
+    return {
+      actionSheet: () => this._actionSheetRef,
+    };
+  }
+
   componentWillMount() {
     this.setIsMounted(true);
     this.initLocale();
@@ -117,6 +112,7 @@ class GiftedMessenger extends Component {
   }
 
   initCustomStyles() {
+    // TODO remove customStyles
     if (this.props.customStyles) {
       this.setCustomStyles(this.props.customStyles);
     } else {
@@ -300,10 +296,13 @@ class GiftedMessenger extends Component {
   }
 
   resetInputToolbar() {
-    this.setState({
-      text: '',
-      composerHeight: this.getCustomStyles().minComposerHeight,
-      messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getCustomStyles().minInputToolbarHeight - this.getKeyboardHeight()),
+    this.setState((previousState) => {
+      return {
+        ...previousState,
+        text: '',
+        composerHeight: this.getCustomStyles().minComposerHeight,
+        messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getCustomStyles().minInputToolbarHeight - this.getKeyboardHeight()),
+      };
     });
   }
 
@@ -317,10 +316,14 @@ class GiftedMessenger extends Component {
     }
     const newComposerHeight = Math.max(this.getCustomStyles().minComposerHeight, Math.min(this.getCustomStyles().maxComposerHeight, e.nativeEvent.contentSize.height));
     const newMessagesContainerHeight = this.getMaxHeight() - this.calculateInputToolbarHeight(newComposerHeight) - this.getKeyboardHeight();
-    this.setState({
-      text: e.nativeEvent.text,
-      composerHeight: newComposerHeight,
-      messagesContainerHeight: new Animated.Value(newMessagesContainerHeight),
+    const text = e.nativeEvent.text;
+    this.setState((previousState) => {
+      return {
+        ...previousState,
+        text,
+        composerHeight: newComposerHeight,
+        messagesContainerHeight: new Animated.Value(newMessagesContainerHeight),
+      };
     });
   }
 
@@ -385,14 +388,17 @@ class GiftedMessenger extends Component {
   }
 }
 
+// required by @exponent/react-native-action-sheet
+GiftedMessenger.childContextTypes = {
+  actionSheet: PropTypes.func,
+};
+
 GiftedMessenger.defaultProps = {
   messages: [],
   onSend: () => {},
   loadEarlier: false,
   onLoadEarlier: () => {},
   locale: null,
-  // TODO TEST:
-  // customStyles: {},
   customStyles: null, // initCustomStyles will check null value
   renderActions: null,
   renderAvatar: null,
@@ -408,7 +414,7 @@ GiftedMessenger.defaultProps = {
   renderMessage: null,
   renderSend: null,
   renderTime: null,
-  user: {}, // mandatory
+  user: {},
 };
 
 export {

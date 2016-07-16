@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    "react",
+    "react-native"
+  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "env": {
+    "node": true
+  }
+}

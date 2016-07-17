@@ -13,6 +13,7 @@ class MessageContainer extends Component {
     super(props);
     this.onLoadEarlier = this.onLoadEarlier.bind(this);
   }
+  
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.messagesHash === nextProps.messagesHash) {
       return false;

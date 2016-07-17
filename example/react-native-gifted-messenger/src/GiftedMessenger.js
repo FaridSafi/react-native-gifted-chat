@@ -41,6 +41,10 @@ class GiftedMessenger extends Component {
     this._maxHeight = null;
     this._touchStarted = false;
     this._isTypingDisabled = false;
+    this._locale = 'en';
+    this._customstyles = null;
+    this._messages = [];
+    this._messagesHash = null;
 
     this.state = {
       isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -109,9 +113,10 @@ class GiftedMessenger extends Component {
     this.initMessages(nextProps.messages, false);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-  }
+  // TODO test if needed (if yes: use forceUpdate instead of setState?)
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return true;
+  // }
 
   initLocale() {
     if (this.props.locale === null || moment.locales().indexOf(this.props.locale) === -1) {

@@ -37,8 +37,8 @@ class Actions extends Component {
   }
 
   onActionsPress() {
-    let options = ['Take Photo', 'Choose From Library', 'Send Location', 'Cancel'];
-    let cancelButtonIndex = options.length - 1;
+    const options = ['Take Photo', 'Choose From Library', 'Send Location', 'Cancel'];
+    const cancelButtonIndex = options.length - 1;
     this.context.actionSheet().showActionSheetWithOptions({
       options,
       cancelButtonIndex,

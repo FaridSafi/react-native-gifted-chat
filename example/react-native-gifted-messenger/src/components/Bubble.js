@@ -81,14 +81,13 @@ class Bubble extends Component {
     return null;
   }
 
-  // TODO issue this is not working
   onLongPress() {
-    if (this.props.text) {
-      let options = [
+    if (this.props.currentMessage.text) {
+      const options = [
         'Copy Text',
         'Cancel',
       ];
-      let cancelButtonIndex = options.length - 1;
+      const cancelButtonIndex = options.length - 1;
       this.context.actionSheet().showActionSheetWithOptions({
         options,
         cancelButtonIndex,
@@ -96,7 +95,7 @@ class Bubble extends Component {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            Clipboard.setString(this.props.text);
+            Clipboard.setString(this.props.currentMessage.text);
             break;
         }
       });

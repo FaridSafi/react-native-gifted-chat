@@ -7,7 +7,7 @@ class Composer extends Component {
   render() {
     return (
       <TextInput
-        placeholder={'Type a message...'}
+        placeholder={this.props.placeholder}
         multiline={true}
         onChange={(e) => {
           this.props.onChange(e);
@@ -29,6 +29,7 @@ Composer.defaultProps = {
   onChange: () => {},
   composerHeight: 35,
   text: '',
+  placeholder: 'Type a message...',
 };
 
 export default Composer;

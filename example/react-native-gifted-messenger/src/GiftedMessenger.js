@@ -51,6 +51,8 @@ class GiftedMessenger extends Component {
     this.onTouchEnd = this.onTouchEnd.bind(this);
     this.onKeyboardWillShow = this.onKeyboardWillShow.bind(this);
     this.onKeyboardWillHide = this.onKeyboardWillHide.bind(this);
+    this.onKeyboardDidShow = this.onKeyboardDidShow.bind(this);
+    this.onKeyboardDidHide = this.onKeyboardDidHide.bind(this);
     this.onType = this.onType.bind(this);
     this.onSend = this.onSend.bind(this);
   }
@@ -204,6 +206,8 @@ class GiftedMessenger extends Component {
   }
 
   onKeyboardWillShow(e) {
+    this.setIsTypingDisabled(true);
+
     this.setKeyboardHeight(e.endCoordinates.height);
     Animated.timing(this.state.messagesContainerHeight, {
       toValue: (this.getMaxHeight() - (this.state.composerHeight + (this.getCustomStyles().minInputToolbarHeight - this.getCustomStyles().minComposerHeight))) - this.getKeyboardHeight(),
@@ -212,11 +216,21 @@ class GiftedMessenger extends Component {
   }
 
   onKeyboardWillHide() {
+    this.setIsTypingDisabled(true);
+
     this.setKeyboardHeight(0);
     Animated.timing(this.state.messagesContainerHeight, {
       toValue: this.getMaxHeight() - (this.state.composerHeight + (this.getCustomStyles().minInputToolbarHeight - this.getCustomStyles().minComposerHeight)),
       duration: 200,
     }).start();
+  }
+
+  onKeyboardDidShow() {
+    this.setIsTypingDisabled(false);
+  }
+
+  onKeyboardDidHide() {
+    this.setIsTypingDisabled(false);
   }
 
   scrollToBottom(animated = true) {
@@ -259,6 +273,8 @@ class GiftedMessenger extends Component {
             onTouchEnd: this.onTouchEnd,
             onKeyboardWillShow: this.onKeyboardWillShow,
             onKeyboardWillHide: this.onKeyboardWillHide,
+            onKeyboardDidShow: this.onKeyboardDidShow,
+            onKeyboardDidHide: this.onKeyboardDidHide,
           }}
 
           messages={this.getMessages()}

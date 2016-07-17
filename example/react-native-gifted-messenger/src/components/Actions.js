@@ -15,8 +15,8 @@ class Actions extends Component {
   };
 
   onActionsPress() {
-    let options = Object.keys(this.props.options);
-    let cancelButtonIndex = Object.keys(this.props.options).length - 1;
+    const options = Object.keys(this.props.options);
+    const cancelButtonIndex = Object.keys(this.props.options).length - 1;
     this.context.actionSheet().showActionSheetWithOptions({
       options,
       cancelButtonIndex,

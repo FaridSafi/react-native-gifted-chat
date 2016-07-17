@@ -24,12 +24,12 @@ class ParsedText extends Component {
   }
 
   onPhonePress(phone) {
-    let options = [
+    const options = [
       'Text',
       'Call',
       'Cancel',
     ];
-    let cancelButtonIndex = options.length - 1;
+    const cancelButtonIndex = options.length - 1;
     this.context.actionSheet().showActionSheetWithOptions({
       options,
       cancelButtonIndex,

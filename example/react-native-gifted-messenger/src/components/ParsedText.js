@@ -14,10 +14,6 @@ class ParsedText extends Component {
     this.onPhonePress = this.onPhonePress.bind(this);
     this.onEmailPress = this.onEmailPress.bind(this);
   }
-  // required by @exponent/react-native-action-sheet
-  static contextTypes = {
-    actionSheet: PropTypes.func,
-  };
 
   onUrlPress(url) {
     Linking.openURL(url);
@@ -67,6 +63,11 @@ class ParsedText extends Component {
     );
   }
 }
+
+// required by @exponent/react-native-action-sheet
+ParsedText.contextTypes = {
+  actionSheet: PropTypes.func,
+};
 
 ParsedText.defaultProps = {
   customStyles: {},

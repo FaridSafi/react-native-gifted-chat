@@ -19,11 +19,6 @@ class Actions extends Component {
     };
   }
 
-  // required by @exponent/react-native-action-sheet
-  static contextTypes = {
-    actionSheet: PropTypes.func,
-  };
-
   setImages(images) {
     this._images = images;
   }
@@ -140,6 +135,11 @@ class Actions extends Component {
     );
   }
 }
+
+// required by @exponent/react-native-action-sheet
+Actions.contextTypes = {
+  actionSheet: PropTypes.func,
+};
 
 Actions.defaultProps = {
   onSend: () => {},

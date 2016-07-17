@@ -9,10 +9,6 @@ class Actions extends Component {
     super(props);
     this.onActionsPress = this.onActionsPress.bind(this);
   }
-  // required by @exponent/react-native-action-sheet
-  static contextTypes = {
-    actionSheet: PropTypes.func,
-  };
 
   onActionsPress() {
     const options = Object.keys(this.props.options);
@@ -59,6 +55,11 @@ class Actions extends Component {
     );
   }
 }
+
+// required by @exponent/react-native-action-sheet
+Actions.contextTypes = {
+  actionSheet: PropTypes.func,
+};
 
 Actions.defaultProps = {
   onSend: () => {},

@@ -15,10 +15,6 @@ class Bubble extends Component {
     super(props);
     this.onLongPress = this.onLongPress.bind(this);
   }
-  // required by @exponent/react-native-action-sheet
-  static contextTypes = {
-    actionSheet: PropTypes.func,
-  };
 
   handleBubbleToNext() {
     if (this.props.isSameUser(this.props.currentMessage, this.props.nextMessage) && this.props.isSameDay(this.props.currentMessage, this.props.nextMessage)) {
@@ -122,6 +118,11 @@ class Bubble extends Component {
     );
   }
 }
+
+// required by @exponent/react-native-action-sheet
+Bubble.contextTypes = {
+  actionSheet: PropTypes.func,
+};
 
 Bubble.defaultProps = {
   customStyles: {},

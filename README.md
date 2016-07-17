@@ -1,6 +1,13 @@
 # Gifted Messenger
 The most complete chat UI for React Native
 
+# Installation
+- `npm install react-native-gifted-messenger --save`
+- `import {GiftedMessenger} from 'react-native-gifted-messenger';`
+
+# Example
+See [example project](example/Example.js)
+
 # Props
 
 # Components

@@ -2,6 +2,6 @@ import {
   AppRegistry,
 } from 'react-native';
 
-import MyContainer from './MyContainer';
+import Example from './Example';
 
-AppRegistry.registerComponent('GiftedMessenger', () => MyContainer);
+AppRegistry.registerComponent('GiftedMessenger', () => Example);

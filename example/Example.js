@@ -4,7 +4,7 @@ import {
   GiftedMessenger
 } from './react-native-gifted-messenger';
 
-export default class MyContainer extends Component {
+export default class Example extends Component {
   constructor(props) {
     super(props);
     this.state = {

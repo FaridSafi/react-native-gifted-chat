@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import {
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-class LoadEarlier extends Component {
+export default class LoadEarlier extends Component {
   render() {
     return (
       <TouchableOpacity
-        style={this.props.customStyles.LoadEarlier.container}
+        style={[styles.container, this.props.containerStyle]}
         onPress={this.props.onLoadEarlier}
       >
-        <View style={this.props.customStyles.LoadEarlier.wrapper}>
-          <Text style={this.props.customStyles.LoadEarlier.text}>
+        <View style={[styles.wrapper, this.props.wrapperStyle]}>
+          <Text style={[styles.text, this.props.textStyle]}>
             Load earlier messages
           </Text>
         </View>
@@ -22,10 +23,32 @@ class LoadEarlier extends Component {
   }
 }
 
-LoadEarlier.defaultProps = {
-  customStyles: {},
-  // should be set in GiftedMessenger root component :
-  onLoadEarlier: () => {},
-};
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+    marginBottom: 10,
+  },
+  wrapper: {
+    alignItems: 'center',
+    backgroundColor: '#ccc',
+    borderRadius: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  text: {
+    backgroundColor: 'transparent',
+    color: '#fff',
+    fontSize: 12,
+  },
+});
 
-export default LoadEarlier;
+LoadEarlier.defaultProps = {
+  containerStyle: {},
+  wrapperStyle: {},
+  textStyle: {},
+  onLoadEarlier: () => {}, // should be set in GiftedMessenger root component
+};

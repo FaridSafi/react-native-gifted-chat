@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {
   View,
+  StyleSheet,
 } from 'react-native';
 
 import moment from 'moment';
@@ -9,7 +10,7 @@ import Avatar from './Avatar';
 import Bubble from './Bubble';
 import Day from './Day';
 
-class Message extends Component {
+export default class Message extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     // not implemented yet
     // if (this.props.currentMessage.status !== nextProps.currentMessage.status) {
@@ -90,9 +91,9 @@ class Message extends Component {
     return (
       <View>
         {this.renderDay()}
-        <View style={[this.props.customStyles.Message[this.props.position].container, {
+        <View style={[styles[this.props.position].container, {
           marginBottom: this.isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
-        }]}>
+        }, this.props.containerStyle[this.props.position]]}>
           {this.props.position === 'left' ? this.renderAvatar() : null}
           {this.renderBubble()}
           {this.props.position === 'right' ? this.renderAvatar() : null}
@@ -102,8 +103,29 @@ class Message extends Component {
   }
 }
 
+const styles = {
+  left: StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      justifyContent: 'flex-start',
+      marginLeft: 5,
+      marginRight: 0,
+    },
+  }),
+  right: StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      justifyContent: 'flex-end',
+      marginLeft: 0,
+      marginRight: 5,
+    },
+  }),
+};
+
 Message.defaultProps = {
-  customStyles: {},
+  containerStyle: {},
   renderAvatar: null,
   renderBubble: null,
   renderDay: null,
@@ -113,5 +135,3 @@ Message.defaultProps = {
   previousMessage: {},
   user: {},
 };
-
-export default Message;

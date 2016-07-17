@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {
-  MapView,
-  TouchableOpacity,
   Linking,
+  MapView,
+  StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 
-class Location extends Component {
+export default class Location extends Component {
   render() {
     return (
-      <TouchableOpacity style={this.props.customStyles.Location.container} onPress={() => {
+      <TouchableOpacity style={[styles.container, this.props.containerStyle]} onPress={() => {
         // TODO test android
         // TODO implement google map url
         const url = `http://maps.apple.com/?ll=${this.props.currentMessage.location.latitude},${this.props.currentMessage.location.longitude}`;
@@ -21,7 +22,7 @@ class Location extends Component {
         });
       }}>
         <MapView
-          style={this.props.customStyles.Location.mapView}
+          style={[styles.mapView, this.props.mapViewStyle]}
           region={{
             latitude: this.props.currentMessage.location.latitude,
             longitude: this.props.currentMessage.location.longitude,
@@ -38,8 +39,20 @@ class Location extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+  },
+  mapView: {
+    width: 150,
+    height: 100,
+    borderRadius: 8,
+    margin: 3,
+  },
+});
+
 Location.defaultProps = {
-  customStyles: {},
+  containerStyle: {},
+  mapViewStyle: {},
   currentMessage: {
     location: {
       latitude: 0,
@@ -47,5 +60,3 @@ Location.defaultProps = {
     },
   }
 };
-
-export default Location;

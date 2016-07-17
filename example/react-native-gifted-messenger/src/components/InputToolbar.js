@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import {
+  PixelRatio,
+  StyleSheet,
   View,
 } from 'react-native';
 
 import Composer from './Composer';
 import Send from './Send';
 
-class InputToolbar extends Component {
-
+export default class InputToolbar extends Component {
   renderActions() {
     if (this.props.renderActions) {
       return this.props.renderActions(this.props);
@@ -36,7 +37,7 @@ class InputToolbar extends Component {
 
   render() {
     return (
-      <View style={this.props.customStyles.InputToolbar.container}>
+      <View style={[styles.container, this.props.containerStyle]}>
         {this.renderActions()}
         {this.renderComposer()}
         {this.renderSend()}
@@ -45,11 +46,19 @@ class InputToolbar extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopColor: '#E6E6E6',
+    backgroundColor: '#FFFFFF',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+});
+
 InputToolbar.defaultProps = {
-  customStyles: {},
+  containerStyle: {},
   renderActions: null,
   renderSend: null,
   renderComposer: null,
 };
-
-export default InputToolbar;

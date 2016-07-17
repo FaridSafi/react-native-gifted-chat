@@ -8,12 +8,12 @@ import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
-class MessageContainer extends Component {
+export default class MessageContainer extends Component {
   constructor(props) {
     super(props);
     this.onLoadEarlier = this.onLoadEarlier.bind(this);
   }
-  
+
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.messagesHash === nextProps.messagesHash) {
       return false;
@@ -60,6 +60,7 @@ class MessageContainer extends Component {
           }
           if (!message.user) {
             console.warn('GiftedMessenger: `user` is missing for message', JSON.stringify(message));
+            message.user = {};
           }
 
           const messageProps = {
@@ -84,10 +85,7 @@ class MessageContainer extends Component {
 
 MessageContainer.defaultProps = {
   locale: 'en',
-  customStyles: {},
   messages: [],
   user: {},
   renderMessage: null,
 };
-
-export default MessageContainer;

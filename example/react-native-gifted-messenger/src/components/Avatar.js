@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import {
+  StyleSheet,
   View,
 } from 'react-native';
 
 import GiftedAvatar from 'react-native-gifted-avatar';
 
-class Avatar extends Component {
+export default class Avatar extends Component {
   renderAvatar() {
     if (this.props.renderAvatar) {
       return this.props.renderAvatar(this.props);
     }
     return (
       <GiftedAvatar
-        avatarStyle={this.props.customStyles.Avatar.image}
+        avatarStyle={StyleSheet.flatten([styles[this.props.position].image, this.props.imageStyle[this.props.position]])}
         user={this.props.currentMessage.user}
       />
     );
@@ -20,23 +21,45 @@ class Avatar extends Component {
   render() {
     if (this.props.isSameUser(this.props.currentMessage, this.props.nextMessage) && this.props.isSameDay(this.props.currentMessage, this.props.nextMessage)) {
       return (
-        <View style={this.props.customStyles.Avatar[this.props.position].container}>
+        <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
           <GiftedAvatar
-            avatarStyle={this.props.customStyles.Avatar.image}
+            avatarStyle={StyleSheet.flatten([styles[this.props.position].image, this.props.imageStyle[this.props.position]])}
           />
         </View>
       );
     }
     return (
-      <View style={this.props.customStyles.Avatar[this.props.position].container}>
+      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
         {this.renderAvatar()}
       </View>
     );
   }
 }
 
+const styles = {
+  left: StyleSheet.create({
+    container: {
+      marginRight: 5,
+    },
+    image: {
+      height: 40,
+      width: 40,
+    },
+  }),
+  right: StyleSheet.create({
+    container: {
+      marginLeft: 5,
+    },
+    image: {
+      height: 40,
+      width: 40,
+    },
+  }),
+};
+
 Avatar.defaultProps = {
-  customStyles: {},
+  containerStyle: {},
+  imageStyle: {},
   isSameDay: () => {},
   isSameUser: () => {},
   position: null,
@@ -45,5 +68,3 @@ Avatar.defaultProps = {
   },
   nextMessage: {},
 };
-
-export default Avatar;

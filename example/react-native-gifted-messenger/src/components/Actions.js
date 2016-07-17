@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import {
   Image,
+  StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 
-class Actions extends Component {
+export default class Actions extends Component {
   constructor(props) {
     super(props);
     this.onActionsPress = this.onActionsPress.bind(this);
@@ -37,7 +38,7 @@ class Actions extends Component {
     }
     return (
       <Image
-        style={this.props.customStyles.Actions.icon}
+        style={[styles.icon, this.props.iconStyle]}
         resizeMode={'contain'}
         source={require('../../assets/paperclip.png')}
       />
@@ -47,7 +48,7 @@ class Actions extends Component {
   render() {
     return (
       <TouchableOpacity
-        style={this.props.customStyles.Actions.container}
+        style={[styles.container, this.props.containerStyle]}
         onPress={this.onActionsPress}
       >
         {this.renderIcon()}
@@ -56,6 +57,22 @@ class Actions extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 30,
+    height: 27,
+    marginLeft: 10,
+    marginBottom: 12,
+  },
+  icon: {
+    width: 27,
+    height: 30,
+    tintColor: '#ccc',
+  },
+});
+
 // required by @exponent/react-native-action-sheet
 Actions.contextTypes = {
   actionSheet: PropTypes.func,
@@ -63,9 +80,8 @@ Actions.contextTypes = {
 
 Actions.defaultProps = {
   onSend: () => {},
-  customStyles: {},
+  containerStyle: {},
+  iconStyle: {},
   options: {},
   icon: null,
 };
-
-export default Actions;

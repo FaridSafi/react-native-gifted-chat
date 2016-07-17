@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import {
-  View,
+  StyleSheet,
   Text,
+  View,
 } from 'react-native';
 
 import moment from 'moment/min/moment-with-locales.min';
 
-class Time extends Component {
+export default class Time extends Component {
   render() {
     return (
-      <View style={this.props.customStyles.Time.container}>
-        <Text style={this.props.customStyles.Time.text}>
+      <View style={[styles.container, this.props.containerStyle]}>
+        <Text style={[styles.text, this.props.textStyle]}>
           {moment(this.props.currentMessage.createdAt).locale(this.props.locale).format('LT')}
         </Text>
       </View>
@@ -18,12 +19,25 @@ class Time extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 5,
+  },
+  text: {
+    fontSize: 11,
+    color: '#fff',
+    backgroundColor: 'transparent',
+    textAlign: 'right',
+  },
+});
+
 Time.defaultProps = {
   locale: 'en',
-  customStyles: {},
+  containerStyle: {},
+  textStyle: {},
   currentMessage: {
     createdAt: null,
   },
 };
-
-export default Time;

@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import {
   Linking,
+  StyleSheet,
   View,
 } from 'react-native';
 
 import RNParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
 
-class ParsedText extends Component {
+export default class ParsedText extends Component {
   constructor(props) {
     super(props);
     this.onUrlPress = this.onUrlPress.bind(this);
@@ -48,13 +49,13 @@ class ParsedText extends Component {
 
   render() {
     return (
-      <View style={this.props.customStyles.ParsedText[this.props.position].container}>
+      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
         <RNParsedText
-          style={this.props.customStyles.ParsedText[this.props.position].text}
+          style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}
           parse={[
-            {type: 'url', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onUrlPress},
-            {type: 'phone', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onPhonePress},
-            {type: 'email', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onEmailPress},
+            {type: 'url', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onUrlPress},
+            {type: 'phone', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onPhonePress},
+            {type: 'email', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onEmailPress},
           ]}
         >
           {this.props.currentMessage.text}
@@ -64,16 +65,49 @@ class ParsedText extends Component {
   }
 }
 
+const styles = {
+  left: StyleSheet.create({
+    container: {
+    },
+    text: {
+      color: 'black',
+      marginTop: 5,
+      marginBottom: 5,
+      marginLeft: 10,
+      marginRight: 10,
+    },
+    link: {
+      color: 'black',
+      textDecorationLine: 'underline',
+    },
+  }),
+  right: StyleSheet.create({
+    container: {
+    },
+    text: {
+      color: 'white',
+      marginTop: 5,
+      marginBottom: 5,
+      marginLeft: 10,
+      marginRight: 10,
+    },
+    link: {
+      color: 'white',
+      textDecorationLine: 'underline',
+    },
+  }),
+};
+
 // required by @exponent/react-native-action-sheet
 ParsedText.contextTypes = {
   actionSheet: PropTypes.func,
 };
 
 ParsedText.defaultProps = {
-  customStyles: {},
+  containerStyle: {},
+  textStyle: {},
+  linkStyle: {},
   currentMessage: {
     text: '',
   },
 };
-
-export default ParsedText;

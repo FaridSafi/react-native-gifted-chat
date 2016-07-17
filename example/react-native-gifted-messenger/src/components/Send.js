@@ -1,31 +1,44 @@
 import React, { Component } from 'react';
 import {
+  StyleSheet,
   Text,
   TouchableOpacity,
 } from 'react-native';
 
-class Send extends Component {
+export default class Send extends Component {
   render() {
     return (
       <TouchableOpacity
-        style={this.props.customStyles.Send.container}
+        style={[styles.container, this.props.containerStyle]}
         onPress={() => {
           this.props.onSend({text: this.props.text.trim()}, true);
         }}
         disabled={this.props.text.trim().length > 0 ? false : true}
       >
-        <Text style={[this.props.customStyles.Send.text, {
+        <Text style={[styles.text, {
           opacity: (this.props.text.trim().length > 0 ? 1 : 0.5),
-        }]}>Send</Text>
+        }, this.props.textStyle]}>Send</Text>
       </TouchableOpacity>
     );
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom: 17,
+  },
+  text: {
+    color: '#6699CC',
+    fontWeight: '600',
+    fontSize: 17,
+  },
+});
+
 Send.defaultProps = {
-  customStyles: {},
+  containerStyle: {},
+  textStyle: {},
   text: '',
   onSend: () => {},
 };
-
-export default Send;

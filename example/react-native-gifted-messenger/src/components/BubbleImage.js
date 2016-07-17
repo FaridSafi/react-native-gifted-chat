@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import {
   Image,
+  StyleSheet,
   View,
 } from 'react-native';
 
-class BubbleImage extends Component {
+export default class BubbleImage extends Component {
   render() {
     return (
-      <View style={this.props.customStyles.BubbleImage.container}>
+      <View style={[styles.container, this.props.containerStyle]}>
         <Image
-          style={this.props.customStyles.BubbleImage.image}
+          style={[styles.image, this.props.imageStyle]}
           source={{uri: this.props.currentMessage.image}}
         />
       </View>
@@ -17,11 +18,22 @@ class BubbleImage extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+  },
+  image: {
+    width: 150,
+    height: 100,
+    borderRadius: 8,
+    margin: 3,
+    resizeMode: 'cover',
+  },
+});
+
 BubbleImage.defaultProps = {
-  customStyles: {},
+  containerStyle: {},
+  imageStyle: {},
   currentMessage: {
     image: null,
   },
 };
-
-export default BubbleImage;

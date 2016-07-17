@@ -68,15 +68,26 @@ class Actions extends Component {
 
   renderNavBar() {
     return (
-      <NavBar style={this.props.customStyles.NavBar}>
+      <NavBar style={{
+        statusBar: {
+          backgroundColor: '#FFF',
+        },
+        navBar: {
+          backgroundColor: '#FFF',
+        },
+      }}>
         <NavButton onPress={() => {
           this.setModalVisible(false);
         }}>
-          <NavButtonText style={this.props.customStyles.NavBar.buttonText}>
+          <NavButtonText style={{
+            color: '#000',
+          }}>
             {'Cancel'}
           </NavButtonText>
         </NavButton>
-        <NavTitle style={this.props.customStyles.NavBar.title}>
+        <NavTitle style={{
+          color: '#000',
+        }}>
           {'Camera Roll'}
         </NavTitle>
         <NavButton onPress={() => {
@@ -88,7 +99,9 @@ class Actions extends Component {
           });
           this.props.onSend(images);
         }}>
-          <NavButtonText style={this.props.customStyles.NavBar.buttonText}>
+          <NavButtonText style={{
+            color: '#000',
+          }}>
             {'Send'}
           </NavButtonText>
         </NavButton>

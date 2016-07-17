@@ -8,37 +8,6 @@ const toolbarInputStyles = {
   minInputToolbarHeight: 55,
   minComposerHeight: 35,
   maxComposerHeight: 100,
-
-  Composer: {
-    textInput: {
-      flex: 1,
-      marginLeft: 10,
-      fontSize: 17,
-    },
-  },
 };
 
-
-/*
-** Global styles
-*/
-// TODO to deprecate?
-const globalStyles = {
-  NavBar: {
-    statusBar: {
-      backgroundColor: '#FFF',
-    },
-    navBar: {
-      backgroundColor: '#FFF',
-    },
-    title: {
-      color: '#000',
-    },
-    buttonText: {
-      color: '#000',
-    },
-  },
-};
-
-
-export default Object.assign({}, toolbarInputStyles, globalStyles);
+export default Object.assign({}, toolbarInputStyles);

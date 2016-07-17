@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
+  StyleSheet,
   TextInput,
 } from 'react-native';
 
-class Composer extends Component {
+export default class Composer extends Component {
   render() {
     return (
       <TextInput
@@ -12,7 +13,7 @@ class Composer extends Component {
         onChange={(e) => {
           this.props.onChange(e);
         }}
-        style={[this.props.customStyles.Composer.textInput, {
+        style={[styles.textInput, this.props.textInputStyle, {
           height: this.props.composerHeight,
           marginTop: (this.props.customStyles.minInputToolbarHeight - this.props.customStyles.minComposerHeight) / 2,
           marginBottom: (this.props.customStyles.minInputToolbarHeight - this.props.customStyles.minComposerHeight) / 2,
@@ -24,12 +25,18 @@ class Composer extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  textInput: {
+    flex: 1,
+    marginLeft: 10,
+    fontSize: 17,
+  },
+});
+
 Composer.defaultProps = {
-  customStyles: {},
+  textInputStyle: {},
   onChange: () => {},
   composerHeight: 35,
   text: '',
   placeholder: 'Type a message...',
 };
-
-export default Composer;

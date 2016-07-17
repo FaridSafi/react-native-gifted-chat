@@ -45,6 +45,14 @@ class GiftedMessenger extends Component {
     this.state = {
       isInitialized: false, // initialization will calculate maxHeight before rendering the chat
     };
+
+    this.onTouchStart = this.onTouchStart.bind(this);
+    this.onTouchMove = this.onTouchMove.bind(this);
+    this.onTouchEnd = this.onTouchEnd.bind(this);
+    this.onKeyboardWillShow = this.onKeyboardWillShow.bind(this);
+    this.onKeyboardWillHide = this.onKeyboardWillHide.bind(this);
+    this.onType = this.onType.bind(this);
+    this.onSend = this.onSend.bind(this);
   }
 
   static append(currentMessages = [], messages) {
@@ -246,11 +254,11 @@ class GiftedMessenger extends Component {
           invertibleScrollViewProps={{
             inverted: true,
             keyboardShouldPersistTaps: true,
-            onTouchStart: this.onTouchStart.bind(this),
-            onTouchMove: this.onTouchMove.bind(this),
-            onTouchEnd: this.onTouchEnd.bind(this),
-            onKeyboardWillShow: this.onKeyboardWillShow.bind(this),
-            onKeyboardWillHide: this.onKeyboardWillHide.bind(this),
+            onTouchStart: this.onTouchStart,
+            onTouchMove: this.onTouchMove,
+            onTouchEnd: this.onTouchEnd,
+            onKeyboardWillShow: this.onKeyboardWillShow,
+            onKeyboardWillHide: this.onKeyboardWillHide,
           }}
 
           messages={this.getMessages()}
@@ -291,7 +299,7 @@ class GiftedMessenger extends Component {
         if (this.getIsMounted() === true) {
           this.setIsTypingDisabled(false);
         }
-      }, 100);
+      }, 200);
     }
   }
 
@@ -316,11 +324,11 @@ class GiftedMessenger extends Component {
     }
     const newComposerHeight = Math.max(this.getCustomStyles().minComposerHeight, Math.min(this.getCustomStyles().maxComposerHeight, e.nativeEvent.contentSize.height));
     const newMessagesContainerHeight = this.getMaxHeight() - this.calculateInputToolbarHeight(newComposerHeight) - this.getKeyboardHeight();
-    const text = e.nativeEvent.text;
+    const newText = e.nativeEvent.text;
     this.setState((previousState) => {
       return {
         ...previousState,
-        text,
+        text: newText,
         composerHeight: newComposerHeight,
         messagesContainerHeight: new Animated.Value(newMessagesContainerHeight),
       };
@@ -332,8 +340,8 @@ class GiftedMessenger extends Component {
       ...this.props,
       text: this.state.text,
       composerHeight: Math.max(this.getCustomStyles().minComposerHeight, this.state.composerHeight),
-      onChange: this.onType.bind(this),
-      onSend: this.onSend.bind(this),
+      onChange: this.onType,
+      onSend: this.onSend,
       customStyles: this.getCustomStyles(),
       locale: this.getLocale(),
     };

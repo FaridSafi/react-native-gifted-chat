@@ -9,6 +9,10 @@ import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
 class MessageContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.onLoadEarlier = this.onLoadEarlier.bind(this);
+  }
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.messagesHash === nextProps.messagesHash) {
       return false;
@@ -26,7 +30,7 @@ class MessageContainer extends Component {
     if (this.props.loadEarlier === true) {
       const loadEarlierProps = {
         ...this.props,
-        onLoadEarlier: this.onLoadEarlier.bind(this),
+        onLoadEarlier: this.onLoadEarlier,
       };
       if (this.props.renderLoadEarlier) {
         return this.props.renderLoadEarlier(loadEarlierProps);

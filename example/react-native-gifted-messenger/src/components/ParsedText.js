@@ -8,7 +8,12 @@ import RNParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
 
 class ParsedText extends Component {
-
+  constructor(props) {
+    super(props);
+    this.onUrlPress = this.onUrlPress.bind(this);
+    this.onPhonePress = this.onPhonePress.bind(this);
+    this.onEmailPress = this.onEmailPress.bind(this);
+  }
   // required by @exponent/react-native-action-sheet
   static contextTypes = {
     actionSheet: PropTypes.func,
@@ -51,9 +56,9 @@ class ParsedText extends Component {
         <RNParsedText
           style={this.props.customStyles.ParsedText[this.props.position].text}
           parse={[
-            {type: 'url', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onUrlPress.bind(this)},
-            {type: 'phone', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onPhonePress.bind(this)},
-            {type: 'email', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onEmailPress.bind(this)},
+            {type: 'url', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onUrlPress},
+            {type: 'phone', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onPhonePress},
+            {type: 'email', style: this.props.customStyles.ParsedText[this.props.position].link, onPress: this.onEmailPress},
           ]}
         >
           {this.props.currentMessage.text}

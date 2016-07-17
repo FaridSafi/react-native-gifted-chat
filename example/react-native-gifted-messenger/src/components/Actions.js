@@ -5,6 +5,10 @@ import {
 } from 'react-native';
 
 class Actions extends Component {
+  constructor(props) {
+    super(props);
+    this.onActionsPress = this.onActionsPress.bind(this);
+  }
   // required by @exponent/react-native-action-sheet
   static contextTypes = {
     actionSheet: PropTypes.func,
@@ -48,7 +52,7 @@ class Actions extends Component {
     return (
       <TouchableOpacity
         style={this.props.customStyles.Actions.container}
-        onPress={this.onActionsPress.bind(this)}
+        onPress={this.onActionsPress}
       >
         {this.renderIcon()}
       </TouchableOpacity>

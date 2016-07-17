@@ -26,7 +26,10 @@ export default class MyContainer extends Component {
         messages: GiftedMessenger.append(previousState.messages, messages),
       };
     });
-    this.onReceive();
+
+
+    this.onReceive(); // for demo purpose
+    this.onReceive(); // for demo purpose
   }
   onReceive() {
     this.setState((previousState) => {

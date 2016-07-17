@@ -11,6 +11,10 @@ import Location from './Location';
 import Time from './Time';
 
 class Bubble extends Component {
+  constructor(props) {
+    super(props);
+    this.onLongPress = this.onLongPress.bind(this);
+  }
   // required by @exponent/react-native-action-sheet
   static contextTypes = {
     actionSheet: PropTypes.func,
@@ -104,7 +108,7 @@ class Bubble extends Component {
       <View style={[this.props.customStyles.Bubble[this.props.position].container]}>
         <View style={[this.props.customStyles.Bubble[this.props.position].wrapper, this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
           <TouchableWithoutFeedback
-            onLongPress={this.onLongPress.bind(this)}
+            onLongPress={this.onLongPress}
           >
             <View>
               {this.renderCustomView()}

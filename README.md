@@ -1,12 +1,12 @@
 # Gifted Messenger
-- The most complete chat UI for React Native
+The most complete chat UI for React Native
 
 # Props
 
 # Components
 ## Actions
-- Description here
 - **Rendered by default** - No
+
 ### Props
 - **options**
 - **icon**

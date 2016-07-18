@@ -25,12 +25,12 @@ import Message from './components/Message';
 import MessageContainer from './components/MessageContainer';
 import Send from './components/Send';
 import Time from './components/Time';
-import DefaultStyles from './DefaultStyles';
 
-// TODO
-// onPressUrl
-// onPressPhone
-// onPressEmail
+// Min and max heights of ToolbarInput and Composer
+// Needed for handling Composer's auto grow and ScrollView animation
+const MIN_COMPOSER_HEIGHT = 35;
+const MAX_COMPOSER_HEIGHT = 100;
+const MIN_INPUT_TOOLBAR_HEIGHT = 55;
 
 class GiftedMessenger extends Component {
   constructor(props) {
@@ -43,7 +43,6 @@ class GiftedMessenger extends Component {
     this._touchStarted = false;
     this._isTypingDisabled = false;
     this._locale = 'en';
-    this._customstyles = null;
     this._messages = [];
     this._messagesHash = null;
 
@@ -103,7 +102,6 @@ class GiftedMessenger extends Component {
   componentWillMount() {
     this.setIsMounted(true);
     this.initLocale();
-    this.initCustomStyles();
     this.initMessages(this.props.messages, true);
   }
 
@@ -128,15 +126,6 @@ class GiftedMessenger extends Component {
     }
   }
 
-  initCustomStyles() {
-    // TODO remove customStyles
-    if (this.props.customStyles) {
-      this.setCustomStyles(this.props.customStyles);
-    } else {
-      this.setCustomStyles(DefaultStyles);
-    }
-  }
-
   initMessages(messages = [], sort = false) {
     if (sort === true) {
       this.setMessages(messages.sort((a, b) => {
@@ -153,14 +142,6 @@ class GiftedMessenger extends Component {
 
   getLocale() {
     return this._locale;
-  }
-
-  setCustomStyles(customStyles) {
-    this._customStyles = customStyles;
-  }
-
-  getCustomStyles() {
-    return this._customStyles;
   }
 
   setMessages(messages) {
@@ -216,9 +197,9 @@ class GiftedMessenger extends Component {
   // setMinInputToolbarHeight
   getMinInputToolbarHeight() {
     if (this.props.renderAccessory) {
-      return this.getCustomStyles().minInputToolbarHeight * 2;
+      return MIN_INPUT_TOOLBAR_HEIGHT * 2;
     }
-    return this.getCustomStyles().minInputToolbarHeight;
+    return MIN_INPUT_TOOLBAR_HEIGHT;
   }
 
   onKeyboardWillShow(e) {
@@ -226,7 +207,7 @@ class GiftedMessenger extends Component {
 
     this.setKeyboardHeight(e.endCoordinates.height);
     Animated.timing(this.state.messagesContainerHeight, {
-      toValue: (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - this.getCustomStyles().minComposerHeight))) - this.getKeyboardHeight(),
+      toValue: (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight(),
       duration: 200,
     }).start();
   }
@@ -236,7 +217,7 @@ class GiftedMessenger extends Component {
 
     this.setKeyboardHeight(0);
     Animated.timing(this.state.messagesContainerHeight, {
-      toValue: this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - this.getCustomStyles().minComposerHeight)),
+      toValue: this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT)),
       duration: 200,
     }).start();
   }
@@ -295,8 +276,6 @@ class GiftedMessenger extends Component {
 
           messages={this.getMessages()}
           messagesHash={this.getMessagesHash()}
-          customStyles={this.getCustomStyles()}
-          locale={this.getLocale()}
 
           ref={component => this._messageContainerRef = component}
         />
@@ -340,21 +319,21 @@ class GiftedMessenger extends Component {
       return {
         ...previousState,
         text: '',
-        composerHeight: this.getCustomStyles().minComposerHeight,
+        composerHeight: MIN_COMPOSER_HEIGHT,
         messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getMinInputToolbarHeight() - this.getKeyboardHeight()),
       };
     });
   }
 
   calculateInputToolbarHeight(newComposerHeight) {
-    return newComposerHeight + (this.getMinInputToolbarHeight() - this.getCustomStyles().minComposerHeight);
+    return newComposerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT);
   }
 
   onType(e) {
     if (this.getIsTypingDisabled() === true) {
       return;
     }
-    const newComposerHeight = Math.max(this.getCustomStyles().minComposerHeight, Math.min(this.getCustomStyles().maxComposerHeight, e.nativeEvent.contentSize.height));
+    const newComposerHeight = Math.max(MIN_COMPOSER_HEIGHT, Math.min(MAX_COMPOSER_HEIGHT, e.nativeEvent.contentSize.height));
     const newMessagesContainerHeight = this.getMaxHeight() - this.calculateInputToolbarHeight(newComposerHeight) - this.getKeyboardHeight();
     const newText = e.nativeEvent.text;
     this.setState((previousState) => {
@@ -371,10 +350,9 @@ class GiftedMessenger extends Component {
     const inputToolbarProps = {
       ...this.props,
       text: this.state.text,
-      composerHeight: Math.max(this.getCustomStyles().minComposerHeight, this.state.composerHeight),
+      composerHeight: Math.max(MIN_COMPOSER_HEIGHT, this.state.composerHeight),
       onChange: this.onType,
       onSend: this.onSend,
-      customStyles: this.getCustomStyles(),
     };
 
     if (this.props.renderInputToolbar) {
@@ -415,7 +393,7 @@ class GiftedMessenger extends Component {
             this.setState({
               isInitialized: true,
               text: '',
-              composerHeight: this.getCustomStyles().minComposerHeight,
+              composerHeight: MIN_COMPOSER_HEIGHT,
               messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getMinInputToolbarHeight()),
             });
           });
@@ -444,7 +422,6 @@ GiftedMessenger.defaultProps = {
   loadEarlier: false,
   onLoadEarlier: () => {},
   locale: null,
-  customStyles: null, // initCustomStyles will check null value
   renderAccessory: null,
   renderActions: null,
   renderAvatar: null,
@@ -478,5 +455,4 @@ export {
   Message,
   Send,
   Time,
-  DefaultStyles,
 };

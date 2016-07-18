@@ -432,6 +432,7 @@ GiftedMessenger.defaultProps = {
   renderCustomView: null,
   renderDay: null,
   renderInputToolbar: null,
+  renderLoadEarlier: null,
   renderLoading: null,
   renderLocation: null,
   renderMessage: null,

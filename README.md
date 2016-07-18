@@ -59,7 +59,11 @@ See [example project](example/Example.js)
 # Props
 - **locale** - Available languages ?
 
+
+# Message object
+
 # Components
+## LoadEarlier
 ## Message
 ## Day
 ## Avatar

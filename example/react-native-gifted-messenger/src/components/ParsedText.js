@@ -9,6 +9,7 @@ import RNParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
 
 // TODO
+// new props
 // onUrlPress
 // onPhonePress
 // onEmailPress

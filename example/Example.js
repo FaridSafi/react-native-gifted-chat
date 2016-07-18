@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {
+  View,
+} from 'react-native';
 
 import {
   GiftedMessenger
@@ -26,10 +29,8 @@ export default class Example extends Component {
         messages: GiftedMessenger.append(previousState.messages, messages),
       };
     });
-
-
-    this.onReceive(); // for demo purpose
-    this.onReceive(); // for demo purpose
+    // this.onReceive(); // for demo purpose
+    // this.onReceive(); // for demo purpose
   }
   onReceive() {
     this.setState((previousState) => {

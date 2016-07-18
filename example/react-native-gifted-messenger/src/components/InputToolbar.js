@@ -35,12 +35,26 @@ export default class InputToolbar extends Component {
     );
   }
 
+  renderAccessory() {
+    if (this.props.renderAccessory) {
+      return (
+        <View style={[styles.accessory, this.props.accessoryStyle]}>
+          {this.props.renderAccessory(this.props)}
+        </View>
+      );
+    }
+    return null;
+  }
+
   render() {
     return (
       <View style={[styles.container, this.props.containerStyle]}>
-        {this.renderActions()}
-        {this.renderComposer()}
-        {this.renderSend()}
+        <View style={[styles.primary, this.props.primaryStyle]}>
+          {this.renderActions()}
+          {this.renderComposer()}
+          {this.renderSend()}
+        </View>
+        {this.renderAccessory()}
       </View>
     );
   }
@@ -51,13 +65,21 @@ const styles = StyleSheet.create({
     borderTopWidth: 1 / PixelRatio.get(),
     borderTopColor: '#E6E6E6',
     backgroundColor: '#FFFFFF',
+  },
+  primary: {
     flexDirection: 'row',
     alignItems: 'flex-end',
+  },
+  accessory: {
+    height: 55,
   },
 });
 
 InputToolbar.defaultProps = {
   containerStyle: {},
+  primaryStyle: {},
+  accessoryStyle: {},
+  renderAccessory: null,
   renderActions: null,
   renderSend: null,
   renderComposer: null,

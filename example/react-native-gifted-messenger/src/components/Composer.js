@@ -15,8 +15,8 @@ export default class Composer extends Component {
         }}
         style={[styles.textInput, this.props.textInputStyle, {
           height: this.props.composerHeight,
-          marginTop: (this.props.customStyles.minInputToolbarHeight - this.props.customStyles.minComposerHeight) / 2,
-          marginBottom: (this.props.customStyles.minInputToolbarHeight - this.props.customStyles.minComposerHeight) / 2,
+          marginTop: 10,
+          marginBottom: 10,
         }]}
         value={this.props.text}
         enablesReturnKeyAutomatically={true}

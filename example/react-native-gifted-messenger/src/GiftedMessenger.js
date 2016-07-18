@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import {
   Animated,
-  View,
   InteractionManager,
+  StyleSheet,
+  View,
 } from 'react-native';
 
 import ActionSheet from '@exponent/react-native-action-sheet';
@@ -211,12 +212,21 @@ class GiftedMessenger extends Component {
     return this._isMounted;
   }
 
+  // TODO
+  // setMinInputToolbarHeight
+  getMinInputToolbarHeight() {
+    if (this.props.renderAccessory) {
+      return this.getCustomStyles().minInputToolbarHeight * 2;
+    }
+    return this.getCustomStyles().minInputToolbarHeight;
+  }
+
   onKeyboardWillShow(e) {
     this.setIsTypingDisabled(true);
 
     this.setKeyboardHeight(e.endCoordinates.height);
     Animated.timing(this.state.messagesContainerHeight, {
-      toValue: (this.getMaxHeight() - (this.state.composerHeight + (this.getCustomStyles().minInputToolbarHeight - this.getCustomStyles().minComposerHeight))) - this.getKeyboardHeight(),
+      toValue: (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - this.getCustomStyles().minComposerHeight))) - this.getKeyboardHeight(),
       duration: 200,
     }).start();
   }
@@ -226,7 +236,7 @@ class GiftedMessenger extends Component {
 
     this.setKeyboardHeight(0);
     Animated.timing(this.state.messagesContainerHeight, {
-      toValue: this.getMaxHeight() - (this.state.composerHeight + (this.getCustomStyles().minInputToolbarHeight - this.getCustomStyles().minComposerHeight)),
+      toValue: this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - this.getCustomStyles().minComposerHeight)),
       duration: 200,
     }).start();
   }
@@ -331,13 +341,13 @@ class GiftedMessenger extends Component {
         ...previousState,
         text: '',
         composerHeight: this.getCustomStyles().minComposerHeight,
-        messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getCustomStyles().minInputToolbarHeight - this.getKeyboardHeight()),
+        messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getMinInputToolbarHeight() - this.getKeyboardHeight()),
       };
     });
   }
 
   calculateInputToolbarHeight(newComposerHeight) {
-    return newComposerHeight + (this.getCustomStyles().minInputToolbarHeight - this.getCustomStyles().minComposerHeight);
+    return newComposerHeight + (this.getMinInputToolbarHeight() - this.getCustomStyles().minComposerHeight);
   }
 
   onType(e) {
@@ -388,7 +398,7 @@ class GiftedMessenger extends Component {
     if (this.state.isInitialized === true) {
       return (
         <ActionSheet ref={component => this._actionSheetRef = component}>
-          <View style={{flex: 1}}>
+          <View style={styles.container}>
             {this.renderMessages()}
             {this.renderInputToolbar()}
           </View>
@@ -397,7 +407,7 @@ class GiftedMessenger extends Component {
     }
     return (
       <View
-        style={{flex: 1}}
+        style={styles.container}
         onLayout={(e) => {
           const layout = e.nativeEvent.layout;
           this.setMaxHeight(layout.height);
@@ -406,7 +416,7 @@ class GiftedMessenger extends Component {
               isInitialized: true,
               text: '',
               composerHeight: this.getCustomStyles().minComposerHeight,
-              messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getCustomStyles().minInputToolbarHeight),
+              messagesContainerHeight: new Animated.Value(this.getMaxHeight() - this.getMinInputToolbarHeight()),
             });
           });
         }}
@@ -416,6 +426,12 @@ class GiftedMessenger extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 GiftedMessenger.childContextTypes = {
   actionSheet: PropTypes.func,
@@ -429,6 +445,7 @@ GiftedMessenger.defaultProps = {
   onLoadEarlier: () => {},
   locale: null,
   customStyles: null, // initCustomStyles will check null value
+  renderAccessory: null,
   renderActions: null,
   renderAvatar: null,
   renderBubble: null,

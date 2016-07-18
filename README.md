@@ -70,6 +70,7 @@ See [example project](example/Example.js)
 ## Location (deprecated)
 ## Time
 ## InputToolbar
+## Accessory
 ## Actions
 - **Rendered by default** - No
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
 
 } from 'react-native';
@@ -12,6 +12,12 @@ export default class MessageContainer extends Component {
   constructor(props) {
     super(props);
     this.onLoadEarlier = this.onLoadEarlier.bind(this);
+  }
+
+  getChildContext() {
+    return {
+      onLoadEarlier: this.onLoadEarlier,
+    };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -31,7 +37,6 @@ export default class MessageContainer extends Component {
     if (this.props.loadEarlier === true) {
       const loadEarlierProps = {
         ...this.props,
-        onLoadEarlier: this.onLoadEarlier,
       };
       if (this.props.renderLoadEarlier) {
         return this.props.renderLoadEarlier(loadEarlierProps);
@@ -83,8 +88,11 @@ export default class MessageContainer extends Component {
   }
 }
 
+MessageContainer.childContextTypes = {
+  onLoadEarlier: PropTypes.func,
+};
+
 MessageContainer.defaultProps = {
-  locale: 'en',
   messages: [],
   user: {},
   renderMessage: null,

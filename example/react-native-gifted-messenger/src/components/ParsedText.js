@@ -98,7 +98,6 @@ const styles = {
   }),
 };
 
-// required by @exponent/react-native-action-sheet
 ParsedText.contextTypes = {
   actionSheet: PropTypes.func,
 };

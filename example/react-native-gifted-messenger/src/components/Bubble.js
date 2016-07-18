@@ -157,7 +157,6 @@ const styles = {
   }),
 };
 
-// required by @exponent/react-native-action-sheet
 Bubble.contextTypes = {
   actionSheet: PropTypes.func,
 };

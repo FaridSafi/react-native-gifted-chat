@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
@@ -14,7 +14,7 @@ export default class Day extends Component {
         <View style={[styles.container, this.props.containerStyle]}>
           <View style={[styles.wrapper, this.props.wrapperStyle]}>
             <Text style={[styles.text, this.props.textStyle]}>
-              {moment(this.props.currentMessage.createdAt).locale(this.props.locale).format('LL')}
+              {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LL')}
             </Text>
           </View>
         </View>
@@ -47,8 +47,11 @@ const styles = StyleSheet.create({
   },
 });
 
+Day.contextTypes = {
+  getLocale: PropTypes.func,
+};
+
 Day.defaultProps = {
-  locale: 'en',
   containerStyle: {},
   wrapperStyle: {},
   textStyle: {},

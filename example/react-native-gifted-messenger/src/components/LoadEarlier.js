@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,7 +11,7 @@ export default class LoadEarlier extends Component {
     return (
       <TouchableOpacity
         style={[styles.container, this.props.containerStyle]}
-        onPress={this.props.onLoadEarlier}
+        onPress={this.context.onLoadEarlier}
       >
         <View style={[styles.wrapper, this.props.wrapperStyle]}>
           <Text style={[styles.text, this.props.textStyle]}>
@@ -46,9 +46,12 @@ const styles = StyleSheet.create({
   },
 });
 
+LoadEarlier.contextTypes = {
+  onLoadEarlier: PropTypes.func,
+};
+
 LoadEarlier.defaultProps = {
   containerStyle: {},
   wrapperStyle: {},
   textStyle: {},
-  onLoadEarlier: () => {}, // should be set in GiftedMessenger root component
 };

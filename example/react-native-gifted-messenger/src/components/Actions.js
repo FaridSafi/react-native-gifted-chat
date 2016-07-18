@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// required by @exponent/react-native-action-sheet
 Actions.contextTypes = {
   actionSheet: PropTypes.func,
 };

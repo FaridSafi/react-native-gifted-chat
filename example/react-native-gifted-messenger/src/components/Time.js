@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
@@ -12,7 +12,7 @@ export default class Time extends Component {
     return (
       <View style={[styles.container, this.props.containerStyle]}>
         <Text style={[styles.text, this.props.textStyle]}>
-          {moment(this.props.currentMessage.createdAt).locale(this.props.locale).format('LT')}
+          {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT')}
         </Text>
       </View>
     );
@@ -33,8 +33,11 @@ const styles = StyleSheet.create({
   },
 });
 
+Time.contextTypes = {
+  getLocale: PropTypes.func,
+};
+
 Time.defaultProps = {
-  locale: 'en',
   containerStyle: {},
   textStyle: {},
   currentMessage: {

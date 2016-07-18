@@ -59,6 +59,7 @@ class GiftedMessenger extends Component {
     this.onKeyboardDidHide = this.onKeyboardDidHide.bind(this);
     this.onType = this.onType.bind(this);
     this.onSend = this.onSend.bind(this);
+    this.getLocale = this.getLocale.bind(this);
   }
 
   static append(currentMessages = [], messages) {
@@ -91,10 +92,10 @@ class GiftedMessenger extends Component {
   //   });
   // }
 
-  // required by @exponent/react-native-action-sheet
   getChildContext() {
     return {
       actionSheet: () => this._actionSheetRef,
+      getLocale: this.getLocale,
     };
   }
 
@@ -364,7 +365,6 @@ class GiftedMessenger extends Component {
       onChange: this.onType,
       onSend: this.onSend,
       customStyles: this.getCustomStyles(),
-      locale: this.getLocale(),
     };
 
     if (this.props.renderInputToolbar) {
@@ -417,9 +417,9 @@ class GiftedMessenger extends Component {
   }
 }
 
-// required by @exponent/react-native-action-sheet
 GiftedMessenger.childContextTypes = {
   actionSheet: PropTypes.func,
+  getLocale: PropTypes.func,
 };
 
 GiftedMessenger.defaultProps = {

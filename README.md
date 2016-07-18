@@ -4,12 +4,12 @@ The most complete chat UI for React Native
 # Installation
 - `npm install react-native-gifted-messenger --save`
 
-# Simple example
+# Minimal example
 ```javascript
 import React, { Component } from 'react';
 import {GiftedMessenger} from 'react-native-gifted-messenger';
 
-export default class Example extends Component {
+class Example extends Component {
   constructor(props) {
     super(props);
     this.state = {messages: []};
@@ -57,8 +57,19 @@ export default class Example extends Component {
 See [example project](example/Example.js)
 
 # Props
+- **locale** - Available languages ?
 
 # Components
+## Message
+## Day
+## Avatar
+## Bubble
+## CustomView
+## BubbleImage
+## ParsedText
+## Location (deprecated)
+## Time
+## InputToolbar
 ## Actions
 - **Rendered by default** - No
 
@@ -68,20 +79,12 @@ See [example project](example/Example.js)
 - **containerStyle**
 - **iconStyle**
 
-## Avatar
-## Bubble
-## ParsedText
-## BubbleImage
 ## Composer (might be renamed)
-## CustomView
-## Day
-## InputToolbar
-## Loading
-## Location (deprecated)
-## Message
 ## Send
-## Time
+## Loading
 
 
 # LICENSE
 - [MIT](LICENSE)
+
+Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi) !

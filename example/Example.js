@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {
   View,
+  Image,
 } from 'react-native';
 
 import {
-  GiftedMessenger
+  GiftedMessenger, Actions
 } from './react-native-gifted-messenger';
 
 export default class Example extends Component {
@@ -16,6 +17,7 @@ export default class Example extends Component {
 
     this.onSend = this.onSend.bind(this);
     this.onReceive = this.onReceive.bind(this);
+    this.renderActions = this.renderActions.bind(this);
   }
   componentWillMount() {
     this.setState({
@@ -49,6 +51,37 @@ export default class Example extends Component {
       };
     });
   }
+  renderActions(props) {
+    const options = {
+      'Take Photo': (props) => {
+        console.log('option 1');
+      },
+      'Choose From Library': (props) => {
+        console.log('option 2');
+      },
+      'Send Location': (props) => {
+        console.log('option 3');
+      },
+      'Cancel': () => {},
+    };
+    return (
+      <Actions
+        {...props}
+        icon={() => {
+          return (
+            <Image
+              style={{
+                width: 20,
+                height: 20,
+              }}
+              source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
+            />
+          );
+        }}
+        options={options}
+      />
+    );
+  }
   render() {
     return (
       <GiftedMessenger
@@ -58,6 +91,7 @@ export default class Example extends Component {
         user={{
           _id: 1,
         }}
+        renderActions={this.renderActions}
       />
     );
   }

@@ -6,6 +6,10 @@ import {
   View,
 } from 'react-native';
 
+
+// TODO
+// 3 words name initials
+
 class GiftedAvatar extends Component {
   setAvatarColor() {
     const userName = this.props.user.name || '';
@@ -38,6 +42,28 @@ class GiftedAvatar extends Component {
     this.avatarColor = colors[sumChars % colors.length];
   }
 
+  renderAvatar() {
+    if (typeof this.props.user.avatar === 'function') {
+      return this.props.user.avatar();
+    } else if (typeof this.props.user.avatar === 'string') {
+      return (
+        <Image
+          source={{uri: this.props.user.avatar}}
+          style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
+        />
+      );
+    }
+    return null;
+  }
+
+  renderInitials() {
+    return (
+      <Text style={[defaultStyles.textStyle, this.props.textStyle]}>
+        {this.avatarName}
+      </Text>
+    );
+  }
+
   render() {
     if (!this.props.user.name && !this.props.user.avatar) {
       // render placeholder
@@ -58,10 +84,7 @@ class GiftedAvatar extends Component {
             this.props.onPress && this.props.onPress(other);
           }}
         >
-          <Image
-            source={{uri: this.props.user.avatar}}
-            style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
-          />
+          {this.renderAvatar()}
         </TouchableOpacity>
       );
     }
@@ -83,9 +106,7 @@ class GiftedAvatar extends Component {
           this.props.avatarStyle,
         ]}
       >
-        <Text style={[defaultStyles.textStyle, this.props.textStyle]}>
-          {this.avatarName}
-        </Text>
+        {this.renderInitials()}
       </TouchableOpacity>
     );
   }

@@ -6,9 +6,9 @@ import {
   View,
 } from 'react-native';
 
-
 // TODO
 // 3 words name initials
+// handle only alpha numeric chars
 
 class GiftedAvatar extends Component {
   setAvatarColor() {
@@ -76,9 +76,9 @@ class GiftedAvatar extends Component {
       )
     }
     if (this.props.user.avatar) {
+      // disabled={this.props.onPress ? false : true}
       return (
         <TouchableOpacity
-          disabled={this.props.onPress ? false : true}
           onPress={() => {
             const {onPress, ...other} = this.props;
             this.props.onPress && this.props.onPress(other);
@@ -93,9 +93,9 @@ class GiftedAvatar extends Component {
       this.setAvatarColor();
     }
 
+    // disabled={this.props.onPress ? false : true}
     return (
       <TouchableOpacity
-        disabled={this.props.onPress ? false : true}
         onPress={() => {
           const {onPress, ...other} = this.props;
           this.props.onPress && this.props.onPress(other);

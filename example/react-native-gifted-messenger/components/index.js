@@ -11,20 +11,20 @@ import dismissKeyboard from 'react-native-dismiss-keyboard';
 import moment from 'moment/min/moment-with-locales.min';
 import md5 from 'md5';
 
-import Actions from './components/Actions';
-import Avatar from './components/Avatar';
-import Bubble from './components/Bubble';
-import BubbleImage from './components/BubbleImage';
-import ParsedText from './components/ParsedText';
-import Composer from './components/Composer';
-import Day from './components/Day';
-import InputToolbar from './components/InputToolbar';
-import LoadEarlier from './components/LoadEarlier';
-import Location from './components/Location';
-import Message from './components/Message';
-import MessageContainer from './components/MessageContainer';
-import Send from './components/Send';
-import Time from './components/Time';
+import Actions from './Actions';
+import Avatar from './Avatar';
+import Bubble from './Bubble';
+import BubbleImage from './BubbleImage';
+import ParsedText from './ParsedText';
+import Composer from './Composer';
+import Day from './Day';
+import InputToolbar from './InputToolbar';
+import LoadEarlier from './LoadEarlier';
+import Location from './Location';
+import Message from './Message';
+import MessageContainer from './MessageContainer';
+import Send from './Send';
+import Time from './Time';
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for handling Composer's auto grow and ScrollView animation
@@ -102,7 +102,7 @@ class GiftedMessenger extends Component {
   componentWillMount() {
     this.setIsMounted(true);
     this.initLocale();
-    this.initMessages(this.props.messages, true);
+    this.initMessages(this.props.messages);
   }
 
   componentWillUnmount() {
@@ -110,7 +110,7 @@ class GiftedMessenger extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.initMessages(nextProps.messages, false);
+    this.initMessages(nextProps.messages);
   }
 
   // TODO test if needed (if yes: use forceUpdate instead of setState?)
@@ -127,13 +127,7 @@ class GiftedMessenger extends Component {
   }
 
   initMessages(messages = [], sort = false) {
-    if (sort === true) {
-      this.setMessages(messages.sort((a, b) => {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      }));
-    } else {
-      this.setMessages(messages);
-    }
+    this.setMessages(messages);
   }
 
   setLocale(locale) {

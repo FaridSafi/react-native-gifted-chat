@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  Image,
   StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default class Actions extends Component {
@@ -37,11 +38,15 @@ export default class Actions extends Component {
       return this.props.icon();
     }
     return (
-      <Image
-        style={[styles.icon, this.props.iconStyle]}
-        resizeMode={'contain'}
-        source={require('../../assets/paperclip.png')}
-      />
+      <View
+        style={[styles.iconContainer, this.props.iconContainerStyle]}
+      >
+        <Text
+          style={[styles.iconText, this.props.iconTextStyle]}
+        >
+          +
+        </Text>
+      </View>
     );
   }
 
@@ -66,10 +71,17 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginBottom: 12,
   },
-  icon: {
-    width: 27,
+  iconContainer: {
+    width: 30,
     height: 30,
-    tintColor: '#ccc',
+    borderRadius: 15,
+    backgroundColor: '#bbb',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconText: {
+    color: '#fff',
+    backgroundColor: 'transparent',
   },
 });
 

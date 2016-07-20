@@ -32,6 +32,7 @@
     "eslint-plugin-react-native": "^1.1.0"
   },
   "dependencies": {
+    "react-native-gifted-material": "file:../react-native-gifted-material/",
     "@exponent/react-native-action-sheet": "^0.2.0",
     "md5": "^2.1.0",
     "moment": "^2.13.0",

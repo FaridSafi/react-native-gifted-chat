@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "react": "15.2.1",
-    "react-native": "^0.29.1"
+    "react-native": "^0.29.2"
   },
   "devDependencies": {
     "eslint": "^3.1.0",

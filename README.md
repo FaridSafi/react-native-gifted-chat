@@ -88,6 +88,9 @@ See [example project](example/Example.js)
 ## Send
 ## Loading
 
+# Performance
+- Be sure to build as Release
+- Rendering optimizations
 
 # LICENSE
 - [MIT](LICENSE)

@@ -127,15 +127,15 @@ const styles = {
       alignItems: 'flex-start',
     },
     wrapper: {
-      borderRadius: 10,
-      backgroundColor: '#F1F0F0',
+      borderRadius: 15,
+      backgroundColor: '#f0f0f0',
       marginRight: 60,
     },
     containerToNext: {
-      borderBottomLeftRadius: 0,
+      borderBottomLeftRadius: 3,
     },
     containerToPrevious: {
-      borderTopLeftRadius: 0,
+      borderTopLeftRadius: 3,
     },
   }),
   right: StyleSheet.create({
@@ -144,15 +144,15 @@ const styles = {
       alignItems: 'flex-end',
     },
     wrapper: {
-      borderRadius: 10,
-      backgroundColor: '#0084FF',
+      borderRadius: 15,
+      backgroundColor: '#0084ff',
       marginLeft: 60,
     },
     containerToNext: {
-      borderBottomRightRadius: 0,
+      borderBottomRightRadius: 3,
     },
     containerToPrevious: {
-      borderTopRightRadius: 0,
+      borderTopRightRadius: 3,
     },
   }),
 };

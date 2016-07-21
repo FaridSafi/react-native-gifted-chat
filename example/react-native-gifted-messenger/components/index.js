@@ -28,9 +28,9 @@ import Time from './Time';
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for handling Composer's auto grow and ScrollView animation
-const MIN_COMPOSER_HEIGHT = 35;
+const MIN_COMPOSER_HEIGHT = 33;
 const MAX_COMPOSER_HEIGHT = 100;
-const MIN_INPUT_TOOLBAR_HEIGHT = 55;
+const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
 class GiftedMessenger extends Component {
   constructor(props) {
@@ -202,7 +202,7 @@ class GiftedMessenger extends Component {
     this.setKeyboardHeight(e.endCoordinates.height);
     Animated.timing(this.state.messagesContainerHeight, {
       toValue: (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight(),
-      duration: 200,
+      duration: 210,
     }).start();
   }
 
@@ -212,7 +212,7 @@ class GiftedMessenger extends Component {
     this.setKeyboardHeight(0);
     Animated.timing(this.state.messagesContainerHeight, {
       toValue: this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT)),
-      duration: 200,
+      duration: 210,
     }).start();
   }
 

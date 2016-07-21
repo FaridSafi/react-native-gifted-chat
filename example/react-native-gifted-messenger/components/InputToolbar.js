@@ -63,7 +63,7 @@ export default class InputToolbar extends Component {
 const styles = StyleSheet.create({
   container: {
     borderTopWidth: 1 / PixelRatio.get(),
-    borderTopColor: '#E6E6E6',
+    borderTopColor: '#ccc',
     backgroundColor: '#FFFFFF',
   },
   primary: {
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   accessory: {
-    height: 55,
+    height: 44,
   },
 });
 

@@ -64,20 +64,20 @@ export default class Example extends Component {
       },
       'Cancel': () => {},
     };
+    // icon={() => {
+    //   return (
+    //     <Image
+    //       style={{
+    //         width: 20,
+    //         height: 20,
+    //       }}
+    //       source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
+    //     />
+    //   );
+    // }}
     return (
       <Actions
         {...props}
-        icon={() => {
-          return (
-            <Image
-              style={{
-                width: 20,
-                height: 20,
-              }}
-              source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
-            />
-          );
-        }}
         options={options}
       />
     );

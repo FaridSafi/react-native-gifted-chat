@@ -109,7 +109,7 @@ const styles = {
       flexDirection: 'row',
       alignItems: 'flex-end',
       justifyContent: 'flex-start',
-      marginLeft: 5,
+      marginLeft: 8,
       marginRight: 0,
     },
   }),
@@ -119,7 +119,7 @@ const styles = {
       alignItems: 'flex-end',
       justifyContent: 'flex-end',
       marginLeft: 0,
-      marginRight: 5,
+      marginRight: 8,
     },
   }),
 };

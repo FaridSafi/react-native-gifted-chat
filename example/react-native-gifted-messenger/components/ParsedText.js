@@ -71,16 +71,22 @@ export default class ParsedText extends Component {
   }
 }
 
+const textStyle = {
+  fontSize: 16,
+  lineHeight: 20,
+  marginTop: 5,
+  marginBottom: 5,
+  marginLeft: 10,
+  marginRight: 10,
+}
+
 const styles = {
   left: StyleSheet.create({
     container: {
     },
     text: {
       color: 'black',
-      marginTop: 5,
-      marginBottom: 5,
-      marginLeft: 10,
-      marginRight: 10,
+      ...textStyle,
     },
     link: {
       color: 'black',
@@ -92,10 +98,7 @@ const styles = {
     },
     text: {
       color: 'white',
-      marginTop: 5,
-      marginBottom: 5,
-      marginLeft: 10,
-      marginRight: 10,
+      ...textStyle,
     },
     link: {
       color: 'white',
@@ -110,6 +113,7 @@ ParsedText.contextTypes = {
 
 ParsedText.defaultProps = {
   containerStyle: {},
+  position: 'left',
   textStyle: {},
   linkStyle: {},
   currentMessage: {

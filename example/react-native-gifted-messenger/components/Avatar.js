@@ -18,6 +18,7 @@ export default class Avatar extends Component {
       />
     );
   }
+
   render() {
     if (this.props.isSameUser(this.props.currentMessage, this.props.nextMessage) && this.props.isSameDay(this.props.currentMessage, this.props.nextMessage)) {
       return (
@@ -39,20 +40,22 @@ export default class Avatar extends Component {
 const styles = {
   left: StyleSheet.create({
     container: {
-      marginRight: 5,
+      marginRight: 8,
     },
     image: {
-      height: 40,
-      width: 40,
+      height: 36,
+      width: 36,
+      borderRadius: 18,
     },
   }),
   right: StyleSheet.create({
     container: {
-      marginLeft: 5,
+      marginLeft: 8,
     },
     image: {
-      height: 40,
-      width: 40,
+      height: 36,
+      width: 36,
+      borderRadius: 18,
     },
   }),
 };
@@ -62,7 +65,7 @@ Avatar.defaultProps = {
   imageStyle: {},
   isSameDay: () => {},
   isSameUser: () => {},
-  position: null,
+  position: 'left',
   currentMessage: {
     user: null,
   },

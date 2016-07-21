@@ -63,7 +63,7 @@ export default class InputToolbar extends Component {
 const styles = StyleSheet.create({
   container: {
     borderTopWidth: 1 / PixelRatio.get(),
-    borderTopColor: '#ccc',
+    borderTopColor: '#f2f2f2',
     backgroundColor: '#FFFFFF',
   },
   primary: {

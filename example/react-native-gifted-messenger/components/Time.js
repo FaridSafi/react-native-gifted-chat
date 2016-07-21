@@ -19,31 +19,35 @@ export default class Time extends Component {
   }
 }
 
+const containerStyle = {
+  marginLeft: 10,
+  marginRight: 10,
+  marginBottom: 5,
+};
+
+const textStyle = {
+  fontSize: 11,
+  backgroundColor: 'transparent',
+  textAlign: 'right',
+};
+
 const styles = {
   left: StyleSheet.create({
     container: {
-      marginLeft: 10,
-      marginRight: 10,
-      marginBottom: 5,
+      ...containerStyle,
     },
     text: {
-      fontSize: 11,
       color: '#aaa',
-      backgroundColor: 'transparent',
-      textAlign: 'right',
+      ...textStyle,
     },
   }),
   right: StyleSheet.create({
     container: {
-      marginLeft: 10,
-      marginRight: 10,
-      marginBottom: 5,
+      ...containerStyle,
     },
     text: {
-      fontSize: 11,
       color: '#fff',
-      backgroundColor: 'transparent',
-      textAlign: 'right',
+      ...textStyle,
     },
   }),
 };

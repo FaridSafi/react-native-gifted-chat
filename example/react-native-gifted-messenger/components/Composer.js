@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     marginLeft: 10,
-    fontSize: 17,
-    lineHeight: 17,
+    fontSize: 16,
+    lineHeight: 16,
     marginTop: 6,
     marginBottom: 5,
   },

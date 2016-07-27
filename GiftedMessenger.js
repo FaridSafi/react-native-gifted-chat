@@ -37,6 +37,7 @@ class GiftedMessenger extends Component {
     this.onChangeText = this.onChangeText.bind(this);
     this.onSend = this.onSend.bind(this);
 
+    this._isMounted = false;
     this._firstDisplay = true;
     this._listHeight = 0;
     this._footerY = 0;
@@ -136,6 +137,8 @@ class GiftedMessenger extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     this.scrollResponder = this.refs.listView.getScrollResponder();
 
     if (this.props.messages.length > 0) {
@@ -195,6 +198,10 @@ class GiftedMessenger extends Component {
         height: new Animated.Value(this.listViewMaxHeight),
       });
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   onSend() {
@@ -372,7 +379,7 @@ class GiftedMessenger extends Component {
   }
 
   scrollToBottom(animated = null) {
-    if (this._listHeight && this._footerY && this._footerY > this._listHeight) {
+    if (this._isMounted && this._listHeight && this._footerY && this._footerY > this._listHeight) {
       let scrollDistance = this._listHeight - this._footerY;
       if (this.props.typingMessage) {
         scrollDistance -= 44;

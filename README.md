@@ -1,10 +1,10 @@
 # Gifted Chat
-The most complete chat UI for React Native
+The most complete chat UI for React Native (formerly known as Gifted Messenger)
 
-# Installation
+## Installation
 - `npm install react-native-gifted-chat --save`
 
-# Minimal example
+## Minimal example
 ```jsx
 import React, { Component } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -53,46 +53,48 @@ class Example extends Component {
 }
 ```
 
-# Advanced example
+## Advanced example
 See [example project](example/Example.js)
 
-# Props
+## Props
 - **locale** - Available languages ?
 
 
-# Message object
+## Message object
 
-# Components
-## LoadEarlier
-## Message
-## Day
-## Avatar
-## Bubble
-## CustomView
-## BubbleImage
-## ParsedText
-## Location (deprecated)
-## Time
-## InputToolbar
-## Accessory
-## Actions
+## Components
+### LoadEarlier
+### Message
+### Day
+### Avatar
+### Bubble
+### CustomView
+### BubbleImage
+### ParsedText
+### Location (deprecated)
+### Time
+### InputToolbar
+### Accessory
+### Actions
 - **Rendered by default** - No
 
-### Props
+#### Props
 - **options**
 - **icon**
 - **containerStyle**
 - **iconStyle**
 
-## Composer (might be renamed)
-## Send
-## Loading
+### Composer (might be renamed)
+### Send
+### Loading
 
-# Performance
-- Be sure to build as Release
-- Rendering optimizations
-
-# LICENSE
+## LICENSE
 - [MIT](LICENSE)
+
+
+## Contributing
+
+Be sure to update the documentation
+
 
 Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi) !

@@ -27,9 +27,14 @@
   },
   "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
   "devDependencies": {
+    "babel-jest": "^14.0.2",
+    "babel-preset-react-native": "^1.9.0",
     "eslint": "^3.1.0",
     "eslint-plugin-react": "^5.2.2",
-    "eslint-plugin-react-native": "^1.1.0"
+    "eslint-plugin-react-native": "^1.1.0",
+    "jest": "^14.0.1",
+    "jest-cli": "^14.0.1",
+    "jest-react-native": "^14.0.0"
   },
   "dependencies": {
     "@exponent/react-native-action-sheet": "git+https://github.com/FaridSafi/react-native-action-sheet.git",

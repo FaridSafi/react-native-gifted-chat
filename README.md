@@ -5,7 +5,7 @@ The most complete chat UI for React Native
 - `npm install react-native-gifted-chat --save`
 
 # Minimal example
-```javascript
+```jsx
 import React, { Component } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 

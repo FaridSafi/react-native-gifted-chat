@@ -37,7 +37,7 @@
     "moment": "^2.13.0",
     "react-native-communications": "^2.0.0",
     "react-native-dismiss-keyboard": "^1.0.0",
-    "react-native-gifted-material": "file:../react-native-gifted-material/",
+    "react-native-gifted-material": "file:./react-native-gifted-material/",
     "react-native-invertible-scroll-view": "^1.0.0",
     "react-native-parsed-text": "0.0.15"
   }

@@ -212,6 +212,10 @@ class GiftedMessenger extends Component {
       this.onChangeText('');
       this.props.handleSend(message);
     }
+    if (Platform.OS === 'android') { // hack to remove autocomplete cache
+      this.refs.textInput.setNativeProps({keyboardType:"email-address"});
+      this.refs.textInput.setNativeProps({keyboardType:"default"});
+    }
   }
 
   onKeyboardWillHide() {
@@ -564,6 +568,7 @@ class GiftedMessenger extends Component {
         <View style={this.styles.textInputContainer}>
           {this.props.leftControlBar}
           <TextInput
+            ref={'textInput'}
             style={this.styles.textInput}
             placeholder={this.props.placeholder}
             placeholderTextColor={this.props.placeholderTextColor}

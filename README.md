@@ -1,13 +1,13 @@
-# Gifted Messenger
+# Gifted Chat
 The most complete chat UI for React Native
 
 # Installation
-- `npm install react-native-gifted-messenger --save`
+- `npm install react-native-gifted-chat --save`
 
 # Minimal example
 ```javascript
 import React, { Component } from 'react';
-import {GiftedMessenger} from 'react-native-gifted-messenger';
+import { GiftedChat } from 'react-native-gifted-chat';
 
 class Example extends Component {
   constructor(props) {
@@ -35,13 +35,13 @@ class Example extends Component {
     this.setState((previousState) => {
       return {
         ...previousState,
-        messages: GiftedMessenger.append(previousState.messages, messages),
+        messages: GiftedChat.append(previousState.messages, messages),
       };
     });
   }
   render() {
     return (
-      <GiftedMessenger
+      <GiftedChat
         messages={this.state.messages}
         onSend={this.onSend}
         user={{

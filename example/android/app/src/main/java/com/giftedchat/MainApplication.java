@@ -1,4 +1,4 @@
-package com.giftedmessenger;
+package com.giftedchat;
 
 import android.app.Application;
 import android.util.Log;

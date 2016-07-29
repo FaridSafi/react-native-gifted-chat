@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "GiftedMessenger.app"
-               BlueprintName = "GiftedMessenger"
-               ReferencedContainer = "container:GiftedMessenger.xcodeproj">
+               BuildableName = "GiftedChat.app"
+               BlueprintName = "GiftedChat"
+               ReferencedContainer = "container:GiftedChat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "GiftedMessengerTests.xctest"
-               BlueprintName = "GiftedMessengerTests"
-               ReferencedContainer = "container:GiftedMessenger.xcodeproj">
+               BuildableName = "GiftedChatTests.xctest"
+               BlueprintName = "GiftedChatTests"
+               ReferencedContainer = "container:GiftedChat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "GiftedMessengerTests.xctest"
-               BlueprintName = "GiftedMessengerTests"
-               ReferencedContainer = "container:GiftedMessenger.xcodeproj">
+               BuildableName = "GiftedChatTests.xctest"
+               BlueprintName = "GiftedChatTests"
+               ReferencedContainer = "container:GiftedChat.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "GiftedMessenger.app"
-            BlueprintName = "GiftedMessenger"
-            ReferencedContainer = "container:GiftedMessenger.xcodeproj">
+            BuildableName = "GiftedChat.app"
+            BlueprintName = "GiftedChat"
+            ReferencedContainer = "container:GiftedChat.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "GiftedMessenger.app"
-            BlueprintName = "GiftedMessenger"
-            ReferencedContainer = "container:GiftedMessenger.xcodeproj">
+            BuildableName = "GiftedChat.app"
+            BlueprintName = "GiftedChat"
+            ReferencedContainer = "container:GiftedChat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "GiftedMessenger.app"
-            BlueprintName = "GiftedMessenger"
-            ReferencedContainer = "container:GiftedMessenger.xcodeproj">
+            BuildableName = "GiftedChat.app"
+            BlueprintName = "GiftedChat"
+            ReferencedContainer = "container:GiftedChat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

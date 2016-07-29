@@ -61,10 +61,10 @@ export default class MessageContainer extends Component {
       >
         {this.props.messages.map((message, index) => {
           if (!message._id) {
-            console.warn('GiftedMessenger: `_id` is missing for message', JSON.stringify(message));
+            console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(message));
           }
           if (!message.user) {
-            console.warn('GiftedMessenger: `user` is missing for message', JSON.stringify(message));
+            console.warn('GiftedChat: `user` is missing for message', JSON.stringify(message));
             message.user = {};
           }
 

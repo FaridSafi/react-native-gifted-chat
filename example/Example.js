@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Image,
-} from 'react-native';
+// import {
+//   View,
+//   Image,
+// } from 'react-native';
 
-import {
-  GiftedMessenger, Actions
-} from './react-native-gifted-messenger';
+import { GiftedChat, Actions } from 'react-native-gifted-chat';
 
 export default class Example extends Component {
   constructor(props) {
@@ -28,7 +26,7 @@ export default class Example extends Component {
     this.setState((previousState) => {
       return {
         ...previousState,
-        messages: GiftedMessenger.append(previousState.messages, messages),
+        messages: GiftedChat.append(previousState.messages, messages),
       };
     });
     // this.onReceive(); // for demo purpose
@@ -38,7 +36,7 @@ export default class Example extends Component {
     this.setState((previousState) => {
       return {
         ...previousState,
-        messages: GiftedMessenger.append(previousState.messages, {
+        messages: GiftedChat.append(previousState.messages, {
           _id: Math.round(Math.random() * 1000000),
           text: 'Hodor',
           createdAt: new Date(),
@@ -84,7 +82,7 @@ export default class Example extends Component {
   }
   render() {
     return (
-      <GiftedMessenger
+      <GiftedChat
         messages={this.state.messages}
         onSend={this.onSend}
         loadEarlier={true}

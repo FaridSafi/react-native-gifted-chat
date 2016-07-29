@@ -1,5 +1,5 @@
 {
-  "name": "GiftedMessenger",
+  "name": "GiftedChat",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,11 +7,12 @@
   },
   "dependencies": {
     "react": "15.2.1",
-    "react-native": "^0.29.2"
+    "react-native": "^0.30.0",
+    "react-native-gifted-chat": "file:./react-native-gifted-chat"
   },
   "devDependencies": {
     "eslint": "^3.1.1",
     "eslint-plugin-react": "^5.2.2",
-    "eslint-plugin-react-native": "^1.1.0"
+    "eslint-plugin-react-native": "^1.2.0"
   }
 }

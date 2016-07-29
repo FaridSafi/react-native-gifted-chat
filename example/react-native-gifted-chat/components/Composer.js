@@ -9,7 +9,7 @@ export default class Composer extends Component {
     return (
       <TextInput
         placeholder={this.props.placeholder}
-        placeholderTextColor={'#ddd'}
+        placeholderTextColor={this.props.placeholderTextColor}
         multiline={true}
         onChange={(e) => {
           this.props.onChange(e);
@@ -42,5 +42,6 @@ Composer.defaultProps = {
   composerHeight: 33,
   text: '',
   placeholder: 'Type a message...',
+  placeholderTextColor: '#b2b2b2',
   textInputProps: null,
 };

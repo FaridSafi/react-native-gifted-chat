@@ -72,7 +72,7 @@ export default class Example extends Component {
           user: {
             _id: 2,
             name: 'React Native',
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
+            // avatar: 'https://facebook.github.io/react/img/logo_og.png',
           },
         }),
       };

@@ -33,10 +33,10 @@ class GiftedAvatar extends Component {
     // inspired by https://github.com/wbinnssmith/react-user-avatar
     // colors from https://flatuicolors.com/
     const colors = [
+      '#e67e22', // carrot
       '#2ecc71', // emerald
       '#3498db', // peter river
       '#8e44ad', // wisteria
-      '#e67e22', // carrot
       '#e74c3c', // alizarin
       '#1abc9c', // turquoise
       '#2c3e50', // midnight blue
@@ -79,9 +79,9 @@ class GiftedAvatar extends Component {
       )
     }
     if (this.props.user.avatar) {
-      // disabled={this.props.onPress ? false : true}
       return (
         <TouchableOpacity
+          disabled={this.props.onPress ? false : true}
           onPress={() => {
             const {onPress, ...other} = this.props;
             this.props.onPress && this.props.onPress(other);
@@ -96,9 +96,9 @@ class GiftedAvatar extends Component {
       this.setAvatarColor();
     }
 
-    // disabled={this.props.onPress ? false : true}
     return (
       <TouchableOpacity
+        disabled={this.props.onPress ? false : true}
         onPress={() => {
           const {onPress, ...other} = this.props;
           this.props.onPress && this.props.onPress(other);

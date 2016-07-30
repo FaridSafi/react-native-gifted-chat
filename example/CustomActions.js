@@ -94,12 +94,14 @@ export default class CustomActions extends Component {
         </NavTitle>
         <NavButton onPress={() => {
           this.setModalVisible(false);
+
           const images = this.getImages().map((image) => {
             return {
-              image: image,
+              image: image.uri,
             };
           });
           this.props.onSend(images);
+          this.setImages([]);
         }}>
           <NavButtonText style={{
             color: '#000',
@@ -147,6 +149,7 @@ export default class CustomActions extends Component {
             maximum={10}
             imagesPerRow={4}
             callback={this.selectImages}
+            selected={[]}
           />
         </Modal>
         {this.renderIcon()}

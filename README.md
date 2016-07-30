@@ -44,7 +44,6 @@ class Example extends Component {
   onSend(messages = []) {
     this.setState((previousState) => {
       return {
-        ...previousState,
         messages: GiftedChat.append(previousState.messages, messages),
       };
     });

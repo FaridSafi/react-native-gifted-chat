@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "15.2.1",
     "react-native": "^0.30.0",
-    "react-native-camera-roll-picker": "^1.1.6",
+    "react-native-camera-roll-picker": "git+https://github.com/FaridSafi/react-native-camera-roll-picker.git",
     "react-native-gifted-chat": "file:../",
     "react-native-nav": "^1.1.4"
   },

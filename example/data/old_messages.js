@@ -6,7 +6,7 @@ module.exports = [
     image: 'https://facebook.github.io/react/img/logo_og.png',
     user: {
       _id: 1,
-      name: 'React Native developer',
+      name: 'Developer',
     },
   },
   {
@@ -15,7 +15,7 @@ module.exports = [
     createdAt: new Date(Date.UTC(2016, 5, 11, 17, 30, 0)),
     user: {
       _id: 1,
-      name: 'React Native developer',
+      name: 'Developer',
     },
   },
   {
@@ -27,7 +27,7 @@ module.exports = [
     createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
     user: {
       _id: 1,
-      name: 'React Native developer',
+      name: 'Developer',
     },
   },
 ];

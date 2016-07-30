@@ -9,6 +9,7 @@ export default class Example extends Component {
     super(props);
     this.state = {
       messages: [],
+      loadEarlier: true,
     };
 
     this.onSend = this.onSend.bind(this);
@@ -16,6 +17,8 @@ export default class Example extends Component {
     this.renderCustomActions = this.renderCustomActions.bind(this);
     this.renderBubble = this.renderBubble.bind(this);
     this.onLoadEarlier = this.onLoadEarlier.bind(this);
+
+    this._isAlright = null;
   }
 
   componentWillMount() {
@@ -30,6 +33,7 @@ export default class Example extends Component {
     this.setState((previousState) => {
       return {
         messages: GiftedChat.prepend(previousState.messages, require('./data/old_messages.js')),
+        loadEarlier: false,
       };
     });
   }
@@ -40,19 +44,31 @@ export default class Example extends Component {
         messages: GiftedChat.append(previousState.messages, messages),
       };
     });
-    this.onReceive(); // for demo purpose
+
+    if (messages.length > 0) {
+      if (messages[0].image) {
+        this.onReceive('Nice picture!');
+      } else if (messages[0].location) {
+        this.onReceive('My favorite place');
+      } else {
+        if (!this._isAlright) {
+          this._isAlright = true;
+          this.onReceive('Alright');
+        }
+      }
+    }
   }
 
-  onReceive() {
+  onReceive(text) {
     this.setState((previousState) => {
       return {
         messages: GiftedChat.append(previousState.messages, {
           _id: Math.round(Math.random() * 1000000),
-          text: 'Hodor',
+          text: text,
           createdAt: new Date(),
           user: {
             _id: 2,
-            name: 'Bot',
+            name: 'React Native',
             avatar: 'https://facebook.github.io/react/img/logo_og.png',
           },
         }),
@@ -114,7 +130,7 @@ export default class Example extends Component {
       <GiftedChat
         messages={this.state.messages}
         onSend={this.onSend}
-        loadEarlier={true}
+        loadEarlier={this.state.loadEarlier}
         onLoadEarlier={this.onLoadEarlier}
         user={{
           _id: 1,

@@ -15,8 +15,8 @@ import md5 from 'md5';
 import Actions from './Actions';
 import Avatar from './Avatar';
 import Bubble from './Bubble';
-import BubbleImage from './BubbleImage';
-import ParsedText from './ParsedText';
+import MessageImage from './MessageImage';
+import MessageText from './MessageText';
 import Composer from './Composer';
 import Day from './Day';
 import InputToolbar from './InputToolbar';
@@ -434,8 +434,8 @@ GiftedChat.defaultProps = {
   renderActions: null,
   renderAvatar: null,
   renderBubble: null,
-  renderParsedText: null,
-  renderBubbleImage: null,
+  renderMessageText: null,
+  renderMessageImage: null,
   renderComposer: null,
   renderCustomView: null,
   renderDay: null,
@@ -453,8 +453,8 @@ export {
   Actions,
   Avatar,
   Bubble,
-  BubbleImage,
-  ParsedText,
+  MessageImage,
+  MessageText,
   Composer,
   Day,
   InputToolbar,

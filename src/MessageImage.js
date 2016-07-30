@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native';
 
-export default class BubbleImage extends Component {
+export default class MessageImage extends Component {
   render() {
     return (
       <View style={[styles.container, this.props.containerStyle]}>
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 });
 
-BubbleImage.defaultProps = {
+MessageImage.defaultProps = {
   containerStyle: {},
   imageStyle: {},
   currentMessage: {

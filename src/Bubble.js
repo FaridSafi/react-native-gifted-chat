@@ -6,8 +6,8 @@ import {
   View,
 } from 'react-native';
 
-import ParsedText from './ParsedText';
-import BubbleImage from './BubbleImage';
+import MessageText from './MessageText';
+import MessageImage from './MessageImage';
 import Time from './Time';
 
 export default class Bubble extends Component {
@@ -30,22 +30,22 @@ export default class Bubble extends Component {
     return null;
   }
 
-  renderParsedText() {
+  renderMessageText() {
     if (this.props.currentMessage.text) {
-      if (this.props.renderParsedText) {
-        this.props.renderParsedText(this.props);
+      if (this.props.renderMessageText) {
+        this.props.renderMessageText(this.props);
       }
-      return <ParsedText {...this.props}/>;
+      return <MessageText {...this.props}/>;
     }
     return null;
   }
 
-  renderBubbleImage() {
+  renderMessageImage() {
     if (this.props.currentMessage.image) {
-      if (this.props.renderBubbleImage) {
-        this.props.renderBubbleImage(this.props);
+      if (this.props.renderMessageImage) {
+        this.props.renderMessageImage(this.props);
       }
-      return <BubbleImage {...this.props}/>;
+      return <MessageImage {...this.props}/>;
     }
     return null;
   }
@@ -97,8 +97,8 @@ export default class Bubble extends Component {
           >
             <View>
               {this.renderCustomView()}
-              {this.renderBubbleImage()}
-              {this.renderParsedText()}
+              {this.renderMessageImage()}
+              {this.renderMessageText()}
               {this.renderTime()}
             </View>
           </TouchableWithoutFeedback>
@@ -155,8 +155,8 @@ Bubble.defaultProps = {
   containerToNextStyle: {},
   containerToPreviousStyle: {},
 
-  renderBubbleImage: null,
-  renderParsedText: null,
+  renderMessageImage: null,
+  renderMessageText: null,
   renderCustomView: null,
   renderTime: null,
   isSameUser: () => {},

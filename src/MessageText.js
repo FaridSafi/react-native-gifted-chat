@@ -5,10 +5,10 @@ import {
   View,
 } from 'react-native';
 
-import RNParsedText from 'react-native-parsed-text';
+import ParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
 
-export default class ParsedText extends Component {
+export default class MessageText extends Component {
   constructor(props) {
     super(props);
     this.onUrlPress = this.onUrlPress.bind(this);
@@ -50,7 +50,7 @@ export default class ParsedText extends Component {
   render() {
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
-        <RNParsedText
+        <ParsedText
           style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}
           parse={[
             {type: 'url', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onUrlPress},
@@ -59,7 +59,7 @@ export default class ParsedText extends Component {
           ]}
         >
           {this.props.currentMessage.text}
-        </RNParsedText>
+        </ParsedText>
       </View>
     );
   }
@@ -101,11 +101,11 @@ const styles = {
   }),
 };
 
-ParsedText.contextTypes = {
+MessageText.contextTypes = {
   actionSheet: PropTypes.func,
 };
 
-ParsedText.defaultProps = {
+MessageText.defaultProps = {
   containerStyle: {},
   position: 'left',
   textStyle: {},

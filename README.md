@@ -89,7 +89,7 @@ See [example/App.js](example/App.js)
 ## Props
 
 - **`messages`** _(Array)_ - messages to display
-- **`user`** _(Object)_ - user sending the messages
+- **`user`** _(Object)_ - user sending the messages {_id, name, avatar}
 - **`onSend`** _(Function)_ - function to call when sending a message
 - **`loadEarlier`** _(Bool)_ - enables the load earlier message button
 - **`onLoadEarlier`** _(Function)_ - function to call when loading earlier messages
@@ -97,10 +97,10 @@ See [example/App.js](example/App.js)
 - **`isAnimated`** _(Bool)_ - animates the view when the keyboard appears
 - **`renderAccessory`** _(Function)_ - renders a second line of actions below the message composer
 - **`renderActions`** _(Function)_ - renders an action button on the left of the message composer
-- **`renderAvatar`** _(Function)_ - renders the sender avatar
+- **`renderAvatar`** _(Function)_ - renders the message avatar
 - **`renderBubble`** _(Function)_ - render the message bubble
-- **`renderParsedText`** _(Function)_ - render the message text
-- **`renderBubbleImage`** _(Function)_ - render the message image
+- **`renderMessageText`** _(Function)_ - render the message text
+- **`renderMessageImage`** _(Function)_ - render the message image
 - **`renderComposer`** _(Function)_ - render the text input message composer
 - **`renderCustomView`** _(Function)_ - render a custom view inside the bubble
 - **`renderDay`** _(Function)_ - render the day above a message

@@ -86,16 +86,6 @@ See [example/App.js](example/App.js)
 ```
 
 
-## Features
-- Custom styles
-- Custom actions
-- Multiline TextInput
-- Load earlier messages
-- Avatar as initials
-- Touchable links using [react-native-parsed-text](https://github.com/taskrabbit/react-native-parsed-text)
-- Localized dates
-- Copy text message to clipboard
-
 ## Props
 
 - **`messages`** _(Array)_ - messages to display
@@ -120,6 +110,18 @@ See [example/App.js](example/App.js)
 - **`renderMessage`** _(Function)_ - render the message container
 - **`renderSend`** _(Function)_ - render the send button
 - **`renderTime`** _(Function)_ - render the message time
+
+
+## Features
+- Custom styles
+- Custom actions
+- Multiline TextInput
+- Load earlier messages
+- Avatar as initials
+- Touchable links using [react-native-parsed-text](https://github.com/taskrabbit/react-native-parsed-text)
+- Localized dates
+- Copy text message to clipboard
+
 
 ## LICENSE
 - [MIT](LICENSE)

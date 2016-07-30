@@ -11,7 +11,11 @@ export default class LoadEarlier extends Component {
     return (
       <TouchableOpacity
         style={[styles.container, this.props.containerStyle]}
-        onPress={this.context.onLoadEarlier}
+        onPress={() => {
+          if (this.props.onLoadEarlier) {
+            this.props.onLoadEarlier();
+          }
+        }}
       >
         <View style={[styles.wrapper, this.props.wrapperStyle]}>
           <Text style={[styles.text, this.props.textStyle]}>
@@ -45,12 +49,9 @@ const styles = StyleSheet.create({
   },
 });
 
-LoadEarlier.contextTypes = {
-  onLoadEarlier: PropTypes.func,
-};
-
 LoadEarlier.defaultProps = {
   containerStyle: {},
   wrapperStyle: {},
   textStyle: {},
+  onLoadEarlier: () => {},
 };

@@ -1,22 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  Image,
   Modal,
+  StyleSheet,
   TouchableOpacity,
+  View,
+  Text,
 } from 'react-native';
 
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 
-class Actions extends Component {
+export default class CustomActions extends Component {
   constructor(props) {
     super(props);
-
     this._images = [];
-
     this.state = {
       modalVisible: false,
     };
+    this.onActionsPress = this.onActionsPress.bind(this);
+    this.selectImages = this.selectImages.bind(this);
   }
 
   setImages(images) {
@@ -32,7 +34,7 @@ class Actions extends Component {
   }
 
   onActionsPress() {
-    const options = ['Take Photo', 'Choose From Library', 'Send Location', 'Cancel'];
+    const options = ['Choose From Library', 'Send Location', 'Cancel'];
     const cancelButtonIndex = options.length - 1;
     this.context.actionSheet().showActionSheetWithOptions({
       options,
@@ -40,10 +42,10 @@ class Actions extends Component {
     },
     (buttonIndex) => {
       switch (buttonIndex) {
-        case 1:
+        case 0:
           this.setModalVisible(true);
           break;
-        case 2:
+        case 1:
           navigator.geolocation.getCurrentPosition(
             (position) => {
               this.props.onSend({
@@ -114,19 +116,23 @@ class Actions extends Component {
       return this.props.icon();
     }
     return (
-      <Image
-        style={this.props.customStyles.Actions.icon}
-        resizeMode={'contain'}
-        source={require('../../assets/paperclip.png')}
-      />
+      <View
+        style={[styles.wrapper, this.props.wrapperStyle]}
+      >
+        <Text
+          style={[styles.iconText, this.props.iconTextStyle]}
+        >
+          +
+        </Text>
+      </View>
     );
   }
 
   render() {
     return (
       <TouchableOpacity
-        style={this.props.customStyles.Actions.container}
-        onPress={this.onActionsPress.bind(this)}
+        style={[styles.container, this.props.containerStyle]}
+        onPress={this.onActionsPress}
       >
         <Modal
           animationType={'slide'}
@@ -140,7 +146,7 @@ class Actions extends Component {
           <CameraRollPicker
             maximum={10}
             imagesPerRow={4}
-            callback={this.selectImages.bind(this)}
+            callback={this.selectImages}
           />
         </Modal>
         {this.renderIcon()}
@@ -149,14 +155,36 @@ class Actions extends Component {
   }
 }
 
-Actions.contextTypes = {
+const styles = StyleSheet.create({
+  container: {
+    width: 26,
+    height: 26,
+    marginLeft: 10,
+    marginBottom: 10,
+  },
+  wrapper: {
+    borderRadius: 13,
+    borderColor: '#b2b2b2',
+    borderWidth: 2,
+    flex: 1,
+  },
+  iconText: {
+    color: '#b2b2b2',
+    fontWeight: 'bold',
+    fontSize: 16,
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+  },
+});
+
+CustomActions.contextTypes = {
   actionSheet: PropTypes.func,
 };
 
-Actions.defaultProps = {
+CustomActions.defaultProps = {
   onSend: () => {},
-  customStyles: {},
+  containerStyle: {},
+  iconStyle: {},
+  options: {},
   icon: null,
 };
-
-export default Actions;

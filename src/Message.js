@@ -87,7 +87,10 @@ export default class Message extends Component {
   }
 
   render() {
-    // console.log('render message', this.props.currentMessage.text);
+    // if (!this.props.currentMessage.text && !this.props.currentMessage.customView && !this.props.currentMessage.image) {
+    //   return null;
+    // }
+
     return (
       <View>
         {this.renderDay()}

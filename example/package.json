@@ -9,7 +9,9 @@
   "dependencies": {
     "react": "15.2.1",
     "react-native": "^0.30.0",
-    "react-native-gifted-chat": "file:../"
+    "react-native-camera-roll-picker": "^1.1.6",
+    "react-native-gifted-chat": "file:../",
+    "react-native-nav": "^1.1.4"
   },
   "devDependencies": {
     "eslint": "^3.2.0",

@@ -21,7 +21,6 @@ import Composer from './Composer';
 import Day from './Day';
 import InputToolbar from './InputToolbar';
 import LoadEarlier from './LoadEarlier';
-import Location from './Location';
 import Message from './Message';
 import MessageContainer from './MessageContainer';
 import Send from './Send';
@@ -80,22 +79,6 @@ class GiftedChat extends Component {
     }
     return currentMessages.concat(messages);
   }
-
-  // static update(currentMessages = [], options) {
-  //   if (!Array.isArray(options)) {
-  //     options = [options];
-  //   }
-  //
-  //   return currentMessages.map((message) => {
-  //     for (let i = 0; i < options.length; i++) {
-  //       const {find, set} = options;
-  //       if () {
-  //         return
-  //       }
-  //     }
-  //     return message;
-  //   });
-  // }
 
   getChildContext() {
     return {
@@ -465,7 +448,6 @@ GiftedChat.defaultProps = {
   renderInputToolbar: null,
   renderLoadEarlier: null,
   renderLoading: null,
-  renderLocation: null,
   renderMessage: null,
   renderSend: null,
   renderTime: null,
@@ -483,7 +465,6 @@ export {
   Day,
   InputToolbar,
   LoadEarlier,
-  Location,
   Message,
   Send,
   Time,

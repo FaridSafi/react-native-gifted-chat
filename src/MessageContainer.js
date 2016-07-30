@@ -8,13 +8,6 @@ import Message from './Message';
 export default class MessageContainer extends Component {
   constructor(props) {
     super(props);
-    this.onLoadEarlier = this.onLoadEarlier.bind(this);
-  }
-
-  getChildContext() {
-    return {
-      onLoadEarlier: this.onLoadEarlier,
-    };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -22,12 +15,6 @@ export default class MessageContainer extends Component {
       return false;
     }
     return true;
-  }
-
-  onLoadEarlier() {
-    if (this.props.onLoadEarlier) {
-      this.props.onLoadEarlier();
-    }
   }
 
   renderLoadEarlier() {
@@ -84,12 +71,9 @@ export default class MessageContainer extends Component {
   }
 }
 
-MessageContainer.childContextTypes = {
-  onLoadEarlier: PropTypes.func,
-};
-
 MessageContainer.defaultProps = {
   messages: [],
   user: {},
   renderMessage: null,
+  onLoadEarlier: () => {},
 };

@@ -8,7 +8,6 @@ import {
 
 import ParsedText from './ParsedText';
 import BubbleImage from './BubbleImage';
-import Location from './Location';
 import Time from './Time';
 
 export default class Bubble extends Component {
@@ -47,16 +46,6 @@ export default class Bubble extends Component {
         this.props.renderBubbleImage(this.props);
       }
       return <BubbleImage {...this.props}/>;
-    }
-    return null;
-  }
-
-  renderLocation() {
-    if (this.props.currentMessage.location) {
-      if (this.props.renderLocation) {
-        this.props.renderLocation(this.props);
-      }
-      return <Location {...this.props}/>;
     }
     return null;
   }
@@ -109,7 +98,6 @@ export default class Bubble extends Component {
             <View>
               {this.renderCustomView()}
               {this.renderBubbleImage()}
-              {this.renderLocation()}
               {this.renderParsedText()}
               {this.renderTime()}
             </View>
@@ -170,13 +158,11 @@ Bubble.defaultProps = {
   renderBubbleImage: null,
   renderParsedText: null,
   renderCustomView: null,
-  renderLocation: null,
   renderTime: null,
   isSameUser: () => {},
   isSameDay: () => {},
   position: 'left',
   currentMessage: {
-    location: null,
     text: null,
     createdAt: null,
     image: null,

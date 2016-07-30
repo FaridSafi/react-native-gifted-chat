@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-// import {
-//   View,
-//   Image,
-// } from 'react-native';
 
-import { GiftedChat, Actions } from 'react-native-gifted-chat';
+import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
+import CustomActions from './CustomActions';
+import CustomView from './CustomView';
 
 export default class Example extends Component {
   constructor(props) {
@@ -15,27 +13,39 @@ export default class Example extends Component {
 
     this.onSend = this.onSend.bind(this);
     this.onReceive = this.onReceive.bind(this);
-    this.renderActions = this.renderActions.bind(this);
+    this.renderCustomActions = this.renderCustomActions.bind(this);
+    this.renderBubble = this.renderBubble.bind(this);
+    this.onLoadEarlier = this.onLoadEarlier.bind(this);
   }
+
   componentWillMount() {
-    this.setState({
-      messages: require('./data/messages.js'),
+    this.setState(() => {
+      return {
+        messages: require('./data/messages.js'),
+      };
     });
   }
+
+  onLoadEarlier() {
+    this.setState((previousState) => {
+      return {
+        messages: GiftedChat.prepend(previousState.messages, require('./data/old_messages.js')),
+      };
+    });
+  }
+
   onSend(messages = []) {
     this.setState((previousState) => {
       return {
-        ...previousState,
         messages: GiftedChat.append(previousState.messages, messages),
       };
     });
-    // this.onReceive(); // for demo purpose
-    // this.onReceive(); // for demo purpose
+    this.onReceive(); // for demo purpose
   }
+
   onReceive() {
     this.setState((previousState) => {
       return {
-        ...previousState,
         messages: GiftedChat.append(previousState.messages, {
           _id: Math.round(Math.random() * 1000000),
           text: 'Hodor',
@@ -49,30 +59,26 @@ export default class Example extends Component {
       };
     });
   }
+
+  renderCustomActions(props) {
+    return (
+      <CustomActions
+        {...props}
+      />
+    );
+  }
+
+  /*
   renderActions(props) {
     const options = {
-      'Take Photo': (props) => {
+      'Action 1': (props) => {
         console.log('option 1');
       },
-      'Choose From Library': (props) => {
+      'Action 2': (props) => {
         console.log('option 2');
-      },
-      'Send Location': (props) => {
-        console.log('option 3');
       },
       'Cancel': () => {},
     };
-    // icon={() => {
-    //   return (
-    //     <Image
-    //       style={{
-    //         width: 20,
-    //         height: 20,
-    //       }}
-    //       source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
-    //     />
-    //   );
-    // }}
     return (
       <Actions
         {...props}
@@ -80,16 +86,42 @@ export default class Example extends Component {
       />
     );
   }
+  */
+
+  renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          left: {
+            backgroundColor: '#f0f0f0',
+          }
+        }}
+      />
+    );
+  }
+
+  renderCustomView(props) {
+    return (
+      <CustomView
+        {...props}
+      />
+    );
+  }
+
   render() {
     return (
       <GiftedChat
         messages={this.state.messages}
         onSend={this.onSend}
         loadEarlier={true}
+        onLoadEarlier={this.onLoadEarlier}
         user={{
           _id: 1,
         }}
-        renderActions={this.renderActions}
+        renderActions={this.renderCustomActions}
+        renderBubble={this.renderBubble}
+        renderCustomView={this.renderCustomView}
       />
     );
   }

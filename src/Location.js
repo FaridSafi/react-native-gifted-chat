@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   mapView: {
     width: 150,
     height: 100,
-    borderRadius: 8,
+    borderRadius: 13,
     margin: 3,
   },
 });

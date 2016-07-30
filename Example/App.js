@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {
+  Platform
+} from 'react-native';
 
 import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
 import CustomActions from './CustomActions';
@@ -77,21 +80,19 @@ export default class Example extends Component {
   }
 
   renderCustomActions(props) {
-    return (
-      <CustomActions
-        {...props}
-      />
-    );
-  }
-
-  /*
-  renderActions(props) {
+    if (Platform.OS === 'ios') {
+      return (
+        <CustomActions
+          {...props}
+        />
+      );
+    }
     const options = {
       'Action 1': (props) => {
-        console.log('option 1');
+        alert('option 1');
       },
       'Action 2': (props) => {
-        console.log('option 2');
+        alert('option 2');
       },
       'Cancel': () => {},
     };
@@ -102,7 +103,6 @@ export default class Example extends Component {
       />
     );
   }
-  */
 
   renderBubble(props) {
     return (
@@ -132,9 +132,11 @@ export default class Example extends Component {
         onSend={this.onSend}
         loadEarlier={this.state.loadEarlier}
         onLoadEarlier={this.onLoadEarlier}
+
         user={{
-          _id: 1,
+          _id: 1, // sent messages should have same user._id
         }}
+
         renderActions={this.renderCustomActions}
         renderBubble={this.renderBubble}
         renderCustomView={this.renderCustomView}

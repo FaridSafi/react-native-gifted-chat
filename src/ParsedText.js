@@ -8,12 +8,6 @@ import {
 import RNParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
 
-// TODO
-// new props
-// onUrlPress
-// onPhonePress
-// onEmailPress
-
 export default class ParsedText extends Component {
   constructor(props) {
     super(props);

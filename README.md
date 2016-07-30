@@ -63,7 +63,7 @@ class Example extends Component {
 ```
 
 ## Advanced example
-See [example project](example/Example.js)
+See [example project](example/App.js)
 
 ## Props documentation
 - Work in progress

@@ -109,7 +109,7 @@ class GiftedChat extends Component {
     }
   }
 
-  initMessages(messages = [], sort = false) {
+  initMessages(messages = []) {
     this.setMessages(messages);
   }
 

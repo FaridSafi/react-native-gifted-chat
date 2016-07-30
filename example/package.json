@@ -14,9 +14,7 @@
     "react-native-nav": "^1.1.4"
   },
   "devDependencies": {
-    "eslint": "^3.2.0",
-    "eslint-plugin-react": "^5.2.2",
-    "eslint-plugin-react-native": "^1.2.0",
+    "babel-preset-react-native": "^1.9.0",
     "sane": "^1.4.0"
   }
 }

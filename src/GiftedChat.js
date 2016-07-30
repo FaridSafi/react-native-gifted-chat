@@ -27,7 +27,7 @@ import Send from './Send';
 import Time from './Time';
 
 // Min and max heights of ToolbarInput and Composer
-// Needed for handling Composer's auto grow and ScrollView animation
+// Needed for Composer auto grow and ScrollView animation
 // TODO move these values to Constants.js (also with used colors #b2b2b2)
 const MIN_COMPOSER_HEIGHT = Platform.select({
   ios: 33,
@@ -100,11 +100,6 @@ class GiftedChat extends Component {
   componentWillReceiveProps(nextProps) {
     this.initMessages(nextProps.messages);
   }
-
-  // TODO test if needed (if yes: use forceUpdate instead of setState?)
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return true;
-  // }
 
   initLocale() {
     if (this.props.locale === null || moment.locales().indexOf(this.props.locale) === -1) {
@@ -257,7 +252,6 @@ class GiftedChat extends Component {
   }
 
   // handle Tap event to dismiss keyboard
-  // TODO test android
   onTouchEnd() {
     if (this._touchStarted === true) {
       dismissKeyboard();

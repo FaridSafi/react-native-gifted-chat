@@ -1,7 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import {
-
-} from 'react-native';
 
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
 
@@ -56,7 +53,6 @@ export default class MessageContainer extends Component {
     return (
       <InvertibleScrollView
         {...this.props.invertibleScrollViewProps}
-
         ref={component => this._invertibleScrollViewRef = component}
       >
         {this.props.messages.map((message, index) => {

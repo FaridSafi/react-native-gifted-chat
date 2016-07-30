@@ -1,3 +1,6 @@
+/*
+**  This component will be published in a separate package
+*/
 import React, { Component } from 'react';
 import {
   Image,

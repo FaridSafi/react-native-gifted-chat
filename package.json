@@ -4,7 +4,10 @@
   "description": "The most complete chat UI for React Native",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-react-native"
   },
   "repository": {
     "type": "git",
@@ -42,7 +45,6 @@
     "moment": "^2.13.0",
     "react-native-communications": "^2.0.0",
     "react-native-dismiss-keyboard": "^1.0.0",
-    "react-native-gifted-material": "file:./react-native-gifted-material/",
     "react-native-invertible-scroll-view": "^1.0.0",
     "react-native-parsed-text": "0.0.15"
   }

@@ -3,15 +3,16 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default class Send extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.text.trim().length === 0 && nextProps.text.trim().length > 0 || this.props.text.trim().length > 0 && nextProps.text.trim().length === 0) {
-      return true;
-    }
-    return false;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (this.props.text.trim().length === 0 && nextProps.text.trim().length > 0 || this.props.text.trim().length > 0 && nextProps.text.trim().length === 0) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
   render() {
     if (this.props.text.trim().length > 0) {
       return (
@@ -25,7 +26,7 @@ export default class Send extends Component {
         </TouchableOpacity>
       );
     }
-    return null;
+    return <View/>;
   }
 }
 

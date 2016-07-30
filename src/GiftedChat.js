@@ -29,6 +29,7 @@ import Time from './Time';
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for handling Composer's auto grow and ScrollView animation
+// TODO move these values to Constants.js (also with used colors #b2b2b2)
 const MIN_COMPOSER_HEIGHT = 33;
 const MAX_COMPOSER_HEIGHT = 100;
 const MIN_INPUT_TOOLBAR_HEIGHT = 44;
@@ -242,11 +243,17 @@ class GiftedChat extends Component {
     }
   }
 
-  onKeyboardDidShow() {
+  onKeyboardDidShow(e) {
+    if (Platform.OS === 'android') {
+      this.onKeyboardWillShow(e);
+    }
     this.setIsTypingDisabled(false);
   }
 
-  onKeyboardDidHide() {
+  onKeyboardDidHide(e) {
+    if (Platform.OS === 'android') {
+      this.onKeyboardWillHide(e);
+    }
     this.setIsTypingDisabled(false);
   }
 

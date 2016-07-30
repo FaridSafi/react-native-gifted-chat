@@ -26,18 +26,17 @@ export default class LoadEarlier extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'center',
     marginTop: 5,
     marginBottom: 10,
   },
   wrapper: {
     alignItems: 'center',
-    backgroundColor: '#ccc',
-    borderRadius: 10,
+    justifyContent: 'center',
+    backgroundColor: '#b2b2b2',
+    borderRadius: 15,
+    height: 30,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
   },
   text: {
     backgroundColor: 'transparent',

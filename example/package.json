@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node_modules/react-native/packager/packager.sh",
-    "sync": "rm -rf ./node_modules/react-native-gifted-chat; sane '/usr/bin/rsync -v -a --exclude .git --exclude example --exclude node_modules ../ ./node_modules/react-native-gifted-chat/' .. --glob='{**/*.json,**/*.js}'"
+    "sync": "rm -rf ./node_modules/react-native-gifted-chat; sane '/usr/bin/rsync -v -a --exclude .git --exclude example --exclude __tests__ --exclude node_modules ../ ./node_modules/react-native-gifted-chat/' .. --glob='{**/*.json,**/*.js}'"
   },
   "dependencies": {
     "react": "15.2.1",
@@ -12,7 +12,7 @@
     "react-native-gifted-chat": "file:../"
   },
   "devDependencies": {
-    "eslint": "^3.1.1",
+    "eslint": "^3.2.0",
     "eslint-plugin-react": "^5.2.2",
     "eslint-plugin-react-native": "^1.2.0",
     "sane": "^1.4.0"

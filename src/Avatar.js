@@ -4,7 +4,7 @@ import {
   View,
 } from 'react-native';
 
-import {Avatar as GiftedAvatar} from 'react-native-gifted-material';
+import GiftedAvatar from './GiftedAvatar';
 
 export default class Avatar extends Component {
   renderAvatar() {

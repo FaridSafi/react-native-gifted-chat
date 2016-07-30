@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 Composer.defaultProps = {
   textInputStyle: {},
   onChange: () => {},
-  composerHeight: 33,
+  composerHeight: 33, // TODO SHARE with GiftedChat.js and tests
   text: '',
   placeholder: 'Type a message...',
   placeholderTextColor: '#b2b2b2',

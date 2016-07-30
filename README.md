@@ -66,46 +66,11 @@ class Example extends Component {
 ## Advanced example
 See [example project](example/Example.js)
 
-## Props
-- **locale** - Available languages ?
-
-
-## Message object
-
-## Components
-### LoadEarlier
-### Message
-### Day
-### Avatar
-### Bubble
-### CustomView
-### BubbleImage
-### ParsedText
-### Location (deprecated)
-### Time
-### InputToolbar
-### Accessory
-### Actions
-- **Rendered by default** - No
-
-#### Props
-- **options**
-- **icon**
-- **containerStyle**
-- **iconStyle**
-
-### Composer (might be renamed)
-### Send
-### Loading
-
+## Props documentation
+- Work in progress
 
 ## LICENSE
 - [MIT](LICENSE)
-
-
-## Contributing
-
-Be sure to update the documentation
 
 
 Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi) !

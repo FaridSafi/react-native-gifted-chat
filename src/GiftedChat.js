@@ -30,7 +30,10 @@ import Time from './Time';
 // Min and max heights of ToolbarInput and Composer
 // Needed for handling Composer's auto grow and ScrollView animation
 // TODO move these values to Constants.js (also with used colors #b2b2b2)
-const MIN_COMPOSER_HEIGHT = 33;
+const MIN_COMPOSER_HEIGHT = Platform.select({
+  ios: 33,
+  android: 41,
+});
 const MAX_COMPOSER_HEIGHT = 100;
 const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
@@ -217,7 +220,6 @@ class GiftedChat extends Component {
     } else {
       this.setState((previousState) => {
         return {
-          // ...previousState,
           messagesContainerHeight: newMessagesContainerHeight,
         };
       });
@@ -236,7 +238,6 @@ class GiftedChat extends Component {
     } else {
       this.setState((previousState) => {
         return {
-          // ...previousState,
           messagesContainerHeight: newMessagesContainerHeight,
         };
       });
@@ -345,7 +346,6 @@ class GiftedChat extends Component {
   resetInputToolbar() {
     this.setState((previousState) => {
       return {
-        // ...previousState,
         text: '',
         composerHeight: MIN_COMPOSER_HEIGHT,
         messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight() - this.getKeyboardHeight()),
@@ -366,7 +366,6 @@ class GiftedChat extends Component {
     const newText = e.nativeEvent.text;
     this.setState((previousState) => {
       return {
-        // ...previousState,
         text: newText,
         composerHeight: newComposerHeight,
         messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight),

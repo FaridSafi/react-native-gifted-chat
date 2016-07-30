@@ -39,7 +39,7 @@ export default class Actions extends Component {
     }
     return (
       <View
-        style={[styles.iconContainer, this.props.iconContainerStyle]}
+        style={[styles.wrapper, this.props.wrapperStyle]}
       >
         <Text
           style={[styles.iconText, this.props.iconTextStyle]}
@@ -64,28 +64,23 @@ export default class Actions extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
     width: 26,
     height: 26,
     marginLeft: 10,
     marginBottom: 10,
   },
-  iconContainer: {
-    width: 26,
-    height: 26,
+  wrapper: {
     borderRadius: 13,
     borderColor: '#b2b2b2',
     borderWidth: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 1,
   },
   iconText: {
     color: '#b2b2b2',
     fontWeight: 'bold',
     fontSize: 16,
-    lineHeight: 16,
     backgroundColor: 'transparent',
+    textAlign: 'center',
   },
 });
 

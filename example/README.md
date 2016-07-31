@@ -1,6 +1,8 @@
 ## Run the example
 
 ```
+git clone https://github.com/FaridSafi/react-native-gifted-chat
+cd react-native-gifted-chat/example
 npm install
 react-native run-ios
 ```

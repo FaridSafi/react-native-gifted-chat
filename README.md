@@ -123,7 +123,7 @@ See [example/App.js](example/App.js)
 - Copy text message to clipboard
 
 
-## LICENSE
+## License
 - [MIT](LICENSE)
 
 

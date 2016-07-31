@@ -430,6 +430,7 @@ GiftedChat.defaultProps = {
     ios: true,
     android: false,
   }),
+  footer: null,
   renderAccessory: null,
   renderActions: null,
   renderAvatar: null,

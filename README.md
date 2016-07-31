@@ -95,6 +95,7 @@ See [example/App.js](example/App.js)
 - **`isAnimated`** _(Bool)_ - animates the view when the keyboard appears
 - **`loadEarlier`** _(Bool)_ - enables the load earlier message button
 - **`onLoadEarlier`** _(Function)_ - function to call when loading earlier messages
+- **`footer`** _(Function)_ - renders a view at the bottom of the scroll view. Should be a state, see [example/App.js](example/App.js)
 - **`renderLoading`** _(Function)_ - render a loading view when initializing
 - **`renderLoadEarlier`** _(Function)_ - render the load earlier button
 - **`renderAvatar`** _(Function)_ - renders the message avatar

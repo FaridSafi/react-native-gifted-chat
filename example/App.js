@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Platform
+  Platform,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
 
 import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
@@ -13,6 +16,7 @@ export default class Example extends Component {
     this.state = {
       messages: [],
       loadEarlier: true,
+      footer: null,
     };
 
     this.onSend = this.onSend.bind(this);
@@ -48,18 +52,47 @@ export default class Example extends Component {
       };
     });
 
+    // for demo purpose
+    this.answerDemo(messages);
+  }
+
+  answerDemo(messages) {
     if (messages.length > 0) {
-      if (messages[0].image) {
-        this.onReceive('Nice picture!');
-      } else if (messages[0].location) {
-        this.onReceive('My favorite place');
-      } else {
-        if (!this._isAlright) {
-          this._isAlright = true;
-          this.onReceive('Alright');
-        }
+      if ((messages[0].image || messages[0].location) || !this._isAlright) {
+        this.setState((previousState) => {
+          return {
+            footer: (props) => {
+              return (
+                <View style={styles.footer}>
+                  <Text>React Native is typing...</Text>
+                </View>
+              );
+            },
+          };
+        });
       }
     }
+
+    setTimeout(() => {
+      if (messages.length > 0) {
+        if (messages[0].image) {
+          this.onReceive('Nice picture!');
+        } else if (messages[0].location) {
+          this.onReceive('My favorite place');
+        } else {
+          if (!this._isAlright) {
+            this._isAlright = true;
+            this.onReceive('Alright');
+          }
+        }
+      }
+
+      this.setState((previousState) => {
+        return {
+          footer: null,
+        };
+      });
+    }, 1000);
   }
 
   onReceive(text) {
@@ -132,6 +165,7 @@ export default class Example extends Component {
         onSend={this.onSend}
         loadEarlier={this.state.loadEarlier}
         onLoadEarlier={this.onLoadEarlier}
+        footer={this.state.footer}
 
         user={{
           _id: 1, // sent messages should have same user._id
@@ -144,3 +178,9 @@ export default class Example extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  footer: {
+    margin: 10,
+  },
+});

@@ -1,4 +1,11 @@
-## Example App
+## Run the example
+
+```
+npm install
+react-native run-ios
+```
+
+## Development helper
 
 Normally, after a code change to react-native-gifted-chat src files, you must remove the node_modules/react-native-gifted-chat directory and npm install. The react-native packager wont follow symlinks.
 

@@ -24,10 +24,7 @@ export default class MessageContainer extends Component {
             ...message,
             hash: md5(JSON.stringify(message))
         }));
-
         this.state = {
-            containerHeight: 0,
-            listViewPaddingTop: 0,
             dataSource: dataSource.cloneWithRows(messages)
         };
     }
@@ -102,28 +99,14 @@ export default class MessageContainer extends Component {
         return (
             <InvertibleScrollView
                 {...invertibleScrollViewProps}
-                contentContainerStyle={{ marginTop: this.state.listViewPaddingTop }}
                 ref={component => this._invertibleScrollViewRef = component}
             />
         );
     }
 
-    updateListViewPaddingTop(contentWidth, contentHeight) {
-        this.setState({
-            listViewPaddingTop: Math.max(this.state.containerHeight - contentHeight, 0)
-        });
-    }
-
-    onContainerLayout(e) {
-        const layout = e.nativeEvent.layout;
-        this.setState({
-            containerHeight: layout.height
-        });
-    }
-
     render() {
         return (
-            <View ref='container' style={{flex:1}} onLayout={this.onContainerLayout.bind(this)}>
+            <View ref='container' style={{flex:1}}>
                 <ListView
                     renderScrollComponent={this.renderScrollComponent.bind(this)}
                     enableEmptySections={true}
@@ -132,7 +115,6 @@ export default class MessageContainer extends Component {
                     renderFooter={this.renderLoadEarlier.bind(this)}
                     renderHeader={this.renderFooter.bind(this)}
                     automaticallyAdjustContentInsets={false}
-                    onContentSizeChange={this.updateListViewPaddingTop.bind(this)}
                 />
             </View>
         );

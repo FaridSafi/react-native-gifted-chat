@@ -123,7 +123,6 @@ export default class MessageContainer extends Component {
 MessageContainer.defaultProps = {
   messages: [],
   user: {},
-  renderFooter: null,
   renderMessage: null,
   onLoadEarlier: () => {
   },

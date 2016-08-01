@@ -2,8 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 import ReactNative, {
   View,
-  ListView,
-  UIManager
+  ListView
 } from 'react-native';
 
 import InvertibleScrollView from 'react-native-invertible-scroll-view';

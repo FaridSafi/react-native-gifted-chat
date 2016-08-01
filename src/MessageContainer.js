@@ -30,7 +30,6 @@ export default class MessageContainer extends Component {
             listViewPaddingTop: 0,
             dataSource: dataSource.cloneWithRows(messages)
         };
-        this.renderFooter = this.renderFooter.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -131,7 +130,7 @@ export default class MessageContainer extends Component {
                     dataSource={this.state.dataSource}
                     renderRow={this.renderRow.bind(this)}
                     renderFooter={this.renderLoadEarlier.bind(this)}
-                    renderHeader={this.renderFooter}
+                    renderHeader={this.renderFooter.bind(this)}
                     automaticallyAdjustContentInsets={false}
                     onContentSizeChange={this.updateListViewPaddingTop.bind(this)}
                 />

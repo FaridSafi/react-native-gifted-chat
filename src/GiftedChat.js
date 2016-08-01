@@ -434,6 +434,7 @@ GiftedChat.defaultProps = {
   renderMessage: null,
   renderSend: null,
   renderTime: null,
+  renderFooter: null,
   user: {},
 };
 

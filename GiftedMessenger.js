@@ -571,6 +571,7 @@ class GiftedMessenger extends Component {
           {this.props.leftControlBar}
           <TextInput
             ref={'textInput'}
+            testID={'messageInput'}
             style={this.styles.textInput}
             placeholder={this.props.placeholder}
             placeholderTextColor={this.props.placeholderTextColor}
@@ -597,6 +598,7 @@ class GiftedMessenger extends Component {
             <Button
               style={this.styles.sendButton}
               onPress={this.onSend}
+              testID={'sendMessageButton'}
             >
               {this.props.sendButtonText}
             </Button>
@@ -610,6 +612,7 @@ class GiftedMessenger extends Component {
             styleDisabled={this.styles.sendButtonDisabled}
             onPress={this.onSend}
             disabled={this.state.disabled}
+            testID={'sendMessageButton'}
           >
             {this.props.sendButtonText}
           </Button>

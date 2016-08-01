@@ -10,7 +10,6 @@ import {
 import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 import moment from 'moment/min/moment-with-locales.min';
-import md5 from 'md5';
 
 import Actions from './Actions';
 import Avatar from './Avatar';
@@ -48,7 +47,6 @@ class GiftedChat extends Component {
     this._isTypingDisabled = false;
     this._locale = 'en';
     this._messages = [];
-    this._messagesHash = null;
 
     this.state = {
       isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -123,19 +121,10 @@ class GiftedChat extends Component {
 
   setMessages(messages) {
     this._messages = messages;
-    this.setMessagesHash(md5(JSON.stringify(messages)));
   }
 
   getMessages() {
     return this._messages;
-  }
-
-  setMessagesHash(messagesHash) {
-    this._messagesHash = messagesHash;
-  }
-
-  getMessagesHash() {
-    return this._messagesHash;
   }
 
   setMaxHeight(height) {
@@ -281,7 +270,6 @@ class GiftedChat extends Component {
           }}
 
           messages={this.getMessages()}
-          messagesHash={this.getMessagesHash()}
 
           ref={component => this._messageContainerRef = component}
         />

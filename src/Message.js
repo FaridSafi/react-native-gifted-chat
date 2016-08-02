@@ -88,7 +88,7 @@ export default class Message extends Component {
   }
 
   render() {
-    // if (!this.props.currentMessage.text && !this.props.currentMessage.customView && !this.props.currentMessage.image) {
+    // if (!this.props.currentMessage.text && !this.props.currentMessage.image && !this.props.renderCustomView) {
     //   return null;
     // }
 

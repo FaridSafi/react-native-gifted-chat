@@ -6,10 +6,6 @@ import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
 export default class MessageContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.messagesHash === nextProps.messagesHash && this.props.loadEarlier === nextProps.loadEarlier) {
       return false;

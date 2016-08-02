@@ -110,9 +110,7 @@ class GiftedChat extends Component {
   }
 
   initMessages(messages = []) {
-    if (!(messages === this.getMessages())) {
-      this.setMessages(messages);
-    }
+    this.setMessages(messages);
   }
 
   setLocale(locale) {

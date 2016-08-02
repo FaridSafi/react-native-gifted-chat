@@ -97,7 +97,7 @@ class GiftedChat extends Component {
     this.setIsMounted(false);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps = {}) {
     this.initMessages(nextProps.messages);
   }
 
@@ -110,7 +110,9 @@ class GiftedChat extends Component {
   }
 
   initMessages(messages = []) {
-    this.setMessages(messages);
+    if (!(messages === this.getMessages())) {
+      this.setMessages(messages);
+    }
   }
 
   setLocale(locale) {

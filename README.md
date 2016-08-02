@@ -95,7 +95,6 @@ See [example/App.js](example/App.js)
 - **`isAnimated`** _(Bool)_ - animates the view when the keyboard appears
 - **`loadEarlier`** _(Bool)_ - enables the load earlier message button
 - **`onLoadEarlier`** _(Function)_ - function to call when loading earlier messages
-- **`footer`** _(Function)_ - renders a view at the bottom of the scroll view. Should be a state, see [example/App.js](example/App.js)
 - **`renderLoading`** _(Function)_ - render a loading view when initializing
 - **`renderLoadEarlier`** _(Function)_ - render the load earlier button
 - **`renderAvatar`** _(Function)_ - renders the message avatar
@@ -106,6 +105,7 @@ See [example/App.js](example/App.js)
 - **`renderCustomView`** _(Function)_ - render a custom view inside the bubble
 - **`renderDay`** _(Function)_ - render the day above a message
 - **`renderTime`** _(Function)_ - render the message time
+- **`renderFooter`** _(Function)_ - renders a fixed bottom view. Can be used for 'is typing message', see [example/App.js](example/App.js)
 - **`renderInputToolbar`** _(Function)_ - render the composer container
 - **`renderActions`** _(Function)_ - renders an action button on the left of the message composer
 - **`renderComposer`** _(Function)_ - render the text input message composer

@@ -8,24 +8,13 @@ import Message from './Message';
 export default class MessageContainer extends Component {
   constructor(props) {
     super(props);
-    this.renderFooter = this.renderFooter.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.messagesHash === nextProps.messagesHash && this.props.loadEarlier === nextProps.loadEarlier && this.props.footer === nextProps.footer) {
+    if (this.props.messagesHash === nextProps.messagesHash && this.props.loadEarlier === nextProps.loadEarlier) {
       return false;
     }
     return true;
-  }
-
-  renderFooter() {
-    if (this.props.footer) {
-      const footerProps = {
-        ...this.props,
-      };
-      return this.props.footer(footerProps);
-    }
-    return null;
   }
 
   renderLoadEarlier() {
@@ -53,7 +42,6 @@ export default class MessageContainer extends Component {
         {...this.props.invertibleScrollViewProps}
         ref={component => this._invertibleScrollViewRef = component}
       >
-        {this.renderFooter()}
         {this.props.messages.map((message, index) => {
           if (!message._id) {
             console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(message));
@@ -86,7 +74,6 @@ export default class MessageContainer extends Component {
 MessageContainer.defaultProps = {
   messages: [],
   user: {},
-  footer: null,
   renderMessage: null,
   onLoadEarlier: () => {},
 };

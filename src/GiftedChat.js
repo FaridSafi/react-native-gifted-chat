@@ -62,6 +62,18 @@ class GiftedChat extends Component {
     this.onType = this.onType.bind(this);
     this.onSend = this.onSend.bind(this);
     this.getLocale = this.getLocale.bind(this);
+
+    this.invertibleScrollViewProps={
+          inverted: true,
+          keyboardShouldPersistTaps: true,
+          onTouchStart: this.onTouchStart,
+          onTouchMove: this.onTouchMove,
+          onTouchEnd: this.onTouchEnd,
+          onKeyboardWillShow: this.onKeyboardWillShow,
+          onKeyboardWillHide: this.onKeyboardWillHide,
+          onKeyboardDidShow: this.onKeyboardDidShow,
+          onKeyboardDidHide: this.onKeyboardDidHide,
+      };
   }
 
   static append(currentMessages = [], messages) {
@@ -257,17 +269,7 @@ class GiftedChat extends Component {
         <MessageContainer
           {...this.props}
 
-          invertibleScrollViewProps={{
-            inverted: true,
-            keyboardShouldPersistTaps: true,
-            onTouchStart: this.onTouchStart,
-            onTouchMove: this.onTouchMove,
-            onTouchEnd: this.onTouchEnd,
-            onKeyboardWillShow: this.onKeyboardWillShow,
-            onKeyboardWillHide: this.onKeyboardWillHide,
-            onKeyboardDidShow: this.onKeyboardDidShow,
-            onKeyboardDidHide: this.onKeyboardDidHide,
-          }}
+          invertibleScrollViewProps={this.invertibleScrollViewProps}
 
           messages={this.getMessages()}
 
@@ -434,7 +436,6 @@ GiftedChat.defaultProps = {
   renderMessage: null,
   renderSend: null,
   renderTime: null,
-  renderFooter: null,
   user: {},
 };
 

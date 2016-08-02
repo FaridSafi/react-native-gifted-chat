@@ -5,6 +5,8 @@ import ReactNative, {
   ListView
 } from 'react-native';
 
+import shallowCompare from 'react-addons-shallow-compare';
+
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
 
 import LoadEarlier from './LoadEarlier';
@@ -16,8 +18,15 @@ export default class MessageContainer extends Component {
   constructor(props) {
     super(props);
 
+    this.renderRow = this.renderRow.bind(this);
+    this.renderFooter = this.renderFooter.bind(this);
+    this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
+    this.renderScrollComponent = this.renderScrollComponent.bind(this);
+
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1.hash !== r2.hash
+      rowHasChanged: (r1, r2) => {
+        return r1.hash !== r2.hash;
+      }
     });
     const messages = props.messages.map(message => ({
       ...message,
@@ -28,7 +37,14 @@ export default class MessageContainer extends Component {
     };
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
+  }
+
   componentWillReceiveProps(nextProps) {
+    if (this.props.messages === nextProps.messages) {
+      return;
+    }
     const messages = nextProps.messages.map(message => ({
       ...message,
       hash: md5(JSON.stringify(message))
@@ -107,13 +123,16 @@ export default class MessageContainer extends Component {
     return (
       <View ref='container' style={{flex:1}}>
         <ListView
-          renderScrollComponent={this.renderScrollComponent.bind(this)}
           enableEmptySections={true}
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow.bind(this)}
-          renderFooter={this.renderLoadEarlier.bind(this)}
-          renderHeader={this.renderFooter.bind(this)}
+          keyboardShouldPersistTaps={true}
           automaticallyAdjustContentInsets={false}
+
+          dataSource={this.state.dataSource}
+
+          renderRow={this.renderRow}
+          renderHeader={this.renderFooter}
+          renderFooter={this.renderLoadEarlier}
+          renderScrollComponent={this.renderScrollComponent}
         />
       </View>
     );
@@ -123,6 +142,7 @@ export default class MessageContainer extends Component {
 MessageContainer.defaultProps = {
   messages: [],
   user: {},
+  renderFooter: null,
   renderMessage: null,
   onLoadEarlier: () => {
   },

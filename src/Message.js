@@ -10,16 +10,17 @@ import Avatar from './Avatar';
 import Bubble from './Bubble';
 import Day from './Day';
 
+import shallowequal from 'shallowequal';
+
 export default class Message extends Component {
   shouldComponentUpdate(nextProps, nextState) {
-    // not implemented yet
-    // if (this.props.currentMessage.status !== nextProps.currentMessage.status) {
-    //   return true;
-    // }
     if (this.props.nextMessage._id !== nextProps.nextMessage._id) {
       return true;
     }
     if (this.props.previousMessage._id !== nextProps.previousMessage._id) {
+      return true;
+    }
+    if (!shallowequal(this.currentMessage, nextProps.currentMessage)) {
       return true;
     }
     return false;

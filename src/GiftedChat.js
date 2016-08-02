@@ -10,7 +10,6 @@ import {
 import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 import moment from 'moment/min/moment-with-locales.min';
-import md5 from 'md5';
 
 import Actions from './Actions';
 import Avatar from './Avatar';
@@ -48,7 +47,6 @@ class GiftedChat extends Component {
     this._isTypingDisabled = false;
     this._locale = 'en';
     this._messages = [];
-    this._messagesHash = null;
 
     this.state = {
       isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -64,6 +62,18 @@ class GiftedChat extends Component {
     this.onType = this.onType.bind(this);
     this.onSend = this.onSend.bind(this);
     this.getLocale = this.getLocale.bind(this);
+
+    this.invertibleScrollViewProps={
+          inverted: true,
+          keyboardShouldPersistTaps: true,
+          onTouchStart: this.onTouchStart,
+          onTouchMove: this.onTouchMove,
+          onTouchEnd: this.onTouchEnd,
+          onKeyboardWillShow: this.onKeyboardWillShow,
+          onKeyboardWillHide: this.onKeyboardWillHide,
+          onKeyboardDidShow: this.onKeyboardDidShow,
+          onKeyboardDidHide: this.onKeyboardDidHide,
+      };
   }
 
   static append(currentMessages = [], messages) {
@@ -123,19 +133,10 @@ class GiftedChat extends Component {
 
   setMessages(messages) {
     this._messages = messages;
-    this.setMessagesHash(md5(JSON.stringify(messages)));
   }
 
   getMessages() {
     return this._messages;
-  }
-
-  setMessagesHash(messagesHash) {
-    this._messagesHash = messagesHash;
-  }
-
-  getMessagesHash() {
-    return this._messagesHash;
   }
 
   setMaxHeight(height) {
@@ -268,20 +269,9 @@ class GiftedChat extends Component {
         <MessageContainer
           {...this.props}
 
-          invertibleScrollViewProps={{
-            inverted: true,
-            keyboardShouldPersistTaps: true,
-            onTouchStart: this.onTouchStart,
-            onTouchMove: this.onTouchMove,
-            onTouchEnd: this.onTouchEnd,
-            onKeyboardWillShow: this.onKeyboardWillShow,
-            onKeyboardWillHide: this.onKeyboardWillHide,
-            onKeyboardDidShow: this.onKeyboardDidShow,
-            onKeyboardDidHide: this.onKeyboardDidHide,
-          }}
+          invertibleScrollViewProps={this.invertibleScrollViewProps}
 
           messages={this.getMessages()}
-          messagesHash={this.getMessagesHash()}
 
           ref={component => this._messageContainerRef = component}
         />

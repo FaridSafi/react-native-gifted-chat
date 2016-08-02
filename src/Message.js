@@ -11,19 +11,6 @@ import Bubble from './Bubble';
 import Day from './Day';
 
 export default class Message extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    // not implemented yet
-    // if (this.props.currentMessage.status !== nextProps.currentMessage.status) {
-    //   return true;
-    // }
-    if (this.props.nextMessage._id !== nextProps.nextMessage._id) {
-      return true;
-    }
-    if (this.props.previousMessage._id !== nextProps.previousMessage._id) {
-      return true;
-    }
-    return false;
-  }
 
   isSameDay(currentMessage = {}, diffMessage = {}) {
     let diff = 0;

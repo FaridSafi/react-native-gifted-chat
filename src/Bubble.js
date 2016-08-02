@@ -33,7 +33,7 @@ export default class Bubble extends Component {
   renderMessageText() {
     if (this.props.currentMessage.text) {
       if (this.props.renderMessageText) {
-        this.props.renderMessageText(this.props);
+        return this.props.renderMessageText(this.props);
       }
       return <MessageText {...this.props}/>;
     }
@@ -43,7 +43,7 @@ export default class Bubble extends Component {
   renderMessageImage() {
     if (this.props.currentMessage.image) {
       if (this.props.renderMessageImage) {
-        this.props.renderMessageImage(this.props);
+        return this.props.renderMessageImage(this.props);
       }
       return <MessageImage {...this.props}/>;
     }

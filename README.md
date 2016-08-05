@@ -12,6 +12,8 @@ The most complete chat UI for React Native (formerly known as Gifted Messenger)
 Add `windowSoftInputMode` in your Android Manifest `android/app/src/main/AndroidManifest.xml`
 ```
 <!-- ... -->
+<activity
+  android:name=".MainActivity"
   android:label="@string/app_name"
   android:windowSoftInputMode="adjustResize" // <!-- add this -->
   android:configChanges="keyboard|keyboardHidden|orientation|screenSize">

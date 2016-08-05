@@ -5,12 +5,11 @@ import {
 } from 'react-native';
 
 import moment from 'moment';
+import shallowequal from 'shallowequal';
 
 import Avatar from './Avatar';
 import Bubble from './Bubble';
 import Day from './Day';
-
-import shallowequal from 'shallowequal';
 
 export default class Message extends Component {
   shouldComponentUpdate(nextProps, nextState) {

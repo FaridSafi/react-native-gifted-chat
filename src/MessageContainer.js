@@ -119,6 +119,7 @@ export default class MessageContainer extends Component {
     const invertibleScrollViewProps = this.props.invertibleScrollViewProps;
     return (
       <InvertibleScrollView
+        {...props}
         {...invertibleScrollViewProps}
         ref={component => this._invertibleScrollViewRef = component}
       />

@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 
 import moment from 'moment';
-import shallowequal from 'shallowequal';
 
 import Avatar from './Avatar';
 import Bubble from './Bubble';

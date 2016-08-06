@@ -275,7 +275,7 @@ class GiftedChat extends Component {
 
           ref={component => this._messageContainerRef = component}
         />
-        {this.renderFooter()}
+        {this.renderChatFooter()}
       </AnimatedView>
     );
   }
@@ -360,12 +360,12 @@ class GiftedChat extends Component {
     );
   }
 
-  renderFooter() {
-    if (this.props.renderFooter) {
+  renderChatFooter() {
+    if (this.props.renderChatFooter) {
       const footerProps = {
         ...this.props,
       };
-      return this.props.renderFooter(footerProps);
+      return this.props.renderChatFooter(footerProps);
     }
     return null;
   }
@@ -438,6 +438,7 @@ GiftedChat.defaultProps = {
   renderAvatar: null,
   renderBubble: null,
   renderFooter: null,
+  renderChatFooter: null,
   renderMessageText: null,
   renderMessageImage: null,
   renderComposer: null,

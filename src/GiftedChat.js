@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 import {
   Animated,
   InteractionManager,
@@ -63,17 +63,17 @@ class GiftedChat extends Component {
     this.onSend = this.onSend.bind(this);
     this.getLocale = this.getLocale.bind(this);
 
-    this.invertibleScrollViewProps={
-          inverted: true,
-          keyboardShouldPersistTaps: true,
-          onTouchStart: this.onTouchStart,
-          onTouchMove: this.onTouchMove,
-          onTouchEnd: this.onTouchEnd,
-          onKeyboardWillShow: this.onKeyboardWillShow,
-          onKeyboardWillHide: this.onKeyboardWillHide,
-          onKeyboardDidShow: this.onKeyboardDidShow,
-          onKeyboardDidHide: this.onKeyboardDidHide,
-      };
+    this.invertibleScrollViewProps = {
+      inverted: true,
+      keyboardShouldPersistTaps: true,
+      onTouchStart: this.onTouchStart,
+      onTouchMove: this.onTouchMove,
+      onTouchEnd: this.onTouchEnd,
+      onKeyboardWillShow: this.onKeyboardWillShow,
+      onKeyboardWillHide: this.onKeyboardWillHide,
+      onKeyboardDidShow: this.onKeyboardDidShow,
+      onKeyboardDidHide: this.onKeyboardDidHide,
+    };
   }
 
   static append(currentMessages = [], messages) {
@@ -412,9 +412,11 @@ GiftedChat.childContextTypes = {
 
 GiftedChat.defaultProps = {
   messages: [],
-  onSend: () => {},
+  onSend: () => {
+  },
   loadEarlier: false,
-  onLoadEarlier: () => {},
+  onLoadEarlier: () => {
+  },
   locale: null,
   isAnimated: Platform.select({
     ios: true,

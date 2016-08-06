@@ -24,16 +24,25 @@ export default class MessageContainer extends Component {
     this.renderScrollComponent = this.renderScrollComponent.bind(this);
 
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => {
-        return r1.hash !== r2.hash;
-      }
+      rowHasChanged: (r1, r2) => r1.hash !== r2.hash
     });
-    const messages = props.messages.map(message => ({
-      ...message,
-      hash: md5(JSON.stringify(message))
-    }));
+
+    const messagesData = this.prepareMessages(props.messages);
     this.state = {
-      dataSource: dataSource.cloneWithRows(messages)
+      dataSource: dataSource.cloneWithRows(messagesData.blob, messagesData.keys)
+    };
+  }
+
+  prepareMessages(messages) {
+    return {
+      keys: messages.map(m => m._id),
+      blob: messages.reduce((o, m) => {
+        o[m._id] = {
+          ...m,
+          hash: md5(JSON.stringify(m))
+        };
+        return o;
+      }, {})
     };
   }
 
@@ -45,12 +54,9 @@ export default class MessageContainer extends Component {
     if (this.props.messages === nextProps.messages) {
       return;
     }
-    const messages = nextProps.messages.map(message => ({
-      ...message,
-      hash: md5(JSON.stringify(message))
-    }));
+    const messagesData = this.prepareMessages(nextProps.messages);
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(messages)
+      dataSource: this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys)
     });
   }
 
@@ -126,6 +132,8 @@ export default class MessageContainer extends Component {
           enableEmptySections={true}
           keyboardShouldPersistTaps={true}
           automaticallyAdjustContentInsets={false}
+          initialListSize={20}
+          pageSize={20}
 
           dataSource={this.state.dataSource}
 

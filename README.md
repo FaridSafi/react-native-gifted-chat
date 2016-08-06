@@ -9,7 +9,7 @@ The most complete chat UI for React Native (formerly known as Gifted Messenger)
 `npm install react-native-gifted-chat --save`
 
 ## Android installation
-Add `windowSoftInputMode` in your Android Manifest `android/app/src/main/AndroidManifest.xml`
+Add `android:windowSoftInputMode="adjustResize"` to your Android Manifest `android/app/src/main/AndroidManifest.xml`
 ```xml
 <!-- ... -->
 <activity
@@ -83,10 +83,9 @@ See [example/App.js](example/App.js)
     avatar: 'https://facebook.github.io/react/img/logo_og.png',
   },
   image: 'https://facebook.github.io/react/img/logo_og.png',
-  // custom params
+  // additional custom parameters
 }
 ```
-
 
 ## Props
 
@@ -116,8 +115,7 @@ See [example/App.js](example/App.js)
 
 
 ## Features
-- Custom styles
-- Custom actions
+- Custom components
 - Multiline TextInput
 - Load earlier messages
 - Avatar as initials

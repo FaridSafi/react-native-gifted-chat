@@ -16,13 +16,14 @@ export default class Example extends Component {
     this.state = {
       messages: [],
       loadEarlier: true,
-      footer: null,
+      isTyping: null,
     };
 
     this.onSend = this.onSend.bind(this);
     this.onReceive = this.onReceive.bind(this);
     this.renderCustomActions = this.renderCustomActions.bind(this);
     this.renderBubble = this.renderBubble.bind(this);
+    this.renderFooter = this.renderFooter.bind(this);
     this.onLoadEarlier = this.onLoadEarlier.bind(this);
 
     this._isAlright = null;
@@ -61,13 +62,7 @@ export default class Example extends Component {
       if ((messages[0].image || messages[0].location) || !this._isAlright) {
         this.setState((previousState) => {
           return {
-            footer: (props) => {
-              return (
-                <View style={styles.footer}>
-                  <Text>React Native is typing...</Text>
-                </View>
-              );
-            },
+            isTyping: 'React Native is typing'
           };
         });
       }
@@ -89,7 +84,7 @@ export default class Example extends Component {
 
       this.setState((previousState) => {
         return {
-          footer: null,
+          isTyping: null,
         };
       });
     }, 1000);
@@ -158,6 +153,19 @@ export default class Example extends Component {
     );
   }
 
+  renderFooter(props) {
+    if (this.state.isTyping) {
+      return (
+        <View style={styles.footerContainer}>
+          <Text style={styles.footerText}>
+            {this.state.isTyping}
+          </Text>
+        </View>
+      );
+    }
+    return null;
+  }
+
   render() {
     return (
       <GiftedChat
@@ -165,7 +173,6 @@ export default class Example extends Component {
         onSend={this.onSend}
         loadEarlier={this.state.loadEarlier}
         onLoadEarlier={this.onLoadEarlier}
-        footer={this.state.footer}
 
         user={{
           _id: 1, // sent messages should have same user._id
@@ -174,13 +181,21 @@ export default class Example extends Component {
         renderActions={this.renderCustomActions}
         renderBubble={this.renderBubble}
         renderCustomView={this.renderCustomView}
+        renderFooter={this.renderFooter}
       />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  footer: {
-    margin: 10,
+  footerContainer: {
+    marginTop: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+  footerText: {
+    fontSize: 14,
+    color: '#aaa',
   },
 });

@@ -33,7 +33,7 @@ export default class Bubble extends Component {
   renderMessageText() {
     if (this.props.currentMessage.text) {
       if (this.props.renderMessageText) {
-        this.props.renderMessageText(this.props);
+        return this.props.renderMessageText(this.props);
       }
       return <MessageText {...this.props}/>;
     }
@@ -43,7 +43,7 @@ export default class Bubble extends Component {
   renderMessageImage() {
     if (this.props.currentMessage.image) {
       if (this.props.renderMessageImage) {
-        this.props.renderMessageImage(this.props);
+        return this.props.renderMessageImage(this.props);
       }
       return <MessageImage {...this.props}/>;
     }
@@ -118,6 +118,8 @@ const styles = {
       borderRadius: 15,
       backgroundColor: '#f0f0f0',
       marginRight: 60,
+      minHeight: 20,
+      justifyContent: 'flex-end',
     },
     containerToNext: {
       borderBottomLeftRadius: 3,
@@ -135,6 +137,8 @@ const styles = {
       borderRadius: 15,
       backgroundColor: '#0084ff',
       marginLeft: 60,
+      minHeight: 20,
+      justifyContent: 'flex-end',
     },
     containerToNext: {
       borderBottomRightRadius: 3,

@@ -24,7 +24,9 @@ export default class MessageContainer extends Component {
     this.renderScrollComponent = this.renderScrollComponent.bind(this);
 
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1.hash !== r2.hash
+      rowHasChanged: (r1, r2) => {
+        return r1.hash !== r2.hash;
+      }
     });
 
     const messagesData = this.prepareMessages(props.messages);
@@ -36,10 +38,16 @@ export default class MessageContainer extends Component {
   prepareMessages(messages) {
     return {
       keys: messages.map(m => m._id),
-      blob: messages.reduce((o, m) => {
+      blob: messages.reduce((o, m, i) => {
+        const previousMessage = messages[i + 1] || {};
+        const nextMessage = messages[i - 1] || {};
+        // add next and previous messages to hash to ensure updates
+        const toHash = JSON.stringify(m) + previousMessage._id + nextMessage._id;
         o[m._id] = {
           ...m,
-          hash: md5(JSON.stringify(m))
+          previousMessage,
+          nextMessage,
+          hash: md5(toHash)
         };
         return o;
       }, {})
@@ -98,14 +106,12 @@ export default class MessageContainer extends Component {
       message.user = {};
     }
 
-    const index = Number(rowId);
-
     const messageProps = {
       ...this.props,
       key: message._id,
       currentMessage: message,
-      previousMessage: this.props.messages[index + 1] || {},
-      nextMessage: this.props.messages[index - 1] || {},
+      previousMessage: message.previousMessage,
+      nextMessage: message.nextMessage,
       position: message.user._id === this.props.user._id ? 'right' : 'left',
     };
 

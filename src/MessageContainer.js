@@ -5,8 +5,7 @@ import ReactNative, {
   ListView
 } from 'react-native';
 
-import shallowCompare from 'react-addons-shallow-compare';
-
+import shallowequal from 'shallowequal';
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
 
 import LoadEarlier from './LoadEarlier';
@@ -55,7 +54,13 @@ export default class MessageContainer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
+    if (!shallowequal(this.props, nextProps)) {
+      return true;
+    }
+    if (!shallowequal(this.state, nextState)) {
+      return true;
+    }
+    return false;
   }
 
   componentWillReceiveProps(nextProps) {

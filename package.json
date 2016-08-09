@@ -43,7 +43,6 @@
     "@exponent/react-native-action-sheet": "git+https://github.com/FaridSafi/react-native-action-sheet.git",
     "md5": "^2.1.0",
     "moment": "^2.13.0",
-    "react-addons-shallow-compare": "^15.2.1",
     "react-native-communications": "^2.0.0",
     "react-native-dismiss-keyboard": "^1.0.0",
     "react-native-invertible-scroll-view": "^1.0.0",

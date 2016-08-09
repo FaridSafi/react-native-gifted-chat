@@ -1,16 +1,81 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
+
+import ReactNative, {
+  View,
+  ListView
+} from 'react-native';
+
+import shallowCompare from 'react-addons-shallow-compare';
 
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
 
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
+import md5 from 'md5';
+
 export default class MessageContainer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.renderRow = this.renderRow.bind(this);
+    this.renderFooter = this.renderFooter.bind(this);
+    this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
+    this.renderScrollComponent = this.renderScrollComponent.bind(this);
+
+    const dataSource = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => {
+        return r1.hash !== r2.hash;
+      }
+    });
+
+    const messagesData = this.prepareMessages(props.messages);
+    this.state = {
+      dataSource: dataSource.cloneWithRows(messagesData.blob, messagesData.keys)
+    };
+  }
+
+  prepareMessages(messages) {
+    return {
+      keys: messages.map(m => m._id),
+      blob: messages.reduce((o, m, i) => {
+        const previousMessage = messages[i + 1] || {};
+        const nextMessage = messages[i - 1] || {};
+        // add next and previous messages to hash to ensure updates
+        const toHash = JSON.stringify(m) + previousMessage._id + nextMessage._id;
+        o[m._id] = {
+          ...m,
+          previousMessage,
+          nextMessage,
+          hash: md5(toHash)
+        };
+        return o;
+      }, {})
+    };
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.messagesHash === nextProps.messagesHash && this.props.loadEarlier === nextProps.loadEarlier) {
-      return false;
+    return shallowCompare(this, nextProps, nextState);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.messages === nextProps.messages) {
+      return;
     }
-    return true;
+    const messagesData = this.prepareMessages(nextProps.messages);
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys)
+    });
+  }
+
+  renderFooter() {
+    if (this.props.renderFooter) {
+      const footerProps = {
+        ...this.props,
+      };
+      return this.props.renderFooter(footerProps);
+    }
+    return null;
   }
 
   renderLoadEarlier() {
@@ -32,37 +97,59 @@ export default class MessageContainer extends Component {
     this._invertibleScrollViewRef.scrollTo(options);
   }
 
-  render() {
+  renderRow(message, sectionId, rowId) {
+    if (!message._id) {
+      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(message));
+    }
+    if (!message.user) {
+      console.warn('GiftedChat: `user` is missing for message', JSON.stringify(message));
+      message.user = {};
+    }
+
+    const messageProps = {
+      ...this.props,
+      key: message._id,
+      currentMessage: message,
+      previousMessage: message.previousMessage,
+      nextMessage: message.nextMessage,
+      position: message.user._id === this.props.user._id ? 'right' : 'left',
+    };
+
+    if (this.props.renderMessage) {
+      return this.props.renderMessage(messageProps);
+    }
+    return <Message {...messageProps}/>;
+  }
+
+  renderScrollComponent(props) {
+    const invertibleScrollViewProps = this.props.invertibleScrollViewProps;
     return (
       <InvertibleScrollView
-        {...this.props.invertibleScrollViewProps}
+        {...props}
+        {...invertibleScrollViewProps}
         ref={component => this._invertibleScrollViewRef = component}
-      >
-        {this.props.messages.map((message, index) => {
-          if (!message._id) {
-            console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(message));
-          }
-          if (!message.user) {
-            console.warn('GiftedChat: `user` is missing for message', JSON.stringify(message));
-            message.user = {};
-          }
+      />
+    );
+  }
 
-          const messageProps = {
-            ...this.props,
-            key: message._id,
-            currentMessage: message,
-            previousMessage: this.props.messages[index + 1] || {},
-            nextMessage: this.props.messages[index - 1] || {},
-            position: message.user._id === this.props.user._id ? 'right' : 'left',
-          };
+  render() {
+    return (
+      <View ref='container' style={{flex:1}}>
+        <ListView
+          enableEmptySections={true}
+          keyboardShouldPersistTaps={true}
+          automaticallyAdjustContentInsets={false}
+          initialListSize={20}
+          pageSize={20}
 
-          if (this.props.renderMessage) {
-            return this.props.renderMessage(messageProps);
-          }
-          return <Message {...messageProps}/>;
-        })}
-        {this.renderLoadEarlier()}
-      </InvertibleScrollView>
+          dataSource={this.state.dataSource}
+
+          renderRow={this.renderRow}
+          renderHeader={this.renderFooter}
+          renderFooter={this.renderLoadEarlier}
+          renderScrollComponent={this.renderScrollComponent}
+        />
+      </View>
     );
   }
 }
@@ -70,6 +157,8 @@ export default class MessageContainer extends Component {
 MessageContainer.defaultProps = {
   messages: [],
   user: {},
+  renderFooter: null,
   renderMessage: null,
-  onLoadEarlier: () => {},
+  onLoadEarlier: () => {
+  },
 };

@@ -5,25 +5,12 @@ import {
 } from 'react-native';
 
 import moment from 'moment';
-import shallowequal from 'shallowequal';
 
 import Avatar from './Avatar';
 import Bubble from './Bubble';
 import Day from './Day';
 
 export default class Message extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.nextMessage._id !== nextProps.nextMessage._id) {
-      return true;
-    }
-    if (this.props.previousMessage._id !== nextProps.previousMessage._id) {
-      return true;
-    }
-    if (!shallowequal(this.currentMessage, nextProps.currentMessage)) {
-      return true;
-    }
-    return false;
-  }
 
   isSameDay(currentMessage = {}, diffMessage = {}) {
     let diff = 0;

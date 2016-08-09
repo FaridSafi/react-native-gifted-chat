@@ -32,15 +32,17 @@ export default class Send extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginBottom: 12,
+    height: 44,
+    justifyContent: 'flex-end',
   },
   text: {
     color: '#0084ff',
     fontWeight: '600',
     fontSize: 17,
     backgroundColor: 'transparent',
+    marginBottom: 12,
+    marginLeft: 10,
+    marginRight: 10,
   },
 });
 

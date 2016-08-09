@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  PixelRatio,
   StyleSheet,
   View,
 } from 'react-native';
@@ -62,7 +61,7 @@ export default class InputToolbar extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    borderTopWidth: 1 / PixelRatio.get(),
+    borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: '#b2b2b2',
     backgroundColor: '#FFFFFF',
   },

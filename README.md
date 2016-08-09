@@ -121,7 +121,7 @@ See [example/App.js](example/App.js)
 - Avatar as initials
 - Touchable links using [react-native-parsed-text](https://github.com/taskrabbit/react-native-parsed-text)
 - Localized dates
-- Copy text message to clipboard
+- Copy text messages to clipboard
 
 
 ## License

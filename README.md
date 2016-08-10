@@ -112,6 +112,7 @@ See [example/App.js](example/App.js)
 - **`renderComposer`** _(Function)_ - render the text input message composer
 - **`renderSend`** _(Function)_ - render the send button
 - **`renderAccessory`** _(Function)_ - renders a second line of actions below the message composer
+- **`bottomOffset`** _(Integer)_ - distance of the chat from the bottom of the screen, useful if you display a tab bar
 
 
 ## Features

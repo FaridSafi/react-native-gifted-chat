@@ -190,7 +190,7 @@ class GiftedChat extends Component {
   onKeyboardWillShow(e) {
     this.setIsTypingDisabled(true);
     this.setKeyboardHeight(e.endCoordinates.height);
-    const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight();
+    const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.props.bottomOffset;
     if (this.props.isAnimated === true) {
       Animated.timing(this.state.messagesContainerHeight, {
         toValue: newMessagesContainerHeight,
@@ -330,7 +330,7 @@ class GiftedChat extends Component {
       return;
     }
     const newComposerHeight = Math.max(MIN_COMPOSER_HEIGHT, Math.min(MAX_COMPOSER_HEIGHT, e.nativeEvent.contentSize.height));
-    const newMessagesContainerHeight = this.getMaxHeight() - this.calculateInputToolbarHeight(newComposerHeight) - this.getKeyboardHeight();
+    const newMessagesContainerHeight = this.getMaxHeight() - this.calculateInputToolbarHeight(newComposerHeight) - this.getKeyboardHeight() + this.props.bottomOffset;
     const newText = e.nativeEvent.text;
     this.setState((previousState) => {
       return {
@@ -393,6 +393,8 @@ class GiftedChat extends Component {
         style={styles.container}
         onLayout={(e) => {
           const layout = e.nativeEvent.layout;
+          console.log('layout');
+          console.log(layout);
           this.setMaxHeight(layout.height);
           InteractionManager.runAfterInteractions(() => {
             this.setState({
@@ -451,6 +453,7 @@ GiftedChat.defaultProps = {
   renderSend: null,
   renderTime: null,
   user: {},
+  bottomOffset: 0,
 };
 
 export {

@@ -393,8 +393,6 @@ class GiftedChat extends Component {
         style={styles.container}
         onLayout={(e) => {
           const layout = e.nativeEvent.layout;
-          console.log('layout');
-          console.log(layout);
           this.setMaxHeight(layout.height);
           InteractionManager.runAfterInteractions(() => {
             this.setState({

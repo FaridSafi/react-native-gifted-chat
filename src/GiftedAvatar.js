@@ -1,7 +1,7 @@
 /*
 **  This component will be published in a separate package
 */
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Image,
   Text,
@@ -13,7 +13,7 @@ import {
 // 3 words name initials
 // handle only alpha numeric chars
 
-class GiftedAvatar extends Component {
+export default class GiftedAvatar extends React.Component {
   setAvatarColor() {
     const userName = this.props.user.name || '';
     const name = userName.toUpperCase().split(' ');
@@ -115,16 +115,6 @@ class GiftedAvatar extends Component {
   }
 }
 
-GiftedAvatar.defaultProps = {
-  user: {
-    name: null,
-    avatar: null,
-  },
-  onPress: null,
-  avatarStyle: {},
-  textStyle: {},
-};
-
 const defaultStyles = {
   avatarStyle: {
     justifyContent: 'center',
@@ -141,4 +131,19 @@ const defaultStyles = {
   },
 };
 
-export default GiftedAvatar;
+GiftedAvatar.defaultProps = {
+  user: {
+    name: null,
+    avatar: null,
+  },
+  onPress: null,
+  avatarStyle: {},
+  textStyle: {},
+};
+
+GiftedAvatar.propTypes = {
+  user: React.PropTypes.object,
+  onPress: React.PropTypes.func,
+  avatarStyle: React.PropTypes.object,
+  textStyle: React.PropTypes.object,
+};

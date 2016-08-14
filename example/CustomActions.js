@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {
   Modal,
   StyleSheet,
@@ -10,7 +10,7 @@ import {
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
 
-export default class CustomActions extends Component {
+export default class CustomActions extends React.Component {
   constructor(props) {
     super(props);
     this._images = [];
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
 });
 
 CustomActions.contextTypes = {
-  actionSheet: PropTypes.func,
+  actionSheet: React.PropTypes.func,
 };
 
 CustomActions.defaultProps = {
@@ -190,4 +190,12 @@ CustomActions.defaultProps = {
   iconStyle: {},
   options: {},
   icon: null,
+};
+
+CustomActions.propTypes = {
+  onSend: React.PropTypes.func,
+  containerStyle: React.PropTypes.object,
+  iconStyle: React.PropTypes.object,
+  options: React.PropTypes.object,
+  icon: React.PropTypes.func,
 };

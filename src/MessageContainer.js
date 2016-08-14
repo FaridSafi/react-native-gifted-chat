@@ -1,19 +1,17 @@
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
 
-import ReactNative, {
+import {
+  ListView,
   View,
-  ListView
 } from 'react-native';
 
 import shallowequal from 'shallowequal';
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
-
+import md5 from 'md5';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
-import md5 from 'md5';
-
-export default class MessageContainer extends Component {
+export default class MessageContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -166,4 +164,12 @@ MessageContainer.defaultProps = {
   renderMessage: null,
   onLoadEarlier: () => {
   },
+};
+
+MessageContainer.propTypes = {
+  messages: React.PropTypes.array,
+  user: React.PropTypes.object,
+  renderFooter: React.PropTypes.func,
+  renderMessage: React.PropTypes.func,
+  onLoadEarlier: React.PropTypes.func,
 };

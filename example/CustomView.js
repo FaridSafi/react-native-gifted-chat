@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Linking,
   MapView,
@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default class CustomView extends Component {
+export default class CustomView extends React.Component {
   render() {
     if (this.props.currentMessage.location) {
       return (
@@ -59,4 +59,10 @@ CustomView.defaultProps = {
   containerStyle: {},
   mapViewStyle: {},
   currentMessage: {},
+};
+
+CustomView.propTypes = {
+  containerStyle: React.PropTypes.object,
+  mapViewStyle: React.PropTypes.object,
+  currentMessage: React.PropTypes.object,
 };

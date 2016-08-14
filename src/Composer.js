@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Platform,
   StyleSheet,
   TextInput,
 } from 'react-native';
 
-export default class Composer extends Component {
+export default class Composer extends React.Component {
   render() {
     return (
       <TextInput
@@ -55,4 +55,14 @@ Composer.defaultProps = {
   placeholder: 'Type a message...',
   placeholderTextColor: '#b2b2b2',
   textInputProps: null,
+};
+
+Composer.propTypes = {
+  textInputStyle: React.PropTypes.object,
+  onChange: React.PropTypes.func,
+  composerHeight: React.PropTypes.number,
+  text: React.PropTypes.string,
+  placeholder: React.PropTypes.string,
+  placeholderTextColor: React.PropTypes.string,
+  textInputProps: React.PropTypes.object,
 };

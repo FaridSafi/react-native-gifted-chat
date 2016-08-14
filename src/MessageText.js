@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {
   Linking,
   StyleSheet,
@@ -8,7 +8,7 @@ import {
 import ParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
 
-export default class MessageText extends Component {
+export default class MessageText extends React.Component {
   constructor(props) {
     super(props);
     this.onUrlPress = this.onUrlPress.bind(this);
@@ -102,7 +102,7 @@ const styles = {
 };
 
 MessageText.contextTypes = {
-  actionSheet: PropTypes.func,
+  actionSheet: React.PropTypes.func,
 };
 
 MessageText.defaultProps = {
@@ -113,4 +113,12 @@ MessageText.defaultProps = {
   currentMessage: {
     text: '',
   },
+};
+
+MessageText.propTypes = {
+  containerStyle: React.PropTypes.object,
+  position: React.PropTypes.oneOf(['left', 'right']),
+  textStyle: React.PropTypes.object,
+  linkStyle: React.PropTypes.object,
+  currentMessage: React.PropTypes.object,
 };

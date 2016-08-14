@@ -1,12 +1,37 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {
+  ActivityIndicator,
+  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-export default class LoadEarlier extends Component {
+export default class LoadEarlier extends React.Component {
+  renderLoading() {
+    if (this.props.isLoadingEarlier === false) {
+      return (
+        <Text style={[styles.text, this.props.textStyle]}>
+          {this.props.label}
+        </Text>
+      );
+    }
+    return (
+      <View>
+        <Text style={[styles.text, this.props.textStyle, {
+            opacity: 0,
+          }]}>
+          {this.props.label}
+        </Text>
+        <ActivityIndicator
+          color='white'
+          size='small'
+          style={[styles.activityIndicator, this.props.activityIndicatorStyle]}
+        />
+      </View>
+    );
+  }
   render() {
     return (
       <TouchableOpacity
@@ -16,11 +41,10 @@ export default class LoadEarlier extends Component {
             this.props.onLoadEarlier();
           }
         }}
+        disabled={this.props.isLoadingEarlier === true}
       >
         <View style={[styles.wrapper, this.props.wrapperStyle]}>
-          <Text style={[styles.text, this.props.textStyle]}>
-            Load earlier messages
-          </Text>
+          {this.renderLoading()}
         </View>
       </TouchableOpacity>
     );
@@ -47,6 +71,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 12,
   },
+  activityIndicator: {
+    marginTop: Platform.select({
+      ios: -14,
+      android: -16,
+    }),
+  }
 });
 
 LoadEarlier.defaultProps = {
@@ -54,4 +84,15 @@ LoadEarlier.defaultProps = {
   wrapperStyle: {},
   textStyle: {},
   onLoadEarlier: () => {},
+  isLoadingEarlier: false,
+  label: 'Load earlier messages',
+};
+
+LoadEarlier.propTypes = {
+  containerStyle: React.PropTypes.object,
+  wrapperStyle: React.PropTypes.object,
+  textStyle: React.PropTypes.object,
+  onLoadEarlier: React.PropTypes.func,
+  isLoadingEarlier: React.PropTypes.bool,
+  label: React.PropTypes.string,
 };

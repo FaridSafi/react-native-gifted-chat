@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -10,7 +10,7 @@ import Avatar from './Avatar';
 import Bubble from './Bubble';
 import Day from './Day';
 
-export default class Message extends Component {
+export default class Message extends React.Component {
 
   isSameDay(currentMessage = {}, diffMessage = {}) {
     let diff = 0;
@@ -74,10 +74,6 @@ export default class Message extends Component {
   }
 
   render() {
-    // if (!this.props.currentMessage.text && !this.props.currentMessage.image && !this.props.renderCustomView) {
-    //   return null;
-    // }
-
     return (
       <View>
         {this.renderDay()}
@@ -124,4 +120,16 @@ Message.defaultProps = {
   nextMessage: {},
   previousMessage: {},
   user: {},
+};
+
+Message.propTypes = {
+  containerStyle: React.PropTypes.object,
+  renderAvatar: React.PropTypes.func,
+  renderBubble: React.PropTypes.func,
+  renderDay: React.PropTypes.func,
+  position: React.PropTypes.oneOf(['left', 'right']),
+  currentMessage: React.PropTypes.object,
+  nextMessage: React.PropTypes.object,
+  previousMessage: React.PropTypes.object,
+  user: React.PropTypes.object,
 };

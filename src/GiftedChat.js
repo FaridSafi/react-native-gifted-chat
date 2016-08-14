@@ -343,7 +343,7 @@ class GiftedChat extends React.Component {
     if(e.nativeEvent && e.nativeEvent.contentSize){
       newComposerHeight = Math.max(MIN_COMPOSER_HEIGHT, Math.min(MAX_COMPOSER_HEIGHT, e.nativeEvent.contentSize.height));
     }else{
-      newComposerHeight = Math.max(MIN_COMPOSER_HEIGHT, MAX_COMPOSER_HEIGHT)
+      newComposerHeight = MIN_COMPOSER_HEIGHT
     }
     
     const newMessagesContainerHeight = this.getMaxHeight() - this.calculateInputToolbarHeight(newComposerHeight) - this.getKeyboardHeight() + this.props.bottomOffset;

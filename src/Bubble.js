@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {
   Clipboard,
   StyleSheet,
@@ -10,7 +10,7 @@ import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
 
-export default class Bubble extends Component {
+export default class Bubble extends React.Component {
   constructor(props) {
     super(props);
     this.onLongPress = this.onLongPress.bind(this);
@@ -150,7 +150,7 @@ const styles = {
 };
 
 Bubble.contextTypes = {
-  actionSheet: PropTypes.func,
+  actionSheet: React.PropTypes.func,
 };
 
 Bubble.defaultProps = {

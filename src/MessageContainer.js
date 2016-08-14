@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
 
 import ReactNative, {
   View,
@@ -13,7 +13,7 @@ import Message from './Message';
 
 import md5 from 'md5';
 
-export default class MessageContainer extends Component {
+export default class MessageContainer extends React.Component {
   constructor(props) {
     super(props);
 

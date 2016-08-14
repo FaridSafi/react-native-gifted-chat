@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 
-export default class Send extends Component {
+export default class Send extends React.Component {
   // shouldComponentUpdate(nextProps, nextState) {
   //   if (this.props.text.trim().length === 0 && nextProps.text.trim().length > 0 || this.props.text.trim().length > 0 && nextProps.text.trim().length === 0) {
   //     return true;
@@ -22,7 +22,7 @@ export default class Send extends Component {
             this.props.onSend({text: this.props.text.trim()}, true);
           }}
         >
-          <Text style={[styles.text, this.props.textStyle]}>{this.props.title}</Text>
+          <Text style={[styles.text, this.props.textStyle]}>{this.props.label}</Text>
         </TouchableOpacity>
       );
     }
@@ -51,5 +51,5 @@ Send.defaultProps = {
   textStyle: {},
   text: '',
   onSend: () => {},
-  title: 'Send',
+  label: 'Send',
 };

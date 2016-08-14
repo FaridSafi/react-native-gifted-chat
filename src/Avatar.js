@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -6,7 +6,7 @@ import {
 
 import GiftedAvatar from './GiftedAvatar';
 
-export default class Avatar extends Component {
+export default class Avatar extends React.Component {
   renderAvatar() {
     if (this.props.renderAvatar) {
       return this.props.renderAvatar(this.props);

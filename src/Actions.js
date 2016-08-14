@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 
-export default class Actions extends Component {
+export default class Actions extends React.Component {
   constructor(props) {
     super(props);
     this.onActionsPress = this.onActionsPress.bind(this);
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 });
 
 Actions.contextTypes = {
-  actionSheet: PropTypes.func,
+  actionSheet: React.PropTypes.func,
 };
 
 Actions.defaultProps = {

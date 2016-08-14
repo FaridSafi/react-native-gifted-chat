@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,7 +7,7 @@ import {
 
 import moment from 'moment/min/moment-with-locales.min';
 
-export default class Day extends Component {
+export default class Day extends React.Component {
   render() {
     if (!this.props.isSameDay(this.props.currentMessage, this.props.previousMessage)) {
       return (
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 });
 
 Day.contextTypes = {
-  getLocale: PropTypes.func,
+  getLocale: React.PropTypes.func,
 };
 
 Day.defaultProps = {

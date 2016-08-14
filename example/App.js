@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Platform,
   StyleSheet,
@@ -10,15 +10,17 @@ import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
 import CustomActions from './CustomActions';
 import CustomView from './CustomView';
 
-export default class Example extends Component {
+export default class Example extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       messages: [],
       loadEarlier: true,
-      isTyping: null,
+      typingText: null,
+      isLoadingEarlier: false,
     };
 
+    this._isMounted = false;
     this.onSend = this.onSend.bind(this);
     this.onReceive = this.onReceive.bind(this);
     this.renderCustomActions = this.renderCustomActions.bind(this);
@@ -30,6 +32,7 @@ export default class Example extends Component {
   }
 
   componentWillMount() {
+    this._isMounted = true;
     this.setState(() => {
       return {
         messages: require('./data/messages.js'),
@@ -37,13 +40,28 @@ export default class Example extends Component {
     });
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   onLoadEarlier() {
     this.setState((previousState) => {
       return {
-        messages: GiftedChat.prepend(previousState.messages, require('./data/old_messages.js')),
-        loadEarlier: false,
+        isLoadingEarlier: true,
       };
     });
+
+    setTimeout(() => {
+      if (this._isMounted === true) {
+        this.setState((previousState) => {
+          return {
+            messages: GiftedChat.prepend(previousState.messages, require('./data/old_messages.js')),
+            loadEarlier: false,
+            isLoadingEarlier: false,
+          };
+        });
+      }
+    }, 1000); // simulating network
   }
 
   onSend(messages = []) {
@@ -62,29 +80,31 @@ export default class Example extends Component {
       if ((messages[0].image || messages[0].location) || !this._isAlright) {
         this.setState((previousState) => {
           return {
-            isTyping: 'React Native is typing'
+            typingText: 'React Native is typing'
           };
         });
       }
     }
 
     setTimeout(() => {
-      if (messages.length > 0) {
-        if (messages[0].image) {
-          this.onReceive('Nice picture!');
-        } else if (messages[0].location) {
-          this.onReceive('My favorite place');
-        } else {
-          if (!this._isAlright) {
-            this._isAlright = true;
-            this.onReceive('Alright');
+      if (this._isMounted === true) {
+        if (messages.length > 0) {
+          if (messages[0].image) {
+            this.onReceive('Nice picture!');
+          } else if (messages[0].location) {
+            this.onReceive('My favorite place');
+          } else {
+            if (!this._isAlright) {
+              this._isAlright = true;
+              this.onReceive('Alright');
+            }
           }
         }
       }
 
       this.setState((previousState) => {
         return {
-          isTyping: null,
+          typingText: null,
         };
       });
     }, 1000);
@@ -154,11 +174,11 @@ export default class Example extends Component {
   }
 
   renderFooter(props) {
-    if (this.state.isTyping) {
+    if (this.state.typingText) {
       return (
         <View style={styles.footerContainer}>
           <Text style={styles.footerText}>
-            {this.state.isTyping}
+            {this.state.typingText}
           </Text>
         </View>
       );
@@ -173,6 +193,7 @@ export default class Example extends Component {
         onSend={this.onSend}
         loadEarlier={this.state.loadEarlier}
         onLoadEarlier={this.onLoadEarlier}
+        isLoadingEarlier={this.state.isLoadingEarlier}
 
         user={{
           _id: 1, // sent messages should have same user._id

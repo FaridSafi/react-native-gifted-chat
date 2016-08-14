@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
 import {
   Animated,
   InteractionManager,
@@ -35,7 +35,7 @@ const MIN_COMPOSER_HEIGHT = Platform.select({
 const MAX_COMPOSER_HEIGHT = 100;
 const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
-class GiftedChat extends Component {
+class GiftedChat extends React.Component {
   constructor(props) {
     super(props);
 
@@ -417,8 +417,8 @@ const styles = StyleSheet.create({
 });
 
 GiftedChat.childContextTypes = {
-  actionSheet: PropTypes.func,
-  getLocale: PropTypes.func,
+  actionSheet: React.PropTypes.func,
+  getLocale: React.PropTypes.func,
 };
 
 GiftedChat.defaultProps = {
@@ -452,6 +452,7 @@ GiftedChat.defaultProps = {
   renderTime: null,
   user: {},
   bottomOffset: 0,
+  isLoadingEarlier: false,
 };
 
 export {

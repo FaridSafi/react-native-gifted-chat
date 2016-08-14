@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,7 +7,7 @@ import {
 
 import moment from 'moment/min/moment-with-locales.min';
 
-export default class Time extends Component {
+export default class Time extends React.Component {
   render() {
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
@@ -53,7 +53,7 @@ const styles = {
 };
 
 Time.contextTypes = {
-  getLocale: PropTypes.func,
+  getLocale: React.PropTypes.func,
 };
 
 Time.defaultProps = {

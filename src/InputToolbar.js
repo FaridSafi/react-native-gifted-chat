@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -7,7 +7,7 @@ import {
 import Composer from './Composer';
 import Send from './Send';
 
-export default class InputToolbar extends Component {
+export default class InputToolbar extends React.Component {
   renderActions() {
     if (this.props.renderActions) {
       return this.props.renderActions(this.props);

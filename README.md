@@ -5,7 +5,7 @@ The most complete chat UI for React Native (formerly known as Gifted Messenger)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png)
 
 ## Dependency
-- React Native minimum version supported 0.29.0
+React Native minimum version `0.29.0`
 
 ## Installation
 `npm install react-native-gifted-chat --save`
@@ -21,6 +21,11 @@ Add `android:windowSoftInputMode="adjustResize"` to your Android Manifest `andro
   android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
 <!-- ... -->
 ```
+
+## Changelog
+### 0.0.7
+- New prop `isLoadingEarlier`
+- `title` prop of `Send` component has been renamed to `label`
 
 ## Example
 ```jsx
@@ -98,6 +103,7 @@ See [example/App.js](example/App.js)
 - **`isAnimated`** _(Bool)_ - animates the view when the keyboard appears
 - **`loadEarlier`** _(Bool)_ - enables the load earlier message button
 - **`onLoadEarlier`** _(Function)_ - function to call when loading earlier messages
+- **`isLoadingEarlier`** _(Bool)_ - display an ActivityIndicator when loading earlier messages
 - **`renderLoading`** _(Function)_ - render a loading view when initializing
 - **`renderLoadEarlier`** _(Function)_ - render the load earlier button
 - **`renderAvatar`** _(Function)_ - renders the message avatar

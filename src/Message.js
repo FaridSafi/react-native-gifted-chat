@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -10,7 +10,7 @@ import Avatar from './Avatar';
 import Bubble from './Bubble';
 import Day from './Day';
 
-export default class Message extends Component {
+export default class Message extends React.Component {
 
   isSameDay(currentMessage = {}, diffMessage = {}) {
     let diff = 0;

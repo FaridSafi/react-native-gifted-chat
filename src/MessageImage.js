@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Image,
   StyleSheet,
   View,
 } from 'react-native';
 
-export default class MessageImage extends Component {
+export default class MessageImage extends React.Component {
   render() {
     return (
       <View style={[styles.container, this.props.containerStyle]}>

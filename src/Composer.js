@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Platform,
   StyleSheet,
   TextInput,
 } from 'react-native';
 
-export default class Composer extends Component {
+export default class Composer extends React.Component {
   render() {
     return (
       <TextInput

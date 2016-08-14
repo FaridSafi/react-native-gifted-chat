@@ -114,3 +114,11 @@ MessageText.defaultProps = {
     text: '',
   },
 };
+
+MessageText.propTypes = {
+  containerStyle: React.PropTypes.object,
+  position: React.PropTypes.oneOf(['left', 'right']),
+  textStyle: React.PropTypes.object,
+  linkStyle: React.PropTypes.object,
+  currentMessage: React.PropTypes.object,
+};

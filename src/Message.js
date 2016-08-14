@@ -74,10 +74,6 @@ export default class Message extends React.Component {
   }
 
   render() {
-    // if (!this.props.currentMessage.text && !this.props.currentMessage.image && !this.props.renderCustomView) {
-    //   return null;
-    // }
-
     return (
       <View>
         {this.renderDay()}
@@ -124,4 +120,16 @@ Message.defaultProps = {
   nextMessage: {},
   previousMessage: {},
   user: {},
+};
+
+Message.propTypes = {
+  containerStyle: React.PropTypes.object,
+  renderAvatar: React.PropTypes.func,
+  renderBubble: React.PropTypes.func,
+  renderDay: React.PropTypes.func,
+  position: React.PropTypes.oneOf(['left', 'right']),
+  currentMessage: React.PropTypes.object,
+  nextMessage: React.PropTypes.object,
+  previousMessage: React.PropTypes.object,
+  user: React.PropTypes.object,
 };

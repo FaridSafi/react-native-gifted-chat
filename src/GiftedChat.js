@@ -455,6 +455,35 @@ GiftedChat.defaultProps = {
   isLoadingEarlier: false,
 };
 
+GiftedChat.propTypes = {
+  messages: React.PropTypes.array,
+  onSend: React.PropTypes.func,
+  loadEarlier: React.PropTypes.bool,
+  onLoadEarlier: React.PropTypes.func,
+  locale: React.PropTypes.string,
+  isAnimated: React.PropTypes.bool,
+  renderAccessory: React.PropTypes.func,
+  renderActions: React.PropTypes.func,
+  renderAvatar: React.PropTypes.func,
+  renderBubble: React.PropTypes.func,
+  renderFooter: React.PropTypes.func,
+  renderChatFooter: React.PropTypes.func,
+  renderMessageText: React.PropTypes.func,
+  renderMessageImage: React.PropTypes.func,
+  renderComposer: React.PropTypes.func,
+  renderCustomView: React.PropTypes.func,
+  renderDay: React.PropTypes.func,
+  renderInputToolbar: React.PropTypes.func,
+  renderLoadEarlier: React.PropTypes.func,
+  renderLoading: React.PropTypes.func,
+  renderMessage: React.PropTypes.func,
+  renderSend: React.PropTypes.func,
+  renderTime: React.PropTypes.func,
+  user: React.PropTypes.object,
+  bottomOffset: React.PropTypes.number,
+  isLoadingEarlier: React.PropTypes.bool,
+};
+
 export {
   GiftedChat,
   Actions,

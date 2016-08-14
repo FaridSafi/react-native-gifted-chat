@@ -158,7 +158,6 @@ Bubble.defaultProps = {
   wrapperStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
-
   renderMessageImage: null,
   renderMessageText: null,
   renderCustomView: null,
@@ -173,4 +172,21 @@ Bubble.defaultProps = {
   },
   nextMessage: {},
   previousMessage: {},
+};
+
+Bubble.propTypes = {
+  containerStyle: React.PropTypes.object,
+  wrapperStyle: React.PropTypes.object,
+  containerToNextStyle: React.PropTypes.object,
+  containerToPreviousStyle: React.PropTypes.object,
+  renderMessageImage: React.PropTypes.func,
+  renderMessageText: React.PropTypes.func,
+  renderCustomView: React.PropTypes.func,
+  renderTime: React.PropTypes.func,
+  isSameUser: React.PropTypes.func,
+  isSameDay: React.PropTypes.func,
+  position: React.PropTypes.oneOf(['left', 'right']),
+  currentMessage: React.PropTypes.object,
+  nextMessage: React.PropTypes.object,
+  previousMessage: React.PropTypes.object,
 };

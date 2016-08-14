@@ -64,3 +64,10 @@ Time.defaultProps = {
     createdAt: null,
   },
 };
+
+Time.propTypes = {
+  position: React.PropTypes.oneOf(['left', 'right']),
+  containerStyle: React.PropTypes.object,
+  textStyle: React.PropTypes.object,
+  currentMessage: React.PropTypes.object,
+};

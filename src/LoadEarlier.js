@@ -87,3 +87,12 @@ LoadEarlier.defaultProps = {
   isLoadingEarlier: false,
   label: 'Load earlier messages',
 };
+
+LoadEarlier.propTypes = {
+  containerStyle: React.PropTypes.object,
+  wrapperStyle: React.PropTypes.object,
+  textStyle: React.PropTypes.object,
+  onLoadEarlier: React.PropTypes.func,
+  isLoadingEarlier: React.PropTypes.bool,
+  label: React.PropTypes.string,
+};

@@ -56,3 +56,13 @@ Composer.defaultProps = {
   placeholderTextColor: '#b2b2b2',
   textInputProps: null,
 };
+
+Composer.propTypes = {
+  textInputStyle: React.PropTypes.object,
+  onChange: React.PropTypes.func,
+  composerHeight: React.PropTypes.number,
+  text: React.PropTypes.string,
+  placeholder: React.PropTypes.string,
+  placeholderTextColor: React.PropTypes.string,
+  textInputProps: React.PropTypes.object,
+};

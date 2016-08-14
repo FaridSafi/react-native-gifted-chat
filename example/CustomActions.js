@@ -191,3 +191,11 @@ CustomActions.defaultProps = {
   options: {},
   icon: null,
 };
+
+CustomActions.propTypes = {
+  onSend: React.PropTypes.func,
+  containerStyle: React.PropTypes.object,
+  iconStyle: React.PropTypes.object,
+  options: React.PropTypes.object,
+  icon: React.PropTypes.func,
+};

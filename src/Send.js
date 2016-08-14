@@ -53,3 +53,11 @@ Send.defaultProps = {
   onSend: () => {},
   label: 'Send',
 };
+
+Send.propTypes = {
+  containerStyle: React.PropTypes.object,
+  textStyle: React.PropTypes.object,
+  text: React.PropTypes.string,
+  onSend: React.PropTypes.func,
+  label: React.PropTypes.string,
+};

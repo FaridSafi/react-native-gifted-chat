@@ -62,3 +62,12 @@ Day.defaultProps = {
   },
   previousMessage: {},
 };
+
+Day.propTypes = {
+  containerStyle: React.PropTypes.object,
+  wrapperStyle: React.PropTypes.object,
+  textStyle: React.PropTypes.object,
+  isSameDay: React.PropTypes.func,
+  currentMessage: React.PropTypes.object,
+  previousMessage: React.PropTypes.object,
+};

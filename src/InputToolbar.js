@@ -83,3 +83,13 @@ InputToolbar.defaultProps = {
   renderSend: null,
   renderComposer: null,
 };
+
+InputToolbar.propTypes = {
+  containerStyle: React.PropTypes.object,
+  primaryStyle: React.PropTypes.object,
+  accessoryStyle: React.PropTypes.object,
+  renderAccessory: React.PropTypes.func,
+  renderActions: React.PropTypes.func,
+  renderSend: React.PropTypes.func,
+  renderComposer: React.PropTypes.func,
+};

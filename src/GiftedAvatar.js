@@ -13,7 +13,7 @@ import {
 // 3 words name initials
 // handle only alpha numeric chars
 
-class GiftedAvatar extends React.Component {
+export default class GiftedAvatar extends React.Component {
   setAvatarColor() {
     const userName = this.props.user.name || '';
     const name = userName.toUpperCase().split(' ');
@@ -115,16 +115,6 @@ class GiftedAvatar extends React.Component {
   }
 }
 
-GiftedAvatar.defaultProps = {
-  user: {
-    name: null,
-    avatar: null,
-  },
-  onPress: null,
-  avatarStyle: {},
-  textStyle: {},
-};
-
 const defaultStyles = {
   avatarStyle: {
     justifyContent: 'center',
@@ -141,4 +131,19 @@ const defaultStyles = {
   },
 };
 
-export default GiftedAvatar;
+GiftedAvatar.defaultProps = {
+  user: {
+    name: null,
+    avatar: null,
+  },
+  onPress: null,
+  avatarStyle: {},
+  textStyle: {},
+};
+
+GiftedAvatar.propTypes = {
+  user: React.PropTypes.object,
+  onPress: React.PropTypes.func,
+  avatarStyle: React.PropTypes.object,
+  textStyle: React.PropTypes.object,
+};

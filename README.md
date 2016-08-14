@@ -26,6 +26,7 @@ Add `android:windowSoftInputMode="adjustResize"` to your Android Manifest `andro
 ### 0.0.7
 - New prop `isLoadingEarlier`
 - `title` prop of `Send` component has been renamed to `label`
+- PropTypes checking
 
 ## Example
 ```jsx

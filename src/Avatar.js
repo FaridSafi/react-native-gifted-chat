@@ -71,3 +71,13 @@ Avatar.defaultProps = {
   },
   nextMessage: {},
 };
+
+Avatar.propTypes = {
+  containerStyle: React.PropTypes.object,
+  imageStyle: React.PropTypes.object,
+  isSameDay: React.PropTypes.func,
+  isSameUser: React.PropTypes.func,
+  position: React.PropTypes.oneOf(['left', 'right']),
+  currentMessage: React.PropTypes.object,
+  nextMessage: React.PropTypes.object,
+};

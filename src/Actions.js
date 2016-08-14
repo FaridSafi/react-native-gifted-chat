@@ -95,3 +95,11 @@ Actions.defaultProps = {
   options: {},
   icon: null,
 };
+
+Actions.propTypes = {
+  onSend: React.PropTypes.func,
+  containerStyle: React.PropTypes.object,
+  iconStyle: React.PropTypes.object,
+  options: React.PropTypes.object,
+  icon: React.PropTypes.func,
+};

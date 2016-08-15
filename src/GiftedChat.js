@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
 import {
   Animated,
   InteractionManager,
@@ -35,7 +35,7 @@ const MIN_COMPOSER_HEIGHT = Platform.select({
 const MAX_COMPOSER_HEIGHT = 100;
 const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
-class GiftedChat extends Component {
+class GiftedChat extends React.Component {
   constructor(props) {
     super(props);
 
@@ -45,6 +45,7 @@ class GiftedChat extends Component {
     this._bottomOffset = 0;
     this._maxHeight = null;
     this._touchStarted = false;
+    this._isFirstLayout = true;
     this._isTypingDisabled = false;
     this._locale = 'en';
     this._messages = [];
@@ -162,6 +163,13 @@ class GiftedChat extends Component {
 
   getBottomOffset() {
     return this._bottomOffset;
+
+  setIsFirstLayout(value) {
+    this._isFirstLayout = value;
+  }
+
+  getIsFirstLayout() {
+    return this._isFirstLayout;
   }
 
   setIsTypingDisabled(value) {
@@ -392,7 +400,24 @@ class GiftedChat extends Component {
     if (this.state.isInitialized === true) {
       return (
         <ActionSheet ref={component => this._actionSheetRef = component}>
-          <View style={styles.container}>
+          <View
+            style={styles.container}
+            onLayout={(e) => {
+              if (Platform.OS === 'android') {
+                // fix an issue when keyboard is dismissing during the initialization
+                const layout = e.nativeEvent.layout;
+                if (this.getMaxHeight() !== layout.height && this.getIsFirstLayout() === true) {
+                  this.setMaxHeight(layout.height);
+                  this.setState({
+                    messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
+                  });
+                }
+              }
+              if (this.getIsFirstLayout() === true) {
+                this.setIsFirstLayout(false);
+              }
+            }}
+          >
             {this.renderMessages()}
             {this.renderInputToolbar()}
           </View>
@@ -428,8 +453,8 @@ const styles = StyleSheet.create({
 });
 
 GiftedChat.childContextTypes = {
-  actionSheet: PropTypes.func,
-  getLocale: PropTypes.func,
+  actionSheet: React.PropTypes.func,
+  getLocale: React.PropTypes.func,
 };
 
 GiftedChat.defaultProps = {
@@ -463,6 +488,36 @@ GiftedChat.defaultProps = {
   renderTime: null,
   user: {},
   bottomOffset: 0,
+  isLoadingEarlier: false,
+};
+
+GiftedChat.propTypes = {
+  messages: React.PropTypes.array,
+  onSend: React.PropTypes.func,
+  loadEarlier: React.PropTypes.bool,
+  onLoadEarlier: React.PropTypes.func,
+  locale: React.PropTypes.string,
+  isAnimated: React.PropTypes.bool,
+  renderAccessory: React.PropTypes.func,
+  renderActions: React.PropTypes.func,
+  renderAvatar: React.PropTypes.func,
+  renderBubble: React.PropTypes.func,
+  renderFooter: React.PropTypes.func,
+  renderChatFooter: React.PropTypes.func,
+  renderMessageText: React.PropTypes.func,
+  renderMessageImage: React.PropTypes.func,
+  renderComposer: React.PropTypes.func,
+  renderCustomView: React.PropTypes.func,
+  renderDay: React.PropTypes.func,
+  renderInputToolbar: React.PropTypes.func,
+  renderLoadEarlier: React.PropTypes.func,
+  renderLoading: React.PropTypes.func,
+  renderMessage: React.PropTypes.func,
+  renderSend: React.PropTypes.func,
+  renderTime: React.PropTypes.func,
+  user: React.PropTypes.object,
+  bottomOffset: React.PropTypes.number,
+  isLoadingEarlier: React.PropTypes.bool,
 };
 
 export {

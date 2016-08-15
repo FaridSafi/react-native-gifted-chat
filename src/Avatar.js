@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -6,7 +6,7 @@ import {
 
 import GiftedAvatar from './GiftedAvatar';
 
-export default class Avatar extends Component {
+export default class Avatar extends React.Component {
   renderAvatar() {
     if (this.props.renderAvatar) {
       return this.props.renderAvatar(this.props);
@@ -70,4 +70,14 @@ Avatar.defaultProps = {
     user: null,
   },
   nextMessage: {},
+};
+
+Avatar.propTypes = {
+  containerStyle: React.PropTypes.object,
+  imageStyle: React.PropTypes.object,
+  isSameDay: React.PropTypes.func,
+  isSameUser: React.PropTypes.func,
+  position: React.PropTypes.oneOf(['left', 'right']),
+  currentMessage: React.PropTypes.object,
+  nextMessage: React.PropTypes.object,
 };

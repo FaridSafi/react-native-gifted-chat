@@ -332,10 +332,10 @@ class GiftedChat extends React.Component {
 
   resetInputToolbar() {
     if (this.textInput) {
-      this.clear = this.state.text;
       this.textInput.clear();
     }
     this.setState({
+      text: '',
       composerHeight: MIN_COMPOSER_HEIGHT,
       messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight() - this.getKeyboardHeight() + this.props.bottomOffset),
     });
@@ -358,13 +358,6 @@ class GiftedChat extends React.Component {
     if (this.getIsTypingDisabled()) {
       return;
     }
-    if (this.clear) {
-      text = text.substring(this.clear.length);
-      this.clear = null;
-      if (text) {
-        text = text[0].toUpperCase() + text.substring(1);
-      }
-    }
     this.setState({text});
   }
 
@@ -381,7 +374,9 @@ class GiftedChat extends React.Component {
         ref: textInput => this.textInput = textInput
       }
     };
-
+    if (this.getIsTypingDisabled()) {
+      inputToolbarProps.textInputProps.maxLength = 0;
+    }
     if (this.props.renderInputToolbar) {
       return this.props.renderInputToolbar(inputToolbarProps);
     }

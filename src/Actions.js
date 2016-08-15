@@ -18,6 +18,7 @@ export default class Actions extends React.Component {
     this.context.actionSheet().showActionSheetWithOptions({
       options,
       cancelButtonIndex,
+      tintColor: this.props.optionTintColor
     },
     (buttonIndex) => {
       let i = 0;
@@ -93,6 +94,7 @@ Actions.defaultProps = {
   containerStyle: {},
   iconStyle: {},
   options: {},
+  optionTintColor: 'blue',
   icon: null,
 };
 
@@ -101,5 +103,6 @@ Actions.propTypes = {
   containerStyle: React.PropTypes.object,
   iconStyle: React.PropTypes.object,
   options: React.PropTypes.object,
+  optionTintColor: React.PropTypes.string,
   icon: React.PropTypes.func,
 };

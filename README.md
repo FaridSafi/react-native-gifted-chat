@@ -11,7 +11,7 @@ React Native minimum version `0.29.0`
 `npm install react-native-gifted-chat --save`
 
 ## Android installation
-Add `android:windowSoftInputMode="adjustResize"` to your Android Manifest `android/app/src/main/AndroidManifest.xml`
+- Add `android:windowSoftInputMode="adjustResize"` to your Android Manifest `android/app/src/main/AndroidManifest.xml`
 ```xml
 <!-- ... -->
 <activity
@@ -21,6 +21,8 @@ Add `android:windowSoftInputMode="adjustResize"` to your Android Manifest `andro
   android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
 <!-- ... -->
 ```
+
+- If you plan to use `GiftedChat` inside a `Modal`, check [#200](https://github.com/FaridSafi/react-native-gifted-chat/issues/200)
 
 ## Changelog
 ### 0.0.7

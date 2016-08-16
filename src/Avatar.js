@@ -9,7 +9,8 @@ import GiftedAvatar from './GiftedAvatar';
 export default class Avatar extends React.Component {
   renderAvatar() {
     if (this.props.renderAvatar) {
-      return this.props.renderAvatar(this.props);
+      const {renderAvatar, ...avatarProps} = this.props;
+      return this.props.renderAvatar(avatarProps);
     }
     return (
       <GiftedAvatar

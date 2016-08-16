@@ -36,8 +36,9 @@ export default class Message extends React.Component {
 
   renderDay() {
     if (this.props.currentMessage.createdAt) {
+      const {containerStyle, ...other} = this.props;
       const dayProps = {
-        ...this.props,
+        ...other,
         isSameUser: this.isSameUser,
         isSameDay: this.isSameDay,
       };
@@ -50,8 +51,9 @@ export default class Message extends React.Component {
   }
 
   renderBubble() {
+    const {containerStyle, ...other} = this.props;
     const bubbleProps = {
-      ...this.props,
+      ...other,
       isSameUser: this.isSameUser,
       isSameDay: this.isSameDay,
     };
@@ -63,11 +65,13 @@ export default class Message extends React.Component {
 
   renderAvatar() {
     if (this.props.user._id !== this.props.currentMessage.user._id) {
+      const {containerStyle, ...other} = this.props;
       const avatarProps = {
-        ...this.props,
+        ...other,
         isSameUser: this.isSameUser,
         isSameDay: this.isSameDay,
       };
+
       return <Avatar {...avatarProps}/>;
     }
     return null;

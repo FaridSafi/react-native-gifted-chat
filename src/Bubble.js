@@ -32,30 +32,33 @@ export default class Bubble extends React.Component {
 
   renderMessageText() {
     if (this.props.currentMessage.text) {
+      const {containerStyle, wrapperStyle, ...messageTextProps} = this.props;
       if (this.props.renderMessageText) {
-        return this.props.renderMessageText(this.props);
+        return this.props.renderMessageText(messageTextProps);
       }
-      return <MessageText {...this.props}/>;
+      return <MessageText {...messageTextProps}/>;
     }
     return null;
   }
 
   renderMessageImage() {
     if (this.props.currentMessage.image) {
+      const {containerStyle, wrapperStyle, ...messageImageProps} = this.props;
       if (this.props.renderMessageImage) {
-        return this.props.renderMessageImage(this.props);
+        return this.props.renderMessageImage(messageImageProps);
       }
-      return <MessageImage {...this.props}/>;
+      return <MessageImage {...messageImageProps}/>;
     }
     return null;
   }
 
   renderTime() {
     if (this.props.currentMessage.createdAt) {
+      const {containerStyle, wrapperStyle, ...timeProps} = this.props;
       if (this.props.renderTime) {
-        return this.props.renderTime(this.props);
+        return this.props.renderTime(timeProps);
       }
-      return <Time {...this.props}/>;
+      return <Time {...timeProps}/>;
     }
     return null;
   }

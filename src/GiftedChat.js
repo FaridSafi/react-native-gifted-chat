@@ -338,7 +338,14 @@ class GiftedChat extends React.Component {
     if (this.getIsTypingDisabled() === true) {
       return;
     }
-    const newComposerHeight = Math.max(MIN_COMPOSER_HEIGHT, Math.min(MAX_COMPOSER_HEIGHT, e.nativeEvent.contentSize.height));
+    
+    let newComposerHeight = null
+    if(e.nativeEvent && e.nativeEvent.contentSize){
+      newComposerHeight = Math.max(MIN_COMPOSER_HEIGHT, Math.min(MAX_COMPOSER_HEIGHT, e.nativeEvent.contentSize.height));
+    }else{
+      newComposerHeight = MIN_COMPOSER_HEIGHT
+    }
+    
     const newMessagesContainerHeight = this.getMaxHeight() - this.calculateInputToolbarHeight(newComposerHeight) - this.getKeyboardHeight() + this.props.bottomOffset;
     const newText = e.nativeEvent.text;
     this.setState((previousState) => {

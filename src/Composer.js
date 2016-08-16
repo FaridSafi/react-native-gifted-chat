@@ -11,7 +11,7 @@ export default class Composer extends React.Component {
       <TextInput
         placeholder={this.props.placeholder}
         placeholderTextColor={this.props.placeholderTextColor}
-        multiline={false}
+        multiline={this.props.multiline}
         onChange={(e) => {
           this.props.onChange(e);
         }}

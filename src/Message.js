@@ -68,7 +68,7 @@ export default class Message extends React.Component {
       isSameDay: this.isSameDay,
     };
 
-    if(this.props.renderAvatar){
+    if (this.props.renderAvatar) {
       return this.props.renderAvatar(avatarProps)
     }
 

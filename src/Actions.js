@@ -94,7 +94,7 @@ Actions.defaultProps = {
   containerStyle: {},
   iconStyle: {},
   options: {},
-  optionTintColor: 'blue',
+  optionTintColor: '#007AFF',
   icon: null,
 };
 

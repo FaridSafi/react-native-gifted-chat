@@ -62,17 +62,13 @@ export default class Message extends React.Component {
   }
 
   renderAvatar() {
-    const avatarProps = {
-      ...this.props,
-      isSameUser: this.isSameUser,
-      isSameDay: this.isSameDay,
-    };
-
-    if (this.props.renderAvatar) {
-      return this.props.renderAvatar(avatarProps)
-    }
-
     if (this.props.user._id !== this.props.currentMessage.user._id) {
+      const avatarProps = {
+        ...this.props,
+        isSameUser: this.isSameUser,
+        isSameDay: this.isSameDay,
+      };
+
       return <Avatar {...avatarProps}/>;
     }
     return null;

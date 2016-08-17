@@ -14,6 +14,7 @@ export default class Bubble extends React.Component {
   constructor(props) {
     super(props);
     this.onLongPress = this.onLongPress.bind(this);
+    this.onPress = this.onPress.bind(this);
   }
 
   handleBubbleToNext() {
@@ -91,12 +92,19 @@ export default class Bubble extends React.Component {
     }
   }
 
+  onPress() {
+    if (typeof this.props.onPress === 'function') {
+      this.props.onPress();
+    }
+  }
+
   render() {
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
         <View style={[styles[this.props.position].wrapper, this.props.wrapperStyle[this.props.position], this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
           <TouchableWithoutFeedback
             onLongPress={this.onLongPress}
+            onPress={this.onPress}
           >
             <View>
               {this.renderCustomView()}

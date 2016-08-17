@@ -8,13 +8,22 @@ import {
 import moment from 'moment/min/moment-with-locales.min';
 
 export default class Day extends React.Component {
+  dayFormat() {
+    if( this.props.dayFormat ) {
+      var locale = this.context.getLocale();
+      return this.props.dayFormat[locale] || this.props.dayFormat;
+    } else {
+      return null;
+    }
+  }
+
   render() {
     if (!this.props.isSameDay(this.props.currentMessage, this.props.previousMessage)) {
       return (
         <View style={[styles.container, this.props.containerStyle]}>
           <View style={[styles.wrapper, this.props.wrapperStyle]}>
             <Text style={[styles.text, this.props.textStyle]}>
-              {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('ll').toUpperCase()}
+              {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).calendar(null, this.dayFormat()).toUpperCase()}
             </Text>
           </View>
         </View>
@@ -61,6 +70,14 @@ Day.defaultProps = {
     createdAt: null,
   },
   previousMessage: {},
+  dayFormat: {
+    sameDay: 'll',
+    nextDay: 'll',
+    lastDay: 'll',
+    nextWeek: 'll',
+    lastWeek: 'll',
+    sameElse: 'll',
+  },
 };
 
 Day.propTypes = {
@@ -70,4 +87,5 @@ Day.propTypes = {
   isSameDay: React.PropTypes.func,
   currentMessage: React.PropTypes.object,
   previousMessage: React.PropTypes.object,
+  dayFormat: React.PropTypes.object,
 };

@@ -22,7 +22,7 @@ React Native minimum version `0.29.0`
 <!-- ... -->
 ```
 
-- If you plan to use `GiftedChat` inside a `Modal`, check [#200](https://github.com/FaridSafi/react-native-gifted-chat/issues/200)
+- If you plan to use `GiftedChat` inside a `Modal`, see [#200](https://github.com/FaridSafi/react-native-gifted-chat/issues/200)
 
 ## Changelog
 ### 0.0.7
@@ -32,10 +32,9 @@ React Native minimum version `0.29.0`
 
 ## Example
 ```jsx
-import React, { Component } from 'react';
-import { GiftedChat } from 'react-native-gifted-chat';
+import {GiftedChat} from 'react-native-gifted-chat';
 
-class Example extends Component {
+class Example extends React.Component {
   constructor(props) {
     super(props);
     this.state = {messages: []};
@@ -128,6 +127,7 @@ See [example/App.js](example/App.js)
 
 ## Features
 - Custom components
+- InputToolbar avoiding keyboard
 - Multiline TextInput
 - Load earlier messages
 - Avatar as initials

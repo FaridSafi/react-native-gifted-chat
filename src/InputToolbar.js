@@ -75,21 +75,21 @@ const styles = StyleSheet.create({
 });
 
 InputToolbar.defaultProps = {
-  containerStyle: {},
-  primaryStyle: {},
-  accessoryStyle: {},
   renderAccessory: null,
   renderActions: null,
   renderSend: null,
   renderComposer: null,
+  containerStyle: {},
+  primaryStyle: {},
+  accessoryStyle: {},
 };
 
 InputToolbar.propTypes = {
-  containerStyle: React.PropTypes.object,
-  primaryStyle: React.PropTypes.object,
-  accessoryStyle: React.PropTypes.object,
   renderAccessory: React.PropTypes.func,
   renderActions: React.PropTypes.func,
   renderSend: React.PropTypes.func,
   renderComposer: React.PropTypes.func,
+  containerStyle: View.propTypes.style,
+  primaryStyle: View.propTypes.style,
+  accessoryStyle: View.propTypes.style,
 };

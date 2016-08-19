@@ -162,10 +162,6 @@ Bubble.contextTypes = {
 };
 
 Bubble.defaultProps = {
-  containerStyle: {},
-  wrapperStyle: {},
-  containerToNextStyle: {},
-  containerToPreviousStyle: {},
   touchableProps: {},
   onLongPress: null,
   renderMessageImage: null,
@@ -182,13 +178,13 @@ Bubble.defaultProps = {
   },
   nextMessage: {},
   previousMessage: {},
+  containerStyle: {},
+  wrapperStyle: {},
+  containerToNextStyle: {},
+  containerToPreviousStyle: {},
 };
 
 Bubble.propTypes = {
-  containerStyle: React.PropTypes.object,
-  wrapperStyle: React.PropTypes.object,
-  containerToNextStyle: React.PropTypes.object,
-  containerToPreviousStyle: React.PropTypes.object,
   touchableProps: React.PropTypes.object,
   onLongPress: React.PropTypes.func,
   renderMessageImage: React.PropTypes.func,
@@ -201,4 +197,20 @@ Bubble.propTypes = {
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
   previousMessage: React.PropTypes.object,
+  containerStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
+  wrapperStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
+  containerToNextStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
+  containerToPreviousStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
 };

@@ -47,17 +47,17 @@ const styles = StyleSheet.create({
 });
 
 Send.defaultProps = {
-  containerStyle: {},
-  textStyle: {},
   text: '',
   onSend: () => {},
   label: 'Send',
+  containerStyle: {},
+  textStyle: {},
 };
 
 Send.propTypes = {
-  containerStyle: React.PropTypes.object,
-  textStyle: React.PropTypes.object,
   text: React.PropTypes.string,
   onSend: React.PropTypes.func,
   label: React.PropTypes.string,
+  containerStyle: View.propTypes.style,
+  textStyle: Text.propTypes.style,
 };

@@ -144,6 +144,6 @@ GiftedAvatar.defaultProps = {
 GiftedAvatar.propTypes = {
   user: React.PropTypes.object,
   onPress: React.PropTypes.func,
-  avatarStyle: React.PropTypes.object,
-  textStyle: React.PropTypes.object,
+  avatarStyle: Image.propTypes.style,
+  textStyle: Text.propTypes.style,
 };

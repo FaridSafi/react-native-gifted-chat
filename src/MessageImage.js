@@ -31,15 +31,15 @@ const styles = StyleSheet.create({
 });
 
 MessageImage.defaultProps = {
-  containerStyle: {},
-  imageStyle: {},
   currentMessage: {
     image: null,
   },
+  containerStyle: {},
+  imageStyle: {},
 };
 
 MessageImage.propTypes = {
-  containerStyle: React.PropTypes.object,
-  imageStyle: React.PropTypes.object,
   currentMessage: React.PropTypes.object,
+  containerStyle: View.propTypes.style,
+  imageStyle: Image.propTypes.style,
 };

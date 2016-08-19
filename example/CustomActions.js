@@ -186,16 +186,18 @@ CustomActions.contextTypes = {
 
 CustomActions.defaultProps = {
   onSend: () => {},
-  containerStyle: {},
-  iconStyle: {},
   options: {},
   icon: null,
+  containerStyle: {},
+  wrapperStyle: {},
+  iconTextStyle: {},
 };
 
 CustomActions.propTypes = {
   onSend: React.PropTypes.func,
-  containerStyle: React.PropTypes.object,
-  iconStyle: React.PropTypes.object,
   options: React.PropTypes.object,
   icon: React.PropTypes.func,
+  containerStyle: View.propTypes.style,
+  wrapperStyle: View.propTypes.style,
+  iconTextStyle: Text.propTypes.style,
 };

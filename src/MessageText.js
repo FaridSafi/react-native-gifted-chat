@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Linking,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 
@@ -106,19 +107,28 @@ MessageText.contextTypes = {
 };
 
 MessageText.defaultProps = {
-  containerStyle: {},
   position: 'left',
-  textStyle: {},
-  linkStyle: {},
   currentMessage: {
     text: '',
   },
+  containerStyle: {},
+  textStyle: {},
+  linkStyle: {},
 };
 
 MessageText.propTypes = {
-  containerStyle: React.PropTypes.object,
   position: React.PropTypes.oneOf(['left', 'right']),
-  textStyle: React.PropTypes.object,
-  linkStyle: React.PropTypes.object,
   currentMessage: React.PropTypes.object,
+  containerStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
+  textStyle: React.PropTypes.shape({
+    left: Text.propTypes.style,
+    right: Text.propTypes.style,
+  }),
+  linkStyle: React.PropTypes.shape({
+    left: Text.propTypes.style,
+    right: Text.propTypes.style,
+  }),
 };

@@ -71,23 +71,27 @@ export default class Bubble extends React.Component {
   }
 
   onLongPress() {
-    if (this.props.currentMessage.text) {
-      const options = [
-        'Copy Text',
-        'Cancel',
-      ];
-      const cancelButtonIndex = options.length - 1;
-      this.context.actionSheet().showActionSheetWithOptions({
-        options,
-        cancelButtonIndex,
-      },
-      (buttonIndex) => {
-        switch (buttonIndex) {
-          case 0:
-            Clipboard.setString(this.props.currentMessage.text);
-            break;
-        }
-      });
+    if (this.props.onLongPress) {
+      this.props.onLongPress(this.context);
+    } else {
+      if (this.props.currentMessage.text) {
+        const options = [
+          'Copy Text',
+          'Cancel',
+        ];
+        const cancelButtonIndex = options.length - 1;
+        this.context.actionSheet().showActionSheetWithOptions({
+          options,
+          cancelButtonIndex,
+        },
+        (buttonIndex) => {
+          switch (buttonIndex) {
+            case 0:
+              Clipboard.setString(this.props.currentMessage.text);
+              break;
+          }
+        });
+      }
     }
   }
 
@@ -97,6 +101,7 @@ export default class Bubble extends React.Component {
         <View style={[styles[this.props.position].wrapper, this.props.wrapperStyle[this.props.position], this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
           <TouchableWithoutFeedback
             onLongPress={this.onLongPress}
+            {...this.props.touchableProps}
           >
             <View>
               {this.renderCustomView()}
@@ -157,10 +162,8 @@ Bubble.contextTypes = {
 };
 
 Bubble.defaultProps = {
-  containerStyle: {},
-  wrapperStyle: {},
-  containerToNextStyle: {},
-  containerToPreviousStyle: {},
+  touchableProps: {},
+  onLongPress: null,
   renderMessageImage: null,
   renderMessageText: null,
   renderCustomView: null,
@@ -175,13 +178,15 @@ Bubble.defaultProps = {
   },
   nextMessage: {},
   previousMessage: {},
+  containerStyle: {},
+  wrapperStyle: {},
+  containerToNextStyle: {},
+  containerToPreviousStyle: {},
 };
 
 Bubble.propTypes = {
-  containerStyle: React.PropTypes.object,
-  wrapperStyle: React.PropTypes.object,
-  containerToNextStyle: React.PropTypes.object,
-  containerToPreviousStyle: React.PropTypes.object,
+  touchableProps: React.PropTypes.object,
+  onLongPress: React.PropTypes.func,
   renderMessageImage: React.PropTypes.func,
   renderMessageText: React.PropTypes.func,
   renderCustomView: React.PropTypes.func,
@@ -192,4 +197,20 @@ Bubble.propTypes = {
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
   previousMessage: React.PropTypes.object,
+  containerStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
+  wrapperStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
+  containerToNextStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
+  containerToPreviousStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
 };

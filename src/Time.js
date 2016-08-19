@@ -58,16 +58,22 @@ Time.contextTypes = {
 
 Time.defaultProps = {
   position: 'left',
-  containerStyle: {},
-  textStyle: {},
   currentMessage: {
     createdAt: null,
   },
+  containerStyle: {},
+  textStyle: {},
 };
 
 Time.propTypes = {
   position: React.PropTypes.oneOf(['left', 'right']),
-  containerStyle: React.PropTypes.object,
-  textStyle: React.PropTypes.object,
   currentMessage: React.PropTypes.object,
+  containerStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
+  textStyle: React.PropTypes.shape({
+    left: Text.propTypes.style,
+    right: Text.propTypes.style,
+  }),
 };

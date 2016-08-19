@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Image,
   StyleSheet,
   View,
 } from 'react-native';
@@ -62,8 +63,6 @@ const styles = {
 };
 
 Avatar.defaultProps = {
-  containerStyle: {},
-  imageStyle: {},
   isSameDay: () => {},
   isSameUser: () => {},
   position: 'left',
@@ -71,14 +70,16 @@ Avatar.defaultProps = {
     user: null,
   },
   nextMessage: {},
+  containerStyle: {},
+  imageStyle: {},
 };
 
 Avatar.propTypes = {
-  containerStyle: React.PropTypes.object,
-  imageStyle: React.PropTypes.object,
   isSameDay: React.PropTypes.func,
   isSameUser: React.PropTypes.func,
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
+  containerStyle: View.propTypes.style,
+  imageStyle: React.PropTypes.oneOfType([View.propTypes.style, Image.propTypes.style]),
 };

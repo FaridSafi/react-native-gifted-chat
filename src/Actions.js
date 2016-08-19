@@ -90,16 +90,16 @@ Actions.contextTypes = {
 
 Actions.defaultProps = {
   onSend: () => {},
-  containerStyle: {},
-  iconStyle: {},
   options: {},
   icon: null,
+  containerStyle: {},
+  iconTextStyle: {},
 };
 
 Actions.propTypes = {
   onSend: React.PropTypes.func,
-  containerStyle: React.PropTypes.object,
-  iconStyle: React.PropTypes.object,
   options: React.PropTypes.object,
   icon: React.PropTypes.func,
+  containerStyle: View.propTypes.style,
+  iconTextStyle: Text.propTypes.style,
 };

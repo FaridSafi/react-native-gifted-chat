@@ -115,7 +115,6 @@ const styles = {
 };
 
 Message.defaultProps = {
-  containerStyle: {},
   renderAvatar: null,
   renderBubble: null,
   renderDay: null,
@@ -124,10 +123,10 @@ Message.defaultProps = {
   nextMessage: {},
   previousMessage: {},
   user: {},
+  containerStyle: {},
 };
 
 Message.propTypes = {
-  containerStyle: React.PropTypes.object,
   renderAvatar: React.PropTypes.func,
   renderBubble: React.PropTypes.func,
   renderDay: React.PropTypes.func,
@@ -136,4 +135,8 @@ Message.propTypes = {
   nextMessage: React.PropTypes.object,
   previousMessage: React.PropTypes.object,
   user: React.PropTypes.object,
+  containerStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
 };

@@ -32,7 +32,7 @@ React Native minimum version `0.29.0`
 
 ## Example
 ```jsx
-import {GiftedChat} from 'react-native-gifted-chat';
+import { GiftedChat } from 'react-native-gifted-chat';
 
 class Example extends React.Component {
   constructor(props) {

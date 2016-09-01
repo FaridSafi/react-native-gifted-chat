@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
   TextInput,
 } from 'react-native';
 
-export default class Composer extends React.Component {
+export default class Composer extends Component {
+  componentWillReceiveProps(nextProps) {
+      if (nextProps.text !== this.props.text) {
+          this.refs.input.focus()
+      }
+  }
+
   render() {
+      fakeEvent = {
+          nativeEvent: {
+              contentSize: {
+                  height: 80,
+              },
+              text: this.props.text,
+          }
+      }
     return (
       <TextInput
+        ref="input"
         placeholder={this.props.placeholder}
         placeholderTextColor={this.props.placeholderTextColor}
-        multiline={this.props.multiline}
+        multiline={true}
         onChange={(e) => {
           this.props.onChange(e);
         }}
+        onFocus={() => this.props.onChange(fakeEvent)}
         style={[styles.textInput, this.props.textInputStyle, {
           height: this.props.composerHeight,
         }]}
@@ -45,6 +61,7 @@ const styles = StyleSheet.create({
 });
 
 Composer.defaultProps = {
+  textInputStyle: {},
   onChange: () => {},
   composerHeight: Platform.select({
     ios: 33,
@@ -54,17 +71,4 @@ Composer.defaultProps = {
   placeholder: 'Type a message...',
   placeholderTextColor: '#b2b2b2',
   textInputProps: null,
-  multiline: true,
-  textInputStyle: {},
-};
-
-Composer.propTypes = {
-  onChange: React.PropTypes.func,
-  composerHeight: React.PropTypes.number,
-  text: React.PropTypes.string,
-  placeholder: React.PropTypes.string,
-  placeholderTextColor: React.PropTypes.string,
-  textInputProps: React.PropTypes.object,
-  multiline: React.PropTypes.bool,
-  textInputStyle: TextInput.propTypes.style,
 };

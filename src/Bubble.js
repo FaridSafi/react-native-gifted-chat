@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Text,
   Clipboard,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -50,6 +51,20 @@ export default class Bubble extends React.Component {
       return <MessageImage {...messageImageProps}/>;
     }
     return null;
+  }
+
+  renderTicks() {
+    _renderTick = function(displayTick) {
+      if (displayTick) return <Text style={styles.tick}>✓</Text>;
+    }
+    if (this.props.messageRead || this.props.messageDelivered) {
+      return (
+        <View style={styles.tickView}>
+          {_renderTick(this.props.messageRead)}
+          {_renderTick(this.props.messageDelivered)}
+        </View>
+      )
+    }
   }
 
   renderTime() {
@@ -108,7 +123,10 @@ export default class Bubble extends React.Component {
               {this.renderCustomView()}
               {this.renderMessageImage()}
               {this.renderMessageText()}
-              {this.renderTime()}
+              <View style={styles.bottom}>
+                {this.renderTicks()}
+                {this.renderTime()}
+              </View>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -156,6 +174,18 @@ const styles = {
       borderTopRightRadius: 3,
     },
   }),
+  bottom: {
+    flexDirection: 'row',
+  },
+  tick: {
+    fontSize: 10,
+    backgroundColor: 'transparent',
+    color: 'white'
+  },
+  tickView: {
+    flexDirection: 'row',
+    marginLeft: 10,
+  }
 };
 
 Bubble.contextTypes = {
@@ -183,6 +213,8 @@ Bubble.defaultProps = {
   wrapperStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
+  messageDelivered: false,
+  messageRead: false,
 };
 
 Bubble.propTypes = {
@@ -214,4 +246,6 @@ Bubble.propTypes = {
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),
+  messageDelivered: React.PropTypes.bool,
+  messageRead: React.PropTypes.bool,
 };

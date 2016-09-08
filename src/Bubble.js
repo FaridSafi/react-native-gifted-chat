@@ -57,11 +57,11 @@ export default class Bubble extends React.Component {
     _renderTick = function(displayTick) {
       if (displayTick) return <Text style={styles.tick}>✓</Text>;
     }
-    if (this.props.messageRead || this.props.messageDelivered) {
+    if (this.props.currentMessage.sent || this.props.currentMessage.received) {
       return (
         <View style={styles.tickView}>
-          {_renderTick(this.props.messageRead)}
-          {_renderTick(this.props.messageDelivered)}
+          {_renderTick(this.props.currentMessage.sent)}
+          {_renderTick(this.props.currentMessage.received)}
         </View>
       )
     }
@@ -213,8 +213,6 @@ Bubble.defaultProps = {
   wrapperStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
-  messageDelivered: false,
-  messageRead: false,
 };
 
 Bubble.propTypes = {
@@ -246,6 +244,4 @@ Bubble.propTypes = {
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),
-  messageDelivered: React.PropTypes.bool,
-  messageRead: React.PropTypes.bool,
 };

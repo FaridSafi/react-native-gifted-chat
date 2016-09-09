@@ -54,14 +54,15 @@ export default class Bubble extends React.Component {
   }
 
   renderTicks() {
-    _renderTick = function(displayTick) {
-      if (displayTick) return <Text style={styles.tick}>✓</Text>;
-    }
     if (this.props.currentMessage.sent || this.props.currentMessage.received) {
+      const {currentMessage} = this.props;
+      if (this.props.renderTicks) {
+        return this.props.renderTicks(currentMessage);
+      }
       return (
         <View style={styles.tickView}>
-          {_renderTick(this.props.currentMessage.sent)}
-          {_renderTick(this.props.currentMessage.received)}
+          {currentMessage.sent && <Text style={styles.tick}>✓</Text>}
+          {currentMessage.received && <Text style={styles.tick}>✓</Text>}
         </View>
       )
     }

@@ -54,11 +54,15 @@ export default class Bubble extends React.Component {
   }
 
   renderTicks() {
-    if (this.props.currentMessage.sent || this.props.currentMessage.received) {
-      const {currentMessage} = this.props;
-      if (this.props.renderTicks) {
+    if (this.props.renderTicks) {
         return this.props.renderTicks(currentMessage);
-      }
+    }
+
+    const {currentMessage} = this.props;
+    if (currentMessage.user._id !== this.props.user._id) {
+        return;
+    }
+    if (currentMessage.sent || currentMessage.received) {
       return (
         <View style={styles.tickView}>
           {currentMessage.sent && <Text style={styles.tick}>✓</Text>}
@@ -125,8 +129,8 @@ export default class Bubble extends React.Component {
               {this.renderMessageImage()}
               {this.renderMessageText()}
               <View style={styles.bottom}>
-                {this.renderTicks()}
                 {this.renderTime()}
+                {this.renderTicks()}
               </View>
             </View>
           </TouchableWithoutFeedback>
@@ -177,15 +181,16 @@ const styles = {
   }),
   bottom: {
     flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   tick: {
     fontSize: 10,
     backgroundColor: 'transparent',
-    color: 'white'
+    color: 'white',
   },
   tickView: {
     flexDirection: 'row',
-    marginLeft: 10,
+    marginRight: 10,
   }
 };
 

@@ -54,11 +54,10 @@ export default class Bubble extends React.Component {
   }
 
   renderTicks() {
+    const {currentMessage} = this.props;
     if (this.props.renderTicks) {
         return this.props.renderTicks(currentMessage);
     }
-
-    const {currentMessage} = this.props;
     if (currentMessage.user._id !== this.props.user._id) {
         return;
     }

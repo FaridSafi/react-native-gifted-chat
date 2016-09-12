@@ -56,10 +56,7 @@ class GiftedMessenger extends Component {
 
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => {
-        if (r1.status !== r2.status) {
-          return true;
-        }
-        return false;
+        return this.props.shouldRerenderMessage(r1, r2);
       },
     });
 
@@ -681,6 +678,7 @@ GiftedMessenger.propTypes = {
   handleUrlPress: React.PropTypes.func,
   hideTextInput: React.PropTypes.bool,
   isLoadingEarlierMessages: React.PropTypes.bool,
+  shouldRerenderMessage: React.PropTypes.func,
   keyboardDismissMode: React.PropTypes.string,
   keyboardShouldPersistTaps: React.PropTypes.bool,
   leftControlBar: React.PropTypes.element,

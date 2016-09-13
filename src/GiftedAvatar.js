@@ -55,7 +55,7 @@ export default class GiftedAvatar extends React.Component {
 
       return (
         <Image
-          source={avatar}
+          source={src}
           style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
         />
       );

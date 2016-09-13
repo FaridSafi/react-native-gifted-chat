@@ -46,12 +46,16 @@ export default class GiftedAvatar extends React.Component {
   }
 
   renderAvatar() {
-    if (typeof this.props.user.avatar === 'function') {
+    var avatar = this.props.user.avatar
+
+    if (avatar === 'function') {
       return this.props.user.avatar();
-    } else if (typeof this.props.user.avatar === 'string') {
+    } else {
+      var src = typeof avatar == 'string' ? {uri: avatar} : avatar;
+
       return (
         <Image
-          source={{uri: this.props.user.avatar}}
+          source={avatar}
           style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
         />
       );

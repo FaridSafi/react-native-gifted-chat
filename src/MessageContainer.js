@@ -143,6 +143,8 @@ export default class MessageContainer extends React.Component {
           automaticallyAdjustContentInsets={false}
           initialListSize={20}
           pageSize={20}
+          onEndReached={this.props.onTopReached}
+          onEndReachedThreshold={1500}
 
           {...this.props.listViewProps}
 

@@ -497,6 +497,7 @@ GiftedChat.defaultProps = {
   user: {},
   bottomOffset: 0,
   isLoadingEarlier: false,
+  onPressImage: null
 };
 
 GiftedChat.propTypes = {
@@ -526,6 +527,7 @@ GiftedChat.propTypes = {
   user: React.PropTypes.object,
   bottomOffset: React.PropTypes.number,
   isLoadingEarlier: React.PropTypes.bool,
+  onPressImage: React.PropTypes.func
 };
 
 export {

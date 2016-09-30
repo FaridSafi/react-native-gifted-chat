@@ -81,5 +81,8 @@ Avatar.propTypes = {
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
   containerStyle: View.propTypes.style,
-  imageStyle: React.PropTypes.oneOfType([View.propTypes.style, Image.propTypes.style]),
+  imageStyle: React.PropTypes.shape({
+    left: React.PropTypes.oneOfType([View.propTypes.style, Image.propTypes.style]),
+    right: React.PropTypes.oneOfType([View.propTypes.style, Image.propTypes.style]),
+  }),
 };

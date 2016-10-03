@@ -1,6 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
-import GiftedSpinner from 'react-native-gifted-spinner';
+import {
+  View,
+  Text,
+  TouchableHighlight,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 
 const styles = StyleSheet.create({
   errorButtonContainer: {
@@ -50,7 +55,7 @@ export default class ErrorButton extends React.Component {
             borderRadius: 0,
           }]}
         >
-          <GiftedSpinner />
+          <ActivityIndicator />
         </View>
       );
     }

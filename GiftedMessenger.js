@@ -19,6 +19,10 @@ import {setLocale} from './Locale';
 import deepEqual from 'deep-equal';
 import Button from 'react-native-button';
 import merge from 'lodash/merge';
+import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
+
+const textInputContainerHeight = 44;
+const textHeightOffset = 6;
 
 class GiftedMessenger extends Component {
 
@@ -87,13 +91,12 @@ class GiftedMessenger extends Component {
         paddingRight: 10,
       },
       textInput: {
-        alignSelf: 'center',
-        height: 30,
+        alignSelf: 'flex-end',
         width: 100,
         backgroundColor: '#FFF',
         flex: 1,
-        padding: 0,
-        margin: 0,
+        paddingBottom: 4,
+        margin: 5,
         fontSize: 15,
       },
       sendButton: {
@@ -208,6 +211,8 @@ class GiftedMessenger extends Component {
     } else {
       this.onChangeText('');
       this.props.handleSend(message);
+      this.refs.textInput.resetHeightToMin();
+      this.onTextInputHeightChange(0);
     }
     if (Platform.OS === 'android') { // hack to remove autocomplete cache
       this.refs.textInput.setNativeProps({keyboardType:"email-address"});
@@ -561,12 +566,28 @@ class GiftedMessenger extends Component {
     });
   }
 
+  onTextInputHeightChange = (newHeight, oldHeight, changedBy) => {
+    this.listViewMaxHeight = this.props.maxHeight - Math.max(newHeight, textInputContainerHeight);
+
+    setTimeout(() => this.scrollToBottom(true), 200);
+
+    this.setState({
+      height: new Animated.Value(this.listViewMaxHeight),
+      textHeight: newHeight,
+    });
+  }
+
   renderTextInput() {
+
+    const containerStyle = Object.assign({}, this.styles.textInputContainer, {
+      height: this.state.textHeight && this.state.textHeight + textHeightOffset > this.styles.textInputContainer.height ? (this.state.textHeight + textHeightOffset) : this.styles.textInputContainer.height,
+    });
+
     if (this.props.hideTextInput === false) {
       return (
-        <View style={this.styles.textInputContainer}>
+        <View style={containerStyle}>
           {this.props.leftControlBar}
-          <TextInput
+          <AutoGrowingTextInput
             ref={'textInput'}
             testID={'messageInput'}
             style={this.styles.textInput}
@@ -578,8 +599,10 @@ class GiftedMessenger extends Component {
             returnKeyType={this.props.submitOnReturn ? 'send' : 'default'}
             onSubmitEditing={this.props.submitOnReturn ? this.onSend : () => {}}
             enablesReturnKeyAutomatically={true}
-
+            multiline
             blurOnSubmit={this.props.blurOnSubmit}
+            onHeightChanged={(newHeight, oldHeight, changedBy) => this.onTextInputHeightChange(newHeight, oldHeight, changedBy)}
+            maxHeight={500}
           />
           {this.renderSendButton()}
           </View>

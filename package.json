@@ -32,6 +32,7 @@
     "deep-equal": "^1.0.1",
     "lodash": "^4.13.1",
     "moment": "^2.10.6",
+    "react-native-autogrow-textinput": "^2.1.0",
     "react-native-button": "^1.5.0",
     "react-native-gifted-spinner": "^0.0.4",
     "react-native-parsed-text": "0.0.12"

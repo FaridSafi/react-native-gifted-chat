@@ -24,6 +24,7 @@ import Message from './Message';
 import MessageContainer from './MessageContainer';
 import Send from './Send';
 import Time from './Time';
+import GiftedAvatar from './GiftedAvatar';
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for Composer auto grow and ScrollView animation
@@ -542,4 +543,5 @@ export {
   Message,
   Send,
   Time,
+  GiftedAvatar,
 };

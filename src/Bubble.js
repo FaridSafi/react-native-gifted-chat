@@ -64,8 +64,8 @@ export default class Bubble extends React.Component {
     if (currentMessage.sent || currentMessage.received) {
       return (
         <View style={styles.tickView}>
-          {currentMessage.sent && <Text style={styles.tick}>✓</Text>}
-          {currentMessage.received && <Text style={styles.tick}>✓</Text>}
+          {currentMessage.sent && <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
+          {currentMessage.received && <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
         </View>
       )
     }
@@ -216,6 +216,7 @@ Bubble.defaultProps = {
   previousMessage: {},
   containerStyle: {},
   wrapperStyle: {},
+  tickStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
 };
@@ -241,6 +242,7 @@ Bubble.propTypes = {
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),
+  tickStyle: Text.propTypes.style,
   containerToNextStyle: React.PropTypes.shape({
     left: View.propTypes.style,
     right: View.propTypes.style,

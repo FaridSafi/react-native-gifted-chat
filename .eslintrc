@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    "react",
+    "react-native"
+  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures" : {
+      experimentalObjectRestSpread: true
+    }
+  },
+  "env": {
+    "node": true
+  }
+}

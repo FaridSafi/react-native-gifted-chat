@@ -1,0 +1,20 @@
+{
+  "name": "GiftedChat",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh",
+    "sync": "rm -rf ./node_modules/react-native-gifted-chat; sane '/usr/bin/rsync -v -a --exclude .git --exclude example --exclude __tests__ --exclude node_modules ../ ./node_modules/react-native-gifted-chat/' .. --glob='{**/*.json,**/*.js}'"
+  },
+  "dependencies": {
+    "react": "15.2.1",
+    "react-native": "^0.30.0",
+    "react-native-camera-roll-picker": "^1.1.7",
+    "react-native-gifted-chat": "file:../",
+    "react-native-nav": "^1.1.4"
+  },
+  "devDependencies": {
+    "babel-preset-react-native": "^1.9.0",
+    "sane": "^1.4.0"
+  }
+}

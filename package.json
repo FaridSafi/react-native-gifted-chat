@@ -1,45 +1,41 @@
 {
-  "name": "react-native-gifted-messenger",
-  "version": "0.1.4",
-  "description": "Chat UI for iOS and Android React-Native apps",
-  "main": "GiftedMessenger.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "name": "react-native-gifted-chat",
+  "version": "0.0.10",
+  "description": "The most complete chat UI for React Native",
+  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FaridSafi/react-native-gifted-messenger.git"
-  },
-  "author": {
-    "name": "Farid from Safi"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/FaridSafi/react-native-gifted-messenger/issues"
+    "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
   },
   "keywords": [
-    "chat",
-    "message",
-    "messenger",
-    "react-component",
-    "react",
-    "react-native",
+    "android",
     "ios",
-    "android"
+    "react-native",
+    "react",
+    "react-component",
+    "messenger",
+    "message",
+    "chat"
   ],
-  "homepage": "https://github.com/FaridSafi/react-native-gifted-messenger#readme",
-  "dependencies": {
-    "deep-equal": "^1.0.1",
-    "lodash": "^4.13.1",
-    "moment": "^2.10.6",
-    "react-native-autogrow-textinput": "^2.1.0",
-    "react-native-button": "^1.5.0",
-    "react-native-parsed-text": "0.0.12"
+  "author": "Farid Safi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FaridSafi/react-native-gifted-chat/issues"
   },
+  "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
   "devDependencies": {
-    "eslint": "^2.7.0",
-    "eslint-config-airbnb": "^7.0.0",
-    "eslint-plugin-react": "^4.3.0",
-    "eslint-plugin-jsx-a11y": "^0.6.2"
+    "eslint": "^3.2.2",
+    "eslint-plugin-react": "^6.0.0",
+    "eslint-plugin-react-native": "^2.0.0"
+  },
+  "dependencies": {
+    "@exponent/react-native-action-sheet": "git+https://github.com/FaridSafi/react-native-action-sheet.git",
+    "md5": "^2.1.0",
+    "moment": "^2.13.0",
+    "react-native-communications": "^2.1.0",
+    "react-native-dismiss-keyboard": "^1.0.0",
+    "react-native-invertible-scroll-view": "^1.0.0",
+    "react-native-parsed-text": "^0.0.15",
+    "shallowequal": "^0.2.2"
   }
 }

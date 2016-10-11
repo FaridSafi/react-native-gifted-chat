@@ -19,11 +19,12 @@ export default class MessageContainer extends React.Component {
     this.renderFooter = this.renderFooter.bind(this);
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
     this.renderScrollComponent = this.renderScrollComponent.bind(this);
+    this.defaultRowHasChanged = (r1, r2) => {
+      return r1.hash !== r2.hash;
+    };
 
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => {
-        return r1.hash !== r2.hash;
-      }
+      rowHasChanged: this.props.rowHasChanged || this.defaultRowHasChanged
     });
 
     const messagesData = this.prepareMessages(props.messages);

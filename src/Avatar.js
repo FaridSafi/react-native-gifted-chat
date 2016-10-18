@@ -16,7 +16,7 @@ export default class Avatar extends React.Component {
     return (
       <GiftedAvatar
         avatarStyle={StyleSheet.flatten([styles[this.props.position].image, this.props.imageStyle[this.props.position]])}
-        user={this.props.currentMessage.user}
+        user={this.props.currentMessage.user} onPress={this.props.onAvatarPress}
       />
     );
   }
@@ -27,6 +27,7 @@ export default class Avatar extends React.Component {
         <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
           <GiftedAvatar
             avatarStyle={StyleSheet.flatten([styles[this.props.position].image, this.props.imageStyle[this.props.position]])}
+            onPress={this.props.onAvatarPress}
           />
         </View>
       );

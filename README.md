@@ -106,6 +106,7 @@ See [example/App.js](example/App.js)
 - **`renderLoading`** _(Function)_ - render a loading view when initializing
 - **`renderLoadEarlier`** _(Function)_ - render the load earlier button
 - **`renderAvatar`** _(Function)_ - renders the message avatar
+- **`onPressAvatar`** _(Function(`user`))_ - callback when a message avatar is tapped
 - **`renderAvatarOnTop`** _(Bool)_ - render the message avatar, on top of consecutive messages. The default value is `false`.
 - **`renderBubble`** _(Function)_ - render the message bubble
 - **`renderMessage`** _(Function)_ - render the message container

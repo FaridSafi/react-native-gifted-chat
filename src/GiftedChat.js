@@ -329,6 +329,10 @@ class GiftedChat extends React.Component {
         }
       }, 200);
     }
+    if (Platform.OS === 'android' && _.get(this.refs, 'inputToolbar.refs.composer.refs.textInput')) { // hack to remove autocomplete cache
+      this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType:"email-address"});
+      this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType:"default"});
+    }
   }
 
   resetInputToolbar() {
@@ -375,6 +379,7 @@ class GiftedChat extends React.Component {
       composerHeight: Math.max(MIN_COMPOSER_HEIGHT, this.state.composerHeight),
       onChange: this.onType,
       onSend: this.onSend,
+      ref: 'inputToolbar'
     };
 
     if (this.props.renderInputToolbar) {

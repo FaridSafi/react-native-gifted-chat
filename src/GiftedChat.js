@@ -10,6 +10,7 @@ import {
 import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 import moment from 'moment/min/moment-with-locales.min';
+import _ from 'lodash';
 
 import Actions from './Actions';
 import Avatar from './Avatar';

@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@exponent/react-native-action-sheet": "git+https://github.com/FaridSafi/react-native-action-sheet.git",
+    "lodash": "^4.16.4",
     "md5": "^2.1.0",
     "moment": "^2.13.0",
     "react-native-communications": "^2.1.0",

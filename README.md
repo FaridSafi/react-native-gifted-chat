@@ -109,6 +109,7 @@ See [example/App.js](example/App.js)
 - **`onPressAvatar`** _(Function(`user`))_ - callback when a message avatar is tapped
 - **`renderAvatarOnTop`** _(Bool)_ - render the message avatar, on top of consecutive messages. The default value is `false`.
 - **`renderBubble`** _(Function)_ - render the message bubble
+- **`onLongPress`** _(Function(`context`, `message`))_ - callback when a message bubble is long-pressed (default is to show action sheet with "Copy Text"). See code for example using `context.actionSheet().showActionSheetWithOptions()`.
 - **`renderMessage`** _(Function)_ - render the message container
 - **`renderMessageText`** _(Function)_ - render the message text
 - **`renderMessageImage`** _(Function)_ - render the message image

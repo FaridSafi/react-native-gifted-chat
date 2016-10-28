@@ -97,6 +97,7 @@ See [example/App.js](example/App.js)
 - **`user`** _(Object)_ - user sending the messages `{_id, name, avatar}`
 - **`onSend`** _(Function)_ - function to call when sending a message
 - **`locale`** _(String)_ - localize the dates
+- **`timeFormat`** _(String)_ - format for time
 - **`isAnimated`** _(Bool)_ - animates the view when the keyboard appears
 - **`loadEarlier`** _(Bool)_ - enables the load earlier message button
 - **`onLoadEarlier`** _(Function)_ - function to call when loading earlier messages

@@ -152,6 +152,7 @@ export default class MessageContainer extends React.Component {
           renderHeader={this.renderFooter}
           renderFooter={this.renderLoadEarlier}
           renderScrollComponent={this.renderScrollComponent}
+          onChangeVisibleRows={this.props.onChangeVisibleRows}
         />
       </View>
     );

@@ -135,10 +135,20 @@ export default class MessageContainer extends React.Component {
     );
   }
 
+  endReachedProps(){
+    let condProps = {}
+    if (this.props.onTopReached){ condProps.onEndReached = this.props.onTopReached }
+    if (this.props.onTopReachedThreshold){
+      condProps.onEndReachedThreshold = this.props.onTopReachedThreshold
+    }
+    return condProps
+  }
+
   render() {
     return (
       <View ref='container' style={{flex:1}}>
         <ListView
+          {...this.endReachedProps()}
           enableEmptySections={true}
           keyboardShouldPersistTaps={true}
           automaticallyAdjustContentInsets={false}

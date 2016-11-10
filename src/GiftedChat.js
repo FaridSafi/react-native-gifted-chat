@@ -154,7 +154,14 @@ class GiftedChat extends React.Component {
   }
 
   getKeyboardHeight() {
-    return this._keyboardHeight;
+    if (Platform.OS === 'android') {
+      // For android: on-screen keyboard resized main container and has own height.
+      // @see https://developer.android.com/training/keyboard-input/visibility.html
+      // So for calculate the messages container height ignore keyboard height.
+      return 0;
+    } else {
+      return this._keyboardHeight;
+    }
   }
 
   setBottomOffset(value) {
@@ -411,15 +418,13 @@ class GiftedChat extends React.Component {
           <View
             style={styles.container}
             onLayout={(e) => {
-              if (Platform.OS === 'android') {
-                // fix an issue when keyboard is dismissing during the initialization
-                const layout = e.nativeEvent.layout;
-                if (this.getMaxHeight() !== layout.height && this.getIsFirstLayout() === true) {
-                  this.setMaxHeight(layout.height);
-                  this.setState({
-                    messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
-                  });
-                }
+              // fix an issue when keyboard is dismissing during the initialization
+              const layout = e.nativeEvent.layout;
+              if (this.getMaxHeight() !== layout.height || this.getIsFirstLayout() === true) {
+                this.setMaxHeight(layout.height);
+                this.setState({
+                  messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
+                });
               }
               if (this.getIsFirstLayout() === true) {
                 this.setIsFirstLayout(false);

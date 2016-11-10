@@ -12,17 +12,17 @@ export default class LoadEarlier extends React.Component {
   renderLoading() {
     if (this.props.isLoadingEarlier === false) {
       return (
-        <Text style={[styles.text, this.props.textStyle]}>
-          {this.props.label}
+        <Text style={[styles.text, this.props.textStyle, this.props.loadEarlierTextStyle]}>
+          {this.props.loadEarlierLabel || this.props.label}
         </Text>
       );
     }
     return (
       <View>
-        <Text style={[styles.text, this.props.textStyle, {
+        <Text style={[styles.text, this.props.textStyle, this.props.loadEarlierTextStyle, {
             opacity: 0,
           }]}>
-          {this.props.label}
+          {this.props.loadEarlierLabel || this.props.label}
         </Text>
         <ActivityIndicator
           color='white'
@@ -94,6 +94,8 @@ LoadEarlier.propTypes = {
   onLoadEarlier: React.PropTypes.func,
   isLoadingEarlier: React.PropTypes.bool,
   label: React.PropTypes.string,
+  loadEarlierLabel: React.PropTypes.string,
+  loadEarlierTextStyle: Text.propTypes.style,
   containerStyle: View.propTypes.style,
   wrapperStyle: View.propTypes.style,
   textStyle: Text.propTypes.style,

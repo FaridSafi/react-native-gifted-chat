@@ -119,6 +119,21 @@ See [example/App.js](example/App.js)
 - **`renderAccessory`** _(Function)_ - renders a second line of actions below the message composer
 - **`bottomOffset`** _(Integer)_ - distance of the chat from the bottom of the screen, useful if you display a tab bar
 
+## Customization props
+
+You can also customize the base components with the following props:
+
+- **`containerStyle`** lets you pass a style to all containers (*kinda dangerous?*)
+- **`wrapperStyle`** lets you pass a style to all wrappers (*kinda dangerous?*)
+- **`imageStyle`** lets you customize the style of `Image`s
+- **`imageProps`** will override the already defined props on the image (for example if you pass a style in `imageProps`, it will override the predefined style and the `imageStyle` prop you could have passed)
+- **`textStyle`** will apply a style to all Texts
+- **`sendTextStyle`** will customize the style of the text of the Send button
+- **`sendLabel`** will customize the text of the Send button
+- **`loadEarlierTextStyle`** will customize the style of the text of the Load earlier messages button
+- **`loadEarlierLabel`** will customize the text of the Load earlier messages button
+- **`activityIndicatorStyle`** will the style of the loaders
+- **`keyboardDismissMode`** allows you to change the [keyboardDismissMode](https://facebook.github.io/react-native/docs/scrollview.html#keyboarddismissmode)
 
 ## Features
 - Custom components

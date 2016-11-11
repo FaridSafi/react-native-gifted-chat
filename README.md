@@ -133,7 +133,7 @@ You can also customize the base components with the following props:
 - **`loadEarlierTextStyle`** will customize the style of the text of the Load earlier messages button
 - **`loadEarlierLabel`** will customize the text of the Load earlier messages button
 - **`activityIndicatorStyle`** will the style of the loaders
-- **`keyboardDismissMode`** allows you to change the [keyboardDismissMode](https://facebook.github.io/react-native/docs/scrollview.html#keyboarddismissmode)
+- **`keyboardDismissMode`** allows you to change the [keyboardDismissMode](https://facebook.github.io/react-native/docs/scrollview.html#keyboarddismissmode) (default value is `interactive`)
 
 ## Features
 - Custom components

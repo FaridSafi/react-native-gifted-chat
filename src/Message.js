@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 
 import moment from 'moment';
@@ -64,13 +65,23 @@ export default class Message extends React.Component {
   }
 
   renderAvatar() {
-    if (this.props.user._id !== this.props.currentMessage.user._id) {
+    const messageUserId = this.props.currentMessage.user._id;
+
+    if (this.props.user._id !== messageUserId) {
       const {containerStyle, ...other} = this.props;
       const avatarProps = {
         ...other,
         isSameUser: this.isSameUser,
         isSameDay: this.isSameDay,
       };
+
+      if (this.props.onPressAvatar) {
+        return (
+          <TouchableOpacity onPress={() => this.props.onPressAvatar(messageUserId)}>
+            <Avatar {...avatarProps} />
+          </TouchableOpacity>
+        );
+      }
 
       return <Avatar {...avatarProps}/>;
     }
@@ -115,6 +126,7 @@ const styles = {
 };
 
 Message.defaultProps = {
+  onPressAvatar: null,
   renderAvatar: null,
   renderBubble: null,
   renderDay: null,
@@ -127,6 +139,7 @@ Message.defaultProps = {
 };
 
 Message.propTypes = {
+  onPressAvatar: React.PropTypes.func,
   renderAvatar: React.PropTypes.func,
   renderBubble: React.PropTypes.func,
   renderDay: React.PropTypes.func,

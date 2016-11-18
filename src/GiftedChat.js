@@ -192,10 +192,16 @@ class GiftedChat extends React.Component {
   // TODO
   // setMinInputToolbarHeight
   getMinInputToolbarHeight() {
+    let toolbarHeight = MIN_INPUT_TOOLBAR_HEIGHT;
     if (this.props.renderAccessory) {
-      return MIN_INPUT_TOOLBAR_HEIGHT * 2;
+      toolbarHeight *= 2;
     }
-    return MIN_INPUT_TOOLBAR_HEIGHT;
+
+    if(this.props.getMinInputToolbarHeight) {
+      return this.props.getMinInputToolbarHeight(toolbarHeight);
+    }
+
+    return toolbarHeight;
   }
 
   prepareMessagesContainerHeight(value) {
@@ -397,6 +403,16 @@ class GiftedChat extends React.Component {
     return null;
   }
 
+  renderInputToolbarFooter() {
+    if (this.props.renderInputToolbarFooter) {
+      const toolbarFooterProps = {
+          ...this.props,
+        };
+      return this.props.renderInputToolbarFooter(toolbarFooterProps);
+    }
+    return null;
+  }
+
   renderLoading() {
     if (this.props.renderLoading) {
       return this.props.renderLoading();
@@ -428,6 +444,7 @@ class GiftedChat extends React.Component {
           >
             {this.renderMessages()}
             {this.renderInputToolbar()}
+            {this.renderInputToolbarFooter()}
           </View>
         </ActionSheet>
       );
@@ -483,6 +500,7 @@ GiftedChat.defaultProps = {
   renderBubble: null,
   renderFooter: null,
   renderChatFooter: null,
+  renderInputToolbarFooter: null,
   renderMessageText: null,
   renderMessageImage: null,
   renderComposer: null,
@@ -494,6 +512,7 @@ GiftedChat.defaultProps = {
   renderMessage: null,
   renderSend: null,
   renderTime: null,
+  getMinInputToolbarHeight: null,
   user: {},
   bottomOffset: 0,
   isLoadingEarlier: false,
@@ -512,6 +531,7 @@ GiftedChat.propTypes = {
   renderBubble: React.PropTypes.func,
   renderFooter: React.PropTypes.func,
   renderChatFooter: React.PropTypes.func,
+  renderInputToolbarFooter: React.PropTypes.func,
   renderMessageText: React.PropTypes.func,
   renderMessageImage: React.PropTypes.func,
   renderComposer: React.PropTypes.func,
@@ -523,6 +543,7 @@ GiftedChat.propTypes = {
   renderMessage: React.PropTypes.func,
   renderSend: React.PropTypes.func,
   renderTime: React.PropTypes.func,
+  getMinInputToolbarHeight: React.PropTypes.func,
   user: React.PropTypes.object,
   bottomOffset: React.PropTypes.number,
   isLoadingEarlier: React.PropTypes.bool,

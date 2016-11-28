@@ -7,9 +7,11 @@ import {
 
 import moment from 'moment/min/moment-with-locales.min';
 
+import { isSameDay } from './utils';
+
 export default class Day extends React.Component {
   render() {
-    if (!this.props.isSameDay(this.props.currentMessage, this.props.previousMessage)) {
+    if (!isSameDay(this.props.currentMessage, this.props.previousMessage)) {
       return (
         <View style={[styles.container, this.props.containerStyle]}>
           <View style={[styles.wrapper, this.props.wrapperStyle]}>
@@ -52,7 +54,6 @@ Day.contextTypes = {
 };
 
 Day.defaultProps = {
-  isSameDay: () => {},
   currentMessage: {
     // TODO test if crash when createdAt === null
     createdAt: null,
@@ -64,7 +65,6 @@ Day.defaultProps = {
 };
 
 Day.propTypes = {
-  isSameDay: React.PropTypes.func,
   currentMessage: React.PropTypes.object,
   previousMessage: React.PropTypes.object,
   containerStyle: View.propTypes.style,

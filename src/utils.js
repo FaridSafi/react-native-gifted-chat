@@ -1,23 +1,24 @@
 import moment from 'moment';
 
 export function isSameDay(currentMessage = {}, diffMessage = {}) {
-  let diff = 0;
-  if (diffMessage.createdAt && currentMessage.createdAt) {
-    diff = Math.abs(moment(diffMessage.createdAt).startOf('day').diff(moment(currentMessage.createdAt).startOf('day'), 'days'));
-  } else {
-    diff = 1;
+
+  let currentCreatedAt = moment(currentMessage.createdAt);
+  let diffCreatedAt = moment(diffMessage.createdAt);
+
+  if (!currentCreatedAt.isValid() || !diffCreatedAt.isValid()) {
+    return false;
   }
-  if (diff === 0) {
-    return true;
-  }
-  return false;
+
+  return currentCreatedAt.startOf('day').isSame(diffCreatedAt.startOf('day'));
+
 }
 
 export function isSameUser(currentMessage = {}, diffMessage = {}) {
-  if (diffMessage.user && currentMessage.user) {
-    if (diffMessage.user._id === currentMessage.user._id) {
-      return true;
-    }
+
+  if (diffMessage.user && currentMessage.user && diffMessage.user._id === currentMessage.user._id) {
+    return true;
   }
+
   return false;
+
 }

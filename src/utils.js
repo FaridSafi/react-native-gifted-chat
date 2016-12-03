@@ -9,16 +9,12 @@ export function isSameDay(currentMessage = {}, diffMessage = {}) {
     return false;
   }
 
-  return currentCreatedAt.startOf('day').isSame(diffCreatedAt.startOf('day'));
+  return currentCreatedAt.isSame(diffCreatedAt, 'day');
 
 }
 
 export function isSameUser(currentMessage = {}, diffMessage = {}) {
 
-  if (diffMessage.user && currentMessage.user && diffMessage.user._id === currentMessage.user._id) {
-    return true;
-  }
-
-  return false;
+  return !!(diffMessage.user && currentMessage.user && diffMessage.user._id === currentMessage.user._id);
 
 }

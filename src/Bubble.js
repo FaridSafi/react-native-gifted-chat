@@ -125,7 +125,7 @@ const styles = {
     },
     wrapper: {
       borderRadius: 15,
-      backgroundColor: '#f0f0f0',
+      backgroundColor: 'rgb(241, 243, 246)',
       marginRight: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
@@ -144,7 +144,7 @@ const styles = {
     },
     wrapper: {
       borderRadius: 15,
-      backgroundColor: '#0084ff',
+      backgroundColor: 'rgb(91, 204, 143)',
       marginLeft: 60,
       minHeight: 20,
       justifyContent: 'flex-end',

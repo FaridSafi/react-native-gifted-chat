@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Platform,
+  View,
   StyleSheet,
   TextInput,
 } from 'react-native';
@@ -31,9 +32,14 @@ export default class Composer extends React.Component {
 const styles = StyleSheet.create({
   textInput: {
     flex: 1,
-    marginLeft: 10,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderWidth: 1,
+    borderColor: '#e5ebf1',
+    borderRadius: 12,
     fontSize: 16,
     lineHeight: 16,
+    marginLeft: 10,
     marginTop: Platform.select({
       ios: 6,
       android: 0,
@@ -52,7 +58,7 @@ Composer.defaultProps = {
     android: 41,
   }), // TODO SHARE with GiftedChat.js and tests
   text: '',
-  placeholder: 'Type a message...',
+  placeholder: '',
   placeholderTextColor: '#b2b2b2',
   textInputProps: null,
   multiline: true,

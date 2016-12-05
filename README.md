@@ -118,7 +118,7 @@ See [example/App.js](example/App.js)
 - **`renderSend`** _(Function)_ - render the send button
 - **`renderAccessory`** _(Function)_ - renders a second line of actions below the message composer
 - **`bottomOffset`** _(Integer)_ - distance of the chat from the bottom of the screen, useful if you display a tab bar
-- **`alwaysRenderAvatar`** _(Bool)_ - always render the message avatar, even when consecutive messages are from same day and same user
+- **`alwaysRenderAvatar`** _(Bool)_ - always render the message avatar, even when consecutive messages are from same day and same user. The default value is `false`.
 
 
 ## Features

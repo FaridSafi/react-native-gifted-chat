@@ -23,7 +23,7 @@ export default class Avatar extends React.Component {
 
   render() {
     if (
-      this.props.hideAvatarWhenSameDayAndUser &&
+      !this.props.alwaysRenderAvatar &&
       this.props.isSameUser(this.props.currentMessage, this.props.nextMessage) &&
       this.props.isSameDay(this.props.currentMessage, this.props.nextMessage)
     ) {
@@ -67,7 +67,7 @@ const styles = {
 };
 
 Avatar.defaultProps = {
-  hideAvatarWhenSameDayAndUser: true,
+  alwaysRenderAvatar: false,
   isSameDay: () => {},
   isSameUser: () => {},
   position: 'left',
@@ -80,7 +80,7 @@ Avatar.defaultProps = {
 };
 
 Avatar.propTypes = {
-  hideAvatarWhenSameDayAndUser: React.PropTypes.bool,
+  alwaysRenderAvatar: React.PropTypes.bool,
   isSameDay: React.PropTypes.func,
   isSameUser: React.PropTypes.func,
   position: React.PropTypes.oneOf(['left', 'right']),

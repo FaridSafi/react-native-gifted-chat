@@ -22,7 +22,11 @@ export default class Avatar extends React.Component {
   }
 
   render() {
-    if (this.props.isSameUser(this.props.currentMessage, this.props.nextMessage) && this.props.isSameDay(this.props.currentMessage, this.props.nextMessage)) {
+    if (
+      this.props.hideAvatarWhenSameDayAndUser &&
+      this.props.isSameUser(this.props.currentMessage, this.props.nextMessage) &&
+      this.props.isSameDay(this.props.currentMessage, this.props.nextMessage)
+    ) {
       return (
         <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
           <GiftedAvatar
@@ -63,6 +67,7 @@ const styles = {
 };
 
 Avatar.defaultProps = {
+  hideAvatarWhenSameDayAndUser: true,
   isSameDay: () => {},
   isSameUser: () => {},
   position: 'left',
@@ -75,6 +80,7 @@ Avatar.defaultProps = {
 };
 
 Avatar.propTypes = {
+  hideAvatarWhenSameDayAndUser: React.PropTypes.bool,
   isSameDay: React.PropTypes.func,
   isSameUser: React.PropTypes.func,
   position: React.PropTypes.oneOf(['left', 'right']),

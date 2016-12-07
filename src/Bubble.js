@@ -10,7 +10,7 @@ import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
 
-import { isSameUser, isSameDay } from './utils';
+import {isSameUser, isSameDay} from './utils';
 
 export default class Bubble extends React.Component {
     constructor(props) {

@@ -7,7 +7,7 @@ import {
 
 import moment from 'moment/min/moment-with-locales.min';
 
-import { isSameDay } from './utils';
+import {isSameDay} from './utils';
 
 export default class Day extends React.Component {
     render() {

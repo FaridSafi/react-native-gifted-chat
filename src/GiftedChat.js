@@ -67,6 +67,8 @@ class GiftedChat extends React.Component {
         this.getLocale = this.getLocale.bind(this);
         this.onInputSizeChanged = this.onInputSizeChanged.bind(this);
         this.onInputTextChanged = this.onInputTextChanged.bind(this);
+        this.onMainViewLayout = this.onMainViewLayout.bind(this);
+        this.onInitialLayoutViewLayout = this.onInitialLayoutViewLayout.bind(this);
 
         this.invertibleScrollViewProps = {
             inverted: true,
@@ -363,6 +365,38 @@ class GiftedChat extends React.Component {
         this.setState({text});
     }
 
+    onInitialLayoutViewLayout(e) {
+        const layout = e.nativeEvent.layout;
+        if (layout.height <= 0) {
+            return;
+        }
+        this.setMaxHeight(layout.height);
+        InteractionManager.runAfterInteractions(() => {
+            this.setState({
+                isInitialized: true,
+                text: '',
+                composerHeight: MIN_COMPOSER_HEIGHT,
+                messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
+            });
+        });
+    }
+
+    onMainViewLayout(e) {
+        if (Platform.OS === 'android') {
+            // fix an issue when keyboard is dismissing during the initialization
+            const layout = e.nativeEvent.layout;
+            if (this.getMaxHeight() !== layout.height && this.getIsFirstLayout() === true) {
+                this.setMaxHeight(layout.height);
+                this.setState({
+                    messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
+                });
+            }
+        }
+        if (this.getIsFirstLayout() === true) {
+            this.setIsFirstLayout(false);
+        }
+    }
+
     renderInputToolbar() {
         const inputToolbarProps = {
             ...this.props,
@@ -411,24 +445,7 @@ class GiftedChat extends React.Component {
         if (this.state.isInitialized === true) {
             return (
                 <ActionSheet ref={component => this._actionSheetRef = component}>
-                    <View
-                        style={styles.container}
-                        onLayout={(e) => {
-                            if (Platform.OS === 'android') {
-                                // fix an issue when keyboard is dismissing during the initialization
-                                const layout = e.nativeEvent.layout;
-                                if (this.getMaxHeight() !== layout.height && this.getIsFirstLayout() === true) {
-                                    this.setMaxHeight(layout.height);
-                                    this.setState({
-                                        messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
-                                    });
-                                }
-                            }
-                            if (this.getIsFirstLayout() === true) {
-                                this.setIsFirstLayout(false);
-                            }
-                        }}
-                    >
+                    <View style={styles.container} onLayout={this.onMainViewLayout}>
                         {this.renderMessages()}
                         {this.renderInputToolbar()}
                     </View>
@@ -436,21 +453,7 @@ class GiftedChat extends React.Component {
             );
         }
         return (
-            <View
-                style={styles.container}
-                onLayout={(e) => {
-                    const layout = e.nativeEvent.layout;
-                    this.setMaxHeight(layout.height);
-                    InteractionManager.runAfterInteractions(() => {
-                        this.setState({
-                            isInitialized: true,
-                            text: '',
-                            composerHeight: MIN_COMPOSER_HEIGHT,
-                            messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
-                        });
-                    });
-                }}
-            >
+            <View style={styles.container} onLayout={this.onInitialLayoutViewLayout}>
                 {this.renderLoading()}
             </View>
         );

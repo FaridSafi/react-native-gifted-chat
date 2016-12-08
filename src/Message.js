@@ -8,13 +8,22 @@ import Avatar from './Avatar';
 import Bubble from './Bubble';
 import Day from './Day';
 
-import {isSameUser} from './utils';
+import {isSameUser, isSameDay} from './utils';
 
 export default class Message extends React.Component {
 
+    getInnerComponentProps() {
+        const {containerStyle, ...props} = this.props;
+        return {
+            ...props,
+            isSameUser,
+            isSameDay
+        }
+    }
+
     renderDay() {
         if (this.props.currentMessage.createdAt) {
-            const {containerStyle, ...dayProps} = this.props;
+            const dayProps = this.getInnerComponentProps();
             if (this.props.renderDay) {
                 return this.props.renderDay(dayProps);
             }
@@ -24,7 +33,7 @@ export default class Message extends React.Component {
     }
 
     renderBubble() {
-        const {containerStyle, ...bubbleProps} = this.props;
+        const bubbleProps = this.getInnerComponentProps();
         if (this.props.renderBubble) {
             return this.props.renderBubble(bubbleProps);
         }
@@ -33,7 +42,7 @@ export default class Message extends React.Component {
 
     renderAvatar() {
         if (this.props.user._id !== this.props.currentMessage.user._id) {
-            const {containerStyle, ...avatarProps} = this.props;
+            const avatarProps = this.getInnerComponentProps();
             return <Avatar {...avatarProps}/>;
         }
         return null;

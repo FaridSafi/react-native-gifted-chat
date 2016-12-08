@@ -88,6 +88,18 @@ const styles = {
       textDecorationLine: 'underline',
     },
   }),
+  center: StyleSheet.create({
+    container: {
+    },
+    text: {
+      color: 'grey',
+      ...textStyle,
+    },
+    link: {
+      color: 'grey',
+      textDecorationLine: 'underline',
+    },
+  }),
   right: StyleSheet.create({
     container: {
     },
@@ -117,18 +129,21 @@ MessageText.defaultProps = {
 };
 
 MessageText.propTypes = {
-  position: React.PropTypes.oneOf(['left', 'right']),
+  position: React.PropTypes.oneOf(['left', 'center', 'right']),
   currentMessage: React.PropTypes.object,
   containerStyle: React.PropTypes.shape({
     left: View.propTypes.style,
+    center: View.propTypes.style,
     right: View.propTypes.style,
   }),
   textStyle: React.PropTypes.shape({
     left: Text.propTypes.style,
+    center: Text.propTypes.style,
     right: Text.propTypes.style,
   }),
   linkStyle: React.PropTypes.shape({
     left: Text.propTypes.style,
+    center: Text.propTypes.style,
     right: Text.propTypes.style,
   }),
 };

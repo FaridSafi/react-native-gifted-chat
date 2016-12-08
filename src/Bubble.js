@@ -161,6 +161,21 @@ const styles = {
       borderTopLeftRadius: 3,
     },
   }),
+  center: StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    wrapper: {
+      borderRadius: 15,
+      backgroundColor: '#f0f0f0',
+      marginHorizontal: 30,
+      minHeight: 20,
+      justifyContent: 'flex-end',
+    },
+    containerToNext: {},
+    containerToPrevious: {},
+  }),
   right: StyleSheet.create({
     container: {
       flex: 1,
@@ -231,25 +246,31 @@ Bubble.propTypes = {
   renderMessageText: React.PropTypes.func,
   renderCustomView: React.PropTypes.func,
   renderTime: React.PropTypes.func,
-  position: React.PropTypes.oneOf(['left', 'right']),
+  isSameUser: React.PropTypes.func,
+  isSameDay: React.PropTypes.func,
+  position: React.PropTypes.oneOf(['left', 'center', 'right']),
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
   previousMessage: React.PropTypes.object,
   containerStyle: React.PropTypes.shape({
     left: View.propTypes.style,
+    center: View.propTypes.style,
     right: View.propTypes.style,
   }),
   wrapperStyle: React.PropTypes.shape({
     left: View.propTypes.style,
+    center: View.propTypes.style,
     right: View.propTypes.style,
   }),
   tickStyle: Text.propTypes.style,
   containerToNextStyle: React.PropTypes.shape({
     left: View.propTypes.style,
+    center: View.propTypes.style,
     right: View.propTypes.style,
   }),
   containerToPreviousStyle: React.PropTypes.shape({
     left: View.propTypes.style,
+    center: View.propTypes.style,
     right: View.propTypes.style,
   }),
   //TODO: remove in next major release

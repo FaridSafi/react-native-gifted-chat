@@ -82,7 +82,7 @@ export default class Message extends React.Component {
       <View>
         {this.renderDay()}
         <View style={[styles[this.props.position].container, {
-          marginBottom: this.isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
+          marginBottom: this.isSameUser(this.props.currentMessage, this.props.nextMessage) ? this.props.marginSameUser : this.props.marginDifferentUser,
         }, this.props.containerStyle[this.props.position]]}>
           {this.props.position === 'left' ? this.renderAvatar() : null}
           {this.renderBubble()}
@@ -119,6 +119,8 @@ Message.defaultProps = {
   renderBubble: null,
   renderDay: null,
   position: 'left',
+  marginSameUser: 6,
+  marginDifferentUser: 10,
   currentMessage: {},
   nextMessage: {},
   previousMessage: {},
@@ -130,6 +132,8 @@ Message.propTypes = {
   renderAvatar: React.PropTypes.func,
   renderBubble: React.PropTypes.func,
   renderDay: React.PropTypes.func,
+  marginSameUser: React.PropTypes.number,
+  marginDifferentUser: React.PropTypes.number,
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,

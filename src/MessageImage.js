@@ -50,10 +50,12 @@ MessageImage.defaultProps = {
   },
   containerStyle: {},
   imageStyle: {},
+  navigator: null,
 };
 
 MessageImage.propTypes = {
   currentMessage: React.PropTypes.object,
   containerStyle: View.propTypes.style,
   imageStyle: Image.propTypes.style,
+  navigator: React.PropTypes.object,
 };

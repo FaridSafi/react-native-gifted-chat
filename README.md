@@ -88,6 +88,7 @@ See [example/App.js](example/App.js)
     avatar: 'https://facebook.github.io/react/img/logo_og.png',
   },
   image: 'https://facebook.github.io/react/img/logo_og.png',
+  isSystemMessage: false,
   // additional custom parameters
 }
 ```

@@ -117,7 +117,7 @@ export default class MessageContainer extends React.Component {
       message.user = {};
     }
 
-    const position = messagePosition(message, this.props.user);
+    const position = this.messagePosition(message, this.props.user);
 
     const messageProps = {
       ...this.props,

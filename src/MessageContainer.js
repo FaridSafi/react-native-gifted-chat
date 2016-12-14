@@ -100,6 +100,14 @@ export default class MessageContainer extends React.Component {
     this._invertibleScrollViewRef.scrollTo(options);
   }
 
+  messagePosition(message, currentUser) {
+    if (message.fromSystem) {
+      return 'center';
+    }
+
+    return (message.user._id === currentUser._id) ? 'right' : 'left';
+  }
+
   renderRow(message, sectionId, rowId) {
     if (!message._id && message._id !== 0) {
       console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(message));
@@ -109,8 +117,8 @@ export default class MessageContainer extends React.Component {
       message.user = {};
     }
 
-    let position = message.user._id === this.props.user._id ? 'right' : 'left';
-    position = message.fromSystem ? 'center' : position;
+    const position = messagePosition(message, this.props.user);
+
     const messageProps = {
       ...this.props,
       key: message._id,

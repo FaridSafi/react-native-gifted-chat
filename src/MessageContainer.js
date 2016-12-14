@@ -110,7 +110,7 @@ export default class MessageContainer extends React.Component {
     }
 
     let position = message.user._id === this.props.user._id ? 'right' : 'left';
-    position = message.isSystemMessage ? 'center' : position;
+    position = message.fromSystem ? 'center' : position;
     const messageProps = {
       ...this.props,
       key: message._id,

@@ -118,6 +118,8 @@ See [example/App.js](example/App.js)
 - **`renderSend`** _(Function)_ - render the send button
 - **`renderAccessory`** _(Function)_ - renders a second line of actions below the message composer
 - **`bottomOffset`** _(Integer)_ - distance of the chat from the bottom of the screen, useful if you display a tab bar
+- **`messageContainerStyle`** _(style)_ - sets the style of the messages' ListView
+- **`messageContainerContentContainerStyle`** _(style)_ - sets the contentContainerStyle of the messages' ListView
 
 
 ## Features

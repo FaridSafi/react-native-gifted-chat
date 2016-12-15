@@ -112,7 +112,7 @@ export default class MessageContainer extends React.Component {
     if (!message._id && message._id !== 0) {
       console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(message));
     }
-    if (!message.user) {
+    if (!message.fromSystem && !message.user) {
       console.warn('GiftedChat: `user` is missing for message', JSON.stringify(message));
       message.user = {};
     }

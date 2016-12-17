@@ -7,7 +7,7 @@ import {
 
 import moment from 'moment/min/moment-with-locales.min';
 
-import { isSameDay } from './utils';
+import { isSameDay, isSameUser, warnDeprecated } from './utils';
 
 export default class Day extends React.Component {
   render() {
@@ -62,6 +62,9 @@ Day.defaultProps = {
   containerStyle: {},
   wrapperStyle: {},
   textStyle: {},
+  //TODO: remove in next major release
+  isSameDay: warnDeprecated(isSameDay),
+  isSameUser: warnDeprecated(isSameUser),
 };
 
 Day.propTypes = {
@@ -70,4 +73,7 @@ Day.propTypes = {
   containerStyle: View.propTypes.style,
   wrapperStyle: View.propTypes.style,
   textStyle: Text.propTypes.style,
+  //TODO: remove in next major release
+  isSameDay: React.PropTypes.func,
+  isSameUser: React.PropTypes.func,
 };

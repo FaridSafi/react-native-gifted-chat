@@ -7,7 +7,7 @@ import {
 
 import GiftedAvatar from './GiftedAvatar';
 
-import { isSameUser, isSameDay } from './utils';
+import { isSameUser, isSameDay, warnDeprecated } from './utils';
 
 export default class Avatar extends React.Component {
   renderAvatar() {
@@ -72,6 +72,9 @@ Avatar.defaultProps = {
   nextMessage: {},
   containerStyle: {},
   imageStyle: {},
+  //TODO: remove in next major release
+  isSameDay: warnDeprecated(isSameDay),
+  isSameUser: warnDeprecated(isSameUser)
 };
 
 Avatar.propTypes = {
@@ -80,4 +83,7 @@ Avatar.propTypes = {
   nextMessage: React.PropTypes.object,
   containerStyle: View.propTypes.style,
   imageStyle: React.PropTypes.oneOfType([View.propTypes.style, Image.propTypes.style]),
+  //TODO: remove in next major release
+  isSameDay: React.PropTypes.func,
+  isSameUser: React.PropTypes.func
 };

@@ -10,7 +10,7 @@ import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
 
-import { isSameUser, isSameDay } from './utils';
+import { isSameUser, isSameDay, warnDeprecated } from './utils';
 
 export default class Bubble extends React.Component {
   constructor(props) {
@@ -183,6 +183,9 @@ Bubble.defaultProps = {
   wrapperStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
+  //TODO: remove in next major release
+  isSameDay: warnDeprecated(isSameDay),
+  isSameUser: warnDeprecated(isSameUser),
 };
 
 Bubble.propTypes = {
@@ -212,4 +215,7 @@ Bubble.propTypes = {
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),
+  //TODO: remove in next major release
+  isSameDay: React.PropTypes.func,
+  isSameUser: React.PropTypes.func,
 };

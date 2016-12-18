@@ -18,6 +18,7 @@ export default class Actions extends React.Component {
     this.context.actionSheet().showActionSheetWithOptions({
       options,
       cancelButtonIndex,
+      tintColor: this.props.optionTintColor
     },
     (buttonIndex) => {
       let i = 0;
@@ -91,6 +92,7 @@ Actions.contextTypes = {
 Actions.defaultProps = {
   onSend: () => {},
   options: {},
+  optionTintColor: '#007AFF',
   icon: null,
   containerStyle: {},
   iconTextStyle: {},
@@ -99,6 +101,7 @@ Actions.defaultProps = {
 Actions.propTypes = {
   onSend: React.PropTypes.func,
   options: React.PropTypes.object,
+  optionTintColor: React.PropTypes.string,
   icon: React.PropTypes.func,
   containerStyle: View.propTypes.style,
   iconTextStyle: Text.propTypes.style,

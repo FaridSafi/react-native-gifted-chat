@@ -10,6 +10,8 @@ import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
 
+import { isSameUser, isSameDay, warnDeprecated } from './utils';
+
 export default class Bubble extends React.Component {
   constructor(props) {
     super(props);
@@ -17,14 +19,14 @@ export default class Bubble extends React.Component {
   }
 
   handleBubbleToNext() {
-    if (this.props.isSameUser(this.props.currentMessage, this.props.nextMessage) && this.props.isSameDay(this.props.currentMessage, this.props.nextMessage)) {
+    if (isSameUser(this.props.currentMessage, this.props.nextMessage) && isSameDay(this.props.currentMessage, this.props.nextMessage)) {
       return StyleSheet.flatten([styles[this.props.position].containerToNext, this.props.containerToNextStyle[this.props.position]]);
     }
     return null;
   }
 
   handleBubbleToPrevious() {
-    if (this.props.isSameUser(this.props.currentMessage, this.props.previousMessage) && this.props.isSameDay(this.props.currentMessage, this.props.previousMessage)) {
+    if (isSameUser(this.props.currentMessage, this.props.previousMessage) && isSameDay(this.props.currentMessage, this.props.previousMessage)) {
       return StyleSheet.flatten([styles[this.props.position].containerToPrevious, this.props.containerToPreviousStyle[this.props.position]]);
     }
     return null;
@@ -169,8 +171,6 @@ Bubble.defaultProps = {
   renderMessageText: null,
   renderCustomView: null,
   renderTime: null,
-  isSameUser: () => {},
-  isSameDay: () => {},
   position: 'left',
   currentMessage: {
     text: null,
@@ -183,6 +183,9 @@ Bubble.defaultProps = {
   wrapperStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
+  //TODO: remove in next major release
+  isSameDay: warnDeprecated(isSameDay),
+  isSameUser: warnDeprecated(isSameUser),
 };
 
 Bubble.propTypes = {
@@ -192,8 +195,6 @@ Bubble.propTypes = {
   renderMessageText: React.PropTypes.func,
   renderCustomView: React.PropTypes.func,
   renderTime: React.PropTypes.func,
-  isSameUser: React.PropTypes.func,
-  isSameDay: React.PropTypes.func,
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
@@ -214,4 +215,7 @@ Bubble.propTypes = {
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),
+  //TODO: remove in next major release
+  isSameDay: React.PropTypes.func,
+  isSameUser: React.PropTypes.func,
 };

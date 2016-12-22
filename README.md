@@ -5,10 +5,10 @@ The most complete chat UI for React Native (formerly known as Gifted Messenger)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png)
 
 ## Dependency
-React Native minimum version `0.29.0`
+React Native minimum version `0.39.2`
 
 ## Installation
-`npm install react-native-gifted-chat --save`
+`npm install react-native-friendly-chat --save`
 
 ## Android installation
 - Add `android:windowSoftInputMode="adjustResize"` to your Android Manifest `android/app/src/main/AndroidManifest.xml`

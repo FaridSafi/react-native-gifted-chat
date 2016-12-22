@@ -8,14 +8,6 @@
     "url": "git+https://github.com/afFriendly/react-native-friendly-chat.git"
   },
   "keywords": [
-    "android",
-    "ios",
-    "react-native",
-    "react",
-    "react-component",
-    "messenger",
-    "message",
-    "chat"
   ],
   "author": "atFriendly",
   "license": "MIT",
@@ -24,18 +16,18 @@
   },
   "homepage": "https://github.com/atFriendly/react-native-friendly-chat#readme",
   "devDependencies": {
-    "eslint": "^3.2.2",
-    "eslint-plugin-react": "^6.0.0",
-    "eslint-plugin-react-native": "^2.0.0"
+    "eslint": "^3.12.2",
+    "eslint-plugin-react": "^6.8.0",
+    "eslint-plugin-react-native": "^2.2.1"
   },
   "dependencies": {
     "@exponent/react-native-action-sheet": "git+https://github.com/FaridSafi/react-native-action-sheet.git",
-    "md5": "^2.1.0",
-    "moment": "^2.13.0",
-    "react-native-communications": "^2.1.0",
+    "md5": "^2.2.1",
+    "moment": "^2.17.1",
+    "react-native-communications": "^2.1.4",
     "react-native-dismiss-keyboard": "^1.0.0",
     "react-native-invertible-scroll-view": "^1.0.0",
-    "react-native-parsed-text": "^0.0.15",
+    "react-native-parsed-text": "^0.0.16",
     "shallowequal": "^0.2.2"
   }
 }

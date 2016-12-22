@@ -11,20 +11,8 @@ import ActionSheet from '@exponent/react-native-action-sheet';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 import moment from 'moment/min/moment-with-locales.min';
 
-import * as utils from './utils';
-import Actions from './Actions';
-import Avatar from './Avatar';
-import Bubble from './Bubble';
-import MessageImage from './MessageImage';
-import MessageText from './MessageText';
-import Composer from './Composer';
-import Day from './Day';
 import InputToolbar from './InputToolbar';
-import LoadEarlier from './LoadEarlier';
-import Message from './Message';
 import MessageContainer from './MessageContainer';
-import Send from './Send';
-import Time from './Time';
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for Composer auto grow and ScrollView animation
@@ -36,7 +24,7 @@ const MIN_COMPOSER_HEIGHT = Platform.select({
 const MAX_COMPOSER_HEIGHT = 100;
 const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
-class GiftedChat extends React.Component {
+export default class GiftedChat extends React.Component {
   constructor(props) {
     super(props);
 
@@ -527,21 +515,4 @@ GiftedChat.propTypes = {
   user: React.PropTypes.object,
   bottomOffset: React.PropTypes.number,
   isLoadingEarlier: React.PropTypes.bool,
-};
-
-export {
-  GiftedChat,
-  Actions,
-  Avatar,
-  Bubble,
-  MessageImage,
-  MessageText,
-  Composer,
-  Day,
-  InputToolbar,
-  LoadEarlier,
-  Message,
-  Send,
-  Time,
-  utils
 };

@@ -119,7 +119,7 @@ export default class Bubble extends React.Component {
   }
 }
 
-const styles = {
+export const styles = {
   left: StyleSheet.create({
     container: {
       flex: 1,

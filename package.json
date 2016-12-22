@@ -1,11 +1,11 @@
 {
-  "name": "react-native-gifted-chat",
-  "version": "0.0.10",
+  "name": "react-native-friendly-chat",
+  "version": "0.0.1",
   "description": "The most complete chat UI for React Native",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
+    "url": "git+https://github.com/afFriendly/react-native-friendly-chat.git"
   },
   "keywords": [
     "android",
@@ -17,12 +17,12 @@
     "message",
     "chat"
   ],
-  "author": "Farid Safi",
+  "author": "atFriendly",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/FaridSafi/react-native-gifted-chat/issues"
+    "url": "https://github.com/atFriendly/react-native-friendly-chat/issues"
   },
-  "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
+  "homepage": "https://github.com/atFriendly/react-native-friendly-chat#readme",
   "devDependencies": {
     "eslint": "^3.2.2",
     "eslint-plugin-react": "^6.0.0",

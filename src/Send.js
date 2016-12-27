@@ -17,7 +17,7 @@ export default class Send extends React.Component {
     if (this.props.text.trim().length > 0) {
       return (
         <TouchableOpacity
-          style={[styles.container, this.props.containerStyle]}
+          style={styles.container}
           onPress={() => {
             this.props.onSend({text: this.props.text.trim()}, true);
           }}

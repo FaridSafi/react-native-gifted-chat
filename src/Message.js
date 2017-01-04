@@ -1,49 +1,27 @@
 import React from 'react';
 import {
   View,
-  StyleSheet,
+  StyleSheet
 } from 'react-native';
-
-import moment from 'moment';
 
 import Avatar from './Avatar';
 import Bubble from './Bubble';
 import Day from './Day';
 
+import { isSameUser, isSameDay, warnDeprecated } from './utils';
+
 export default class Message extends React.Component {
-
-  isSameDay(currentMessage = {}, diffMessage = {}) {
-    let diff = 0;
-    if (diffMessage.createdAt && currentMessage.createdAt) {
-      diff = Math.abs(moment(diffMessage.createdAt).startOf('day').diff(moment(currentMessage.createdAt).startOf('day'), 'days'));
-    } else {
-      diff = 1;
-    }
-    if (diff === 0) {
-      return true;
-    }
-    return false;
-  }
-
-  isSameUser(currentMessage = {}, diffMessage = {}) {
-    if (diffMessage.user && currentMessage.user) {
-      if (diffMessage.user._id === currentMessage.user._id) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   renderDay() {
     if (this.props.currentMessage.createdAt) {
-      const {containerStyle, ...other} = this.props;
-      const dayProps = {
-        ...other,
-        isSameUser: this.isSameUser,
-        isSameDay: this.isSameDay,
-      };
+      const {containerStyle, ...dayProps} = this.props;
       if (this.props.renderDay) {
-        return this.props.renderDay(dayProps);
+        return this.props.renderDay({
+          ...dayProps,
+          //TODO: remove in next major release
+          isSameUser: warnDeprecated(isSameUser),
+          isSameDay: warnDeprecated(isSameDay)
+        });
       }
       return <Day {...dayProps}/>;
     }
@@ -51,30 +29,33 @@ export default class Message extends React.Component {
   }
 
   renderBubble() {
-    const {containerStyle, ...other} = this.props;
-    const bubbleProps = {
-      ...other,
-      isSameUser: this.isSameUser,
-      isSameDay: this.isSameDay,
-    };
+    const {containerStyle, ...bubbleProps} = this.props;
     if (this.props.renderBubble) {
-      return this.props.renderBubble(bubbleProps);
+      return this.props.renderBubble({
+        ...bubbleProps,
+        //TODO: remove in next major release
+        isSameUser: warnDeprecated(isSameUser),
+        isSameDay: warnDeprecated(isSameDay)
+      });
     }
     return <Bubble {...bubbleProps}/>;
   }
 
   renderAvatar() {
-    if (this.props.user._id !== this.props.currentMessage.user._id) {
-      const {containerStyle, ...other} = this.props;
-      const avatarProps = {
-        ...other,
-        isSameUser: this.isSameUser,
-        isSameDay: this.isSameDay,
-      };
 
-      return <Avatar {...avatarProps}/>;
+    if (this.props.user._id === this.props.currentMessage.user._id) {
+      return null;
     }
-    return null;
+
+    const {containerStyle, ...other} = this.props;
+    const avatarProps = {
+      ...other,
+      //TODO: remove in next major release
+      isSameUser: warnDeprecated(isSameUser),
+      isSameDay: warnDeprecated(isSameDay)
+    };
+    return <Avatar {...avatarProps}/>;
+
   }
 
   render() {
@@ -82,7 +63,7 @@ export default class Message extends React.Component {
       <View>
         {this.renderDay()}
         <View style={[styles[this.props.position].container, {
-          marginBottom: this.isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
+          marginBottom: isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
         }, this.props.containerStyle[this.props.position]]}>
           {this.props.position === 'left' ? this.renderAvatar() : null}
           {this.renderBubble()}

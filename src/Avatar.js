@@ -7,6 +7,8 @@ import {
 
 import GiftedAvatar from './GiftedAvatar';
 
+import { isSameUser, isSameDay, warnDeprecated } from './utils';
+
 export default class Avatar extends React.Component {
   renderAvatar() {
     if (this.props.renderAvatar) {
@@ -22,7 +24,7 @@ export default class Avatar extends React.Component {
   }
 
   render() {
-    if (this.props.isSameUser(this.props.currentMessage, this.props.nextMessage) && this.props.isSameDay(this.props.currentMessage, this.props.nextMessage)) {
+    if (isSameUser(this.props.currentMessage, this.props.nextMessage) && isSameDay(this.props.currentMessage, this.props.nextMessage)) {
       return (
         <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
           <GiftedAvatar
@@ -63,8 +65,6 @@ const styles = {
 };
 
 Avatar.defaultProps = {
-  isSameDay: () => {},
-  isSameUser: () => {},
   position: 'left',
   currentMessage: {
     user: null,
@@ -72,14 +72,18 @@ Avatar.defaultProps = {
   nextMessage: {},
   containerStyle: {},
   imageStyle: {},
+  //TODO: remove in next major release
+  isSameDay: warnDeprecated(isSameDay),
+  isSameUser: warnDeprecated(isSameUser)
 };
 
 Avatar.propTypes = {
-  isSameDay: React.PropTypes.func,
-  isSameUser: React.PropTypes.func,
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
   containerStyle: View.propTypes.style,
   imageStyle: React.PropTypes.oneOfType([View.propTypes.style, Image.propTypes.style]),
+  //TODO: remove in next major release
+  isSameDay: React.PropTypes.func,
+  isSameUser: React.PropTypes.func
 };

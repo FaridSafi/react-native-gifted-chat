@@ -5,7 +5,6 @@ import {
   Platform,
   StyleSheet,
   View,
-  // Keyboard,
 } from 'react-native';
 
 import ActionSheet from '@exponent/react-native-action-sheet';

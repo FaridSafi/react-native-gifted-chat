@@ -55,7 +55,7 @@ export default class Actions extends React.Component {
     return (
       <TouchableOpacity
         style={[styles.container, this.props.containerStyle]}
-        onPress={this.onActionsPress}
+        onPress={this.props.onPressActionButton || this.onActionsPress}
       >
         {this.renderIcon()}
       </TouchableOpacity>
@@ -103,6 +103,7 @@ Actions.propTypes = {
   options: React.PropTypes.object,
   optionTintColor: React.PropTypes.string,
   icon: React.PropTypes.func,
+  onPressActionButton: React.PropTypes.func,
   containerStyle: View.propTypes.style,
   iconTextStyle: Text.propTypes.style,
 };

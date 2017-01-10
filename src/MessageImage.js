@@ -20,6 +20,7 @@ export default class MessageImage extends React.Component {
           }}
         >
           <Image
+            {...this.props.imageProps}
             style={[styles.image, this.props.imageStyle]}
             source={{uri: this.props.currentMessage.image}}
           />
@@ -50,6 +51,7 @@ MessageImage.defaultProps = {
   },
   containerStyle: {},
   imageStyle: {},
+  imageProps: {},
   navigator: null,
 };
 
@@ -57,5 +59,6 @@ MessageImage.propTypes = {
   currentMessage: React.PropTypes.object,
   containerStyle: View.propTypes.style,
   imageStyle: Image.propTypes.style,
+  imageProps: React.PropTypes.object,
   navigator: React.PropTypes.object,
 };

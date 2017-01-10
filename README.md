@@ -108,6 +108,8 @@ See [example/App.js](example/App.js)
 - **`renderMessage`** _(Function)_ - render the message container
 - **`renderMessageText`** _(Function)_ - render the message text
 - **`renderMessageImage`** _(Function)_ - render the message image
+- **`imageProps`** _(Object)_ - extra props to be passed to the [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component created by the default `renderMessageImage`
+- **`lightboxProps`** _(Object)_ - extra props to be passed to the MessageImage's [Lightbox](https://github.com/oblador/react-native-lightbox)
 - **`renderCustomView`** _(Function)_ - render a custom view inside the bubble
 - **`renderDay`** _(Function)_ - render the day above a message
 - **`renderTime`** _(Function)_ - render the message time

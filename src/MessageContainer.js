@@ -140,7 +140,6 @@ export default class MessageContainer extends React.Component {
       <View ref='container' style={{flex:1}}>
         <ListView
           enableEmptySections={true}
-          keyboardShouldPersistTaps={true}
           automaticallyAdjustContentInsets={false}
           initialListSize={20}
           pageSize={20}

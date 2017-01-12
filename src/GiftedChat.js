@@ -193,6 +193,9 @@ class GiftedChat extends React.Component {
   // TODO
   // setMinInputToolbarHeight
   getMinInputToolbarHeight() {
+    if( this.props.hideInputToolbar === true) {
+      return 0;
+    }
     if (this.props.renderAccessory) {
       return MIN_INPUT_TOOLBAR_HEIGHT * 2;
     }
@@ -378,6 +381,9 @@ class GiftedChat extends React.Component {
       onSend: this.onSend,
     };
 
+    if( this.props.hideInputToolbar === true) {
+      return null;
+    }
     if (this.props.renderInputToolbar) {
       return this.props.renderInputToolbar(inputToolbarProps);
     }
@@ -498,6 +504,7 @@ GiftedChat.defaultProps = {
   user: {},
   bottomOffset: 0,
   isLoadingEarlier: false,
+  hideInputToolbar: false,
 };
 
 GiftedChat.propTypes = {
@@ -527,6 +534,7 @@ GiftedChat.propTypes = {
   user: React.PropTypes.object,
   bottomOffset: React.PropTypes.number,
   isLoadingEarlier: React.PropTypes.bool,
+  hideInputToolbar: React.PropTypes.bool,
 };
 
 export {

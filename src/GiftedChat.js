@@ -360,6 +360,9 @@ class GiftedChat extends React.Component {
 
     const newMessagesContainerHeight = this.getMaxHeight() - this.calculateInputToolbarHeight(newComposerHeight) - this.getKeyboardHeight() + this.getBottomOffset();
     const newText = e.nativeEvent.text;
+    if( this.props.onType ) {
+      this.props.onType();
+    }
     this.setState((previousState) => {
       return {
         text: newText,
@@ -498,6 +501,7 @@ GiftedChat.defaultProps = {
   user: {},
   bottomOffset: 0,
   isLoadingEarlier: false,
+  onType: null,
 };
 
 GiftedChat.propTypes = {
@@ -527,6 +531,7 @@ GiftedChat.propTypes = {
   user: React.PropTypes.object,
   bottomOffset: React.PropTypes.number,
   isLoadingEarlier: React.PropTypes.bool,
+  onType: React.PropTypes.func,
 };
 
 export {

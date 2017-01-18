@@ -145,7 +145,7 @@ export default class MessageContainer extends React.Component {
           pageSize={20}
 
           {...this.props.listViewProps}
-          
+
           enableEmptySections={true}
           dataSource={this.state.dataSource}
 
@@ -164,6 +164,7 @@ MessageContainer.defaultProps = {
   user: {},
   renderFooter: null,
   renderMessage: null,
+  listViewProps: {},
   onLoadEarlier: () => {
   },
 };
@@ -174,4 +175,5 @@ MessageContainer.propTypes = {
   renderFooter: React.PropTypes.func,
   renderMessage: React.PropTypes.func,
   onLoadEarlier: React.PropTypes.func,
+  listViewProps: React.PropTypes.object,
 };

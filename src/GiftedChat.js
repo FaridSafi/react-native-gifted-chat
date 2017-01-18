@@ -508,7 +508,7 @@ GiftedChat.propTypes = {
   user: React.PropTypes.object,
   bottomOffset: React.PropTypes.number,
   isLoadingEarlier: React.PropTypes.bool,
-  keyboardShouldPersistTaps: React.PropTypes.string,
+  keyboardShouldPersistTaps: React.PropTypes.oneOf(['always', 'never', 'handled']),
 };
 
 export {

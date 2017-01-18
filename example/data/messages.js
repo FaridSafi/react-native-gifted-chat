@@ -7,6 +7,8 @@ module.exports = [
       _id: 1,
       name: 'Developer',
     },
+    sent: true,
+    received: true,
     // location: {
     //   latitude: 48.864601,
     //   longitude: 2.398704

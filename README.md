@@ -108,6 +108,8 @@ See [example/App.js](example/App.js)
 - **`renderMessage`** _(Function)_ - render the message container
 - **`renderMessageText`** _(Function)_ - render the message text
 - **`renderMessageImage`** _(Function)_ - render the message image
+- **`imageProps`** _(Object)_ - extra props to be passed to the [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component created by the default `renderMessageImage`
+- **`lightboxProps`** _(Object)_ - extra props to be passed to the MessageImage's [Lightbox](https://github.com/oblador/react-native-lightbox)
 - **`renderCustomView`** _(Function)_ - render a custom view inside the bubble
 - **`renderDay`** _(Function)_ - render the day above a message
 - **`renderTime`** _(Function)_ - render the message time
@@ -117,6 +119,7 @@ See [example/App.js](example/App.js)
 - **`renderComposer`** _(Function)_ - render the text input message composer
 - **`renderSend`** _(Function)_ - render the send button
 - **`renderAccessory`** _(Function)_ - renders a second line of actions below the message composer
+- **`onPressActionButton`** _(Function)_ - callback to perform custom logic when the Action button is pressed (the default `actionSheet` will not be used)
 - **`bottomOffset`** _(Integer)_ - distance of the chat from the bottom of the screen, useful if you display a tab bar
 
 

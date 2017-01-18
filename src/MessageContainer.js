@@ -151,6 +151,8 @@ export default class MessageContainer extends React.Component {
           renderHeader={this.renderFooter}
           renderFooter={this.renderLoadEarlier}
           renderScrollComponent={this.renderScrollComponent}
+          style={this.props.messageContainerStyle}
+          contentContainerStyle={this.props.messageContainerContentContainerStyle}
         />
       </View>
     );

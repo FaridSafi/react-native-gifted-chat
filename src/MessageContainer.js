@@ -139,19 +139,20 @@ export default class MessageContainer extends React.Component {
     return (
       <View ref='container' style={{flex:1}}>
         <ListView
-          enableEmptySections={true}
           keyboardShouldPersistTaps={'always'}
           automaticallyAdjustContentInsets={false}
           initialListSize={20}
           pageSize={20}
 
+          {...this.props.listViewProps}
+          
+          enableEmptySections={true}
           dataSource={this.state.dataSource}
 
           renderRow={this.renderRow}
           renderHeader={this.renderFooter}
           renderFooter={this.renderLoadEarlier}
           renderScrollComponent={this.renderScrollComponent}
-          {...this.props.listViewProps}
         />
       </View>
     );

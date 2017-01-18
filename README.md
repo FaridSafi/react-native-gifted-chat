@@ -121,6 +121,8 @@ See [example/App.js](example/App.js)
 - **`renderAccessory`** _(Function)_ - renders a second line of actions below the message composer
 - **`onPressActionButton`** _(Function)_ - callback to perform custom logic when the Action button is pressed (the default `actionSheet` will not be used)
 - **`bottomOffset`** _(Integer)_ - distance of the chat from the bottom of the screen, useful if you display a tab bar
+- **`onTopReached`** _(Function)_ - function to call when scroll top is reached
+- **`onTopReachedThreshold`** _(Integer)_ - distance to the top to trigger onTopReached
 
 
 ## Features

@@ -81,8 +81,14 @@ Avatar.propTypes = {
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
-  containerStyle: View.propTypes.style,
-  imageStyle: React.PropTypes.oneOfType([View.propTypes.style, Image.propTypes.style]),
+  containerStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
+  imageStyle: React.PropTypes.shape({
+    left: View.propTypes.style,
+    right: View.propTypes.style,
+  }),
   //TODO: remove in next major release
   isSameDay: React.PropTypes.func,
   isSameUser: React.PropTypes.func

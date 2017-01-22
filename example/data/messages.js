@@ -23,4 +23,11 @@ module.exports = [
       name: 'React Native',
     },
   },
+  {
+    _id: Math.round(Math.random() * 1000000),
+    text: 'Welcome in Gifted Chat!',
+    createdAt: new Date(Date.UTC(2016, 7, 30, 17, 19, 0)),
+    fromSystem: true,
+    user: null,
+  },
 ];

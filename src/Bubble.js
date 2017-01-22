@@ -60,7 +60,7 @@ export default class Bubble extends React.Component {
     if (this.props.renderTicks) {
         return this.props.renderTicks(currentMessage);
     }
-    if (currentMessage.user._id !== this.props.user._id) {
+    if (currentMessage.fromSystem || (currentMessage.user._id !== this.props.user._id)) {
         return;
     }
     if (currentMessage.sent || currentMessage.received) {
@@ -168,7 +168,7 @@ const styles = {
     },
     wrapper: {
       borderRadius: 15,
-      backgroundColor: '#f0f0f0',
+      backgroundColor: '#7E8B99',
       marginHorizontal: 30,
       minHeight: 20,
       justifyContent: 'flex-end',

@@ -92,11 +92,11 @@ const styles = {
     container: {
     },
     text: {
-      color: 'grey',
+      color: 'white',
       ...textStyle,
     },
     link: {
-      color: 'grey',
+      color: 'white',
       textDecorationLine: 'underline',
     },
   }),

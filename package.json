@@ -23,18 +23,25 @@
     "url": "https://github.com/FaridSafi/react-native-gifted-chat/issues"
   },
   "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
+  "scripts": {
+    "lint": "eslint . --ext .js,.jsx"
+  },
   "devDependencies": {
-    "eslint": "^3.2.2",
-    "eslint-plugin-react": "^6.0.0",
-    "eslint-plugin-react-native": "^2.0.0"
+    "eslint": "~3.12.2",
+    "eslint-config-airbnb": "~13.0.0",
+    "eslint-config-cooperka": "~0.2.3",
+    "eslint-plugin-import": "~2.2.0",
+    "eslint-plugin-jsx-a11y": "~2.2.3",
+    "eslint-plugin-react": "~6.8.0",
+    "eslint-plugin-react-native": "~2.2.1"
   },
   "dependencies": {
     "@exponent/react-native-action-sheet": "git+https://github.com/FaridSafi/react-native-action-sheet.git",
     "md5": "^2.1.0",
     "moment": "^2.13.0",
     "react-native-communications": "^2.1.0",
-    "react-native-dismiss-keyboard": "^1.0.0",
     "react-native-invertible-scroll-view": "^1.0.0",
+    "react-native-lightbox": "oblador/react-native-lightbox#c84a8543d4511fe6a44c3d7820747c9c1bddd875",
     "react-native-parsed-text": "^0.0.15",
     "shallowequal": "^0.2.2"
   }

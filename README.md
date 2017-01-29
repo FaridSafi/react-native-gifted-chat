@@ -5,7 +5,8 @@ The most complete chat UI for React Native (formerly known as Gifted Messenger)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png)
 
 ## Dependency
-React Native minimum version `0.29.0`
+Use `0.0.10` for RN < `0.40.0`  
+Use `0.1.0` for RN >= `0.40.0`
 
 ## Installation
 `npm install react-native-gifted-chat --save`

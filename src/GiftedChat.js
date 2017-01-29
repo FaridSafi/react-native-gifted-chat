@@ -329,6 +329,10 @@ class GiftedChat extends React.Component {
       return;
     }
 
+    if (this.props.onInputTextChanged) {
+      this.props.onInputTextChanged(e.nativeEvent.text);
+    }
+
     let newComposerHeight = null;
     if (e.nativeEvent && e.nativeEvent.contentSize) {
       newComposerHeight = Math.max(MIN_COMPOSER_HEIGHT, Math.min(MAX_COMPOSER_HEIGHT, e.nativeEvent.contentSize.height));
@@ -486,6 +490,7 @@ GiftedChat.defaultProps = {
 GiftedChat.propTypes = {
   messages: React.PropTypes.array,
   onSend: React.PropTypes.func,
+  onInputTextChanged: React.PropTypes.func,
   loadEarlier: React.PropTypes.bool,
   onLoadEarlier: React.PropTypes.func,
   locale: React.PropTypes.string,

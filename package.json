@@ -36,13 +36,13 @@
     "eslint-plugin-react-native": "~2.2.1"
   },
   "dependencies": {
-    "@exponent/react-native-action-sheet": "git+https://github.com/FaridSafi/react-native-action-sheet.git",
-    "md5": "^2.1.0",
-    "moment": "^2.13.0",
-    "react-native-communications": "^2.1.0",
-    "react-native-invertible-scroll-view": "^1.0.0",
+    "@exponent/react-native-action-sheet": "0.3.0",
+    "md5": "2.1.1",
+    "moment": "2.17.1",
+    "react-native-communications": "2.1.1",
+    "react-native-invertible-scroll-view": "1.0.0",
     "react-native-lightbox": "oblador/react-native-lightbox#c84a8543d4511fe6a44c3d7820747c9c1bddd875",
-    "react-native-parsed-text": "^0.0.15",
-    "shallowequal": "^0.2.2"
+    "react-native-parsed-text": "0.0.16",
+    "shallowequal": "0.2.2"
   }
 }

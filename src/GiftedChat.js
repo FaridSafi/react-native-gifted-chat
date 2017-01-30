@@ -9,6 +9,7 @@ import {
 
 import ActionSheet from '@exponent/react-native-action-sheet';
 import moment from 'moment/min/moment-with-locales.min';
+import uuid from 'node-uuid';
 
 import * as utils from './utils';
 import Actions from './Actions';
@@ -292,7 +293,7 @@ class GiftedChat extends React.Component {
         ...message,
         user: this.props.user,
         createdAt: new Date(),
-        _id: 'temp-id-' + Math.round(Math.random() * 1000000),
+        _id: this.props.messageIdGenerator(),
       };
     });
 
@@ -489,6 +490,7 @@ GiftedChat.defaultProps = {
   user: {},
   bottomOffset: 0,
   isLoadingEarlier: false,
+  messageIdGenerator: () => uuid.v4()
 };
 
 GiftedChat.propTypes = {
@@ -519,6 +521,7 @@ GiftedChat.propTypes = {
   user: React.PropTypes.object,
   bottomOffset: React.PropTypes.number,
   isLoadingEarlier: React.PropTypes.bool,
+  messageIdGenerator: React.PropTypes.func,
   keyboardShouldPersistTaps: React.PropTypes.oneOf(['always', 'never', 'handled']),
 };
 

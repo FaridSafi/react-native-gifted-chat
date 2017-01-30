@@ -43,6 +43,7 @@
     "@exponent/react-native-action-sheet": "^0.2.1",
     "md5": "^2.1.0",
     "moment": "^2.13.0",
+    "node-uuid": "^1.4.7",
     "react-native-communications": "^2.1.0",
     "react-native-dismiss-keyboard": "^1.0.0",
     "react-native-invertible-scroll-view": "^1.0.0",

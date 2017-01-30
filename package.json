@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@exponent/react-native-action-sheet": "0.3.0",
-    "md5": "2.1.1",
+    "md5": "2.2.1",
     "moment": "2.17.1",
     "react-native-communications": "2.1.1",
     "react-native-invertible-scroll-view": "1.0.0",

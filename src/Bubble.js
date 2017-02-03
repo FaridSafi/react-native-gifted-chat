@@ -11,7 +11,7 @@ import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
 
-import { isSameUser, isSameDay, warnDeprecated } from './utils';
+import { isSameUser, isSameDay, warnDeprecated, isFromOtherUser } from './utils';
 
 export default class Bubble extends React.Component {
   constructor(props) {
@@ -60,8 +60,8 @@ export default class Bubble extends React.Component {
     if (this.props.renderTicks) {
         return this.props.renderTicks(currentMessage);
     }
-    if (currentMessage.fromSystem || (currentMessage.user._id !== this.props.user._id)) {
-        return;
+    if (isFromOtherUser({ currentMessage, user: this.props.user })) {
+        return null;
     }
     if (currentMessage.sent || currentMessage.received) {
       return (
@@ -173,8 +173,6 @@ const styles = {
       minHeight: 20,
       justifyContent: 'flex-end',
     },
-    containerToNext: {},
-    containerToPrevious: {},
   }),
   right: StyleSheet.create({
     container: {

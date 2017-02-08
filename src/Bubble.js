@@ -11,7 +11,7 @@ import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
 
-import { isSameUser, isSameDay, warnDeprecated } from './utils';
+import { isSameUser, isSameDay, warnDeprecated, isFromOtherUser } from './utils';
 
 export default class Bubble extends React.Component {
   constructor(props) {
@@ -60,8 +60,8 @@ export default class Bubble extends React.Component {
     if (this.props.renderTicks) {
         return this.props.renderTicks(currentMessage);
     }
-    if (currentMessage.user._id !== this.props.user._id) {
-        return;
+    if (isFromOtherUser({ currentMessage, user: this.props.user })) {
+        return null;
     }
     if (currentMessage.sent || currentMessage.received) {
       return (
@@ -144,7 +144,6 @@ export default class Bubble extends React.Component {
 const styles = {
   left: StyleSheet.create({
     container: {
-      flex: 1,
       alignItems: 'flex-start',
     },
     wrapper: {
@@ -161,9 +160,20 @@ const styles = {
       borderTopLeftRadius: 3,
     },
   }),
+  center: StyleSheet.create({
+    container: {
+      alignItems: 'center',
+    },
+    wrapper: {
+      borderRadius: 15,
+      backgroundColor: '#7E8B99',
+      marginHorizontal: 30,
+      minHeight: 20,
+      justifyContent: 'flex-end',
+    },
+  }),
   right: StyleSheet.create({
     container: {
-      flex: 1,
       alignItems: 'flex-end',
     },
     wrapper: {
@@ -231,25 +241,31 @@ Bubble.propTypes = {
   renderMessageText: React.PropTypes.func,
   renderCustomView: React.PropTypes.func,
   renderTime: React.PropTypes.func,
-  position: React.PropTypes.oneOf(['left', 'right']),
+  isSameUser: React.PropTypes.func,
+  isSameDay: React.PropTypes.func,
+  position: React.PropTypes.oneOf(['left', 'center', 'right']),
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
   previousMessage: React.PropTypes.object,
   containerStyle: React.PropTypes.shape({
     left: View.propTypes.style,
+    center: View.propTypes.style,
     right: View.propTypes.style,
   }),
   wrapperStyle: React.PropTypes.shape({
     left: View.propTypes.style,
+    center: View.propTypes.style,
     right: View.propTypes.style,
   }),
   tickStyle: Text.propTypes.style,
   containerToNextStyle: React.PropTypes.shape({
     left: View.propTypes.style,
+    center: View.propTypes.style,
     right: View.propTypes.style,
   }),
   containerToPreviousStyle: React.PropTypes.shape({
     left: View.propTypes.style,
+    center: View.propTypes.style,
     right: View.propTypes.style,
   }),
   //TODO: remove in next major release

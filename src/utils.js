@@ -21,6 +21,12 @@ export function isSameUser(currentMessage = {}, diffMessage = {}) {
 
 }
 
+export function isFromOtherUser({ currentMessage = {}, user = {} }) {
+
+  return currentMessage.fromSystem || (currentMessage.user._id !== user._id);
+
+}
+
 export function warnDeprecated(fn) {
 
   return (...args) => {

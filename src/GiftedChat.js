@@ -301,6 +301,22 @@ class GiftedChat extends React.Component {
     );
   }
 
+  renderSuggestions() {
+    if (!this.props.renderSuggestions) {
+      return null;
+    }
+    const suggestions = this.props.renderSuggestions(this.props);
+    if (!suggestions) {
+      return null;
+    }
+    const bottom = this.calculateInputToolbarHeight(this.state.composerHeight) + this.getKeyboardHeight();
+    return (
+      <View style={[styles.suggestions, {bottom}]}>
+        {suggestions}
+      </View>
+    )
+  }
+
   onSend(messages = [], shouldResetInputToolbar = false) {
     if (!Array.isArray(messages)) {
       messages = [messages];
@@ -434,6 +450,7 @@ class GiftedChat extends React.Component {
           >
             {this.renderMessages()}
             {this.renderInputToolbar()}
+            {this.renderSuggestions()}
           </View>
         </ActionSheet>
       );
@@ -463,6 +480,11 @@ class GiftedChat extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  suggestions: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
   },
 });
 
@@ -500,6 +522,7 @@ GiftedChat.defaultProps = {
   renderMessage: null,
   renderSend: null,
   renderTime: null,
+  renderSuggestions: null,
   user: {},
   bottomOffset: 0,
   isLoadingEarlier: false,
@@ -529,6 +552,7 @@ GiftedChat.propTypes = {
   renderMessage: React.PropTypes.func,
   renderSend: React.PropTypes.func,
   renderTime: React.PropTypes.func,
+  renderSuggestions: React.PropTypes.func,
   user: React.PropTypes.object,
   bottomOffset: React.PropTypes.number,
   isLoadingEarlier: React.PropTypes.bool,

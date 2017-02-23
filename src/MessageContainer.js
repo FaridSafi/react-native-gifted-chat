@@ -146,7 +146,6 @@ export default class MessageContainer extends React.Component {
 
           {...this.props.listViewProps}
 
-          enableEmptySections={true}
           dataSource={this.state.dataSource}
 
           renderRow={this.renderRow}

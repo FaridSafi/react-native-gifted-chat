@@ -309,7 +309,7 @@ class GiftedChat extends React.Component {
     if (!suggestions) {
       return null;
     }
-    const bottom = this.calculateInputToolbarHeight(this.state.composerHeight) + this.getKeyboardHeight();
+    const bottom = this.calculateInputToolbarHeight(this.state.composerHeight);
     return (
       <View style={[styles.suggestions, {bottom}]}>
         {suggestions}

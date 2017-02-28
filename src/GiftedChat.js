@@ -309,9 +309,11 @@ class GiftedChat extends React.Component {
     if (!suggestions) {
       return null;
     }
-    const bottom = this.calculateInputToolbarHeight(this.state.composerHeight);
+    const bottom = this.calculateInputToolbarHeight(this.state.composerHeight) + 1;
     return (
-      <View style={[styles.suggestions, {bottom}]}>
+      <View style={[styles.suggestions, {bottom}]}
+            onLayout={e => this.setState({suggestionsHeight: e.nativeEvent.layout.height})}>
+
         {suggestions}
       </View>
     )
@@ -427,11 +429,12 @@ class GiftedChat extends React.Component {
   }
 
   render() {
+    const minHeight = Math.max(this.state.composerHeight || 0) + (this.state.suggestionsHeight || 0) + 10;
     if (this.state.isInitialized === true) {
       return (
         <ActionSheet ref={component => this._actionSheetRef = component}>
           <View
-            style={styles.container}
+            style={[styles.container, {minHeight}]}
             onLayout={(e) => {
               if (Platform.OS === 'android') {
                 // fix an issue when keyboard is dismissing during the initialization
@@ -480,6 +483,7 @@ class GiftedChat extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-end',
   },
   suggestions: {
     position: 'absolute',

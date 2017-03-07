@@ -537,6 +537,7 @@ export {
   InputToolbar,
   LoadEarlier,
   Message,
+  MessageContainer,
   Send,
   Time,
   GiftedAvatar,

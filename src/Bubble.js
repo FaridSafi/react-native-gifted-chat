@@ -216,6 +216,7 @@ Bubble.defaultProps = {
   previousMessage: {},
   containerStyle: {},
   wrapperStyle: {},
+  bottomContainerStyle: {},
   tickStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},

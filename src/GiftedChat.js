@@ -36,7 +36,7 @@ const MIN_COMPOSER_HEIGHT = Platform.select({
   android: 41,
 });
 const MAX_COMPOSER_HEIGHT = 100;
-const MIN_INPUT_TOOLBAR_HEIGHT = 44;
+var MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
 class GiftedChat extends React.Component {
   constructor(props) {
@@ -193,8 +193,10 @@ class GiftedChat extends React.Component {
     return this._isMounted;
   }
 
-  // TODO
-  // setMinInputToolbarHeight
+  setMinInputToolbarHeight(value) {
+    MIN_INPUT_TOOLBAR_HEIGHT = value;
+  }
+  
   getMinInputToolbarHeight() {
     if (this.props.renderAccessory) {
       return MIN_INPUT_TOOLBAR_HEIGHT * 2;

@@ -35,7 +35,6 @@ const MIN_COMPOSER_HEIGHT = Platform.select({
   android: 41,
 });
 const MAX_COMPOSER_HEIGHT = 100;
-const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
 class GiftedChat extends React.Component {
   constructor(props) {
@@ -49,7 +48,6 @@ class GiftedChat extends React.Component {
     this._isFirstLayout = true;
     this._locale = 'en';
     this._messages = [];
-    this.setMinInputToolbarHeight(props.minInputToolbarHeight || MIN_INPUT_TOOLBAR_HEIGHT);
 
     this.state = {
       isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -193,12 +191,10 @@ class GiftedChat extends React.Component {
     return this._isMounted;
   }
 
-  setMinInputToolbarHeight(value) {
-    this._minInputToolBarHeight = value;
-  }
-
+  // TODO
+  // setMinInputToolbarHeight
   getMinInputToolbarHeight() {
-    return this.props.renderAccessory ? this._minInputToolBarHeight * 2 : this._minInputToolBarHeight;
+    return this.props.renderAccessory ? this.props.minInputToolbarHeight * 2 : this.props.minInputToolbarHeight;
   }
 
   prepareMessagesContainerHeight(value) {
@@ -489,7 +485,7 @@ GiftedChat.defaultProps = {
   renderTime: null,
   user: {},
   bottomOffset: 0,
-  minInputToolbarHeight: 0,
+  minInputToolbarHeight: 44,
   isLoadingEarlier: false,
   messageIdGenerator: () => uuid.v4()
 };

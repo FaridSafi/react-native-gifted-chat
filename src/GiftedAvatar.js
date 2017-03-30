@@ -55,7 +55,7 @@ export default class GiftedAvatar extends React.Component {
           style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
         />
       );
-    }else if(typeof this.props.user.avatar==='number'){
+    } else if (typeof this.props.user.avatar === 'number') {
       return (
         <Image
           source={this.props.user.avatar}
@@ -63,7 +63,6 @@ export default class GiftedAvatar extends React.Component {
         />
       );
     }
-  
     return null;
   }
 

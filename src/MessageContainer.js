@@ -83,7 +83,7 @@ export default class MessageContainer extends React.Component {
   }
 
   renderLoadEarlier() {
-    if (this.props.loadEarlier === true) {
+    if (this.props.isLoadingEarlier === true) {
       const loadEarlierProps = {
         ...this.props,
       };

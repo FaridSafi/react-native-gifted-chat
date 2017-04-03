@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Animated,
-  InteractionManager,
   Platform,
   StyleSheet,
   View,
@@ -27,7 +26,6 @@ import MessageContainer from './MessageContainer';
 import Send from './Send';
 import Time from './Time';
 import GiftedAvatar from './GiftedAvatar';
-import GiftedChatInteractionManager from './GiftedChatInteractionManager';
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for Composer auto grow and ScrollView animation
@@ -258,7 +256,9 @@ class GiftedChat extends React.Component {
   }
 
   scrollToBottom(animated = true) {
-    if (this._messageContainerRef === null) { return }
+    if (this._messageContainerRef === null) {
+      return
+    }
     this._messageContainerRef.scrollTo({
       y: 0,
       animated,
@@ -333,8 +333,8 @@ class GiftedChat extends React.Component {
       }, 100);
     }
     if (Platform.OS === 'android' && _.get(this.refs, 'inputToolbar.refs.composer.refs.textInput')) { // hack to remove autocomplete cache
-      this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType:"email-address"});
-      this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType:"default"});
+      this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType: "email-address"});
+      this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType: "default"});
     }
   }
 
@@ -378,13 +378,11 @@ class GiftedChat extends React.Component {
       return;
     }
     this.setMaxHeight(layout.height);
-    GiftedChatInteractionManager.runAfterInteractions(() => {
-      this.setState({
-        isInitialized: true,
-        text: '',
-        composerHeight: MIN_COMPOSER_HEIGHT,
-        messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
-      });
+    this.setState({
+      isInitialized: true,
+      text: '',
+      composerHeight: MIN_COMPOSER_HEIGHT,
+      messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
     });
   }
 

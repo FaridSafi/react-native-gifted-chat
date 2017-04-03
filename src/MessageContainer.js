@@ -146,6 +146,8 @@ export default class MessageContainer extends React.Component {
           initialListSize={20}
           pageSize={20}
 
+          {...this.props.listViewProps}
+
           dataSource={this.state.dataSource}
 
           renderRow={this.renderRow}
@@ -164,6 +166,7 @@ MessageContainer.defaultProps = {
   user: {},
   renderFooter: null,
   renderMessage: null,
+  listViewProps: {},
   onLoadEarlier: () => {
   },
 };
@@ -174,4 +177,5 @@ MessageContainer.propTypes = {
   renderFooter: React.PropTypes.func,
   renderMessage: React.PropTypes.func,
   onLoadEarlier: React.PropTypes.func,
+  listViewProps: React.PropTypes.object,
 };

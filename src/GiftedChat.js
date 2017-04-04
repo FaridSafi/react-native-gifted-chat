@@ -374,9 +374,6 @@ class GiftedChat extends React.Component {
 
   onInitialLayoutViewLayout(e) {
     const layout = e.nativeEvent.layout;
-    if (layout.height <= 0) {
-      return;
-    }
     this.setMaxHeight(layout.height);
     this.setState({
       isInitialized: true,

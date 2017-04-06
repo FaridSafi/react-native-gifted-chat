@@ -257,7 +257,7 @@ class GiftedChat extends React.Component {
 
   scrollToBottom(animated = true) {
     if (this._messageContainerRef === null) {
-      return
+      return;
     }
     this._messageContainerRef.scrollTo({
       y: 0,
@@ -332,9 +332,13 @@ class GiftedChat extends React.Component {
         }
       }, 100);
     }
-    if (Platform.OS === 'android' && _.get(this.refs, 'inputToolbar.refs.composer.refs.textInput')) { // hack to remove autocomplete cache
-      this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType: "email-address"});
-      this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType: "default"});
+    if (Platform.OS === 'android') { // hack to remove autocomplete cache
+      if (_.get(this.refs, 'inputToolbar.refs.composer.refs.textInput')) {
+        this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType: "email-address"});
+        this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType: "default"});
+      } else {
+        console.warn('Could not find the textInput reference');
+      }
     }
   }
 

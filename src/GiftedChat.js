@@ -336,11 +336,12 @@ class GiftedChat extends React.Component {
 
   resetInputToolbar() {
     if (_.get(this.refs, 'inputToolbar.refs.composer.refs.textInput')) {
-      this.refs.inputToolbar.refs.composer.refs.textInput.clear();
+      const textInput = this.refs.inputToolbar.refs.composer.refs.textInput;
+      textInput.clear();
       // hack to remove autocomplete cache on android
       if (Platform.OS === 'android') {
-        this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType: "email-address"});
-        this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType: "default"});
+        textInput.setNativeProps({keyboardType: "email-address"});
+        textInput.setNativeProps({keyboardType: "default"});
       }
     } else {
       console.warn('Could not clear the textInput');

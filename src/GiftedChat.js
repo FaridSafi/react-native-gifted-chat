@@ -332,13 +332,14 @@ class GiftedChat extends React.Component {
         }
       }, 100);
     }
-    if (Platform.OS === 'android') { // hack to remove autocomplete cache
-      if (_.get(this.refs, 'inputToolbar.refs.composer.refs.textInput')) {
+    // hack to remove autocomplete cache on android
+    if (_.get(this.refs, 'inputToolbar.refs.composer.refs.textInput')) {
+      if (Platform.OS === 'android') {
         this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType: "email-address"});
         this.refs.inputToolbar.refs.composer.refs.textInput.setNativeProps({keyboardType: "default"});
-      } else {
-        console.warn('Could not find the textInput reference');
       }
+    } else {
+      console.warn('Could not find the textInput reference');
     }
   }
 
@@ -414,7 +415,7 @@ class GiftedChat extends React.Component {
       onTextChanged: this.onInputTextChanged,
       textInputProps: {
         ...this.props.textInputProps,
-        ref: textInput => this.textInput = textInput,
+        ref: 'textInput',
         maxLength: this.getIsTypingDisabled() ? 0 : null
       }
     };

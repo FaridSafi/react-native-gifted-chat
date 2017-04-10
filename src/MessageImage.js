@@ -10,7 +10,9 @@ import Lightbox from 'react-native-lightbox';
 export default class MessageImage extends React.Component {
   render() {
     const { width, height } = Dimensions.get('window');
-
+    const { imageRatio } = this.props.currentMessage
+    const maxBubbleWidth = width - 78
+    const imageHeight = maxBubbleWidth / imageRatio <= maxBubbleWidth ? maxBubbleWidth / imageRatio : maxBubbleWidth
     return (
       <View style={[styles.container, this.props.containerStyle]}>
         <Lightbox
@@ -21,7 +23,7 @@ export default class MessageImage extends React.Component {
         >
           <Image
             {...this.props.imageProps}
-            style={[styles.image, this.props.imageStyle]}
+            style={[styles.image, this.props.imageStyle, { width: maxBubbleWidth, height: imageHeight }]}
             source={{uri: this.props.currentMessage.image}}
           />
         </Lightbox>
@@ -34,8 +36,6 @@ const styles = StyleSheet.create({
   container: {
   },
   image: {
-    width: 150,
-    height: 100,
     borderRadius: 13,
     margin: 3,
     resizeMode: 'cover',

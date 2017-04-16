@@ -13,6 +13,7 @@ export default class Avatar extends React.Component {
       <GiftedAvatar
         avatarStyle={StyleSheet.flatten([styles[this.props.position].image, this.props.imageStyle[this.props.position]])}
         user={this.props.currentMessage.user}
+        onPress={() => this.props.onPressAvatar && this.props.onPressAvatar(this.props.currentMessage.user)}
       />
     );
   }
@@ -90,6 +91,7 @@ Avatar.propTypes = {
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
+  onPressAvatar: React.PropTypes.func,
   containerStyle: React.PropTypes.shape({
     left: View.propTypes.style,
     right: View.propTypes.style,

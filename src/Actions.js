@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     borderRadius: 13,
     borderColor: '#b2b2b2',
     borderWidth: 2,
-    flex: 1,
+    flexGrow: 1,
   },
   iconText: {
     color: '#b2b2b2',

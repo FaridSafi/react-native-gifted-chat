@@ -3,6 +3,10 @@
   "version": "0.1.4",
   "description": "The most complete chat UI for React Native",
   "main": "index.js",
+  "engines": {
+    "node": "6.2.1",
+    "npm": "3.9.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
@@ -37,6 +41,7 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "0.3.0",
+    "lodash": "^4.16.4",
     "md5": "2.2.1",
     "moment": "2.17.1",
     "react-native-communications": "2.2.1",

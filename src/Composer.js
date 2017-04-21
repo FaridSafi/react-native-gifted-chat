@@ -24,6 +24,7 @@ export default class Composer extends React.Component {
   render() {
     return (
       <TextInput
+        ref={'textInput'}
         placeholder={this.props.placeholder}
         placeholderTextColor={this.props.placeholderTextColor}
         multiline={this.props.multiline}
@@ -45,7 +46,7 @@ export default class Composer extends React.Component {
 
 const styles = StyleSheet.create({
   textInput: {
-    flex: 1,
+    flexGrow: 1,
     marginLeft: 10,
     fontSize: 16,
     lineHeight: 16,

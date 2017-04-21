@@ -32,6 +32,7 @@ export default class InputToolbar extends React.Component {
 
     return (
       <Composer
+        ref={'composer'}
         {...this.props}
       />
     );

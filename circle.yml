@@ -1,0 +1,15 @@
+machine:
+  environment:
+    PATH: ${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin
+    NODE_ENV: test
+  node:
+    version: 6.2.1
+dependencies:
+  pre:
+    - npm install -g npm@3
+    - git config user.name "CircleCI"
+    - git config user.email "circleci@edtechfoundry.com"
+  cache_directories:
+    - node_modules
+  override:
+    - npm prune && npm install

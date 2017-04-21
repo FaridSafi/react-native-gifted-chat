@@ -125,6 +125,7 @@ See [example/App.js](example/App.js)
 - **`renderSend`** _(Function)_ - render the send button
 - **`renderAccessory`** _(Function)_ - renders a second line of actions below the message composer
 - **`onPressActionButton`** _(Function)_ - callback to perform custom logic when the Action button is pressed (the default `actionSheet` will not be used)
+- **`renderSuggestions`** _(Function)_ - renders suggestions for composer
 - **`bottomOffset`** _(Integer)_ - distance of the chat from the bottom of the screen, useful if you display a tab bar
 - **`minInputToolbarHeight`** _(Integer)_ - minimum height of the input toolbar. The default value is `44`.
 - **`listViewProps`** _(Object)_ - extra props to be passed to the [`<ListView>`](https://facebook.github.io/react-native/docs/listview.html), some props can not be override, see the code in `render` method of `MessageContainer` for detail

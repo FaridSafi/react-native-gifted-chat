@@ -155,6 +155,8 @@ export default class MessageContainer extends React.Component {
           renderFooter={this.renderLoadEarlier}
           renderScrollComponent={this.renderScrollComponent}
           onChangeVisibleRows={this.props.onChangeVisibleRows}
+          onEndReached={this.props.onTopReached}
+          onEndReachedThreshold={this.props.onTopReachedThreshold}
         />
       </View>
     );
@@ -178,4 +180,6 @@ MessageContainer.propTypes = {
   renderMessage: React.PropTypes.func,
   onLoadEarlier: React.PropTypes.func,
   listViewProps: React.PropTypes.object,
+  onTopReached: React.PropTypes.func,
+  onTopReachedThreshold: React.PropTypes.number,
 };

@@ -36,7 +36,7 @@
     "eslint-plugin-react-native": "~2.2.1"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "0.3.0",
+    "@expo/react-native-action-sheet": "github:kesha-antonov/react-native-action-sheet#1dc9afb93fad90858ccca02dcfc23c2f12afe71a",
     "md5": "2.2.1",
     "moment": "2.17.1",
     "react-native-communications": "2.2.1",

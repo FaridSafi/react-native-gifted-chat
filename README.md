@@ -117,6 +117,7 @@ See [example/App.js](example/App.js)
 - **`renderDay`** _(Function)_ - render the day above a message
 - **`renderTime`** _(Function)_ - render the message time
 - **`renderFooter`** _(Function)_ - renders a fixed bottom view. Can be used for 'is typing message', see [example/App.js](example/App.js)
+- **`shouldHideInputToolbar`** _(Bool)_ - hides the input toolbar
 - **`renderInputToolbar`** _(Function)_ - render the composer container
 - **`renderActions`** _(Function)_ - renders an action button on the left of the message composer
 - **`renderComposer`** _(Function)_ - render the text input message composer

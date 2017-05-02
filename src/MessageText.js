@@ -108,10 +108,9 @@ const styles = {
       textDecorationLine: 'underline',
     },
     usernameStyle: {
-      marginLeft: 2, 
-      marginRight: 2, 
-      marginTop: 2, 
-      marginBottom: 2, 
+      marginLeft: 5, 
+      marginTop: 5,
+      backgroundColor: 'transparent',
       lineHeight: 10, 
       fontSize: 10, 
       fontWeight: '700'

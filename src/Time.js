@@ -10,7 +10,7 @@ import moment from 'moment/min/moment-with-locales.min';
 export default class Time extends React.Component {
   render() {
     return (
-      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
+      <View style={[styles[this.props.position].container, this.props.timeContainerStyle[this.props.position]]}>
         <Text style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}>
           {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT')}
         </Text>

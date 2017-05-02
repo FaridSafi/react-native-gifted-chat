@@ -12,7 +12,7 @@ export default class MessageImage extends React.Component {
     const { width, height } = Dimensions.get('window');
 
     return (
-      <View style={[styles.container, this.props.containerStyle]}>
+      <View style={[styles.container, this.props.messageImageContainerStyle]}>
         <Lightbox
           activeProps={{
             style: [styles.imageActive, { width, height }],

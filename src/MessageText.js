@@ -8,6 +8,8 @@ import {
 
 import ParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
+import GiftedAvatar from './GiftedAvatar'
+import {isSameUser, isSameDay} from "./utils";
 
 export default class MessageText extends React.Component {
   constructor(props) {
@@ -48,9 +50,27 @@ export default class MessageText extends React.Component {
     Communications.email(email, null, null, null, null);
   }
 
+  renderUsername() {
+    if (this.props.renderUsername) {
+      const {renderUsername, ...usernameProps} = this.props;
+      return this.props.renderUsername(usernameProps);
+    }
+    return (
+      <Text style={[styles[this.props.position].usernameStyle,
+        {color: GiftedAvatar.getColor(this.props.currentMessage.user.name)},
+        this.props.usernameStyle]}>
+        {this.props.currentMessage.user.name}
+      </Text>
+    );
+  }
+
   render() {
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
+        {(!isSameUser(this.props.currentMessage, this.props.previousMessage) || !isSameDay(this.props.currentMessage, this.props.previousMessage)) && 
+          this.props.shouldRenderUsername && this.props.position === 'left' ? 
+          this.renderUsername() : null
+        }
         <ParsedText
           style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}
           parse={[
@@ -87,6 +107,15 @@ const styles = {
       color: 'black',
       textDecorationLine: 'underline',
     },
+    usernameStyle: {
+      marginLeft: 2, 
+      marginRight: 2, 
+      marginTop: 2, 
+      marginBottom: 2, 
+      lineHeight: 10, 
+      fontSize: 10, 
+      fontWeight: '700'
+    }
   }),
   right: StyleSheet.create({
     container: {
@@ -114,6 +143,7 @@ MessageText.defaultProps = {
   containerStyle: {},
   textStyle: {},
   linkStyle: {},
+  usernameStyle: {},
 };
 
 MessageText.propTypes = {

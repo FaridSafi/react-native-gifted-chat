@@ -14,17 +14,7 @@ import {
 // handle only alpha numeric chars
 
 export default class GiftedAvatar extends React.Component {
-  setAvatarColor() {
-    const userName = this.props.user.name || '';
-    const name = userName.toUpperCase().split(' ');
-    if (name.length === 1) {
-      this.avatarName = `${name[0].charAt(0)}`;
-    } else if (name.length > 1) {
-      this.avatarName = `${name[0].charAt(0)}${name[1].charAt(0)}`;
-    } else {
-      this.avatarName = '';
-    }
-
+  static getColor(userName) {
     let sumChars = 0;
     for(let i = 0; i < userName.length; i++) {
       sumChars += userName.charCodeAt(i);
@@ -42,7 +32,18 @@ export default class GiftedAvatar extends React.Component {
       '#2c3e50', // midnight blue
     ];
 
-    this.avatarColor = colors[sumChars % colors.length];
+    return colors[sumChars % colors.length];
+  }
+
+  static getInitials(userName) {
+    const name = userName.toUpperCase().split(' ').filter(word => word !== '');
+    if (name.length === 1) {
+      return `${name[0].charAt(0)}`;
+    } else if (name.length > 1) {
+      return `${name[0].charAt(0)}${name[1].charAt(0)}`;
+    } else {
+      return '';
+    }
   }
 
   renderAvatar() {
@@ -69,7 +70,7 @@ export default class GiftedAvatar extends React.Component {
   renderInitials() {
     return (
       <Text style={[defaultStyles.textStyle, this.props.textStyle]}>
-        {this.avatarName}
+        {GiftedAvatar.getInitials(this.props.user.name)}
       </Text>
     );
   }
@@ -104,7 +105,7 @@ export default class GiftedAvatar extends React.Component {
     }
 
     if (!this.avatarColor) {
-      this.setAvatarColor();
+      this.avatarColor = GiftedAvatar.getColor(this.props.user.name || '')
     }
 
     return (

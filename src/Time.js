@@ -11,7 +11,7 @@ export default class Time extends React.Component {
   render() {
     return (
       <View style={[styles[this.props.position].container, this.props.timeContainerStyle[this.props.position]]}>
-        <Text style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}>
+        <Text style={[styles[this.props.position].text, this.props.timeTextStyle[this.props.position]]}>
           {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT')}
         </Text>
       </View>
@@ -62,7 +62,7 @@ Time.defaultProps = {
     createdAt: null,
   },
   timeContainerStyle: {},
-  textStyle: {},
+  timeTextStyle: {},
 };
 
 Time.propTypes = {
@@ -72,7 +72,7 @@ Time.propTypes = {
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),
-  textStyle: React.PropTypes.shape({
+  timeTextStyle: React.PropTypes.shape({
     left: Text.propTypes.style,
     right: Text.propTypes.style,
   }),

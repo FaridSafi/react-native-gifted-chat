@@ -35,7 +35,7 @@ export default class Bubble extends React.Component {
 
   renderMessageText() {
     if (this.props.currentMessage.text) {
-      const {containerStyle, wrapperStyle, ...messageTextProps} = this.props;
+      const {wrapperStyle, ...messageTextProps} = this.props;
       if (this.props.renderMessageText) {
         return this.props.renderMessageText(messageTextProps);
       }
@@ -46,7 +46,7 @@ export default class Bubble extends React.Component {
 
   renderMessageImage() {
     if (this.props.currentMessage.image) {
-      const {containerStyle, wrapperStyle, ...messageImageProps} = this.props;
+      const {wrapperStyle, ...messageImageProps} = this.props;
       if (this.props.renderMessageImage) {
         return this.props.renderMessageImage(messageImageProps);
       }
@@ -75,7 +75,7 @@ export default class Bubble extends React.Component {
 
   renderTime() {
     if (this.props.currentMessage.createdAt) {
-      const {containerStyle, wrapperStyle, ...timeProps} = this.props;
+      const {wrapperStyle, ...timeProps} = this.props;
       if (this.props.renderTime) {
         return this.props.renderTime(timeProps);
       }
@@ -214,7 +214,7 @@ Bubble.defaultProps = {
   },
   nextMessage: {},
   previousMessage: {},
-  containerStyle: {},
+  bubbleContainerStyle: {},
   wrapperStyle: {},
   bottomContainerStyle: {},
   tickStyle: {},
@@ -236,7 +236,7 @@ Bubble.propTypes = {
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
   previousMessage: React.PropTypes.object,
-  containerStyle: React.PropTypes.shape({
+  bubbleContainerStyle: React.PropTypes.shape({
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),

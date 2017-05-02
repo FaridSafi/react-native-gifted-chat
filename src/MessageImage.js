@@ -49,7 +49,7 @@ MessageImage.defaultProps = {
   currentMessage: {
     image: null,
   },
-  containerStyle: {},
+  messageImageContainerStyle: {},
   imageStyle: {},
   imageProps: {},
   lightboxProps: {},
@@ -57,7 +57,7 @@ MessageImage.defaultProps = {
 
 MessageImage.propTypes = {
   currentMessage: React.PropTypes.object,
-  containerStyle: View.propTypes.style,
+  messageImageContainerStyle: View.propTypes.style,
   imageStyle: Image.propTypes.style,
   imageProps: React.PropTypes.object,
   lightboxProps: React.PropTypes.object,

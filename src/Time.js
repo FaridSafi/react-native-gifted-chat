@@ -61,14 +61,14 @@ Time.defaultProps = {
   currentMessage: {
     createdAt: null,
   },
-  containerStyle: {},
+  timeContainerStyle: {},
   textStyle: {},
 };
 
 Time.propTypes = {
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
-  containerStyle: React.PropTypes.shape({
+  timeContainerStyle: React.PropTypes.shape({
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),

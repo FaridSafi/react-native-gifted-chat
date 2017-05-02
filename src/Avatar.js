@@ -79,7 +79,7 @@ Avatar.defaultProps = {
     user: null,
   },
   nextMessage: {},
-  containerStyle: {},
+  avatarContainerStyle: {},
   imageStyle: {},
   //TODO: remove in next major release
   isSameDay: warnDeprecated(isSameDay),
@@ -92,7 +92,7 @@ Avatar.propTypes = {
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
   onPressAvatar: React.PropTypes.func,
-  containerStyle: React.PropTypes.shape({
+  avatarContainerStyle: React.PropTypes.shape({
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),

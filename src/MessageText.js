@@ -112,7 +112,7 @@ const styles = {
       marginRight: 5,
       marginTop: 5,
       backgroundColor: 'transparent',
-      lineHeight: 10, 
+      lineHeight: 12, 
       fontSize: 10, 
       fontWeight: '700'
     }

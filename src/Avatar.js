@@ -23,7 +23,7 @@ export default class Avatar extends React.Component {
     const messageToCompare = renderAvatarOnTop ? this.props.previousMessage : this.props.nextMessage;
     const computedStyle = renderAvatarOnTop ? "onTop" : "onBottom"
 
-    if(this.props.shouldRenderAvatar === false) {
+    if (this.props.renderAvatar === null) {
       return null
     }
 

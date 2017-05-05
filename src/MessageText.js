@@ -66,7 +66,7 @@ export default class MessageText extends React.Component {
 
   render() {
     return (
-      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
+      <View style={[styles[this.props.position].container, this.props.messageTextContainerStyle[this.props.position]]}>
         {(!isSameUser(this.props.currentMessage, this.props.previousMessage) || !isSameDay(this.props.currentMessage, this.props.previousMessage))
           && (this.props.renderUsername !== null) && this.props.position === 'left' ? 
           this.renderUsername() : null

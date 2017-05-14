@@ -139,6 +139,7 @@ export default class MessageContainer extends React.Component {
     return (
       <View ref='container' style={{flex:1}}>
         <ListView
+          contentContainerStyle={{flex: 1, justifyContent: 'flex-end'}}
           enableEmptySections={true}
           automaticallyAdjustContentInsets={false}
           initialListSize={20}

@@ -29,7 +29,7 @@ export default class Avatar extends React.Component {
 
     if (isSameUser(this.props.currentMessage, messageToCompare) && isSameDay(this.props.currentMessage, messageToCompare)) {
       return (
-        <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
+        <View style={[styles[this.props.position].container, this.props.avatarContainerStyle[this.props.position]]}>
           <GiftedAvatar
             avatarStyle={StyleSheet.flatten([styles[this.props.position].image, this.props.imageStyle[this.props.position]])}
           />
@@ -39,7 +39,7 @@ export default class Avatar extends React.Component {
     
     return (
       <View
-        style={[styles[this.props.position].container, styles[this.props.position][computedStyle], this.props.containerStyle[this.props.position]]}>
+        style={[styles[this.props.position].container, styles[this.props.position][computedStyle], this.props.avatarContainerStyle[this.props.position]]}>
         {this.renderAvatar()}
       </View>
     );
@@ -84,7 +84,7 @@ Avatar.defaultProps = {
     user: null,
   },
   nextMessage: {},
-  containerStyle: {},
+  avatarContainerStyle: {},
   imageStyle: {},
   //TODO: remove in next major release
   isSameDay: warnDeprecated(isSameDay),
@@ -97,7 +97,7 @@ Avatar.propTypes = {
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
   onPressAvatar: React.PropTypes.func,
-  containerStyle: React.PropTypes.shape({
+  avatarContainerStyle: React.PropTypes.shape({
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),

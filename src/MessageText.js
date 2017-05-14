@@ -50,7 +50,7 @@ export default class MessageText extends React.Component {
 
   render() {
     return (
-      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
+      <View style={[styles[this.props.position].container, this.props.messageTextContainerStyle[this.props.position]]}>
         <ParsedText
           style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}
           parse={[
@@ -111,7 +111,7 @@ MessageText.defaultProps = {
   currentMessage: {
     text: '',
   },
-  containerStyle: {},
+  messageTextContainerStyle: {},
   textStyle: {},
   linkStyle: {},
 };
@@ -119,7 +119,7 @@ MessageText.defaultProps = {
 MessageText.propTypes = {
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
-  containerStyle: React.PropTypes.shape({
+  messageTextContainerStyle: React.PropTypes.shape({
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),

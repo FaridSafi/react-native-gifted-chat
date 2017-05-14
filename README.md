@@ -105,7 +105,7 @@ See [example/App.js](example/App.js)
 - **`isLoadingEarlier`** _(Bool)_ - display an ActivityIndicator when loading earlier messages
 - **`renderLoading`** _(Function)_ - render a loading view when initializing
 - **`renderLoadEarlier`** _(Function)_ - render the load earlier button
-- **`renderAvatar`** _(Function)_ - renders the message avatar
+- **`renderAvatar`** _(Function)_ - renders the message avatar. Set to `null` to not render any avatar for the message
 - **`onPressAvatar`** _(Function(`user`))_ - callback when a message avatar is tapped
 - **`renderAvatarOnTop`** _(Bool)_ - render the message avatar, on top of consecutive messages. The default value is `false`.
 - **`renderBubble`** _(Function)_ - render the message bubble

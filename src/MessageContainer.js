@@ -62,7 +62,7 @@ export default class MessageContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.messages === nextProps.messages) {
+    if (this.props.messages === nextProps.messages && this.props === nextProps) {
       return;
     }
     const messagesData = this.prepareMessages(nextProps.messages);

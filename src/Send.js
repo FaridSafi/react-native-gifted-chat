@@ -27,7 +27,13 @@ export default class Send extends React.Component {
         </TouchableOpacity>
       );
     }
-    return <View/>;
+    return (
+      <View style={[styles.container, this.props.containerStyle]}>
+        <Text style={[styles.text, styles.textDisabled, this.props.textDisabledStyle]}>
+          {this.props.label}
+        </Text>
+      </View>
+    );
   }
 }
 
@@ -39,19 +45,23 @@ const styles = StyleSheet.create({
   text: {
     color: '#0084ff',
     fontWeight: '600',
-    fontSize: 17,
+    fontSize: 12,
     backgroundColor: 'transparent',
     marginBottom: 12,
     marginLeft: 10,
     marginRight: 10,
   },
+  textDisabled: {
+    color: 'rgb(201, 201, 201)',
+  }
 });
 
 Send.defaultProps = {
   text: '',
   onSend: () => {},
-  label: 'Send',
+  label: 'SEND',
   containerStyle: {},
+  textDisabledStyle: {},
   textStyle: {},
 };
 

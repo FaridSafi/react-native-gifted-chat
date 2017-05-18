@@ -19,6 +19,10 @@ export default class MessageContainer extends React.Component {
     this.renderFooter = this.renderFooter.bind(this);
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
     this.renderScrollComponent = this.renderScrollComponent.bind(this);
+    
+	  this.showLoadEarlier = props.loadEarlier;  
+    if (props.messages.length > 20)
+      this.showLoadEarlier = false;  
 
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => {
@@ -64,8 +68,11 @@ export default class MessageContainer extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.messages === nextProps.messages) {
       return;
-    }
-    const messagesData = this.prepareMessages(nextProps.messages);
+	}
+	if (nextProps.messages.length - this.props.messages.length < 20)
+    this.showLoadEarlier = false;
+    
+	const messagesData = this.prepareMessages(nextProps.messages);
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys)
     });
@@ -82,7 +89,7 @@ export default class MessageContainer extends React.Component {
   }
 
   renderLoadEarlier() {
-    if (this.props.loadEarlier === true) {
+    if (this.props.loadEarlier === true && this.showLoadEarlier === true) {
       const loadEarlierProps = {
         ...this.props,
       };

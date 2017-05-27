@@ -37,13 +37,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   text: {
-    color: '#0084ff',
-    fontWeight: '600',
-    fontSize: 17,
     backgroundColor: 'transparent',
     marginBottom: 12,
     marginLeft: 10,
     marginRight: 10,
+    color: '#FFD105',
+    fontFamily: 'OpenSans-Semibold', fontSize: 16,
   },
 });
 

@@ -12,7 +12,7 @@ export default class Time extends React.Component {
   render() {
     const  {isRead} = this.props.currentMessage;
     let isReadElement = <Image
-      source={isRead ? require('./../../../assets/images/IconCheckGreen.png') : null}
+      source={isRead ? require('./../assets/IconCheckGreen.png') : null }
       style={{
         width: 8, height: 5.82,
         marginLeft: 4,

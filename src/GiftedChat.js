@@ -35,7 +35,7 @@ const MIN_COMPOSER_HEIGHT = Platform.select({
   ios: 33,
   android: 41,
 });
-const MAX_COMPOSER_HEIGHT = 100;
+const MAX_COMPOSER_HEIGHT = 300;
 
 class GiftedChat extends React.Component {
   constructor(props) {

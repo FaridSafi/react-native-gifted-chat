@@ -493,7 +493,7 @@ GiftedChat.defaultProps = {
   }),
   renderAccessory: null,
   renderActions: null,
-  renderAvatar: null,
+  renderAvatar: undefined,
   renderBubble: null,
   renderFooter: null,
   renderChatFooter: null,

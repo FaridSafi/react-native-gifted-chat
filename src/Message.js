@@ -86,7 +86,7 @@ const styles = {
 };
 
 Message.defaultProps = {
-  renderAvatar: null,
+  renderAvatar: undefined,
   renderBubble: null,
   renderDay: null,
   position: 'left',

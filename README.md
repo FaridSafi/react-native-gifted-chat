@@ -12,6 +12,9 @@ Use `0.1.0` for RN >= `0.40.0`
 `npm install react-native-gifted-chat --save`
 
 ## Android installation
+
+If you are using Create React Native App / Expo, no Android specific installation steps are required -- you can skip this seciton. Otherwise, you will need to modify your project configuration as follows.
+
 - Add `android:windowSoftInputMode="adjustResize"` to your Android Manifest `android/app/src/main/AndroidManifest.xml`
 ```xml
 <!-- ... -->

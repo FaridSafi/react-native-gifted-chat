@@ -23,7 +23,15 @@ export default class Send extends React.Component {
           }}
           accessibilityTraits="button"
         >
-          <Text style={[styles.text, this.props.textStyle]}>{this.props.label}</Text>
+            {this.props.children ?
+              <View>
+                {this.props.children}
+              </View>
+              :
+              <View>
+                <Text style={[styles.text, this.props.textStyle]}>{this.props.label}</Text>
+              </View>
+            }
         </TouchableOpacity>
       );
     }

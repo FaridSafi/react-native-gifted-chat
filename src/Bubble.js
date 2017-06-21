@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  ViewPropTypes,
 } from 'react-native';
 
 import MessageText from './MessageText';
@@ -237,25 +238,25 @@ Bubble.propTypes = {
   nextMessage: React.PropTypes.object,
   previousMessage: React.PropTypes.object,
   containerStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
   wrapperStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
   bottomContainerStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
   tickStyle: Text.propTypes.style,
   containerToNextStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
   containerToPreviousStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
   //TODO: remove in next major release
   isSameDay: React.PropTypes.func,

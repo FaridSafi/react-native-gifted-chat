@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ViewPropTypes,
 } from 'react-native';
 
 import ParsedText from 'react-native-parsed-text';
@@ -120,8 +121,8 @@ MessageText.propTypes = {
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
   containerStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
   textStyle: React.PropTypes.shape({
     left: Text.propTypes.style,

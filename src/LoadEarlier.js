@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ViewPropTypes,
 } from 'react-native';
 
 export default class LoadEarlier extends React.Component {
@@ -94,8 +95,8 @@ LoadEarlier.propTypes = {
   onLoadEarlier: React.PropTypes.func,
   isLoadingEarlier: React.PropTypes.bool,
   label: React.PropTypes.string,
-  containerStyle: View.propTypes.style,
-  wrapperStyle: View.propTypes.style,
+  containerStyle: ViewPropTypes.style,
+  wrapperStyle: ViewPropTypes.style,
   textStyle: Text.propTypes.style,
-  activityIndicatorStyle: View.propTypes.style,
+  activityIndicatorStyle: ViewPropTypes.style,
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   StyleSheet,
+  ViewPropTypes,
 } from 'react-native';
 
 import Avatar from './Avatar';
@@ -107,7 +108,7 @@ Message.propTypes = {
   previousMessage: React.PropTypes.object,
   user: React.PropTypes.object,
   containerStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
 };

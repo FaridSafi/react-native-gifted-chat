@@ -16,7 +16,7 @@ export default class Day extends React.Component {
         <View style={[styles.container, this.props.containerStyle]}>
           <View style={[styles.wrapper, this.props.wrapperStyle]}>
             <Text style={[styles.text, this.props.textStyle]}>
-              {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('ll').toUpperCase()}
+              {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('ll')}
             </Text>
           </View>
         </View>
@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   wrapper: {
+    backgroundColor: '#0C0C11',
+    paddingHorizontal: 15,
+    paddingVertical: 4,
+    borderRadius: 40,
+
     // backgroundColor: '#ccc',
     // borderRadius: 10,
     // paddingLeft: 10,
@@ -43,9 +48,10 @@ const styles = StyleSheet.create({
   },
   text: {
     backgroundColor: 'transparent',
-    color: '#b2b2b2',
-    fontSize: 12,
-    fontWeight: '600',
+    color: '#909297',
+    fontSize: 11,
+    fontFamily: 'OpenSans-Light'
+
   },
 });
 

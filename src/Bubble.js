@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Text,
   Clipboard,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -55,24 +54,6 @@ export default class Bubble extends React.Component {
     return null;
   }
 
-  renderTicks() {
-    const {currentMessage} = this.props;
-    if (this.props.renderTicks) {
-        return this.props.renderTicks(currentMessage);
-    }
-    if (currentMessage.user._id !== this.props.user._id) {
-        return;
-    }
-    if (currentMessage.sent || currentMessage.received) {
-      return (
-        <View style={styles.tickView}>
-          {currentMessage.sent && <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
-          {currentMessage.received && <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
-        </View>
-      )
-    }
-  }
-
   renderTime() {
     if (this.props.currentMessage.createdAt) {
       const {containerStyle, wrapperStyle, ...timeProps} = this.props;
@@ -80,6 +61,13 @@ export default class Bubble extends React.Component {
         return this.props.renderTime(timeProps);
       }
       return <Time {...timeProps}/>;
+    }
+    return null;
+  }
+
+  renderRetry() {
+    if (this.props.renderRetry) {
+      return this.props.renderRetry(this.props);
     }
     return null;
   }
@@ -93,7 +81,7 @@ export default class Bubble extends React.Component {
 
   onLongPress() {
     if (this.props.onLongPress) {
-      this.props.onLongPress(this.context, this.props.currentMessage);
+      this.props.onLongPress(this.context);
     } else {
       if (this.props.currentMessage.text) {
         const options = [
@@ -129,10 +117,8 @@ export default class Bubble extends React.Component {
               {this.renderCustomView()}
               {this.renderMessageImage()}
               {this.renderMessageText()}
-              <View style={[styles.bottom, this.props.bottomContainerStyle[this.props.position]]}>
-                {this.renderTime()}
-                {this.renderTicks()}
-              </View>
+              {this.renderTime()}
+              {this.renderRetry()}
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -148,7 +134,7 @@ const styles = {
       alignItems: 'flex-start',
     },
     wrapper: {
-      borderRadius: 15,
+      borderRadius: 14,
       backgroundColor: '#f0f0f0',
       marginRight: 60,
       minHeight: 20,
@@ -167,7 +153,7 @@ const styles = {
       alignItems: 'flex-end',
     },
     wrapper: {
-      borderRadius: 15,
+      borderRadius: 14,
       backgroundColor: '#0084ff',
       marginLeft: 60,
       minHeight: 20,
@@ -180,19 +166,6 @@ const styles = {
       borderTopRightRadius: 3,
     },
   }),
-  bottom: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  tick: {
-    fontSize: 10,
-    backgroundColor: 'transparent',
-    color: 'white',
-  },
-  tickView: {
-    flexDirection: 'row',
-    marginRight: 10,
-  }
 };
 
 Bubble.contextTypes = {
@@ -206,6 +179,7 @@ Bubble.defaultProps = {
   renderMessageText: null,
   renderCustomView: null,
   renderTime: null,
+  renderRetry: null,
   position: 'left',
   currentMessage: {
     text: null,
@@ -216,8 +190,6 @@ Bubble.defaultProps = {
   previousMessage: {},
   containerStyle: {},
   wrapperStyle: {},
-  bottomContainerStyle: {},
-  tickStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
   //TODO: remove in next major release
@@ -232,6 +204,7 @@ Bubble.propTypes = {
   renderMessageText: React.PropTypes.func,
   renderCustomView: React.PropTypes.func,
   renderTime: React.PropTypes.func,
+  renderRetry: React.PropTypes.func,
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
@@ -244,11 +217,6 @@ Bubble.propTypes = {
     left: View.propTypes.style,
     right: View.propTypes.style,
   }),
-  bottomContainerStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
-  }),
-  tickStyle: Text.propTypes.style,
   containerToNextStyle: React.PropTypes.shape({
     left: View.propTypes.style,
     right: View.propTypes.style,

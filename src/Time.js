@@ -3,32 +3,48 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
 } from 'react-native';
 
 import moment from 'moment/min/moment-with-locales.min';
 
 export default class Time extends React.Component {
   render() {
+    const  {isRead} = this.props.currentMessage;
+    let isReadElement = <Image
+      source={isRead ? require('./../assets/IconCheckGreen.png') : null }
+      style={{
+        width: 8, height: 5.82,
+        marginLeft: 4,
+      }}
+    />
+
+
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
         <Text style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}>
           {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT')}
         </Text>
+        {isReadElement}
       </View>
     );
   }
 }
 
 const containerStyle = {
-  marginLeft: 10,
-  marginRight: 10,
+  marginLeft: 20,
+  marginRight: 20,
   marginBottom: 5,
+  flexDirection: 'row',
+  alignItems: 'center',
 };
 
 const textStyle = {
   fontSize: 10,
   backgroundColor: 'transparent',
-  textAlign: 'right',
+  textAlign: 'left',
+  color: '#979AA8',
+  fontFamily: 'OpenSans-Light', fontSize: 10,
 };
 
 const styles = {

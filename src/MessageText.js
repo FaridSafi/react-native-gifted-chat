@@ -35,12 +35,13 @@ export default class MessageText extends React.Component {
     (buttonIndex) => {
       switch (buttonIndex) {
         case 0:
-          Communications.phonecall(phone, true);
+            Communications.text(phone);
           break;
         case 1:
-          Communications.text(phone);
+            Communications.phonecall(phone, true);
           break;
       }
+      
     });
   }
 
@@ -67,12 +68,17 @@ export default class MessageText extends React.Component {
 }
 
 const textStyle = {
-  fontSize: 16,
+  color: '#fff',
+  fontFamily: 'OpenSans-Light', fontSize: 16,
   lineHeight: 20,
   marginTop: 5,
   marginBottom: 5,
   marginLeft: 10,
   marginRight: 10,
+  paddingVertical: 8,
+  paddingHorizontal: 8,
+  paddingBottom: 0,
+  color: '#fff',
 };
 
 const styles = {
@@ -80,11 +86,10 @@ const styles = {
     container: {
     },
     text: {
-      color: 'black',
       ...textStyle,
     },
     link: {
-      color: 'black',
+      color: '#fff',
       textDecorationLine: 'underline',
     },
   }),
@@ -92,11 +97,10 @@ const styles = {
     container: {
     },
     text: {
-      color: 'white',
       ...textStyle,
     },
     link: {
-      color: 'white',
+      color: '#fff',
       textDecorationLine: 'underline',
     },
   }),

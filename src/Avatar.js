@@ -13,6 +13,7 @@ export default class Avatar extends React.Component {
       <GiftedAvatar
         avatarStyle={StyleSheet.flatten([styles[this.props.position].image, this.props.imageStyle[this.props.position]])}
         user={this.props.currentMessage.user}
+        onPress={() => this.props.onPressAvatar && this.props.onPressAvatar(this.props.currentMessage.user)}
       />
     );
   }
@@ -21,6 +22,10 @@ export default class Avatar extends React.Component {
     const renderAvatarOnTop = this.props.renderAvatarOnTop;
     const messageToCompare = renderAvatarOnTop ? this.props.previousMessage : this.props.nextMessage;
     const computedStyle = renderAvatarOnTop ? "onTop" : "onBottom"
+
+    if (this.props.renderAvatar === null) {
+      return null
+    }
 
     if (isSameUser(this.props.currentMessage, messageToCompare) && isSameDay(this.props.currentMessage, messageToCompare)) {
       return (
@@ -31,6 +36,7 @@ export default class Avatar extends React.Component {
         </View>
       );
     }
+    
     return (
       <View
         style={[styles[this.props.position].container, styles[this.props.position][computedStyle], this.props.containerStyle[this.props.position]]}>
@@ -90,6 +96,7 @@ Avatar.propTypes = {
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
+  onPressAvatar: React.PropTypes.func,
   containerStyle: React.PropTypes.shape({
     left: View.propTypes.style,
     right: View.propTypes.style,

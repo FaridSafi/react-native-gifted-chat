@@ -144,7 +144,7 @@ export default class MessageContainer extends React.Component {
           initialListSize={20}
           pageSize={20}
           onEndReached={this.props.onTopReached}
-          onEndReachedThreshold={1500}
+          onEndReachedThreshold={this.props.onTopReachedThreshold}
 
           {...this.props.listViewProps}
 
@@ -177,4 +177,6 @@ MessageContainer.propTypes = {
   renderMessage: React.PropTypes.func,
   onLoadEarlier: React.PropTypes.func,
   listViewProps: React.PropTypes.object,
+  onTopReached: React.PropTypes.func,
+  onTopReachedThreshold: React.PropTypes.number,
 };

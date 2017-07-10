@@ -2,6 +2,7 @@ import React from 'react';
 import {
   StyleSheet,
   View,
+  ViewPropTypes,
 } from 'react-native';
 
 import Composer from './Composer';
@@ -93,7 +94,7 @@ InputToolbar.propTypes = {
   renderSend: React.PropTypes.func,
   renderComposer: React.PropTypes.func,
   onPressActionButton: React.PropTypes.func,
-  containerStyle: View.propTypes.style,
-  primaryStyle: View.propTypes.style,
-  accessoryStyle: View.propTypes.style,
+  containerStyle: ViewPropTypes.style,
+  primaryStyle: ViewPropTypes.style,
+  accessoryStyle: ViewPropTypes.style,
 };

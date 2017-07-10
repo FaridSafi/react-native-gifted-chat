@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  ViewPropTypes,
   Text,
 } from 'react-native';
 
@@ -197,7 +198,7 @@ CustomActions.propTypes = {
   onSend: React.PropTypes.func,
   options: React.PropTypes.object,
   icon: React.PropTypes.func,
-  containerStyle: View.propTypes.style,
-  wrapperStyle: View.propTypes.style,
+  containerStyle: ViewPropTypes.style,
+  wrapperStyle: ViewPropTypes.style,
   iconTextStyle: Text.propTypes.style,
 };

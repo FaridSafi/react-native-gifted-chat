@@ -2608,9 +2608,9 @@ react-native-maps@0.15.3:
   version "0.15.3"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.15.3.tgz#5d9e0a8e30ecc51dc755b7a3b9d6b6ed5e2dd08c"
 
-react-native-nav@1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/react-native-nav/-/react-native-nav-1.1.4.tgz#e5d9453a4723745197429bb6cadff36a29cbbde7"
+react-native-nav@cribspot/react-native-nav#76baa81ded23829ad9b5eb4e4a51052b20fb4e08:
+  version "1.2.0"
+  resolved "https://codeload.github.com/cribspot/react-native-nav/tar.gz/76baa81ded23829ad9b5eb4e4a51052b20fb4e08"
 
 react-native-parsed-text@0.0.18:
   version "0.0.18"

@@ -15,7 +15,7 @@
     "react-native-camera-roll-picker": "1.1.7",
     "react-native-gifted-chat": "file:..",
     "react-native-maps": "0.15.3",
-    "react-native-nav": "1.1.4"
+    "react-native-nav": "cribspot/react-native-nav#76baa81ded23829ad9b5eb4e4a51052b20fb4e08"
   },
   "devDependencies": {
     "babel-preset-react-native": "2.1.0",

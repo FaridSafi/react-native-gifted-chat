@@ -1062,9 +1062,9 @@ safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
 
-shallowequal@cribspot/shallowequal#f515936c8a790fbc225add864265b6c82881c9b1:
-  version "1.0.1"
-  resolved "https://codeload.github.com/cribspot/shallowequal/tar.gz/f515936c8a790fbc225add864265b6c82881c9b1"
+shallowequal@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.0.2.tgz#1561dbdefb8c01408100319085764da3fcf83f8f"
 
 shelljs@^0.7.5:
   version "0.7.8"

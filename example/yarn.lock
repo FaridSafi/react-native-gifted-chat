@@ -2588,7 +2588,7 @@ react-native-communications@2.2.1:
     react-native-invertible-scroll-view "1.0.0"
     react-native-lightbox oblador/react-native-lightbox#c84a8543d4511fe6a44c3d7820747c9c1bddd875
     react-native-parsed-text "0.0.18"
-    shallowequal cribspot/shallowequal#f515936c8a790fbc225add864265b6c82881c9b1
+    shallowequal "1.0.2"
     uuid "3.1.0"
 
 react-native-invertible-scroll-view@1.0.0:
@@ -3033,9 +3033,9 @@ setimmediate@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/setimmediate/-/setimmediate-1.0.5.tgz#290cbb232e306942d7d7ea9b83732ab7856f8285"
 
-shallowequal@cribspot/shallowequal#f515936c8a790fbc225add864265b6c82881c9b1:
-  version "1.0.1"
-  resolved "https://codeload.github.com/cribspot/shallowequal/tar.gz/f515936c8a790fbc225add864265b6c82881c9b1"
+shallowequal@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.0.2.tgz#1561dbdefb8c01408100319085764da3fcf83f8f"
 
 shell-quote@1.6.1, shell-quote@^1.6.1:
   version "1.6.1"

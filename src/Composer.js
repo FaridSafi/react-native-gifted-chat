@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 export default class Composer extends React.Component {
-  onChange(e) {
+  onContentSizeChange(e) {
     const contentSize = e.nativeEvent.contentSize;
     if (!this.contentSize) {
       this.contentSize = contentSize;
@@ -28,7 +28,7 @@ export default class Composer extends React.Component {
         placeholderTextColor={this.props.placeholderTextColor}
         multiline={this.props.multiline}
 
-        onChange={(e) => this.onChange(e)}
+        onContentSizeChange={(e) => this.onContentSizeChange(e)}
         onChangeText={text => this.onChangeText(text)}
 
         style={[styles.textInput, this.props.textInputStyle, {height: this.props.composerHeight}]}

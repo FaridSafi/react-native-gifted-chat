@@ -2604,6 +2604,10 @@ react-native-lightbox@oblador/react-native-lightbox#c84a8543d4511fe6a44c3d782074
   dependencies:
     react-timer-mixin "^0.13.3"
 
+react-native-maps@0.15.3:
+  version "0.15.3"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.15.3.tgz#5d9e0a8e30ecc51dc755b7a3b9d6b6ed5e2dd08c"
+
 react-native-nav@1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/react-native-nav/-/react-native-nav-1.1.4.tgz#e5d9453a4723745197429bb6cadff36a29cbbde7"

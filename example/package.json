@@ -14,6 +14,7 @@
     "react-native": "0.45.1",
     "react-native-camera-roll-picker": "1.1.7",
     "react-native-gifted-chat": "file:..",
+    "react-native-maps": "0.15.3",
     "react-native-nav": "1.1.4"
   },
   "devDependencies": {

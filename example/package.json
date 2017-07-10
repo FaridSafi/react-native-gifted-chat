@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "yarn run clean:example; yarn run clean:babelrc",
+    "clean:example": "rm -rf node_modules/react-native-gifted-chat/{node_modules,example,.git}",
+    "clean:babelrc": "(find node_modules -type f -name .babelrc | grep -v /react-native/ | xargs rm) || true",
     "start": "node_modules/react-native/packager/packager.sh",
     "sync": "rm -rf ./node_modules/react-native-gifted-chat; sane '/usr/bin/rsync -v -a --exclude .git --exclude example --exclude __tests__ --exclude node_modules ../ ./node_modules/react-native-gifted-chat/' .. --glob='{**/*.json,**/*.js}'"
   },

@@ -36,7 +36,7 @@
     "eslint-plugin-react-native": "2.3.2"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "1.0.0",
+    "@expo/react-native-action-sheet": "cribspot/react-native-action-sheet#b422c54f26d30b9e85eb14a882ea9cec38600730",
     "md5": "2.2.1",
     "moment": "2.18.1",
     "react-native-communications": "2.2.1",

@@ -2,11 +2,12 @@
 # yarn lockfile v1
 
 
-"@expo/react-native-action-sheet@1.0.0":
+"@expo/react-native-action-sheet@cribspot/react-native-action-sheet#b422c54f26d30b9e85eb14a882ea9cec38600730":
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@expo/react-native-action-sheet/-/react-native-action-sheet-1.0.0.tgz#0677d2c2e3130dc1ed9597cf72c10743b224e4f1"
+  resolved "https://codeload.github.com/cribspot/react-native-action-sheet/tar.gz/b422c54f26d30b9e85eb14a882ea9cec38600730"
   dependencies:
     hoist-non-react-statics "^1.2.0"
+    prop-types "^15.5.10"
 
 abbrev@1:
   version "1.1.0"
@@ -2496,7 +2497,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.6, prop-types@^15.5.8:
+prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.5.8:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -2581,7 +2582,7 @@ react-native-communications@2.2.1:
 "react-native-gifted-chat@file:..":
   version "0.1.5"
   dependencies:
-    "@expo/react-native-action-sheet" "1.0.0"
+    "@expo/react-native-action-sheet" cribspot/react-native-action-sheet#b422c54f26d30b9e85eb14a882ea9cec38600730
     md5 "2.2.1"
     moment "2.18.1"
     react-native-communications "2.2.1"

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   Text,
@@ -197,7 +198,7 @@ const styles = {
 };
 
 Bubble.contextTypes = {
-  actionSheet: React.PropTypes.func,
+  actionSheet: PropTypes.func,
 };
 
 Bubble.defaultProps = {
@@ -227,38 +228,38 @@ Bubble.defaultProps = {
 };
 
 Bubble.propTypes = {
-  touchableProps: React.PropTypes.object,
-  onLongPress: React.PropTypes.func,
-  renderMessageImage: React.PropTypes.func,
-  renderMessageText: React.PropTypes.func,
-  renderCustomView: React.PropTypes.func,
-  renderTime: React.PropTypes.func,
-  position: React.PropTypes.oneOf(['left', 'right']),
-  currentMessage: React.PropTypes.object,
-  nextMessage: React.PropTypes.object,
-  previousMessage: React.PropTypes.object,
-  containerStyle: React.PropTypes.shape({
+  touchableProps: PropTypes.object,
+  onLongPress: PropTypes.func,
+  renderMessageImage: PropTypes.func,
+  renderMessageText: PropTypes.func,
+  renderCustomView: PropTypes.func,
+  renderTime: PropTypes.func,
+  position: PropTypes.oneOf(['left', 'right']),
+  currentMessage: PropTypes.object,
+  nextMessage: PropTypes.object,
+  previousMessage: PropTypes.object,
+  containerStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
-  wrapperStyle: React.PropTypes.shape({
+  wrapperStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
-  bottomContainerStyle: React.PropTypes.shape({
+  bottomContainerStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
   tickStyle: Text.propTypes.style,
-  containerToNextStyle: React.PropTypes.shape({
+  containerToNextStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
-  containerToPreviousStyle: React.PropTypes.shape({
+  containerToPreviousStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
   //TODO: remove in next major release
-  isSameDay: React.PropTypes.func,
-  isSameUser: React.PropTypes.func,
+  isSameDay: PropTypes.func,
+  isSameUser: PropTypes.func,
 };

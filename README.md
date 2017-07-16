@@ -142,6 +142,8 @@ e.g.
 
 ## Notes for Android
 
+If you are using Create React Native App / Expo, no Android specific installation steps are required -- you can skip this seciton. Otherwise we recommend modifying your project configuration as follows.
+
 - Make sure you have `android:windowSoftInputMode="adjustResize"` in your `AndroidManifest.xml`:
 
     ```xml

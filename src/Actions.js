@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   StyleSheet,
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
 });
 
 Actions.contextTypes = {
-  actionSheet: React.PropTypes.func,
+  actionSheet: PropTypes.func,
 };
 
 Actions.defaultProps = {
@@ -100,11 +101,11 @@ Actions.defaultProps = {
 };
 
 Actions.propTypes = {
-  onSend: React.PropTypes.func,
-  options: React.PropTypes.object,
-  optionTintColor: React.PropTypes.string,
-  icon: React.PropTypes.func,
-  onPressActionButton: React.PropTypes.func,
+  onSend: PropTypes.func,
+  options: PropTypes.object,
+  optionTintColor: PropTypes.string,
+  icon: PropTypes.func,
+  onPressActionButton: PropTypes.func,
   containerStyle: ViewPropTypes.style,
   iconTextStyle: Text.propTypes.style,
 };

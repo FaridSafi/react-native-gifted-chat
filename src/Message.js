@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   View,
@@ -99,15 +100,15 @@ Message.defaultProps = {
 };
 
 Message.propTypes = {
-  renderAvatar: React.PropTypes.func,
-  renderBubble: React.PropTypes.func,
-  renderDay: React.PropTypes.func,
-  position: React.PropTypes.oneOf(['left', 'right']),
-  currentMessage: React.PropTypes.object,
-  nextMessage: React.PropTypes.object,
-  previousMessage: React.PropTypes.object,
-  user: React.PropTypes.object,
-  containerStyle: React.PropTypes.shape({
+  renderAvatar: PropTypes.func,
+  renderBubble: PropTypes.func,
+  renderDay: PropTypes.func,
+  position: PropTypes.oneOf(['left', 'right']),
+  currentMessage: PropTypes.object,
+  nextMessage: PropTypes.object,
+  previousMessage: PropTypes.object,
+  user: PropTypes.object,
+  containerStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),

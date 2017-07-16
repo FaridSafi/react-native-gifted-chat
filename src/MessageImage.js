@@ -17,7 +17,7 @@ export default class MessageImage extends React.Component {
       <View style={[styles.container, this.props.containerStyle]}>
         <Lightbox
           activeProps={{
-            style: [styles.imageActive, { width, height }],
+            style: styles.imageActive,
           }}
           {...this.props.lightboxProps}
         >
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   imageActive: {
+    flex: 1,
     resizeMode: 'contain',
   },
 });

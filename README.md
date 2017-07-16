@@ -158,6 +158,20 @@ If you are using Create React Native App / Expo, no Android specific installatio
 
 - If you plan to use `GiftedChat` inside a `Modal`, see [#200](https://github.com/FaridSafi/react-native-gifted-chat/issues/200).
 
+## Notes for local development
+
+You can use [`wml`](https://github.com/wix/wml) to keep the example app in sync
+with any changes you make to the library during development. Steps:
+
+1. Install it: `npm install -g wml`
+2. Configure it: `wml add . example/node_modules/react-native-gifted-chat` from the root directory
+3. `cd example`
+4. `npm start`
+5. `wml start` in another terminal window (doesn't matter where)
+
+Note that it's important for `wml start` to come **after** `npm start`, or you'll get `Can't find entry file index.js` errors.
+If you have any issues, you can clear your watches using `watchman watch-del-all` and try again.
+
 ## License
 
 - [MIT](LICENSE)

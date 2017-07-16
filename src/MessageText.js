@@ -11,6 +11,8 @@ import {
 import ParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
 
+const WWW_URL_PATTERN = /^www\./i;
+
 export default class MessageText extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +22,11 @@ export default class MessageText extends React.Component {
   }
 
   onUrlPress(url) {
-    Linking.openURL(url);
+    if (url.match(WWW_URL_PATTERN)) {
+      this.onUrlPress('http://' + url);
+    } else if (Linking.canOpenURL(url)) {
+      Linking.openURL(url);
+    }
   }
 
   onPhonePress(phone) {

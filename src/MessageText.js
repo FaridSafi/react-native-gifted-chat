@@ -22,10 +22,14 @@ export default class MessageText extends React.Component {
   }
 
   onUrlPress(url) {
-    if (url.match(WWW_URL_PATTERN)) {
-      this.onUrlPress('http://' + url);
+    // When someone sends a message that includes a website address beginning with "www." (omitting the scheme),
+    // react-native-parsed-text recognizes it as a valid url, but Linking fails to open due to the missing scheme.
+    if (WWW_URL_PATTERN.test(url)) {
+      this.onUrlPress(`http://${url}`);
     } else if (Linking.canOpenURL(url)) {
       Linking.openURL(url);
+    } else {
+      console.error('No handler for URL:', url);
     }
   }
 

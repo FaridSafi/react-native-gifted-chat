@@ -108,6 +108,7 @@ e.g.
 - **`onSend`** _(Function)_ - Callback when sending a message
 - **`locale`** _(String)_ - Locale to localize the dates
 - **`timeFormat`** _(String)_ - Format to use for rendering times; default is 'LT'
+- **`dateFormat`** _(String)_ - Format to use for rendering dates; default is 'll'
 - **`isAnimated`** _(Bool)_ - Animates the view when the keyboard appears
 - **`loadEarlier`** _(Bool)_ - Enables the "Load earlier messages" button
 - **`onLoadEarlier`** _(Function)_ - Callback when loading earlier messages

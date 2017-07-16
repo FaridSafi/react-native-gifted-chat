@@ -79,5 +79,5 @@ Time.propTypes = {
     left: Text.propTypes.style,
     right: Text.propTypes.style,
   }),
-  timeFormat: React.PropTypes.string
+  timeFormat: PropTypes.string,
 };

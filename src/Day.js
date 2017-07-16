@@ -13,12 +13,14 @@ import { isSameDay, isSameUser, warnDeprecated } from './utils';
 
 export default class Day extends React.Component {
   render() {
+    const { dateFormat } = this.props;
+
     if (!isSameDay(this.props.currentMessage, this.props.previousMessage)) {
       return (
         <View style={[styles.container, this.props.containerStyle]}>
           <View style={[styles.wrapper, this.props.wrapperStyle]}>
             <Text style={[styles.text, this.props.textStyle]}>
-              {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('ll').toUpperCase()}
+              {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format(dateFormat).toUpperCase()}
             </Text>
           </View>
         </View>
@@ -67,6 +69,7 @@ Day.defaultProps = {
   //TODO: remove in next major release
   isSameDay: warnDeprecated(isSameDay),
   isSameUser: warnDeprecated(isSameUser),
+  dateFormat: 'll'
 };
 
 Day.propTypes = {
@@ -78,4 +81,5 @@ Day.propTypes = {
   //TODO: remove in next major release
   isSameDay: PropTypes.func,
   isSameUser: PropTypes.func,
+  dateFormat: PropTypes.string,
 };

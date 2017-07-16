@@ -2497,7 +2497,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.5.8:
+prop-types@15.5.10, prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.5.8:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -2580,11 +2580,12 @@ react-native-communications@2.2.1:
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
 
 "react-native-gifted-chat@file:..":
-  version "0.1.5"
+  version "0.2.0"
   dependencies:
     "@expo/react-native-action-sheet" cribspot/react-native-action-sheet#b422c54f26d30b9e85eb14a882ea9cec38600730
     md5 "2.2.1"
     moment "2.18.1"
+    prop-types "15.5.10"
     react-native-communications "2.2.1"
     react-native-invertible-scroll-view "1.0.0"
     react-native-lightbox oblador/react-native-lightbox#c84a8543d4511fe6a44c3d7820747c9c1bddd875

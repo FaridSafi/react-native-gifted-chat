@@ -10,6 +10,7 @@
     "sync": "rm -rf ./node_modules/react-native-gifted-chat; sane '/usr/bin/rsync -v -a --exclude .git --exclude example --exclude __tests__ --exclude node_modules ../ ./node_modules/react-native-gifted-chat/' .. --glob='{**/*.json,**/*.js}'"
   },
   "dependencies": {
+    "prop-types": "15.5.10",
     "react": "16.0.0-alpha.12",
     "react-native": "0.45.1",
     "react-native-camera-roll-picker": "1.1.7",

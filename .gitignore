@@ -2,3 +2,5 @@
 node_modules/
 npm-debug.log
 TODO.md
+
+.idea

@@ -1,8 +1,10 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   StyleSheet,
   Text,
   View,
+  ViewPropTypes,
 } from 'react-native';
 
 import moment from 'moment/min/moment-with-locales.min';
@@ -53,7 +55,7 @@ const styles = {
 };
 
 Time.contextTypes = {
-  getLocale: React.PropTypes.func,
+  getLocale: PropTypes.func,
 };
 
 Time.defaultProps = {
@@ -66,13 +68,13 @@ Time.defaultProps = {
 };
 
 Time.propTypes = {
-  position: React.PropTypes.oneOf(['left', 'right']),
-  currentMessage: React.PropTypes.object,
-  containerStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+  position: PropTypes.oneOf(['left', 'right']),
+  currentMessage: PropTypes.object,
+  containerStyle: PropTypes.shape({
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
-  textStyle: React.PropTypes.shape({
+  textStyle: PropTypes.shape({
     left: Text.propTypes.style,
     right: Text.propTypes.style,
   }),

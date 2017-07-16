@@ -1,15 +1,19 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   StyleSheet,
   Text,
   View,
+  ViewPropTypes,
 } from 'react-native';
 
 import moment from 'moment/min/moment-with-locales.min';
 
+import { isSameDay, isSameUser, warnDeprecated } from './utils';
+
 export default class Day extends React.Component {
   render() {
-    if (!this.props.isSameDay(this.props.currentMessage, this.props.previousMessage)) {
+    if (!isSameDay(this.props.currentMessage, this.props.previousMessage)) {
       return (
         <View style={[styles.container, this.props.containerStyle]}>
           <View style={[styles.wrapper, this.props.wrapperStyle]}>
@@ -48,11 +52,10 @@ const styles = StyleSheet.create({
 });
 
 Day.contextTypes = {
-  getLocale: React.PropTypes.func,
+  getLocale: PropTypes.func,
 };
 
 Day.defaultProps = {
-  isSameDay: () => {},
   currentMessage: {
     // TODO test if crash when createdAt === null
     createdAt: null,
@@ -61,13 +64,18 @@ Day.defaultProps = {
   containerStyle: {},
   wrapperStyle: {},
   textStyle: {},
+  //TODO: remove in next major release
+  isSameDay: warnDeprecated(isSameDay),
+  isSameUser: warnDeprecated(isSameUser),
 };
 
 Day.propTypes = {
-  isSameDay: React.PropTypes.func,
-  currentMessage: React.PropTypes.object,
-  previousMessage: React.PropTypes.object,
-  containerStyle: View.propTypes.style,
-  wrapperStyle: View.propTypes.style,
+  currentMessage: PropTypes.object,
+  previousMessage: PropTypes.object,
+  containerStyle: ViewPropTypes.style,
+  wrapperStyle: ViewPropTypes.style,
   textStyle: Text.propTypes.style,
+  //TODO: remove in next major release
+  isSameDay: PropTypes.func,
+  isSameUser: PropTypes.func,
 };

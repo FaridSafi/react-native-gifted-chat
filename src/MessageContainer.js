@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import {
@@ -140,10 +141,11 @@ export default class MessageContainer extends React.Component {
       <View ref='container' style={{flex:1}}>
         <ListView
           enableEmptySections={true}
-          keyboardShouldPersistTaps={true}
           automaticallyAdjustContentInsets={false}
           initialListSize={20}
           pageSize={20}
+
+          {...this.props.listViewProps}
 
           dataSource={this.state.dataSource}
 
@@ -162,14 +164,16 @@ MessageContainer.defaultProps = {
   user: {},
   renderFooter: null,
   renderMessage: null,
+  listViewProps: {},
   onLoadEarlier: () => {
   },
 };
 
 MessageContainer.propTypes = {
-  messages: React.PropTypes.array,
-  user: React.PropTypes.object,
-  renderFooter: React.PropTypes.func,
-  renderMessage: React.PropTypes.func,
-  onLoadEarlier: React.PropTypes.func,
+  messages: PropTypes.array,
+  user: PropTypes.object,
+  renderFooter: PropTypes.func,
+  renderMessage: PropTypes.func,
+  onLoadEarlier: PropTypes.func,
+  listViewProps: PropTypes.object,
 };

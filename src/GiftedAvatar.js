@@ -1,6 +1,7 @@
 /*
 **  This component will be published in a separate package
 */
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   Image,
@@ -52,6 +53,13 @@ export default class GiftedAvatar extends React.Component {
       return (
         <Image
           source={{uri: this.props.user.avatar}}
+          style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
+        />
+      );
+    } else if (typeof this.props.user.avatar === 'number') {
+      return (
+        <Image
+          source={this.props.user.avatar}
           style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
         />
       );
@@ -147,8 +155,8 @@ GiftedAvatar.defaultProps = {
 };
 
 GiftedAvatar.propTypes = {
-  user: React.PropTypes.object,
-  onPress: React.PropTypes.func,
+  user: PropTypes.object,
+  onPress: PropTypes.func,
   avatarStyle: Image.propTypes.style,
   textStyle: Text.propTypes.style,
 };

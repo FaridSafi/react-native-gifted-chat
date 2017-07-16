@@ -1,47 +1,31 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   View,
+  ViewPropTypes,
   StyleSheet,
 } from 'react-native';
-
-import moment from 'moment';
 
 import Avatar from './Avatar';
 import Bubble from './Bubble';
 import Day from './Day';
 
+import {isSameUser, isSameDay} from './utils';
+
 export default class Message extends React.Component {
 
-  isSameDay(currentMessage = {}, diffMessage = {}) {
-    let diff = 0;
-    if (diffMessage.createdAt && currentMessage.createdAt) {
-      diff = Math.abs(moment(diffMessage.createdAt).startOf('day').diff(moment(currentMessage.createdAt).startOf('day'), 'days'));
-    } else {
-      diff = 1;
+  getInnerComponentProps() {
+    const {containerStyle, ...props} = this.props;
+    return {
+      ...props,
+      isSameUser,
+      isSameDay
     }
-    if (diff === 0) {
-      return true;
-    }
-    return false;
-  }
-
-  isSameUser(currentMessage = {}, diffMessage = {}) {
-    if (diffMessage.user && currentMessage.user) {
-      if (diffMessage.user._id === currentMessage.user._id) {
-        return true;
-      }
-    }
-    return false;
   }
 
   renderDay() {
     if (this.props.currentMessage.createdAt) {
-      const {containerStyle, ...other} = this.props;
-      const dayProps = {
-        ...other,
-        isSameUser: this.isSameUser,
-        isSameDay: this.isSameDay,
-      };
+      const dayProps = this.getInnerComponentProps();
       if (this.props.renderDay) {
         return this.props.renderDay(dayProps);
       }
@@ -51,12 +35,7 @@ export default class Message extends React.Component {
   }
 
   renderBubble() {
-    const {containerStyle, ...other} = this.props;
-    const bubbleProps = {
-      ...other,
-      isSameUser: this.isSameUser,
-      isSameDay: this.isSameDay,
-    };
+    const bubbleProps = this.getInnerComponentProps();
     if (this.props.renderBubble) {
       return this.props.renderBubble(bubbleProps);
     }
@@ -65,13 +44,7 @@ export default class Message extends React.Component {
 
   renderAvatar() {
     if (this.props.user._id !== this.props.currentMessage.user._id) {
-      const {containerStyle, ...other} = this.props;
-      const avatarProps = {
-        ...other,
-        isSameUser: this.isSameUser,
-        isSameDay: this.isSameDay,
-      };
-
+      const avatarProps = this.getInnerComponentProps();
       return <Avatar {...avatarProps}/>;
     }
     return null;
@@ -82,7 +55,7 @@ export default class Message extends React.Component {
       <View>
         {this.renderDay()}
         <View style={[styles[this.props.position].container, {
-          marginBottom: this.isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
+          marginBottom: isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
         }, this.props.containerStyle[this.props.position]]}>
           {this.props.position === 'left' ? this.renderAvatar() : null}
           {this.renderBubble()}
@@ -115,7 +88,7 @@ const styles = {
 };
 
 Message.defaultProps = {
-  renderAvatar: null,
+  renderAvatar: undefined,
   renderBubble: null,
   renderDay: null,
   position: 'left',
@@ -127,16 +100,16 @@ Message.defaultProps = {
 };
 
 Message.propTypes = {
-  renderAvatar: React.PropTypes.func,
-  renderBubble: React.PropTypes.func,
-  renderDay: React.PropTypes.func,
-  position: React.PropTypes.oneOf(['left', 'right']),
-  currentMessage: React.PropTypes.object,
-  nextMessage: React.PropTypes.object,
-  previousMessage: React.PropTypes.object,
-  user: React.PropTypes.object,
-  containerStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+  renderAvatar: PropTypes.func,
+  renderBubble: PropTypes.func,
+  renderDay: PropTypes.func,
+  position: PropTypes.oneOf(['left', 'right']),
+  currentMessage: PropTypes.object,
+  nextMessage: PropTypes.object,
+  previousMessage: PropTypes.object,
+  user: PropTypes.object,
+  containerStyle: PropTypes.shape({
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
 };

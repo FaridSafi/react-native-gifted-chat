@@ -1,9 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
+  ViewPropTypes,
 } from 'react-native';
 
 export default class Actions extends React.Component {
@@ -18,6 +20,7 @@ export default class Actions extends React.Component {
     this.context.actionSheet().showActionSheetWithOptions({
       options,
       cancelButtonIndex,
+      tintColor: this.props.optionTintColor
     },
     (buttonIndex) => {
       let i = 0;
@@ -54,7 +57,7 @@ export default class Actions extends React.Component {
     return (
       <TouchableOpacity
         style={[styles.container, this.props.containerStyle]}
-        onPress={this.onActionsPress}
+        onPress={this.props.onPressActionButton || this.onActionsPress}
       >
         {this.renderIcon()}
       </TouchableOpacity>
@@ -85,21 +88,24 @@ const styles = StyleSheet.create({
 });
 
 Actions.contextTypes = {
-  actionSheet: React.PropTypes.func,
+  actionSheet: PropTypes.func,
 };
 
 Actions.defaultProps = {
   onSend: () => {},
   options: {},
+  optionTintColor: '#007AFF',
   icon: null,
   containerStyle: {},
   iconTextStyle: {},
 };
 
 Actions.propTypes = {
-  onSend: React.PropTypes.func,
-  options: React.PropTypes.object,
-  icon: React.PropTypes.func,
-  containerStyle: View.propTypes.style,
+  onSend: PropTypes.func,
+  options: PropTypes.object,
+  optionTintColor: PropTypes.string,
+  icon: PropTypes.func,
+  onPressActionButton: PropTypes.func,
+  containerStyle: ViewPropTypes.style,
   iconTextStyle: Text.propTypes.style,
 };

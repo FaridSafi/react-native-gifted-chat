@@ -1,14 +1,19 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
+  Text,
   Clipboard,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  ViewPropTypes,
 } from 'react-native';
 
 import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
+
+import { isSameUser, isSameDay, warnDeprecated } from './utils';
 
 export default class Bubble extends React.Component {
   constructor(props) {
@@ -17,14 +22,14 @@ export default class Bubble extends React.Component {
   }
 
   handleBubbleToNext() {
-    if (this.props.isSameUser(this.props.currentMessage, this.props.nextMessage) && this.props.isSameDay(this.props.currentMessage, this.props.nextMessage)) {
+    if (isSameUser(this.props.currentMessage, this.props.nextMessage) && isSameDay(this.props.currentMessage, this.props.nextMessage)) {
       return StyleSheet.flatten([styles[this.props.position].containerToNext, this.props.containerToNextStyle[this.props.position]]);
     }
     return null;
   }
 
   handleBubbleToPrevious() {
-    if (this.props.isSameUser(this.props.currentMessage, this.props.previousMessage) && this.props.isSameDay(this.props.currentMessage, this.props.previousMessage)) {
+    if (isSameUser(this.props.currentMessage, this.props.previousMessage) && isSameDay(this.props.currentMessage, this.props.previousMessage)) {
       return StyleSheet.flatten([styles[this.props.position].containerToPrevious, this.props.containerToPreviousStyle[this.props.position]]);
     }
     return null;
@@ -52,6 +57,24 @@ export default class Bubble extends React.Component {
     return null;
   }
 
+  renderTicks() {
+    const {currentMessage} = this.props;
+    if (this.props.renderTicks) {
+        return this.props.renderTicks(currentMessage);
+    }
+    if (currentMessage.user._id !== this.props.user._id) {
+        return;
+    }
+    if (currentMessage.sent || currentMessage.received) {
+      return (
+        <View style={styles.tickView}>
+          {currentMessage.sent && <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
+          {currentMessage.received && <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
+        </View>
+      )
+    }
+  }
+
   renderTime() {
     if (this.props.currentMessage.createdAt) {
       const {containerStyle, wrapperStyle, ...timeProps} = this.props;
@@ -72,7 +95,7 @@ export default class Bubble extends React.Component {
 
   onLongPress() {
     if (this.props.onLongPress) {
-      this.props.onLongPress(this.context);
+      this.props.onLongPress(this.context, this.props.currentMessage);
     } else {
       if (this.props.currentMessage.text) {
         const options = [
@@ -108,7 +131,10 @@ export default class Bubble extends React.Component {
               {this.renderCustomView()}
               {this.renderMessageImage()}
               {this.renderMessageText()}
-              {this.renderTime()}
+              <View style={[styles.bottom, this.props.bottomContainerStyle[this.props.position]]}>
+                {this.renderTime()}
+                {this.renderTicks()}
+              </View>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -156,10 +182,23 @@ const styles = {
       borderTopRightRadius: 3,
     },
   }),
+  bottom: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  tick: {
+    fontSize: 10,
+    backgroundColor: 'transparent',
+    color: 'white',
+  },
+  tickView: {
+    flexDirection: 'row',
+    marginRight: 10,
+  }
 };
 
 Bubble.contextTypes = {
-  actionSheet: React.PropTypes.func,
+  actionSheet: PropTypes.func,
 };
 
 Bubble.defaultProps = {
@@ -169,8 +208,6 @@ Bubble.defaultProps = {
   renderMessageText: null,
   renderCustomView: null,
   renderTime: null,
-  isSameUser: () => {},
-  isSameDay: () => {},
   position: 'left',
   currentMessage: {
     text: null,
@@ -181,37 +218,48 @@ Bubble.defaultProps = {
   previousMessage: {},
   containerStyle: {},
   wrapperStyle: {},
+  bottomContainerStyle: {},
+  tickStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
+  //TODO: remove in next major release
+  isSameDay: warnDeprecated(isSameDay),
+  isSameUser: warnDeprecated(isSameUser),
 };
 
 Bubble.propTypes = {
-  touchableProps: React.PropTypes.object,
-  onLongPress: React.PropTypes.func,
-  renderMessageImage: React.PropTypes.func,
-  renderMessageText: React.PropTypes.func,
-  renderCustomView: React.PropTypes.func,
-  renderTime: React.PropTypes.func,
-  isSameUser: React.PropTypes.func,
-  isSameDay: React.PropTypes.func,
-  position: React.PropTypes.oneOf(['left', 'right']),
-  currentMessage: React.PropTypes.object,
-  nextMessage: React.PropTypes.object,
-  previousMessage: React.PropTypes.object,
-  containerStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+  touchableProps: PropTypes.object,
+  onLongPress: PropTypes.func,
+  renderMessageImage: PropTypes.func,
+  renderMessageText: PropTypes.func,
+  renderCustomView: PropTypes.func,
+  renderTime: PropTypes.func,
+  position: PropTypes.oneOf(['left', 'right']),
+  currentMessage: PropTypes.object,
+  nextMessage: PropTypes.object,
+  previousMessage: PropTypes.object,
+  containerStyle: PropTypes.shape({
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
-  wrapperStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+  wrapperStyle: PropTypes.shape({
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
-  containerToNextStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+  bottomContainerStyle: PropTypes.shape({
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
-  containerToPreviousStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+  tickStyle: Text.propTypes.style,
+  containerToNextStyle: PropTypes.shape({
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
+  containerToPreviousStyle: PropTypes.shape({
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
+  }),
+  //TODO: remove in next major release
+  isSameDay: PropTypes.func,
+  isSameUser: PropTypes.func,
 };

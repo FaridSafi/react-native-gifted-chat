@@ -5,14 +5,11 @@ import {
   StyleSheet,
   View,
   ViewPropTypes,
-  Dimensions,
 } from 'react-native';
 import Lightbox from 'react-native-lightbox';
 
 export default class MessageImage extends React.Component {
   render() {
-    const { width, height } = Dimensions.get('window');
-
     return (
       <View style={[styles.container, this.props.containerStyle]}>
         <Lightbox

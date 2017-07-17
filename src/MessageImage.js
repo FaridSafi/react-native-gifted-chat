@@ -1,8 +1,10 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   Image,
   StyleSheet,
   View,
+  ViewPropTypes,
   Dimensions,
 } from 'react-native';
 import Lightbox from 'react-native-lightbox';
@@ -15,7 +17,7 @@ export default class MessageImage extends React.Component {
       <View style={[styles.container, this.props.containerStyle]}>
         <Lightbox
           activeProps={{
-            style: [styles.imageActive, { width, height }],
+            style: styles.imageActive,
           }}
           {...this.props.lightboxProps}
         >
@@ -41,6 +43,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   imageActive: {
+    flex: 1,
     resizeMode: 'contain',
   },
 });
@@ -56,9 +59,9 @@ MessageImage.defaultProps = {
 };
 
 MessageImage.propTypes = {
-  currentMessage: React.PropTypes.object,
-  containerStyle: View.propTypes.style,
+  currentMessage: PropTypes.object,
+  containerStyle: ViewPropTypes.style,
   imageStyle: Image.propTypes.style,
-  imageProps: React.PropTypes.object,
-  lightboxProps: React.PropTypes.object,
+  imageProps: PropTypes.object,
+  lightboxProps: PropTypes.object,
 };

@@ -122,7 +122,7 @@ e.g.
 - **`renderAvatar`** _(Function)_ - Custom message avatar; set to `null` to not render any avatar for the message
 - **`showUserAvatar`** _(Function)_ - Whether to render an avatar for the current user; default is `false`, only show avatars for other users
 - **`onPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is tapped
-- **`renderAvatarOnTop`** _(Bool)_ - Render the message avatar at the top of consecutive messages, rather than the bottom (default)
+- **`renderAvatarOnTop`** _(Bool)_ - Render the message avatar at the top of consecutive messages, rather than the bottom; default is `false`
 - **`renderBubble`** _(Function)_ - Custom message bubble
 - **`onLongPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master/example/CustomActions.js))
 - **`renderMessage`** _(Function)_ - Custom message container
@@ -133,7 +133,8 @@ e.g.
 - **`renderCustomView`** _(Function)_ - Custom view inside the bubble
 - **`renderDay`** _(Function)_ - Custom day above a message
 - **`renderTime`** _(Function)_ - Custom time inside a message
-- **`renderFooter`** _(Function)_ - Custom fixed bottom view, e.g. "User is typing..."; see [example/App.js](example/App.js) for an example
+- **`renderFooter`** _(Function)_ - Custom footer component on the ListView, e.g. "User is typing..."; see [example/App.js](example/App.js) for an example
+- **`renderChatFooter`** _(Function)_ - Custom component to render below the MessageContainer (separate from the ListView)
 - **`renderInputToolbar`** _(Function)_ - Custom message composer container
 - **`renderComposer`** _(Function)_ - Custom text input message composer
 - **`renderActions`** _(Function)_ - Custom action button on the left of the message composer

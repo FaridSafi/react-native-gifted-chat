@@ -164,7 +164,6 @@ MessageContainer.defaultProps = {
   user: {},
   renderFooter: null,
   renderMessage: null,
-  listViewProps: {},
   onLoadEarlier: () => {
   },
 };

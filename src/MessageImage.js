@@ -51,8 +51,6 @@ MessageImage.defaultProps = {
   },
   containerStyle: {},
   imageStyle: {},
-  imageProps: {},
-  lightboxProps: {},
 };
 
 MessageImage.propTypes = {

@@ -93,7 +93,6 @@ const styles = {
 
 Message.defaultProps = {
   renderAvatar: undefined,
-  showUserAvatar: false,
   renderBubble: null,
   renderDay: null,
   position: 'left',

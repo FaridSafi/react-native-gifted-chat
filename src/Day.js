@@ -69,7 +69,6 @@ Day.defaultProps = {
   //TODO: remove in next major release
   isSameDay: warnDeprecated(isSameDay),
   isSameUser: warnDeprecated(isSameUser),
-  dateFormat: 'll'
 };
 
 Day.propTypes = {

@@ -43,6 +43,9 @@ export default class Message extends React.Component {
   }
 
   renderAvatar() {
+    if (this.props.user._id === this.props.currentMessage.user._id && !this.props.showUserAvatar) {
+      return null;
+    }
     const avatarProps = this.getInnerComponentProps();
     const { currentMessage } = avatarProps;
     if (currentMessage.user.avatar === null) {
@@ -90,6 +93,7 @@ const styles = {
 
 Message.defaultProps = {
   renderAvatar: undefined,
+  showUserAvatar: false,
   renderBubble: null,
   renderDay: null,
   position: 'left',
@@ -102,6 +106,7 @@ Message.defaultProps = {
 
 Message.propTypes = {
   renderAvatar: PropTypes.func,
+  showUserAvatar: PropTypes.bool,
   renderBubble: PropTypes.func,
   renderDay: PropTypes.func,
   position: PropTypes.oneOf(['left', 'right']),

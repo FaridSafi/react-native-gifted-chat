@@ -1029,9 +1029,11 @@ react-native-lightbox@oblador/react-native-lightbox#c84a8543d4511fe6a44c3d782074
   dependencies:
     react-timer-mixin "^0.13.3"
 
-react-native-parsed-text@0.0.18:
+"react-native-parsed-text@git+https://github.com/brunocascio/react-native-parsed-text.git#08b864e10e5b65298c628cafd9231fb28f7e4064":
   version "0.0.18"
-  resolved "https://registry.yarnpkg.com/react-native-parsed-text/-/react-native-parsed-text-0.0.18.tgz#b528eb6f1410f552d2e3fd8d80da7ff0a7890c71"
+  resolved "git+https://github.com/brunocascio/react-native-parsed-text.git#08b864e10e5b65298c628cafd9231fb28f7e4064"
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-scrollable-mixin@^1.0.1:
   version "1.0.1"

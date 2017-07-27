@@ -57,7 +57,7 @@ export default class MessageText extends React.Component {
   }
 
   onEmailPress(email) {
-    Communications.email(email, null, null, null, null);
+    Communications.email([email], null, null, null, null);
   }
 
   render() {

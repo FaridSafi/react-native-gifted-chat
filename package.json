@@ -41,9 +41,9 @@
     "moment": "2.18.1",
     "prop-types": "15.5.10",
     "react-native-communications": "2.2.1",
-    "react-native-invertible-scroll-view": "1.0.0",
+    "react-native-invertible-scroll-view": "git+https://github.com/brunocascio/react-native-invertible-scroll-view.git",
     "react-native-lightbox": "git+https://github.com/brunocascio/react-native-lightbox.git",
-    "react-native-parsed-text": "git+https://github.com/brunocascio/react-native-parsed-text.git#08b864e10e5b65298c628cafd9231fb28f7e4064",
+    "react-native-parsed-text": "git+https://github.com/brunocascio/react-native-parsed-text.git",
     "shallowequal": "1.0.2",
     "uuid": "3.1.0"
   }

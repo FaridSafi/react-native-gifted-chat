@@ -65,7 +65,6 @@ Time.defaultProps = {
   },
   containerStyle: {},
   textStyle: {},
-  timeFormat: 'LT'
 };
 
 Time.propTypes = {

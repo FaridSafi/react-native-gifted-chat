@@ -5,7 +5,6 @@ import { ListView, FlatList, View } from 'react-native'
 import { InvertibleFlatList } from 'react-native-invertible-flat-list'
 
 import shallowequal from 'shallowequal'
-import InvertibleScrollView from 'react-native-invertible-scroll-view'
 import md5 from 'md5'
 import LoadEarlier from './LoadEarlier'
 import Message from './Message'
@@ -125,17 +124,6 @@ export default class MessageContainer extends React.Component {
       return this.props.renderMessage(messageProps)
     }
     return <Message {...messageProps} />
-  }
-
-  renderScrollComponent(props) {
-    const invertibleScrollViewProps = this.props.invertibleScrollViewProps
-    return (
-      <InvertibleScrollView
-        {...props}
-        {...invertibleScrollViewProps}
-        ref={component => (this._invertibleScrollViewRef = component)}
-      />
-    )
   }
 
   render() {

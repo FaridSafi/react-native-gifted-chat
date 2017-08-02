@@ -122,8 +122,38 @@ class GiftedChat extends React.Component {
     return this.props.text
   }
 
+  // convert a single message to match default shape
+  convertMessage(message) {
+    const messageShape = this.props.messageShape
+
+    let structuredMessage = {
+      _id: message[messageShape.messageId],
+      text: message[messageShape.messageText],
+      createdAt: message[messageShape.messageCreatedAt],
+      user: {
+        _id: message[messageShape.user][messageShape.userId],
+        name: message[messageShape.user][messageShape.userName],
+        avatar: message[messageShape.user][messageShape.userAvatar]
+      },
+      image: message[messageShape.messageImage]
+      // TODO: pass additional custom parameters
+    }
+    return structuredMessage
+  }
+
+  // TODO: This is a quick hack.
+  // For better preformance it's better to pass a shape prop and
+  // have the each component extract the props it needs
+  convertMessages(messages) {
+    return messages.map(message => this.convertMessage(message))
+  }
+
   setMessages(messages) {
-    this._messages = messages
+    if (this.props.messageShape !== null) {
+      this._messages = this.convertMessages(messages)
+    } else {
+      this._messages = messages
+    }
   }
 
   getMessages() {
@@ -179,8 +209,7 @@ class GiftedChat extends React.Component {
           messages={this.getMessages()}
           ref={component => (this._messageContainerRef = component)}
         />
-        {/* TODO: work on chatFooter  */}
-        {/* {this.renderChatFooter()}  */}
+        {this.renderChatFooter()}
       </AnimatedView>
     )
   }
@@ -190,13 +219,14 @@ class GiftedChat extends React.Component {
       messages = [messages]
     }
 
+    const messageShape = this.props.messageShape
     messages = messages.map(message => {
-      return {
-        ...message,
-        user: this.props.user,
-        createdAt: new Date(),
-        _id: this.props.messageIdGenerator()
-      }
+      let msg = { ...message }
+      msg[messageShape.user] = this.props.user
+      msg[messageShape.user][messageShape.userId] = this.props.user._id // TODO: remove hardcode
+      msg[messageShape.messageCreatedAt] = new Date()
+      msg[messageShape.messageId] = this.props.messageIdGenerator()
+      return msg
     })
 
     if (shouldResetInputToolbar === true) {
@@ -296,6 +326,8 @@ class GiftedChat extends React.Component {
   }
 
   render() {
+    // TODO: Calculate full composer height
+    // Hardcoding 15 for now
     const inputToolbarHeight =
       this.calculateInputToolbarHeight(this.state.composerHeight) + 15
     return (
@@ -309,7 +341,7 @@ class GiftedChat extends React.Component {
         >
           <KeyboardAvoidingView
             behavior="padding"
-            keyboardVerticalOffset={inputToolbarHeight} // TODO: Calculate full composer height
+            keyboardVerticalOffset={inputToolbarHeight}
             style={styles.container}
           >
             {this.renderMessages()}
@@ -334,6 +366,16 @@ GiftedChat.childContextTypes = {
 
 GiftedChat.defaultProps = {
   messages: [],
+  messageShape: {
+    messageId: '_id',
+    messageText: 'text',
+    messageImage: 'image',
+    messageCreatedAt: 'createdAt',
+    user: 'user',
+    userId: '_id',
+    userName: 'name',
+    userAvatar: 'avatar'
+  },
   text: undefined,
   placeholder: 'Type a message...',
   messageIdGenerator: () => uuid.v4(),
@@ -391,6 +433,7 @@ GiftedChat.defaultProps = {
 
 GiftedChat.propTypes = {
   messages: PropTypes.array,
+  messageShape: PropTypes.object,
   text: PropTypes.string,
   placeholder: PropTypes.string,
   messageIdGenerator: PropTypes.func,

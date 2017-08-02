@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { ListView, FlatList, View } from 'react-native'
-import { InvertibleFlatList } from 'react-native-invertible-flat-list'
 
 import shallowequal from 'shallowequal'
+import { InvertibleFlatList } from 'react-native-invertible-flat-list'
 import md5 from 'md5'
 import LoadEarlier from './LoadEarlier'
 import Message from './Message'
@@ -17,18 +17,13 @@ export default class MessageContainer extends React.Component {
     this.renderFooter = this.renderFooter.bind(this)
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this)
 
-    // const dataSource = new ListView.DataSource({
-    // 	rowHasChanged: (r1, r2) => {
-    // 		return r1.hash !== r2.hash
-    // 	}
-    // })
-
     const messagesData = this.prepareMessages(props.messages)
     this.state = {
       dataSource: messagesData
     }
   }
 
+  // Groups messages
   prepareMessages(messages) {
     return {
       keys: messages.map(m => m._id),
@@ -49,10 +44,10 @@ export default class MessageContainer extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (!shallowequal(this.props, nextProps)) {
+    if (this.props.messages.length !== nextProps.messages.length) {
       return true
     }
-    if (!shallowequal(this.state, nextState)) {
+    if (!shallowequal(this.props, nextState)) {
       return true
     }
     return false
@@ -92,7 +87,7 @@ export default class MessageContainer extends React.Component {
   }
 
   scrollToEnd(animated = true) {
-    this._invertibleScrollViewRef.scrollToOffset({ offset: 0, animated })
+    this._listRef.scrollToOffset({ offset: 0, animated })
   }
 
   renderRow = ({ item }) => {
@@ -130,14 +125,18 @@ export default class MessageContainer extends React.Component {
     return (
       <InvertibleFlatList
         inverted={true}
+        automaticallyAdjustContentInsets={false}
+        enableEmptySections={true}
+        removeClippedSubviews={true}
+        pageSize={20}
+        {...this.props.listViewProps}
+        style={{ flexGrow: 1 }}
+        ref={component => (this._listRef = component)}
         data={this.state.dataSource.keys}
         keyExtractor={(item, idx) => item}
         renderItem={this.renderRow}
-        ListHeaderComponent={this.renderFooter}
-        style={{ flex: 1 }}
-        ref={component => (this._invertibleScrollViewRef = component)}
-        automaticallyAdjustContentInsets={false}
-        {...this.props.listViewProps}
+        renderHeader={this.renderFooter}
+        renderFooter={this.renderLoadEarlier}
       />
     )
   }

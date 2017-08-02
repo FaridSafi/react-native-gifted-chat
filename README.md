@@ -152,6 +152,7 @@ e.g.
 - **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
 - **`minComposerHeight`** _(Integer)_ - Min heightsof ToolbarInput and Composer. Needed for Composer auto grow and ScrollView animation
 - **`maxComposerHeight`** _(Integer)_ - Max heightsof ToolbarInput and Composer. Needed for Composer auto grow and ScrollView animation
+- **`messageShape`** _(Shape)_ - Shape with property names to convert to GiftedChat data structure. If provided all properties must be provided.
 
 ## Notes for [Redux](https://github.com/reactjs/redux)
 

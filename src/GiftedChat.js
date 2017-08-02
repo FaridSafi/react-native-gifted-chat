@@ -433,7 +433,16 @@ GiftedChat.defaultProps = {
 
 GiftedChat.propTypes = {
   messages: PropTypes.array,
-  messageShape: PropTypes.object,
+  messageShape: PropTypes.shape({
+    messageId: PropTypes.string.isRequired,
+    messageText: PropTypes.string.isRequired,
+    messageImage: PropTypes.string.isRequired,
+    messageCreatedAt: PropTypes.string.isRequired,
+    user: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired,
+    userAvatar: PropTypes.string.isRequired
+  }),
   text: PropTypes.string,
   placeholder: PropTypes.string,
   messageIdGenerator: PropTypes.func,

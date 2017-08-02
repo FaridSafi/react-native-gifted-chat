@@ -150,6 +150,9 @@ e.g.
 - **`keyboardShouldPersistTaps`** _(Enum)_ - Determines whether the keyboard should stay visible after a tap; see [`<ScrollView>`](https://facebook.github.io/react-native/docs/scrollview.html) docs
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
 - **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
+- **`minComposerHeight`** _(Integer)_ - Min heightsof ToolbarInput and Composer. Needed for Composer auto grow and ScrollView animation
+- **`maxComposerHeight`** _(Integer)_ - Max heightsof ToolbarInput and Composer. Needed for Composer auto grow and ScrollView animation
+- **`messageShape`** _(Shape)_ - Shape with property names to convert to GiftedChat data structure. If provided all properties must be provided.
 
 ## Notes for [Redux](https://github.com/reactjs/redux)
 

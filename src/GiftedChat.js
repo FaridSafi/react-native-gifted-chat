@@ -33,7 +33,7 @@ import GiftedChatInteractionManager from './GiftedChatInteractionManager';
 // TODO move these values to Constants.js (also with used colors #b2b2b2)
 const MIN_COMPOSER_HEIGHT = Platform.select({
   ios: 33,
-  android: 41,
+  android: 42.5,
 });
 const MAX_COMPOSER_HEIGHT = 100;
 
@@ -116,6 +116,12 @@ class GiftedChat extends React.Component {
     const { messages, text } = nextProps;
     this.setMessages(messages || []);
     this.setTextFromProp(text);
+  }
+
+  componentDidUpdate(prevProps) {
+    if ( prevProps.minInputToolbarHeight !== this.props.minInputToolbarHeight ) {
+      this.setMessagesContainerHeight(this.getMessagesContainerHeightWithKeyboard())
+    }
   }
 
   initLocale() {
@@ -249,16 +255,7 @@ class GiftedChat extends React.Component {
     this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
     this.setBottomOffset(this.props.bottomOffset);
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard();
-    if (this.props.isAnimated === true) {
-      Animated.timing(this.state.messagesContainerHeight, {
-        toValue: newMessagesContainerHeight,
-        duration: 210,
-      }).start();
-    } else {
-      this.setState({
-        messagesContainerHeight: newMessagesContainerHeight,
-      });
-    }
+    this.setMessagesContainerHeight(newMessagesContainerHeight)
   }
 
   onKeyboardWillHide() {
@@ -266,6 +263,10 @@ class GiftedChat extends React.Component {
     this.setKeyboardHeight(0);
     this.setBottomOffset(0);
     const newMessagesContainerHeight = this.getBasicMessagesContainerHeight();
+    this.setMessagesContainerHeight(newMessagesContainerHeight)
+  }
+
+  setMessagesContainerHeight(newMessagesContainerHeight) {
     if (this.props.isAnimated === true) {
       Animated.timing(this.state.messagesContainerHeight, {
         toValue: newMessagesContainerHeight,

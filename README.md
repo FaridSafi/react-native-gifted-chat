@@ -151,6 +151,10 @@ e.g.
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
 - **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
 
+## Imperative methods
+
+- `focusTextInput()` - Open the keyboard and focus the text input box
+
 ## Notes for [Redux](https://github.com/reactjs/redux)
 
 The `messages` prop should work out-of-the-box with Redux. In most cases this is all you need.

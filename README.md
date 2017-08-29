@@ -150,6 +150,15 @@ e.g.
 - **`keyboardShouldPersistTaps`** _(Enum)_ - Determines whether the keyboard should stay visible after a tap; see [`<ScrollView>`](https://facebook.github.io/react-native/docs/scrollview.html) docs
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
 - **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
+- **`parsePatterns`** _(Function)_ - Custom parsed patterns, e.g.
+  ```javascript
+  <GiftedChat
+    parsePatterns={(linkStyle) => [
+      {type: 'phone', style: linkStyle, onPress: this.onPhonePress},
+      {pattern: /#(\w+)/, style: {...linkStyle, styles.hashtag}, onPress: this.onHashtagPress}
+    ]}
+  />
+  ```
 
 ## Imperative methods
 

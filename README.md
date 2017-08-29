@@ -141,7 +141,7 @@ e.g.
 - **`renderInputToolbar`** _(Function)_ - Custom message composer container
 - **`renderComposer`** _(Function)_ - Custom text input message composer
 - **`renderActions`** _(Function)_ - Custom action button on the left of the message composer
-- **`renderSend`** _(Function)_ - Custom send button
+- **`renderSend`** _(Function)_ - Custom send button; you can pass children to the original `Send` component quite easily, for example to use a custom icon ([example](https://github.com/FaridSafi/react-native-gifted-chat/pull/487))
 - **`renderAccessory`** _(Function)_ - Custom second line of actions below the message composer
 - **`onPressActionButton`** _(Function)_ - Callback when the Action button is pressed (if set, the default `actionSheet` will not be used)
 - **`bottomOffset`** _(Integer)_ - Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar)
@@ -150,6 +150,20 @@ e.g.
 - **`keyboardShouldPersistTaps`** _(Enum)_ - Determines whether the keyboard should stay visible after a tap; see [`<ScrollView>`](https://facebook.github.io/react-native/docs/scrollview.html) docs
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
 - **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
+- **`parsePatterns`** _(Function)_ - Custom parse patterns for [react-native-parsed-text](https://github.com/taskrabbit/react-native-parsed-text) used to linkify message content (like URLs and phone numbers), e.g.:
+
+    ```js
+    <GiftedChat
+      parsePatterns={(linkStyle) => [
+        { type: 'phone', style: linkStyle, onPress: this.onPressPhoneNumber },
+        { pattern: /#(\w+)/, style: { ...linkStyle, styles.hashtag }, onPress: this.onPressHashtag },
+      ]}
+    />
+    ```
+
+## Imperative methods
+
+- `focusTextInput()` - Open the keyboard and focus the text input box
 
 ## Notes for [Redux](https://github.com/reactjs/redux)
 
@@ -168,7 +182,7 @@ simply implement `onInputTextChanged` to receive typing events and reset events 
 
 ## Notes for Android
 
-If you are using Create React Native App / Expo, no Android specific installation steps are required -- you can skip this seciton. Otherwise we recommend modifying your project configuration as follows.
+If you are using Create React Native App / Expo, no Android specific installation steps are required -- you can skip this section. Otherwise we recommend modifying your project configuration as follows.
 
 - Make sure you have `android:windowSoftInputMode="adjustResize"` in your `AndroidManifest.xml`:
 

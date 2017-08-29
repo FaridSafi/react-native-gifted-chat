@@ -365,6 +365,12 @@ class GiftedChat extends React.Component {
     });
   }
 
+  focusTextInput() {
+    if (this.textInput) {
+      this.textInput.focus();
+    }
+  }
+
   onInputSizeChanged(size) {
     const newComposerHeight = Math.max(MIN_COMPOSER_HEIGHT, Math.min(MAX_COMPOSER_HEIGHT, size.height));
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(newComposerHeight);

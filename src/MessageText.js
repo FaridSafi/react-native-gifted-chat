@@ -65,14 +65,16 @@ export default class MessageText extends React.Component {
   }
 
   render() {
+    const linkStyle = StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]);
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
         <ParsedText
           style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}
           parse={[
-            {type: 'url', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onUrlPress},
-            {type: 'phone', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onPhonePress},
-            {type: 'email', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onEmailPress},
+            ...this.props.parsePatterns(linkStyle),
+            {type: 'url', style: linkStyle, onPress: this.onUrlPress},
+            {type: 'phone', style: linkStyle, onPress: this.onPhonePress},
+            {type: 'email', style: linkStyle, onPress: this.onEmailPress},
           ]}
         >
           {this.props.currentMessage.text}
@@ -130,6 +132,7 @@ MessageText.defaultProps = {
   containerStyle: {},
   textStyle: {},
   linkStyle: {},
+  parsePatterns: () => [],
 };
 
 MessageText.propTypes = {
@@ -147,4 +150,5 @@ MessageText.propTypes = {
     left: Text.propTypes.style,
     right: Text.propTypes.style,
   }),
+  parsePatterns: PropTypes.func,
 };

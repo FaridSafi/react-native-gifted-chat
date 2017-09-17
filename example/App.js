@@ -27,6 +27,7 @@ export default class Example extends React.Component {
     this.renderBubble = this.renderBubble.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.onLoadEarlier = this.onLoadEarlier.bind(this);
+    this.onInitialized = this.onInitialized.bind(this);
 
     this._isAlright = null;
   }
@@ -73,6 +74,10 @@ export default class Example extends React.Component {
 
     // for demo purpose
     this.answerDemo(messages);
+  }
+
+  onInitialized() {
+    console.log('Chat initialized');
   }
 
   answerDemo(messages) {
@@ -203,6 +208,8 @@ export default class Example extends React.Component {
         renderBubble={this.renderBubble}
         renderCustomView={this.renderCustomView}
         renderFooter={this.renderFooter}
+
+        onInitialized={this.onInitialized}
       />
     );
   }

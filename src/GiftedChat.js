@@ -399,6 +399,12 @@ class GiftedChat extends React.Component {
     }
   }
 
+  notifyInitialized() {
+    if (this.props.onInitialized) {
+      this.props.onInitialized();
+    }
+  }
+
   onInitialLayoutViewLayout(e) {
     const layout = e.nativeEvent.layout;
     if (layout.height <= 0) {
@@ -414,6 +420,7 @@ class GiftedChat extends React.Component {
       composerHeight: newComposerHeight,
       messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight),
     });
+    this.notifyInitialized();
   }
 
   onMainViewLayout(e) {
@@ -554,6 +561,7 @@ GiftedChat.defaultProps = {
   }),
   onInputTextChanged: null,
   maxInputLength: null,
+  onInitialized: null,
 };
 
 GiftedChat.propTypes = {
@@ -600,6 +608,7 @@ GiftedChat.propTypes = {
   keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
   onInputTextChanged: PropTypes.func,
   maxInputLength: PropTypes.number,
+  onInitialized: PropTypes.func,
 };
 
 export {

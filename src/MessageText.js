@@ -26,17 +26,21 @@ export default class MessageText extends React.Component {
     // react-native-parsed-text recognizes it as a valid url, but Linking fails to open due to the missing scheme.
     if (WWW_URL_PATTERN.test(url)) {
       this.onUrlPress(`http://${url}`);
-    } else if (Linking.canOpenURL(url)) {
-      Linking.openURL(url);
     } else {
-      console.error('No handler for URL:', url);
+      Linking.canOpenURL(url).then((supported) => {
+        if (!supported) {
+          console.error('No handler for URL:', url);
+        } else {
+          Linking.openURL(url);
+        }
+      });
     }
   }
 
   onPhonePress(phone) {
     const options = [
-      'Text',
       'Call',
+      'Text',
       'Cancel',
     ];
     const cancelButtonIndex = options.length - 1;
@@ -57,7 +61,7 @@ export default class MessageText extends React.Component {
   }
 
   onEmailPress(email) {
-    Communications.email(email, null, null, null, null);
+    Communications.email([email], null, null, null, null);
   }
 
   render() {

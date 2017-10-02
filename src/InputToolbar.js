@@ -4,6 +4,7 @@ import {
   StyleSheet,
   View,
   ViewPropTypes,
+  Dimensions
 } from 'react-native';
 
 import Composer from './Composer';
@@ -69,6 +70,9 @@ const styles = StyleSheet.create({
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: '#b2b2b2',
     backgroundColor: '#FFFFFF',
+    position: 'absolute',
+    bottom: 0,
+    width: Dimensions.get('window').width
   },
   primary: {
     flexDirection: 'row',

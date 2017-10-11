@@ -38,7 +38,7 @@
   "dependencies": {
     "@expo/react-native-action-sheet": "cribspot/react-native-action-sheet#b422c54f26d30b9e85eb14a882ea9cec38600730",
     "md5": "2.2.1",
-    "moment": "2.18.1",
+    "moment": "2.19.0",
     "prop-types": "15.5.10",
     "react-native-communications": "2.2.1",
     "react-native-invertible-scroll-view": "git+https://github.com/brunocascio/react-native-invertible-scroll-view.git",

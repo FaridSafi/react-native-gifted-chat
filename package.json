@@ -36,14 +36,14 @@
     "eslint-plugin-react-native": "2.3.2"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "cribspot/react-native-action-sheet#b422c54f26d30b9e85eb14a882ea9cec38600730",
+    "@expo/react-native-action-sheet": "^1.0.1",
     "md5": "2.2.1",
-    "moment": "2.19.0",
+    "moment": "^2.19.0",
     "prop-types": "15.5.10",
     "react-native-communications": "2.2.1",
-    "react-native-invertible-scroll-view": "git+https://github.com/brunocascio/react-native-invertible-scroll-view.git",
-    "react-native-lightbox": "git+https://github.com/brunocascio/react-native-lightbox.git",
-    "react-native-parsed-text": "git+https://github.com/brunocascio/react-native-parsed-text.git",
+    "react-native-invertible-scroll-view": "^1.1.0",
+    "react-native-lightbox": "^0.7.0",
+    "react-native-parsed-text": "^0.0.19",
     "shallowequal": "1.0.2",
     "uuid": "3.1.0"
   }

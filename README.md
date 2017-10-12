@@ -147,6 +147,7 @@ e.g.
 - **`bottomOffset`** _(Integer)_ - Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar)
 - **`minInputToolbarHeight`** _(Integer)_ - Minimum height of the input toolbar; default is `44`
 - **`listViewProps`** _(Object)_ - Extra props to be passed to the messages [`<ListView>`](https://facebook.github.io/react-native/docs/listview.html); some props can't be overridden, see the code in `MessageContainer.render()` for details
+- **`textInputProps`** _(Object)_ - Extra props to be passed to the [`<TextInput>`](https://facebook.github.io/react-native/docs/textinput.html)
 - **`keyboardShouldPersistTaps`** _(Enum)_ - Determines whether the keyboard should stay visible after a tap; see [`<ScrollView>`](https://facebook.github.io/react-native/docs/scrollview.html) docs
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
 - **`maxInputLength`** _(Integer)_ - Max message composer TextInput length

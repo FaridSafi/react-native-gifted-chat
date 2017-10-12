@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import ActionSheet from '@expo/react-native-action-sheet';
-import moment from 'moment/min/moment-with-locales.min';
+import moment from 'moment';
 import uuid from 'uuid';
 
 import * as utils from './utils';

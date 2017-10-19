@@ -44,14 +44,11 @@ export default class Message extends React.Component {
   }
 
   renderSystemMessage() {
-    if (this.props.currentMessage.system) {
-      const systemMessageProps = this.getInnerComponentProps();
-      if (this.props.renderSystemMessage) {
-        return this.props.renderSystemMessage(systemMessageProps);
-      }
-      return <SystemMessage {...systemMessageProps} />;
+    const systemMessageProps = this.getInnerComponentProps();
+    if (this.props.renderSystemMessage) {
+      return this.props.renderSystemMessage(systemMessageProps);
     }
-    return null;
+    return <SystemMessage {...systemMessageProps} />;
   }
 
   renderAvatar() {

@@ -15,6 +15,7 @@ import * as utils from './utils';
 import Actions from './Actions';
 import Avatar from './Avatar';
 import Bubble from './Bubble';
+import SystemMessage from "./SystemMessage";;
 import MessageImage from './MessageImage';
 import MessageText from './MessageText';
 import Composer from './Composer';
@@ -528,6 +529,7 @@ GiftedChat.defaultProps = {
   onPressAvatar: null,
   renderAvatarOnTop: false,
   renderBubble: null,
+  renderSystemMessage: null,
   onLongPress: null,
   renderMessage: null,
   renderMessageText: null,
@@ -578,6 +580,7 @@ GiftedChat.propTypes = {
   onPressAvatar: PropTypes.func,
   renderAvatarOnTop: PropTypes.bool,
   renderBubble: PropTypes.func,
+  renderSystemMessage: PropTypes.func,
   onLongPress: PropTypes.func,
   renderMessage: PropTypes.func,
   renderMessageText: PropTypes.func,
@@ -609,6 +612,7 @@ export {
   Actions,
   Avatar,
   Bubble,
+  SystemMessage,
   MessageImage,
   MessageText,
   Composer,

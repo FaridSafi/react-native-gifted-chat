@@ -21,6 +21,7 @@ The most complete chat UI for React Native (formerly known as Gifted Messenger).
 - Multiline TextInput
 - InputToolbar avoiding keyboard
 - Redux support
+- System message
 
 ## Dependency
 
@@ -88,7 +89,7 @@ See [example/App.js](example/App.js) for a working demo!
 
 ## Message object
 
-e.g.
+e.g. Chat Message
 
 ```js
 {
@@ -101,6 +102,18 @@ e.g.
     avatar: 'https://facebook.github.io/react/img/logo_og.png',
   },
   image: 'https://facebook.github.io/react/img/logo_og.png',
+  // Any additional custom parameters are passed through
+}
+```
+
+e.g. System Message
+
+```js
+{
+  _id: 1,
+  text: 'This is a system message',
+  createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
+  system: true,
   // Any additional custom parameters are passed through
 }
 ```
@@ -127,6 +140,7 @@ e.g.
 - **`onPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is tapped
 - **`renderAvatarOnTop`** _(Bool)_ - Render the message avatar at the top of consecutive messages, rather than the bottom; default is `false`
 - **`renderBubble`** _(Function)_ - Custom message bubble
+- **`renderSystemMessage`** _(Function)_ - Custom system message
 - **`onLongPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
 - **`renderMessage`** _(Function)_ - Custom message container
 - **`renderMessageText`** _(Function)_ - Custom message text

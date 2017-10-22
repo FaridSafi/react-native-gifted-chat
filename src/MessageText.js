@@ -76,6 +76,7 @@ export default class MessageText extends React.Component {
             {type: 'phone', style: linkStyle, onPress: this.onPhonePress},
             {type: 'email', style: linkStyle, onPress: this.onEmailPress},
           ]}
+          childrenProps={{...this.props.textProps}}
         >
           {this.props.currentMessage.text}
         </ParsedText>
@@ -151,4 +152,5 @@ MessageText.propTypes = {
     right: Text.propTypes.style,
   }),
   parsePatterns: PropTypes.func,
+  textProps: PropTypes.object,
 };

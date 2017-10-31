@@ -1,21 +1,34 @@
 import React from "react";
-import { StyleSheet, Text, View, ViewPropTypes } from "react-native";
+import { StyleSheet, Text, View, ViewPropTypes, Linking } from "react-native";
 import PropTypes from "prop-types";
+import ParsedText from 'react-native-parsed-text';
 
 export default class SystemMessage extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+
   render() {
     const { currentMessage } = this.props;
+    //console.log('IN MY SM ', this.props)
     return (
       <View style={[styles.container, this.props.containerStyle]}>
         <View style={[styles.wrapper, this.props.wrapperStyle]}>
-          <Text style={[styles.text, this.props.textStyle]}>
+          <ParsedText
+            style={[styles.text, this.props.textStyle]}
+            parse={[
+              ...this.props.systemMessageParsePatterns(currentMessage),
+            ]}
+          >
             {currentMessage.text}
-          </Text>
+          </ParsedText>
         </View>
       </View>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

@@ -2,13 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import {
-  ListView,
+  FlatList,
   View,
   StyleSheet,
 } from 'react-native';
 
 import shallowequal from 'shallowequal';
-import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import md5 from 'md5';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
@@ -20,37 +19,22 @@ export default class MessageContainer extends React.Component {
     this.renderRow = this.renderRow.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
-    this.renderScrollComponent = this.renderScrollComponent.bind(this);
-
-    const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => {
-        return r1.hash !== r2.hash;
-      }
-    });
-
-    const messagesData = this.prepareMessages(props.messages);
     this.state = {
-      dataSource: dataSource.cloneWithRows(messagesData.blob, messagesData.keys)
-    };
+      messagesData: this.prepareMessages(props.messages)
+    }; 
   }
 
   prepareMessages(messages) {
-    return {
-      keys: messages.map(m => m._id),
-      blob: messages.reduce((o, m, i) => {
-        const previousMessage = messages[i + 1] || {};
-        const nextMessage = messages[i - 1] || {};
-        // add next and previous messages to hash to ensure updates
-        const toHash = JSON.stringify(m) + previousMessage._id + nextMessage._id;
-        o[m._id] = {
-          ...m,
-          previousMessage,
-          nextMessage,
-          hash: md5(toHash)
-        };
-        return o;
-      }, {})
-    };
+    return output = messages.reduce((o,m,i) => {
+      const previousMessage = messages[i + 1] || {}
+      const nextMessage = messages[i - 1] || {}
+      o.push( {
+        ...m,
+        previousMessage,
+        nextMessage
+      })
+      return o
+    },[])
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -67,10 +51,9 @@ export default class MessageContainer extends React.Component {
     if (this.props.messages === nextProps.messages) {
       return;
     }
-    const messagesData = this.prepareMessages(nextProps.messages);
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys)
-    });
+      messagesData: this.prepareMessages(nextProps.messages)
+    })
   }
 
   renderFooter() {
@@ -99,45 +82,44 @@ export default class MessageContainer extends React.Component {
   }
 
   scrollTo(options) {
-    this._invertibleScrollViewRef.scrollTo(options);
+    this.refs.flatListRef.scrollToOffset(options)
   }
 
-  renderRow(message, sectionId, rowId) {
-    if (!message._id && message._id !== 0) {
-      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(message));
+  renderRow({item,index}) {
+    if (!item._id && item._id !== 0) {
+      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
     }
-    if (!message.user) {
-      if (!message.system) {
-        console.warn("GiftedChat: `user` is missing for message", JSON.stringify(message));
+    if (!item.user) {
+      if (!item.system) {
+        console.warn("GiftedChat: `user` is missing for message", JSON.stringify(item));
       }
-      message.user = {};
+      item.user = {};
     }
 
     const messageProps = {
       ...this.props,
-      key: message._id,
-      currentMessage: message,
-      previousMessage: message.previousMessage,
-      nextMessage: message.nextMessage,
-      position: message.user._id === this.props.user._id ? 'right' : 'left',
+      key: item._id,
+      currentMessage: item,
+      previousMessage: item.previousMessage,
+      nextMessage: item.nextMessage,
+      position: item.user._id === this.props.user._id ? 'right' : 'left',
     };
 
     if (this.props.renderMessage) {
       return this.props.renderMessage(messageProps);
     }
-    return <Message {...messageProps}/>;
+    return (
+      <View style={{ transform: [{ scaleY: -1 },{perspective: 1280}]}}>
+        <Message {...messageProps}/>
+      </View>
+    )
   }
 
-  renderScrollComponent(props) {
-    const invertibleScrollViewProps = this.props.invertibleScrollViewProps;
-    return (
-      <InvertibleScrollView
-        {...props}
-        {...invertibleScrollViewProps}
-        ref={component => this._invertibleScrollViewRef = component}
-      />
-    );
-  }
+  renderHeaderWrapper = () => {
+    return <View style={{ flex: 1, transform: [{ scaleY: -1 },{perspective: 1280}] }}>{this.renderLoadEarlier()}</View>;
+  };
+
+  _keyExtractor = (item, index) => item._id+" "+index
 
   render() {
     return (
@@ -145,20 +127,23 @@ export default class MessageContainer extends React.Component {
         ref='container'
         style={styles.container}
       >
-        <ListView
+        <FlatList
           enableEmptySections={true}
           automaticallyAdjustContentInsets={false}
           initialListSize={20}
           pageSize={20}
-
+          ref='flatListRef'
+          keyExtractor={this._keyExtractor}
           {...this.props.listViewProps}
 
-          dataSource={this.state.dataSource}
+          data={this.state.messagesData}
 
-          renderRow={this.renderRow}
+          renderItem={this.renderRow}
           renderHeader={this.renderFooter}
-          renderFooter={this.renderLoadEarlier}
-          renderScrollComponent={this.renderScrollComponent}
+          renderFooter={this.renderLoadEarlier()}
+          style={{transform: [{scaleY: -1 },{perspective: 1280}]}}
+          {...this.props.invertibleScrollViewProps}
+          ListFooterComponent={this.renderHeaderWrapper}
         />
       </View>
     );

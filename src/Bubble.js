@@ -19,6 +19,7 @@ export default class Bubble extends React.Component {
   constructor(props) {
     super(props);
     this.onLongPress = this.onLongPress.bind(this);
+    this.onPress = this.onPress.bind(this);
   }
 
   handleBubbleToNext() {
@@ -117,6 +118,12 @@ export default class Bubble extends React.Component {
       }
     }
   }
+  
+  onPress() {
+    if (this.props.onPress) {
+      this.props.onPress(this.context, this.props.currentMessage);
+    }
+  }
 
   render() {
     return (
@@ -124,6 +131,7 @@ export default class Bubble extends React.Component {
         <View style={[styles[this.props.position].wrapper, this.props.wrapperStyle[this.props.position], this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
           <TouchableWithoutFeedback
             onLongPress={this.onLongPress}
+            onPress={this.onPress}
             accessibilityTraits="text"
             {...this.props.touchableProps}
           >
@@ -204,6 +212,7 @@ Bubble.contextTypes = {
 Bubble.defaultProps = {
   touchableProps: {},
   onLongPress: null,
+  onPress: null,
   renderMessageImage: null,
   renderMessageText: null,
   renderCustomView: null,
@@ -230,6 +239,7 @@ Bubble.defaultProps = {
 Bubble.propTypes = {
   touchableProps: PropTypes.object,
   onLongPress: PropTypes.func,
+  onPress: PropTypes.fubc,
   renderMessageImage: PropTypes.func,
   renderMessageText: PropTypes.func,
   renderCustomView: PropTypes.func,

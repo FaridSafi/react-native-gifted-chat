@@ -239,7 +239,7 @@ Bubble.defaultProps = {
 Bubble.propTypes = {
   touchableProps: PropTypes.object,
   onLongPress: PropTypes.func,
-  onPress: PropTypes.fubc,
+  onPress: PropTypes.func,
   renderMessageImage: PropTypes.func,
   renderMessageText: PropTypes.func,
   renderCustomView: PropTypes.func,

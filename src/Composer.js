@@ -33,13 +33,15 @@ export default class Composer extends React.Component {
         onChange={(e) => this.onContentSizeChange(e)}
         onContentSizeChange={(e) => this.onContentSizeChange(e)}
 
-        onChangeText={text => this.onChangeText(text)}
+        onChangeText={(text) => this.onChangeText(text)}
 
-        style={[styles.textInput, this.props.textInputStyle, {height: this.props.composerHeight}]}
+        style={[styles.textInput, this.props.textInputStyle, { height: this.props.composerHeight }]}
+
+        autoFocus={this.props.textInputAutoFocus}
 
         value={this.props.text}
         accessibilityLabel={this.props.text || this.props.placeholder}
-        enablesReturnKeyAutomatically={true}
+        enablesReturnKeyAutomatically
         underlineColorAndroid="transparent"
         {...this.props.textInputProps}
       />
@@ -74,6 +76,7 @@ Composer.defaultProps = {
   textInputProps: null,
   multiline: true,
   textInputStyle: {},
+  textInputAutoFocus: false,
   onTextChanged: () => {
   },
   onInputSizeChanged: () => {
@@ -90,4 +93,5 @@ Composer.propTypes = {
   onInputSizeChanged: PropTypes.func,
   multiline: PropTypes.bool,
   textInputStyle: TextInput.propTypes.style,
+  textInputAutoFocus: PropTypes.bool,
 };

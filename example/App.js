@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 
-import {GiftedChat, Actions, Bubble} from 'react-native-gifted-chat';
+import {GiftedChat, Actions, Bubble, SystemMessage} from 'react-native-gifted-chat';
 import CustomActions from './CustomActions';
 import CustomView from './CustomView';
 
@@ -25,6 +25,7 @@ export default class Example extends React.Component {
     this.onReceive = this.onReceive.bind(this);
     this.renderCustomActions = this.renderCustomActions.bind(this);
     this.renderBubble = this.renderBubble.bind(this);
+    this.renderSystemMessage = this.renderSystemMessage.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.onLoadEarlier = this.onLoadEarlier.bind(this);
 
@@ -165,6 +166,20 @@ export default class Example extends React.Component {
     );
   }
 
+  renderSystemMessage(props) {
+    return (
+      <SystemMessage
+        {...props}
+        containerStyle={{
+          marginBottom: 15,
+        }}
+        textStyle={{
+          fontSize: 14,
+        }}
+      />
+    );
+  }
+
   renderCustomView(props) {
     return (
       <CustomView
@@ -201,6 +216,7 @@ export default class Example extends React.Component {
 
         renderActions={this.renderCustomActions}
         renderBubble={this.renderBubble}
+        renderSystemMessage={this.renderSystemMessage}
         renderCustomView={this.renderCustomView}
         renderFooter={this.renderFooter}
       />

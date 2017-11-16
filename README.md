@@ -21,6 +21,7 @@ The most complete chat UI for React Native (formerly known as Gifted Messenger).
 - Multiline TextInput
 - InputToolbar avoiding keyboard
 - Redux support
+- System message
 
 ## Dependency
 
@@ -88,7 +89,7 @@ See [example/App.js](example/App.js) for a working demo!
 
 ## Message object
 
-e.g.
+e.g. Chat Message
 
 ```js
 {
@@ -101,6 +102,18 @@ e.g.
     avatar: 'https://facebook.github.io/react/img/logo_og.png',
   },
   image: 'https://facebook.github.io/react/img/logo_og.png',
+  // Any additional custom parameters are passed through
+}
+```
+
+e.g. System Message
+
+```js
+{
+  _id: 1,
+  text: 'This is a system message',
+  createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
+  system: true,
   // Any additional custom parameters are passed through
 }
 ```
@@ -123,11 +136,12 @@ e.g.
 - **`renderLoading`** _(Function)_ - Render a loading view when initializing
 - **`renderLoadEarlier`** _(Function)_ - Custom "Load earlier messages" button
 - **`renderAvatar`** _(Function)_ - Custom message avatar; set to `null` to not render any avatar for the message
-- **`showUserAvatar`** _(Function)_ - Whether to render an avatar for the current user; default is `false`, only show avatars for other users
+- **`showUserAvatar`** _(Bool)_ - Whether to render an avatar for the current user; default is `false`, only show avatars for other users
 - **`onPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is tapped
 - **`renderAvatarOnTop`** _(Bool)_ - Render the message avatar at the top of consecutive messages, rather than the bottom; default is `false`
 - **`renderBubble`** _(Function)_ - Custom message bubble
-- **`onLongPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master/example/CustomActions.js))
+- **`renderSystemMessage`** _(Function)_ - Custom system message
+- **`onLongPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
 - **`renderMessage`** _(Function)_ - Custom message container
 - **`renderMessageText`** _(Function)_ - Custom message text
 - **`renderMessageImage`** _(Function)_ - Custom message image
@@ -147,9 +161,20 @@ e.g.
 - **`bottomOffset`** _(Integer)_ - Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar)
 - **`minInputToolbarHeight`** _(Integer)_ - Minimum height of the input toolbar; default is `44`
 - **`listViewProps`** _(Object)_ - Extra props to be passed to the messages [`<ListView>`](https://facebook.github.io/react-native/docs/listview.html); some props can't be overridden, see the code in `MessageContainer.render()` for details
+- **`textInputProps`** _(Object)_ - Extra props to be passed to the [`<TextInput>`](https://facebook.github.io/react-native/docs/textinput.html)
 - **`keyboardShouldPersistTaps`** _(Enum)_ - Determines whether the keyboard should stay visible after a tap; see [`<ScrollView>`](https://facebook.github.io/react-native/docs/scrollview.html) docs
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
 - **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
+- **`parsePatterns`** _(Function)_ - Custom parse patterns for [react-native-parsed-text](https://github.com/taskrabbit/react-native-parsed-text) used to linkify message content (like URLs and phone numbers), e.g.:
+
+    ```js
+    <GiftedChat
+      parsePatterns={(linkStyle) => [
+        { type: 'phone', style: linkStyle, onPress: this.onPressPhoneNumber },
+        { pattern: /#(\w+)/, style: { ...linkStyle, styles.hashtag }, onPress: this.onPressHashtag },
+      ]}
+    />
+    ```
 
 ## Imperative methods
 

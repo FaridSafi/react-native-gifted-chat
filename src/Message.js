@@ -8,6 +8,7 @@ import {
 
 import Avatar from './Avatar';
 import Bubble from './Bubble';
+import SystemMessage from './SystemMessage';
 import Day from './Day';
 
 import {isSameUser, isSameDay} from './utils';
@@ -42,6 +43,14 @@ export default class Message extends React.Component {
     return <Bubble {...bubbleProps}/>;
   }
 
+  renderSystemMessage() {
+    const systemMessageProps = this.getInnerComponentProps();
+    if (this.props.renderSystemMessage) {
+      return this.props.renderSystemMessage(systemMessageProps);
+    }
+    return <SystemMessage {...systemMessageProps} />;
+  }
+
   renderAvatar() {
     if (this.props.user._id === this.props.currentMessage.user._id && !this.props.showUserAvatar) {
       return null;
@@ -58,13 +67,13 @@ export default class Message extends React.Component {
     return (
       <View>
         {this.renderDay()}
-        <View style={[styles[this.props.position].container, {
-          marginBottom: isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
-        }, this.props.containerStyle[this.props.position]]}>
-          {this.props.position === 'left' ? this.renderAvatar() : null}
-          {this.renderBubble()}
-          {this.props.position === 'right' ? this.renderAvatar() : null}
-        </View>
+        {this.props.currentMessage.system ? 
+          this.renderSystemMessage() :
+          <View style={[styles[this.props.position].container, { marginBottom: isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10 }, this.props.containerStyle[this.props.position]]}>
+            {this.props.position === "left" ? this.renderAvatar() : null}
+            {this.renderBubble()}
+            {this.props.position === "right" ? this.renderAvatar() : null}
+          </View>}
       </View>
     );
   }
@@ -95,6 +104,7 @@ Message.defaultProps = {
   renderAvatar: undefined,
   renderBubble: null,
   renderDay: null,
+  renderSystemMessage: null,
   position: 'left',
   currentMessage: {},
   nextMessage: {},
@@ -108,6 +118,7 @@ Message.propTypes = {
   showUserAvatar: PropTypes.bool,
   renderBubble: PropTypes.func,
   renderDay: PropTypes.func,
+  renderSystemMessage: PropTypes.func,
   position: PropTypes.oneOf(['left', 'right']),
   currentMessage: PropTypes.object,
   nextMessage: PropTypes.object,

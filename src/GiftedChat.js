@@ -117,14 +117,10 @@ class GiftedChat extends React.Component {
     const { messages, text } = nextProps;
     this.setMessages(messages || []);
     this.setTextFromProp(text);
-    
-    if(this.props.minInputToolbarHeight !== nextProps.minInputToolbarHeight) {
-      let inputToolbarHeight = this.state.composerHeight + (nextProps.minInputToolbarHeight - MIN_COMPOSER_HEIGHT);
 
-      const newMessagesContainerHeight = this.getMaxHeight() - inputToolbarHeight - this.getKeyboardHeight() + this.getBottomOffset();
-      this.setState({
-        messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight),
-      });
+    if (nextProps.minInputToolbarHeight !== this.props.minInputToolbarHeight) {
+      const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(this.state.composerHeight, nextProps);
+      this.updateMessageContainerHeight(newMessagesContainerHeight)
     }
   }
 
@@ -254,21 +250,25 @@ class GiftedChat extends React.Component {
     return value;
   }
 
+  updateMessageContainerHeight (height) {
+    if (this.props.isAnimated === true) {
+      Animated.timing(this.state.messagesContainerHeight, {
+        toValue: height,
+        duration: 210,
+      }).start();
+    } else {
+      this.setState({
+        messagesContainerHeight: height,
+      });
+    }
+  }
+
   onKeyboardWillShow(e) {
     this.setIsTypingDisabled(true);
     this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
     this.setBottomOffset(this.props.bottomOffset);
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard();
-    if (this.props.isAnimated === true) {
-      Animated.timing(this.state.messagesContainerHeight, {
-        toValue: newMessagesContainerHeight,
-        duration: 210,
-      }).start();
-    } else {
-      this.setState({
-        messagesContainerHeight: newMessagesContainerHeight,
-      });
-    }
+    this.updateMessageContainerHeight(newMessagesContainerHeight)
   }
 
   onKeyboardWillHide() {
@@ -276,16 +276,7 @@ class GiftedChat extends React.Component {
     this.setKeyboardHeight(0);
     this.setBottomOffset(0);
     const newMessagesContainerHeight = this.getBasicMessagesContainerHeight();
-    if (this.props.isAnimated === true) {
-      Animated.timing(this.state.messagesContainerHeight, {
-        toValue: newMessagesContainerHeight,
-        duration: 210,
-      }).start();
-    } else {
-      this.setState({
-        messagesContainerHeight: newMessagesContainerHeight,
-      });
-    }
+    this.updateMessageContainerHeight(newMessagesContainerHeight)
   }
 
   onKeyboardDidShow(e) {

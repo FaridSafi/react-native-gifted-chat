@@ -221,26 +221,26 @@ class GiftedChat extends React.Component {
 
   // TODO
   // setMinInputToolbarHeight
-  getMinInputToolbarHeight() {
-    return this.props.minInputToolbarHeight;
+  getMinInputToolbarHeight(props) {
+    return props.minInputToolbarHeight;
   }
 
-  calculateInputToolbarHeight(composerHeight) {
-    return composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT);
+  calculateInputToolbarHeight(composerHeight, props) {
+    return composerHeight + (this.getMinInputToolbarHeight(props) - MIN_COMPOSER_HEIGHT);
   }
 
   /**
    * Returns the height, based on current window size, without taking the keyboard into account.
    */
-  getBasicMessagesContainerHeight(composerHeight = this.state.composerHeight) {
-    return this.getMaxHeight() - this.calculateInputToolbarHeight(composerHeight);
+  getBasicMessagesContainerHeight(composerHeight = this.state.composerHeight, props = this.props) {
+    return this.getMaxHeight() - this.calculateInputToolbarHeight(composerHeight, props);
   }
 
   /**
    * Returns the height, based on current window size, taking the keyboard into account.
    */
-  getMessagesContainerHeightWithKeyboard(composerHeight = this.state.composerHeight) {
-    return this.getBasicMessagesContainerHeight(composerHeight) - this.getKeyboardHeight() + this.getBottomOffset();
+  getMessagesContainerHeightWithKeyboard(composerHeight = this.state.composerHeight, props = this.props) {
+    return this.getBasicMessagesContainerHeight(composerHeight, props) - this.getKeyboardHeight() + this.getBottomOffset();
   }
 
   prepareMessagesContainerHeight(value) {

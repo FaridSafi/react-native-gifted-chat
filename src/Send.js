@@ -23,6 +23,7 @@ export default class Send extends React.Component {
           onPress={() => {
             this.props.onSend({text: this.props.text.trim()}, true);
           }}
+          accessibilityLabel={this.props.accessibilityLabel}
           accessibilityTraits="button"
         >
           <View>
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
 });
 
 Send.defaultProps = {
+  accessibilityLabel: 'SendButton',
   text: '',
   onSend: () => {},
   label: 'Send',
@@ -60,6 +62,7 @@ Send.defaultProps = {
 };
 
 Send.propTypes = {
+  accessibilityLabel: PropTypes.string,
   text: PropTypes.string,
   onSend: PropTypes.func,
   label: PropTypes.string,

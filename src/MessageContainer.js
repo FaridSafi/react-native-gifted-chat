@@ -141,10 +141,7 @@ export default class MessageContainer extends React.Component {
 
   render() {
     return (
-      <View
-        ref='container'
-        style={styles.container}
-      >
+      <View style={styles.container}>
         <ListView
           enableEmptySections={true}
           automaticallyAdjustContentInsets={false}

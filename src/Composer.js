@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 });
 
 Composer.defaultProps = {
-  accessibilityLabel: 'composer',
+  accessibilityLabel: 'Composer',
   composerHeight: Platform.select({
     ios: 33,
     android: 41,

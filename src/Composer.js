@@ -40,7 +40,7 @@ export default class Composer extends React.Component {
         autoFocus={this.props.textInputAutoFocus}
 
         value={this.props.text}
-        accessibilityLabel={this.props.text || this.props.placeholder}
+        accessibilityLabel={this.props.accessibilityLabel}
         enablesReturnKeyAutomatically
         underlineColorAndroid="transparent"
         {...this.props.textInputProps}
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
 });
 
 Composer.defaultProps = {
+  accessibilityLabel: 'composer',
   composerHeight: Platform.select({
     ios: 33,
     android: 41,
@@ -84,6 +85,7 @@ Composer.defaultProps = {
 };
 
 Composer.propTypes = {
+  accessibilityLabel: PropTypes.string,
   composerHeight: PropTypes.number,
   text: PropTypes.string,
   placeholder: PropTypes.string,

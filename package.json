@@ -41,7 +41,6 @@
     "moment": "^2.19.0",
     "prop-types": "15.5.10",
     "react-native-communications": "2.2.1",
-    "react-native-invertible-scroll-view": "^1.1.0",
     "react-native-lightbox": "^0.7.0",
     "react-native-parsed-text": "^0.0.19",
     "shallowequal": "1.0.2",

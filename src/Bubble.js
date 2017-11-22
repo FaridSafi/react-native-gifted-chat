@@ -6,7 +6,9 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  ViewPropTypes,
+  Image,
+  Dimensions, //改
+  ViewPropTypes
 } from 'react-native';
 
 import MessageText from './MessageText';
@@ -14,6 +16,8 @@ import MessageImage from './MessageImage';
 import Time from './Time';
 
 import { isSameUser, isSameDay, warnDeprecated } from './utils';
+
+const { width } = Dimensions.get('window'); //改
 
 export default class Bubble extends React.Component {
   constructor(props) {
@@ -57,19 +61,17 @@ export default class Bubble extends React.Component {
     return null;
   }
 
-  renderTicks() {
+  renderTicks() { //改
     const {currentMessage} = this.props;
     if (this.props.renderTicks) {
         return this.props.renderTicks(currentMessage);
     }
-    if (currentMessage.user._id !== this.props.user._id) {
-        return;
-    }
-    if (currentMessage.sent || currentMessage.received) {
+
+    if (currentMessage.tag1 || currentMessage.tag2) {
       return (
         <View style={styles.tickView}>
-          {currentMessage.sent && <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
-          {currentMessage.received && <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
+          {currentMessage.tag1 && <Image source={currentMessage.tagIcon1} style={[styles.tick, this.props.tagStyle]} />}
+          {currentMessage.tag2 && <Image source={currentMessage.tagIcon2} style={[styles.tick, this.props.tagStyle]} />}
         </View>
       )
     }
@@ -96,6 +98,7 @@ export default class Bubble extends React.Component {
   onLongPress() {
     if (this.props.onLongPress) {
       this.props.onLongPress(this.context, this.props.currentMessage);
+
     } else {
       if (this.props.currentMessage.text) {
         const options = [
@@ -118,6 +121,73 @@ export default class Bubble extends React.Component {
     }
   }
 
+  //改
+  renderBubbleContent() {
+    const {currentMessage} = this.props;
+
+    if (this.props.position === 'left') {
+      return (
+        <View style={{ flexDirection: 'row' }}>
+          <View style={{
+            width: width / 6,
+            alignSelf: 'flex-start',
+            paddingTop: 10
+            }}
+          >
+            {this.renderTicks()}
+          </View>
+          <View style={{
+            flexDirection: 'column',
+            justifyContent:'center',
+            width: 2 * (width / 3)
+            }}
+          >
+            {this.renderMessageImage()}
+            {this.renderMessageText()}
+            {this.renderTime()}
+          </View>
+          <View style={{
+            alignSelf: 'flex-start',
+            paddingTop: 10,
+            width: width / 6
+            }}
+           >
+            <Image
+              source={{ uri: currentMessage.user.avatar }}
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: 40,
+                height: 40,
+                borderRadius: 20
+              }}
+            />
+          </View>
+        </View>
+      );
+    }
+
+    return (
+      <View style={{ flexDirection: 'row' }}>
+        <View style={{ alignSelf: 'flex-end', width: 1.5 * (width / 10) }}>
+          {this.renderTime()}
+        </View>
+        <View style={{
+          flexDirection: 'column',
+          justifyContent:'flex-start',
+          width: width / 2
+          }}
+        >
+          {this.renderMessageImage()}
+          {this.renderMessageText()}
+        </View>
+        <View style={{ alignSelf: 'center', width: 1.5 * (width / 10) }}>
+          {this.renderTicks()}
+        </View>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
@@ -128,12 +198,9 @@ export default class Bubble extends React.Component {
             {...this.props.touchableProps}
           >
             <View>
-              {this.renderCustomView()}
-              {this.renderMessageImage()}
-              {this.renderMessageText()}
+               {this.renderCustomView()}
+              {this.renderBubbleContent()}
               <View style={[styles.bottom, this.props.bottomContainerStyle[this.props.position]]}>
-                {this.renderTime()}
-                {this.renderTicks()}
               </View>
             </View>
           </TouchableWithoutFeedback>
@@ -186,14 +253,14 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
-  tick: {
-    fontSize: 10,
-    backgroundColor: 'transparent',
-    color: 'white',
+  tick: { //改
+    width: 25,
+    resizeMode: Image.resizeMode.contain
   },
   tickView: {
     flexDirection: 'row',
     marginRight: 10,
+    alignSelf: 'center', //改
   }
 };
 
@@ -219,7 +286,7 @@ Bubble.defaultProps = {
   containerStyle: {},
   wrapperStyle: {},
   bottomContainerStyle: {},
-  tickStyle: {},
+  tagStyle: {}, //改
   containerToNextStyle: {},
   containerToPreviousStyle: {},
   //TODO: remove in next major release

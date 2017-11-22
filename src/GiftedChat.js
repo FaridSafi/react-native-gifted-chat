@@ -8,13 +8,14 @@ import {
 } from 'react-native';
 
 import ActionSheet from '@expo/react-native-action-sheet';
-import moment from 'moment/min/moment-with-locales.min';
+import moment from 'moment';
 import uuid from 'uuid';
 
 import * as utils from './utils';
 import Actions from './Actions';
 import Avatar from './Avatar';
 import Bubble from './Bubble';
+import SystemMessage from "./SystemMessage";;
 import MessageImage from './MessageImage';
 import MessageText from './MessageText';
 import Composer from './Composer';
@@ -169,7 +170,7 @@ class GiftedChat extends React.Component {
   }
 
   getKeyboardHeight() {
-    if (Platform.OS === 'android') {
+    if (Platform.OS === 'android' && !this.props.forceGetKeyboardHeight) {
       // For android: on-screen keyboard resized main container and has own height.
       // @see https://developer.android.com/training/keyboard-input/visibility.html
       // So for calculate the messages container height ignore keyboard height.
@@ -528,6 +529,7 @@ GiftedChat.defaultProps = {
   onPressAvatar: null,
   renderAvatarOnTop: false,
   renderBubble: null,
+  renderSystemMessage: null,
   onLongPress: null,
   renderMessage: null,
   renderMessageText: null,
@@ -554,6 +556,7 @@ GiftedChat.defaultProps = {
   }),
   onInputTextChanged: null,
   maxInputLength: null,
+  forceGetKeyboardHeight: false,
 };
 
 GiftedChat.propTypes = {
@@ -577,6 +580,7 @@ GiftedChat.propTypes = {
   onPressAvatar: PropTypes.func,
   renderAvatarOnTop: PropTypes.bool,
   renderBubble: PropTypes.func,
+  renderSystemMessage: PropTypes.func,
   onLongPress: PropTypes.func,
   renderMessage: PropTypes.func,
   renderMessageText: PropTypes.func,
@@ -600,6 +604,7 @@ GiftedChat.propTypes = {
   keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
   onInputTextChanged: PropTypes.func,
   maxInputLength: PropTypes.number,
+  forceGetKeyboardHeight: PropTypes.bool,
 };
 
 export {
@@ -607,6 +612,7 @@ export {
   Actions,
   Avatar,
   Bubble,
+  SystemMessage,
   MessageImage,
   MessageText,
   Composer,

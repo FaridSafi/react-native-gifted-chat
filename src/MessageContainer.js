@@ -64,9 +64,6 @@ export default class MessageContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.messages === nextProps.messages) {
-      return;
-    }
     const messagesData = this.prepareMessages(nextProps.messages);
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys)

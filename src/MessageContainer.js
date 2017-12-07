@@ -156,8 +156,8 @@ export default class MessageContainer extends React.Component {
           dataSource={this.state.dataSource}
 
           renderRow={this.renderRow}
-          renderHeader={this.renderFooter}
-          renderFooter={this.renderLoadEarlier}
+          renderHeader={this.props.inverted ? this.renderFooter : this.renderLoadEarlier}
+          renderFooter={this.props.inverted ? this.renderLoadEarlier : this.renderFooter}
           renderScrollComponent={this.renderScrollComponent}
         />
       </View>

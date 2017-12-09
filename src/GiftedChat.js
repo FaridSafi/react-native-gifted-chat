@@ -71,7 +71,7 @@ class GiftedChat extends React.Component {
 
 
     this.invertibleScrollViewProps = {
-      inverted: true,
+      inverted: false,
       keyboardShouldPersistTaps: this.props.keyboardShouldPersistTaps,
       onKeyboardWillShow: this.onKeyboardWillShow,
       onKeyboardWillHide: this.onKeyboardWillHide,
@@ -84,7 +84,7 @@ class GiftedChat extends React.Component {
     if (!Array.isArray(messages)) {
       messages = [messages];
     }
-    return messages.concat(currentMessages);
+    return currentMessages.concat(messages);
   }
 
   static prepend(currentMessages = [], messages) {

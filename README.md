@@ -142,6 +142,7 @@ e.g. System Message
 - **`renderBubble`** _(Function)_ - Custom message bubble
 - **`renderSystemMessage`** _(Function)_ - Custom system message
 - **`onLongPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
+- **`inverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
 - **`renderMessage`** _(Function)_ - Custom message container
 - **`renderMessageText`** _(Function)_ - Custom message text
 - **`renderMessageImage`** _(Function)_ - Custom message image

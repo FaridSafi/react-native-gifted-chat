@@ -20,6 +20,7 @@ export default class Avatar extends React.Component {
   }
 
   render() {
+    const renderAvatarAnyway = this.props.renderAvatarAnyway
     const renderAvatarOnTop = this.props.renderAvatarOnTop;
     const messageToCompare = renderAvatarOnTop ? this.props.previousMessage : this.props.nextMessage;
     const computedStyle = renderAvatarOnTop ? "onTop" : "onBottom"
@@ -28,7 +29,7 @@ export default class Avatar extends React.Component {
       return null
     }
 
-    if (isSameUser(this.props.currentMessage, messageToCompare) && isSameDay(this.props.currentMessage, messageToCompare)) {
+    if (!renderAvatarAnyway && (isSameUser(this.props.currentMessage, messageToCompare) && isSameDay(this.props.currentMessage, messageToCompare))) {
       return (
         <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
           <GiftedAvatar

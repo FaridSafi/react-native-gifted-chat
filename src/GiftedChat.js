@@ -71,7 +71,7 @@ class GiftedChat extends React.Component {
 
 
     this.invertibleScrollViewProps = {
-      inverted: this.props.inverted,
+      inverted: false,
       keyboardShouldPersistTaps: this.props.keyboardShouldPersistTaps,
       onKeyboardWillShow: this.onKeyboardWillShow,
       onKeyboardWillHide: this.onKeyboardWillHide,
@@ -84,14 +84,14 @@ class GiftedChat extends React.Component {
     if (!Array.isArray(messages)) {
       messages = [messages];
     }
-    return this.props.inverted ? messages.concat(currentMessages) : currentMessages.concat(messages);
+    return currentMessages.concat(messages);
   }
 
   static prepend(currentMessages = [], messages) {
     if (!Array.isArray(messages)) {
       messages = [messages];
     }
-    return this.props.inverted ? currentMessages.concat(messages) : messages.concat(currentMessages);
+    return currentMessages.concat(messages);
   }
 
   getChildContext() {
@@ -557,7 +557,6 @@ GiftedChat.defaultProps = {
   onInputTextChanged: null,
   maxInputLength: null,
   forceGetKeyboardHeight: false,
-  inverted: true,
 };
 
 GiftedChat.propTypes = {
@@ -606,7 +605,6 @@ GiftedChat.propTypes = {
   onInputTextChanged: PropTypes.func,
   maxInputLength: PropTypes.number,
   forceGetKeyboardHeight: PropTypes.bool,
-  inverted: PropTypes.bool,
 };
 
 export {

@@ -11,7 +11,7 @@ import Bubble from './Bubble';
 import SystemMessage from './SystemMessage';
 import Day from './Day';
 
-import {isSameUser, isSameDay} from './utils';
+import { isSameUser, isSameDay } from './utils';
 
 export default class Message extends React.Component {
 
@@ -64,12 +64,19 @@ export default class Message extends React.Component {
   }
 
   render() {
+    const sameUser = isSameUser(this.props.currentMessage, this.props.nextMessage)
     return (
       <View>
         {this.renderDay()}
-        {this.props.currentMessage.system ? 
+        {this.props.currentMessage.system ?
           this.renderSystemMessage() :
-          <View style={[styles[this.props.position].container, { marginBottom: isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10 }, this.props.containerStyle[this.props.position]]}>
+          <View style={[
+              styles[this.props.position].container,
+              { marginBottom: sameUser ? 2 : 10 },
+              !this.props.inverted && { marginBottom: 2 },
+              this.props.containerStyle[this.props.position]
+            ]}
+          >
             {this.props.position === "left" ? this.renderAvatar() : null}
             {this.renderBubble()}
             {this.props.position === "right" ? this.renderAvatar() : null}

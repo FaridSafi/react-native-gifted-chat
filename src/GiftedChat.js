@@ -325,7 +325,6 @@ class GiftedChat extends React.Component {
     if (!Array.isArray(messages)) {
       messages = [messages];
     }
-
     messages = messages.map((message) => {
       return {
         ...message,

@@ -140,6 +140,10 @@ export default class MessageContainer extends React.Component {
   }
 
   render() {
+    const contentContainerStyle = this.props.inverted
+    ? {}
+    : styles.notInvertedContentContainerStyle
+
     return (
       <View
         ref='container'
@@ -155,6 +159,8 @@ export default class MessageContainer extends React.Component {
 
           dataSource={this.state.dataSource}
 
+          contentContainerStyle={contentContainerStyle}
+
           renderRow={this.renderRow}
           renderHeader={this.props.inverted ? this.renderFooter : this.renderLoadEarlier}
           renderFooter={this.props.inverted ? this.renderLoadEarlier : this.renderFooter}
@@ -168,6 +174,9 @@ export default class MessageContainer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  notInvertedContentContainerStyle: {
+    justifyContent: 'flex-end'
   }
 });
 

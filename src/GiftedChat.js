@@ -40,8 +40,6 @@ const {
   DATE_FORMAT,
 } = Constants;
 
-console.warn(MIN_COMPOSER_HEIGHT, MAX_COMPOSER_HEIGHT);
-
 class GiftedChat extends React.Component {
   static append(currentMessages = [], messages, inverted = true) {
     if (!Array.isArray(messages)) {

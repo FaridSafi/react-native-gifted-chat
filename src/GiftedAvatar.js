@@ -3,9 +3,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import Colors from './Colors';
+import Color from './Color';
 
-const { carot, emerald, peterRiver, wisteria, alizarin, turquoise, midnightBlue } = Colors;
+const { carot, emerald, peterRiver, wisteria, alizarin, turquoise, midnightBlue } = Color;
 // TODO
 // 3 words name initials
 // handle only alpha numeric chars
@@ -117,12 +117,12 @@ const styles = {
     borderRadius: 20,
   },
   avatarTransparent: {
-    backgroundColor: Colors.backgroundTransparent,
+    backgroundColor: Color.backgroundTransparent,
   },
   textStyle: {
-    color: Colors.white,
+    color: Color.white,
     fontSize: 16,
-    backgroundColor: Colors.backgroundTransparent,
+    backgroundColor: Color.backgroundTransparent,
     fontWeight: '100',
   },
 };

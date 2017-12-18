@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
-import Colors from './Colors';
+import Color from './Color';
 
 export default function Send({ text, containerStyle, onSend, children, textStyle, label }) {
   if (text.trim().length > 0) {
@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   text: {
-    color: Colors.defaultBlue,
+    color: Color.defaultBlue,
     fontWeight: '600',
     fontSize: 17,
-    backgroundColor: Colors.backgroundTransparent,
+    backgroundColor: Color.backgroundTransparent,
     marginBottom: 12,
     marginLeft: 10,
     marginRight: 10,

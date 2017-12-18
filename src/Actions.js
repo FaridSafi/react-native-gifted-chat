@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
-import Colors from './Colors';
+import Color from './Color';
 
 export default class Actions extends React.Component {
   constructor(props) {
@@ -67,15 +67,15 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     borderRadius: 13,
-    borderColor: Colors.defaultColor,
+    borderColor: Color.defaultColor,
     borderWidth: 2,
     flex: 1,
   },
   iconText: {
-    color: Colors.defaultColor,
+    color: Color.defaultColor,
     fontWeight: 'bold',
     fontSize: 16,
-    backgroundColor: Colors.backgroundTransparent,
+    backgroundColor: Color.backgroundTransparent,
     textAlign: 'center',
   },
 });
@@ -87,7 +87,7 @@ Actions.contextTypes = {
 Actions.defaultProps = {
   onSend: () => {},
   options: {},
-  optionTintColor: Colors.optionTintColor,
+  optionTintColor: Color.optionTintColor,
   icon: null,
   containerStyle: {},
   iconTextStyle: {},

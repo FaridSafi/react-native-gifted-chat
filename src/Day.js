@@ -5,7 +5,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 import moment from 'moment';
 
-import Colors from './Colors';
+import Color from './Color';
 
 import { isSameDay, isSameUser, warnDeprecated } from './utils';
 import { DATE_FORMAT } from './Constant';
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   text: {
-    backgroundColor: Colors.backgroundTransparent,
-    color: Colors.defaultColor,
+    backgroundColor: Color.backgroundTransparent,
+    color: Color.defaultColor,
     fontSize: 12,
     fontWeight: '600',
   },

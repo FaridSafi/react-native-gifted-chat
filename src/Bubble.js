@@ -14,7 +14,7 @@ import {
 import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
-import Colors from './Colors';
+import Color from './Color';
 
 import { isSameUser, isSameDay, warnDeprecated } from './utils';
 
@@ -178,7 +178,7 @@ const styles = {
     },
     wrapper: {
       borderRadius: 15,
-      backgroundColor: Colors.leftBubbleBackground,
+      backgroundColor: Color.leftBubbleBackground,
       marginRight: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
@@ -197,7 +197,7 @@ const styles = {
     },
     wrapper: {
       borderRadius: 15,
-      backgroundColor: Colors.defaultBlue,
+      backgroundColor: Color.defaultBlue,
       marginLeft: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
@@ -215,8 +215,8 @@ const styles = {
   },
   tick: {
     fontSize: 10,
-    backgroundColor: Colors.backgroundTransparent,
-    color: Colors.white,
+    backgroundColor: Color.backgroundTransparent,
+    color: Color.white,
   },
   tickView: {
     flexDirection: 'row',

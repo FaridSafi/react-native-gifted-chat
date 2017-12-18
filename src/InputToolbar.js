@@ -7,7 +7,7 @@ import { StyleSheet, View, Keyboard, ViewPropTypes, Dimensions } from 'react-nat
 import Composer from './Composer';
 import Send from './Send';
 import Actions from './Actions';
-import Colors from './Colors';
+import Color from './Color';
 
 export default class InputToolbar extends React.Component {
   constructor(props) {
@@ -97,8 +97,8 @@ export default class InputToolbar extends React.Component {
 const styles = StyleSheet.create({
   container: {
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: Colors.defaultColor,
-    backgroundColor: Colors.white,
+    borderTopColor: Color.defaultColor,
+    backgroundColor: Color.white,
     bottom: 0,
     width: Dimensions.get('window').width,
   },

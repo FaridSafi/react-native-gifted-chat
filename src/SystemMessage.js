@@ -3,7 +3,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import Colors from './Colors';
+import Color from './Color';
 
 export default function SystemMessage({ currentMessage, containerStyle, wrapperStyle, textStyle }) {
   return (
@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   text: {
-    backgroundColor: Colors.backgroundTransparent,
-    color: Colors.defaultColor,
+    backgroundColor: Color.backgroundTransparent,
+    color: Color.defaultColor,
     fontSize: 12,
     fontWeight: '300',
   },

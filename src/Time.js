@@ -6,7 +6,7 @@ import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 
 import moment from 'moment';
 
-import Colors from './Colors';
+import Color from './Color';
 import { TIME_FORMAT } from './Constant';
 
 export default function Time({ position, containerStyle, currentMessage, timeFormat }, context) {
@@ -39,7 +39,7 @@ const styles = {
       ...containerStyle,
     },
     text: {
-      color: Colors.timeTextColor,
+      color: Color.timeTextColor,
       ...textStyle,
     },
   }),
@@ -48,7 +48,7 @@ const styles = {
       ...containerStyle,
     },
     text: {
-      color: Colors.white,
+      color: Color.white,
       ...textStyle,
     },
   }),

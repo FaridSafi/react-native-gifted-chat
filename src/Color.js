@@ -4,7 +4,7 @@ export default {
   defaultBlue: '#0084ff',
   leftBubbleBackground: '#f0f0f0',
   white: '#fff',
-  carot: '#e67e22',
+  carrot: '#e67e22',
   emerald: '#2ecc71',
   peterRiver: '#3498db',
   wisteria: '#8e44ad',

@@ -11,7 +11,7 @@ import {
   View,
   ViewPropTypes,
 } from 'react-native';
-import Colors from './Colors';
+import Color from './Color';
 
 export default class LoadEarlier extends React.Component {
   renderLoading() {
@@ -56,15 +56,15 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.defaultColor,
+    backgroundColor: Color.defaultColor,
     borderRadius: 15,
     height: 30,
     paddingLeft: 10,
     paddingRight: 10,
   },
   text: {
-    backgroundColor: Colors.backgroundTransparent,
-    color: Colors.white,
+    backgroundColor: Color.backgroundTransparent,
+    color: Color.white,
     fontSize: 12,
   },
   activityIndicator: {

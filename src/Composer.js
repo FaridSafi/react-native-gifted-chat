@@ -5,7 +5,7 @@ import React from 'react';
 import { Platform, StyleSheet, TextInput } from 'react-native';
 
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant';
-import Colors from './Colors';
+import Color from './Color';
 
 export default class Composer extends React.Component {
   onContentSizeChange(e) {
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 Composer.defaultProps = {
   composerHeight: MIN_COMPOSER_HEIGHT,
   text: '',
-  placeholderTextColor: Colors.defaultProps,
+  placeholderTextColor: Color.defaultProps,
   placeholder: DEFAULT_PLACEHOLDER,
   textInputProps: null,
   multiline: true,

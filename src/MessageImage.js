@@ -5,19 +5,25 @@ import React from 'react';
 import { Image, StyleSheet, View, ViewPropTypes } from 'react-native';
 import Lightbox from 'react-native-lightbox';
 
-export default function MessageImage() {
+export default function MessageImage({
+  containerStyle,
+  lightboxProps,
+  imageProps,
+  imageStyle,
+  currentMessage,
+}) {
   return (
-    <View style={[styles.container, this.props.containerStyle]}>
+    <View style={[styles.container, containerStyle]}>
       <Lightbox
         activeProps={{
           style: styles.imageActive,
         }}
-        {...this.props.lightboxProps}
+        {...lightboxProps}
       >
         <Image
-          {...this.props.imageProps}
-          style={[styles.image, this.props.imageStyle]}
-          source={{ uri: this.props.currentMessage.image }}
+          {...imageProps}
+          style={[styles.image, imageStyle]}
+          source={{ uri: currentMessage.image }}
         />
       </Lightbox>
     </View>

@@ -3,7 +3,7 @@ machine:
   environment:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
   node:
-    version: 8.2.0
+    version: 8.x
 
 dependencies:
   override:

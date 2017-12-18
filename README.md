@@ -4,10 +4,12 @@
 </p>
 
 <h3 align="center">
-  💬 <strong>Gifted Chat</strong> <br/>
+  💬 Gifted Chat
+</h3>
+<p align="center">
   The most complete chat UI for React Native <br/>
   <small>(formerly known as Gifted Messenger).</small>
-</h3>
+</p>
 <p align="center">
   <a href="https://www.npmjs.com/package/react-native-gifted-chat">
   <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>

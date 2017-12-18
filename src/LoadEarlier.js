@@ -17,11 +17,17 @@ export default class LoadEarlier extends React.Component {
 
   renderLoading() {
     if (this.props.isLoadingEarlier === false) {
-      return <Text style={[styles.text, this.props.textStyle]}>{this.props.label}</Text>;
+      return (
+        <Text style={[styles.text, this.props.textStyle]}>
+          {this.props.label}
+        </Text>
+      );
     }
     return (
       <View>
-        <Text style={[styles.text, this.props.textStyle, { opacity: 0 }]}>{this.props.label}</Text>
+        <Text style={[styles.text, this.props.textStyle, { opacity: 0 }]}>
+          {this.props.label}
+        </Text>
         <ActivityIndicator
           color="white"
           size="small"
@@ -42,7 +48,9 @@ export default class LoadEarlier extends React.Component {
         disabled={this.props.isLoadingEarlier === true}
         accessibilityTraits="button"
       >
-        <View style={[styles.wrapper, this.props.wrapperStyle]}>{this.renderLoading()}</View>
+        <View style={[styles.wrapper, this.props.wrapperStyle]}>
+          {this.renderLoading()}
+        </View>
       </TouchableOpacity>
     );
   }
@@ -78,7 +86,7 @@ const styles = StyleSheet.create({
 });
 
 LoadEarlier.defaultProps = {
-  onLoadEarlier: () => {},
+  onLoadEarlier: () => { },
   isLoadingEarlier: false,
   label: 'Load earlier messages',
   containerStyle: {},

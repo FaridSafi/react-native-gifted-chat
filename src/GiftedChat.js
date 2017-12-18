@@ -40,6 +40,7 @@ import {
 } from './Constant';
 
 class GiftedChat extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -297,7 +298,7 @@ class GiftedChat extends React.Component {
     if (this._messageContainerRef === null) {
       return;
     }
-    this._messageContainerRef.scrollTo({ y: 0, animated, });
+    this._messageContainerRef.scrollTo({ y: 0, animated });
   }
 
 
@@ -422,7 +423,7 @@ class GiftedChat extends React.Component {
     if (this.getMaxHeight() !== layout.height || this.getIsFirstLayout() === true) {
       this.setMaxHeight(layout.height);
       this.setState({
-        messagesContainerHeight: this.prepareMessagesContainerHeight(this.getBasicMessagesContainerHeight(), ),
+        messagesContainerHeight: this.prepareMessagesContainerHeight(this.getBasicMessagesContainerHeight()),
       });
     }
     if (this.getIsFirstLayout() === true) {

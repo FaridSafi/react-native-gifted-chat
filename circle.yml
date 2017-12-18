@@ -12,7 +12,7 @@ dependencies:
   cache_directories:
     - "node_modules"
     - ~/.yarn
-    - ~/.yarn-cache
+    - ~/.cache/yarn
 
 test:
   override:

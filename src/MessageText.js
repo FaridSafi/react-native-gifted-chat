@@ -144,7 +144,7 @@ MessageText.defaultProps = {
   textStyle: {},
   linkStyle: {},
   customTextStyle: {},
-  textProps: '',
+  textProps: {},
   parsePatterns: () => [],
 };
 

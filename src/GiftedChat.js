@@ -30,7 +30,17 @@ import MessageContainer from './MessageContainer';
 import Send from './Send';
 import Time from './Time';
 import GiftedAvatar from './GiftedAvatar';
-import { MIN_COMPOSER_HEIGHT, MAX_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constants';
+import Constants from './Constants';
+
+const {
+  MIN_COMPOSER_HEIGHT,
+  MAX_COMPOSER_HEIGHT,
+  DEFAULT_PLACEHOLDER,
+  TIME_FORMAT,
+  DATE_FORMAT,
+} = Constants;
+
+console.warn(MIN_COMPOSER_HEIGHT, MAX_COMPOSER_HEIGHT);
 
 class GiftedChat extends React.Component {
   static append(currentMessages = [], messages, inverted = true) {
@@ -520,8 +530,8 @@ GiftedChat.defaultProps = {
   user: {},
   onSend: () => {},
   locale: null,
-  timeFormat: 'LT',
-  dateFormat: 'll',
+  timeFormat: TIME_FORMAT,
+  dateFormat: DATE_FORMAT,
   isAnimated: Platform.select({
     ios: true,
     android: false,

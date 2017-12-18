@@ -6,18 +6,18 @@ import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 
 import moment from 'moment';
 
-export default function Time() {
+import Colors from './Colors';
+import Constants from './Constants';
+
+const { TIME_FORMAT } = Constants;
+
+export default function Time({ position, containerStyle, currentMessage, timeFormat }, context) {
   return (
-    <View
-      style={[
-        styles[this.props.position].container,
-        this.props.containerStyle[this.props.position],
-      ]}
-    >
-      <Text style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}>
-        {moment(this.props.currentMessage.createdAt)
-          .locale(this.context.getLocale())
-          .format(this.props.timeFormat)}
+    <View style={[styles[position].container, containerStyle[position]]}>
+      <Text style={[styles[position].text, textStyle[position]]}>
+        {moment(currentMessage.createdAt)
+          .locale(context.getLocale())
+          .format(timeFormat)}
       </Text>
     </View>
   );
@@ -41,7 +41,7 @@ const styles = {
       ...containerStyle,
     },
     text: {
-      color: '#aaa',
+      color: Colors.timeTextColor,
       ...textStyle,
     },
   }),
@@ -50,7 +50,7 @@ const styles = {
       ...containerStyle,
     },
     text: {
-      color: '#fff',
+      color: Colors.white,
       ...textStyle,
     },
   }),
@@ -67,6 +67,7 @@ Time.defaultProps = {
   },
   containerStyle: {},
   textStyle: {},
+  timeFormat: TIME_FORMAT,
 };
 
 Time.propTypes = {
@@ -80,5 +81,5 @@ Time.propTypes = {
     left: Text.propTypes.style,
     right: Text.propTypes.style,
   }),
-  timeFormat: PropTypes.string.isRequired,
+  timeFormat: PropTypes.string,
 };

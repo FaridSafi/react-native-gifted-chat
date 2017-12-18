@@ -8,17 +8,21 @@ import moment from 'moment';
 import Colors from './Colors';
 
 import { isSameDay, isSameUser, warnDeprecated } from './utils';
+import Constants from './Constants';
 
-export default function Day() {
-  const { dateFormat } = this.props;
+const { DATE_FORMAT } = Constants;
 
-  if (!isSameDay(this.props.currentMessage, this.props.previousMessage)) {
+export default function Day(
+  { dateFormat, currentMessage, previousMessage, containerStyle, wrapperStyle, textStyle },
+  context
+) {
+  if (!isSameDay(currentMessage, previousMessage)) {
     return (
-      <View style={[styles.container, this.props.containerStyle]}>
-        <View style={this.props.wrapperStyle}>
-          <Text style={[styles.text, this.props.textStyle]}>
-            {moment(this.props.currentMessage.createdAt)
-              .locale(this.context.getLocale())
+      <View style={[styles.container, containerStyle]}>
+        <View style={wrapperStyle}>
+          <Text style={[styles.text, textStyle]}>
+            {moment(currentMessage.createdAt)
+              .locale(context.getLocale())
               .format(dateFormat)
               .toUpperCase()}
           </Text>
@@ -60,6 +64,7 @@ Day.defaultProps = {
   // TODO: remove in next major release
   isSameDay: warnDeprecated(isSameDay),
   isSameUser: warnDeprecated(isSameUser),
+  dateFormat: DATE_FORMAT,
 };
 
 Day.propTypes = {
@@ -71,5 +76,5 @@ Day.propTypes = {
   // TODO: remove in next major release
   isSameDay: PropTypes.func,
   isSameUser: PropTypes.func,
-  dateFormat: PropTypes.string.isRequired,
+  dateFormat: PropTypes.string,
 };

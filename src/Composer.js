@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Platform, StyleSheet, TextInput } from 'react-native';
 
-import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constants';
+import Constants from './Constants';
 import Colors from './Colors';
+
+const { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } = Constants;
 
 export default class Composer extends React.Component {
   onContentSizeChange(e) {

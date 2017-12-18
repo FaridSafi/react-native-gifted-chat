@@ -150,6 +150,7 @@ export default class MessageContainer extends React.Component {
         style={styles.container}
       >
         <ListView
+          contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-end' }}
           enableEmptySections={true}
           automaticallyAdjustContentInsets={false}
           initialListSize={20}

@@ -19,6 +19,7 @@ import Color from './Color';
 import { isSameUser, isSameDay, warnDeprecated } from './utils';
 
 export default class Bubble extends React.Component {
+
   constructor(props) {
     super(props);
     this.onLongPress = this.onLongPress.bind(this);
@@ -35,7 +36,7 @@ export default class Bubble extends React.Component {
           options,
           cancelButtonIndex,
         },
-        buttonIndex => {
+        (buttonIndex) => {
           switch (buttonIndex) {
             case 0:
               Clipboard.setString(this.props.currentMessage.text);
@@ -43,7 +44,7 @@ export default class Bubble extends React.Component {
             default:
               break;
           }
-        }
+        },
       );
     }
   }
@@ -168,6 +169,7 @@ export default class Bubble extends React.Component {
       </View>
     );
   }
+
 }
 
 const styles = {

@@ -6,6 +6,7 @@ import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-n
 import Color from './Color';
 
 export default class Actions extends React.Component {
+
   constructor(props) {
     super(props);
     this.onActionsPress = this.onActionsPress.bind(this);
@@ -20,9 +21,9 @@ export default class Actions extends React.Component {
         cancelButtonIndex,
         tintColor: this.props.optionTintColor,
       },
-      buttonIndex => {
+      function handle(buttonIndex) {
         let i = 0;
-        Object.keys(this.props.options).forEach(key => {
+        Object.keys(this.props.options).forEach(function launch(key) {
           if (this.props.options[key]) {
             if (buttonIndex === i) {
               this.props.options[key](this.props);
@@ -31,7 +32,7 @@ export default class Actions extends React.Component {
             i += 1;
           }
         });
-      }
+      },
     );
   }
 
@@ -56,6 +57,7 @@ export default class Actions extends React.Component {
       </TouchableOpacity>
     );
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -85,14 +87,14 @@ Actions.contextTypes = {
 };
 
 Actions.defaultProps = {
-  onSend: () => {},
+  onSend: () => { },
   options: {},
   optionTintColor: Color.optionTintColor,
   icon: null,
   containerStyle: {},
   iconTextStyle: {},
   wrapperStyle: {},
-  onPressActionButton: () => {},
+  onPressActionButton: () => { },
 };
 
 Actions.propTypes = {

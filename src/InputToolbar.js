@@ -10,6 +10,7 @@ import Actions from './Actions';
 import Color from './Color';
 
 export default class InputToolbar extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -92,6 +93,7 @@ export default class InputToolbar extends React.Component {
       </View>
     );
   }
+
 }
 
 const styles = StyleSheet.create({

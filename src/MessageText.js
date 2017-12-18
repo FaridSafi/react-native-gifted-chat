@@ -9,6 +9,7 @@ import Communications from 'react-native-communications';
 const WWW_URL_PATTERN = /^www\./i;
 
 export default class MessageText extends React.Component {
+
   constructor(props) {
     super(props);
     this.onUrlPress = this.onUrlPress.bind(this);
@@ -95,6 +96,7 @@ export default class MessageText extends React.Component {
       </View>
     );
   }
+
 }
 
 const textStyle = {

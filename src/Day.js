@@ -12,7 +12,7 @@ import { DATE_FORMAT } from './Constant';
 
 export default function Day(
   { dateFormat, currentMessage, previousMessage, containerStyle, wrapperStyle, textStyle },
-  context
+  context,
 ) {
   if (!isSameDay(currentMessage, previousMessage)) {
     return (

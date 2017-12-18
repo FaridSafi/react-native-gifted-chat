@@ -4,6 +4,7 @@
     no-use-before-define: ["error", { "variables": false }],
     arrow-parens: 0,
     no-return-assign: 0,
+    react/no-string-refs: 0
 */
 
 import PropTypes from 'prop-types';
@@ -18,6 +19,7 @@ import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
 export default class MessageContainer extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -131,7 +133,7 @@ export default class MessageContainer extends React.Component {
   }
 
   renderScrollComponent(props) {
-    const invertibleScrollViewProps = this.props.invertibleScrollViewProps;
+    const { invertibleScrollViewProps } = this.props;
     return (
       <InvertibleScrollView
         {...props}
@@ -147,7 +149,7 @@ export default class MessageContainer extends React.Component {
       : styles.notInvertedContentContainerStyle;
 
     return (
-      <View style={styles.container}>
+      <View ref="container" style={styles.container}>
         <ListView
           enableEmptySections
           automaticallyAdjustContentInsets={false}
@@ -164,6 +166,7 @@ export default class MessageContainer extends React.Component {
       </View>
     );
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -180,8 +183,7 @@ MessageContainer.defaultProps = {
   user: {},
   renderFooter: null,
   renderMessage: null,
-  renderLoadEarlier: null,
-  onLoadEarlier: () => {},
+  onLoadEarlier: () => { },
   inverted: true,
   loadEarlier: false,
   listViewProps: {},

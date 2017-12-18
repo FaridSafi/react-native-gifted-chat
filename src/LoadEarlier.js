@@ -14,6 +14,7 @@ import {
 import Color from './Color';
 
 export default class LoadEarlier extends React.Component {
+
   renderLoading() {
     if (this.props.isLoadingEarlier === false) {
       return <Text style={[styles.text, this.props.textStyle]}>{this.props.label}</Text>;
@@ -45,6 +46,7 @@ export default class LoadEarlier extends React.Component {
       </TouchableOpacity>
     );
   }
+
 }
 
 const styles = StyleSheet.create({

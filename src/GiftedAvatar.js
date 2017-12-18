@@ -11,6 +11,7 @@ const { carot, emerald, peterRiver, wisteria, alizarin, turquoise, midnightBlue 
 // handle only alpha numeric chars
 
 export default class GiftedAvatar extends React.Component {
+
   setAvatarColor() {
     const userName = this.props.user.name || '';
     const name = userName.toUpperCase().split(' ');
@@ -106,6 +107,7 @@ export default class GiftedAvatar extends React.Component {
       </TouchableOpacity>
     );
   }
+
 }
 
 const styles = {

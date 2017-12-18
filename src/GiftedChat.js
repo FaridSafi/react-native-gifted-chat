@@ -40,6 +40,7 @@ import {
 } from './Constant';
 
 class GiftedChat extends React.Component {
+
   static append(currentMessages = [], messages, inverted = true) {
     if (!Array.isArray(messages)) {
       messages = [messages];
@@ -200,10 +201,10 @@ class GiftedChat extends React.Component {
   onInputSizeChanged(size) {
     const newComposerHeight = Math.max(
       MIN_COMPOSER_HEIGHT,
-      Math.min(MAX_COMPOSER_HEIGHT, size.height)
+      Math.min(MAX_COMPOSER_HEIGHT, size.height),
     );
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
-      newComposerHeight
+      newComposerHeight,
     );
     this.setState({
       composerHeight: newComposerHeight,
@@ -225,7 +226,7 @@ class GiftedChat extends React.Component {
   }
 
   onInitialLayoutViewLayout(e) {
-    const layout = e.nativeEvent.layout;
+    const { layout } = e.nativeEvent;
     if (layout.height <= 0) {
       return;
     }
@@ -233,7 +234,7 @@ class GiftedChat extends React.Component {
     this.setMaxHeight(layout.height);
     const newComposerHeight = MIN_COMPOSER_HEIGHT;
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
-      newComposerHeight
+      newComposerHeight,
     );
     this.setState({
       isInitialized: true,
@@ -245,12 +246,12 @@ class GiftedChat extends React.Component {
 
   onMainViewLayout(e) {
     // fix an issue when keyboard is dismissing during the initialization
-    const layout = e.nativeEvent.layout;
+    const { layout } = e.nativeEvent;
     if (this.getMaxHeight() !== layout.height || this.getIsFirstLayout() === true) {
       this.setMaxHeight(layout.height);
       this.setState({
         messagesContainerHeight: this.prepareMessagesContainerHeight(
-          this.getBasicMessagesContainerHeight()
+          this.getBasicMessagesContainerHeight(),
         ),
       });
     }
@@ -409,7 +410,7 @@ class GiftedChat extends React.Component {
     this.notifyInputTextReset();
     const newComposerHeight = MIN_COMPOSER_HEIGHT;
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
-      newComposerHeight
+      newComposerHeight,
     );
     this.setState({
       text: this.getTextFromProp(''),
@@ -506,6 +507,7 @@ class GiftedChat extends React.Component {
       </View>
     );
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -525,7 +527,7 @@ GiftedChat.defaultProps = {
   placeholder: DEFAULT_PLACEHOLDER,
   messageIdGenerator: () => uuid.v4(),
   user: {},
-  onSend: () => {},
+  onSend: () => { },
   locale: null,
   timeFormat: TIME_FORMAT,
   dateFormat: DATE_FORMAT,
@@ -534,7 +536,7 @@ GiftedChat.defaultProps = {
     android: false,
   }),
   loadEarlier: false,
-  onLoadEarlier: () => {},
+  onLoadEarlier: () => { },
   isLoadingEarlier: false,
   renderLoading: null,
   renderLoadEarlier: null,

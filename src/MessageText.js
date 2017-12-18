@@ -1,4 +1,4 @@
-/* eslint arrow-parens: 0, no-use-before-define: ["error", { "variables": false }], comma-dangle: 0 */
+/* eslint no-use-before-define: ["error", { "variables": false }] */
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Linking, StyleSheet, Text, View, ViewPropTypes } from 'react-native';
@@ -17,17 +17,13 @@ export default class MessageText extends React.Component {
     this.onEmailPress = this.onEmailPress.bind(this);
   }
 
-  /**
-   * When someone sends a message that includes a website address beginning with "www." (omitting the scheme),
-   * react-native-parsed-text recognizes it as a valid url, but Linking fails to open due to the missing scheme.
-   * @param {string} url
-   * @memberof MessageText
-   */
   onUrlPress(url) {
+    // When someone sends a message that includes a website address beginning with "www." (omitting the scheme),
+    // react-native-parsed-text recognizes it as a valid url, but Linking fails to open due to the missing scheme.
     if (WWW_URL_PATTERN.test(url)) {
       this.onUrlPress(`http://${url}`);
     } else {
-      Linking.canOpenURL(url).then(supported => {
+      Linking.canOpenURL(url).then((supported) => {
         if (!supported) {
           // eslint-disable-next-line
           console.error('No handler for URL:', url);
@@ -46,7 +42,7 @@ export default class MessageText extends React.Component {
         options,
         cancelButtonIndex,
       },
-      buttonIndex => {
+      (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
             Communications.phonecall(phone, true);
@@ -57,7 +53,7 @@ export default class MessageText extends React.Component {
           default:
             break;
         }
-      }
+      },
     );
   }
 

@@ -2,7 +2,6 @@
     no-console: 0,
     no-param-reassign: 0,
     no-use-before-define: ["error", { "variables": false }],
-    arrow-parens: 0,
     no-return-assign: 0,
     react/no-string-refs: 0
 */
@@ -62,7 +61,7 @@ export default class MessageContainer extends React.Component {
 
   prepareMessages(messages) {
     return {
-      keys: messages.map(m => m._id),
+      keys: messages.map((m) => m._id),
       blob: messages.reduce((o, m, i) => {
         const previousMessage = messages[i + 1] || {};
         const nextMessage = messages[i - 1] || {};
@@ -138,7 +137,7 @@ export default class MessageContainer extends React.Component {
       <InvertibleScrollView
         {...props}
         {...invertibleScrollViewProps}
-        ref={component => (this._invertibleScrollViewRef = component)}
+        ref={(component) => (this._invertibleScrollViewRef = component)}
       />
     );
   }

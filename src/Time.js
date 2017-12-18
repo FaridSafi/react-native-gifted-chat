@@ -1,24 +1,26 @@
+/* eslint no-use-before-define: ["error", { "variables": false }] */
+
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ViewPropTypes,
-} from 'react-native';
+import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 
 import moment from 'moment';
 
-export default class Time extends React.Component {
-  render() {
-    return (
-      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
-        <Text style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}>
-          {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format(this.props.timeFormat)}
-        </Text>
-      </View>
-    );
-  }
+export default function Time() {
+  return (
+    <View
+      style={[
+        styles[this.props.position].container,
+        this.props.containerStyle[this.props.position],
+      ]}
+    >
+      <Text style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}>
+        {moment(this.props.currentMessage.createdAt)
+          .locale(this.context.getLocale())
+          .format(this.props.timeFormat)}
+      </Text>
+    </View>
+  );
 }
 
 const containerStyle = {
@@ -78,5 +80,5 @@ Time.propTypes = {
     left: Text.propTypes.style,
     right: Text.propTypes.style,
   }),
-  timeFormat: PropTypes.string,
+  timeFormat: PropTypes.string.isRequired,
 };

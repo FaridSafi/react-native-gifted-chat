@@ -1,12 +1,7 @@
+/* eslint arrow-parens: 0, no-use-before-define: ["error", { "variables": false }], comma-dangle: 0 */
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Linking,
-  StyleSheet,
-  Text,
-  View,
-  ViewPropTypes,
-} from 'react-native';
+import { Linking, StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 
 import ParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
@@ -21,14 +16,19 @@ export default class MessageText extends React.Component {
     this.onEmailPress = this.onEmailPress.bind(this);
   }
 
+  /**
+   * When someone sends a message that includes a website address beginning with "www." (omitting the scheme),
+   * react-native-parsed-text recognizes it as a valid url, but Linking fails to open due to the missing scheme.
+   * @param {string} url
+   * @memberof MessageText
+   */
   onUrlPress(url) {
-    // When someone sends a message that includes a website address beginning with "www." (omitting the scheme),
-    // react-native-parsed-text recognizes it as a valid url, but Linking fails to open due to the missing scheme.
     if (WWW_URL_PATTERN.test(url)) {
       this.onUrlPress(`http://${url}`);
     } else {
-      Linking.canOpenURL(url).then((supported) => {
+      Linking.canOpenURL(url).then(supported => {
         if (!supported) {
+          // eslint-disable-next-line
           console.error('No handler for URL:', url);
         } else {
           Linking.openURL(url);
@@ -38,26 +38,26 @@ export default class MessageText extends React.Component {
   }
 
   onPhonePress(phone) {
-    const options = [
-      'Call',
-      'Text',
-      'Cancel',
-    ];
+    const options = ['Call', 'Text', 'Cancel'];
     const cancelButtonIndex = options.length - 1;
-    this.context.actionSheet().showActionSheetWithOptions({
-      options,
-      cancelButtonIndex,
-    },
-    (buttonIndex) => {
-      switch (buttonIndex) {
-        case 0:
-          Communications.phonecall(phone, true);
-          break;
-        case 1:
-          Communications.text(phone);
-          break;
+    this.context.actionSheet().showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+      },
+      buttonIndex => {
+        switch (buttonIndex) {
+          case 0:
+            Communications.phonecall(phone, true);
+            break;
+          case 1:
+            Communications.text(phone);
+            break;
+          default:
+            break;
+        }
       }
-    });
+    );
   }
 
   onEmailPress(email) {
@@ -65,18 +65,30 @@ export default class MessageText extends React.Component {
   }
 
   render() {
-    const linkStyle = StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]);
+    const linkStyle = StyleSheet.flatten([
+      styles[this.props.position].link,
+      this.props.linkStyle[this.props.position],
+    ]);
     return (
-      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
+      <View
+        style={[
+          styles[this.props.position].container,
+          this.props.containerStyle[this.props.position],
+        ]}
+      >
         <ParsedText
-          style={[styles[this.props.position].text, this.props.textStyle[this.props.position], this.props.customTextStyle]}
+          style={[
+            styles[this.props.position].text,
+            this.props.textStyle[this.props.position],
+            this.props.customTextStyle,
+          ]}
           parse={[
             ...this.props.parsePatterns(linkStyle),
-            {type: 'url', style: linkStyle, onPress: this.onUrlPress},
-            {type: 'phone', style: linkStyle, onPress: this.onPhonePress},
-            {type: 'email', style: linkStyle, onPress: this.onEmailPress},
+            { type: 'url', style: linkStyle, onPress: this.onUrlPress },
+            { type: 'phone', style: linkStyle, onPress: this.onPhonePress },
+            { type: 'email', style: linkStyle, onPress: this.onEmailPress },
           ]}
-          childrenProps={{...this.props.textProps}}
+          childrenProps={{ ...this.props.textProps }}
         >
           {this.props.currentMessage.text}
         </ParsedText>
@@ -96,8 +108,7 @@ const textStyle = {
 
 const styles = {
   left: StyleSheet.create({
-    container: {
-    },
+    container: {},
     text: {
       color: 'black',
       ...textStyle,
@@ -108,8 +119,7 @@ const styles = {
     },
   }),
   right: StyleSheet.create({
-    container: {
-    },
+    container: {},
     text: {
       color: 'white',
       ...textStyle,
@@ -133,6 +143,8 @@ MessageText.defaultProps = {
   containerStyle: {},
   textStyle: {},
   linkStyle: {},
+  customTextStyle: {},
+  textProps: '',
   parsePatterns: () => [],
 };
 

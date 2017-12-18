@@ -1,3 +1,5 @@
+/* eslint no-use-before-define: ["error", { "variables": false }], react-native/no-inline-styles: 0 */
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
@@ -9,26 +11,19 @@ import {
   View,
   ViewPropTypes,
 } from 'react-native';
+import Colors from './Colors';
 
 export default class LoadEarlier extends React.Component {
   renderLoading() {
     if (this.props.isLoadingEarlier === false) {
-      return (
-        <Text style={[styles.text, this.props.textStyle]}>
-          {this.props.label}
-        </Text>
-      );
+      return <Text style={[styles.text, this.props.textStyle]}>{this.props.label}</Text>;
     }
     return (
       <View>
-        <Text style={[styles.text, this.props.textStyle, {
-            opacity: 0,
-          }]}>
-          {this.props.label}
-        </Text>
+        <Text style={[styles.text, this.props.textStyle, { opacity: 0 }]}>{this.props.label}</Text>
         <ActivityIndicator
-          color='white'
-          size='small'
+          color="white"
+          size="small"
           style={[styles.activityIndicator, this.props.activityIndicatorStyle]}
         />
       </View>
@@ -46,9 +41,7 @@ export default class LoadEarlier extends React.Component {
         disabled={this.props.isLoadingEarlier === true}
         accessibilityTraits="button"
       >
-        <View style={[styles.wrapper, this.props.wrapperStyle]}>
-          {this.renderLoading()}
-        </View>
+        <View style={[styles.wrapper, this.props.wrapperStyle]}>{this.renderLoading()}</View>
       </TouchableOpacity>
     );
   }
@@ -63,15 +56,15 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#b2b2b2',
+    backgroundColor: Colors.defaultColor,
     borderRadius: 15,
     height: 30,
     paddingLeft: 10,
     paddingRight: 10,
   },
   text: {
-    backgroundColor: 'transparent',
-    color: '#fff',
+    backgroundColor: Colors.backgroundTransparent,
+    color: Colors.white,
     fontSize: 12,
   },
   activityIndicator: {
@@ -79,7 +72,7 @@ const styles = StyleSheet.create({
       ios: -14,
       android: -16,
     }),
-  }
+  },
 });
 
 LoadEarlier.defaultProps = {

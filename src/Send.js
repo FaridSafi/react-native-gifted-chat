@@ -1,38 +1,29 @@
+/* eslint no-use-before-define: ["error", { "variables": false }] */
+
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  ViewPropTypes,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
+import Colors from './Colors';
 
-export default class Send extends React.Component {
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (this.props.text.trim().length === 0 && nextProps.text.trim().length > 0 || this.props.text.trim().length > 0 && nextProps.text.trim().length === 0) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-  render() {
-    if (this.props.text.trim().length > 0) {
-      return (
-        <TouchableOpacity
-          style={[styles.container, this.props.containerStyle]}
-          onPress={() => {
-            this.props.onSend({text: this.props.text.trim()}, true);
-          }}
-          accessibilityTraits="button"
-        >
-          <View>
-            {this.props.children || <Text style={[styles.text, this.props.textStyle]}>{this.props.label}</Text>}
-          </View>
-        </TouchableOpacity>
-      );
-    }
-    return <View/>;
+export default function Send({ text }) {
+  if (text.trim().length > 0) {
+    return (
+      <TouchableOpacity
+        style={[styles.container, this.props.containerStyle]}
+        onPress={() => {
+          this.props.onSend({ text: this.props.text.trim() }, true);
+        }}
+        accessibilityTraits="button"
+      >
+        <View>
+          {this.props.children || (
+            <Text style={[styles.text, this.props.textStyle]}>{this.props.label}</Text>
+          )}
+        </View>
+      </TouchableOpacity>
+    );
   }
+  return <View />;
 }
 
 const styles = StyleSheet.create({
@@ -41,10 +32,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   text: {
-    color: '#0084ff',
+    color: Colors.defaultBlue,
     fontWeight: '600',
     fontSize: 17,
-    backgroundColor: 'transparent',
+    backgroundColor: Colors.backgroundTransparent,
     marginBottom: 12,
     marginLeft: 10,
     marginRight: 10,

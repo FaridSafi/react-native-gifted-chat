@@ -30,15 +30,14 @@ import MessageContainer from './MessageContainer';
 import Send from './Send';
 import Time from './Time';
 import GiftedAvatar from './GiftedAvatar';
-import Constants from './Constants';
 
-const {
+import {
   MIN_COMPOSER_HEIGHT,
   MAX_COMPOSER_HEIGHT,
   DEFAULT_PLACEHOLDER,
   TIME_FORMAT,
   DATE_FORMAT,
-} = Constants;
+} from './Constant';
 
 class GiftedChat extends React.Component {
   static append(currentMessages = [], messages, inverted = true) {

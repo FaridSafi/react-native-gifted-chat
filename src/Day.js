@@ -8,9 +8,7 @@ import moment from 'moment';
 import Colors from './Colors';
 
 import { isSameDay, isSameUser, warnDeprecated } from './utils';
-import Constants from './Constants';
-
-const { DATE_FORMAT } = Constants;
+import { DATE_FORMAT } from './Constant';
 
 export default function Day(
   { dateFormat, currentMessage, previousMessage, containerStyle, wrapperStyle, textStyle },

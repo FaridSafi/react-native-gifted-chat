@@ -14,9 +14,7 @@
   <a href="https://www.npmjs.com/package/react-native-gifted-chat">
   <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>
   <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
-  <a href="https://github.com/FaridSafi/react-native-gifted-chat"><img
-  alt="Latest GitHub tag" src="https://img.shields.io/github/tag/FaridSafi/react-native-gifted-chat.svg"></a>
-  <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=svg"></a>
+  <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=svg" alt="build"></a>
 </p>
 
 

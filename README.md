@@ -241,3 +241,11 @@ If you have any issues, you can clear your watches using `watchman watch-del-all
 ## Author
 
 Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi)!
+
+## Contributors
+
+- Kevin Cooper [cooperka](https://github.com/cooperka)
+- Kfir Golan [kfiroo](https://github.com/kfiroo)
+- Bruno Cascio [brunocascio](https://github.com/brunocascio)
+- Xavier Carpentier [xcarpentier](https://github.com/xcarpentier)
+- [more](https://github.com/FaridSafi/react-native-gifted-chat/graphs/contributors)

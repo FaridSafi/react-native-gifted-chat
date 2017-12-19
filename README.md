@@ -21,6 +21,8 @@
 
 ## Features
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/FaridSafi/react-native-gifted-chat.svg)](https://greenkeeper.io/)
+
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
 - Load earlier messages

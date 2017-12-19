@@ -34,18 +34,18 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
-    "eslint-plugin-react-native": "2.3.2",
+    "eslint-plugin-react-native": "3.2.0",
     "husky": "0.14.3"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^1.0.1",
     "md5": "2.2.1",
     "moment": "^2.19.0",
-    "prop-types": "15.5.10",
+    "prop-types": "15.6.0",
     "react-native-communications": "2.2.1",
     "react-native-invertible-scroll-view": "^1.1.0",
     "react-native-lightbox": "^0.7.0",
-    "react-native-parsed-text": "^0.0.19",
+    "react-native-parsed-text": "^0.0.20",
     "shallowequal": "1.0.2",
     "uuid": "3.1.0"
   }

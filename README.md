@@ -1,16 +1,24 @@
-# Gifted Chat
+<p align="center">
+    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-1.png" width=200>
+    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png" width=200>
+</p>
 
-[![npm downloads](https://img.shields.io/npm/dm/react-native-gifted-chat.svg)](https://www.npmjs.com/package/react-native-gifted-chat)
-[![npm version](https://img.shields.io/npm/v/react-native-gifted-chat.svg)](https://www.npmjs.com/package/react-native-gifted-chat)
-[![Latest GitHub tag](https://img.shields.io/github/tag/FaridSafi/react-native-gifted-chat.svg)](https://github.com/FaridSafi/react-native-gifted-chat)
-
-The most complete chat UI for React Native (formerly known as Gifted Messenger).
-
-![screenshot 1](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-1.png)
-![screenshot 2](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png)
+<h3 align="center">
+  💬 Gifted Chat
+</h3>
+<p align="center">
+  The most complete chat UI for React Native <br/>
+  <small>(formerly known as Gifted Messenger).</small>
+</p>
+<p align="center">
+  <a href="https://www.npmjs.com/package/react-native-gifted-chat">
+  <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>
+  <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
+  <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=svg" alt="build"></a>
+  <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/FaridSafi/react-native-gifted-chat.svg" alt="build"></a>
+</p>
 
 ## Features
-
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
 - Load earlier messages
@@ -142,6 +150,7 @@ e.g. System Message
 - **`renderBubble`** _(Function)_ - Custom message bubble
 - **`renderSystemMessage`** _(Function)_ - Custom system message
 - **`onLongPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
+- **`inverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
 - **`renderMessage`** _(Function)_ - Custom message container
 - **`renderMessageText`** _(Function)_ - Custom message text
 - **`renderMessageImage`** _(Function)_ - Custom message image
@@ -232,3 +241,11 @@ If you have any issues, you can clear your watches using `watchman watch-del-all
 ## Author
 
 Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi)!
+
+## Contributors
+
+- Kevin Cooper [cooperka](https://github.com/cooperka)
+- Kfir Golan [kfiroo](https://github.com/kfiroo)
+- Bruno Cascio [brunocascio](https://github.com/brunocascio)
+- Xavier Carpentier [xcarpentier](https://github.com/xcarpentier)
+- [more](https://github.com/FaridSafi/react-native-gifted-chat/graphs/contributors)

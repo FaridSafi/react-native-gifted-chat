@@ -11,12 +11,19 @@
   <small>(formerly known as Gifted Messenger).</small>
 </p>
 <p align="center">
-  <a href="https://www.npmjs.com/package/react-native-gifted-chat">
-  <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>
+  <!--a href="https://www.npmjs.com/package/react-native-gifted-chat">
+  <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a -->
   <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
   <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=svg" alt="build"></a>
   <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/FaridSafi/react-native-gifted-chat.svg" alt="build"></a>
 </p>
+
+<p align="center">
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=exp://expo.io/@xcarpentier/gifted-chat">
+  <br>
+  <a href="https://snack.expo.io/@xcarpentier/gifted-chat">Demo on snack (Expo)</a>
+</p>
+
 
 ## Features
 - Fully customizable components

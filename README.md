@@ -8,7 +8,7 @@
 </h3>
 <p align="center">
   The most complete chat UI for React Native <br/>
-  <small>(formerly known as Gifted Messenger).</small>
+  <small>formerly known as Gifted Messenger</small>
 </p>
 <p align="center">
   <!--a href="https://www.npmjs.com/package/react-native-gifted-chat">

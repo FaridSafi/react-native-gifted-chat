@@ -15,14 +15,10 @@
   <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>
   <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
   <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=svg" alt="build"></a>
+  <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/FaridSafi/react-native-gifted-chat.svg" alt="build"></a>
 </p>
 
-
-
 ## Features
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/FaridSafi/react-native-gifted-chat.svg)](https://greenkeeper.io/)
-
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
 - Load earlier messages

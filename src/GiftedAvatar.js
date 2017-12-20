@@ -1,17 +1,16 @@
-/* eslint no-use-before-define: ["error", { "variables": false }] */
+/* eslint no-use-before-define: ["error", { "variables": false }], padded-blocks: 0 */
 
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Color from './Color';
 
-const { carot, emerald, peterRiver, wisteria, alizarin, turquoise, midnightBlue } = Color;
+const { carrot, emerald, peterRiver, wisteria, alizarin, turquoise, midnightBlue } = Color;
 // TODO
 // 3 words name initials
 // handle only alpha numeric chars
 
 export default class GiftedAvatar extends React.Component {
-
   setAvatarColor() {
     const userName = this.props.user.name || '';
     const name = userName.toUpperCase().split(' ');
@@ -30,7 +29,7 @@ export default class GiftedAvatar extends React.Component {
 
     // inspired by https://github.com/wbinnssmith/react-user-avatar
     // colors from https://flatuicolors.com/
-    const colors = [carot, emerald, peterRiver, wisteria, alizarin, turquoise, midnightBlue];
+    const colors = [carrot, emerald, peterRiver, wisteria, alizarin, turquoise, midnightBlue];
 
     this.avatarColor = colors[sumChars % colors.length];
   }
@@ -107,7 +106,6 @@ export default class GiftedAvatar extends React.Component {
       </TouchableOpacity>
     );
   }
-
 }
 
 const styles = {

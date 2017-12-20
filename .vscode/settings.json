@@ -1,0 +1,15 @@
+{
+  "typescript.check.tscVersion": false,
+  "window.zoomLevel": 0,
+  "javascript.validate.enable": false,
+  "editor.tabSize": 2,
+  "files.trimTrailingWhitespace": true,
+  "workbench.statusBar.visible": true,
+  "workbench.welcome.enabled": false,
+  "flow.useNPMPackagedFlow ": true,
+  "flow.pathToFlow": "./node_modules/flow-bin/cli.js",
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "prettier.semi": true,
+}

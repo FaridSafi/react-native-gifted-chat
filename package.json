@@ -25,9 +25,19 @@
   "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
   "scripts": {
     "lint": "eslint . --ext .js,.jsx",
-    "precommit": "yarn lint"
+    "precommit": "yarn lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "jest": {
+    "preset": "react-native",
+    "setupFiles": ["./tests/setup.js"]
   },
   "devDependencies": {
+    "babel": "6.23.0",
+    "babel-jest": "22.0.3",
+    "babel-preset-react-native": "4.0.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "16.1.0",
     "eslint-config-cooperka": "0.2.9",
@@ -35,7 +45,11 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-react-native": "3.2.0",
-    "husky": "0.14.3"
+    "husky": "0.14.3",
+    "jest": "22.0.3",
+    "react": "16.2.0",
+    "react-native": "0.51.0",
+    "react-test-renderer": "16.2.0"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^1.0.1",

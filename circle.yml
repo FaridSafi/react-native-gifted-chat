@@ -17,8 +17,7 @@ dependencies:
 test:
   override:
     - yarn run lint
-    # TODO: - yarn run flow
-    # TODO: - yarn run test -- --coverage
+    - yarn run test:coverage
     # TODO: - codecov
 
 # TODO: deployment:

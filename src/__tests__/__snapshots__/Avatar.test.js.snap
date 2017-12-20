@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <Avatar /> and compare with snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "marginRight": 8,
+      },
+      Object {},
+      undefined,
+    ]
+  }
+>
+  renderAvatar
+</View>
+`;

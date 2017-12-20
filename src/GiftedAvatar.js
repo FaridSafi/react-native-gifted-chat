@@ -1,20 +1,17 @@
-/*
-**  This component will be published in a separate package
-*/
+/* eslint no-use-before-define: ["error", { "variables": false }] */
+
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import Color from './Color';
 
+const { carot, emerald, peterRiver, wisteria, alizarin, turquoise, midnightBlue } = Color;
 // TODO
 // 3 words name initials
 // handle only alpha numeric chars
 
 export default class GiftedAvatar extends React.Component {
+
   setAvatarColor() {
     const userName = this.props.user.name || '';
     const name = userName.toUpperCase().split(' ');
@@ -27,21 +24,13 @@ export default class GiftedAvatar extends React.Component {
     }
 
     let sumChars = 0;
-    for(let i = 0; i < userName.length; i++) {
+    for (let i = 0; i < userName.length; i += 1) {
       sumChars += userName.charCodeAt(i);
     }
 
     // inspired by https://github.com/wbinnssmith/react-user-avatar
     // colors from https://flatuicolors.com/
-    const colors = [
-      '#e67e22', // carrot
-      '#2ecc71', // emerald
-      '#3498db', // peter river
-      '#8e44ad', // wisteria
-      '#e74c3c', // alizarin
-      '#1abc9c', // turquoise
-      '#2c3e50', // midnight blue
-    ];
+    const colors = [carot, emerald, peterRiver, wisteria, alizarin, turquoise, midnightBlue];
 
     this.avatarColor = colors[sumChars % colors.length];
   }
@@ -52,15 +41,15 @@ export default class GiftedAvatar extends React.Component {
     } else if (typeof this.props.user.avatar === 'string') {
       return (
         <Image
-          source={{uri: this.props.user.avatar}}
-          style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
+          source={{ uri: this.props.user.avatar }}
+          style={[styles.avatarStyle, this.props.avatarStyle]}
         />
       );
     } else if (typeof this.props.user.avatar === 'number') {
       return (
         <Image
           source={this.props.user.avatar}
-          style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
+          style={[styles.avatarStyle, this.props.avatarStyle]}
         />
       );
     }
@@ -68,11 +57,7 @@ export default class GiftedAvatar extends React.Component {
   }
 
   renderInitials() {
-    return (
-      <Text style={[defaultStyles.textStyle, this.props.textStyle]}>
-        {this.avatarName}
-      </Text>
-    );
+    return <Text style={[styles.textStyle, this.props.textStyle]}>{this.avatarName}</Text>;
   }
 
   render() {
@@ -80,22 +65,20 @@ export default class GiftedAvatar extends React.Component {
       // render placeholder
       return (
         <View
-          style={[
-            defaultStyles.avatarStyle,
-            {backgroundColor: 'transparent'},
-            this.props.avatarStyle,
-          ]}
+          style={[styles.avatarStyle, styles.avatarTransparent, this.props.avatarStyle]}
           accessibilityTraits="image"
         />
-      )
+      );
     }
     if (this.props.user.avatar) {
       return (
         <TouchableOpacity
-          disabled={this.props.onPress ? false : true}
+          disabled={!this.props.onPress}
           onPress={() => {
-            const {onPress, ...other} = this.props;
-            this.props.onPress && this.props.onPress(other);
+            const { onPress, ...other } = this.props;
+            if (this.props.onPress) {
+              this.props.onPress(other);
+            }
           }}
           accessibilityTraits="image"
         >
@@ -110,25 +93,24 @@ export default class GiftedAvatar extends React.Component {
 
     return (
       <TouchableOpacity
-        disabled={this.props.onPress ? false : true}
+        disabled={!this.props.onPress}
         onPress={() => {
-          const {onPress, ...other} = this.props;
-          this.props.onPress && this.props.onPress(other);
+          const { onPress, ...other } = this.props;
+          if (this.props.onPress) {
+            this.props.onPress(other);
+          }
         }}
-        style={[
-          defaultStyles.avatarStyle,
-          {backgroundColor: this.avatarColor},
-          this.props.avatarStyle,
-        ]}
+        style={[styles.avatarStyle, { backgroundColor: this.avatarColor }, this.props.avatarStyle]}
         accessibilityTraits="image"
       >
         {this.renderInitials()}
       </TouchableOpacity>
     );
   }
+
 }
 
-const defaultStyles = {
+const styles = {
   avatarStyle: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -136,10 +118,13 @@ const defaultStyles = {
     height: 40,
     borderRadius: 20,
   },
+  avatarTransparent: {
+    backgroundColor: Color.backgroundTransparent,
+  },
   textStyle: {
-    color: '#fff',
+    color: Color.white,
     fontSize: 16,
-    backgroundColor: 'transparent',
+    backgroundColor: Color.backgroundTransparent,
     fontWeight: '100',
   },
 };

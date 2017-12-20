@@ -1,16 +1,31 @@
-# Gifted Chat
+<p align="center">
+    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-1.png" width=200>
+    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png" width=200>
+</p>
 
-[![npm downloads](https://img.shields.io/npm/dm/react-native-gifted-chat.svg)](https://www.npmjs.com/package/react-native-gifted-chat)
-[![npm version](https://img.shields.io/npm/v/react-native-gifted-chat.svg)](https://www.npmjs.com/package/react-native-gifted-chat)
-[![Latest GitHub tag](https://img.shields.io/github/tag/FaridSafi/react-native-gifted-chat.svg)](https://github.com/FaridSafi/react-native-gifted-chat)
+<h3 align="center">
+  💬 Gifted Chat
+</h3>
+<p align="center">
+  The most complete chat UI for React Native <br/>
+  <small>formerly known as Gifted Messenger</small>
+</p>
+<p align="center">
+  <!--a href="https://www.npmjs.com/package/react-native-gifted-chat">
+  <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a -->
+  <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
+  <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=svg" alt="build"></a>
+  <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/FaridSafi/react-native-gifted-chat.svg" alt="build"></a>
+</p>
 
-The most complete chat UI for React Native (formerly known as Gifted Messenger).
+<p align="center">
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=exp://expo.io/@xcarpentier/gifted-chat">
+  <br>
+  <a href="https://snack.expo.io/@xcarpentier/gifted-chat">Demo on snack (Expo)</a>
+</p>
 
-![screenshot 1](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-1.png)
-![screenshot 2](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png)
 
 ## Features
-
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
 - Load earlier messages
@@ -233,3 +248,11 @@ If you have any issues, you can clear your watches using `watchman watch-del-all
 ## Author
 
 Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi)!
+
+## Contributors
+
+- Kevin Cooper [cooperka](https://github.com/cooperka)
+- Kfir Golan [kfiroo](https://github.com/kfiroo)
+- Bruno Cascio [brunocascio](https://github.com/brunocascio)
+- Xavier Carpentier [xcarpentier](https://github.com/xcarpentier)
+- [more](https://github.com/FaridSafi/react-native-gifted-chat/graphs/contributors)

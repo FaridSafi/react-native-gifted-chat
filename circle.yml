@@ -18,7 +18,7 @@ test:
   override:
     - yarn run lint
     - yarn run test:coverage
-    # TODO: - codecov
+    - codecov
 
 # TODO: deployment:
 #   release:

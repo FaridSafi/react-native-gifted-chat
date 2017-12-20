@@ -16,6 +16,7 @@
   <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
   <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=svg" alt="build"></a>
   <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/FaridSafi/react-native-gifted-chat.svg" alt="build"></a>
+  <a href="https://codecov.io/gh/FaridSafi/react-native-gifted-chat"><img src="https://codecov.io/gh/FaridSafi/react-native-gifted-chat/coverage.svg"></a>
 </p>
 
 <p align="center">

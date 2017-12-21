@@ -244,7 +244,8 @@ If you have any issues, you can clear your watches using `watchman watch-del-all
 
 ## Questions
 - [How can I set Bubble color for each user?](https://github.com/FaridSafi/react-native-gifted-chat/issues/672)
-
+- [How to pass style props to Input Toolbar Design to customize it's color and other style properties?](https://github.com/FaridSafi/react-native-gifted-chat/issues/662)
+- 
 ## License
 
 - [MIT](LICENSE)

@@ -242,6 +242,9 @@ with any changes you make to the library during development. Steps:
 Note that it's important for `wml start` to come **after** `npm start`, or you'll get `Can't find entry file index.js` errors.
 If you have any issues, you can clear your watches using `watchman watch-del-all` and try again.
 
+## Questions
+- [How can I set Bubble color for each user?](https://github.com/FaridSafi/react-native-gifted-chat/issues/672)
+
 ## License
 
 - [MIT](LICENSE)

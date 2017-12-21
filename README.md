@@ -244,8 +244,10 @@ If you have any issues, you can clear your watches using `watchman watch-del-all
 
 ## Questions
 - [How can I set Bubble color for each user?](https://github.com/FaridSafi/react-native-gifted-chat/issues/672)
-- [How to pass style props to Input Toolbar Design to customize it's color and other style properties?](https://github.com/FaridSafi/react-native-gifted-chat/issues/662)
-- 
+- [How can I pass style props to InputToolbar design and customize it's color and other styles properties?](https://github.com/FaridSafi/react-native-gifted-chat/issues/662)
+- [How can I change the color of the message box?](https://github.com/FaridSafi/react-native-gifted-chat/issues/640)
+- [Is there a way to manually dismiss the keyboard?](https://github.com/FaridSafi/react-native-gifted-chat/issues/647)
+
 ## License
 
 - [MIT](LICENSE)

@@ -247,7 +247,8 @@ If you have any issues, you can clear your watches using `watchman watch-del-all
 - [How can I pass style props to InputToolbar design and customize it's color and other styles properties?](https://github.com/FaridSafi/react-native-gifted-chat/issues/662)
 - [How can I change the color of the message box?](https://github.com/FaridSafi/react-native-gifted-chat/issues/640)
 - [Is there a way to manually dismiss the keyboard?](https://github.com/FaridSafi/react-native-gifted-chat/issues/647)
-
+- [I want to implement a popover that pops right after clicking on a specific avatar,
+what is the best implementation in this case and how?](https://github.com/FaridSafi/react-native-gifted-chat/issues/660)
 ## License
 
 - [MIT](LICENSE)

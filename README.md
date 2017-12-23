@@ -101,7 +101,11 @@ class Example extends React.Component {
 
 ## Advanced example
 
-See [example/App.js](example/App.js) for a working demo!
+See [`example/App.js`](example/App.js) for a working demo!
+
+## "Slack" example
+
+See the files in [`example-slack-message`](example-slack-message) for an example of how to override the default UI to make something that looks more like Slack -- with usernames displayed and all messages on the left.
 
 ## Message object
 

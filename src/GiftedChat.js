@@ -313,7 +313,7 @@ class GiftedChat extends React.Component {
         <MessageContainer
           {...this.props}
           invertibleScrollViewProps={this.invertibleScrollViewProps}
-          messages={this.getMessages()}
+          messages={this.props.inverted ? this.getMessages().reverse() : this.getMessages()}
           ref={(component) => (this._messageContainerRef = component)}
 
         />
@@ -532,6 +532,7 @@ GiftedChat.defaultProps = {
   renderBubble: null,
   renderSystemMessage: null,
   onLongPress: null,
+  inverted: true,
   renderMessage: null,
   renderMessageText: null,
   renderMessageImage: null,
@@ -585,6 +586,7 @@ GiftedChat.propTypes = {
   renderBubble: PropTypes.func,
   renderSystemMessage: PropTypes.func,
   onLongPress: PropTypes.func,
+  inverted: PropTypes.func,
   renderMessage: PropTypes.func,
   renderMessageText: PropTypes.func,
   renderMessageImage: PropTypes.func,

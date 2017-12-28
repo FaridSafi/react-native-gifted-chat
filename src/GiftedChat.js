@@ -386,7 +386,7 @@ class GiftedChat extends React.Component {
       return;
     }
     if (this.props.onInputTextChanged) {
-      this.props.onInputTextChanged(text);
+      this.props.onInputTextChanged(text, this.textInput);
     }
     // Only set state if it's not being overridden by a prop.
     if (this.props.text === undefined) {
@@ -396,7 +396,7 @@ class GiftedChat extends React.Component {
 
   notifyInputTextReset() {
     if (this.props.onInputTextChanged) {
-      this.props.onInputTextChanged('');
+      this.props.onInputTextChanged('', this.textInput);
     }
   }
 

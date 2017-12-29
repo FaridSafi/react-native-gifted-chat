@@ -94,7 +94,6 @@ Actions.defaultProps = {
   containerStyle: {},
   iconTextStyle: {},
   wrapperStyle: {},
-  onPressActionButton: () => { },
 };
 
 Actions.propTypes = {

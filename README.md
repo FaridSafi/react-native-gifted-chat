@@ -253,6 +253,8 @@ If you have any issues, you can clear your watches using `watchman watch-del-all
 - [Is there a way to manually dismiss the keyboard?](https://github.com/FaridSafi/react-native-gifted-chat/issues/647)
 - [I want to implement a popover that pops right after clicking on a specific avatar,
 what is the best implementation in this case and how?](https://github.com/FaridSafi/react-native-gifted-chat/issues/660)
+- [Why Textinput is hidden on Android?](https://github.com/FaridSafi/react-native-gifted-chat/issues/578)
+
 ## License
 
 - [MIT](LICENSE)

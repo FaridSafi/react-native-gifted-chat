@@ -17,7 +17,7 @@ dependencies:
 test:
   override:
     - yarn run lint
-    - yarn run test:coverage
+    - yarn run test:coverage --no-watchman
     - codecov
 
 # TODO: deployment:

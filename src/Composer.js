@@ -1,17 +1,25 @@
+/* eslint no-use-before-define: ["error", { "variables": false }] */
+
+import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Platform,
-  StyleSheet,
-  TextInput,
-} from 'react-native';
+import { Platform, StyleSheet, TextInput } from 'react-native';
+
+import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant';
+import Color from './Color';
 
 export default class Composer extends React.Component {
-  onChange(e) {
-    const contentSize = e.nativeEvent.contentSize;
-    if (!this.contentSize) {
-      this.contentSize = contentSize;
-      this.props.onInputSizeChanged(this.contentSize);
-    } else if (this.contentSize.width !== contentSize.width || this.contentSize.height !== contentSize.height) {
+
+  onContentSizeChange(e) {
+    const { contentSize } = e.nativeEvent;
+
+    // Support earlier versions of React Native on Android.
+    if (!contentSize) return;
+
+    if (
+      !this.contentSize ||
+      this.contentSize.width !== contentSize.width ||
+      this.contentSize.height !== contentSize.height
+    ) {
       this.contentSize = contentSize;
       this.props.onInputSizeChanged(this.contentSize);
     }
@@ -27,20 +35,20 @@ export default class Composer extends React.Component {
         placeholder={this.props.placeholder}
         placeholderTextColor={this.props.placeholderTextColor}
         multiline={this.props.multiline}
-
-        onChange={(e) => this.onChange(e)}
-        onChangeText={text => this.onChangeText(text)}
-
-        style={[styles.textInput, this.props.textInputStyle, {height: this.props.composerHeight}]}
-
+        onChange={(e) => this.onContentSizeChange(e)}
+        onContentSizeChange={(e) => this.onContentSizeChange(e)}
+        onChangeText={(text) => this.onChangeText(text)}
+        style={[styles.textInput, this.props.textInputStyle, { height: this.props.composerHeight }]}
+        autoFocus={this.props.textInputAutoFocus}
         value={this.props.text}
         accessibilityLabel={this.props.text || this.props.placeholder}
-        enablesReturnKeyAutomatically={true}
+        enablesReturnKeyAutomatically
         underlineColorAndroid="transparent"
         {...this.props.textInputProps}
       />
     );
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -61,33 +69,27 @@ const styles = StyleSheet.create({
 });
 
 Composer.defaultProps = {
-  onChange: () => {
-  },
-  composerHeight: Platform.select({
-    ios: 33,
-    android: 41,
-  }), // TODO SHARE with GiftedChat.js and tests
+  composerHeight: MIN_COMPOSER_HEIGHT,
   text: '',
-  placeholder: 'Type a message...',
-  placeholderTextColor: '#b2b2b2',
+  placeholderTextColor: Color.defaultProps,
+  placeholder: DEFAULT_PLACEHOLDER,
   textInputProps: null,
   multiline: true,
   textInputStyle: {},
-  onTextChanged: () => {
-  },
-  onInputSizeChanged: () => {
-  },
+  textInputAutoFocus: false,
+  onTextChanged: () => { },
+  onInputSizeChanged: () => { },
 };
 
 Composer.propTypes = {
-  onChange: React.PropTypes.func,
-  composerHeight: React.PropTypes.number,
-  text: React.PropTypes.string,
-  placeholder: React.PropTypes.string,
-  placeholderTextColor: React.PropTypes.string,
-  textInputProps: React.PropTypes.object,
-  onTextChanged: React.PropTypes.func,
-  onInputSizeChanged: React.PropTypes.func,
-  multiline: React.PropTypes.bool,
+  composerHeight: PropTypes.number,
+  text: PropTypes.string,
+  placeholder: PropTypes.string,
+  placeholderTextColor: PropTypes.string,
+  textInputProps: PropTypes.object,
+  onTextChanged: PropTypes.func,
+  onInputSizeChanged: PropTypes.func,
+  multiline: PropTypes.bool,
   textInputStyle: TextInput.propTypes.style,
+  textInputAutoFocus: PropTypes.bool,
 };

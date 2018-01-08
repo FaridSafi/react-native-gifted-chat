@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <GiftedAvatar /> and compare with snapshot 1`] = `
+<View
+  accessibilityTraits="image"
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 20,
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
+      },
+      Object {
+        "backgroundColor": "transparent",
+      },
+      Object {},
+    ]
+  }
+/>
+`;

@@ -1,12 +1,23 @@
 {
-  "extends": "cooperka/react-native",
-
-  "env": {
-    "browser": true,
-    "jest": true
-  },
-
-  // Any rules here will override those from
-  // https://github.com/cooperka/eslint-config-cooperka.
-  "rules": {}
+    "extends": "cooperka/react-native",
+    "env": {
+        "browser": true,
+        "jest": true
+    },
+    "rules": {
+        "no-underscore-dangle": 0,
+        "import/no-unresolved": [
+            2,
+            {
+                "ignore": [
+                    "react",
+                    "react-native"
+                ]
+            }
+        ],
+        "import/no-extraneous-dependencies": 0,
+        "import/extensions": 0,
+        "react/no-unused-prop-types": 0,
+        "react/no-typos": 0
+    }
 }

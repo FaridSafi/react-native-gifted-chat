@@ -1,22 +1,24 @@
+/* eslint no-use-before-define: ["error", { "variables": false }] */
+
+import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 
-import moment from 'moment/min/moment-with-locales.min';
+import moment from 'moment';
 
-export default class Time extends React.Component {
-  render() {
-    return (
-      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
-        <Text style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}>
-          {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('LT')}
-        </Text>
-      </View>
-    );
-  }
+import Color from './Color';
+import { TIME_FORMAT } from './Constant';
+
+export default function Time({ position, containerStyle, currentMessage, timeFormat }, context) {
+  return (
+    <View style={[styles[position].container, containerStyle[position]]}>
+      <Text style={[styles[position].text, textStyle[position]]}>
+        {moment(currentMessage.createdAt)
+          .locale(context.getLocale())
+          .format(timeFormat)}
+      </Text>
+    </View>
+  );
 }
 
 const containerStyle = {
@@ -37,7 +39,7 @@ const styles = {
       ...containerStyle,
     },
     text: {
-      color: '#aaa',
+      color: Color.timeTextColor,
       ...textStyle,
     },
   }),
@@ -46,14 +48,14 @@ const styles = {
       ...containerStyle,
     },
     text: {
-      color: '#fff',
+      color: Color.white,
       ...textStyle,
     },
   }),
 };
 
 Time.contextTypes = {
-  getLocale: React.PropTypes.func,
+  getLocale: PropTypes.func,
 };
 
 Time.defaultProps = {
@@ -63,17 +65,19 @@ Time.defaultProps = {
   },
   containerStyle: {},
   textStyle: {},
+  timeFormat: TIME_FORMAT,
 };
 
 Time.propTypes = {
-  position: React.PropTypes.oneOf(['left', 'right']),
-  currentMessage: React.PropTypes.object,
-  containerStyle: React.PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+  position: PropTypes.oneOf(['left', 'right']),
+  currentMessage: PropTypes.object,
+  containerStyle: PropTypes.shape({
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
-  textStyle: React.PropTypes.shape({
+  textStyle: PropTypes.shape({
     left: Text.propTypes.style,
     right: Text.propTypes.style,
   }),
+  timeFormat: PropTypes.string,
 };

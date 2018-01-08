@@ -1,38 +1,37 @@
+/* eslint no-use-before-define: ["error", { "variables": false }] */
+
+import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  View,
-  Dimensions,
-} from 'react-native';
+import { Image, StyleSheet, View, ViewPropTypes } from 'react-native';
 import Lightbox from 'react-native-lightbox';
 
-export default class MessageImage extends React.Component {
-  render() {
-    const { width, height } = Dimensions.get('window');
-
-    return (
-      <View style={[styles.container, this.props.containerStyle]}>
-        <Lightbox
-          activeProps={{
-            style: [styles.imageActive, { width, height }],
-          }}
-          {...this.props.lightboxProps}
-        >
-          <Image
-            {...this.props.imageProps}
-            style={[styles.image, this.props.imageStyle]}
-            source={{uri: this.props.currentMessage.image}}
-          />
-        </Lightbox>
-      </View>
-    );
-  }
+export default function MessageImage({
+  containerStyle,
+  lightboxProps,
+  imageProps,
+  imageStyle,
+  currentMessage,
+}) {
+  return (
+    <View style={[styles.container, containerStyle]}>
+      <Lightbox
+        activeProps={{
+          style: styles.imageActive,
+        }}
+        {...lightboxProps}
+      >
+        <Image
+          {...imageProps}
+          style={[styles.image, imageStyle]}
+          source={{ uri: currentMessage.image }}
+        />
+      </Lightbox>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
   image: {
     width: 150,
     height: 100,
@@ -41,6 +40,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   imageActive: {
+    flex: 1,
     resizeMode: 'contain',
   },
 });
@@ -56,9 +56,9 @@ MessageImage.defaultProps = {
 };
 
 MessageImage.propTypes = {
-  currentMessage: React.PropTypes.object,
-  containerStyle: View.propTypes.style,
+  currentMessage: PropTypes.object,
+  containerStyle: ViewPropTypes.style,
   imageStyle: Image.propTypes.style,
-  imageProps: React.PropTypes.object,
-  lightboxProps: React.PropTypes.object,
+  imageProps: PropTypes.object,
+  lightboxProps: PropTypes.object,
 };

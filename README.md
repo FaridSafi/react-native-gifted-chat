@@ -1,7 +1,7 @@
 <p align="center" >
-    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-1.png" width="200"/>
+    <img alt="react-native-gifted-chat-1" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/iPhone-6s-gifted-chat-1.png" width="250"/>
     &nbsp;&nbsp;&nbsp;
-    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png" width="200"/>
+    <img alt="react-native-gifted-chat-2" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/iPhone-6s-gifted-chat-2.png" width="250"/>
 </p>
 
 <h3 align="center">

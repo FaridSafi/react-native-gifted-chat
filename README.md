@@ -1,6 +1,7 @@
-<p align="center">
-    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-1.png" width=200>
-    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png" width=200>
+<p align="center" >
+    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-1.png" width="200"/>
+    &nbsp;&nbsp;&nbsp;
+    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png" width="200"/>
 </p>
 
 <h3 align="center">
@@ -11,11 +12,13 @@
   <small>formerly known as Gifted Messenger</small>
 </p>
 <p align="center">
-  <!--a href="https://www.npmjs.com/package/react-native-gifted-chat">
-  <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a -->
+  <a href="https://www.npmjs.com/package/react-native-gifted-chat">
+  <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>
   <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
-  <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=svg" alt="build"></a>
   <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/FaridSafi/react-native-gifted-chat.svg" alt="build"></a>
+</p>
+<p align="center">
+  <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=shield" alt="build"></a>
   <a href="https://codecov.io/gh/FaridSafi/react-native-gifted-chat"><img src="https://codecov.io/gh/FaridSafi/react-native-gifted-chat/coverage.svg"></a>
 </p>
 
@@ -101,7 +104,11 @@ class Example extends React.Component {
 
 ## Advanced example
 
-See [example/App.js](example/App.js) for a working demo!
+See [`example/App.js`](example/App.js) for a working demo!
+
+## "Slack" example
+
+See the files in [`example-slack-message`](example-slack-message) for an example of how to override the default UI to make something that looks more like Slack -- with usernames displayed and all messages on the left.
 
 ## Message object
 
@@ -241,6 +248,15 @@ with any changes you make to the library during development. Steps:
 
 Note that it's important for `wml start` to come **after** `npm start`, or you'll get `Can't find entry file index.js` errors.
 If you have any issues, you can clear your watches using `watchman watch-del-all` and try again.
+
+## Questions
+- [How can I set Bubble color for each user?](https://github.com/FaridSafi/react-native-gifted-chat/issues/672)
+- [How can I pass style props to InputToolbar design and customize it's color and other styles properties?](https://github.com/FaridSafi/react-native-gifted-chat/issues/662)
+- [How can I change the color of the message box?](https://github.com/FaridSafi/react-native-gifted-chat/issues/640)
+- [Is there a way to manually dismiss the keyboard?](https://github.com/FaridSafi/react-native-gifted-chat/issues/647)
+- [I want to implement a popover that pops right after clicking on a specific avatar,
+what is the best implementation in this case and how?](https://github.com/FaridSafi/react-native-gifted-chat/issues/660)
+- [Why Textinput is hidden on Android?](https://github.com/FaridSafi/react-native-gifted-chat/issues/578)
 
 ## License
 

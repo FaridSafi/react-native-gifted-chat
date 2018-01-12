@@ -17,10 +17,10 @@ dependencies:
 test:
   override:
     - yarn run lint
-    - yarn run test:coverage --no-watchman
+    - yarn run test:coverage
     - codecov
 
-# TODO: deployment:
+# TODO: publish on npm on tagging?
 #   release:
 #     tag: /v[0-9]+(\.[0-9]+)*/
 #     commands:

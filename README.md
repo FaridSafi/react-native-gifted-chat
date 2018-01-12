@@ -1,6 +1,7 @@
-<p align="center">
-    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-1.png" width=200>
-    <img alt="react-native-linkedin" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png" width=200>
+<p align="center" >
+    <img alt="react-native-gifted-chat-1" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/iPhone-6s-gifted-chat-1.png" width="250"/>
+    &nbsp;&nbsp;&nbsp;
+    <img alt="react-native-gifted-chat-2" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/iPhone-6s-gifted-chat-2.png" width="250"/>
 </p>
 
 <h3 align="center">
@@ -11,11 +12,13 @@
   <small>formerly known as Gifted Messenger</small>
 </p>
 <p align="center">
-  <!--a href="https://www.npmjs.com/package/react-native-gifted-chat">
-  <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a -->
+  <a href="https://www.npmjs.com/package/react-native-gifted-chat">
+  <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>
   <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
-  <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=svg" alt="build"></a>
   <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/FaridSafi/react-native-gifted-chat.svg" alt="build"></a>
+</p>
+<p align="center">
+  <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=shield" alt="build"></a>
   <a href="https://codecov.io/gh/FaridSafi/react-native-gifted-chat"><img src="https://codecov.io/gh/FaridSafi/react-native-gifted-chat/coverage.svg"></a>
 </p>
 

@@ -23,7 +23,7 @@
 <p align="center">
   <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=exp://expo.io/@xcarpentier/gifted-chat">
   <br>
-  <a href="https://snack.expo.io/@xcarpentier/gifted-chat">Demo on snack (Expo)</a>
+  <a href="https://snack.expo.io/@xcarpentier/gifted-chat" target="_blank">Demo on snack (Expo)</a>
 </p>
 
 ## Features

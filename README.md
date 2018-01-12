@@ -1,5 +1,5 @@
 <p align="center" >
-    <img alt="react-native-gifted-chat-1" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/iPhone-6s-gifted-chat-3.png" width="270"/>
+    <img alt="react-native-gifted-chat-1" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/iPhone-6s-gifted-chat-3.png" width="300"/>
 </p>
 
 <h3 align="center">

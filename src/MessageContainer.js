@@ -24,6 +24,8 @@ export default class MessageContainer extends React.Component {
     this.renderRow = this.renderRow.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
+    this.renderHeaderWrapper = this.renderHeaderWrapper.bind(this);
+    this.keyExtractor = this.keyExtractor.bind(this);
     this.state = {
       messagesData: this.prepareMessages(props.messages),
     };
@@ -122,7 +124,7 @@ export default class MessageContainer extends React.Component {
     return <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>;
   }
 
-  _keyExtractor(item, index) {
+  keyExtractor(item, index) {
     return `${item._id} ${index}`;
   }
 
@@ -135,7 +137,7 @@ export default class MessageContainer extends React.Component {
           initialListSize={20}
           pageSize={20}
           ref="flatListRef"
-          keyExtractor={this._keyExtractor}
+          keyExtractor={this.keyExtractor}
           {...this.props.listViewProps}
           data={this.state.messagesData}
           renderItem={this.renderRow}

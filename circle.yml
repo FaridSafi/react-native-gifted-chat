@@ -31,4 +31,5 @@ deployment:
   appr:
     branch: /.*/
     commands:
+      - 'export BRANCH=$CIRCLE_BRANCH'
       - 'if [ "$CI_PULL_REQUEST" != "" ]; then yarn appr; fi'

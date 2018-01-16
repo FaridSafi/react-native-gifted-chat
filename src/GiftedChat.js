@@ -445,9 +445,6 @@ class GiftedChat extends React.Component {
         maxLength: this.getIsTypingDisabled() ? 0 : this.props.maxInputLength,
       },
     };
-    if (this.getIsTypingDisabled()) {
-      inputToolbarProps.textInputProps.maxLength = 0;
-    }
     if (this.props.renderInputToolbar) {
       return this.props.renderInputToolbar(inputToolbarProps);
     }

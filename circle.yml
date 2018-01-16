@@ -26,3 +26,9 @@ test:
 #     commands:
 #       - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
 #       - yarn publish --new-version `./scripts/version.js`
+
+deployment:
+  appr:
+    branch: /.*/
+    commands:
+      - 'if [ "$CI_PULL_REQUEST" != "" ]; then yarn appr; fi'

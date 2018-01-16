@@ -20,18 +20,14 @@ export default class Avatar extends React.Component {
           this.props.imageStyle[this.props.position],
         ])}
         user={this.props.currentMessage.user}
-        onPress={() =>
-          this.props.onPressAvatar && this.props.onPressAvatar(this.props.currentMessage.user)
-        }
+        onPress={() => this.props.onPressAvatar && this.props.onPressAvatar(this.props.currentMessage.user)}
       />
     );
   }
 
   render() {
     const { renderAvatarOnTop } = this.props;
-    const messageToCompare = renderAvatarOnTop
-      ? this.props.previousMessage
-      : this.props.nextMessage;
+    const messageToCompare = renderAvatarOnTop ? this.props.previousMessage : this.props.nextMessage;
     const computedStyle = renderAvatarOnTop ? 'onTop' : 'onBottom';
 
     if (this.props.renderAvatar === null) {
@@ -43,12 +39,7 @@ export default class Avatar extends React.Component {
       isSameDay(this.props.currentMessage, messageToCompare)
     ) {
       return (
-        <View
-          style={[
-            styles[this.props.position].container,
-            this.props.containerStyle[this.props.position],
-          ]}
-        >
+        <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
           <GiftedAvatar
             avatarStyle={StyleSheet.flatten([
               styles[this.props.position].image,
@@ -107,7 +98,6 @@ const styles = {
 
 Avatar.defaultProps = {
   renderAvatarOnTop: false,
-  renderAvatar: null,
   position: 'left',
   currentMessage: {
     user: null,
@@ -116,7 +106,7 @@ Avatar.defaultProps = {
   nextMessage: {},
   containerStyle: {},
   imageStyle: {},
-  onPressAvatar: () => { },
+  onPressAvatar: () => {},
   // TODO: remove in next major release
   isSameDay: warnDeprecated(isSameDay),
   isSameUser: warnDeprecated(isSameUser),

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <Time /> and compare with snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "marginBottom": 5,
+        "marginLeft": 10,
+        "marginRight": 10,
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "color": "#aaa",
+          "fontSize": 10,
+          "textAlign": "right",
+        },
+        undefined,
+      ]
+    }
+  >
+    Invalid date
+  </Text>
+</View>
+`;

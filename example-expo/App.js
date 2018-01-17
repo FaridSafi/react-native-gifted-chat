@@ -37,7 +37,7 @@ export default class App extends Component {
   onSend(messages = []) {
     const step = this.state.step + 1;
     this.setState((previousState) => ({
-      messages: GiftedChat.append(previousState.messages, messages),
+      messages: GiftedChat.append(previousState.messages, [{ ...messages[0], sent: true, received: true }]),
       step,
     }));
     setTimeout(() => this.botSend(step), 1500 + Math.round(Math.random() * 1000));
@@ -54,6 +54,7 @@ export default class App extends Component {
       }));
     }
   }
+
   parsePatterns(linkStyle) {
     return [
       {

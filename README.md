@@ -17,6 +17,7 @@
 </p>
 <p align="center">
   <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=shield" alt="build"></a>
+  <a href="https://travis-ci.org/FaridSafi/react-native-gifted-chat"><img src="https://api.travis-ci.org/FaridSafi/react-native-gifted-chat.svg" alt="deployed"></a>
   <a href="https://codecov.io/gh/FaridSafi/react-native-gifted-chat"><img src="https://codecov.io/gh/FaridSafi/react-native-gifted-chat/coverage.svg"></a>
 </p>
 

@@ -3,17 +3,16 @@
     no-param-reassign: 0,
     no-use-before-define: ["error", { "variables": false }],
     no-return-assign: 0,
-    react/no-string-refs: 0
+    react/no-string-refs: 0,
+    react/sort-comp: 0
 */
 
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { ListView, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 
 import shallowequal from 'shallowequal';
-import InvertibleScrollView from 'react-native-invertible-scroll-view';
-import md5 from 'md5';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
@@ -25,28 +24,11 @@ export default class MessageContainer extends React.Component {
     this.renderRow = this.renderRow.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
-    this.renderScrollComponent = this.renderScrollComponent.bind(this);
-
-    const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => {
-        return r1.hash !== r2.hash;
-      },
-    });
-
-    const messagesData = this.prepareMessages(props.messages);
+    this.renderHeaderWrapper = this.renderHeaderWrapper.bind(this);
+    this.keyExtractor = this.keyExtractor.bind(this);
     this.state = {
-      dataSource: dataSource.cloneWithRows(messagesData.blob, messagesData.keys),
+      messagesData: this.prepareMessages(props.messages),
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.messages === nextProps.messages) {
-      return;
-    }
-    const messagesData = this.prepareMessages(nextProps.messages);
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys),
-    });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -60,26 +42,35 @@ export default class MessageContainer extends React.Component {
   }
 
   prepareMessages(messages) {
-    return {
-      keys: messages.map((m) => m._id),
-      blob: messages.reduce((o, m, i) => {
-        const previousMessage = messages[i + 1] || {};
-        const nextMessage = messages[i - 1] || {};
-        // add next and previous messages to hash to ensure updates
-        const toHash = JSON.stringify(m) + previousMessage._id + nextMessage._id;
-        o[m._id] = {
-          ...m,
-          previousMessage,
-          nextMessage,
-          hash: md5(toHash),
-        };
-        return o;
-      }, {}),
-    };
+    return messages.reduce((o, m, i) => {
+      const previousMessage = messages[i + 1] || {};
+      const nextMessage = messages[i - 1] || {};
+      o.push({
+        ...m,
+        previousMessage,
+        nextMessage,
+      });
+      return o;
+    }, []);
   }
 
-  scrollTo(options) {
-    this._invertibleScrollViewRef.scrollTo(options);
+  componentWillReceiveProps(nextProps) {
+    if (this.props.messages === nextProps.messages) {
+      return;
+    }
+    this.setState({
+      messagesData: this.prepareMessages(nextProps.messages),
+    });
+  }
+
+  renderFooter() {
+    if (this.props.renderFooter) {
+      const footerProps = {
+        ...this.props,
+      };
+      return this.props.renderFooter(footerProps);
+    }
+    return null;
   }
 
   renderLoadEarlier() {
@@ -95,72 +86,66 @@ export default class MessageContainer extends React.Component {
     return null;
   }
 
-  renderFooter() {
-    if (this.props.renderFooter) {
-      const footerProps = {
-        ...this.props,
-      };
-      return this.props.renderFooter(footerProps);
-    }
-    return null;
+  scrollTo(options) {
+    this.refs.flatListRef.scrollToOffset(options);
   }
 
-  renderRow(message) {
-    if (!message._id && message._id !== 0) {
-      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(message));
+  renderRow({ item }) {
+    if (!item._id && item._id !== 0) {
+      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
     }
-    if (!message.user) {
-      if (!message.system) {
-        console.warn('GiftedChat: `user` is missing for message', JSON.stringify(message));
+    if (!item.user) {
+      if (!item.system) {
+        console.warn('GiftedChat: `user` is missing for message', JSON.stringify(item));
       }
-      message.user = {};
+      item.user = {};
     }
 
     const messageProps = {
       ...this.props,
-      key: message._id,
-      currentMessage: message,
-      previousMessage: message.previousMessage,
-      nextMessage: message.nextMessage,
-      position: message.user._id === this.props.user._id ? 'right' : 'left',
+      key: item._id,
+      currentMessage: item,
+      previousMessage: item.previousMessage,
+      nextMessage: item.nextMessage,
+      position: item.user._id === this.props.user._id ? 'right' : 'left',
     };
 
     if (this.props.renderMessage) {
       return this.props.renderMessage(messageProps);
     }
-    return <Message {...messageProps} />;
-  }
-
-  renderScrollComponent(props) {
-    const { invertibleScrollViewProps } = this.props;
     return (
-      <InvertibleScrollView
-        {...props}
-        {...invertibleScrollViewProps}
-        ref={(component) => (this._invertibleScrollViewRef = component)}
-      />
+      <View style={{ transform: [{ scaleY: -1 }, { perspective: 1280 }] }}>
+        <Message {...messageProps} />
+      </View>
     );
   }
 
-  render() {
-    const contentContainerStyle = this.props.inverted
-      ? {}
-      : styles.notInvertedContentContainerStyle;
+  renderHeaderWrapper() {
+    return <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>;
+  }
 
+  keyExtractor(item, index) {
+    return `${item._id} ${index}`;
+  }
+
+  render() {
     return (
       <View ref="container" style={styles.container}>
-        <ListView
+        <FlatList
           enableEmptySections
           automaticallyAdjustContentInsets={false}
           initialListSize={20}
           pageSize={20}
+          ref="flatListRef"
+          keyExtractor={this.keyExtractor}
           {...this.props.listViewProps}
-          dataSource={this.state.dataSource}
-          contentContainerStyle={contentContainerStyle}
-          renderRow={this.renderRow}
-          renderHeader={this.props.inverted ? this.renderFooter : this.renderLoadEarlier}
-          renderFooter={this.props.inverted ? this.renderLoadEarlier : this.renderFooter}
-          renderScrollComponent={this.renderScrollComponent}
+          data={this.state.messagesData}
+          renderItem={this.renderRow}
+          renderHeader={this.renderFooter}
+          renderFooter={this.renderLoadEarlier()}
+          style={{ transform: [{ scaleY: -1 }, { perspective: 1280 }] }}
+          {...this.props.invertibleScrollViewProps}
+          ListFooterComponent={this.renderHeaderWrapper}
         />
       </View>
     );
@@ -172,8 +157,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  notInvertedContentContainerStyle: {
-    justifyContent: 'flex-end',
+  headerWrapper: {
+    flex: 1,
+    transform: [{ scaleY: -1 }, { perspective: 1280 }],
   },
 });
 
@@ -182,7 +168,7 @@ MessageContainer.defaultProps = {
   user: {},
   renderFooter: null,
   renderMessage: null,
-  onLoadEarlier: () => { },
+  onLoadEarlier: () => {},
   inverted: true,
   loadEarlier: false,
   listViewProps: {},

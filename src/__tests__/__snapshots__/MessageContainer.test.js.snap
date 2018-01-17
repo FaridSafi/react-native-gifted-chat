@@ -9,21 +9,70 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
   }
 >
   <RCTScrollView
+    ListFooterComponent={[Function]}
     automaticallyAdjustContentInsets={false}
-    contentContainerStyle={Object {}}
-    dataSource={
-      ListViewDataSource {
-        "items": 0,
+    data={Array []}
+    disableVirtualization={false}
+    enableEmptySections={true}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={false}
+    initialListSize={20}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onContentSizeChange={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    pageSize={20}
+    renderFooter={null}
+    renderHeader={[Function]}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    style={
+      Object {
+        "transform": Array [
+          Object {
+            "scaleY": -1,
+          },
+          Object {
+            "perspective": 1280,
+          },
+        ],
       }
     }
-    enableEmptySections={true}
-    initialListSize={20}
-    pageSize={20}
-    renderFooter={[Function]}
-    renderHeader={[Function]}
-    renderRow={[Function]}
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
   >
-    <View />
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "transform": Array [
+                Object {
+                  "scaleY": -1,
+                },
+                Object {
+                  "perspective": 1280,
+                },
+              ],
+            }
+          }
+        />
+      </View>
+    </View>
   </RCTScrollView>
 </View>
 `;

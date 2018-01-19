@@ -26,9 +26,10 @@
   "scripts": {
     "lint": "eslint . --ext .js,.jsx",
     "precommit": "yarn lint",
-    "test": "jest",
+    "test": "jest --no-watchman",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "appr": "cd example-expo && ./setPRVersion.js && yarn && yarn appr"
   },
   "jest": {
     "preset": "react-native",

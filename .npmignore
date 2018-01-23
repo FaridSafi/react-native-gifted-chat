@@ -3,3 +3,8 @@ TODO.md
 screenshots/
 .babelrc
 tests/
+example-slack-message/
+example-expo/
+README.md
+ISSUE_TEMPLATE.md
+circle.yml

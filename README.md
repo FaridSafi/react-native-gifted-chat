@@ -230,9 +230,11 @@ If you are using Create React Native App / Expo, no Android specific installatio
     android:windowSoftInputMode="adjustResize"
     android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
   ```
+* For **Expo**, there are almost 2 solutions to fix it:
+  * adding KeyboardAvoidingView after GiftedChat
+  * adding an opaque background status bar on app.json https://docs.expo.io/versions/latest/guides/configuration.html#androidstatusbar
 
 * If you plan to use `GiftedChat` inside a `Modal`, see [#200](https://github.com/FaridSafi/react-native-gifted-chat/issues/200).
-
 ## Notes for local development
 
 You can use [`wml`](https://github.com/wix/wml) to keep the example app in sync
@@ -255,7 +257,7 @@ If you have any issues, you can clear your watches using `watchman watch-del-all
 * [Is there a way to manually dismiss the keyboard?](https://github.com/FaridSafi/react-native-gifted-chat/issues/647)
 * [I want to implement a popover that pops right after clicking on a specific avatar,
   what is the best implementation in this case and how?](https://github.com/FaridSafi/react-native-gifted-chat/issues/660)
-* [Why Textinput is hidden on Android?](https://github.com/FaridSafi/react-native-gifted-chat/issues/578)
+* [Why Textinput is hidden on Android?](https://github.com/FaridSafi/react-native-gifted-chat/issues/680#issuecomment-359699364)
 
 ## License
 

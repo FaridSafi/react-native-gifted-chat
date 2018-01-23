@@ -4,6 +4,6 @@ node_js:
 cache: yarn
 script:
   - 'export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)'
-  - 'export BRANCH="$TRAVIS_REPO_SLUG#$BRANCH"'
+  - 'export BRANCH="$TRAVIS_PULL_REQUEST_SLUG#$BRANCH"'
   - 'echo "BRANCH=$BRANCH"'
   - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then yarn appr; fi'

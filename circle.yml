@@ -26,3 +26,10 @@ test:
 #     commands:
 #       - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
 #       - yarn publish --new-version `./scripts/version.js`
+
+# deployment:
+#   appr:
+#     branch: /.*/
+#     commands:
+#       - 'export BRANCH="$CIRCLE_PROJECT_REPONAME/$CIRCLE_PROJECT_USERNAME#$CIRCLE_BRANCH"'
+#       - 'if [ "$CI_PULL_REQUEST" != "" ]; then yarn appr; fi'

@@ -109,7 +109,7 @@ export default class MessageContainer extends React.PureComponent {
           removeClippedSubviews
           inverted={this.props.inverted}
           {...this.props.listViewProps}
-          data={this.state.messagesData}
+          data={this.props.messages}
           style={styles.listStyle}
           contentContainerStyle={styles.contentContainerStyle}
           renderItem={this.renderRow}

@@ -61,6 +61,20 @@ export default class Message extends React.Component {
     return <Avatar {...avatarProps} />;
   }
 
+  renderCustomTopView() {
+    if (this.props.renderCustomTopView) {
+      return this.props.renderCustomTopView(this.props);
+    }
+    return null;
+  }
+
+  renderCustomBottomView() {
+    if (this.props.renderCustomBottomView) {
+      return this.props.renderCustomBottomView(this.props);
+    }
+    return null;
+  }
+
   render() {
     const sameUser = isSameUser(this.props.currentMessage, this.props.nextMessage);
     return (
@@ -69,17 +83,21 @@ export default class Message extends React.Component {
         {this.props.currentMessage.system ? (
           this.renderSystemMessage()
         ) : (
-          <View
-            style={[
-              styles[this.props.position].container,
-              { marginBottom: sameUser ? 2 : 10 },
-              !this.props.inverted && { marginBottom: 2 },
-              this.props.containerStyle[this.props.position],
-            ]}
-          >
-            {this.props.position === 'left' ? this.renderAvatar() : null}
-            {this.renderBubble()}
-            {this.props.position === 'right' ? this.renderAvatar() : null}
+          <View>
+            {this.renderCustomTopView()}
+            <View
+              style={[
+                styles[this.props.position].container,
+                { marginBottom: sameUser ? 2 : 10 },
+                !this.props.inverted && { marginBottom: 2 },
+                this.props.containerStyle[this.props.position],
+              ]}
+            >
+              {this.props.position === 'left' ? this.renderAvatar() : null}
+              {this.renderBubble()}
+              {this.props.position === 'right' ? this.renderAvatar() : null}
+            </View>
+            {this.renderCustomBottomView()}
           </View>
         )}
       </View>

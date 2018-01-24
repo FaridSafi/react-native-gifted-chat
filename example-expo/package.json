@@ -14,6 +14,9 @@
     "sentry-expo": "1.7.0"
   },
   "devDependencies": {
-    "appr": "xcarpentier/appr"
+    "appr": "xcarpentier/appr",
+    "detox": "7.0.0-alpha.1",
+    "detox-expo-helpers": "0.2.0",
+    "jest": "22.1.4"
   }
 }

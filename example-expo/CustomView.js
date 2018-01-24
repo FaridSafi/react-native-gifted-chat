@@ -29,7 +29,6 @@ export default function CustomView(props) {
           zoomEnabled={false}
         >
           <MapView.Marker
-            pinColor={'#fff'}
             coordinate={{
               latitude: props.currentMessage.location.latitude,
               longitude: props.currentMessage.location.longitude,

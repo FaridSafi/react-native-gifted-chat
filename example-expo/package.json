@@ -14,6 +14,6 @@
     "react-native-nav": "2.0.2"
   },
   "devDependencies": {
-    "appr": "1.1.0"
+    "appr": "xcarpentier/appr"
   }
 }

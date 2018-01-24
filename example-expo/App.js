@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Asset, AppLoading } from 'expo';
 import { View, StyleSheet, Linking } from 'react-native';
 
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -25,15 +26,17 @@ export default class App extends Component {
     this.state = {
       messages: [],
       step: 0,
+      appIsReady: false,
     };
 
     this.onSend = this.onSend.bind(this);
     this.parsePatterns = this.parsePatterns.bind(this);
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     // init with only system messages
-    this.setState({ messages: messagesData.filter((message) => message.system) });
+    await Asset.fromModule(require('./assets/avatar.png')).downloadAsync();
+    this.setState({ messages: messagesData.filter((message) => message.system), appIsReady: true });
   }
 
   onSend(messages = []) {
@@ -42,7 +45,7 @@ export default class App extends Component {
       messages: GiftedChat.append(previousState.messages, [{ ...messages[0], sent: true, received: true }]),
       step,
     }));
-    setTimeout(() => this.botSend(step), 1500 + Math.round(Math.random() * 1000));
+    setTimeout(() => this.botSend(step), 1200 + Math.round(Math.random() * 1000));
   }
 
   botSend(step = 0) {
@@ -61,14 +64,17 @@ export default class App extends Component {
     return [
       {
         pattern: /#(\w+)/,
-        style: { ...linkStyle, color: 'orange' },
+        style: { ...linkStyle, color: 'darkorange' },
         onPress: () => Linking.openURL('http://gifted.chat'),
       },
     ];
   }
   render() {
+    if (!this.state.appIsReady) {
+      return <AppLoading />;
+    }
     return (
-      <View style={styles.container}>
+      <View style={styles.container} accessible accessibilityLabel="main" testID="main">
         <NavBar />
         <GiftedChat
           messages={this.state.messages}

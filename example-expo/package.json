@@ -3,7 +3,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
-    "test:e2e": "detox test -c ios.sim.debug",
+    "e2e:init": "./e2e/init.sh 2.2.0",
+    "test:e2e": "exp r -c & detox test -c ios.sim; pkill -f exp",
     "cleaning":
       "watchman watch-del-all && rm -f yarn.lock && rm -rf node_modules && rm -rf $TMPDIR/react-* && yarn cache clean"
   },
@@ -20,5 +21,16 @@
     "detox": "7.0.0-alpha.1",
     "detox-expo-helpers": "0.2.0",
     "jest": "22.1.4"
+  },
+  "detox": {
+    "test-runner": "jest",
+    "runner-config": "e2e/config.json",
+    "configurations": {
+      "ios.sim": {
+        "binaryPath": "./e2e/Exponent-2.2.0.app",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
+      }
+    }
   }
 }

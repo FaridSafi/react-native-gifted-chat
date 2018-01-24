@@ -3,7 +3,9 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
-    "cleaning": "watchman watch-del-all && rm -f yarn.lock && rm -rf node_modules && rm -rf $TMPDIR/react-* && yarn cache clean"
+    "test:e2e": "detox test -c ios.sim.debug",
+    "cleaning":
+      "watchman watch-del-all && rm -f yarn.lock && rm -rf node_modules && rm -rf $TMPDIR/react-* && yarn cache clean"
   },
   "dependencies": {
     "expo": "^24.0.0",

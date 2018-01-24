@@ -19,6 +19,18 @@
     },
     "androidStatusBar": {
       "backgroundColor": "#000000"
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "xavier-carpentier-sas",
+            "project": "giftedchat",
+            "authToken": "d32ac87517964ac2b5b778bf5c7b544e59dcab60d1df4fafb6fab65a9d8019ff"
+          }
+        }
+      ]
     }
   }
 }

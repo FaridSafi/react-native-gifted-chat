@@ -1,13 +1,14 @@
-/* eslint no-alert: 0, jsx-a11y/accessible-emoji: 0  */
-
 import React, { Component } from 'react';
 import { View, StyleSheet, Linking } from 'react-native';
 
 import { GiftedChat } from 'react-native-gifted-chat';
+import Sentry from 'sentry-expo';
 
 import messagesData from './data';
 import NavBar from './NavBar';
 import CustomView from './CustomView';
+
+Sentry.config('https://2a164b1e89424a5aafc186da811308cb@sentry.io/276804').install();
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
@@ -20,6 +21,7 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       messages: [],
       step: 0,

@@ -51,8 +51,11 @@ export default class MessageContainer extends React.PureComponent {
   }
 
   scrollTo(options) {
-    if (this.flatListRef) {
-      this.flatListRef.scrollToOffset(options);
+    // if (this.flatListRef) {
+    //   this.flatListRef.scrollToOffset(options);
+    // }
+    if (this.refs.flatListRef) {
+      this.refs.flatListRef.scrollToOffset(options);
     }
   }
 
@@ -96,11 +99,11 @@ export default class MessageContainer extends React.PureComponent {
     if (this.props.messages.length === 0) {
       return <View style={styles.container} />;
     }
-
+    // ref={(ref) => (this.flatListRef = ref)}
     return (
       <View ref="container" style={styles.container}>
         <FlatList
-          ref={(ref) => (this.flatListRef = ref)}
+          ref="flatListRef"
           keyExtractor={(item) => item._id}
           enableEmptySections
           automaticallyAdjustContentInsets={false}

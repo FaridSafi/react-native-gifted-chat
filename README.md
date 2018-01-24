@@ -1,5 +1,8 @@
 <p align="center" >
-    <img alt="react-native-gifted-chat-1" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/iPhone-6s-gifted-chat-3.png" width="300"/>
+    <img alt="react-native-gifted-chat" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/giftedchat.gif" width="260" height="510" />
+
+<!-- <img alt="react-native-gifted-chat-gif" src="https://thumbs.gfycat.com/AnnualPoorAmurminnow-size_restricted.gif" width="253" height="498"/> -->
+
 </p>
 
 <h3 align="center">

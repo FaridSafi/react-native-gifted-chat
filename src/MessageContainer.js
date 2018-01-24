@@ -77,9 +77,9 @@ export default class MessageContainer extends React.PureComponent {
       previousMessage,
       nextMessage,
       position: item.user._id === this.props.user._id ? 'right' : 'left',
-      //  hash: sum(
-      //  `${item.body ? item.body.length : 0}${JSON.stringify(item.attributes)}${previousMessage._id}${nextMessage._id}`,
-      //  ),
+      hash: sum(
+        `${item.body ? item.body.length : 0}${JSON.stringify(item.attributes)}${previousMessage._id}${nextMessage._id}`,
+      ),
     };
 
     if (this.props.renderMessage) {

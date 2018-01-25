@@ -15,6 +15,7 @@ import sum from 'hash-sum';
 
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
+import { MAX_RENDER_ITEM } from './Constant';
 
 export default class MessageContainer extends React.PureComponent {
 
@@ -103,9 +104,9 @@ export default class MessageContainer extends React.PureComponent {
           keyExtractor={(item) => item._id}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
-          initialNumToRender={10}
-          maxToRenderPerBatch={10}
-          windowSize={10}
+          initialNumToRender={MAX_RENDER_ITEM}
+          maxToRenderPerBatch={MAX_RENDER_ITEM}
+          windowSize={MAX_RENDER_ITEM}
           removeClippedSubviews
           inverted={this.props.inverted}
           {...this.props.listViewProps}

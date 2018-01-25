@@ -25,7 +25,7 @@
   "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
   "scripts": {
     "lint": "eslint . --ext .js,.jsx",
-    "precommit": "yarn lint",
+    
     "test": "jest --no-watchman",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

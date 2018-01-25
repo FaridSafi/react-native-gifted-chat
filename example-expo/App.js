@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Linking } from 'react-native';
 
-import { GiftedChat } from 'react-native-gifted-chat';
-
+//import { GiftedChat } from 'react-native-gifted-chat';
+import {GiftedChat} from 'react-native-gifted-chat'
 import messagesData from './data';
 import NavBar from './NavBar';
 import CustomView from './CustomView';

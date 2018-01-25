@@ -46,8 +46,8 @@ class GiftedChat extends React.Component {
 
     // default values
     this._isMounted = false;
-    this._keyboardHeight = 0;
-    this._bottomOffset = 0;
+    this._keyboardHeight = 5;
+    this._bottomOffset = 5;
     this._maxHeight = null;
     this._isFirstLayout = true;
     this._locale = 'en';

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <SystemMessage /> and compare with snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "marginBottom": 10,
+        "marginTop": 5,
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        undefined,
+        Object {},
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "color": "#b2b2b2",
+            "fontSize": 12,
+            "fontWeight": "300",
+          },
+          Object {},
+        ]
+      }
+    />
+  </View>
+</View>
+`;

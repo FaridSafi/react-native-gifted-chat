@@ -1,32 +1,47 @@
-import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  View,
-} from 'react-native';
+/* eslint no-use-before-define: ["error", { "variables": false }] */
 
-export default class MessageImage extends React.Component {
-  render() {
-    return (
-      <View style={[styles.container, this.props.containerStyle]}>
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Image, StyleSheet, View, ViewPropTypes } from 'react-native';
+import Lightbox from 'react-native-lightbox';
+
+export default function MessageImage({
+  containerStyle,
+  lightboxProps,
+  imageProps,
+  imageStyle,
+  currentMessage,
+}) {
+  return (
+    <View style={[styles.container, containerStyle]}>
+      <Lightbox
+        activeProps={{
+          style: styles.imageActive,
+        }}
+        {...lightboxProps}
+      >
         <Image
-          style={[styles.image, this.props.imageStyle]}
-          source={{uri: this.props.currentMessage.image}}
+          {...imageProps}
+          style={[styles.image, imageStyle]}
+          source={{ uri: currentMessage.image }}
         />
-      </View>
-    );
-  }
+      </Lightbox>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
   image: {
     width: 150,
     height: 100,
     borderRadius: 13,
     margin: 3,
     resizeMode: 'cover',
+  },
+  imageActive: {
+    flex: 1,
+    resizeMode: 'contain',
   },
 });
 
@@ -36,10 +51,14 @@ MessageImage.defaultProps = {
   },
   containerStyle: {},
   imageStyle: {},
+  imageProps: {},
+  lightboxProps: {},
 };
 
 MessageImage.propTypes = {
-  currentMessage: React.PropTypes.object,
-  containerStyle: View.propTypes.style,
+  currentMessage: PropTypes.object,
+  containerStyle: ViewPropTypes.style,
   imageStyle: Image.propTypes.style,
+  imageProps: PropTypes.object,
+  lightboxProps: PropTypes.object,
 };

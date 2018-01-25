@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <MessageText /> and compare with snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {},
+      undefined,
+    ]
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    childrenProps={Object {}}
+    ellipsizeMode="tail"
+    parse={
+      Array [
+        Object {
+          "onPress": [Function],
+          "style": Object {
+            "color": "black",
+            "textDecorationLine": "underline",
+          },
+          "type": "url",
+        },
+        Object {
+          "onPress": [Function],
+          "style": Object {
+            "color": "black",
+            "textDecorationLine": "underline",
+          },
+          "type": "phone",
+        },
+        Object {
+          "onPress": [Function],
+          "style": Object {
+            "color": "black",
+            "textDecorationLine": "underline",
+          },
+          "type": "email",
+        },
+      ]
+    }
+    style={
+      Array [
+        Object {
+          "color": "black",
+          "fontSize": 16,
+          "lineHeight": 20,
+          "marginBottom": 5,
+          "marginLeft": 10,
+          "marginRight": 10,
+          "marginTop": 5,
+        },
+        undefined,
+        Object {},
+      ]
+    }
+  />
+</View>
+`;

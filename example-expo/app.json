@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "example-expo",
+    "description": "This project is really great.",
+    "slug": "example-expo",
+    "privacy": "public",
+    "sdkVersion": "24.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#000000"
+    }
+  }
+}

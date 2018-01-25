@@ -1,9 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   Modal,
   StyleSheet,
   TouchableOpacity,
   View,
+  ViewPropTypes,
   Text,
 } from 'react-native';
 
@@ -181,7 +183,7 @@ const styles = StyleSheet.create({
 });
 
 CustomActions.contextTypes = {
-  actionSheet: React.PropTypes.func,
+  actionSheet: PropTypes.func,
 };
 
 CustomActions.defaultProps = {
@@ -194,10 +196,10 @@ CustomActions.defaultProps = {
 };
 
 CustomActions.propTypes = {
-  onSend: React.PropTypes.func,
-  options: React.PropTypes.object,
-  icon: React.PropTypes.func,
-  containerStyle: View.propTypes.style,
-  wrapperStyle: View.propTypes.style,
+  onSend: PropTypes.func,
+  options: PropTypes.object,
+  icon: PropTypes.func,
+  containerStyle: ViewPropTypes.style,
+  wrapperStyle: ViewPropTypes.style,
   iconTextStyle: Text.propTypes.style,
 };

@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <MessageImage /> and compare with snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {},
+      Object {},
+    ]
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={undefined}
+  >
+    <View
+      collapsable={undefined}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+            },
+            undefined,
+          ]
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          source={
+            Object {
+              "uri": null,
+            }
+          }
+          style={
+            Array [
+              Object {
+                "borderRadius": 13,
+                "height": 100,
+                "margin": 3,
+                "resizeMode": "cover",
+                "width": 150,
+              },
+              Object {},
+            ]
+          }
+        />
+      </View>
+    </View>
+    <Modal
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      transparent={true}
+      visible={false}
+    >
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "backgroundColor": "black",
+            "height": 1334,
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": 750,
+          }
+        }
+      />
+      <View
+        collapsable={undefined}
+        onMoveShouldSetResponder={[Function]}
+        onMoveShouldSetResponderCapture={[Function]}
+        onResponderEnd={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderReject={[Function]}
+        onResponderRelease={[Function]}
+        onResponderStart={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        onStartShouldSetResponderCapture={[Function]}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "flex": 1,
+            "height": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": 0,
+          }
+        }
+      >
+        <Image
+          source={
+            Object {
+              "uri": null,
+            }
+          }
+          style={
+            Object {
+              "flex": 1,
+              "resizeMode": "contain",
+            }
+          }
+        />
+      </View>
+      <View
+        collapsable={undefined}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "left": 0,
+            "opacity": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": 750,
+          }
+        }
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "white",
+                "fontSize": 35,
+                "lineHeight": 40,
+                "shadowColor": "black",
+                "shadowOffset": Object {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.8,
+                "shadowRadius": 1.5,
+                "textAlign": "center",
+                "width": 40,
+              }
+            }
+          >
+            ×
+          </Text>
+        </View>
+      </View>
+    </Modal>
+  </View>
+</View>
+`;

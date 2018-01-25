@@ -1,5 +1,8 @@
 .DS_Store
 node_modules/
+.expo/
 npm-debug.log
 TODO.md
-__tests__
+
+.idea
+.vscode

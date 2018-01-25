@@ -2,6 +2,16 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import {
+  Container,
+  Header,
+  Content,
+  Card,
+  CardItem,
+  Body,
+} from 'native-base';
+
 import {
   Text,
   Clipboard,
@@ -10,6 +20,7 @@ import {
   View,
   ViewPropTypes,
 } from 'react-native';
+
 
 import MessageText from './MessageText';
 import MessageImage from './MessageImage';
@@ -136,13 +147,15 @@ export default class Bubble extends React.Component {
 
   render() {
     return (
-      <View
+    <Container>
+     <Content>
+      <Card
         style={[
           styles[this.props.position].container,
           this.props.containerStyle[this.props.position],
         ]}
       >
-        <View
+        <CardItem
           style={[
             styles[this.props.position].wrapper,
             this.props.wrapperStyle[this.props.position],
@@ -155,18 +168,20 @@ export default class Bubble extends React.Component {
             accessibilityTraits="text"
             {...this.props.touchableProps}
           >
-            <View>
+            <CardItem>
               {this.renderCustomView()}
               {this.renderMessageImage()}
               {this.renderMessageText()}
-              <View style={[styles.bottom, this.props.bottomContainerStyle[this.props.position]]}>
+              <CardItem footer style={[styles.bottom, this.props.bottomContainerStyle[this.props.position]]}>
                 {this.renderTime()}
                 {this.renderTicks()}
-              </View>
-            </View>
+              </CardItem>
+            </CardItem>
           </TouchableWithoutFeedback>
-        </View>
-      </View>
+        </CardItem>
+      </Card>
+      </Content>
+    </Container>
     );
   }
 

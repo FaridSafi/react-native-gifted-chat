@@ -25,7 +25,6 @@
   "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
   "scripts": {
     "lint": "eslint . --ext .js,.jsx",
-    
     "test": "jest --no-watchman",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -33,7 +32,11 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": ["./tests/setup.js"]
+    "transformIgnorePatterns": ["node_modules/(?!|native-base-shoutem-theme)"
+  ],
+    "setupFiles": [
+      "./tests/setup.js"
+    ]
   },
   "devDependencies": {
     "babel": "6.23.0",

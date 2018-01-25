@@ -56,61 +56,175 @@ exports[`should render <Message /> and compare with snapshot 1`] = `
     </View>
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "flex-start",
-            "flex": 1,
-          },
-          undefined,
-        ]
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "backgroundColor": "#f0f0f0",
-              "borderRadius": 15,
-              "justifyContent": "flex-end",
-              "marginRight": 60,
-              "minHeight": 20,
-            },
-            undefined,
-            null,
-            null,
-          ]
+        Object {
+          "flex": 1,
+          "height": 1334,
         }
+      }
+      virtual={undefined}
+    >
+      <RCTScrollView
+        automaticallyAdjustContentInsets={false}
+        contentContainerStyle={undefined}
+        contentInset={
+          Object {
+            "bottom": 0,
+          }
+        }
+        enableAutoAutomaticScroll={true}
+        enableResetScrollToCoords={true}
+        extraHeight={75}
+        extraScrollHeight={0}
+        getScrollResponder={[Function]}
+        handleOnScroll={[Function]}
+        keyboardDismissMode="interactive"
+        keyboardOpeningTime={250}
+        keyboardShouldPersistTaps="handled"
+        keyboardSpace={0}
+        onScroll={[Function]}
+        resetKeyboardSpace={[Function]}
+        resetScrollToCoords={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
+        scrollEventThrottle={1}
+        scrollForExtraHeightOnAndroid={[Function]}
+        scrollToEnd={[Function]}
+        scrollToFocusedInput={[Function]}
+        scrollToPosition={[Function]}
+        showsVerticalScrollIndicator={true}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "flex": 1,
+          }
+        }
+        viewIsInsideTabBar={false}
+        virtual={undefined}
       >
-        <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits="text"
-          accessible={true}
-          hitSlop={undefined}
-          nativeID={undefined}
-          onLayout={undefined}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={undefined}
-          testID={undefined}
-        >
+        <View>
           <View
             style={
               Array [
                 Object {
-                  "flexDirection": "row",
-                  "justifyContent": "flex-end",
+                  "backgroundColor": "#fff",
+                  "borderBottomWidth": 0.5,
+                  "borderColor": "#ccc",
+                  "borderLeftWidth": 0.5,
+                  "borderRadius": 2,
+                  "borderRightWidth": 0.5,
+                  "borderTopWidth": 0.5,
+                  "elevation": 3,
+                  "flex": 1,
+                  "flexWrap": "nowrap",
+                  "marginBottom": 5,
+                  "marginLeft": 2,
+                  "marginRight": 2,
+                  "marginTop": 5,
+                  "shadowColor": "#000",
+                  "shadowOffset": Object {
+                    "height": 2,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.1,
+                  "shadowRadius": 1.5,
+                },
+                Object {
+                  "alignItems": "flex-start",
+                  "flex": 1,
                 },
                 undefined,
               ]
             }
-          />
+            virtual={undefined}
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#fff",
+                    "borderRadius": 2,
+                    "flexDirection": "row",
+                    "paddingBottom": 10,
+                    "paddingLeft": 15,
+                    "paddingRight": 15,
+                    "paddingTop": 10,
+                  },
+                  Object {
+                    "backgroundColor": "#f0f0f0",
+                    "borderRadius": 15,
+                    "justifyContent": "flex-end",
+                    "marginRight": 60,
+                    "minHeight": 20,
+                  },
+                  undefined,
+                  null,
+                  null,
+                ]
+              }
+              virtual={undefined}
+            >
+              <View
+                accessibilityComponentType={undefined}
+                accessibilityLabel={undefined}
+                accessibilityTraits="text"
+                accessible={true}
+                hitSlop={undefined}
+                nativeID={undefined}
+                onLayout={undefined}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#fff",
+                    "borderRadius": 2,
+                    "flexDirection": "row",
+                    "paddingBottom": 10,
+                    "paddingLeft": 15,
+                    "paddingRight": 15,
+                    "paddingTop": 10,
+                  }
+                }
+                testID={undefined}
+                virtual={undefined}
+              >
+                <View
+                  footer={true}
+                  style={
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "backgroundColor": "#fff",
+                        "borderBottomWidth": null,
+                        "borderRadius": 2,
+                        "flexDirection": "row",
+                        "paddingBottom": 10,
+                        "paddingLeft": 15,
+                        "paddingRight": 15,
+                        "paddingTop": 10,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-end",
+                      },
+                      undefined,
+                    ]
+                  }
+                  virtual={undefined}
+                />
+              </View>
+            </View>
+          </View>
         </View>
-      </View>
+      </RCTScrollView>
     </View>
   </View>
 </View>

@@ -103,8 +103,9 @@ export default class MessageContainer extends React.PureComponent {
           keyExtractor={(item) => item._id}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
-          initialNumToRender={8}
-          maxToRenderPerBatch={1}
+          initialNumToRender={10}
+          maxToRenderPerBatch={10}
+          windowSize={10}
           removeClippedSubviews
           inverted={this.props.inverted}
           {...this.props.listViewProps}

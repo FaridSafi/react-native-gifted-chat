@@ -26,7 +26,7 @@ export default class Avatar extends React.Component {
   }
 
   render() {
-    const { renderAvatarOnTop } = this.props;
+    const { renderAvatarOnTop, showAvatarForEveryMessage } = this.props;
     const messageToCompare = renderAvatarOnTop ? this.props.previousMessage : this.props.nextMessage;
     const computedStyle = renderAvatarOnTop ? 'onTop' : 'onBottom';
 
@@ -35,6 +35,7 @@ export default class Avatar extends React.Component {
     }
 
     if (
+      !showAvatarForEveryMessage &&
       isSameUser(this.props.currentMessage, messageToCompare) &&
       isSameDay(this.props.currentMessage, messageToCompare)
     ) {
@@ -98,6 +99,7 @@ const styles = {
 
 Avatar.defaultProps = {
   renderAvatarOnTop: false,
+  showAvatarForEveryMessage: false,
   position: 'left',
   currentMessage: {
     user: null,
@@ -114,6 +116,7 @@ Avatar.defaultProps = {
 
 Avatar.propTypes = {
   renderAvatarOnTop: PropTypes.bool,
+  showAvatarForEveryMessage: PropTypes.bool,
   position: PropTypes.oneOf(['left', 'right']),
   currentMessage: PropTypes.object,
   previousMessage: PropTypes.object,

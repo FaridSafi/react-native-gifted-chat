@@ -107,7 +107,7 @@ export default class MessageContainer extends React.PureComponent {
           initialNumToRender={MAX_RENDER_ITEM}
           maxToRenderPerBatch={MAX_RENDER_ITEM}
           windowSize={MAX_RENDER_ITEM}
-          removeClippedSubviews
+          removeClippedSubviews={false}
           inverted={this.props.inverted}
           {...this.props.listViewProps}
           data={this.props.messages}

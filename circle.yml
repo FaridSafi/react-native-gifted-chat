@@ -32,4 +32,5 @@ deployment:
     branch: /.*/
     commands:
       - 'export BRANCH="$CIRCLE_PROJECT_REPONAME/$CIRCLE_PROJECT_USERNAME#$CIRCLE_BRANCH"'
-      - 'if [ "$CI_PULL_REQUEST" != "" ]; then yarn appr; fi'
+      - 'echo $BRANCH'
+      - yarn appr

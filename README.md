@@ -33,14 +33,6 @@
   <a href="https://snack.expo.io/@xcarpentier/gifted-chat" target="_blank">Demo on snack (Expo)</a>
 </p>
 
-<p align="center">
-  We have a major PR for improving this component by using FlatList and we need your feedbacks.
-  <br>
-  Please give it a try: install <a href="https://expo.io/tools">expo</a> and scan a qrcode in PR 📲
-  <br>
-  👉 Please go <a href="https://github.com/FaridSafi/react-native-gifted-chat/pull/705">here</a>.
-</p>
-
 ## Features
 
 * Fully customizable components

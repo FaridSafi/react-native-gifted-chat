@@ -33,4 +33,4 @@ deployment:
     commands:
       - 'export BRANCH="$CIRCLE_PROJECT_REPONAME/$CIRCLE_PROJECT_USERNAME#$CIRCLE_BRANCH"'
       - 'echo $BRANCH'
-      - yarn appr
+#      - yarn appr

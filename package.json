@@ -20,7 +20,9 @@
     "test": "jest --no-watchman",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "appr": "cd example-expo && ./setPRVersion.js && yarn && yarn appr"
+    "appr": "cd example-expo && ./setPRVersion.js && yarn && yarn appr",
+    "deploy":
+      "cd example-expo && yarn install && exp login --username $EXPO_USERNAME --password $EXPO_PASSWORD && exp publish --non-interactive"
   },
   "jest": {
     "preset": "react-native",

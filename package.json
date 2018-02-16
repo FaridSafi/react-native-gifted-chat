@@ -7,16 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
   },
-  "keywords": [
-    "android",
-    "ios",
-    "react-native",
-    "react",
-    "react-component",
-    "messenger",
-    "message",
-    "chat"
-  ],
+  "keywords": ["android", "ios", "react-native", "react", "react-component", "messenger", "message", "chat"],
   "author": "Farid Safi",
   "license": "MIT",
   "bugs": {
@@ -33,7 +24,8 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": ["./tests/setup.js"]
+    "setupFiles": ["./tests/setup.js"],
+    "modulePathIgnorePatterns": ["<rootDir>/example", "<rootDir>/example-expo", "<rootDir>/example-slack-message"]
   },
   "devDependencies": {
     "babel": "6.23.0",

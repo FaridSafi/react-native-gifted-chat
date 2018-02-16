@@ -44,6 +44,7 @@ export default class Composer extends React.Component {
         accessibilityLabel={this.props.text || this.props.placeholder}
         enablesReturnKeyAutomatically
         underlineColorAndroid="transparent"
+        keyboardAppearance={ this.props.keyboardAppearance }
         {...this.props.textInputProps}
       />
     );
@@ -77,6 +78,7 @@ Composer.defaultProps = {
   multiline: true,
   textInputStyle: {},
   textInputAutoFocus: false,
+  keyboardAppearance: 'default',
   onTextChanged: () => { },
   onInputSizeChanged: () => { },
 };
@@ -92,4 +94,5 @@ Composer.propTypes = {
   multiline: PropTypes.bool,
   textInputStyle: TextInput.propTypes.style,
   textInputAutoFocus: PropTypes.bool,
+  keyboardAppearance: PropTypes.string
 };

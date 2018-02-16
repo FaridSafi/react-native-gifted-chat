@@ -5,4 +5,4 @@ cache: yarn
 script:
   - 'export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "$TRAVIS_REPO_SLUG"; else echo "$TRAVIS_PULL_REQUEST_SLUG#$TRAVIS_PULL_REQUEST_BRANCH"; fi)'
   - 'echo "BRANCH=$BRANCH"'
-  - 'export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then yarn appr; else yarn deploy fi)'
+  - 'export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then yarn appr; else yarn deploy; fi)'

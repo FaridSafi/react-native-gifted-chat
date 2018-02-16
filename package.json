@@ -22,7 +22,7 @@
     "test:coverage": "jest --coverage",
     "appr": "cd example-expo && ./setPRVersion.js && yarn && yarn appr",
     "deploy":
-      "cd example-expo && yarn install && exp login --username $EXPO_USERNAME --password $EXPO_PASSWORD && exp publish --non-interactive"
+      "cd example-expo && yarn install && exp login --username $EXP_USERNAME --password $EXP_PASSWORD && exp publish --non-interactive"
   },
   "jest": {
     "preset": "react-native",

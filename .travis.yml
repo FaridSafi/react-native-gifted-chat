@@ -3,6 +3,11 @@ node_js:
   - "node"
 cache: yarn
 script:
+  - 'export GITHUB_SOURCE_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "$TRAVIS_BRANCH"; fi)'
+  - 'export TRAVIS_PULL_REQUEST_BRANCH=$GITHUB_SOURCE_BRANCH'
+  - 'export GITHUB_PR_NUMBER=0'
+  - 'export GITHUB_PR_NUMBER=0'
+  - 'export TRAVIS_PULL_REQUEST=$GITHUB_PR_NUMBER'
   - 'export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "$TRAVIS_REPO_SLUG#$TRAVIS_BRANCH"; else echo "$TRAVIS_PULL_REQUEST_SLUG#$TRAVIS_PULL_REQUEST_BRANCH"; fi)'
   - 'echo "BRANCH=$BRANCH"'
   - 'yarn appr'

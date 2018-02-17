@@ -30,6 +30,8 @@
     "modulePathIgnorePatterns": ["<rootDir>/example", "<rootDir>/example-expo", "<rootDir>/example-slack-message"]
   },
   "devDependencies": {
+    "@types/react": "^16.0.38",
+    "@types/react-native": "^0.52.12",
     "babel": "6.23.0",
     "babel-jest": "22.2.2",
     "babel-preset-react-native": "4.0.0",

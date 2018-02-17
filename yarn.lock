@@ -21,6 +21,16 @@
   version "8.5.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.1.tgz#4ec3020bcdfe2abffeef9ba3fbf26fca097514b5"
 
+"@types/react-native@^0.52.12":
+  version "0.52.12"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.52.12.tgz#5dc8d406f295b916e63d1dd7ae1cbc4d8c67d5c6"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@^16.0.38":
+  version "16.0.38"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.38.tgz#76617433ea10274505f60bb86eddfdd0476ffdc2"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"

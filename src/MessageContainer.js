@@ -9,7 +9,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { ListView, View, StyleSheet } from 'react-native';
+import { ListView, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 import shallowequal from 'shallowequal';
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
@@ -26,6 +26,7 @@ export default class MessageContainer extends React.Component {
     this.renderFooter = this.renderFooter.bind(this);
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
     this.renderScrollComponent = this.renderScrollComponent.bind(this);
+    this.handleOnScroll = this.handleOnScroll.bind(this);
 
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => {
@@ -36,6 +37,7 @@ export default class MessageContainer extends React.Component {
     const messagesData = this.prepareMessages(props.messages);
     this.state = {
       dataSource: dataSource.cloneWithRows(messagesData.blob, messagesData.keys),
+      showScrollBottom: false,
     };
   }
 
@@ -78,8 +80,21 @@ export default class MessageContainer extends React.Component {
     };
   }
 
+  scrollToBottom = () => {
+    this.scrollTo({x:0,y:0, animated: 'true'});
+  }
+
   scrollTo(options) {
     this._invertibleScrollViewRef.scrollTo(options);
+  }
+
+  handleOnScroll(event) {
+    console.log("ContentOffset.Y: ", event.nativeEvent.contentOffset.y)
+    if(event.nativeEvent.contentOffset.y > 350){
+      this.setState({showScrollBottom: true});
+    } else {
+      this.setState({showScrollBottom: false});
+    }
   }
 
   renderLoadEarlier() {
@@ -146,9 +161,18 @@ export default class MessageContainer extends React.Component {
     const contentContainerStyle = this.props.inverted
       ? {}
       : styles.notInvertedContentContainerStyle;
+    
+    const scrollToBottomComponent = (
+      <View style={styles.scrollToBottomStyle}>
+        <TouchableOpacity onPress={this.scrollToBottom} hitSlop={{top:5,left:5,right:5,bottom:5}}>
+          <Text>🔽</Text>
+        </TouchableOpacity>
+      </View>
+    );
 
     return (
       <View ref="container" style={styles.container}>
+        {this.state.showScrollBottom ? scrollToBottomComponent : null}
         <ListView
           enableEmptySections
           automaticallyAdjustContentInsets={false}
@@ -161,6 +185,8 @@ export default class MessageContainer extends React.Component {
           renderHeader={this.props.inverted ? this.renderFooter : this.renderLoadEarlier}
           renderFooter={this.props.inverted ? this.renderLoadEarlier : this.renderFooter}
           renderScrollComponent={this.renderScrollComponent}
+          onScroll={this.handleOnScroll}
+          scrollEventThrottle={100}
         />
       </View>
     );
@@ -175,6 +201,24 @@ const styles = StyleSheet.create({
   notInvertedContentContainerStyle: {
     justifyContent: 'flex-end',
   },
+  scrollToBottomStyle: {
+    position: 'absolute',
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    right: 0,
+    bottom: 30,
+    zIndex: 999,
+    height: 40,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomLeftRadius: 10,
+    borderTopLeftRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.5,
+    shadowOffset: {width: 0, height: 0},
+    shadowRadius: 1,
+  }
 });
 
 MessageContainer.defaultProps = {

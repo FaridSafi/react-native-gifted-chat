@@ -89,7 +89,6 @@ export default class MessageContainer extends React.Component {
   }
 
   handleOnScroll(event) {
-    console.log("ContentOffset.Y: ", event.nativeEvent.contentOffset.y)
     if(event.nativeEvent.contentOffset.y > 350){
       this.setState({showScrollBottom: true});
     } else {

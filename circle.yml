@@ -1,0 +1,35 @@
+---
+machine:
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+  node:
+    version: 8.2.0
+dependencies:
+  override:
+    - yarn global add codecov
+    - yarn install --no-progress --no-emoji --ignore-engines
+  cache_directories:
+    - "node_modules"
+    - ~/.yarn
+    - ~/.cache/yarn
+
+test:
+  override:
+    - yarn run lint
+    - yarn run test:coverage
+    - codecov
+
+# TODO: deployment:
+#   release:
+#     tag: /v[0-9]+(\.[0-9]+)*/
+#     commands:
+#       - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+#       - yarn publish --new-version `./scripts/version.js`
+
+#deployment:
+#  appr:
+#    branch: /.*/
+#    commands:
+#      - 'export BRANCH="$CIRCLE_PROJECT_REPONAME/$CIRCLE_PROJECT_USERNAME#$CIRCLE_BRANCH"'
+#      - 'echo $BRANCH'
+#      - yarn appr

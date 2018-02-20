@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <Composer /> and compare with snapshot 1`] = `
+<TextInput
+  accessibilityLabel="Type a message..."
+  allowFontScaling={true}
+  autoFocus={false}
+  enablesReturnKeyAutomatically={true}
+  keyboardAppearance="default"
+  multiline={true}
+  onChange={[Function]}
+  onChangeText={[Function]}
+  onContentSizeChange={[Function]}
+  placeholder="Type a message..."
+  placeholderTextColor={undefined}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+        "fontSize": 16,
+        "lineHeight": 16,
+        "marginBottom": 5,
+        "marginLeft": 10,
+        "marginTop": 6,
+      },
+      Object {},
+      Object {
+        "height": 33,
+      },
+    ]
+  }
+  underlineColorAndroid="transparent"
+  value=""
+/>
+`;

@@ -1,3 +1,5 @@
 example/
 TODO.md
 screenshots/
+.babelrc
+tests/

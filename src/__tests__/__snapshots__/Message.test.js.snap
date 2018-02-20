@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <Message /> and compare with snapshot 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "flex-end",
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+          "marginLeft": 8,
+          "marginRight": 0,
+        },
+        Object {
+          "marginBottom": 10,
+        },
+        false,
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "marginRight": 8,
+          },
+          Object {},
+          undefined,
+        ]
+      }
+    >
+      <View
+        accessibilityTraits="image"
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderRadius": 20,
+              "height": 40,
+              "justifyContent": "center",
+              "width": 40,
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
+              "borderRadius": 18,
+              "height": 36,
+              "width": 36,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "flex-start",
+            "flex": 1,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#f0f0f0",
+              "borderRadius": 15,
+              "justifyContent": "flex-end",
+              "marginRight": 60,
+              "minHeight": 20,
+            },
+            undefined,
+            null,
+            null,
+          ]
+        }
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits="text"
+          accessible={true}
+          hitSlop={undefined}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={undefined}
+          testID={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                  "justifyContent": "flex-end",
+                },
+                undefined,
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

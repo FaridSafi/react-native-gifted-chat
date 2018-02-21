@@ -7,16 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
   },
-  "keywords": [
-    "android",
-    "ios",
-    "react-native",
-    "react",
-    "react-component",
-    "messenger",
-    "message",
-    "chat"
-  ],
+  "keywords": ["android", "ios", "react-native", "react", "react-component", "messenger", "message", "chat"],
   "author": "Farid Safi",
   "license": "MIT",
   "bugs": {
@@ -29,17 +20,20 @@
     "test": "jest --no-watchman",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "appr": "cd example-expo && ./setPRVersion.js && yarn && yarn appr"
+    "appr": "cd example-expo && ./setPRVersion.js && yarn && yarn appr",
+    "deploy":
+      "cd example-expo && yarn install && exp login --username $EXP_USERNAME --password $EXP_PASSWORD && exp publish --non-interactive"
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": [
-      "./tests/setup.js"
-    ]
+    "setupFiles": ["./tests/setup.js"],
+    "modulePathIgnorePatterns": ["<rootDir>/example", "<rootDir>/example-expo", "<rootDir>/example-slack-message"]
   },
   "devDependencies": {
+    "@types/react": "^16.0.38",
+    "@types/react-native": "^0.52.12",
     "babel": "6.23.0",
-    "babel-jest": "22.1.0",
+    "babel-jest": "22.4.0",
     "babel-preset-react-native": "4.0.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "16.1.0",

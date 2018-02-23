@@ -266,6 +266,7 @@ If you have any issues, you can clear your watches using `watchman watch-del-all
   what is the best implementation in this case and how?](https://github.com/FaridSafi/react-native-gifted-chat/issues/660)
 * [Why Textinput is hidden on Android?](https://github.com/FaridSafi/react-native-gifted-chat/issues/680#issuecomment-359699364)
 * [How to use renderLoading?](https://github.com/FaridSafi/react-native-gifted-chat/issues/298)
+* [Can I use MySql to save the message?](https://github.com/FaridSafi/react-native-gifted-chat/issues/738)
 
 ## License
 

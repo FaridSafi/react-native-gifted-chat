@@ -59,5 +59,8 @@
     "react-native-parsed-text": "^0.0.20",
     "shallowequal": "1.0.2",
     "uuid": "3.2.1"
+  },
+  "peerDependencies": {
+    "moment": "^2.19.0"
   }
 }

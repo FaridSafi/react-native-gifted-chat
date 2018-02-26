@@ -49,7 +49,7 @@
     "react-test-renderer": "16.2.0"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "git+https://github.com/PeterKottas/react-native-action-sheet#50d21a045c8272a61b06dd1a728d61493d25d7f1",
+    "@expo/react-native-action-sheet": "git+https://github.com/PeterKottas/react-native-action-sheet#8867a9d413ad6f86ace22a1693eacd04302c0866",
     "md5": "2.2.1",
     "moment": "^2.19.0",
     "prop-types": "15.6.0",

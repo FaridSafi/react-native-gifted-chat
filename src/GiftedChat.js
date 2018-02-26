@@ -283,11 +283,10 @@ class GiftedChat extends React.Component {
     );
   }
 
-  onSend(messages = [], shouldResetInputToolbar = false) {
+  onSend(messages = [], shouldResetInputToolbar = false, mentions: string) {
     if (!Array.isArray(messages)) {
       messages = [messages];
     }
-
     messages = messages.map((message) => {
       return {
         ...message,
@@ -302,7 +301,7 @@ class GiftedChat extends React.Component {
       this.resetInputToolbar();
     }
 
-    this.props.onSend(messages);
+    this.props.onSend(messages, mentions);
     this.scrollToBottom();
 
     if (shouldResetInputToolbar === true) {

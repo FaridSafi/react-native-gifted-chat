@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, View, Keyboard, ViewPropTypes, Dimensions } from 'react-native';
+import { StyleSheet, View, Keyboard, ViewPropTypes, Dimensions, Platform } from 'react-native';
 
 import Composer from './Composer';
 import Send from './Send';

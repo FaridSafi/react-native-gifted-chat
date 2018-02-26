@@ -23,13 +23,17 @@ export default class InputToolbar extends React.Component {
   }
 
   componentWillMount() {
-    this.keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
-    this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+    if(Platform.OS !== 'web') {  
+      this.keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+      this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+    }
   }
 
   componentWillUnmount() {
-    this.keyboardWillShowListener.remove();
-    this.keyboardWillHideListener.remove();
+    if(Platform.OS !== 'web') {  
+      this.keyboardWillShowListener.remove();
+      this.keyboardWillHideListener.remove();
+    }
   }
 
   keyboardWillShow() {
@@ -102,7 +106,7 @@ const styles = StyleSheet.create({
     borderTopColor: Color.defaultColor,
     backgroundColor: Color.white,
     bottom: 0,
-    width: Dimensions.get('window').width,
+    width: Platform.OS === 'web' ? '100%' : Dimensions.get('window').width,
   },
   primary: {
     flexDirection: 'row',

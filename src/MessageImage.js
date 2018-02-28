@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, StyleSheet, View, ViewPropTypes } from 'react-native';
-import Lightbox from 'react-native-lightbox';
+import Lightbox from 'react-native-lightbox-divvito';
 
 export default function MessageImage({
   containerStyle,

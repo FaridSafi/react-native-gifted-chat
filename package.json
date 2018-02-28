@@ -32,7 +32,9 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": ["./tests/setup.js"]
+    "setupFiles": [
+      "./tests/setup.js"
+    ]
   },
   "devDependencies": {
     "babel": "6.23.0",
@@ -58,7 +60,7 @@
     "prop-types": "15.6.0",
     "react-native-communications": "2.2.1",
     "react-native-invertible-scroll-view": "^1.1.0",
-    "react-native-lightbox": "^0.7.0",
+    "react-native-lightbox-divvito": "github:divvito/react-native-lightbox",
     "react-native-parsed-text": "^0.0.20",
     "shallowequal": "1.0.2",
     "uuid": "3.1.0"

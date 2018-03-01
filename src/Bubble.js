@@ -189,6 +189,27 @@ export default class Bubble extends React.Component {
   }
 
   render() {
+  	const {currentMessage} = this.props;
+  	if (currentMessage.tag1) {
+  		return (  
+	      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
+	        <View style={[styles[this.props.position].wrapper, this.props.wrapperStyle[this.props.position], this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
+	          <TouchableWithoutFeedback
+	            onLongPress={this.onLongPress}
+	            accessibilityTraits="text"
+	            {...this.props.touchableProps}
+	          >
+	            <View>
+	              {this.renderCustomView()}
+	              {this.renderBubbleContent()}
+	              <View style={[styles.bottom, this.props.bottomContainerStyle[this.props.position]]}>
+	              </View>
+	            </View>
+	          </TouchableWithoutFeedback>
+	        </View>
+	      </View>
+  		);
+  	}
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
         <View style={[styles[this.props.position].wrapper, this.props.wrapperStyle[this.props.position], this.handleBubbleToNext(), this.handleBubbleToPrevious()]}>
@@ -198,9 +219,11 @@ export default class Bubble extends React.Component {
             {...this.props.touchableProps}
           >
             <View>
-               {this.renderCustomView()}
-              {this.renderBubbleContent()}
+              {this.renderCustomView()}
+              {this.renderMessageImage()}
+              {this.renderMessageText()}
               <View style={[styles.bottom, this.props.bottomContainerStyle[this.props.position]]}>
+               {this.renderTime()}
               </View>
             </View>
           </TouchableWithoutFeedback>

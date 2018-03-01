@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
     borderTopColor: Color.defaultColor,
     backgroundColor: Color.white,
     bottom: 0,
-    width: Dimensions.get('window').width,
+    left: 0,
+    right: 0,
   },
   primary: {
     flexDirection: 'row',

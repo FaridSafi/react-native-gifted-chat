@@ -9,7 +9,8 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
         "borderTopColor": "#b2b2b2",
         "borderTopWidth": 0.5,
         "bottom": 0,
-        "width": 750,
+        "left": 0,
+        "right": 0,
       },
       Object {},
       Object {

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "example-expo",
-    "description": "This project is really great.",
+    "name": "gifted-chat-example",
+    "description": "Gifted Chat Expo Example",
     "slug": "example-expo",
     "privacy": "public",
     "sdkVersion": "25.0.0",

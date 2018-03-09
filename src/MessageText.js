@@ -26,6 +26,11 @@ export default class MessageText extends React.Component {
     if (WWW_URL_PATTERN.test(url)) {
       this.onUrlPress(`http://${url}`);
     } else {
+      const { onUrlPress } = this.props;
+      if (onUrlPress) {
+        onUrlPress();
+      }
+
       Linking.canOpenURL(url).then((supported) => {
         if (!supported) {
           // eslint-disable-next-line
@@ -167,4 +172,5 @@ MessageText.propTypes = {
   parsePatterns: PropTypes.func,
   textProps: PropTypes.object,
   customTextStyle: Text.propTypes.style,
+  onUrlPress: PropTypes.func,
 };

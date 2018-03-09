@@ -7,6 +7,7 @@ import ParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
 
 const WWW_URL_PATTERN = /^www\./i;
+const URL_REGEX = /(https?:\/\/|www\.)[-a-zA-Z0-9\u4e00-\u9eff@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9\u4e00-\u9eff@:%_+.~#?&//=]*)/ui;
 
 export default class MessageText extends React.Component {
 
@@ -15,6 +16,8 @@ export default class MessageText extends React.Component {
     this.onUrlPress = this.onUrlPress.bind(this);
     this.onPhonePress = this.onPhonePress.bind(this);
     this.onEmailPress = this.onEmailPress.bind(this);
+
+    this.urlRegex = URL_REGEX;
   }
 
   onUrlPress(url) {
@@ -81,7 +84,7 @@ export default class MessageText extends React.Component {
           ]}
           parse={[
             ...this.props.parsePatterns(linkStyle),
-            { type: 'url', style: linkStyle, onPress: this.onUrlPress },
+            { pattern: this.urlRegex, style: linkStyle, onPress: this.onUrlPress },
             { type: 'phone', style: linkStyle, onPress: this.onPhonePress },
             { type: 'email', style: linkStyle, onPress: this.onEmailPress },
           ]}

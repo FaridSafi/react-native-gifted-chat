@@ -7,7 +7,7 @@ import ParsedText from 'react-native-parsed-text';
 import Communications from 'react-native-communications';
 
 const WWW_URL_PATTERN = /^www\./i;
-const URL_REGEX = /(https?:\/\/|www\.)[-a-zA-Z0-9\u4e00-\u9eff@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9\u4e00-\u9eff@:%_+.~#?&//=]*)/ui;
+const URL_REGEX = /(https?:\/\/|www\.)[-a-zA-Z0-9\u4e00-\u9eff@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9\u4e00-\u9eff@:%_+.~#?&//=]*)/i;
 
 export default class MessageText extends React.Component {
 

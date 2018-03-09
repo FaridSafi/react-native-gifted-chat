@@ -28,7 +28,7 @@ export default class MessageText extends React.Component {
     } else {
       const { onUrlPress } = this.props;
       if (onUrlPress) {
-        onUrlPress();
+        onUrlPress(url);
       }
 
       Linking.canOpenURL(url).then((supported) => {

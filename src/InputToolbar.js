@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, View, Keyboard, ViewPropTypes, Dimensions } from 'react-native';
+import { StyleSheet, View, Keyboard, ViewPropTypes } from 'react-native';
 
 import Composer from './Composer';
 import Send from './Send';
@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
     borderTopColor: Color.defaultColor,
     backgroundColor: Color.white,
     bottom: 0,
-    width: Dimensions.get('window').width,
+    left: 0,
+    right: 0,
   },
   primary: {
     flexDirection: 'row',

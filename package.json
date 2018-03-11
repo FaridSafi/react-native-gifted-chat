@@ -1,22 +1,13 @@
 {
   "name": "react-native-gifted-chat",
-  "version": "0.3.0",
+  "version": "0.4.1",
   "description": "The most complete chat UI for React Native",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
   },
-  "keywords": [
-    "android",
-    "ios",
-    "react-native",
-    "react",
-    "react-component",
-    "messenger",
-    "message",
-    "chat"
-  ],
+  "keywords": ["android", "ios", "react-native", "react", "react-component", "messenger", "message", "chat"],
   "author": "Farid Safi",
   "license": "MIT",
   "bugs": {
@@ -26,17 +17,23 @@
   "scripts": {
     "lint": "eslint . --ext .js,.jsx",
     "precommit": "yarn lint",
-    "test": "jest",
+    "test": "jest --no-watchman",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "appr": "cd example-expo && ./setPRVersion.js && yarn && yarn appr",
+    "deploy":
+      "cd example-expo && yarn install && exp login --username $EXP_USERNAME --password $EXP_PASSWORD && exp publish --non-interactive"
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": ["./tests/setup.js"]
+    "setupFiles": ["./tests/setup.js"],
+    "modulePathIgnorePatterns": ["<rootDir>/example", "<rootDir>/example-expo", "<rootDir>/example-slack-message"]
   },
   "devDependencies": {
+    "@types/react": "^16.0.38",
+    "@types/react-native": "^0.52.12",
     "babel": "6.23.0",
-    "babel-jest": "22.1.0",
+    "babel-jest": "22.4.1",
     "babel-preset-react-native": "4.0.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "16.1.0",
@@ -45,8 +42,8 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-react-native": "3.2.1",
-    "husky": "0.14.3",
-    "jest": "22.1.1",
+    "husky": "0.15.0-rc.2",
+    "jest": "22.1.4",
     "react": "16.2.0",
     "react-native": "0.51.0",
     "react-test-renderer": "16.2.0"
@@ -55,7 +52,7 @@
     "@expo/react-native-action-sheet": "^1.0.1",
     "md5": "2.2.1",
     "moment": "^2.19.0",
-    "prop-types": "15.6.0",
+    "prop-types": "15.6.1",
     "react-native-communications": "2.2.1",
     "react-native-invertible-scroll-view": "^1.1.0",
     "react-native-lightbox": "^0.7.0",

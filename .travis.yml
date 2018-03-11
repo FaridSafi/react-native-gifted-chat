@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "node"
+cache: false
+before_install:
+  - yarn global add exp
+script:
+  - 'export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "$TRAVIS_REPO_SLUG"; else echo "$TRAVIS_PULL_REQUEST_SLUG#$TRAVIS_PULL_REQUEST_BRANCH"; fi)'
+  - 'echo "BRANCH=$BRANCH"'
+  - 'export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then yarn deploy; else yarn appr; fi)'

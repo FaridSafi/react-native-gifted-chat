@@ -15,6 +15,7 @@ export default [
     user: {
       _id: 2,
       name: 'React Native',
+      avatar: require('./assets/avatar.png'),
     },
     image: 'https://lh3.googleusercontent.com/-uXipYA5hSKc/VVWKiFIvo-I/AAAAAAAAAhQ/vkjLyZNEzUA/w800-h800/1.jpg',
     sent: true,
@@ -36,6 +37,7 @@ export default [
     user: {
       _id: 2,
       name: 'React Native',
+      avatar: require('./assets/avatar.png'),
     },
     sent: true,
     received: true,
@@ -60,6 +62,7 @@ export default [
     user: {
       _id: 2,
       name: 'React Native',
+      avatar: require('./assets/avatar.png'),
     },
     sent: true,
     received: true,

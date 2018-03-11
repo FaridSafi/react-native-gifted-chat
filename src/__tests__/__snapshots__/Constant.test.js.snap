@@ -5,6 +5,7 @@ Object {
   "DATE_FORMAT": "ll",
   "DEFAULT_PLACEHOLDER": "Type a message...",
   "MAX_COMPOSER_HEIGHT": 200,
+  "MAX_RENDER_ITEM": 25,
   "MIN_COMPOSER_HEIGHT": 33,
   "TIME_FORMAT": "LT",
 }

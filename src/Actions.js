@@ -21,9 +21,9 @@ export default class Actions extends React.Component {
         cancelButtonIndex,
         tintColor: this.props.optionTintColor,
       },
-      function handle(buttonIndex) {
+      (buttonIndex) => {
         let i = 0;
-        Object.keys(this.props.options).forEach(function launch(key) {
+        Object.keys(this.props.options).forEach((key) => {
           if (this.props.options[key]) {
             if (buttonIndex === i) {
               this.props.options[key](this.props);

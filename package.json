@@ -45,7 +45,7 @@
     "husky": "0.15.0-rc.2",
     "jest": "22.1.4",
     "react": "16.2.0",
-    "react-native": "0.51.0",
+    "react-native": "0.54.2",
     "react-test-renderer": "16.2.0"
   },
   "dependencies": {

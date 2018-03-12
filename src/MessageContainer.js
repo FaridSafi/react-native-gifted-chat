@@ -148,7 +148,7 @@ export default class MessageContainer extends React.Component {
       : styles.notInvertedContentContainerStyle;
 
     return (
-      <View ref="container" style={styles.container}>
+      <View style={styles.container}>
         <ListView
           enableEmptySections
           automaticallyAdjustContentInsets={false}

@@ -14,6 +14,7 @@ export default class Actions extends React.Component {
 
   onActionsPress() {
     const options = Object.keys(this.props.options);
+    const props = this.props;
     const cancelButtonIndex = Object.keys(this.props.options).length - 1;
     this.context.actionSheet().showActionSheetWithOptions(
       {
@@ -22,14 +23,12 @@ export default class Actions extends React.Component {
         tintColor: this.props.optionTintColor,
       },
       function handle(buttonIndex) {
-        let i = 0;
-        Object.keys(this.props.options).forEach(function launch(key) {
-          if (this.props.options[key]) {
+        Object.keys(props.options).map(function launch(key,i) {
+          if (props.options[key]) {
             if (buttonIndex === i) {
-              this.props.options[key](this.props);
+              props.options[key](props);
               return;
             }
-            i += 1;
           }
         });
       },

@@ -98,7 +98,7 @@ export default class MessageContainer extends React.PureComponent {
       return <View style={styles.container} />;
     }
     return (
-      <View ref="container" style={styles.container}>
+      <View style={styles.container}>
         <FlatList
           ref={(ref) => (this.flatListRef = ref)}
           keyExtractor={(item) => item._id}

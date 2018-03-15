@@ -128,18 +128,22 @@ export default class Bubble extends React.Component {
     if (this.props.position === 'left') {
       return (
         <View style={{ flexDirection: 'row' }}>
-          <View style={{
-            width: width / 6,
-            alignSelf: 'flex-start',
-            paddingTop: 10
-            }}
-          >
+          <View style={{ 
+            alignSelf: 'center',
+            width: width / 10 ,
+            paddingLeft: 5
+            //width: width / 6,
+            //alignSelf: 'flex-start',
+            //paddingTop: 10
+          }}>
             {this.renderTicks()}
           </View>
           <View style={{
             flexDirection: 'column',
             justifyContent:'center',
-            width: 2 * (width / 3)
+            alignItems: 'center',  //新增by Howie
+            width: width / 1.6
+            //width: 2 * (width / 3)
             }}
           >
             {this.renderMessageImage()}
@@ -147,19 +151,25 @@ export default class Bubble extends React.Component {
             {this.renderTime()}
           </View>
           <View style={{
-            alignSelf: 'flex-start',
-            paddingTop: 10,
-            width: width / 6
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: width / 10
+            //alignSelf: 'flex-start',
+            //paddingTop: 10,
+            //width: width / 6
             }}
            >
             <Image
               source={{ uri: currentMessage.user.avatar }}
               style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: 40,
-                height: 40,
-                borderRadius: 20
+                width: 20,
+                height: 20,
+                borderRadius: 10
+                //justifyContent: 'center',
+                //alignItems: 'center',
+                //width: 40,
+                //height: 40,
+                //borderRadius: 20
               }}
             />
           </View>
@@ -169,19 +179,23 @@ export default class Bubble extends React.Component {
 
     return (
       <View style={{ flexDirection: 'row' }}>
-        <View style={{ alignSelf: 'flex-end', width: 1.5 * (width / 10) }}>
-          {this.renderTime()}
-        </View>
         <View style={{
           flexDirection: 'column',
-          justifyContent:'flex-start',
-          width: width / 2
+          justifyContent:'center',
+          alignItems: 'center',
+          width: width / 1.5
           }}
         >
           {this.renderMessageImage()}
           {this.renderMessageText()}
+          {this.renderTime()}
         </View>
-        <View style={{ alignSelf: 'center', width: 1.5 * (width / 10) }}>
+        <View style={{
+          alignSelf: 'center',
+          width: width / 10 ,
+          paddingRight: 5
+          //width: 1.5 * (width / 10)
+        }}>
           {this.renderTicks()}
         </View>
       </View>
@@ -243,7 +257,7 @@ const styles = {
       borderRadius: 15,
       backgroundColor: '#f0f0f0',
       marginRight: 60,
-      minHeight: 20,
+      minHeight: 25,
       justifyContent: 'flex-end',
     },
     containerToNext: {
@@ -262,7 +276,7 @@ const styles = {
       borderRadius: 15,
       backgroundColor: '#0084ff',
       marginLeft: 60,
-      minHeight: 20,
+      minHeight: 25,
       justifyContent: 'flex-end',
     },
     containerToNext: {
@@ -281,9 +295,7 @@ const styles = {
     resizeMode: Image.resizeMode.contain
   },
   tickView: {
-    flexDirection: 'row',
-    marginRight: 10,
-    alignSelf: 'center', //改
+    alignSelf: 'center' //改
   }
 };
 

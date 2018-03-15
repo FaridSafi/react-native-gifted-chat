@@ -562,6 +562,9 @@ GiftedChat.defaultProps = {
 };
 
 GiftedChat.propTypes = {
+    
+  MIN_COMPOSER_HEIGHT: PropTypes.number,
+  MAX_COMPOSER_HEIGHT: PropTypes.number,
   messages: PropTypes.arrayOf(PropTypes.object),
   text: PropTypes.string,
   placeholder: PropTypes.string,

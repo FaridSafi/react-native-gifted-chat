@@ -27,10 +27,6 @@ export default class InputToolbar extends React.Component {
     this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState.position !== this.state.position;
-  }
-
   componentWillUnmount() {
     this.keyboardWillShowListener.remove();
     this.keyboardWillHideListener.remove();

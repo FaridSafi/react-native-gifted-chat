@@ -1,6 +1,7 @@
 {
   "name": "react-native-gifted-chat-expo",
   "main": "node_modules/expo/AppEntry.js",
+  "version": "0.4.1",
   "private": true,
   "scripts": {
     "e2e:init": "./e2e/init.sh 2.3.0",

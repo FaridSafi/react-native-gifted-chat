@@ -15,7 +15,6 @@ import sum from 'hash-sum';
 
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
-import { MAX_RENDER_ITEM } from './Constant';
 
 export default class MessageContainer extends React.PureComponent {
 
@@ -98,15 +97,12 @@ export default class MessageContainer extends React.PureComponent {
       return <View style={styles.container} />;
     }
     return (
-      <View ref="container" style={styles.container}>
+      <View style={styles.container}>
         <FlatList
           ref={(ref) => (this.flatListRef = ref)}
           keyExtractor={(item) => item._id}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
-          initialNumToRender={MAX_RENDER_ITEM}
-          maxToRenderPerBatch={MAX_RENDER_ITEM * 2}
-          windowSize={MAX_RENDER_ITEM * 2}
           removeClippedSubviews
           inverted={this.props.inverted}
           {...this.props.listViewProps}

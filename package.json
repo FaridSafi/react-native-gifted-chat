@@ -61,5 +61,5 @@
     "prop-types": "*",
     "react": "*",
     "react-native": "*"
-  },
+  }
 }

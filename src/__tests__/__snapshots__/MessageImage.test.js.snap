@@ -37,14 +37,7 @@ exports[`should render <MessageImage /> and compare with snapshot 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        style={
-          Array [
-            Object {
-              "backgroundColor": "transparent",
-            },
-            undefined,
-          ]
-        }
+        style={null}
         testID={undefined}
         tvParallaxProperties={undefined}
       >

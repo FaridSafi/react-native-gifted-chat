@@ -11,7 +11,7 @@ import Day from './Day';
 
 import { isSameUser, isSameDay } from './utils';
 
-export default class Message extends React.Component {
+export default class Message extends React.PureComponent {
 
   getInnerComponentProps() {
     const { containerStyle, ...props } = this.props;

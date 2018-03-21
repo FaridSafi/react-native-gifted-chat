@@ -44,20 +44,25 @@
     "eslint-plugin-react-native": "3.2.1",
     "husky": "0.15.0-rc.2",
     "jest": "22.1.4",
+    "react-test-renderer": "16.2.0",
     "react": "16.2.0",
     "react-native": "0.51.0",
-    "react-test-renderer": "16.2.0"
+    "prop-types": "15.6.1"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^1.0.1",
     "md5": "2.2.1",
     "moment": "^2.19.0",
-    "prop-types": "15.6.1",
     "react-native-communications": "2.2.1",
     "react-native-invertible-scroll-view": "^1.1.0",
     "react-native-lightbox": "^0.7.0",
     "react-native-parsed-text": "^0.0.20",
     "shallowequal": "1.0.2",
     "uuid": "3.2.1"
+  },
+  "peerDependencies": {
+    "prop-types": "*",
+    "react": "*",
+    "react-native": "*"
   }
 }

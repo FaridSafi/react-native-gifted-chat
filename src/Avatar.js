@@ -35,7 +35,7 @@ const styles = {
   }),
 };
 
-export default class Avatar extends React.Component {
+export default class Avatar extends React.PureComponent {
 
   renderAvatar() {
     if (this.props.renderAvatar) {

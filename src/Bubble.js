@@ -11,7 +11,7 @@ import Color from './Color';
 
 import { isSameUser, isSameDay } from './utils';
 
-export default class Bubble extends React.Component {
+export default class Bubble extends React.PureComponent {
 
   constructor(props) {
     super(props);

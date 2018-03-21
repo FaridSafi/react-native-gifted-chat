@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { FlatList, View, StyleSheet, Platform } from 'react-native';
-import sum from 'hash-sum';
 
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
@@ -77,9 +76,6 @@ export default class MessageContainer extends React.PureComponent {
       previousMessage,
       nextMessage,
       position: item.user._id === this.props.user._id ? 'right' : 'left',
-      hash: sum(
-        `${item.body ? item.body.length : 0}${JSON.stringify(item.attributes)}${previousMessage._id}${nextMessage._id}`,
-      ),
     };
 
     if (this.props.renderMessage) {

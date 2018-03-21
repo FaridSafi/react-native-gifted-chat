@@ -8,13 +8,17 @@ import Communications from 'react-native-communications';
 
 const WWW_URL_PATTERN = /^www\./i;
 
-export default class MessageText extends React.PureComponent {
+export default class MessageText extends React.Component {
 
   constructor(props) {
     super(props);
     this.onUrlPress = this.onUrlPress.bind(this);
     this.onPhonePress = this.onPhonePress.bind(this);
     this.onEmailPress = this.onEmailPress.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.currentMessage.text !== nextProps.currentMessage.text;
   }
 
   onUrlPress(url) {

@@ -80,6 +80,7 @@ export default class App extends Component {
           messages={this.state.messages}
           onSend={this.onSend}
           renderCustomView={CustomView}
+          keyboardShouldPersistTaps="never"
           user={{
             _id: 1,
           }}

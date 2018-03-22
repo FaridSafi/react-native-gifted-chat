@@ -10,8 +10,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { FlatList, View, StyleSheet } from 'react-native';
-import sum from 'hash-sum';
+import { FlatList, View, StyleSheet, Platform } from 'react-native';
 
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
@@ -77,9 +76,6 @@ export default class MessageContainer extends React.PureComponent {
       previousMessage,
       nextMessage,
       position: item.user._id === this.props.user._id ? 'right' : 'left',
-      hash: sum(
-        `${item.body ? item.body.length : 0}${JSON.stringify(item.attributes)}${previousMessage._id}${nextMessage._id}`,
-      ),
     };
 
     if (this.props.renderMessage) {
@@ -103,7 +99,7 @@ export default class MessageContainer extends React.PureComponent {
           keyExtractor={(item) => item._id}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
-          removeClippedSubviews
+          removeClippedSubviews={Platform.OS === 'android'}
           inverted={this.props.inverted}
           {...this.props.listViewProps}
           data={this.props.messages}

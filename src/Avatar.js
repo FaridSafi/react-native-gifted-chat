@@ -1,12 +1,41 @@
-/* eslint no-use-before-define: ["error", { "variables": false }] */
-
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, View, ViewPropTypes } from 'react-native';
 import GiftedAvatar from './GiftedAvatar';
-import { isSameUser, isSameDay, warnDeprecated } from './utils';
+import { isSameUser, isSameDay } from './utils';
 
-export default class Avatar extends React.Component {
+const styles = {
+  left: StyleSheet.create({
+    container: {
+      marginRight: 8,
+    },
+    onTop: {
+      alignSelf: 'flex-start',
+    },
+    onBottom: {},
+    image: {
+      height: 36,
+      width: 36,
+      borderRadius: 18,
+    },
+  }),
+  right: StyleSheet.create({
+    container: {
+      marginLeft: 8,
+    },
+    onTop: {
+      alignSelf: 'flex-start',
+    },
+    onBottom: {},
+    image: {
+      height: 36,
+      width: 36,
+      borderRadius: 18,
+    },
+  }),
+};
+
+export default class Avatar extends React.PureComponent {
 
   renderAvatar() {
     if (this.props.renderAvatar) {
@@ -67,37 +96,6 @@ export default class Avatar extends React.Component {
 
 }
 
-const styles = {
-  left: StyleSheet.create({
-    container: {
-      marginRight: 8,
-    },
-    onTop: {
-      alignSelf: 'flex-start',
-    },
-    onBottom: {},
-    image: {
-      height: 36,
-      width: 36,
-      borderRadius: 18,
-    },
-  }),
-  right: StyleSheet.create({
-    container: {
-      marginLeft: 8,
-    },
-    onTop: {
-      alignSelf: 'flex-start',
-    },
-    onBottom: {},
-    image: {
-      height: 36,
-      width: 36,
-      borderRadius: 18,
-    },
-  }),
-};
-
 Avatar.defaultProps = {
   renderAvatarOnTop: false,
   showAvatarForEveryMessage: false,
@@ -110,9 +108,6 @@ Avatar.defaultProps = {
   containerStyle: {},
   imageStyle: {},
   onPressAvatar: () => {},
-  // TODO: remove in next major release
-  isSameDay: warnDeprecated(isSameDay),
-  isSameUser: warnDeprecated(isSameUser),
 };
 
 Avatar.propTypes = {
@@ -132,7 +127,4 @@ Avatar.propTypes = {
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
-  // TODO: remove in next major release
-  isSameDay: PropTypes.func,
-  isSameUser: PropTypes.func,
 };

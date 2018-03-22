@@ -120,6 +120,14 @@ class GiftedChat extends React.Component {
     this.setTextFromProp(text);
   }
 
+  componentDidUpdate(_, { isInitialized }) {
+    if (isInitialized) return;
+
+    if (this.state.isInitialized) {
+      this.props.onInitialized();
+    }
+  }
+
   initLocale() {
     if (this.props.locale === null || moment.locales().indexOf(this.props.locale) === -1) {
       this.setLocale('en');
@@ -519,6 +527,7 @@ GiftedChat.defaultProps = {
   }),
   loadEarlier: false,
   onLoadEarlier: () => { },
+  onInitialized: () => { },
   isLoadingEarlier: false,
   renderLoading: null,
   renderLoadEarlier: null,
@@ -572,6 +581,7 @@ GiftedChat.propTypes = {
   isAnimated: PropTypes.bool,
   loadEarlier: PropTypes.bool,
   onLoadEarlier: PropTypes.func,
+  onInitialized: PropTypes.func,
   isLoadingEarlier: PropTypes.bool,
   renderLoading: PropTypes.func,
   renderLoadEarlier: PropTypes.func,

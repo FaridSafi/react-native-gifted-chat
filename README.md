@@ -83,12 +83,36 @@ class Example extends React.Component {
         },
       ],
     })
+    
+    //Mark Message as sent
+    socket.on('mark_sent', (message_id) => {
+        this.mark_message_sent(message_id);
+    })
+    
+    //Mark Message as received
+    socket.on('mark_received', (message_id) => {
+        this.mark_message_received(message_id);
+    })
   }
 
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
     }))
+  }
+ 
+  //Mark Message as sent
+  mark_message_sent(message_id){
+    this.setState(previousState => ({
+        messages: GiftedChat.updateSent(previousState.messages, message_id, true)
+    }));
+  }
+  
+  //Mark Message as received
+  mark_message_received(message_id){
+    this.setState(previousState => ({
+        messages: GiftedChat.updateReceived(previousState.messages, message_id, true)
+    }));
   }
 
   render() {
@@ -142,6 +166,22 @@ e.g. System Message
   system: true,
   // Any additional custom parameters are passed through
 }
+```
+
+## Mark Message Sent/Received
+```js
+//@parms (previous state messages, message_id, mark_as_true/false (default:true) )
+
+//mark received
+this.setState(previousState => ({
+        messages: GiftedChat.updateReceived(previousState.messages, message_id, true)
+}));
+
+//mark sent
+this.setState(previousState => ({
+        messages: GiftedChat.updateSent(previousState.messages, message_id, true)
+}));
+    
 ```
 
 ## Props

@@ -95,7 +95,7 @@ class GiftedChat extends React.Component {
     return inverted ? currentMessages.concat(messages) : messages.concat(currentMessages);
   }
 
-  static updateSent(currentMessages, messageId, status = true) {
+  static updateSent(currentMessages = [], messageId, status = true) {
     if (!Array.isArray(currentMessages)) {
       currentMessages = [currentMessages];
     }
@@ -110,7 +110,7 @@ class GiftedChat extends React.Component {
     });
   }
 
-  static updateReceived(currentMessages, messageId, status = true) {
+  static updateReceived(currentMessages = [], messageId, status = true) {
     if (!Array.isArray(currentMessages)) {
       currentMessages = [currentMessages];
     }

@@ -51,7 +51,7 @@ class GiftedChat extends React.Component {
     this._maxHeight = null;
     this._isFirstLayout = true;
     this._locale = 'en';
-    this._messages = [];
+    this._messages = props.messages;
 
     this.state = {
       isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -94,37 +94,38 @@ class GiftedChat extends React.Component {
     }
     return inverted ? currentMessages.concat(messages) : messages.concat(currentMessages);
   }
-    
-    static updateSent(currentMessages, messageId, status = true) {
-        if (!Array.isArray(currentMessages)) {
-            currentMessages = [currentMessages];
-        }
-        return currentMessages.map(m => {
-            if (m._id === messageId) {
-                return {
-                    ...m,
-                    sent: status
-                };
-            }
-            return m;
-        });
-    }
 
-    static updateReceived(currentMessages, messageId, status = true) {
-        if (!Array.isArray(currentMessages)) {
-            currentMessages = [currentMessages];
-        }
-        return currentMessages.map(m => {
-            if (m._id === messageId) {
-                return {
-                    ...m,
-                    received: status
-                }
-            };
-            return m;
-        });
-
+  static updateSent(currentMessages, messageId, status = true) {
+    if (!Array.isArray(currentMessages)) {
+      currentMessages = [currentMessages];
     }
+    return currentMessages.map((m) => {
+      if (m._id === messageId) {
+        return {
+          ...m,
+          sent: status,
+        };
+      }
+      return m;
+    });
+  }
+
+  static updateReceived(currentMessages, messageId, status = true) {
+    if (!Array.isArray(currentMessages)) {
+      currentMessages = [currentMessages];
+    }
+    return currentMessages.map((m) => {
+      if (m._id === messageId) {
+        return {
+          ...m,
+          received: status,
+        };
+      }
+
+      return m;
+    });
+  }
+
   getChildContext() {
     return {
       actionSheet: () => this._actionSheetRef,
@@ -251,20 +252,21 @@ class GiftedChat extends React.Component {
       ? this.props.minInputToolbarHeight * 2
       : this.props.minInputToolbarHeight;
   }
+
   calculateInputToolbarHeight(composerHeight) {
     return composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT);
   }
 
   /**
-   * Returns the height, based on current window size, without taking the keyboard into account.
-   */
+     * Returns the height, based on current window size, without taking the keyboard into account.
+     */
   getBasicMessagesContainerHeight(composerHeight = this.state.composerHeight) {
     return this.getMaxHeight() - this.calculateInputToolbarHeight(composerHeight);
   }
 
   /**
-   * Returns the height, based on current window size, taking the keyboard into account.
-   */
+     * Returns the height, based on current window size, taking the keyboard into account.
+     */
   getMessagesContainerHeightWithKeyboard(composerHeight = this.state.composerHeight) {
     return this.getBasicMessagesContainerHeight(composerHeight) - this.getKeyboardHeight() + this.getBottomOffset();
   }
@@ -337,15 +339,14 @@ class GiftedChat extends React.Component {
     return (
       <AnimatedView
         style={{
-          height: this.state.messagesContainerHeight,
-        }}
+                    height: this.state.messagesContainerHeight,
+                }}
       >
         <MessageContainer
           {...this.props}
           invertibleScrollViewProps={this.invertibleScrollViewProps}
           messages={this.getMessages()}
           ref={(component) => (this._messageContainerRef = component)}
-
         />
         {this.renderChatFooter()}
       </AnimatedView>
@@ -362,6 +363,8 @@ class GiftedChat extends React.Component {
         user: this.props.user,
         createdAt: new Date(),
         _id: this.props.messageIdGenerator(),
+        sent: false,
+        received: false,
       };
     });
 
@@ -539,7 +542,8 @@ GiftedChat.defaultProps = {
   placeholder: DEFAULT_PLACEHOLDER,
   messageIdGenerator: () => uuid.v4(),
   user: {},
-  onSend: () => { },
+  onSend: () => {
+  },
   locale: null,
   timeFormat: TIME_FORMAT,
   dateFormat: DATE_FORMAT,
@@ -548,7 +552,8 @@ GiftedChat.defaultProps = {
     android: false,
   }),
   loadEarlier: false,
-  onLoadEarlier: () => { },
+  onLoadEarlier: () => {
+  },
   isLoadingEarlier: false,
   renderLoading: null,
   renderLoadEarlier: null,

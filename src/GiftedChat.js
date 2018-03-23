@@ -95,38 +95,36 @@ class GiftedChat extends React.Component {
     return inverted ? currentMessages.concat(messages) : messages.concat(currentMessages);
   }
     
-  static updateSent(currentMessages, message_id, status = true) {
+    static updateSent(currentMessages, messageId, status = true) {
         if (!Array.isArray(currentMessages)) {
             currentMessages = [currentMessages];
         }
-        message = currentMessages.map(m => {
-            if(m._id === message_id){
+        return currentMessages.map(m => {
+            if (m._id === messageId) {
                 return {
                     ...m,
-                    sent:status
-                }
+                    sent: status
+                };
             }
             return m;
         });
-        return message;
-    }
-    
-    static updateReceived(currentMessages, message_id, status = true) {
-        if (!Array.isArray(currentMessages)) {
-            currentMessages = [currentMessages];
-        }
-        message = currentMessages.map(m => {
-            if(m._id === message_id){
-                return {
-                    ...m,
-                    received:status
-                }
-            }
-            return m;
-        });
-        return message;
     }
 
+    static updateReceived(currentMessages, messageId, status = true) {
+        if (!Array.isArray(currentMessages)) {
+            currentMessages = [currentMessages];
+        }
+        return currentMessages.map(m => {
+            if (m._id === messageId) {
+                return {
+                    ...m,
+                    received: status
+                }
+            };
+            return m;
+        });
+
+    }
   getChildContext() {
     return {
       actionSheet: () => this._actionSheetRef,

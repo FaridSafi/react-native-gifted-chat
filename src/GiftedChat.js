@@ -203,6 +203,8 @@ class GiftedChat extends React.Component {
   }
 
   setIsTypingDisabled(value) {
+    if (!this.props.canTypingBeDisabled) return;
+
     this.setState({
       typingDisabled: value,
     });
@@ -570,6 +572,7 @@ GiftedChat.propTypes = {
   timeFormat: PropTypes.string,
   dateFormat: PropTypes.string,
   isAnimated: PropTypes.bool,
+  canTypingBeDisabled: PropTypes.bool,
   loadEarlier: PropTypes.bool,
   onLoadEarlier: PropTypes.func,
   isLoadingEarlier: PropTypes.bool,

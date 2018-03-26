@@ -10,7 +10,7 @@ const { carrot, emerald, peterRiver, wisteria, alizarin, turquoise, midnightBlue
 // 3 words name initials
 // handle only alpha numeric chars
 
-export default class GiftedAvatar extends React.Component {
+export default class GiftedAvatar extends React.PureComponent {
   setAvatarColor() {
     const userName = this.props.user.name || '';
     const name = userName.toUpperCase().split(' ');
@@ -86,9 +86,7 @@ export default class GiftedAvatar extends React.Component {
       );
     }
 
-    if (!this.avatarColor) {
-      this.setAvatarColor();
-    }
+    this.setAvatarColor();
 
     return (
       <TouchableOpacity

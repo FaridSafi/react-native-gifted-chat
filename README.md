@@ -1,5 +1,6 @@
 <p align="center" >
-    <img alt="react-native-gifted-chat-1" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/iPhone-6s-gifted-chat-3.png" width="300"/>
+    <img alt="react-native-gifted-chat" src="https://thumbs.gfycat.com/AbsoluteSadDobermanpinscher-size_restricted.gif" width="260" height="510" />
+
 </p>
 
 <h3 align="center">
@@ -14,17 +15,22 @@
   <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>
   <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
   <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/FaridSafi/react-native-gifted-chat.svg" alt="build"></a>
+  <a href="https://reactnative.gallery"><img src="https://img.shields.io/badge/reactnative.gallery-%E2%99%A5-red.svg" alt="reactnative.gallery"></a>
+
 </p>
 <p align="center">
   <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=shield" alt="build"></a>
   <a href="https://travis-ci.org/FaridSafi/react-native-gifted-chat"><img src="https://api.travis-ci.org/FaridSafi/react-native-gifted-chat.svg" alt="deployed"></a>
   <a href="https://codecov.io/gh/FaridSafi/react-native-gifted-chat"><img src="https://codecov.io/gh/FaridSafi/react-native-gifted-chat/coverage.svg"></a>
+  <a title='License' href="https://github.com/FaridSafi/react-native-gifted-chat/blob/master/LICENSE" height="18">
+    <img src='https://img.shields.io/badge/license-MIT-blue.svg' />
+  </a>
 </p>
 
 <p align="center">
   <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=exp://expo.io/@xcarpentier/gifted-chat">
   <br>
-  <a href="https://snack.expo.io/@xcarpentier/gifted-chat" target="_blank">Demo on snack (Expo)</a>
+  <a href="https://snack.expo.io/@xcarpentier/gifted-chat" target="_blank"><i>demo</i></a>
 </p>
 
 ## Features
@@ -158,6 +164,7 @@ e.g. System Message
 * **`renderLoadEarlier`** _(Function)_ - Custom "Load earlier messages" button
 * **`renderAvatar`** _(Function)_ - Custom message avatar; set to `null` to not render any avatar for the message
 * **`showUserAvatar`** _(Bool)_ - Whether to render an avatar for the current user; default is `false`, only show avatars for other users
+* **`showAvatarForEveryMessage`** _(Bool)_ - When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is `false`
 * **`onPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is tapped
 * **`renderAvatarOnTop`** _(Bool)_ - Render the message avatar at the top of consecutive messages, rather than the bottom; default is `false`
 * **`renderBubble`** _(Function)_ - Custom message bubble
@@ -259,6 +266,8 @@ If you have any issues, you can clear your watches using `watchman watch-del-all
 * [I want to implement a popover that pops right after clicking on a specific avatar,
   what is the best implementation in this case and how?](https://github.com/FaridSafi/react-native-gifted-chat/issues/660)
 * [Why Textinput is hidden on Android?](https://github.com/FaridSafi/react-native-gifted-chat/issues/680#issuecomment-359699364)
+* [How to use renderLoading?](https://github.com/FaridSafi/react-native-gifted-chat/issues/298)
+* [Can I use MySql to save the message?](https://github.com/FaridSafi/react-native-gifted-chat/issues/738)
 
 ## License
 

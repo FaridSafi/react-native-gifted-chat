@@ -6,6 +6,7 @@ exports[`should render <Composer /> and compare with snapshot 1`] = `
   allowFontScaling={true}
   autoFocus={false}
   enablesReturnKeyAutomatically={true}
+  keyboardAppearance="default"
   multiline={true}
   onChange={[Function]}
   onChangeText={[Function]}

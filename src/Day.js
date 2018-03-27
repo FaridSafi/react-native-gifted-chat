@@ -57,7 +57,6 @@ Day.defaultProps = {
   },
   previousMessage: {},
   nextMessage: {},
-  inverted: true,
   containerStyle: {},
   wrapperStyle: {},
   textStyle: {},

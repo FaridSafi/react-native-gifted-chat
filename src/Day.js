@@ -56,6 +56,8 @@ Day.defaultProps = {
     createdAt: null,
   },
   previousMessage: {},
+  nextMessage: {},
+  inverted: true,
   containerStyle: {},
   wrapperStyle: {},
   textStyle: {},
@@ -68,6 +70,8 @@ Day.defaultProps = {
 Day.propTypes = {
   currentMessage: PropTypes.object,
   previousMessage: PropTypes.object,
+  nextMessage: PropTypes.object,
+  inverted: PropTypes.bool,
   containerStyle: ViewPropTypes.style,
   wrapperStyle: ViewPropTypes.style,
   textStyle: Text.propTypes.style,

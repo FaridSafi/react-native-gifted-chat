@@ -11,10 +11,10 @@ import { isSameDay, isSameUser, warnDeprecated } from './utils';
 import { DATE_FORMAT } from './Constant';
 
 export default function Day(
-  { dateFormat, currentMessage, previousMessage, containerStyle, wrapperStyle, textStyle },
+  { dateFormat, currentMessage, previousMessage, nextMessage, containerStyle, wrapperStyle, textStyle, inverted },
   context,
 ) {
-  if (!isSameDay(currentMessage, previousMessage)) {
+  if (!isSameDay(currentMessage, inverted ? previousMessage : nextMessage)) {
     return (
       <View style={[styles.container, containerStyle]}>
         <View style={wrapperStyle}>

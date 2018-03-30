@@ -3,6 +3,7 @@
   "version": "0.4.3",
   "description": "The most complete chat UI for React Native",
   "main": "index.js",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"

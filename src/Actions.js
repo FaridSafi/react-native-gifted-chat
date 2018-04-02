@@ -22,16 +22,9 @@ export default class Actions extends React.Component {
         tintColor: this.props.optionTintColor,
       },
       (buttonIndex) => {
-        let i = 0;
-        Object.keys(this.props.options).forEach((key) => {
-          if (this.props.options[key]) {
-            if (buttonIndex === i) {
-              this.props.options[key](this.props);
-              return;
-            }
-            i += 1;
-          }
-        });
+        const keys = Object.keys(this.props.options);
+        const obj = keys[buttonIndex];
+        this.props.options[obj](this.props);
       },
     );
   }

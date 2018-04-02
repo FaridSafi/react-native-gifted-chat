@@ -9,7 +9,7 @@ import Communications from 'react-native-communications';
 const WWW_URL_PATTERN = /^www\./i;
 const URL_REGEX = /(https?:\/\/|www\.)[-a-zA-Z0-9\u4e00-\u9eff@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9\u4e00-\u9eff@:%_+.~#?&//=]*)/i;
 
-export default class MessageText extends React.Component {
+export default class MessageText extends React.PureComponent {
 
   constructor(props) {
     super(props);
@@ -18,10 +18,6 @@ export default class MessageText extends React.Component {
     this.onEmailPress = this.onEmailPress.bind(this);
 
     this.urlRegex = URL_REGEX;
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return this.props.currentMessage.text !== nextProps.currentMessage.text;
   }
 
   onUrlPress(url) {

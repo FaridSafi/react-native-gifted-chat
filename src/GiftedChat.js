@@ -217,10 +217,15 @@ class GiftedChat extends React.Component {
 
   // TODO: setMinInputToolbarHeight
   getMinInputToolbarHeight() {
-    return this.props.renderAccessory
-      ? this.props.minInputToolbarHeight * 2
-      : this.props.minInputToolbarHeight;
+    const { isRenderAccessory, renderAccessory, minInputToolbarHeight, accessoryHeight } = this.props;
+    if(isRenderAccessory && renderAccessory){
+        return minInputToolbarHeight + accessoryHeight
+    }else{
+        return minInputToolbarHeight
+    }
   }
+
+
   calculateInputToolbarHeight(composerHeight) {
     return composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT);
   }
@@ -549,6 +554,8 @@ GiftedChat.defaultProps = {
   onPressActionButton: null,
   bottomOffset: 0,
   minInputToolbarHeight: 44,
+  isRenderAccessory: true,
+  accessoryHeight: 44,
   keyboardShouldPersistTaps: Platform.select({
     ios: 'never',
     android: 'always',
@@ -604,6 +611,8 @@ GiftedChat.propTypes = {
   keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
   onInputTextChanged: PropTypes.func,
   maxInputLength: PropTypes.number,
+  accessoryHeight: PropTypes.number,
+  isRenderAccessory: PropTypes.bool,
   forceGetKeyboardHeight: PropTypes.bool,
   inverted: PropTypes.bool,
   textInputProps: PropTypes.object,

@@ -69,7 +69,7 @@ export default class InputToolbar extends React.Component {
   }
 
   renderAccessory() {
-    if (this.props.renderAccessory) {
+    if (this.props.renderAccessory && this.props.isRenderAccessory) {
       return (
         <View style={[styles.accessory, this.props.accessoryStyle]}>
           {this.props.renderAccessory(this.props)}
@@ -122,6 +122,7 @@ InputToolbar.defaultProps = {
   containerStyle: {},
   primaryStyle: {},
   accessoryStyle: {},
+  isRenderAccessory: true,
   onPressActionButton: () => {},
 };
 
@@ -134,4 +135,5 @@ InputToolbar.propTypes = {
   containerStyle: ViewPropTypes.style,
   primaryStyle: ViewPropTypes.style,
   accessoryStyle: ViewPropTypes.style,
+  isRenderAccessory: PropTypes.bool,
 };

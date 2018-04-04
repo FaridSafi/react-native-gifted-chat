@@ -45,7 +45,7 @@
     "eslint-plugin-react-native": "3.2.1",
     "husky": "0.15.0-rc.2",
     "jest": "22.1.4",
-    "react-test-renderer": "16.3.0",
+    "react-test-renderer": "16.3.1",
     "react": "16.2.0",
     "react-native": "0.51.0",
     "prop-types": "15.6.1"

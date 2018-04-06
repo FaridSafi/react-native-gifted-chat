@@ -168,6 +168,8 @@ export interface GiftedChatProps {
   renderAvatar?(props: AvatarProps): React.ReactNode;
   /* Whether to render an avatar for the current user; default is false, only show avatars for other users */
   showUserAvatar?: boolean;
+  /* When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is false */
+  showAvatarForEveryMessage?: boolean;
   /* Callback when a message avatar is tapped */
   onPressAvatar?(user: User): void;
   /* Render the message avatar at the top of consecutive messages, rather than the bottom; default is false */

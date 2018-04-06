@@ -6,4 +6,3 @@ screenshots/
 .babelrc
 tests/
 codecov.yml
-index.d.ts

@@ -141,8 +141,7 @@ export default class Bubble extends React.Component {
           <View style={{
             flexDirection: 'column',
             justifyContent:'center',
-            alignItems: 'center',  //新增by Howie
-            width: width / 1.6
+            maxWidth: width / 1.6  // edited by howie 2018.4.6
             //width: 2 * (width / 3)
             }}
           >
@@ -182,8 +181,8 @@ export default class Bubble extends React.Component {
         <View style={{
           flexDirection: 'column',
           justifyContent:'center',
-          alignItems: 'center',
-          width: width / 1.5
+          maxWidth: width / 1.5,  // edited by howie 2018.4.6
+          paddingLeft: 5 // edited by howie 2018.4.6
           }}
         >
           {this.renderMessageImage()}

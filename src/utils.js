@@ -7,6 +7,7 @@ export function isSameDay(currentMessage = {}, diffMessage = {}) {
   if (!diffMessage.createdAt) {
     return false;
   }
+  return false
 
   const currentCreatedAt = moment(currentMessage.createdAt);
   const diffCreatedAt = moment(diffMessage.createdAt);

@@ -39,10 +39,14 @@ export default class GiftedAvatar extends React.PureComponent {
       return this.props.user.avatar();
     } else if (typeof this.props.user.avatar === 'string') {
       return (
-        <Image
-          source={{ uri: this.props.user.avatar }}
-          style={[styles.avatarStyle, this.props.avatarStyle]}
-        />
+          <View>
+            <Image
+                source={{ uri: this.props.user.avatar }}
+                style={[styles.avatarStyle, this.props.avatarStyle]}
+            />
+            <Text style={styles.nameText}>{this.props.user.name}</Text>
+          </View>
+
       );
     } else if (typeof this.props.user.avatar === 'number') {
       return (
@@ -123,6 +127,12 @@ const styles = {
     backgroundColor: Color.backgroundTransparent,
     fontWeight: '100',
   },
+    nameText: {
+        color: '#676767',
+        fontSize: 10,
+        textAlign: 'center',
+        marginTop: 5
+    }
 };
 
 GiftedAvatar.defaultProps = {

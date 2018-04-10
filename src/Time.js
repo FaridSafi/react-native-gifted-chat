@@ -9,18 +9,21 @@ import moment from 'moment';
 import Color from './Color';
 import { TIME_FORMAT } from './Constant';
 
-export default function Time({ position, containerStyle, currentMessage, timeFormat, textStyle }, context) {
+export default function Time({ position, containerStyle, currentMessage, timeFormat }, context) {
   return (
     <View style={[styles[position].container, containerStyle[position]]}>
       <Text style={[styles[position].text, textStyle[position]]}>
-        {moment(currentMessage.createdAt)
-          .locale(context.getLocale())
-          .format(timeFormat)}
+          {currentMessage.createdAt}
+
       </Text>
     </View>
   );
 }
 
+// {moment(currentMessage.createdAt)
+//     .locale(context.getLocale())
+//     .format(timeFormat)}
+//
 const containerStyle = {
   marginLeft: 10,
   marginRight: 10,

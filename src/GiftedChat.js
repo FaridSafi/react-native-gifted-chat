@@ -8,7 +8,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Animated, Platform, StyleSheet, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View ,TouchableWithoutFeedback} from 'react-native';
 
 import ActionSheet from '@expo/react-native-action-sheet';
 import moment from 'moment';
@@ -310,13 +310,13 @@ class GiftedChat extends React.Component {
           height: this.state.messagesContainerHeight,
         }}
       >
-        <MessageContainer
-          {...this.props}
-          invertibleScrollViewProps={this.invertibleScrollViewProps}
-          messages={this.getMessages()}
-          ref={(component) => (this._messageContainerRef = component)}
+          <MessageContainer
+              {...this.props}
+              invertibleScrollViewProps={this.invertibleScrollViewProps}
+              messages={this.getMessages()}
+              ref={(component) => (this._messageContainerRef = component)}
 
-        />
+          />
         {this.renderChatFooter()}
       </AnimatedView>
     );
@@ -476,10 +476,10 @@ class GiftedChat extends React.Component {
     if (this.state.isInitialized === true) {
       return (
         <ActionSheet ref={(component) => (this._actionSheetRef = component)}>
-          <View style={styles.container} onLayout={this.onMainViewLayout}>
-            {this.renderMessages()}
-            {this.renderInputToolbar()}
-          </View>
+            <View style={styles.container} onLayout={this.onMainViewLayout}>
+              {this.renderMessages()}
+              {this.renderInputToolbar()}
+            </View>
         </ActionSheet>
       );
     }

@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View, ViewPropTypes, StyleSheet } from 'react-native';
+import { View, ViewPropTypes, StyleSheet,TouchableWithoutFeedback } from 'react-native';
 
 import Avatar from './Avatar';
 import Bubble from './Bubble';
@@ -69,11 +69,12 @@ export default class Message extends React.Component {
         {this.props.currentMessage.system ? (
           this.renderSystemMessage()
         ) : (
+                <TouchableWithoutFeedback onPress={()=>{
+                    this.props.clickCallback&&this.props.clickCallback()
+                }}>
           <View
             style={[
               styles[this.props.position].container,
-              { marginBottom: sameUser ? 2 : 10 },
-              !this.props.inverted && { marginBottom: 2 },
               this.props.containerStyle[this.props.position],
             ]}
           >
@@ -81,6 +82,7 @@ export default class Message extends React.Component {
             {this.renderBubble()}
             {this.props.position === 'right' ? this.renderAvatar() : null}
           </View>
+                </TouchableWithoutFeedback>
         )}
       </View>
     );
@@ -88,11 +90,14 @@ export default class Message extends React.Component {
 
 }
 
+{/*{ marginBottom: sameUser ? 2 : 10 },*/}
+{/*!this.props.inverted && { marginBottom: 2 },*/}
+
 const styles = {
   left: StyleSheet.create({
     container: {
       flexDirection: 'row',
-      alignItems: 'flex-end',
+      // alignItems: 'flex-end',
       justifyContent: 'flex-start',
       marginLeft: 8,
       marginRight: 0,
@@ -101,7 +106,7 @@ const styles = {
   right: StyleSheet.create({
     container: {
       flexDirection: 'row',
-      alignItems: 'flex-end',
+      // alignItems: 'flex-end',
       justifyContent: 'flex-end',
       marginLeft: 0,
       marginRight: 8,

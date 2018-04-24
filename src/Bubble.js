@@ -203,6 +203,7 @@ const styles = {
       marginLeft: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
+
     },
     containerToNext: {
       borderBottomRightRadius: 3,

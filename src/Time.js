@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native';
 
-import moment from 'moment/min/moment-with-locales.min';
+import moment from 'moment';
 
 export default class Time extends React.Component {
   render() {

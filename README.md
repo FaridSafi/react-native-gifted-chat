@@ -78,7 +78,7 @@ class Example extends React.Component {
           user: {
             _id: 2,
             name: 'React Native',
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
+            avatar: 'https://placeimg.com/140/140/any',
           },
         },
       ],

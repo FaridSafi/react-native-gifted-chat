@@ -60,11 +60,12 @@ export default class MessageContainer extends React.Component {
   }
 
   prepareMessages(messages) {
+    const { inverted } = this.props;
     return {
       keys: messages.map((m) => m._id),
       blob: messages.reduce((o, m, i) => {
-        const previousMessage = messages[i + 1] || {};
-        const nextMessage = messages[i - 1] || {};
+        const previousMessage = inverted ? (messages[i + 1] || {}) : (messages[i - 1] || {});
+        const nextMessage = inverted ? (messages[i - 1] || {}) : (messages[i + 1] || {});
         // add next and previous messages to hash to ensure updates
         const toHash = JSON.stringify(m) + previousMessage._id + nextMessage._id;
         o[m._id] = {

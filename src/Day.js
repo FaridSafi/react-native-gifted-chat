@@ -14,7 +14,7 @@ export default function Day(
   { dateFormat, currentMessage, previousMessage, nextMessage, containerStyle, wrapperStyle, textStyle, inverted },
   context,
 ) {
-  if (!isSameDay(currentMessage, inverted ? previousMessage : nextMessage)) {
+  if (!isSameDay(currentMessage, previousMessage)) {
     return (
       <View style={[styles.container, containerStyle]}>
         <View style={wrapperStyle}>

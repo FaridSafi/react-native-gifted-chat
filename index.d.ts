@@ -98,7 +98,7 @@ interface ComposerProps {
   composerHeight?: number;
   text?: string;
   placeholder?: string;
-  placeholderTextCoolor?: string;
+  placeholderTextColor?: string;
   textInputProps?: Partial<TextInputProperties>;
   onTextChanged?(text: string): void;
   onInputSizeChanged?(contentSize: number): void;
@@ -359,7 +359,7 @@ interface TimeProps {
 export class Time extends React.Component<TimeProps> { }
 
 export type utils = {
-  isSameUser(currrentMessage?: IMessage, message?: IMessage): boolean;
+  isSameUser(currentMessage?: IMessage, message?: IMessage): boolean;
   isSameDay(currentMessage?: IMessage, message?: IMessage): boolean;
   isSameTime(currentMessage?: IMessage, message?: IMessage): boolean;
 };

@@ -86,9 +86,9 @@ interface BubbleProps {
   bottomContainerStyle: LeftRightStyle<ViewStyle>;
   tickStyle: TextStyle;
   containerToNextStyle: LeftRightStyle<ViewStyle>;
-  containertoPreviousStyle: LeftRightStyle<ViewStyle>;
+  containerToPreviousStyle: LeftRightStyle<ViewStyle>;
   // TODO: remove in next major release
-  isSameDay?(currentMessage: IMessage, inextMessage: IMessage): boolean;
+  isSameDay?(currentMessage: IMessage, nextMessage: IMessage): boolean;
   isSameUser?(currentMessage: IMessage, nextMessage: IMessage): boolean;
 }
 
@@ -117,7 +117,7 @@ interface DayProps {
   wrapperStyle?: ViewStyle;
   textStyle?: TextStyle;
   // TODO: remove in next major release
-  isSameDay?(currentMessage: IMessage, inextMessage: IMessage): boolean;
+  isSameDay?(currentMessage: IMessage, nextMessage: IMessage): boolean;
   isSameUser?(currentMessage: IMessage, nextMessage: IMessage): boolean;
   dateFormat?: string;
 }

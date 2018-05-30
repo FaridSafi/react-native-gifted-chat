@@ -1,8 +1,10 @@
 example/
 example-expo/
 example-slack-message/
-TODO.md
 screenshots/
 .babelrc
 tests/
+README.md
+ISSUE_TEMPLATE.md
+circle.yml
 codecov.yml

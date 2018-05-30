@@ -33,15 +33,19 @@ export default class InputToolbar extends React.Component {
   }
 
   keyboardWillShow() {
-    this.setState({
-      position: 'relative',
-    });
+    if (this.state !== 'relative') {
+      this.setState({
+        position: 'relative',
+      });
+    }
   }
 
   keyboardWillHide() {
-    this.setState({
-      position: 'absolute',
-    });
+    if (this.state !== 'absolute') {
+      this.setState({
+        position: 'absolute',
+      });
+    }
   }
 
   renderActions() {
@@ -71,9 +75,7 @@ export default class InputToolbar extends React.Component {
   renderAccessory() {
     if (this.props.renderAccessory) {
       return (
-        <View style={[styles.accessory, this.props.accessoryStyle]}>
-          {this.props.renderAccessory(this.props)}
-        </View>
+        <View style={[styles.accessory, this.props.accessoryStyle]}>{this.props.renderAccessory(this.props)}</View>
       );
     }
     return null;
@@ -81,9 +83,7 @@ export default class InputToolbar extends React.Component {
 
   render() {
     return (
-      <View
-        style={[styles.container, this.props.containerStyle, { position: this.state.position }]}
-      >
+      <View style={[styles.container, this.props.containerStyle, { position: this.state.position }]}>
         <View style={[styles.primary, this.props.primaryStyle]}>
           {this.renderActions()}
           {this.renderComposer()}

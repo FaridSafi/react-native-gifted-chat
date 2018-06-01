@@ -11,7 +11,7 @@ import React from 'react';
 import { Animated, Platform, StyleSheet, View } from 'react-native';
 
 import ActionSheet from '@expo/react-native-action-sheet';
-import moment from 'moment';
+import moment from 'moment/min/moment-with-locales';
 import uuid from 'uuid';
 
 import * as utils from './utils';

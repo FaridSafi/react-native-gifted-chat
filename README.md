@@ -56,6 +56,7 @@
 * InputToolbar avoiding keyboard
 * Redux support
 * System message
+* Quick Reply messages
 
 ## Dependency
 
@@ -123,9 +124,26 @@ See [`example/App.js`](example/App.js) for a working demo!
 
 See the files in [`example-slack-message`](example-slack-message) for an example of how to override the default UI to make something that looks more like Slack -- with usernames displayed and all messages on the left.
 
+## Quick Reply example
+
+```jsx
+onQuickReply(quickReply) {
+   if(quickReply.contentType === "text") {
+         // send text message
+    } else if (quickReply.contentType === "location") {
+        // send location
+    } else if (quickReply.contentType === "camera") {
+        // open camera then send video / image
+    }
+    // infinite possibilities
+}
+...
+<GiftedChat onQuickReply={quickReply => this.onQuickReply(quickReply)}>
+```
+
 ## Message object
 
-e.g. Chat Message
+### e.g. Chat Message
 
 ```js
 {
@@ -141,8 +159,28 @@ e.g. Chat Message
   // Any additional custom parameters are passed through
 }
 ```
+### e.g. Chat Message with Quick Reply options
 
-e.g. System Message
+```js
+{
+  _id: 1,
+  text: 'My message',
+  "quickReplies":[
+      {
+        "contentType":"text",
+        "title":"Yes",
+        "imageUrl":"http://example.com/img/yes.png"
+      },
+      {
+        "contentType":"text",
+        "title":"No",
+        "imageUrl":"http://example.com/img/no.png"
+      }
+    ]
+}
+```
+
+### e.g. System Message
 
 ```js
 {
@@ -214,6 +252,9 @@ e.g. System Message
     ]}
   />
   ```
+
+* **`onQuickReply`** _(Function)_ - Callback when sending a quick reply (to backend server)
+* **`renderQuickReply`** _(Function)_ - Custom quick reply view
 
 ## Imperative methods
 

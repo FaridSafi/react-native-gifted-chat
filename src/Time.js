@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 
-import moment from 'moment';
+import moment from 'moment/min/moment-with-locales';
 
 import Color from './Color';
 import { TIME_FORMAT } from './Constant';

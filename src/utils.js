@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment/min/moment-with-locales';
 
 export function isSameDay(currentMessage = {}, diffMessage = {}) {
   if (!diffMessage.createdAt) {

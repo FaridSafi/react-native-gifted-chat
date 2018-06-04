@@ -29,4 +29,30 @@ module.exports = [
     createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
     system: true,
   },
+  {
+    _id: Math.round(Math.random() * 1000000),
+    text: "This is a quick reply. Do you love Gifted Chat?",
+    createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
+    quickReplies: [
+      {
+        _id: Math.round(Math.random() * 1000000),
+        contentType: "text",
+        title: "😋 Yes"
+      },
+      {
+        _id: Math.round(Math.random() * 1000000),
+        contentType: "camera",
+        title: "📷 Yes, let me show you with a picture!",
+      },
+      {
+        _id: Math.round(Math.random() * 1000000),
+        contentType: "text",
+        title: "😞 Nope. Whaaaaaat?",
+      }
+    ],
+    user: {
+      _id: 2,
+      name: 'React Native',
+    },
+  },
 ];

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Text, Clipboard, StyleSheet, TouchableWithoutFeedback, View, ViewPropTypes } from 'react-native';
 
+import QuickReplies from './QuickReplies';
 import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
@@ -127,6 +128,18 @@ export default class Bubble extends React.PureComponent {
     return null;
   }
 
+  renderQuickReplies() {
+    const { currentMessage } = this.props;
+    if (currentMessage.quickReplies) {
+      const { containerStyle, wrapperStyle, ...quickReplyProps } = this.props;
+      if (this.props.renderQuickReplies) {
+        return this.props.renderQuickReplies(quickReplyProps);
+      }
+      return <QuickReplies {...quickReplyProps} />;
+    }
+    return null;
+  }
+
   render() {
     return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
@@ -154,6 +167,7 @@ export default class Bubble extends React.PureComponent {
             </View>
           </TouchableWithoutFeedback>
         </View>
+        {this.renderQuickReplies()}
       </View>
     );
   }
@@ -221,6 +235,7 @@ Bubble.contextTypes = {
 Bubble.defaultProps = {
   touchableProps: {},
   onLongPress: null,
+  renderQuickReplies: null,
   renderMessageImage: null,
   renderMessageText: null,
   renderCustomView: null,
@@ -246,6 +261,7 @@ Bubble.propTypes = {
   user: PropTypes.object.isRequired,
   touchableProps: PropTypes.object,
   onLongPress: PropTypes.func,
+  renderQuickReplies: PropTypes.func,
   renderMessageImage: PropTypes.func,
   renderMessageText: PropTypes.func,
   renderCustomView: PropTypes.func,

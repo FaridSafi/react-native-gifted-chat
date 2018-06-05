@@ -1,0 +1,24 @@
+{
+  "name": "GiftedChatWithChatkit",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@pusher/chatkit": "^0.7.12",
+    "react": "16.3.1",
+    "react-native": "0.55.4",
+    "react-native-gifted-chat": "^0.4.3"
+  },
+  "devDependencies": {
+    "babel-jest": "22.4.3",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "22.4.3",
+    "react-test-renderer": "16.3.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

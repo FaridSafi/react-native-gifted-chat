@@ -1,6 +1,8 @@
 example/
 example-expo/
 example-slack-message/
+example-pusher-chatkit/
+TODO.md
 screenshots/
 .babelrc
 tests/

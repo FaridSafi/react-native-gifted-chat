@@ -6,6 +6,8 @@ import { Linking, StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 import ParsedText from 'react-native-parsed-text';
 import Markdown from 'react-native-markdown-renderer';
 import Communications from 'react-native-communications';
+import Lightbox from 'react-native-lightbox';
+import FitImage from 'react-native-fit-image';
 
 const WWW_URL_PATTERN = /^www\./i;
 
@@ -67,9 +69,21 @@ export default class MessageText extends React.Component {
   }
 
   renderMarkdown() {
-    const { style, ...restProps } = this.props.markdownProps;
+    const renderLightboxImage = (node, children, parent, styles) => {
+      return (
+        <Lightbox key={node.key}>
+          <View>
+            <FitImage indicator style={styles.image} source={{ uri: node.attributes.src }} />
+          </View>
+        </Lightbox>
+      );
+    };
+
+    const { style, rules, ...restProps } = this.props.markdownProps;
+    const rulesProps = Object.assign({}, { image: renderLightboxImage }, rules);
+
     return (
-      <Markdown style={style[this.props.position]} {...restProps}>
+      <Markdown style={style[this.props.position]} rules={rulesProps} {...restProps}>
         {this.props.currentMessage.text}
       </Markdown>
     );

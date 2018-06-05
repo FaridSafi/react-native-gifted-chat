@@ -69,6 +69,7 @@
     "moment": "^2.19.0",
     "react-native-communications": "2.2.1",
     "react-native-lightbox": "^0.7.0",
+    "react-native-markdown-renderer": "^3.2.6",
     "react-native-parsed-text": "^0.0.20",
     "uuid": "3.3.0"
   },

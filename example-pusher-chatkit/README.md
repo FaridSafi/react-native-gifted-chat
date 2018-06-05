@@ -1,6 +1,6 @@
 # Want to use Gifted Chat with Pusher Chatkit?
 
-## What is [Chatkit](https://pusher.com/chatkit?utm_source=github&utm_campaign=react-native-gifted-chat-sponsorship)?
+## What is [Chatkit](https://pusher.com/chatkit?utm_source=github&utm_campaign=react-native-gifted-chat-sponsorship)?
 
 <p align="center">
   <a href="https://pusher.com/chatkit?utm_source=github&utm_campaign=react-native-gifted-chat-sponsorship">

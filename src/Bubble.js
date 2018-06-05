@@ -2,23 +2,16 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Text,
-  Clipboard,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-  ViewPropTypes,
-} from 'react-native';
+import { Text, Clipboard, StyleSheet, TouchableWithoutFeedback, View, ViewPropTypes } from 'react-native';
 
 import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
 import Color from './Color';
 
-import { isSameUser, isSameDay, warnDeprecated } from './utils';
+import { isSameUser, isSameDay } from './utils';
 
-export default class Bubble extends React.Component {
+export default class Bubble extends React.PureComponent {
 
   constructor(props) {
     super(props);
@@ -136,12 +129,7 @@ export default class Bubble extends React.Component {
 
   render() {
     return (
-      <View
-        style={[
-          styles[this.props.position].container,
-          this.props.containerStyle[this.props.position],
-        ]}
-      >
+      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
         <View
           style={[
             styles[this.props.position].wrapper,
@@ -252,9 +240,6 @@ Bubble.defaultProps = {
   tickStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
-  // TODO: remove in next major release
-  isSameDay: warnDeprecated(isSameDay),
-  isSameUser: warnDeprecated(isSameUser),
 };
 
 Bubble.propTypes = {
@@ -291,7 +276,4 @@ Bubble.propTypes = {
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
-  // TODO: remove in next major release
-  isSameDay: PropTypes.func,
-  isSameUser: PropTypes.func,
 };

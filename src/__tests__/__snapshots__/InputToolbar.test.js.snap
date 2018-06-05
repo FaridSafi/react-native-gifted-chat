@@ -95,6 +95,7 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
     </View>
     <TextInput
       accessibilityLabel="Type a message..."
+      accessible={true}
       allowFontScaling={true}
       autoFocus={false}
       enablesReturnKeyAutomatically={true}
@@ -121,6 +122,7 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
           },
         ]
       }
+      testID="Type a message..."
       underlineColorAndroid="transparent"
       value=""
     />

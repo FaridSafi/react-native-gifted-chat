@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "example-expo",
-    "description": "This project is really great.",
+    "name": "gifted-chat-example",
+    "description": "Gifted Chat Expo Example",
     "slug": "example-expo",
     "privacy": "public",
-    "sdkVersion": "24.0.0",
+    "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
-    "version": "1.0.0",
+    "version": "0.4.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,6 +19,18 @@
     },
     "androidStatusBar": {
       "backgroundColor": "#000000"
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "xavier-carpentier-sas",
+            "project": "giftedchat",
+            "authToken": "d32ac87517964ac2b5b778bf5c7b544e59dcab60d1df4fafb6fab65a9d8019ff"
+          }
+        }
+      ]
     }
   }
 }

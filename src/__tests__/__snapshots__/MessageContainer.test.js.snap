@@ -7,23 +7,5 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
       "flex": 1,
     }
   }
->
-  <RCTScrollView
-    automaticallyAdjustContentInsets={false}
-    contentContainerStyle={Object {}}
-    dataSource={
-      ListViewDataSource {
-        "items": 0,
-      }
-    }
-    enableEmptySections={true}
-    initialListSize={20}
-    pageSize={20}
-    renderFooter={[Function]}
-    renderHeader={[Function]}
-    renderRow={[Function]}
-  >
-    <View />
-  </RCTScrollView>
-</View>
+/>
 `;

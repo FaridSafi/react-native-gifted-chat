@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import Color from './Color';
 
-import { isSameDay, isSameUser, warnDeprecated } from './utils';
+import { isSameDay } from './utils';
 import { DATE_FORMAT } from './Constant';
 
 export default function Day(
@@ -60,9 +60,6 @@ Day.defaultProps = {
   containerStyle: {},
   wrapperStyle: {},
   textStyle: {},
-  // TODO: remove in next major release
-  isSameDay: warnDeprecated(isSameDay),
-  isSameUser: warnDeprecated(isSameUser),
   dateFormat: DATE_FORMAT,
 };
 
@@ -74,8 +71,5 @@ Day.propTypes = {
   containerStyle: ViewPropTypes.style,
   wrapperStyle: ViewPropTypes.style,
   textStyle: Text.propTypes.style,
-  // TODO: remove in next major release
-  isSameDay: PropTypes.func,
-  isSameUser: PropTypes.func,
   dateFormat: PropTypes.string,
 };

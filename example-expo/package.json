@@ -1,18 +1,37 @@
 {
   "name": "react-native-gifted-chat-expo",
   "main": "node_modules/expo/AppEntry.js",
+  "version": "0.4.1",
   "private": true,
   "scripts": {
-    "cleaning": "watchman watch-del-all && rm -f yarn.lock && rm -rf node_modules && rm -rf $TMPDIR/react-* && yarn cache clean"
+    "e2e:init": "./e2e/init.sh 2.3.0",
+    "test:e2e": "exp r -c & detox test -c ios.sim; pkill -f exp",
+    "cleaning":
+      "watchman watch-del-all && rm -f yarn.lock && rm -rf node_modules && rm -rf $TMPDIR/react-* && yarn cache clean"
   },
   "dependencies": {
-    "expo": "^24.0.0",
-    "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
-    "react-native-gifted-chat": "https://github.com/FaridSafi/react-native-gifted-chat.git",
-    "react-native-nav": "2.0.2"
+    "expo": "^25.0.0",
+    "react": "16.2.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "react-native-gifted-chat": "FaridSafi/react-native-gifted-chat",
+    "react-native-nav": "2.0.2",
+    "sentry-expo": "1.7.0"
   },
   "devDependencies": {
-    "appr": "xcarpentier/appr"
+    "appr": "xcarpentier/appr",
+    "detox": "7.0.0-alpha.1",
+    "detox-expo-helpers": "0.2.0",
+    "jest": "22.1.4"
+  },
+  "detox": {
+    "test-runner": "jest",
+    "runner-config": "e2e/config.json",
+    "configurations": {
+      "ios.sim": {
+        "binaryPath": "./e2e/Exponent-2.3.0.app",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
+      }
+    }
   }
 }

@@ -66,13 +66,10 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^1.0.1",
-    "md5": "2.2.1",
     "moment": "^2.19.0",
     "react-native-communications": "2.2.1",
-    "react-native-invertible-scroll-view": "^1.1.0",
     "react-native-lightbox": "^0.7.0",
     "react-native-parsed-text": "^0.0.20",
-    "shallowequal": "1.0.2",
     "uuid": "3.2.1"
   },
   "peerDependencies": {

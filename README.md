@@ -196,6 +196,8 @@ e.g. System Message
 * **`renderActions`** _(Function)_ - Custom action button on the left of the message composer
 * **`renderSend`** _(Function)_ - Custom send button; you can pass children to the original `Send` component quite easily, for example to use a custom icon ([example](https://github.com/FaridSafi/react-native-gifted-chat/pull/487))
 * **`renderAccessory`** _(Function)_ - Custom second line of actions below the message composer
+* **`renderMarkdown`** _(Bool)_ - Enables markdown syntax support for messages. ([markdown docs](https://github.com/mientjan/react-native-markdown-renderer/))
+* **`markdownProps`** - _(Object)_ - Props to be passed to Markdown renderer. Style should be divided into `left` and `right` ex `{ style: { left: { text: { color: 'white' }}, right: { text: { color: 'blue' }}}}`. See markdown docs for more settings.
 * **`onPressActionButton`** _(Function)_ - Callback when the Action button is pressed (if set, the default `actionSheet` will not be used)
 * **`bottomOffset`** _(Integer)_ - Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar)
 * **`minInputToolbarHeight`** _(Integer)_ - Minimum height of the input toolbar; default is `44`

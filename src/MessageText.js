@@ -4,6 +4,7 @@ import React from 'react';
 import { Linking, StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 
 import ParsedText from 'react-native-parsed-text';
+import Markdown from 'react-native-markdown-renderer';
 import Communications from 'react-native-communications';
 
 const WWW_URL_PATTERN = /^www\./i;
@@ -65,26 +66,36 @@ export default class MessageText extends React.Component {
     Communications.email([email], null, null, null, null);
   }
 
-  render() {
+  renderMarkdown() {
+    return <Markdown {...this.props.markdownProps}>{this.props.currentMessage.text}</Markdown>;
+  }
+
+  renderParsedText() {
     const linkStyle = StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]);
     return (
+      <ParsedText
+        style={[
+          styles[this.props.position].text,
+          this.props.textStyle[this.props.position],
+          this.props.customTextStyle,
+        ]}
+        parse={[
+          ...this.props.parsePatterns(linkStyle),
+          { type: 'url', style: linkStyle, onPress: this.onUrlPress },
+          { type: 'phone', style: linkStyle, onPress: this.onPhonePress },
+          { type: 'email', style: linkStyle, onPress: this.onEmailPress },
+        ]}
+        childrenProps={{ ...this.props.textProps }}
+      >
+        {this.props.currentMessage.text}
+      </ParsedText>
+    );
+  }
+
+  render() {
+    return (
       <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
-        <ParsedText
-          style={[
-            styles[this.props.position].text,
-            this.props.textStyle[this.props.position],
-            this.props.customTextStyle,
-          ]}
-          parse={[
-            ...this.props.parsePatterns(linkStyle),
-            { type: 'url', style: linkStyle, onPress: this.onUrlPress },
-            { type: 'phone', style: linkStyle, onPress: this.onPhonePress },
-            { type: 'email', style: linkStyle, onPress: this.onEmailPress },
-          ]}
-          childrenProps={{ ...this.props.textProps }}
-        >
-          {this.props.currentMessage.text}
-        </ParsedText>
+        {this.props.renderMarkdown ? this.renderMarkdown() : this.renderParsedText()}
       </View>
     );
   }
@@ -140,6 +151,8 @@ MessageText.defaultProps = {
   customTextStyle: {},
   textProps: {},
   parsePatterns: () => [],
+  renderMarkdown: false,
+  markdownProps: {},
 };
 
 MessageText.propTypes = {
@@ -160,4 +173,6 @@ MessageText.propTypes = {
   parsePatterns: PropTypes.func,
   textProps: PropTypes.object,
   customTextStyle: Text.propTypes.style,
+  renderMarkdown: PropTypes.bool,
+  markdownProps: PropTypes.object,
 };

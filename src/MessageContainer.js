@@ -10,7 +10,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { FlatList, View, StyleSheet, Platform } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
@@ -99,7 +99,6 @@ export default class MessageContainer extends React.PureComponent {
           keyExtractor={(item) => item._id}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
-          removeClippedSubviews={Platform.OS === 'android'}
           inverted={this.props.inverted}
           {...this.props.listViewProps}
           data={this.props.messages}

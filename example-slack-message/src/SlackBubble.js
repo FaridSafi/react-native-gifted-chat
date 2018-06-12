@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle, no-use-before-define */
 
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   Text,
@@ -225,7 +226,7 @@ const styles = StyleSheet.create({
 });
 
 Bubble.contextTypes = {
-  actionSheet: React.PropTypes.func,
+  actionSheet: PropTypes.func,
 };
 
 Bubble.defaultProps = {
@@ -250,34 +251,34 @@ Bubble.defaultProps = {
 };
 
 Bubble.propTypes = {
-  touchableProps: React.PropTypes.object,
-  onLongPress: React.PropTypes.func,
-  renderMessageImage: React.PropTypes.func,
-  renderMessageText: React.PropTypes.func,
-  renderCustomView: React.PropTypes.func,
-  renderUsername: React.PropTypes.func,
-  renderTime: React.PropTypes.func,
-  renderTicks: React.PropTypes.func,
-  currentMessage: React.PropTypes.object,
-  nextMessage: React.PropTypes.object,
-  previousMessage: React.PropTypes.object,
-  user: React.PropTypes.object,
-  containerStyle: React.PropTypes.shape({
+  touchableProps: PropTypes.object,
+  onLongPress: PropTypes.func,
+  renderMessageImage: PropTypes.func,
+  renderMessageText: PropTypes.func,
+  renderCustomView: PropTypes.func,
+  renderUsername: PropTypes.func,
+  renderTime: PropTypes.func,
+  renderTicks: PropTypes.func,
+  currentMessage: PropTypes.object,
+  nextMessage: PropTypes.object,
+  previousMessage: PropTypes.object,
+  user: PropTypes.object,
+  containerStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
-  wrapperStyle: React.PropTypes.shape({
+  wrapperStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
   messageTextStyle: Text.propTypes.style,
   usernameStyle: Text.propTypes.style,
   tickStyle: Text.propTypes.style,
-  containerToNextStyle: React.PropTypes.shape({
+  containerToNextStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
-  containerToPreviousStyle: React.PropTypes.shape({
+  containerToPreviousStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),

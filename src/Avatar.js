@@ -44,6 +44,7 @@ export default class Avatar extends React.PureComponent {
     }
     return (
       <GiftedAvatar
+        textStyle={this.props.avatarTextStyle[this.props.position]}
         avatarStyle={StyleSheet.flatten([
           styles[this.props.position].image,
           this.props.imageStyle[this.props.position],
@@ -71,6 +72,7 @@ export default class Avatar extends React.PureComponent {
       return (
         <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
           <GiftedAvatar
+            textStyle={this.props.avatarTextStyle[this.props.position]}
             avatarStyle={StyleSheet.flatten([
               styles[this.props.position].image,
               this.props.imageStyle[this.props.position],
@@ -106,6 +108,10 @@ Avatar.defaultProps = {
   nextMessage: {},
   containerStyle: {},
   imageStyle: {},
+  avatarTextStyle: {
+    left: {},
+    right: {},
+  },
   onPressAvatar: () => {},
 };
 
@@ -125,5 +131,9 @@ Avatar.propTypes = {
   imageStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
+  }),
+  avatarTextStyle: PropTypes.shape({
+    left: PropTypes.shape({}),
+    right: PropTypes.shape({}),
   }),
 };

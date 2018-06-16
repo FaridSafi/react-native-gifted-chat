@@ -100,7 +100,6 @@ export default class MessageContainer extends React.PureComponent {
           enableEmptySections
           automaticallyAdjustContentInsets={false}
           inverted={this.props.inverted}
-          {...this.props.listViewProps}
           data={this.props.messages}
           style={styles.listStyle}
           contentContainerStyle={styles.contentContainerStyle}
@@ -109,6 +108,7 @@ export default class MessageContainer extends React.PureComponent {
           renderFooter={this.renderLoadEarlier}
           {...this.props.invertibleScrollViewProps}
           ListFooterComponent={this.renderHeaderWrapper}
+          {...this.props.listViewProps}
         />
       </View>
     );

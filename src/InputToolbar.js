@@ -33,7 +33,7 @@ export default class InputToolbar extends React.Component {
   }
 
   keyboardWillShow() {
-    if (this.state !== 'relative') {
+    if (this.state.position !== 'relative') {
       this.setState({
         position: 'relative',
       });
@@ -41,7 +41,7 @@ export default class InputToolbar extends React.Component {
   }
 
   keyboardWillHide() {
-    if (this.state !== 'absolute') {
+    if (this.state.position !== 'absolute') {
       this.setState({
         position: 'absolute',
       });

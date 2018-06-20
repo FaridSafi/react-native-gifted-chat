@@ -21,8 +21,7 @@ export default function Day(
           <Text style={[styles.text, textStyle]}>
             {moment(currentMessage.createdAt)
               .locale(context.getLocale())
-              .format(dateFormat)
-              .toUpperCase()}
+              .format(dateFormat)}
           </Text>
         </View>
       </View>

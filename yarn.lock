@@ -4082,9 +4082,9 @@ react-native-invertible-scroll-view@^1.1.0:
     react-clone-referenced-element "^1.0.1"
     react-native-scrollable-mixin "^1.0.1"
 
-react-native-lightbox@^0.7.0:
+react-native-lightbox@OurPath/react-native-lightbox:
   version "0.7.0"
-  resolved "https://registry.yarnpkg.com/react-native-lightbox/-/react-native-lightbox-0.7.0.tgz#e52b4d7fcc141f59d7b23f0180de535e35b20ec9"
+  resolved "https://codeload.github.com/OurPath/react-native-lightbox/tar.gz/0a37652178b40e9cc38ffcca72bde7ccacde1aa7"
   dependencies:
     prop-types "^15.5.10"
 

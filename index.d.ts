@@ -195,9 +195,9 @@ export interface GiftedChatProps {
   /* Custom view inside the bubble */
   renderCustomView?(): React.ReactNode;
   /*Custom day above a message*/
-  renderDay?(): React.ReactNode;
+  renderDay?(props: DayProps): React.ReactNode;
   /* Custom time inside a message */
-  renderTime?(): React.ReactNode;
+  renderTime?(props: TimeProps): React.ReactNode;
   /* Custom footer component on the ListView, e.g. 'User is typing...' */
   renderFooter?(): React.ReactNode;
   /* Custom component to render below the MessageContainer (separate from the ListView) */

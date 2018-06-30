@@ -320,8 +320,8 @@ interface MessageTextProps {
   currentMessage?: IMessage;
   containerStyle?: LeftRightStyle<ViewStyle>;
   textStyle?: LeftRightStyle<TextStyle>;
-  linkStyle?: LeftRightStyle<LinkStyle>;
-  parsePatterns?(linkStyle: LinkStyle): any;
+  linkStyle?: LeftRightStyle<TextStyle>;
+  parsePatterns?(linkStyle: TextStyle): any;
   textProps?: TextProperties;
   customTextStyle?: TextStyle;
 }

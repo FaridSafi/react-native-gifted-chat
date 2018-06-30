@@ -21,6 +21,7 @@ export interface IChatMessage {
     name: string;
     avatar: string;
   };
+  image?: string;
 }
 
 export interface ISystemMessage {

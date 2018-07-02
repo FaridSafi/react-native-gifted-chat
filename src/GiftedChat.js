@@ -248,35 +248,39 @@ class GiftedChat extends React.Component {
 
   onKeyboardWillShow(e) {
     this.setIsTypingDisabled(true);
-    this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
-    this.setBottomOffset(this.props.bottomOffset);
-    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard();
-    if (this.props.isAnimated === true) {
-      Animated.timing(this.state.messagesContainerHeight, {
-        toValue: newMessagesContainerHeight,
-        duration: 210,
-      }).start();
-    } else {
-      this.setState({
-        messagesContainerHeight: newMessagesContainerHeight,
-      });
+    if (this.props.avoidKeyboard) {
+      this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
+      this.setBottomOffset(this.props.bottomOffset);
+      const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard();
+      if (this.props.isAnimated === true) {
+        Animated.timing(this.state.messagesContainerHeight, {
+          toValue: newMessagesContainerHeight,
+          duration: 210,
+        }).start();
+      } else {
+        this.setState({
+          messagesContainerHeight: newMessagesContainerHeight,
+        });
+      }
     }
   }
 
   onKeyboardWillHide() {
     this.setIsTypingDisabled(true);
-    this.setKeyboardHeight(0);
-    this.setBottomOffset(0);
-    const newMessagesContainerHeight = this.getBasicMessagesContainerHeight();
-    if (this.props.isAnimated === true) {
-      Animated.timing(this.state.messagesContainerHeight, {
-        toValue: newMessagesContainerHeight,
-        duration: 210,
-      }).start();
-    } else {
-      this.setState({
-        messagesContainerHeight: newMessagesContainerHeight,
-      });
+    if (this.props.avoidKeyboard) {
+      this.setKeyboardHeight(0);
+      this.setBottomOffset(0);
+      const newMessagesContainerHeight = this.getBasicMessagesContainerHeight();
+      if (this.props.isAnimated === true) {
+        Animated.timing(this.state.messagesContainerHeight, {
+          toValue: newMessagesContainerHeight,
+          duration: 210,
+        }).start();
+      } else {
+        this.setState({
+          messagesContainerHeight: newMessagesContainerHeight,
+        });
+      }
     }
   }
 
@@ -557,6 +561,7 @@ GiftedChat.defaultProps = {
   maxInputLength: null,
   forceGetKeyboardHeight: false,
   inverted: true,
+  avoidKeyboard: true
 };
 
 GiftedChat.propTypes = {
@@ -607,6 +612,7 @@ GiftedChat.propTypes = {
   forceGetKeyboardHeight: PropTypes.bool,
   inverted: PropTypes.bool,
   textInputProps: PropTypes.object,
+  avoidKeyboard: PropTypes.bool
 };
 
 export {

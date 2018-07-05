@@ -68,7 +68,7 @@
     "@expo/react-native-action-sheet": "^1.0.1",
     "moment": "^2.19.0",
     "react-native-communications": "2.2.1",
-    "react-native-lightbox": "^0.7.0",
+    "react-native-lightbox": "OurPath/react-native-lightbox#dd3ab775f07450251515e51c0efb26b46f7024b4",
     "react-native-parsed-text": "^0.0.20",
     "uuid": "3.2.1"
   },

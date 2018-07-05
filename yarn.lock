@@ -4377,9 +4377,9 @@ react-native-communications@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
 
-react-native-lightbox@^0.7.0:
+react-native-lightbox@OurPath/react-native-lightbox#dd3ab775f07450251515e51c0efb26b46f7024b4:
   version "0.7.0"
-  resolved "https://registry.yarnpkg.com/react-native-lightbox/-/react-native-lightbox-0.7.0.tgz#e52b4d7fcc141f59d7b23f0180de535e35b20ec9"
+  resolved "https://codeload.github.com/OurPath/react-native-lightbox/tar.gz/dd3ab775f07450251515e51c0efb26b46f7024b4"
   dependencies:
     prop-types "^15.5.10"
 

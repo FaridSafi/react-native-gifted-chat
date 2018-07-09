@@ -21,6 +21,7 @@ export interface IChatMessage {
     name: string;
     avatar: string;
   };
+  image?: string;
 }
 
 export interface ISystemMessage {
@@ -195,9 +196,9 @@ export interface GiftedChatProps {
   /* Custom view inside the bubble */
   renderCustomView?(): React.ReactNode;
   /*Custom day above a message*/
-  renderDay?(): React.ReactNode;
+  renderDay?(props: DayProps): React.ReactNode;
   /* Custom time inside a message */
-  renderTime?(): React.ReactNode;
+  renderTime?(props: TimeProps): React.ReactNode;
   /* Custom footer component on the ListView, e.g. 'User is typing...' */
   renderFooter?(): React.ReactNode;
   /* Custom component to render below the MessageContainer (separate from the ListView) */
@@ -320,8 +321,8 @@ interface MessageTextProps {
   currentMessage?: IMessage;
   containerStyle?: LeftRightStyle<ViewStyle>;
   textStyle?: LeftRightStyle<TextStyle>;
-  linkStyle?: LeftRightStyle<LinkStyle>;
-  parsePatterns?(linkStyle: LinkStyle): any;
+  linkStyle?: LeftRightStyle<TextStyle>;
+  parsePatterns?(linkStyle: TextStyle): any;
   textProps?: TextProperties;
   customTextStyle?: TextStyle;
 }

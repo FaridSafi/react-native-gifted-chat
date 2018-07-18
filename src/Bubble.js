@@ -121,10 +121,10 @@ export default class Bubble extends React.PureComponent {
   }
 
   renderUsername() {
-    const {currentMessage} = this.props;
+    const { currentMessage } = this.props;
     if (this.props.renderUsernameOnMessage) {
       if (currentMessage.user._id === this.props.user._id) {
-        return;
+        return null;
       }
       return (
         <View style={styles.usernameView}>
@@ -132,7 +132,7 @@ export default class Bubble extends React.PureComponent {
             ~ {currentMessage.user.name}
           </Text>
         </View>
-      )
+      );
     }
     return null;
   }
@@ -235,7 +235,7 @@ const styles = {
     left: 0,
     fontSize: 12,
     backgroundColor: 'transparent',
-    color: '#aaa'
+    color: '#aaa',
   },
   usernameView: {
     flexDirection: 'row',
@@ -253,6 +253,7 @@ Bubble.defaultProps = {
   renderMessageImage: null,
   renderMessageText: null,
   renderCustomView: null,
+  renderUsername: null,
   renderTicks: null,
   renderTime: null,
   position: 'left',
@@ -278,6 +279,7 @@ Bubble.propTypes = {
   renderMessageImage: PropTypes.func,
   renderMessageText: PropTypes.func,
   renderCustomView: PropTypes.func,
+  renderUsername: PropTypes.func,
   renderTime: PropTypes.func,
   renderTicks: PropTypes.func,
   position: PropTypes.oneOf(['left', 'right']),

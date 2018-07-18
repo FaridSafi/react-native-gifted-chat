@@ -268,6 +268,7 @@ Bubble.defaultProps = {
   wrapperStyle: {},
   bottomContainerStyle: {},
   tickStyle: {},
+  usernameStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
 };
@@ -279,6 +280,7 @@ Bubble.propTypes = {
   renderMessageImage: PropTypes.func,
   renderMessageText: PropTypes.func,
   renderCustomView: PropTypes.func,
+  renderUsernameOnMessage: PropTypes.bool,
   renderUsername: PropTypes.func,
   renderTime: PropTypes.func,
   renderTicks: PropTypes.func,
@@ -299,6 +301,7 @@ Bubble.propTypes = {
     right: ViewPropTypes.style,
   }),
   tickStyle: Text.propTypes.style,
+  usernameStyle: Text.propTypes.style,
   containerToNextStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,

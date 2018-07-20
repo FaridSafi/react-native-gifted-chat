@@ -3,43 +3,100 @@
     no-param-reassign: 0,
     no-use-before-define: ["error", { "variables": false }],
     no-return-assign: 0,
-    react/no-string-refs: 0,
-    react/sort-comp: 0
+    react/no-string-refs: 0
 */
 
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
-import { FlatList, View, StyleSheet } from 'react-native';
+import {
+  ListView,
+  View,
+  StyleSheet,
+  Dimensions,
+  ScrollView
+} from "react-native";
 
-import LoadEarlier from './LoadEarlier';
-import Message from './Message';
+import shallowequal from "shallowequal";
+import InvertibleScrollView from "react-native-invertible-scroll-view";
+import md5 from "md5";
+import LoadEarlier from "./LoadEarlier";
+import Message from "./Message";
 
-export default class MessageContainer extends React.PureComponent {
+const { width: WIDTH } = Dimensions.get("window");
 
+export default class MessageContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.renderRow = this.renderRow.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
-    this.renderHeaderWrapper = this.renderHeaderWrapper.bind(this);
+    this.renderScrollComponent = this.renderScrollComponent.bind(this);
+
+    const dataSource = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => {
+        return r1.hash !== r2.hash;
+      }
+    });
+
+    const messagesData = this.prepareMessages(props.messages);
+    this.state = {
+      dataSource: dataSource.cloneWithRows(messagesData.blob, messagesData.keys)
+    };
   }
 
-  renderFooter() {
-    if (this.props.renderFooter) {
-      const footerProps = {
-        ...this.props,
-      };
-      return this.props.renderFooter(footerProps);
+  componentWillReceiveProps(nextProps) {
+    if (this.props.messages === nextProps.messages) {
+      return;
     }
-    return null;
+    const messagesData = this.prepareMessages(nextProps.messages);
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(
+        messagesData.blob,
+        messagesData.keys
+      )
+    });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (!shallowequal(this.props, nextProps)) {
+      return true;
+    }
+    if (!shallowequal(this.state, nextState)) {
+      return true;
+    }
+    return false;
+  }
+
+  prepareMessages(messages) {
+    return {
+      keys: messages.map(m => m._id),
+      blob: messages.reduce((o, m, i) => {
+        const previousMessage = messages[i + 1] || {};
+        const nextMessage = messages[i - 1] || {};
+        // add next and previous messages to hash to ensure updates
+        const toHash =
+          JSON.stringify(m) + previousMessage._id + nextMessage._id;
+        o[m._id] = {
+          ...m,
+          previousMessage,
+          nextMessage,
+          hash: md5(toHash)
+        };
+        return o;
+      }, {})
+    };
+  }
+
+  scrollTo(options) {
+    this._invertibleScrollViewRef.scrollTo(options);
   }
 
   renderLoadEarlier() {
     if (this.props.loadEarlier === true) {
       const loadEarlierProps = {
-        ...this.props,
+        ...this.props
       };
       if (this.props.renderLoadEarlier) {
         return this.props.renderLoadEarlier(loadEarlierProps);
@@ -49,33 +106,46 @@ export default class MessageContainer extends React.PureComponent {
     return null;
   }
 
-  scrollTo(options) {
-    if (this.flatListRef) {
-      this.flatListRef.scrollToOffset(options);
+  renderFooter() {
+    if (this.props.renderFooter) {
+      const footerProps = {
+        ...this.props
+      };
+      return this.props.renderFooter(footerProps);
     }
+    return null;
   }
 
-  renderRow({ item, index }) {
-    if (!item._id && item._id !== 0) {
-      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
+  onScrollEndDrag = () => {
+    if (this._scrollView) {
+      this._scrollView.scrollTo({ x: 0, y: 0, animated: true });
     }
-    if (!item.user) {
-      if (!item.system) {
-        console.warn('GiftedChat: `user` is missing for message', JSON.stringify(item));
+  };
+
+  renderRow(message) {
+    if (!message._id && message._id !== 0) {
+      console.warn(
+        "GiftedChat: `_id` is missing for message",
+        JSON.stringify(message)
+      );
+    }
+    if (!message.user) {
+      if (!message.system) {
+        console.warn(
+          "GiftedChat: `user` is missing for message",
+          JSON.stringify(message)
+        );
       }
-      item.user = {};
+      message.user = {};
     }
-    const { messages, ...restProps } = this.props;
-    const previousMessage = messages[index + 1] || {};
-    const nextMessage = messages[index - 1] || {};
 
     const messageProps = {
-      ...restProps,
-      key: item._id,
-      currentMessage: item,
-      previousMessage,
-      nextMessage,
-      position: item.user._id === this.props.user._id ? 'right' : 'left',
+      ...this.props,
+      key: message._id,
+      currentMessage: message,
+      previousMessage: message.previousMessage,
+      nextMessage: message.nextMessage,
+      position: message.user._id === this.props.user._id ? "right" : "left"
     };
 
     if (this.props.renderMessage) {
@@ -84,62 +154,107 @@ export default class MessageContainer extends React.PureComponent {
     return <Message {...messageProps} />;
   }
 
-  renderHeaderWrapper() {
-    return <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>;
+  renderScrollComponent(props) {
+    const { invertibleScrollViewProps } = this.props;
+    return (
+      <InvertibleScrollView
+        {...props}
+        {...invertibleScrollViewProps}
+        ref={component => (this._invertibleScrollViewRef = component)}
+      />
+    );
   }
 
   render() {
-    if (this.props.messages.length === 0) {
-      return <View style={styles.container} />;
+    const contentContainerStyle = this.props.inverted
+      ? {}
+      : styles.notInvertedContentContainerStyle;
+
+    if (this.props.timeRenderMode === "sideScroll") {
+      return (
+        <View ref="container" style={styles.container}>
+          <ScrollView
+            ref={el => {
+              this._scrollView = el;
+            }}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            bouncesZoom={false}
+            bounces={false}
+            snapToAlignment="start"
+            onScrollEndDrag={this.onScrollEndDrag}
+            style={styles.scrollableTime}
+          >
+            <ListView
+              enableEmptySections
+              automaticallyAdjustContentInsets={false}
+              initialListSize={20}
+              pageSize={20}
+              {...this.props.listViewProps}
+              dataSource={this.state.dataSource}
+              contentContainerStyle={contentContainerStyle}
+              renderRow={this.renderRow}
+              renderHeader={
+                this.props.inverted ? this.renderFooter : this.renderLoadEarlier
+              }
+              renderFooter={
+                this.props.inverted ? this.renderLoadEarlier : this.renderFooter
+              }
+              renderScrollComponent={this.renderScrollComponent}
+            />
+          </ScrollView>
+        </View>
+      );
     }
+
     return (
-      <View style={styles.container}>
-        <FlatList
-          ref={(ref) => (this.flatListRef = ref)}
-          keyExtractor={(item) => item._id}
+      <View ref="container" style={styles.container}>
+        <ListView
           enableEmptySections
           automaticallyAdjustContentInsets={false}
-          inverted={this.props.inverted}
-          data={this.props.messages}
-          style={styles.listStyle}
-          contentContainerStyle={styles.contentContainerStyle}
-          renderItem={this.renderRow}
-          {...this.props.invertibleScrollViewProps}
-          ListFooterComponent={this.renderHeaderWrapper}
-          ListHeaderComponent={this.renderFooter}
+          initialListSize={20}
+          pageSize={20}
           {...this.props.listViewProps}
+          dataSource={this.state.dataSource}
+          contentContainerStyle={contentContainerStyle}
+          renderRow={this.renderRow}
+          renderHeader={
+            this.props.inverted ? this.renderFooter : this.renderLoadEarlier
+          }
+          renderFooter={
+            this.props.inverted ? this.renderLoadEarlier : this.renderFooter
+          }
+          renderScrollComponent={this.renderScrollComponent}
         />
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
-  contentContainerStyle: {
-    justifyContent: 'flex-end',
+  notInvertedContentContainerStyle: {
+    justifyContent: "flex-end"
   },
-  headerWrapper: {
-    flex: 1,
-  },
-  listStyle: {
-    flex: 1,
-  },
+  scrollableTime: {
+    //  width of the screen plus size of timestamp
+    width: WIDTH
+  }
 });
 
 MessageContainer.defaultProps = {
   messages: [],
   user: {},
+  timeRenderMode: "default",
   renderFooter: null,
   renderMessage: null,
   onLoadEarlier: () => {},
   inverted: true,
   loadEarlier: false,
   listViewProps: {},
-  invertibleScrollViewProps: {}, // TODO: support or not?
+  invertibleScrollViewProps: {}
 };
 
 MessageContainer.propTypes = {
@@ -152,5 +267,6 @@ MessageContainer.propTypes = {
   listViewProps: PropTypes.object,
   inverted: PropTypes.bool,
   loadEarlier: PropTypes.bool,
-  invertibleScrollViewProps: PropTypes.object, // TODO: support or not?
+  invertibleScrollViewProps: PropTypes.object,
+  timeRenderMode: PropTypes.oneOf(["default", "sideScroll"])
 };

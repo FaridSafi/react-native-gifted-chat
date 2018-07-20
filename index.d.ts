@@ -21,6 +21,7 @@ export interface IChatMessage {
     name: string;
     avatar: string;
   };
+  image?: string;
 }
 
 export interface ISystemMessage {
@@ -135,7 +136,7 @@ export class GiftedAvatarProps extends React.Component<GiftedAvatarProps> { }
 
 export interface GiftedChatProps {
   /* Messages to display */
-  messages?: any[];
+  messages?: IMessage[];
   /* Input text; default is undefined, but if specified, it will override GiftedChat's internal state */
   text?: string;
   /* Placeholder when text is empty; default is 'Type a message...' */
@@ -183,7 +184,7 @@ export interface GiftedChatProps {
   /* Reverses display order of messages; default is true */
   inverted?: boolean;
   /*Custom message container */
-  renderMessage?(message: any): React.ReactNode;
+  renderMessage?(message: IMessage): React.ReactNode;
   /* Custom message text */
   renderMessageText?(messageText: MessageTextProps): React.ReactNode;
   /* Custom message image */
@@ -195,9 +196,9 @@ export interface GiftedChatProps {
   /* Custom view inside the bubble */
   renderCustomView?(): React.ReactNode;
   /*Custom day above a message*/
-  renderDay?(): React.ReactNode;
+  renderDay?(props: DayProps): React.ReactNode;
   /* Custom time inside a message */
-  renderTime?(): React.ReactNode;
+  renderTime?(props: TimeProps): React.ReactNode;
   /* Custom footer component on the ListView, e.g. 'User is typing...' */
   renderFooter?(): React.ReactNode;
   /* Custom component to render below the MessageContainer (separate from the ListView) */
@@ -234,15 +235,15 @@ export interface GiftedChatProps {
 
 export class GiftedChat extends React.Component<GiftedChatProps> {
   static append(
-    currentMessages: any[],
-    messages: any[],
+    currentMessages: IMessage[],
+    messages: IMessage[],
     inverted?: boolean
-  ): any[];
+  ): IMessage[];
   static prepend(
-    currentMessages: any[],
-    messages: any[],
+    currentMessages: IMessage[],
+    messages: IMessage[],
     inverted?: boolean
-  ): any[];
+  ): IMessage[];
 }
 
 interface InputToolbarProps {
@@ -320,8 +321,8 @@ interface MessageTextProps {
   currentMessage?: IMessage;
   containerStyle?: LeftRightStyle<ViewStyle>;
   textStyle?: LeftRightStyle<TextStyle>;
-  linkStyle?: LeftRightStyle<LinkStyle>;
-  parsePatterns?(linkStyle: LinkStyle): any;
+  linkStyle?: LeftRightStyle<TextStyle>;
+  parsePatterns?(linkStyle: TextStyle): any;
   textProps?: TextProperties;
   customTextStyle?: TextStyle;
 }

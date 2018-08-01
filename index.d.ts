@@ -206,13 +206,13 @@ export interface GiftedChatProps {
   /* Custom message composer container */
   renderInputToolbar?(props: InputToolbarProps): React.ReactNode;
   /*  Custom text input message composer */
-  renderComposer?(): React.ReactNode;
+  renderComposer?(props: ComposerProps): React.ReactNode;
   /* Custom action button on the left of the message composer */
-  renderActions?(): React.ReactNode;
+  renderActions?(props: ActionsProps): React.ReactNode;
   /* Custom send button; you can pass children to the original Send component quite easily, for example to use a custom icon (example) */
-  renderSend?(): React.ReactNode;
+  renderSend?(props: SendProps): React.ReactNode;
   /*Custom second line of actions below the message composer */
-  renderAccessory?(): React.ReactNode;
+  renderAccessory?(props: InputToolbarProps): React.ReactNode;
   /*Callback when the Action button is pressed (if set, the default actionSheet will not be used) */
   onPressActionButton?(): void;
   /*Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar) */
@@ -248,9 +248,9 @@ export class GiftedChat extends React.Component<GiftedChatProps> {
 
 interface InputToolbarProps {
   renderAccessory?(props: InputToolbarProps): React.ReactNode;
-  renderActions?(props: InputToolbarProps): React.ReactNode;
-  renderSend?(props: InputToolbarProps): React.ReactNode;
-  renderComposer?(props: InputToolbarProps): React.ReactNode;
+  renderActions?(props: ActionsProps): React.ReactNode;
+  renderSend?(props: SendProps): React.ReactNode;
+  renderComposer?(props: ComposerProps): React.ReactNode;
   onPressActionButton?(): void;
   containerStyle?: ViewStyle;
   primaryStyle?: ViewStyle;

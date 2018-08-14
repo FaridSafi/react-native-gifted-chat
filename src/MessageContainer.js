@@ -117,13 +117,12 @@ export default class MessageContainer extends React.PureComponent {
   }
 
   render() {
-    if (this.props.messages.length === 0) {
-      return <View style={styles.container} />;
-    }
     return (
       <View style={styles.container}>
         <FlatList
-          ref={(ref) => { this.flatListRef = ref; }}
+          ref={(ref) => {
+            this.flatListRef = ref;
+          }}
           keyExtractor={(item) => `item-${item._id}`}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
@@ -132,10 +131,10 @@ export default class MessageContainer extends React.PureComponent {
           style={styles.listStyle}
           contentContainerStyle={styles.contentContainerStyle}
           renderItem={this.renderRow}
-          {...this.props.invertibleScrollViewProps}
-          {...this.props.listViewProps}
+          ListEmptyComponent={<View style={styles.container} />}
           ListFooterComponent={this.renderHeaderWrapper}
           ListHeaderComponent={this.renderFooter}
+          {...this.props.invertibleScrollViewProps}
           {...this.props.listViewProps}
         />
       </View>

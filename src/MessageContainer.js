@@ -44,14 +44,14 @@ export default class MessageContainer extends React.PureComponent {
     if (this.props.isAnimated && this.props.messages.length > prevProps.messages.length) {
       this.flatListRef.scrollToIndex({
         animated: false,
-        index: 1
+        index: 1,
       });
       setTimeout(() => {
         this.flatListRef.scrollToIndex({
           animated: true,
-            index: 0,
+          index: 0,
         });
-      }, 50)
+      }, 50);
     }
   }
 
@@ -196,5 +196,6 @@ MessageContainer.propTypes = {
   listViewProps: PropTypes.object,
   inverted: PropTypes.bool,
   loadEarlier: PropTypes.bool,
+  isAnimated: PropTypes.bool,
   invertibleScrollViewProps: PropTypes.object, // TODO: support or not?
 };

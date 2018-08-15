@@ -40,6 +40,21 @@ export default class MessageContainer extends React.PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.isAnimated && this.props.messages.length > prevProps.messages.length) {
+      this.flatListRef.scrollToIndex({
+        animated: false,
+        index: 1
+      });
+      setTimeout(() => {
+        this.flatListRef.scrollToIndex({
+          animated: true,
+            index: 0,
+        });
+      }, 50)
+    }
+  }
+
   attachKeyboardListeners(props) {
     Keyboard.addListener('keyboardWillShow', props.invertibleScrollViewProps.onKeyboardWillShow);
     Keyboard.addListener('keyboardDidShow', props.invertibleScrollViewProps.onKeyboardDidShow);
@@ -136,6 +151,7 @@ export default class MessageContainer extends React.PureComponent {
           ListFooterComponent={this.renderHeaderWrapper}
           ListHeaderComponent={this.renderFooter}
           {...this.props.listViewProps}
+          onScrollToIndexFailed={() => {}}
         />
       </View>
     );

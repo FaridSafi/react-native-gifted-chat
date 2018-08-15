@@ -42,10 +42,12 @@ export default class MessageContainer extends React.PureComponent {
 
   componentDidUpdate(prevProps) {
     if (this.props.isAnimated && this.props.messages.length > prevProps.messages.length) {
-      this.flatListRef.scrollToIndex({
-        animated: false,
-        index: 1,
-      });
+      if (this.props.messages.length > 1) {
+        this.flatListRef.scrollToIndex({
+          animated: false,
+          index: 1,
+        });
+      }
       setTimeout(() => {
         this.flatListRef.scrollToIndex({
           animated: true,

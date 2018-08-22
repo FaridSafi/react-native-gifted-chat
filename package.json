@@ -70,7 +70,7 @@
     "react-native-communications": "2.2.1",
     "react-native-fit-image": "^1.5.4",
     "react-native-lightbox": "^0.7.0",
-    "react-native-markdown-renderer": "^3.2.6",
+    "react-native-markdown-renderer": "^3.2.8",
     "react-native-parsed-text": "^0.0.20",
     "uuid": "3.3.0"
   },

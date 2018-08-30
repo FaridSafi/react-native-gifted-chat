@@ -15,6 +15,8 @@ import { FlatList, View, StyleSheet, Keyboard } from 'react-native';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 import moment from 'moment';
+import { DATE_FORMAT } from './Constant';
+
 export default class MessageContainer extends React.PureComponent {
 
   constructor(props) {
@@ -88,12 +90,14 @@ export default class MessageContainer extends React.PureComponent {
     return null;
   }
 
-  renderDateBubble(date) {
-    return this.props.renderDateBubble ? this.props.renderDateBubble({ date: date }) : null
+  renderDateBubble() {
+    return this.props.renderDateBubble ?
+      this.props.renderDateBubble({ date: this.state.currentDate }) : null
   }
 
   renderGoBottomButton() {
-    return this.props.renderGoBottomButton ? this.props.renderGoBottomButton({ onPress: this.scrollToBottom }) : null
+    return this.props.renderGoBottomButton ?
+      this.props.renderGoBottomButton({ onPress: this.scrollToBottom }) : null
   }
 
   scrollTo(options) {
@@ -102,14 +106,15 @@ export default class MessageContainer extends React.PureComponent {
     }
   }
 
-  //new function --->
   scrollToBottom = () => {
     this.scrollTo({ offset: 0, animated: 'true' });
   }
 
   handleOnScroll(event) {
     if (this.props.renderGoBottomButton) {
-      if (event.nativeEvent.contentOffset.y > 200) {
+      const offSet = this.props.goButtomButtonOffset > 0 ?
+        this.props.goButtomButtonOffset : 200
+      if (event.nativeEvent.contentOffset.y > offSet) {
         this.setState({ showGoToBottomButton: true });
       } else {
         this.setState({ showGoToBottomButton: false });
@@ -118,22 +123,28 @@ export default class MessageContainer extends React.PureComponent {
   }
 
   onViewableItemsChanged = ({ viewableItems }) => {
-    let dateDiff = ''
-    if (viewableItems && viewableItems.length > 0 && this.state.showGoToBottomButton) {
-      const msg = viewableItems[viewableItems.length - 1].item
-      dateDiff = moment(msg.createdAt).calendar(null, {
-        sameDay: '[]',
-        nextDay: '[]',
-        nextWeek: '[]',
-        lastDay: 'DD-MM-YYYY',
-        lastWeek: 'DD-MM-YYYY',
-        sameElse: 'DD-MM-YYYY'
+    if (this.props.renderDateBubble) {
+      let dateDiff = ''
+
+      if (viewableItems && viewableItems.length > 0 &&
+        this.state.showGoToBottomButton) {
+        const msg = viewableItems[viewableItems.length - 1].item
+        if (msg && msg.createdAt) {
+          dateDiff = moment(msg.createdAt).calendar(null, {
+            sameDay: '[]',
+            nextDay: '[]',
+            nextWeek: '[]',
+            lastDay: this.props.lastDayStr,
+            lastWeek: this.props.dateFormat,
+            sameElse: this.props.dateFormat,
+          })
+        }
+      }
+
+      this.setState({
+        currentDate: dateDiff,
       })
     }
-
-    this.setState({
-      currentDate: dateDiff,
-    })
   }
 
   renderRow({ item, index }) {
@@ -192,12 +203,12 @@ export default class MessageContainer extends React.PureComponent {
           //new
           windowSize={30}
           onEndReachedThreshold={10}
-          onScroll={this.handleOnScroll}
           scrollEventThrottle={100}
+          onScroll={this.handleOnScroll}
           onViewableItemsChanged={this.onViewableItemsChanged}
         />
-        {this.renderDateBubble(this.state.currentDate)}
-        {this.state.showGoToBottomButton && this.renderGoBottomButton}
+        {this.state.currentDate && this.renderDateBubble()}
+        {this.state.showGoToBottomButton && this.renderGoBottomButton()}
       </View>
     );
   }
@@ -232,6 +243,9 @@ MessageContainer.defaultProps = {
 
   renderDateBubble: null,
   renderGoBottomButton: null,
+  lastDayStr: '[]',
+  dateFormat: DATE_FORMAT,
+  goButtomButtonOffset: 200,
 };
 
 MessageContainer.propTypes = {
@@ -248,7 +262,7 @@ MessageContainer.propTypes = {
 
   renderDateBubble: PropTypes.func,
   renderGoBottomButton: PropTypes.func,
+  lastDayStr: PropTypes.string,
+  dateFormat: PropTypes.string,
+  goButtomButtonOffset: PropTypes.number,
 };
-
-
-

@@ -315,7 +315,6 @@ class GiftedChat extends React.Component {
           invertibleScrollViewProps={this.invertibleScrollViewProps}
           messages={this.getMessages()}
           ref={(component) => (this._messageContainerRef = component)}
-
         />
         {this.renderChatFooter()}
       </AnimatedView>
@@ -560,6 +559,8 @@ GiftedChat.defaultProps = {
 
   renderDateBubble: null,
   renderGoBottomButton: null,
+  lastDayStr: '[]',
+  goButtomButtonOffset: 200,
 };
 
 GiftedChat.propTypes = {
@@ -613,6 +614,8 @@ GiftedChat.propTypes = {
 
   renderDateBubble: PropTypes.func,
   renderGoBottomButton: PropTypes.func,
+  lastDayStr: PropTypes.string,
+  goButtomButtonOffset: PropTypes.number,
 };
 
 export {

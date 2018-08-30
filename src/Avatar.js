@@ -76,6 +76,7 @@ export default class Avatar extends React.PureComponent {
             avatarStyle={StyleSheet.flatten([
               styles[this.props.position].image,
               this.props.imageStyle[this.props.position],
+              { backgroundColor: 'transparent' },
             ])}
           />
         </View>

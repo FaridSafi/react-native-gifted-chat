@@ -152,7 +152,9 @@ export default class MessageContainer extends React.PureComponent {
     }
 
     if (this.props.renderDateBubble) {
-      showDateBubble = yOffset > this.props.dateBubbleOffset
+      const targetOffset = this.props.dateBubbleOffset > 0 ?
+        this.props.dateBubbleOffset : 200
+      showDateBubble = yOffset > targetOffset
     }
 
     this.setState({
@@ -173,7 +175,7 @@ export default class MessageContainer extends React.PureComponent {
             sameDay: '[]',
             nextDay: '[]',
             nextWeek: '[]',
-            lastDay: this.props.lastDayStr,
+            lastDay: '[' + this.props.lastDayStr + ']',
             lastWeek: this.props.dateFormat,
             sameElse: this.props.dateFormat,
           })
@@ -284,7 +286,7 @@ MessageContainer.defaultProps = {
 
   renderDateBubble: null,
   renderGoBottomButton: null,
-  lastDayStr: '[]',
+  lastDayStr: '',
   dateFormat: DATE_FORMAT,
   dateBubbleOffset: 200,
   goButtomButtonOffset: 200,

@@ -560,6 +560,7 @@ GiftedChat.defaultProps = {
   renderDateBubble: null,
   renderGoBottomButton: null,
   lastDayStr: '[]',
+  dateBubbleOffset: 200,
   goButtomButtonOffset: 200,
 };
 
@@ -615,6 +616,7 @@ GiftedChat.propTypes = {
   renderDateBubble: PropTypes.func,
   renderGoBottomButton: PropTypes.func,
   lastDayStr: PropTypes.string,
+  dateBubbleOffset: PropTypes.number,
   goButtomButtonOffset: PropTypes.number,
 };
 

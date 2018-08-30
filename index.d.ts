@@ -235,6 +235,7 @@ export interface GiftedChatProps {
   renderDateBubble?(): React.ReactNode;
   renderGoBottomButton?(): React.ReactNode;
   lastDayStr?: string;
+  dateBubbleOffset: number,
   goButtomButtonOffset?: number;
 }
 

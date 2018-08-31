@@ -233,10 +233,10 @@ export interface GiftedChatProps {
   parsePatterns?(): React.ReactNode;
 
   renderDateBubble?(): React.ReactNode;
-  renderGoBottomButton?(): React.ReactNode;
-  lastDayStr?: string;
   dateBubbleOffset: number,
-  goButtomButtonOffset?: number;
+  dateBUbbleTimeout?: number;
+  renderScrollToBottomButton?(): React.ReactNode;
+  scrollToButtomButtonOffset?: number;
 }
 
 export class GiftedChat extends React.Component<GiftedChatProps> {

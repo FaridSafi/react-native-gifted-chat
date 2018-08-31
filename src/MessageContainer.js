@@ -96,13 +96,15 @@ export default class MessageContainer extends React.PureComponent {
   }
 
   renderDateBubble() {
+    const dateBubbleProps = { date: this.state.currentDate }
     return this.props.renderDateBubble ?
-      this.props.renderDateBubble({ date: this.state.currentDate }) : null
+      this.props.renderDateBubble(dateBubbleProps) : null
   }
 
   renderGoBottomButton() {
+    const buttonProps = { onPress: this.scrollToBottom }
     return this.props.renderGoBottomButton ?
-      this.props.renderGoBottomButton({ onPress: this.scrollToBottom }) : null
+      this.props.renderGoBottomButton(buttonProps) : null
   }
 
   scrollTo(options) {
@@ -120,13 +122,11 @@ export default class MessageContainer extends React.PureComponent {
   }
 
   hideDateBuddle() {
-    if (this.props.renderDateBubble) {
-      if (!this.dateBubbleDisappearTimer) {
-        this.dateBubbleDisappearTimer = setTimeout(
-          () => { this.setState({ currentDate: '' }) }
-          , 1000
-        )
-      }
+    if (this.props.renderDateBubble && !this.dateBubbleDisappearTimer) {
+      this.dateBubbleDisappearTimer = setTimeout(
+        () => { this.setState({ currentDate: '' }) }
+        , this.props.dateBubbleTimeout
+      )
     }
   }
 
@@ -145,8 +145,8 @@ export default class MessageContainer extends React.PureComponent {
     }
 
     if (this.props.renderGoBottomButton) {
-      const targetOffset = this.props.goButtomButtonOffset > 0 ?
-        this.props.goButtomButtonOffset : 200
+      const targetOffset = this.props.scrollToButtomButtonOffset > 0 ?
+        this.props.scrollToButtomButtonOffset : 200
 
       showGoToBottomButton = yOffset > targetOffset
     }
@@ -165,25 +165,18 @@ export default class MessageContainer extends React.PureComponent {
 
   onViewableItemsChanged = ({ viewableItems }) => {
     if (this.props.renderDateBubble) {
-      let dateDiff = ''
+      let currentDate = ''
 
       if (viewableItems && viewableItems.length > 0 &&
         this.state.showDateBubble) {
         const msg = viewableItems[viewableItems.length - 1].item
         if (msg && msg.createdAt) {
-          dateDiff = moment(msg.createdAt).calendar(null, {
-            sameDay: '[]',
-            nextDay: '[]',
-            nextWeek: '[]',
-            lastDay: '[' + this.props.lastDayStr + ']',
-            lastWeek: this.props.dateFormat,
-            sameElse: this.props.dateFormat,
-          })
+          currentDate = msg.createdAt
         }
       }
 
       this.setState({
-        currentDate: dateDiff,
+        currentDate: currentDate,
       })
     }
   }
@@ -242,7 +235,6 @@ export default class MessageContainer extends React.PureComponent {
           ListHeaderComponent={this.renderFooter}
           {...this.props.listViewProps}
           //new
-          windowSize={30}
           onEndReachedThreshold={10}
           scrollEventThrottle={100}
           onScroll={this.onScroll}
@@ -285,11 +277,10 @@ MessageContainer.defaultProps = {
   invertibleScrollViewProps: {}, // TODO: support or not?
 
   renderDateBubble: null,
-  renderGoBottomButton: null,
-  lastDayStr: '',
-  dateFormat: DATE_FORMAT,
   dateBubbleOffset: 200,
-  goButtomButtonOffset: 200,
+  dateBubbleTimeout: 1000,
+  renderScrollToBottomButton: null,
+  scrollToButtomButtonOffset: 200,
 };
 
 MessageContainer.propTypes = {
@@ -305,9 +296,7 @@ MessageContainer.propTypes = {
   invertibleScrollViewProps: PropTypes.object, // TODO: support or not?
 
   renderDateBubble: PropTypes.func,
-  renderGoBottomButton: PropTypes.func,
-  lastDayStr: PropTypes.string,
-  dateFormat: PropTypes.string,
+  renderScrollToBottomButton: PropTypes.func,
   dateBubbleOffset: PropTypes.number,
-  goButtomButtonOffset: PropTypes.number,
+  scrollToButtomButtonOffset: PropTypes.number,
 };

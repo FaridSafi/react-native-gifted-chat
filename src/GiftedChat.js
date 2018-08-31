@@ -614,10 +614,10 @@ GiftedChat.propTypes = {
   textInputProps: PropTypes.object,
 
   renderDateBubble: PropTypes.func,
-  renderGoBottomButton: PropTypes.func,
-  lastDayStr: PropTypes.string,
   dateBubbleOffset: PropTypes.number,
-  goButtomButtonOffset: PropTypes.number,
+  dateBubbleTimeout : PropTypes.number,
+  renderScrollToBottomButton: PropTypes.func,
+  scrollToButtomButtonOffset: PropTypes.number,
 };
 
 export {

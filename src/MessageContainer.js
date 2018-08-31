@@ -34,13 +34,13 @@ export default class MessageContainer extends React.PureComponent {
     //new
     this.state = {
       showDateBubble: false,
-      showGoToBottomButton: false,
+      showScrollToBottomButton: false,
       currentDate: ''
     }
 
     this.onScroll = this.onScroll.bind(this);
     this.onViewableItemsChanged = this.onViewableItemsChanged.bind(this);
-    this.renderGoBottomButton = this.renderGoBottomButton.bind(this);
+    this.renderScrollToBottomButton = this.renderScrollToBottomButton.bind(this);
     this.renderDateBubble = this.renderDateBubble.bind(this);
 
     this.onMomentumScrollEnd = this.onMomentumScrollEnd.bind(this);
@@ -99,10 +99,10 @@ export default class MessageContainer extends React.PureComponent {
       this.props.renderDateBubble(dateBubbleProps) : null
   }
 
-  renderGoBottomButton() {
+  renderScrollToBottomButton() {
     const buttonProps = { onPress: this.scrollToBottom }
-    return this.props.renderGoBottomButton ?
-      this.props.renderGoBottomButton(buttonProps) : null
+    return this.props.renderScrollToBottomButton ?
+      this.props.renderScrollToBottomButton(buttonProps) : null
   }
 
   scrollTo(options) {
@@ -137,18 +137,18 @@ export default class MessageContainer extends React.PureComponent {
   onScroll(event) {
     const yOffset = event.nativeEvent.contentOffset.y
     let showDateBubble = this.state.showDateBubble
-    let showGoToBottomButton = this.state.showGoToBottomButton
+    let showScrollToBottomButton = this.state.showScrollToBottomButton
 
     if (this.dateBubbleDisappearTimer) {
       clearTimeout(this.dateBubbleDisappearTimer);
       this.dateBubbleDisappearTimer = null;
     }
 
-    if (this.props.renderGoBottomButton) {
+    if (this.props.renderScrollToBottomButton) {
       const targetOffset = this.props.scrollToButtomButtonOffset > 0 ?
         this.props.scrollToButtomButtonOffset : 200
 
-      showGoToBottomButton = yOffset > targetOffset
+        showScrollToBottomButton = yOffset > targetOffset
     }
 
     if (this.props.renderDateBubble) {
@@ -159,7 +159,7 @@ export default class MessageContainer extends React.PureComponent {
 
     this.setState({
       showDateBubble: showDateBubble,
-      showGoToBottomButton: showGoToBottomButton,
+      showScrollToBottomButton: showScrollToBottomButton,
     })
   }
 
@@ -242,8 +242,8 @@ export default class MessageContainer extends React.PureComponent {
           onMomentumScrollEnd={this.onMomentumScrollEnd}
           onScrollEndDrag={this.onScrollEndDrag}
         />
-        {this.state.currentDate && this.renderDateBubble()}
-        {this.state.showGoToBottomButton && this.renderGoBottomButton()}
+        {!!this.state.currentDate && this.renderDateBubble()}
+        {this.state.showScrollToBottomButton && this.renderScrollToBottomButton()}
       </View>
     );
   }

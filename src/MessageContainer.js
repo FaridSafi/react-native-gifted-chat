@@ -14,8 +14,6 @@ import { FlatList, View, StyleSheet, Keyboard } from 'react-native';
 
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
-import moment from 'moment';
-import { DATE_FORMAT } from './Constant';
 
 export default class MessageContainer extends React.PureComponent {
 

@@ -123,9 +123,11 @@ export default class MessageContainer extends React.PureComponent {
 
   hideDateBuddle() {
     if (this.props.renderDateBubble && !this.dateBubbleDisappearTimer) {
+      const timeout = this.props.dateBubbleTimeout > 0 ?
+        this.props.dateBubbleTimeout : 1000
       this.dateBubbleDisappearTimer = setTimeout(
         () => { this.setState({ currentDate: '' }) }
-        , this.props.dateBubbleTimeout
+        , timeout
       )
     }
   }

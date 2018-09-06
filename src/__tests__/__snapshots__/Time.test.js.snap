@@ -26,6 +26,7 @@ exports[`should render <Time /> and compare with snapshot 1`] = `
           "textAlign": "right",
         },
         undefined,
+        undefined,
       ]
     }
   >

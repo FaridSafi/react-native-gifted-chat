@@ -7,7 +7,16 @@
     "type": "git",
     "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
   },
-  "keywords": ["android", "ios", "react-native", "react", "react-component", "messenger", "message", "chat"],
+  "keywords": [
+    "android",
+    "ios",
+    "react-native",
+    "react",
+    "react-component",
+    "messenger",
+    "message",
+    "chat"
+  ],
   "author": "Farid Safi",
   "license": "MIT",
   "bugs": {
@@ -21,13 +30,18 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "appr": "cd example-expo && ./setPRVersion.js && yarn && yarn appr",
-    "deploy":
-      "cd example-expo && yarn install && exp login --username $EXP_USERNAME --password $EXP_PASSWORD && exp publish --non-interactive"
+    "deploy": "cd example-expo && yarn install && exp login --username $EXP_USERNAME --password $EXP_PASSWORD && exp publish --non-interactive"
   },
   "jest": {
     "preset": "react-native",
-    "setupFiles": ["./tests/setup.js"],
-    "modulePathIgnorePatterns": ["<rootDir>/example", "<rootDir>/example-expo", "<rootDir>/example-slack-message"]
+    "setupFiles": [
+      "./tests/setup.js"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/example",
+      "<rootDir>/example-expo",
+      "<rootDir>/example-slack-message"
+    ]
   },
   "devDependencies": {
     "@types/react": "^16.0.38",
@@ -54,7 +68,7 @@
     "moment": "^2.19.0",
     "prop-types": "15.6.1",
     "react-native-communications": "2.2.1",
-    "react-native-invertible-scroll-view": "^1.1.0",
+    "react-native-invertible-scroll-view": "git+https://github.com/Singloo/react-native-invertible-scroll-view.git",
     "react-native-lightbox": "^0.7.0",
     "react-native-parsed-text": "^0.0.20",
     "shallowequal": "1.0.2",

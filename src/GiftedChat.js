@@ -371,7 +371,7 @@ class GiftedChat extends React.Component {
       if (this.getMaxHeight() !== layout.height && this.getIsFirstLayout() === true) {
         this.setMaxHeight(layout.height);
         this.setState({
-          messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
+          messagesContainerHeight: this.prepareMessagesContainerHeight(this.getBasicMessagesContainerHeight() - this.getKeyboardHeight()),
         });
       }
     }

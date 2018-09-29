@@ -16,6 +16,7 @@ export default class Bubble extends React.PureComponent {
   constructor(props) {
     super(props);
     this.onLongPress = this.onLongPress.bind(this);
+    this.onPress = this.onPress.bind(this);
   }
 
   onLongPress() {
@@ -39,6 +40,12 @@ export default class Bubble extends React.PureComponent {
           }
         },
       );
+    }
+  }
+
+  onPress() {
+    if (this.props.onPress) {
+      this.props.onPress(this.context, this.props.currentMessage);
     }
   }
 

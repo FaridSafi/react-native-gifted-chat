@@ -216,6 +216,7 @@ e.g. System Message
     ]}
   />
   ```
+* **`disableKeyboardAvoiding`** _(Bool)_ - If true, do not adjust for the onscreen keyboard. Useful if you're managing keyboard avoidance yourself.
 
 ## Imperative methods
 

@@ -172,7 +172,7 @@ class GiftedChat extends React.Component {
 
   getKeyboardHeight() {
     // if true, then always force keyboard height to zero
-    if (this.props.forceKeyboardHeightToZero) {
+    if (this.props.disableKeyboardAvoiding) {
       return 0;
     }
     if (Platform.OS === 'android' && !this.props.forceGetKeyboardHeight) {
@@ -560,7 +560,7 @@ GiftedChat.defaultProps = {
   onInputTextChanged: null,
   maxInputLength: null,
   forceGetKeyboardHeight: false,
-  forceKeyboardHeightToZero: false,
+  disableKeyboardAvoiding: false,
   inverted: true,
 };
 
@@ -610,7 +610,7 @@ GiftedChat.propTypes = {
   onInputTextChanged: PropTypes.func,
   maxInputLength: PropTypes.number,
   forceGetKeyboardHeight: PropTypes.bool,
-  forceKeyboardHeightToZero: PropTypes.bool,
+  disableKeyboardAvoiding: PropTypes.bool,
   inverted: PropTypes.bool,
   textInputProps: PropTypes.object,
 };

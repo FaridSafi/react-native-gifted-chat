@@ -171,6 +171,10 @@ class GiftedChat extends React.Component {
   }
 
   getKeyboardHeight() {
+    // if true, then always force keyboard height to zero
+    if (this.props.forceKeyboardHeightToZero) {
+      return 0;
+    }
     if (Platform.OS === 'android' && !this.props.forceGetKeyboardHeight) {
       // For android: on-screen keyboard resized main container and has own height.
       // @see https://developer.android.com/training/keyboard-input/visibility.html
@@ -556,6 +560,7 @@ GiftedChat.defaultProps = {
   onInputTextChanged: null,
   maxInputLength: null,
   forceGetKeyboardHeight: false,
+  forceKeyboardHeightToZero: false,
   inverted: true,
 };
 
@@ -605,6 +610,7 @@ GiftedChat.propTypes = {
   onInputTextChanged: PropTypes.func,
   maxInputLength: PropTypes.number,
   forceGetKeyboardHeight: PropTypes.bool,
+  forceKeyboardHeightToZero: PropTypes.bool,
   inverted: PropTypes.bool,
   textInputProps: PropTypes.object,
 };

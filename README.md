@@ -12,6 +12,9 @@
   The most complete chat UI for React Native <br/>
   <small>formerly known as Gifted Messenger</small>
 </p>
+
+<h1>** PLEASE NOTE: WE DON'T HAVE TIME TO UPDATE THIS LIBRARY, WE DON'T HAVE TIME TO EVEN CHECK THE PRS AND ISSUES , SO PLEASE BE CAREFUL TO USE IT **</h1>
+
 <p align="center">
   <a href="https://www.npmjs.com/package/react-native-gifted-chat">
   <img alt="npm dowloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>

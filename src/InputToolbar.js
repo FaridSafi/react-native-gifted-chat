@@ -16,6 +16,8 @@ export default class InputToolbar extends React.Component {
 
     this.keyboardWillShow = this.keyboardWillShow.bind(this);
     this.keyboardWillHide = this.keyboardWillHide.bind(this);
+    this.keyboardDidShow = this.keyboardDidShow.bind(this);
+    this.keyboardDidHide = this.keyboardDidHide.bind(this);
 
     this.state = {
       position: 'absolute',
@@ -25,11 +27,15 @@ export default class InputToolbar extends React.Component {
   componentWillMount() {
     this.keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
     this.keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+    this.keyboardDidShow = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+    this.keyboardDidHide = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
   }
 
   componentWillUnmount() {
     this.keyboardWillShowListener.remove();
     this.keyboardWillHideListener.remove();
+    this.keyboardDidShow.remove();
+    this.keyboardDidHide.remove();
   }
 
   keyboardWillShow() {
@@ -46,6 +52,17 @@ export default class InputToolbar extends React.Component {
         position: 'absolute',
       });
     }
+  }
+  keyboardDidShow(props) {
+      console.log("InputToolbar keyboardDidShow=>", this.props)
+      this.props.invertibleScrollViewProps.onKeyboardDidShow
+      this.keyboardWillShow()
+  }
+
+  keyboardDidHide(props) {
+      console.log("InputToolbar keyboardDidHide=>", this.props)
+      this.props.invertibleScrollViewProps.onKeyboardDidHide
+      this.keyboardWillHide()
   }
 
   renderActions() {

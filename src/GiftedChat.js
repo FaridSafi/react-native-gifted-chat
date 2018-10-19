@@ -444,6 +444,7 @@ class GiftedChat extends React.Component {
         ref: (textInput) => (this.textInput = textInput),
         maxLength: this.getIsTypingDisabled() ? 0 : this.props.maxInputLength,
       },
+      invertibleScrollViewProps: this.invertibleScrollViewProps
     };
     if (this.props.renderInputToolbar) {
       return this.props.renderInputToolbar(inputToolbarProps);

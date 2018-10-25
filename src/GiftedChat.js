@@ -48,6 +48,7 @@ class GiftedChat extends React.Component {
     this._isMounted = false;
     this._keyboardHeight = 0;
     this._bottomOffset = 0;
+    this._otherInputToolbarHeight = 0;
     this._maxHeight = null;
     this._isFirstLayout = true;
     this._locale = 'en';
@@ -171,6 +172,10 @@ class GiftedChat extends React.Component {
   }
 
   getKeyboardHeight() {
+      //人保E通处理，无须添加键盘高度
+    if(!this.props.isMobileAgent){
+          return 0;
+    }
     if (Platform.OS === 'android' && !this.props.forceGetKeyboardHeight) {
       // For android: on-screen keyboard resized main container and has own height.
       // @see https://developer.android.com/training/keyboard-input/visibility.html
@@ -214,7 +219,18 @@ class GiftedChat extends React.Component {
   getIsMounted() {
     return this._isMounted;
   }
+  //在输入框下面展示的其他模块的长度
+  setOtherInputToolbarHeight(value) {
+    this._otherInputToolbarHeight = value;
+  }
 
+  getOtherInputToolbarHeight() {
+    //人保E通处理，E动神州无须计算
+    if (this.props.isMobileAgent) {
+        return 0;
+    }
+    return this._otherInputToolbarHeight;
+  }
   // TODO: setMinInputToolbarHeight
   getMinInputToolbarHeight() {
     return this.props.renderAccessory
@@ -222,7 +238,7 @@ class GiftedChat extends React.Component {
       : this.props.minInputToolbarHeight;
   }
   calculateInputToolbarHeight(composerHeight) {
-    return composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT);
+    return composerHeight + (this.getMinInputToolbarHeight()+this.getOtherInputToolbarHeight()  - MIN_COMPOSER_HEIGHT);
   }
 
   /**
@@ -439,6 +455,7 @@ class GiftedChat extends React.Component {
       onSend: this.onSend,
       onInputSizeChanged: this.onInputSizeChanged,
       onTextChanged: this.onInputTextChanged,
+      setOtherInputToolbarHeight: (value) => this.setOtherInputToolbarHeight(value),
       textInputProps: {
         ...this.props.textInputProps,
         ref: (textInput) => (this.textInput = textInput),
@@ -557,6 +574,8 @@ GiftedChat.defaultProps = {
   maxInputLength: null,
   forceGetKeyboardHeight: false,
   inverted: true,
+  isMobileAgent:true,
+
 };
 
 GiftedChat.propTypes = {
@@ -607,6 +626,8 @@ GiftedChat.propTypes = {
   forceGetKeyboardHeight: PropTypes.bool,
   inverted: PropTypes.bool,
   textInputProps: PropTypes.object,
+  isMobileAgent: PropTypes.bool,
+
 };
 
 export {

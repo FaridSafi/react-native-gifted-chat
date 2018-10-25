@@ -13,6 +13,21 @@ export default class MessageImage extends React.Component {
     this.state = {
       preloader: false,
     };
+
+    this.preloaderShow = this.preloaderShow.bind(this);
+    this.preloaderHide = this.preloaderHide.bind(this);
+  }
+
+  preloaderShow() {
+    this.setState({
+      preloader: true,
+    });
+  }
+
+  preloaderHide() {
+    this.setState({
+      preloader: false,
+    });
   }
 
   render() {
@@ -42,8 +57,8 @@ export default class MessageImage extends React.Component {
             {...imageProps}
             style={[styles.image, imageStyle]}
             source={{ uri: currentMessage.image }}
-            onLoadStart={() => this.setState({ preloader: true })}
-            onLoadEnd={() => this.setState({ preloader: false })}
+            onLoadStart={this.preloaderShow}
+            onLoadEnd={this.preloaderHide}
           />
         </Lightbox>
       </View>

@@ -11,8 +11,8 @@ export default class MessageImage extends React.Component {
     super(props);
 
     this.state = {
-      preloader: false
-    }
+      preloader: false,
+    };
   }
 
   render() {
@@ -21,13 +21,13 @@ export default class MessageImage extends React.Component {
       lightboxProps,
       imageProps,
       imageStyle,
-      currentMessage
-    } = this.props
+      currentMessage,
+    } = this.props;
 
     return (
       <View style={[styles.container, containerStyle]}>
         <View style={styles.preloader}>
-          <ActivityIndicator 
+          <ActivityIndicator
             animating={this.state.preloader}
             hidesWhenStopped
           />
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
     alignSelf: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
 
 MessageImage.defaultProps = {

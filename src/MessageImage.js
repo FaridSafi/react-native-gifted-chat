@@ -2,32 +2,54 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Image, StyleSheet, View, ViewPropTypes } from 'react-native';
+import { Image, StyleSheet, View, ViewPropTypes, ActivityIndicator } from 'react-native';
 import Lightbox from 'react-native-lightbox';
 
-export default function MessageImage({
-  containerStyle,
-  lightboxProps,
-  imageProps,
-  imageStyle,
-  currentMessage,
-}) {
-  return (
-    <View style={[styles.container, containerStyle]}>
-      <Lightbox
-        activeProps={{
-          style: styles.imageActive,
-        }}
-        {...lightboxProps}
-      >
-        <Image
-          {...imageProps}
-          style={[styles.image, imageStyle]}
-          source={{ uri: currentMessage.image }}
-        />
-      </Lightbox>
-    </View>
-  );
+export default class MessageImage extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      preloader: false
+    }
+  }
+
+  render() {
+    const {
+      containerStyle,
+      lightboxProps,
+      imageProps,
+      imageStyle,
+      currentMessage
+    } = this.props
+
+    return (
+      <View style={[styles.container, containerStyle]}>
+        <View style={styles.preloader}>
+          <ActivityIndicator 
+            animating={this.state.preloader}
+            hidesWhenStopped
+          />
+        </View>
+        <Lightbox
+          activeProps={{
+            style: styles.imageActive,
+          }}
+          {...lightboxProps}
+        >
+          <Image
+            {...imageProps}
+            style={[styles.image, imageStyle]}
+            source={{ uri: currentMessage.image }}
+            onLoadStart={() => this.setState({ preloader: true })}
+            onLoadEnd={() => this.setState({ preloader: false })}
+          />
+        </Lightbox>
+      </View>
+    );
+  }
+
 }
 
 const styles = StyleSheet.create({
@@ -43,6 +65,15 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'contain',
   },
+  preloader: {
+    right: 0,
+    bottom: 0,
+    top: 0,
+    left: 0,
+    position: 'absolute',
+    alignSelf: 'center',
+    justifyContent: 'center'
+  }
 });
 
 MessageImage.defaultProps = {

@@ -115,9 +115,12 @@ class GiftedChat extends React.Component {
   }
 
   componentWillReceiveProps(nextProps = {}) {
-    const { messages, text } = nextProps;
+    const { messages, text ,messagesContainerHeight } = nextProps;
     this.setMessages(messages || []);
     this.setTextFromProp(text);
+    // this.setState({
+    //     messagesContainerHeight: messagesContainerHeight,
+    // });
   }
 
   initLocale() {
@@ -229,13 +232,17 @@ class GiftedChat extends React.Component {
    * Returns the height, based on current window size, without taking the keyboard into account.
    */
   getBasicMessagesContainerHeight(composerHeight = this.state.composerHeight) {
-    return this.getMaxHeight() - this.calculateInputToolbarHeight(composerHeight);
+    // return this.getMaxHeight() - this.calculateInputToolbarHeight(composerHeight);
+    //   console.log("this.getMaxHeight() - this.calculateInputToolbarHeight(composerHeight)=>",this.getMaxHeight() ,MIN_COMPOSER_HEIGHT, composerHeight, this.calculateInputToolbarHeight(composerHeight))
+      var fixHeight = Platform.OS == 'ios' ? 28:-2
+    return this.getMaxHeight() -  this.calculateInputToolbarHeight(MIN_COMPOSER_HEIGHT - fixHeight)
   }
 
   /**
    * Returns the height, based on current window size, taking the keyboard into account.
    */
   getMessagesContainerHeightWithKeyboard(composerHeight = this.state.composerHeight) {
+    // console.log("this.getBasicMessagesContainerHeight(composerHeight) - this.getKeyboardHeight() + this.getBottomOffset()=>",this.getBasicMessagesContainerHeight(composerHeight) , this.getKeyboardHeight() , this.getBottomOffset())
     return this.getBasicMessagesContainerHeight(composerHeight) - this.getKeyboardHeight() + this.getBottomOffset();
   }
 
@@ -251,6 +258,7 @@ class GiftedChat extends React.Component {
     this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
     this.setBottomOffset(this.props.bottomOffset);
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard();
+
     if (this.props.isAnimated === true) {
       Animated.timing(this.state.messagesContainerHeight, {
         toValue: newMessagesContainerHeight,

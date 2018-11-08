@@ -22,6 +22,7 @@ export interface IChatMessage {
     avatar: string;
   };
   image?: string;
+  system?: false;
 }
 
 export interface ISystemMessage {
@@ -347,7 +348,7 @@ interface SystemMessageProps {
   textStyle?: TextStyle;
 }
 
-export class ISystemMessage extends React.Component<SystemMessageProps> { }
+export class SystemMessage extends React.Component<SystemMessageProps> { }
 
 interface TimeProps {
   position?: "left" | "right";

@@ -251,7 +251,7 @@ If you are using Create React Native App / Expo, no Android specific installatio
     android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
   ```
 * For **Expo**, there are almost 2 solutions to fix it:
-  * adding KeyboardAvoidingView after GiftedChat
+  * adding KeyboardAvoidingView after GiftedChat [see this comment](https://github.com/FaridSafi/react-native-gifted-chat/issues/461#issuecomment-314858092)
   * adding an opaque background status bar on app.json https://docs.expo.io/versions/latest/guides/configuration.html#androidstatusbar
 
 * If you plan to use `GiftedChat` inside a `Modal`, see [#200](https://github.com/FaridSafi/react-native-gifted-chat/issues/200).

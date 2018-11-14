@@ -133,7 +133,7 @@ interface GiftedAvatarProps {
   textStyle?: TextStyle;
 }
 
-export class GiftedAvatarProps extends React.Component<GiftedAvatarProps> { }
+export class GiftedAvatar extends React.Component<GiftedAvatarProps> { }
 
 export interface GiftedChatProps {
   /* Messages to display */

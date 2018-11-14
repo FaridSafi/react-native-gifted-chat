@@ -232,6 +232,8 @@ export interface GiftedChatProps {
   maxInputLength?: number;
   /* Custom parse patterns for react-native-parsed-text used to linkify message content (like URLs and phone numbers) */
   parsePatterns?(): React.ReactNode;
+  /* Force getting keyboard height to fix some display issues */
+  forceGetKeyboardHeight?: boolean;
 }
 
 export class GiftedChat extends React.Component<GiftedChatProps> {

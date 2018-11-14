@@ -236,6 +236,8 @@ export interface GiftedChatProps {
   forceGetKeyboardHeight?: boolean;
   /* Force send button */
   alwaysShowSend?: boolean;
+  /* Image style */
+  imageStyle: ViewStyle
 }
 
 export class GiftedChat extends React.Component<GiftedChatProps> {

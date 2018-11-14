@@ -234,6 +234,8 @@ export interface GiftedChatProps {
   parsePatterns?(): React.ReactNode;
   /* Force getting keyboard height to fix some display issues */
   forceGetKeyboardHeight?: boolean;
+  /* Force send button */
+  alwaysShowSend?: boolean;
 }
 
 export class GiftedChat extends React.Component<GiftedChatProps> {

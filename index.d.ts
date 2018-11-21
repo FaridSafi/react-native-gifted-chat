@@ -237,7 +237,7 @@ export interface GiftedChatProps {
   /* Force send button */
   alwaysShowSend?: boolean;
   /* Image style */
-  imageStyle: ViewStyle
+  imageStyle?: ViewStyle
 }
 
 export class GiftedChat extends React.Component<GiftedChatProps> {

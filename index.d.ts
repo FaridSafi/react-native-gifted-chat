@@ -20,11 +20,7 @@ export interface IMessage {
   _id: any;
   text: string;
   createdAt: Date;
-  user: {
-    _id: any;
-    name: string;
-    avatar: string;
-  };
+  user: User;
   image?: string;
   system?: boolean;
 }

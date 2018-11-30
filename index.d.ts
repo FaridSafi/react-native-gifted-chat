@@ -40,6 +40,7 @@ interface ActionsProps {
   wrapperStyle?: ViewStyle;
   containerStyle?: ViewStyle;
   iconTextStyle?: ViewStyle;
+  onPressActionButton(): void;
 }
 
 export class Actions extends React.Component<ActionsProps> { }
@@ -238,6 +239,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
 }
 
 export class GiftedChat extends React.Component<GiftedChatProps> {
+  static defaultProps: GiftedChatProps;
   static append<TMessage extends IMessage = IMessage>(
     currentMessages: TMessage[],
     messages: TMessage[],

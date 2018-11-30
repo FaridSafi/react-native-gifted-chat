@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { ViewStyle, TextStyle, TextProperties, TextInputProperties, ImageStyle, ListViewProperties, ImageProperties } from 'react-native';
+import * as RN from 'react-native';
+
+type ViewStyle = RN.StyleProp<RN.ViewStyle>;
+type TextStyle = RN.StyleProp<RN.TextStyle>;
+type ImageStyle = RN.StyleProp<RN.ImageStyle>;
 
 export interface LeftRightStyle<T> {
   left: T;
@@ -92,13 +96,13 @@ interface ComposerProps {
   text?: string;
   placeholder?: string;
   placeholderTextColor?: string;
-  textInputProps?: Partial<TextInputProperties>;
+  textInputProps?: Partial<RN.TextInputProps>;
   onTextChanged?(text: string): void;
   onInputSizeChanged?(contentSize: number): void;
   multiline?: boolean;
-  textInputStyle?: TextInputProperties["style"];
+  textInputStyle?: RN.TextInputProps["style"];
   textInputAutoFocus?: boolean;
-  keyboardAppearance: TextInputProperties["keyboardAppearance"];
+  keyboardAppearance: RN.TextInputProps["keyboardAppearance"];
 }
 
 export class Composer extends React.Component<ComposerProps> { }
@@ -294,7 +298,7 @@ interface MessageContainerProps<TMessage extends IMessage = IMessage> {
   renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode;
   // todo: not used
   onLoadEarlier?(): void;
-  listViewProps: Partial<ListViewProperties>;
+  listViewProps: Partial<RN.ListViewProps>;
   inverted?: boolean;
   loadEarlier?: boolean;
   // todo: should be InvertibleScrollView props
@@ -307,7 +311,7 @@ interface MessageImageProps<TMessage extends IMessage = IMessage> {
   currentMessage?: TMessage;
   containerStyle?: ViewStyle;
   imageStyle?: ImageStyle;
-  imageProps?: Partial<ImageProperties>;
+  imageProps?: Partial<RN.ImageProps>;
   // todo: should be LightBox properties
   lightboxProps?: object;
 }
@@ -324,7 +328,7 @@ interface MessageTextProps<TMessage extends IMessage = IMessage> {
   textStyle?: LeftRightStyle<TextStyle>;
   linkStyle?: LeftRightStyle<TextStyle>;
   parsePatterns?(linkStyle: TextStyle): any;
-  textProps?: TextProperties;
+  textProps?: RN.TextProps;
   customTextStyle?: TextStyle;
 }
 
@@ -370,4 +374,3 @@ export type utils<TMessage extends IMessage = IMessage> = {
 };
 
 export const utils: utils;
-

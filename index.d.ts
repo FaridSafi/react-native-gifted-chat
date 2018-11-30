@@ -29,6 +29,8 @@ export interface IMessage {
   system?: boolean;
 }
 
+export type IChatMessage = IMessage
+
 interface ActionsProps {
   // todo: onSend is not used
   onSend?(): void;

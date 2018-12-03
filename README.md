@@ -73,6 +73,7 @@
 ## Example
 
 ```jsx
+import React from 'react';
 import { GiftedChat } from 'react-native-gifted-chat'
 
 class Example extends React.Component {

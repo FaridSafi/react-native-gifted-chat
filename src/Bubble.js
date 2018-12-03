@@ -10,6 +10,7 @@ import Time from './Time';
 import Color from './Color';
 
 import { isSameUser, isSameDay } from './utils';
+import MessageVideo from './MessageVideo';
 
 export default class Bubble extends React.PureComponent {
 
@@ -90,6 +91,17 @@ export default class Bubble extends React.PureComponent {
     return null;
   }
 
+  renderMessageVideo() {
+    if (this.props.currentMessage.video) {
+      const { containerStyle, wrapperStyle, ...messageVideoProps } = this.props;
+      if (this.props.renderMessageVideo) {
+        return this.props.renderMessageVideo(messageVideoProps);
+      }
+      return <MessageVideo {...messageVideoProps} />;
+    }
+    return null;
+  }
+
   renderTicks() {
     const { currentMessage } = this.props;
     if (this.props.renderTicks) {
@@ -163,6 +175,7 @@ export default class Bubble extends React.PureComponent {
             <View>
               {this.renderCustomView()}
               {this.renderMessageImage()}
+              {this.renderMessageVideo()}
               {this.renderMessageText()}
               <View style={[styles.bottom, this.props.bottomContainerStyle[this.props.position]]}>
                 {this.renderUsername()}
@@ -251,6 +264,7 @@ Bubble.defaultProps = {
   touchableProps: {},
   onLongPress: null,
   renderMessageImage: null,
+  renderMessageVideo: null,
   renderMessageText: null,
   renderCustomView: null,
   renderUsername: null,
@@ -278,6 +292,7 @@ Bubble.propTypes = {
   touchableProps: PropTypes.object,
   onLongPress: PropTypes.func,
   renderMessageImage: PropTypes.func,
+  renderMessageVideo: PropTypes.func,
   renderMessageText: PropTypes.func,
   renderCustomView: PropTypes.func,
   renderUsernameOnMessage: PropTypes.bool,

@@ -11,6 +11,7 @@ export default function MessageVideo({
   currentMessage,
 }) {
   return (
+    // eslint-disable-next-line no-use-before-define
     <View style={[styles.container, containerStyle]}>
 
       <Video

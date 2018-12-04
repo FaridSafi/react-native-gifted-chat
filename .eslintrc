@@ -18,6 +18,7 @@
         "import/no-extraneous-dependencies": 0,
         "import/extensions": 0,
         "react/no-unused-prop-types": 0,
-        "react/no-typos": 0
+        "react/no-typos": 0,
+        "jsx-a11y/accessible-emoji": 0
     }
 }

@@ -7,16 +7,15 @@
     react/sort-comp: 0
 */
 
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
-import { FlatList, View, StyleSheet, Keyboard } from 'react-native';
+import { FlatList, View, StyleSheet, Keyboard } from "react-native";
 
-import LoadEarlier from './LoadEarlier';
-import Message from './Message';
+import LoadEarlier from "./LoadEarlier";
+import Message from "./Message";
 
 export default class MessageContainer extends React.PureComponent {
-
   constructor(props) {
     super(props);
 
@@ -35,29 +34,56 @@ export default class MessageContainer extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     if (this.props.messages.length === 0 && nextProps.messages.length > 0) {
       this.detatchKeyboardListeners();
-    } else if (this.props.messages.length > 0 && nextProps.messages.length === 0) {
+    } else if (
+      this.props.messages.length > 0 &&
+      nextProps.messages.length === 0
+    ) {
       this.attachKeyboardListeners(nextProps);
     }
   }
 
   attachKeyboardListeners(props) {
-    Keyboard.addListener('keyboardWillShow', props.invertibleScrollViewProps.onKeyboardWillShow);
-    Keyboard.addListener('keyboardDidShow', props.invertibleScrollViewProps.onKeyboardDidShow);
-    Keyboard.addListener('keyboardWillHide', props.invertibleScrollViewProps.onKeyboardWillHide);
-    Keyboard.addListener('keyboardDidHide', props.invertibleScrollViewProps.onKeyboardDidHide);
+    Keyboard.addListener(
+      "keyboardWillShow",
+      props.invertibleScrollViewProps.onKeyboardWillShow
+    );
+    Keyboard.addListener(
+      "keyboardDidShow",
+      props.invertibleScrollViewProps.onKeyboardDidShow
+    );
+    Keyboard.addListener(
+      "keyboardWillHide",
+      props.invertibleScrollViewProps.onKeyboardWillHide
+    );
+    Keyboard.addListener(
+      "keyboardDidHide",
+      props.invertibleScrollViewProps.onKeyboardDidHide
+    );
   }
 
   detatchKeyboardListeners() {
-    Keyboard.removeListener('keyboardWillShow', this.props.invertibleScrollViewProps.onKeyboardWillShow);
-    Keyboard.removeListener('keyboardDidShow', this.props.invertibleScrollViewProps.onKeyboardDidShow);
-    Keyboard.removeListener('keyboardWillHide', this.props.invertibleScrollViewProps.onKeyboardWillHide);
-    Keyboard.removeListener('keyboardDidHide', this.props.invertibleScrollViewProps.onKeyboardDidHide);
+    Keyboard.removeListener(
+      "keyboardWillShow",
+      this.props.invertibleScrollViewProps.onKeyboardWillShow
+    );
+    Keyboard.removeListener(
+      "keyboardDidShow",
+      this.props.invertibleScrollViewProps.onKeyboardDidShow
+    );
+    Keyboard.removeListener(
+      "keyboardWillHide",
+      this.props.invertibleScrollViewProps.onKeyboardWillHide
+    );
+    Keyboard.removeListener(
+      "keyboardDidHide",
+      this.props.invertibleScrollViewProps.onKeyboardDidHide
+    );
   }
 
   renderFooter() {
     if (this.props.renderFooter) {
       const footerProps = {
-        ...this.props,
+        ...this.props
       };
       return this.props.renderFooter(footerProps);
     }
@@ -67,7 +93,7 @@ export default class MessageContainer extends React.PureComponent {
   renderLoadEarlier() {
     if (this.props.loadEarlier === true) {
       const loadEarlierProps = {
-        ...this.props,
+        ...this.props
       };
       if (this.props.renderLoadEarlier) {
         return this.props.renderLoadEarlier(loadEarlierProps);
@@ -85,11 +111,17 @@ export default class MessageContainer extends React.PureComponent {
 
   renderRow({ item, index }) {
     if (!item._id && item._id !== 0) {
-      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
+      console.warn(
+        "GiftedChat: `_id` is missing for message",
+        JSON.stringify(item)
+      );
     }
     if (!item.user) {
       if (!item.system) {
-        console.warn('GiftedChat: `user` is missing for message', JSON.stringify(item));
+        console.warn(
+          "GiftedChat: `user` is missing for message",
+          JSON.stringify(item)
+        );
       }
       item.user = {};
     }
@@ -103,7 +135,7 @@ export default class MessageContainer extends React.PureComponent {
       currentMessage: item,
       previousMessage,
       nextMessage,
-      position: item.user._id === this.props.user._id ? 'right' : 'left',
+      position: item.user._id === this.props.user._id ? "right" : "left"
     };
 
     if (this.props.renderMessage) {
@@ -123,8 +155,8 @@ export default class MessageContainer extends React.PureComponent {
     return (
       <View style={styles.container}>
         <FlatList
-          ref={(ref) => (this.flatListRef = ref)}
-          keyExtractor={(item) => `${item._id}`}
+          ref={ref => (this.flatListRef = ref)}
+          keyExtractor={item => `${item._id}`}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
           inverted={this.props.inverted}
@@ -140,22 +172,21 @@ export default class MessageContainer extends React.PureComponent {
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   contentContainerStyle: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end"
   },
   headerWrapper: {
-    flex: 1,
+    flex: 1
   },
   listStyle: {
-    flex: 1,
-  },
+    flex: 1
+  }
 });
 
 MessageContainer.defaultProps = {
@@ -167,7 +198,7 @@ MessageContainer.defaultProps = {
   inverted: true,
   loadEarlier: false,
   listViewProps: {},
-  invertibleScrollViewProps: {}, // TODO: support or not?
+  invertibleScrollViewProps: {} // TODO: support or not?
 };
 
 MessageContainer.propTypes = {
@@ -180,5 +211,5 @@ MessageContainer.propTypes = {
   listViewProps: PropTypes.object,
   inverted: PropTypes.bool,
   loadEarlier: PropTypes.bool,
-  invertibleScrollViewProps: PropTypes.object, // TODO: support or not?
+  invertibleScrollViewProps: PropTypes.object // TODO: support or not?
 };

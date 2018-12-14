@@ -102,6 +102,13 @@ class GiftedChat extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.minInputToolbarHeight !== this.props.minInputToolbarHeight) {
+      const messagesContainerHeight = this.prepareMessagesContainerHeight(this.getBasicMessagesContainerHeight());
+      this.setState({ messagesContainerHeight }); // eslint-disable-line react/no-did-update-set-state
+    }
+  }
+
   componentWillMount() {
     const { messages, text } = this.props;
     this.setIsMounted(true);

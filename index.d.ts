@@ -77,7 +77,9 @@ interface BubbleProps<TMessage extends IMessage = IMessage> {
   renderCustomView?(bubbleProps: BubbleProps): React.ReactNode;
   renderTime?(timeProps: TimeProps): React.ReactNode;
   renderTicks?(currentMessage: TMessage): React.ReactNode;
-  position?: 'left' | 'right';
+  renderUsername?(): React.ReactNode;
+  renderUsernameOnMessage?: boolean
+  position?: "left" | "right";
   currentMessage?: TMessage;
   nextMessage?: TMessage;
   previousMessage?: TMessage;

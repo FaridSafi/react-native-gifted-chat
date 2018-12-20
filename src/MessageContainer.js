@@ -136,6 +136,7 @@ export default class MessageContainer extends React.PureComponent {
           ListFooterComponent={this.renderHeaderWrapper}
           ListHeaderComponent={this.renderFooter}
           {...this.props.listViewProps}
+          isLoadingEarlier={this.props.isLoadingEarlier}
         />
       </View>
     );

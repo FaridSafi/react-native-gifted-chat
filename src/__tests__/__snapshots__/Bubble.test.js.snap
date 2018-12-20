@@ -50,7 +50,7 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
           Array [
             Object {
               "flexDirection": "row",
-              "justifyContent": "flex-end",
+              "justifyContent": "flex-start",
             },
             undefined,
           ]

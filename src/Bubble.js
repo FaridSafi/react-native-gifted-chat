@@ -178,7 +178,7 @@ export default class Bubble extends React.PureComponent {
               {this.renderMessageImage()}
               {this.renderMessageVideo()}
               {this.renderMessageText()}
-              <View style={[styles.bottom, this.props.bottomContainerStyle[this.props.position]]}>
+              <View style={[styles[this.props.position].bottom, this.props.bottomContainerStyle[this.props.position]]}>
                 {this.renderUsername()}
                 {this.renderTime()}
                 {this.renderTicks()}
@@ -211,6 +211,10 @@ const styles = {
     containerToPrevious: {
       borderTopLeftRadius: 3,
     },
+    bottom: {
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+    },
   }),
   right: StyleSheet.create({
     container: {
@@ -230,11 +234,11 @@ const styles = {
     containerToPrevious: {
       borderTopRightRadius: 3,
     },
+    bottom: {
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+    },
   }),
-  bottom: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
   tick: {
     fontSize: 10,
     backgroundColor: Color.backgroundTransparent,

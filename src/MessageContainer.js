@@ -115,6 +115,8 @@ export default class MessageContainer extends React.PureComponent {
   renderHeaderWrapper() {
     return <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>;
   }
+  
+  keyExtractor = (item) => `${item._id}`
 
   render() {
     if (this.props.messages.length === 0) {
@@ -124,7 +126,7 @@ export default class MessageContainer extends React.PureComponent {
       <View style={styles.container}>
         <FlatList
           ref={(ref) => (this.flatListRef = ref)}
-          keyExtractor={(item) => `${item._id}`}
+          keyExtractor={this.keyExtractor}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
           inverted={this.props.inverted}

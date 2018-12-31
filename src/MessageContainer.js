@@ -115,7 +115,7 @@ export default class MessageContainer extends React.PureComponent {
   renderHeaderWrapper() {
     return <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>;
   }
-  
+
   keyExtractor = (item) => `${item._id}`
 
   render() {

@@ -9,14 +9,11 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-
-import { FlatList, View, StyleSheet, Keyboard } from 'react-native';
-
+import { FlatList, Keyboard, StyleSheet, View } from 'react-native';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
 export default class MessageContainer extends React.PureComponent {
-
   constructor(props) {
     super(props);
 
@@ -48,10 +45,22 @@ export default class MessageContainer extends React.PureComponent {
   }
 
   detatchKeyboardListeners() {
-    Keyboard.removeListener('keyboardWillShow', this.props.invertibleScrollViewProps.onKeyboardWillShow);
-    Keyboard.removeListener('keyboardDidShow', this.props.invertibleScrollViewProps.onKeyboardDidShow);
-    Keyboard.removeListener('keyboardWillHide', this.props.invertibleScrollViewProps.onKeyboardWillHide);
-    Keyboard.removeListener('keyboardDidHide', this.props.invertibleScrollViewProps.onKeyboardDidHide);
+    Keyboard.removeListener(
+      'keyboardWillShow',
+      this.props.invertibleScrollViewProps.onKeyboardWillShow,
+    );
+    Keyboard.removeListener(
+      'keyboardDidShow',
+      this.props.invertibleScrollViewProps.onKeyboardDidShow,
+    );
+    Keyboard.removeListener(
+      'keyboardWillHide',
+      this.props.invertibleScrollViewProps.onKeyboardWillHide,
+    );
+    Keyboard.removeListener(
+      'keyboardDidHide',
+      this.props.invertibleScrollViewProps.onKeyboardDidHide,
+    );
   }
 
   renderFooter() {
@@ -115,8 +124,8 @@ export default class MessageContainer extends React.PureComponent {
   renderHeaderWrapper() {
     return <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>;
   }
-  
-  keyExtractor = (item) => `${item._id}`
+
+  keyExtractor = item => `${item._id}`;
 
   render() {
     if (this.props.messages.length === 0) {
@@ -125,7 +134,8 @@ export default class MessageContainer extends React.PureComponent {
     return (
       <View style={styles.container}>
         <FlatList
-          ref={(ref) => (this.flatListRef = ref)}
+          ref={ref => (this.flatListRef = ref)}
+          extraData={this.props}
           keyExtractor={this.keyExtractor}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
@@ -142,7 +152,6 @@ export default class MessageContainer extends React.PureComponent {
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({

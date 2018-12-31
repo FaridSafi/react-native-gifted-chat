@@ -48,6 +48,7 @@
     "@types/react": "^16.0.38",
     "@types/react-native": "^0.52.12",
     "babel": "6.23.0",
+    "babel-eslint": "10.0.1",
     "babel-jest": "23.0.0",
     "babel-preset-react-native": "4.0.0",
     "eslint": "^4.9.0",
@@ -59,10 +60,10 @@
     "eslint-plugin-react-native": "3.2.1",
     "husky": "0.15.0-rc.2",
     "jest": "22.1.4",
-    "react-test-renderer": "16.4.0",
+    "prop-types": "15.6.2",
     "react": "16.2.0",
     "react-native": "0.51.0",
-    "prop-types": "15.6.2"
+    "react-test-renderer": "16.4.0"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^1.0.1",
@@ -70,8 +71,8 @@
     "react-native-communications": "2.2.1",
     "react-native-lightbox": "^0.7.0",
     "react-native-parsed-text": "^0.0.20",
-    "uuid": "3.3.0",
-    "react-native-video": "^3.2.1"
+    "react-native-video": "^3.2.1",
+    "uuid": "3.3.0"
   },
   "peerDependencies": {
     "prop-types": "*",

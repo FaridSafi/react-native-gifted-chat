@@ -171,7 +171,7 @@ MessageContainer.defaultProps = {
   loadEarlier: false,
   listViewProps: {},
   invertibleScrollViewProps: {}, // TODO: support or not?
-  extraData: null
+  extraData: null,
 };
 
 MessageContainer.propTypes = {

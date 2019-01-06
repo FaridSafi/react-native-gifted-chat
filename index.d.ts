@@ -236,6 +236,10 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   imageStyle?: ViewStyle
   /* This can be used to pass any data which needs to be re-rendered */
   extraData?: any;
+  /* composer min Height */
+  minComposerHeight?: number;
+  /* composer min Height */
+  maxComposerHeight?: number;
 }
 
 export class GiftedChat extends React.Component<GiftedChatProps> {

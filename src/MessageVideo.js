@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, View, ViewPropTypes } from 'react-native';
-import Video from 'react-native-video';
+import Video from 'react-native-video-controls';
 
 
 export default function MessageVideo({

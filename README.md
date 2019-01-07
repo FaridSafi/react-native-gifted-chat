@@ -209,6 +209,8 @@ e.g. System Message
 * **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
 * **`parsePatterns`** _(Function)_ - Custom parse patterns for [react-native-parsed-text](https://github.com/taskrabbit/react-native-parsed-text) used to linkify message content (like URLs and phone numbers), e.g.:
 * **`extraData`** _(Object)_ - Extra props for re-rendering flatlist on demand. This will be useful for rendering footer etc.
+* **`minComposerHeight`** _(Object)_ - Custom min height of the composer.
+* **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
 
   ```js
   <GiftedChat

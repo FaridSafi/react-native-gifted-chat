@@ -23,6 +23,7 @@ export default function MessageVideo({
         onBuffer={this.onBuffer}
         onLoadStart={this.onLoadStart}
         onLoad={this.onLoad}
+        resizeMode={this.props.resizeMode}
       />
     </View>
   );
@@ -43,9 +44,10 @@ MessageVideo.defaultProps = {
     height: 100,
     borderRadius: 13,
     margin: 3,
-    resizeMode: 'cover',
+
   },
   videoProps: {},
+  resizeMode: "cover",
 };
 
 MessageVideo.propTypes = {
@@ -53,4 +55,5 @@ MessageVideo.propTypes = {
   containerStyle: ViewPropTypes.style,
   videoStyle: ViewPropTypes.style,
   videoProps: PropTypes.object,
+  resizeMode: PropTypes.string,
 };

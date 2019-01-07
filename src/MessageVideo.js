@@ -20,9 +20,9 @@ export default function MessageVideo({
         source={{ uri: currentMessage.video }}
         style={videoStyle}
         controls
-        onBuffer={this.onBuffer}
-        onLoadStart={this.onLoadStart}
-        onLoad={this.onLoad}
+        //onBuffer={this.onBuffer}
+        //onLoadStart={this.onLoadStart}
+        //onLoad={this.onLoad}
         paused
         resizeMode={this.props.resizeMode}
       />

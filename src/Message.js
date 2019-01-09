@@ -40,6 +40,7 @@ export default class Message extends React.Component {
     return (
       next.send !== current.send ||
       next.received !== current.received ||
+      next.pending !== current.pending ||
       next.createdAt !== current.createdAt ||
       next.text !== current.text ||
       next.image !== current.image ||

@@ -13,7 +13,7 @@ import Color from './Color';
 
 import { isSameUser, isSameDay } from './utils';
 
-export default class Bubble extends React.PureComponent {
+export default class Bubble extends React.Component {
 
   onLongPress = () => {
     if (this.props.onLongPress) {

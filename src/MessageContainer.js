@@ -15,46 +15,47 @@ import { FlatList, View, StyleSheet, Keyboard } from 'react-native';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
-export default class MessageContainer extends React.PureComponent {
+export default class MessageContainer extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.renderRow = this.renderRow.bind(this);
-    this.renderFooter = this.renderFooter.bind(this);
-    this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
-    this.renderHeaderWrapper = this.renderHeaderWrapper.bind(this);
-    this.attachKeyboardListeners = this.attachKeyboardListeners.bind(this);
-    this.detatchKeyboardListeners = this.detatchKeyboardListeners.bind(this);
-
-    if (props.messages.length === 0) {
-      this.attachKeyboardListeners(props);
+  componentDidMount() {
+    if (this.props.messages.length === 0) {
+      this.attachKeyboardListeners();
     }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const next = nextProps.messages;
+    const current = this.props.messages;
+    return (
+      next.length !== current.length || next.extraData !== current.extraData || next.loadEarlier !== current.loadEarlier
+    );
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.messages.length === 0 && nextProps.messages.length > 0) {
-      this.detatchKeyboardListeners();
+      this.detachKeyboardListeners();
     } else if (this.props.messages.length > 0 && nextProps.messages.length === 0) {
       this.attachKeyboardListeners(nextProps);
     }
   }
 
-  attachKeyboardListeners(props) {
-    Keyboard.addListener('keyboardWillShow', props.invertibleScrollViewProps.onKeyboardWillShow);
-    Keyboard.addListener('keyboardDidShow', props.invertibleScrollViewProps.onKeyboardDidShow);
-    Keyboard.addListener('keyboardWillHide', props.invertibleScrollViewProps.onKeyboardWillHide);
-    Keyboard.addListener('keyboardDidHide', props.invertibleScrollViewProps.onKeyboardDidHide);
-  }
+  attachKeyboardListeners = () => {
+    const { invertibleScrollViewProps: invertibleProps } = this.props;
+    Keyboard.addListener('keyboardWillShow', invertibleProps.onKeyboardWillShow);
+    Keyboard.addListener('keyboardDidShow', invertibleProps.onKeyboardDidShow);
+    Keyboard.addListener('keyboardWillHide', invertibleProps.onKeyboardWillHide);
+    Keyboard.addListener('keyboardDidHide', invertibleProps.onKeyboardDidHide);
+  };
 
-  detatchKeyboardListeners() {
-    Keyboard.removeListener('keyboardWillShow', this.props.invertibleScrollViewProps.onKeyboardWillShow);
-    Keyboard.removeListener('keyboardDidShow', this.props.invertibleScrollViewProps.onKeyboardDidShow);
-    Keyboard.removeListener('keyboardWillHide', this.props.invertibleScrollViewProps.onKeyboardWillHide);
-    Keyboard.removeListener('keyboardDidHide', this.props.invertibleScrollViewProps.onKeyboardDidHide);
-  }
+  detachKeyboardListeners = () => {
+    const { invertibleScrollViewProps: invertibleProps } = this.props;
+    Keyboard.removeListener('keyboardWillShow', invertibleProps.onKeyboardWillShow);
+    Keyboard.removeListener('keyboardDidShow', invertibleProps.onKeyboardDidShow);
+    Keyboard.removeListener('keyboardWillHide', invertibleProps.onKeyboardWillHide);
+    Keyboard.removeListener('keyboardDidHide', invertibleProps.onKeyboardDidHide);
+  };
 
-  renderFooter() {
+  renderFooter = () => {
     if (this.props.renderFooter) {
       const footerProps = {
         ...this.props,
@@ -62,9 +63,9 @@ export default class MessageContainer extends React.PureComponent {
       return this.props.renderFooter(footerProps);
     }
     return null;
-  }
+  };
 
-  renderLoadEarlier() {
+  renderLoadEarlier = () => {
     if (this.props.loadEarlier === true) {
       const loadEarlierProps = {
         ...this.props,
@@ -75,15 +76,15 @@ export default class MessageContainer extends React.PureComponent {
       return <LoadEarlier {...loadEarlierProps} />;
     }
     return null;
-  }
+  };
 
   scrollTo(options) {
-    if (this.flatListRef) {
+    if (this.flatListRef && options) {
       this.flatListRef.scrollToOffset(options);
     }
   }
 
-  renderRow({ item, index }) {
+  renderRow = ({ item, index }) => {
     if (!item._id && item._id !== 0) {
       console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
     }
@@ -110,13 +111,11 @@ export default class MessageContainer extends React.PureComponent {
       return this.props.renderMessage(messageProps);
     }
     return <Message {...messageProps} />;
-  }
+  };
 
-  renderHeaderWrapper() {
-    return <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>;
-  }
+  renderHeaderWrapper = () => <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>;
 
-  keyExtractor = (item) => `${item._id}`
+  keyExtractor = (item) => `${item._id}`;
 
   render() {
     if (this.props.messages.length === 0) {
@@ -184,6 +183,6 @@ MessageContainer.propTypes = {
   listViewProps: PropTypes.object,
   inverted: PropTypes.bool,
   loadEarlier: PropTypes.bool,
-  invertibleScrollViewProps: PropTypes.object, // TODO: support or not?
+  invertibleScrollViewProps: PropTypes.object,
   extraData: PropTypes.object,
 };

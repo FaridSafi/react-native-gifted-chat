@@ -66,7 +66,7 @@
     "react-test-renderer": "16.4.0"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "^1.0.1",
+    "@expo/react-native-action-sheet": "^2.0.1",
     "moment": "^2.19.0",
     "react-native-communications": "2.2.1",
     "react-native-lightbox": "^0.7.0",

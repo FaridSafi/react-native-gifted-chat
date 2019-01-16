@@ -17,8 +17,9 @@ import Message from './Message';
 import Color from './Color';
 
 export default class MessageContainer extends React.Component {
+
   state = {
-    showScrollBottom: false
+    showScrollBottom: false,
   }
 
   componentDidMount() {

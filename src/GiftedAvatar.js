@@ -6,11 +6,8 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Color from './Color';
 
 const { carrot, emerald, peterRiver, wisteria, alizarin, turquoise, midnightBlue } = Color;
-// TODO
-// 3 words name initials
-// handle only alpha numeric chars
 
-export default class GiftedAvatar extends React.PureComponent {
+export default class GiftedAvatar extends React.Component {
   setAvatarColor() {
     const userName = this.props.user.name || '';
     const name = userName.toUpperCase().split(' ');
@@ -38,19 +35,9 @@ export default class GiftedAvatar extends React.PureComponent {
     if (typeof this.props.user.avatar === 'function') {
       return this.props.user.avatar();
     } else if (typeof this.props.user.avatar === 'string') {
-      return (
-        <Image
-          source={{ uri: this.props.user.avatar }}
-          style={[styles.avatarStyle, this.props.avatarStyle]}
-        />
-      );
+      return <Image source={{ uri: this.props.user.avatar }} style={[styles.avatarStyle, this.props.avatarStyle]} />;
     } else if (typeof this.props.user.avatar === 'number') {
-      return (
-        <Image
-          source={this.props.user.avatar}
-          style={[styles.avatarStyle, this.props.avatarStyle]}
-        />
-      );
+      return <Image source={this.props.user.avatar} style={[styles.avatarStyle, this.props.avatarStyle]} />;
     }
     return null;
   }

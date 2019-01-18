@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as RN from 'react-native';
 
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
+
 type ViewStyle = RN.StyleProp<RN.ViewStyle>;
 type TextStyle = RN.StyleProp<RN.TextStyle>;
 type ImageStyle = RN.StyleProp<RN.ImageStyle>;
@@ -19,13 +21,13 @@ export interface User {
 export interface IMessage {
   _id: any;
   text: string;
-  createdAt: Date;
+  createdAt: Date | number;
   user: User;
   image?: string;
   system?: boolean;
 }
 
-export type IChatMessage = IMessage
+export type IChatMessage = IMessage;
 
 interface ActionsProps {
   // todo: onSend is not used
@@ -43,7 +45,7 @@ export class Actions extends React.Component<ActionsProps> { }
 
 interface AvatarProps<TMessage extends IMessage = IMessage> {
   renderAvatarOnTop: boolean;
-  position: "left" | "right";
+  position: 'left' | 'right';
   currentMessage: TMessage;
   previousMessage: TMessage;
   nextMessage: TMessage;
@@ -68,7 +70,9 @@ interface BubbleProps<TMessage extends IMessage = IMessage> {
   user: User;
   touchableProps?: object;
   onLongPress?(context?: any, message?: any): void;
-  renderMessageImage?(messageImageProps: RenderMessageImageProps): React.ReactNode;
+  renderMessageImage?(
+    messageImageProps: RenderMessageImageProps,
+  ): React.ReactNode;
   renderMessageText?(messageTextProps: MessageTextProps): React.ReactNode;
   renderCustomView?(bubbleProps: BubbleProps): React.ReactNode;
   renderTime?(timeProps: TimeProps): React.ReactNode;
@@ -99,11 +103,11 @@ interface ComposerProps {
   placeholderTextColor?: string;
   textInputProps?: Partial<RN.TextInputProps>;
   onTextChanged?(text: string): void;
-  onInputSizeChanged?(contentSize: number): void;
+  onInputSizeChanged?(contentSize: { width: number; height: number }): void;
   multiline?: boolean;
-  textInputStyle?: RN.TextInputProps["style"];
+  textInputStyle?: RN.TextInputProps['style'];
   textInputAutoFocus?: boolean;
-  keyboardAppearance: RN.TextInputProps["keyboardAppearance"];
+  keyboardAppearance: RN.TextInputProps['keyboardAppearance'];
 }
 
 export class Composer extends React.Component<ComposerProps> { }
@@ -227,19 +231,13 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*Max message composer TextInput length */
   maxInputLength?: number;
   /* Custom parse patterns for react-native-parsed-text used to linkify message content (like URLs and phone numbers) */
-  parsePatterns?(): React.ReactNode;
+  parsePatterns?(linkStyle: TextStyle): React.ReactNode;
   /* Force getting keyboard height to fix some display issues */
   forceGetKeyboardHeight?: boolean;
   /* Force send button */
   alwaysShowSend?: boolean;
   /* Image style */
-  imageStyle?: ViewStyle
-  /* This can be used to pass any data which needs to be re-rendered */
-  extraData?: any;
-  /* composer min Height */
-  minComposerHeight?: number;
-  /* composer min Height */
-  maxComposerHeight?: number;
+  imageStyle?: ViewStyle;
 }
 
 export class GiftedChat extends React.Component<GiftedChatProps> {
@@ -247,12 +245,12 @@ export class GiftedChat extends React.Component<GiftedChatProps> {
   static append<TMessage extends IMessage = IMessage>(
     currentMessages: TMessage[],
     messages: TMessage[],
-    inverted?: boolean
+    inverted?: boolean,
   ): TMessage[];
   static prepend<TMessage extends IMessage = IMessage>(
     currentMessages: TMessage[],
     messages: TMessage[],
-    inverted?: boolean
+    inverted?: boolean,
   ): TMessage[];
 }
 
@@ -287,7 +285,7 @@ interface MessageProps<TMessage extends IMessage = IMessage> {
   renderBubble(props: BubbleProps): React.ReactNode;
   renderDay(props: DayProps): React.ReactNode;
   renderSystemMessage(props: SystemMessageProps): React.ReactNode;
-  position?: "left" | "right";
+  position?: 'left' | 'right';
   currentMessage?: TMessage;
   nextMessage?: TMessage;
   previousMessage?: TMessage;
@@ -313,7 +311,9 @@ interface MessageContainerProps<TMessage extends IMessage = IMessage> {
   invertibleScrollViewProps?: object;
 }
 
-export class MessageContainer extends React.Component<MessageContainerProps> { }
+export class MessageContainer extends React.Component<
+  MessageContainerProps
+  > { }
 
 interface MessageImageProps<TMessage extends IMessage = IMessage> {
   currentMessage?: TMessage;
@@ -326,11 +326,13 @@ interface MessageImageProps<TMessage extends IMessage = IMessage> {
 
 export class MessageImage extends React.Component<MessageImageProps> { }
 
-export type RenderMessageImageProps<TMessage extends IMessage = IMessage> =
-  MessageImageProps<TMessage> & Exclude<BubbleProps<TMessage>, 'wrapperStyle' | 'containerStyle'>
+export type RenderMessageImageProps<
+  TMessage extends IMessage = IMessage
+  > = MessageImageProps<TMessage> &
+  Omit<BubbleProps<TMessage>, 'wrapperStyle' | 'containerStyle'>;
 
 interface MessageTextProps<TMessage extends IMessage = IMessage> {
-  position: "left" | "right";
+  position: 'left' | 'right';
   currentMessage?: TMessage;
   containerStyle?: LeftRightStyle<ViewStyle>;
   textStyle?: LeftRightStyle<TextStyle>;
@@ -342,8 +344,10 @@ interface MessageTextProps<TMessage extends IMessage = IMessage> {
 
 export class MessageText extends React.Component<MessageTextProps> { }
 
-export type RenderMessageTextProps<TMessage extends IMessage = IMessage> =
-  MessageTextProps<TMessage> & Exclude<BubbleProps<TMessage>, 'wrapperStyle' | 'containerStyle'>
+export type RenderMessageTextProps<
+  TMessage extends IMessage = IMessage
+  > = MessageTextProps<TMessage> &
+  Omit<BubbleProps<TMessage>, 'wrapperStyle' | 'containerStyle'>;
 
 interface SendProps {
   text?: string;
@@ -366,7 +370,7 @@ interface SystemMessageProps<TMessage extends IMessage = IMessage> {
 export class SystemMessage extends React.Component<SystemMessageProps> { }
 
 interface TimeProps<TMessage extends IMessage = IMessage> {
-  position?: "left" | "right";
+  position?: 'left' | 'right';
   currentMessage?: TMessage;
   containerStyle?: LeftRightStyle<ViewStyle>;
   textStyle?: LeftRightStyle<TextStyle>;

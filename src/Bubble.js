@@ -6,20 +6,16 @@ import { Text, Clipboard, StyleSheet, TouchableWithoutFeedback, View, ViewPropTy
 
 import MessageText from './MessageText';
 import MessageImage from './MessageImage';
+import MessageVideo from './MessageVideo';
+
 import Time from './Time';
 import Color from './Color';
 
 import { isSameUser, isSameDay } from './utils';
-import MessageVideo from './MessageVideo';
 
-export default class Bubble extends React.PureComponent {
+export default class Bubble extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.onLongPress = this.onLongPress.bind(this);
-  }
-
-  onLongPress() {
+  onLongPress = () => {
     if (this.props.onLongPress) {
       this.props.onLongPress(this.context, this.props.currentMessage);
     } else if (this.props.currentMessage.text) {
@@ -41,7 +37,7 @@ export default class Bubble extends React.PureComponent {
         },
       );
     }
-  }
+  };
 
   handleBubbleToNext() {
     if (
@@ -141,9 +137,7 @@ export default class Bubble extends React.PureComponent {
       }
       return (
         <View style={styles.usernameView}>
-          <Text style={[styles.username, this.props.usernameStyle]}>
-            ~ {currentMessage.user.name}
-          </Text>
+          <Text style={[styles.username, this.props.usernameStyle]}>~ {currentMessage.user.name}</Text>
         </View>
       );
     }

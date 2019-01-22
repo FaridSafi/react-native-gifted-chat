@@ -104,9 +104,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@expo/react-native-action-sheet@^1.0.1":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@expo/react-native-action-sheet/-/react-native-action-sheet-1.0.2.tgz#abdfb21cbefec6147c6ee8b8fb725287cbd2e696"
+"@expo/react-native-action-sheet@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@expo/react-native-action-sheet/-/react-native-action-sheet-2.0.1.tgz#0780c6887e80fbb1bf11cd1193b17e8785afebc9"
+  integrity sha512-2TKGDU77mQADYqJaddhwa7bSH4B3g3wfY9TD9lPlyGFt2UQWgXLLgMxN8yyTpyj4o6BcchwSgoyrgAr9PrUSIg==
   dependencies:
     hoist-non-react-statics "^2.2.2"
     prop-types "^15.5.10"

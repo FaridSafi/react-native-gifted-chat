@@ -28,6 +28,10 @@ export default class MessageContainer extends React.PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    this.detachKeyboardListeners();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.messages.length === 0 && nextProps.messages.length > 0) {
       this.detachKeyboardListeners();

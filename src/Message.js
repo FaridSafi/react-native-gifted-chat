@@ -37,8 +37,8 @@ export default class Message extends React.Component {
   shouldComponentUpdate(nextProps) {
     const next = nextProps.currentMessage;
     const current = this.props.currentMessage;
-    const nextCreatedAt = next.createdAt && next.createdAt.getTime();
-    const currentCreatedAt = current.createdAt && current.createdAt.getTime();
+    const nextCreatedAt = next.createdAt && next.createdAt;
+    const currentCreatedAt = current.createdAt && current.createdAt;
     return (
       next.send !== current.send ||
       next.received !== current.received ||

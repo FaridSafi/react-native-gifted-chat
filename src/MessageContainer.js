@@ -129,22 +129,20 @@ export default class MessageContainer extends React.PureComponent {
   renderHeaderWrapper = () => <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>;
 
   renderScrollToBottomWrapper() {
-    const scrollToBottomComponent = (
+    if (this.props.scrollToBottomComponent) {
+      return (
+        <TouchableOpacity onPress={this.scrollToBottom} hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}>
+          {this.props.scrollToBottomComponent()}
+        </TouchableOpacity>
+      );
+    }
+    return (
       <View style={styles.scrollToBottomStyle}>
         <TouchableOpacity onPress={this.scrollToBottom} hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}>
           <Text>V</Text>
         </TouchableOpacity>
       </View>
     );
-
-    if (this.props.scrollToBottomComponent) {
-      return (
-        <TouchableOpacity onPress={this.scrollToBottom} hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}>
-          {this.props.scrollToBottomComponent}
-        </TouchableOpacity>
-      );
-    }
-    return scrollToBottomComponent;
   }
 
   keyExtractor = (item) => `${item._id}`;

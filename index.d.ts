@@ -352,6 +352,8 @@ interface SendProps {
   containerStyle?: ViewStyle;
   textStyle?: TextStyle;
   children?: React.ReactNode;
+  alwaysShowSend?: boolean;
+  disabled?: boolean;
 }
 
 export class Send extends React.Component<SendProps> { }

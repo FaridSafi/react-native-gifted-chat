@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, View, ViewPropTypes } from 'react-native';
-import Video from 'react-native-video';
+import { isExpo } from './utils';
+
+let Video;
+if(isExpo()) {
+  const { Video as ExpoVideo } = require('expo')
+  Video = ExpoVideo
+} else { 
+   Video = require('react-native-video')
+}
 
 
 export default function MessageVideo({

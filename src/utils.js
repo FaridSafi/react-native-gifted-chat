@@ -20,7 +20,5 @@ export function isSameUser(currentMessage = {}, diffMessage = {}) {
 }
 
 export function isExpo() {
-  return global.__exponent || global.__expo;
+  return !!global && (!!global.__exponent || !!global.__expo);
 }
-
-

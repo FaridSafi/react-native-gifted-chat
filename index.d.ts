@@ -238,6 +238,12 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   alwaysShowSend?: boolean;
   /* Image style */
   imageStyle?: ViewStyle;
+  /* This can be used to pass any data which needs to be re-rendered */
+  extraData?: any;
+  /* composer min Height */
+  minComposerHeight?: number;
+  /* composer min Height */
+  maxComposerHeight?: number;
 }
 
 export class GiftedChat extends React.Component<GiftedChatProps> {
@@ -356,6 +362,8 @@ interface SendProps {
   containerStyle?: ViewStyle;
   textStyle?: TextStyle;
   children?: React.ReactNode;
+  alwaysShowSend?: boolean;
+  disabled?: boolean;
 }
 
 export class Send extends React.Component<SendProps> {}

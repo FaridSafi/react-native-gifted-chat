@@ -1,6 +1,6 @@
 import React from "react";
 import { GiftedChat } from "react-native-gifted-chat";
-import Chatkit from "@pusher/chatkit";
+import Chatkit from "@pusher/chatkit-client";
 
 const CHATKIT_TOKEN_PROVIDER_ENDPOINT =
   "<url from TEST TOKEN PROVIDER section>";
@@ -29,7 +29,7 @@ export default class MyChat extends React.Component {
       this.currentUser.subscribeToRoom({
         roomId: CHATKIT_ROOM_ID,
         hooks: {
-          onNewMessage: this.onReceive.bind(this)
+          onMessage: this.onReceive.bind(this)
         }
       });
     });

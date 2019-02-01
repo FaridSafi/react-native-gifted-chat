@@ -3,6 +3,7 @@ export default {
   backgroundTransparent: 'transparent',
   defaultBlue: '#0084ff',
   leftBubbleBackground: '#f0f0f0',
+  black: '#000',
   white: '#fff',
   carrot: '#e67e22',
   emerald: '#2ecc71',

@@ -32,16 +32,33 @@ const styles = {
   }),
 };
 
-export default class Message extends React.PureComponent {
+export default class Message extends React.Component {
 
-  getInnerComponentProps() {
+  shouldComponentUpdate(nextProps) {
+    const next = nextProps.currentMessage;
+    const current = this.props.currentMessage;
+    const { nextMessage } = this.props;
+    const nextPropsMessage = nextProps.nextMessage;
+    return (
+      next.send !== current.send ||
+      next.received !== current.received ||
+      next.pending !== current.pending ||
+      next.createdAt !== current.createdAt ||
+      next.text !== current.text ||
+      next.image !== current.image ||
+      next.video !== current.video ||
+      nextMessage !== nextPropsMessage
+    );
+  }
+
+  getInnerComponentProps = () => {
     const { containerStyle, ...props } = this.props;
     return {
       ...props,
       isSameUser,
       isSameDay,
     };
-  }
+  };
 
   renderDay() {
     if (this.props.currentMessage.createdAt) {

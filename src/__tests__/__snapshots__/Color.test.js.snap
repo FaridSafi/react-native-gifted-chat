@@ -4,6 +4,7 @@ exports[`should compare Color with snapshot 1`] = `
 Object {
   "alizarin": "#e74c3c",
   "backgroundTransparent": "transparent",
+  "black": "#000",
   "carrot": "#e67e22",
   "defaultBlue": "#0084ff",
   "defaultColor": "#b2b2b2",

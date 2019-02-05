@@ -215,6 +215,7 @@ e.g. System Message
 * **`scrollToBottom`** _(Bool)_ - Enables the scrollToBottom Component (Default is false)    
 * **`scrollToBottomComponent`** _(Function)_ - Custom Scroll To Bottom Component container  
 * **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)  
+* **`alignTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 
 ## Imperative methods
 

@@ -7,7 +7,7 @@ import { isExpo } from './utils';
 
 let Video;
 if (isExpo()) {
-  const Expo = require('expo');
+  const Expo = require(isExpo() ? 'expo' : 'react'); //just gets past static analysis
   const { Video: ExpoVideo } = Expo;
   Video = ExpoVideo;
 } else {

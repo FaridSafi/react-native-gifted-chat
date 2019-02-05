@@ -59,6 +59,13 @@
 - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-gifted-chat --save`
 - Using [Yarn](https://yarnpkg.com/): `yarn add react-native-gifted-chat`
 
+## You have a questions ?
+
+1. Please check this readme and may find a response
+1. Please ask on StackOverflow first: https://stackoverflow.com/questions/tagged/react-native-gifted-chat
+1. Find response on existing issues
+1. Try to keep issues for issues
+
 ## Example
 
 ```jsx

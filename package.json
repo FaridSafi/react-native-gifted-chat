@@ -61,9 +61,9 @@
     "husky": "0.15.0-rc.2",
     "jest": "22.1.4",
     "prop-types": "15.6.2",
-    "react": "16.2.0",
+    "react": "16.8.0",
     "react-native": "0.51.0",
-    "react-test-renderer": "16.4.0"
+    "react-test-renderer": "16.8.0"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^2.0.1",

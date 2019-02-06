@@ -63,7 +63,7 @@
     "prop-types": "15.6.2",
     "react": "16.8.1",
     "react-native": "0.51.0",
-    "react-test-renderer": "16.8.0"
+    "react-test-renderer": "16.8.1"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^2.0.1",

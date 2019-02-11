@@ -114,11 +114,17 @@
     hoist-non-react-statics "^2.2.2"
     prop-types "^15.5.10"
 
-"@types/react-native@^0.52.12":
-  version "0.52.18"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.52.18.tgz#082fada6fdddc6c745a4c1a6234e4aa3b104176b"
-  integrity sha512-e2jeEVvxIqkiV/3ej1JqEVOqrvWRMuHI5kWDakHj1q3YPDrryT8F9pVBWKlogD14gaJ8ePeurMg81/oIbVN5Dg==
+"@types/prop-types@*":
+  version "15.5.8"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.8.tgz#8ae4e0ea205fe95c3901a5a1df7f66495e3a56ce"
+  integrity sha512-3AQoUxQcQtLHsK25wtTWIoIpgYjH3vSDroZOUr7PpCHw/jLY1RB9z9E8dBT/OSmwStVgkRNvdh+ZHNiomRieaw==
+
+"@types/react-native@^0.57.35":
+  version "0.57.35"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.35.tgz#362bbfa28a5700bac6fd814f8cb4aae1521cd9d3"
+  integrity sha512-RQnpq9qi1JiAF9331r+WcBSsTYhpl3wcMZPI+UvZWwNG1X7HxZCgaU3+7/zb8VT8GAuKmmp0SUYXhxXba3C53A==
   dependencies:
+    "@types/prop-types" "*"
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^16.0.38":

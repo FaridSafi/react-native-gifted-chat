@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.0.38",
-    "@types/react-native": "^0.52.12",
+    "@types/react-native": "^0.57.35",
     "babel": "6.23.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "23.0.0",

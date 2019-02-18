@@ -25,20 +25,26 @@ export default class Bubble extends React.Component {
 
   onLongPress() {
     if (this.props.onLongPress) {
-      this.props.onLongPress(this.context);
-    } else if (this.props.currentMessage.text) {
-      const options = [
-        'Copy Text',
-        'Cancel',
-      ];
-      const cancelButtonIndex = options.length - 1;
-      this.context.actionSheet().showActionSheetWithOptions(
-        { options, cancelButtonIndex },
+      this.props.onLongPress(this.context, this.props.currentMessage);
+    } else {
+      if (this.props.currentMessage.text) {
+        const options = [
+          'Copy Text',
+          'Cancel',
+        ];
+        const cancelButtonIndex = options.length - 1;
+        this.context.actionSheet().showActionSheetWithOptions({
+          options,
+          cancelButtonIndex,
+        },
         (buttonIndex) => {
-          if (buttonIndex === 0) {
-            Clipboard.setString(this.props.currentMessage.text);
+          switch (buttonIndex) {
+            case 0:
+              Clipboard.setString(this.props.currentMessage.text);
+              break;
           }
         });
+      }
     }
   }
 

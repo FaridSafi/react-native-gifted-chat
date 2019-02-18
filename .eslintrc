@@ -1,23 +1,22 @@
 {
-    "extends": "cooperka/react-native",
-    "env": {
-        "browser": true,
-        "jest": true
-    },
-    "rules": {
-        "no-underscore-dangle": 0,
-        "import/no-unresolved": [
-            2,
-            {
-                "ignore": [
-                    "react",
-                    "react-native"
-                ]
-            }
-        ],
-        "import/no-extraneous-dependencies": 0,
-        "import/extensions": 0,
-        "react/no-unused-prop-types": 0,
-        "react/no-typos": 0
-    }
+  "extends": "cooperka/react-native",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "no-underscore-dangle": 0,
+    "import/no-unresolved": [
+      2,
+      {
+        "ignore": ["react", "react-native"]
+      }
+    ],
+    "import/no-extraneous-dependencies": 0,
+    "import/extensions": 0,
+    "react/no-unused-prop-types": 0,
+    "react/no-typos": 0,
+    "jsx-a11y/accessible-emoji": 0
+  }
 }

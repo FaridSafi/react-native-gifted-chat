@@ -71,7 +71,7 @@
     "react-native-communications": "2.2.1",
     "react-native-lightbox": "^0.7.0",
     "react-native-parsed-text": "^0.0.20",
-    "react-native-video": "^3.2.1",
+    "react-native-video": "^4.4.0",
     "uuid": "3.3.0"
   },
   "peerDependencies": {

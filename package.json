@@ -31,7 +31,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "appr": "cd example-expo && ./setPRVersion.js && yarn && yarn appr",
-    "deploy": "cd example-expo && yarn install && exp login --username $EXP_USERNAME --password $EXP_PASSWORD && exp publish --non-interactive"
+    "deploy": "cd example-expo && yarn install && exp login --username $EXP_USERNAME --password $EXP_PASSWORD && exp publish --non-interactive",
+    "prepublish": "babel src --ignore src/__tests__ --out-dir lib"
   },
   "jest": {
     "preset": "react-native",
@@ -47,7 +48,7 @@
   "devDependencies": {
     "@types/react": "^16.0.38",
     "@types/react-native": "^0.57.35",
-    "babel": "6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "23.0.0",
     "babel-preset-react-native": "4.0.0",

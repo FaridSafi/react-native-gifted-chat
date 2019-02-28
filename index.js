@@ -1,1 +1,1 @@
-export * from './src/GiftedChat';
+export * from './lib/GiftedChat';

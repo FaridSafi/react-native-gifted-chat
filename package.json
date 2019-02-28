@@ -62,7 +62,7 @@
     "jest": "22.1.4",
     "prop-types": "15.6.2",
     "react": "16.8.1",
-    "react-native": "0.51.0",
+    "react-native": "0.58.6",
     "react-test-renderer": "16.8.1"
   },
   "dependencies": {

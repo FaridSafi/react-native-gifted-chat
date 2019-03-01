@@ -29,15 +29,9 @@ export default class App extends Component {
     isLoadingEarlier: false,
   };
   _isMounted = false;
-  _isAlright = null;
 
   async componentWillMount() {
     this._isMounted = true;
-    // this.setState(() => {
-    //   return {
-    //     messages: require('./data/messages.js'),
-    //   };
-    // });
     // init with only system messages
     await Asset.fromModule(require('./assets/avatar.png')).downloadAsync();
     this.setState({ messages: messagesData.filter((message) => message.system), appIsReady: true });

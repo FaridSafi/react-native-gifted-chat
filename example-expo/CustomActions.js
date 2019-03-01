@@ -1,59 +1,10 @@
-import { ImagePicker, Location, Permissions } from 'expo';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
 
+import { getLocationAsync, pickImageAsync, takePictureAsync } from './mediaUtils';
+
 export default class CustomActions extends React.Component {
-
-  _getLocationAsync = async () => {
-    const { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
-      return null;
-    }
-
-    const location = await Location.getCurrentPositionAsync({});
-    return location;
-  };
-
-  _pickImageAsync = async () => {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    if (status !== 'granted') {
-      return null;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-    });
-
-    if (!result.cancelled) {
-      // Upload image (result.uri)
-      const storageUrl = result.uri;
-      return storageUrl;
-    }
-
-    return null;
-  };
-
-  _takePictureAsync = async () => {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    if (status !== 'granted') {
-      return null;
-    }
-
-    const result = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-    });
-
-    if (!result.cancelled) {
-      // Upload image (result.uri)
-      const storageUrl = result.uri;
-      return storageUrl;
-    }
-
-    return null;
-  };
 
   onActionsPress = () => {
     const options = ['Choose From Library', 'Take Picture', 'Send Location', 'Cancel'];
@@ -64,35 +15,16 @@ export default class CustomActions extends React.Component {
         cancelButtonIndex,
       },
       async (buttonIndex) => {
+        const { onSend } = this.props;
         switch (buttonIndex) {
           case 0:
-            {
-              const image = await this._pickImageAsync();
-              if (image) {
-                this.props.onSend([{ image }]);
-              }
-            }
-            break;
+            pickImageAsync(onSend);
+            return;
           case 1:
-            {
-              const image = await this._takePictureAsync();
-              if (image) {
-                this.props.onSend([{ image }]);
-              }
-            }
-            break;
+            takePictureAsync(onSend);
+            return;
           case 2:
-            {
-              const location = await this._getLocationAsync();
-              if (location) {
-                this.props.onSend([
-                  {
-                    location: location.coords,
-                  },
-                ]);
-              }
-            }
-            break;
+            getLocationAsync(onSend);
           default:
         }
       },

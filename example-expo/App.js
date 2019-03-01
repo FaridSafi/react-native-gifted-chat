@@ -7,10 +7,10 @@ import Sentry from 'sentry-expo';
 import AccessoryBar from './AccessoryBar';
 import CustomActions from './CustomActions';
 import CustomView from './CustomView';
-import messagesData from './data';
 import NavBar from './NavBar';
+import messagesData from './data/messages';
 import earlierMessages from './data/earlierMessages';
-// import { GiftedChat } from 'react-native-gifted-chat';
+
 Sentry.config('https://2a164b1e89424a5aafc186da811308cb@sentry.io/276804').install();
 
 const styles = StyleSheet.create({
@@ -20,26 +20,39 @@ const styles = StyleSheet.create({
 const filterBotMessages = (message) => !message.system && message.user && message.user._id && message.user._id === 2;
 const findStep = (step) => (_, index) => index === step - 1;
 
+const user = {
+  _id: 1,
+  name: 'Developer',
+};
+
+const otherUser = {
+  _id: 2,
+  name: 'React Native',
+  avatar: 'https://facebook.github.io/react/img/logo_og.png',
+};
+
 export default class App extends Component {
 
   state = {
+    step: 0,
     messages: [],
     loadEarlier: true,
     typingText: null,
     isLoadingEarlier: false,
   };
+
   _isMounted = false;
 
   async componentWillMount() {
     this._isMounted = true;
     // init with only system messages
-    await Asset.fromModule(require('./assets/avatar.png')).downloadAsync();
     this.setState({ messages: messagesData.filter((message) => message.system), appIsReady: true });
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
+
   onLoadEarlier = () => {
     this.setState((previousState) => {
       return {
@@ -70,10 +83,10 @@ export default class App extends Component {
       };
     });
     // for demo purpose
-    setTimeout(() => this.botSend(step), 1200 + Math.round(Math.random() * 1000));
+    setTimeout(() => this.botSend(step), Math.round(Math.random() * 1000));
   };
 
-  botSend(step = 0) {
+  botSend = (step = 0) => {
     const newMessage = messagesData
       .reverse()
       .filter(filterBotMessages)
@@ -83,7 +96,7 @@ export default class App extends Component {
         messages: GiftedChat.append(previousState.messages, newMessage),
       }));
     }
-  }
+  };
 
   parsePatterns = (linkStyle) => {
     return [
@@ -106,21 +119,13 @@ export default class App extends Component {
           _id: Math.round(Math.random() * 1000000),
           text,
           createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            // avatar: 'https://facebook.github.io/react/img/logo_og.png',
-          },
+          user: otherUser,
         }),
       };
     });
   };
 
   onSendFromUser = (messages = []) => {
-    const user = {
-      _id: 1,
-      name: 'Bacon',
-    };
     const createdAt = new Date();
     const messagesToUpload = messages.map((message) => ({
       ...message,
@@ -190,9 +195,7 @@ export default class App extends Component {
           onLoadEarlier={this.onLoadEarlier}
           isLoadingEarlier={this.state.isLoadingEarlier}
           parsePatterns={this.parsePatterns}
-          user={{
-            _id: 1,
-          }}
+          user={user}
           renderAccessory={this.renderAccessory}
           renderActions={this.renderCustomActions}
           renderBubble={this.renderBubble}

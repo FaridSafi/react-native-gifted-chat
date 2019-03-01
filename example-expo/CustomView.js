@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { MapView } from 'expo';
 
 const styles = StyleSheet.create({
   mapView: {
@@ -17,7 +17,6 @@ export default function CustomView(props) {
     return (
       <View style={props.containerStyle}>
         <MapView
-          provider={PROVIDER_GOOGLE}
           style={[styles.mapView]}
           region={{
             latitude: props.currentMessage.location.latitude,

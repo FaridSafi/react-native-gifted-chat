@@ -1,14 +1,16 @@
+import { AppLoading, Asset, Linking } from 'expo';
 import React, { Component } from 'react';
-import { Asset, AppLoading, Linking } from 'expo';
-import { View, StyleSheet } from 'react-native';
-
-import { GiftedChat } from 'react-native-gifted-chat';
+import { StyleSheet, View } from 'react-native';
+import { Bubble, GiftedChat, SystemMessage } from 'react-native-gifted-chat';
 import Sentry from 'sentry-expo';
 
+import AccessoryBar from './AccessoryBar';
+import CustomActions from './CustomActions';
+import CustomView from './CustomView';
 import messagesData from './data';
 import NavBar from './NavBar';
-import CustomView from './CustomView';
-
+import earlierMessages from './data/earlierMessages';
+// import { GiftedChat } from 'react-native-gifted-chat';
 Sentry.config('https://2a164b1e89424a5aafc186da811308cb@sentry.io/276804').install();
 
 const styles = StyleSheet.create({
@@ -22,15 +24,47 @@ export default class App extends Component {
 
   state = {
     messages: [],
-    step: 0,
-    appIsReady: false,
+    loadEarlier: true,
+    typingText: null,
+    isLoadingEarlier: false,
   };
+  _isMounted = false;
+  _isAlright = null;
 
   async componentWillMount() {
+    this._isMounted = true;
+    // this.setState(() => {
+    //   return {
+    //     messages: require('./data/messages.js'),
+    //   };
+    // });
     // init with only system messages
     await Asset.fromModule(require('./assets/avatar.png')).downloadAsync();
     this.setState({ messages: messagesData.filter((message) => message.system), appIsReady: true });
   }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+  onLoadEarlier = () => {
+    this.setState((previousState) => {
+      return {
+        isLoadingEarlier: true,
+      };
+    });
+
+    setTimeout(() => {
+      if (this._isMounted === true) {
+        this.setState((previousState) => {
+          return {
+            messages: GiftedChat.prepend(previousState.messages, earlierMessages),
+            loadEarlier: false,
+            isLoadingEarlier: false,
+          };
+        });
+      }
+    }, 1000); // simulating network
+  };
 
   onSend = (messages = []) => {
     const step = this.state.step + 1;
@@ -41,6 +75,7 @@ export default class App extends Component {
         step,
       };
     });
+    // for demo purpose
     setTimeout(() => this.botSend(step), 1200 + Math.round(Math.random() * 1000));
   };
 
@@ -70,6 +105,82 @@ export default class App extends Component {
     return <CustomView {...props} />;
   }
 
+  onReceive = (text) => {
+    this.setState((previousState) => {
+      return {
+        messages: GiftedChat.append(previousState.messages, {
+          _id: Math.round(Math.random() * 1000000),
+          text,
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: 'React Native',
+            // avatar: 'https://facebook.github.io/react/img/logo_og.png',
+          },
+        }),
+      };
+    });
+  };
+
+  onSendFromUser = (messages = []) => {
+    const user = {
+      _id: 1,
+      name: 'Bacon',
+    };
+    const createdAt = new Date();
+    const messagesToUpload = messages.map((message) => ({
+      ...message,
+      user,
+      createdAt,
+      _id: Math.round(Math.random() * 1000000),
+    }));
+    this.onSend(messagesToUpload);
+  };
+
+  renderAccessory = () => <AccessoryBar onSend={this.onSendFromUser} />;
+
+  renderCustomActions = (props) => {
+    return <CustomActions {...props} onSend={this.onSendFromUser} />;
+  };
+
+  renderBubble = (props) => {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          left: {
+            backgroundColor: '#f0f0f0',
+          },
+        }}
+      />
+    );
+  };
+
+  renderSystemMessage = (props) => {
+    return (
+      <SystemMessage
+        {...props}
+        containerStyle={{
+          marginBottom: 15,
+        }}
+        textStyle={{
+          fontSize: 14,
+        }}
+      />
+    );
+  };
+
+  renderFooter = (props) => {
+    if (this.state.typingText) {
+      return (
+        <View style={styles.footerContainer}>
+          <Text style={styles.footerText}>{this.state.typingText}</Text>
+        </View>
+      );
+    }
+    return null;
+  };
+
   render() {
     if (!this.state.appIsReady) {
       return <AppLoading />;
@@ -80,12 +191,20 @@ export default class App extends Component {
         <GiftedChat
           messages={this.state.messages}
           onSend={this.onSend}
-          renderCustomView={this.renderCustomView}
           keyboardShouldPersistTaps="never"
+          loadEarlier={this.state.loadEarlier}
+          onLoadEarlier={this.onLoadEarlier}
+          isLoadingEarlier={this.state.isLoadingEarlier}
+          parsePatterns={this.parsePatterns}
           user={{
             _id: 1,
           }}
-          parsePatterns={this.parsePatterns}
+          renderAccessory={this.renderAccessory}
+          renderActions={this.renderCustomActions}
+          renderBubble={this.renderBubble}
+          renderSystemMessage={this.renderSystemMessage}
+          renderCustomView={this.renderCustomView}
+          renderFooter={this.renderFooter}
         />
       </View>
     );

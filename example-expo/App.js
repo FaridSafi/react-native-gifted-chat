@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Asset, AppLoading } from 'expo';
-import { View, StyleSheet, Linking } from 'react-native';
+import { Asset, AppLoading, Linking } from 'expo';
+import { View, StyleSheet } from 'react-native';
 
 import { GiftedChat } from 'react-native-gifted-chat';
 import Sentry from 'sentry-expo';
@@ -20,18 +20,11 @@ const findStep = (step) => (_, index) => index === step - 1;
 
 export default class App extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      messages: [],
-      step: 0,
-      appIsReady: false,
-    };
-
-    this.onSend = this.onSend.bind(this);
-    this.parsePatterns = this.parsePatterns.bind(this);
-  }
+  state = {
+    messages: [],
+    step: 0,
+    appIsReady: false,
+  };
 
   async componentWillMount() {
     // init with only system messages
@@ -39,14 +32,17 @@ export default class App extends Component {
     this.setState({ messages: messagesData.filter((message) => message.system), appIsReady: true });
   }
 
-  onSend(messages = []) {
+  onSend = (messages = []) => {
     const step = this.state.step + 1;
-    this.setState((previousState) => ({
-      messages: GiftedChat.append(previousState.messages, [{ ...messages[0], sent: true, received: true }]),
-      step,
-    }));
+    this.setState((previousState) => {
+      const sentMessages = [{ ...messages[0], sent: true, received: true }];
+      return {
+        messages: GiftedChat.append(previousState.messages, sentMessages),
+        step,
+      };
+    });
     setTimeout(() => this.botSend(step), 1200 + Math.round(Math.random() * 1000));
-  }
+  };
 
   botSend(step = 0) {
     const newMessage = messagesData
@@ -60,7 +56,7 @@ export default class App extends Component {
     }
   }
 
-  parsePatterns(linkStyle) {
+  parsePatterns = (linkStyle) => {
     return [
       {
         pattern: /#(\w+)/,
@@ -68,7 +64,12 @@ export default class App extends Component {
         onPress: () => Linking.openURL('http://gifted.chat'),
       },
     ];
+  };
+
+  renderCustomView(props) {
+    return <CustomView {...props} />;
   }
+
   render() {
     if (!this.state.appIsReady) {
       return <AppLoading />;
@@ -79,7 +80,7 @@ export default class App extends Component {
         <GiftedChat
           messages={this.state.messages}
           onSend={this.onSend}
-          renderCustomView={CustomView}
+          renderCustomView={this.renderCustomView}
           keyboardShouldPersistTaps="never"
           user={{
             _id: 1,

@@ -301,6 +301,14 @@ class GiftedChat extends React.Component {
     this._messageContainerRef.scrollTo({ y: 0, animated });
   }
 
+  // Trigger onPress using ref to <GiftedChat />
+  // Eg: this._giftedChatRef.scrollToIndex({index: 8, viewOffset: 0, viewPosition: 1})
+  scrollToIndex(params) {
+    if (this._messageContainerRef === null) {
+      return;
+    }
+    this._messageContainerRef.scrollToIndex(params);
+  }
 
   renderMessages() {
     const AnimatedView = this.props.isAnimated === true ? Animated.View : View;

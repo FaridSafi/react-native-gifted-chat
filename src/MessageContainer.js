@@ -89,6 +89,13 @@ export default class MessageContainer extends React.PureComponent {
     this.scrollTo({ offset: 0, animated: 'true' });
   };
 
+  // Called in GiftedChat
+  scrollToIndex(params) {
+    if (this.flatListRef) {
+      this.flatListRef.scrollToIndex(params);
+    }
+  };
+
   handleOnScroll = (event) => {
     if (event.nativeEvent.contentOffset.y > this.props.scrollToBottomOffset) {
       this.setState({ showScrollBottom: true });
@@ -118,6 +125,8 @@ export default class MessageContainer extends React.PureComponent {
       previousMessage,
       nextMessage,
       position: item.user._id === this.props.user._id ? 'right' : 'left',
+      // Make FlatList index available in messageProps; mapping message _id with index
+      listIndex: index,
     };
 
     if (this.props.renderMessage) {

@@ -16,11 +16,11 @@ import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 import Color from './Color';
 
-export default class MessageContainer extends React.Component {
+export default class MessageContainer extends React.PureComponent {
 
   state = {
     showScrollBottom: false,
-  }
+  };
 
   componentDidMount() {
     if (this.props.messages.length === 0) {
@@ -28,12 +28,8 @@ export default class MessageContainer extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    const next = nextProps.messages;
-    const current = this.props.messages;
-    return (
-      next.length !== current.length || next.extraData !== current.extraData || next.loadEarlier !== current.loadEarlier
-    );
+  componentWillUnmount() {
+    this.detachKeyboardListeners();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -91,7 +87,7 @@ export default class MessageContainer extends React.Component {
 
   scrollToBottom = () => {
     this.scrollTo({ offset: 0, animated: 'true' });
-  }
+  };
 
   handleOnScroll = (event) => {
     if (event.nativeEvent.contentOffset.y > this.props.scrollToBottomOffset) {
@@ -99,7 +95,7 @@ export default class MessageContainer extends React.Component {
     } else {
       this.setState({ showScrollBottom: false });
     }
-  }
+  };
 
   renderRow = ({ item, index }) => {
     if (!item._id && item._id !== 0) {
@@ -145,7 +141,8 @@ export default class MessageContainer extends React.Component {
       return (
         <TouchableOpacity onPress={this.scrollToBottom} hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}>
           {this.props.scrollToBottomComponent}
-        </TouchableOpacity>);
+        </TouchableOpacity>
+      );
     }
     return scrollToBottomComponent;
   }
@@ -157,7 +154,7 @@ export default class MessageContainer extends React.Component {
       return <View style={styles.container} />;
     }
     return (
-      <View style={styles.container}>
+      <View style={this.props.alignTop ? styles.containerAlignTop : styles.container}>
         {this.state.showScrollBottom && this.props.scrollToBottom ? this.renderScrollToBottomWrapper() : null}
         <FlatList
           ref={(ref) => (this.flatListRef = ref)}
@@ -186,6 +183,10 @@ export default class MessageContainer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerAlignTop: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
   },
   contentContainerStyle: {
     justifyContent: 'flex-end',
@@ -230,6 +231,7 @@ MessageContainer.defaultProps = {
   extraData: null,
   scrollToBottom: false,
   scrollToBottomOffset: 200,
+  alignTop: false,
 };
 
 MessageContainer.propTypes = {
@@ -247,4 +249,5 @@ MessageContainer.propTypes = {
   scrollToBottom: PropTypes.bool,
   scrollToBottomOffset: PropTypes.number,
   scrollToBottomComponent: PropTypes.func,
+  alignTop: PropTypes.bool,
 };

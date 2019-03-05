@@ -414,9 +414,10 @@ class GiftedChat extends React.Component {
     this.setMaxHeight(layout.height);
     const newComposerHeight = this.props.minComposerHeight;
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(newComposerHeight);
+    const initialText = this.props.initialText || '';
     this.setState({
       isInitialized: true,
-      text: this.getTextFromProp(''),
+      text: this.getTextFromProp(initialText),
       composerHeight: newComposerHeight,
       messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight),
     });
@@ -572,6 +573,7 @@ GiftedChat.defaultProps = {
 GiftedChat.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.object),
   text: PropTypes.string,
+  initialText: PropTypes.string,
   placeholder: PropTypes.string,
   messageIdGenerator: PropTypes.func,
   user: PropTypes.object,
@@ -622,6 +624,7 @@ GiftedChat.propTypes = {
   extraData: PropTypes.object,
   minComposerHeight: PropTypes.number,
   maxComposerHeight: PropTypes.number,
+  alignTop: PropTypes.bool,
 };
 
 export {

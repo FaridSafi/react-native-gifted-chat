@@ -1,22 +1,19 @@
+/* eslint global-require: 0 */
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, View, ViewPropTypes } from 'react-native';
 import Video from 'react-native-video';
 
-
-export default function MessageVideo({
-  containerStyle,
-  videoProps,
-  videoStyle,
-  currentMessage,
-}) {
+export default function MessageVideo({ containerStyle, videoProps, videoStyle, currentMessage }) {
   return (
     // eslint-disable-next-line no-use-before-define
     <View style={[styles.container, containerStyle]}>
-
       <Video
         {...videoProps}
-        ref={(r) => { this.player = r; }}
+        ref={(r) => {
+          this.player = r;
+        }}
         source={{ uri: currentMessage.video }}
         style={videoStyle}
         resizeMode="cover"
@@ -29,8 +26,7 @@ export default function MessageVideo({
 }
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
 });
 
 MessageVideo.defaultProps = {

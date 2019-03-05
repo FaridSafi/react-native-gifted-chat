@@ -59,6 +59,13 @@
 - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-gifted-chat --save`
 - Using [Yarn](https://yarnpkg.com/): `yarn add react-native-gifted-chat`
 
+## You have a question ?
+
+1. Please check this readme and may find a response
+1. Please ask on StackOverflow first: https://stackoverflow.com/questions/tagged/react-native-gifted-chat
+1. Find response on existing issues
+1. Try to keep issues for issues
+
 ## Example
 
 ```jsx
@@ -130,6 +137,8 @@ e.g. Chat Message
     avatar: 'https://facebook.github.io/react/img/logo_og.png',
   },
   image: 'https://facebook.github.io/react/img/logo_og.png',
+  // You can also add a video prop:
+  video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
   // Any additional custom parameters are passed through
 }
 ```
@@ -173,6 +182,7 @@ e.g. System Message
 - **`renderSystemMessage`** _(Function)_ - Custom system message
 - **`onLongPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
 - **`inverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
+- **`renderUsernameOnMessage`** _(Bool)_ - Indicate whether to show the user's username inside the message bubble; default is `false`
 - **`renderMessage`** _(Function)_ - Custom message container
 - **`renderMessageText`** _(Function)_ - Custom message text
 - **`renderMessageImage`** _(Function)_ - Custom message image
@@ -214,6 +224,7 @@ e.g. System Message
 * **`scrollToBottom`** _(Bool)_ - Enables the scrollToBottom Component (Default is false)    
 * **`scrollToBottomComponent`** _(Function)_ - Custom Scroll To Bottom Component container  
 * **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)  
+* **`alignTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 
 ## Imperative methods
 

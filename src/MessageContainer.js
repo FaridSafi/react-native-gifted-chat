@@ -94,7 +94,7 @@ export default class MessageContainer extends React.PureComponent {
     if (this.flatListRef) {
       this.flatListRef.scrollToIndex(params);
     }
-  };
+  }
 
   handleOnScroll = (event) => {
     if (event.nativeEvent.contentOffset.y > this.props.scrollToBottomOffset) {

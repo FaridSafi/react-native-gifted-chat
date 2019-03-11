@@ -40,7 +40,6 @@ export default class Message extends React.Component {
     const { nextMessage, previousMessage } = this.props;
     const nextPropsMessage = nextProps.nextMessage;
     const nextPropsPreviousMessage = nextProps.previousMessage;
-
     return (
       next.sent !== current.sent ||
       next.received !== current.received ||

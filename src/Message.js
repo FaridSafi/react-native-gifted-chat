@@ -39,21 +39,22 @@ export default class Message extends React.Component {
     const current = this.props.currentMessage;
     const { nextMessage, previousMessage } = this.props;
     const nextPropsMessage = nextProps.nextMessage;
-    const prevPropsMessage = nextProps.previousMessage;
+    const nextPropsPreviousMessage = nextProps.previousMessage;
 
     return (
-      next.send !== current.send ||
+      next.sent !== current.sent ||
       next.received !== current.received ||
       next.pending !== current.pending ||
       next.createdAt !== current.createdAt ||
       next.text !== current.text ||
       next.image !== current.image ||
       next.video !== current.video ||
+      next.audio !== current.audio ||
       nextMessage !== nextPropsMessage ||
-      prevPropsMessage !== previousMessage
+      nextPropsPreviousMessage !== previousMessage
     );
   }
-
+  
   getInnerComponentProps = () => {
     const { containerStyle, ...props } = this.props;
     return {

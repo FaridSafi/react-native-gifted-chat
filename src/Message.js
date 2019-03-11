@@ -53,7 +53,7 @@ export default class Message extends React.Component {
       nextPropsPreviousMessage !== previousMessage
     );
   }
-  
+
   getInnerComponentProps = () => {
     const { containerStyle, ...props } = this.props;
     return {

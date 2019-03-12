@@ -84,7 +84,8 @@ interface BubbleProps<TMessage extends IMessage = IMessage> {
   nextMessage?: TMessage;
   previousMessage?: TMessage;
   containerStyle?: LeftRightStyle<ViewStyle>;
-  wrapperStyle: LeftRightStyle<ViewStyle>;
+  wrapperStyle?: LeftRightStyle<ViewStyle>;
+  textStyle?: LeftRightStyle<ViewStyle>;
   bottomContainerStyle: LeftRightStyle<ViewStyle>;
   tickStyle: TextStyle;
   containerToNextStyle: LeftRightStyle<ViewStyle>;

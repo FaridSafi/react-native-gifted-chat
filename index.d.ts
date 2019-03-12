@@ -108,7 +108,7 @@ interface ComposerProps {
   multiline?: boolean;
   textInputStyle?: RN.TextInputProps['style'];
   textInputAutoFocus?: boolean;
-  keyboardAppearance: RN.TextInputProps['keyboardAppearance'];
+  keyboardAppearance?: RN.TextInputProps['keyboardAppearance'];
 }
 
 export class Composer extends React.Component<ComposerProps> {}

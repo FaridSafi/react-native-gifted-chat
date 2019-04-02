@@ -207,11 +207,7 @@ e.g. System Message
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
 - **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
 - **`parsePatterns`** _(Function)_ - Custom parse patterns for [react-native-parsed-text](https://github.com/taskrabbit/react-native-parsed-text) used to linkify message content (like URLs and phone numbers), e.g.:
-- **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
-- **`minComposerHeight`** _(Object)_ - Custom min height of the composer.
-- **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
-
-  ```js
+ ```js
   <GiftedChat
     parsePatterns={(linkStyle) => [
       { type: 'phone', style: linkStyle, onPress: this.onPressPhoneNumber },
@@ -219,6 +215,9 @@ e.g. System Message
     ]}
   />
   ```
+- **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
+- **`minComposerHeight`** _(Object)_ - Custom min height of the composer.
+- **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
 * **`scrollToBottom`** _(Bool)_ - Enables the scrollToBottom Component (Default is false)    
 * **`scrollToBottomComponent`** _(Function)_ - Custom Scroll To Bottom Component container  
 * **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)  

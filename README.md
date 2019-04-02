@@ -210,6 +210,7 @@ e.g. System Message
 - **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
+- **`shouldUpdateMessage`** _(Function)_ - Lets the message component know when to update outside of normal cases.
 
   ```js
   <GiftedChat

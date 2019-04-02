@@ -39,6 +39,7 @@ export default class Message extends React.Component {
     const current = this.props.currentMessage;
     const { nextMessage } = this.props;
     const nextPropsMessage = nextProps.nextMessage;
+    const shouldUpdate = ((this.props.shouldUpdateMessage && this.props.shouldUpdateMessage(this.props, nextProps)) || false);
     return (
       next.sent !== current.sent ||
       next.received !== current.received ||
@@ -48,7 +49,8 @@ export default class Message extends React.Component {
       next.image !== current.image ||
       next.video !== current.video ||
       next.audio !== current.audio ||
-      nextMessage !== nextPropsMessage
+      nextMessage !== nextPropsMessage ||
+      shouldUpdate
     );
   }
 
@@ -129,6 +131,7 @@ export default class Message extends React.Component {
 
 Message.defaultProps = {
   renderAvatar: undefined,
+  shouldUpdateMessage: undefined,
   renderBubble: null,
   renderDay: null,
   renderSystemMessage: null,
@@ -144,6 +147,7 @@ Message.defaultProps = {
 
 Message.propTypes = {
   renderAvatar: PropTypes.func,
+  shouldUpdateMessage: PropTypes.func,
   showUserAvatar: PropTypes.bool,
   renderBubble: PropTypes.func,
   renderDay: PropTypes.func,

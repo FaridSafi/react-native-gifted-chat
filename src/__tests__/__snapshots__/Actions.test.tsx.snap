@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <Actions /> and compare with snapshot 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "height": 26,
+      "marginBottom": 10,
+      "marginLeft": 10,
+      "opacity": 1,
+      "width": 26,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "borderColor": "#b2b2b2",
+          "borderRadius": 13,
+          "borderWidth": 2,
+          "flex": 1,
+        },
+        Object {},
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "color": "#b2b2b2",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "textAlign": "center",
+          },
+          Object {},
+        ]
+      }
+    >
+      +
+    </Text>
+  </View>
+</View>
+`;

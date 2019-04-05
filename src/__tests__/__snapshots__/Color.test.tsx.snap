@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should compare Color with snapshot 1`] = `
+Object {
+  "alizarin": "#e74c3c",
+  "backgroundTransparent": "transparent",
+  "black": "#000",
+  "carrot": "#e67e22",
+  "defaultBlue": "#0084ff",
+  "defaultColor": "#b2b2b2",
+  "emerald": "#2ecc71",
+  "leftBubbleBackground": "#f0f0f0",
+  "midnightBlue": "#2c3e50",
+  "optionTintColor": "#007AFF",
+  "peterRiver": "#3498db",
+  "timeTextColor": "#aaa",
+  "turquoise": "#1abc9c",
+  "white": "#fff",
+  "wisteria": "#8e44ad",
+}
+`;

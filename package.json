@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
   "scripts": {
-    "lint": "tslint .",
+    "lint": "tslint --project .",
     "tsc": "tsc --noEmit",
     "build": "rm -rf lib/ && tsc",
     "precommit": "yarn lint",

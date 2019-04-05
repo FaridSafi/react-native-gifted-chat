@@ -1,12 +1,11 @@
 import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import createComponentWithContext from './context'
 
 import { Message } from '../GiftedChat'
 
 it('should render <Message /> and compare with snapshot', () => {
-  const tree = renderer
-    .create(
+  const tree = createComponentWithContext(
       <Message
         key='123'
         user={{ _id: 1 }}

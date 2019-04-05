@@ -1,5 +1,3 @@
-/* eslint no-use-before-define: ["error", { "variables": false }] */
-
 import PropTypes from 'prop-types'
 import React from 'react'
 import {
@@ -17,6 +15,21 @@ import Color from './Color'
 import { isSameDay } from './utils'
 import { DATE_FORMAT } from './Constant'
 import { IMessage } from './types'
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+    marginBottom: 10,
+  },
+  text: {
+    backgroundColor: Color.backgroundTransparent,
+    color: Color.defaultColor,
+    fontSize: 12,
+    fontWeight: '600',
+  },
+})
 
 interface DayProps<TMessage extends IMessage = IMessage> {
   currentMessage?: TMessage
@@ -61,21 +74,6 @@ export default function Day(
   }
   return null
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 5,
-    marginBottom: 10,
-  },
-  text: {
-    backgroundColor: Color.backgroundTransparent,
-    color: Color.defaultColor,
-    fontSize: 12,
-    fontWeight: '600',
-  },
-})
 
 Day.contextTypes = {
   getLocale: PropTypes.func,

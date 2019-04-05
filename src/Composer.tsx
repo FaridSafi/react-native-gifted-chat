@@ -1,14 +1,23 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import {
-  Platform,
-  StyleSheet,
-  TextInput,
-  NativeSyntheticEvent,
-  TextInputContentSizeChangeEventData,
-  TextInputProps,
-  TextInputChangeEventData,
-} from 'react-native'
+import { Platform, StyleSheet, TextInput, TextInputProps } from 'react-native'
+
+const styles = StyleSheet.create({
+  textInput: {
+    flex: 1,
+    marginLeft: 10,
+    fontSize: 16,
+    lineHeight: 16,
+    marginTop: Platform.select({
+      ios: 6,
+      android: 0,
+    }),
+    marginBottom: Platform.select({
+      ios: 5,
+      android: 3,
+    }),
+  },
+})
 
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
 import Color from './Color'
@@ -108,20 +117,3 @@ export default class Composer extends React.Component<ComposerProps> {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  textInput: {
-    flex: 1,
-    marginLeft: 10,
-    fontSize: 16,
-    lineHeight: 16,
-    marginTop: Platform.select({
-      ios: 6,
-      android: 0,
-    }),
-    marginBottom: Platform.select({
-      ios: 5,
-      android: 3,
-    }),
-  },
-})

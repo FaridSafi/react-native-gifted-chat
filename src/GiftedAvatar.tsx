@@ -1,5 +1,3 @@
-/* eslint no-use-before-define: ["error", { "variables": false }], padded-blocks: 0 */
-
 import PropTypes from 'prop-types'
 import React from 'react'
 import {

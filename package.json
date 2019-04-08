@@ -29,9 +29,9 @@
     "tsc": "tsc --noEmit",
     "build": "rm -rf lib/ && tsc",
     "precommit": "yarn lint",
-    "test": "jest --no-watchman",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
+    "test": "TZ=Europe/Paris jest --no-watchman",
+    "test:watch": "TZ=Europe/Paris jest --watch",
+    "test:coverage": "TZ=Europe/Paris jest --coverage",
     "prepublishOnly": "yarn lint && yarn build && yarn test"
   },
   "jest": {

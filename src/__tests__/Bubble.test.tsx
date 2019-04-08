@@ -11,7 +11,7 @@ it('should render <Bubble /> and compare with snapshot', () => {
       currentMessage={{
         _id: 1,
         text: 'test',
-        createdAt: new Date(),
+        createdAt: 1554744013721,
         user: { _id: 1 },
       }}
     />,

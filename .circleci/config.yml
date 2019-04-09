@@ -13,7 +13,7 @@ test: &test
 
     - run:
         name: Installing codecov
-        command: yarn global add codecov
+        command: sudo yarn global add codecov
 
     - run:
         name: Installing dependencies

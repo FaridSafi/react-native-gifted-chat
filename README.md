@@ -47,6 +47,7 @@
 - InputToolbar avoiding keyboard
 - Redux support
 - System message
+- Write with TypeScript [soon](https://github.com/FaridSafi/react-native-gifted-chat/pull/1190)
 
 ## Dependency
 

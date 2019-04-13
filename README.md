@@ -48,7 +48,7 @@
     <p align="center">
       Click to learn more
     </p>
-  </a> 🙌
+  </a>
 </p>
 
 ## Features

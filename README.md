@@ -9,8 +9,7 @@
   💬 Gifted Chat
 </h3>
 <p align="center">
-  The most complete chat UI for React Native <br/>
-  <small>formerly known as Gifted Messenger</small>
+  The most complete chat UI for React Native
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/react-native-gifted-chat">
@@ -32,6 +31,17 @@
   <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=exp://expo.io/@xcarpentier/gifted-chat">
   <br>
   <a href="https://snack.expo.io/@xcarpentier/gifted-chat" target="_blank"><i>demo</i></a>
+</p>
+
+## Sponsor
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/sponsor-lereacteur/media/logo_sponsor.png">
+  <br>
+  <p align="center">
+  Coding Bootcamp in Paris co-founded by Farid Safi
+  </p>
+  <a href="https://www.lereacteur.io" target="_blank">Click to learn more 🙌</a>
 </p>
 
 ## Features
@@ -70,35 +80,35 @@
 ## Example
 
 ```jsx
-import React from 'react'
-import { GiftedChat } from 'react-native-gifted-chat'
+import React from "react";
+import { GiftedChat } from "react-native-gifted-chat";
 
 class Example extends React.Component {
   state = {
-    messages: [],
-  }
+    messages: []
+  };
 
   componentWillMount() {
     this.setState({
       messages: [
         {
           _id: 1,
-          text: 'Hello developer',
+          text: "Hello developer",
           createdAt: new Date(),
           user: {
             _id: 2,
-            name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
-          },
-        },
-      ],
-    })
+            name: "React Native",
+            avatar: "https://placeimg.com/140/140/any"
+          }
+        }
+      ]
+    });
   }
 
   onSend(messages = []) {
     this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
-    }))
+      messages: GiftedChat.append(previousState.messages, messages)
+    }));
   }
 
   render() {
@@ -107,10 +117,10 @@ class Example extends React.Component {
         messages={this.state.messages}
         onSend={messages => this.onSend(messages)}
         user={{
-          _id: 1,
+          _id: 1
         }}
       />
-    )
+    );
   }
 }
 ```
@@ -209,20 +219,23 @@ e.g. System Message
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
 - **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
 - **`parsePatterns`** _(Function)_ - Custom parse patterns for [react-native-parsed-text](https://github.com/taskrabbit/react-native-parsed-text) used to linkify message content (like URLs and phone numbers), e.g.:
- ```js
-  <GiftedChat
-    parsePatterns={(linkStyle) => [
-      { type: 'phone', style: linkStyle, onPress: this.onPressPhoneNumber },
-      { pattern: /#(\w+)/, style: { ...linkStyle, styles.hashtag }, onPress: this.onPressHashtag },
-    ]}
-  />
-  ```
+
+```js
+ <GiftedChat
+   parsePatterns={(linkStyle) => [
+     { type: 'phone', style: linkStyle, onPress: this.onPressPhoneNumber },
+     { pattern: /#(\w+)/, style: { ...linkStyle, styles.hashtag }, onPress: this.onPressHashtag },
+   ]}
+ />
+```
+
 - **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
-* **`scrollToBottom`** _(Bool)_ - Enables the scrollToBottom Component (Default is false)    
-* **`scrollToBottomComponent`** _(Function)_ - Custom Scroll To Bottom Component container  
-* **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)  
+
+* **`scrollToBottom`** _(Bool)_ - Enables the scrollToBottom Component (Default is false)
+* **`scrollToBottomComponent`** _(Function)_ - Custom Scroll To Bottom Component container
+* **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)
 * **`alignTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 
 ## Imperative methods

@@ -36,12 +36,19 @@
 ## Sponsor
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/sponsor-lereacteur/media/logo_sponsor.png">
+  <br/>
+  <a href="https://www.lereacteur.io" target="_blank">
+    <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/sponsor-lereacteur/media/logo_sponsor.png">
+  </a>
   <br>
   <p align="center">
-  Coding Bootcamp in Paris co-founded by Farid Safi
+    Coding Bootcamp in Paris co-founded by Farid Safi
   </p>
-  <a href="https://www.lereacteur.io" target="_blank">Click to learn more 🙌</a>
+  <a href="https://www.lereacteur.io" target="_blank">
+    <p align="center">
+      Click to learn more
+    </p>
+  </a> 🙌
 </p>
 
 ## Features

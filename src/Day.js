@@ -11,7 +11,7 @@ import { isSameDay } from './utils';
 import { DATE_FORMAT } from './Constant';
 
 export default function Day(
-  { dateFormat, currentMessage, previousMessage, nextMessage, containerStyle, wrapperStyle, textStyle, inverted },
+  { dateFormat, currentMessage, previousMessage, nextMessage, containerStyle, wrapperStyle, textStyle, inverted, hash },
   context,
 ) {
   const msg = inverted ? previousMessage : nextMessage

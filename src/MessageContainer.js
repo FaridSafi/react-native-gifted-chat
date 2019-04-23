@@ -10,7 +10,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { FlatList, View, StyleSheet, Keyboard, TouchableOpacity, Text } from 'react-native';
+import { FlatList, View, StyleSheet, Keyboard, TouchableOpacity, Text, LayoutAnimation, UIManager } from 'react-native';
 
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
@@ -23,6 +23,7 @@ export default class MessageContainer extends React.PureComponent {
   };
 
   componentDidMount() {
+    UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
     if (this.props.messages.length === 0) {
       this.attachKeyboardListeners();
     }
@@ -80,6 +81,7 @@ export default class MessageContainer extends React.PureComponent {
   };
 
   scrollTo(options) {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     if (this.flatListRef && options) {
       this.flatListRef.scrollToOffset(options);
     }
@@ -157,22 +159,24 @@ export default class MessageContainer extends React.PureComponent {
       <View style={this.props.alignTop ? styles.containerAlignTop : styles.container}>
         {this.state.showScrollBottom && this.props.scrollToBottom ? this.renderScrollToBottomWrapper() : null}
         <FlatList
-          ref={(ref) => (this.flatListRef = ref)}
+          {...this.props.listViewProps}
+          {...this.props.invertibleScrollViewProps}
+          enableEmptySections
+          style={styles.listStyle}
+          scrollEventThrottle={100}
+          data={this.props.messages}
+          inverted={this.props.inverted}
+          onScroll={this.handleOnScroll}
           extraData={this.props.extraData}
           keyExtractor={this.keyExtractor}
-          enableEmptySections
-          automaticallyAdjustContentInsets={false}
-          inverted={this.props.inverted}
-          data={this.props.messages}
-          style={styles.listStyle}
-          contentContainerStyle={styles.contentContainerStyle}
-          renderItem={this.renderRow}
-          {...this.props.invertibleScrollViewProps}
-          ListFooterComponent={this.renderHeaderWrapper}
+          ref={(ref) => (this.flatListRef = ref)}
           ListHeaderComponent={this.renderFooter}
-          onScroll={this.handleOnScroll}
-          scrollEventThrottle={100}
-          {...this.props.listViewProps}
+          automaticallyAdjustContentInsets={false}
+          ListFooterComponent={this.renderHeaderWrapper}
+          contentContainerStyle={styles.contentContainerStyle}
+          renderItem={({ item, index }) => (
+            this.renderRow({ item: this.props.hash[item], index })
+          )}
         />
       </View>
     );

@@ -51,7 +51,8 @@ class GiftedChat extends React.Component {
     this._maxHeight = null;
     this._isFirstLayout = true;
     this._locale = 'en';
-    this._messages = [];
+    this._keys = [];
+    this._hash = {};
 
     this.state = {
       isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -103,10 +104,10 @@ class GiftedChat extends React.Component {
   }
 
   componentWillMount() {
-    const { messages, text } = this.props;
+    const { keys, text } = this.props;
     this.setIsMounted(true);
     this.initLocale();
-    this.setMessages(messages || []);
+    this.setMessages(keys || []);
     this.setTextFromProp(text);
   }
 
@@ -115,8 +116,8 @@ class GiftedChat extends React.Component {
   }
 
   componentWillReceiveProps(nextProps = {}) {
-    const { messages, text } = nextProps;
-    this.setMessages(messages || []);
+    const { keys, text } = nextProps;
+    this.setMessages(keys || []);
     this.setTextFromProp(text);
   }
 
@@ -151,11 +152,11 @@ class GiftedChat extends React.Component {
   }
 
   setMessages(messages) {
-    this._messages = messages;
+    this._keys = messages;
   }
 
   getMessages() {
-    return this._messages;
+    return this._keys;
   }
 
   setMaxHeight(height) {
@@ -571,7 +572,8 @@ GiftedChat.defaultProps = {
 };
 
 GiftedChat.propTypes = {
-  messages: PropTypes.arrayOf(PropTypes.object),
+  keys: PropTypes.arrayOf(PropTypes.string),
+  hash: PropTypes.object,
   text: PropTypes.string,
   initialText: PropTypes.string,
   placeholder: PropTypes.string,

@@ -84,7 +84,8 @@ interface BubbleProps<TMessage extends IMessage = IMessage> {
   nextMessage?: TMessage;
   previousMessage?: TMessage;
   containerStyle?: LeftRightStyle<ViewStyle>;
-  wrapperStyle: LeftRightStyle<ViewStyle>;
+  wrapperStyle?: LeftRightStyle<ViewStyle>;
+  textStyle?: LeftRightStyle<TextStyle>;
   bottomContainerStyle: LeftRightStyle<ViewStyle>;
   tickStyle: TextStyle;
   containerToNextStyle: LeftRightStyle<ViewStyle>;
@@ -107,7 +108,7 @@ interface ComposerProps {
   multiline?: boolean;
   textInputStyle?: RN.TextInputProps['style'];
   textInputAutoFocus?: boolean;
-  keyboardAppearance: RN.TextInputProps['keyboardAppearance'];
+  keyboardAppearance?: RN.TextInputProps['keyboardAppearance'];
 }
 
 export class Composer extends React.Component<ComposerProps> {}

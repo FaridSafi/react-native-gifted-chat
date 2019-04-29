@@ -1,7 +1,6 @@
 example/
 example-expo/
 example-slack-message/
-example-pusher-chatkit/
 TODO.md
 screenshots/
 .babelrc
@@ -10,3 +9,4 @@ README.md
 ISSUE_TEMPLATE.md
 circle.yml
 codecov.yml
+media/

@@ -1,18 +1,17 @@
 {
   "name": "react-native-gifted-chat-expo",
   "main": "node_modules/expo/AppEntry.js",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "private": true,
   "scripts": {
     "e2e:init": "./e2e/init.sh 2.3.0",
     "test:e2e": "exp r -c & detox test -c ios.sim; pkill -f exp",
-    "cleaning":
-      "watchman watch-del-all && rm -f yarn.lock && rm -rf node_modules && rm -rf $TMPDIR/react-* && yarn cache clean"
+    "cleaning": "watchman watch-del-all && rm -f yarn.lock && rm -rf node_modules && rm -rf $TMPDIR/react-* && yarn cache clean"
   },
   "dependencies": {
-    "expo": "^25.0.0",
-    "react": "16.2.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "expo": "^32.0.0",
+    "react": "16.5.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-gifted-chat": "FaridSafi/react-native-gifted-chat",
     "react-native-nav": "2.0.2",
     "sentry-expo": "1.7.0"

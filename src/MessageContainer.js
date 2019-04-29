@@ -139,9 +139,11 @@ export default class MessageContainer extends React.PureComponent {
 
     if (this.props.scrollToBottomComponent) {
       return (
-        <TouchableOpacity onPress={this.scrollToBottom} hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}>
-          {this.props.scrollToBottomComponent}
-        </TouchableOpacity>
+        <View style={[styles.scrollToBottomStyle, this.props.scrollToBottomStyle]}>
+          <TouchableOpacity onPress={this.scrollToBottom} hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}>
+            {this.props.scrollToBottomComponent()}
+          </TouchableOpacity>
+        </View>
       );
     }
     return scrollToBottomComponent;

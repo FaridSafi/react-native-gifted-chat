@@ -1,19 +1,15 @@
 import { AppLoading, Asset, Linking } from 'expo'
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Bubble, GiftedChat, SystemMessage } from 'react-native-gifted-chat'
+import { Bubble, GiftedChat, SystemMessage } from './src/'
 import Sentry from 'sentry-expo'
 
-import AccessoryBar from './AccessoryBar'
-import CustomActions from './CustomActions'
-import CustomView from './CustomView'
-import NavBar from './NavBar'
-import messagesData from './data/messages'
-import earlierMessages from './data/earlierMessages'
-
-Sentry.config(
-  'https://2a164b1e89424a5aafc186da811308cb@sentry.io/276804',
-).install()
+import AccessoryBar from './example-expo/AccessoryBar'
+import CustomActions from './example-expo/CustomActions'
+import CustomView from './example-expo/CustomView'
+import NavBar from './example-expo/NavBar'
+import messagesData from './example-expo/data/messages'
+import earlierMessages from './example-expo/data/earlierMessages'
 
 const styles = StyleSheet.create({
   container: { flex: 1 },

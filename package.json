@@ -6,7 +6,7 @@
   "version": "0.9.0-beta.0",
 >>>>>>> chore set beta version
   "description": "The most complete chat UI for React Native",
-  "main": "lib/index.js",
+  "main": "node_modules/expo/AppEntry.js",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
   "scripts": {
+    "config:dev": "json -I -f package.json -e 'this.main=\"node_modules/expo/AppEntry.js\"'",
+    "config:npm": "json -I -f package.json -e 'this.main=\"lib/index.js\"'",
     "lint": "tslint --project .",
     "tsc": "node_modules/.bin/tsc --noEmit",
     "build": "rm -rf lib/ && node_modules/.bin/tsc",
@@ -36,7 +38,8 @@
     "test": "TZ=Europe/Paris jest --no-watchman",
     "test:watch": "TZ=Europe/Paris jest --watch",
     "test:coverage": "TZ=Europe/Paris jest --coverage",
-    "prepublishOnly": "yarn lint && yarn build && yarn test"
+    "prepublishOnly": "yarn lint && yarn build && yarn test && yarn config:npm",
+    "postpublish": "yarn config:dev"
   },
   "jest": {
     "preset": "react-native",
@@ -80,11 +83,14 @@
     "prettier": "1.15.3",
     "prop-types": "15.6.2",
     "react": "16.8.1",
-    "react-native": "0.57.7",
+    "json": "^9.0.6",
     "react-test-renderer": "16.8.1",
     "tslint": "5.12.0",
     "tslint-config-prettier": "1.17.0",
-    "typescript": "3.4.5"
+    "typescript": "3.4.5",
+    "expo": "^32.0.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-nav": "2.0.2"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^2.0.1",

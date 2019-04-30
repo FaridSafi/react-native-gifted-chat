@@ -1,8 +1,8 @@
 /* eslint jsx-a11y/accessible-emoji: 0 */
-import React from 'react';
-import { Text } from 'react-native';
-import NavBar, { NavTitle, NavButton } from 'react-native-nav';
-import { Constants } from 'expo';
+import React from 'react'
+import { Text } from 'react-native'
+import NavBar, { NavTitle, NavButton } from 'react-native-nav'
+import { Constants } from 'expo'
 
 export default function NavBarCustom() {
   return (
@@ -16,5 +16,5 @@ export default function NavBarCustom() {
       </NavTitle>
       <NavButton />
     </NavBar>
-  );
+  )
 }

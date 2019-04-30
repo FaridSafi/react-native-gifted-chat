@@ -1,46 +1,57 @@
-import { Linking, MapView } from 'expo';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Platform, StyleSheet, TouchableOpacity, ViewPropTypes } from 'react-native';
+import { Linking, MapView } from 'expo'
+import PropTypes from 'prop-types'
+import React from 'react'
+import {
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  ViewPropTypes,
+} from 'react-native'
 
 export default class CustomView extends React.Component {
-
   static propTypes = {
     currentMessage: PropTypes.object,
     containerStyle: ViewPropTypes.style,
     mapViewStyle: ViewPropTypes.style,
-  };
+  }
 
   static defaultProps = {
     currentMessage: {},
     containerStyle: {},
     mapViewStyle: {},
-  };
+  }
 
   openMapAsync = async () => {
-    const { currentMessage: { location = {} } = {} } = this.props;
+    const { currentMessage: { location = {} } = {} } = this.props
 
     const url = Platform.select({
-      ios: `http://maps.apple.com/?ll=${location.latitude},${location.longitude}`,
-      default: `http://maps.google.com/?q=${location.latitude},${location.longitude}`,
-    });
+      ios: `http://maps.apple.com/?ll=${location.latitude},${
+        location.longitude
+      }`,
+      default: `http://maps.google.com/?q=${location.latitude},${
+        location.longitude
+      }`,
+    })
 
     try {
-      const supported = await Linking.canOpenURL(url);
+      const supported = await Linking.canOpenURL(url)
       if (supported) {
-        return Linking.openURL(url);
+        return Linking.openURL(url)
       }
-      alert('Opening the map is not supported.');
+      alert('Opening the map is not supported.')
     } catch ({ message }) {
-      alert(message);
+      alert(message)
     }
-  };
+  }
 
   render() {
-    const { currentMessage, containerStyle, mapViewStyle } = this.props;
+    const { currentMessage, containerStyle, mapViewStyle } = this.props
     if (currentMessage.location) {
       return (
-        <TouchableOpacity style={[styles.container, containerStyle]} onPress={this.openMapAsync}>
+        <TouchableOpacity
+          style={[styles.container, containerStyle]}
+          onPress={this.openMapAsync}
+        >
           <MapView
             style={[styles.mapView, mapViewStyle]}
             region={{
@@ -53,11 +64,10 @@ export default class CustomView extends React.Component {
             zoomEnabled={false}
           />
         </TouchableOpacity>
-      );
+      )
     }
-    return null;
+    return null
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -68,4 +78,4 @@ const styles = StyleSheet.create({
     borderRadius: 13,
     margin: 3,
   },
-});
+})

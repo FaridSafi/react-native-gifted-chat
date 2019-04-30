@@ -1,12 +1,12 @@
-import { Permissions, Location, ImagePicker, Linking } from 'expo';
+import { Permissions, Location, ImagePicker, Linking } from 'expo'
 
-import { Alert } from 'react-native';
+import { Alert } from 'react-native'
 
 export default async function getPermissionAsync(permission) {
-  const { status } = await Permissions.askAsync(permission);
+  const { status } = await Permissions.askAsync(permission)
   if (status !== 'granted') {
-    const { name } = Constants.manifest;
-    const permissionName = permission.toLowerCase().replace('_', ' ');
+    const { name } = Constants.manifest
+    const permissionName = permission.toLowerCase().replace('_', ' ')
     Alert.alert(
       'Cannot be done 😞',
       `If you would like to use this feature, you'll need to enable the ${permissionName} permission in your phone settings.`,
@@ -18,18 +18,18 @@ export default async function getPermissionAsync(permission) {
         { text: 'Nevermind', onPress: () => {}, style: 'cancel' },
       ],
       { cancelable: true },
-    );
+    )
 
-    return false;
+    return false
   }
-  return true;
+  return true
 }
 
 export async function getLocationAsync(onSend) {
   if (await getPermissionAsync(Permissions.LOCATION)) {
-    const location = await Location.getCurrentPositionAsync({});
+    const location = await Location.getCurrentPositionAsync({})
     if (location) {
-      onSend([{ location: location.coords }]);
+      onSend([{ location: location.coords }])
     }
   }
 }
@@ -39,11 +39,11 @@ export async function pickImageAsync(onSend) {
     const result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [4, 3],
-    });
+    })
 
     if (!result.cancelled) {
-      onSend([{ image: result.uri }]);
-      return result.uri;
+      onSend([{ image: result.uri }])
+      return result.uri
     }
   }
 }
@@ -53,11 +53,11 @@ export async function takePictureAsync(onSend) {
     const result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
       aspect: [4, 3],
-    });
+    })
 
     if (!result.cancelled) {
-      onSend([{ image: result.uri }]);
-      return result.uri;
+      onSend([{ image: result.uri }])
+      return result.uri
     }
   }
 }

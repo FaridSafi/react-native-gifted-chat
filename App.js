@@ -2,7 +2,6 @@ import { AppLoading, Asset, Linking } from 'expo'
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Bubble, GiftedChat, SystemMessage } from './src/'
-import Sentry from 'sentry-expo'
 
 import AccessoryBar from './example-expo/AccessoryBar'
 import CustomActions from './example-expo/CustomActions'

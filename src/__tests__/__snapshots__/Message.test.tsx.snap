@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <Message /> and compare with snapshot 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "marginBottom": 10,
+          "marginTop": 5,
+        },
+        Object {},
+      ]
+    }
+  >
+    <View
+      style={Object {}}
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+              "color": "#b2b2b2",
+              "fontSize": 12,
+              "fontWeight": "600",
+            },
+            Object {},
+          ]
+        }
+      >
+        APR 8, 2019
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "flex-end",
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+          "marginLeft": 8,
+          "marginRight": 0,
+        },
+        Object {
+          "marginBottom": 10,
+        },
+        false,
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "marginRight": 8,
+          },
+          Object {},
+          undefined,
+        ]
+      }
+    >
+      <View
+        accessibilityTraits="image"
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderRadius": 20,
+              "height": 40,
+              "justifyContent": "center",
+              "width": 40,
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+            Array [
+              Object {
+                "borderRadius": 18,
+                "height": 36,
+                "width": 36,
+              },
+              undefined,
+            ],
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "flex-start",
+            "flex": 1,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#f0f0f0",
+              "borderRadius": 15,
+              "justifyContent": "flex-end",
+              "marginRight": 60,
+              "minHeight": 20,
+            },
+            undefined,
+            null,
+            null,
+          ]
+        }
+      >
+        <View
+          accessibilityTraits="text"
+          accessible={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+        >
+          <View
+            style={
+              Array [
+                Object {},
+                undefined,
+              ]
+            }
+          >
+            <Text
+              childrenProps={Object {}}
+              parse={
+                Array [
+                  Object {
+                    "onPress": [Function],
+                    "style": Array [
+                      Object {
+                        "color": "black",
+                        "textDecorationLine": "underline",
+                      },
+                      undefined,
+                    ],
+                    "type": "url",
+                  },
+                  Object {
+                    "onPress": [Function],
+                    "style": Array [
+                      Object {
+                        "color": "black",
+                        "textDecorationLine": "underline",
+                      },
+                      undefined,
+                    ],
+                    "type": "phone",
+                  },
+                  Object {
+                    "onPress": [Function],
+                    "style": Array [
+                      Object {
+                        "color": "black",
+                        "textDecorationLine": "underline",
+                      },
+                      undefined,
+                    ],
+                    "type": "email",
+                  },
+                ]
+              }
+              style={
+                Array [
+                  Object {
+                    "color": "black",
+                    "fontSize": 16,
+                    "lineHeight": 20,
+                    "marginBottom": 5,
+                    "marginLeft": 10,
+                    "marginRight": 10,
+                    "marginTop": 5,
+                  },
+                  undefined,
+                  Object {},
+                ]
+              }
+            >
+              <Text>
+                test
+              </Text>
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "marginBottom": 5,
+                    "marginLeft": 10,
+                    "marginRight": 10,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "transparent",
+                      "color": "#aaa",
+                      "fontSize": 10,
+                      "textAlign": "right",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                7:20 PM
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

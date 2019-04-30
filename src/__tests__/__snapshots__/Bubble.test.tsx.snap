@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <Bubble /> and compare with snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#f0f0f0",
+          "borderRadius": 15,
+          "justifyContent": "flex-end",
+          "marginRight": 60,
+          "minHeight": 20,
+        },
+        undefined,
+        null,
+        null,
+      ]
+    }
+  >
+    <View
+      accessibilityTraits="text"
+      accessible={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <View
+        style={
+          Array [
+            Object {},
+            undefined,
+          ]
+        }
+      >
+        <Text
+          childrenProps={Object {}}
+          parse={
+            Array [
+              Object {
+                "onPress": [Function],
+                "style": Array [
+                  Object {
+                    "color": "black",
+                    "textDecorationLine": "underline",
+                  },
+                  undefined,
+                ],
+                "type": "url",
+              },
+              Object {
+                "onPress": [Function],
+                "style": Array [
+                  Object {
+                    "color": "black",
+                    "textDecorationLine": "underline",
+                  },
+                  undefined,
+                ],
+                "type": "phone",
+              },
+              Object {
+                "onPress": [Function],
+                "style": Array [
+                  Object {
+                    "color": "black",
+                    "textDecorationLine": "underline",
+                  },
+                  undefined,
+                ],
+                "type": "email",
+              },
+            ]
+          }
+          style={
+            Array [
+              Object {
+                "color": "black",
+                "fontSize": 16,
+                "lineHeight": 20,
+                "marginBottom": 5,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 5,
+              },
+              undefined,
+              Object {},
+            ]
+          }
+        >
+          <Text>
+            test
+          </Text>
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "marginBottom": 5,
+                "marginLeft": 10,
+                "marginRight": 10,
+              },
+              undefined,
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "color": "#aaa",
+                  "fontSize": 10,
+                  "textAlign": "right",
+                },
+                undefined,
+              ]
+            }
+          >
+            7:20 PM
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

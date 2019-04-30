@@ -1,6 +1,10 @@
 {
   "name": "react-native-gifted-chat",
+<<<<<<< HEAD
   "version": "0.8.2",
+=======
+  "version": "0.9.0-beta.0",
+>>>>>>> chore set beta version
   "description": "The most complete chat UI for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

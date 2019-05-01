@@ -51,6 +51,20 @@
   </a>
 </p>
 
+<p align="center">
+  <br/>
+  <a href="https://getstream.io/chat/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">
+    <img src="https://i.imgur.com/oU7XYkk.png">
+  </a>
+  <br>
+  <p align="center">
+    Scalable <a href="https://getstream.io/chat/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">chat API/Server</a> written in Go
+  </p>
+  <p align="center">
+    <a href="https://getstream.io/chat/get_started/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">API Tour</a> | <a href="https://dev.to/nickparsons/react-native-chat-with-chuck-norris-3h7m?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">React Native Gifted tutorial</a>
+  </p>
+</p>
+
 ## Features
 
 - Write with **TypeScript** (since 0.8.0)
@@ -88,35 +102,35 @@
 ## Example
 
 ```jsx
-import React from 'react'
-import { GiftedChat } from 'react-native-gifted-chat'
+import React from "react";
+import { GiftedChat } from "react-native-gifted-chat";
 
 class Example extends React.Component {
   state = {
-    messages: [],
-  }
+    messages: []
+  };
 
   componentWillMount() {
     this.setState({
       messages: [
         {
           _id: 1,
-          text: 'Hello developer',
+          text: "Hello developer",
           createdAt: new Date(),
           user: {
             _id: 2,
-            name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
-          },
-        },
-      ],
-    })
+            name: "React Native",
+            avatar: "https://placeimg.com/140/140/any"
+          }
+        }
+      ]
+    });
   }
 
   onSend(messages = []) {
     this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
-    }))
+      messages: GiftedChat.append(previousState.messages, messages)
+    }));
   }
 
   render() {
@@ -125,10 +139,10 @@ class Example extends React.Component {
         messages={this.state.messages}
         onSend={messages => this.onSend(messages)}
         user={{
-          _id: 1,
+          _id: 1
         }}
       />
-    )
+    );
   }
 }
 ```

@@ -94,6 +94,7 @@
     "prop-types": "*",
     "react": "*",
     "react-native": "*",
+	
     "react-native-video": "*"
   }
 }

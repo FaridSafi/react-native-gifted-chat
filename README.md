@@ -65,6 +65,7 @@
 - InputToolbar avoiding keyboard
 - Redux support
 - System message
+- **Bot message implementation [soon](https://github.com/FaridSafi/react-native-gifted-chat/pull/1211)**
 
 ## Dependency
 

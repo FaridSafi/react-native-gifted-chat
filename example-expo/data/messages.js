@@ -10,7 +10,7 @@ export default [
   },
   {
     _id: Math.round(Math.random() * 1000000),
-    text: '',
+    text: 'Paris',
     createdAt: new Date(),
     user: {
       _id: 2,
@@ -84,23 +84,23 @@ export default [
     _id: Math.round(Math.random() * 1000000),
     text: 'This is a quick reply. Do you love Gifted Chat?',
     createdAt: new Date(),
-    quickReplies: [
-      {
-        _id: Math.round(Math.random() * 1000000),
-        contentType: 'text',
-        title: '😋 Yes',
-      },
-      {
-        _id: Math.round(Math.random() * 1000000),
-        contentType: 'camera',
-        title: '📷 Yes, let me show you with a picture!',
-      },
-      {
-        _id: Math.round(Math.random() * 1000000),
-        contentType: 'text',
-        title: '😞 Nope. Whaaaaaat?',
-      },
-    ],
+    quickReplies: {
+      type: 'radio', // or 'checkbox',
+      values: [
+        {
+          title: '😋 Yes',
+          value: 'yes',
+        },
+        {
+          title: '📷 Yes, let me show you with a picture!',
+          value: 'yes_picture',
+        },
+        {
+          title: '😞 Nope. What?',
+          value: 'no',
+        },
+      ],
+    },
     user: {
       _id: 2,
       name: 'React Native',

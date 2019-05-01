@@ -13,6 +13,16 @@ export interface User {
   avatar?: string | renderFunction
 }
 
+export interface Reply {
+  title: string
+  value: string
+}
+
+export interface QuickReplies {
+  type: 'radio' | 'checkbox'
+  values: Reply[]
+}
+
 export interface IMessage {
   _id: any
   text: string
@@ -25,6 +35,7 @@ export interface IMessage {
   sent?: boolean
   received?: boolean
   pending?: boolean
+  quickReplies?: QuickReplies
 }
 
 export type IChatMessage = IMessage

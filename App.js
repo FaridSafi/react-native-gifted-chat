@@ -183,6 +183,18 @@ export default class App extends Component {
     return null
   }
 
+  onQuickReply = reply => {
+    const createdAt = new Date()
+    this.onSend([
+      {
+        createdAt,
+        _id: Math.round(Math.random() * 1000000),
+        text: reply.title,
+        user,
+      },
+    ])
+  }
+
   render() {
     if (!this.state.appIsReady) {
       return <AppLoading />
@@ -203,6 +215,7 @@ export default class App extends Component {
           isLoadingEarlier={this.state.isLoadingEarlier}
           parsePatterns={this.parsePatterns}
           user={user}
+          onQuickReply={this.onQuickReply}
           keyboardShouldPersistTaps='never'
           renderAccessory={this.renderAccessory}
           renderActions={this.renderCustomActions}

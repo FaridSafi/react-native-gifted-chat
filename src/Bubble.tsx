@@ -11,6 +11,8 @@ import {
   TextStyle,
 } from 'react-native'
 
+import QuickReplies from './QuickReplies'
+
 import MessageText from './MessageText'
 import MessageImage from './MessageImage'
 import MessageVideo from './MessageVideo'
@@ -19,7 +21,7 @@ import Time from './Time'
 import Color from './Color'
 
 import { isSameUser, isSameDay } from './utils'
-import { User, IMessage, LeftRightStyle } from './types'
+import { User, IMessage, LeftRightStyle, Reply } from './types'
 
 const styles = {
   left: StyleSheet.create({
@@ -112,6 +114,7 @@ interface BubbleProps<TMessage extends IMessage = IMessage> {
   containerToPreviousStyle?: LeftRightStyle<ViewStyle>
   usernameStyle?: LeftRightStyle<ViewStyle>
   onLongPress?(context?: any, message?: any): void
+  onQuickReply?(reply: Reply): void
   renderMessageImage?(messageImageProps: MessageImage['props']): React.ReactNode
   renderMessageVideo?(messageVideoProps: MessageVideo['props']): React.ReactNode
   renderMessageText?(messageTextProps: MessageText['props']): React.ReactNode
@@ -119,6 +122,7 @@ interface BubbleProps<TMessage extends IMessage = IMessage> {
   renderTime?(timeProps: Time['props']): React.ReactNode
   renderTicks?(currentMessage: TMessage): React.ReactNode
   renderUsername?(): React.ReactNode
+  renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
   // TODO: remove in next major release
   isSameDay?(currentMessage: TMessage, nextMessage: TMessage): boolean
   isSameUser?(currentMessage: TMessage, nextMessage: TMessage): boolean
@@ -139,6 +143,8 @@ export default class Bubble extends React.Component<BubbleProps> {
     renderUsername: null,
     renderTicks: null,
     renderTime: null,
+    renderQuickReplies: null,
+    onQuickReply: null,
     position: 'left',
     optionTitles: DEFAULT_OPTION_TITLES,
     currentMessage: {
@@ -169,6 +175,8 @@ export default class Bubble extends React.Component<BubbleProps> {
     renderUsername: PropTypes.func,
     renderTime: PropTypes.func,
     renderTicks: PropTypes.func,
+    renderQuickReplies: PropTypes.func,
+    onQuickReply: PropTypes.func,
     position: PropTypes.oneOf(['left', 'right']),
     optionTitles: PropTypes.arrayOf(PropTypes.string),
     currentMessage: PropTypes.object,
@@ -267,6 +275,21 @@ export default class Bubble extends React.Component<BubbleProps> {
         styles[position].containerToPrevious,
         containerToPreviousStyle && containerToPreviousStyle[position],
       ]
+    }
+    return null
+  }
+
+  renderQuickReplies() {
+    const { currentMessage, onQuickReply, nextMessage } = this.props
+    if (nextMessage && nextMessage._id) {
+      return null
+    }
+    if (currentMessage && currentMessage.quickReplies) {
+      const { containerStyle, wrapperStyle, ...quickReplyProps } = this.props
+      if (this.props.renderQuickReplies) {
+        return this.props.renderQuickReplies(quickReplyProps)
+      }
+      return <QuickReplies {...{ currentMessage, onQuickReply }} />
     }
     return null
   }
@@ -422,6 +445,7 @@ export default class Bubble extends React.Component<BubbleProps> {
             </View>
           </TouchableWithoutFeedback>
         </View>
+        {this.renderQuickReplies()}
       </View>
     )
   }

@@ -1,0 +1,55 @@
+version: 2
+
+test: &test
+  docker:
+    - image: circleci/node:11.10.1
+  steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+          - v1-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v1-dependencies-
+
+    - run:
+        name: Installing codecov
+        command: sudo yarn global add codecov
+
+    - run:
+        name: Installing dependencies
+        command: yarn install
+
+    - run:
+        name: Check typescript
+        command: yarn tsc
+
+    - run:
+        name: Check tslint
+        command: yarn lint
+
+    - run:
+        name: Check tests
+        command: yarn test:coverage
+
+    - run:
+        name: codecov
+        command: codecov
+
+    - save_cache:
+        paths:
+          - node_modules
+          - ~/.cache/yarn
+        key: v1-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+
+jobs:
+  test:
+    <<: *test
+
+workflows:
+  version: 2
+  watchdog_system:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: /^feature\/.*$|^release\/.*$|^hotfix\/.*$/

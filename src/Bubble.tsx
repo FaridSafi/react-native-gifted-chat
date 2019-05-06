@@ -114,7 +114,7 @@ interface BubbleProps<TMessage extends IMessage = IMessage> {
   containerToPreviousStyle?: LeftRightStyle<ViewStyle>
   usernameStyle?: LeftRightStyle<ViewStyle>
   onLongPress?(context?: any, message?: any): void
-  onQuickReply?(reply: Reply): void
+  onQuickReply?(replies: Reply[]): void
   renderMessageImage?(messageImageProps: MessageImage['props']): React.ReactNode
   renderMessageVideo?(messageVideoProps: MessageVideo['props']): React.ReactNode
   renderMessageText?(messageTextProps: MessageText['props']): React.ReactNode

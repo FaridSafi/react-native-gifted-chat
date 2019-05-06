@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 
 const filterBotMessages = message =>
   !message.system && message.user && message.user._id && message.user._id === 2
-const findStep = step => (_, index) => index === step - 1
+const findStep = step => message => message._id === step
 
 const user = {
   _id: 1,
@@ -40,7 +40,7 @@ export default class App extends Component {
 
   _isMounted = false
 
-  async componentWillMount() {
+  componentDidMount() {
     this._isMounted = true
     // init with only system messages
     this.setState({
@@ -92,7 +92,7 @@ export default class App extends Component {
   botSend = (step = 0) => {
     const newMessage = messagesData
       .reverse()
-      .filter(filterBotMessages)
+      // .filter(filterBotMessages)
       .find(findStep(step))
     if (newMessage) {
       this.setState(previousState => ({
@@ -183,16 +183,29 @@ export default class App extends Component {
     return null
   }
 
-  onQuickReply = reply => {
+  onQuickReply = replies => {
     const createdAt = new Date()
-    this.onSend([
-      {
-        createdAt,
-        _id: Math.round(Math.random() * 1000000),
-        text: reply.title,
-        user,
-      },
-    ])
+    if (replies.length === 1) {
+      this.onSend([
+        {
+          createdAt,
+          _id: Math.round(Math.random() * 1000000),
+          text: replies[0].title,
+          user,
+        },
+      ])
+    } else if (replies.length > 1) {
+      this.onSend([
+        {
+          createdAt,
+          _id: Math.round(Math.random() * 1000000),
+          text: replies.map(reply => reply.title).join(', '),
+          user,
+        },
+      ])
+    } else {
+      console.warn('replies param is not set correctly')
+    }
   }
 
   render() {

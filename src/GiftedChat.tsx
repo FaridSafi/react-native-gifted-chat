@@ -147,7 +147,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   onInputTextChanged?(text: string): void
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
   parsePatterns?(): React.ReactNode
-  onQuickReply?(reply: Reply): void
+  onQuickReply?(replies: Reply[]): void
 }
 
 interface GiftedChatState {

@@ -16,7 +16,7 @@ export interface User {
 export interface Reply {
   title: string
   value: string
-  messageId?: string
+  messageId?: any
 }
 
 export interface QuickReplies {

@@ -16,11 +16,13 @@ export interface User {
 export interface Reply {
   title: string
   value: string
+  messageId?: string
 }
 
 export interface QuickReplies {
   type: 'radio' | 'checkbox'
   values: Reply[]
+  keepIt?: boolean
 }
 
 export interface IMessage {

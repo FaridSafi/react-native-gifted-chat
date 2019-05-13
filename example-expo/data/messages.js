@@ -76,10 +76,11 @@ export default [
   // },
   {
     _id: 1,
-    text: 'This is a quick reply. Do you love Gifted Chat? (radio)',
+    text: 'This is a quick reply. Do you love Gifted Chat? (radio) KEEP IT',
     createdAt: new Date(),
     quickReplies: {
       type: 'radio', // or 'checkbox',
+      keepIt: true,
       values: [
         {
           title: '😋 Yes',

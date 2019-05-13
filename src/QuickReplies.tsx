@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 })
 
 interface QuickRepliesProps {
+  nextMessage?: IMessage
   currentMessage?: IMessage
   color?: string
   sendText?: string
@@ -58,6 +59,7 @@ export default class QuickReplies extends Component<
     onQuickReply: () => {},
     color: Color.peterRiver,
     sendText: 'Send',
+    keepReplies: false,
   }
 
   static propTypes = {
@@ -101,18 +103,41 @@ export default class QuickReplies extends Component<
   }
 
   handleSend = (replies: Reply[]) => () => {
+    const { currentMessage } = this.props
     if (this.props.onQuickReply) {
-      this.props.onQuickReply(replies)
+      this.props.onQuickReply(
+        replies.map((reply: Reply) => ({
+          ...reply,
+          messageId: currentMessage!._id,
+        })),
+      )
     }
+  }
+
+  shouldComponentDisplay = () => {
+    const { currentMessage, nextMessage } = this.props
+    const hasReplies = !!currentMessage && !!currentMessage!.quickReplies
+    const hasNext = !!nextMessage && !!nextMessage!._id
+
+    if (hasReplies && !hasNext) {
+      return true
+    }
+    if (hasReplies && hasNext && currentMessage!.quickReplies!.keepIt) {
+      return true
+    }
+    return false
   }
 
   render() {
     const { currentMessage, color, sendText } = this.props
     const { replies } = this.state
-    if (!currentMessage && !currentMessage!.quickReplies) {
+
+    if (!this.shouldComponentDisplay()) {
       return null
     }
+
     const { type } = currentMessage!.quickReplies!
+
     return (
       <View style={styles.container}>
         {currentMessage!.quickReplies!.values.map((reply: Reply) => {

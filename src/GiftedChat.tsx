@@ -32,6 +32,7 @@ import {
   DATE_FORMAT,
 } from './Constant'
 import { IMessage, User, Reply } from './types'
+import QuickReplies from './QuickReplies'
 
 const GiftedActionSheet = ActionSheet as any
 
@@ -148,6 +149,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
   parsePatterns?(): React.ReactNode
   onQuickReply?(replies: Reply[]): void
+  renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
 }
 
 interface GiftedChatState {

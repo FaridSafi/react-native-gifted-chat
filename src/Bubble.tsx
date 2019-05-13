@@ -281,15 +281,12 @@ export default class Bubble extends React.Component<BubbleProps> {
 
   renderQuickReplies() {
     const { currentMessage, onQuickReply, nextMessage } = this.props
-    if (nextMessage && nextMessage._id) {
-      return null
-    }
     if (currentMessage && currentMessage.quickReplies) {
       const { containerStyle, wrapperStyle, ...quickReplyProps } = this.props
       if (this.props.renderQuickReplies) {
         return this.props.renderQuickReplies(quickReplyProps)
       }
-      return <QuickReplies {...{ currentMessage, onQuickReply }} />
+      return <QuickReplies {...{ currentMessage, onQuickReply, nextMessage }} />
     }
     return null
   }

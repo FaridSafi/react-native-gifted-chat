@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { PureComponent } from 'react'
 import {
   StyleSheet,
   Text,
@@ -42,63 +42,63 @@ interface DayProps<TMessage extends IMessage = IMessage> {
   inverted?: boolean
 }
 
-export default function Day(
-  {
-    dateFormat,
-    currentMessage,
-    previousMessage,
-    nextMessage,
-    containerStyle,
-    wrapperStyle,
-    textStyle,
-    inverted,
-  }: DayProps,
-  context: any,
-) {
-  if (
-    currentMessage &&
-    !isSameDay(currentMessage, inverted ? previousMessage! : nextMessage!)
-  ) {
-    return (
-      <View style={[styles.container, containerStyle]}>
-        <View style={wrapperStyle}>
-          <Text style={[styles.text, textStyle]}>
-            {moment(currentMessage.createdAt)
-              .locale(context.getLocale())
-              .format(dateFormat)
-              .toUpperCase()}
-          </Text>
-        </View>
-      </View>
-    )
+export default class Day extends PureComponent<DayProps> {
+  static contextTypes = {
+    getLocale: PropTypes.func,
   }
-  return null
-}
 
-Day.contextTypes = {
-  getLocale: PropTypes.func,
-}
+  static defaultProps = {
+    currentMessage: {
+      // TODO: test if crash when createdAt === null
+      createdAt: null,
+    },
+    previousMessage: {},
+    nextMessage: {},
+    containerStyle: {},
+    wrapperStyle: {},
+    textStyle: {},
+    dateFormat: DATE_FORMAT,
+  }
 
-Day.defaultProps = {
-  currentMessage: {
-    // TODO: test if crash when createdAt === null
-    createdAt: null,
-  },
-  previousMessage: {},
-  nextMessage: {},
-  containerStyle: {},
-  wrapperStyle: {},
-  textStyle: {},
-  dateFormat: DATE_FORMAT,
-}
+  static propTypes = {
+    currentMessage: PropTypes.object,
+    previousMessage: PropTypes.object,
+    nextMessage: PropTypes.object,
+    inverted: PropTypes.bool,
+    containerStyle: ViewPropTypes.style,
+    wrapperStyle: ViewPropTypes.style,
+    textStyle: PropTypes.any,
+    dateFormat: PropTypes.string,
+  }
+  render() {
+    const {
+      dateFormat,
+      currentMessage,
+      previousMessage,
+      nextMessage,
+      containerStyle,
+      wrapperStyle,
+      textStyle,
+      inverted,
+    } = this.props
 
-Day.propTypes = {
-  currentMessage: PropTypes.object,
-  previousMessage: PropTypes.object,
-  nextMessage: PropTypes.object,
-  inverted: PropTypes.bool,
-  containerStyle: ViewPropTypes.style,
-  wrapperStyle: ViewPropTypes.style,
-  textStyle: PropTypes.any,
-  dateFormat: PropTypes.string,
+    if (
+      currentMessage &&
+      !isSameDay(currentMessage, inverted ? previousMessage! : nextMessage!)
+    ) {
+      return (
+        <View style={[styles.container, containerStyle]}>
+          <View style={wrapperStyle}>
+            <Text style={[styles.text, textStyle]}>
+              {moment(currentMessage.createdAt)
+                .locale(this.context.getLocale())
+                .format(dateFormat)
+                .toUpperCase()}
+            </Text>
+          </View>
+        </View>
+      )
+    }
+    return null
+  }
 }

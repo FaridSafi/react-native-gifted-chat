@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
   StyleSheet,
   Text,
@@ -34,36 +34,38 @@ interface SystemMessageProps<TMessage extends IMessage = IMessage> {
   textStyle?: TextStyle
 }
 
-export default function SystemMessage({
-  currentMessage,
-  containerStyle,
-  wrapperStyle,
-  textStyle,
-}: SystemMessageProps) {
-  if (currentMessage) {
-    return (
-      <View style={[styles.container, containerStyle]}>
-        <View style={wrapperStyle}>
-          <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
-        </View>
-      </View>
-    )
+export default class SystemMessage extends Component<SystemMessageProps> {
+  static defaultProps = {
+    currentMessage: {
+      system: false,
+    },
+    containerStyle: {},
+    wrapperStyle: {},
+    textStyle: {},
   }
-  return null
-}
 
-SystemMessage.defaultProps = {
-  currentMessage: {
-    system: false,
-  },
-  containerStyle: {},
-  wrapperStyle: {},
-  textStyle: {},
-}
-
-SystemMessage.propTypes = {
-  currentMessage: PropTypes.object,
-  containerStyle: ViewPropTypes.style,
-  wrapperStyle: ViewPropTypes.style,
-  textStyle: PropTypes.any,
+  static propTypes = {
+    currentMessage: PropTypes.object,
+    containerStyle: ViewPropTypes.style,
+    wrapperStyle: ViewPropTypes.style,
+    textStyle: PropTypes.any,
+  }
+  render() {
+    const {
+      currentMessage,
+      containerStyle,
+      wrapperStyle,
+      textStyle,
+    } = this.props
+    if (currentMessage) {
+      return (
+        <View style={[styles.container, containerStyle]}>
+          <View style={wrapperStyle}>
+            <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
+          </View>
+        </View>
+      )
+    }
+    return null
+  }
 }

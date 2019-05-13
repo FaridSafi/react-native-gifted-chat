@@ -191,7 +191,7 @@ e.g. System Message
 
 ### e.g. Chat Message with Quick Reply options
 
-See PR #[1211](https://github.com/FaridSafi/react-native-gifted-chat/pull/1211)
+See PR [#1211](https://github.com/FaridSafi/react-native-gifted-chat/pull/1211)
 
 ```ts
 interface Reply {

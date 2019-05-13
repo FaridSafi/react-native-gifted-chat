@@ -4,6 +4,7 @@ example-slack-message/
 TODO.md
 screenshots/
 .babelrc
+babel.config.js
 tests/
 README.md
 ISSUE_TEMPLATE.md

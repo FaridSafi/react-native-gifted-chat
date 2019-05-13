@@ -26,8 +26,8 @@
   "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
   "scripts": {
     "lint": "tslint --project .",
-    "tsc": "tsc --noEmit",
-    "build": "rm -rf lib/ && tsc",
+    "tsc": "node_modules/.bin/tsc --noEmit",
+    "build": "rm -rf lib/ && node_modules/.bin/tsc",
     "precommit": "yarn lint",
     "test": "TZ=Europe/Paris jest --no-watchman",
     "test:watch": "TZ=Europe/Paris jest --watch",
@@ -80,7 +80,7 @@
     "react-test-renderer": "16.8.1",
     "tslint": "5.12.0",
     "tslint-config-prettier": "1.17.0",
-    "typescript": "3.2.2"
+    "typescript": "3.4.5"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^2.0.1",

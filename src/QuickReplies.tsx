@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 interface QuickRepliesProps {
   currentMessage?: IMessage
   color?: string
-  sendText: string
+  sendText?: string
   onQuickReply?(reply: Reply[]): void
 }
 

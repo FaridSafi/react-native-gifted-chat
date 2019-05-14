@@ -67,6 +67,7 @@
 
 ## Features
 
+- **Bot or quick replies implementation [soon](https://github.com/FaridSafi/react-native-gifted-chat/pull/1211)**
 - Write with **TypeScript** (since 0.8.0)
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
@@ -79,7 +80,6 @@
 - InputToolbar avoiding keyboard
 - Redux support
 - System message
-- **Bot message implementation [soon](https://github.com/FaridSafi/react-native-gifted-chat/pull/1211)**
 
 ## Dependency
 

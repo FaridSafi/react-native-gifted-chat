@@ -384,7 +384,7 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
 
   setTextFromProp(textProp?: string) {
     // Text prop takes precedence over state.
-    if (!textProp && textProp !== this.state.text) {
+    if (textProp !== undefined && textProp !== this.state.text) {
       this.setState({ text: textProp })
     }
   }

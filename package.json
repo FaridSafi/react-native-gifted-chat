@@ -70,7 +70,7 @@
     "@types/uuid": "3.4.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.7.1",
-    "metro-react-native-babel-preset": "0.53.1",
+    "metro-react-native-babel-preset": "0.54.1",
     "husky": "0.15.0-rc.2",
     "jest": "24.7.1",
     "prettier": "1.15.3",

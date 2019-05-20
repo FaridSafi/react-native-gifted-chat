@@ -247,6 +247,7 @@ export default class MessageContainer extends React.PureComponent<
 
       const messageProps: Message['props'] = {
         ...restProps,
+        user,
         key: item._id,
         currentMessage: item,
         previousMessage,

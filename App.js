@@ -1,6 +1,6 @@
 import { AppLoading, Asset, Linking } from 'expo'
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { Bubble, GiftedChat, SystemMessage } from './src/'
 
 import AccessoryBar from './example-expo/AccessoryBar'

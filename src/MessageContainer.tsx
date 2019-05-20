@@ -257,7 +257,7 @@ export default class MessageContainer extends React.PureComponent<
       if (this.props.renderMessage) {
         return this.props.renderMessage(messageProps)
       }
-      return <Message {...messageProps} />
+      return <Message {...messageProps} {...user} />
     }
     return null
   }

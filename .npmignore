@@ -11,3 +11,10 @@ ISSUE_TEMPLATE.md
 circle.yml
 codecov.yml
 media/
+App.js
+app.json
+babel.config.js
+src/
+.expo
+tsconfig.json
+tslint.json

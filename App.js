@@ -1,19 +1,14 @@
 import { AppLoading, Asset, Linking } from 'expo'
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Bubble, GiftedChat, SystemMessage } from 'react-native-gifted-chat'
-import Sentry from 'sentry-expo'
+import { StyleSheet, View, Text } from 'react-native'
+import { Bubble, GiftedChat, SystemMessage } from './src/'
 
-import AccessoryBar from './AccessoryBar'
-import CustomActions from './CustomActions'
-import CustomView from './CustomView'
-import NavBar from './NavBar'
-import messagesData from './data/messages'
-import earlierMessages from './data/earlierMessages'
-
-Sentry.config(
-  'https://2a164b1e89424a5aafc186da811308cb@sentry.io/276804',
-).install()
+import AccessoryBar from './example-expo/AccessoryBar'
+import CustomActions from './example-expo/CustomActions'
+import CustomView from './example-expo/CustomView'
+import NavBar from './example-expo/NavBar'
+import messagesData from './example-expo/data/messages'
+import earlierMessages from './example-expo/data/earlierMessages'
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
@@ -21,7 +16,7 @@ const styles = StyleSheet.create({
 
 const filterBotMessages = message =>
   !message.system && message.user && message.user._id && message.user._id === 2
-const findStep = step => (_, index) => index === step - 1
+const findStep = step => message => message._id === step
 
 const user = {
   _id: 1,
@@ -45,7 +40,7 @@ export default class App extends Component {
 
   _isMounted = false
 
-  async componentWillMount() {
+  componentDidMount() {
     this._isMounted = true
     // init with only system messages
     this.setState({
@@ -97,7 +92,7 @@ export default class App extends Component {
   botSend = (step = 0) => {
     const newMessage = messagesData
       .reverse()
-      .filter(filterBotMessages)
+      // .filter(filterBotMessages)
       .find(findStep(step))
     if (newMessage) {
       this.setState(previousState => ({
@@ -188,6 +183,31 @@ export default class App extends Component {
     return null
   }
 
+  onQuickReply = replies => {
+    const createdAt = new Date()
+    if (replies.length === 1) {
+      this.onSend([
+        {
+          createdAt,
+          _id: Math.round(Math.random() * 1000000),
+          text: replies[0].title,
+          user,
+        },
+      ])
+    } else if (replies.length > 1) {
+      this.onSend([
+        {
+          createdAt,
+          _id: Math.round(Math.random() * 1000000),
+          text: replies.map(reply => reply.title).join(', '),
+          user,
+        },
+      ])
+    } else {
+      console.warn('replies param is not set correctly')
+    }
+  }
+
   render() {
     if (!this.state.appIsReady) {
       return <AppLoading />
@@ -208,6 +228,7 @@ export default class App extends Component {
           isLoadingEarlier={this.state.isLoadingEarlier}
           parsePatterns={this.parsePatterns}
           user={user}
+          onQuickReply={this.onQuickReply}
           keyboardShouldPersistTaps='never'
           renderAccessory={this.renderAccessory}
           renderActions={this.renderCustomActions}

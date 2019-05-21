@@ -57,43 +57,6 @@ exports[`should render <Message /> and compare with snapshot 1`] = `
       style={
         Array [
           Object {
-            "marginRight": 8,
-          },
-          Object {},
-          undefined,
-        ]
-      }
-    >
-      <View
-        accessibilityTraits="image"
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderRadius": 20,
-              "height": 40,
-              "justifyContent": "center",
-              "width": 40,
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-            Array [
-              Object {
-                "borderRadius": 18,
-                "height": 36,
-                "width": 36,
-              },
-              undefined,
-            ],
-          ]
-        }
-      />
-    </View>
-    <View
-      style={
-        Array [
-          Object {
             "alignItems": "flex-start",
             "flex": 1,
           },

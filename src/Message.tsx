@@ -38,7 +38,7 @@ interface MessageProps<TMessage extends IMessage = IMessage> {
   currentMessage?: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage
-  user?: User
+  user: User
   inverted?: boolean
   containerStyle?: LeftRightStyle<ViewStyle>
   renderBubble?(props: Bubble['props']): React.ReactNode
@@ -59,7 +59,7 @@ export default class Message extends React.Component<MessageProps> {
     previousMessage: {},
     user: {},
     containerStyle: {},
-    showUserAvatar: true,
+    showUserAvatar: false,
     inverted: true,
   }
 
@@ -128,12 +128,14 @@ export default class Message extends React.Component<MessageProps> {
   }
 
   renderAvatar() {
-    const { user, currentMessage } = this.props
+    const { user, currentMessage, showUserAvatar } = this.props
+
     if (
       user &&
+      user._id &&
       currentMessage &&
       user._id === currentMessage.user._id &&
-      !this.props.showUserAvatar
+      !showUserAvatar
     ) {
       return null
     }
@@ -141,6 +143,7 @@ export default class Message extends React.Component<MessageProps> {
     if (currentMessage && currentMessage.user.avatar === null) {
       return null
     }
+
     const { containerStyle, ...props } = this.props
     return <Avatar {...props} />
   }

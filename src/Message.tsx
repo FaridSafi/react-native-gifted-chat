@@ -129,17 +129,6 @@ export default class Message extends React.Component<MessageProps> {
 
   renderAvatar() {
     const { user, currentMessage, showUserAvatar } = this.props
-    console.warn({
-      cond:
-        user &&
-        user._id &&
-        currentMessage &&
-        user._id === currentMessage.user._id &&
-        !showUserAvatar,
-      showUserAvatar,
-      user,
-      currentMessage,
-    })
 
     if (
       user &&

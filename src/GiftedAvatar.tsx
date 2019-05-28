@@ -102,7 +102,7 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
     const { user } = this.props
     if (user) {
       if (typeof user.avatar === 'function') {
-        return user.avatar()
+        return user.avatar([styles.avatarStyle, this.props.avatarStyle])
       } else if (typeof user.avatar === 'string') {
         return (
           <Image

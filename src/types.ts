@@ -6,7 +6,7 @@ export interface LeftRightStyle<T> {
   left: T
   right: T
 }
-type renderFunction = () => JSX.Element
+type renderFunction = (x: any) => JSX.Element
 export interface User {
   _id: any
   name?: string

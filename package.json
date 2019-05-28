@@ -30,7 +30,6 @@
     "lint": "tslint --project .",
     "tsc": "node_modules/.bin/tsc --noEmit",
     "build": "rm -rf lib/ && node_modules/.bin/tsc",
-    "precommit": "yarn lint",
     "test": "TZ=Europe/Paris jest --no-watchman",
     "test:watch": "TZ=Europe/Paris jest --watch",
     "test:coverage": "TZ=Europe/Paris jest --coverage",
@@ -102,5 +101,10 @@
     "prop-types": "*",
     "react": "*",
     "react-native": "*"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && yarn tsc"
+    }
   }
 }

@@ -117,7 +117,7 @@ export default class MessageContainer extends React.PureComponent<
     showScrollBottom: false,
   }
 
-  flatListRef?: RefObject<FlatList<IMessage>> = undefined
+  flatListRef?: RefObject<FlatList<IMessage>> = React.createRef()
 
   componentDidMount() {
     if (this.props.messages && this.props.messages.length === 0) {
@@ -267,29 +267,29 @@ export default class MessageContainer extends React.PureComponent<
     <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>
   )
 
+  renderScrollBottomComponent() {
+    const { scrollToBottomComponent } = this.props
+
+    if (scrollToBottomComponent) {
+      return scrollToBottomComponent()
+    }
+
+    return (
+      <Text>V</Text>
+    )
+  }
+
   renderScrollToBottomWrapper() {
-    const scrollToBottomComponent = (
+    return (
       <View style={styles.scrollToBottomStyle}>
         <TouchableOpacity
           onPress={this.scrollToBottom}
           hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}
         >
-          <Text>V</Text>
+          {this.renderScrollBottomComponent()}
         </TouchableOpacity>
       </View>
     )
-
-    if (this.props.scrollToBottomComponent) {
-      return (
-        <TouchableOpacity
-          onPress={this.scrollToBottom}
-          hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}
-        >
-          {this.props.scrollToBottomComponent}
-        </TouchableOpacity>
-      )
-    }
-    return scrollToBottomComponent
   }
 
   keyExtractor = (item: IMessage) => `${item._id}`

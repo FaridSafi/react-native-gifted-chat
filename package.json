@@ -95,10 +95,10 @@
     "react-native-iphone-x-helper": "^1.2.0",
     "react-native-lightbox": "^0.7.0",
     "react-native-parsed-text": "^0.0.20",
-    "react-native-video": "^3.2.1",
     "uuid": "3.3.0"
   },
   "peerDependencies": {
+    "react-native-video": "*",
     "prop-types": "*",
     "react": "*",
     "react-native": "*"

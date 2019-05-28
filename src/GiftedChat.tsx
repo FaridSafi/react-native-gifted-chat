@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types'
 import React, { RefObject } from 'react'
-import { Animated, Platform, StyleSheet, View, ViewStyle, SafeAreaView } from 'react-native'
+import {
+  Animated,
+  Platform,
+  StyleSheet,
+  View,
+  ViewStyle,
+  SafeAreaView,
+} from 'react-native'
 
 import ActionSheet from '@expo/react-native-action-sheet'
 import moment from 'moment'
@@ -507,10 +514,10 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
   }
 
   safeAreaIphoneX = (bottomOffset: number) => {
-    if(isIphoneX()) {
-      return bottomOffset === this._bottomOffset ? 33 : bottomOffset;
+    if (isIphoneX()) {
+      return bottomOffset === this._bottomOffset ? 33 : bottomOffset
     }
-    return bottomOffset;
+    return bottomOffset
   }
 
   onKeyboardWillShow = (e: any) => {
@@ -532,7 +539,7 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
     }
   }
 
-  onKeyboardWillHide = (e: any) => {
+  onKeyboardWillHide = (_e: any) => {
     this.setIsTypingDisabled(true)
     this.setKeyboardHeight(0)
     this.setBottomOffset(0)
@@ -744,9 +751,6 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
 
   renderChatFooter() {
     if (this.props.renderChatFooter) {
-      const footerProps = {
-        ...this.props,
-      }
       return this.props.renderChatFooter()
     }
     return null
@@ -787,8 +791,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   safeArea: {
-    flex: 1
-  }
+    flex: 1,
+  },
 })
 
 export {

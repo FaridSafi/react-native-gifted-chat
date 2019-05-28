@@ -9,8 +9,6 @@ import {
   TouchableOpacity,
   Text,
   ListViewProps,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
   ListRenderItemInfo,
 } from 'react-native'
 
@@ -274,9 +272,7 @@ export default class MessageContainer extends React.PureComponent<
       return scrollToBottomComponent()
     }
 
-    return (
-      <Text>V</Text>
-    )
+    return <Text>V</Text>
   }
 
   renderScrollToBottomWrapper() {

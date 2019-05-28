@@ -1,12 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import {
-  StyleSheet,
-  View,
-  ViewPropTypes,
-  ViewStyle,
-  ImageStyle,
-} from 'react-native'
+import { View, ViewPropTypes, ViewStyle } from 'react-native'
 import Video, { VideoProperties } from 'react-native-video'
 import { IMessage } from './types'
 
@@ -15,7 +9,7 @@ interface MessageVideoProps<TMessage extends IMessage = IMessage> {
   containerStyle?: ViewStyle
   videoStyle?: ViewStyle
   videoProps?: Partial<VideoProperties>
-  // todo: should be LightBox properties
+  // TODO: should be LightBox properties
   lightboxProps?: object
 }
 

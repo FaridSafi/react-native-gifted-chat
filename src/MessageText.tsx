@@ -3,7 +3,6 @@ import React from 'react'
 import {
   Linking,
   StyleSheet,
-  Text,
   View,
   ViewPropTypes,
   TextProps,

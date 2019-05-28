@@ -1,5 +1,3 @@
-import * as RN from 'react-native'
-
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
 
 export interface LeftRightStyle<T> {

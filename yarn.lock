@@ -1018,10 +1018,10 @@
   resolved "https://registry.yarnpkg.com/@types/react-native-communications/-/react-native-communications-2.2.1.tgz#fe067d9d226090cea34a62de8c6ac71f92caeeb9"
   integrity sha512-eTgJlMjrx825VuO+3y5rT4Xu3it6oH3i7Zck/QhJO3c8RM61nBp9lJ7BBI3Coc8nxweYkS6i1lkrPPmZOnNzNA==
 
-"@types/react-native-video@3.1.2":
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/@types/react-native-video/-/react-native-video-3.1.2.tgz#5d19b2d2505f79ceedbcce0d2c0c25befd3f5ae1"
-  integrity sha512-L8F8Qpbp7mCxYqEfQyrFgNq/HfTlkqtWgB7Bu8W9sQ6GQ/7lRHlmkQ49J3PBSFAVPF2JtnyiXlor5RvhgrHwxw==
+"@types/react-native-video@3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@types/react-native-video/-/react-native-video-3.1.4.tgz#17049b708d22f7254971b823523d7afe9a8a9bb6"
+  integrity sha512-bFAgMtItNyHDhg9XV2EYw+o4ARZD26h4AEAuQkYBBs3DXe3cdFfiDKD1SKMV25hu2JjGsfQ/n6Si+N+s+tFWaA==
   dependencies:
     "@types/react" "*"
     "@types/react-native" "*"

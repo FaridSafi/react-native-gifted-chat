@@ -92,8 +92,7 @@ export default class Day extends PureComponent<DayProps> {
             <Text style={[styles.text, textStyle]}>
               {moment(currentMessage.createdAt)
                 .locale(this.context.getLocale())
-                .format(dateFormat)
-                .toUpperCase()}
+                .format(dateFormat)}
             </Text>
           </View>
         </View>

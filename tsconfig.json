@@ -19,7 +19,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "importHelpers": true,
+    "importHelpers": false,
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
     "strictFunctionTypes": true,

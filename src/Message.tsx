@@ -84,7 +84,8 @@ export default class Message extends React.Component<MessageProps> {
   shouldComponentUpdate(nextProps: MessageProps) {
     const next = nextProps.currentMessage!
     const current = this.props.currentMessage!
-    const { previousMessage } = this.props;
+    const { previousMessage, nextMessage } = this.props;
+    const nextPropsMessage = nextProps.nextMessage
     const nextPropsPreviousMessage = nextProps.previousMessage;
     return (
       next.sent !== current.sent ||
@@ -95,7 +96,8 @@ export default class Message extends React.Component<MessageProps> {
       next.image !== current.image ||
       next.video !== current.video ||
       next.audio !== current.audio ||
-      previousMessage !== nextPropsPreviousMessage
+      previousMessage !== nextPropsPreviousMessage ||
+      nextMessage !== nextPropsMessage
     )
   }
 

@@ -68,7 +68,7 @@
     "@types/react-native": "^0.57.19",
     "@types/react-native-communications": "2.2.1",
     "@types/react-native-video": "3.1.4",
-    "@types/react-test-renderer": "16.8.1",
+    "@types/react-test-renderer": "16.8.2",
     "@types/uuid": "3.4.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.7.1",

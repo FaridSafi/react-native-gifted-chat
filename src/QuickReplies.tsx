@@ -152,7 +152,7 @@ export default class QuickReplies extends Component<
                 { borderColor: color },
                 selected && { backgroundColor: color },
               ]}
-              key={reply.value}
+              key={reply.messageId}
             >
               <Text
                 numberOfLines={2}

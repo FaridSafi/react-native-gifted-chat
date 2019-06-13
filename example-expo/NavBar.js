@@ -2,7 +2,7 @@
 import React from 'react'
 import { Text } from 'react-native'
 import NavBar, { NavTitle, NavButton } from 'react-native-nav'
-import { Constants } from 'expo'
+import Constants from 'expo-constants'
 
 export default function NavBarCustom() {
   return (

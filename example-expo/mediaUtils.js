@@ -1,4 +1,7 @@
-import { Permissions, Location, ImagePicker, Linking } from 'expo'
+import { Linking } from 'expo'
+import * as Location from 'expo-location'
+import * as Permissions from 'expo-permissions'
+import * as ImagePicker from 'expo-image-picker'
 
 import { Alert } from 'react-native'
 

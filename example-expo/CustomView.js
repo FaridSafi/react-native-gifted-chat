@@ -1,4 +1,5 @@
-import { Linking, MapView } from 'expo'
+import { Linking } from 'expo'
+import MapView from 'react-native-maps'
 import PropTypes from 'prop-types'
 import React from 'react'
 import {

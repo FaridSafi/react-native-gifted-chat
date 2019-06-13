@@ -93,6 +93,7 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
       onContentSizeChange={[Function]}
       placeholder="Type a message..."
       placeholderTextColor="#b2b2b2"
+      rejectResponderTermination={true}
       style={
         Array [
           Object {

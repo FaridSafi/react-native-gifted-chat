@@ -100,7 +100,6 @@
     "react-native-maps": "~0.24.0",
     "react-native-parsed-text": "^0.0.20",
     "react-native-video": "4.4.1",
-    "tslib": "^1.9.3",
     "uuid": "3.3.0"
   },
   "peerDependencies": {

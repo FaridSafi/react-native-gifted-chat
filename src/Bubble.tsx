@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewPropTypes,
+  StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native'
@@ -109,7 +110,7 @@ interface BubbleProps<TMessage extends IMessage> {
   wrapperStyle?: LeftRightStyle<ViewStyle>
   textStyle?: LeftRightStyle<TextStyle>
   bottomContainerStyle?: LeftRightStyle<ViewStyle>
-  tickStyle?: TextStyle
+  tickStyle?: StyleProp<TextStyle>
   containerToNextStyle?: LeftRightStyle<ViewStyle>
   containerToPreviousStyle?: LeftRightStyle<ViewStyle>
   usernameStyle?: LeftRightStyle<ViewStyle>

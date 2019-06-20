@@ -6,6 +6,7 @@ import {
   View,
   ViewPropTypes,
   TextProps,
+  StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native'
@@ -58,7 +59,7 @@ interface MessageTextProps<TMessage extends IMessage> {
   textStyle?: LeftRightStyle<TextStyle>
   linkStyle?: LeftRightStyle<TextStyle>
   textProps?: TextProps
-  customTextStyle?: TextStyle
+  customTextStyle?: StyleProp<TextStyle>
   parsePatterns?(linkStyle: TextStyle): any
 }
 

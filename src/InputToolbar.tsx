@@ -6,6 +6,7 @@ import {
   Keyboard,
   ViewPropTypes,
   EmitterSubscription,
+  StyleProp,
   ViewStyle,
 } from 'react-native'
 
@@ -35,9 +36,9 @@ const styles = StyleSheet.create({
 interface InputToolbarProps {
   options?: { [key: string]: any }
   optionTintColor?: string
-  containerStyle?: ViewStyle
-  primaryStyle?: ViewStyle
-  accessoryStyle?: ViewStyle
+  containerStyle?: StyleProp<ViewStyle>
+  primaryStyle?: StyleProp<ViewStyle>
+  accessoryStyle?: StyleProp<ViewStyle>
   renderAccessory?(props: InputToolbarProps): React.ReactNode
   renderActions?(props: Actions['props']): React.ReactNode
   renderSend?(props: Send['props']): React.ReactNode

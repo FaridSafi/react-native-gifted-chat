@@ -5,6 +5,7 @@ import {
   Platform,
   StyleSheet,
   View,
+  StyleProp,
   ViewStyle,
   SafeAreaView,
 } from 'react-native'
@@ -93,7 +94,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Force send button */
   alwaysShowSend?: boolean
   /* Image style */
-  imageStyle?: ViewStyle
+  imageStyle?: StyleProp<ViewStyle>
   /* This can be used to pass any data which needs to be re-rendered */
   extraData?: any
   /* composer min Height */

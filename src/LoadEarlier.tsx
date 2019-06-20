@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   ViewPropTypes,
+  StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native'
@@ -44,10 +45,10 @@ const styles = StyleSheet.create({
 interface LoadEarlierProps {
   isLoadingEarlier?: boolean
   label?: string
-  containerStyle?: ViewStyle
-  wrapperStyle?: ViewStyle
-  textStyle?: TextStyle
-  activityIndicatorStyle?: ViewStyle
+  containerStyle?: StyleProp<ViewStyle>
+  wrapperStyle?: StyleProp<ViewStyle>
+  textStyle?: StyleProp<TextStyle>
+  activityIndicatorStyle?: StyleProp<ViewStyle>
   activityIndicatorColor?: string
   activityIndicatorSize?: number | 'small' | 'large'
   onLoadEarlier?(): void

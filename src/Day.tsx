@@ -5,6 +5,7 @@ import {
   Text,
   View,
   ViewPropTypes,
+  StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native'
@@ -35,9 +36,9 @@ interface DayProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage
-  containerStyle?: ViewStyle
-  wrapperStyle?: ViewStyle
-  textStyle?: TextStyle
+  containerStyle?: StyleProp<ViewStyle>
+  wrapperStyle?: StyleProp<ViewStyle>
+  textStyle?: StyleProp<TextStyle>
   dateFormat?: string
   inverted?: boolean
 }

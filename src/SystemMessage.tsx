@@ -27,14 +27,14 @@ const styles = StyleSheet.create({
   },
 })
 
-interface SystemMessageProps<TMessage extends IMessage = IMessage> {
+interface SystemMessageProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   containerStyle?: ViewStyle
   wrapperStyle?: ViewStyle
   textStyle?: TextStyle
 }
 
-export default class SystemMessage extends Component<SystemMessageProps> {
+export default class SystemMessage<TMessage extends IMessage = IMessage> extends Component<SystemMessageProps<TMessage>> {
   static defaultProps = {
     currentMessage: {
       system: false,
@@ -50,6 +50,7 @@ export default class SystemMessage extends Component<SystemMessageProps> {
     wrapperStyle: ViewPropTypes.style,
     textStyle: PropTypes.any,
   }
+  
   render() {
     const {
       currentMessage,

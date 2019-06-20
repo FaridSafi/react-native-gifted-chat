@@ -96,7 +96,7 @@ const styles = {
 
 const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel']
 
-interface BubbleProps<TMessage extends IMessage = IMessage> {
+interface BubbleProps<TMessage extends IMessage> {
   user?: User
   touchableProps?: object
   renderUsernameOnMessage?: boolean
@@ -118,7 +118,7 @@ interface BubbleProps<TMessage extends IMessage = IMessage> {
   renderMessageImage?(messageImageProps: MessageImage['props']): React.ReactNode
   renderMessageVideo?(messageVideoProps: MessageVideo['props']): React.ReactNode
   renderMessageText?(messageTextProps: MessageText['props']): React.ReactNode
-  renderCustomView?(bubbleProps: BubbleProps): React.ReactNode
+  renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
   renderTime?(timeProps: Time['props']): React.ReactNode
   renderTicks?(currentMessage: TMessage): React.ReactNode
   renderUsername?(): React.ReactNode
@@ -128,7 +128,7 @@ interface BubbleProps<TMessage extends IMessage = IMessage> {
   isSameUser?(currentMessage: TMessage, nextMessage: TMessage): boolean
 }
 
-export default class Bubble extends React.Component<BubbleProps> {
+export default class Bubble<TMessage extends IMessage = IMessage> extends React.Component<BubbleProps<TMessage>> {
   static contextTypes = {
     actionSheet: PropTypes.func,
   }

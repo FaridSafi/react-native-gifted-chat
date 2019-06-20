@@ -22,7 +22,7 @@ import Time from './Time'
 import Color from './Color'
 
 import { isSameUser, isSameDay } from './utils'
-import { User, IMessage, LeftRightStyle, Reply } from './types'
+import { User, IMessage, LeftRightStyle, Reply, Omit } from './types'
 
 const styles = {
   left: StyleSheet.create({
@@ -97,6 +97,18 @@ const styles = {
 
 const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel']
 
+export type RenderMessageImageProps<TMessage extends IMessage> =
+  Omit<BubbleProps<TMessage>, 'containerStyle' | 'wrapperStyle'> &
+  MessageImage['props'];
+
+export type RenderMessageVideoProps<TMessage extends IMessage> =
+  Omit<BubbleProps<TMessage>, 'containerStyle' | 'wrapperStyle'> &
+  MessageVideo['props']
+
+export type RenderMessageTextProps<TMessage extends IMessage> =
+  Omit<BubbleProps<TMessage>, 'containerStyle' | 'wrapperStyle'> &
+  MessageText['props']
+
 interface BubbleProps<TMessage extends IMessage> {
   user?: User
   touchableProps?: object
@@ -116,9 +128,9 @@ interface BubbleProps<TMessage extends IMessage> {
   usernameStyle?: LeftRightStyle<ViewStyle>
   onLongPress?(context?: any, message?: any): void
   onQuickReply?(replies: Reply[]): void
-  renderMessageImage?(messageImageProps: MessageImage['props']): React.ReactNode
-  renderMessageVideo?(messageVideoProps: MessageVideo['props']): React.ReactNode
-  renderMessageText?(messageTextProps: MessageText['props']): React.ReactNode
+  renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
+  renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode
+  renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
   renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
   renderTime?(timeProps: Time['props']): React.ReactNode
   renderTicks?(currentMessage: TMessage): React.ReactNode

@@ -1,5 +1,11 @@
 import { StyleProp } from 'react-native';
 
+export {
+  RenderMessageImageProps,
+  RenderMessageVideoProps,
+  RenderMessageTextProps,
+} from './Bubble';
+
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
 
 export interface LeftRightStyle<T> {

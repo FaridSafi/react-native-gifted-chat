@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
 })
 
-interface MessageContainerProps<TMessage extends IMessage = IMessage> {
+interface MessageContainerProps<TMessage extends IMessage> {
   messages?: TMessage[]
   user?: User
   listViewProps: Partial<ListViewProps>
@@ -66,15 +66,15 @@ interface MessageContainerProps<TMessage extends IMessage = IMessage> {
   invertibleScrollViewProps?: any
   extraData?: any
   scrollToBottomOffset?: number
-  renderFooter?(props: MessageContainerProps): React.ReactNode
+  renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactNode
   renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
   scrollToBottomComponent?(): React.ReactNode
   onLoadEarlier?(): void
 }
 
-export default class MessageContainer extends React.PureComponent<
-  MessageContainerProps,
+export default class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureComponent<
+  MessageContainerProps<TMessage>,
   { showScrollBottom: boolean }
 > {
   static defaultProps = {
@@ -115,7 +115,7 @@ export default class MessageContainer extends React.PureComponent<
     showScrollBottom: false,
   }
 
-  flatListRef?: RefObject<FlatList<IMessage>> = React.createRef()
+  flatListRef?: RefObject<FlatList<TMessage>> = React.createRef()
 
   componentDidMount() {
     if (this.props.messages && this.props.messages.length === 0) {
@@ -127,7 +127,7 @@ export default class MessageContainer extends React.PureComponent<
     this.detachKeyboardListeners()
   }
 
-  componentWillReceiveProps(nextProps: MessageContainerProps) {
+  componentWillReceiveProps(nextProps: MessageContainerProps<TMessage>) {
     if (
       this.props.messages &&
       this.props.messages.length === 0 &&
@@ -222,7 +222,7 @@ export default class MessageContainer extends React.PureComponent<
     }
   }
 
-  renderRow = ({ item, index }: ListRenderItemInfo<IMessage>) => {
+  renderRow = ({ item, index }: ListRenderItemInfo<TMessage>) => {
     if (!item._id && item._id !== 0) {
       console.warn(
         'GiftedChat: `_id` is missing for message',
@@ -288,7 +288,7 @@ export default class MessageContainer extends React.PureComponent<
     )
   }
 
-  keyExtractor = (item: IMessage) => `${item._id}`
+  keyExtractor = (item: TMessage) => `${item._id}`
 
   render() {
     if (

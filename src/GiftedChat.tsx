@@ -5,6 +5,7 @@ import {
   Platform,
   StyleSheet,
   View,
+  StyleProp,
   ViewStyle,
   SafeAreaView,
 } from 'react-native'
@@ -93,7 +94,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Force send button */
   alwaysShowSend?: boolean
   /* Image style */
-  imageStyle?: ViewStyle
+  imageStyle?: StyleProp<ViewStyle>
   /* This can be used to pass any data which needs to be re-rendered */
   extraData?: any
   /* composer min Height */
@@ -167,7 +168,7 @@ interface GiftedChatState {
   text?: string
 }
 
-class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
+class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<GiftedChatProps<TMessage>, GiftedChatState> {
   static childContextTypes = {
     actionSheet: PropTypes.func,
     getLocale: PropTypes.func,
@@ -291,9 +292,9 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
     alignTop: PropTypes.bool,
   }
 
-  static append(
-    currentMessages: IMessage[] = [],
-    messages: IMessage[],
+  static append<TMessage extends IMessage>(
+    currentMessages: TMessage[] = [],
+    messages: TMessage[],
     inverted = true,
   ) {
     if (!Array.isArray(messages)) {
@@ -304,9 +305,9 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
       : currentMessages.concat(messages)
   }
 
-  static prepend(
-    currentMessages: IMessage[] = [],
-    messages: IMessage[],
+  static prepend<TMessage extends IMessage>(
+    currentMessages: TMessage[] = [],
+    messages: TMessage[],
     inverted = true,
   ) {
     if (!Array.isArray(messages)) {
@@ -323,7 +324,7 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
   _maxHeight?: number = undefined
   _isFirstLayout: boolean = true
   _locale: string = 'en'
-  _messages: IMessage[] = []
+  _messages: TMessage[] = []
   invertibleScrollViewProps: any = undefined
   _actionSheetRef: any = undefined
 
@@ -338,7 +339,7 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
     text: undefined,
   }
 
-  constructor(props: GiftedChatProps) {
+  constructor(props: GiftedChatProps<TMessage>) {
     super(props)
 
     this.invertibleScrollViewProps = {
@@ -370,7 +371,7 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
     this.setIsMounted(false)
   }
 
-  componentWillReceiveProps(nextProps: GiftedChatProps = {}) {
+  componentWillReceiveProps(nextProps: GiftedChatProps<TMessage> = {}) {
     const { messages, text } = nextProps
     this.setMessages(messages || [])
     this.setTextFromProp(text)
@@ -407,7 +408,7 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
     return this.props.text
   }
 
-  setMessages(messages: IMessage[]) {
+  setMessages(messages: TMessage[]) {
     this._messages = messages
   }
 
@@ -595,11 +596,11 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
     )
   }
 
-  onSend = (messages: IMessage[] = [], shouldResetInputToolbar = false) => {
+  onSend = (messages: TMessage[] = [], shouldResetInputToolbar = false) => {
     if (!Array.isArray(messages)) {
       messages = [messages]
     }
-    const newMessages: IMessage[] = messages.map(message => {
+    const newMessages: TMessage[] = messages.map(message => {
       return {
         ...message,
         user: this.props.user!,
@@ -794,6 +795,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 })
+
+export * from './types';
 
 export {
   GiftedChat,

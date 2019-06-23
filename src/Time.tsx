@@ -48,7 +48,7 @@ const styles = {
   }),
 }
 
-interface TimeProps<TMessage extends IMessage = IMessage> {
+interface TimeProps<TMessage extends IMessage> {
   position: 'left' | 'right'
   currentMessage?: TMessage
   containerStyle?: LeftRightStyle<ViewStyle>
@@ -56,7 +56,7 @@ interface TimeProps<TMessage extends IMessage = IMessage> {
   timeFormat?: string
 }
 
-export default class Time extends Component<TimeProps> {
+export default class Time<TMessage extends IMessage = IMessage> extends Component<TimeProps<TMessage>> {
   static contextTypes = {
     getLocale: PropTypes.func,
   }

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   ViewPropTypes,
+  StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native'
@@ -30,8 +31,8 @@ const styles = StyleSheet.create({
 interface SendProps {
   text?: string
   label?: string
-  containerStyle?: ViewStyle
-  textStyle?: TextStyle
+  containerStyle?: StyleProp<ViewStyle>
+  textStyle?: StyleProp<TextStyle>
   children?: React.ReactNode
   alwaysShowSend?: boolean
   disabled?: boolean

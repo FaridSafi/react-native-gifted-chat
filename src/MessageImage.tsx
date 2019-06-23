@@ -7,6 +7,7 @@ import {
   ViewPropTypes,
   ImageProps,
   ViewStyle,
+  StyleProp,
   ImageStyle,
 } from 'react-native'
 // @ts-ignore
@@ -28,15 +29,15 @@ const styles = StyleSheet.create({
   },
 })
 
-interface MessageImageProps<TMessage extends IMessage = IMessage> {
+interface MessageImageProps<TMessage extends IMessage> {
   currentMessage?: TMessage
-  containerStyle?: ViewStyle
-  imageStyle?: ImageStyle
+  containerStyle?: StyleProp<ViewStyle>
+  imageStyle?: StyleProp<ImageStyle>
   imageProps?: Partial<ImageProps>
   lightboxProps?: object
 }
 
-export default class MessageImage extends Component<MessageImageProps> {
+export default class MessageImage<TMessage extends IMessage = IMessage> extends Component<MessageImageProps<TMessage>> {
   static defaultProps = {
     currentMessage: {
       image: null,

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  StyleProp,
   ImageStyle,
   TextStyle,
 } from 'react-native'
@@ -43,8 +44,8 @@ const styles = StyleSheet.create({
 
 interface GiftedAvatarProps {
   user?: User
-  avatarStyle?: ImageStyle
-  textStyle?: TextStyle
+  avatarStyle?: StyleProp<ImageStyle>
+  textStyle?: StyleProp<TextStyle>
   onPress?(props: any): void
 }
 

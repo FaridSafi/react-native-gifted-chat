@@ -42,20 +42,20 @@ const styles = {
   }),
 }
 
-interface AvatarProps {
-  currentMessage?: IMessage
-  previousMessage?: IMessage
-  nextMessage?: IMessage
+interface AvatarProps<TMessage extends IMessage> {
+  currentMessage?: TMessage
+  previousMessage?: TMessage
+  nextMessage?: TMessage
   position: 'left' | 'right'
   renderAvatarOnTop?: boolean
   showAvatarForEveryMessage?: boolean
   imageStyle?: LeftRightStyle<ImageStyle>
   containerStyle?: LeftRightStyle<ViewStyle>
-  renderAvatar?(props: Omit<AvatarProps, 'renderAvatar'>): ReactNode
+  renderAvatar?(props: Omit<AvatarProps<TMessage>, 'renderAvatar'>): ReactNode
   onPressAvatar?(user: User): void
 }
 
-export default class Avatar extends React.Component<AvatarProps> {
+export default class Avatar<TMessage extends IMessage = IMessage> extends React.Component<AvatarProps<TMessage>> {
   static defaultProps = {
     renderAvatarOnTop: false,
     showAvatarForEveryMessage: false,

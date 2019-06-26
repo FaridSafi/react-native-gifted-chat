@@ -1,5 +1,5 @@
 import { Linking } from 'expo'
-import MapView from 'react-native-maps'
+// import MapView from 'react-native-maps'
 import PropTypes from 'prop-types'
 import React from 'react'
 import {
@@ -26,12 +26,8 @@ export default class CustomView extends React.Component {
     const { currentMessage: { location = {} } = {} } = this.props
 
     const url = Platform.select({
-      ios: `http://maps.apple.com/?ll=${location.latitude},${
-        location.longitude
-      }`,
-      default: `http://maps.google.com/?q=${location.latitude},${
-        location.longitude
-      }`,
+      ios: `http://maps.apple.com/?ll=${location.latitude},${location.longitude}`,
+      default: `http://maps.google.com/?q=${location.latitude},${location.longitude}`,
     })
 
     try {
@@ -53,7 +49,7 @@ export default class CustomView extends React.Component {
           style={[styles.container, containerStyle]}
           onPress={this.openMapAsync}
         >
-          <MapView
+          {/* <MapView
             style={[styles.mapView, mapViewStyle]}
             region={{
               latitude: currentMessage.location.latitude,
@@ -63,7 +59,7 @@ export default class CustomView extends React.Component {
             }}
             scrollEnabled={false}
             zoomEnabled={false}
-          />
+          /> */}
         </TouchableOpacity>
       )
     }

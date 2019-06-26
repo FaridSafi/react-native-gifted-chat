@@ -1,5 +1,4 @@
 import { Linking } from 'expo'
-// import MapView from 'react-native-maps'
 import PropTypes from 'prop-types'
 import React from 'react'
 import {
@@ -8,6 +7,11 @@ import {
   TouchableOpacity,
   ViewPropTypes,
 } from 'react-native'
+
+const MapView = Platform.select({
+  web: () => require('react-native-web-maps'),
+  default: () => require('react-native-maps'),
+})
 
 export default class CustomView extends React.Component {
   static propTypes = {
@@ -49,7 +53,7 @@ export default class CustomView extends React.Component {
           style={[styles.container, containerStyle]}
           onPress={this.openMapAsync}
         >
-          {/* <MapView
+          <MapView
             style={[styles.mapView, mapViewStyle]}
             region={{
               latitude: currentMessage.location.latitude,
@@ -59,7 +63,7 @@ export default class CustomView extends React.Component {
             }}
             scrollEnabled={false}
             zoomEnabled={false}
-          /> */}
+          />
         </TouchableOpacity>
       )
     }

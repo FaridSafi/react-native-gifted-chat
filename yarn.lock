@@ -6295,6 +6295,13 @@ react-native-view-shot@2.6.0:
   resolved "https://registry.yarnpkg.com/react-native-view-shot/-/react-native-view-shot-2.6.0.tgz#3b23675826f67658366352c4b97b59a6aded2f43"
   integrity sha512-yO9vWi/11m2hEJl8FrW1SMeVzFfPtMKh20MUInGqlsL0H8Ya2JGGlFfrBzx1KiFR2hFb5OdsTLYNtcVZtJ6pLQ==
 
+react-native-web-maps@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-web-maps/-/react-native-web-maps-0.2.0.tgz#348dbcd9d08fc2c894235d2be0d75989084b5004"
+  integrity sha512-NapoturnD65xVci3AXAZfZR7Z84WXrwpbqQedEhB8vYxmuzw7PddOXJokwtT4UnRtwqh1cg3q3cNWYy3p2+4/w==
+  dependencies:
+    react-google-maps "^9.4.5"
+
 react-native-web@^0.11.1:
   version "0.11.4"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.11.4.tgz#86e8158d83a6a41983e43b1c84acaaa342d443b2"

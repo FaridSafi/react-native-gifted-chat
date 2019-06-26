@@ -67,6 +67,7 @@
 
 ## Features
 
+- *`react-native-web` able* (asap: [#1284](https://github.com/FaridSafi/react-native-gifted-chat/pull/1284))
 - Write with **TypeScript** (since 0.8.0)
 - Fully customizable components
 - Composer actions (to attach photos, etc.)

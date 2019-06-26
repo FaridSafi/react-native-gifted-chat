@@ -1,14 +1,24 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { View, ViewPropTypes, StyleProp, ViewStyle } from 'react-native'
-import Video, { VideoProperties } from 'react-native-video'
+import {
+  View,
+  ViewPropTypes,
+  StyleProp,
+  ViewStyle,
+  Platform,
+} from 'react-native'
 import { IMessage } from './types'
 
-export interface MessageVideoProps<TMessage extends IMessage> {
+const Video = Platform.select({
+  web: () => <View />,
+  default: () => require('react-native-video'),
+})
+
+interface MessageVideoProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   containerStyle?: StyleProp<ViewStyle>
   videoStyle?: StyleProp<ViewStyle>
-  videoProps?: Partial<VideoProperties>
+  videoProps?: any
   // TODO: should be LightBox properties
   lightboxProps?: object
 }
@@ -50,7 +60,7 @@ export default class MessageVideo<
       <View style={containerStyle}>
         <Video
           {...videoProps}
-          ref={r => {
+          ref={(r: any) => {
             this.player = r
           }}
           source={{ uri: currentMessage!.video! }}

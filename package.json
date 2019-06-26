@@ -79,7 +79,7 @@
     "json": "^9.0.6",
     "prettier": "1.18.0",
     "prop-types": "15.6.2",
-    "react": "16.5.1",
+    "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-nav": "2.0.2",
     "react-test-renderer": "16.5.1",
@@ -95,13 +95,15 @@
     "expo-permissions": "~5.0.1",
     "moment": "^2.19.0",
     "prop-types": "15.7.2",
+    "react-dom": "16.8.3",
     "react-native-communications": "2.2.1",
     "react-native-iphone-x-helper": "^1.2.0",
     "react-native-lightbox": "^0.7.0",
     "react-native-maps": "~0.24.0",
-    "react-native-parsed-text": "^0.0.20",
-    "react-native-video": "5.0.1",
-    "uuid": "3.3.3"
+    "react-native-parsed-text": "https://github.com/EvanBacon/react-native-parsed-text.git",
+    "react-native-video": "4.4.2",
+    "uuid": "3.3.3",
+    "react-native-web": "^0.11.1"
   },
   "peerDependencies": {
     "react": "*",

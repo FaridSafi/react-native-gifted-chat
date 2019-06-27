@@ -12,7 +12,7 @@ import {
 } from 'react-native'
 import Color from './Color'
 
-interface ActionsProps {
+export interface ActionsProps {
   options?: { [key: string]: any }
   optionTintColor?: string
   icon?: () => ReactNode

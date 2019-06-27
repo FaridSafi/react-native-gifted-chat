@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
 })
 
-interface MessageImageProps<TMessage extends IMessage> {
+export interface MessageImageProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   containerStyle?: StyleProp<ViewStyle>
   imageStyle?: StyleProp<ImageStyle>
@@ -37,7 +37,9 @@ interface MessageImageProps<TMessage extends IMessage> {
   lightboxProps?: object
 }
 
-export default class MessageImage<TMessage extends IMessage = IMessage> extends Component<MessageImageProps<TMessage>> {
+export default class MessageImage<
+  TMessage extends IMessage = IMessage
+> extends Component<MessageImageProps<TMessage>> {
   static defaultProps = {
     currentMessage: {
       image: null,

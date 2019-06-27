@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
 })
 
-interface LoadEarlierProps {
+export interface LoadEarlierProps {
   isLoadingEarlier?: boolean
   label?: string
   containerStyle?: StyleProp<ViewStyle>

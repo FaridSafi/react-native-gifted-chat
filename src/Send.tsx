@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 })
 
-interface SendProps {
+export interface SendProps {
   text?: string
   label?: string
   containerStyle?: StyleProp<ViewStyle>

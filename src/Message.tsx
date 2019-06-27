@@ -31,7 +31,7 @@ const styles = {
   }),
 }
 
-interface MessageProps<TMessage extends IMessage> {
+export interface MessageProps<TMessage extends IMessage> {
   key: any
   showUserAvatar?: boolean
   position: 'left' | 'right'
@@ -47,7 +47,9 @@ interface MessageProps<TMessage extends IMessage> {
   renderAvatar?(props: Avatar['props']): React.ReactNode
 }
 
-export default class Message<TMessage extends IMessage = IMessage> extends React.Component<MessageProps<TMessage>> {
+export default class Message<
+  TMessage extends IMessage = IMessage
+> extends React.Component<MessageProps<TMessage>> {
   static defaultProps = {
     renderAvatar: undefined,
     renderBubble: null,
@@ -84,9 +86,9 @@ export default class Message<TMessage extends IMessage = IMessage> extends React
   shouldComponentUpdate(nextProps: MessageProps<TMessage>) {
     const next = nextProps.currentMessage!
     const current = this.props.currentMessage!
-    const { previousMessage, nextMessage } = this.props;
+    const { previousMessage, nextMessage } = this.props
     const nextPropsMessage = nextProps.nextMessage
-    const nextPropsPreviousMessage = nextProps.previousMessage;
+    const nextPropsPreviousMessage = nextProps.previousMessage
     return (
       next.sent !== current.sent ||
       next.received !== current.received ||

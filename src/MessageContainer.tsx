@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
 })
 
-interface MessageContainerProps<TMessage extends IMessage> {
+export interface MessageContainerProps<TMessage extends IMessage> {
   messages?: TMessage[]
   user?: User
   listViewProps: Partial<ListViewProps>
@@ -73,7 +73,9 @@ interface MessageContainerProps<TMessage extends IMessage> {
   onLoadEarlier?(): void
 }
 
-export default class MessageContainer<TMessage extends IMessage = IMessage> extends React.PureComponent<
+export default class MessageContainer<
+  TMessage extends IMessage = IMessage
+> extends React.PureComponent<
   MessageContainerProps<TMessage>,
   { showScrollBottom: boolean }
 > {

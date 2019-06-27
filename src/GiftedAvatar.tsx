@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
 })
 
-interface GiftedAvatarProps {
+export interface GiftedAvatarProps {
   user?: User
   avatarStyle?: StyleProp<ImageStyle>
   textStyle?: StyleProp<TextStyle>

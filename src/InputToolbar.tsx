@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
 })
 
-interface InputToolbarProps {
+export interface InputToolbarProps {
   options?: { [key: string]: any }
   optionTintColor?: string
   containerStyle?: StyleProp<ViewStyle>

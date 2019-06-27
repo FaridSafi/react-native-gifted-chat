@@ -208,6 +208,8 @@ export default class App extends Component {
     }
   }
 
+  renderQuickReplySend = () => <Text>{' custom send =>'}</Text>
+
   render() {
     if (!this.state.appIsReady) {
       return <AppLoading />
@@ -236,6 +238,8 @@ export default class App extends Component {
           renderSystemMessage={this.renderSystemMessage}
           renderCustomView={this.renderCustomView}
           renderFooter={this.renderFooter}
+          quickReplyStyle={{ borderRadius: 2 }}
+          renderQuickReplySend={this.renderQuickReplySend}
         />
       </View>
     )

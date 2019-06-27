@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
 })
 
-interface DayProps<TMessage extends IMessage> {
+export interface DayProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage
@@ -43,7 +43,9 @@ interface DayProps<TMessage extends IMessage> {
   inverted?: boolean
 }
 
-export default class Day<TMessage extends IMessage = IMessage> extends PureComponent<DayProps<TMessage>> {
+export default class Day<
+  TMessage extends IMessage = IMessage
+> extends PureComponent<DayProps<TMessage>> {
   static contextTypes = {
     getLocale: PropTypes.func,
   }

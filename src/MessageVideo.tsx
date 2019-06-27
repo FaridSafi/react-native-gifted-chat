@@ -4,7 +4,7 @@ import { View, ViewPropTypes, StyleProp, ViewStyle } from 'react-native'
 import Video, { VideoProperties } from 'react-native-video'
 import { IMessage } from './types'
 
-interface MessageVideoProps<TMessage extends IMessage> {
+export interface MessageVideoProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   containerStyle?: StyleProp<ViewStyle>
   videoStyle?: StyleProp<ViewStyle>
@@ -13,7 +13,9 @@ interface MessageVideoProps<TMessage extends IMessage> {
   lightboxProps?: object
 }
 
-export default class MessageVideo<TMessage extends IMessage = IMessage> extends React.Component<MessageVideoProps<TMessage>> {
+export default class MessageVideo<
+  TMessage extends IMessage = IMessage
+> extends React.Component<MessageVideoProps<TMessage>> {
   static defaultProps = {
     currentMessage: {
       video: null,

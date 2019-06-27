@@ -42,7 +42,7 @@ const styles = {
   }),
 }
 
-interface AvatarProps<TMessage extends IMessage> {
+export interface AvatarProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   previousMessage?: TMessage
   nextMessage?: TMessage
@@ -55,7 +55,9 @@ interface AvatarProps<TMessage extends IMessage> {
   onPressAvatar?(user: User): void
 }
 
-export default class Avatar<TMessage extends IMessage = IMessage> extends React.Component<AvatarProps<TMessage>> {
+export default class Avatar<
+  TMessage extends IMessage = IMessage
+> extends React.Component<AvatarProps<TMessage>> {
   static defaultProps = {
     renderAvatarOnTop: false,
     showAvatarForEveryMessage: false,

@@ -52,7 +52,7 @@ const styles = {
   }),
 }
 
-interface MessageTextProps<TMessage extends IMessage> {
+export interface MessageTextProps<TMessage extends IMessage> {
   position: 'left' | 'right'
   currentMessage?: TMessage
   containerStyle?: LeftRightStyle<ViewStyle>
@@ -63,7 +63,9 @@ interface MessageTextProps<TMessage extends IMessage> {
   parsePatterns?(linkStyle: TextStyle): any
 }
 
-export default class MessageText<TMessage extends IMessage = IMessage> extends React.Component<MessageTextProps<TMessage>> {
+export default class MessageText<
+  TMessage extends IMessage = IMessage
+> extends React.Component<MessageTextProps<TMessage>> {
   static contextTypes = {
     actionSheet: PropTypes.func,
   }

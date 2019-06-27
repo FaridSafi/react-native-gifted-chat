@@ -97,19 +97,25 @@ const styles = {
 
 const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel']
 
-export type RenderMessageImageProps<TMessage extends IMessage> =
-  Omit<BubbleProps<TMessage>, 'containerStyle' | 'wrapperStyle'> &
-  MessageImage['props'];
+export type RenderMessageImageProps<TMessage extends IMessage> = Omit<
+  BubbleProps<TMessage>,
+  'containerStyle' | 'wrapperStyle'
+> &
+  MessageImage['props']
 
-export type RenderMessageVideoProps<TMessage extends IMessage> =
-  Omit<BubbleProps<TMessage>, 'containerStyle' | 'wrapperStyle'> &
+export type RenderMessageVideoProps<TMessage extends IMessage> = Omit<
+  BubbleProps<TMessage>,
+  'containerStyle' | 'wrapperStyle'
+> &
   MessageVideo['props']
 
-export type RenderMessageTextProps<TMessage extends IMessage> =
-  Omit<BubbleProps<TMessage>, 'containerStyle' | 'wrapperStyle'> &
+export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
+  BubbleProps<TMessage>,
+  'containerStyle' | 'wrapperStyle'
+> &
   MessageText['props']
 
-interface BubbleProps<TMessage extends IMessage> {
+export interface BubbleProps<TMessage extends IMessage> {
   user?: User
   touchableProps?: object
   renderUsernameOnMessage?: boolean
@@ -126,6 +132,7 @@ interface BubbleProps<TMessage extends IMessage> {
   containerToNextStyle?: LeftRightStyle<ViewStyle>
   containerToPreviousStyle?: LeftRightStyle<ViewStyle>
   usernameStyle?: LeftRightStyle<ViewStyle>
+  quickReplyStyle?: StyleProp<ViewStyle>
   onLongPress?(context?: any, message?: any): void
   onQuickReply?(replies: Reply[]): void
   renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
@@ -135,13 +142,16 @@ interface BubbleProps<TMessage extends IMessage> {
   renderTime?(timeProps: Time['props']): React.ReactNode
   renderTicks?(currentMessage: TMessage): React.ReactNode
   renderUsername?(): React.ReactNode
+  renderQuickReplySend?(): React.ReactNode
   renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
   // TODO: remove in next major release
   isSameDay?(currentMessage: TMessage, nextMessage: TMessage): boolean
   isSameUser?(currentMessage: TMessage, nextMessage: TMessage): boolean
 }
 
-export default class Bubble<TMessage extends IMessage = IMessage> extends React.Component<BubbleProps<TMessage>> {
+export default class Bubble<
+  TMessage extends IMessage = IMessage
+> extends React.Component<BubbleProps<TMessage>> {
   static contextTypes = {
     actionSheet: PropTypes.func,
   }
@@ -293,13 +303,29 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
   }
 
   renderQuickReplies() {
-    const { currentMessage, onQuickReply, nextMessage } = this.props
+    const {
+      currentMessage,
+      onQuickReply,
+      nextMessage,
+      renderQuickReplySend,
+      quickReplyStyle,
+    } = this.props
     if (currentMessage && currentMessage.quickReplies) {
       const { containerStyle, wrapperStyle, ...quickReplyProps } = this.props
       if (this.props.renderQuickReplies) {
         return this.props.renderQuickReplies(quickReplyProps)
       }
-      return <QuickReplies {...{ currentMessage, onQuickReply, nextMessage }} />
+      return (
+        <QuickReplies
+          {...{
+            currentMessage,
+            onQuickReply,
+            nextMessage,
+            renderQuickReplySend,
+            quickReplyStyle,
+          }}
+        />
+      )
     }
     return null
   }

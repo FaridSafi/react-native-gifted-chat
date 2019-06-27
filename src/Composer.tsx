@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
 import Color from './Color'
 
-interface ComposerProps {
+export interface ComposerProps {
   composerHeight?: number
   text?: string
   placeholder?: string

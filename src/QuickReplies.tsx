@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
+import {
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  StyleProp,
+  ViewStyle,
+} from 'react-native'
 import { IMessage, Reply } from './types'
 import Color from './Color'
 
@@ -31,15 +38,17 @@ const styles = StyleSheet.create({
   },
 })
 
-interface QuickRepliesProps {
+export interface QuickRepliesProps {
   nextMessage?: IMessage
   currentMessage?: IMessage
   color?: string
   sendText?: string
+  quickReplyStyle?: StyleProp<ViewStyle>
   onQuickReply?(reply: Reply[]): void
+  renderQuickReplySend?(): React.ReactNode
 }
 
-interface QuickRepliesState {
+export interface QuickRepliesState {
   replies: Reply[]
 }
 
@@ -61,6 +70,8 @@ export default class QuickReplies extends Component<
     color: Color.peterRiver,
     sendText: 'Send',
     keepReplies: false,
+    renderQuickReplySend: undefined,
+    quickReplyStyle: undefined,
   }
 
   static propTypes = {
@@ -129,8 +140,26 @@ export default class QuickReplies extends Component<
     return false
   }
 
+  renderQuickReplySend = () => {
+    const { replies } = this.state
+    const { sendText, renderQuickReplySend: customSend } = this.props
+
+    return (
+      <TouchableOpacity
+        style={[styles.quickReply, styles.sendLink]}
+        onPress={this.handleSend(replies)}
+      >
+        {customSend ? (
+          customSend()
+        ) : (
+          <Text style={styles.sendLinkText}>{sendText}</Text>
+        )}
+      </TouchableOpacity>
+    )
+  }
+
   render() {
-    const { currentMessage, color, sendText } = this.props
+    const { currentMessage, color, quickReplyStyle } = this.props
     const { replies } = this.state
 
     if (!this.shouldComponentDisplay()) {
@@ -148,7 +177,7 @@ export default class QuickReplies extends Component<
               onPress={this.handlePress(reply)}
               style={[
                 styles.quickReply,
-                ,
+                quickReplyStyle,
                 { borderColor: color },
                 selected && { backgroundColor: color },
               ]}
@@ -164,14 +193,7 @@ export default class QuickReplies extends Component<
             </TouchableOpacity>
           )
         })}
-        {replies.length > 0 && (
-          <TouchableOpacity
-            style={[styles.quickReply, styles.sendLink]}
-            onPress={this.handleSend(replies)}
-          >
-            <Text style={styles.sendLinkText}>{sendText}</Text>
-          </TouchableOpacity>
-        )}
+        {replies.length > 0 && this.renderQuickReplySend()}
       </View>
     )
   }

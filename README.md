@@ -67,7 +67,7 @@
 
 ## Features
 
-- *`react-native-web` able* (asap: [#1284](https://github.com/FaridSafi/react-native-gifted-chat/pull/1284))
+- _`react-native-web`able_ (ASAP: [#1284](https://github.com/FaridSafi/react-native-gifted-chat/pull/1284))
 - Write with **TypeScript** (since 0.8.0)
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
@@ -158,7 +158,7 @@ See the files in [`example-slack-message`](example-slack-message) for an example
 
 ## Message object
 
-e.g. Chat Message
+> e.g. Chat Message
 
 ```js
 {
@@ -177,7 +177,7 @@ e.g. Chat Message
 }
 ```
 
-e.g. System Message
+> e.g. System Message
 
 ```js
 {
@@ -189,7 +189,7 @@ e.g. System Message
 }
 ```
 
-### e.g. Chat Message with Quick Reply options
+> e.g. Chat Message with Quick Reply options
 
 See PR [#1211](https://github.com/FaridSafi/react-native-gifted-chat/pull/1211)
 
@@ -337,7 +337,9 @@ interface QuickReplies {
 * **`scrollToBottomStyle`** _(Object)_ - Custom style for Bottom Component container
 * **`alignTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 * **`onQuickReply`** _(Function)_ - Callback when sending a quick reply (to backend server)
-* **`renderQuickReply`** _(Function)_ - Custom quick reply view
+* **`renderQuickReply`** _(Function)_ - Custom all quick reply view
+* **`quickReplyStyle`** _(StyleProp<ViewStyle>)_ - Custom quick reply view style
+* **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
 
 ## Imperative methods
 

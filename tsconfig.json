@@ -4,7 +4,7 @@
     "outDir": "./lib",
     "strict": true,
     "jsx": "react-native",
-    "target": "es6",
+    "target": "es2019",
     "module": "es6",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,

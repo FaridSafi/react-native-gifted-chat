@@ -139,9 +139,13 @@ export default class App extends Component {
     this.onSend(messagesToUpload)
   }
 
-  renderAccessory = () => <AccessoryBar onSend={this.onSendFromUser} />
+  renderAccessory = () =>
+    Platform.OS === 'web' ? null : <AccessoryBar onSend={this.onSendFromUser} />
 
   renderCustomActions = props => {
+    if (Platform.OS === 'web') {
+      return null
+    }
     return <CustomActions {...props} onSend={this.onSendFromUser} />
   }
 
@@ -172,16 +176,16 @@ export default class App extends Component {
     )
   }
 
-  renderFooter = props => {
-    if (this.state.typingText) {
-      return (
-        <View style={styles.footerContainer}>
-          <Text style={styles.footerText}>{this.state.typingText}</Text>
-        </View>
-      )
-    }
-    return null
-  }
+  // renderFooter = props => {
+  //   if (this.state.typingText) {
+  //     return (
+  //       <View style={styles.footerContainer}>
+  //         <Text style={styles.footerText}>{this.state.typingText}</Text>
+  //       </View>
+  //     )
+  //   }
+  //   return null
+  // }
 
   onQuickReply = replies => {
     console.log({ replies })
@@ -238,7 +242,6 @@ export default class App extends Component {
           renderBubble={this.renderBubble}
           renderSystemMessage={this.renderSystemMessage}
           renderCustomView={this.renderCustomView}
-          renderFooter={this.renderFooter}
           quickReplyStyle={{ borderRadius: 2 }}
           renderQuickReplySend={this.renderQuickReplySend}
         />

@@ -299,6 +299,7 @@ export default class MessageContainer<
     ) {
       return <View style={styles.container} />
     }
+    const { inverted } = this.props
     return (
       <View
         style={
@@ -314,14 +315,18 @@ export default class MessageContainer<
           keyExtractor={this.keyExtractor}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
-          inverted={this.props.inverted}
+          inverted={inverted}
           data={this.props.messages}
           style={styles.listStyle}
           contentContainerStyle={styles.contentContainerStyle}
           renderItem={this.renderRow}
           {...this.props.invertibleScrollViewProps}
-          ListFooterComponent={this.renderHeaderWrapper}
-          ListHeaderComponent={this.renderFooter}
+          ListFooterComponent={
+            inverted ? this.renderHeaderWrapper : this.renderFooter
+          }
+          ListHeaderComponent={
+            inverted ? this.renderFooter : this.renderHeaderWrapper
+          }
           onScroll={this.handleOnScroll}
           scrollEventThrottle={100}
           {...this.props.listViewProps}

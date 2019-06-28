@@ -8,8 +8,9 @@ import {
   Platform,
 } from 'react-native'
 import { IMessage } from './types'
+import { VideoProperties } from 'react-native-video'
 
-const Video = Platform.select({
+const Video = Platform.select<React.ElementType>({
   web: () => <View />,
   default: () => require('react-native-video'),
 })
@@ -18,7 +19,7 @@ interface MessageVideoProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   containerStyle?: StyleProp<ViewStyle>
   videoStyle?: StyleProp<ViewStyle>
-  videoProps?: any
+  videoProps?: Partial<VideoProperties>
   // TODO: should be LightBox properties
   lightboxProps?: object
 }

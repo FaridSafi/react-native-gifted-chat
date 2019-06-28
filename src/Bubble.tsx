@@ -267,8 +267,6 @@ export default class Bubble<
       nextMessage,
       position,
       containerToNextStyle,
-      containerToPreviousStyle,
-      inverted,
     } = this.props
     if (
       currentMessage &&
@@ -277,17 +275,10 @@ export default class Bubble<
       isSameUser(currentMessage, nextMessage) &&
       isSameDay(currentMessage, nextMessage)
     ) {
-      if (inverted) {
-        return [
-          styles[position].containerToNext,
-          containerToNextStyle && containerToNextStyle[position],
-        ]
-      } else {
-        return [
-          styles[position].containerToPrevious,
-          containerToPreviousStyle && containerToPreviousStyle[position],
-        ]
-      }
+      return [
+        styles[position].containerToNext,
+        containerToNextStyle && containerToNextStyle[position],
+      ]
     }
     return null
   }
@@ -298,8 +289,6 @@ export default class Bubble<
       previousMessage,
       position,
       containerToPreviousStyle,
-      containerToNextStyle,
-      inverted,
     } = this.props
     if (
       currentMessage &&
@@ -308,17 +297,10 @@ export default class Bubble<
       isSameUser(currentMessage, previousMessage) &&
       isSameDay(currentMessage, previousMessage)
     ) {
-      if (inverted) {
-        return [
-          styles[position].containerToPrevious,
-          containerToPreviousStyle && containerToPreviousStyle[position],
-        ]
-      } else {
-        return [
-          styles[position].containerToNext,
-          containerToNextStyle && containerToNextStyle[position],
-        ]
-      }
+      return [
+        styles[position].containerToPrevious,
+        containerToPreviousStyle && containerToPreviousStyle[position],
+      ]
     }
     return null
   }
@@ -458,20 +440,21 @@ export default class Bubble<
   }
 
   renderBubbleContent() {
-    return this.props.isCustomViewBottom ?
-    <View>
-    {this.renderMessageImage()}
-    {this.renderMessageVideo()}
-    {this.renderMessageText()}
-    {this.renderCustomView()}
-    </View>
-    :
-    <View>
-    {this.renderCustomView()}
-    {this.renderMessageImage()}
-    {this.renderMessageVideo()}
-    {this.renderMessageText()}
-    </View>
+    return this.props.isCustomViewBottom ? (
+      <View>
+        {this.renderMessageImage()}
+        {this.renderMessageVideo()}
+        {this.renderMessageText()}
+        {this.renderCustomView()}
+      </View>
+    ) : (
+      <View>
+        {this.renderCustomView()}
+        {this.renderMessageImage()}
+        {this.renderMessageVideo()}
+        {this.renderMessageText()}
+      </View>
+    )
   }
 
   render() {

@@ -78,17 +78,12 @@ export default class Day<
       dateFormat,
       currentMessage,
       previousMessage,
-      nextMessage,
       containerStyle,
       wrapperStyle,
       textStyle,
-      inverted,
     } = this.props
 
-    if (
-      currentMessage &&
-      !isSameDay(currentMessage, inverted ? previousMessage! : nextMessage!)
-    ) {
+    if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
       return (
         <View style={[styles.container, containerStyle]}>
           <View style={wrapperStyle}>

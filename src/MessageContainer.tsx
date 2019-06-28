@@ -66,6 +66,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   invertibleScrollViewProps?: any
   extraData?: any
   scrollToBottomOffset?: number
+  forwardRef?: RefObject<FlatList<any>>
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactNode
   renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
@@ -116,8 +117,6 @@ export default class MessageContainer<
   state = {
     showScrollBottom: false,
   }
-
-  flatListRef?: RefObject<FlatList<TMessage>> = React.createRef()
 
   componentDidMount() {
     if (this.props.messages && this.props.messages.length === 0) {
@@ -207,13 +206,18 @@ export default class MessageContainer<
   }
 
   scrollTo(options: { animated?: boolean; offset: number }) {
-    if (this.flatListRef && this.flatListRef.current && options) {
-      this.flatListRef.current.scrollToOffset(options)
+    if (this.props.forwardRef && this.props.forwardRef.current && options) {
+      this.props.forwardRef.current.scrollToOffset(options)
     }
   }
 
   scrollToBottom = () => {
-    this.scrollTo({ offset: 0, animated: true })
+    const { inverted } = this.props
+    if (inverted) {
+      this.scrollTo({ offset: 0, animated: true })
+    } else {
+      this.props.forwardRef!.current!.scrollToEnd()
+    }
   }
 
   handleOnScroll = (event: any) => {
@@ -240,10 +244,12 @@ export default class MessageContainer<
       }
       item.user = { _id: 0 }
     }
-    const { messages, user, ...restProps } = this.props
+    const { messages, user, inverted, ...restProps } = this.props
     if (messages && user) {
-      const previousMessage = messages[index + 1] || {}
-      const nextMessage = messages[index - 1] || {}
+      const previousMessage =
+        (inverted ? messages[index + 1] : messages[index - 1]) || {}
+      const nextMessage =
+        (inverted ? messages[index - 1] : messages[index + 1]) || {}
 
       const messageProps: Message['props'] = {
         ...restProps,
@@ -251,6 +257,7 @@ export default class MessageContainer<
         key: item._id,
         currentMessage: item,
         previousMessage,
+        inverted,
         nextMessage,
         position: item.user._id === user._id ? 'right' : 'left',
       }
@@ -310,7 +317,7 @@ export default class MessageContainer<
           ? this.renderScrollToBottomWrapper()
           : null}
         <FlatList
-          ref={this.flatListRef}
+          ref={this.props.forwardRef}
           extraData={this.props.extraData}
           keyExtractor={this.keyExtractor}
           enableEmptySections

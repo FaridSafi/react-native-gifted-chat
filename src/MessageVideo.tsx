@@ -15,7 +15,7 @@ const Video = Platform.select<React.ElementType>({
   default: () => require('react-native-video'),
 })
 
-interface MessageVideoProps<TMessage extends IMessage> {
+export interface MessageVideoProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   containerStyle?: StyleProp<ViewStyle>
   videoStyle?: StyleProp<ViewStyle>

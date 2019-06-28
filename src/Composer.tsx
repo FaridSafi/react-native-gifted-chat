@@ -11,10 +11,22 @@ const styles = StyleSheet.create({
     marginTop: Platform.select({
       ios: 6,
       android: 0,
+      web: 6,
+    }),
+    paddingTop: Platform.select({
+      web: 6,
+      ios: 6,
+      android: 0,
+    }),
+    paddingLeft: Platform.select({
+      web: 4,
+      ios: 0,
+      android: 0,
     }),
     marginBottom: Platform.select({
       ios: 5,
       android: 3,
+      web: 4,
     }),
   },
 })

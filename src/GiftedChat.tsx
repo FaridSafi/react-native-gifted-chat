@@ -160,6 +160,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   onQuickReply?(replies: Reply[]): void
   renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
+  shouldUpdateMessage?(props: Message['props'], nextProps: Message['props']): boolean
 }
 
 export interface GiftedChatState {

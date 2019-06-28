@@ -45,6 +45,7 @@ export interface MessageProps<TMessage extends IMessage> {
   renderDay?(props: Day['props']): React.ReactNode
   renderSystemMessage?(props: SystemMessage['props']): React.ReactNode
   renderAvatar?(props: Avatar['props']): React.ReactNode
+  shouldUpdateMessage?(props: MessageProps<IMessage>, nextProps: MessageProps<IMessage>): boolean
 }
 
 export default class Message<
@@ -63,6 +64,7 @@ export default class Message<
     containerStyle: {},
     showUserAvatar: false,
     inverted: true,
+    shouldUpdateMessage: undefined,
   }
 
   static propTypes = {
@@ -81,6 +83,7 @@ export default class Message<
       left: ViewPropTypes.style,
       right: ViewPropTypes.style,
     }),
+    shouldUpdateMessage: PropTypes.func,
   }
 
   shouldComponentUpdate(nextProps: MessageProps<TMessage>) {
@@ -89,6 +92,9 @@ export default class Message<
     const { previousMessage, nextMessage } = this.props
     const nextPropsMessage = nextProps.nextMessage
     const nextPropsPreviousMessage = nextProps.previousMessage
+
+    const shouldUpdate = ((this.props.shouldUpdateMessage && this.props.shouldUpdateMessage(this.props, nextProps)) || false)
+
     return (
       next.sent !== current.sent ||
       next.received !== current.received ||
@@ -99,7 +105,8 @@ export default class Message<
       next.video !== current.video ||
       next.audio !== current.audio ||
       previousMessage !== nextPropsPreviousMessage ||
-      nextMessage !== nextPropsMessage
+      nextMessage !== nextPropsMessage ||
+      shouldUpdate
     )
   }
 

@@ -1,3 +1,7 @@
+.expo/
+.expo-shared/
+.circleci/
+.github/
 example-expo/
 example-slack-message/
 screenshots/
@@ -11,9 +15,6 @@ App.js
 app.json
 metro.config.js
 src/
-.expo
-.expo-shared
 tsconfig.json
 tslint.json
-.circleci/
 yarn.lock

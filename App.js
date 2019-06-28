@@ -1,7 +1,7 @@
 import { AppLoading, Asset, Linking } from 'expo'
 import React, { Component } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
-import { Bubble, GiftedChat, SystemMessage } from './lib/'
+import { StyleSheet, View, Text, Platform } from 'react-native'
+import { Bubble, GiftedChat, SystemMessage } from './src/'
 
 import AccessoryBar from './example-expo/AccessoryBar'
 import CustomActions from './example-expo/CustomActions'
@@ -139,15 +139,12 @@ export default class App extends Component {
     this.onSend(messagesToUpload)
   }
 
-  renderAccessory = () =>
-    Platform.OS === 'web' ? null : <AccessoryBar onSend={this.onSendFromUser} />
+  renderAccessory = () => <AccessoryBar onSend={this.onSendFromUser} />
 
-  renderCustomActions = props => {
-    if (Platform.OS === 'web') {
-      return null
-    }
-    return <CustomActions {...props} onSend={this.onSendFromUser} />
-  }
+  renderCustomActions = props =>
+    Platform.OS === 'web' ? null : (
+      <CustomActions {...props} onSend={this.onSendFromUser} />
+    )
 
   renderBubble = props => {
     return (
@@ -237,7 +234,7 @@ export default class App extends Component {
           user={user}
           onQuickReply={this.onQuickReply}
           keyboardShouldPersistTaps='never'
-          renderAccessory={this.renderAccessory}
+          renderAccessory={Platform.OS === 'web' ? null : this.renderAccessory}
           renderActions={this.renderCustomActions}
           renderBubble={this.renderBubble}
           renderSystemMessage={this.renderSystemMessage}

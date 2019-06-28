@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
     borderRadius: 13,
     margin: 3,
   },
+  quickReplyText: {
+    overflow: 'visible',
+  },
   sendLink: {
     borderWidth: 0,
   },
@@ -186,7 +189,10 @@ export default class QuickReplies extends Component<
               <Text
                 numberOfLines={2}
                 ellipsizeMode={'tail'}
-                style={{ color: selected ? Color.white : color }}
+                style={[
+                  styles.quickReplyText,
+                  { color: selected ? Color.white : color },
+                ]}
               >
                 {reply.title}
               </Text>

@@ -8,20 +8,18 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
     lineHeight: 16,
+    ...Platform.select({
+      web: {
+        paddingTop: 6,
+        paddingLeft: 4,
+        outline: '0px !important',
+        WebkitAppearance: 'none',
+      },
+    }),
     marginTop: Platform.select({
       ios: 6,
       android: 0,
       web: 6,
-    }),
-    paddingTop: Platform.select({
-      web: 6,
-      ios: 6,
-      android: 0,
-    }),
-    paddingLeft: Platform.select({
-      web: 4,
-      ios: 0,
-      android: 0,
     }),
     marginBottom: Platform.select({
       ios: 5,
@@ -117,7 +115,10 @@ export default class Composer extends React.Component<ComposerProps> {
         style={[
           styles.textInput,
           this.props.textInputStyle,
-          { height: this.props.composerHeight },
+          {
+            height: this.props.composerHeight,
+            ...Platform.select({ web: { outline: 0 } }),
+          },
         ]}
         autoFocus={this.props.textInputAutoFocus}
         value={this.props.text}

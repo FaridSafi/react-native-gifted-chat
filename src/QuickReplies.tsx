@@ -133,11 +133,12 @@ export default class QuickReplies extends Component<
     const { currentMessage, nextMessage } = this.props
     const hasReplies = !!currentMessage && !!currentMessage!.quickReplies
     const hasNext = !!nextMessage && !!nextMessage!._id
+    const keepIt = currentMessage!.quickReplies!.keepIt
 
     if (hasReplies && !hasNext) {
       return true
     }
-    if (hasReplies && hasNext && currentMessage!.quickReplies!.keepIt) {
+    if (hasReplies && hasNext && keepIt) {
       return true
     }
     return false

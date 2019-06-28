@@ -8,6 +8,7 @@ import {
   StyleProp,
   ViewStyle,
   SafeAreaView,
+  FlatList,
 } from 'react-native'
 
 import ActionSheet from '@expo/react-native-action-sheet'
@@ -168,7 +169,10 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   onQuickReply?(replies: Reply[]): void
   renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
-  shouldUpdateMessage?(props: Message['props'], nextProps: Message['props']): boolean
+  shouldUpdateMessage?(
+    props: Message['props'],
+    nextProps: Message['props'],
+  ): boolean
 }
 
 export interface GiftedChatState {
@@ -349,7 +353,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   invertibleScrollViewProps: any = undefined
   _actionSheetRef: any = undefined
 
-  _messageContainerRef?: RefObject<MessageContainer> = React.createRef()
+  _messageContainerRef?: RefObject<FlatList<any>> = React.createRef()
   textInput?: any
 
   state = {
@@ -596,7 +600,15 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   scrollToBottom(animated = true) {
     if (this._messageContainerRef && this._messageContainerRef.current) {
-      this._messageContainerRef.current.scrollTo({ offset: 0, animated })
+      const { inverted } = this.props
+      if (!inverted) {
+        this._messageContainerRef.current.scrollToEnd()
+      } else {
+        this._messageContainerRef.current.scrollToOffset({
+          offset: 0,
+          animated,
+        })
+      }
     }
   }
 
@@ -612,7 +624,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
           {...this.props}
           invertibleScrollViewProps={this.invertibleScrollViewProps}
           messages={this.getMessages()}
-          ref={this._messageContainerRef}
+          forwardRef={this._messageContainerRef}
         />
         {this.renderChatFooter()}
       </AnimatedView>

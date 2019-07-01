@@ -31,6 +31,7 @@ const otherUser = {
 
 export default class App extends Component {
   state = {
+    inverted: false,
     step: 0,
     messages: [],
     loadEarlier: true,
@@ -44,7 +45,7 @@ export default class App extends Component {
     this._isMounted = true
     // init with only system messages
     this.setState({
-      messages: messagesData.filter(message => message.system),
+      messages: [], // messagesData.filter(message => message.system),
       appIsReady: true,
     })
   }
@@ -81,12 +82,16 @@ export default class App extends Component {
     this.setState(previousState => {
       const sentMessages = [{ ...messages[0], sent: true, received: true }]
       return {
-        messages: GiftedChat.append(previousState.messages, sentMessages),
+        messages: GiftedChat.append(
+          previousState.messages,
+          sentMessages,
+          this.state.inverted,
+        ),
         step,
       }
     })
     // for demo purpose
-    setTimeout(() => this.botSend(step), Math.round(Math.random() * 1000))
+    // setTimeout(() => this.botSend(step), Math.round(Math.random() * 1000))
   }
 
   botSend = (step = 0) => {
@@ -96,7 +101,11 @@ export default class App extends Component {
       .find(findStep(step))
     if (newMessage) {
       this.setState(previousState => ({
-        messages: GiftedChat.append(previousState.messages, newMessage),
+        messages: GiftedChat.append(
+          previousState.messages,
+          newMessage,
+          this.state.inverted,
+        ),
       }))
     }
   }
@@ -232,6 +241,7 @@ export default class App extends Component {
           isLoadingEarlier={this.state.isLoadingEarlier}
           parsePatterns={this.parsePatterns}
           user={user}
+          scrollToBottom
           onQuickReply={this.onQuickReply}
           keyboardShouldPersistTaps='never'
           renderAccessory={Platform.OS === 'web' ? null : this.renderAccessory}
@@ -241,6 +251,7 @@ export default class App extends Component {
           renderCustomView={this.renderCustomView}
           quickReplyStyle={{ borderRadius: 2 }}
           renderQuickReplySend={this.renderQuickReplySend}
+          inverted={false}
         />
       </View>
     )

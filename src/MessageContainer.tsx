@@ -10,6 +10,8 @@ import {
   Text,
   ListViewProps,
   ListRenderItemInfo,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
 } from 'react-native'
 
 import LoadEarlier from './LoadEarlier'
@@ -66,7 +68,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   invertibleScrollViewProps?: any
   extraData?: any
   scrollToBottomOffset?: number
-  forwardRef?: RefObject<FlatList<any>>
+  forwardRef?: RefObject<FlatList<IMessage>>
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactNode
   renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
@@ -216,15 +218,27 @@ export default class MessageContainer<
     if (inverted) {
       this.scrollTo({ offset: 0, animated: true })
     } else {
-      this.props.forwardRef!.current!.scrollToEnd()
+      this.props.forwardRef!.current!.scrollToEnd({ animated: true })
     }
   }
 
-  handleOnScroll = (event: any) => {
-    if (event.nativeEvent.contentOffset.y > this.props.scrollToBottomOffset!) {
-      this.setState({ showScrollBottom: true })
+  handleOnScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    if (this.props.inverted) {
+      if (
+        event.nativeEvent.contentOffset.y > this.props.scrollToBottomOffset!
+      ) {
+        this.setState({ showScrollBottom: true })
+      } else {
+        this.setState({ showScrollBottom: false })
+      }
     } else {
-      this.setState({ showScrollBottom: false })
+      if (
+        event.nativeEvent.contentOffset.y < this.props.scrollToBottomOffset!
+      ) {
+        this.setState({ showScrollBottom: true })
+      } else {
+        this.setState({ showScrollBottom: false })
+      }
     }
   }
 

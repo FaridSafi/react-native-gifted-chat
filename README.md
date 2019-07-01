@@ -69,7 +69,7 @@
 
 ## Features
 
-- _`react-native-web`able_ (ASAP: [#1284](https://github.com/FaridSafi/react-native-gifted-chat/pull/1284))
+- _`react-native-web`able_
 - Write with **TypeScript** (since 0.8.0)
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
@@ -401,6 +401,10 @@ If you use React Navigation, additional handling may be required to account for 
 1. Install `yarn add -g expo-cli`
 2. `expo start`
 
+### Web
+
+`expo start -w`
+
 ## Questions
 
 - [How can I set Bubble color for each user?](https://github.com/FaridSafi/react-native-gifted-chat/issues/672)
@@ -430,7 +434,7 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 - [more](https://github.com/FaridSafi/react-native-gifted-chat/graphs/contributors)
 
 ## Hire an expert!
-Looking for a ReactNative freelance expert with more than 12 years experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
 
+Looking for a ReactNative freelance expert with more than 12 years experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
 
 <img src="https://api.keen.io/3.0/projects/5ae31b61c9e77c0001cc2093/events/pageviews?api_key=55301C3E5BAB217E90A5867113C02506CE20385CD6F4C9C1CCDD4671B1A9DE374C3DF9DEF70C0BB3F5A9C5CA4CB1CCCFAF25FC3ED9CF63FB83102456A6881EFBAECD1C7D9718EE5402752DD8F6FA2DEC4D844BCB17FE6262570DB447D9A8CED2&data=eyJ0aXRsZSI6ICJnYyJ9" />

@@ -74,7 +74,7 @@
     "babel-jest": "24.7.1",
     "babel-preset-expo": "^5.0.0",
     "expo": "^33.0.0",
-    "husky": "^2.4.0",
+    "husky": "^3.0.0",
     "jest-expo": "^33.0.0",
     "json": "^9.0.6",
     "prettier": "1.18.0",

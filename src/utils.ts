@@ -1,6 +1,5 @@
 import moment from 'moment'
 import { IMessage } from './types'
-import pkg from '../package.json'
 
 export function isSameDay(
   currentMessage: IMessage,
@@ -34,7 +33,7 @@ export function isSameUser(
 
 const styleString = (color: string) => `color: ${color}; font-weight: bold`
 
-const headerLog = `%c[${pkg.name} v${pkg.version}]`
+const headerLog = '%c[react-native-gifted-chat]'
 
 export const warning = (...args: any) =>
   console.log(headerLog, styleString('orange'), ...args)

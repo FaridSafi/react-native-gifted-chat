@@ -18,6 +18,7 @@ import LoadEarlier from './LoadEarlier'
 import Message from './Message'
 import Color from './Color'
 import { User, IMessage } from './types'
+import { warning } from './utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -244,14 +245,11 @@ export default class MessageContainer<
 
   renderRow = ({ item, index }: ListRenderItemInfo<TMessage>) => {
     if (!item._id && item._id !== 0) {
-      console.warn(
-        'GiftedChat: `_id` is missing for message',
-        JSON.stringify(item),
-      )
+      warning('GiftedChat: `_id` is missing for message', JSON.stringify(item))
     }
     if (!item.user) {
       if (!item.system) {
-        console.warn(
+        warning(
           'GiftedChat: `user` is missing for message',
           JSON.stringify(item),
         )

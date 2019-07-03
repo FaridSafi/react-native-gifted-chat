@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import { IMessage, Reply } from './types'
 import Color from './Color'
+import { warning } from './utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -110,7 +111,7 @@ export default class QuickReplies extends Component<
         }
 
         default: {
-          console.warn(`[GiftedChat.onQuickReply] unknown type: ` + type)
+          warning(`onQuickReply unknown type: ${type}`)
           return
         }
       }

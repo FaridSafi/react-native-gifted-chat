@@ -1,5 +1,6 @@
 import moment from 'moment'
 import { IMessage } from './types'
+import pkg from '../package.json'
 
 export function isSameDay(
   currentMessage: IMessage,
@@ -30,3 +31,13 @@ export function isSameUser(
     diffMessage.user._id === currentMessage.user._id
   )
 }
+
+const styleString = (color: string) => `color: ${color}; font-weight: bold`
+
+const headerLog = `%c[${pkg.name} v${pkg.version}]`
+
+export const warning = (...args: any) =>
+  console.log(headerLog, styleString('orange'), ...args)
+
+export const error = (...args: any) =>
+  console.log(headerLog, styleString('red'), ...args)

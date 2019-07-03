@@ -1,5 +1,8 @@
 {
   "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": ["**/*.json"]
+  },
   "rules": {
     "member-access": false,
     "interface-name": false,

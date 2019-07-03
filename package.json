@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-chat",
-  "version": "0.10.0-beta.web.5",
+  "version": "0.10.0-beta.web.6",
   "description": "The most complete chat UI for React Native",
   "main": "node_modules/expo/AppEntry.js",
   "types": "lib/index.d.ts",

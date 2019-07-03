@@ -77,12 +77,14 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   onLoadEarlier?(): void
 }
 
+interface State {
+  showScrollBottom: boolean
+  listMounted: boolean
+}
+
 export default class MessageContainer<
   TMessage extends IMessage = IMessage
-> extends React.PureComponent<
-  MessageContainerProps<TMessage>,
-  { showScrollBottom: boolean }
-> {
+> extends React.PureComponent<MessageContainerProps<TMessage>, State> {
   static defaultProps = {
     messages: [],
     user: {},
@@ -119,6 +121,7 @@ export default class MessageContainer<
 
   state = {
     showScrollBottom: false,
+    listMounted: false,
   }
 
   componentDidMount() {
@@ -309,6 +312,13 @@ export default class MessageContainer<
     )
   }
 
+  onLayoutList = () => {
+    if (!this.state.listMounted && this.props.inverted) {
+      this.setState({ listMounted: true })
+      this.scrollToBottom()
+    }
+  }
+
   keyExtractor = (item: TMessage) => `${item._id}`
 
   render() {
@@ -348,6 +358,7 @@ export default class MessageContainer<
           }
           onScroll={this.handleOnScroll}
           scrollEventThrottle={100}
+          onLayout={this.onLayoutList}
           {...this.props.listViewProps}
         />
       </View>

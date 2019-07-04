@@ -151,6 +151,17 @@ export default class InputToolbar extends React.Component<
     return null
   }
 
+  renderTopAccessory() {
+    if (this.props.renderTopAccessory) {
+      return (
+        <View style={[this.props.topAccessoryStyle]}>
+          {this.props.renderTopAccessory(this.props)}
+        </View>
+      )
+    }
+    return null
+  }
+
   render() {
     return (
       <View
@@ -162,6 +173,7 @@ export default class InputToolbar extends React.Component<
           ] as ViewStyle
         }
       >
+        {this.renderTopAccessory()}
         <View style={[styles.primary, this.props.primaryStyle]}>
           {this.renderActions()}
           {this.renderComposer()}

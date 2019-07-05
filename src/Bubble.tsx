@@ -436,6 +436,23 @@ export default class Bubble<
     return null
   }
 
+  renderBubbleContent() {
+    return this.props.customViewPosition === 'top' ?
+    <View>
+    {this.renderCustomView()}
+    {this.renderMessageImage()}
+    {this.renderMessageVideo()}
+    {this.renderMessageText()}
+    </View>
+    :
+    <View>
+    {this.renderMessageImage()}
+    {this.renderMessageVideo()}
+    {this.renderMessageText()}
+    {this.renderCustomView()}
+    </View>
+  }
+
   render() {
     const {
       position,
@@ -464,10 +481,7 @@ export default class Bubble<
             {...this.props.touchableProps}
           >
             <View>
-              {this.renderCustomView()}
-              {this.renderMessageImage()}
-              {this.renderMessageVideo()}
-              {this.renderMessageText()}
+              {this.renderBubbleContent()}
               <View
                 style={[
                   styles[position].bottom,

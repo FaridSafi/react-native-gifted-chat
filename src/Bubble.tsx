@@ -194,6 +194,7 @@ export default class Bubble<
     renderMessageVideo: PropTypes.func,
     renderMessageText: PropTypes.func,
     renderCustomView: PropTypes.func,
+    customViewPosition: PropTypes.oneOf(['top', 'bottom']),
     renderUsernameOnMessage: PropTypes.bool,
     renderUsername: PropTypes.func,
     renderTime: PropTypes.func,

@@ -119,6 +119,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   user?: User
   touchableProps?: object
   renderUsernameOnMessage?: boolean
+  renderCustomViewBottom?: boolean
   position: 'left' | 'right'
   currentMessage?: TMessage
   nextMessage?: TMessage
@@ -194,7 +195,7 @@ export default class Bubble<
     renderMessageVideo: PropTypes.func,
     renderMessageText: PropTypes.func,
     renderCustomView: PropTypes.func,
-    customViewPosition: PropTypes.oneOf(['top', 'bottom']),
+    renderCustomViewBottom: PropTypes.bool,
     renderUsernameOnMessage: PropTypes.bool,
     renderUsername: PropTypes.func,
     renderTime: PropTypes.func,
@@ -438,19 +439,19 @@ export default class Bubble<
   }
 
   renderBubbleContent() {
-    return this.props.customViewPosition === 'top' ?
+    return this.props.renderCustomViewBottom ?
     <View>
-    {this.renderCustomView()}
     {this.renderMessageImage()}
     {this.renderMessageVideo()}
     {this.renderMessageText()}
+    {this.renderCustomView()}
     </View>
     :
     <View>
+    {this.renderCustomView()}
     {this.renderMessageImage()}
     {this.renderMessageVideo()}
     {this.renderMessageText()}
-    {this.renderCustomView()}
     </View>
   }
 

@@ -77,7 +77,6 @@
     "jest-expo": "^33.0.0",
     "json": "^9.0.6",
     "prettier": "1.18.0",
-    "prop-types": "15.6.2",
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-nav": "2.0.2",
@@ -85,14 +84,14 @@
     "react-test-renderer": "16.5.1",
     "tslint": "5.12.0",
     "tslint-config-prettier": "1.17.0",
-    "typescript": "3.4.5"
-  },
-  "dependencies": {
-    "@expo/react-native-action-sheet": "^3.0.0",
+    "typescript": "3.4.5",
     "expo-constants": "~5.0.1",
     "expo-image-picker": "~5.0.2",
     "expo-location": "~5.0.1",
-    "expo-permissions": "~5.0.1",
+    "expo-permissions": "~5.0.1"
+  },
+  "dependencies": {
+    "@expo/react-native-action-sheet": "^2.0.1",
     "moment": "^2.19.0",
     "prop-types": "15.7.2",
     "react-dom": "16.8.3",

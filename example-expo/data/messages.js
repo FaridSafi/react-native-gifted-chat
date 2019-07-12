@@ -127,10 +127,10 @@ export default [
       name: 'React Native',
     },
   },
-  {
-    _id: 9,
-    text: 'You are officially rocking GiftedChat.',
-    createdAt: new Date(),
-    system: true,
-  },
+  // {
+  //   _id: 9,
+  //   text: 'You are officially rocking GiftedChat.',
+  //   createdAt: new Date(),
+  //   system: true,
+  // },
 ]

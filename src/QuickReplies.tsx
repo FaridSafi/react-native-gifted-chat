@@ -175,32 +175,35 @@ export default class QuickReplies extends Component<
 
     return (
       <View style={styles.container}>
-        {currentMessage!.quickReplies!.values.map((reply: Reply) => {
-          const selected = type === 'checkbox' && replies.find(sameReply(reply))
-          return (
-            <TouchableOpacity
-              onPress={this.handlePress(reply)}
-              style={[
-                styles.quickReply,
-                quickReplyStyle,
-                { borderColor: color },
-                selected && { backgroundColor: color },
-              ]}
-              key={reply.value}
-            >
-              <Text
-                numberOfLines={2}
-                ellipsizeMode={'tail'}
+        {currentMessage!.quickReplies!.values.map(
+          (reply: Reply, index: number) => {
+            const selected =
+              type === 'checkbox' && replies.find(sameReply(reply))
+            return (
+              <TouchableOpacity
+                onPress={this.handlePress(reply)}
                 style={[
-                  styles.quickReplyText,
-                  { color: selected ? Color.white : color },
+                  styles.quickReply,
+                  quickReplyStyle,
+                  { borderColor: color },
+                  selected && { backgroundColor: color },
                 ]}
+                key={`${reply.value}-${index}`}
               >
-                {reply.title}
-              </Text>
-            </TouchableOpacity>
-          )
-        })}
+                <Text
+                  numberOfLines={2}
+                  ellipsizeMode={'tail'}
+                  style={[
+                    styles.quickReplyText,
+                    { color: selected ? Color.white : color },
+                  ]}
+                >
+                  {reply.title}
+                </Text>
+              </TouchableOpacity>
+            )
+          },
+        )}
         {replies.length > 0 && this.renderQuickReplySend()}
       </View>
     )

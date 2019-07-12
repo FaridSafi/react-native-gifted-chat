@@ -45,7 +45,7 @@ export default class App extends Component {
     this._isMounted = true
     // init with only system messages
     this.setState({
-      messages: [], // messagesData.filter(message => message.system),
+      messages: messagesData.filter(message => message.system),
       appIsReady: true,
     })
   }
@@ -91,7 +91,7 @@ export default class App extends Component {
       }
     })
     // for demo purpose
-    // setTimeout(() => this.botSend(step), Math.round(Math.random() * 1000))
+    setTimeout(() => this.botSend(step), Math.round(Math.random() * 1000))
   }
 
   botSend = (step = 0) => {
@@ -252,6 +252,7 @@ export default class App extends Component {
           quickReplyStyle={{ borderRadius: 2 }}
           renderQuickReplySend={this.renderQuickReplySend}
           inverted={false}
+          timeTextStyle={{ left: { color: 'red' }, right: { color: 'yellow' } }}
         />
       </View>
     )

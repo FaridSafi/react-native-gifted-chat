@@ -31,7 +31,7 @@ exports[`should render <Message /> and compare with snapshot 1`] = `
           ]
         }
       >
-        APR 8, 2019
+        Apr 8, 2019
       </Text>
     </View>
   </View>

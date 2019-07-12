@@ -338,7 +338,7 @@ interface QuickReplies {
 * **`scrollToBottomStyle`** _(Object)_ - Custom style for Bottom Component container
 * **`alignTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 * **`onQuickReply`** _(Function)_ - Callback when sending a quick reply (to backend server)
-* **`renderQuickReply`** _(Function)_ - Custom all quick reply view
+* **`renderQuickReplies`** _(Function)_ - Custom all quick reply view
 * **`quickReplyStyle`** _(StyleProp<ViewStyle>)_ - Custom quick reply view style
 * **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
 * **`shouldUpdateMessage`** _(Function)_ - Lets the message component know when to update outside of normal cases.

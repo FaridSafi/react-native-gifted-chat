@@ -47,7 +47,7 @@ jobs:
 
 workflows:
   version: 2
-  watchdog_system:
+  gifted_chat:
     jobs:
       - test:
           filters:

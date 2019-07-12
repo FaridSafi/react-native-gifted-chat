@@ -52,7 +52,7 @@ export interface TimeProps<TMessage extends IMessage> {
   position: 'left' | 'right'
   currentMessage?: TMessage
   containerStyle?: LeftRightStyle<ViewStyle>
-  textStyle?: LeftRightStyle<TextStyle>
+  timeTextStyle?: LeftRightStyle<TextStyle>
   timeFormat?: string
 }
 
@@ -69,7 +69,6 @@ export default class Time<
       createdAt: null,
     },
     containerStyle: {},
-    textStyle: {},
     timeFormat: TIME_FORMAT,
     timeTextStyle: {},
   }
@@ -80,10 +79,6 @@ export default class Time<
     containerStyle: PropTypes.shape({
       left: ViewPropTypes.style,
       right: ViewPropTypes.style,
-    }),
-    textStyle: PropTypes.shape({
-      left: PropTypes.any,
-      right: PropTypes.any,
     }),
     timeFormat: PropTypes.string,
     timeTextStyle: PropTypes.shape({
@@ -98,7 +93,7 @@ export default class Time<
       containerStyle,
       currentMessage,
       timeFormat,
-      textStyle,
+      timeTextStyle,
     } = this.props
 
     if (!!currentMessage) {
@@ -113,7 +108,7 @@ export default class Time<
             style={
               [
                 styles[position].text,
-                textStyle && textStyle[position],
+                timeTextStyle && timeTextStyle[position],
               ] as TextStyle
             }
           >

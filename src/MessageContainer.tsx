@@ -17,7 +17,7 @@ import {
 import LoadEarlier from './LoadEarlier'
 import Message from './Message'
 import Color from './Color'
-import { User, IMessage } from './types'
+import { User, IMessage, Reply } from './types'
 import { warning } from './utils'
 
 const styles = StyleSheet.create({
@@ -75,6 +75,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
   scrollToBottomComponent?(): React.ReactNode
   onLoadEarlier?(): void
+  onQuickReply?(replies: Reply[]): void
 }
 
 interface State {
@@ -91,6 +92,7 @@ export default class MessageContainer<
     renderFooter: null,
     renderMessage: null,
     onLoadEarlier: () => {},
+    onQuickReply: () => {},
     inverted: true,
     loadEarlier: false,
     listViewProps: {},
@@ -227,17 +229,24 @@ export default class MessageContainer<
   }
 
   handleOnScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const {
+      nativeEvent: {
+        contentOffset: { y: contentOffsetY },
+        contentSize: { height: contentSizeHeight },
+        layoutMeasurement: { height: layoutMeasurementHeight },
+      },
+    } = event
+    const { scrollToBottomOffset } = this.props
     if (this.props.inverted) {
-      if (
-        event.nativeEvent.contentOffset.y > this.props.scrollToBottomOffset!
-      ) {
+      if (contentOffsetY > scrollToBottomOffset!) {
         this.setState({ showScrollBottom: true })
       } else {
         this.setState({ showScrollBottom: false })
       }
     } else {
       if (
-        event.nativeEvent.contentOffset.y < this.props.scrollToBottomOffset!
+        contentOffsetY < scrollToBottomOffset! &&
+        contentSizeHeight - layoutMeasurementHeight > scrollToBottomOffset!
       ) {
         this.setState({ showScrollBottom: true })
       } else {

@@ -152,9 +152,6 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderUsername?(): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
   renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
-  // TODO: remove in next major release
-  isSameDay?(currentMessage: TMessage, nextMessage: TMessage): boolean
-  isSameUser?(currentMessage: TMessage, nextMessage: TMessage): boolean
 }
 
 export default class Bubble<

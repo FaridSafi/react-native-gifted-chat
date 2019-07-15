@@ -377,17 +377,17 @@ If you are using Create React Native App / Expo, no Android specific installatio
     android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
   ```
 
-- For **Expo**, there are almost 2 solutions to fix it:
+- For **Expo**, there are at least 2 solutions to fix it:
 
-  - Wrap Gifted Chat in a [`KeyboardAvoidingView`](https://facebook.github.io/react-native/docs/keyboardavoidingview). This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into Gifted Chat, e.g.:
+  - Wrap GiftedChat in a [`KeyboardAvoidingView`](https://facebook.github.io/react-native/docs/keyboardavoidingview). This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
 ```
 <View style={{ flex: 1 }}>
    {
       Platform.OS === 'android' ?
          <KeyboardAvoidingView behavior="padding">
-            <GiftedChat ... />
+            <GiftedChat />
          </KeyboardAvoidingView> :
-         <GiftedChat ... />
+         <GiftedChat />
    }
 </View>
 ```

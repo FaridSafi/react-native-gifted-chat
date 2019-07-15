@@ -12,7 +12,7 @@ import {
   TextStyle,
 } from 'react-native'
 
-import ActionSheet from '@expo/react-native-action-sheet'
+import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import moment from 'moment'
 import uuid from 'uuid'
 import { isIphoneX } from 'react-native-iphone-x-helper'
@@ -44,7 +44,7 @@ import {
 import { IMessage, User, Reply, LeftRightStyle } from './types'
 import QuickReplies from './QuickReplies'
 
-const GiftedActionSheet = ActionSheet as any
+// const GiftedActionSheet = ActionSheet as any
 
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Messages to display */
@@ -380,7 +380,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   getChildContext() {
     return {
-      actionSheet: () => this._actionSheetRef,
+      actionSheet: () => this._actionSheetRef.getContext(),
       getLocale: this.getLocale,
     }
   }
@@ -814,14 +814,14 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     if (this.state.isInitialized === true) {
       return (
         <SafeAreaView style={styles.safeArea}>
-          <GiftedActionSheet
+          <ActionSheetProvider
             ref={(component: any) => (this._actionSheetRef = component)}
           >
             <View style={styles.container} onLayout={this.onMainViewLayout}>
               {this.renderMessages()}
               {this.renderInputToolbar()}
             </View>
-          </GiftedActionSheet>
+          </ActionSheetProvider>
         </SafeAreaView>
       )
     }

@@ -80,7 +80,6 @@ export interface MessageContainerProps<TMessage extends IMessage> {
 
 interface State {
   showScrollBottom: boolean
-  listMounted: boolean
 }
 
 export default class MessageContainer<
@@ -123,7 +122,6 @@ export default class MessageContainer<
 
   state = {
     showScrollBottom: false,
-    listMounted: false,
   }
 
   componentDidMount() {
@@ -322,9 +320,12 @@ export default class MessageContainer<
   }
 
   onLayoutList = () => {
-    if (!this.state.listMounted && this.props.inverted) {
-      this.setState({ listMounted: true })
-      this.scrollToBottom()
+    if (
+      !this.props.inverted &&
+      !!this.props.messages &&
+      this.props.messages!.length
+    ) {
+      setTimeout(this.scrollToBottom, 150)
     }
   }
 

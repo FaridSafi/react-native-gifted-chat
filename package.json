@@ -91,7 +91,7 @@
     "expo-permissions": "~5.0.1"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "^2.0.1",
+    "@expo/react-native-action-sheet": "^3.0.2",
     "moment": "^2.19.0",
     "prop-types": "15.7.2",
     "react-dom": "16.8.3",

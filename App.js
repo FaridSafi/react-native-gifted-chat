@@ -45,7 +45,7 @@ export default class App extends Component {
     this._isMounted = true
     // init with only system messages
     this.setState({
-      messages: messagesData.filter(message => message.system),
+      messages: messagesData, // messagesData.filter(message => message.system),
       appIsReady: true,
     })
   }
@@ -68,6 +68,7 @@ export default class App extends Component {
             messages: GiftedChat.prepend(
               previousState.messages,
               earlierMessages,
+              Platform.OS !== 'web',
             ),
             loadEarlier: false,
             isLoadingEarlier: false,
@@ -85,13 +86,13 @@ export default class App extends Component {
         messages: GiftedChat.append(
           previousState.messages,
           sentMessages,
-          this.state.inverted,
+          Platform.OS !== 'web',
         ),
         step,
       }
     })
     // for demo purpose
-    setTimeout(() => this.botSend(step), Math.round(Math.random() * 1000))
+    // setTimeout(() => this.botSend(step), Math.round(Math.random() * 1000))
   }
 
   botSend = (step = 0) => {
@@ -104,7 +105,7 @@ export default class App extends Component {
         messages: GiftedChat.append(
           previousState.messages,
           newMessage,
-          this.state.inverted,
+          Platform.OS !== 'web',
         ),
       }))
     }
@@ -127,12 +128,16 @@ export default class App extends Component {
   onReceive = text => {
     this.setState(previousState => {
       return {
-        messages: GiftedChat.append(previousState.messages, {
-          _id: Math.round(Math.random() * 1000000),
-          text,
-          createdAt: new Date(),
-          user: otherUser,
-        }),
+        messages: GiftedChat.append(
+          previousState.messages,
+          {
+            _id: Math.round(Math.random() * 1000000),
+            text,
+            createdAt: new Date(),
+            user: otherUser,
+          },
+          Platform.OS !== 'web',
+        ),
       }
     })
   }
@@ -194,7 +199,6 @@ export default class App extends Component {
   // }
 
   onQuickReply = replies => {
-    console.log({ replies })
     const createdAt = new Date()
     if (replies.length === 1) {
       this.onSend([
@@ -251,7 +255,7 @@ export default class App extends Component {
           renderCustomView={this.renderCustomView}
           quickReplyStyle={{ borderRadius: 2 }}
           renderQuickReplySend={this.renderQuickReplySend}
-          inverted={false}
+          inverted={Platform.OS !== 'web'}
           timeTextStyle={{ left: { color: 'red' }, right: { color: 'yellow' } }}
         />
       </View>

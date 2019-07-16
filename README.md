@@ -1,4 +1,5 @@
 <p align="center" >
+<p align="center" >
    <a href="https://reactnative.gallery/FaridSafi/gifted-chat">
     <img alt="react-native-gifted-chat" src="https://thumbs.gfycat.com/AbsoluteSadDobermanpinscher-size_restricted.gif" width="260" height="510" />
  </a>
@@ -285,6 +286,7 @@ interface QuickReplies {
 - **`showUserAvatar`** _(Bool)_ - Whether to render an avatar for the current user; default is `false`, only show avatars for other users
 - **`showAvatarForEveryMessage`** _(Bool)_ - When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is `false`
 - **`onPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is tapped
+- **`onLongPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is long-pressed
 - **`renderAvatarOnTop`** _(Bool)_ - Render the message avatar at the top of consecutive messages, rather than the bottom; default is `false`
 - **`renderBubble`** _(Function)_ - Custom message bubble
 - **`renderSystemMessage`** _(Function)_ - Custom system message
@@ -434,5 +436,3 @@ Looking for a ReactNative freelance expert with more than 12 years experience? C
 
 
 <img src="https://api.keen.io/3.0/projects/5ae31b61c9e77c0001cc2093/events/pageviews?api_key=55301C3E5BAB217E90A5867113C02506CE20385CD6F4C9C1CCDD4671B1A9DE374C3DF9DEF70C0BB3F5A9C5CA4CB1CCCFAF25FC3ED9CF63FB83102456A6881EFBAECD1C7D9718EE5402752DD8F6FA2DEC4D844BCB17FE6262570DB447D9A8CED2&data=eyJ0aXRsZSI6ICJnYyJ9" />
-
-

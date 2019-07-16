@@ -129,19 +129,19 @@ export default class MessageContainer<
     this.detachKeyboardListeners()
   }
 
-  componentWillReceiveProps(nextProps: MessageContainerProps<TMessage>) {
+  componentDidUpdate(prevProps: MessageContainerProps<TMessage>) {
     if (
+      prevProps.messages &&
+      prevProps.messages.length === 0 &&
       this.props.messages &&
-      this.props.messages.length === 0 &&
-      nextProps.messages &&
-      nextProps.messages.length > 0
+      this.props.messages.length > 0
     ) {
       this.detachKeyboardListeners()
     } else if (
+      prevProps.messages &&
       this.props.messages &&
-      nextProps.messages &&
-      this.props.messages.length > 0 &&
-      nextProps.messages.length === 0
+      prevProps.messages.length > 0 &&
+      this.props.messages.length === 0
     ) {
       this.attachKeyboardListeners()
     }

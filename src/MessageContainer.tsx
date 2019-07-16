@@ -217,12 +217,12 @@ export default class MessageContainer<
     }
   }
 
-  scrollToBottom = () => {
+  scrollToBottom = (animated: boolean = true) => {
     const { inverted } = this.props
     if (inverted) {
-      this.scrollTo({ offset: 0, animated: true })
+      this.scrollTo({ offset: 0, animated })
     } else {
-      this.props.forwardRef!.current!.scrollToEnd({ animated: true })
+      this.props.forwardRef!.current!.scrollToEnd({ animated })
     }
   }
 
@@ -310,7 +310,7 @@ export default class MessageContainer<
     return (
       <View style={styles.scrollToBottomStyle}>
         <TouchableOpacity
-          onPress={this.scrollToBottom}
+          onPress={() => this.scrollToBottom()}
           hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}
         >
           {this.renderScrollBottomComponent()}
@@ -325,7 +325,10 @@ export default class MessageContainer<
       !!this.props.messages &&
       this.props.messages!.length
     ) {
-      setTimeout(this.scrollToBottom, 150)
+      setTimeout(
+        () => this.scrollToBottom(false),
+        15 * this.props.messages!.length,
+      )
     }
   }
 

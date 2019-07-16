@@ -46,6 +46,7 @@ export interface QuickRepliesProps {
   quickReplyStyle?: StyleProp<ViewStyle>
   onQuickReply?(reply: Reply[]): void
   renderQuickReplySend?(): React.ReactNode
+  containerStyle?: StyleProp<ViewStyle>
 }
 
 export interface QuickRepliesState {
@@ -72,6 +73,7 @@ export default class QuickReplies extends Component<
     keepReplies: false,
     renderQuickReplySend: undefined,
     quickReplyStyle: undefined,
+    containerStye: undefined,
   }
 
   static propTypes = {
@@ -159,7 +161,7 @@ export default class QuickReplies extends Component<
   }
 
   render() {
-    const { currentMessage, color, quickReplyStyle } = this.props
+    const { currentMessage, color, quickReplyStyle, containerStyle} = this.props
     const { replies } = this.state
 
     if (!this.shouldComponentDisplay()) {
@@ -169,7 +171,7 @@ export default class QuickReplies extends Component<
     const { type } = currentMessage!.quickReplies!
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, containerStyle]}>
         {currentMessage!.quickReplies!.values.map((reply: Reply) => {
           const selected = type === 'checkbox' && replies.find(sameReply(reply))
           return (

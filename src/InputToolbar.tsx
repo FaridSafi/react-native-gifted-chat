@@ -79,7 +79,7 @@ export default class InputToolbar extends React.Component<
   keyboardWillShowListener?: EmitterSubscription = undefined
   keyboardWillHideListener?: EmitterSubscription = undefined
 
-  componentWillMount() {
+  componentDidMount() {
     this.keyboardWillShowListener = Keyboard.addListener(
       'keyboardWillShow',
       this.keyboardWillShow,

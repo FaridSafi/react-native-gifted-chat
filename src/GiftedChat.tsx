@@ -374,7 +374,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { messages, text } = this.props
     this.setIsMounted(true)
     this.initLocale()
@@ -386,10 +386,12 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     this.setIsMounted(false)
   }
 
-  componentWillReceiveProps(nextProps: GiftedChatProps<TMessage> = {}) {
-    const { messages, text } = nextProps
+  componentDidUpdate(prevProps: GiftedChatProps<TMessage> = {}) {
+    if(this.props !== prevProps) {
+    const { messages, text } = this.props
     this.setMessages(messages || [])
     this.setTextFromProp(text)
+    }
   }
 
   initLocale() {

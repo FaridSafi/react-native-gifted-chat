@@ -53,6 +53,7 @@ export interface AvatarProps<TMessage extends IMessage> {
   containerStyle?: LeftRightStyle<ViewStyle>
   renderAvatar?(props: Omit<AvatarProps<TMessage>, 'renderAvatar'>): ReactNode
   onPressAvatar?(user: User): void
+  onLongPressAvatar?(user: User): void
 }
 
 export default class Avatar<
@@ -70,6 +71,7 @@ export default class Avatar<
     containerStyle: {},
     imageStyle: {},
     onPressAvatar: () => {},
+    onLongPressAvatar: () => { },
   }
 
   static propTypes = {
@@ -80,6 +82,7 @@ export default class Avatar<
     previousMessage: PropTypes.object,
     nextMessage: PropTypes.object,
     onPressAvatar: PropTypes.func,
+    onLongPressAvatar: PropTypes.func,
     renderAvatar: PropTypes.func,
     containerStyle: PropTypes.shape({
       left: ViewPropTypes.style,
@@ -110,6 +113,10 @@ export default class Avatar<
           onPress={() =>
             this.props.onPressAvatar &&
             this.props.onPressAvatar(this.props.currentMessage!.user)
+          }
+          onLongPress={() =>
+            this.props.onLongPressAvatar &&
+            this.props.onLongPressAvatar(this.props.currentMessage!.user)
           }
         />
       )

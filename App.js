@@ -246,6 +246,8 @@ export default class App extends Component {
           parsePatterns={this.parsePatterns}
           user={user}
           scrollToBottom
+          onLongPressAvatar={user => alert(JSON.stringify(user))}
+          onPressAvatar={() => alert('short press')}
           onQuickReply={this.onQuickReply}
           keyboardShouldPersistTaps='never'
           renderAccessory={Platform.OS === 'web' ? null : this.renderAccessory}

@@ -398,10 +398,10 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   componentDidUpdate(prevProps: GiftedChatProps<TMessage> = {}) {
-    if(this.props !== prevProps) {
-    const { messages, text } = this.props
-    this.setMessages(messages || [])
-    this.setTextFromProp(text)
+    if (this.props !== prevProps) {
+      const { messages, text } = this.props
+      this.setMessages(messages || [])
+      this.setTextFromProp(text)
     }
   }
 
@@ -655,7 +655,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       this.props.onSend(newMessages)
     }
 
-    setTimeout(() => this.scrollToBottom(false), 100)
+    setTimeout(() => this.scrollToBottom(false), 200)
 
     if (shouldResetInputToolbar === true) {
       setTimeout(() => {
@@ -670,7 +670,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     if (this.props.onQuickReply) {
       this.props.onQuickReply(replies)
     }
-    setTimeout(() => this.scrollToBottom(false), 100)
+    setTimeout(() => this.scrollToBottom(false), 200)
   }
 
   resetInputToolbar() {

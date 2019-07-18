@@ -87,6 +87,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   textInputProps?: any
   /*Determines whether the keyboard should stay visible after a tap; see <ScrollView> docs */
   keyboardShouldPersistTaps?: any
+  /* Do not resize >MessageContainer> on keyboardDidShow */
+  disableKeyboardHandling?: boolean
   /*Max message composer TextInput length */
   maxInputLength?: number
   /* Force getting keyboard height to fix some display issues */
@@ -222,7 +224,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     textInputProps: {},
     listViewProps: {},
     renderCustomView: null,
-    isCustomViewBottom: false,
     renderDay: null,
     renderTime: null,
     renderFooter: null,
@@ -239,6 +240,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       ios: 'never',
       android: 'always',
     }),
+    disableKeyboardHandling: false,
     onInputTextChanged: null,
     maxInputLength: null,
     forceGetKeyboardHeight: false,
@@ -296,6 +298,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     minInputToolbarHeight: PropTypes.number,
     listViewProps: PropTypes.object,
     keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
+    disableKeyboardHandling: PropTypes.bool,
     onInputTextChanged: PropTypes.func,
     maxInputLength: PropTypes.number,
     forceGetKeyboardHeight: PropTypes.bool,
@@ -540,37 +543,41 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   onKeyboardWillShow = (e: any) => {
     this.setIsTypingDisabled(true)
-    this.setKeyboardHeight(
-      e.endCoordinates ? e.endCoordinates.height : e.end.height,
-    )
-    this.setBottomOffset(this.safeAreaIphoneX(this.props.bottomOffset!))
-    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard()
-    if (this.props.isAnimated === true) {
-      Animated.timing(this.state.messagesContainerHeight!, {
-        toValue: newMessagesContainerHeight,
-        duration: 210,
-      }).start()
-    } else {
-      this.setState({
-        messagesContainerHeight: newMessagesContainerHeight,
-      })
+    if (!this.props.disableKeyboardHandling){
+      this.setKeyboardHeight(
+        e.endCoordinates ? e.endCoordinates.height : e.end.height,
+      )
+      this.setBottomOffset(this.safeAreaIphoneX(this.props.bottomOffset!))
+      const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard()
+      if (this.props.isAnimated === true) {
+        Animated.timing(this.state.messagesContainerHeight!, {
+          toValue: newMessagesContainerHeight,
+          duration: 210,
+        }).start()
+      } else {
+        this.setState({
+          messagesContainerHeight: newMessagesContainerHeight,
+        })
+      }
     }
   }
 
   onKeyboardWillHide = (_e: any) => {
     this.setIsTypingDisabled(true)
-    this.setKeyboardHeight(0)
-    this.setBottomOffset(0)
-    const newMessagesContainerHeight = this.getBasicMessagesContainerHeight()
-    if (this.props.isAnimated === true) {
-      Animated.timing(this.state.messagesContainerHeight!, {
-        toValue: newMessagesContainerHeight,
-        duration: 210,
-      }).start()
-    } else {
-      this.setState({
-        messagesContainerHeight: newMessagesContainerHeight,
-      })
+    if (!this.props.disableKeyboardHandling){
+      this.setKeyboardHeight(0)
+      this.setBottomOffset(0)
+      const newMessagesContainerHeight = this.getBasicMessagesContainerHeight()
+      if (this.props.isAnimated === true) {
+        Animated.timing(this.state.messagesContainerHeight!, {
+          toValue: newMessagesContainerHeight,
+          duration: 210,
+        }).start()
+      } else {
+        this.setState({
+          messagesContainerHeight: newMessagesContainerHeight,
+        })
+      }
     }
   }
 

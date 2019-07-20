@@ -91,6 +91,7 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
       onChange={[Function]}
       onChangeText={[Function]}
       onContentSizeChange={[Function]}
+      onSelectionChange={[Function]}
       placeholder="Type a message..."
       placeholderTextColor="#b2b2b2"
       rejectResponderTermination={true}

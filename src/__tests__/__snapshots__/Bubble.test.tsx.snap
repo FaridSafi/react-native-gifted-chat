@@ -38,35 +38,75 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
     >
-      <View
-        style={
-          Array [
-            Object {},
-            undefined,
-          ]
-        }
-      >
-        <Text
+      <View>
+        <View
           style={
             Array [
-              Object {
-                "color": "black",
-                "fontSize": 16,
-                "lineHeight": 20,
-                "marginBottom": 5,
-                "marginLeft": 10,
-                "marginRight": 10,
-                "marginTop": 5,
-              },
-              undefined,
               Object {},
+              undefined,
             ]
           }
         >
-          <Text>
-            test
+          <Text
+            childrenProps={Object {}}
+            parse={
+              Array [
+                Object {
+                  "onPress": [Function],
+                  "style": Array [
+                    Object {
+                      "color": "black",
+                      "textDecorationLine": "underline",
+                    },
+                    undefined,
+                  ],
+                  "type": "url",
+                },
+                Object {
+                  "onPress": [Function],
+                  "style": Array [
+                    Object {
+                      "color": "black",
+                      "textDecorationLine": "underline",
+                    },
+                    undefined,
+                  ],
+                  "type": "phone",
+                },
+                Object {
+                  "onPress": [Function],
+                  "style": Array [
+                    Object {
+                      "color": "black",
+                      "textDecorationLine": "underline",
+                    },
+                    undefined,
+                  ],
+                  "type": "email",
+                },
+              ]
+            }
+            style={
+              Array [
+                Object {
+                  "color": "black",
+                  "fontSize": 16,
+                  "lineHeight": 20,
+                  "marginBottom": 5,
+                  "marginLeft": 10,
+                  "marginRight": 10,
+                  "marginTop": 5,
+                },
+                undefined,
+                Object {},
+              ]
+            }
+          >
+            <Text>
+              test
+            </Text>
           </Text>
-        </Text>
+        </View>
       </View>
       <View
         style={
@@ -104,7 +144,7 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
               ]
             }
           >
-            7:20 PM
+            6:20 PM
           </Text>
         </View>
       </View>

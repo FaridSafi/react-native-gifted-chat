@@ -222,7 +222,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     textInputProps: {},
     listViewProps: {},
     renderCustomView: null,
-    isCustomViewBottom: false,
     renderDay: null,
     renderTime: null,
     renderFooter: null,

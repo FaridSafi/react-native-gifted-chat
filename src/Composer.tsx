@@ -32,11 +32,14 @@ export interface ComposerProps {
   textInputAutoFocus?: boolean
   keyboardAppearance?: TextInputProps['keyboardAppearance']
   multiline?: boolean
-  onTextChanged?(text: string): void
+  onTextChanged?(text: string, textPosition: number | null ): void
   onInputSizeChanged?(contentSize: { width: number; height: number }): void
 }
+export interface ComposerState {
+  textPosition?: number | null
+}
 
-export default class Composer extends React.Component<ComposerProps> {
+export default class Composer extends React.Component<ComposerProps, ComposerState> {
   static defaultProps = {
     composerHeight: MIN_COMPOSER_HEIGHT,
     text: '',
@@ -65,6 +68,10 @@ export default class Composer extends React.Component<ComposerProps> {
     keyboardAppearance: PropTypes.string,
   }
 
+  state = {
+    textPosition: null
+  }
+
   contentSize?: { width: number; height: number } = undefined
 
   onContentSizeChange = (e: any) => {
@@ -87,7 +94,11 @@ export default class Composer extends React.Component<ComposerProps> {
   }
 
   onChangeText = (text: string) => {
-    this.props.onTextChanged!(text)
+    this.props.onTextChanged!(text, this.state.textPosition)
+  }
+
+  onSelectionChange = (e: any) => {
+    this.setState({ textPosition: e.nativeEvent.selection.end })
   }
 
   render() {
@@ -102,6 +113,7 @@ export default class Composer extends React.Component<ComposerProps> {
         onChange={this.onContentSizeChange}
         onContentSizeChange={this.onContentSizeChange}
         onChangeText={this.onChangeText}
+        onSelectionChange={this.onSelectionChange}
         style={[
           styles.textInput,
           this.props.textInputStyle,

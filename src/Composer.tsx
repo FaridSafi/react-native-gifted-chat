@@ -94,7 +94,7 @@ export default class Composer extends React.Component<ComposerProps, ComposerSta
   }
 
   onChangeText = (text: string) => {
-    this.props.onTextChanged!(text, this.state.textPosition = null)
+    this.props.onTextChanged!(text, this.state.textPosition)
   }
 
   onSelectionChange = (e: any) => {

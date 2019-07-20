@@ -47,6 +47,7 @@ export interface GiftedAvatarProps {
   avatarStyle?: StyleProp<ImageStyle>
   textStyle?: StyleProp<TextStyle>
   onPress?(props: any): void
+  onLongPress?(props: any): void
 }
 
 export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
@@ -158,6 +159,12 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
               this.props.onPress(other)
             }
           }}
+          onLongPress={() => {
+            const { onLongPress, ...other } = this.props
+            if (this.props.onLongPress) {
+              this.props.onLongPress(other)
+            }
+          }}
           accessibilityTraits='image'
         >
           {this.renderAvatar()}
@@ -170,13 +177,13 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
     return (
       <TouchableOpacity
         disabled={!this.props.onPress}
-        onPress={() => {
-          const { onPress, ...other } = this.props
-          if (this.props.onPress) {
-            this.props.onPress(other)
+        onLongPress={() => {
+          const { onLongPress, ...other } = this.props
+          if (this.props.onLongPress) {
+            this.props.onLongPress(other)
           }
         }}
-        style={[
+      style={[
           styles.avatarStyle,
           { backgroundColor: this.avatarColor },
           this.props.avatarStyle,

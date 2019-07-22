@@ -177,12 +177,13 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   ): boolean
 }
 
-export interface GiftedChatState {
+export interface GiftedChatState<TMessage extends IMessage = IMessage> {
   isInitialized: boolean
   composerHeight?: number
   messagesContainerHeight?: number | Animated.Value
   typingDisabled: boolean
   text?: string
+  messages?: TMessage[]
 }
 
 class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
@@ -350,7 +351,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   _maxHeight?: number = undefined
   _isFirstLayout: boolean = true
   _locale: string = 'en'
-  _messages: TMessage[] = []
   invertibleScrollViewProps: any = undefined
   _actionSheetRef: any = undefined
 
@@ -363,6 +363,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     messagesContainerHeight: undefined,
     typingDisabled: false,
     text: undefined,
+    messages: undefined,
   }
 
   constructor(props: GiftedChatProps<TMessage>) {
@@ -444,11 +445,11 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   setMessages(messages: TMessage[]) {
-    this._messages = messages
+    this.setState({ messages })
   }
 
   getMessages() {
-    return this._messages
+    return this.state.messages
   }
 
   setMaxHeight(height: number) {

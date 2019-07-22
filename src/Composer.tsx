@@ -114,7 +114,13 @@ export default class Composer extends React.Component<ComposerProps> {
           this.props.textInputStyle,
           {
             height: this.props.composerHeight,
-            ...Platform.select({ web: { outline: 0 } }),
+            ...Platform.select({
+              web: {
+                outlineWidth: 0,
+                outlineColor: 'transparent',
+                outlineOffset: 0,
+              },
+            }),
           },
         ]}
         autoFocus={this.props.textInputAutoFocus}

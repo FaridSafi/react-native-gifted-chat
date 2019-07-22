@@ -21,10 +21,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  containerAlignTop: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
   contentContainerStyle: {
     justifyContent: 'flex-end',
   },
@@ -301,9 +297,7 @@ export default class MessageContainer<
     }
     return (
       <View
-        style={
-          this.props.alignTop ? styles.containerAlignTop : styles.container
-        }
+        style={styles.container}
       >
         {this.state.showScrollBottom && this.props.scrollToBottom
           ? this.renderScrollToBottomWrapper()

@@ -398,9 +398,16 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   componentDidUpdate(prevProps: GiftedChatProps<TMessage> = {}) {
-    if (this.props !== prevProps) {
-      const { messages, text } = this.props
+    const { messages, text } = this.props
+    if (
+      messages &&
+      prevProps.messages &&
+      messages.length !== prevProps.messages.length
+    ) {
       this.setMessages(messages || [])
+      this.scrollToBottom()
+    }
+    if (text !== prevProps.text) {
       this.setTextFromProp(text)
     }
   }

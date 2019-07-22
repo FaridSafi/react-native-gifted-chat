@@ -12,9 +12,6 @@ import {
 } from 'react-native'
 
 // @ts-ignore
-import TextStylePropTypes from 'react-native/Libraries/Text/TextStylePropTypes'
-
-// @ts-ignore
 import ParsedText from 'react-native-parsed-text'
 import Communications from 'react-native-communications'
 import { LeftRightStyle, IMessage } from './types'
@@ -94,16 +91,16 @@ export default class MessageText<
       right: ViewPropTypes.style,
     }),
     textStyle: PropTypes.shape({
-      left: TextStylePropTypes,
-      right: TextStylePropTypes,
+      left: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+      right: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
     }),
     linkStyle: PropTypes.shape({
-      left: TextStylePropTypes,
-      right: TextStylePropTypes,
+      left: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+      right: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
     }),
     parsePatterns: PropTypes.func,
     textProps: PropTypes.object,
-    customTextStyle: PropTypes.object,
+    customTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   }
 
   shouldComponentUpdate(nextProps: MessageTextProps<TMessage>) {

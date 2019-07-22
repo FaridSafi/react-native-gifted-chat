@@ -399,14 +399,16 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   componentDidUpdate(prevProps: GiftedChatProps<TMessage> = {}) {
-    const { messages, text } = this.props
+    const { messages, text, inverted } = this.props
     if (
       messages &&
       prevProps.messages &&
       messages.length !== prevProps.messages.length
     ) {
       this.setMessages(messages || [])
-      this.scrollToBottom()
+      if (!inverted) {
+        setTimeout(() => this.scrollToBottom(false), 200)
+      }
     }
     if (text !== prevProps.text) {
       this.setTextFromProp(text)

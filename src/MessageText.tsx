@@ -12,6 +12,9 @@ import {
 } from 'react-native'
 
 // @ts-ignore
+import TextStylePropTypes from 'react-native/Libraries/Text/TextStylePropTypes'
+
+// @ts-ignore
 import ParsedText from 'react-native-parsed-text'
 import Communications from 'react-native-communications'
 import { LeftRightStyle, IMessage } from './types'
@@ -91,12 +94,12 @@ export default class MessageText<
       right: ViewPropTypes.style,
     }),
     textStyle: PropTypes.shape({
-      left: PropTypes.object,
-      right: PropTypes.object,
+      left: TextStylePropTypes,
+      right: TextStylePropTypes,
     }),
     linkStyle: PropTypes.shape({
-      left: PropTypes.object,
-      right: PropTypes.object,
+      left: TextStylePropTypes,
+      right: TextStylePropTypes,
     }),
     parsePatterns: PropTypes.func,
     textProps: PropTypes.object,

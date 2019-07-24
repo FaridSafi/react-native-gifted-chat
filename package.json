@@ -72,7 +72,7 @@
     "@types/uuid": "3.4.5",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.7.1",
-    "babel-preset-expo": "^5.0.0",
+    "babel-preset-expo": "^6.0.0",
     "expo": "^33.0.0",
     "husky": "^3.0.0",
     "jest-expo": "^33.0.0",

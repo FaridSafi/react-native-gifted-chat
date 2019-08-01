@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "name": "gifted-chat-example",
+    "description": "Gifted Chat Expo Example",
+    "slug": "example-expo",
+    "privacy": "public",
+    "sdkVersion": "33.0.0",
+    "platforms": ["ios", "android"],
+    "version": "0.5.0",
+    "orientation": "portrait",
+    "icon": "https://d1wp6m56sqw74a.cloudfront.net/~assets/c9aa1be8a6a6fe81e20c3ac4106a2ebc",
+    "splash": {
+      "image": "https://d1wp6m56sqw74a.cloudfront.net/~assets/c9aa1be8a6a6fe81e20c3ac4106a2ebc"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#000000"
+    }
+  }
+}

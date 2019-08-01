@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should compare Constant with snapshot 1`] = `
+Object {
+  "DATE_FORMAT": "ll",
+  "DEFAULT_PLACEHOLDER": "Type a message...",
+  "MAX_COMPOSER_HEIGHT": 200,
+  "MIN_COMPOSER_HEIGHT": 33,
+  "TIME_FORMAT": "LT",
+}
+`;

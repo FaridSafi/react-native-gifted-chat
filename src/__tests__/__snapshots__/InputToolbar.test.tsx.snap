@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+        "borderTopColor": "#b2b2b2",
+        "borderTopWidth": 0.5,
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+      },
+      Object {},
+      Object {
+        "position": "absolute",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "flex-end",
+          "flexDirection": "row",
+        },
+        Object {},
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "height": 26,
+          "marginBottom": 10,
+          "marginLeft": 10,
+          "opacity": 1,
+          "width": 26,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "borderColor": "#b2b2b2",
+              "borderRadius": 13,
+              "borderWidth": 2,
+              "flex": 1,
+            },
+            Object {},
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "color": "#b2b2b2",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "textAlign": "center",
+              },
+              Object {},
+            ]
+          }
+        >
+          +
+        </Text>
+      </View>
+    </View>
+    <TextInput
+      accessibilityLabel="Type a message..."
+      accessible={true}
+      allowFontScaling={true}
+      autoFocus={false}
+      enablesReturnKeyAutomatically={true}
+      keyboardAppearance="default"
+      multiline={true}
+      onChange={[Function]}
+      onChangeText={[Function]}
+      onContentSizeChange={[Function]}
+      placeholder="Type a message..."
+      placeholderTextColor="#b2b2b2"
+      rejectResponderTermination={true}
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "fontSize": 16,
+            "lineHeight": 16,
+            "marginBottom": 5,
+            "marginLeft": 10,
+            "marginTop": 6,
+          },
+          Object {},
+          Object {
+            "height": 33,
+          },
+        ]
+      }
+      testID="Type a message..."
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <View />
+  </View>
+</View>
+`;

@@ -79,7 +79,7 @@
     "json": "^9.0.6",
     "prettier": "1.18.0",
     "prop-types": "15.6.2",
-    "react": "16.5.1",
+    "react": "16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-nav": "2.0.2",
     "react-test-renderer": "16.5.1",

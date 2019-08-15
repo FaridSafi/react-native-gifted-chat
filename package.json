@@ -88,7 +88,7 @@
     "typescript": "3.4.5"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "^3.0.0",
+    "@expo/react-native-action-sheet": "^3.0.3",
     "expo-constants": "~5.0.1",
     "expo-image-picker": "~5.0.2",
     "expo-location": "~5.0.1",

@@ -305,6 +305,7 @@ interface QuickReplies {
 - **`renderDay`** _(Function)_ - Custom day above a message
 - **`renderTime`** _(Function)_ - Custom time inside a message
 - **`renderFooter`** _(Function)_ - Custom footer component on the ListView, e.g. `'User is typing...'`; see [example/App.js](example/App.js) for an example
+- **`renderChatHeader`** _(Function)_ - Custom component to render above the MessageContainer (separate from the ListView)
 - **`renderChatFooter`** _(Function)_ - Custom component to render below the MessageContainer (separate from the ListView)
 - **`renderInputToolbar`** _(Function)_ - Custom message composer container
 - **`renderComposer`** _(Function)_ - Custom text input message composer
@@ -382,6 +383,7 @@ If you are using Create React Native App / Expo, no Android specific installatio
 - For **Expo**, there are at least 2 solutions to fix it:
 
   - Wrap GiftedChat in a [`KeyboardAvoidingView`](https://facebook.github.io/react-native/docs/keyboardavoidingview). This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
+
 ```
 <View style={{ flex: 1 }}>
    {
@@ -393,8 +395,10 @@ If you are using Create React Native App / Expo, no Android specific installatio
    }
 </View>
 ```
+
 If you use React Navigation, additional handling may be required to account for navigation headers and tabs. `KeyboardAvoidingView`'s `keyboardVerticalOffset` property can be set to the height of the navigation header and [`tabBarOptions.keyboardHidesTabBar`](https://reactnavigation.org/docs/en/bottom-tab-navigator.html#bottomtabnavigatorconfig) can be set to keep the tab bar from being shown when the keyboard is up. Due to a [bug with calculating height on Android phones with notches](facebook/react-native#23693), `KeyboardAvoidingView` is recommended over other solutions that involve calculating the height of the window.
-  - adding an opaque background status bar on app.json (even though `android:windowSoftInputMode="adjustResize"` is set internally on Expo's Android apps, the transulcent status bar causes it not to work): https://docs.expo.io/versions/latest/guides/configuration.html#androidstatusbar
+
+- adding an opaque background status bar on app.json (even though `android:windowSoftInputMode="adjustResize"` is set internally on Expo's Android apps, the transulcent status bar causes it not to work): https://docs.expo.io/versions/latest/guides/configuration.html#androidstatusbar
 
 - If you plan to use `GiftedChat` inside a `Modal`, see [#200](https://github.com/FaridSafi/react-native-gifted-chat/issues/200).
 
@@ -432,7 +436,7 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 - [more](https://github.com/FaridSafi/react-native-gifted-chat/graphs/contributors)
 
 ## Hire an expert!
-Looking for a ReactNative freelance expert with more than 12 years experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
 
+Looking for a ReactNative freelance expert with more than 12 years experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
 
 <img src="https://api.keen.io/3.0/projects/5ae31b61c9e77c0001cc2093/events/pageviews?api_key=55301C3E5BAB217E90A5867113C02506CE20385CD6F4C9C1CCDD4671B1A9DE374C3DF9DEF70C0BB3F5A9C5CA4CB1CCCFAF25FC3ED9CF63FB83102456A6881EFBAECD1C7D9718EE5402752DD8F6FA2DEC4D844BCB17FE6262570DB447D9A8CED2&data=eyJ0aXRsZSI6ICJnYyJ9" />

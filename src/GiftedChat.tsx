@@ -147,6 +147,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   renderTime?(props: Time['props']): React.ReactNode
   /* Custom footer component on the ListView, e.g. 'User is typing...' */
   renderFooter?(): React.ReactNode
+  /* Custom component to render above the MessageContainer (separate from the ListView) */
+  renderChatHeader?(): React.ReactNode
   /* Custom component to render below the MessageContainer (separate from the ListView) */
   renderChatFooter?(): React.ReactNode
   /* Custom message composer container */
@@ -230,6 +232,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderDay: null,
     renderTime: null,
     renderFooter: null,
+    renderChatHeader: null,
     renderChatFooter: null,
     renderInputToolbar: null,
     renderComposer: null,
@@ -289,6 +292,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderDay: PropTypes.func,
     renderTime: PropTypes.func,
     renderFooter: PropTypes.func,
+    renderChatHeader: PropTypes.func,
     renderChatFooter: PropTypes.func,
     renderInputToolbar: PropTypes.func,
     renderComposer: PropTypes.func,
@@ -606,6 +610,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
           height: this.state.messagesContainerHeight,
         }}
       >
+        {this.renderChatHeader()}
         <MessageContainer
           {...this.props}
           invertibleScrollViewProps={this.invertibleScrollViewProps}
@@ -769,6 +774,13 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       return this.props.renderInputToolbar(inputToolbarProps)
     }
     return <InputToolbar {...inputToolbarProps} />
+  }
+
+  renderChatHeader() {
+    if (this.props.renderChatHeader) {
+      return this.props.renderChatHeader()
+    }
+    return null
   }
 
   renderChatFooter() {

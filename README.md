@@ -151,7 +151,7 @@ class Example extends React.Component {
 
 ## Advanced example
 
-See [`example/App.js`](example/App.js) for a working demo!
+See [`App.js`](App.js) for a working demo!
 
 ## "Slack" example
 

@@ -101,7 +101,7 @@
     "react-native-maps": "~0.24.0",
     "react-native-parsed-text": "^0.0.20",
     "react-native-video": "4.4.2",
-    "uuid": "3.3.0"
+    "uuid": "3.3.3"
   },
   "peerDependencies": {
     "react": "*",

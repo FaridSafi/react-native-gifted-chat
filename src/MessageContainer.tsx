@@ -324,6 +324,7 @@ export default class MessageContainer<
           ListHeaderComponent={this.renderFooter}
           onScroll={this.handleOnScroll}
           scrollEventThrottle={100}
+          bounces={this.props.alignTop ? false : true}
           {...this.props.listViewProps}
         />
       </View>

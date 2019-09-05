@@ -382,16 +382,11 @@ If you are using Create React Native App / Expo, no Android specific installatio
 
 - For **Expo**, there are at least 2 solutions to fix it:
 
-  - Wrap GiftedChat in a [`KeyboardAvoidingView`](https://facebook.github.io/react-native/docs/keyboardavoidingview). This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
+  - Add a [`KeyboardAvoidingView`](https://facebook.github.io/react-native/docs/keyboardavoidingview) below GiftedChat, wrapped in a parent whose `flex` is 1. This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
 ```
 <View style={{ flex: 1 }}>
-   {
-      Platform.OS === 'android' ?
-         <KeyboardAvoidingView behavior="padding">
-            <GiftedChat />
-         </KeyboardAvoidingView> :
-         <GiftedChat />
-   }
+   <GiftedChat />
+   {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="padding" />}
 </View>
 ```
 If you use React Navigation, additional handling may be required to account for navigation headers and tabs. `KeyboardAvoidingView`'s `keyboardVerticalOffset` property can be set to the height of the navigation header and [`tabBarOptions.keyboardHidesTabBar`](https://reactnavigation.org/docs/en/bottom-tab-navigator.html#bottomtabnavigatorconfig) can be set to keep the tab bar from being shown when the keyboard is up. Due to a [bug with calculating height on Android phones with notches](facebook/react-native#23693), `KeyboardAvoidingView` is recommended over other solutions that involve calculating the height of the window.

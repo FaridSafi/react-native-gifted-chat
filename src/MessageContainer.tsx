@@ -293,12 +293,6 @@ export default class MessageContainer<
   keyExtractor = (item: TMessage) => `${item._id}`
 
   render() {
-    if (
-      !this.props.messages ||
-      (this.props.messages && this.props.messages.length === 0)
-    ) {
-      return <View style={styles.container} />
-    }
     return (
       <View
         style={

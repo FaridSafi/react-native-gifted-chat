@@ -37,8 +37,6 @@ const styles = StyleSheet.create({
   scrollToBottomStyle: {
     opacity: 0.8,
     position: 'absolute',
-    paddingHorizontal: 15,
-    paddingVertical: 8,
     right: 10,
     bottom: 30,
     zIndex: 999,
@@ -278,8 +276,9 @@ export default class MessageContainer<
   }
 
   renderScrollToBottomWrapper() {
+    const propsStyle = this.props.scrollToBottomStyle || {};
     return (
-      <View style={styles.scrollToBottomStyle}>
+      <View style={[styles.scrollToBottomStyle, propsStyle]}>
         <TouchableOpacity
           onPress={this.scrollToBottom}
           hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}

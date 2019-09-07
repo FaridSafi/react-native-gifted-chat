@@ -382,15 +382,12 @@ If you are using Create React Native App / Expo, no Android specific installatio
 
 - For **Expo**, there are at least 2 solutions to fix it:
 
-  - Wrap GiftedChat in a [`KeyboardAvoidingView`](https://facebook.github.io/react-native/docs/keyboardavoidingview). This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
+  - Append [`KeyboardAvoidingView`](https://facebook.github.io/react-native/docs/keyboardavoidingview) after GiftedChat. This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
 ```
 <View style={{ flex: 1 }}>
+   <GiftedChat />
    {
-      Platform.OS === 'android' ?
-         <KeyboardAvoidingView behavior="padding">
-            <GiftedChat />
-         </KeyboardAvoidingView> :
-         <GiftedChat />
+      Platform.OS === 'android' && <KeyboardAvoidingView behavior="padding" />
    }
 </View>
 ```

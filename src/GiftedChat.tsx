@@ -12,6 +12,7 @@ import {
 
 import ActionSheet from '@expo/react-native-action-sheet'
 import moment from 'moment'
+import 'moment/min/locales';
 import uuid from 'uuid'
 import { isIphoneX } from 'react-native-iphone-x-helper'
 

@@ -4,7 +4,7 @@
     "declaration": true,
     "outDir": "./lib",
     "strict": true,
-    "jsx": "react-native",
+    "jsx": "react",
     "target": "es2019",
     "module": "es6",
     "moduleResolution": "node",

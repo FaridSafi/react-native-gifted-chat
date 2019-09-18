@@ -91,6 +91,7 @@ export default class Composer extends React.Component<ComposerProps> {
   }
 
   render() {
+    const { style, ...otherTextInputProps } = this.props.textInputProps;
     return (
       <TextInput
         testID={this.props.placeholder}
@@ -104,7 +105,7 @@ export default class Composer extends React.Component<ComposerProps> {
         onChangeText={this.onChangeText}
         style={[
           styles.textInput,
-          this.props.textInputStyle,
+          style,
           { height: this.props.composerHeight },
         ]}
         autoFocus={this.props.textInputAutoFocus}
@@ -112,7 +113,7 @@ export default class Composer extends React.Component<ComposerProps> {
         enablesReturnKeyAutomatically
         underlineColorAndroid='transparent'
         keyboardAppearance={this.props.keyboardAppearance}
-        {...this.props.textInputProps}
+        {...otherTextInputProps}
       />
     )
   }

@@ -89,7 +89,7 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^3.0.0",
-    "expo-constants": "~5.0.1",
+    "expo-constants": "~7.0.0",
     "expo-image-picker": "~5.0.2",
     "expo-location": "~5.0.1",
     "expo-permissions": "~5.0.1",

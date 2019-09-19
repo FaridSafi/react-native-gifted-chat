@@ -2,6 +2,8 @@
 .expo-shared/
 .circleci/
 .github/
+.prettierrc
+.vscode/
 example-expo/
 example-slack-message/
 screenshots/

@@ -96,7 +96,6 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^3.0.3",
-    "expo-asset": "~6.0.0",
     "expo-av": "~6.0.0",
     "moment": "^2.19.0",
     "prop-types": "15.7.2",
@@ -110,7 +109,6 @@
   },
   "peerDependencies": {
     "expo-av": "*",
-    "expo-assets": "*",
     "moment": "*",
     "react": "*",
     "react-dom": "*",

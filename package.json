@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-chat",
-  "version": "0.10.0-beta.web.24",
+  "version": "0.10.0-beta.web.25",
   "description": "The most complete chat UI for React Native",
   "main": "node_modules/expo/AppEntry.js",
   "types": "lib/index.d.ts",
@@ -96,8 +96,8 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^3.0.3",
+    "expo-asset": "~6.0.0",
     "expo-av": "~6.0.0",
-    "react-native-video": "5.0.2",
     "moment": "^2.19.0",
     "prop-types": "15.7.2",
     "react-native-communications": "2.2.1",
@@ -105,15 +105,17 @@
     "react-native-lightbox": "^0.7.0",
     "react-native-maps": "~0.24.0",
     "react-native-parsed-text": "https://github.com/EvanBacon/react-native-parsed-text.git",
+    "react-native-video": "5.0.2",
     "uuid": "3.3.3"
   },
   "peerDependencies": {
+    "expo-av": "*",
+    "expo-assets": "*",
     "moment": "*",
     "react": "*",
     "react-dom": "*",
     "react-native": "*",
-    "react-native-video": "*",
-    "expo-av": "*"
+    "react-native-video": "*"
   },
   "husky": {
     "hooks": {

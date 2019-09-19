@@ -91,7 +91,7 @@
     "@expo/react-native-action-sheet": "^3.0.0",
     "expo-constants": "~5.0.1",
     "expo-image-picker": "~5.0.2",
-    "expo-location": "~5.0.1",
+    "expo-location": "~7.0.0",
     "expo-permissions": "~5.0.1",
     "moment": "^2.19.0",
     "prop-types": "15.7.2",

@@ -426,7 +426,7 @@ If you use React Navigation, additional handling may be required to account for 
 module.exports = function override(config, env) {
   config.module.rules.push({
     test: /\.js$/,
-    exclude: /node_modules[/\\](?!react-native-gifted-chat|react-native-lightbox|react-native-parsed-text)/,
+    exclude: /node_modules[/\\](?!react-native-gifted-chat|react-native-lightbox|react-native-parsed-text|expo-av)/,
     use: {
       loader: 'babel-loader',
       options: {
@@ -444,6 +444,8 @@ module.exports = function override(config, env) {
   return config
 }
 ```
+
+> **You will find an example and a demo here: [xcarpentier/gifted-chat-web-demo](https://github.com/xcarpentier/gifted-chat-web-demo)**
 
 ## Questions
 

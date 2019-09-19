@@ -76,150 +76,6 @@ export default [
   },
   {
     _id: 10,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 100,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 1000,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 2000,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 3000,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 4000,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 5000,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 5500,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 6000,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 7000,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 8000,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 9000,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 9900,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 9990,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 9999,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 1111,
-    text: 'Are you building a chat app?',
-    createdAt: new Date(),
-    user: {
-      _id: 1,
-      name: 'Developer',
-    },
-  },
-  {
-    _id: 10,
     text: 'This is a quick reply. Do you love Gifted Chat? (radio) KEEP IT',
     createdAt: new Date(),
     quickReplies: {
@@ -271,10 +127,13 @@ export default [
       name: 'React Native',
     },
   },
-  // {
-  //   _id: 9,
-  //   text: 'You are officially rocking GiftedChat.',
-  //   createdAt: new Date(),
-  //   system: true,
-  // },
+  {
+    _id: 30,
+    createdAt: new Date(),
+    video: 'https://media.giphy.com/media/3o6ZthZjk09Xx4ktZ6/giphy.mp4',
+    user: {
+      _id: 2,
+      name: 'React Native',
+    },
+  },
 ]

@@ -16,11 +16,12 @@ import QuickReplies from './QuickReplies'
 
 import MessageText from './MessageText'
 import MessageImage from './MessageImage'
+import MessageVideo from './MessageVideo'
 
 import Time from './Time'
 import Color from './Color'
 
-import { isSameUser, isSameDay, error } from './utils'
+import { isSameUser, isSameDay } from './utils'
 import {
   User,
   IMessage,
@@ -359,33 +360,12 @@ export default class Bubble<
   }
 
   renderMessageVideo() {
-    const { containerStyle, wrapperStyle, ...messageVideoProps } = this.props
-    if (
-      this.props.currentMessage &&
-      this.props.currentMessage.video &&
-      this.props.renderMessageVideo
-    ) {
+    if (this.props.currentMessage && this.props.currentMessage.video) {
+      const { containerStyle, wrapperStyle, ...messageVideoProps } = this.props
       if (this.props.renderMessageVideo) {
         return this.props.renderMessageVideo(messageVideoProps)
-      } else {
-        error('renderMessageVideo is required when a video!')
-        const now = new Date()
-        return (
-          <MessageText
-            {...{
-              ...messageVideoProps,
-              currentMessage: {
-                text: '⚠️renderMessageVideo is required for video!️️️ ⚠️',
-                _id: `id-error-${now.getTime()}`,
-                createdAt: now,
-                user: {
-                  _id: 'system',
-                },
-              },
-            }}
-          />
-        )
       }
+      return <MessageVideo {...messageVideoProps} />
     }
     return null
   }

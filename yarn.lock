@@ -868,10 +868,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@expo/react-native-action-sheet@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@expo/react-native-action-sheet/-/react-native-action-sheet-3.0.2.tgz#9760bf9140d44cff21887ea2463ef6f2479efe4a"
-  integrity sha512-xQPeLObwL6WRX8cAX1JGCjCMZj+TzUOxB3XKFNO2khOK8CsSjmxA+EceDzbWmQee4dbtEa56YfDd5DhRtCy/2g==
+"@expo/react-native-action-sheet@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@expo/react-native-action-sheet/-/react-native-action-sheet-3.0.3.tgz#1d69a2668784961c6d458babe52e9a02893936a2"
+  integrity sha512-MsVDCDQwJthoolqUqbg1nF8hmzA2gYfvnUV6j/h4gXPSKsrLqdaQz+Vi5onCB18oxmUZbYQ1+QNU+n1PwTp0Zw==
 
 "@expo/vector-icons@^10.0.2":
   version "10.0.5"

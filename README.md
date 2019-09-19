@@ -69,7 +69,7 @@
 
 ## Features
 
-- **_`react-native-web`able_ (since 0.10.0)**
+- **_`react-native-web`able_ (since 0.10.0)** [web configuration](#react-native-web)
 - Write with **TypeScript** (since 0.8.0)
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
@@ -410,10 +410,40 @@ If you use React Navigation, additional handling may be required to account for 
 1. Install `yarn add -g expo-cli`
 2. `expo start`
 
-### Web
+### react-native-web
+
+#### With expo
 
 1. Install `yarn add -g expo-cli`
 2. `expo start -w`
+
+#### With create-react-app
+
+1. `yarn add -D react-app-rewired`
+2. `touch config-overrides.js`
+
+```js
+module.exports = function override(config, env) {
+  config.module.rules.push({
+    test: /\.js$/,
+    exclude: /node_modules[/\\](?!react-native-gifted-chat|react-native-lightbox|react-native-parsed-text)/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        babelrc: false,
+        configFile: false,
+        presets: [
+          ['@babel/preset-env', { useBuiltIns: 'usage' }],
+          '@babel/preset-react',
+        ],
+        plugins: ['@babel/plugin-proposal-class-properties'],
+      },
+    },
+  })
+
+  return config
+}
+```
 
 ## Questions
 

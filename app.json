@@ -4,7 +4,7 @@
     "description": "Gifted Chat Expo Example",
     "slug": "example-expo",
     "privacy": "public",
-    "sdkVersion": "33.0.0",
+    "sdkVersion": "34.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "0.5.0",
     "orientation": "portrait",

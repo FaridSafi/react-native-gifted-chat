@@ -10,7 +10,7 @@
   💬 Gifted Chat
 </h3>
 <p align="center">
-  The most complete chat UI for React Native
+  The most complete chat UI for React Native & Web
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/react-native-gifted-chat">

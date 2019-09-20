@@ -104,7 +104,6 @@
     "react-native-lightbox": "^0.7.0",
     "react-native-maps": "~0.25.0",
     "react-native-parsed-text": "https://github.com/EvanBacon/react-native-parsed-text.git",
-    "react-native-video": "5.0.2",
     "uuid": "3.3.3"
   },
   "peerDependencies": {
@@ -113,7 +112,7 @@
     "react": "*",
     "react-dom": "*",
     "react-native": "*",
-    "react-native-video": "*"
+    "react-native-video": "5.0.2"
   },
   "husky": {
     "hooks": {

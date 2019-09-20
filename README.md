@@ -84,10 +84,6 @@
 - System message
 - Quick Reply messages (bot)
 
-## Versions notes
-
-- Since v0.10.0 removed `react-native-video` dependency.
-
 ## Dependency
 
 - Use version `0.2.x` for RN `>= 0.44.0`

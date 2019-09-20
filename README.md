@@ -69,7 +69,7 @@
 
 ## Features
 
-- 🎉**_`react-native-web`able_ (since 0.10.0)** [web configuration](#react-native-web)
+- 🎉 **_`react-native-web`able_ (since 0.10.0)** [web configuration](#react-native-web)
 - Write with **TypeScript** (since 0.8.0)
 - Fully customizable components
 - Composer actions (to attach photos, etc.)

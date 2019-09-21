@@ -403,14 +403,14 @@ If you use React Navigation, additional handling may be required to account for 
 
 ### Native
 
-1. Install `yarn add -g expo-cli@3.0.11-alpha.1`
+1. Install `yarn add -g expo-cli`
 2. `expo start`
 
 ### react-native-web
 
 #### With expo
 
-1. Install `yarn add -g expo-cli@3.0.11-alpha.1`
+1. Install `yarn add -g expo-cli`
 2. `expo start -w`
 
 #### With create-react-app

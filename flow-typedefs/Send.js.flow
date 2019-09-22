@@ -1,0 +1,17 @@
+// @flow
+import { Component } from 'react'
+
+export interface SendProps {
+  text?: string;
+  label?: string;
+  containerStyle?: Object;
+  textStyle?: Object;
+  children?: React$Element<any>;
+  alwaysShowSend?: boolean;
+  disabled?: boolean;
+  onSend?: ({ text: string }, boolean) => void;
+}
+
+export default class Send extends Component<SendProps> {
+  render: () => React$Element<any>
+}

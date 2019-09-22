@@ -11,6 +11,4 @@ export interface SystemMessageProps<TMessage: IMessage> {
 
 export default class SystemMessages<TMessage: IMessage> extends Component<
   SystemMessageProps<TMessage>,
-> {
-  render: () => React$Element<any>
-}
+> {}

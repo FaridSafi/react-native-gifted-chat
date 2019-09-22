@@ -12,6 +12,4 @@ export interface SendProps {
   onSend?: ({ text: string }, boolean) => void;
 }
 
-export default class Send extends Component<SendProps> {
-  render: () => React$Element<any>
-}
+export default class Send extends Component<SendProps> {}

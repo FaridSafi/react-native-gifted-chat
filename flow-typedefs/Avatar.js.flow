@@ -22,6 +22,4 @@ export interface AvatarProps<TMessage: IMessage> {
 
 export default class Avatar<TMessage: IMessage> extends Component<
   AvatarProps<TMessage>,
-> {
-  render: () => React$Element<any>
-}
+> {}

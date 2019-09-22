@@ -21,6 +21,4 @@ export interface ComposerProps {
   |}) => void;
 }
 
-export default class Composer extends React.Component<ComposerProps> {
-  render: () => React$Element<any>
-}
+export default class Composer extends React.Component<ComposerProps> {}

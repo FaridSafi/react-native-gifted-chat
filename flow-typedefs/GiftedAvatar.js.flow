@@ -10,6 +10,4 @@ export interface GiftedAvatarProps {
   onLongPress: any => void;
 }
 
-export default class GiftedAvatar extends Component<GiftedAvatarProps> {
-  render: () => React$Element<any>
-}
+export default class GiftedAvatar extends Component<GiftedAvatarProps> {}

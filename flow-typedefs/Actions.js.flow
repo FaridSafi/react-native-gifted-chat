@@ -13,8 +13,4 @@ export interface ActionsProps {
   onPressActionButton?: () => void;
 }
 
-export default class Actions extends Component<ActionsProps> {
-  onActionsPress: () => void
-  renderIcon: () => {} | null | void
-  render: () => React$Element<any>
-}
+export default class Actions extends Component<ActionsProps> {}

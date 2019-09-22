@@ -12,6 +12,4 @@ export interface TimeProps<TMessage: IMessage> {
 
 export default class Time<TMessage: IMessage> extends Component<
   TimeProps<TMessage>,
-> {
-  render: () => React$Element<any>
-}
+> {}

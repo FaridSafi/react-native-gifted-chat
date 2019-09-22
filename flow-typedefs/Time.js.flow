@@ -1,0 +1,17 @@
+// @flow
+import { Component } from 'react'
+import type { IMessage, LeftRightStyle } from './types'
+
+export interface TimeProps<TMessage: IMessage> {
+  position: 'left' | 'right';
+  currentMessage?: TMessage;
+  containerStyle?: LeftRightStyle;
+  timeTextStyle?: LeftRightStyle;
+  timeFormat?: string;
+}
+
+export default class Time<TMessage: IMessage> extends Component<
+  TimeProps<TMessage>,
+> {
+  render: () => React$Element<any>
+}

@@ -1,25 +1,25 @@
 // @flow
 type renderFunction = any => React$Element<any>
 
-interface User {
+export interface User {
   +_id: string | number;
   +name?: string;
   +avatar?: string | renderFunction;
 }
 
-interface Reply {
+export interface Reply {
   +title: string;
   +value: string;
   +messageId?: any;
 }
 
-interface QuickReplies {
+export interface QuickReplies {
   +type: 'radio' | 'checkbox';
   +values: Array<Reply>;
   +keepIt?: boolean;
 }
 
-interface IMessage {
+export interface IMessage {
   +_id: any;
   +text: string;
   +createdAt: Date | number;
@@ -34,9 +34,9 @@ interface IMessage {
   +quickReplies?: QuickReplies;
 }
 
-type IChatMessage = IMessage
+export type IChatMessage = IMessage
 
-interface MessageVideoProps {
+export interface MessageVideoProps {
   currentMessage?: IMessage;
   containerStyle?: Object;
   videoStyle?: Object;

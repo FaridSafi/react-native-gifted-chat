@@ -31,7 +31,7 @@
     "tsc": "node_modules/.bin/tsc --noEmit",
     "start": "yarn config:dev && expo start",
     "start:web": "yarn config:dev && expo start -w",
-    "build": "rm -rf lib/ && node_modules/.bin/tsc",
+    "build": "rm -rf lib/ && node_modules/.bin/tsc && cp flow-typedefs/* lib/",
     "test": "TZ=Europe/Paris jest --no-watchman",
     "test:watch": "TZ=Europe/Paris jest --watch",
     "test:coverage": "TZ=Europe/Paris jest --coverage",

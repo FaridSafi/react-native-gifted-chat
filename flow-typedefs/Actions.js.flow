@@ -1,0 +1,19 @@
+import { Component } from 'react'
+
+export interface ActionsProps {
+  options?: {
+    [key: string]: any,
+  };
+  optionTintColor?: string;
+  icon?: () => React$Element<any>;
+  wrapperStyle?: Object;
+  iconTextStyle?: Object;
+  containerStyle?: Object;
+  onPressActionButton?: () => void;
+}
+
+export default class Actions extends Component<ActionsProps> {
+  onActionsPress: () => void
+  renderIcon: () => {} | null | undefined
+  render: () => React$Element<any>
+}

@@ -1,0 +1,45 @@
+// @flow
+type renderFunction = any => React$Element<any>
+
+interface User {
+  +_id: string | number;
+  +name?: string;
+  +avatar?: string | renderFunction;
+}
+
+interface Reply {
+  +title: string;
+  +value: string;
+  +messageId?: any;
+}
+
+interface QuickReplies {
+  +type: 'radio' | 'checkbox';
+  +values: Array<Reply>;
+  +keepIt?: boolean;
+}
+
+interface IMessage {
+  +_id: any;
+  +text: string;
+  +createdAt: Date | number;
+  +user: User;
+  +image?: string;
+  +video?: string;
+  +audio?: string;
+  +system?: boolean;
+  +sent?: boolean;
+  +received?: boolean;
+  +pending?: boolean;
+  +quickReplies?: QuickReplies;
+}
+
+type IChatMessage = IMessage
+
+interface MessageVideoProps {
+  currentMessage?: IMessage;
+  containerStyle?: Object;
+  videoStyle?: Object;
+  videoProps?: Object;
+  lightboxProps?: Object;
+}

@@ -1,6 +1,14 @@
 // @flow
 import { Component } from 'react'
-import { IMessage, MessageVideoProps } from './types'
+import { IMessage } from './types'
+
+export interface MessageVideoProps<TMessage: IMessage> {
+  currentMessage?: TMessage;
+  containerStyle?: Object;
+  videoStyle?: Object;
+  videoProps?: Object;
+  lightboxProps?: Object;
+}
 
 export default class MessageVideo<TMessage: IMessage> extends Component<
   MessageVideoProps<TMessage>,

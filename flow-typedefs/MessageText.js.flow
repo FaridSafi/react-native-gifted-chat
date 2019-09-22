@@ -1,0 +1,19 @@
+// @flow
+import { Text } from 'react-native'
+import type { LeftRightStyle, IMessage } from './types'
+import * as React from 'react'
+
+export interface MessageTextProps<TMessage: IMessage> {
+  position: 'left' | 'right';
+  currentMessage?: TMessage;
+  containerStyle: LeftRightStyle;
+  textStyle?: LeftRightStyle;
+  linkStyle?: LeftRightStyle;
+  textProps?: $Shape<React.ElementProps<typeof Text>>;
+  customTextStyle?: Object;
+  parsePatterns?: Object => any;
+}
+
+export default class MessageText<TMessage: IMessage> extends React.Component<
+  MessageTextProps<TMessage>,
+> {}

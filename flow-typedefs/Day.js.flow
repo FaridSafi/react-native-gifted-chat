@@ -18,4 +18,3 @@ export default class Day<TMessage: IMessage> extends PureComponent<
 > {
   render: () => React$Element<any>
 }
-

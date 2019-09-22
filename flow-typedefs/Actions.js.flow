@@ -1,3 +1,4 @@
+// @flow
 import { Component } from 'react'
 
 export interface ActionsProps {
@@ -14,6 +15,6 @@ export interface ActionsProps {
 
 export default class Actions extends Component<ActionsProps> {
   onActionsPress: () => void
-  renderIcon: () => {} | null | undefined
+  renderIcon: () => {} | null | void
   render: () => React$Element<any>
 }

@@ -1,0 +1,21 @@
+// @flow
+import { PureComponent } from 'react'
+import type { IMessage } from './types'
+
+export interface DayProps<TMessage: IMessage> {
+  currentMessage?: TMessage;
+  nextMessage?: TMessage;
+  previousMessage?: TMessage;
+  containerStyle?: Object;
+  wrapperStyle?: Object;
+  textStyle?: Object;
+  dateFormat?: string;
+  inverted?: boolean;
+}
+
+export default class Day<TMessage: IMessage> extends PureComponent<
+  DayProps<TMessage>,
+> {
+  render: () => React$Element<any>
+}
+

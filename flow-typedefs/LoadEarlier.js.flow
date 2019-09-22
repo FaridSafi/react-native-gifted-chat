@@ -1,0 +1,16 @@
+// @flow
+import { Component } from 'react'
+
+export interface LoadEarlierProps {
+  isLoadingEarlier?: boolean;
+  label?: string;
+  containerStyle?: Object;
+  wrapperStyle?: Object;
+  textStyle?: Object;
+  activityIndicatorStyle?: Object;
+  activityIndicatorColor?: string;
+  activityIndicatorSize?: number | 'small' | 'large';
+  onLoadEarlier?: () => void;
+}
+
+export default class LoadEarlier extends Component<LoadEarlierProps> {}

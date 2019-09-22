@@ -1,0 +1,9 @@
+// @flow
+import { Component } from 'react'
+import { IMessage, MessageVideoProps } from './types'
+
+export default class MessageVideo<TMessage: IMessage> extends Component<
+  MessageVideoProps<TMessage>,
+> {
+  render: () => React$Element<any>
+}

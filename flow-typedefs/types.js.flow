@@ -36,8 +36,8 @@ export interface IMessage {
 
 export type IChatMessage = IMessage
 
-export interface MessageVideoProps {
-  currentMessage?: IMessage;
+export interface MessageVideoProps<TMessage: IMessage> {
+  currentMessage?: TMessage;
   containerStyle?: Object;
   videoStyle?: Object;
   videoProps?: Object;

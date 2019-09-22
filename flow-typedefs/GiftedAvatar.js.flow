@@ -1,0 +1,15 @@
+// @flow
+import { Component } from 'react'
+import type { User } from './types'
+
+export interface GiftedAvatarProps {
+  user?: User;
+  avatarStyle?: Object;
+  textStyle?: Object;
+  onPress: any => void;
+  onLongPress: any => void;
+}
+
+export default class GiftedAvatar extends Component<GiftedAvatarProps> {
+  render: () => React$Element<any>
+}

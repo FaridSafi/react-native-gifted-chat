@@ -19,6 +19,7 @@ import GiftedAvatar from './GiftedAvatar.js.flow'
 import { IMessage, User, Reply, LeftRightStyle } from './types'
 import type AnimatedValue from 'react-native/Libraries/Animated/src/nodes/AnimatedValue'
 import { FlatList } from 'react-native'
+import * as utils from './utils'
 
 export interface GiftedChatProps<TMessage: IMessage> {
   messages?: Array<TMessage>;
@@ -127,4 +128,5 @@ export {
   Send,
   Time,
   GiftedAvatar,
+  utils,
 }

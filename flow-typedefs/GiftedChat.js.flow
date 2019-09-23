@@ -48,7 +48,7 @@ export interface GiftedChatProps<TMessage: IMessage> {
   lightboxProps?: any;
   bottomOffset?: number;
   minInputToolbarHeight?: number;
-  listViewProps: $Shape<React.ElementProps<typeof FlatList>>;
+  listViewProps?: $Shape<React.ElementProps<typeof FlatList>>;
   textInputProps?: any;
   keyboardShouldPersistTaps?: any;
   maxInputLength?: number;

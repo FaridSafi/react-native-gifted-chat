@@ -1,6 +1,10 @@
 // @flow
 import { Component } from 'react'
 import type { IMessage, User, LeftRightStyle } from './types'
+import type {
+  ImageStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 type Props = { name: string, age: number => string }
 
@@ -11,8 +15,8 @@ export interface AvatarProps<TMessage: IMessage> {
   position: 'left' | 'right';
   renderAvatarOnTop?: boolean;
   showAvatarForEveryMessage?: boolean;
-  imageStyle?: LeftRightStyle;
-  containerStyle?: LeftRightStyle;
+  imageStyle?: LeftRightStyle<ImageStyleProp>;
+  containerStyle?: LeftRightStyle<ViewStyleProp>;
   renderAvatar?: (
     $Diff<AvatarProps<TMessage>, {| renderAvatar: * |}>,
   ) => React$Element<any>;

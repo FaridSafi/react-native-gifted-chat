@@ -5,6 +5,7 @@ import { BubbleProps } from './Bubble'
 import { SystemMessageProps } from './SystemMessage'
 import { DayProps } from './Day'
 import { IMessage, User, LeftRightStyle } from './types'
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export interface MessageProps<TMessage: IMessage> {
   key: React$Key;
@@ -15,7 +16,7 @@ export interface MessageProps<TMessage: IMessage> {
   previousMessage?: TMessage;
   user: User;
   inverted?: boolean;
-  containerStyle?: LeftRightStyle;
+  containerStyle?: LeftRightStyle<ViewStyleProp>;
   renderBubble?: (BubbleProps<TMessage>) => React$Element<any>;
   renderDay?: (DayProps<TMessage>) => React$Element<any>;
   renderSystemMessage?: (SystemMessageProps<TMessage>) => React$Element<any>;

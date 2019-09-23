@@ -1,14 +1,18 @@
 // @flow
 import { Text } from 'react-native'
 import type { LeftRightStyle, IMessage } from './types'
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
 import * as React from 'react'
 
 export interface MessageTextProps<TMessage: IMessage> {
   position: 'left' | 'right';
   currentMessage?: TMessage;
-  containerStyle: LeftRightStyle;
-  textStyle?: LeftRightStyle;
-  linkStyle?: LeftRightStyle;
+  containerStyle: LeftRightStyle<ViewStyleProp>;
+  textStyle?: LeftRightStyle<TextStyleProp>;
+  linkStyle?: LeftRightStyle<TextStyleProp>;
   textProps?: $Shape<React.ElementProps<typeof Text>>;
   customTextStyle?: Object;
   parsePatterns?: Object => any;

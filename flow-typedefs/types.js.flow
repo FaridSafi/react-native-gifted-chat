@@ -1,9 +1,9 @@
 // @flow
 type renderFunction = any => React$Element<any>
 
-export interface LeftRightStyle {
-  left: Object;
-  right: Object;
+export interface LeftRightStyle<T> {
+  left: T;
+  right: T;
 }
 
 export interface User {

@@ -18,6 +18,7 @@ import MessageContainer from './MessageContainer.js.flow'
 import GiftedAvatar from './GiftedAvatar.js.flow'
 import { IMessage, User, Reply, LeftRightStyle } from './types'
 import type AnimatedValue from 'react-native/Libraries/Animated/src/nodes/AnimatedValue'
+import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 import { FlatList } from 'react-native'
 import * as utils from './utils'
 
@@ -59,7 +60,7 @@ export interface GiftedChatProps<TMessage: IMessage> {
   optionTintColor?: string;
   quickReplyStyle?: Object;
   isCustomViewBottom?: boolean;
-  timeTextStyle?: LeftRightStyle;
+  timeTextStyle?: LeftRightStyle<TextStyleProp>;
   onPressAvatar?: User => void;
   onLongPressAvatar?: User => void;
   messageIdGenerator?: (message?: TMessage) => string;

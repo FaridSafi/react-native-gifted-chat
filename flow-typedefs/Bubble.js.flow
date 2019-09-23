@@ -6,6 +6,10 @@ import type { MessageVideoProps } from './MessageVideo'
 import type { MessageTextProps } from './MessageText'
 import type { TimeProps } from './Time'
 import type { User, IMessage, LeftRightStyle, Reply } from './types'
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export type RenderMessageImageProps<TMessage: IMessage> = $Diff<
   BubbleProps<TMessage>,
@@ -36,14 +40,14 @@ export interface BubbleProps<TMessage: IMessage> {
   nextMessage?: TMessage;
   previousMessage?: TMessage;
   optionTitles?: string;
-  containerStyle?: LeftRightStyle;
-  wrapperStyle?: LeftRightStyle;
-  textStyle?: LeftRightStyle;
-  bottomContainerStyle?: LeftRightStyle;
+  containerStyle?: LeftRightStyle<ViewStyleProp>;
+  wrapperStyle?: LeftRightStyle<ViewStyleProp>;
+  textStyle?: LeftRightStyle<TextStyleProp>;
+  bottomContainerStyle?: LeftRightStyle<ViewStyleProp>;
   tickStyle?: Object;
-  containerToNextStyle?: LeftRightStyle;
-  containerToPreviousStyle?: LeftRightStyle;
-  usernameStyle?: LeftRightStyle;
+  containerToNextStyle?: LeftRightStyle<ViewStyleProp>;
+  containerToPreviousStyle?: LeftRightStyle<ViewStyleProp>;
+  usernameStyle?: LeftRightStyle<TextStyleProp>;
   quickReplyStyle?: Object;
   onLongPress?: (context?: any, message?: any) => void;
   onQuickReply?: (Array<Reply>) => void;

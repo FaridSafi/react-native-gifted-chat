@@ -1,12 +1,16 @@
 // @flow
 import { Component } from 'react'
 import type { IMessage, LeftRightStyle } from './types'
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export interface TimeProps<TMessage: IMessage> {
   position: 'left' | 'right';
   currentMessage?: TMessage;
-  containerStyle?: LeftRightStyle;
-  timeTextStyle?: LeftRightStyle;
+  containerStyle?: LeftRightStyle<ViewStyleProp>;
+  timeTextStyle?: LeftRightStyle<TextStyleProp>;
   timeFormat?: string;
 }
 

@@ -1,5 +1,5 @@
 // @flow
-import { Component } from 'react'
+import * as React from 'react'
 import Actions, { ActionsProps } from './Actions'
 import Avatar, { AvatarProps } from './Avatar'
 import Bubble, { BubbleProps } from './Bubble'
@@ -18,6 +18,7 @@ import MessageContainer from './MessageContainer.js.flow'
 import GiftedAvatar from './GiftedAvatar.js.flow'
 import { IMessage, User, Reply, LeftRightStyle } from './types'
 import type AnimatedValue from 'react-native/Libraries/Animated/src/nodes/AnimatedValue'
+import { FlatList } from 'react-native'
 
 export interface GiftedChatProps<TMessage: IMessage> {
   messages?: Array<TMessage>;
@@ -41,7 +42,7 @@ export interface GiftedChatProps<TMessage: IMessage> {
   lightboxProps?: any;
   bottomOffset?: number;
   minInputToolbarHeight?: number;
-  listViewProps?: any;
+  listViewProps: $Shape<React.ElementProps<typeof FlatList>>;
   textInputProps?: any;
   keyboardShouldPersistTaps?: any;
   maxInputLength?: number;
@@ -103,7 +104,7 @@ export interface GiftedChatState<TMessage: IMessage> {
   messages?: Array<TMessage>;
 }
 
-class GiftedChat<TMessage: IMessage> extends Component<
+class GiftedChat<TMessage: IMessage> extends React.Component<
   GiftedChatProps<TMessage>,
   GiftedChatState<TMessage>,
 > {}

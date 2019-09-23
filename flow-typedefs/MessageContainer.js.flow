@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import { ListView, FlatList } from 'react-native'
+import { FlatList } from 'react-native'
 import type { LoadEarlierProps } from './LoadEarlier'
 import type { MessageProps } from './Message'
 import type { User, IMessage, Reply } from './types'
@@ -8,7 +8,7 @@ import type { User, IMessage, Reply } from './types'
 export interface MessageContainerProps<TMessage: IMessage> {
   messages?: Array<TMessage>;
   user?: User;
-  listViewProps: $Shape<React.ElementProps<typeof ListView>>;
+  listViewProps: $Shape<React.ElementProps<typeof FlatList>>;
   inverted?: boolean;
   loadEarlier?: boolean;
   alignTop?: boolean;

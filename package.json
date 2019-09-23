@@ -30,7 +30,7 @@
     "lint": "tslint --project .",
     "tsc": "node_modules/.bin/tsc --noEmit",
     "start": "yarn config:dev && expo start",
-    "start:web": "yarn config:dev && expo start -w",
+    "start:web": "yarn config:dev && expo start -w --dev",
     "build": "rm -rf lib/ && node_modules/.bin/tsc",
     "test": "TZ=Europe/Paris jest --no-watchman",
     "test:watch": "TZ=Europe/Paris jest --watch",

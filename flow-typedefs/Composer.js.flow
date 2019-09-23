@@ -10,7 +10,7 @@ export interface ComposerProps {
   placeholder?: string;
   placeholderTextColor?: string;
   textInputProps?: TextInputProps;
-  textInputStyle?: Object;
+  textInputStyle?: $PropertyType<TextInputProps, 'style'>;
   textInputAutoFocus?: boolean;
   keyboardAppearance?: $PropertyType<TextInputProps, 'keyboardAppearance'>;
   multiline?: boolean;

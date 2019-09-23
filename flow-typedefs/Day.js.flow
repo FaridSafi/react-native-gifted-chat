@@ -1,14 +1,19 @@
 // @flow
 import { PureComponent } from 'react'
 import type { IMessage } from './types'
+import type {
+  ViewStyleProp,
+  ImageStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export interface DayProps<TMessage: IMessage> {
   currentMessage?: TMessage;
   nextMessage?: TMessage;
   previousMessage?: TMessage;
-  containerStyle?: Object;
-  wrapperStyle?: Object;
-  textStyle?: Object;
+  containerStyle?: ViewStyleProp;
+  wrapperStyle?: ViewStyleProp;
+  textStyle?: TextStyleProp;
   dateFormat?: string;
   inverted?: boolean;
 }

@@ -1,11 +1,12 @@
 // @flow
 import { Component } from 'react'
 import { IMessage } from './types'
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export interface MessageVideoProps<TMessage: IMessage> {
   currentMessage?: TMessage;
-  containerStyle?: Object;
-  videoStyle?: Object;
+  containerStyle?: ViewStyleProp;
+  videoStyle?: ViewStyleProp;
   videoProps?: Object;
   lightboxProps?: Object;
 }

@@ -44,11 +44,11 @@ export interface BubbleProps<TMessage: IMessage> {
   wrapperStyle?: LeftRightStyle<ViewStyleProp>;
   textStyle?: LeftRightStyle<TextStyleProp>;
   bottomContainerStyle?: LeftRightStyle<ViewStyleProp>;
-  tickStyle?: Object;
+  tickStyle?: TextStyleProp;
   containerToNextStyle?: LeftRightStyle<ViewStyleProp>;
   containerToPreviousStyle?: LeftRightStyle<ViewStyleProp>;
   usernameStyle?: LeftRightStyle<TextStyleProp>;
-  quickReplyStyle?: Object;
+  quickReplyStyle?: ViewStyleProp;
   onLongPress?: (context?: any, message?: any) => void;
   onQuickReply?: (Array<Reply>) => void;
   renderMessageImage?: (

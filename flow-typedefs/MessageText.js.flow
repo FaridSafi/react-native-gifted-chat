@@ -14,8 +14,8 @@ export interface MessageTextProps<TMessage: IMessage> {
   textStyle?: LeftRightStyle<TextStyleProp>;
   linkStyle?: LeftRightStyle<TextStyleProp>;
   textProps?: $Shape<React.ElementProps<typeof Text>>;
-  customTextStyle?: Object;
-  parsePatterns?: Object => any;
+  customTextStyle?: TextStyleProp;
+  parsePatterns?: TextStyleProp => any;
 }
 
 export default class MessageText<TMessage: IMessage> extends React.Component<

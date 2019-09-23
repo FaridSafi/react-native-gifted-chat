@@ -1,5 +1,10 @@
 // @flow
 import { Component } from 'react'
+import type {
+  ViewStyleProp,
+  ImageStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export interface ActionsProps {
   options?: {
@@ -7,9 +12,9 @@ export interface ActionsProps {
   };
   optionTintColor?: string;
   icon?: () => React$Element<any>;
-  wrapperStyle?: Object;
-  iconTextStyle?: Object;
-  containerStyle?: Object;
+  wrapperStyle?: ViewStyleProp;
+  iconTextStyle?: TextStyleProp;
+  containerStyle?: ViewStyleProp;
   onPressActionButton?: () => void;
 }
 

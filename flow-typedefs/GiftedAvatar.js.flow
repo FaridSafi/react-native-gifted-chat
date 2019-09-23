@@ -1,11 +1,15 @@
 // @flow
 import { Component } from 'react'
 import type { User } from './types'
+import type {
+  ImageStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export interface GiftedAvatarProps {
   user?: User;
-  avatarStyle?: Object;
-  textStyle?: Object;
+  avatarStyle?: ImageStyleProp;
+  textStyle?: TextStyleProp;
   onPress: any => void;
   onLongPress: any => void;
 }

@@ -2,11 +2,15 @@
 import { Image, TextInput } from 'react-native'
 import { IMessage } from './types'
 import * as React from 'react'
+import type {
+  ViewStyleProp,
+  ImageStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export interface MessageImageProps<TMessage: IMessage> {
   currentMessage?: TMessage;
-  containerStyle?: Object;
-  imageStyle?: Object;
+  containerStyle?: ViewStyleProp;
+  imageStyle?: ImageStyleProp;
   imageProps?: $Shape<React.ElementProps<typeof Image>>;
   lightboxProps?: Object;
 }

@@ -1,13 +1,17 @@
 // @flow
 import { Component } from 'react'
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export interface LoadEarlierProps {
   isLoadingEarlier?: boolean;
   label?: string;
-  containerStyle?: Object;
-  wrapperStyle?: Object;
-  textStyle?: Object;
-  activityIndicatorStyle?: Object;
+  containerStyle?: ViewStyleProp;
+  wrapperStyle?: ViewStyleProp;
+  textStyle?: TextStyleProp;
+  activityIndicatorStyle?: ViewStyleProp;
   activityIndicatorColor?: string;
   activityIndicatorSize?: number | 'small' | 'large';
   onLoadEarlier?: () => void;

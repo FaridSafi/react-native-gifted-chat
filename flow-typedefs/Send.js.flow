@@ -1,0 +1,19 @@
+// @flow
+import { Component } from 'react'
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export interface SendProps {
+  text?: string;
+  label?: string;
+  containerStyle?: ViewStyleProp;
+  textStyle?: TextStyleProp;
+  children?: React$Element<any>;
+  alwaysShowSend?: boolean;
+  disabled?: boolean;
+  onSend?: ({ text: string }, boolean) => void;
+}
+
+export default class Send extends Component<SendProps> {}

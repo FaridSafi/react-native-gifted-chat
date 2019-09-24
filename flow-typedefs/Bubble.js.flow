@@ -1,0 +1,71 @@
+// @flow
+import { Component } from 'react'
+import type { QuickRepliesProps } from './QuickReplies'
+import type { MessageImageProps } from './MessageImage'
+import type { MessageVideoProps } from './MessageVideo'
+import type { MessageTextProps } from './MessageText'
+import type { TimeProps } from './Time'
+import type { User, IMessage, LeftRightStyle, Reply } from './types'
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type RenderMessageImageProps<TMessage: IMessage> = $Diff<
+  BubbleProps<TMessage>,
+  {| containerStyle: *, wrapperStyle: * |},
+> &
+  MessageImageProps<TMessage>
+
+export type RenderMessageVideoProps<TMessage: IMessage> = $Diff<
+  BubbleProps<TMessage>,
+  {| containerStyle: *, wrapperStyle: * |},
+> &
+  MessageVideoProps<TMessage>
+
+export type RenderMessageTextProps<TMessage: IMessage> = $Diff<
+  BubbleProps<TMessage>,
+  {| containerStyle: *, wrapperStyle: * |},
+> &
+  MessageTextProps<TMessage>
+
+export interface BubbleProps<TMessage: IMessage> {
+  user?: User;
+  touchableProps?: Object;
+  renderUsernameOnMessage?: boolean;
+  isCustomViewBottom?: boolean;
+  inverted?: boolean;
+  position: 'left' | 'right';
+  currentMessage?: TMessage;
+  nextMessage?: TMessage;
+  previousMessage?: TMessage;
+  optionTitles?: string;
+  containerStyle?: LeftRightStyle<ViewStyleProp>;
+  wrapperStyle?: LeftRightStyle<ViewStyleProp>;
+  textStyle?: LeftRightStyle<TextStyleProp>;
+  bottomContainerStyle?: LeftRightStyle<ViewStyleProp>;
+  tickStyle?: TextStyleProp;
+  containerToNextStyle?: LeftRightStyle<ViewStyleProp>;
+  containerToPreviousStyle?: LeftRightStyle<ViewStyleProp>;
+  usernameStyle?: LeftRightStyle<TextStyleProp>;
+  quickReplyStyle?: ViewStyleProp;
+  onLongPress?: (context?: any, message?: any) => void;
+  onQuickReply?: (Array<Reply>) => void;
+  renderMessageImage?: (
+    RenderMessageImageProps<TMessage>,
+  ) => React$Element<any>;
+  renderMessageVideo?: (
+    RenderMessageVideoProps<TMessage>,
+  ) => React$Element<any>;
+  renderMessageText?: (RenderMessageTextProps<TMessage>) => React$Element<any>;
+  renderCustomView?: (BubbleProps<TMessage>) => React$Element<any>;
+  renderTime?: (TimeProps: TMessage) => React$Element<any>;
+  renderTicks?: TMessage => React$Element<any>;
+  renderUsername?: () => React$Element<any>;
+  renderQuickReplySend?: () => React$Element<any>;
+  renderQuickReplies?: QuickRepliesProps => React$Element<any>;
+}
+
+export default class Bubble<TMessage: IMessage> extends Component<
+  BubbleProps<TMessage>,
+> {}

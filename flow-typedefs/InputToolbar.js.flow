@@ -1,0 +1,31 @@
+// @flow
+import { Component } from 'react'
+import type { ComposerProps } from './Composer'
+import type { SendProps } from './Send'
+import type { ActionsProps } from './Actions'
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export interface InputToolbarProps {
+  options?: {
+    [key: string]: any,
+  };
+  optionTintColor?: string;
+  containerStyle?: ViewStyleProp;
+  primaryStyle?: ViewStyleProp;
+  accessoryStyle?: ViewStyleProp;
+  renderAccessory?: InputToolbarProps => React$Element<any>;
+  renderActions?: ActionsProps => React$Element<any>;
+  renderSend?: SendProps => React$Element<any>;
+  renderComposer?: ComposerProps => React$Element<any>;
+  onPressActionButton: () => void;
+}
+
+export default class InputToolbar extends Component<
+  InputToolbarProps,
+  {
+    position: string,
+  },
+> {}

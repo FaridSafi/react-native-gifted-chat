@@ -52,9 +52,11 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Input text; default is undefined, but if specified, it will override GiftedChat's internal state */
   text?: string
   /* Controls whether or not the message bubbles appear at the top of the chat */
-  alignTop?: boolean;
+  alignTop?: boolean
   /* enables the scrollToBottom Component */
-  scrollToBottom?: boolean;
+  scrollToBottom?: boolean
+  /* Scroll to bottom wrapper style */
+  scrollToBottomStyle?: StyleProp<ViewStyle>
   initialText?: string
   /* Placeholder when text is empty; default is 'Type a message...' */
   placeholder?: string

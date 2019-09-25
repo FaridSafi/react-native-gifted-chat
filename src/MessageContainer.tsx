@@ -12,6 +12,8 @@ import {
   ListRenderItemInfo,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  StyleProp,
+  ViewStyle,
 } from 'react-native'
 
 import LoadEarlier from './LoadEarlier'
@@ -68,6 +70,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   extraData?: any
   scrollToBottomOffset?: number
   forwardRef?: RefObject<FlatList<IMessage>>
+  scrollToBottomStyle?: StyleProp<ViewStyle>
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactNode
   renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
@@ -98,6 +101,7 @@ export default class MessageContainer<
     scrollToBottom: false,
     scrollToBottomOffset: 200,
     alignTop: false,
+    scrollToBottomStyle: {},
   }
 
   static propTypes = {
@@ -305,7 +309,7 @@ export default class MessageContainer<
   }
 
   renderScrollToBottomWrapper() {
-    const propsStyle = this.props.scrollToBottomStyle || {};
+    const propsStyle = this.props.scrollToBottomStyle || {}
     return (
       <View style={[styles.scrollToBottomStyle, propsStyle]}>
         <TouchableOpacity

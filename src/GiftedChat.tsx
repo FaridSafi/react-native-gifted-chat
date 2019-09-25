@@ -115,7 +115,6 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* optional prop used to place customView below text, image and video views; default is false */
   isCustomViewBottom?: boolean
   timeTextStyle?: LeftRightStyle<TextStyle>
-  scrollToBottomStyle?: StyleProp<ViewStyle>
   /* Callback when a message avatar is tapped */
   onPressAvatar?(user: User): void
   /* Callback when a message avatar is tapped */

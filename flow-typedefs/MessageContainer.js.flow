@@ -4,6 +4,7 @@ import { FlatList } from 'react-native'
 import type { LoadEarlierProps } from './LoadEarlier'
 import type { MessageProps } from './Message'
 import type { User, IMessage, Reply } from './types'
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export interface MessageContainerProps<TMessage: IMessage> {
   messages?: Array<TMessage>;
@@ -21,6 +22,7 @@ export interface MessageContainerProps<TMessage: IMessage> {
   renderMessage?: (MessageProps<TMessage>) => React$Element<any>;
   renderLoadEarlier?: LoadEarlierProps => React$Element<any>;
   scrollToBottomComponent?: () => React$Element<any>;
+  scrollToBottomStyle?: ViewStyleProp;
   onLoadEarlier?: () => void;
   onQuickReply?: (Array<Reply>) => void;
 }

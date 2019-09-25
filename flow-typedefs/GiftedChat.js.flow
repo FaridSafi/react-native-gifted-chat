@@ -31,6 +31,7 @@ export interface GiftedChatProps<TMessage: IMessage> {
   text?: string;
   alignTop?: boolean;
   scrollToBottom?: boolean;
+  scrollToBottomStyle?: ViewStyleProp;
   initialText?: string;
   placeholder?: string;
   user?: User;

@@ -112,7 +112,8 @@
     "react": "*",
     "react-dom": "*",
     "react-native": "*",
-    "react-native-video": "5.0.2"
+    "react-native-video": "5.0.2",
+    "react-native-htmlview": "*"
   },
   "husky": {
     "hooks": {

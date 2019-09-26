@@ -371,6 +371,7 @@ export default class MessageContainer<
           }
           onScroll={this.handleOnScroll}
           scrollEventThrottle={100}
+          bounces={false}
           onLayout={this.onLayoutList}
           {...this.props.listViewProps}
         />

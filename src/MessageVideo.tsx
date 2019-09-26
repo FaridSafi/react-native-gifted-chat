@@ -33,9 +33,6 @@ export default class MessageVideo<
   render() {
     const {
       containerStyle,
-      videoProps,
-      videoStyle,
-      currentMessage,
     } = this.props
     return (
       <View style={containerStyle}>

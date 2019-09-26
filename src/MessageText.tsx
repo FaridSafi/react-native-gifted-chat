@@ -13,6 +13,8 @@ import {
 
 // @ts-ignore
 import ParsedText from 'react-native-parsed-text'
+// @ts-ignore
+import HTMLView from 'react-native-htmlview';
 import Communications from 'react-native-communications'
 import { LeftRightStyle, IMessage } from './types'
 
@@ -158,6 +160,40 @@ export default class MessageText<
       styles[this.props.position].link,
       this.props.linkStyle && this.props.linkStyle[this.props.position],
     ]
+    let txt = this.props.currentMessage!.text
+    let content
+    if (txt.substring(0,3) === '<p>') {
+      txt = txt.slice(3, -4)
+    }
+    if (txt.charAt(0) === '<') {
+      content = (
+        <HTMLView
+          value={txt}
+          stylesheet={{ 
+            a: linkStyle
+          }}
+        />
+      )
+    } else {
+      content = (
+        <ParsedText
+          style={[
+            styles[this.props.position].text,
+            this.props.textStyle && this.props.textStyle[this.props.position],
+            this.props.customTextStyle,
+          ]}
+          parse={[
+            ...this.props.parsePatterns(linkStyle),
+            { type: 'url', style: linkStyle, onPress: this.onUrlPress },
+            { type: 'phone', style: linkStyle, onPress: this.onPhonePress },
+            { type: 'email', style: linkStyle, onPress: this.onEmailPress },
+          ]}
+          childrenProps={{ ...this.props.textProps }}
+        >
+          {txt}
+        </ParsedText>
+      )
+    }
     return (
       <View
         style={[
@@ -166,22 +202,7 @@ export default class MessageText<
             this.props.containerStyle[this.props.position],
         ]}
       >
-        <ParsedText
-          style={[
-            styles[this.props.position].text,
-            this.props.textStyle && this.props.textStyle[this.props.position],
-            this.props.customTextStyle,
-          ]}
-          parse={[
-            ...this.props.parsePatterns!(linkStyle as TextStyle),
-            { type: 'url', style: linkStyle, onPress: this.onUrlPress },
-            { type: 'phone', style: linkStyle, onPress: this.onPhonePress },
-            { type: 'email', style: linkStyle, onPress: this.onEmailPress },
-          ]}
-          childrenProps={{ ...this.props.textProps }}
-        >
-          {this.props.currentMessage!.text}
-        </ParsedText>
+        {content}
       </View>
     )
   }

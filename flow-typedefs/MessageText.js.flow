@@ -7,7 +7,7 @@ import type {
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 import * as React from 'react'
 
-export type MessageTextProps<TMessage: IMessage> = $ReadOnly<{|
+export type MessageTextProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   position: 'left' | 'right',
   currentMessage?: TMessage,
   containerStyle: LeftRightStyle<ViewStyleProp>,
@@ -18,6 +18,6 @@ export type MessageTextProps<TMessage: IMessage> = $ReadOnly<{|
   parsePatterns?: TextStyleProp => any,
 |}>
 
-export default class MessageText<TMessage: IMessage> extends React.Component<
-  MessageTextProps<TMessage>,
-> {}
+export default class MessageText<
+  TMessage: IMessage = IMessage,
+> extends React.Component<MessageTextProps<TMessage>> {}

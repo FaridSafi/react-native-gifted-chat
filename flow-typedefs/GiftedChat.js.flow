@@ -40,7 +40,7 @@ import type {
 import { FlatList } from 'react-native'
 import * as utils from './utils'
 
-export type GiftedChatProps<TMessage: IMessage> = $ReadOnly<{|
+export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   messages?: Array<TMessage>,
   text?: string,
   alignTop?: boolean,
@@ -116,7 +116,7 @@ export type GiftedChatProps<TMessage: IMessage> = $ReadOnly<{|
   ) => boolean,
 |}>
 
-export type GiftedChatState<TMessage: IMessage> = {|
+export type GiftedChatState<TMessage: IMessage = IMessage> = {|
   isInitialized: boolean,
   composerHeight?: number,
   messagesContainerHeight?: number | AnimatedValue,
@@ -125,7 +125,7 @@ export type GiftedChatState<TMessage: IMessage> = {|
   messages?: Array<TMessage>,
 |}
 
-class GiftedChat<TMessage: IMessage> extends React.Component<
+class GiftedChat<TMessage: IMessage = IMessage> extends React.Component<
   GiftedChatProps<TMessage>,
   GiftedChatState<TMessage>,
 > {}

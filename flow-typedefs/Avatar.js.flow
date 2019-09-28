@@ -6,7 +6,7 @@ import type {
   ViewStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-export type AvatarProps<TMessage: IMessage> = $ReadOnly<{|
+export type AvatarProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   currentMessage?: TMessage,
   previousMessage?: TMessage,
   nextMessage?: TMessage,
@@ -22,6 +22,6 @@ export type AvatarProps<TMessage: IMessage> = $ReadOnly<{|
   onLongPressAvatar?: User => void,
 |}>
 
-export default class Avatar<TMessage: IMessage> extends Component<
+export default class Avatar<TMessage: IMessage = IMessage> extends Component<
   AvatarProps<TMessage>,
 > {}

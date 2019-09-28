@@ -7,7 +7,7 @@ import type { DayProps } from './Day'
 import type { IMessage, User, LeftRightStyle } from './types'
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-export type MessageProps<TMessage: IMessage> = $ReadOnly<{|
+export type MessageProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   key: React$Key,
   showUserAvatar?: boolean,
   position: 'left' | 'right',
@@ -27,6 +27,6 @@ export type MessageProps<TMessage: IMessage> = $ReadOnly<{|
   ) => boolean,
 |}>
 
-export default class Message<TMessage: IMessage> extends Component<
+export default class Message<TMessage: IMessage = IMessage> extends Component<
   MessageProps<TMessage>,
 > {}

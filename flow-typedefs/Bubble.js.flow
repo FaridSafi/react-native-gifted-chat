@@ -11,25 +11,25 @@ import type {
   ViewStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-export type RenderMessageImageProps<TMessage: IMessage> = $Diff<
+export type RenderMessageImageProps<TMessage: IMessage = IMessage> = $Diff<
   BubbleProps<TMessage>,
   {| containerStyle: *, wrapperStyle: * |},
 > &
   MessageImageProps<TMessage>
 
-export type RenderMessageVideoProps<TMessage: IMessage> = $Diff<
+export type RenderMessageVideoProps<TMessage: IMessage = IMessage> = $Diff<
   BubbleProps<TMessage>,
   {| containerStyle: *, wrapperStyle: * |},
 > &
   MessageVideoProps<TMessage>
 
-export type RenderMessageTextProps<TMessage: IMessage> = $Diff<
+export type RenderMessageTextProps<TMessage: IMessage = IMessage> = $Diff<
   BubbleProps<TMessage>,
   {| containerStyle: *, wrapperStyle: * |},
 > &
   MessageTextProps<TMessage>
 
-export type BubbleProps<TMessage: IMessage> = $ReadOnly<{|
+export type BubbleProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   user?: User,
   touchableProps?: Object,
   renderUsernameOnMessage?: boolean,
@@ -66,6 +66,6 @@ export type BubbleProps<TMessage: IMessage> = $ReadOnly<{|
   renderQuickReplies?: QuickRepliesProps => React$Element<any>,
 |}>
 
-export default class Bubble<TMessage: IMessage> extends Component<
+export default class Bubble<TMessage: IMessage = IMessage> extends Component<
   BubbleProps<TMessage>,
 > {}

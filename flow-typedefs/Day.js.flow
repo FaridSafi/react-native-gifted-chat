@@ -7,7 +7,7 @@ import type {
   TextStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-export type DayProps<TMessage: IMessage> = $ReadOnly<{|
+export type DayProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   currentMessage?: TMessage,
   nextMessage?: TMessage,
   previousMessage?: TMessage,
@@ -18,6 +18,6 @@ export type DayProps<TMessage: IMessage> = $ReadOnly<{|
   inverted?: boolean,
 |}>
 
-export default class Day<TMessage: IMessage> extends PureComponent<
+export default class Day<TMessage: IMessage = IMessage> extends PureComponent<
   DayProps<TMessage>,
 > {}

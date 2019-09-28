@@ -29,42 +29,42 @@ export type RenderMessageTextProps<TMessage: IMessage> = $Diff<
 > &
   MessageTextProps<TMessage>
 
-export interface BubbleProps<TMessage: IMessage> {
-  user?: User;
-  touchableProps?: Object;
-  renderUsernameOnMessage?: boolean;
-  isCustomViewBottom?: boolean;
-  inverted?: boolean;
-  position: 'left' | 'right';
-  currentMessage?: TMessage;
-  nextMessage?: TMessage;
-  previousMessage?: TMessage;
-  optionTitles?: string;
-  containerStyle?: LeftRightStyle<ViewStyleProp>;
-  wrapperStyle?: LeftRightStyle<ViewStyleProp>;
-  textStyle?: LeftRightStyle<TextStyleProp>;
-  bottomContainerStyle?: LeftRightStyle<ViewStyleProp>;
-  tickStyle?: TextStyleProp;
-  containerToNextStyle?: LeftRightStyle<ViewStyleProp>;
-  containerToPreviousStyle?: LeftRightStyle<ViewStyleProp>;
-  usernameStyle?: LeftRightStyle<TextStyleProp>;
-  quickReplyStyle?: ViewStyleProp;
-  onLongPress?: (context?: any, message?: any) => void;
-  onQuickReply?: (Array<Reply>) => void;
+export type BubbleProps<TMessage: IMessage> = $ReadOnly<{|
+  user?: User,
+  touchableProps?: Object,
+  renderUsernameOnMessage?: boolean,
+  isCustomViewBottom?: boolean,
+  inverted?: boolean,
+  position: 'left' | 'right',
+  currentMessage?: TMessage,
+  nextMessage?: TMessage,
+  previousMessage?: TMessage,
+  optionTitles?: string,
+  containerStyle?: LeftRightStyle<ViewStyleProp>,
+  wrapperStyle?: LeftRightStyle<ViewStyleProp>,
+  textStyle?: LeftRightStyle<TextStyleProp>,
+  bottomContainerStyle?: LeftRightStyle<ViewStyleProp>,
+  tickStyle?: TextStyleProp,
+  containerToNextStyle?: LeftRightStyle<ViewStyleProp>,
+  containerToPreviousStyle?: LeftRightStyle<ViewStyleProp>,
+  usernameStyle?: LeftRightStyle<TextStyleProp>,
+  quickReplyStyle?: ViewStyleProp,
+  onLongPress?: (context?: any, message?: any) => void,
+  onQuickReply?: (Array<Reply>) => void,
   renderMessageImage?: (
     RenderMessageImageProps<TMessage>,
-  ) => React$Element<any>;
+  ) => React$Element<any>,
   renderMessageVideo?: (
     RenderMessageVideoProps<TMessage>,
-  ) => React$Element<any>;
-  renderMessageText?: (RenderMessageTextProps<TMessage>) => React$Element<any>;
-  renderCustomView?: (BubbleProps<TMessage>) => React$Element<any>;
-  renderTime?: (TimeProps: TMessage) => React$Element<any>;
-  renderTicks?: TMessage => React$Element<any>;
-  renderUsername?: () => React$Element<any>;
-  renderQuickReplySend?: () => React$Element<any>;
-  renderQuickReplies?: QuickRepliesProps => React$Element<any>;
-}
+  ) => React$Element<any>,
+  renderMessageText?: (RenderMessageTextProps<TMessage>) => React$Element<any>,
+  renderCustomView?: (BubbleProps<TMessage>) => React$Element<any>,
+  renderTime?: (TimeProps: TMessage) => React$Element<any>,
+  renderTicks?: TMessage => React$Element<any>,
+  renderUsername?: () => React$Element<any>,
+  renderQuickReplySend?: () => React$Element<any>,
+  renderQuickReplies?: QuickRepliesProps => React$Element<any>,
+|}>
 
 export default class Bubble<TMessage: IMessage> extends Component<
   BubbleProps<TMessage>,

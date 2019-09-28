@@ -1,5 +1,5 @@
 // @flow
-import { IMessage } from './types'
+import type { IMessage } from './types'
 
 declare export function isSameDay(
   currentMessage: IMessage,

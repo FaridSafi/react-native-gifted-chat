@@ -8,24 +8,24 @@ import type {
   ViewStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-export interface InputToolbarProps {
+export type InputToolbarProps = $ReadOnly<{|
   options?: {
     [key: string]: any,
-  };
-  optionTintColor?: string;
-  containerStyle?: ViewStyleProp;
-  primaryStyle?: ViewStyleProp;
-  accessoryStyle?: ViewStyleProp;
-  renderAccessory?: InputToolbarProps => React$Element<any>;
-  renderActions?: ActionsProps => React$Element<any>;
-  renderSend?: SendProps => React$Element<any>;
-  renderComposer?: ComposerProps => React$Element<any>;
-  onPressActionButton: () => void;
-}
+  },
+  optionTintColor?: string,
+  containerStyle?: ViewStyleProp,
+  primaryStyle?: ViewStyleProp,
+  accessoryStyle?: ViewStyleProp,
+  renderAccessory?: InputToolbarProps => React$Element<any>,
+  renderActions?: ActionsProps => React$Element<any>,
+  renderSend?: SendProps => React$Element<any>,
+  renderComposer?: ComposerProps => React$Element<any>,
+  onPressActionButton: () => void,
+|}>
 
 export default class InputToolbar extends Component<
   InputToolbarProps,
-  {
+  {|
     position: string,
-  },
+  |},
 > {}

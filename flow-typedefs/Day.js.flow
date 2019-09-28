@@ -7,16 +7,16 @@ import type {
   TextStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-export interface DayProps<TMessage: IMessage> {
-  currentMessage?: TMessage;
-  nextMessage?: TMessage;
-  previousMessage?: TMessage;
-  containerStyle?: ViewStyleProp;
-  wrapperStyle?: ViewStyleProp;
-  textStyle?: TextStyleProp;
-  dateFormat?: string;
-  inverted?: boolean;
-}
+export type DayProps<TMessage: IMessage> = $ReadOnly<{|
+  currentMessage?: TMessage,
+  nextMessage?: TMessage,
+  previousMessage?: TMessage,
+  containerStyle?: ViewStyleProp,
+  wrapperStyle?: ViewStyleProp,
+  textStyle?: TextStyleProp,
+  dateFormat?: string,
+  inverted?: boolean,
+|}>
 
 export default class Day<TMessage: IMessage> extends PureComponent<
   DayProps<TMessage>,

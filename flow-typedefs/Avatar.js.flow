@@ -6,8 +6,6 @@ import type {
   ViewStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-type Props = { name: string, age: number => string }
-
 export interface AvatarProps<TMessage: IMessage> {
   currentMessage?: TMessage;
   previousMessage?: TMessage;

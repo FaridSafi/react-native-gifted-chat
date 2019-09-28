@@ -1,5 +1,6 @@
 // @flow
-type renderFunction = any => React$Element<any>
+import * as React from 'react'
+type renderFunction = any => React.Node
 
 export type LeftRightStyle<T> = {|
   left: T,

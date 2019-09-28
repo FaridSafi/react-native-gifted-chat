@@ -1,5 +1,5 @@
 // @flow
-import { Component } from 'react'
+import * as React from 'react'
 import type { AvatarProps } from './Avatar'
 import type { BubbleProps } from './Bubble'
 import type { SystemMessageProps } from './SystemMessage'
@@ -17,16 +17,16 @@ export type MessageProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   user: User,
   inverted?: boolean,
   containerStyle?: LeftRightStyle<ViewStyleProp>,
-  renderBubble?: (BubbleProps<TMessage>) => React$Element<any>,
-  renderDay?: (DayProps<TMessage>) => React$Element<any>,
-  renderSystemMessage?: (SystemMessageProps<TMessage>) => React$Element<any>,
-  renderAvatar?: (AvatarProps<TMessage>) => React$Element<any>,
+  renderBubble?: (BubbleProps<TMessage>) => React.Node,
+  renderDay?: (DayProps<TMessage>) => React.Node,
+  renderSystemMessage?: (SystemMessageProps<TMessage>) => React.Node,
+  renderAvatar?: (AvatarProps<TMessage>) => React.Node,
   shouldUpdateMessage?: (
     props: MessageProps<IMessage>,
     nextProps: MessageProps<IMessage>,
   ) => boolean,
 |}>
 
-export default class Message<TMessage: IMessage = IMessage> extends Component<
-  MessageProps<TMessage>,
-> {}
+export default class Message<
+  TMessage: IMessage = IMessage,
+> extends React.Component<MessageProps<TMessage>> {}

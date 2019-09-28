@@ -1,5 +1,5 @@
 // @flow
-import { Component } from 'react'
+import * as React from 'react'
 import type {
   ViewStyleProp,
   ImageStyleProp,
@@ -11,11 +11,11 @@ export type ActionsProps = $ReadOnly<{|
     [key: string]: any,
   },
   optionTintColor?: string,
-  icon?: () => React$Element<any>,
+  icon?: () => React.Node,
   wrapperStyle?: ViewStyleProp,
   iconTextStyle?: TextStyleProp,
   containerStyle?: ViewStyleProp,
   onPressActionButton?: () => void,
 |}>
 
-export default class Actions extends Component<ActionsProps> {}
+export default class Actions extends React.Component<ActionsProps> {}

@@ -4,21 +4,21 @@ import * as React from 'react'
 
 type TextInputProps = $Shape<React.ElementProps<typeof TextInput>>
 
-export interface ComposerProps {
-  composerHeight?: number;
-  text?: string;
-  placeholder?: string;
-  placeholderTextColor?: string;
-  textInputProps?: TextInputProps;
-  textInputStyle?: $PropertyType<TextInputProps, 'style'>;
-  textInputAutoFocus?: boolean;
-  keyboardAppearance?: $PropertyType<TextInputProps, 'keyboardAppearance'>;
-  multiline?: boolean;
-  onTextChanged?: string => void;
+export type ComposerProps = $ReadOnly<{|
+  composerHeight?: number,
+  text?: string,
+  placeholder?: string,
+  placeholderTextColor?: string,
+  textInputProps?: TextInputProps,
+  textInputStyle?: $PropertyType<TextInputProps, 'style'>,
+  textInputAutoFocus?: boolean,
+  keyboardAppearance?: $PropertyType<TextInputProps, 'keyboardAppearance'>,
+  multiline?: boolean,
+  onTextChanged?: string => void,
   onInputSizeChanged?: ({|
     width: number,
     height: number,
-  |}) => void;
-}
+  |}) => void,
+|}>
 
 export default class Composer extends React.Component<ComposerProps> {}

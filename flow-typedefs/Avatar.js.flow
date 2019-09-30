@@ -1,29 +1,27 @@
 // @flow
-import { Component } from 'react'
+import * as React from 'react'
 import type { IMessage, User, LeftRightStyle } from './types'
 import type {
   ImageStyleProp,
   ViewStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-type Props = { name: string, age: number => string }
-
-export interface AvatarProps<TMessage: IMessage> {
-  currentMessage?: TMessage;
-  previousMessage?: TMessage;
-  nextMessage?: TMessage;
-  position: 'left' | 'right';
-  renderAvatarOnTop?: boolean;
-  showAvatarForEveryMessage?: boolean;
-  imageStyle?: LeftRightStyle<ImageStyleProp>;
-  containerStyle?: LeftRightStyle<ViewStyleProp>;
+export type AvatarProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  currentMessage?: TMessage,
+  previousMessage?: TMessage,
+  nextMessage?: TMessage,
+  position: 'left' | 'right',
+  renderAvatarOnTop?: boolean,
+  showAvatarForEveryMessage?: boolean,
+  imageStyle?: LeftRightStyle<ImageStyleProp>,
+  containerStyle?: LeftRightStyle<ViewStyleProp>,
   renderAvatar?: (
     $Diff<AvatarProps<TMessage>, {| renderAvatar: * |}>,
-  ) => React$Element<any>;
-  onPressAvatar?: User => void;
-  onLongPressAvatar?: User => void;
-}
+  ) => React.Node,
+  onPressAvatar?: User => void,
+  onLongPressAvatar?: User => void,
+|}>
 
-export default class Avatar<TMessage: IMessage> extends Component<
-  AvatarProps<TMessage>,
-> {}
+export default class Avatar<
+  TMessage: IMessage = IMessage,
+> extends React.Component<AvatarProps<TMessage>> {}

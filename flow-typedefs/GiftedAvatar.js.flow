@@ -6,12 +6,12 @@ import type {
   TextStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-export interface GiftedAvatarProps {
-  user?: User;
-  avatarStyle?: ImageStyleProp;
-  textStyle?: TextStyleProp;
-  onPress: any => void;
-  onLongPress: any => void;
-}
+export type GiftedAvatarProps = $ReadOnly<{|
+  user?: User,
+  avatarStyle?: ImageStyleProp,
+  textStyle?: TextStyleProp,
+  onPress: any => void,
+  onLongPress: any => void,
+|}>
 
 export default class GiftedAvatar extends Component<GiftedAvatarProps> {}

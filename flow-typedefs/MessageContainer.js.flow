@@ -6,33 +6,33 @@ import type { MessageProps } from './Message'
 import type { User, IMessage, Reply } from './types'
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-export interface MessageContainerProps<TMessage: IMessage> {
-  messages?: Array<TMessage>;
-  user?: User;
-  listViewProps: $Shape<React.ElementProps<typeof FlatList>>;
-  inverted?: boolean;
-  loadEarlier?: boolean;
-  alignTop?: boolean;
-  scrollToBottom?: boolean;
-  invertibleScrollViewProps?: any;
-  extraData?: any;
-  scrollToBottomOffset?: number;
-  forwardRef?: React.Ref<typeof FlatList>;
-  renderFooter?: (MessageContainerProps<TMessage>) => React$Element<any>;
-  renderMessage?: (MessageProps<TMessage>) => React$Element<any>;
-  renderLoadEarlier?: LoadEarlierProps => React$Element<any>;
-  scrollToBottomComponent?: () => React$Element<any>;
-  scrollToBottomStyle?: ViewStyleProp;
-  onLoadEarlier?: () => void;
-  onQuickReply?: (Array<Reply>) => void;
-}
+export type MessageContainerProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  messages?: Array<TMessage>,
+  user?: User,
+  listViewProps: $Shape<React.ElementProps<typeof FlatList>>,
+  inverted?: boolean,
+  loadEarlier?: boolean,
+  alignTop?: boolean,
+  scrollToBottom?: boolean,
+  invertibleScrollViewProps?: any,
+  extraData?: any,
+  scrollToBottomOffset?: number,
+  forwardRef?: React.Ref<typeof FlatList>,
+  renderFooter?: (MessageContainerProps<TMessage>) => React.Node,
+  renderMessage?: (MessageProps<TMessage>) => React.Node,
+  renderLoadEarlier?: LoadEarlierProps => React.Node,
+  scrollToBottomComponent?: () => React.Node,
+  scrollToBottomStyle?: ViewStyleProp,
+  onLoadEarlier?: () => void,
+  onQuickReply?: (Array<Reply>) => void,
+|}>
 
-interface MessageContainerState {
-  showScrollBottom: boolean;
-}
+type MessageContainerState = {|
+  showScrollBottom: boolean,
+|}
 
 export default class MessageContainer<
-  TMessage: IMessage,
+  TMessage: IMessage = IMessage,
 > extends React.PureComponent<
   MessageContainerProps<TMessage>,
   MessageContainerState,

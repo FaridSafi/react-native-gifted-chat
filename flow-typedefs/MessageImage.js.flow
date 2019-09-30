@@ -1,20 +1,20 @@
 // @flow
 import { Image, TextInput } from 'react-native'
-import { IMessage } from './types'
+import type { IMessage } from './types'
 import * as React from 'react'
 import type {
   ViewStyleProp,
   ImageStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-export interface MessageImageProps<TMessage: IMessage> {
-  currentMessage?: TMessage;
-  containerStyle?: ViewStyleProp;
-  imageStyle?: ImageStyleProp;
-  imageProps?: $Shape<React.ElementProps<typeof Image>>;
-  lightboxProps?: Object;
-}
+export type MessageImageProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  currentMessage?: TMessage,
+  containerStyle?: ViewStyleProp,
+  imageStyle?: ImageStyleProp,
+  imageProps?: $Shape<React.ElementProps<typeof Image>>,
+  lightboxProps?: Object,
+|}>
 
-export default class MessageImage<TMessage: IMessage> extends React.Component<
-  MessageImageProps<TMessage>,
-> {}
+export default class MessageImage<
+  TMessage: IMessage = IMessage,
+> extends React.Component<MessageImageProps<TMessage>> {}

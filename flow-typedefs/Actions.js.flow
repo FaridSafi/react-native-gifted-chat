@@ -1,21 +1,21 @@
 // @flow
-import { Component } from 'react'
+import * as React from 'react'
 import type {
   ViewStyleProp,
   ImageStyleProp,
   TextStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-export interface ActionsProps {
+export type ActionsProps = $ReadOnly<{|
   options?: {
     [key: string]: any,
-  };
-  optionTintColor?: string;
-  icon?: () => React$Element<any>;
-  wrapperStyle?: ViewStyleProp;
-  iconTextStyle?: TextStyleProp;
-  containerStyle?: ViewStyleProp;
-  onPressActionButton?: () => void;
-}
+  },
+  optionTintColor?: string,
+  icon?: () => React.Node,
+  wrapperStyle?: ViewStyleProp,
+  iconTextStyle?: TextStyleProp,
+  containerStyle?: ViewStyleProp,
+  onPressActionButton?: () => void,
+|}>
 
-export default class Actions extends Component<ActionsProps> {}
+export default class Actions extends React.Component<ActionsProps> {}

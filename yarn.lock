@@ -6117,10 +6117,10 @@ react-native-lightbox@^0.7.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-maps@~0.25.0:
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.25.0.tgz#81bc51eb50e33811a9e1c345cc48869413ead67d"
-  integrity sha512-PFJuW1pt+HnnnN0m0OGk29RSvICFVkK/DScX6cUk0SuCSN2DAHx0y6y57lZyYXcYqU4J4usNpfxgp/ccjASDiw==
+react-native-maps@~0.26.0:
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.26.0.tgz#dd991fa55ef4d49958ca28b8d61af871bf4f6812"
+  integrity sha512-WX26b/ZuAGwkhtbWPYBQDxMYf41gug7tRNHJsE6V/FigBNHB4JYEDq3fy8YttOVxPdthG5slUH1Dsm+tzMWjGw==
 
 react-native-nav@2.0.2:
   version "2.0.2"

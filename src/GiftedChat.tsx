@@ -177,6 +177,11 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     props: Message['props'],
     nextProps: Message['props'],
   ): boolean
+  /* Custom comparator to be used in GiftedChat's componentDidUpdate method to override the default memoization implementation */
+  shouldUpdateChat?(
+    prevProps: GiftedChatProps<TMessage>,
+    props: GiftedChatProps<TMessage>,
+  ): boolean
 }
 
 export interface GiftedChatState<TMessage extends IMessage = IMessage> {
@@ -260,6 +265,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     extraData: null,
     minComposerHeight: MIN_COMPOSER_HEIGHT,
     maxComposerHeight: MAX_COMPOSER_HEIGHT,
+    shouldUpdateChat: undefined,
   }
 
   static propTypes = {
@@ -319,6 +325,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     minComposerHeight: PropTypes.number,
     maxComposerHeight: PropTypes.number,
     alignTop: PropTypes.bool,
+    shouldUpdateChat: PropTypes.func,
   }
 
   static append<TMessage extends IMessage>(
@@ -401,11 +408,14 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   componentDidUpdate(prevProps: GiftedChatProps<TMessage> = {}) {
-    const { messages, text } = this.props
+    const { messages, text, shouldUpdateChat } = this.props
+    const shouldUpdate =
+      shouldUpdateChat && shouldUpdateChat(prevProps, this.props)
     if (
-      messages &&
-      prevProps.messages &&
-      messages.length !== prevProps.messages.length
+      shouldUpdateChat ||
+      (messages &&
+        prevProps.messages &&
+        messages.length !== prevProps.messages.length)
     ) {
       this.setMessages(messages || [])
       setTimeout(() => this.scrollToBottom(false), 200)

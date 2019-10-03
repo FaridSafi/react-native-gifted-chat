@@ -402,12 +402,19 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   componentDidUpdate(prevProps: GiftedChatProps<TMessage> = {}) {
     const { messages, text } = this.props
-    if (messages && prevProps.messages) {
+
+    if (this.props !== prevProps) {
       this.setMessages(messages || [])
-      if (messages.length !== prevProps.messages.length) {
-        setTimeout(() => this.scrollToBottom(false), 200)
-      }
     }
+
+    if (
+      messages &&
+      prevProps.messages &&
+      messages.length !== prevProps.messages.length
+    ) {
+      setTimeout(() => this.scrollToBottom(false), 200)
+    }
+
     if (text !== prevProps.text) {
       this.setTextFromProp(text)
     }

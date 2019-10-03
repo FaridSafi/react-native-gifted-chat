@@ -97,7 +97,7 @@
 
 ### No expo, no web, just native
 
-- You have to define `"react-native-video": "5.0.2"` into **your own dependencies** and **linking** it.
+- You have to define `"react-native-video": "<your version>"` or/and `"expo-av": "<your version>"` into **your own dependencies** and **linking** it.
 - [Doc Linking Libraries](https://facebook.github.io/react-native/docs/linking-libraries-ios)
 - [StackOverflow - Linking native library in react native?](https://stackoverflow.com/questions/43099237/linking-native-library-in-react-native)
 

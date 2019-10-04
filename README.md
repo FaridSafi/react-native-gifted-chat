@@ -95,11 +95,10 @@
 - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-gifted-chat --save`
 - Using [Yarn](https://yarnpkg.com/): `yarn add react-native-gifted-chat`
 
-### No expo, no web, just native
+### react-native-video and expo-av
 
-- You have to define `"react-native-video": "<your version>"` or/and `"expo-av": "<your version>"` into **your own dependencies** and **linking** it.
-- [Doc Linking Libraries](https://facebook.github.io/react-native/docs/linking-libraries-ios)
-- [StackOverflow - Linking native library in react native?](https://stackoverflow.com/questions/43099237/linking-native-library-in-react-native)
+- Both dependencies are removed since `0.11.0`.
+- You still be able to provide a `video` but you need to provide `renderMessageVideo` prop.
 
 ## You have a question ?
 
@@ -428,7 +427,7 @@ If you use React Navigation, additional handling may be required to account for 
 module.exports = function override(config, env) {
   config.module.rules.push({
     test: /\.js$/,
-    exclude: /node_modules[/\\](?!react-native-gifted-chat|react-native-lightbox|react-native-parsed-text|expo-av)/,
+    exclude: /node_modules[/\\](?!react-native-gifted-chat|react-native-lightbox|react-native-parsed-text)/,
     use: {
       loader: 'babel-loader',
       options: {

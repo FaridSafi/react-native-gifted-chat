@@ -1,54 +1,15 @@
-import PropTypes from 'prop-types'
 import React from 'react'
-import { View, ViewPropTypes } from 'react-native'
-import Video from 'react-native-video'
-import { IMessage, MessageVideoProps } from './types'
+import Color from './Color'
+import { View, Text } from 'react-native'
 
-export default class MessageVideo<
-  TMessage extends IMessage = IMessage
-> extends React.Component<MessageVideoProps<TMessage>> {
-  static defaultProps = {
-    currentMessage: {
-      video: null,
-    },
-    containerStyle: {},
-    videoStyle: {
-      width: 150,
-      height: 100,
-      borderRadius: 13,
-      margin: 3,
-    },
-    videoProps: {},
-  }
-
-  static propTypes = {
-    currentMessage: PropTypes.object,
-    containerStyle: ViewPropTypes.style,
-    videoStyle: ViewPropTypes.style,
-    videoProps: PropTypes.object,
-  }
-
-  player: any = undefined
-
-  render() {
-    const {
-      containerStyle,
-      videoProps,
-      videoStyle,
-      currentMessage,
-    } = this.props
-    return (
-      <View style={containerStyle}>
-        <Video
-          {...videoProps}
-          ref={r => {
-            this.player = r
-          }}
-          source={{ uri: currentMessage!.video! }}
-          style={videoStyle}
-          resizeMode='cover'
-        />
-      </View>
-    )
-  }
-}
+export default (_props: any) => (
+  <View style={{ padding: 20 }}>
+    <Text style={{ color: Color.alizarin, fontWeight: '600' }}>
+      Video is not implemented by GiftedChat.
+    </Text>
+    <Text style={{ color: Color.alizarin, fontWeight: '600' }}>
+      You need to provide your own implementation by using renderMessageVideo
+      prop.
+    </Text>
+  </View>
+)

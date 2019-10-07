@@ -10,6 +10,7 @@ import {
   StyleProp,
   ImageStyle,
 } from 'react-native'
+// TODO: support web
 // @ts-ignore
 import Lightbox from 'react-native-lightbox'
 import { IMessage } from './types'

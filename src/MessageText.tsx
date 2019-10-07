@@ -91,16 +91,16 @@ export default class MessageText<
       right: ViewPropTypes.style,
     }),
     textStyle: PropTypes.shape({
-      left: PropTypes.object,
-      right: PropTypes.object,
+      left: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+      right: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
     }),
     linkStyle: PropTypes.shape({
-      left: PropTypes.object,
-      right: PropTypes.object,
+      left: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+      right: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
     }),
     parsePatterns: PropTypes.func,
     textProps: PropTypes.object,
-    customTextStyle: PropTypes.object,
+    customTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   }
 
   shouldComponentUpdate(nextProps: MessageTextProps<TMessage>) {

@@ -10,7 +10,7 @@
   💬 Gifted Chat
 </h3>
 <p align="center">
-  The most complete chat UI for React Native
+  The most complete chat UI for React Native & Web
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/react-native-gifted-chat">
@@ -26,6 +26,7 @@
   <a title='License' href="https://github.com/FaridSafi/react-native-gifted-chat/blob/master/LICENSE" height="18">
     <img src='https://img.shields.io/badge/license-MIT-blue.svg' />
   </a>
+  <a href="#hire-an-expert"><img src="https://img.shields.io/badge/%F0%9F%92%AA-hire%20an%20expert-brightgreen"/></a>
 </p>
 
 <p align="center">
@@ -68,7 +69,7 @@
 
 ## Features
 
-- _`react-native-web`able_ (ASAP: [#1284](https://github.com/FaridSafi/react-native-gifted-chat/pull/1284))
+- 🎉 **_`react-native-web`able_ (since 0.10.0)** [web configuration](#react-native-web)
 - Write with **TypeScript** (since 0.8.0)
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
@@ -93,6 +94,11 @@
 
 - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-gifted-chat --save`
 - Using [Yarn](https://yarnpkg.com/): `yarn add react-native-gifted-chat`
+
+### react-native-video and expo-av
+
+- Both dependencies are removed since `0.11.0`.
+- You still be able to provide a `video` but you need to provide `renderMessageVideo` prop.
 
 ## You have a question ?
 
@@ -151,7 +157,7 @@ class Example extends React.Component {
 
 ## Advanced example
 
-See [`example/App.js`](example/App.js) for a working demo!
+See [`App.js`](App.js) for a working demo!
 
 ## "Slack" example
 
@@ -298,7 +304,7 @@ interface QuickReplies {
 - **`renderMessageImage`** _(Function)_ - Custom message image
 - **`renderMessageVideo`** _(Function)_ - Custom message video
 - **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component created by the default `renderMessageImage`
-- **`videoProps`** _(Object)_ - Extra props to be passed to the [`<Video>`](https://github.com/react-native-community/react-native-video) component created by the default `renderMessageVideo`
+- **`videoProps`** _(Object)_ - Extra props to be passed to the video component created by the required `renderMessageVideo`
 - **`lightboxProps`** _(Object)_ - Extra props to be passed to the `MessageImage`'s [Lightbox](https://github.com/oblador/react-native-lightbox)
 - **`isCustomViewBottom`** _(Bool)_ - Determine wether renderCustomView is displayed before or after the text, image and video views; default is `false`
 - **`renderCustomView`** _(Function)_ - Custom view inside the bubble
@@ -319,7 +325,7 @@ interface QuickReplies {
 - **`keyboardShouldPersistTaps`** _(Enum)_ - Determines whether the keyboard should stay visible after a tap; see [`<ScrollView>`](https://facebook.github.io/react-native/docs/scrollview.html) docs
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
 - **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
-- **`parsePatterns`** _(Function)_ - Custom parse patterns for [react-native-parsed-text](https://github.com/taskrabbit/react-native-parsed-text) used to linkify message content (like URLs and phone numbers), e.g.:
+- **`parsePatterns`** _(Function)_ - Custom parse patterns for [react-native-parsed-text](https://github.com/taskrabbit/react-native-parsed-text) used to linking message content (like URLs and phone numbers), e.g.:
 
 ```js
  <GiftedChat
@@ -381,27 +387,68 @@ If you are using Create React Native App / Expo, no Android specific installatio
 
 - For **Expo**, there are at least 2 solutions to fix it:
 
-  - Wrap GiftedChat in a [`KeyboardAvoidingView`](https://facebook.github.io/react-native/docs/keyboardavoidingview). This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
+  - Append [`KeyboardAvoidingView`](https://facebook.github.io/react-native/docs/keyboardavoidingview) after GiftedChat. This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
+
 ```
 <View style={{ flex: 1 }}>
+   <GiftedChat />
    {
-      Platform.OS === 'android' ?
-         <KeyboardAvoidingView behavior="padding">
-            <GiftedChat />
-         </KeyboardAvoidingView> :
-         <GiftedChat />
+      Platform.OS === 'android' && <KeyboardAvoidingView behavior="padding" />
    }
 </View>
 ```
+
 If you use React Navigation, additional handling may be required to account for navigation headers and tabs. `KeyboardAvoidingView`'s `keyboardVerticalOffset` property can be set to the height of the navigation header and [`tabBarOptions.keyboardHidesTabBar`](https://reactnavigation.org/docs/en/bottom-tab-navigator.html#bottomtabnavigatorconfig) can be set to keep the tab bar from being shown when the keyboard is up. Due to a [bug with calculating height on Android phones with notches](facebook/react-native#23693), `KeyboardAvoidingView` is recommended over other solutions that involve calculating the height of the window.
-  - adding an opaque background status bar on app.json (even though `android:windowSoftInputMode="adjustResize"` is set internally on Expo's Android apps, the transulcent status bar causes it not to work): https://docs.expo.io/versions/latest/guides/configuration.html#androidstatusbar
+
+- adding an opaque background status bar on app.json (even though `android:windowSoftInputMode="adjustResize"` is set internally on Expo's Android apps, the translucent status bar causes it not to work): https://docs.expo.io/versions/latest/guides/configuration.html#androidstatusbar
 
 - If you plan to use `GiftedChat` inside a `Modal`, see [#200](https://github.com/FaridSafi/react-native-gifted-chat/issues/200).
 
 ## Notes for local development
 
+### Native
+
 1. Install `yarn add -g expo-cli`
 2. `expo start`
+
+### react-native-web
+
+#### With expo
+
+1. Install `yarn add -g expo-cli`
+2. `expo start -w`
+
+#### With create-react-app
+
+1. `yarn add -D react-app-rewired`
+2. `touch config-overrides.js`
+
+```js
+module.exports = function override(config, env) {
+  config.module.rules.push({
+    test: /\.js$/,
+    exclude: /node_modules[/\\](?!react-native-gifted-chat|react-native-lightbox|react-native-parsed-text)/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        babelrc: false,
+        configFile: false,
+        presets: [
+          ['@babel/preset-env', { useBuiltIns: 'usage' }],
+          '@babel/preset-react',
+        ],
+        plugins: ['@babel/plugin-proposal-class-properties'],
+      },
+    },
+  })
+
+  return config
+}
+```
+
+> You will find an example and a **web demo** here: [xcarpentier/gifted-chat-web-demo](https://github.com/xcarpentier/gifted-chat-web-demo)
+
+> Another example with **Gatsby** : [xcarpentier/clean-archi-boilerplate](https://github.com/xcarpentier/clean-archi-boilerplate/tree/develop/apps/web)
 
 ## Questions
 
@@ -432,7 +479,7 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 - [more](https://github.com/FaridSafi/react-native-gifted-chat/graphs/contributors)
 
 ## Hire an expert!
-Looking for a ReactNative freelance expert with more than 12 years experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
 
+Looking for a ReactNative freelance expert with more than 12 years experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
 
 <img src="https://api.keen.io/3.0/projects/5ae31b61c9e77c0001cc2093/events/pageviews?api_key=55301C3E5BAB217E90A5867113C02506CE20385CD6F4C9C1CCDD4671B1A9DE374C3DF9DEF70C0BB3F5A9C5CA4CB1CCCFAF25FC3ED9CF63FB83102456A6881EFBAECD1C7D9718EE5402752DD8F6FA2DEC4D844BCB17FE6262570DB447D9A8CED2&data=eyJ0aXRsZSI6ICJnYyJ9" />

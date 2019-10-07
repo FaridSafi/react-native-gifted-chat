@@ -1,0 +1,18 @@
+// @flow
+import { Component } from 'react'
+import type { IMessage } from './types'
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type SystemMessageProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  currentMessage?: TMessage,
+  containerStyle?: ViewStyleProp,
+  wrapperStyle?: ViewStyleProp,
+  textStyle?: TextStyleProp,
+|}>
+
+export default class SystemMessages<
+  TMessage: IMessage = IMessage,
+> extends Component<SystemMessageProps<TMessage>> {}

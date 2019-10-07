@@ -8,9 +8,11 @@ import {
   StyleProp,
   ViewStyle,
   SafeAreaView,
+  FlatList,
+  TextStyle,
 } from 'react-native'
 
-import ActionSheet from '@expo/react-native-action-sheet'
+import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import moment from 'moment'
 import uuid from 'uuid'
 import { isIphoneX } from 'react-native-iphone-x-helper'
@@ -39,10 +41,10 @@ import {
   TIME_FORMAT,
   DATE_FORMAT,
 } from './Constant'
-import { IMessage, User, Reply } from './types'
+import { IMessage, User, Reply, LeftRightStyle } from './types'
 import QuickReplies from './QuickReplies'
 
-const GiftedActionSheet = ActionSheet as any
+// const GiftedActionSheet = ActionSheet as any
 
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Messages to display */
@@ -50,9 +52,11 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Input text; default is undefined, but if specified, it will override GiftedChat's internal state */
   text?: string
   /* Controls whether or not the message bubbles appear at the top of the chat */
-  alignTop?: boolean;
+  alignTop?: boolean
   /* enables the scrollToBottom Component */
-  scrollToBottom?: boolean;
+  scrollToBottom?: boolean
+  /* Scroll to bottom wrapper style */
+  scrollToBottomStyle?: StyleProp<ViewStyle>
   initialText?: string
   /* Placeholder when text is empty; default is 'Type a message...' */
   placeholder?: string
@@ -110,6 +114,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   quickReplyStyle?: StyleProp<ViewStyle>
   /* optional prop used to place customView below text, image and video views; default is false */
   isCustomViewBottom?: boolean
+  timeTextStyle?: LeftRightStyle<TextStyle>
   /* Callback when a message avatar is tapped */
   onPressAvatar?(user: User): void
   /* Callback when a message avatar is tapped */
@@ -140,7 +145,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom message image */
   renderMessageImage?(props: MessageImage['props']): React.ReactNode
   /* Custom view inside the bubble */
-  renderCustomView?(): React.ReactNode
+  renderCustomView?(props: Bubble['props']): React.ReactNode
   /*Custom day above a message*/
   renderDay?(props: Day['props']): React.ReactNode
   /* Custom time inside a message */
@@ -168,15 +173,19 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   onQuickReply?(replies: Reply[]): void
   renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
-  shouldUpdateMessage?(props: Message['props'], nextProps: Message['props']): boolean
+  shouldUpdateMessage?(
+    props: Message['props'],
+    nextProps: Message['props'],
+  ): boolean
 }
 
-export interface GiftedChatState {
+export interface GiftedChatState<TMessage extends IMessage = IMessage> {
   isInitialized: boolean
   composerHeight?: number
   messagesContainerHeight?: number | Animated.Value
   typingDisabled: boolean
   text?: string
+  messages?: TMessage[]
 }
 
 class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
@@ -201,6 +210,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     isAnimated: Platform.select({
       ios: true,
       android: false,
+      default: false,
     }),
     loadEarlier: false,
     onLoadEarlier: () => {},
@@ -213,7 +223,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     onLongPressAvatar: null,
     renderUsernameOnMessage: false,
     renderAvatarOnTop: false,
-    isCustomViewBottom: false,
     renderBubble: null,
     renderSystemMessage: null,
     onLongPress: null,
@@ -241,6 +250,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     keyboardShouldPersistTaps: Platform.select({
       ios: 'never',
       android: 'always',
+      default: 'never',
     }),
     onInputTextChanged: null,
     maxInputLength: null,
@@ -342,11 +352,10 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   _maxHeight?: number = undefined
   _isFirstLayout: boolean = true
   _locale: string = 'en'
-  _messages: TMessage[] = []
   invertibleScrollViewProps: any = undefined
   _actionSheetRef: any = undefined
 
-  _messageContainerRef?: RefObject<MessageContainer> = React.createRef()
+  _messageContainerRef?: RefObject<FlatList<IMessage>> = React.createRef()
   textInput?: any
 
   state = {
@@ -355,6 +364,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     messagesContainerHeight: undefined,
     typingDisabled: false,
     text: undefined,
+    messages: undefined,
   }
 
   constructor(props: GiftedChatProps<TMessage>) {
@@ -372,7 +382,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   getChildContext() {
     return {
-      actionSheet: () => this._actionSheetRef,
+      actionSheet: () => this._actionSheetRef.getContext(),
       getLocale: this.getLocale,
     }
   }
@@ -390,10 +400,22 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   componentDidUpdate(prevProps: GiftedChatProps<TMessage> = {}) {
-    if(this.props !== prevProps) {
     const { messages, text } = this.props
-    this.setMessages(messages || [])
-    this.setTextFromProp(text)
+
+    if (this.props !== prevProps) {
+      this.setMessages(messages || [])
+    }
+
+    if (
+      messages &&
+      prevProps.messages &&
+      messages.length !== prevProps.messages.length
+    ) {
+      setTimeout(() => this.scrollToBottom(false), 200)
+    }
+
+    if (text !== prevProps.text) {
+      this.setTextFromProp(text)
     }
   }
 
@@ -429,11 +451,11 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   setMessages(messages: TMessage[]) {
-    this._messages = messages
+    this.setState({ messages })
   }
 
   getMessages() {
-    return this._messages
+    return this.state.messages
   }
 
   setMaxHeight(height: number) {
@@ -593,12 +615,21 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   scrollToBottom(animated = true) {
     if (this._messageContainerRef && this._messageContainerRef.current) {
-      this._messageContainerRef.current.scrollTo({ offset: 0, animated })
+      const { inverted } = this.props
+      if (!inverted) {
+        this._messageContainerRef.current.scrollToEnd({ animated })
+      } else {
+        this._messageContainerRef.current.scrollToOffset({
+          offset: 0,
+          animated,
+        })
+      }
     }
   }
 
   renderMessages() {
     const AnimatedView = this.props.isAnimated === true ? Animated.View : View
+
     return (
       <AnimatedView
         style={{
@@ -609,7 +640,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
           {...this.props}
           invertibleScrollViewProps={this.invertibleScrollViewProps}
           messages={this.getMessages()}
-          ref={this._messageContainerRef}
+          forwardRef={this._messageContainerRef}
         />
         {this.renderChatFooter()}
       </AnimatedView>
@@ -636,7 +667,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     if (this.props.onSend) {
       this.props.onSend(newMessages)
     }
-    this.scrollToBottom()
 
     if (shouldResetInputToolbar === true) {
       setTimeout(() => {
@@ -788,14 +818,14 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     if (this.state.isInitialized === true) {
       return (
         <SafeAreaView style={styles.safeArea}>
-          <GiftedActionSheet
+          <ActionSheetProvider
             ref={(component: any) => (this._actionSheetRef = component)}
           >
             <View style={styles.container} onLayout={this.onMainViewLayout}>
               {this.renderMessages()}
               {this.renderInputToolbar()}
             </View>
-          </GiftedActionSheet>
+          </ActionSheetProvider>
         </SafeAreaView>
       )
     }

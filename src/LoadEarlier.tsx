@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     marginTop: Platform.select({
       ios: -14,
       android: -16,
+      default: -15,
     }),
   },
 })

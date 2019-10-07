@@ -30,7 +30,7 @@ exports[`should render <Day /> and compare with snapshot 1`] = `
         ]
       }
     >
-      INVALID DATE
+      Invalid date
     </Text>
   </View>
 </View>

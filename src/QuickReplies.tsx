@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import { IMessage, Reply } from './types'
 import Color from './Color'
+import { warning } from './utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +28,9 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 13,
     margin: 3,
+  },
+  quickReplyText: {
+    overflow: 'visible',
   },
   sendLink: {
     borderWidth: 0,
@@ -107,7 +111,7 @@ export default class QuickReplies extends Component<
         }
 
         default: {
-          console.warn(`[GiftedChat.onQuickReply] unknown type: ` + type)
+          warning(`onQuickReply unknown type: ${type}`)
           return
         }
       }
@@ -130,11 +134,12 @@ export default class QuickReplies extends Component<
     const { currentMessage, nextMessage } = this.props
     const hasReplies = !!currentMessage && !!currentMessage!.quickReplies
     const hasNext = !!nextMessage && !!nextMessage!._id
+    const keepIt = currentMessage!.quickReplies!.keepIt
 
     if (hasReplies && !hasNext) {
       return true
     }
-    if (hasReplies && hasNext && currentMessage!.quickReplies!.keepIt) {
+    if (hasReplies && hasNext && keepIt) {
       return true
     }
     return false
@@ -170,29 +175,35 @@ export default class QuickReplies extends Component<
 
     return (
       <View style={styles.container}>
-        {currentMessage!.quickReplies!.values.map((reply: Reply) => {
-          const selected = type === 'checkbox' && replies.find(sameReply(reply))
-          return (
-            <TouchableOpacity
-              onPress={this.handlePress(reply)}
-              style={[
-                styles.quickReply,
-                quickReplyStyle,
-                { borderColor: color },
-                selected && { backgroundColor: color },
-              ]}
-              key={reply.value}
-            >
-              <Text
-                numberOfLines={2}
-                ellipsizeMode={'tail'}
-                style={{ color: selected ? Color.white : color }}
+        {currentMessage!.quickReplies!.values.map(
+          (reply: Reply, index: number) => {
+            const selected =
+              type === 'checkbox' && replies.find(sameReply(reply))
+            return (
+              <TouchableOpacity
+                onPress={this.handlePress(reply)}
+                style={[
+                  styles.quickReply,
+                  quickReplyStyle,
+                  { borderColor: color },
+                  selected && { backgroundColor: color },
+                ]}
+                key={`${reply.value}-${index}`}
               >
-                {reply.title}
-              </Text>
-            </TouchableOpacity>
-          )
-        })}
+                <Text
+                  numberOfLines={2}
+                  ellipsizeMode={'tail'}
+                  style={[
+                    styles.quickReplyText,
+                    { color: selected ? Color.white : color },
+                  ]}
+                >
+                  {reply.title}
+                </Text>
+              </TouchableOpacity>
+            )
+          },
+        )}
         {replies.length > 0 && this.renderQuickReplySend()}
       </View>
     )

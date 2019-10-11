@@ -26,7 +26,7 @@ export type QuickReplies = {
 }
 
 export type IMessage = {
-  _id: any,
+  _id: string | number,
   text: string,
   createdAt: Date | number,
   user: User,

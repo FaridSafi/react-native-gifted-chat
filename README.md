@@ -100,7 +100,7 @@
 - Both dependencies are removed since `0.11.0`.
 - You still be able to provide a `video` but you need to provide `renderMessageVideo` prop.
 
-## You have a question ?
+## You have a question?
 
 1. Please check this readme and may find a response
 1. Please ask on StackOverflow first: https://stackoverflow.com/questions/tagged/react-native-gifted-chat
@@ -113,7 +113,7 @@
 import React from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 
-class Example extends React.Component {
+class Example extends React. Component {
   state = {
     messages: [],
   }
@@ -303,10 +303,10 @@ interface QuickReplies {
 - **`renderMessageText`** _(Function)_ - Custom message text
 - **`renderMessageImage`** _(Function)_ - Custom message image
 - **`renderMessageVideo`** _(Function)_ - Custom message video
-- **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component created by the default `renderMessageImage`
+- **image props`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component created by the default `renderMessageImage`
 - **`videoProps`** _(Object)_ - Extra props to be passed to the video component created by the required `renderMessageVideo`
 - **`lightboxProps`** _(Object)_ - Extra props to be passed to the `MessageImage`'s [Lightbox](https://github.com/oblador/react-native-lightbox)
-- **`isCustomViewBottom`** _(Bool)_ - Determine wether renderCustomView is displayed before or after the text, image and video views; default is `false`
+- **`isCustomViewBottom`** _(Bool)_ - Determine whether renderCustomView is displayed before or after the text, image and video views; default is `false`
 - **`renderCustomView`** _(Function)_ - Custom view inside the bubble
 - **`renderDay`** _(Function)_ - Custom day above a message
 - **`renderTime`** _(Function)_ - Custom time inside a message
@@ -315,7 +315,7 @@ interface QuickReplies {
 - **`renderInputToolbar`** _(Function)_ - Custom message composer container
 - **`renderComposer`** _(Function)_ - Custom text input message composer
 - **`renderActions`** _(Function)_ - Custom action button on the left of the message composer
-- **`renderSend`** _(Function)_ - Custom send button; you can pass children to the original `Send` component quite easily, for example to use a custom icon ([example](https://github.com/FaridSafi/react-native-gifted-chat/pull/487))
+- **`renderSend`** _(Function)_ - Custom send button; you can pass children to the original `Send` component quite easily, for example, to use a custom icon ([example](https://github.com/FaridSafi/react-native-gifted-chat/pull/487))
 - **`renderAccessory`** _(Function)_ - Custom second line of actions below the message composer
 - **`onPressActionButton`** _(Function)_ - Callback when the Action button is pressed (if set, the default `actionSheet` will not be used)
 - **`bottomOffset`** _(Integer)_ - Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar)
@@ -337,10 +337,10 @@ interface QuickReplies {
 ```
 
 - **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
-- **`minComposerHeight`** _(Object)_ - Custom min height of the composer.
+- **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
 
-* **`scrollToBottom`** _(Bool)_ - Enables the scrollToBottom Component (Default is false)
+* **`scrollToBottom`** _(Bool)_ - Enables the scroll to bottom Component (Default is false)
 * **`scrollToBottomComponent`** _(Function)_ - Custom Scroll To Bottom Component container
 * **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)
 * **`scrollToBottomStyle`** _(Object)_ - Custom style for Bottom Component container
@@ -357,7 +357,7 @@ interface QuickReplies {
 
 ## Notes for [Redux](https://github.com/reactjs/redux)
 
-The `messages` prop should work out-of-the-box with Redux. In most cases this is all you need.
+The `messages` prop should work out-of-the-box with Redux. In most cases, this is all you need.
 
 If you decide to specify a `text` prop, GiftedChat will no longer manage its own internal `text` state and will defer entirely to your prop.
 This is great for using a tool like Redux, but there's one extra step you'll need to take:
@@ -453,7 +453,7 @@ module.exports = function override(config, env) {
 ## Questions
 
 - [How can I set Bubble color for each user?](https://github.com/FaridSafi/react-native-gifted-chat/issues/672)
-- [How can I pass style props to InputToolbar design and customize it's color and other styles properties?](https://github.com/FaridSafi/react-native-gifted-chat/issues/662)
+- [How can I pass style props to InputToolbar design and customize its color and other styles properties?](https://github.com/FaridSafi/react-native-gifted-chat/issues/662)
 - [How can I change the color of the message box?](https://github.com/FaridSafi/react-native-gifted-chat/issues/640)
 - [Is there a way to manually dismiss the keyboard?](https://github.com/FaridSafi/react-native-gifted-chat/issues/647)
 - [I want to implement a popover that pops right after clicking on a specific avatar,
@@ -480,6 +480,6 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 
 ## Hire an expert!
 
-Looking for a ReactNative freelance expert with more than 12 years experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
+Looking for a ReactNative freelance expert with more than 12 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
 
 <img src="https://api.keen.io/3.0/projects/5ae31b61c9e77c0001cc2093/events/pageviews?api_key=55301C3E5BAB217E90A5867113C02506CE20385CD6F4C9C1CCDD4671B1A9DE374C3DF9DEF70C0BB3F5A9C5CA4CB1CCCFAF25FC3ED9CF63FB83102456A6881EFBAECD1C7D9718EE5402752DD8F6FA2DEC4D844BCB17FE6262570DB447D9A8CED2&data=eyJ0aXRsZSI6ICJnYyJ9" />

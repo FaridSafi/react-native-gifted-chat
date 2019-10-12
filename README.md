@@ -482,4 +482,38 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 
 Looking for a ReactNative freelance expert with more than 12 years experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
 
-<img src="https://api.keen.io/3.0/projects/5ae31b61c9e77c0001cc2093/events/pageviews?api_key=55301C3E5BAB217E90A5867113C02506CE20385CD6F4C9C1CCDD4671B1A9DE374C3DF9DEF70C0BB3F5A9C5CA4CB1CCCFAF25FC3ED9CF63FB83102456A6881EFBAECD1C7D9718EE5402752DD8F6FA2DEC4D844BCB17FE6262570DB447D9A8CED2&data=eyJ0aXRsZSI6ICJnYyJ9" />
+<img src="https://api.keen.io/3.0/projects/5ae31b61c9e77c0001cc2093/events/pageviews?api_key=55301C3E5BAB217E90A5867113C02506CE20385CD6F4C9C1CCDD4671B1A9DE374C3DF9DEF70C0BB3F5A9C5CA4CB1CCCFAF25FC3ED9CF63FB83102456A6881EFBAECD1C7D9718EE5402752DD8F6FA2DEC4D844BCB17FE6262570DB447D9A8CED2&data=eyJ0aXRsZSI6ICJnYyJ9" 
+
+
+
+
+
+
+
+
+mport java.util.Scanner;
+class Palindrome 
+{
+public static void main(String[] args) 
+{
+int a,no,b,temp=0;
+Scanner s=new Scanner(System.in);
+System.out.println("Enter any num: ");
+no=s.nextInt();
+b=no;
+while(no>0)
+{
+a=no%10;
+no=no/10;
+temp=temp*10+a;
+}
+if(temp==b)
+{
+System.out.println("Palindrome");
+}
+else
+{
+System.out.println("not Palindrome");
+}
+}
+}

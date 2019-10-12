@@ -100,7 +100,7 @@
 - Both dependencies are removed since `0.11.0`.
 - You still be able to provide a `video` but you need to provide `renderMessageVideo` prop.
 
-## You have a question ?
+## You have a question?
 
 1. Please check this readme and may find a response
 1. Please ask on StackOverflow first: https://stackoverflow.com/questions/tagged/react-native-gifted-chat
@@ -113,7 +113,7 @@
 import React from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 
-class Example extends React.Component {
+class Example extends React. Component {
   state = {
     messages: [],
   }
@@ -283,7 +283,7 @@ interface QuickReplies {
 - **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'`
 - **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'ll'`
 - **`isAnimated`** _(Bool)_ - Animates the view when the keyboard appears
-- **`loadEarlier`** _(Bool)_ - Enables the "Load earlier messages" button
+- **`loadEarlier`** _(Bool)_ - Enables the "load earlier messages" button
 - **`onLoadEarlier`** _(Function)_ - Callback when loading earlier messages
 - **`isLoadingEarlier`** _(Bool)_ - Display an `ActivityIndicator` when loading earlier messages
 - **`renderLoading`** _(Function)_ - Render a loading view when initializing
@@ -306,7 +306,7 @@ interface QuickReplies {
 - **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component created by the default `renderMessageImage`
 - **`videoProps`** _(Object)_ - Extra props to be passed to the video component created by the required `renderMessageVideo`
 - **`lightboxProps`** _(Object)_ - Extra props to be passed to the `MessageImage`'s [Lightbox](https://github.com/oblador/react-native-lightbox)
-- **`isCustomViewBottom`** _(Bool)_ - Determine wether renderCustomView is displayed before or after the text, image and video views; default is `false`
+- **`isCustomViewBottom`** _(Bool)_ - Determine whether renderCustomView is displayed before or after the text, image and video views; default is `false`
 - **`renderCustomView`** _(Function)_ - Custom view inside the bubble
 - **`renderDay`** _(Function)_ - Custom day above a message
 - **`renderTime`** _(Function)_ - Custom time inside a message
@@ -315,7 +315,7 @@ interface QuickReplies {
 - **`renderInputToolbar`** _(Function)_ - Custom message composer container
 - **`renderComposer`** _(Function)_ - Custom text input message composer
 - **`renderActions`** _(Function)_ - Custom action button on the left of the message composer
-- **`renderSend`** _(Function)_ - Custom send button; you can pass children to the original `Send` component quite easily, for example to use a custom icon ([example](https://github.com/FaridSafi/react-native-gifted-chat/pull/487))
+- **`renderSend`** _(Function)_ - Custom send button; you can pass children to the original `Send` component quite easily, for example, to use a custom icon ([example](https://github.com/FaridSafi/react-native-gifted-chat/pull/487))
 - **`renderAccessory`** _(Function)_ - Custom second line of actions below the message composer
 - **`onPressActionButton`** _(Function)_ - Callback when the Action button is pressed (if set, the default `actionSheet` will not be used)
 - **`bottomOffset`** _(Integer)_ - Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar)
@@ -373,7 +373,7 @@ simply implement `onInputTextChanged` to receive typing events and reset events 
 
 ## Notes for Android
 
-If you are using Create React Native App / Expo, no Android specific installation steps are required -- you can skip this section. Otherwise we recommend modifying your project configuration as follows.
+If you are using Create React Native App / Expo, no Android specific installation steps are required -- you can skip this section. Otherwise, we recommend modifying your project configuration as follows.
 
 - Make sure you have `android:windowSoftInputMode="adjustResize"` in your `AndroidManifest.xml`:
 

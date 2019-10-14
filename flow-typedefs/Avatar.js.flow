@@ -15,9 +15,9 @@ export type AvatarProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   showAvatarForEveryMessage?: boolean,
   imageStyle?: LeftRightStyle<ImageStyleProp>,
   containerStyle?: LeftRightStyle<ViewStyleProp>,
-  renderAvatar?: (
-    $Diff<AvatarProps<TMessage>, {| renderAvatar: * |}>,
-  ) => React.Node,
+  renderAvatar?:
+    | (($Diff<AvatarProps<TMessage>, {| renderAvatar: * |}>) => React.Node)
+    | null,
   onPressAvatar?: User => void,
   onLongPressAvatar?: User => void,
 |}>

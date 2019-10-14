@@ -20,7 +20,7 @@ export type MessageProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   renderBubble?: (BubbleProps<TMessage>) => React.Node,
   renderDay?: (DayProps<TMessage>) => React.Node,
   renderSystemMessage?: (SystemMessageProps<TMessage>) => React.Node,
-  renderAvatar?: (AvatarProps<TMessage>) => React.Node,
+  renderAvatar?: ((AvatarProps<TMessage>) => React.Node) | null,
   shouldUpdateMessage?: (
     props: MessageProps<IMessage>,
     nextProps: MessageProps<IMessage>,

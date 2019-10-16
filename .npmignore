@@ -17,6 +17,7 @@ App.js
 app.json
 metro.config.js
 src/
+flow-typedefs/
 tsconfig.json
 tslint.json
 yarn.lock

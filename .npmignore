@@ -20,3 +20,6 @@ src/
 tsconfig.json
 tslint.json
 yarn.lock
+flow-typedefs/
+types.d.ts
+.flowconfig

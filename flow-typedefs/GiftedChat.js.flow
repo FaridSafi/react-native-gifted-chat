@@ -46,6 +46,7 @@ export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   alignTop?: boolean,
   scrollToBottom?: boolean,
   scrollToBottomStyle?: ViewStyleProp,
+  scrollToBottomComponent?: () => React.Node,
   initialText?: string,
   placeholder?: string,
   user?: User,

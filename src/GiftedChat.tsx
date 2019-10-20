@@ -173,6 +173,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   onQuickReply?(replies: Reply[]): void
   renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
+  /* Scroll to bottom custom component */
+  scrollToBottomComponent?(): React.ReactNode
   shouldUpdateMessage?(
     props: Message['props'],
     nextProps: Message['props'],

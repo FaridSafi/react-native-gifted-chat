@@ -806,7 +806,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   renderChatFooter() {
     if (this.props.renderChatFooter) {
-      return this.props.renderChatFooter()
+      return this.props.renderChatFooter(this.props)
     }
     return null
   }

@@ -33,4 +33,43 @@ describe('Message component', () => {
 
     expect(tree).toMatchSnapshot()
   })
+
+  it('should render <Message /> with Avatar', () => {
+    const tree = createComponentWithContext(
+      <Message
+        key='123'
+        user={{ _id: 1 }}
+        currentMessage={{
+          _id: 1,
+          text: 'test',
+          createdAt: 1554744013721,
+          user: { _id: 1 },
+        }}
+        showUserAvatar
+      />,
+    ).toJSON()
+
+    expect(tree).toMatchSnapshot()
+  })
+
+  it('should render null if user has no Avatar', () => {
+    const tree = createComponentWithContext(
+      <Message
+        key='123'
+        user={{ _id: 1 }}
+        currentMessage={{
+          _id: 1,
+          text: 'test',
+          createdAt: 1554744013721,
+          user: {
+            _id: 1,
+            avatar: null
+          },
+        }}
+        showUserAvatar
+      />,
+    ).toJSON()
+
+    expect(tree).toMatchSnapshot()
+  })
 })

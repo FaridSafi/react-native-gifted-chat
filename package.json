@@ -59,6 +59,9 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/example-expo",
       "<rootDir>/example-slack-message"
+    ],
+    "coveragePathIgnorePatterns": [
+      "./src/__tests__/"
     ]
   },
   "devDependencies": {

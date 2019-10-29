@@ -151,13 +151,14 @@ export default class Message<
       user &&
       user._id &&
       currentMessage &&
+      currentMessage.user &&
       user._id === currentMessage.user._id &&
       !showUserAvatar
     ) {
       return null
     }
 
-    if (currentMessage && currentMessage.user.avatar === null) {
+    if (currentMessage && currentMessage.user && currentMessage.user.avatar === null) {
       return null
     }
 

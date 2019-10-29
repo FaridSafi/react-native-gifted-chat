@@ -4,19 +4,33 @@ import createComponentWithContext from './context'
 
 import { Message } from '../GiftedChat'
 
-it('should render <Message /> and compare with snapshot', () => {
-  const tree = createComponentWithContext(
-    <Message
-      key='123'
-      user={{ _id: 1 }}
-      currentMessage={{
-        _id: 1,
-        text: 'test',
-        createdAt: 1554744013721,
-        user: { _id: 1 },
-      }}
-    />,
-  ).toJSON()
+describe('Message component', () => {
+  it('should render <Message /> and compare with snapshot', () => {
+    const tree = createComponentWithContext(
+      <Message
+        key='123'
+        user={{ _id: 1 }}
+        currentMessage={{
+          _id: 1,
+          text: 'test',
+          createdAt: 1554744013721,
+          user: { _id: 1 },
+        }}
+      />,
+    ).toJSON()
 
-  expect(tree).toMatchSnapshot()
+    expect(tree).toMatchSnapshot()
+  })
+
+  it('should NOT render <Message />', () => {
+    const tree = createComponentWithContext(
+      <Message
+        key='123'
+        user={{ _id: 1 }}
+        currentMessage={null}
+      />,
+    ).toJSON()
+
+    expect(tree).toMatchSnapshot()
+  })
 })

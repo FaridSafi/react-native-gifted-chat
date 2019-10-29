@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render <Message /> and compare with snapshot 1`] = `
+exports[`Message component should NOT render <Message /> 1`] = `null`;
+
+exports[`Message component should render <Message /> and compare with snapshot 1`] = `
 <View>
   <View
     style={

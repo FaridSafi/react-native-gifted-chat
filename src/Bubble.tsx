@@ -375,7 +375,7 @@ export default class Bubble<
     if (renderTicks && currentMessage) {
       return renderTicks(currentMessage)
     }
-    if (currentMessage && user && currentMessage.user._id !== user._id) {
+    if (currentMessage && user && currentMessage.user && currentMessage.user._id !== user._id) {
       return null
     }
     if (

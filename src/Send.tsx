@@ -51,6 +51,7 @@ export default class Send extends Component<SendProps> {
     children: null,
     alwaysShowSend: false,
     disabled: false,
+    sendButtonProps: null,
   }
 
   static propTypes = {
@@ -62,6 +63,7 @@ export default class Send extends Component<SendProps> {
     children: PropTypes.element,
     alwaysShowSend: PropTypes.bool,
     disabled: PropTypes.bool,
+    sendButtonProps: PropTypes.object,
   }
 
   render() {

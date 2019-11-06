@@ -3099,10 +3099,10 @@ find-up@^4.0.0:
   dependencies:
     locate-path "^5.0.0"
 
-flow-bin@^0.108.0:
-  version "0.108.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.108.0.tgz#6a42c85fd664d23dd937d925851e8e6ab5d71393"
-  integrity sha512-hPEyCP1J8rdhNDfCAA5w7bN6HUNBDcHVg/ABU5JVo0gUFMx+uRewpyEH8LlLBGjVQuIpbaPpaqpoaQhAVyaYww==
+flow-bin@^0.111.3:
+  version "0.111.3"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.111.3.tgz#8653a413400ebc966097a47c81fb4e6b722a5921"
+  integrity sha512-Gn27aRTjSFicukZ/pq3raRERmSk9UWszhIK9eNtj6843L54YtK+jk2OkQWV70+VKi9LmWyfItCkhwoIVy7L2lA==
 
 fontfaceobserver@^2.1.0:
   version "2.1.0"

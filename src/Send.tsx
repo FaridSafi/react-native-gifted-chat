@@ -9,6 +9,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  TouchableOpacityProps,
 } from 'react-native'
 import Color from './Color'
 
@@ -36,7 +37,7 @@ export interface SendProps {
   children?: React.ReactNode
   alwaysShowSend?: boolean
   disabled?: boolean
-  sendButtonProps?: any
+  sendButtonProps?: Partial<TouchableOpacityProps>
   onSend?({ text }: { text: string }, b: boolean): void
 }
 

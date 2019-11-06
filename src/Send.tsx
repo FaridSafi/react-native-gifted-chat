@@ -5,7 +5,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ViewProps,
   ViewPropTypes,
   StyleProp,
   ViewStyle,
@@ -37,7 +36,7 @@ export interface SendProps {
   children?: React.ReactNode
   alwaysShowSend?: boolean
   disabled?: boolean
-  sendButtonProps?: Partial<ViewProps>
+  sendButtonProps?: any
   onSend?({ text }: { text: string }, b: boolean): void
 }
 

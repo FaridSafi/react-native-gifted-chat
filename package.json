@@ -87,7 +87,7 @@
     "json": "^9.0.6",
     "prettier": "1.18.0",
     "react": "16.12.0",
-    "react-dom": "16.8.3",
+    "react-dom": "16.12.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-nav": "2.0.2",
     "react-native-web": "^0.11.1",

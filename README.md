@@ -280,8 +280,8 @@ interface QuickReplies {
 - **`locale`** _(String)_ - Locale to localize the dates
 - **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'`
 - **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'ll'`
-- **`isAnimated`** _(Bool)_ - Animates the view when the keyboard appears
 - **`loadEarlier`** _(Bool)_ - Enables the "load earlier messages" button
+- **`isKeyboardInternallyHandled`** _(Bool)_ - Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true`
 - **`onLoadEarlier`** _(Function)_ - Callback when loading earlier messages
 - **`isLoadingEarlier`** _(Bool)_ - Display an `ActivityIndicator` when loading earlier messages
 - **`renderLoading`** _(Function)_ - Render a loading view when initializing

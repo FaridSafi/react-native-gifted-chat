@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   contentContainerStyle: {
-    justifyContent: 'flex-end',
+    flexGrow: 1,
+    justifyContent: 'flex-start',
   },
   headerWrapper: {
     flex: 1,
@@ -71,6 +72,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   extraData?: any
   scrollToBottomOffset?: number
   forwardRef?: RefObject<FlatList<IMessage>>
+  renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactNode
   renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
@@ -89,6 +91,7 @@ export default class MessageContainer<
   static defaultProps = {
     messages: [],
     user: {},
+    renderChatEmpty: null,
     renderFooter: null,
     renderMessage: null,
     onLoadEarlier: () => {},
@@ -107,6 +110,7 @@ export default class MessageContainer<
   static propTypes = {
     messages: PropTypes.arrayOf(PropTypes.object),
     user: PropTypes.object,
+    renderChatEmpty: PropTypes.func,
     renderFooter: PropTypes.func,
     renderMessage: PropTypes.func,
     renderLoadEarlier: PropTypes.func,
@@ -294,6 +298,13 @@ export default class MessageContainer<
     return null
   }
 
+  renderChatEmpty = () => {
+    if (this.props.renderChatEmpty) {
+      return this.props.renderChatEmpty()
+    }
+    return <View style={styles.container} />
+  }
+
   renderHeaderWrapper = () => (
     <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>
   )
@@ -338,12 +349,6 @@ export default class MessageContainer<
   keyExtractor = (item: TMessage) => `${item._id}`
 
   render() {
-    if (
-      !this.props.messages ||
-      (this.props.messages && this.props.messages.length === 0)
-    ) {
-      return <View style={styles.container} />
-    }
     const { inverted } = this.props
     return (
       <View
@@ -366,6 +371,7 @@ export default class MessageContainer<
           contentContainerStyle={styles.contentContainerStyle}
           renderItem={this.renderRow}
           {...this.props.invertibleScrollViewProps}
+          ListEmptyComponent={this.renderChatEmpty}
           ListFooterComponent={
             inverted ? this.renderHeaderWrapper : this.renderFooter
           }

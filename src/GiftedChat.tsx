@@ -153,6 +153,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   renderTime?(props: Time['props']): React.ReactNode
   /* Custom footer component on the ListView, e.g. 'User is typing...' */
   renderFooter?(): React.ReactNode
+  /* Custom component to render in the ListView when messages are empty */
+  renderChatEmpty?(): React.ReactNode
   /* Custom component to render below the MessageContainer (separate from the ListView) */
   renderChatFooter?(): React.ReactNode
   /* Custom message composer container */
@@ -237,6 +239,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderDay: null,
     renderTime: null,
     renderFooter: null,
+    renderChatEmpty: null,
     renderChatFooter: null,
     renderInputToolbar: null,
     renderComposer: null,
@@ -298,6 +301,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderDay: PropTypes.func,
     renderTime: PropTypes.func,
     renderFooter: PropTypes.func,
+    renderChatEmpty: PropTypes.func,
     renderChatFooter: PropTypes.func,
     renderInputToolbar: PropTypes.func,
     renderComposer: PropTypes.func,

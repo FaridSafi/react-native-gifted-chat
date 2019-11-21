@@ -272,6 +272,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     locale: PropTypes.string,
     timeFormat: PropTypes.string,
     dateFormat: PropTypes.string,
+    isKeyboardInternallyHandled: PropTypes.bool,
     loadEarlier: PropTypes.bool,
     onLoadEarlier: PropTypes.func,
     isLoadingEarlier: PropTypes.bool,

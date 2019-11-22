@@ -1,0 +1,23 @@
+// @flow
+import * as React from 'react'
+import type { IMessage, Reply } from './types'
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type QuickRepliesProps = $ReadOnly<{|
+  nextMessage?: IMessage,
+  currentMessage?: IMessage,
+  color?: string,
+  sendText?: string,
+  quickReplyStyle?: ViewStyleProp,
+  onQuickReply: (Array<Reply>) => void,
+  renderQuickReplySend?: () => React.Node,
+|}>
+
+export type QuickRepliesState = {|
+  replies: Array<Reply>,
+|}
+
+export default class QuickReplies extends React.Component<
+  QuickRepliesProps,
+  QuickRepliesState,
+> {}

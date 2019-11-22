@@ -1,4 +1,5 @@
 {
+  "include": ["src", "./types.d.ts"],
   "compilerOptions": {
     "declaration": true,
     "outDir": "./lib",
@@ -29,6 +30,5 @@
     "lib": ["es6"],
     "typeRoots": ["./node_modules/@types", "./@types"]
   },
-  "include": ["src"],
   "exclude": ["node_modules", "src/__tests__"]
 }

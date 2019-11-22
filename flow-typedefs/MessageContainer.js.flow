@@ -1,0 +1,39 @@
+// @flow
+import * as React from 'react'
+import { FlatList } from 'react-native'
+import type { LoadEarlierProps } from './LoadEarlier'
+import type { MessageProps } from './Message'
+import type { User, IMessage, Reply } from './types'
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type MessageContainerProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  messages?: Array<TMessage>,
+  user?: User,
+  listViewProps: $Shape<React.ElementProps<typeof FlatList>>,
+  inverted?: boolean,
+  loadEarlier?: boolean,
+  alignTop?: boolean,
+  scrollToBottom?: boolean,
+  invertibleScrollViewProps?: any,
+  extraData?: any,
+  scrollToBottomOffset?: number,
+  forwardRef?: React.Ref<typeof FlatList>,
+  renderFooter?: (MessageContainerProps<TMessage>) => React.Node,
+  renderMessage?: (MessageProps<TMessage>) => React.Node,
+  renderLoadEarlier?: LoadEarlierProps => React.Node,
+  scrollToBottomComponent?: () => React.Node,
+  scrollToBottomStyle?: ViewStyleProp,
+  onLoadEarlier?: () => void,
+  onQuickReply?: (Array<Reply>) => void,
+|}>
+
+type MessageContainerState = {|
+  showScrollBottom: boolean,
+|}
+
+export default class MessageContainer<
+  TMessage: IMessage = IMessage,
+> extends React.PureComponent<
+  MessageContainerProps<TMessage>,
+  MessageContainerState,
+> {}

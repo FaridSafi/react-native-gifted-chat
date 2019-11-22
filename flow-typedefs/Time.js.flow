@@ -1,0 +1,19 @@
+// @flow
+import { Component } from 'react'
+import type { IMessage, LeftRightStyle } from './types'
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type TimeProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  position: 'left' | 'right',
+  currentMessage?: TMessage,
+  containerStyle?: LeftRightStyle<ViewStyleProp>,
+  timeTextStyle?: LeftRightStyle<TextStyleProp>,
+  timeFormat?: string,
+|}>
+
+export default class Time<TMessage: IMessage = IMessage> extends Component<
+  TimeProps<TMessage>,
+> {}

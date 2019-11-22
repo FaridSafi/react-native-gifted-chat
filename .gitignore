@@ -9,3 +9,4 @@ yarn-error.log
 Exponent-*.app
 *.log
 lib/
+coverage/

@@ -1,0 +1,24 @@
+// @flow
+import { TextInput } from 'react-native'
+import * as React from 'react'
+
+type TextInputProps = $Shape<React.ElementProps<typeof TextInput>>
+
+export type ComposerProps = $ReadOnly<{|
+  composerHeight?: number,
+  text?: string,
+  placeholder?: string,
+  placeholderTextColor?: string,
+  textInputProps?: TextInputProps,
+  textInputStyle?: $PropertyType<TextInputProps, 'style'>,
+  textInputAutoFocus?: boolean,
+  keyboardAppearance?: $PropertyType<TextInputProps, 'keyboardAppearance'>,
+  multiline?: boolean,
+  onTextChanged?: string => void,
+  onInputSizeChanged?: ({|
+    width: number,
+    height: number,
+  |}) => void,
+|}>
+
+export default class Composer extends React.Component<ComposerProps> {}

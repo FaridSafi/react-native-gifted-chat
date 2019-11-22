@@ -1,7 +1,7 @@
 import { AppLoading, Asset, Linking } from 'expo'
 import React, { Component } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
-import { Bubble, GiftedChat, SystemMessage } from './lib/'
+import { StyleSheet, View, Text, Platform } from 'react-native'
+import { Bubble, GiftedChat, SystemMessage } from './src/'
 
 import AccessoryBar from './example-expo/AccessoryBar'
 import CustomActions from './example-expo/CustomActions'
@@ -31,6 +31,7 @@ const otherUser = {
 
 export default class App extends Component {
   state = {
+    inverted: false,
     step: 0,
     messages: [],
     loadEarlier: true,
@@ -44,7 +45,7 @@ export default class App extends Component {
     this._isMounted = true
     // init with only system messages
     this.setState({
-      messages: messagesData.filter(message => message.system),
+      messages: messagesData, // messagesData.filter(message => message.system),
       appIsReady: true,
     })
   }
@@ -67,6 +68,7 @@ export default class App extends Component {
             messages: GiftedChat.prepend(
               previousState.messages,
               earlierMessages,
+              Platform.OS !== 'web',
             ),
             loadEarlier: false,
             isLoadingEarlier: false,
@@ -81,12 +83,16 @@ export default class App extends Component {
     this.setState(previousState => {
       const sentMessages = [{ ...messages[0], sent: true, received: true }]
       return {
-        messages: GiftedChat.append(previousState.messages, sentMessages),
+        messages: GiftedChat.append(
+          previousState.messages,
+          sentMessages,
+          Platform.OS !== 'web',
+        ),
         step,
       }
     })
     // for demo purpose
-    setTimeout(() => this.botSend(step), Math.round(Math.random() * 1000))
+    // setTimeout(() => this.botSend(step), Math.round(Math.random() * 1000))
   }
 
   botSend = (step = 0) => {
@@ -96,7 +102,11 @@ export default class App extends Component {
       .find(findStep(step))
     if (newMessage) {
       this.setState(previousState => ({
-        messages: GiftedChat.append(previousState.messages, newMessage),
+        messages: GiftedChat.append(
+          previousState.messages,
+          newMessage,
+          Platform.OS !== 'web',
+        ),
       }))
     }
   }
@@ -118,12 +128,16 @@ export default class App extends Component {
   onReceive = text => {
     this.setState(previousState => {
       return {
-        messages: GiftedChat.append(previousState.messages, {
-          _id: Math.round(Math.random() * 1000000),
-          text,
-          createdAt: new Date(),
-          user: otherUser,
-        }),
+        messages: GiftedChat.append(
+          previousState.messages,
+          {
+            _id: Math.round(Math.random() * 1000000),
+            text,
+            createdAt: new Date(),
+            user: otherUser,
+          },
+          Platform.OS !== 'web',
+        ),
       }
     })
   }
@@ -141,9 +155,10 @@ export default class App extends Component {
 
   renderAccessory = () => <AccessoryBar onSend={this.onSendFromUser} />
 
-  renderCustomActions = props => {
-    return <CustomActions {...props} onSend={this.onSendFromUser} />
-  }
+  renderCustomActions = props =>
+    Platform.OS === 'web' ? null : (
+      <CustomActions {...props} onSend={this.onSendFromUser} />
+    )
 
   renderBubble = props => {
     return (
@@ -172,19 +187,18 @@ export default class App extends Component {
     )
   }
 
-  renderFooter = props => {
-    if (this.state.typingText) {
-      return (
-        <View style={styles.footerContainer}>
-          <Text style={styles.footerText}>{this.state.typingText}</Text>
-        </View>
-      )
-    }
-    return null
-  }
+  // renderFooter = props => {
+  //   if (this.state.typingText) {
+  //     return (
+  //       <View style={styles.footerContainer}>
+  //         <Text style={styles.footerText}>{this.state.typingText}</Text>
+  //       </View>
+  //     )
+  //   }
+  //   return null
+  // }
 
   onQuickReply = replies => {
-    console.log({ replies })
     const createdAt = new Date()
     if (replies.length === 1) {
       this.onSend([
@@ -231,16 +245,20 @@ export default class App extends Component {
           isLoadingEarlier={this.state.isLoadingEarlier}
           parsePatterns={this.parsePatterns}
           user={user}
+          scrollToBottom
+          onLongPressAvatar={user => alert(JSON.stringify(user))}
+          onPressAvatar={() => alert('short press')}
           onQuickReply={this.onQuickReply}
           keyboardShouldPersistTaps='never'
-          renderAccessory={this.renderAccessory}
+          renderAccessory={Platform.OS === 'web' ? null : this.renderAccessory}
           renderActions={this.renderCustomActions}
           renderBubble={this.renderBubble}
           renderSystemMessage={this.renderSystemMessage}
           renderCustomView={this.renderCustomView}
-          renderFooter={this.renderFooter}
           quickReplyStyle={{ borderRadius: 2 }}
           renderQuickReplySend={this.renderQuickReplySend}
+          inverted={Platform.OS !== 'web'}
+          timeTextStyle={{ left: { color: 'red' }, right: { color: 'yellow' } }}
         />
       </View>
     )

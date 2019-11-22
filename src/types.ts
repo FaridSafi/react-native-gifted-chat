@@ -1,27 +1,26 @@
-import { StyleProp } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native'
 
-export { ActionsProps } from './Actions';
-export { AvatarProps } from './Avatar';
+export { ActionsProps } from './Actions'
+export { AvatarProps } from './Avatar'
 export {
   BubbleProps,
   RenderMessageImageProps,
   RenderMessageVideoProps,
   RenderMessageTextProps,
-} from './Bubble';
-export { ComposerProps } from './Composer';
-export { DayProps } from './Day';
-export { GiftedAvatarProps } from './GiftedAvatar';
-export { InputToolbarProps } from './InputToolbar';
-export { LoadEarlierProps } from './LoadEarlier';
-export { MessageProps } from './Message';
-export { MessageContainerProps } from './MessageContainer';
-export { MessageImageProps } from './MessageImage';
-export { MessageTextProps } from './MessageText';
-export { MessageVideoProps } from './MessageVideo';
-export { QuickRepliesProps } from './QuickReplies';
-export { SendProps } from './Send';
-export { SystemMessageProps } from './SystemMessage';
-export { TimeProps } from './Time';
+} from './Bubble'
+export { ComposerProps } from './Composer'
+export { DayProps } from './Day'
+export { GiftedAvatarProps } from './GiftedAvatar'
+export { InputToolbarProps } from './InputToolbar'
+export { LoadEarlierProps } from './LoadEarlier'
+export { MessageProps } from './Message'
+export { MessageContainerProps } from './MessageContainer'
+export { MessageImageProps } from './MessageImage'
+export { MessageTextProps } from './MessageText'
+export { QuickRepliesProps } from './QuickReplies'
+export { SendProps } from './Send'
+export { SystemMessageProps } from './SystemMessage'
+export { TimeProps } from './Time'
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
 
@@ -31,7 +30,7 @@ export interface LeftRightStyle<T> {
 }
 type renderFunction = (x: any) => JSX.Element
 export interface User {
-  _id: any
+  _id: string | number
   name?: string
   avatar?: string | renderFunction
 }
@@ -49,7 +48,7 @@ export interface QuickReplies {
 }
 
 export interface IMessage {
-  _id: any
+  _id: string | number
   text: string
   createdAt: Date | number
   user: User
@@ -64,3 +63,12 @@ export interface IMessage {
 }
 
 export type IChatMessage = IMessage
+
+export interface MessageVideoProps<TMessage extends IMessage> {
+  currentMessage?: TMessage
+  containerStyle?: StyleProp<ViewStyle>
+  videoStyle?: StyleProp<ViewStyle>
+  videoProps?: object
+  // TODO: should be LightBox properties
+  lightboxProps?: object
+}

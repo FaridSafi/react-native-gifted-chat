@@ -9,6 +9,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  TouchableOpacityProps,
 } from 'react-native'
 import Color from './Color'
 
@@ -36,6 +37,7 @@ export interface SendProps {
   children?: React.ReactNode
   alwaysShowSend?: boolean
   disabled?: boolean
+  sendButtonProps?: Partial<TouchableOpacityProps>
   onSend?({ text }: { text: string }, b: boolean): void
 }
 
@@ -49,6 +51,7 @@ export default class Send extends Component<SendProps> {
     children: null,
     alwaysShowSend: false,
     disabled: false,
+    sendButtonProps: null,
   }
 
   static propTypes = {
@@ -60,6 +63,7 @@ export default class Send extends Component<SendProps> {
     children: PropTypes.element,
     alwaysShowSend: PropTypes.bool,
     disabled: PropTypes.bool,
+    sendButtonProps: PropTypes.object,
   }
 
   render() {
@@ -72,6 +76,7 @@ export default class Send extends Component<SendProps> {
       label,
       alwaysShowSend,
       disabled,
+      sendButtonProps,
     } = this.props
     if (alwaysShowSend || (text && text.trim().length > 0)) {
       return (
@@ -87,6 +92,7 @@ export default class Send extends Component<SendProps> {
           }}
           accessibilityTraits='button'
           disabled={disabled}
+          {...sendButtonProps}
         >
           <View>
             {children || <Text style={[styles.text, textStyle]}>{label}</Text>}

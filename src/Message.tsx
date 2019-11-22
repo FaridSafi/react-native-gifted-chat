@@ -45,7 +45,10 @@ export interface MessageProps<TMessage extends IMessage> {
   renderDay?(props: Day['props']): React.ReactNode
   renderSystemMessage?(props: SystemMessage['props']): React.ReactNode
   renderAvatar?(props: Avatar['props']): React.ReactNode
-  shouldUpdateMessage?(props: MessageProps<IMessage>, nextProps: MessageProps<IMessage>): boolean
+  shouldUpdateMessage?(
+    props: MessageProps<IMessage>,
+    nextProps: MessageProps<IMessage>,
+  ): boolean
 }
 
 export default class Message<
@@ -93,7 +96,10 @@ export default class Message<
     const nextPropsMessage = nextProps.nextMessage
     const nextPropsPreviousMessage = nextProps.previousMessage
 
-    const shouldUpdate = ((this.props.shouldUpdateMessage && this.props.shouldUpdateMessage(this.props, nextProps)) || false)
+    const shouldUpdate =
+      (this.props.shouldUpdateMessage &&
+        this.props.shouldUpdateMessage(this.props, nextProps)) ||
+      false
 
     return (
       next.sent !== current.sent ||
@@ -145,13 +151,14 @@ export default class Message<
       user &&
       user._id &&
       currentMessage &&
+      currentMessage.user &&
       user._id === currentMessage.user._id &&
       !showUserAvatar
     ) {
       return null
     }
 
-    if (currentMessage && currentMessage.user.avatar === null) {
+    if (currentMessage && currentMessage.user && currentMessage.user.avatar === null) {
       return null
     }
 

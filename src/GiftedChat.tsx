@@ -612,41 +612,26 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   renderMessages() {
-    return (
-      <>
-        {this.props.isKeyboardInternallyHandled && (
-          <KeyboardAvoidingView enabled>
-            <View
-              style={{
-                height: this.state.messagesContainerHeight,
-              }}
-            >
-              <MessageContainer
-                {...this.props}
-                invertibleScrollViewProps={this.invertibleScrollViewProps}
-                messages={this.getMessages()}
-                forwardRef={this._messageContainerRef}
-              />
-              {this.renderChatFooter()}
-            </View>
-          </KeyboardAvoidingView>
-        )}
-        {!this.props.isKeyboardInternallyHandled && (
-          <View
-            style={{
-              height: this.state.messagesContainerHeight,
-            }}
-          >
-            <MessageContainer
-              {...this.props}
-              invertibleScrollViewProps={this.invertibleScrollViewProps}
-              messages={this.getMessages()}
-              forwardRef={this._messageContainerRef}
-            />
-            {this.renderChatFooter()}
-          </View>
-        )}
-      </>
+    const fragment = (
+      <View
+        style={{
+          height: this.state.messagesContainerHeight,
+        }}
+      >
+        <MessageContainer
+          {...this.props}
+          invertibleScrollViewProps={this.invertibleScrollViewProps}
+          messages={this.getMessages()}
+          forwardRef={this._messageContainerRef}
+        />
+        {this.renderChatFooter()}
+      </View>
+    )
+
+    return this.props.isKeyboardInternallyHandled ? (
+      <KeyboardAvoidingView enabled>{fragment}</KeyboardAvoidingView>
+    ) : (
+      fragment
     )
   }
 

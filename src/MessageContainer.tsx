@@ -107,6 +107,7 @@ export default class MessageContainer<
         scrollToBottomOffset: 200,
         alignTop: false,
         scrollToBottomStyle: {},
+        itemVisiblePercentThreshold: 50
     }
 
     static propTypes = {
@@ -126,7 +127,8 @@ export default class MessageContainer<
         scrollToBottomOffset: PropTypes.number,
         scrollToBottomComponent: PropTypes.func,
         alignTop: PropTypes.bool,
-        onViewableMessagesChanged: PropTypes.func
+        onViewableMessagesChanged: PropTypes.func,
+        itemVisiblePercentThreshold: PropTypes.number
     }
 
     state = {

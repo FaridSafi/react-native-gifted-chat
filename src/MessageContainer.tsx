@@ -340,7 +340,7 @@ export default class MessageContainer<
       this.props.messages!.length
     ) {
       setTimeout(
-        () => this.scrollToBottom(false),
+        () => this.scrollToBottom && this.scrollToBottom(false),
         15 * this.props.messages!.length,
       )
     }

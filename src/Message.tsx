@@ -41,6 +41,7 @@ export interface MessageProps<TMessage extends IMessage> {
   user: User
   inverted?: boolean
   containerStyle?: LeftRightStyle<ViewStyle>
+  textStyle?: LeftRightStyle<ViewStyle>
   renderBubble?(props: Bubble['props']): React.ReactNode
   renderDay?(props: Day['props']): React.ReactNode
   renderSystemMessage?(props: SystemMessage['props']): React.ReactNode
@@ -65,6 +66,7 @@ export default class Message<
     previousMessage: {},
     user: {},
     containerStyle: {},
+    textStyle: {},
     showUserAvatar: false,
     inverted: true,
     shouldUpdateMessage: undefined,
@@ -83,6 +85,10 @@ export default class Message<
     user: PropTypes.object,
     inverted: PropTypes.bool,
     containerStyle: PropTypes.shape({
+      left: ViewPropTypes.style,
+      right: ViewPropTypes.style,
+    }),
+    textStyle: PropTypes.shape({
       left: ViewPropTypes.style,
       right: ViewPropTypes.style,
     }),

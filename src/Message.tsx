@@ -142,12 +142,12 @@ export default class Message<
   }
 
   renderSystemMessage() {
-    const { containerStyle, ...props } = this.props
+    const { containerStyle, textStyle, ...props } = this.props
 
     if (this.props.renderSystemMessage) {
       return this.props.renderSystemMessage(props)
     }
-    return <SystemMessage {...props} />
+    return <SystemMessage {...props, textStyle} />
   }
 
   renderAvatar() {

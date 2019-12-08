@@ -52,8 +52,11 @@ const styles = {
   }),
 }
 
+const DEFAULT_OPTION_TITLES = ['Call', 'Text', 'Cancel']
+
 export interface MessageTextProps<TMessage extends IMessage> {
   position: 'left' | 'right'
+  optionTitles?: string[]
   currentMessage?: TMessage
   containerStyle?: LeftRightStyle<ViewStyle>
   textStyle?: LeftRightStyle<TextStyle>
@@ -72,6 +75,7 @@ export default class MessageText<
 
   static defaultProps = {
     position: 'left',
+    optionTitles: DEFAULT_OPTION_TITLES,
     currentMessage: {
       text: '',
     },
@@ -85,6 +89,7 @@ export default class MessageText<
 
   static propTypes = {
     position: PropTypes.oneOf(['left', 'right']),
+    optionTitles: PropTypes.arrayOf(PropTypes.string),
     currentMessage: PropTypes.object,
     containerStyle: PropTypes.shape({
       left: ViewPropTypes.style,
@@ -128,7 +133,11 @@ export default class MessageText<
   }
 
   onPhonePress = (phone: string) => {
-    const options = ['Call', 'Text', 'Cancel']
+    const { optionTitles } = this.props
+    const options =
+      optionTitles && optionTitles.length > 0
+        ? optionTitles.slice(0, 3)
+        : DEFAULT_OPTION_TITLES
     const cancelButtonIndex = options.length - 1
     this.context.actionSheet().showActionSheetWithOptions(
       {

@@ -132,7 +132,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage
-  optionTitles?: string
+  optionTitles?: string[]
   containerStyle?: LeftRightStyle<ViewStyle>
   wrapperStyle?: LeftRightStyle<ViewStyle>
   textStyle?: LeftRightStyle<TextStyle>
@@ -339,7 +339,12 @@ export default class Bubble<
 
   renderMessageText() {
     if (this.props.currentMessage && this.props.currentMessage.text) {
-      const { containerStyle, wrapperStyle, ...messageTextProps } = this.props
+      const {
+        containerStyle,
+        wrapperStyle,
+        optionTitles,
+        ...messageTextProps
+      } = this.props
       if (this.props.renderMessageText) {
         return this.props.renderMessageText(messageTextProps)
       }
@@ -375,7 +380,12 @@ export default class Bubble<
     if (renderTicks && currentMessage) {
       return renderTicks(currentMessage)
     }
-    if (currentMessage && user && currentMessage.user && currentMessage.user._id !== user._id) {
+    if (
+      currentMessage &&
+      user &&
+      currentMessage.user &&
+      currentMessage.user._id !== user._id
+    ) {
       return null
     }
     if (

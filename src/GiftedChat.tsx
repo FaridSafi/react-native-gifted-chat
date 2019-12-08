@@ -50,6 +50,8 @@ import QuickReplies from './QuickReplies'
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Messages to display */
   messages?: TMessage[]
+  /* Messages container style */
+  messagesContainerStyle?: StyleProp<ViewStyle>
   /* Input text; default is undefined, but if specified, it will override GiftedChat's internal state */
   text?: string
   /* Controls whether or not the message bubbles appear at the top of the chat */
@@ -204,6 +206,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   static defaultProps = {
     messages: [],
+    messagesContainerStyle: undefined,
     text: undefined,
     placeholder: DEFAULT_PLACEHOLDER,
     messageIdGenerator: () => uuid.v4(),
@@ -266,6 +269,10 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   static propTypes = {
     messages: PropTypes.arrayOf(PropTypes.object),
+    messagesContainerStyle: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.number,
+    ]),
     text: PropTypes.string,
     initialText: PropTypes.string,
     placeholder: PropTypes.string,
@@ -616,14 +623,18 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   renderMessages() {
+    const { messagesContainerStyle, ...messagesContainerProps } = this.props
     const fragment = (
       <View
-        style={{
-          height: this.state.messagesContainerHeight,
-        }}
+        style={[
+          {
+            height: this.state.messagesContainerHeight,
+          },
+          messagesContainerStyle,
+        ]}
       >
         <MessageContainer
-          {...this.props}
+          {...messagesContainerProps}
           invertibleScrollViewProps={this.invertibleScrollViewProps}
           messages={this.getMessages()}
           forwardRef={this._messageContainerRef}

@@ -77,7 +77,7 @@
     "babel-jest": "24.7.1",
     "babel-preset-expo": "^7.0.0",
     "expo": "^35.0.0",
-    "expo-constants": "~7.0.0",
+    "expo-constants": "~8.0.0",
     "expo-image-picker": "~7.0.0",
     "expo-location": "~7.0.0",
     "expo-permissions": "~7.0.0",

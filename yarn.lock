@@ -2770,10 +2770,10 @@ expo-font@~7.0.0:
   dependencies:
     fontfaceobserver "^2.1.0"
 
-expo-image-picker@~7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-7.0.0.tgz#e4a5a52bd6f9655f75ecf3cc866aa9bb0c99e24b"
-  integrity sha512-LeGdAqbeuB2KsT369ns1kDtCGbyDCmY2gIFlf/rsD3+UmagRFX9emZLGPEnUNdCWXoctSejjFwxDnCUtpvL6yw==
+expo-image-picker@~8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-8.0.0.tgz#e738ad56a5ea319c66fa401960a3509d17d4a4b7"
+  integrity sha512-xelYCrK2pjdnpeeLxObzKX6MTtK3G2PLlm7Rig4BcysJm/aJB86wnheVOiGxVut0lWHPGJbEd7zsqs53ARxh8g==
 
 expo-keep-awake@~7.0.0:
   version "7.0.0"

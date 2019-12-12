@@ -481,4 +481,4 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 
 ## Hire an expert!
 
-Looking for a ReactNative freelance expert with more than 12 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
+Looking for a ReactNative freelance expert or with more than 12 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)!

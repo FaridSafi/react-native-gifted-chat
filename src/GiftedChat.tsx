@@ -63,6 +63,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   initialText?: string
   /* Placeholder when text is empty; default is 'Type a message...' */
   placeholder?: string
+  /* Makes the composer not editable*/
+  disableComposer?: boolean
   /* User sending the messages: { _id, name, avatar } */
   user?: User
   /*  Locale to localize the dates */
@@ -209,6 +211,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     messagesContainerStyle: undefined,
     text: undefined,
     placeholder: DEFAULT_PLACEHOLDER,
+    disableComposer: false,
     messageIdGenerator: () => uuid.v4(),
     user: {},
     onSend: () => {},
@@ -276,6 +279,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     text: PropTypes.string,
     initialText: PropTypes.string,
     placeholder: PropTypes.string,
+    disableComposer: PropTypes.bool,
     messageIdGenerator: PropTypes.func,
     user: PropTypes.object,
     onSend: PropTypes.func,

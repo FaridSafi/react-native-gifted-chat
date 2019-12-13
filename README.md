@@ -116,7 +116,7 @@ class Example extends React.Component {
     messages: [],
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       messages: [
         {

@@ -103,7 +103,7 @@
     "prop-types": "15.7.2",
     "react-native-communications": "2.2.1",
     "react-native-iphone-x-helper": "^1.2.0",
-    "react-native-lightbox": "^0.7.0",
+    "react-native-lightbox": "^0.8.1",
     "react-native-maps": "~0.25.0",
     "react-native-parsed-text": "https://github.com/EvanBacon/react-native-parsed-text.git",
     "uuid": "3.3.3"

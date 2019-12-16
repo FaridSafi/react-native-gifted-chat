@@ -1,22 +1,22 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import PropTypes from 'prop-types';
-import { GiftedChat } from 'react-native-gifted-chat';
-import emojiUtils from 'emoji-utils';
+import React from 'react'
+import { Platform } from 'react-native'
+import PropTypes from 'prop-types'
+import { GiftedChat } from 'react-native-gifted-chat'
+import emojiUtils from 'emoji-utils'
 
-import SlackMessage from './SlackMessage';
+import SlackMessage from './SlackMessage'
 
 export default class App extends React.Component {
   state = {
     messages: [],
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       messages: [
         {
           _id: 1,
-          text: 'Hello developer',
+          text: 'Hello developer!!!',
           createdAt: new Date(),
           user: {
             _id: 2,
@@ -35,9 +35,11 @@ export default class App extends React.Component {
   }
 
   renderMessage(props) {
-    const { currentMessage: { text: currText } } = props;
+    const {
+      currentMessage: { text: currText },
+    } = props
 
-    let messageTextStyle;
+    let messageTextStyle
 
     // Make "pure emoji" messages much bigger than plain text.
     if (currText && emojiUtils.isPureEmojiString(currText)) {
@@ -45,12 +47,10 @@ export default class App extends React.Component {
         fontSize: 28,
         // Emoji get clipped if lineHeight isn't increased; make it consistent across platforms.
         lineHeight: Platform.OS === 'android' ? 34 : 30,
-      };
+      }
     }
 
-    return (
-      <SlackMessage {...props} messageTextStyle={messageTextStyle} />
-    );
+    return <SlackMessage {...props} messageTextStyle={messageTextStyle} />
   }
 
   render() {
@@ -63,7 +63,6 @@ export default class App extends React.Component {
         }}
         renderMessage={this.renderMessage}
       />
-    );
+    )
   }
-
 }

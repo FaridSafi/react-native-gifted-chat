@@ -89,8 +89,9 @@
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-maps": "0.26.1",
     "react-native-nav": "2.0.2",
-    "react-native-web": "^0.11.1",
+    "react-native-web": "0.11.7",
     "react-native-web-maps": "0.2.0",
     "react-test-renderer": "16.5.1",
     "tslint": "5.12.0",
@@ -104,7 +105,6 @@
     "react-native-communications": "2.2.1",
     "react-native-iphone-x-helper": "^1.2.0",
     "react-native-lightbox": "^0.8.1",
-    "react-native-maps": "~0.25.0",
     "react-native-parsed-text": "https://github.com/EvanBacon/react-native-parsed-text.git",
     "uuid": "3.3.3"
   },

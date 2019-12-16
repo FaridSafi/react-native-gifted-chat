@@ -13,7 +13,7 @@ README.md
 ISSUE_TEMPLATE.md
 codecov.yml
 media/
-App.js
+App.tsx
 app.json
 metro.config.js
 src/

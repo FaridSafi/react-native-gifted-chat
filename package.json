@@ -68,7 +68,7 @@
     "@babel/core": "^7.1.2",
     "@babel/preset-typescript": "^7.1.0",
     "@types/jest": "24.0.17",
-    "@types/react": "^16.7.17",
+    "@types/react": "16.9.16",
     "@types/react-native": "^0.57.19",
     "@types/react-native-communications": "2.2.1",
     "@types/react-test-renderer": "16.8.3",
@@ -98,7 +98,7 @@
     "typescript": "3.4.5"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "^3.1.0",
+    "@expo/react-native-action-sheet": "3.4.1",
     "moment": "^2.19.0",
     "prop-types": "15.7.2",
     "react-native-communications": "2.2.1",

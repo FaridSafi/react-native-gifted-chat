@@ -6,6 +6,7 @@ exports[`should render <Composer /> and compare with snapshot 1`] = `
   accessible={true}
   allowFontScaling={true}
   autoFocus={false}
+  editable={true}
   enablesReturnKeyAutomatically={true}
   keyboardAppearance="default"
   multiline={true}

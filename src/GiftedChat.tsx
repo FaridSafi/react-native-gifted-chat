@@ -13,7 +13,10 @@ import {
   KeyboardAvoidingView,
 } from 'react-native'
 
-import { ActionSheetProvider } from '@expo/react-native-action-sheet'
+import {
+  ActionSheetProvider,
+  ActionSheetOptions,
+} from '@expo/react-native-action-sheet'
 import moment from 'moment'
 import uuid from 'uuid'
 import { isIphoneX } from 'react-native-iphone-x-helper'
@@ -120,6 +123,13 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* optional prop used to place customView below text, image and video views; default is false */
   isCustomViewBottom?: boolean
   timeTextStyle?: LeftRightStyle<TextStyle>
+  /* Custom action sheet */
+  actionSheet?(): {
+    showActionSheetWithOptions: (
+      options: ActionSheetOptions,
+      callback: (i: number) => void,
+    ) => void
+  }
   /* Callback when a message avatar is tapped */
   onPressAvatar?(user: User): void
   /* Callback when a message avatar is tapped */
@@ -225,6 +235,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderLoadEarlier: null,
     renderAvatar: undefined,
     showUserAvatar: false,
+    actionSheet: null,
     onPressAvatar: null,
     onLongPressAvatar: null,
     renderUsernameOnMessage: false,
@@ -294,6 +305,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderLoadEarlier: PropTypes.func,
     renderAvatar: PropTypes.func,
     showUserAvatar: PropTypes.bool,
+    actionSheet: PropTypes.func,
     onPressAvatar: PropTypes.func,
     onLongPressAvatar: PropTypes.func,
     renderUsernameOnMessage: PropTypes.bool,
@@ -397,7 +409,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   getChildContext() {
     return {
-      actionSheet: () => this._actionSheetRef.getContext(),
+      actionSheet:
+        this.props.actionSheet || (() => this._actionSheetRef.getContext()),
       getLocale: this.getLocale,
     }
   }

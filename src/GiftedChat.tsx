@@ -446,14 +446,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     if (text !== prevProps.text) {
       this.setTextFromProp(text)
     }
-
-    if (prevProps.minInputToolbarHeight !== this.props.minInputToolbarHeight) {
-      this.setState({
-        messagesContainerHeight: this.prepareMessagesContainerHeight(
-          this.getBasicMessagesContainerHeight(),
-        ),
-      })
-    }
   }
 
   initLocale() {

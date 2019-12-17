@@ -32,7 +32,9 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
   >
     <View
       accessible={true}
+      focusable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -85,6 +87,7 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
       accessible={true}
       allowFontScaling={true}
       autoFocus={false}
+      editable={true}
       enablesReturnKeyAutomatically={true}
       keyboardAppearance="default"
       multiline={true}

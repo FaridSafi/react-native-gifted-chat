@@ -83,8 +83,9 @@ exports[`Message component should render <Message /> and compare with snapshot 1
         }
       >
         <View
-          accessibilityTraits="text"
           accessible={true}
+          focusable={false}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -289,8 +290,9 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
         }
       >
         <View
-          accessibilityTraits="text"
           accessible={true}
+          focusable={false}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -458,8 +460,9 @@ exports[`Message component should render null if user has no Avatar 1`] = `
         }
       >
         <View
-          accessibilityTraits="text"
           accessible={true}
+          focusable={false}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}

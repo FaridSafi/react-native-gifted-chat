@@ -157,8 +157,8 @@ export default class InputToolbar extends React.Component<
         style={
           [
             styles.container,
-            this.props.containerStyle,
             { position: this.state.position },
+            this.props.containerStyle,
           ] as ViewStyle
         }
       >

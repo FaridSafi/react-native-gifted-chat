@@ -6756,7 +6756,7 @@ react-native-nav@2.0.2:
   resolved "https://registry.yarnpkg.com/react-native-nav/-/react-native-nav-2.0.2.tgz#280be2c9b2ecb5c10e57f8b1833aa1ac9c5c1101"
   integrity sha512-t5BOIMRU5vMzMOtuUUuYxd59ipwRe8v1H7NTk8Z0elvBf8hCwYSsnRFDIYk35k/ZbbKZcODmd74P4x1zLTsDyA==
 
-"react-native-parsed-text@https://github.com/EvanBacon/react-native-parsed-text.git":
+"react-native-parsed-text@git+ssh://git@github.com/taskrabbit/react-native-parsed-text.git":
   version "0.0.22"
   resolved "https://github.com/EvanBacon/react-native-parsed-text.git#24939951b13a8223882c74610d758903eed652ab"
   dependencies:

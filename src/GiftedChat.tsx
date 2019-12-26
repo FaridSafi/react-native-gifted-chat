@@ -90,7 +90,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   renderAvatarOnTop?: boolean
   inverted?: boolean
   /* Extra props to be passed to the <Image> component created by the default renderMessageImage */
-  imageProps?: Message['props']
+  imageProps?: Message<TMessage>['props']
   /*Extra props to be passed to the MessageImage's Lightbox */
   lightboxProps?: any
   /*Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar) */
@@ -145,26 +145,26 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom "Load earlier messages" button */
   renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
   /* Custom message avatar; set to null to not render any avatar for the message */
-  renderAvatar?(props: Avatar['props']): React.ReactNode
+  renderAvatar?(props: Avatar<TMessage>['props']): React.ReactNode
   /* Custom message bubble */
-  renderBubble?(props: Bubble['props']): React.ReactNode
+  renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom system message */
-  renderSystemMessage?(props: SystemMessage['props']): React.ReactNode
+  renderSystemMessage?(props: SystemMessage<TMessage>['props']): React.ReactNode
   /* Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see example using showActionSheetWithOptions()) */
   onLongPress?(context: any, message: any): void
   /* Reverses display order of messages; default is true */
   /*Custom message container */
-  renderMessage?(message: Message['props']): React.ReactNode
+  renderMessage?(message: Message<TMessage>['props']): React.ReactNode
   /* Custom message text */
-  renderMessageText?(messageText: MessageText['props']): React.ReactNode
+  renderMessageText?(messageText: MessageText<TMessage>['props']): React.ReactNode
   /* Custom message image */
-  renderMessageImage?(props: MessageImage['props']): React.ReactNode
+  renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
   /* Custom view inside the bubble */
-  renderCustomView?(props: Bubble['props']): React.ReactNode
+  renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom day above a message*/
-  renderDay?(props: Day['props']): React.ReactNode
+  renderDay?(props: Day<TMessage>['props']): React.ReactNode
   /* Custom time inside a message */
-  renderTime?(props: Time['props']): React.ReactNode
+  renderTime?(props: Time<TMessage>['props']): React.ReactNode
   /* Custom footer component on the ListView, e.g. 'User is typing...' */
   renderFooter?(): React.ReactNode
   /* Custom component to render in the ListView when messages are empty */
@@ -193,8 +193,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Scroll to bottom custom component */
   scrollToBottomComponent?(): React.ReactNode
   shouldUpdateMessage?(
-    props: Message['props'],
-    nextProps: Message['props'],
+    props: Message<TMessage>['props'],
+    nextProps: Message<TMessage>['props'],
   ): boolean
 }
 
@@ -650,7 +650,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
           messagesContainerStyle,
         ]}
       >
-        <MessageContainer
+        <MessageContainer<TMessage>
           {...messagesContainerProps}
           invertibleScrollViewProps={this.invertibleScrollViewProps}
           messages={this.getMessages()}

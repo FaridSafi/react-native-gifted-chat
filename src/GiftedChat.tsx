@@ -53,6 +53,8 @@ import QuickReplies from './QuickReplies'
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Messages to display */
   messages?: TMessage[]
+  /* Typing Indicator state */
+  isTyping?: boolean
   /* Messages container style */
   messagesContainerStyle?: StyleProp<ViewStyle>
   /* Input text; default is undefined, but if specified, it will override GiftedChat's internal state */
@@ -655,6 +657,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
           invertibleScrollViewProps={this.invertibleScrollViewProps}
           messages={this.getMessages()}
           forwardRef={this._messageContainerRef}
+          isTyping={this.props.isTyping}
         />
         {this.renderChatFooter()}
       </View>

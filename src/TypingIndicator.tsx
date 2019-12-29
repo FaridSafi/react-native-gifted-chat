@@ -10,6 +10,7 @@ interface Props {
 const TypingIndicator = (props: Props) => {
   const [yCoords, setYCoords] = useState(new Animated.Value(200))
   const [heightScale, setHeightScale] = useState(new Animated.Value(0))
+  const [marginScale, setmarginScale] = useState(new Animated.Value(0))
 
   // on isTyping fire side effect
   useUpdateLayoutEffect(() => {
@@ -30,6 +31,10 @@ const TypingIndicator = (props: Props) => {
         toValue: 35,
         duration: 250,
       }),
+      Animated.timing(marginScale, {
+        toValue: 8,
+        duration: 250,
+      }),
     ]).start()
   }
 
@@ -40,6 +45,10 @@ const TypingIndicator = (props: Props) => {
         toValue: 200,
       }),
       Animated.timing(heightScale, {
+        toValue: 0,
+        duration: 250,
+      }),
+      Animated.timing(marginScale, {
         toValue: 0,
         duration: 250,
       }),
@@ -57,7 +66,7 @@ const TypingIndicator = (props: Props) => {
           ],
           height: heightScale,
           marginLeft: 8,
-          marginBottom: 10,
+          marginBottom: marginScale,
           width: 45,
           borderRadius: 15,
           backgroundColor: '#f0f0f0',

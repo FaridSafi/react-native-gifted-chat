@@ -10,8 +10,7 @@ import {
 
 export default class AccessoryBar extends React.Component {
   render() {
-    const { onSend } = this.props
-    const isTyping = this.props.isTyping
+    const { onSend, isTyping } = this.props
 
     return (
       <View style={styles.container}>

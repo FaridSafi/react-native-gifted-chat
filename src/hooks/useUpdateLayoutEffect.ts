@@ -18,5 +18,5 @@ export function useUpdateLayoutEffect(
     } else {
       effect()
     }
-  }, dependencies) // eslint-disable-line react-hooks/exhaustive-deps
+  }, dependencies)
 }

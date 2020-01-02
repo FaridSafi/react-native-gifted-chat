@@ -21,6 +21,7 @@ import Message from './Message'
 import Color from './Color'
 import { User, IMessage, Reply } from './types'
 import { warning } from './utils'
+import TypingIndicator from './TypingIndicator'
 
 const styles = StyleSheet.create({
   container: {
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
 
 export interface MessageContainerProps<TMessage extends IMessage> {
   messages?: TMessage[]
+  isTyping?: boolean
   user?: User
   listViewProps: Partial<ListViewProps>
   inverted?: boolean
@@ -91,6 +93,7 @@ export default class MessageContainer<
   static defaultProps = {
     messages: [],
     user: {},
+    isTyping: false,
     renderChatEmpty: null,
     renderFooter: null,
     renderMessage: null,
@@ -109,6 +112,7 @@ export default class MessageContainer<
 
   static propTypes = {
     messages: PropTypes.arrayOf(PropTypes.object),
+    isTyping: PropTypes.bool,
     user: PropTypes.object,
     renderChatEmpty: PropTypes.func,
     renderFooter: PropTypes.func,
@@ -119,7 +123,7 @@ export default class MessageContainer<
     inverted: PropTypes.bool,
     loadEarlier: PropTypes.bool,
     invertibleScrollViewProps: PropTypes.object,
-    extraData: PropTypes.object,
+    extraData: PropTypes.array,
     scrollToBottom: PropTypes.bool,
     scrollToBottomOffset: PropTypes.number,
     scrollToBottomComponent: PropTypes.func,
@@ -194,14 +198,16 @@ export default class MessageContainer<
     )
   }
 
+  renderTypingIndicator = () => {
+    return <TypingIndicator isTyping={this.props.isTyping || false} />
+  }
+
   renderFooter = () => {
     if (this.props.renderFooter) {
-      const footerProps = {
-        ...this.props,
-      }
-      return this.props.renderFooter(footerProps)
+      return this.props.renderFooter(this.props)
     }
-    return null
+
+    return this.renderTypingIndicator()
   }
 
   renderLoadEarlier = () => {
@@ -361,7 +367,7 @@ export default class MessageContainer<
           : null}
         <FlatList
           ref={this.props.forwardRef}
-          extraData={this.props.extraData}
+          extraData={[this.props.extraData, this.props.isTyping]}
           keyExtractor={this.keyExtractor}
           enableEmptySections
           automaticallyAdjustContentInsets={false}

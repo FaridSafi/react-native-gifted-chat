@@ -10,12 +10,19 @@ import {
 
 export default class AccessoryBar extends React.Component {
   render() {
-    const { onSend } = this.props
+    const { onSend, isTyping } = this.props
+
     return (
       <View style={styles.container}>
         <Button onPress={() => pickImageAsync(onSend)} name='photo' />
         <Button onPress={() => takePictureAsync(onSend)} name='camera' />
         <Button onPress={() => getLocationAsync(onSend)} name='my-location' />
+        <Button
+          onPress={() => {
+            isTyping()
+          }}
+          name='chat'
+        />
       </View>
     )
   }

@@ -59,8 +59,6 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   text?: string
   /* Controls whether or not the message bubbles appear at the top of the chat */
   alignTop?: boolean
-  /* Determine whether is wrapped in a SafeAreaView */
-  useSafeArea?: boolean
   /* enables the scrollToBottom Component */
   scrollToBottom?: boolean
   /* Scroll to bottom wrapper style */
@@ -281,7 +279,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     extraData: null,
     minComposerHeight: MIN_COMPOSER_HEIGHT,
     maxComposerHeight: MAX_COMPOSER_HEIGHT,
-    useSafeArea: true,
   }
 
   static propTypes = {
@@ -348,7 +345,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     minComposerHeight: PropTypes.number,
     maxComposerHeight: PropTypes.number,
     alignTop: PropTypes.bool,
-    useSafeArea: PropTypes.bool,
   }
 
   static append<TMessage extends IMessage>(
@@ -832,11 +828,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   render() {
     if (this.state.isInitialized === true) {
-      const { useSafeArea } = this.props
-      const ViewComponent = useSafeArea ? SafeAreaView : View
-
       return (
-        <ViewComponent style={styles.safeArea}>
+        <SafeAreaView style={styles.safeArea}>
           <ActionSheetProvider
             ref={(component: any) => (this._actionSheetRef = component)}
           >
@@ -845,7 +838,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
               {this.renderInputToolbar()}
             </View>
           </ActionSheetProvider>
-        </ViewComponent>
+        </SafeAreaView>
       )
     }
     return (

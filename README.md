@@ -32,6 +32,12 @@
 <p align="center">
   <a href="https://reverent-bardeen-47c862.netlify.com/" target="_blank">Demo Web 🖥</a>
 </p>
+<p align="center">
+  <a href="https://snack.expo.io/@xcarpentier/giftedchat-playground" target="_blank">Snack GiftedChat playground</a>
+  <img height="18" src="https://snack.expo.io/favicon.ico" />
+</p>
+
+
 
 ## Sponsor
 
@@ -68,6 +74,7 @@
 ## Please vote
 **GiftedChat** depends on other packages and some needs a boost, please vote for PRs will improve it, thanks:
 - https://github.com/taskrabbit/react-native-parsed-text/pull/58
+- https://github.com/watadarkstar/react-native-typing-animation/issues/18
 
 ## Features
 
@@ -85,6 +92,7 @@
 - Redux support
 - System message
 - Quick Reply messages (bot)
+- Typying indicatior [react-native-typing-animation](https://github.com/watadarkstar/react-native-typing-animation)
 
 ## Dependency
 

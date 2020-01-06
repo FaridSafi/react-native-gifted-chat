@@ -140,7 +140,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   tickStyle?: StyleProp<TextStyle>
   containerToNextStyle?: LeftRightStyle<ViewStyle>
   containerToPreviousStyle?: LeftRightStyle<ViewStyle>
-  usernameStyle?: LeftRightStyle<ViewStyle>
+  usernameStyle?: TextStyle
   quickReplyStyle?: StyleProp<ViewStyle>
   onLongPress?(context?: any, message?: any): void
   onQuickReply?(replies: Reply[]): void

@@ -47,7 +47,7 @@ export type BubbleProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   tickStyle?: TextStyleProp,
   containerToNextStyle?: LeftRightStyle<ViewStyleProp>,
   containerToPreviousStyle?: LeftRightStyle<ViewStyleProp>,
-  usernameStyle?: LeftRightStyle<TextStyleProp>,
+  usernameStyle?: TextStyleProp,
   quickReplyStyle?: ViewStyleProp,
   onLongPress?: (context?: any, message?: any) => void,
   onQuickReply?: (Array<Reply>) => void,

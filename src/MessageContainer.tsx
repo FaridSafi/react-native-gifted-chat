@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  containerAlignTop: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
+  contentContainerAlignTop: {
+    flexGrow: 1,
+    justifyContent: 'flex-end',
   },
   contentContainerStyle: {
     flexGrow: 1,
@@ -355,13 +355,9 @@ export default class MessageContainer<
   keyExtractor = (item: TMessage) => `${item._id}`
 
   render() {
-    const { inverted } = this.props
+    const { alignTop, inverted } = this.props
     return (
-      <View
-        style={
-          this.props.alignTop ? styles.containerAlignTop : styles.container
-        }
-      >
+      <View style={styles.container}>
         {this.state.showScrollBottom && this.props.scrollToBottom
           ? this.renderScrollToBottomWrapper()
           : null}
@@ -374,7 +370,11 @@ export default class MessageContainer<
           inverted={inverted}
           data={this.props.messages}
           style={styles.listStyle}
-          contentContainerStyle={styles.contentContainerStyle}
+          contentContainerStyle={
+            alignTop
+              ? styles.contentContainerAlignTop
+              : styles.contentContainerStyle
+          }
           renderItem={this.renderRow}
           {...this.props.invertibleScrollViewProps}
           ListEmptyComponent={this.renderChatEmpty}

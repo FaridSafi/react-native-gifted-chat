@@ -66,6 +66,7 @@ export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   minInputToolbarHeight?: number,
   listViewProps?: $Shape<React.ElementProps<typeof FlatList>>,
   textInputProps?: any,
+  textInputStyle?: any,
   keyboardShouldPersistTaps?: any,
   maxInputLength?: number,
   forceGetKeyboardHeight?: boolean,

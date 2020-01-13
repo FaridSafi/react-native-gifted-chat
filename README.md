@@ -168,7 +168,7 @@ class Example extends React.Component {
 
 ## Advanced example
 
-See [`App.js`](App.js) for a working demo!
+See [`App.js`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master/App.tsx) for a working demo!
 
 ## "Slack" example
 

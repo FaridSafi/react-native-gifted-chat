@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
   listStyle: {
     flex: 1,
   },
+  emptyChatContainer: {
+    flex: 1,
+    transform: [{ scaleY: -1 }],
+  },
   scrollToBottomStyle: {
     opacity: 0.8,
     position: 'absolute',
@@ -306,7 +310,11 @@ export default class MessageContainer<
 
   renderChatEmpty = () => {
     if (this.props.renderChatEmpty) {
-      return this.props.renderChatEmpty()
+      return (
+        <View style={styles.emptyChatContainer}>
+          {this.props.renderChatEmpty()}
+        </View>
+      )
     }
     return <View style={styles.container} />
   }

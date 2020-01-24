@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'flex-start',
     },
+    emptyChatContainer: {
+      flex: 1,
+      transform: [{ scaleY: -1 }],
+    },
     headerWrapper: {
         flex: 1,
     },
@@ -147,7 +151,7 @@ export default class MessageContainer extends React.PureComponent {
         };
         this.renderChatEmpty = () => {
             if (this.props.renderChatEmpty) 
-                return this.props.inverted?this.props.renderChatEmpty(): <View style={{flex:1,transform:[{scaleY: -1}]}}> {this.props.renderChatEmpty()}</View>
+                return this.props.inverted?this.props.renderChatEmpty(): <View style={styles.emptyChatContainer}> {this.props.renderChatEmpty()}</View>
             return <View style={styles.container}/>;
         };
         this.renderHeaderWrapper = () => (<View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>);

@@ -310,10 +310,12 @@ export default class MessageContainer<
 
   renderChatEmpty = () => {
     if (this.props.renderChatEmpty) {
-      return (
+      return !this.props.inverted ? (
         <View style={styles.emptyChatContainer}>
           {this.props.renderChatEmpty()}
         </View>
+      ) : (
+        this.props.renderChatEmpty()
       )
     }
     return <View style={styles.container} />

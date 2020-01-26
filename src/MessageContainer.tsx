@@ -35,6 +35,10 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'flex-start',
   },
+  emptyChatContainer: {
+    flex: 1,
+    transform: [{ scaleY: -1 }],
+  },
   headerWrapper: {
     flex: 1,
   },

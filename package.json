@@ -69,7 +69,7 @@
     "@babel/preset-typescript": "^7.1.0",
     "@types/jest": "24.0.25",
     "@types/react": "16.9.17",
-    "@types/react-native": "^0.60.26",
+    "@types/react-native": "^0.61.5",
     "@types/react-native-communications": "2.2.1",
     "@types/react-test-renderer": "16.8.3",
     "@types/uuid": "3.4.7",

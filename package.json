@@ -72,7 +72,7 @@
     "@types/react-native": "^0.60.26",
     "@types/react-native-communications": "2.2.1",
     "@types/react-test-renderer": "16.8.3",
-    "@types/uuid": "3.4.5",
+    "@types/uuid": "3.4.7",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.7.1",
     "babel-preset-expo": "^7.0.0",

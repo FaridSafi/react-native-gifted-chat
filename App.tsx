@@ -240,7 +240,7 @@ export default class App extends Component {
         accessibilityLabel='main'
         testID='main'
       >
-        <NavBar />
+        {/* <NavBar /> */}
         <GiftedChat
           messages={this.state.messages}
           onSend={this.onSend}
@@ -252,11 +252,11 @@ export default class App extends Component {
           scrollToBottom
           onLongPressAvatar={user => alert(JSON.stringify(user))}
           onPressAvatar={() => alert('short press')}
-          onQuickReply={this.onQuickReply}
+          // onQuickReply={this.onQuickReply}
           keyboardShouldPersistTaps='never'
           renderAccessory={Platform.OS === 'web' ? null : this.renderAccessory}
           renderActions={this.renderCustomActions}
-          renderBubble={this.renderBubble}
+          // renderBubble={this.renderBubble}
           renderSystemMessage={this.renderSystemMessage}
           renderCustomView={this.renderCustomView}
           quickReplyStyle={{ borderRadius: 2 }}

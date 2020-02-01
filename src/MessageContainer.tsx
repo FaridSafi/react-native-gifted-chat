@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { RefObject } from 'react'
 
 import {
-  FlatList,
   View,
   StyleSheet,
   Keyboard,
@@ -15,6 +14,8 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native'
+
+import { FlatList } from 'react-native-gesture-handler'
 
 import LoadEarlier from './LoadEarlier'
 import Message from './Message'
@@ -365,6 +366,7 @@ export default class MessageContainer<
         {this.state.showScrollBottom && this.props.scrollToBottom
           ? this.renderScrollToBottomWrapper()
           : null}
+        <View></View>
         <FlatList
           ref={this.props.forwardRef}
           extraData={[this.props.extraData, this.props.isTyping]}

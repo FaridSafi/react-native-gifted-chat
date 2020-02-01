@@ -3,14 +3,18 @@ import React, { Component } from 'react'
 import {
   StyleSheet,
   Text,
-  TouchableOpacity,
+  TouchableOpacity as TouchableOpacityIOS,
   View,
   ViewPropTypes,
   StyleProp,
   ViewStyle,
   TextStyle,
   TouchableOpacityProps,
+  Platform,
 } from 'react-native'
+
+import { TouchableOpacity as TouchableOpacityAndroid } from 'react-native-gesture-handler'
+
 import Color from './Color'
 
 const styles = StyleSheet.create({
@@ -80,24 +84,51 @@ export default class Send extends Component<SendProps> {
     } = this.props
     if (alwaysShowSend || (text && text.trim().length > 0)) {
       return (
-        <TouchableOpacity
-          testID='send'
-          accessible
-          accessibilityLabel='send'
-          style={[styles.container, containerStyle]}
-          onPress={() => {
-            if (text && onSend) {
-              onSend({ text: text.trim() }, true)
-            }
-          }}
-          accessibilityTraits='button'
-          disabled={disabled}
-          {...sendButtonProps}
-        >
-          <View>
-            {children || <Text style={[styles.text, textStyle]}>{label}</Text>}
-          </View>
-        </TouchableOpacity>
+        <View>
+          {Platform.OS === 'android' ? (
+            <TouchableOpacityIOS
+              testID='send'
+              accessible
+              accessibilityLabel='send'
+              style={[styles.container, containerStyle]}
+              onPress={() => {
+                if (text && onSend) {
+                  onSend({ text: text.trim() }, true)
+                }
+              }}
+              accessibilityTraits='button'
+              disabled={disabled}
+              {...sendButtonProps}
+            >
+              <View>
+                {children || (
+                  <Text style={[styles.text, textStyle]}>{label}</Text>
+                )}
+              </View>
+            </TouchableOpacityIOS>
+          ) : (
+            <TouchableOpacityAndroid
+              testID='send'
+              accessible
+              accessibilityLabel='send'
+              style={[styles.container, containerStyle]}
+              onPress={() => {
+                if (text && onSend) {
+                  onSend({ text: text.trim() }, true)
+                }
+              }}
+              accessibilityTraits='button'
+              disabled={disabled}
+              {...sendButtonProps}
+            >
+              <View>
+                {children || (
+                  <Text style={[styles.text, textStyle]}>{label}</Text>
+                )}
+              </View>
+            </TouchableOpacityAndroid>
+          )}
+        </View>
       )
     }
     return <View />

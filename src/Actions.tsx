@@ -11,6 +11,11 @@ import {
   TextStyle,
 } from 'react-native'
 import Color from './Color'
+import { Icon } from 'native-base'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen'
 
 export interface ActionsProps {
   options?: { [key: string]: any }
@@ -71,7 +76,20 @@ export default class Actions extends React.Component<ActionsProps> {
     }
     return (
       <View style={[styles.wrapper, this.props.wrapperStyle]}>
-        <Text style={[styles.iconText, this.props.iconTextStyle]}>+</Text>
+        {/* <Text style={[styles.iconText, this.props.iconTextStyle]}>+</Text> */}
+        <Icon
+          type='Entypo'
+          name='attachment'
+          style={{
+            fontSize: wp('5%'),
+            color: '#FFF',
+            // borderWidth: 2,
+            //   left: LEFT_WIDTH / 3,
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignSelf: 'center',
+          }}
+        />
       </View>
     )
   }

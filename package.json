@@ -101,12 +101,14 @@
   "dependencies": {
     "@expo/react-native-action-sheet": "3.4.1",
     "moment": "^2.19.0",
+    "native-base": "^2.13.8",
     "prop-types": "15.7.2",
     "react-native-communications": "2.2.1",
     "react-native-gesture-handler": "^1.5.3",
     "react-native-iphone-x-helper": "^1.2.0",
     "react-native-lightbox": "^0.8.1",
     "react-native-parsed-text": "https://github.com/EvanBacon/react-native-parsed-text.git",
+    "react-native-responsive-screen": "^1.3.1",
     "react-native-typing-animation": "^0.1.7",
     "uuid": "3.3.3"
   },

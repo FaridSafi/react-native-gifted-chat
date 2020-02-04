@@ -1306,9 +1306,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@expo/react-native-action-sheet@3.4.1":
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/@expo/react-native-action-sheet/-/react-native-action-sheet-3.4.1.tgz#af1397d3b1c446f77b3ece531ce87aab5a8777d2"
+"@expo/react-native-action-sheet@3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@expo/react-native-action-sheet/-/react-native-action-sheet-3.5.0.tgz#243ef101b47d9d438ba17883ff816252c5d5b7dc"
+  integrity sha512-xhJZtRJxG9/IsJFJhXhYMqLbq+IM3PCKsN4nEoI+4B07oitQOGfeqZlfQNOAQdFUjaG4pjDFSkzRK8hPlLLr+w==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.1"
     hoist-non-react-statics "^3.3.0"
@@ -1760,11 +1761,11 @@
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@types/react-native-communications/-/react-native-communications-2.2.1.tgz#fe067d9d226090cea34a62de8c6ac71f92caeeb9"
 
-"@types/react-native@^0.60.26":
-  version "0.60.26"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.60.26.tgz#cfbb02c39cd162240d59f4922b5bdeb0c212f90d"
+"@types/react-native@^0.61.5":
+  version "0.61.10"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.61.10.tgz#d010b9093322bc781151638f74124f58fc87cc90"
+  integrity sha512-z+RWEFfdwHnOLpq70DO//4mjyNqoZypdR3uBqpBB82t2HJg2YbY4j6XIow7sFqeO/r8XibgV9UFEVG2tYIRlSA==
   dependencies:
-    "@types/prop-types" "*"
     "@types/react" "*"
 
 "@types/react-test-renderer@16.8.3":

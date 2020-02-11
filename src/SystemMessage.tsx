@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
   StyleSheet,
-  Text,
   View,
   ViewPropTypes,
   ViewStyle,
@@ -11,6 +10,7 @@ import {
 import PropTypes from 'prop-types'
 import Color from './Color'
 import { IMessage } from './types'
+import MessageText from './MessageText'
 
 const styles = StyleSheet.create({
   container: {
@@ -33,6 +33,7 @@ export interface SystemMessageProps<TMessage extends IMessage> {
   containerStyle?: StyleProp<ViewStyle>
   wrapperStyle?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
+  linkStyle?: StyleProp<TextStyle>
 }
 
 export default class SystemMessage<
@@ -45,6 +46,7 @@ export default class SystemMessage<
     containerStyle: {},
     wrapperStyle: {},
     textStyle: {},
+    linkStyle: {},
   }
 
   static propTypes = {
@@ -52,20 +54,16 @@ export default class SystemMessage<
     containerStyle: ViewPropTypes.style,
     wrapperStyle: ViewPropTypes.style,
     textStyle: PropTypes.any,
+    linkStyle: PropTypes.any,
   }
 
   render() {
-    const {
-      currentMessage,
-      containerStyle,
-      wrapperStyle,
-      textStyle,
-    } = this.props
-    if (currentMessage) {
+    const { containerStyle, wrapperStyle, textStyle, linkStyle, ...messageTextProps } = this.props;
+    if (this.props.currentMessage) {
       return (
         <View style={[styles.container, containerStyle]}>
           <View style={wrapperStyle}>
-            <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
+            <MessageText customTextStyle={[styles.text, textStyle]} customLinkStyle={linkStyle} {...messageTextProps}/>
           </View>
         </View>
       )

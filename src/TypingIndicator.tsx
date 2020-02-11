@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Animated } from 'react-native'
+// @ts-ignore
 import { TypingAnimation } from 'react-native-typing-animation'
 import { useUpdateLayoutEffect } from './hooks/useUpdateLayoutEffect'
 
@@ -8,9 +9,9 @@ interface Props {
 }
 
 const TypingIndicator = (props: Props) => {
-  const [yCoords, setYCoords] = useState(new Animated.Value(200))
-  const [heightScale, setHeightScale] = useState(new Animated.Value(0))
-  const [marginScale, setmarginScale] = useState(new Animated.Value(0))
+  const [yCoords] = useState(new Animated.Value(200))
+  const [heightScale] = useState(new Animated.Value(0))
+  const [marginScale] = useState(new Animated.Value(0))
 
   // on isTyping fire side effect
   useUpdateLayoutEffect(() => {

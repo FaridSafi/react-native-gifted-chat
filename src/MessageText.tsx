@@ -63,6 +63,7 @@ export interface MessageTextProps<TMessage extends IMessage> {
   linkStyle?: LeftRightStyle<TextStyle>
   textProps?: TextProps
   customTextStyle?: StyleProp<TextStyle>
+  customLinkStyle?: StyleProp<TextStyle>
   parsePatterns?(linkStyle: TextStyle): any
 }
 
@@ -83,6 +84,7 @@ export default class MessageText<
     textStyle: {},
     linkStyle: {},
     customTextStyle: {},
+    customLinkStyle: {},
     textProps: {},
     parsePatterns: () => [],
   }
@@ -106,6 +108,7 @@ export default class MessageText<
     parsePatterns: PropTypes.func,
     textProps: PropTypes.object,
     customTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    customLinkStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   }
 
   shouldComponentUpdate(nextProps: MessageTextProps<TMessage>) {
@@ -166,6 +169,7 @@ export default class MessageText<
     const linkStyle = [
       styles[this.props.position].link,
       this.props.linkStyle && this.props.linkStyle[this.props.position],
+      this.props.customLinkStyle,
     ]
     return (
       <View

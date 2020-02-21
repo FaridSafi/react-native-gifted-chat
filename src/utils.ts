@@ -5,8 +5,12 @@ export function isSameDay(
   currentMessage: IMessage,
   diffMessage: IMessage | null | undefined,
 ) {
-  if (!diffMessage || !diffMessage.createdAt) {
+  if (!diffMessage || (!currentMessage.createdAt && diffMessage.createdAt)) {
     return false
+  }
+
+  if (!diffMessage.createdAt) {
+    return true
   }
 
   const currentCreatedAt = moment(currentMessage.createdAt)

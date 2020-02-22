@@ -488,9 +488,9 @@ export default class Bubble<
         <View
           style={[
             styles[position].wrapper,
-            wrapperStyle && wrapperStyle[position],
-            this.styledBubbleToNext(),
+             this.styledBubbleToNext(),
             this.styledBubbleToPrevious(),
+            wrapperStyle && wrapperStyle[position],
           ]}
         >
           <TouchableWithoutFeedback

@@ -74,6 +74,7 @@ export default class MessageImage<
               style: styles.imageActive,
             }}
             {...lightboxProps}
+            {...currentMessage}
           >
             <Image
               {...imageProps}

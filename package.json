@@ -104,7 +104,7 @@
     "prop-types": "15.7.2",
     "react-native-communications": "2.2.1",
     "react-native-iphone-x-helper": "^1.2.0",
-    "react-native-lightbox": "^0.8.1",
+    "react-native-lightbox": "shubhamgupta14cse/react-native-lightbox#master",
     "react-native-parsed-text": "https://github.com/EvanBacon/react-native-parsed-text.git",
     "react-native-typing-animation": "^0.1.7",
     "uuid": "3.3.3"

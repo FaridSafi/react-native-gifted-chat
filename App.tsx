@@ -38,7 +38,6 @@ export default class App extends Component {
     typingText: null,
     isLoadingEarlier: false,
     appIsReady: false,
-    isTyping: false,
   }
 
   _isMounted = false
@@ -49,7 +48,6 @@ export default class App extends Component {
     this.setState({
       messages: messagesData, // messagesData.filter(message => message.system),
       appIsReady: true,
-      isTyping: false,
     })
   }
 
@@ -158,15 +156,7 @@ export default class App extends Component {
     this.onSend(messagesToUpload)
   }
 
-  setIsTyping = () => {
-    this.setState({
-      isTyping: !this.state.isTyping,
-    })
-  }
-
-  renderAccessory = () => (
-    <AccessoryBar onSend={this.onSendFromUser} isTyping={this.setIsTyping} />
-  )
+  renderAccessory = () => <AccessoryBar onSend={this.onSendFromUser} />
 
   renderCustomActions = props =>
     Platform.OS === 'web' ? null : (
@@ -263,7 +253,6 @@ export default class App extends Component {
           renderQuickReplySend={this.renderQuickReplySend}
           inverted={Platform.OS !== 'web'}
           timeTextStyle={{ left: { color: 'red' }, right: { color: 'yellow' } }}
-          isTyping={this.state.isTyping}
         />
       </View>
     )

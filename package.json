@@ -1,42 +1,85 @@
 {
-  "name": "react-native-gifted-chat",
-  "version": "0.14.0",
-  "description": "The most complete chat UI for React Native",
-  "main": "node_modules/expo/AppEntry.js",
-  "types": "lib/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
+  "_from": "react-native-gifted-chat@^0.13.0",
+  "_id": "react-native-gifted-chat@0.13.0",
+  "_inBundle": false,
+  "_integrity": "sha512-vUFQTX1bIaKgabaQW5E8frLGbzxJFVoUR/Mvpu619dimp2CnmFgmDsq0K7rCzramYF3U+cCuhhHAmjTFYImXhA==",
+  "_location": "/react-native-gifted-chat",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "react-native-gifted-chat@^0.13.0",
+    "name": "react-native-gifted-chat",
+    "escapedName": "react-native-gifted-chat",
+    "rawSpec": "^0.13.0",
+    "saveSpec": null,
+    "fetchSpec": "^0.13.0"
   },
-  "keywords": [
-    "android",
-    "ios",
-    "react-native",
-    "react",
-    "react-component",
-    "messenger",
-    "message",
-    "chat"
+  "_requiredBy": [
+    "/"
   ],
-  "author": "Farid Safi",
-  "license": "MIT",
+  "_resolved": "https://registry.npmjs.org/react-native-gifted-chat/-/react-native-gifted-chat-0.13.0.tgz",
+  "_shasum": "0151a092a2e8b3c3a754f2b6ffe3ca3069d8dac8",
+  "_spec": "react-native-gifted-chat@^0.13.0",
+  "_where": "/Users/shubhamgupta/Desktop/catchVYBZ/rashmidev/expokit/app-origin",
+  "author": {
+    "name": "Farid Safi"
+  },
   "bugs": {
     "url": "https://github.com/FaridSafi/react-native-gifted-chat/issues"
   },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@expo/react-native-action-sheet": "3.4.1",
+    "moment": "^2.19.0",
+    "prop-types": "15.7.2",
+    "react-native-communications": "2.2.1",
+    "react-native-iphone-x-helper": "^1.2.0",
+    "react-native-lightbox": "shubhamgupta14cse/react-native-lightbox",
+    "react-native-parsed-text": "git+https://github.com/EvanBacon/react-native-parsed-text.git",
+    "uuid": "3.3.3"
+  },
+  "deprecated": false,
+  "description": "The most complete chat UI for React Native",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-typescript": "^7.1.0",
+    "@types/jest": "24.0.17",
+    "@types/react": "16.9.16",
+    "@types/react-native": "^0.57.19",
+    "@types/react-native-communications": "2.2.1",
+    "@types/react-test-renderer": "16.8.3",
+    "@types/uuid": "3.4.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "24.7.1",
+    "babel-preset-expo": "^7.0.0",
+    "expo": "^36.0.0",
+    "expo-constants": "~8.0.0",
+    "expo-image-picker": "~8.0.0",
+    "expo-location": "~8.0.0",
+    "expo-permissions": "~8.0.0",
+    "flow-bin": "^0.108.0",
+    "husky": "^3.0.0",
+    "jest-expo": "^36.0.0",
+    "json": "^9.0.6",
+    "prettier": "1.18.0",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-maps": "0.26.1",
+    "react-native-nav": "2.0.2",
+    "react-native-web": "0.11.7",
+    "react-native-web-maps": "0.2.0",
+    "react-test-renderer": "16.5.1",
+    "tslint": "5.12.0",
+    "tslint-config-prettier": "1.17.0",
+    "typescript": "3.4.5"
+  },
   "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
-  "scripts": {
-    "config:dev": "json -I -f package.json -e 'this.main=\"node_modules/expo/AppEntry.js\"'",
-    "config:npm": "json -I -f package.json -e 'this.main=\"lib/index.js\"'",
-    "lint": "tslint --project .",
-    "tsc": "node_modules/.bin/tsc --noEmit",
-    "start": "yarn config:dev && expo start",
-    "start:web": "yarn config:dev && expo start -w --dev",
-    "build": "rm -rf lib/ && node_modules/.bin/tsc && cp flow-typedefs/*.js.flow lib/",
-    "test": "TZ=Europe/Paris jest --no-watchman",
-    "test:watch": "TZ=Europe/Paris jest --watch",
-    "test:coverage": "TZ=Europe/Paris jest --coverage",
-    "prepublishOnly": "yarn lint && yarn build && yarn test && yarn config:npm",
-    "postpublish": "yarn config:dev"
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && yarn tsc"
+    }
   },
   "jest": {
     "preset": "react-native",
@@ -64,59 +107,41 @@
       "./src/__tests__/"
     ]
   },
-  "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/preset-typescript": "^7.1.0",
-    "@types/jest": "25.1.2",
-    "@types/react": "16.9.22",
-    "@types/react-native": "^0.61.5",
-    "@types/react-native-communications": "2.2.1",
-    "@types/react-test-renderer": "16.8.3",
-    "@types/uuid": "3.4.7",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "24.7.1",
-    "babel-preset-expo": "^7.0.0",
-    "expo": "^36.0.0",
-    "expo-constants": "~8.0.0",
-    "expo-image-picker": "~8.0.0",
-    "expo-location": "~8.0.0",
-    "expo-permissions": "~8.0.0",
-    "flow-bin": "^0.118.0",
-    "husky": "^4.0.2",
-    "jest-expo": "^36.0.0",
-    "json": "^9.0.6",
-    "prettier": "1.18.0",
-    "react": "16.9.0",
-    "react-dom": "16.9.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
-    "react-native-maps": "0.26.1",
-    "react-native-nav": "2.0.2",
-    "react-native-web": "0.12.1",
-    "react-native-web-maps": "0.2.0",
-    "react-test-renderer": "16.5.1",
-    "tslint": "5.12.0",
-    "tslint-config-prettier": "1.17.0",
-    "typescript": "3.4.5"
-  },
-  "dependencies": {
-    "@expo/react-native-action-sheet": "3.5.0",
-    "moment": "^2.19.0",
-    "prop-types": "15.7.2",
-    "react-native-communications": "2.2.1",
-    "react-native-iphone-x-helper": "^1.2.0",
-    "react-native-lightbox": "shubhamgupta14cse/react-native-lightbox#master",
-    "react-native-parsed-text": "https://github.com/EvanBacon/react-native-parsed-text.git",
-    "react-native-typing-animation": "^0.1.7",
-    "uuid": "3.3.3"
-  },
+  "keywords": [
+    "android",
+    "ios",
+    "react-native",
+    "react",
+    "react-component",
+    "messenger",
+    "message",
+    "chat"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "name": "react-native-gifted-chat",
   "peerDependencies": {
     "moment": "*",
     "react": "*",
     "react-native": "*"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint && yarn tsc"
-    }
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
+  },
+  "scripts": {
+    "config:dev": "json -I -f package.json -e 'this.main=\"node_modules/expo/AppEntry.js\"'",
+    "config:npm": "json -I -f package.json -e 'this.main=\"lib/index.js\"'",
+    "lint": "tslint --project .",
+    "postpublish": "yarn config:dev",
+    "prepublishOnly": "yarn lint && yarn build && yarn test && yarn config:npm",
+    "start": "yarn config:dev && expo start",
+    "start:web": "yarn config:dev && expo start -w --dev",
+    "test": "TZ=Europe/Paris jest --no-watchman",
+    "test:coverage": "TZ=Europe/Paris jest --coverage",
+    "test:watch": "TZ=Europe/Paris jest --watch",
+    "tsc": "tsc --noEmit"
+  },
+  "types": "lib/index.d.ts",
+  "version": "0.13.0"
 }

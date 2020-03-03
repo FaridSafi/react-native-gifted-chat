@@ -35,7 +35,7 @@
     "prop-types": "15.7.2",
     "react-native-communications": "2.2.1",
     "react-native-iphone-x-helper": "^1.2.0",
-    "react-native-lightbox": "shubhamgupta14cse/react-native-lightbox",
+    "react-native-lightbox": "decabits/react-native-lightbox",
     "react-native-parsed-text": "git+https://github.com/EvanBacon/react-native-parsed-text.git",
     "uuid": "3.3.3"
   },

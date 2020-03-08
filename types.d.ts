@@ -6,3 +6,5 @@ declare module '@expo/react-native-action-sheet' {
     ActionSheetOptions,
   } from '@expo/react-native-action-sheet/lib/typescript'
 }
+
+declare module 'react-native-typing-animation';

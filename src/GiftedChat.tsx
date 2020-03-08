@@ -693,7 +693,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       this.resetInputToolbar()
     }
     if (this.props.onSend) {
-      this.props.onSend(newMessages, this.scrollToBottom)
+      this.props.onSend(newMessages, this.scrollToBottom.bind(this))
     }
 
     if (shouldResetInputToolbar === true) {

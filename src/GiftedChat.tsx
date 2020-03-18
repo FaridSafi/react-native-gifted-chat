@@ -65,6 +65,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   wrapInSafeArea?: boolean
   /* enables the scrollToBottom Component */
   scrollToBottom?: boolean
+  /* enabled scroll to bottom on messages list update */
+  preventScrollToBottomOnUpdate?: boolean
   /* Scroll to bottom wrapper style */
   scrollToBottomStyle?: StyleProp<ViewStyle>
   initialText?: string
@@ -284,6 +286,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       android: 'always',
       default: 'never',
     }),
+    preventScrollToBottomOnUpdate: false,
     onInputTextChanged: null,
     maxInputLength: null,
     forceGetKeyboardHeight: false,
@@ -348,6 +351,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     onPressActionButton: PropTypes.func,
     bottomOffset: PropTypes.number,
     minInputToolbarHeight: PropTypes.number,
+    preventScrollToBottomOnUpdate: PropTypes.bool,
     listViewProps: PropTypes.object,
     layoutListScrollToBottomDelay: PropTypes.number,
     keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
@@ -444,7 +448,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   componentDidUpdate(prevProps: GiftedChatProps<TMessage> = {}) {
-    const { messages, text, inverted } = this.props
+    const { messages, text, inverted, preventScrollToBottomOnUpdate } = this.props
 
     if (this.props !== prevProps) {
       this.setMessages(messages || [])
@@ -454,12 +458,9 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       inverted === false &&
       messages &&
       prevProps.messages &&
-      messages.length !== prevProps.messages.length
+      messages.length !== prevProps.messages.length &&
+      !preventScrollToBottomOnUpdate
     ) {
-      if (this.props.scrollToBottomDelay === 0) {
-        return this.scrollToBottom(false)
-      }
-
       setTimeout(
         () => this.scrollToBottom(false),
         this.props.scrollToBottomDelay,

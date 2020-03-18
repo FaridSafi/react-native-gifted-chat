@@ -13,6 +13,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
     loadEarlier?: boolean;
     alignTop?: boolean;
     scrollToBottom?: boolean;
+    preventScrollToBottomOnLayout?: boolean;
     scrollToBottomStyle?: StyleProp<ViewStyle>;
     invertibleScrollViewProps?: any;
     extraData?: any;
@@ -49,6 +50,7 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
         scrollToBottomOffset: number;
         alignTop: boolean;
         scrollToBottomStyle: {};
+        preventScrollToBottomOnLayout: boolean;
     };
     static propTypes: {
         messages: PropTypes.Requireable<(object | null)[]>;
@@ -67,6 +69,7 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
         scrollToBottom: PropTypes.Requireable<boolean>;
         scrollToBottomOffset: PropTypes.Requireable<number>;
         scrollToBottomComponent: PropTypes.Requireable<(...args: any[]) => any>;
+        preventScrollToBottomOnLayout: PropTypes.Requireable<boolean>;
         alignTop: PropTypes.Requireable<boolean>;
     };
     state: {

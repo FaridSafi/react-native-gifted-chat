@@ -26,6 +26,7 @@ import TypingIndicator from './TypingIndicator'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-end',
   },
   containerAlignTop: {
     flexDirection: 'row',
@@ -73,6 +74,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   loadEarlier?: boolean
   alignTop?: boolean
   scrollToBottom?: boolean
+  preventScrollToBottomOnLayout?: boolean
   scrollToBottomStyle?: StyleProp<ViewStyle>
   invertibleScrollViewProps?: any
   extraData?: any
@@ -113,6 +115,7 @@ export default class MessageContainer<
     scrollToBottomOffset: 200,
     alignTop: false,
     scrollToBottomStyle: {},
+    preventScrollToBottomOnLayout: false,
   }
 
   static propTypes = {
@@ -132,6 +135,7 @@ export default class MessageContainer<
     scrollToBottom: PropTypes.bool,
     scrollToBottomOffset: PropTypes.number,
     scrollToBottomComponent: PropTypes.func,
+    preventScrollToBottomOnLayout: PropTypes.bool,
     alignTop: PropTypes.bool,
   }
 
@@ -354,15 +358,13 @@ export default class MessageContainer<
     if (
       !this.props.inverted &&
       !!this.props.messages &&
-      this.props.messages!.length
+      this.props.messages!.length &&
+      !this.props.preventScrollToBottomOnLayout
     ) {
+      const estimatedMessageRenderTime = 15
       const scrollDelay =
         this.props.layoutListScrollToBottomDelay ||
-        15 * this.props.messages!.length
-
-      if (scrollDelay === 0) {
-        return this.scrollToBottom && this.scrollToBottom(false)
-      }
+        estimatedMessageRenderTime * this.props.messages!.length
 
       setTimeout(
         () => this.scrollToBottom && this.scrollToBottom(false),

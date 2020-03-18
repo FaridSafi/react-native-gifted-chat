@@ -105,6 +105,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   minInputToolbarHeight?: number
   /*Extra props to be passed to the messages <ListView>; some props can't be overridden, see the code in MessageContainer.render() for details */
   listViewProps?: any
+  /* Delay before list is scrolled to bottom on list layout event */
+  layoutListScrollToBottomDelay?: number
   /*  Extra props to be passed to the <TextInput> */
   textInputProps?: any
   /*Determines whether the keyboard should stay visible after a tap; see <ScrollView> docs */
@@ -162,7 +164,9 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*Custom message container */
   renderMessage?(message: Message<TMessage>['props']): React.ReactNode
   /* Custom message text */
-  renderMessageText?(messageText: MessageText<TMessage>['props']): React.ReactNode
+  renderMessageText?(
+    messageText: MessageText<TMessage>['props'],
+  ): React.ReactNode
   /* Custom message image */
   renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
   /* Custom view inside the bubble */
@@ -258,6 +262,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     lightboxProps: {},
     textInputProps: {},
     listViewProps: {},
+    layoutListScrollToBottomDelay: null,
     renderCustomView: null,
     isCustomViewBottom: false,
     renderDay: null,
@@ -344,6 +349,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     bottomOffset: PropTypes.number,
     minInputToolbarHeight: PropTypes.number,
     listViewProps: PropTypes.object,
+    layoutListScrollToBottomDelay: PropTypes.number,
     keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
     onInputTextChanged: PropTypes.func,
     maxInputLength: PropTypes.number,
@@ -450,7 +456,14 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       prevProps.messages &&
       messages.length !== prevProps.messages.length
     ) {
-      setTimeout(() => this.scrollToBottom(false), this.props.scrollToBottomDelay)
+      if (this.props.scrollToBottomDelay === 0) {
+        return this.scrollToBottom(false)
+      }
+
+      setTimeout(
+        () => this.scrollToBottom(false),
+        this.props.scrollToBottomDelay,
+      )
     }
 
     if (text !== prevProps.text) {

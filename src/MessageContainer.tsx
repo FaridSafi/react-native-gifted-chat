@@ -77,6 +77,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   invertibleScrollViewProps?: any
   extraData?: any
   scrollToBottomOffset?: number
+  layoutListScrollToBottomDelay?: number
   forwardRef?: RefObject<FlatList<IMessage>>
   renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
@@ -355,9 +356,17 @@ export default class MessageContainer<
       !!this.props.messages &&
       this.props.messages!.length
     ) {
+      const scrollDelay =
+        this.props.layoutListScrollToBottomDelay ||
+        15 * this.props.messages!.length
+
+      if (scrollDelay === 0) {
+        return this.scrollToBottom && this.scrollToBottom(false)
+      }
+
       setTimeout(
         () => this.scrollToBottom && this.scrollToBottom(false),
-        15 * this.props.messages!.length,
+        scrollDelay,
       )
     }
   }

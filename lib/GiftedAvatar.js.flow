@@ -1,0 +1,17 @@
+// @flow
+import { Component } from 'react'
+import type { User } from './types'
+import type {
+  ImageStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type GiftedAvatarProps = $ReadOnly<{|
+  user?: User,
+  avatarStyle?: ImageStyleProp,
+  textStyle?: TextStyleProp,
+  onPress: any => void,
+  onLongPress: any => void,
+|}>
+
+export default class GiftedAvatar extends Component<GiftedAvatarProps> {}

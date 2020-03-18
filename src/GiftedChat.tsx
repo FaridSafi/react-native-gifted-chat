@@ -86,6 +86,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   isLoadingEarlier?: boolean
   /* Whether to render an avatar for the current user; default is false, only show avatars for other users */
   showUserAvatar?: boolean
+  /* Alters the delay of scroll to bottom connected to render time of the message after it is appended */
+  scrollToBottomDelay?: number
   /* When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is false */
   showAvatarForEveryMessage?: boolean
   /* Render the message avatar at the top of consecutive messages, rather than the bottom; default is false */
@@ -239,6 +241,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderLoadEarlier: null,
     renderAvatar: undefined,
     showUserAvatar: false,
+    scrollToBottomDelay: 200,
     actionSheet: null,
     onPressAvatar: null,
     onLongPressAvatar: null,
@@ -310,6 +313,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderLoadEarlier: PropTypes.func,
     renderAvatar: PropTypes.func,
     showUserAvatar: PropTypes.bool,
+    scrollToBottomDelay: PropTypes.number,
     actionSheet: PropTypes.func,
     onPressAvatar: PropTypes.func,
     onLongPressAvatar: PropTypes.func,
@@ -446,7 +450,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       prevProps.messages &&
       messages.length !== prevProps.messages.length
     ) {
-      setTimeout(() => this.scrollToBottom(false), 200)
+      setTimeout(() => this.scrollToBottom(false), this.props.scrollToBottomDelay)
     }
 
     if (text !== prevProps.text) {

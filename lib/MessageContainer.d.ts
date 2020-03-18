@@ -17,6 +17,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
     invertibleScrollViewProps?: any;
     extraData?: any;
     scrollToBottomOffset?: number;
+    layoutListScrollToBottomDelay?: number;
     forwardRef?: RefObject<FlatList<IMessage>>;
     renderChatEmpty?(): React.ReactNode;
     renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode;

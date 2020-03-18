@@ -49,6 +49,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     bottomOffset?: number;
     minInputToolbarHeight?: number;
     listViewProps?: any;
+    layoutListScrollToBottomDelay?: number;
     textInputProps?: any;
     keyboardShouldPersistTaps?: any;
     maxInputLength?: number;
@@ -151,6 +152,7 @@ declare class GiftedChat<TMessage extends IMessage = IMessage> extends React.Com
         lightboxProps: {};
         textInputProps: {};
         listViewProps: {};
+        layoutListScrollToBottomDelay: null;
         renderCustomView: null;
         isCustomViewBottom: boolean;
         renderDay: null;
@@ -229,6 +231,7 @@ declare class GiftedChat<TMessage extends IMessage = IMessage> extends React.Com
         bottomOffset: PropTypes.Requireable<number>;
         minInputToolbarHeight: PropTypes.Requireable<number>;
         listViewProps: PropTypes.Requireable<object>;
+        layoutListScrollToBottomDelay: PropTypes.Requireable<number>;
         keyboardShouldPersistTaps: PropTypes.Requireable<string>;
         onInputTextChanged: PropTypes.Requireable<(...args: any[]) => any>;
         maxInputLength: PropTypes.Requireable<number>;

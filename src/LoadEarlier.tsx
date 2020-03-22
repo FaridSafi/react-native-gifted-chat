@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ViewPropTypes,
+  
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -72,10 +72,10 @@ export default class LoadEarlier extends React.Component<LoadEarlierProps> {
     onLoadEarlier: PropTypes.func,
     isLoadingEarlier: PropTypes.bool,
     label: PropTypes.string,
-    containerStyle: ViewPropTypes.style,
-    wrapperStyle: ViewPropTypes.style,
+    containerStyle: {},
+    wrapperStyle: {},
     textStyle: PropTypes.any,
-    activityIndicatorStyle: ViewPropTypes.style,
+    activityIndicatorStyle: {},
     activityIndicatorColor: PropTypes.string,
     activityIndicatorSize: PropTypes.string,
   }

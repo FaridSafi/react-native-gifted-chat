@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  ViewPropTypes,
+  
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -213,26 +213,26 @@ export default class Bubble<
     nextMessage: PropTypes.object,
     previousMessage: PropTypes.object,
     containerStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
     wrapperStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
     bottomContainerStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
     tickStyle: PropTypes.any,
     usernameStyle: PropTypes.any,
     containerToNextStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
     containerToPreviousStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
   }
 

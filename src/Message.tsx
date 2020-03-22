@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { View, ViewPropTypes, StyleSheet, ViewStyle } from 'react-native'
+import { View,  StyleSheet, ViewStyle } from 'react-native'
 
 import Avatar from './Avatar'
 import Bubble from './Bubble'
@@ -83,8 +83,8 @@ export default class Message<
     user: PropTypes.object,
     inverted: PropTypes.bool,
     containerStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
     shouldUpdateMessage: PropTypes.func,
   }

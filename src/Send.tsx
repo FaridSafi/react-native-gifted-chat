@@ -5,7 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ViewPropTypes,
+  
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -58,7 +58,7 @@ export default class Send extends Component<SendProps> {
     text: PropTypes.string,
     onSend: PropTypes.func,
     label: PropTypes.string,
-    containerStyle: ViewPropTypes.style,
+    containerStyle: {},
     textStyle: PropTypes.any,
     children: PropTypes.element,
     alwaysShowSend: PropTypes.bool,

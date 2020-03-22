@@ -4,7 +4,7 @@ import {
   Image,
   StyleSheet,
   View,
-  ViewPropTypes,
+  
   ImageProps,
   ViewStyle,
   StyleProp,
@@ -53,7 +53,7 @@ export default class MessageImage<
 
   static propTypes = {
     currentMessage: PropTypes.object,
-    containerStyle: ViewPropTypes.style,
+    containerStyle: {},
     imageStyle: PropTypes.object,
     imageProps: PropTypes.object,
     lightboxProps: PropTypes.object,

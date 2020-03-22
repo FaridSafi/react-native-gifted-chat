@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  ViewPropTypes,
+  
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -68,8 +68,8 @@ export default class Day<
     previousMessage: PropTypes.object,
     nextMessage: PropTypes.object,
     inverted: PropTypes.bool,
-    containerStyle: ViewPropTypes.style,
-    wrapperStyle: ViewPropTypes.style,
+    containerStyle: {},
+    wrapperStyle: {},
     textStyle: PropTypes.any,
     dateFormat: PropTypes.string,
   }

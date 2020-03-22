@@ -5,7 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ViewPropTypes,
+  
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -38,8 +38,8 @@ export default class Actions extends React.Component<ActionsProps> {
     optionTintColor: PropTypes.string,
     icon: PropTypes.func,
     onPressActionButton: PropTypes.func,
-    wrapperStyle: ViewPropTypes.style,
-    containerStyle: ViewPropTypes.style,
+    wrapperStyle: {},
+    containerStyle: {},
   }
 
   static contextTypes = {

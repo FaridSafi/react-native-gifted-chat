@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  ViewPropTypes,
+  
   ViewStyle,
   TextStyle,
 } from 'react-native'
@@ -77,8 +77,8 @@ export default class Time<
     position: PropTypes.oneOf(['left', 'right']),
     currentMessage: PropTypes.object,
     containerStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
     timeFormat: PropTypes.string,
     timeTextStyle: PropTypes.shape({

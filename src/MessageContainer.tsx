@@ -35,6 +35,10 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'flex-start',
   },
+  emptyChatContainer: {
+    flex: 1,
+    transform: [{ scaleY: -1 }],
+  },
   headerWrapper: {
     flex: 1,
   },
@@ -233,7 +237,7 @@ export default class MessageContainer<
     const { inverted } = this.props
     if (inverted) {
       this.scrollTo({ offset: 0, animated })
-    } else {
+    } else if (this.props.forwardRef && this.props.forwardRef.current) {
       this.props.forwardRef!.current!.scrollToEnd({ animated })
     }
   }
@@ -306,7 +310,13 @@ export default class MessageContainer<
 
   renderChatEmpty = () => {
     if (this.props.renderChatEmpty) {
-      return this.props.renderChatEmpty()
+      return this.props.inverted ? (
+        this.props.renderChatEmpty()
+      ) : (
+        <View style={styles.emptyChatContainer}>
+          {this.props.renderChatEmpty()}
+        </View>
+      )
     }
     return <View style={styles.container} />
   }

@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 import {
   StyleSheet,
   View,
-  ViewPropTypes,
+  
   ImageStyle,
   ViewStyle,
 } from 'react-native'
@@ -85,12 +85,12 @@ export default class Avatar<
     onLongPressAvatar: PropTypes.func,
     renderAvatar: PropTypes.func,
     containerStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
     imageStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
   }
 

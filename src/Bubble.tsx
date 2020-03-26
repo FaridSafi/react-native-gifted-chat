@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  ViewPropTypes,
+  
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -140,7 +140,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   tickStyle?: StyleProp<TextStyle>
   containerToNextStyle?: LeftRightStyle<ViewStyle>
   containerToPreviousStyle?: LeftRightStyle<ViewStyle>
-  usernameStyle?: LeftRightStyle<ViewStyle>
+  usernameStyle?: TextStyle
   quickReplyStyle?: StyleProp<ViewStyle>
   onLongPress?(context?: any, message?: any): void
   onQuickReply?(replies: Reply[]): void
@@ -213,26 +213,26 @@ export default class Bubble<
     nextMessage: PropTypes.object,
     previousMessage: PropTypes.object,
     containerStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
     wrapperStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
     bottomContainerStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
     tickStyle: PropTypes.any,
     usernameStyle: PropTypes.any,
     containerToNextStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
     containerToPreviousStyle: PropTypes.shape({
-      left: ViewPropTypes.style,
-      right: ViewPropTypes.style,
+      left: {},
+      right: {},
     }),
   }
 
@@ -488,9 +488,9 @@ export default class Bubble<
         <View
           style={[
             styles[position].wrapper,
-            wrapperStyle && wrapperStyle[position],
-            this.styledBubbleToNext(),
+             this.styledBubbleToNext(),
             this.styledBubbleToPrevious(),
+            wrapperStyle && wrapperStyle[position],
           ]}
         >
           <TouchableWithoutFeedback

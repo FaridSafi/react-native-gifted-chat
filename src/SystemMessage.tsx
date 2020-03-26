@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  ViewPropTypes,
+  
   ViewStyle,
   StyleProp,
   TextStyle,
@@ -49,8 +49,8 @@ export default class SystemMessage<
 
   static propTypes = {
     currentMessage: PropTypes.object,
-    containerStyle: ViewPropTypes.style,
-    wrapperStyle: ViewPropTypes.style,
+    containerStyle: {},
+    wrapperStyle: {},
     textStyle: PropTypes.any,
   }
 

@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View,
   Keyboard,
-  ViewPropTypes,
+  
   EmitterSubscription,
   StyleProp,
   ViewStyle,
@@ -67,9 +67,9 @@ export default class InputToolbar extends React.Component<
     renderSend: PropTypes.func,
     renderComposer: PropTypes.func,
     onPressActionButton: PropTypes.func,
-    containerStyle: ViewPropTypes.style,
-    primaryStyle: ViewPropTypes.style,
-    accessoryStyle: ViewPropTypes.style,
+    containerStyle: {},
+    primaryStyle: {},
+    accessoryStyle: {},
   }
 
   state = {

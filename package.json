@@ -75,7 +75,7 @@
     "@types/uuid": "3.4.7",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.7.1",
-    "babel-preset-expo": "^7.0.0",
+    "babel-preset-expo": "^8.1.0",
     "expo": "^36.0.0",
     "expo-constants": "~8.0.0",
     "expo-image-picker": "~8.0.0",

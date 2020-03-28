@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { RefObject } from 'react'
 import {
+  ActionSheetIOSOptions,
   Animated,
   Platform,
   StyleSheet,
@@ -13,10 +14,6 @@ import {
   KeyboardAvoidingView,
 } from 'react-native'
 
-import {
-  ActionSheetProvider,
-  ActionSheetOptions,
-} from '@expo/react-native-action-sheet'
 import moment from 'moment'
 import uuid from 'uuid'
 import { isIphoneX } from 'react-native-iphone-x-helper'
@@ -47,6 +44,7 @@ import {
 } from './Constant'
 import { IMessage, User, Reply, LeftRightStyle } from './types'
 import QuickReplies from './QuickReplies'
+import ActionSheet, { ActionSheetCustom } from './ActionSheet'
 
 // const GiftedActionSheet = ActionSheet as any
 
@@ -130,8 +128,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom action sheet */
   actionSheet?(): {
     showActionSheetWithOptions: (
-      options: ActionSheetOptions,
-      callback: (i: number) => void,
+      options: ActionSheetIOSOptions,
+      callback: (buttonIndex: number) => void,
     ) => void
   }
   /* Callback when a message avatar is tapped */
@@ -160,7 +158,9 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*Custom message container */
   renderMessage?(message: Message<TMessage>['props']): React.ReactNode
   /* Custom message text */
-  renderMessageText?(messageText: MessageText<TMessage>['props']): React.ReactNode
+  renderMessageText?(
+    messageText: MessageText<TMessage>['props'],
+  ): React.ReactNode
   /* Custom message image */
   renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
   /* Custom view inside the bubble */
@@ -386,7 +386,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   _isFirstLayout: boolean = true
   _locale: string = 'en'
   invertibleScrollViewProps: any = undefined
-  _actionSheetRef: any = undefined
+  _actionSheetRef: RefObject<ActionSheetCustom> = React.createRef()
 
   _messageContainerRef?: RefObject<FlatList<IMessage>> = React.createRef()
   textInput?: any
@@ -416,7 +416,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   getChildContext() {
     return {
       actionSheet:
-        this.props.actionSheet || (() => this._actionSheetRef.getContext()),
+        this.props.actionSheet || (() => this._actionSheetRef.current),
       getLocale: this.getLocale,
     }
   }
@@ -840,14 +840,11 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
       return (
         <Wrapper style={styles.safeArea}>
-          <ActionSheetProvider
-            ref={(component: any) => (this._actionSheetRef = component)}
-          >
-            <View style={styles.container} onLayout={this.onMainViewLayout}>
-              {this.renderMessages()}
-              {this.renderInputToolbar()}
-            </View>
-          </ActionSheetProvider>
+          <View style={styles.container} onLayout={this.onMainViewLayout}>
+            {this.renderMessages()}
+            {this.renderInputToolbar()}
+          </View>
+          <ActionSheet ref={this._actionSheetRef} />
         </Wrapper>
       )
     }
@@ -872,6 +869,8 @@ export * from './types'
 
 export {
   GiftedChat,
+  ActionSheet,
+  ActionSheetCustom,
   Actions,
   Avatar,
   Bubble,

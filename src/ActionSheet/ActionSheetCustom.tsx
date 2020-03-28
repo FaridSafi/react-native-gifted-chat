@@ -6,6 +6,7 @@ import {
   Easing,
   Keyboard,
   Modal,
+  Platform,
   SafeAreaView,
   ScrollView,
   Text,
@@ -89,7 +90,7 @@ class ActionSheet extends PureComponent<Props<{}>, ActionSheetState> {
       toValue: 0,
       duration: ANIMATION_DURATION,
       easing: Easing.out(Easing.ease),
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS === 'android',
     }).start(() => {
       this._isTransitioning = false
     })
@@ -102,7 +103,7 @@ class ActionSheet extends PureComponent<Props<{}>, ActionSheetState> {
       toValue: maxHeight,
       duration: ANIMATION_DURATION,
       easing: Easing.ease,
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS === 'android',
     }).start(() => {
       if (!this._isMounted) {
         return

@@ -19,7 +19,7 @@ import {
 } from '@expo/react-native-action-sheet'
 import moment from 'moment'
 import uuid from 'uuid'
-import { isIphoneX } from 'react-native-iphone-x-helper'
+import { isIphoneX, getBottomSpace } from 'react-native-iphone-x-helper';
 
 import * as utils from './utils'
 import Actions from './Actions'
@@ -584,11 +584,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     )
   }
 
-  safeAreaIphoneX = (bottomOffset: number) => {
-    if (isIphoneX()) {
-      return bottomOffset === this._bottomOffset ? 33 : bottomOffset
-    }
-    return bottomOffset
+  safeAreaSupport = (bottomOffset: number) => {
+    return bottomOffset === this._bottomOffset ? getBottomSpace() : bottomOffset
   }
 
   onKeyboardWillShow = (e: any) => {
@@ -597,7 +594,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       this.setKeyboardHeight(
         e.endCoordinates ? e.endCoordinates.height : e.end.height,
       )
-      this.setBottomOffset(this.safeAreaIphoneX(this.props.bottomOffset!))
+      this.setBottomOffset(this.safeAreaSupport(this.props.bottomOffset!))
       const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard()
       this.setState({
         messagesContainerHeight: newMessagesContainerHeight,

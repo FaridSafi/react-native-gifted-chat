@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-  modal: {
+  webContent: StyleSheet.absoluteFillObject,
+  content: {
     flex: 1,
     justifyContent: 'flex-end',
   },

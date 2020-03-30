@@ -6,6 +6,7 @@ import {
   Easing,
   Keyboard,
   Modal,
+  ModalPropsIOS,
   Platform,
   SafeAreaView,
   ScrollView,
@@ -21,6 +22,13 @@ const ANIMATION_DURATION = 250
 const SHOW_TIMEOUT = 50
 const MAX_PER_HEIGHT = 0.8
 const TITTLE_MESSAGE_PER_HEIGHT = 0.3
+const SUPPORTED_ORIENTATIONS: ModalPropsIOS['supportedOrientations'] = [
+  'portrait',
+  'portrait-upside-down',
+  'landscape',
+  'landscape-left',
+  'landscape-right',
+]
 
 function getMaxHeight() {
   const { height } = Dimensions.get('window')
@@ -207,14 +215,37 @@ class ActionSheet extends PureComponent<Props<{}>, ActionSheetState> {
     )
   }
 
-  render() {
-    const { open, maxHeight, cancelButtonIndex } = this.state
+  renderContent = () => {
+    const { maxHeight, cancelButtonIndex } = this.state
     const titleMessageElement = this.renderTitleMessage()
     const buttonsElement = this.renderButtons()
     const animatedStyle = {
       maxHeight,
       transform: [{ translateY: this._translateY }],
     }
+    const webContentStyle = Platform.OS === 'web' && styles.webContent
+
+    return (
+      <View style={[styles.content, webContentStyle]}>
+        <TouchableWithoutFeedback onPress={this.hide(cancelButtonIndex)}>
+          <View style={styles.overlay} />
+        </TouchableWithoutFeedback>
+        <Animated.View style={[styles.body, animatedStyle]}>
+          {titleMessageElement}
+          {buttonsElement}
+        </Animated.View>
+      </View>
+    )
+  }
+
+  render() {
+    const { open, cancelButtonIndex } = this.state
+
+    if (Platform.OS === 'web') {
+      return open ? this.renderContent() : null
+    }
+
+    const contentElement = this.renderContent()
 
     return (
       <Modal
@@ -222,23 +253,9 @@ class ActionSheet extends PureComponent<Props<{}>, ActionSheetState> {
         transparent
         visible={open}
         onRequestClose={this.hide(cancelButtonIndex)}
-        supportedOrientations={[
-          'portrait',
-          'portrait-upside-down',
-          'landscape',
-          'landscape-left',
-          'landscape-right',
-        ]}
+        supportedOrientations={SUPPORTED_ORIENTATIONS}
       >
-        <View style={styles.modal}>
-          <TouchableWithoutFeedback onPress={this.hide(cancelButtonIndex)}>
-            <View style={styles.overlay} />
-          </TouchableWithoutFeedback>
-          <Animated.View style={[styles.body, animatedStyle]}>
-            {titleMessageElement}
-            {buttonsElement}
-          </Animated.View>
-        </View>
+        {contentElement}
       </Modal>
     )
   }

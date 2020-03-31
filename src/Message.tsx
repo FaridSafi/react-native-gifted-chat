@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { View,  StyleSheet, ViewStyle } from 'react-native'
+import { View, StyleSheet, ViewStyle } from 'react-native'
 
 import Avatar from './Avatar'
 import Bubble from './Bubble'
@@ -82,10 +82,6 @@ export default class Message<
     previousMessage: PropTypes.object,
     user: PropTypes.object,
     inverted: PropTypes.bool,
-    containerStyle: PropTypes.shape({
-      left: {},
-      right: {},
-    }),
     shouldUpdateMessage: PropTypes.func,
   }
 
@@ -132,7 +128,7 @@ export default class Message<
     if (this.props.renderBubble) {
       return this.props.renderBubble(props)
     }
-    return <Bubble {...props} />
+    return <Bubble {...(props as any)} />
   }
 
   renderSystemMessage() {
@@ -158,7 +154,11 @@ export default class Message<
       return null
     }
 
-    if (currentMessage && currentMessage.user && currentMessage.user.avatar === null) {
+    if (
+      currentMessage &&
+      currentMessage.user &&
+      currentMessage.user.avatar === null
+    ) {
       return null
     }
 

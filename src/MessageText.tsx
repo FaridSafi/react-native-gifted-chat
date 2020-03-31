@@ -4,7 +4,6 @@ import {
   Linking,
   StyleSheet,
   View,
-  
   TextProps,
   StyleProp,
   ViewStyle,
@@ -91,10 +90,6 @@ export default class MessageText<
     position: PropTypes.oneOf(['left', 'right']),
     optionTitles: PropTypes.arrayOf(PropTypes.string),
     currentMessage: PropTypes.object,
-    containerStyle: PropTypes.shape({
-      left: {},
-      right: {},
-    }),
     textStyle: PropTypes.shape({
       left: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
       right: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),

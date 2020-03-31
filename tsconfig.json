@@ -9,7 +9,7 @@
     "module": "es6",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "experimentalDecorators": true,
     "preserveConstEnums": true,
     "sourceMap": true,

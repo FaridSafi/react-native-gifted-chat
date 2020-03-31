@@ -8,5 +8,5 @@ yarn-error.log
 .vscode
 Exponent-*.app
 *.log
-lib/
+
 coverage/

@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -212,28 +211,6 @@ export default class Bubble<
     currentMessage: PropTypes.object,
     nextMessage: PropTypes.object,
     previousMessage: PropTypes.object,
-    containerStyle: PropTypes.shape({
-      left: {},
-      right: {},
-    }),
-    wrapperStyle: PropTypes.shape({
-      left: {},
-      right: {},
-    }),
-    bottomContainerStyle: PropTypes.shape({
-      left: {},
-      right: {},
-    }),
-    tickStyle: PropTypes.any,
-    usernameStyle: PropTypes.any,
-    containerToNextStyle: PropTypes.shape({
-      left: {},
-      right: {},
-    }),
-    containerToPreviousStyle: PropTypes.shape({
-      left: {},
-      right: {},
-    }),
   }
 
   onLongPress = () => {
@@ -488,7 +465,7 @@ export default class Bubble<
         <View
           style={[
             styles[position].wrapper,
-             this.styledBubbleToNext(),
+            this.styledBubbleToNext(),
             this.styledBubbleToPrevious(),
             wrapperStyle && wrapperStyle[position],
           ]}

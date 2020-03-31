@@ -1,13 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  
-  ViewStyle,
-  TextStyle,
-} from 'react-native'
+import { StyleSheet, Text, View, ViewStyle, TextStyle } from 'react-native'
 
 import moment from 'moment'
 
@@ -76,15 +69,7 @@ export default class Time<
   static propTypes = {
     position: PropTypes.oneOf(['left', 'right']),
     currentMessage: PropTypes.object,
-    containerStyle: PropTypes.shape({
-      left: {},
-      right: {},
-    }),
     timeFormat: PropTypes.string,
-    timeTextStyle: PropTypes.shape({
-      left: PropTypes.any,
-      right: PropTypes.any,
-    }),
   }
 
   render() {

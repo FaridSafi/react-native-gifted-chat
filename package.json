@@ -83,7 +83,7 @@
     "expo-permissions": "~8.0.0",
     "flow-bin": "^0.118.0",
     "husky": "^4.0.2",
-    "jest-expo": "^36.0.0",
+    "jest-expo": "^37.0.0",
     "json": "^9.0.6",
     "prettier": "1.18.0",
     "react": "16.9.0",

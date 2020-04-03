@@ -99,7 +99,7 @@
     "typescript": "3.4.5"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "3.5.0",
+    "@expo/react-native-action-sheet": "3.6.0",
     "moment": "^2.19.0",
     "prop-types": "15.7.2",
     "react-native-communications": "2.2.1",

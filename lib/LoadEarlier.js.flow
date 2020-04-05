@@ -1,0 +1,20 @@
+// @flow
+import { Component } from 'react'
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type LoadEarlierProps = $ReadOnly<{|
+  isLoadingEarlier?: boolean,
+  label?: string,
+  containerStyle?: ViewStyleProp,
+  wrapperStyle?: ViewStyleProp,
+  textStyle?: TextStyleProp,
+  activityIndicatorStyle?: ViewStyleProp,
+  activityIndicatorColor?: string,
+  activityIndicatorSize?: number | 'small' | 'large',
+  onLoadEarlier?: () => void,
+|}>
+
+export default class LoadEarlier extends Component<LoadEarlierProps> {}

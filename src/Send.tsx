@@ -12,6 +12,7 @@ import {
   TouchableOpacityProps,
 } from 'react-native'
 import Color from './Color'
+import { IMessage } from './types'
 
 const styles = StyleSheet.create({
   container: {
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export interface SendProps {
+export interface SendProps<TMessage extends IMessage> {
   text?: string
   label?: string
   containerStyle?: StyleProp<ViewStyle>
@@ -38,10 +39,15 @@ export interface SendProps {
   alwaysShowSend?: boolean
   disabled?: boolean
   sendButtonProps?: Partial<TouchableOpacityProps>
-  onSend?({ text }: { text: string }, b: boolean): void
+  onSend?(
+    messages: Partial<TMessage> | Partial<TMessage>[],
+    shouldResetInputToolbar: boolean,
+  ): void
 }
 
-export default class Send extends Component<SendProps> {
+export default class Send<
+  TMessage extends IMessage = IMessage
+> extends Component<SendProps<TMessage>> {
   static defaultProps = {
     text: '',
     onSend: () => {},

@@ -37,8 +37,6 @@
   <img height="18" src="https://snack.expo.io/favicon.ico" />
 </p>
 
-
-
 ## Sponsor
 
 <p align="center">
@@ -84,7 +82,9 @@
 </p>
 
 ## Please vote
+
 **GiftedChat** depends on other packages and some needs a boost, please vote for PRs will improve it, thanks:
+
 - https://github.com/taskrabbit/react-native-parsed-text/pull/58
 - https://github.com/watadarkstar/react-native-typing-animation/issues/18
 
@@ -111,7 +111,6 @@
 - Use version `0.2.x` for RN `>= 0.44.0`
 - Use version `0.1.x` for RN `>= 0.40.0`
 - Use version `0.0.10` for RN `< 0.40.0`
-
 
 ## Installation
 

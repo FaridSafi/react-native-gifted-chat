@@ -12,10 +12,10 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
         "left": 0,
         "right": 0,
       },
-      Object {},
       Object {
         "position": "absolute",
       },
+      Object {},
     ]
   }
 >

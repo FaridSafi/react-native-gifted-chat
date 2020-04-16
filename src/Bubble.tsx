@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -21,7 +20,7 @@ import MessageVideo from './MessageVideo'
 import Time from './Time'
 import Color from './Color'
 
-import { isSameUser, isSameDay } from './utils'
+import { StylePropType, isSameUser, isSameDay } from './utils'
 import {
   User,
   IMessage,
@@ -213,26 +212,26 @@ export default class Bubble<
     nextMessage: PropTypes.object,
     previousMessage: PropTypes.object,
     containerStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
     wrapperStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
     bottomContainerStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
-    tickStyle: PropTypes.any,
-    usernameStyle: PropTypes.any,
+    tickStyle: StylePropType,
+    usernameStyle: StylePropType,
     containerToNextStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
     containerToPreviousStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
   }
 
@@ -488,7 +487,7 @@ export default class Bubble<
         <View
           style={[
             styles[position].wrapper,
-             this.styledBubbleToNext(),
+            this.styledBubbleToNext(),
             this.styledBubbleToPrevious(),
             wrapperStyle && wrapperStyle[position],
           ]}

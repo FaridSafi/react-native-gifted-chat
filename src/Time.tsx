@@ -1,19 +1,13 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  
-  ViewStyle,
-  TextStyle,
-} from 'react-native'
+import { StyleSheet, Text, View, ViewStyle, TextStyle } from 'react-native'
 
 import moment from 'moment'
 
 import Color from './Color'
 import { TIME_FORMAT } from './Constant'
 import { LeftRightStyle, IMessage } from './types'
+import { StylePropType } from './utils'
 
 const containerStyle = {
   marginLeft: 10,
@@ -77,13 +71,13 @@ export default class Time<
     position: PropTypes.oneOf(['left', 'right']),
     currentMessage: PropTypes.object,
     containerStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
     timeFormat: PropTypes.string,
     timeTextStyle: PropTypes.shape({
-      left: PropTypes.any,
-      right: PropTypes.any,
+      left: StylePropType,
+      right: StylePropType,
     }),
   }
 

@@ -24,4 +24,4 @@ export default [
     createdAt: new Date(Date.UTC(2016, 7, 30, 17, 20, 0)),
     system: true,
   },
-];
+]

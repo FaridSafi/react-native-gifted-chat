@@ -1,1 +1,1 @@
-export * from './GiftedChat';
+export * from './GiftedChat'

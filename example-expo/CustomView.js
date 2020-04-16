@@ -9,8 +9,8 @@ import {
 } from 'react-native'
 
 const MapView = Platform.select({
-  web: () => require('react-native-web-maps'),
-  default: () => require('react-native-maps'),
+  web: require('react-native-web-maps').default,
+  default: require('react-native-maps').default,
 })
 
 export default class CustomView extends React.Component {

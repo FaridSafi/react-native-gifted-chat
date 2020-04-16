@@ -7,12 +7,12 @@ import {
   Text,
   TouchableOpacity,
   View,
-  
   StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native'
 import Color from './Color'
+import { StylePropType } from './utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -72,10 +72,10 @@ export default class LoadEarlier extends React.Component<LoadEarlierProps> {
     onLoadEarlier: PropTypes.func,
     isLoadingEarlier: PropTypes.bool,
     label: PropTypes.string,
-    containerStyle: {},
-    wrapperStyle: {},
-    textStyle: PropTypes.any,
-    activityIndicatorStyle: {},
+    containerStyle: StylePropType,
+    wrapperStyle: StylePropType,
+    textStyle: StylePropType,
+    activityIndicatorStyle: StylePropType,
     activityIndicatorColor: PropTypes.string,
     activityIndicatorSize: PropTypes.string,
   }

@@ -1,5 +1,13 @@
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import { IMessage } from './types'
+
+export const StylePropType = PropTypes.oneOfType([
+  PropTypes.array,
+  PropTypes.object,
+  PropTypes.number,
+  PropTypes.bool,
+])
 
 export function isSameDay(
   currentMessage: IMessage,

@@ -19,7 +19,7 @@ import {
 } from '@expo/react-native-action-sheet'
 import moment from 'moment'
 import uuid from 'uuid'
-import { isIphoneX, getBottomSpace } from 'react-native-iphone-x-helper';
+import { getBottomSpace } from 'react-native-iphone-x-helper'
 
 import * as utils from './utils'
 import Actions from './Actions'
@@ -160,7 +160,9 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*Custom message container */
   renderMessage?(message: Message<TMessage>['props']): React.ReactNode
   /* Custom message text */
-  renderMessageText?(messageText: MessageText<TMessage>['props']): React.ReactNode
+  renderMessageText?(
+    messageText: MessageText<TMessage>['props'],
+  ): React.ReactNode
   /* Custom message image */
   renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
   /* Custom view inside the bubble */
@@ -288,10 +290,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   static propTypes = {
     messages: PropTypes.arrayOf(PropTypes.object),
-    messagesContainerStyle: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.number,
-    ]),
+    messagesContainerStyle: utils.StylePropType,
     text: PropTypes.string,
     initialText: PropTypes.string,
     placeholder: PropTypes.string,

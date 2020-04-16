@@ -4,7 +4,6 @@ import {
   Linking,
   StyleSheet,
   View,
-  
   TextProps,
   StyleProp,
   ViewStyle,
@@ -15,6 +14,7 @@ import {
 import ParsedText from 'react-native-parsed-text'
 import Communications from 'react-native-communications'
 import { LeftRightStyle, IMessage } from './types'
+import { StylePropType } from './utils'
 
 const WWW_URL_PATTERN = /^www\./i
 
@@ -92,20 +92,20 @@ export default class MessageText<
     optionTitles: PropTypes.arrayOf(PropTypes.string),
     currentMessage: PropTypes.object,
     containerStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
     textStyle: PropTypes.shape({
-      left: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
-      right: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+      left: StylePropType,
+      right: StylePropType,
     }),
     linkStyle: PropTypes.shape({
-      left: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
-      right: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+      left: StylePropType,
+      right: StylePropType,
     }),
     parsePatterns: PropTypes.func,
     textProps: PropTypes.object,
-    customTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    customTextStyle: StylePropType,
   }
 
   shouldComponentUpdate(nextProps: MessageTextProps<TMessage>) {

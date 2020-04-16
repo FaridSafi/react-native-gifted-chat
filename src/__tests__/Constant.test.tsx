@@ -1,5 +1,5 @@
-import * as Constant from '../Constant';
+import * as Constant from '../Constant'
 
 it('should compare Constant with snapshot', () => {
-  expect(Constant).toMatchSnapshot();
-});
+  expect(Constant).toMatchSnapshot()
+})

@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import Color from './Color'
 import { User } from './types'
+import { StylePropType } from './utils'
 
 const {
   carrot,
@@ -56,7 +57,8 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
       name: null,
       avatar: null,
     },
-    onPress: null,
+    onPress: undefined,
+    onLongPress: undefined,
     avatarStyle: {},
     textStyle: {},
   }
@@ -64,6 +66,9 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
   static propTypes = {
     user: PropTypes.object,
     onPress: PropTypes.func,
+    onLongPress: PropTypes.func,
+    avatarStyle: StylePropType,
+    textStyle: StylePropType,
   }
 
   avatarName?: string = undefined

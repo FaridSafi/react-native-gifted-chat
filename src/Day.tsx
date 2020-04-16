@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -13,7 +12,7 @@ import moment from 'moment'
 
 import Color from './Color'
 
-import { isSameDay } from './utils'
+import { StylePropType, isSameDay } from './utils'
 import { DATE_FORMAT } from './Constant'
 import { IMessage } from './types'
 
@@ -68,9 +67,9 @@ export default class Day<
     previousMessage: PropTypes.object,
     nextMessage: PropTypes.object,
     inverted: PropTypes.bool,
-    containerStyle: {},
-    wrapperStyle: {},
-    textStyle: PropTypes.any,
+    containerStyle: StylePropType,
+    wrapperStyle: StylePropType,
+    textStyle: StylePropType,
     dateFormat: PropTypes.string,
   }
   render() {

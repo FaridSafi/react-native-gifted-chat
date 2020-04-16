@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { IMessage, Reply } from './types'
 import Color from './Color'
-import { warning } from './utils'
+import { warning, StylePropType } from './utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -82,6 +82,10 @@ export default class QuickReplies extends Component<
     currentMessage: PropTypes.object.isRequired,
     onQuickReply: PropTypes.func,
     color: PropTypes.string,
+    sendText: PropTypes.string,
+    keepReplies: PropTypes.bool,
+    renderQuickReplySend: PropTypes.func,
+    quickReplyStyle: StylePropType,
   }
 
   state = {

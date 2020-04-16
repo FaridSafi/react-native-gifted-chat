@@ -5,13 +5,13 @@ import {
   Text,
   TouchableOpacity,
   View,
-  
   StyleProp,
   ViewStyle,
   TextStyle,
   TouchableOpacityProps,
 } from 'react-native'
 import Color from './Color'
+import { StylePropType } from './utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -58,8 +58,8 @@ export default class Send extends Component<SendProps> {
     text: PropTypes.string,
     onSend: PropTypes.func,
     label: PropTypes.string,
-    containerStyle: {},
-    textStyle: PropTypes.any,
+    containerStyle: StylePropType,
+    textStyle: StylePropType,
     children: PropTypes.element,
     alwaysShowSend: PropTypes.bool,
     disabled: PropTypes.bool,

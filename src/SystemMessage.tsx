@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  
   ViewStyle,
   StyleProp,
   TextStyle,
@@ -11,6 +10,7 @@ import {
 import PropTypes from 'prop-types'
 import Color from './Color'
 import { IMessage } from './types'
+import { StylePropType } from './utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -49,9 +49,9 @@ export default class SystemMessage<
 
   static propTypes = {
     currentMessage: PropTypes.object,
-    containerStyle: {},
-    wrapperStyle: {},
-    textStyle: PropTypes.any,
+    containerStyle: StylePropType,
+    wrapperStyle: StylePropType,
+    textStyle: StylePropType,
   }
 
   render() {

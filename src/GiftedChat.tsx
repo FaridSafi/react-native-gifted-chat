@@ -584,7 +584,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   safeAreaSupport = (bottomOffset: number) => {
-    return bottomOffset === this._bottomOffset ? getBottomSpace() : bottomOffset
+    return bottomOffset === this._bottomOffset ? (this.getBottomOffset() ? this.getBottomOffset() : getBottomSpace()) : bottomOffset
   }
 
   onKeyboardWillShow = (e: any) => {

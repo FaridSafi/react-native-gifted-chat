@@ -784,7 +784,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     ) {
       this.setMaxHeight(layout.height)
       this.setState({
-        messagesContainerHeight: this.getBasicMessagesContainerHeight(),
+        messagesContainerHeight: (this._keyboardHeight > 0) ?
+          this.getMessagesContainerHeightWithKeyboard() : this.getBasicMessagesContainerHeight(),
       })
     }
     if (this.getIsFirstLayout() === true) {

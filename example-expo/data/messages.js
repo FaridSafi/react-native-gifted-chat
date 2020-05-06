@@ -87,7 +87,8 @@ export default [
           value: 'yes',
         },
         {
-          title: '📷 Yes, let me show you with a picture!',
+          title:
+            '📷 Yes, let me show you with a picture! Again let me show you with a picture!',
           value: 'yes_picture',
         },
         {

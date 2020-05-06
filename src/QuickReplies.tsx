@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    maxWidth: 160,
+    maxWidth: 200,
     paddingVertical: 7,
     paddingHorizontal: 12,
-    height: 50,
+    minHeight: 50,
     borderRadius: 13,
     margin: 3,
   },
@@ -195,7 +195,7 @@ export default class QuickReplies extends Component<
                 key={`${reply.value}-${index}`}
               >
                 <Text
-                  numberOfLines={2}
+                  numberOfLines={10}
                   ellipsizeMode={'tail'}
                   style={[
                     styles.quickReplyText,

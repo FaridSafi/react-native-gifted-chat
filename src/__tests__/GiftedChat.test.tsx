@@ -1,8 +1,8 @@
-import 'react-native';
-import React from 'react';
-import renderer from 'react-test-renderer';
+import 'react-native'
+import React from 'react'
+import renderer from 'react-test-renderer'
 
-import { GiftedChat } from '../GiftedChat';
+import { GiftedChat } from '../GiftedChat'
 
 const messages = [
   {
@@ -14,7 +14,7 @@ const messages = [
       name: 'React Native',
     },
   },
-];
+]
 
 it('should render <GiftedChat/> and compare with snapshot', () => {
   const tree = renderer
@@ -27,7 +27,7 @@ it('should render <GiftedChat/> and compare with snapshot', () => {
         }}
       />,
     )
-    .toJSON();
+    .toJSON()
 
-  expect(tree).toMatchSnapshot();
-});
+  expect(tree).toMatchSnapshot()
+})

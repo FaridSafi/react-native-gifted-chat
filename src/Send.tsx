@@ -5,7 +5,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -13,6 +12,7 @@ import {
 } from 'react-native'
 import Color from './Color'
 import { IMessage } from './types'
+import { StylePropType } from './utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -64,8 +64,8 @@ export default class Send<
     text: PropTypes.string,
     onSend: PropTypes.func,
     label: PropTypes.string,
-    containerStyle: {},
-    textStyle: PropTypes.any,
+    containerStyle: StylePropType,
+    textStyle: StylePropType,
     children: PropTypes.element,
     alwaysShowSend: PropTypes.bool,
     disabled: PropTypes.bool,

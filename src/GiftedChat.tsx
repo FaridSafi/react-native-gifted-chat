@@ -19,7 +19,7 @@ import {
 } from '@expo/react-native-action-sheet'
 import moment from 'moment'
 import uuid from 'uuid'
-import { isIphoneX, getBottomSpace } from 'react-native-iphone-x-helper';
+import { getBottomSpace } from 'react-native-iphone-x-helper'
 
 import * as utils from './utils'
 import Actions from './Actions'
@@ -160,7 +160,9 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*Custom message container */
   renderMessage?(message: Message<TMessage>['props']): React.ReactNode
   /* Custom message text */
-  renderMessageText?(messageText: MessageText<TMessage>['props']): React.ReactNode
+  renderMessageText?(
+    messageText: MessageText<TMessage>['props'],
+  ): React.ReactNode
   /* Custom message image */
   renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
   /* Custom view inside the bubble */
@@ -252,6 +254,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderMessageImage: null,
     imageProps: {},
     videoProps: {},
+    audioProps: {},
     lightboxProps: {},
     textInputProps: {},
     listViewProps: {},
@@ -288,10 +291,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   static propTypes = {
     messages: PropTypes.arrayOf(PropTypes.object),
-    messagesContainerStyle: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.number,
-    ]),
+    messagesContainerStyle: utils.StylePropType,
     text: PropTypes.string,
     initialText: PropTypes.string,
     placeholder: PropTypes.string,
@@ -324,6 +324,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderMessageImage: PropTypes.func,
     imageProps: PropTypes.object,
     videoProps: PropTypes.object,
+    audioProps: PropTypes.object,
     lightboxProps: PropTypes.object,
     renderCustomView: PropTypes.func,
     renderDay: PropTypes.func,
@@ -585,7 +586,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   safeAreaSupport = (bottomOffset: number) => {
-    return bottomOffset === this._bottomOffset ? getBottomSpace() : bottomOffset
+    return bottomOffset === this._bottomOffset ? (this.getBottomOffset() ? this.getBottomOffset() : getBottomSpace()) : bottomOffset
   }
 
   onKeyboardWillShow = (e: any) => {
@@ -785,7 +786,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     ) {
       this.setMaxHeight(layout.height)
       this.setState({
-        messagesContainerHeight: this.getBasicMessagesContainerHeight(),
+        messagesContainerHeight: (this._keyboardHeight > 0) ?
+          this.getMessagesContainerHeightWithKeyboard() : this.getBasicMessagesContainerHeight(),
       })
     }
     if (this.getIsFirstLayout() === true) {

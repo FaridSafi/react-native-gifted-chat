@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle, no-use-before-define */
 
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from 'prop-types'
+import React from 'react'
 import {
   Text,
   Clipboard,
@@ -10,135 +10,180 @@ import {
   View,
   ViewPropTypes,
   Platform,
-} from 'react-native';
+} from 'react-native'
 
-import { MessageText, MessageImage, Time, utils } from 'react-native-gifted-chat';
+import {
+  MessageText,
+  MessageImage,
+  Time,
+  utils,
+} from 'react-native-gifted-chat'
 
-const { isSameUser, isSameDay } = utils;
+const { isSameUser, isSameDay } = utils
 
 export default class Bubble extends React.Component {
-
   constructor(props) {
-    super(props);
-    this.onLongPress = this.onLongPress.bind(this);
+    super(props)
+    this.onLongPress = this.onLongPress.bind(this)
   }
 
   onLongPress() {
     if (this.props.onLongPress) {
-      this.props.onLongPress(this.context, this.props.currentMessage);
+      this.props.onLongPress(this.context, this.props.currentMessage)
     } else {
       if (this.props.currentMessage.text) {
-        const options = [
-          'Copy Text',
-          'Cancel',
-        ];
-        const cancelButtonIndex = options.length - 1;
-        this.context.actionSheet().showActionSheetWithOptions({
-          options,
-          cancelButtonIndex,
-        },
-        (buttonIndex) => {
-          switch (buttonIndex) {
-            case 0:
-              Clipboard.setString(this.props.currentMessage.text);
-              break;
-          }
-        });
+        const options = ['Copy Text', 'Cancel']
+        const cancelButtonIndex = options.length - 1
+        this.context.actionSheet().showActionSheetWithOptions(
+          {
+            options,
+            cancelButtonIndex,
+          },
+          buttonIndex => {
+            switch (buttonIndex) {
+              case 0:
+                Clipboard.setString(this.props.currentMessage.text)
+                break
+            }
+          },
+        )
       }
     }
   }
 
   renderMessageText() {
     if (this.props.currentMessage.text) {
-      const { containerStyle, wrapperStyle, messageTextStyle, ...messageTextProps } = this.props;
+      const {
+        containerStyle,
+        wrapperStyle,
+        messageTextStyle,
+        ...messageTextProps
+      } = this.props
       if (this.props.renderMessageText) {
-        return this.props.renderMessageText(messageTextProps);
+        return this.props.renderMessageText(messageTextProps)
       }
       return (
         <MessageText
           {...messageTextProps}
           textStyle={{
-            left: [styles.standardFont, styles.slackMessageText, messageTextProps.textStyle, messageTextStyle],
+            left: [
+              styles.standardFont,
+              styles.slackMessageText,
+              messageTextProps.textStyle,
+              messageTextStyle,
+            ],
           }}
         />
-      );
+      )
     }
-    return null;
+    return null
   }
 
   renderMessageImage() {
     if (this.props.currentMessage.image) {
-      const { containerStyle, wrapperStyle, ...messageImageProps } = this.props;
+      const { containerStyle, wrapperStyle, ...messageImageProps } = this.props
       if (this.props.renderMessageImage) {
-        return this.props.renderMessageImage(messageImageProps);
+        return this.props.renderMessageImage(messageImageProps)
       }
-      return <MessageImage {...messageImageProps} imageStyle={[styles.slackImage, messageImageProps.imageStyle]} />;
+      return (
+        <MessageImage
+          {...messageImageProps}
+          imageStyle={[styles.slackImage, messageImageProps.imageStyle]}
+        />
+      )
     }
-    return null;
+    return null
   }
 
   renderTicks() {
-    const { currentMessage } = this.props;
+    const { currentMessage } = this.props
     if (this.props.renderTicks) {
-      return this.props.renderTicks(currentMessage);
+      return this.props.renderTicks(currentMessage)
     }
     if (currentMessage.user._id !== this.props.user._id) {
-      return null;
+      return null
     }
     if (currentMessage.sent || currentMessage.received) {
       return (
         <View style={[styles.headerItem, styles.tickView]}>
-          {currentMessage.sent && <Text style={[styles.standardFont, styles.tick, this.props.tickStyle]}>✓</Text>}
-          {currentMessage.received && <Text style={[styles.standardFont, styles.tick, this.props.tickStyle]}>✓</Text>}
+          {currentMessage.sent && (
+            <Text
+              style={[styles.standardFont, styles.tick, this.props.tickStyle]}
+            >
+              ✓
+            </Text>
+          )}
+          {currentMessage.received && (
+            <Text
+              style={[styles.standardFont, styles.tick, this.props.tickStyle]}
+            >
+              ✓
+            </Text>
+          )}
         </View>
-      );
+      )
     }
-    return null;
+    return null
   }
 
   renderUsername() {
-    const username = this.props.currentMessage.user.name;
+    const username = this.props.currentMessage.user.name
     if (username) {
-      const { containerStyle, wrapperStyle, ...usernameProps } = this.props;
+      const { containerStyle, wrapperStyle, ...usernameProps } = this.props
       if (this.props.renderUsername) {
-        return this.props.renderUsername(usernameProps);
+        return this.props.renderUsername(usernameProps)
       }
       return (
-        <Text style={[styles.standardFont, styles.headerItem, styles.username, this.props.usernameStyle]}>
+        <Text
+          style={[
+            styles.standardFont,
+            styles.headerItem,
+            styles.username,
+            this.props.usernameStyle,
+          ]}
+        >
           {username}
         </Text>
-      );
+      )
     }
-    return null;
+    return null
   }
 
   renderTime() {
     if (this.props.currentMessage.createdAt) {
-      const { containerStyle, wrapperStyle, ...timeProps } = this.props;
+      const { containerStyle, wrapperStyle, ...timeProps } = this.props
       if (this.props.renderTime) {
-        return this.props.renderTime(timeProps);
+        return this.props.renderTime(timeProps)
       }
       return (
         <Time
           {...timeProps}
           containerStyle={{ left: [styles.timeContainer] }}
-          textStyle={{ left: [styles.standardFont, styles.headerItem, styles.time, timeProps.textStyle] }}
+          textStyle={{
+            left: [
+              styles.standardFont,
+              styles.headerItem,
+              styles.time,
+              timeProps.textStyle,
+            ],
+          }}
         />
-      );
+      )
     }
-    return null;
+    return null
   }
 
   renderCustomView() {
     if (this.props.renderCustomView) {
-      return this.props.renderCustomView(this.props);
+      return this.props.renderCustomView(this.props)
     }
-    return null;
+    return null
   }
 
   render() {
-    const isSameThread = isSameUser(this.props.currentMessage, this.props.previousMessage)
-      && isSameDay(this.props.currentMessage, this.props.previousMessage);
+    const isSameThread =
+      isSameUser(this.props.currentMessage, this.props.previousMessage) &&
+      isSameDay(this.props.currentMessage, this.props.previousMessage)
 
     const messageHeader = isSameThread ? null : (
       <View style={styles.headerView}>
@@ -146,21 +191,16 @@ export default class Bubble extends React.Component {
         {this.renderTime()}
         {this.renderTicks()}
       </View>
-    );
+    )
 
     return (
       <View style={[styles.container, this.props.containerStyle]}>
         <TouchableOpacity
           onLongPress={this.onLongPress}
-          accessibilityTraits="text"
+          accessibilityTraits='text'
           {...this.props.touchableProps}
         >
-          <View
-            style={[
-              styles.wrapper,
-              this.props.wrapperStyle,
-            ]}
-          >
+          <View style={[styles.wrapper, this.props.wrapperStyle]}>
             <View>
               {this.renderCustomView()}
               {messageHeader}
@@ -170,9 +210,8 @@ export default class Bubble extends React.Component {
           </View>
         </TouchableOpacity>
       </View>
-    );
+    )
   }
-
 }
 
 // Note: Everything is forced to be "left" positioned with this component.
@@ -229,11 +268,11 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     marginRight: 0,
   },
-});
+})
 
 Bubble.contextTypes = {
   actionSheet: PropTypes.func,
-};
+}
 
 Bubble.defaultProps = {
   touchableProps: {},
@@ -254,7 +293,7 @@ Bubble.defaultProps = {
   tickStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
-};
+}
 
 Bubble.propTypes = {
   touchableProps: PropTypes.object,
@@ -288,4 +327,4 @@ Bubble.propTypes = {
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
-};
+}

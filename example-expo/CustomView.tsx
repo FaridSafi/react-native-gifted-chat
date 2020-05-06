@@ -6,14 +6,17 @@ import {
   StyleSheet,
   TouchableOpacity,
   ViewPropTypes,
+  View,
+  Text,
 } from 'react-native'
 
-const MapView = Platform.select({
-  web: () => require('react-native-web-maps'),
-  default: () => require('react-native-maps'),
-})
+import MapView from './MapView'
 
-export default class CustomView extends React.Component {
+export default class CustomView extends React.Component<{
+  currentMessage: any
+  containerStyle: any
+  mapViewStyle: any
+}> {
   static propTypes = {
     currentMessage: PropTypes.object,
     containerStyle: ViewPropTypes.style,
@@ -27,6 +30,10 @@ export default class CustomView extends React.Component {
   }
 
   openMapAsync = async () => {
+    if (Platform.OS === 'web') {
+      alert('Opening the map is not supported.')
+      return
+    }
     const { currentMessage: { location = {} } = {} } = this.props
 
     const url = Platform.select({
@@ -53,17 +60,25 @@ export default class CustomView extends React.Component {
           style={[styles.container, containerStyle]}
           onPress={this.openMapAsync}
         >
-          <MapView
-            style={[styles.mapView, mapViewStyle]}
-            region={{
-              latitude: currentMessage.location.latitude,
-              longitude: currentMessage.location.longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-            scrollEnabled={false}
-            zoomEnabled={false}
-          />
+          {Platform.OS !== 'web' ? (
+            <MapView
+              style={[styles.mapView, mapViewStyle]}
+              region={{
+                latitude: currentMessage.location.latitude,
+                longitude: currentMessage.location.longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+              scrollEnabled={false}
+              zoomEnabled={false}
+            />
+          ) : (
+            <View style={{ padding: 15 }}>
+              <Text style={{ color: 'tomato', fontWeight: 'bold' }}>
+                Map not supported in web yet, sorry!
+              </Text>
+            </View>
+          )}
         </TouchableOpacity>
       )
     }

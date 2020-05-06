@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  
   StyleProp,
   ViewStyle,
   TextStyle,
@@ -17,11 +16,12 @@ import QuickReplies from './QuickReplies'
 import MessageText from './MessageText'
 import MessageImage from './MessageImage'
 import MessageVideo from './MessageVideo'
+import MessageAudio from './MessageAudio'
 
 import Time from './Time'
 import Color from './Color'
 
-import { isSameUser, isSameDay } from './utils'
+import { StylePropType, isSameUser, isSameDay } from './utils'
 import {
   User,
   IMessage,
@@ -29,6 +29,7 @@ import {
   Reply,
   Omit,
   MessageVideoProps,
+  MessageAudioProps
 } from './types'
 
 const styles = {
@@ -116,6 +117,12 @@ export type RenderMessageVideoProps<TMessage extends IMessage> = Omit<
 > &
   MessageVideoProps<TMessage>
 
+export type RenderMessageAudioProps<TMessage extends IMessage> = Omit<
+  BubbleProps<TMessage>,
+  'containerStyle' | 'wrapperStyle'
+> &
+  MessageAudioProps<TMessage>
+
 export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
   'containerStyle' | 'wrapperStyle'
@@ -146,6 +153,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   onQuickReply?(replies: Reply[]): void
   renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
   renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode
+  renderMessageAudio?(props: RenderMessageAudioProps<TMessage>): React.ReactNode
   renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
   renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
   renderTime?(timeProps: Time['props']): React.ReactNode
@@ -167,6 +175,7 @@ export default class Bubble<
     onLongPress: null,
     renderMessageImage: null,
     renderMessageVideo: null,
+    renderMessageAudio: null,
     renderMessageText: null,
     renderCustomView: null,
     renderUsername: null,
@@ -198,6 +207,7 @@ export default class Bubble<
     onLongPress: PropTypes.func,
     renderMessageImage: PropTypes.func,
     renderMessageVideo: PropTypes.func,
+    renderMessageAudio: PropTypes.func,
     renderMessageText: PropTypes.func,
     renderCustomView: PropTypes.func,
     isCustomViewBottom: PropTypes.bool,
@@ -213,26 +223,26 @@ export default class Bubble<
     nextMessage: PropTypes.object,
     previousMessage: PropTypes.object,
     containerStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
     wrapperStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
     bottomContainerStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
-    tickStyle: PropTypes.any,
-    usernameStyle: PropTypes.any,
+    tickStyle: StylePropType,
+    usernameStyle: StylePropType,
     containerToNextStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
     containerToPreviousStyle: PropTypes.shape({
-      left: {},
-      right: {},
+      left: StylePropType,
+      right: StylePropType,
     }),
   }
 
@@ -375,6 +385,17 @@ export default class Bubble<
     return null
   }
 
+  renderMessageAudio() {
+    if (this.props.currentMessage && this.props.currentMessage.audio) {
+      const { containerStyle, wrapperStyle, ...messageAudioProps } = this.props
+      if (this.props.renderMessageAudio) {
+        return this.props.renderMessageAudio(messageAudioProps)
+      }
+      return <MessageAudio {...messageAudioProps} />
+    }
+    return null
+  }
+
   renderTicks() {
     const { currentMessage, renderTicks, user } = this.props
     if (renderTicks && currentMessage) {
@@ -458,6 +479,7 @@ export default class Bubble<
       <View>
         {this.renderMessageImage()}
         {this.renderMessageVideo()}
+        {this.renderMessageAudio()}
         {this.renderMessageText()}
         {this.renderCustomView()}
       </View>
@@ -466,6 +488,7 @@ export default class Bubble<
         {this.renderCustomView()}
         {this.renderMessageImage()}
         {this.renderMessageVideo()}
+        {this.renderMessageAudio()}
         {this.renderMessageText()}
       </View>
     )
@@ -488,7 +511,7 @@ export default class Bubble<
         <View
           style={[
             styles[position].wrapper,
-             this.styledBubbleToNext(),
+            this.styledBubbleToNext(),
             this.styledBubbleToPrevious(),
             wrapperStyle && wrapperStyle[position],
           ]}

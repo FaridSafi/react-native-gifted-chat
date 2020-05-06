@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { IMessage, Reply } from './types'
 import Color from './Color'
-import { warning } from './utils'
+import { warning, StylePropType } from './utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    maxWidth: 160,
+    maxWidth: 200,
     paddingVertical: 7,
     paddingHorizontal: 12,
-    height: 50,
+    minHeight: 50,
     borderRadius: 13,
     margin: 3,
   },
@@ -82,6 +82,10 @@ export default class QuickReplies extends Component<
     currentMessage: PropTypes.object.isRequired,
     onQuickReply: PropTypes.func,
     color: PropTypes.string,
+    sendText: PropTypes.string,
+    keepReplies: PropTypes.bool,
+    renderQuickReplySend: PropTypes.func,
+    quickReplyStyle: StylePropType,
   }
 
   state = {
@@ -191,7 +195,7 @@ export default class QuickReplies extends Component<
                 key={`${reply.value}-${index}`}
               >
                 <Text
-                  numberOfLines={2}
+                  numberOfLines={10}
                   ellipsizeMode={'tail'}
                   style={[
                     styles.quickReplyText,

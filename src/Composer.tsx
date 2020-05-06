@@ -3,6 +3,7 @@ import React from 'react'
 import { Platform, StyleSheet, TextInput, TextInputProps } from 'react-native'
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
 import Color from './Color'
+import { StylePropType } from './utils'
 
 const styles = StyleSheet.create({
   textInput: {
@@ -70,7 +71,7 @@ export default class Composer extends React.Component<ComposerProps> {
     onInputSizeChanged: PropTypes.func,
     multiline: PropTypes.bool,
     disableComposer: PropTypes.bool,
-    textInputStyle: PropTypes.any,
+    textInputStyle: StylePropType,
     textInputAutoFocus: PropTypes.bool,
     keyboardAppearance: PropTypes.string,
   }
@@ -109,7 +110,7 @@ export default class Composer extends React.Component<ComposerProps> {
         placeholder={this.props.placeholder}
         placeholderTextColor={this.props.placeholderTextColor}
         multiline={this.props.multiline}
-        editable={!(this.props.disableComposer)}
+        editable={!this.props.disableComposer}
         onChange={this.onContentSizeChange}
         onContentSizeChange={this.onContentSizeChange}
         onChangeText={this.onChangeText}

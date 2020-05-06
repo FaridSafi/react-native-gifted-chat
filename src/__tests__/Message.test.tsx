@@ -24,11 +24,7 @@ describe('Message component', () => {
 
   it('should NOT render <Message />', () => {
     const tree = createComponentWithContext(
-      <Message
-        key='123'
-        user={{ _id: 1 }}
-        currentMessage={null}
-      />,
+      <Message key='123' user={{ _id: 1 }} currentMessage={null} />,
     ).toJSON()
 
     expect(tree).toMatchSnapshot()
@@ -63,7 +59,7 @@ describe('Message component', () => {
           createdAt: 1554744013721,
           user: {
             _id: 1,
-            avatar: null
+            avatar: null,
           },
         }}
         showUserAvatar

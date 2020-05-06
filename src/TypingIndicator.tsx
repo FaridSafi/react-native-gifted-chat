@@ -8,9 +8,9 @@ interface Props {
 }
 
 const TypingIndicator = (props: Props) => {
-  const [yCoords, setYCoords] = useState(new Animated.Value(200))
-  const [heightScale, setHeightScale] = useState(new Animated.Value(0))
-  const [marginScale, setmarginScale] = useState(new Animated.Value(0))
+  const [yCoords] = useState(new Animated.Value(200))
+  const [heightScale] = useState(new Animated.Value(0))
+  const [marginScale] = useState(new Animated.Value(0))
 
   // on isTyping fire side effect
   useUpdateLayoutEffect(() => {
@@ -26,14 +26,17 @@ const TypingIndicator = (props: Props) => {
     Animated.parallel([
       Animated.spring(yCoords, {
         toValue: 0,
+        useNativeDriver: false,
       }),
       Animated.timing(heightScale, {
         toValue: 35,
         duration: 250,
+        useNativeDriver: false,
       }),
       Animated.timing(marginScale, {
         toValue: 8,
         duration: 250,
+        useNativeDriver: false,
       }),
     ]).start()
   }
@@ -43,14 +46,17 @@ const TypingIndicator = (props: Props) => {
     Animated.parallel([
       Animated.spring(yCoords, {
         toValue: 200,
+        useNativeDriver: false,
       }),
       Animated.timing(heightScale, {
         toValue: 0,
         duration: 250,
+        useNativeDriver: false,
       }),
       Animated.timing(marginScale, {
         toValue: 0,
         duration: 250,
+        useNativeDriver: false,
       }),
     ]).start()
   }

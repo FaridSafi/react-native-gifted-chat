@@ -40,10 +40,10 @@ export default [
     },
     sent: true,
     received: true,
-    // location: {
-    //   latitude: 48.864601,
-    //   longitude: 2.398704,
-    // },
+    location: {
+      latitude: 48.864601,
+      longitude: 2.398704,
+    },
   },
   {
     _id: 3,
@@ -87,7 +87,8 @@ export default [
           value: 'yes',
         },
         {
-          title: '📷 Yes, let me show you with a picture!',
+          title:
+            '📷 Yes, let me show you with a picture! Again let me show you with a picture!',
           value: 'yes_picture',
         },
         {
@@ -131,6 +132,16 @@ export default [
     _id: 30,
     createdAt: new Date(),
     video: 'https://media.giphy.com/media/3o6ZthZjk09Xx4ktZ6/giphy.mp4',
+    user: {
+      _id: 2,
+      name: 'React Native',
+    },
+  },
+  {
+    _id: 31,
+    createdAt: new Date(),
+    audio:
+      'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3',
     user: {
       _id: 2,
       name: 'React Native',

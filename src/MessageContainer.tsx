@@ -14,13 +14,14 @@ import {
   NativeScrollEvent,
   StyleProp,
   ViewStyle,
+  Platform,
 } from 'react-native'
 
 import LoadEarlier from './LoadEarlier'
 import Message from './Message'
 import Color from './Color'
 import { User, IMessage, Reply } from './types'
-import { warning } from './utils'
+import { warning, StylePropType } from './utils'
 import TypingIndicator from './TypingIndicator'
 
 const styles = StyleSheet.create({
@@ -132,6 +133,7 @@ export default class MessageContainer<
     scrollToBottomOffset: PropTypes.number,
     scrollToBottomComponent: PropTypes.func,
     alignTop: PropTypes.bool,
+    scrollToBottomStyle: StylePropType,
   }
 
   state = {
@@ -203,6 +205,9 @@ export default class MessageContainer<
   }
 
   renderTypingIndicator = () => {
+    if (Platform.OS === 'web') {
+      return null
+    }
     return <TypingIndicator isTyping={this.props.isTyping || false} />
   }
 

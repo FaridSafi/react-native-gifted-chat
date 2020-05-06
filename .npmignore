@@ -6,6 +6,7 @@
 .vscode/
 example-expo/
 example-slack-message/
+example-gifted-chat/
 screenshots/
 babel.config.js
 tests/

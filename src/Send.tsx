@@ -11,6 +11,7 @@ import {
   TouchableOpacityProps,
 } from 'react-native'
 import Color from './Color'
+import { IMessage } from './types'
 import { StylePropType } from './utils'
 
 const styles = StyleSheet.create({
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export interface SendProps {
+export interface SendProps<TMessage extends IMessage> {
   text?: string
   label?: string
   containerStyle?: StyleProp<ViewStyle>
@@ -38,10 +39,15 @@ export interface SendProps {
   alwaysShowSend?: boolean
   disabled?: boolean
   sendButtonProps?: Partial<TouchableOpacityProps>
-  onSend?({ text }: { text: string }, b: boolean): void
+  onSend?(
+    messages: Partial<TMessage> | Partial<TMessage>[],
+    shouldResetInputToolbar: boolean,
+  ): void
 }
 
-export default class Send extends Component<SendProps> {
+export default class Send<
+  TMessage extends IMessage = IMessage
+> extends Component<SendProps<TMessage>> {
   static defaultProps = {
     text: '',
     onSend: () => {},
@@ -66,11 +72,17 @@ export default class Send extends Component<SendProps> {
     sendButtonProps: PropTypes.object,
   }
 
+  handleOnPress = () => {
+    const { text, onSend } = this.props
+    if (text && onSend) {
+      onSend({ text: text.trim() } as Partial<TMessage>, true)
+    }
+  }
+
   render() {
     const {
       text,
       containerStyle,
-      onSend,
       children,
       textStyle,
       label,
@@ -85,11 +97,7 @@ export default class Send extends Component<SendProps> {
           accessible
           accessibilityLabel='send'
           style={[styles.container, containerStyle]}
-          onPress={() => {
-            if (text && onSend) {
-              onSend({ text: text.trim() }, true)
-            }
-          }}
+          onPress={this.handleOnPress}
           accessibilityTraits='button'
           disabled={disabled}
           {...sendButtonProps}

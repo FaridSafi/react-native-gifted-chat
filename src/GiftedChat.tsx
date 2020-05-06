@@ -254,6 +254,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderMessageImage: null,
     imageProps: {},
     videoProps: {},
+    audioProps: {},
     lightboxProps: {},
     textInputProps: {},
     listViewProps: {},
@@ -323,6 +324,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderMessageImage: PropTypes.func,
     imageProps: PropTypes.object,
     videoProps: PropTypes.object,
+    audioProps: PropTypes.object,
     lightboxProps: PropTypes.object,
     renderCustomView: PropTypes.func,
     renderDay: PropTypes.func,
@@ -584,7 +586,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   safeAreaSupport = (bottomOffset: number) => {
-    return bottomOffset === this._bottomOffset ? getBottomSpace() : bottomOffset
+    return bottomOffset === this._bottomOffset ? (this.getBottomOffset() ? this.getBottomOffset() : getBottomSpace()) : bottomOffset
   }
 
   onKeyboardWillShow = (e: any) => {

@@ -6,6 +6,7 @@ export {
   BubbleProps,
   RenderMessageImageProps,
   RenderMessageVideoProps,
+  RenderMessageAudioProps,
   RenderMessageTextProps,
 } from './Bubble'
 export { ComposerProps } from './Composer'
@@ -72,3 +73,11 @@ export interface MessageVideoProps<TMessage extends IMessage> {
   // TODO: should be LightBox properties
   lightboxProps?: object
 }
+
+export interface MessageAudioProps<TMessage extends IMessage> {
+  currentMessage?: TMessage
+  containerStyle?: StyleProp<ViewStyle>
+  audioStyle?: StyleProp<ViewStyle>
+  audioProps?: object
+}
+

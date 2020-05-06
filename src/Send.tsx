@@ -72,11 +72,17 @@ export default class Send<
     sendButtonProps: PropTypes.object,
   }
 
+  handleOnPress = () => {
+    const { text, onSend } = this.props
+    if (text && onSend) {
+      onSend({ text: text.trim() } as Partial<TMessage>, true)
+    }
+  }
+
   render() {
     const {
       text,
       containerStyle,
-      onSend,
       children,
       textStyle,
       label,
@@ -91,11 +97,7 @@ export default class Send<
           accessible
           accessibilityLabel='send'
           style={[styles.container, containerStyle]}
-          onPress={() => {
-            if (text && onSend) {
-              onSend({ text: text.trim() }, true)
-            }
-          }}
+          onPress={this.handleOnPress}
           accessibilityTraits='button'
           disabled={disabled}
           {...sendButtonProps}

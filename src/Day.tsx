@@ -9,7 +9,6 @@ import {
   TextStyle,
 } from 'react-native'
 import dayjs from 'dayjs'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 import Color from './Color'
 
@@ -71,10 +70,6 @@ export default class Day<
     wrapperStyle: StylePropType,
     textStyle: StylePropType,
     dateFormat: PropTypes.string,
-  }
-
-  componentDidMount() {
-    dayjs.extend(localizedFormat)
   }
 
   render() {

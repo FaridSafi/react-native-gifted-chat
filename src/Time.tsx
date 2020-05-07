@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, ViewStyle, TextStyle } from 'react-native'
 import dayjs from 'dayjs'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 import Color from './Color'
 import { TIME_FORMAT } from './Constant'
@@ -79,10 +78,6 @@ export default class Time<
       left: StylePropType,
       right: StylePropType,
     }),
-  }
-
-  componentDidMount() {
-    dayjs.extend(localizedFormat)
   }
 
   render() {

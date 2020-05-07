@@ -8,7 +8,7 @@ import {
   takePictureAsync,
 } from './mediaUtils'
 
-export default class AccessoryBar extends React.Component {
+export default class AccessoryBar extends React.Component<any> {
   render() {
     const { onSend, isTyping } = this.props
 

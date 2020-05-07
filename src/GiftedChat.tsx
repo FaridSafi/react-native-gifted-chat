@@ -12,13 +12,14 @@ import {
   TextStyle,
   KeyboardAvoidingView,
 } from 'react-native'
-
 import {
   ActionSheetProvider,
   ActionSheetOptions,
 } from '@expo/react-native-action-sheet'
 import uuid from 'uuid'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
+import dayjs from 'dayjs'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 import * as utils from './utils'
 import Actions from './Actions'
@@ -47,7 +48,7 @@ import {
 import { IMessage, User, Reply, LeftRightStyle } from './types'
 import QuickReplies from './QuickReplies'
 
-// const GiftedActionSheet = ActionSheet as any
+dayjs.extend(localizedFormat)
 
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Messages to display */
@@ -125,6 +126,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   quickReplyStyle?: StyleProp<ViewStyle>
   /* optional prop used to place customView below text, image and video views; default is false */
   isCustomViewBottom?: boolean
+  /* infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
+  infiniteScroll?: boolean
   timeTextStyle?: LeftRightStyle<TextStyle>
   /* Custom action sheet */
   actionSheet?(): {

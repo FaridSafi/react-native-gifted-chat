@@ -71,15 +71,15 @@ export default class App extends Component {
           return {
             messages: GiftedChat.prepend(
               previousState.messages,
-              earlierMessages as any,
+              earlierMessages() as IMessage[],
               Platform.OS !== 'web',
             ),
-            loadEarlier: false,
+            loadEarlier: true,
             isLoadingEarlier: false,
           }
         })
       }
-    }, 1000) // simulating network
+    }, 1500) // simulating network
   }
 
   onSend = (messages = []) => {
@@ -148,7 +148,7 @@ export default class App extends Component {
     })
   }
 
-  onSendFromUser = (messages = []) => {
+  onSendFromUser = (messages: IMessage[] = []) => {
     const createdAt = new Date()
     const messagesToUpload = messages.map(message => ({
       ...message,
@@ -261,6 +261,7 @@ export default class App extends Component {
           inverted={Platform.OS !== 'web'}
           timeTextStyle={{ left: { color: 'red' }, right: { color: 'yellow' } }}
           isTyping={this.state.isTyping}
+          infiniteScroll
         />
       </View>
     )

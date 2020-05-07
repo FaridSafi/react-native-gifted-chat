@@ -26,7 +26,7 @@ exports[`should render <Time /> and compare with snapshot 1`] = `
       ]
     }
   >
-    Invalid date
+    Invalid Date
   </Text>
 </View>
 `;

@@ -445,6 +445,8 @@ If you use React Navigation, additional handling may be required to account for 
 1. Install `yarn add -g expo-cli`
 2. `expo start -w`
 
+[Upgrade snack version](https://snackager.expo.io/bundle/react-native-gifted-chat@0.15.0?bypassCache=true)
+
 #### With create-react-app
 
 1. `yarn add -D react-app-rewired`
@@ -495,7 +497,7 @@ module.exports = function override(config, env) {
 
 ## Author
 
-Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi)!
+Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi)! or [@xcapetir](https://www.twitter.com/xcapetir)!
 
 ## Contributors
 

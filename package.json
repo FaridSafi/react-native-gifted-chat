@@ -99,18 +99,18 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^3.6.0",
-    "moment": "^2.24.0",
+    "dayjs": "1.8.26",
     "prop-types": "^15.7.2",
     "react-native-communications": "^2.2.1",
     "react-native-iphone-x-helper": "^1.2.1",
     "react-native-lightbox": "^0.8.1",
-    "react-native-parsed-text": "https://github.com/EvanBacon/react-native-parsed-text.git",
+    "react-native-parsed-text": "EvanBacon/react-native-parsed-text",
     "react-native-typing-animation": "^0.1.7",
     "react-native-web": "^0.11.7",
     "uuid": "3.4.0"
   },
   "peerDependencies": {
-    "moment": "*",
+    "dayjs": "*",
     "react": "*",
     "react-native": "*"
   },

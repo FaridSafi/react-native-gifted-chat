@@ -302,7 +302,7 @@ interface QuickReplies {
 - **`user`** _(Object)_ - User sending the messages: `{ _id, name, avatar }`
 - **`onSend`** _(Function)_ - Callback when sending a message
 - **`alwaysShowSend`** _(Bool)_ - Always show send button in input text composer; default `false`, show only when text input is not empty
-- **`locale`** _(String)_ - Locale to localize the dates
+- **`locale`** _(String)_ - Locale to localize the dates. You need first to import the locale you need (ie. `require('dayjs/locale/de')` or `import 'dayjs/locale/fr'`)
 - **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'`
 - **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'ll'`
 - **`loadEarlier`** _(Bool)_ - Enables the "load earlier messages" button

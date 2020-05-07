@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import moment from 'moment'
+import dayjs from 'dayjs'
+
 import { IMessage } from './types'
 
 export const StylePropType = PropTypes.oneOfType([
@@ -17,8 +18,8 @@ export function isSameDay(
     return false
   }
 
-  const currentCreatedAt = moment(currentMessage.createdAt)
-  const diffCreatedAt = moment(diffMessage.createdAt)
+  const currentCreatedAt = dayjs(currentMessage.createdAt)
+  const diffCreatedAt = dayjs(diffMessage.createdAt)
 
   if (!currentCreatedAt.isValid() || !diffCreatedAt.isValid()) {
     return false

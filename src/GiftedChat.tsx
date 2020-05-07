@@ -17,7 +17,6 @@ import {
   ActionSheetProvider,
   ActionSheetOptions,
 } from '@expo/react-native-action-sheet'
-import moment from 'moment'
 import uuid from 'uuid'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 
@@ -456,10 +455,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   initLocale() {
-    if (
-      this.props.locale === null ||
-      moment.locales().indexOf(this.props.locale || 'en') === -1
-    ) {
+    if (this.props.locale === null) {
       this.setLocale('en')
     } else {
       this.setLocale(this.props.locale || 'en')
@@ -586,7 +582,11 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   safeAreaSupport = (bottomOffset: number) => {
-    return bottomOffset === this._bottomOffset ? (this.getBottomOffset() ? this.getBottomOffset() : getBottomSpace()) : bottomOffset
+    return bottomOffset === this._bottomOffset
+      ? this.getBottomOffset()
+        ? this.getBottomOffset()
+        : getBottomSpace()
+      : bottomOffset
   }
 
   onKeyboardWillShow = (e: any) => {
@@ -786,8 +786,10 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     ) {
       this.setMaxHeight(layout.height)
       this.setState({
-        messagesContainerHeight: (this._keyboardHeight > 0) ?
-          this.getMessagesContainerHeightWithKeyboard() : this.getBasicMessagesContainerHeight(),
+        messagesContainerHeight:
+          this._keyboardHeight > 0
+            ? this.getMessagesContainerHeightWithKeyboard()
+            : this.getBasicMessagesContainerHeight(),
       })
     }
     if (this.getIsFirstLayout() === true) {

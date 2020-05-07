@@ -10,3 +10,4 @@ Exponent-*.app
 *.log
 lib/
 coverage/
+web-build/

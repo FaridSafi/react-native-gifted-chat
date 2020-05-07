@@ -376,7 +376,7 @@ interface QuickReplies {
 * **`quickReplyStyle`** _(StyleProp<ViewStyle>)_ - Custom quick reply view style
 * **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
 * **`shouldUpdateMessage`** _(Function)_ - Lets the message component know when to update outside of normal cases.
-* **`infiniteScroll`** _(Bool)_ - infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist
+* **`infiniteScroll`** _(Bool)_ - infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist (not yet supported for the web)
 
 ## Imperative methods
 

@@ -11,6 +11,7 @@ import {
   FlatList,
   TextStyle,
   KeyboardAvoidingView,
+  LayoutChangeEvent,
 } from 'react-native'
 import {
   ActionSheetProvider,
@@ -29,13 +30,14 @@ import SystemMessage from './SystemMessage'
 import MessageImage from './MessageImage'
 import MessageText from './MessageText'
 import Composer from './Composer'
-import Day from './Day'
+import { Day, DayProps } from './Day'
 import InputToolbar from './InputToolbar'
 import LoadEarlier from './LoadEarlier'
 import Message from './Message'
 import MessageContainer from './MessageContainer'
-import Send from './Send'
-import Time from './Time'
+import { Send, SendProps } from './Send'
+import { GiftedChatContext } from './GiftedChatContext'
+import { Time, TimeProps } from './Time'
 import GiftedAvatar from './GiftedAvatar'
 
 import {
@@ -181,9 +183,9 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom view inside the bubble */
   renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom day above a message*/
-  renderDay?(props: Day<TMessage>['props']): React.ReactNode
+  renderDay?(props: DayProps<TMessage>): React.ReactNode
   /* Custom time inside a message */
-  renderTime?(props: Time<TMessage>['props']): React.ReactNode
+  renderTime?(props: TimeProps<TMessage>): React.ReactNode
   /* Custom footer component on the ListView, e.g. 'User is typing...' */
   renderFooter?(): React.ReactNode
   /* Custom component to render in the ListView when messages are empty */
@@ -197,7 +199,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom action button on the left of the message composer */
   renderActions?(props: Actions['props']): React.ReactNode
   /* Custom send button; you can pass children to the original Send component quite easily, for example to use a custom icon (example) */
-  renderSend?(props: Send['props']): React.ReactNode
+  renderSend?(props: SendProps<TMessage>): React.ReactNode
   /*Custom second line of actions below the message composer */
   renderAccessory?(props: InputToolbar['props']): React.ReactNode
   /*Callback when the Action button is pressed (if set, the default actionSheet will not be used) */
@@ -230,11 +232,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   GiftedChatProps<TMessage>,
   GiftedChatState
 > {
-  static childContextTypes = {
-    actionSheet: PropTypes.func,
-    getLocale: PropTypes.func,
-  }
-
   static defaultProps = {
     messages: [],
     messagesContainerStyle: undefined,
@@ -429,13 +426,13 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     }
   }
 
-  getChildContext() {
-    return {
-      actionSheet:
-        this.props.actionSheet || (() => this._actionSheetRef.getContext()),
-      getLocale: this.getLocale,
-    }
-  }
+  // getChildContext() {
+  //   return {
+  //     actionSheet:
+  //       this.props.actionSheet || (() => this._actionSheetRef.getContext()),
+  //     getLocale: this.getLocale,
+  //   }
+  // }
 
   componentDidMount() {
     const { messages, text } = this.props
@@ -822,8 +819,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     })
   }
 
-  onMainViewLayout = (e: any) => {
-    // fix an issue when keyboard is dismissing during the initialization
+  onMainViewLayout = (e: LayoutChangeEvent) => {
+    // TODO: fix an issue when keyboard is dismissing during the initialization
     const { layout } = e.nativeEvent
     if (
       this.getMaxHeight() !== layout.height ||
@@ -883,18 +880,27 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     if (this.state.isInitialized === true) {
       const { wrapInSafeArea } = this.props
       const Wrapper = wrapInSafeArea ? SafeAreaView : View
-
+      const actionSheet =
+        this.props.actionSheet || (() => this._actionSheetRef.getContext())
+      const { getLocale } = this
       return (
-        <Wrapper style={styles.safeArea}>
-          <ActionSheetProvider
-            ref={(component: any) => (this._actionSheetRef = component)}
-          >
-            <View style={styles.container} onLayout={this.onMainViewLayout}>
-              {this.renderMessages()}
-              {this.renderInputToolbar()}
-            </View>
-          </ActionSheetProvider>
-        </Wrapper>
+        <GiftedChatContext.Provider
+          value={{
+            actionSheet,
+            getLocale,
+          }}
+        >
+          <Wrapper style={styles.safeArea}>
+            <ActionSheetProvider
+              ref={(component: any) => (this._actionSheetRef = component)}
+            >
+              <View style={styles.container} onLayout={this.onMainViewLayout}>
+                {this.renderMessages()}
+                {this.renderInputToolbar()}
+              </View>
+            </ActionSheetProvider>
+          </Wrapper>
+        </GiftedChatContext.Provider>
       )
     }
     return (

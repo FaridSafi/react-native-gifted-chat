@@ -30,6 +30,7 @@
     "lint": "tslint --project .",
     "lint:fix": "./node_modules/.bin/tslint ./src/**/*.{ts,tsx} --fix",
     "tsc": "node_modules/.bin/tsc --noEmit",
+    "tsc:watch": "node_modules/.bin/tsc --watch --noEmit",
     "start": "yarn config:dev && expo start",
     "start:web": "yarn config:dev && expo start -w --dev",
     "build": "rm -rf lib/ && node_modules/.bin/tsc && cp flow-typedefs/*.js.flow lib/",
@@ -93,9 +94,9 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
     "react-native-maps": "0.26.1",
     "react-native-nav": "2.0.2",
+    "react-native-web": "^0.11.7",
     "react-native-web-maps": "0.2.0",
     "react-test-renderer": "16.9.0",
-    "react-native-web": "^0.11.7",
     "tslint": "6.1.2",
     "tslint-config-prettier": "1.18.0",
     "typescript": "^3.8.3"
@@ -109,6 +110,7 @@
     "react-native-lightbox": "^0.8.1",
     "react-native-parsed-text": "0.0.22",
     "react-native-typing-animation": "^0.1.7",
+    "use-memo-one": "1.1.1",
     "uuid": "3.4.0"
   },
   "peerDependencies": {

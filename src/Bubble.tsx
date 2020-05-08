@@ -18,7 +18,7 @@ import MessageImage from './MessageImage'
 import MessageVideo from './MessageVideo'
 import MessageAudio from './MessageAudio'
 
-import Time from './Time'
+import { Time, TimeProps } from './Time'
 import Color from './Color'
 
 import { StylePropType, isSameUser, isSameDay } from './utils'
@@ -156,7 +156,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderMessageAudio?(props: RenderMessageAudioProps<TMessage>): React.ReactNode
   renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
   renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
-  renderTime?(timeProps: Time['props']): React.ReactNode
+  renderTime?(timeProps: TimeProps<TMessage>): React.ReactNode
   renderTicks?(currentMessage: TMessage): React.ReactNode
   renderUsername?(): React.ReactNode
   renderQuickReplySend?(): React.ReactNode

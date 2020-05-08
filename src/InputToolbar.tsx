@@ -11,7 +11,7 @@ import {
 
 import Composer from './Composer'
 import { Send, SendProps } from './Send'
-import Actions from './Actions'
+import { Actions, ActionsProps } from './Actions'
 import Color from './Color'
 import { StylePropType } from './utils'
 import { IMessage } from './types'
@@ -41,7 +41,7 @@ export interface InputToolbarProps<TMessage extends IMessage> {
   primaryStyle?: StyleProp<ViewStyle>
   accessoryStyle?: StyleProp<ViewStyle>
   renderAccessory?(props: InputToolbarProps<TMessage>): React.ReactNode
-  renderActions?(props: Actions['props']): React.ReactNode
+  renderActions?(props: ActionsProps): React.ReactNode
   renderSend?(props: SendProps<TMessage>): React.ReactNode
   renderComposer?(props: Composer['props']): React.ReactNode
   onPressActionButton?(): void

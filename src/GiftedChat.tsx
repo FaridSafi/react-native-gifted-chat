@@ -23,7 +23,7 @@ import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 import * as utils from './utils'
-import Actions from './Actions'
+import { Actions, ActionsProps } from './Actions'
 import Avatar from './Avatar'
 import Bubble from './Bubble'
 import SystemMessage from './SystemMessage'
@@ -186,7 +186,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*  Custom text input message composer */
   renderComposer?(props: Composer['props']): React.ReactNode
   /* Custom action button on the left of the message composer */
-  renderActions?(props: Actions['props']): React.ReactNode
+  renderActions?(props: ActionsProps): React.ReactNode
   /* Custom send button; you can pass children to the original Send component quite easily, for example to use a custom icon (example) */
   renderSend?(props: SendProps<TMessage>): React.ReactNode
   /*Custom second line of actions below the message composer */

@@ -10,10 +10,11 @@ import {
 } from 'react-native'
 
 import Composer from './Composer'
-import Send from './Send'
+import { Send, SendProps } from './Send'
 import Actions from './Actions'
 import Color from './Color'
 import { StylePropType } from './utils'
+import { IMessage } from './types'
 
 const styles = StyleSheet.create({
   container: {
@@ -33,23 +34,22 @@ const styles = StyleSheet.create({
   },
 })
 
-export interface InputToolbarProps {
+export interface InputToolbarProps<TMessage extends IMessage> {
   options?: { [key: string]: any }
   optionTintColor?: string
   containerStyle?: StyleProp<ViewStyle>
   primaryStyle?: StyleProp<ViewStyle>
   accessoryStyle?: StyleProp<ViewStyle>
-  renderAccessory?(props: InputToolbarProps): React.ReactNode
+  renderAccessory?(props: InputToolbarProps<TMessage>): React.ReactNode
   renderActions?(props: Actions['props']): React.ReactNode
-  renderSend?(props: Send['props']): React.ReactNode
+  renderSend?(props: SendProps<TMessage>): React.ReactNode
   renderComposer?(props: Composer['props']): React.ReactNode
   onPressActionButton?(): void
 }
 
-export default class InputToolbar extends React.Component<
-  InputToolbarProps,
-  { position: string }
-> {
+export default class InputToolbar<
+  TMessage extends IMessage = IMessage
+> extends React.Component<InputToolbarProps<TMessage>, { position: string }> {
   static defaultProps = {
     renderAccessory: null,
     renderActions: null,

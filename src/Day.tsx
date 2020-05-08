@@ -1,5 +1,5 @@
+import * as React from 'react'
 import PropTypes from 'prop-types'
-import React, { PureComponent } from 'react'
 import {
   StyleSheet,
   Text,
@@ -11,7 +11,6 @@ import {
 import dayjs from 'dayjs'
 
 import Color from './Color'
-
 import { StylePropType, isSameDay } from './utils'
 import { DATE_FORMAT } from './Constant'
 import { IMessage } from './Models'
@@ -42,59 +41,50 @@ export interface DayProps<TMessage extends IMessage> {
   inverted?: boolean
 }
 
-export default class Day<
-  TMessage extends IMessage = IMessage
-> extends PureComponent<DayProps<TMessage>> {
-  static contextTypes = {
-    getLocale: PropTypes.func,
-  }
-
-  static defaultProps = {
-    currentMessage: {
-      createdAt: null,
-    },
-    previousMessage: {},
-    nextMessage: {},
-    containerStyle: {},
-    wrapperStyle: {},
-    textStyle: {},
-    dateFormat: DATE_FORMAT,
-  }
-
-  static propTypes = {
-    currentMessage: PropTypes.object,
-    previousMessage: PropTypes.object,
-    nextMessage: PropTypes.object,
-    inverted: PropTypes.bool,
-    containerStyle: StylePropType,
-    wrapperStyle: StylePropType,
-    textStyle: StylePropType,
-    dateFormat: PropTypes.string,
-  }
-
-  render() {
-    const {
-      dateFormat,
-      currentMessage,
-      previousMessage,
-      containerStyle,
-      wrapperStyle,
-      textStyle,
-    } = this.props
-
-    if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
-      return (
-        <View style={[styles.container, containerStyle]}>
-          <View style={wrapperStyle}>
-            <Text style={[styles.text, textStyle]}>
-              {dayjs(currentMessage.createdAt)
-                .locale(this.context.getLocale())
-                .format(dateFormat)}
-            </Text>
-          </View>
+export const Day = <TMessage extends IMessage = IMessage>({
+  dateFormat,
+  currentMessage,
+  previousMessage,
+  containerStyle,
+  wrapperStyle,
+  textStyle,
+}: DayProps<TMessage>) => {
+  const { getLocale } = useChatContext()
+  if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
+    return (
+      <View style={[styles.container, containerStyle]}>
+        <View style={wrapperStyle}>
+          <Text style={[styles.text, textStyle]}>
+            {dayjs(currentMessage.createdAt)
+              .locale(getLocale())
+              .format(dateFormat)}
+          </Text>
         </View>
-      )
-    }
-    return null
+      </View>
+    )
   }
+  return null
+}
+
+Day.defaultProps = {
+  currentMessage: {
+    createdAt: null,
+  },
+  previousMessage: {},
+  nextMessage: {},
+  containerStyle: {},
+  wrapperStyle: {},
+  textStyle: {},
+  dateFormat: DATE_FORMAT,
+}
+
+Day.propTypes = {
+  currentMessage: PropTypes.object,
+  previousMessage: PropTypes.object,
+  nextMessage: PropTypes.object,
+  inverted: PropTypes.bool,
+  containerStyle: StylePropType,
+  wrapperStyle: StylePropType,
+  textStyle: StylePropType,
+  dateFormat: PropTypes.string,
 }

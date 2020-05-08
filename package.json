@@ -93,6 +93,7 @@
     "react-native-nav": "2.0.2",
     "react-native-web-maps": "0.2.0",
     "react-test-renderer": "16.9.0",
+    "react-native-web": "^0.11.7",
     "tslint": "6.1.2",
     "tslint-config-prettier": "1.18.0",
     "typescript": "^3.8.3"
@@ -106,7 +107,6 @@
     "react-native-lightbox": "^0.8.1",
     "react-native-parsed-text": "EvanBacon/react-native-parsed-text",
     "react-native-typing-animation": "^0.1.7",
-    "react-native-web": "^0.11.7",
     "uuid": "3.4.0"
   },
   "peerDependencies": {

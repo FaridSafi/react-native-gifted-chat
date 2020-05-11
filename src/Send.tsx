@@ -11,7 +11,7 @@ import {
   TouchableOpacityProps,
 } from 'react-native'
 import Color from './Color'
-import { IMessage } from './types'
+import { IMessage } from './Models'
 import { StylePropType } from './utils'
 
 const styles = StyleSheet.create({

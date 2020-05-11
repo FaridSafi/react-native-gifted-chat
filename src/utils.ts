@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import dayjs from 'dayjs'
 
-import { IMessage } from './types'
+import { IMessage } from './Models'
 
 export const StylePropType = PropTypes.oneOfType([
   PropTypes.array,

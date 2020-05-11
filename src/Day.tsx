@@ -14,7 +14,7 @@ import Color from './Color'
 
 import { StylePropType, isSameDay } from './utils'
 import { DATE_FORMAT } from './Constant'
-import { IMessage } from './types'
+import { IMessage } from './Models'
 
 const styles = StyleSheet.create({
   container: {

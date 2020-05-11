@@ -8,7 +8,7 @@ import SystemMessage from './SystemMessage'
 import Day from './Day'
 
 import { StylePropType, isSameUser } from './utils'
-import { IMessage, User, LeftRightStyle } from './types'
+import { IMessage, User, LeftRightStyle } from './Models'
 
 const styles = {
   left: StyleSheet.create({

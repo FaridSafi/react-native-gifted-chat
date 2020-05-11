@@ -13,7 +13,7 @@ import {
 // @ts-ignore
 import ParsedText from 'react-native-parsed-text'
 import Communications from 'react-native-communications'
-import { LeftRightStyle, IMessage } from './types'
+import { LeftRightStyle, IMessage } from './Models'
 import { StylePropType } from './utils'
 
 const WWW_URL_PATTERN = /^www\./i

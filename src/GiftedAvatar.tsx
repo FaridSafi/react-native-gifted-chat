@@ -11,7 +11,7 @@ import {
   TextStyle,
 } from 'react-native'
 import Color from './Color'
-import { User } from './types'
+import { User } from './Models'
 import { StylePropType } from './utils'
 
 const {

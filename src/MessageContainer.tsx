@@ -20,7 +20,7 @@ import {
 import LoadEarlier from './LoadEarlier'
 import Message from './Message'
 import Color from './Color'
-import { User, IMessage, Reply } from './types'
+import { User, IMessage, Reply } from './Models'
 import { warning, StylePropType } from './utils'
 import TypingIndicator from './TypingIndicator'
 

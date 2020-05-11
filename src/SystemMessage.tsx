@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import Color from './Color'
-import { IMessage } from './types'
+import { IMessage } from './Models'
 import { StylePropType } from './utils'
 
 const styles = StyleSheet.create({

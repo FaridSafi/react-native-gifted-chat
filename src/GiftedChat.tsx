@@ -45,7 +45,7 @@ import {
   TIME_FORMAT,
   DATE_FORMAT,
 } from './Constant'
-import { IMessage, User, Reply, LeftRightStyle } from './types'
+import { IMessage, User, Reply, LeftRightStyle } from './Models'
 import QuickReplies from './QuickReplies'
 
 dayjs.extend(localizedFormat)
@@ -872,7 +872,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export * from './types'
+export * from './Models'
 
 export {
   GiftedChat,

@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 
 import Color from './Color'
 import { TIME_FORMAT } from './Constant'
-import { LeftRightStyle, IMessage } from './types'
+import { LeftRightStyle, IMessage } from './Models'
 import { StylePropType } from './utils'
 
 const containerStyle = {

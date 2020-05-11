@@ -29,8 +29,8 @@ import {
   Reply,
   Omit,
   MessageVideoProps,
-  MessageAudioProps
-} from './types'
+  MessageAudioProps,
+} from './Models'
 
 const styles = {
   left: StyleSheet.create({

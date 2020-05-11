@@ -8,7 +8,7 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native'
-import { IMessage, Reply } from './types'
+import { IMessage, Reply } from './Models'
 import Color from './Color'
 import { warning, StylePropType } from './utils'
 

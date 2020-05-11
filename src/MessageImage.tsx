@@ -12,7 +12,7 @@ import {
 // TODO: support web
 // @ts-ignore
 import Lightbox from 'react-native-lightbox'
-import { IMessage } from './types'
+import { IMessage } from './Models'
 import { StylePropType } from './utils'
 
 const styles = StyleSheet.create({

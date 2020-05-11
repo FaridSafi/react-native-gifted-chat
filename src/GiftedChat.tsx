@@ -28,7 +28,7 @@ import Avatar from './Avatar'
 import Bubble from './Bubble'
 import SystemMessage from './SystemMessage'
 import MessageImage from './MessageImage'
-import MessageText from './MessageText'
+import { MessageText, MessageTextProps } from './MessageText'
 import Composer from './Composer'
 import { Day, DayProps } from './Day'
 import InputToolbar from './InputToolbar'
@@ -164,9 +164,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*Custom message container */
   renderMessage?(message: Message<TMessage>['props']): React.ReactNode
   /* Custom message text */
-  renderMessageText?(
-    messageText: MessageText<TMessage>['props'],
-  ): React.ReactNode
+  renderMessageText?(messageText: MessageTextProps<TMessage>): React.ReactNode
   /* Custom message image */
   renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
   /* Custom view inside the bubble */

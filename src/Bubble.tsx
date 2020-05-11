@@ -13,7 +13,7 @@ import {
 
 import QuickReplies from './QuickReplies'
 
-import MessageText from './MessageText'
+import { MessageText, MessageTextProps } from './MessageText'
 import MessageImage from './MessageImage'
 import MessageVideo from './MessageVideo'
 import MessageAudio from './MessageAudio'
@@ -127,7 +127,7 @@ export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
   'containerStyle' | 'wrapperStyle'
 > &
-  MessageText['props']
+  MessageTextProps<TMessage>
 
 export interface BubbleProps<TMessage extends IMessage> {
   user?: User

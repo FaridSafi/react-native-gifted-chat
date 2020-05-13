@@ -1,25 +1,31 @@
-import React, { useState } from 'react'
-import { Animated } from 'react-native'
+import * as React from 'react'
+import { Animated, StyleSheet } from 'react-native'
 import { TypingAnimation } from 'react-native-typing-animation'
 import { useUpdateLayoutEffect } from './hooks/useUpdateLayoutEffect'
+import Color from './Color'
 
 interface Props {
-  isTyping: boolean
+  isTyping?: boolean
 }
 
-const TypingIndicator = (props: Props) => {
-  const [yCoords] = useState(new Animated.Value(200))
-  const [heightScale] = useState(new Animated.Value(0))
-  const [marginScale] = useState(new Animated.Value(0))
+const TypingIndicator = ({ isTyping }: Props) => {
+  const { yCoords, heightScale, marginScale } = React.useMemo(
+    () => ({
+      yCoords: new Animated.Value(200),
+      heightScale: new Animated.Value(0),
+      marginScale: new Animated.Value(0),
+    }),
+    [],
+  )
 
   // on isTyping fire side effect
   useUpdateLayoutEffect(() => {
-    if (props.isTyping) {
+    if (isTyping) {
       slideIn()
     } else {
       slideOut()
     }
-  }, [props.isTyping])
+  }, [isTyping])
 
   // side effect
   const slideIn = () => {
@@ -60,22 +66,23 @@ const TypingIndicator = (props: Props) => {
       }),
     ]).start()
   }
-
+  const opacity = yCoords.interpolate({
+    inputRange: [0, 200],
+    outputRange: [1, 0],
+  })
   return (
     <Animated.View
       style={[
+        styles.container,
         {
+          opacity,
           transform: [
             {
               translateY: yCoords,
             },
           ],
           height: heightScale,
-          marginLeft: 8,
           marginBottom: marginScale,
-          width: 45,
-          borderRadius: 15,
-          backgroundColor: '#f0f0f0',
         },
       ]}
     >
@@ -88,5 +95,14 @@ const TypingIndicator = (props: Props) => {
     </Animated.View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginLeft: 8,
+    width: 45,
+    borderRadius: 15,
+    backgroundColor: Color.leftBubbleBackground,
+  },
+})
 
 export default TypingIndicator

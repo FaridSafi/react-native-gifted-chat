@@ -379,7 +379,6 @@ export default class MessageContainer<
       infiniteScroll,
       isLoadingEarlier,
     } = this.props
-
     if (
       infiniteScroll &&
       distanceFromEnd > 0 &&

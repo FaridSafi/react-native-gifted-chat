@@ -88,6 +88,7 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
               "height": 0,
               "marginBottom": 0,
               "marginLeft": 8,
+              "opacity": 0,
               "transform": Array [
                 Object {
                   "translateY": 200,

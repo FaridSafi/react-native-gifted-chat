@@ -81,7 +81,7 @@
     "expo-image-picker": "~8.1.0",
     "expo-location": "~8.1.0",
     "expo-permissions": "~8.1.0",
-    "flow-bin": "0.123.0",
+    "flow-bin": "0.125.0",
     "husky": "4.2.5",
     "jest-expo": "^37.0.0",
     "json": "9.0.6",

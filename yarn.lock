@@ -3349,10 +3349,10 @@ find-yarn-workspace-root@^1.2.1:
     fs-extra "^4.0.3"
     micromatch "^3.1.4"
 
-flow-bin@0.123.0:
-  version "0.123.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.123.0.tgz#7ba61a0b8775928cf4943ccf78eed2b1b05f7b3a"
-  integrity sha512-Ylcf8YDIM/KrqtxkPuq+f8O+6sdYA2Nuz5f+sWHlp539DatZz3YMcsO1EiXaf1C11HJgpT/3YGYe7xZ9/UZmvQ==
+flow-bin@0.125.0:
+  version "0.125.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.125.0.tgz#944239e0c8b76fc63ed6262f7a7fa89db0076502"
+  integrity sha512-m9mPCJgH7DNlhEjIkXNxm1p2MMMU+TnLT5SRN17qFpLG+1ddYciNSrAnOlzVOIQgIab4FCzJRr+v+lPjvWNmog==
 
 fontfaceobserver@^2.1.0:
   version "2.1.0"

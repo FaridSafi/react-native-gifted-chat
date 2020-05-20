@@ -107,7 +107,7 @@
     "react-native-lightbox": "^0.8.1",
     "react-native-parsed-text": "EvanBacon/react-native-parsed-text",
     "react-native-typing-animation": "^0.1.7",
-    "uuid": "3.4.0"
+    "uuid": "8.1.0"
   },
   "peerDependencies": {
     "dayjs": "*",

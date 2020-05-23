@@ -100,7 +100,7 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^3.6.0",
-    "dayjs": "1.8.27",
+    "dayjs": "^1.8.26",
     "prop-types": "^15.7.2",
     "react-native-communications": "^2.2.1",
     "react-native-iphone-x-helper": "^1.2.1",

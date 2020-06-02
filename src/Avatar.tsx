@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { ReactNode } from 'react'
-import { StyleSheet, View, ImageStyle, ViewStyle } from 'react-native'
+import { StyleSheet, View, ImageStyle, TextStyle, ViewStyle } from 'react-native'
 import GiftedAvatar from './GiftedAvatar'
 import { StylePropType, isSameUser, isSameDay } from './utils'
 import { Omit, IMessage, User, LeftRightStyle } from './Models'
@@ -45,6 +45,7 @@ export interface AvatarProps<TMessage extends IMessage> {
   showAvatarForEveryMessage?: boolean
   imageStyle?: LeftRightStyle<ImageStyle>
   containerStyle?: LeftRightStyle<ViewStyle>
+  textStyle?: TextStyle
   renderAvatar?(props: Omit<AvatarProps<TMessage>, 'renderAvatar'>): ReactNode
   onPressAvatar?(user: User): void
   onLongPressAvatar?(user: User): void
@@ -103,6 +104,7 @@ export default class Avatar<
                 this.props.imageStyle[this.props.position],
             ] as ImageStyle
           }
+          textStyle={this.props.textStyle ? this.props.textStyle : {}}
           user={this.props.currentMessage.user}
           onPress={() =>
             this.props.onPressAvatar &&

@@ -93,7 +93,7 @@
     "react-native-nav": "2.0.2",
     "react-native-web-maps": "0.2.0",
     "react-test-renderer": "16.9.0",
-    "react-native-web": "^0.11.7",
+    "react-native-web": "^0.12.3",
     "tslint": "6.1.2",
     "tslint-config-prettier": "1.18.0",
     "typescript": "^3.8.3"

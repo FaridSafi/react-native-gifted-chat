@@ -599,7 +599,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       if (new Date().getTime() - this._lastUpdate < 100) {
           return;
       }
-      this._lastUpdate = new Date().getTime();
+      this._lastUpdate = Date.now()
       
       this.setIsTypingDisabled(true)
       this.setKeyboardHeight(

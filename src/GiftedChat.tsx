@@ -596,7 +596,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   onKeyboardWillShow = (e: any) => {
     if (this.props.isKeyboardInternallyHandled) {
-      if (new Date().getTime() - this._lastUpdate < 100) {
+      if (Date.now() - this._lastUpdate < 100) {
           return;
       }
       this._lastUpdate = Date.now()

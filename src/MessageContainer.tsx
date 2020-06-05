@@ -213,7 +213,7 @@ export default class MessageContainer<
     if (Platform.OS === 'web') {
       return null
     }
-    return <TypingIndicator isTyping={this.props.isTyping || false} />
+    return <TypingIndicator isTyping={this.props.isTyping} />
   }
 
   renderFooter = () => {

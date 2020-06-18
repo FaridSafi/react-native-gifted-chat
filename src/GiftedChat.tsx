@@ -26,8 +26,8 @@ import * as utils from './utils'
 import { Actions, ActionsProps } from './Actions'
 import Avatar from './Avatar'
 import Bubble from './Bubble'
-import SystemMessage from './SystemMessage'
-import MessageImage from './MessageImage'
+import SystemMessage, { SystemMessageProps } from './SystemMessage'
+import MessageImage, { MessageImageProps } from './MessageImage'
 import { MessageText, MessageTextProps } from './MessageText'
 import Composer from './Composer'
 import { Day, DayProps } from './Day'
@@ -157,7 +157,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom message bubble */
   renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom system message */
-  renderSystemMessage?(props: SystemMessage<TMessage>['props']): React.ReactNode
+  renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
   /* Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see example using showActionSheetWithOptions()) */
   onLongPress?(context: any, message: any): void
   /* Reverses display order of messages; default is true */
@@ -166,7 +166,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom message text */
   renderMessageText?(messageText: MessageTextProps<TMessage>): React.ReactNode
   /* Custom message image */
-  renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
+  renderMessageImage?(props: MessageImageProps<TMessage>): React.ReactNode
   /* Custom view inside the bubble */
   renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom day above a message*/

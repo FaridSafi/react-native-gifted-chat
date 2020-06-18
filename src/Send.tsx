@@ -66,7 +66,7 @@ export const Send = <TMessage extends IMessage = IMessage>({
 
   const showSend = useMemoOne(
     () => alwaysShowSend || (text && text.trim().length > 0),
-    [alwaysShowSend, test],
+    [alwaysShowSend, text],
   )
 
   if (showSend) {

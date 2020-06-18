@@ -15,6 +15,8 @@ import { StylePropType, isSameDay } from './utils'
 import { DATE_FORMAT } from './Constant'
 import { IMessage } from './Models'
 
+import { useChatContext } from './GiftedChatContext'
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',

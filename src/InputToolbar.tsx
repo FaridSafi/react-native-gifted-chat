@@ -14,7 +14,7 @@ import { Send, SendProps } from './Send'
 import { Actions, ActionsProps } from './Actions'
 import Color from './Color'
 import { StylePropType } from './utils'
-import { IMessage } from './types'
+import { IMessage } from './Models'
 
 const styles = StyleSheet.create({
   container: {

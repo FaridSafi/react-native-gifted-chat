@@ -1,7 +1,9 @@
 import * as React from 'react'
 
 export interface IGiftedChatContext {
-  actionSheet(): { showActionSheetWithOptions: (option?: any, cb?: any) => any }
+  actionSheet(): {
+    showActionSheetWithOptions: (option?: any, cb?: any) => any,
+  }
   getLocale(): string
 }
 

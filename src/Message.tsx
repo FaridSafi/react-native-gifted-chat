@@ -4,7 +4,7 @@ import { View, StyleSheet, ViewStyle } from 'react-native'
 
 import Avatar from './Avatar'
 import Bubble from './Bubble'
-import SystemMessage from './SystemMessage'
+import SystemMessage, { SystemMessageProps } from './SystemMessage'
 import { Day, DayProps } from './Day'
 
 import { StylePropType, isSameUser } from './utils'
@@ -43,7 +43,7 @@ export interface MessageProps<TMessage extends IMessage> {
   containerStyle?: LeftRightStyle<ViewStyle>
   renderBubble?(props: Bubble['props']): React.ReactNode
   renderDay?(props: DayProps<TMessage>): React.ReactNode
-  renderSystemMessage?(props: SystemMessage['props']): React.ReactNode
+  renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
   renderAvatar?(props: Avatar['props']): React.ReactNode
   shouldUpdateMessage?(
     props: MessageProps<IMessage>,

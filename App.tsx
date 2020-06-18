@@ -2,7 +2,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { AppLoading, Asset, Linking } from 'expo'
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Platform } from 'react-native'
-import { Bubble, GiftedChat, SystemMessage, IMessage, Send } from './src'
+import { Bubble, GiftedChat, SystemMessage, IMessage, Send, SendProps } from './src'
 
 import AccessoryBar from './example-expo/AccessoryBar'
 import CustomActions from './example-expo/CustomActions'
@@ -219,7 +219,7 @@ export default class App extends Component {
 
   renderQuickReplySend = () => <Text>{' custom send =>'}</Text>
 
-  renderSend = (props: Send['props']) => (
+  renderSend = (props: SendProps<IMessage>) => (
     <Send {...props} containerStyle={{ justifyContent: 'center' }}>
       <MaterialIcons size={30} color={'tomato'} name={'send'} />
     </Send>

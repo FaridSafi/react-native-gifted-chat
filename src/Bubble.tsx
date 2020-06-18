@@ -12,7 +12,6 @@ import {
 } from 'react-native'
 
 import QuickReplies from './QuickReplies'
-
 import MessageText from './MessageText'
 import MessageImage from './MessageImage'
 import MessageVideo from './MessageVideo'
@@ -163,9 +162,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
 }
 
-export default class Bubble<
-  TMessage extends IMessage = IMessage
-> extends React.Component<BubbleProps<TMessage>> {
+export default class Bubble<TMessage extends IMessage = IMessage> extends React.Component<BubbleProps<TMessage>> {
   static contextTypes = {
     actionSheet: PropTypes.func,
   }
@@ -397,36 +394,25 @@ export default class Bubble<
   }
 
   renderTicks() {
-    const { currentMessage, renderTicks, user } = this.props
+    const { currentMessage, user, renderTicks, tickStyle } = this.props
+
     if (renderTicks && currentMessage) {
       return renderTicks(currentMessage)
     }
-    if (
-      currentMessage &&
-      user &&
-      currentMessage.user &&
-      currentMessage.user._id !== user._id
-    ) {
-      return null
-    }
-    if (
-      currentMessage &&
-      (currentMessage.sent || currentMessage.received || currentMessage.pending)
-    ) {
+
+    const isMyMessage = currentMessage?.user._id === user?._id;
+    const shouldDisplayTicks = currentMessage?.sent || currentMessage?.received || currentMessage?.pending;
+
+    if (currentMessage && isMyMessage && shouldDisplayTicks) {
       return (
         <View style={styles.content.tickView}>
-          {!!currentMessage.sent && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>✓</Text>
-          )}
-          {!!currentMessage.received && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>✓</Text>
-          )}
-          {!!currentMessage.pending && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>🕓</Text>
-          )}
+          {!!currentMessage.sent && <Text style={[styles.content.tick, tickStyle]}>✓</Text>}
+          {!!currentMessage.received && <Text style={[styles.content.tick, tickStyle]}>✓</Text>}
+          {!!currentMessage.pending && <Text style={[styles.content.tick, tickStyle]}>🕓</Text>}
         </View>
       )
     }
+  
     return null
   }
 

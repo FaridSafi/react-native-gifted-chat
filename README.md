@@ -190,6 +190,23 @@ See the files in [`example-slack-message`](example-slack-message) for an example
 
 > e.g. Chat Message
 
+```ts
+export interface IMessage {
+  _id: string | number
+  text: string
+  createdAt: Date | number
+  user: User
+  image?: string
+  video?: string
+  audio?: string
+  system?: boolean
+  sent?: boolean
+  received?: boolean
+  pending?: boolean
+  quickReplies?: QuickReplies
+}
+```
+
 ```js
 {
   _id: 1,
@@ -325,6 +342,7 @@ interface QuickReplies {
 - **`onLongPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is long-pressed
 - **`renderAvatarOnTop`** _(Bool)_ - Render the message avatar at the top of consecutive messages, rather than the bottom; default is `false`
 - **`renderBubble`** _(Function)_ - Custom message bubble
+- **`renderTicks`** _(Function(`message`))_ - Custom ticks indicator to display message status
 - **`renderSystemMessage`** _(Function)_ - Custom system message
 - **`onLongPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
 - **`inverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`

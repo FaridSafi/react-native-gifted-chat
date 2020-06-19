@@ -14,9 +14,9 @@ import {
 import QuickReplies from './QuickReplies'
 
 import { MessageText, MessageTextProps } from './MessageText'
-import MessageImage, { MessageImageProps } from './MessageImage'
+import { MessageImage, MessageImageProps } from './MessageImage'
 import MessageVideo from './MessageVideo'
-import MessageAudio from './MessageAudio'
+import { MessageAudio } from './MessageAudio'
 
 import { Time, TimeProps } from './Time'
 import Color from './Color'

@@ -14,5 +14,3 @@ export function MessageAudio(_props: any) {
     </View>
   )
 }
-
-export default MessageAudio;

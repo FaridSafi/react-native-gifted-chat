@@ -29,7 +29,7 @@ import Bubble from './Bubble'
 import { SystemMessage, SystemMessageProps } from './SystemMessage'
 import { MessageImage, MessageImageProps } from './MessageImage'
 import { MessageText, MessageTextProps } from './MessageText'
-import Composer from './Composer'
+import { Composer, ComposerProps } from './Composer'
 import { Day, DayProps } from './Day'
 import InputToolbar from './InputToolbar'
 import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
@@ -182,7 +182,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom message composer container */
   renderInputToolbar?(props: InputToolbar['props']): React.ReactNode
   /*  Custom text input message composer */
-  renderComposer?(props: Composer['props']): React.ReactNode
+  renderComposer?(props: ComposerProps): React.ReactNode
   /* Custom action button on the left of the message composer */
   renderActions?(props: ActionsProps): React.ReactNode
   /* Custom send button; you can pass children to the original Send component quite easily, for example to use a custom icon (example) */

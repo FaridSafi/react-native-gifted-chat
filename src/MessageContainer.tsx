@@ -17,7 +17,7 @@ import {
   Platform,
 } from 'react-native'
 
-import LoadEarlier from './LoadEarlier'
+import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
 import Message from './Message'
 import Color from './Color'
 import { User, IMessage, Reply } from './Models'
@@ -82,7 +82,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactNode
-  renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
+  renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   scrollToBottomComponent?(): React.ReactNode
   onLoadEarlier?(): void
   onQuickReply?(replies: Reply[]): void

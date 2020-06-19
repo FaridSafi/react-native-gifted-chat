@@ -32,7 +32,7 @@ import { MessageText, MessageTextProps } from './MessageText'
 import Composer from './Composer'
 import { Day, DayProps } from './Day'
 import InputToolbar from './InputToolbar'
-import LoadEarlier from './LoadEarlier'
+import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
 import Message from './Message'
 import MessageContainer from './MessageContainer'
 import { Send, SendProps } from './Send'
@@ -151,7 +151,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*  Render a loading view when initializing */
   renderLoading?(): React.ReactNode
   /* Custom "Load earlier messages" button */
-  renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
+  renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   /* Custom message avatar; set to null to not render any avatar for the message */
   renderAvatar?(props: Avatar<TMessage>['props']): React.ReactNode
   /* Custom message bubble */

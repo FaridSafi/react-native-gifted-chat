@@ -85,5 +85,3 @@ MessageImage.propTypes = {
   imageProps: PropTypes.object,
   lightboxProps: PropTypes.object,
 }
-
-export default MessageImage;

@@ -9,7 +9,7 @@ import {
   ViewStyle,
 } from 'react-native'
 
-import Composer from './Composer'
+import { Composer, ComposerProps } from './Composer'
 import { Send, SendProps } from './Send'
 import { Actions, ActionsProps } from './Actions'
 import Color from './Color'
@@ -43,7 +43,7 @@ export interface InputToolbarProps<TMessage extends IMessage> {
   renderAccessory?(props: InputToolbarProps<TMessage>): React.ReactNode
   renderActions?(props: ActionsProps): React.ReactNode
   renderSend?(props: SendProps<TMessage>): React.ReactNode
-  renderComposer?(props: Composer['props']): React.ReactNode
+  renderComposer?(props: ComposerProps): React.ReactNode
   onPressActionButton?(): void
 }
 
@@ -134,7 +134,7 @@ export default class InputToolbar<
 
   renderComposer() {
     if (this.props.renderComposer) {
-      return this.props.renderComposer(this.props)
+      return this.props.renderComposer(this.props as ComposerProps)
     }
 
     return <Composer {...this.props} />

@@ -4,7 +4,7 @@ import { View, StyleSheet, ViewStyle } from 'react-native'
 
 import Avatar from './Avatar'
 import Bubble from './Bubble'
-import SystemMessage, { SystemMessageProps } from './SystemMessage'
+import { SystemMessage, SystemMessageProps } from './SystemMessage'
 import { Day, DayProps } from './Day'
 
 import { StylePropType, isSameUser } from './utils'

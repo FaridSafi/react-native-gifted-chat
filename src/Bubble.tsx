@@ -12,15 +12,13 @@ import {
 } from 'react-native'
 
 import QuickReplies from './QuickReplies'
-
 import { MessageText, MessageTextProps } from './MessageText'
 import { MessageImage, MessageImageProps } from './MessageImage'
-import MessageVideo from './MessageVideo'
+import { MessageVideo } from './MessageVideo'
 import { MessageAudio } from './MessageAudio'
-
 import { Time, TimeProps } from './Time'
-import Color from './Color'
 
+import Color from './Color'
 import { StylePropType, isSameUser, isSameDay } from './utils'
 import {
   User,

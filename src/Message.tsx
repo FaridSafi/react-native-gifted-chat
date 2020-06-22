@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { View, StyleSheet, ViewStyle } from 'react-native'
 
-import Avatar from './Avatar'
+import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
 import { SystemMessage, SystemMessageProps } from './SystemMessage'
 import { Day, DayProps } from './Day'
@@ -44,7 +44,7 @@ export interface MessageProps<TMessage extends IMessage> {
   renderBubble?(props: Bubble['props']): React.ReactNode
   renderDay?(props: DayProps<TMessage>): React.ReactNode
   renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
-  renderAvatar?(props: Avatar['props']): React.ReactNode
+  renderAvatar?(props: AvatarProps<TMessage>): React.ReactNode
   shouldUpdateMessage?(
     props: MessageProps<IMessage>,
     nextProps: MessageProps<IMessage>,

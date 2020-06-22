@@ -24,7 +24,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 import * as utils from './utils'
 import { Actions, ActionsProps } from './Actions'
-import Avatar from './Avatar'
+import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
 import { SystemMessage, SystemMessageProps } from './SystemMessage'
 import { MessageImage, MessageImageProps } from './MessageImage'
@@ -153,7 +153,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom "Load earlier messages" button */
   renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   /* Custom message avatar; set to null to not render any avatar for the message */
-  renderAvatar?(props: Avatar<TMessage>['props']): React.ReactNode
+  renderAvatar?(props: AvatarProps<TMessage>): React.ReactNode
   /* Custom message bubble */
   renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom system message */

@@ -14,7 +14,6 @@ import { Actions, ActionsProps } from './Actions'
 import Color from './Color'
 import { StylePropType } from './utils'
 import { IMessage } from './Models'
-import { useCallbackOne } from 'use-memo-one'
 
 const styles = StyleSheet.create({
   container: {
@@ -49,7 +48,6 @@ export interface InputToolbarProps<TMessage extends IMessage> {
 
 export function InputToolbar<TMessage extends IMessage = IMessage>(props: InputToolbarProps<TMessage>) {
   const [position, setPosition] = useState('absolute');
-
   useEffect(() => {
     const keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', () => setPosition('relative'));
     return () => keyboardWillShowListener?.remove();
@@ -60,44 +58,8 @@ export function InputToolbar<TMessage extends IMessage = IMessage>(props: InputT
     return () => keyboardWillHideListener?.remove();
   }, []);
 
-  const renderActions = useCallbackOne(() => {
-    const { containerStyle, ...rest } = props
-    if (props.renderActions) {
-      return props.renderActions(rest)
-    } else if (props.onPressActionButton) {
-      return <Actions {...rest} />
-    }
-
-    return null
-  }, [props.renderActions, props.onPressActionButton]);
-
-  const renderSend = useCallbackOne(() => {
-    if (props.renderSend) {
-      return props.renderSend(props)
-    }
-
-    return <Send {...props} />
-  }, [props.renderSend]);
-
-  const renderComposer = useCallbackOne(() => {
-    if (props.renderComposer) {
-      return props.renderComposer(props as ComposerProps)
-    }
-
-    return <Composer {...props} />
-  }, [props.renderComposer]);
-
-  const renderAccessory = useCallbackOne(() => {
-    if (props.renderAccessory) {
-      return (
-        <View style={[styles.accessory, props.accessoryStyle]}>
-          {props.renderAccessory(props)}
-        </View>
-      )
-    }
-
-    return null
-  }, [props.renderAccessory]);
+  const { containerStyle, ...rest } = props
+  const { renderActions, onPressActionButton, renderComposer, renderSend, renderAccessory } = rest;
 
   return (
     <View
@@ -105,16 +67,24 @@ export function InputToolbar<TMessage extends IMessage = IMessage>(props: InputT
         [
           styles.container,
           { position },
-          props.containerStyle,
+          containerStyle,
         ] as ViewStyle
       }
     >
       <View style={[styles.primary, props.primaryStyle]}>
-        {renderActions()}
-        {renderComposer()}
-        {renderSend()}
+        {renderActions?.(rest) || (onPressActionButton && <Actions {...rest} />)}
+        {renderComposer?.(props as ComposerProps) || <Composer {...props} />}
+        {renderSend?.(props) || <Send {...props} />}
       </View>
-      {renderAccessory()}
+      {
+        renderAccessory && (
+          (
+            <View style={[styles.accessory, props.accessoryStyle]}>
+              {renderAccessory(props)}
+            </View>
+          )
+        )
+      }
     </View>
   )
 }

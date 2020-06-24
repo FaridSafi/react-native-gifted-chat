@@ -10,7 +10,7 @@ import {
   ImageStyle,
 } from 'react-native'
 // TODO: support web
-import Lightbox from 'react-native-lightbox';
+import Lightbox from 'react-native-lightbox'
 import { IMessage } from './Models'
 import { StylePropType } from './utils'
 
@@ -37,7 +37,9 @@ export interface MessageImageProps<TMessage extends IMessage> {
   lightboxProps?: object
 }
 
-export function MessageImage<TMessage extends IMessage = IMessage>(props: MessageImageProps<TMessage>) {
+export function MessageImage<TMessage extends IMessage = IMessage>(
+  props: MessageImageProps<TMessage>,
+) {
   const {
     containerStyle,
     lightboxProps,
@@ -76,7 +78,7 @@ MessageImage.defaultProps = {
   imageStyle: {},
   imageProps: {},
   lightboxProps: {},
-};
+}
 
 MessageImage.propTypes = {
   currentMessage: PropTypes.object,

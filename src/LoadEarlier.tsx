@@ -56,7 +56,7 @@ export interface LoadEarlierProps {
 }
 
 export function LoadEarlier(props: LoadEarlierProps): React.ReactElement {
-  const { isLoadingEarlier, onLoadEarlier, label } = props;
+  const { isLoadingEarlier, onLoadEarlier, label } = props
 
   return (
     <TouchableOpacity
@@ -66,34 +66,27 @@ export function LoadEarlier(props: LoadEarlierProps): React.ReactElement {
       accessibilityTraits='button'
     >
       <View style={[styles.wrapper, props.wrapperStyle]}>
-        {
-          isLoadingEarlier
-            ? (
-              <View>
-                <Text style={[styles.text, props.textStyle, { opacity: 0 }]}>
-                  {label}
-                </Text>
-                <ActivityIndicator
-                  color={props.activityIndicatorColor!}
-                  size={props.activityIndicatorSize!}
-                  style={[styles.activityIndicator, props.activityIndicatorStyle]}
-                />
-              </View>
-            )
-            : (
-              <Text style={[styles.text, props.textStyle]}>
-                {label}
-              </Text>
-            )
-        }
+        {isLoadingEarlier ? (
+          <View>
+            <Text style={[styles.text, props.textStyle, { opacity: 0 }]}>
+              {label}
+            </Text>
+            <ActivityIndicator
+              color={props.activityIndicatorColor!}
+              size={props.activityIndicatorSize!}
+              style={[styles.activityIndicator, props.activityIndicatorStyle]}
+            />
+          </View>
+        ) : (
+          <Text style={[styles.text, props.textStyle]}>{label}</Text>
+        )}
       </View>
     </TouchableOpacity>
   )
 }
 
-
 LoadEarlier.defaultProps = {
-  onLoadEarlier: () => { },
+  onLoadEarlier: () => {},
   isLoadingEarlier: false,
   label: 'Load earlier messages',
   containerStyle: {},

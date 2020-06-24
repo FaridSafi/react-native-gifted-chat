@@ -35,7 +35,9 @@ export interface SystemMessageProps<TMessage extends IMessage> {
   textStyle?: StyleProp<TextStyle>
 }
 
-export function SystemMessage<TMessage extends IMessage = IMessage>(props: SystemMessageProps<TMessage>) {
+export function SystemMessage<TMessage extends IMessage = IMessage>(
+  props: SystemMessageProps<TMessage>,
+) {
   const { currentMessage, containerStyle, wrapperStyle, textStyle } = props
 
   if (currentMessage) {

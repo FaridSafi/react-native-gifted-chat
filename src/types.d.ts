@@ -1,1 +1,1 @@
-declare module 'react-native-lightbox';
+declare module 'react-native-lightbox'

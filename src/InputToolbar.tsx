@@ -1,12 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import {
-  StyleSheet,
-  View,
-  Keyboard,
-  StyleProp,
-  ViewStyle,
-} from 'react-native'
+import { StyleSheet, View, Keyboard, StyleProp, ViewStyle } from 'react-native'
 
 import { Composer, ComposerProps } from './Composer'
 import { Send, SendProps } from './Send'
@@ -46,45 +40,48 @@ export interface InputToolbarProps<TMessage extends IMessage> {
   onPressActionButton?(): void
 }
 
-export function InputToolbar<TMessage extends IMessage = IMessage>(props: InputToolbarProps<TMessage>) {
-  const [position, setPosition] = useState('absolute');
+export function InputToolbar<TMessage extends IMessage = IMessage>(
+  props: InputToolbarProps<TMessage>,
+) {
+  const [position, setPosition] = useState('absolute')
   useEffect(() => {
-    const keyboardWillShowListener = Keyboard.addListener('keyboardWillShow', () => setPosition('relative'));
-    return () => keyboardWillShowListener?.remove();
-  }, []);
+    const keyboardWillShowListener = Keyboard.addListener(
+      'keyboardWillShow',
+      () => setPosition('relative'),
+    )
+    return () => keyboardWillShowListener?.remove()
+  }, [])
 
   useEffect(() => {
-    const keyboardWillHideListener = Keyboard.addListener('keyboardWillHide', () => setPosition('absolute'));
-    return () => keyboardWillHideListener?.remove();
-  }, []);
+    const keyboardWillHideListener = Keyboard.addListener(
+      'keyboardWillHide',
+      () => setPosition('absolute'),
+    )
+    return () => keyboardWillHideListener?.remove()
+  }, [])
 
   const { containerStyle, ...rest } = props
-  const { renderActions, onPressActionButton, renderComposer, renderSend, renderAccessory } = rest;
+  const {
+    renderActions,
+    onPressActionButton,
+    renderComposer,
+    renderSend,
+    renderAccessory,
+  } = rest
 
   return (
-    <View
-      style={
-        [
-          styles.container,
-          { position },
-          containerStyle,
-        ] as ViewStyle
-      }
-    >
+    <View style={[styles.container, { position }, containerStyle] as ViewStyle}>
       <View style={[styles.primary, props.primaryStyle]}>
-        {renderActions?.(rest) || (onPressActionButton && <Actions {...rest} />)}
+        {renderActions?.(rest) ||
+          (onPressActionButton && <Actions {...rest} />)}
         {renderComposer?.(props as ComposerProps) || <Composer {...props} />}
         {renderSend?.(props) || <Send {...props} />}
       </View>
-      {
-        renderAccessory && (
-          (
-            <View style={[styles.accessory, props.accessoryStyle]}>
-              {renderAccessory(props)}
-            </View>
-          )
-        )
-      }
+      {renderAccessory && (
+        <View style={[styles.accessory, props.accessoryStyle]}>
+          {renderAccessory(props)}
+        </View>
+      )}
     </View>
   )
 }
@@ -97,7 +94,7 @@ InputToolbar.defaultProps = {
   containerStyle: {},
   primaryStyle: {},
   accessoryStyle: {},
-  onPressActionButton: () => { },
+  onPressActionButton: () => {},
 }
 
 InputToolbar.propTypes = {

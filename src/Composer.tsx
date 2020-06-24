@@ -47,25 +47,30 @@ export interface ComposerProps {
 }
 
 export function Composer(props: ComposerProps): React.ReactElement {
-  const { placeholder, onTextChanged, text } = props;
-  const contentSizeRef = useRef<{ width: number; height: number }>();
+  const { placeholder, onTextChanged, text } = props
+  const contentSizeRef = useRef<{ width: number; height: number }>()
 
-  const onContentSizeChange = useCallbackOne((event: any) => {
-    const { contentSize } = event.nativeEvent
+  const onContentSizeChange = useCallbackOne(
+    (event: any) => {
+      const { contentSize } = event.nativeEvent
 
-    // Support earlier versions of React Native on Android.
-    if (!contentSize) {
-      return
-    }
+      // Support earlier versions of React Native on Android.
+      if (!contentSize) {
+        return
+      }
 
-    const { current: currentContent } = contentSizeRef;
-    const contentHasChange = currentContent?.width !== contentSize.width || currentContent?.height !== contentSize.height;
-  
-    if (contentHasChange) {
-      contentSizeRef.current = contentSize
-      props.onInputSizeChanged!(contentSize!)
-    }
-  }, [props.onInputSizeChanged])
+      const { current: currentContent } = contentSizeRef
+      const contentHasChange =
+        currentContent?.width !== contentSize.width ||
+        currentContent?.height !== contentSize.height
+
+      if (contentHasChange) {
+        contentSizeRef.current = contentSize
+        props.onInputSizeChanged!(contentSize!)
+      }
+    },
+    [props.onInputSizeChanged],
+  )
 
   return (
     <TextInput
@@ -114,8 +119,8 @@ Composer.defaultProps = {
   textInputStyle: {},
   textInputAutoFocus: false,
   keyboardAppearance: 'default',
-  onTextChanged: () => { },
-  onInputSizeChanged: () => { },
+  onTextChanged: () => {},
+  onInputSizeChanged: () => {},
 }
 
 Composer.propTypes = {

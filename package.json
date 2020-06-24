@@ -28,7 +28,7 @@
     "config:dev": "json -I -f package.json -e 'this.main=\"node_modules/expo/AppEntry.js\"'",
     "config:npm": "json -I -f package.json -e 'this.main=\"lib/index.js\"'",
     "lint": "tslint --project .",
-    "lint:fix": "./node_modules/.bin/tslint ./src/**/*.{ts,tsx} --fix",
+    "lint:fix": "./node_modules/.bin/tslint ./src/*.{ts,tsx} --fix",
     "tsc": "node_modules/.bin/tsc --noEmit",
     "tsc:watch": "node_modules/.bin/tsc --watch --noEmit",
     "start": "yarn config:dev && expo start",
@@ -39,7 +39,7 @@
     "test:coverage": "TZ=Europe/Paris jest --coverage",
     "prepublishOnly": "yarn lint && yarn build && yarn test && yarn config:npm",
     "postpublish": "yarn config:dev",
-    "prettier": "./node_modules/.bin/prettier --write \"src/**/*.{ts,tsx}\""
+    "prettier": "./node_modules/.bin/prettier --write ./src/*.{ts,tsx}"
   },
   "jest": {
     "preset": "react-native",

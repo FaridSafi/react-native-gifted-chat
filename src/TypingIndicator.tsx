@@ -66,16 +66,11 @@ const TypingIndicator = ({ isTyping }: Props) => {
       }),
     ]).start()
   }
-  const opacity = yCoords.interpolate({
-    inputRange: [0, 200],
-    outputRange: [1, 0],
-  })
   return (
     <Animated.View
       style={[
         styles.container,
         {
-          opacity,
           transform: [
             {
               translateY: yCoords,
@@ -86,12 +81,14 @@ const TypingIndicator = ({ isTyping }: Props) => {
         },
       ]}
     >
-      <TypingAnimation
-        style={{ marginLeft: 6, marginTop: 7.2 }}
-        dotRadius={4}
-        dotMargin={5.5}
-        dotColor={'rgba(0, 0, 0, 0.38)'}
-      />
+      {isTyping ? (
+        <TypingAnimation
+          style={{ marginLeft: 6, marginTop: 7.2 }}
+          dotRadius={4}
+          dotMargin={5.5}
+          dotColor={'rgba(0, 0, 0, 0.38)'}
+        />
+      ) : null}
     </Animated.View>
   )
 }

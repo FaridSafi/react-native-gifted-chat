@@ -57,7 +57,9 @@ export interface AvatarProps<TMessage extends IMessage> {
   onLongPressAvatar?(user: User): void
 }
 
-export function Avatar<TMessage extends IMessage = IMessage>(props: AvatarProps<TMessage>) {
+export function Avatar<TMessage extends IMessage = IMessage>(
+  props: AvatarProps<TMessage>,
+) {
   const {
     renderAvatarOnTop,
     showAvatarForEveryMessage,
@@ -83,7 +85,6 @@ export function Avatar<TMessage extends IMessage = IMessage>(props: AvatarProps<
     isSameUser(currentMessage, messageToCompare) &&
     isSameDay(currentMessage, messageToCompare)
   ) {
-
     return (
       <View
         style={[
@@ -115,13 +116,14 @@ export function Avatar<TMessage extends IMessage = IMessage>(props: AvatarProps<
           avatarStyle={
             [
               styles[props.position].image,
-              props.imageStyle &&
-              props.imageStyle[props.position],
+              props.imageStyle && props.imageStyle[props.position],
             ] as ImageStyle
           }
           user={props.currentMessage.user}
           onPress={() => props.onPressAvatar?.(props.currentMessage!.user)}
-          onLongPress={() => props.onLongPressAvatar?.(props.currentMessage!.user)}
+          onLongPress={() =>
+            props.onLongPressAvatar?.(props.currentMessage!.user)
+          }
         />
       )
     }
@@ -153,8 +155,8 @@ Avatar.defaultProps = {
   nextMessage: {},
   containerStyle: {},
   imageStyle: {},
-  onPressAvatar: () => { },
-  onLongPressAvatar: () => { },
+  onPressAvatar: () => {},
+  onLongPressAvatar: () => {},
 }
 
 Avatar.propTypes = {

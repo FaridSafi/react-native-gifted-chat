@@ -88,7 +88,6 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
               "height": 0,
               "marginBottom": 0,
               "marginLeft": 8,
-              "opacity": 0,
               "transform": Array [
                 Object {
                   "translateY": 200,
@@ -97,74 +96,7 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
               "width": 45,
             }
           }
-        >
-          <View
-            style={
-              Array [
-                undefined,
-                Object {
-                  "marginLeft": 6,
-                  "marginTop": 7.2,
-                },
-              ]
-            }
-          >
-            <View
-              style={
-                Array [
-                  Object {
-                    "position": "absolute",
-                  },
-                  undefined,
-                  Object {
-                    "backgroundColor": "rgba(0, 0, 0, 0.38)",
-                    "borderRadius": 4,
-                    "height": 8,
-                    "left": 2.5,
-                    "top": undefined,
-                    "width": 8,
-                  },
-                ]
-              }
-            />
-            <View
-              style={
-                Array [
-                  Object {
-                    "position": "absolute",
-                  },
-                  undefined,
-                  Object {
-                    "backgroundColor": "rgba(0, 0, 0, 0.38)",
-                    "borderRadius": 4,
-                    "height": 8,
-                    "left": 12,
-                    "top": undefined,
-                    "width": 8,
-                  },
-                ]
-              }
-            />
-            <View
-              style={
-                Array [
-                  Object {
-                    "position": "absolute",
-                  },
-                  undefined,
-                  Object {
-                    "backgroundColor": "rgba(0, 0, 0, 0.38)",
-                    "borderRadius": 4,
-                    "height": 8,
-                    "left": 21.5,
-                    "top": undefined,
-                    "width": 8,
-                  },
-                ]
-              }
-            />
-          </View>
-        </View>
+        />
       </View>
       <View
         style={

@@ -39,7 +39,7 @@
     "test:coverage": "TZ=Europe/Paris jest --coverage",
     "prepublishOnly": "yarn lint && yarn build && yarn test && yarn config:npm",
     "postpublish": "yarn config:dev",
-    "prettier": "./node_modules/.bin/prettier --write ./src/*.{ts,tsx}"
+    "prettier": "./node_modules/.bin/prettier --write \"src/**/*.{ts,tsx}\""
   },
   "jest": {
     "preset": "react-native",

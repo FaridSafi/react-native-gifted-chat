@@ -391,7 +391,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   invertibleScrollViewProps: any = undefined
   _actionSheetRef: any = undefined
 
-  _lastUpdate = -1;
+  _lastUpdate = -1
 
   _messageContainerRef?: RefObject<FlatList<IMessage>> = React.createRef()
   textInput?: any
@@ -597,10 +597,10 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   onKeyboardWillShow = (e: any) => {
     if (this.props.isKeyboardInternallyHandled) {
       if (Date.now() - this._lastUpdate < 100) {
-          return;
+        return
       }
       this._lastUpdate = Date.now()
-      
+
       this.setIsTypingDisabled(true)
       this.setKeyboardHeight(
         e.endCoordinates ? e.endCoordinates.height : e.end.height,

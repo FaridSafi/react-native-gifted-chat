@@ -72,7 +72,6 @@ const TypingIndicator = ({ isTyping }: Props) => {
         styles.container,
         {
           transform: [
-
             {
               translateY: yCoords,
             },

@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types'
 import React, { ReactNode } from 'react'
-import { StyleSheet, View, ImageStyle, TextStyle, ViewStyle } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  ImageStyle,
+  TextStyle,
+  ViewStyle,
+} from 'react-native'
 import GiftedAvatar from './GiftedAvatar'
 import { StylePropType, isSameUser, isSameDay } from './utils'
 import { Omit, IMessage, User, LeftRightStyle } from './Models'

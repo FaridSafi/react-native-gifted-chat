@@ -80,4 +80,3 @@ export interface MessageAudioProps<TMessage extends IMessage> {
   audioStyle?: StyleProp<ViewStyle>
   audioProps?: object
 }
-

@@ -31,7 +31,7 @@ import { MessageImage, MessageImageProps } from './MessageImage'
 import { MessageText, MessageTextProps } from './MessageText'
 import { Composer, ComposerProps } from './Composer'
 import { Day, DayProps } from './Day'
-import InputToolbar from './InputToolbar'
+import { InputToolbar, InputToolbarProps } from './InputToolbar'
 import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
 import Message from './Message'
 import MessageContainer from './MessageContainer'
@@ -180,7 +180,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom component to render below the MessageContainer (separate from the ListView) */
   renderChatFooter?(): React.ReactNode
   /* Custom message composer container */
-  renderInputToolbar?(props: InputToolbar['props']): React.ReactNode
+  renderInputToolbar?(props: InputToolbarProps<TMessage>): React.ReactNode
   /*  Custom text input message composer */
   renderComposer?(props: ComposerProps): React.ReactNode
   /* Custom action button on the left of the message composer */
@@ -188,7 +188,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom send button; you can pass children to the original Send component quite easily, for example to use a custom icon (example) */
   renderSend?(props: SendProps<TMessage>): React.ReactNode
   /*Custom second line of actions below the message composer */
-  renderAccessory?(props: InputToolbar['props']): React.ReactNode
+  renderAccessory?(props: InputToolbarProps<TMessage>): React.ReactNode
   /*Callback when the Action button is pressed (if set, the default actionSheet will not be used) */
   onPressActionButton?(): void
   /* Callback when the input text changes */

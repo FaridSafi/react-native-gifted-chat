@@ -11,7 +11,7 @@ import {
   TextStyle,
 } from 'react-native'
 
-import QuickReplies from './QuickReplies'
+import { QuickReplies, QuickRepliesProps } from './QuickReplies'
 import { MessageText, MessageTextProps } from './MessageText'
 import { MessageImage, MessageImageProps } from './MessageImage'
 import { MessageVideo } from './MessageVideo'
@@ -158,7 +158,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderTicks?(currentMessage: TMessage): React.ReactNode
   renderUsername?(): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
-  renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
+  renderQuickReplies?(quickReplies: QuickRepliesProps): React.ReactNode
 }
 
 export default class Bubble<

@@ -38,6 +38,7 @@ import MessageContainer from './MessageContainer'
 import { Send, SendProps } from './Send'
 import { GiftedChatContext } from './GiftedChatContext'
 import { Time, TimeProps } from './Time'
+import { QuickRepliesProps } from './QuickReplies'
 import GiftedAvatar from './GiftedAvatar'
 
 import {
@@ -48,7 +49,6 @@ import {
   DATE_FORMAT,
 } from './Constant'
 import { IMessage, User, Reply, LeftRightStyle } from './Models'
-import QuickReplies from './QuickReplies'
 
 dayjs.extend(localizedFormat)
 
@@ -196,7 +196,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
   parsePatterns?(linkStyle: TextStyle): any
   onQuickReply?(replies: Reply[]): void
-  renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
+  renderQuickReplies?(quickReplies: QuickRepliesProps): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
   /* Scroll to bottom custom component */
   scrollToBottomComponent?(): React.ReactNode

@@ -81,11 +81,12 @@
   </p>
 </p>
 
+## The future of GiftedChat 🎉 
+Please give us your advice: [Related PR](https://github.com/FaridSafi/react-native-gifted-chat/pull/1775)
+
 ## Please vote
 
 **GiftedChat** depends on other packages and some needs a boost, please vote for PRs will improve it, thanks:
-
-- https://github.com/taskrabbit/react-native-parsed-text/pull/58
 - https://github.com/watadarkstar/react-native-typing-animation/issues/18
 
 ## Features

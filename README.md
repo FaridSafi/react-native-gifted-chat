@@ -454,7 +454,7 @@ If you use React Navigation, additional handling may be required to account for 
 
 1. Install `yarn global add expo-cli`
 2. Install dependencies`yarn install`
-3. `expo start -w`
+3. `expo start`
 
 ### react-native-web
 

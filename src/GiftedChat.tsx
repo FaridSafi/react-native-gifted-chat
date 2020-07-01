@@ -274,7 +274,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderAccessory: null,
     isKeyboardInternallyHandled: true,
     onPressActionButton: null,
-    bottomOffset: 0,
+    bottomOffset: null,
     minInputToolbarHeight: 44,
     keyboardShouldPersistTaps: Platform.select({
       ios: 'never',

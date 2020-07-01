@@ -452,14 +452,14 @@ If you use React Navigation, additional handling may be required to account for 
 
 ### Native
 
-1. Install `yarn add -g expo-cli`
+1. Install `yarn global add expo-cli`
 2. `expo start`
 
 ### react-native-web
 
 #### With expo
 
-1. Install `yarn add -g expo-cli`
+1. Install `yarn global add expo-cli`
 2. `expo start -w`
 
 [Upgrade snack version](https://snackager.expo.io/bundle/react-native-gifted-chat@0.15.0?bypassCache=true)

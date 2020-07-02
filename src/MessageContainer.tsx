@@ -5,7 +5,6 @@ import {
   FlatList,
   View,
   StyleSheet,
-  Keyboard,
   TouchableOpacity,
   Text,
   ListViewProps,
@@ -143,70 +142,6 @@ export default class MessageContainer<
 
   state = {
     showScrollBottom: false,
-  }
-
-  componentDidMount() {
-    if (this.props.messages && this.props.messages.length === 0) {
-      this.attachKeyboardListeners()
-    }
-  }
-
-  componentWillUnmount() {
-    this.detachKeyboardListeners()
-  }
-
-  componentDidUpdate(prevProps: MessageContainerProps<TMessage>) {
-    if (
-      prevProps.messages &&
-      prevProps.messages.length === 0 &&
-      this.props.messages &&
-      this.props.messages.length > 0
-    ) {
-      this.detachKeyboardListeners()
-    } else if (
-      prevProps.messages &&
-      this.props.messages &&
-      prevProps.messages.length > 0 &&
-      this.props.messages.length === 0
-    ) {
-      this.attachKeyboardListeners()
-    }
-  }
-
-  attachKeyboardListeners = () => {
-    const { invertibleScrollViewProps: invertibleProps } = this.props
-    if (invertibleProps) {
-      Keyboard.addListener(
-        'keyboardWillShow',
-        invertibleProps.onKeyboardWillShow,
-      )
-      Keyboard.addListener('keyboardDidShow', invertibleProps.onKeyboardDidShow)
-      Keyboard.addListener(
-        'keyboardWillHide',
-        invertibleProps.onKeyboardWillHide,
-      )
-      Keyboard.addListener('keyboardDidHide', invertibleProps.onKeyboardDidHide)
-    }
-  }
-
-  detachKeyboardListeners = () => {
-    const { invertibleScrollViewProps: invertibleProps } = this.props
-    Keyboard.removeListener(
-      'keyboardWillShow',
-      invertibleProps.onKeyboardWillShow,
-    )
-    Keyboard.removeListener(
-      'keyboardDidShow',
-      invertibleProps.onKeyboardDidShow,
-    )
-    Keyboard.removeListener(
-      'keyboardWillHide',
-      invertibleProps.onKeyboardWillHide,
-    )
-    Keyboard.removeListener(
-      'keyboardDidHide',
-      invertibleProps.onKeyboardDidHide,
-    )
   }
 
   renderTypingIndicator = () => {

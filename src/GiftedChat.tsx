@@ -391,7 +391,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   invertibleScrollViewProps: any = undefined
   _actionSheetRef: any = undefined
   _messageContainerRef?: RefObject<FlatList<IMessage>> = React.createRef()
-  _isTextInputWasFocused: boolean = false // Indicator to show if the keyboard was focused before hiding keyboard or not
+  _isTextInputWasFocused: boolean = false
   textInput?: any
 
   state = {
@@ -588,9 +588,23 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     return bottomOffset != null ? bottomOffset : getBottomSpace()
   }
 
-  onKeyboardWillShow = (e: any) => {
-    // Focus the text input only if it was focused before showing keyboard
-    // This is needed in some cases (eg. showing image picker)
+  /**
+   * Store text input focus status when keyboard hide to retrieve
+   * it after wards if needed.
+   * `onKeyboardWillHide` may be called twice in sequence so we
+   * make a guard condition (eg. showing image picker)
+   */
+  handleTextInputFocusWhenKeyboardHide() {
+    if (!this._isTextInputWasFocused) {
+      this._isTextInputWasFocused = this.textInput?.isFocused() || false
+    }
+  }
+
+  /**
+   * Refocus the text input only if it was focused before showing keyboard.
+   * This is needed in some cases (eg. showing image picker).
+   */
+  handleTextInputFocusWhenKeyboardShow() {
     if (
       this.textInput &&
       this._isTextInputWasFocused &&
@@ -601,6 +615,10 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
     // Reset the indicator since the keyboard is shown
     this._isTextInputWasFocused = false
+  }
+
+  onKeyboardWillShow = (e: any) => {
+    this.handleTextInputFocusWhenKeyboardShow()
 
     if (this.props.isKeyboardInternallyHandled) {
       this.setIsTypingDisabled(true)
@@ -616,12 +634,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   onKeyboardWillHide = (_e: any) => {
-    // Use condition since the `onKeyboardWillHide` may be called
-    // twice in sequence in some case (eg. showing image picker)
-    // and we expect only one event.
-    if (!this._isTextInputWasFocused) {
-      this._isTextInputWasFocused = this.textInput?.isFocused() || false
-    }
+    this.handleTextInputFocusWhenKeyboardHide()
 
     if (this.props.isKeyboardInternallyHandled) {
       this.setIsTypingDisabled(true)

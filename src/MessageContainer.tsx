@@ -131,7 +131,7 @@ export default class MessageContainer<
     inverted: PropTypes.bool,
     loadEarlier: PropTypes.bool,
     invertibleScrollViewProps: PropTypes.object,
-    extraData: PropTypes.array,
+    extraData: PropTypes.object,
     scrollToBottom: PropTypes.bool,
     scrollToBottomOffset: PropTypes.number,
     scrollToBottomComponent: PropTypes.func,

@@ -151,7 +151,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom "Load earlier messages" button */
   renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
   /* Custom message avatar; set to null to not render any avatar for the message */
-  renderAvatar?(props: Avatar<TMessage>['props']): React.ReactNode
+  renderAvatar?(props: Avatar<TMessage>['props']): React.ReactNode | null
   /* Custom message bubble */
   renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom system message */

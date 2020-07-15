@@ -167,6 +167,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   ): React.ReactNode
   /* Custom message image */
   renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
+  /* Custom message video */
+  renderMessageVideo?(props: MessageImage<TMessage>['props']): React.ReactNode
   /* Custom view inside the bubble */
   renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom day above a message*/

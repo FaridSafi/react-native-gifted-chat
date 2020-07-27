@@ -12,6 +12,7 @@ export type TimeProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   containerStyle?: LeftRightStyle<ViewStyleProp>,
   timeTextStyle?: LeftRightStyle<TextStyleProp>,
   timeFormat?: string,
+  customText?: string
 |}>
 
 export default class Time<TMessage: IMessage = IMessage> extends Component<

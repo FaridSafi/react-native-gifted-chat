@@ -40,6 +40,7 @@ export interface DayProps<TMessage extends IMessage> {
   textStyle?: StyleProp<TextStyle>
   dateFormat?: string
   inverted?: boolean
+  customText?: string
 }
 
 export default class Day<
@@ -80,6 +81,7 @@ export default class Day<
       containerStyle,
       wrapperStyle,
       textStyle,
+      customText,
     } = this.props
 
     if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
@@ -87,7 +89,7 @@ export default class Day<
         <View style={[styles.container, containerStyle]}>
           <View style={wrapperStyle}>
             <Text style={[styles.text, textStyle]}>
-              {dayjs(currentMessage.createdAt)
+              {customText ? customText : dayjs(currentMessage.createdAt)
                 .locale(this.context.getLocale())
                 .format(dateFormat)}
             </Text>

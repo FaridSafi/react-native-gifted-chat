@@ -16,6 +16,7 @@ export type DayProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   textStyle?: TextStyleProp,
   dateFormat?: string,
   inverted?: boolean,
+  customText?: string
 |}>
 
 export default class Day<TMessage: IMessage = IMessage> extends PureComponent<

@@ -47,6 +47,7 @@ export interface TimeProps<TMessage extends IMessage> {
   containerStyle?: LeftRightStyle<ViewStyle>
   timeTextStyle?: LeftRightStyle<TextStyle>
   timeFormat?: string
+  customText?: string
 }
 
 export default class Time<
@@ -87,6 +88,7 @@ export default class Time<
       currentMessage,
       timeFormat,
       timeTextStyle,
+      customText,
     } = this.props
 
     if (!!currentMessage) {
@@ -105,7 +107,7 @@ export default class Time<
               ] as TextStyle
             }
           >
-            {dayjs(currentMessage.createdAt)
+            {customText ? customText : dayjs(currentMessage.createdAt)
               .locale(this.context.getLocale())
               .format(timeFormat)}
           </Text>

@@ -7,6 +7,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  TextProps,
 } from 'react-native'
 import dayjs from 'dayjs'
 
@@ -38,6 +39,7 @@ export interface DayProps<TMessage extends IMessage> {
   containerStyle?: StyleProp<ViewStyle>
   wrapperStyle?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
+  textProps?: TextProps
   dateFormat?: string
   inverted?: boolean
   customText?: string
@@ -59,6 +61,7 @@ export default class Day<
     containerStyle: {},
     wrapperStyle: {},
     textStyle: {},
+    textProps: {},
     dateFormat: DATE_FORMAT,
   }
 
@@ -70,6 +73,7 @@ export default class Day<
     containerStyle: StylePropType,
     wrapperStyle: StylePropType,
     textStyle: StylePropType,
+    textProps: PropTypes.object,
     dateFormat: PropTypes.string,
   }
 
@@ -82,13 +86,14 @@ export default class Day<
       wrapperStyle,
       textStyle,
       customText,
+      textProps,
     } = this.props
 
     if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
       return (
         <View style={[styles.container, containerStyle]}>
           <View style={wrapperStyle}>
-            <Text style={[styles.text, textStyle]}>
+            <Text style={[styles.text, textStyle]} {...textProps}>
               {customText ? customText : dayjs(currentMessage.createdAt)
                 .locale(this.context.getLocale())
                 .format(dateFormat)}

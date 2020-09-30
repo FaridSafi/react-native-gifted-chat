@@ -158,9 +158,10 @@ export default class MessageContainer<
       style.height = containerHeight - emptyHeight;
     }
     return (
-    <View style={style}>
-      <TypingIndicator isTyping={this.props.isTyping || false} />
-    </View>
+      <View style={style}>
+        <TypingIndicator isTyping={this.props.isTyping || false} />
+      </View>
+    );
   }
 
   renderFooter = () => {

@@ -116,6 +116,7 @@ export default class MessageContainer<
     scrollToBottomStyle: {},
     infiniteScroll: false,
     isLoadingEarlier: false,
+    containerHeight: 0,
   }
 
   static propTypes = {
@@ -138,17 +139,28 @@ export default class MessageContainer<
     alignTop: PropTypes.bool,
     scrollToBottomStyle: StylePropType,
     infiniteScroll: PropTypes.bool,
+    containerHeight: PropTypes.number,
   }
 
   state = {
     showScrollBottom: false,
+    emptyHeight: 0,
   }
 
   renderTypingIndicator = () => {
     if (Platform.OS === 'web') {
       return null
     }
-    return <TypingIndicator isTyping={this.props.isTyping || false} />
+    const {emptyHeight} = this.state;
+    const {containerHeight} = this.props;
+    const style = {} as {height: number};
+    if (this.props.alignTop && emptyHeight) {
+      style.height = containerHeight - emptyHeight;
+    }
+    return (
+    <View style={style}>
+      <TypingIndicator isTyping={this.props.isTyping || false} />
+    </View>
   }
 
   renderFooter = () => {
@@ -327,6 +339,14 @@ export default class MessageContainer<
     }
   }
 
+  onContainerLayout = (_: number, height: number) => { 
+    const {emptyHeight} = this.state;
+    const {containerHeight} = this.props;
+    if (containerHeight > height)
+        this.setState({ emptyHeight: height });
+    else if (emptyHeight && containerHeight !== height) this.setState({ emptyHeight: 0 });
+  };
+
   keyExtractor = (item: TMessage) => `${item._id}`
 
   render() {
@@ -364,6 +384,7 @@ export default class MessageContainer<
           onLayout={this.onLayoutList}
           onEndReached={this.onEndReached}
           onEndReachedThreshold={0.1}
+          onContentSizeChange={this.onContainerLayout}
           {...this.props.listViewProps}
         />
       </View>

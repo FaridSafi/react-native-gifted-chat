@@ -694,6 +694,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
           messages={this.getMessages()}
           forwardRef={this._messageContainerRef}
           isTyping={this.props.isTyping}
+          containerHeight={this.state.messagesContainerHeight}
         />
         {this.renderChatFooter()}
       </View>

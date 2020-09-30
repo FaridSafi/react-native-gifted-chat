@@ -87,10 +87,12 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   onQuickReply?(replies: Reply[]): void
   infiniteScroll?: boolean
   isLoadingEarlier?: boolean
+  containerHeight: number
 }
 
 interface State {
   showScrollBottom: boolean
+  emptyHeight: number
 }
 
 export default class MessageContainer<
@@ -151,17 +153,17 @@ export default class MessageContainer<
     if (Platform.OS === 'web') {
       return null
     }
-    const {emptyHeight} = this.state;
-    const {containerHeight} = this.props;
-    const style = {} as {height: number};
+    const { emptyHeight } = this.state
+    const { containerHeight } = this.props
+    const style = {} as { height: number }
     if (this.props.alignTop && emptyHeight) {
-      style.height = containerHeight - emptyHeight;
+      style.height = containerHeight - emptyHeight
     }
     return (
       <View style={style}>
         <TypingIndicator isTyping={this.props.isTyping || false} />
       </View>
-    );
+    )
   }
 
   renderFooter = () => {
@@ -340,13 +342,13 @@ export default class MessageContainer<
     }
   }
 
-  onContainerLayout = (_: number, height: number) => { 
-    const {emptyHeight} = this.state;
-    const {containerHeight} = this.props;
-    if (containerHeight > height)
-        this.setState({ emptyHeight: height });
-    else if (emptyHeight && containerHeight !== height) this.setState({ emptyHeight: 0 });
-  };
+  onContainerLayout = (_: number, height: number) => {
+    const { emptyHeight } = this.state
+    const { containerHeight } = this.props
+    if (containerHeight > height) this.setState({ emptyHeight: height })
+    else if (emptyHeight && containerHeight !== height)
+      this.setState({ emptyHeight: 0 })
+  }
 
   keyExtractor = (item: TMessage) => `${item._id}`
 

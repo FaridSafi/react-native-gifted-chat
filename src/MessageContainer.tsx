@@ -346,7 +346,7 @@ export default class MessageContainer<
     const { emptyHeight } = this.state
     const { containerHeight } = this.props
     if (containerHeight > height) this.setState({ emptyHeight: height })
-    else if (emptyHeight && (height - containerHeight) > 10)
+    else if (emptyHeight && height - containerHeight > 10)
       this.setState({ emptyHeight: 0 })
   }
 

@@ -161,6 +161,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderUsername?(): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
   renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
+  renderFooter?(currentMessage: TMessage): React.ReactNode
 }
 
 export default class Bubble<
@@ -315,6 +316,17 @@ export default class Bubble<
         styles[position].containerToPrevious,
         containerToPreviousStyle && containerToPreviousStyle[position],
       ]
+    }
+    return null
+  }
+
+  renderFooter() {
+    const {
+      currentMessage,
+      renderFooter
+    } = this.props
+    if (renderFooter && currentMessage) {
+      return renderFooter(currentMessage)
     }
     return null
   }
@@ -535,6 +547,7 @@ export default class Bubble<
               </View>
             </View>
           </TouchableWithoutFeedback>
+          {this.renderFooter()}
         </View>
         {this.renderQuickReplies()}
       </View>

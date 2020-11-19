@@ -206,7 +206,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     props: Message<TMessage>['props'],
     nextProps: Message<TMessage>['props'],
   ): boolean
-  textInputStyle: StyleProp<TextInput>
+  textInputStyle?: StyleProp<TextInput>
 }
 
 export interface GiftedChatState<TMessage extends IMessage = IMessage> {

@@ -293,6 +293,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     minComposerHeight: MIN_COMPOSER_HEIGHT,
     maxComposerHeight: MAX_COMPOSER_HEIGHT,
     wrapInSafeArea: true,
+    multiline: true
   }
 
   static propTypes = {
@@ -358,6 +359,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     maxComposerHeight: PropTypes.number,
     alignTop: PropTypes.bool,
     wrapInSafeArea: PropTypes.bool,
+    multiline: PropTypes.bool,
   }
 
   static append<TMessage extends IMessage>(

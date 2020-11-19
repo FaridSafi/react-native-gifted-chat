@@ -206,6 +206,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     props: Message<TMessage>['props'],
     nextProps: Message<TMessage>['props'],
   ): boolean
+  /** Indicates whether to allow the <TextInput> to be multiple lines or not; default true. */
+  multiline?: Boolean
 }
 
 export interface GiftedChatState<TMessage extends IMessage = IMessage> {

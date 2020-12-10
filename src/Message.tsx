@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { View, StyleSheet, ViewStyle } from 'react-native'
+import { View, StyleSheet, ViewStyle, LayoutChangeEvent } from 'react-native'
 
 import Avatar from './Avatar'
 import Bubble from './Bubble'
@@ -49,6 +49,7 @@ export interface MessageProps<TMessage extends IMessage> {
     props: MessageProps<IMessage>,
     nextProps: MessageProps<IMessage>,
   ): boolean
+  onMessageLayout?(event: LayoutChangeEvent): void
 }
 
 export default class Message<
@@ -68,6 +69,7 @@ export default class Message<
     showUserAvatar: false,
     inverted: true,
     shouldUpdateMessage: undefined,
+    onMessageLayout: undefined,
   }
 
   static propTypes = {
@@ -87,6 +89,7 @@ export default class Message<
       right: StylePropType,
     }),
     shouldUpdateMessage: PropTypes.func,
+    onMessageLayout: PropTypes.func,
   }
 
   shouldComponentUpdate(nextProps: MessageProps<TMessage>) {
@@ -118,7 +121,7 @@ export default class Message<
 
   renderDay() {
     if (this.props.currentMessage && this.props.currentMessage.createdAt) {
-      const { containerStyle, ...props } = this.props
+      const { containerStyle, onMessageLayout, ...props } = this.props
       if (this.props.renderDay) {
         return this.props.renderDay(props)
       }
@@ -128,7 +131,7 @@ export default class Message<
   }
 
   renderBubble() {
-    const { containerStyle, ...props } = this.props
+    const { containerStyle, onMessageLayout, ...props } = this.props
     if (this.props.renderBubble) {
       return this.props.renderBubble(props)
     }
@@ -137,7 +140,7 @@ export default class Message<
   }
 
   renderSystemMessage() {
-    const { containerStyle, ...props } = this.props
+    const { containerStyle, onMessageLayout, ...props } = this.props
 
     if (this.props.renderSystemMessage) {
       return this.props.renderSystemMessage(props)
@@ -167,16 +170,22 @@ export default class Message<
       return null
     }
 
-    const { containerStyle, ...props } = this.props
+    const { containerStyle, onMessageLayout, ...props } = this.props
     return <Avatar {...props} />
   }
 
   render() {
-    const { currentMessage, nextMessage, position, containerStyle } = this.props
+    const {
+      currentMessage,
+      onMessageLayout,
+      nextMessage,
+      position,
+      containerStyle,
+    } = this.props
     if (currentMessage) {
       const sameUser = isSameUser(currentMessage, nextMessage!)
       return (
-        <View>
+        <View onLayout={onMessageLayout}>
           {this.renderDay()}
           {currentMessage.system ? (
             this.renderSystemMessage()

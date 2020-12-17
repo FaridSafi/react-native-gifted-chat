@@ -149,6 +149,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   containerToPreviousStyle?: LeftRightStyle<ViewStyle>
   usernameStyle?: TextStyle
   quickReplyStyle?: StyleProp<ViewStyle>
+  onPress?(context?: any, message?: any): void
   onLongPress?(context?: any, message?: any): void
   onQuickReply?(replies: Reply[]): void
   renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
@@ -172,6 +173,7 @@ export default class Bubble<
 
   static defaultProps = {
     touchableProps: {},
+    onPress: null,
     onLongPress: null,
     renderMessageImage: null,
     renderMessageVideo: null,
@@ -244,6 +246,13 @@ export default class Bubble<
       left: StylePropType,
       right: StylePropType,
     }),
+  }
+
+  onPress = () => {
+    const { currentMessage } = this.props
+    if (this.props.onPress) {
+      this.props.onPress(this.context, this.props.currentMessage)
+    } 
   }
 
   onLongPress = () => {
@@ -517,6 +526,7 @@ export default class Bubble<
           ]}
         >
           <TouchableWithoutFeedback
+            onPress={this.onPress}
             onLongPress={this.onLongPress}
             accessibilityTraits='text'
             {...this.props.touchableProps}

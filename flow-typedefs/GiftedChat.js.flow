@@ -10,6 +10,10 @@ import SystemMessage from './SystemMessage'
 import type { SystemMessageProps } from './SystemMessage'
 import MessageImage from './MessageImage'
 import type { MessageImageProps } from './MessageImage'
+import MessageVideo from './MessageVideo'
+import type { MessageVideoProps } from './MessageVideo'
+import MessageAudio from './MessageAudio'
+import type { MessageAudioProps } from './MessageAudio'
 import MessageText from './MessageText'
 import type { MessageTextProps } from './MessageText'
 import Composer from './Composer'
@@ -96,6 +100,8 @@ export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   renderMessage?: (MessageProps<TMessage>) => React.Node,
   renderMessageText?: (MessageTextProps<TMessage>) => React.Node,
   renderMessageImage?: (MessageImageProps<TMessage>) => React.Node,
+  renderMessageVideo?: (MessageVideoProps<TMessage>) => React.Node,
+  renderMessageAudio?: (MessageAudioProps<TMessage>) => React.Node,
   renderCustomView?: (BubbleProps<TMessage>) => React.Node,
   renderDay?: (DayProps<TMessage>) => React.Node,
   renderTime?: (TimeProps<TMessage>) => React.Node,
@@ -140,6 +146,8 @@ export {
   Bubble,
   SystemMessage,
   MessageImage,
+  MessageVideo,
+  MessageAudio,
   MessageText,
   Composer,
   Day,

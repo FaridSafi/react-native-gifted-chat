@@ -45,7 +45,7 @@ import {
   TIME_FORMAT,
   DATE_FORMAT,
 } from './Constant'
-import { IMessage, User, Reply, LeftRightStyle } from './Models'
+import { IMessage, User, Reply, LeftRightStyle, MessageVideoProps, MessageAudioProps } from './Models'
 import QuickReplies from './QuickReplies'
 
 dayjs.extend(localizedFormat)
@@ -168,7 +168,9 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom message image */
   renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
   /* Custom message video */
-  renderMessageVideo?(props: MessageImage<TMessage>['props']): React.ReactNode
+  renderMessageVideo?(props: MessageVideoProps<TMessage>): React.ReactNode
+  /* Custom message video */
+  renderMessageAudio?(props: MessageAudioProps<TMessage>): React.ReactNode
   /* Custom view inside the bubble */
   renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom day above a message*/
@@ -256,6 +258,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderMessage: null,
     renderMessageText: null,
     renderMessageImage: null,
+    renderMessageVideo: null,
+    renderMessageAudio: null,
     imageProps: {},
     videoProps: {},
     audioProps: {},

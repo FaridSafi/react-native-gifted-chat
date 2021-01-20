@@ -42,7 +42,7 @@ export interface ComposerProps {
   multiline?: boolean
   disableComposer?: boolean
   onTextChanged?(text: string): void
-  onInputSizeChanged?(contentSize: { width: number; height: number }): void
+  onInputSizeChanged?(layout: { width: number; height: number }): void
 }
 
 export default class Composer extends React.Component<ComposerProps> {
@@ -76,24 +76,24 @@ export default class Composer extends React.Component<ComposerProps> {
     keyboardAppearance: PropTypes.string,
   }
 
-  contentSize?: { width: number; height: number } = undefined
+  layout?: { width: number; height: number } = undefined
 
-  onContentSizeChange = (e: any) => {
-    const { contentSize } = e.nativeEvent
+  onLayout = (e: any) => {
+    const { layout } = e.nativeEvent
 
     // Support earlier versions of React Native on Android.
-    if (!contentSize) {
+    if (!layout) {
       return
     }
 
     if (
-      !this.contentSize ||
-      (this.contentSize &&
-        (this.contentSize.width !== contentSize.width ||
-          this.contentSize.height !== contentSize.height))
+      !this.layout ||
+      (this.layout &&
+        (this.layout.width !== layout.width ||
+          this.layout.height !== layout.height))
     ) {
-      this.contentSize = contentSize
-      this.props.onInputSizeChanged!(this.contentSize!)
+      this.layout = layout
+      this.props.onInputSizeChanged!(this.layout!)
     }
   }
 
@@ -111,8 +111,7 @@ export default class Composer extends React.Component<ComposerProps> {
         placeholderTextColor={this.props.placeholderTextColor}
         multiline={this.props.multiline}
         editable={!this.props.disableComposer}
-        onChange={this.onContentSizeChange}
-        onContentSizeChange={this.onContentSizeChange}
+        onLayout={this.onLayout}
         onChangeText={this.onChangeText}
         style={[
           styles.textInput,

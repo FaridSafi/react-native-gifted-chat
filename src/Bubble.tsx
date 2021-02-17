@@ -249,10 +249,9 @@ export default class Bubble<
   }
 
   onPress = () => {
-    const { currentMessage } = this.props
     if (this.props.onPress) {
       this.props.onPress(this.context, this.props.currentMessage)
-    } 
+    }
   }
 
   onLongPress = () => {

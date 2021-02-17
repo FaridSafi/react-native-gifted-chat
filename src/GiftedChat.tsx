@@ -45,7 +45,14 @@ import {
   TIME_FORMAT,
   DATE_FORMAT,
 } from './Constant'
-import { IMessage, User, Reply, LeftRightStyle, MessageVideoProps, MessageAudioProps } from './Models'
+import {
+  IMessage,
+  User,
+  Reply,
+  LeftRightStyle,
+  MessageVideoProps,
+  MessageAudioProps,
+} from './Models'
 import QuickReplies from './QuickReplies'
 
 dayjs.extend(localizedFormat)

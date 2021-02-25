@@ -460,6 +460,9 @@ export default class Bubble<
       if (user && currentMessage.user._id === user._id) {
         return null
       }
+      if (this.props.renderUsername) {
+        return this.props.renderUsername()
+      }
       return (
         <View style={styles.content.usernameView}>
           <Text

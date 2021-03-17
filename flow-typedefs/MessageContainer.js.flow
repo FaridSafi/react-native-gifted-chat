@@ -29,6 +29,7 @@ export type MessageContainerProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
 
 type MessageContainerState = {|
   showScrollBottom: boolean,
+  hasScrolled: boolean,
 |}
 
 export default class MessageContainer<

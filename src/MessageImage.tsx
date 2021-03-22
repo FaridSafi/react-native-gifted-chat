@@ -8,6 +8,7 @@ import {
   ViewStyle,
   StyleProp,
   ImageStyle,
+  FlatList
 } from 'react-native'
 // TODO: support web
 // @ts-ignore
@@ -67,6 +68,23 @@ export default class MessageImage<
       currentMessage,
     } = this.props
     if (!!currentMessage) {
+      if(currentMessage.multipleImages){
+        const renderMultipleImage = (props) => (
+          <View style={[styles.container, containerStyle]}>
+            <Lightbox activeProps={{style: styles.imageActive,}} {...lightboxProps}>
+                <Image {...imageProps} style={[styles.image, imageStyle]} source={{ uri: props.item.image }}/>
+            </Lightbox>
+          </View>
+        )
+        return (
+          <FlatList 
+            data={currentMessage.multipleImages}
+            renderItem={(item) => renderMultipleImage(item)}
+            keyExtractor={item => item.id}
+          />
+        )
+      }
+
       return (
         <View style={[styles.container, containerStyle]}>
           <Lightbox

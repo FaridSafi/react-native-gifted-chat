@@ -52,7 +52,7 @@ export interface AvatarProps<TMessage extends IMessage> {
   imageStyle?: LeftRightStyle<ImageStyle>
   containerStyle?: LeftRightStyle<ViewStyle>
   textStyle?: TextStyle
-  renderAvatar?(props: Omit<AvatarProps<TMessage>, 'renderAvatar'>): ReactNode
+  renderAvatar?: ((props: Omit<AvatarProps<TMessage>, 'renderAvatar'>) => ReactNode) | null
   onPressAvatar?(user: User): void
   onLongPressAvatar?(user: User): void
 }

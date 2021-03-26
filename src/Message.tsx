@@ -44,7 +44,7 @@ export interface MessageProps<TMessage extends IMessage> {
   renderBubble?(props: Bubble['props']): React.ReactNode
   renderDay?(props: Day['props']): React.ReactNode
   renderSystemMessage?(props: SystemMessage['props']): React.ReactNode
-  renderAvatar?(props: Avatar['props']): React.ReactNode
+  renderAvatar?: ((props: Avatar['props']) => React.ReactNode) | null
   shouldUpdateMessage?(
     props: MessageProps<IMessage>,
     nextProps: MessageProps<IMessage>,

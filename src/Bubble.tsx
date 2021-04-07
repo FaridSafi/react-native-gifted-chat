@@ -159,6 +159,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderMessageAudio?(props: RenderMessageAudioProps<TMessage>): React.ReactNode
   renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
   renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
+  shareButton?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
   renderTime?(timeProps: Time['props']): React.ReactNode
   renderTicks?(currentMessage: TMessage): React.ReactNode
   renderUsername?(): React.ReactNode
@@ -182,6 +183,7 @@ export default class Bubble<
     renderMessageAudio: null,
     renderMessageText: null,
     renderCustomView: null,
+	shareButton:null,
     renderUsername: null,
     renderTicks: null,
     renderTime: null,
@@ -518,7 +520,7 @@ export default class Bubble<
           containerStyle && containerStyle[position],
         ]}
       >
-        {position == 'right' &&  this.props.shareButton}
+        {position === 'right' &&  this.props.shareButton}
         <View
           style={[
             styles[position].wrapper,
@@ -548,7 +550,7 @@ export default class Bubble<
             </View>
           </TouchableWithoutFeedback>
         </View>
-        {position == 'left' &&  this.props.shareButton}
+        {position === 'left' &&  this.props.shareButton}
         {this.renderQuickReplies()}
       </View>
     )

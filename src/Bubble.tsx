@@ -36,7 +36,8 @@ const styles = {
   left: StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
+      flexDirection:'row',
     },
     wrapper: {
       borderRadius: 15,
@@ -59,7 +60,8 @@ const styles = {
   right: StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'flex-end',
+      flexDirection:'row',
+      justifyContent:'flex-end'
     },
     wrapper: {
       borderRadius: 15,
@@ -516,6 +518,7 @@ export default class Bubble<
           containerStyle && containerStyle[position],
         ]}
       >
+        {position == 'right' &&  this.props.shareButton}
         <View
           style={[
             styles[position].wrapper,
@@ -545,6 +548,7 @@ export default class Bubble<
             </View>
           </TouchableWithoutFeedback>
         </View>
+        {position == 'left' &&  this.props.shareButton}
         {this.renderQuickReplies()}
       </View>
     )

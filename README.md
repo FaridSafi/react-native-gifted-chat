@@ -318,8 +318,8 @@ interface QuickReplies {
 - **`onSend`** _(Function)_ - Callback when sending a message
 - **`alwaysShowSend`** _(Bool)_ - Always show send button in input text composer; default `false`, show only when text input is not empty
 - **`locale`** _(String)_ - Locale to localize the dates. You need first to import the locale you need (ie. `require('dayjs/locale/de')` or `import 'dayjs/locale/fr'`)
-- **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'`
-- **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'ll'`
+- **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
+- **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'ll'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`loadEarlier`** _(Bool)_ - Enables the "load earlier messages" button, required for `infiniteScroll`
 - **`isKeyboardInternallyHandled`** _(Bool)_ - Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true`
 - **`onLoadEarlier`** _(Function)_ - Callback when loading earlier messages

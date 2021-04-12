@@ -232,9 +232,9 @@ export default class MessageContainer<
     const { messages, user, inverted, ...restProps } = this.props
     if (messages && user) {
       const previousMessage =
-        (inverted ? messages[index + 1] : messages[index - 1]) || {}
+        (inverted ? messages[index + 1] : messages[index - 1]) || undefined
       const nextMessage =
-        (inverted ? messages[index - 1] : messages[index + 1]) || {}
+        (inverted ? messages[index - 1] : messages[index + 1]) || undefined
 
       const messageProps: Message['props'] = {
         ...restProps,

@@ -98,7 +98,7 @@ export default class Send<
           accessibilityLabel='send'
           style={[styles.container, containerStyle]}
           onPress={this.handleOnPress}
-          accessibilityTraits='button'
+          accessibilityRole='button'
           disabled={disabled}
           {...sendButtonProps}
         >

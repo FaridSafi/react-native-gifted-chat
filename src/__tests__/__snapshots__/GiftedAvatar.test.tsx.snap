@@ -2,7 +2,7 @@
 
 exports[`should render <GiftedAvatar /> and compare with snapshot 1`] = `
 <View
-  accessibilityTraits="image"
+  accessibilityRole="image"
   style={
     Array [
       Object {

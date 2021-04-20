@@ -225,6 +225,8 @@ export default class App extends Component {
     </Send>
   )
 
+  chat = {}
+
   render() {
     if (!this.state.appIsReady) {
       return <AppLoading />
@@ -238,6 +240,7 @@ export default class App extends Component {
       >
         <NavBar />
         <GiftedChat
+          ref={this.chat}
           messages={this.state.messages}
           onSend={this.onSend}
           loadEarlier={this.state.loadEarlier}

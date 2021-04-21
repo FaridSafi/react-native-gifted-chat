@@ -1,8 +1,8 @@
-import React, { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback } from 'react'
 
-const merge = (obj1, obj2) => ({...obj1, ...obj2})
+const merge = (obj1: {}, obj2: {}) => ({ ...obj1, ...obj2 })
 
-export const useMergeState = initialState => {
+export const useMergeState = (initialState: { [key: string]: any }) => {
   const [state, setState] = useState(initialState)
   const stateRef = useRef(state)
   stateRef.current = state

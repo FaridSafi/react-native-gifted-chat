@@ -94,7 +94,6 @@ InputToolbar.defaultProps = {
   containerStyle: {},
   primaryStyle: {},
   accessoryStyle: {},
-  onPressActionButton: () => {},
 }
 
 InputToolbar.propTypes = {

@@ -256,7 +256,6 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
       }
     >
       <View
-        accessibilityTraits="image"
         style={
           Array [
             Object {

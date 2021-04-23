@@ -26,9 +26,21 @@
     "resolveJsonModule": true,
     "noFallthroughCasesInSwitch": true,
     "strictPropertyInitialization": false,
-    "lib": ["es6"],
-    "typeRoots": ["./node_modules/@types", "./@types"]
+    "lib": [
+      "es6"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./@types"
+    ]
   },
-  "include": ["src", "./types.d.ts"],
-  "exclude": ["node_modules", "src/__tests__"]
+  "include": [
+    "src",
+    "./types.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/__tests__"
+  ],
+  "extends": "expo/tsconfig.base"
 }

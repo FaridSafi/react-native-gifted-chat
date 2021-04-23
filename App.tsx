@@ -1,5 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons'
-import { AppLoading, Asset, Linking } from 'expo'
+import { Asset, Linking } from 'expo'
+import AppLoading from 'expo-app-loading'
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Platform } from 'react-native'
 import { Bubble, GiftedChat, SystemMessage, IMessage, Send, SendProps } from './src'

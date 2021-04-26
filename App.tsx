@@ -2,7 +2,14 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { AppLoading, Asset, Linking } from 'expo'
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Platform } from 'react-native'
-import { Bubble, GiftedChat, SystemMessage, IMessage, Send, SendProps } from './src'
+import {
+  Bubble,
+  GiftedChat,
+  SystemMessage,
+  IMessage,
+  Send,
+  SendProps,
+} from './src'
 
 import AccessoryBar from './example-expo/AccessoryBar'
 import CustomActions from './example-expo/CustomActions'
@@ -15,8 +22,8 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
 })
 
-const filterBotMessages = message =>
-  !message.system && message.user && message.user._id && message.user._id === 2
+// const filterBotMessages = message =>
+//   !message.system && message.user && message.user._id && message.user._id === 2
 const findStep = step => message => message._id === step
 
 const user = {

@@ -7,6 +7,7 @@ import React, {
   memo,
 } from 'react'
 import {
+  Animated,
   Platform,
   StyleSheet,
   View,
@@ -430,9 +431,10 @@ const RenderInputToolbar: any = memo((props: any) => {
   } = props
   const textInput: any = useRef()
 
-  const [{ text, keyboardHeight, typingDisabled }, _setState] = useMergeState({
+  const slideAnim = useRef(new Animated.Value(0)).current
+
+  const [{ text, typingDisabled }, _setState] = useMergeState({
     text: propsText,
-    keyboardHeight: undefined,
     typingDisabled: false,
   })
 
@@ -618,16 +620,30 @@ const RenderInputToolbar: any = memo((props: any) => {
         android: 'keyboardDidHide',
       }) || 'keyboardWillHide'
 
-    Keyboard.addListener(show, ({ endCoordinates }) => {
+    Keyboard.addListener(show, () => {
       handleTextInputFocusWhenKeyboardShow()
       if (isKeyboardInternallyHandled) {
         _setState({
           typingDisabled: false,
-          keyboardHeight: endCoordinates.height,
         })
         setBottomOffset(safeAreaSupport(_this.current._bottomOffset))
       }
     })
+
+    if (Platform.OS === 'ios') {
+      Keyboard.addListener(
+        'keyboardWillChangeFrame',
+        ({ duration, endCoordinates, startCoordinates }) =>
+          slideTo({
+            duration,
+            toValue:
+              startCoordinates &&
+              endCoordinates.screenY > startCoordinates.screenY
+                ? 0
+                : endCoordinates.height,
+          }),
+      )
+    }
 
     Keyboard.addListener(hide, () => {
       handleTextInputFocusWhenKeyboardHide()
@@ -635,7 +651,6 @@ const RenderInputToolbar: any = memo((props: any) => {
       if (isKeyboardInternallyHandled) {
         _setState({
           typingDisabled: true,
-          keyboardHeight: undefined,
         })
         setBottomOffset(0)
       }
@@ -644,8 +659,25 @@ const RenderInputToolbar: any = memo((props: any) => {
     return () => {
       Keyboard.removeListener(show, () => {})
       Keyboard.removeListener(hide, () => {})
+      if (Platform.OS === 'ios') {
+        Keyboard.removeListener('keyboardWillChangeFrame', () => {})
+      }
     }
   }, [isKeyboardInternallyHandled])
+
+  const slideTo = ({
+    toValue,
+    duration,
+  }: {
+    toValue: number
+    duration: number
+  }) => {
+    Animated.timing(slideAnim, {
+      toValue,
+      duration,
+      useNativeDriver: false,
+    }).start()
+  }
 
   if (baseRef) {
     baseRef.current.onSend = onSend
@@ -656,14 +688,13 @@ const RenderInputToolbar: any = memo((props: any) => {
   }
 
   return (
-    <View
+    <Animated.View
       style={{
-        marginTop: 'auto',
-        marginBottom: Platform.select({ ios: keyboardHeight }),
+        marginBottom: Platform.select({ ios: slideAnim }),
       }}
     >
       <InputToolbar {...inputToolbarProps} />
-    </View>
+    </Animated.View>
   )
 })
 

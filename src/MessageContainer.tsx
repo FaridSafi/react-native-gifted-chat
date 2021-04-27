@@ -91,7 +91,6 @@ export interface MessageContainerProps<TMessage extends IMessage> {
 
 interface State {
   showScrollBottom: boolean
-  hasScrolled: boolean
 }
 
 export default class MessageContainer<

@@ -1,1 +1,0 @@
-{"version":3,"file":"warnAboutManuallyLinkedLibs.d.ts","sourceRoot":"","sources":["../../src/link/warnAboutManuallyLinkedLibs.ts"],"names":[],"mappings":"AAGA,OAAO,EAAC,MAAM,EAAC,MAAM,mCAAmC,CAAC;AAIzD,MAAM,CAAC,OAAO,UAAU,2BAA2B,CACjD,MAAM,EAAE,MAAM,EACd,QAAQ,GAAE,MAAkB,EAC5B,UAAU,GAAE,UAAU,CACpB,MAAM,CAAC,WAAW,CAAC,CAAC,SAAS,CAAC,CAAC,YAAY,CAAC,CAC3B,QAwCpB"}

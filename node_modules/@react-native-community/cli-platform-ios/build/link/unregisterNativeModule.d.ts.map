@@ -1,1 +1,0 @@
-{"version":3,"file":"unregisterNativeModule.d.ts","sourceRoot":"","sources":["../../src/link/unregisterNativeModule.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAiBH,OAAO,EACL,mBAAmB,EACnB,gBAAgB,EAChB,gBAAgB,EACjB,MAAM,mCAAmC,CAAC;AAE3C;;;;GAIG;AACH,MAAM,CAAC,OAAO,UAAU,sBAAsB,CAC5C,gBAAgB,EAAE,mBAAmB,EACrC,aAAa,EAAE,gBAAgB,EAC/B,eAAe,EAAE,KAAK,CAAC,gBAAgB,CAAC,QAgDzC"}

@@ -1,2 +1,0 @@
-boosh:
-	node Makefile.js

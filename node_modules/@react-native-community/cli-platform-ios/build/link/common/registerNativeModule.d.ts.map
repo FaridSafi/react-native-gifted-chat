@@ -1,1 +1,0 @@
-{"version":3,"file":"registerNativeModule.d.ts","sourceRoot":"","sources":["../../../src/link/common/registerNativeModule.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,OAAO,EACL,mBAAmB,EACnB,gBAAgB,EACjB,MAAM,mCAAmC,CAAC;AAI3C,MAAM,CAAC,OAAO,UAAU,oBAAoB,CAC1C,IAAI,EAAE,MAAM,EACZ,gBAAgB,EAAE,mBAAmB,EAErC,OAAO,EAAE,GAAG,GAAG,SAAS,EACxB,aAAa,EAAE,gBAAgB,QAOhC"}

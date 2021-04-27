@@ -1,6 +1,0 @@
-[submodule "SlickSpec/Runner"]
-	path = SlickSpec/Runner
-	url = git://github.com/mootools/mootools-runner.git
-[submodule "speed/benchmarkjs"]
-	path = speed/benchmarkjs
-	url = https://github.com/mathiasbynens/Benchmark.js.git

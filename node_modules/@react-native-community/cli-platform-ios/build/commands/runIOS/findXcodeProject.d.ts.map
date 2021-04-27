@@ -1,1 +1,0 @@
-{"version":3,"file":"findXcodeProject.d.ts","sourceRoot":"","sources":["../../../src/commands/runIOS/findXcodeProject.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAIH,oBAAY,WAAW,GAAG;IACxB,IAAI,EAAE,MAAM,CAAC;IACb,WAAW,EAAE,OAAO,CAAC;CACtB,CAAC;AAEF,iBAAS,gBAAgB,CAAC,KAAK,EAAE,KAAK,CAAC,MAAM,CAAC,GAAG,WAAW,GAAG,IAAI,CAqBlE;AAED,eAAe,gBAAgB,CAAC"}

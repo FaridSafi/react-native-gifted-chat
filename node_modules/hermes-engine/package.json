@@ -1,0 +1,35 @@
+{
+  "name": "hermes-engine",
+  "version": "0.2.1",
+  "private": false,
+  "description": "A JavaScript engine optimized for running React Native on Android",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:facebook/hermes.git"
+  },
+  "files": [
+    "README.md",
+    "android/hermes-debug.aar",
+    "android/hermes-release.aar",
+    "android/hermes-cppruntime-debug.aar",
+    "android/hermes-cppruntime-release.aar",
+    "android/include/**/*.h",
+    "osx-bin/hermes",
+    "osx-bin/hermes-repl",
+    "linux64-bin/hermes",
+    "linux64-bin/hermes-repl",
+    "win64-bin/hermes.exe",
+    "win64-bin/hermes-repl.exe",
+    "win64-bin/icu*.dll"
+  ],
+  "devDependencies": {
+    "request": "^2.88.0",
+    "tar": "^4.4.8",
+    "command-line-args": "^5.1.1"
+  },
+  "scripts": {
+    "prepack": "node fetch.js",
+    "prepack-dev": "node fetch.js --dev"
+  }
+}

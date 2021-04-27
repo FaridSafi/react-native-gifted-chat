@@ -1,0 +1,106 @@
+{
+  "name": "tslint-config-prettier",
+  "version": "1.18.0",
+  "description": "Do you wanna use tslint and prettier without conflicts? tslint-config-prettier disables all conflicting rules that may cause such problems. Prettier takes care of formatting and tslint the rest.",
+  "keywords": [
+    "lint",
+    "tslint",
+    "ts-lint",
+    "prettier",
+    "config",
+    "typescript"
+  ],
+  "files": [
+    "bin/check.js",
+    "lib/index.json",
+    "lib/checker.js"
+  ],
+  "main": "lib/index.json",
+  "bin": {
+    "tslint-config-prettier-check": "bin/check.js"
+  },
+  "author": "Alex Jover Morales <alexjovermorales@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prettier/tslint-config-prettier.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "prepublish": "yarn build-tools && yarn generate-config && yarn build-checker",
+    "lint": "tslint 'tools/**/*.ts'",
+    "test": "yarn clean && jest --no-cache",
+    "clean": "rimraf ./node_modules/vrsource-tslint-rules/rules/*.ts",
+    "build-tools": "tsc",
+    "build-checker": "tsc -p ./tsconfig.checker.json",
+    "generate-config": "node ./build/generate.js",
+    "semantic-release": "semantic-release",
+    "commit": "git-cz",
+    "prepush": "yarn test && yarn lint",
+    "commitmsg": "validate-commit-msg"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "types": "conventional-commit-types",
+      "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
+    }
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "testMatch": [
+      "**/src/**/test.{ts,tsx}",
+      "**/tools/*.test.ts"
+    ],
+    "transform": {
+      "/src/.+\\.tsx?$": "<rootDir>/build/transform.js",
+      "/tools/.+\\.ts$": "ts-jest/preprocessor"
+    },
+    "coverageThreshold": {
+      "global": {
+        "branches": 95,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/jest": "^23.1.2",
+    "@types/make-dir": "^1.0.1",
+    "@types/node": "^10.0.3",
+    "@types/prettier": "^1.10.0",
+    "codelyzer": "4.5.0",
+    "commitizen": "^3.0.0",
+    "cz-conventional-changelog": "^2.0.0",
+    "husky": "^1.0.0",
+    "jest": "^23.2.0",
+    "lodash": "^4.17.4",
+    "make-dir": "^1.0.0",
+    "prettier": "1.16.4",
+    "rimraf": "^2.6.1",
+    "semantic-release": "^15.0.0",
+    "ts-jest": "^23.10.0",
+    "tslint": "5.12.1",
+    "tslint-consistent-codestyle": "1.15.0",
+    "tslint-divid": "1.3.0",
+    "tslint-eslint-rules": "5.4.0",
+    "tslint-immutable": "5.1.2",
+    "tslint-microsoft-contrib": "6.0.0",
+    "tslint-misc-rules": "3.5.1",
+    "tslint-react": "3.6.0",
+    "typescript": "3.3.1",
+    "validate-commit-msg": "^2.10.1",
+    "vrsource-tslint-rules": "6.0.0"
+  }
+}

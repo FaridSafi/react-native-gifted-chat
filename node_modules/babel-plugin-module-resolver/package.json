@@ -1,0 +1,86 @@
+{
+  "name": "babel-plugin-module-resolver",
+  "version": "3.2.0",
+  "main": "lib/index.js",
+  "description": "Module resolver plugin for Babel",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tleunen/babel-plugin-module-resolver.git"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "author": {
+    "name": "Tommy Leunen",
+    "email": "tommy.leunen@gmail.com",
+    "url": "http://tommyleunen.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "module",
+    "resolver",
+    "alias",
+    "rewrite",
+    "resolve",
+    "rename",
+    "mapping",
+    "require",
+    "import"
+  ],
+  "dependencies": {
+    "find-babel-config": "^1.1.0",
+    "glob": "^7.1.2",
+    "pkg-up": "^2.0.0",
+    "reselect": "^3.0.1",
+    "resolve": "^1.4.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "common-tags": "^1.4.0",
+    "eslint": "^4.19.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.9.0",
+    "husky": "^0.14.3",
+    "jest": "^23.6.0",
+    "lint-staged": "^7.0.0",
+    "prettier-eslint-cli": "^4.7.1",
+    "standard-version": "^4.2.0"
+  },
+  "scripts": {
+    "lint": "eslint src test",
+    "compile": "babel src --out-dir lib",
+    "pretest": "npm run lint",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "prepublish": "npm run compile",
+    "release": "standard-version",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "/test/.*\\.test\\.js$",
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/log.js"
+    ]
+  }
+}

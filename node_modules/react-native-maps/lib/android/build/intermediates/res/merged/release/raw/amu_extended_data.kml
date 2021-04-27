@@ -1,0 +1,17 @@
+  <Placemark>
+    <name>Club house</name>
+    <ExtendedData>
+      <Data name="holeNumber">
+        <value>1</value>
+      </Data>
+      <Data name="holeYardage">
+        <value>234</value>
+      </Data>
+      <Data name="holePar">
+        <value>4</value>
+      </Data>
+    </ExtendedData>
+    <Point>
+      <coordinates>-111.956,33.5043</coordinates>
+    </Point>
+  </Placemark>

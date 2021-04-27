@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Ir á páxina de inicio"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Desprazarse cara arriba"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Máis opcións"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Feito"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Ver todas"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Escoller unha aplicación"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"DESACTIVAR"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"ACTIVAR"</string>
+    <string msgid="1302280443949172191" name="abc_menu_alt_shortcut_label">"Alt +"</string>
+    <string msgid="1324831542140195728" name="abc_menu_ctrl_shortcut_label">"Ctrl +"</string>
+    <string msgid="8362206064229013510" name="abc_menu_delete_shortcut_label">"eliminar"</string>
+    <string msgid="8341180395196749340" name="abc_menu_enter_shortcut_label">"Intro"</string>
+    <string msgid="4792426091847145555" name="abc_menu_function_shortcut_label">"Función +"</string>
+    <string msgid="7643535737296831317" name="abc_menu_meta_shortcut_label">"Meta +"</string>
+    <string msgid="8126296154200614004" name="abc_menu_shift_shortcut_label">"Maiús +"</string>
+    <string msgid="2378550843553983978" name="abc_menu_space_shortcut_label">"espazo"</string>
+    <string msgid="9002602288060866689" name="abc_menu_sym_shortcut_label">"Sim +"</string>
+    <string msgid="1351762916121158029" name="abc_prepend_shortcut_label">"Menú +"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Buscar…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Borrar consulta"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Consulta de busca"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Buscar"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Enviar consulta"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Busca por voz"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Compartir con"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Compartir con <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Contraer"</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"Activar"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> non funcionará a menos que actives os servizos de Google Play."</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Activar servizos de Google Play"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"Instalar"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> non se executará se o teu dispositivo non ten instalados os servizos de Google Play."</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Descargar servizos de Google Play"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Dispoñibilidade dos servizos de Play"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Erro nos servizos de Google Play"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"<ns1:g id="APP_NAME">%1$s</ns1:g> ten problemas cos servizos de Google Play. Téntao de novo."</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> non se executará sen os servizos de Google Play, que non son compatibles co teu dispositivo."</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"Actualizar"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> non se executará a menos que actualices os servizos de Google Play."</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Actualizar os servizos de Google Play"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> non se executará sen os servizos de Google Play, que se están actualizando neste momento."</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"Necesítase a nova versión dos servizos de Google Play. Actualizarase en breve."</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"Abrir no teléfono"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"Iniciar sesión"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Iniciar sesión con Google"</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Buscar"</string>
+    <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">">999"</string>
+</resources>

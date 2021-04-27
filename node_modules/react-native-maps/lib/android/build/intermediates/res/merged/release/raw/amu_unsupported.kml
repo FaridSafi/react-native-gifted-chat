@@ -1,0 +1,28 @@
+<kml><NetworkLinkControl>
+<Update>
+		<targetHref>weather.kml</targetHref>
+		<Change>
+				<Placemark targetId="37501">
+						<name>changedName</name>
+				</Placemark>
+		</Change>
+		<Create>
+				<Folder targetId="folder">
+						<Placemark id="newplacemark">
+								<name>new placemark</name>
+						</Placemark>
+				</Folder>
+		</Create>
+		<Delete>
+				<Placemark targetId="73101"/>
+		</Delete>
+</Update>
+</NetworkLinkControl>
+<Placemark>
+<Point>
+<coordinates>
+15, 13, 0
+</coordinates>
+</Point>
+</Placemark>
+</kml>

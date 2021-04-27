@@ -1,0 +1,14 @@
+[ignore]
+<PROJECT_ROOT>/example/
+
+[include]
+
+[libs]
+node_modules/react-native/flow
+node_modules/react-native/Libraries/react-native/react-native-interface.js
+
+[lints]
+
+[options]
+
+[strict]

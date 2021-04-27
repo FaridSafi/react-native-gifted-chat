@@ -1,0 +1,34 @@
+{
+  "name": "denodeify",
+  "version": "1.2.1",
+  "description": "Tool to turn functions with Node-style callback APIs into functions that return Promises",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "files": "find . -name '*.js' ! -path './node_modules/*'",
+    "jshint": "./node_modules/.bin/jshint `npm run -s files`",
+    "lintspaces": "./node_modules/.bin/lintspaces -i js-comments -e .editorconfig `npm run -s files`",
+    "test": "./node_modules/.bin/mocha test/*test.js && npm run jshint && npm run lintspaces"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matthew-andrews/denodeify.git"
+  },
+  "author": "Matt Andrews",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matthew-andrews/denodeify/issues"
+  },
+  "homepage": "https://github.com/matthew-andrews/denodeify",
+  "devDependencies": {
+    "es6-promise": "^1.0.0",
+    "es6-shim": "^0.18.0",
+    "jshint": "^2.5.5",
+    "lie": "^2.7.7",
+    "lintspaces-cli": "0.0.4",
+    "mocha": "^1.21.4",
+    "native-promise-only": "^0.7.6-a"
+  }
+}

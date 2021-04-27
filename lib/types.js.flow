@@ -1,0 +1,43 @@
+// @flow
+import * as React from 'react'
+type renderFunction = any => React.Node
+
+export type LeftRightStyle<T> = {|
+  left: T,
+  right: T,
+|}
+
+export type User = {
+  _id: string | number,
+  name?: string,
+  avatar?: string | renderFunction,
+}
+
+export type Reply = {
+  title: string,
+  value: string,
+  messageId?: any,
+}
+
+export type QuickReplies = {
+  type: 'radio' | 'checkbox',
+  values: Array<Reply>,
+  keepIt?: boolean,
+}
+
+export type IMessage = {
+  _id: string | number,
+  text: string,
+  createdAt: Date | number,
+  user: User,
+  image?: string,
+  video?: string,
+  audio?: string,
+  system?: boolean,
+  sent?: boolean,
+  received?: boolean,
+  pending?: boolean,
+  quickReplies?: QuickReplies,
+}
+
+export type IChatMessage = IMessage

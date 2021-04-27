@@ -1,0 +1,19 @@
+name: "Slick"
+
+web: "[mootools.net](http://mootools.net)"
+
+description: "Slick, the most awesome CSS Parser and Finder"
+
+license: "[MIT License](http://mootools.net/license.txt)"
+
+copyright: "&copy; [MooTools](http://mootools.net)"
+
+authors:
+  - Thomas Aylott
+  - Valerio Proietti
+  - Fabio M Costa
+  - Jan Kassens
+
+sources:
+  - "Source/Slick.Parser.js"
+  - "Source/Slick.Finder.js"

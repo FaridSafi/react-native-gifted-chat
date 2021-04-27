@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A Feature with description has a default balloon -->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Placemark>
+    <name>My office</name>
+    <description>This is the location of my office.</description>
+    <Point>
+      <coordinates>-122.0821604290386,37.42041505714916</coordinates>
+    </Point>
+  </Placemark>
+</kml>

@@ -1,0 +1,1 @@
+{"version":3,"file":"registerNativeModule.d.ts","sourceRoot":"","sources":["../../src/link-pods/registerNativeModule.ts"],"names":[],"mappings":"AASA,OAAO,EAAC,gBAAgB,EAAC,MAAM,mCAAmC,CAAC;AAUnE,MAAM,CAAC,OAAO,UAAU,wBAAwB,CAC9C,IAAI,EAAE,MAAM,EACZ,WAAW,EAAE,MAAM,EACnB,UAAU,EAAE,gBAAgB,QAM7B"}

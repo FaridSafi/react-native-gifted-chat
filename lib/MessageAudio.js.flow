@@ -1,0 +1,15 @@
+// @flow
+import { Component } from 'react'
+import type { IMessage } from './types'
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type MessageAudioProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  currentMessage?: TMessage,
+  containerStyle?: ViewStyleProp,
+  audioStyle?: ViewStyleProp,
+  audioProps?: Object,
+|}>
+
+export default class MessageAudio<
+  TMessage: IMessage = IMessage,
+> extends Component<MessageAudioProps<TMessage>> {}

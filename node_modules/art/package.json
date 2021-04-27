@@ -1,0 +1,25 @@
+{
+  "name": "art",
+  "description":  "Cross-browser Vector Graphics",
+  "version": "0.10.3",
+  "keywords": [
+    "art",
+    "canvas",
+    "svg",
+    "vml"
+  ],
+  "author": "Sebastian Markbage",
+  "homepage": "http://sebmarkbage.github.io/art",
+  "bugs": "https://github.com/sebmarkbage/art/issues",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sebmarkbage/art.git"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}

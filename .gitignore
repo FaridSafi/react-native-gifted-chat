@@ -1,5 +1,4 @@
 .DS_Store
-node_modules/
 .expo/
 npm-debug.log
 TODO.md
@@ -8,6 +7,5 @@ yarn-error.log
 .vscode
 Exponent-*.app
 *.log
-lib/
 coverage/
 web-build/

@@ -1,0 +1,43 @@
+{
+  "name": "plugin-error",
+  "description": "Error handling for vinyl plugins. Just an abstraction of what's in gulp-util with minor changes.",
+  "version": "0.1.2",
+  "homepage": "https://github.com/jonschlinkert/plugin-error",
+  "author": {
+    "name": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonschlinkert/plugin-error.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/plugin-error/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "ansi-cyan": "^0.1.1",
+    "ansi-red": "^0.1.1",
+    "arr-diff": "^1.0.1",
+    "arr-union": "^2.0.1",
+    "extend-shallow": "^1.1.2"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "keywords": [
+    "error",
+    "plugin"
+  ]
+}

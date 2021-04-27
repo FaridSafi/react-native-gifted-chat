@@ -1,0 +1,10 @@
+var core = require('./svg/core');
+require('./svg/externals');
+require('./svg/colors');
+require('./svg/fonts');
+require('./svg/markers');
+require('./svg/paints');
+require('./svg/shapes');
+require('./svg/styles');
+require('./svg/text');
+module.exports = core;

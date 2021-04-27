@@ -1,0 +1,44 @@
+{
+  "name": "temp",
+  "description": "Temporary files and directories",
+  "tags": [
+    "temporary",
+    "temp",
+    "tempfile",
+    "tempdir",
+    "tmpfile",
+    "tmpdir",
+    "security"
+  ],
+  "version": "0.8.3",
+  "author": "Bruce Williams <brwcodes@gmail.com>",
+  "license": "MIT",
+  "directories": {
+    "lib": "lib"
+  },
+  "engines": [
+    "node >=0.8.0"
+  ],
+  "main": "./lib/temp",
+  "dependencies": {
+    "os-tmpdir": "^1.0.0",
+    "rimraf": "~2.2.6"
+  },
+  "keywords": [
+    "temporary",
+    "tmp",
+    "temp",
+    "tempdir",
+    "tempfile",
+    "tmpdir",
+    "tmpfile"
+  ],
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bruce/node-temp.git"
+  },
+  "scripts": {
+    "test": "node test/temp-test.js"
+  }
+}

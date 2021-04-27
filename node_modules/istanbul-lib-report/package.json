@@ -1,0 +1,38 @@
+{
+  "name": "istanbul-lib-report",
+  "version": "2.0.8",
+  "description": "Base reporting library for istanbul",
+  "author": "Krishnan Anantheswaran <kananthmail-github@yahoo.com>",
+  "main": "index.js",
+  "files": [
+    "lib",
+    "index.js"
+  ],
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "istanbul-lib-coverage": "^2.0.5",
+    "make-dir": "^2.1.0",
+    "supports-color": "^6.1.0"
+  },
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/istanbuljs/istanbuljs/issues"
+  },
+  "homepage": "https://istanbul.js.org/",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:istanbuljs/istanbuljs.git"
+  },
+  "keywords": [
+    "istanbul",
+    "report",
+    "api",
+    "lib"
+  ],
+  "engines": {
+    "node": ">=6"
+  },
+  "gitHead": "90e60cc47833bb780680f916488ca24f0be36ca2"
+}

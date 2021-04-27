@@ -1,0 +1,85 @@
+language: generic
+sudo: true
+
+env:
+  global:
+    # PATH order is incredibly important. e.g. the 'emulator' script exists in more than one place!
+    - ANDROID_HOME=/usr/local/android-sdk
+    - TOOLS=${ANDROID_HOME}/tools
+    - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
+
+matrix:
+  fast_finish: true
+  include:
+    - os: osx
+      osx_image: xcode10.2
+      env: RNVERSION=59 NODE=8
+    - os: osx
+      osx_image: xcode10.2
+      env: RNVERSION=59 NODE=10
+    - os: osx
+      osx_image: xcode10.2
+      env: RNVERSION=60 NODE=11
+    - os: osx
+      osx_image: xcode10.2
+      env: RNVERSION=60 NODE=node
+    - os: linux
+      env: RNVERSION=59 NODE=11
+    - os: linux
+      env: RNVERSION=59 NODE=node
+    - os: linux
+      env: RNVERSION=60 NODE=8
+    - os: linux
+      env: RNVERSION=60 NODE=10
+  allow_failures:
+    - env: RNVERSION=60 NODE=node
+
+before_install:
+  - ANDROID_TOOLS=4333796 # android-28
+  - export ANDROID_HOME=~/android-sdk
+  - |
+    if [ $TRAVIS_OS_NAME == "osx" ]; then
+      wget -q "https://dl.google.com/android/repository/sdk-tools-darwin-$ANDROID_TOOLS.zip" -O android-sdk-tools.zip
+    else
+      wget -q "https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_TOOLS.zip" -O android-sdk-tools.zip
+    fi
+  - unzip -q android-sdk-tools.zip -d ${ANDROID_HOME}
+  - rm android-sdk-tools.zip
+  - PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
+  # Silence warning.
+  - mkdir -p ~/.android
+  - touch ~/.android/repositories.cfg
+  # install correct version of java on osx
+  - |
+    if [ $TRAVIS_OS_NAME == "osx" ]; then
+      # skip brew update
+      export HOMEBREW_NO_AUTO_UPDATE=1
+      brew cask uninstall java; brew tap AdoptOpenJDK/openjdk; brew cask install adoptopenjdk8;
+    else
+      PATH=$(echo "$PATH" | sed -e 's/:\/usr\/local\/lib\/jvm\/openjdk11\/bin//');
+      JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64;
+    fi
+  # Accept licenses before installing components, no need to echo y for each component
+  - yes | sdkmanager --licenses
+  # Platform tools
+  - sdkmanager "tools" "platform-tools" > /dev/null
+  # install older build tools (for emulator)
+  - sdkmanager "build-tools;25.0.2" "platforms;android-25" > /dev/null
+  # install modern build tools (for compilation)
+  - sdkmanager "build-tools;28.0.3" "platforms;android-28" > /dev/null
+  # Node.js management
+  - nvm install $NODE
+  - npm i -g react-native-cli
+
+script:
+  - git clone https://github.com/mikehardy/rn-androidx-demo.git
+  - cd rn-androidx-demo && ./make-demo.sh
+
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+cache:
+  directories:
+    - $HOME/.npm
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/

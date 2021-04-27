@@ -1,0 +1,30 @@
+{
+  "name": "vlq",
+  "description": "Generate, and decode, base64 VLQ mappings for source maps and other uses",
+  "author": "Rich Harris",
+  "repository": "https://github.com/Rich-Harris/vlq",
+  "license": "MIT",
+  "version": "1.0.1",
+  "main": "dist/vlq.js",
+  "module": "dist/vlq.es.js",
+  "types": "dist/types/vlq.d.ts",
+  "files": [
+    "README.md",
+    "LICENSE",
+    "dist/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "rollup": "^1.16.4",
+    "rollup-plugin-typescript": "^1.0.1",
+    "typescript": "^3.5.2"
+  },
+  "scripts": {
+    "build": "rollup -c && tsc",
+    "lint": "eslint src",
+    "test": "node test",
+    "pretest": "npm run build",
+    "prepublish": "npm test"
+  }
+}

@@ -1,0 +1,32 @@
+// @flow
+import * as React from 'react'
+import type { AvatarProps } from './Avatar'
+import type { BubbleProps } from './Bubble'
+import type { SystemMessageProps } from './SystemMessage'
+import type { DayProps } from './Day'
+import type { IMessage, User, LeftRightStyle } from './types'
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type MessageProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  key: React$Key,
+  showUserAvatar?: boolean,
+  position: 'left' | 'right',
+  currentMessage?: TMessage,
+  nextMessage?: TMessage,
+  previousMessage?: TMessage,
+  user: User,
+  inverted?: boolean,
+  containerStyle?: LeftRightStyle<ViewStyleProp>,
+  renderBubble?: (BubbleProps<TMessage>) => React.Node,
+  renderDay?: (DayProps<TMessage>) => React.Node,
+  renderSystemMessage?: (SystemMessageProps<TMessage>) => React.Node,
+  renderAvatar?: ((AvatarProps<TMessage>) => React.Node) | null,
+  shouldUpdateMessage?: (
+    props: MessageProps<IMessage>,
+    nextProps: MessageProps<IMessage>,
+  ) => boolean,
+|}>
+
+export default class Message<
+  TMessage: IMessage = IMessage,
+> extends React.Component<MessageProps<TMessage>> {}

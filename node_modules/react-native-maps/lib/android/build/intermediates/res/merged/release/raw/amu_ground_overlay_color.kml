@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+	<GroundOverlay>
+		<name>Ground overlay with draw order</name>
+		<drawOrder>99</drawOrder>
+		<color>7f000000</color>
+		<LatLonBox>
+        <north>37.91904192681665</north>
+        <south>37.46543388598137</south>
+        <east>15.35832653742206</east>
+        <west>14.60128369746704</west>
+		</LatLonBox>
+	</GroundOverlay>
+</kml>

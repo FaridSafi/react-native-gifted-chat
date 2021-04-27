@@ -1,0 +1,51 @@
+{
+  "name": "deep-assign",
+  "version": "3.0.0",
+  "description": "Recursive Object.assign()",
+  "license": "MIT",
+  "repository": "sindresorhus/deep-assign",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "object",
+    "obj",
+    "assign",
+    "extend",
+    "properties",
+    "merge",
+    "clone",
+    "copy",
+    "mixin",
+    "deep",
+    "recursive",
+    "key",
+    "keys",
+    "values",
+    "prop",
+    "properties"
+  ],
+  "dependencies": {
+    "is-obj": "^1.0.0"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "xo": "*"
+  },
+  "xo": {
+    "ignores": [
+      "test.js"
+    ]
+  }
+}

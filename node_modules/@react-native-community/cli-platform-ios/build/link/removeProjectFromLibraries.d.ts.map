@@ -1,0 +1,1 @@
+{"version":3,"file":"removeProjectFromLibraries.d.ts","sourceRoot":"","sources":["../../src/link/removeProjectFromLibraries.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH;;;;;;GAMG;AACH,MAAM,CAAC,OAAO,UAAU,0BAA0B,CAChD,SAAS,EAAE;IAAC,QAAQ,EAAE,KAAK,CAAC;QAAC,OAAO,EAAE,MAAM,CAAA;KAAC,CAAC,CAAA;CAAC,EAC/C,IAAI,EAAE;IAAC,QAAQ,EAAE,MAAM,CAAA;CAAC,QAKzB"}

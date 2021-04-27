@@ -1,0 +1,21 @@
+// @flow
+import * as React from 'react'
+import type {
+  ViewStyleProp,
+  ImageStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type ActionsProps = $ReadOnly<{|
+  options?: {
+    [key: string]: any,
+  },
+  optionTintColor?: string,
+  icon?: () => React.Node,
+  wrapperStyle?: ViewStyleProp,
+  iconTextStyle?: TextStyleProp,
+  containerStyle?: ViewStyleProp,
+  onPressActionButton?: () => void,
+|}>
+
+export default class Actions extends React.Component<ActionsProps> {}

@@ -1,0 +1,15 @@
+{
+  "name": "@babel/helper-split-export-declaration",
+  "version": "7.8.3",
+  "description": "",
+  "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-split-export-declaration",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@babel/types": "^7.8.3"
+  },
+  "gitHead": "a7620bd266ae1345975767bbc7abf09034437017"
+}

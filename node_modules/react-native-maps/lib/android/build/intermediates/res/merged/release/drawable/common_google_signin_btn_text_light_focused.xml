@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:left="1dp"
+          android:top="1dp"
+          android:right="1dp"
+          android:bottom="1dp">
+        <shape android:shape="rectangle">
+            <!-- Explicit transparent fill to avoid GB filling with the stroke colour -->
+            <solid android:color="@android:color/transparent" />
+            <stroke android:color="#4D4284F2"
+                    android:width="4dp" />
+        </shape>
+    </item>
+    <item android:drawable="@drawable/common_google_signin_btn_text_light_normal" />
+</layer-list>

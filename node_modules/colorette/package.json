@@ -1,0 +1,36 @@
+{
+  "name": "colorette",
+  "version": "1.1.0",
+  "description": "Color your terminal using pure idiomatic JavaScript.",
+  "main": "index.js",
+  "types": "colorette.d.ts",
+  "scripts": {
+    "test": "nyc -r lcov testmatrix test/index.js",
+    "release": "v=$npm_package_version; git commit -am $v && git tag -s $v -m $v && git push && git push --tags && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "jorgebucaran/colorette"
+  },
+  "files": [
+    "index.js",
+    "colorette.d.ts"
+  ],
+  "keywords": [
+    "colorette",
+    "terminal",
+    "styles",
+    "color",
+    "ansi"
+  ],
+  "author": "Jorge Bucaran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jorgebucaran/colorette/issues"
+  },
+  "homepage": "https://github.com/jorgebucaran/colorette",
+  "devDependencies": {
+    "nyc": "14.1.1",
+    "testmatrix": "0.1.2"
+  }
+}

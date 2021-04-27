@@ -1,0 +1,33 @@
+{
+  "name": "react-devtools-core",
+  "version": "3.6.3",
+  "description": "Use react-devtools outside of the browser",
+  "main": "./build/backend.js",
+  "repository": {
+    "url": "https://github.com/facebook/react-devtools.git",
+    "type": "git"
+  },
+  "files": [
+    "build",
+    "index.js",
+    "standalone.js",
+    "vendor"
+  ],
+  "scripts": {
+    "backend": "cross-env NODE_ENV=production ../../node_modules/.bin/webpack --config webpack.backend.js",
+    "backend:watch": "cross-env NODE_ENV=production ../../node_modules/.bin/webpack --config webpack.backend.js --watch",
+    "standalone": "cross-env NODE_ENV=production ../../node_modules/.bin/webpack --config webpack.standalone.js",
+    "standalone:watch": "cross-env NODE_ENV=production ../../node_modules/.bin/webpack --config webpack.standalone.js --watch",
+    "build": "yarn run backend && yarn run standalone",
+    "prepublish": "yarn run build"
+  },
+  "author": "Jared Forsyth",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "shell-quote": "^1.6.1",
+    "ws": "^3.3.1"
+  },
+  "devDependencies": {
+    "cross-env": "^3.1.4"
+  }
+}

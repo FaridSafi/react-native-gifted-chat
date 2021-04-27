@@ -1,0 +1,61 @@
+{
+  "name": "simple-plist",
+  "author": "Joe Wollard",
+  "license": "MIT",
+  "homepage": "https://github.com/wollardj/node-simple-plist.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wollardj/node-simple-plist.git"
+  },
+  "version": "1.1.0",
+  "description": "A wrapper utility for interacting with plist data.",
+  "main": "simple-plist.js",
+  "files": [
+    "simple-plist.js"
+  ],
+  "keywords": [
+    "plist",
+    "binary",
+    "bplist",
+    "xml"
+  ],
+  "scripts": {
+    "clean": "rimraf __tests__/write-test* coverage",
+    "jest": "jest --coverage ",
+    "jest:verbose": "jest --coverage --verbose",
+    "test": "run-s clean jest",
+    "test:verbose": "run-s clean jest:verbose"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx run-s test",
+      "pre-push": "npx run-s test"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "bplist-creator": "0.0.8",
+    "bplist-parser": "0.2.0",
+    "plist": "^3.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.4.2",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0"
+  }
+}

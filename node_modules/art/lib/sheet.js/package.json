@@ -1,0 +1,55 @@
+{
+
+	"name": "Sheet",
+	"version": "1.0.2 dev",
+
+	"description": "100% DOM-less JavaScript implementation of the styleSheets, cssRule & style APIs \nSupports custom and browser-incompatible CSS syntax like nested rules",
+	"keywords": [
+		"CSS",
+		"CSSOM",
+		"styleSheet",
+		"cssRule",
+		"style",
+		"parse"
+	],
+
+	"authors": ["Thomas Aylott"],
+	"contributors": [
+		{
+			"name": "Thomas Aylott",
+			"email": "thomas@subtlegradient.com",
+			"web": "http://subtlegradient.com"
+		}
+	],
+
+	"copyright":  "© 2010 Thomas Aylott",
+	"license": "MIT License",
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://creativecommons.org/licenses/MIT/"
+		}
+	],
+
+	"repositories": [{
+		"type": "git",
+		"url": "http://github.com/subtleGradient/Sheet.js/"
+	}],
+
+	"bugs": {
+		"web": "http://github.com/subtleGradient/Sheet.js/issues"
+	},
+
+	"directories": {
+		"src": "./Source",
+		"lib": "./Source",
+		"test": "./Test"
+	},
+
+	"sources": [
+		"Source/Sheet.js",
+		"Source/SheetParser.CSS.js"
+	],
+
+	"main":"./Source/Sheet"
+}

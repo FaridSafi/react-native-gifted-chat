@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+if (project.hasProperty('POM_ARTIFACT_ID')) {
+  apply from: 'gradle-maven-push.gradle'
+}
+
+def safeExtGet(prop, fallback) {
+  rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
+android {
+  compileSdkVersion safeExtGet('compileSdkVersion', 28)
+
+  defaultConfig {
+    minSdkVersion safeExtGet('minSdkVersion', 16)
+    targetSdkVersion safeExtGet('targetSdkVersion', 27)
+  }
+}
+
+dependencies {
+  def supportLibMajorVersion = supportLibVersion.split('\\.')[0] as int
+  def appCompatLibName =  (supportLibMajorVersion < 20) ? "androidx.appcompat:appcompat" : "com.android.support:appcompat-v7"
+  implementation "$appCompatLibName:$supportLibVersion"
+  implementation('com.facebook.react:react-native:+') {
+    exclude group: 'com.android.support'
+  }
+  implementation "com.google.android.gms:play-services-base:${safeExtGet('playServicesVersion', '16.1.0')}"
+  implementation "com.google.android.gms:play-services-maps:${safeExtGet('playServicesVersion', '16.1.0')}"
+  implementation 'com.google.maps.android:android-maps-utils:0.5'
+}

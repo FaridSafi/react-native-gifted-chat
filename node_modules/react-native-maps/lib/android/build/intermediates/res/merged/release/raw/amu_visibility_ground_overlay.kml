@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Folder>
+   <visibility>1</visibility>
+<GroundOverlay>
+   <name>GroundOverlay.kml</name>
+   <color>7fffffff</color>
+   <drawOrder>1</drawOrder>
+   <visibility>1</visibility>
+   <Icon>
+      <href>http://www.google.com/intl/en/images/logo.gif</href>
+      <refreshMode>onInterval</refreshMode>
+      <refreshInterval>86400</refreshInterval>
+      <viewBoundScale>0.75</viewBoundScale>
+   </Icon>
+   <LatLonBox>
+      <north>37.83234</north>
+      <south>37.832122</south>
+      <east>-122.373033</east>
+      <west>-122.373724</west>
+      <rotation>45</rotation>
+   </LatLonBox>
+</GroundOverlay>
+</Folder>
+</kml>

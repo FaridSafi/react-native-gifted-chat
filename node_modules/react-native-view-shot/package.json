@@ -1,0 +1,31 @@
+{
+  "name": "react-native-view-shot",
+  "version": "3.1.2",
+  "description": "Capture a React Native view to an image",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "keywords": [
+    "react-native",
+    "screenshot",
+    "viewshot",
+    "view-snapshot",
+    "snapshot",
+    "rasterize"
+  ],
+  "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
+  "homepage": "https://github.com/gre/react-native-view-shot",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gre/react-native-view-shot.git"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.116.1",
+    "react": "^16.12.0",
+    "react-native": "^0.61.5"
+  }
+}

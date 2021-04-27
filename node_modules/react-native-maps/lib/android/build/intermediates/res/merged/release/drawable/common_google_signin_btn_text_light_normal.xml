@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/common_google_signin_btn_text_light_normal_background" />
+    <item android:left="-36dp">
+        <bitmap android:src="@drawable/googleg_standard_color_18"
+                android:gravity="left|center_vertical" />
+    </item>
+</layer-list>

@@ -1,0 +1,16 @@
+{
+    "name": "@types/fbemitter",
+    "version": "2.0.32",
+    "description": "TypeScript definitions for Facebook's EventEmitter 2.0.0",
+    "license": "MIT",
+    "author": "kmxz <https://github.com/kmxz>",
+    "main": "",
+    "repository": {
+        "type": "git",
+        "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "typings": "index.d.ts",
+    "typesPublisherContentHash": "eab4389cbf3c9e00039b834852fa9d9166395b83649509662c4a7ad34e7e70a7"
+}

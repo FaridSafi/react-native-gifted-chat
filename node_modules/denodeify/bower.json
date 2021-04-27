@@ -1,0 +1,22 @@
+{
+  "name": "denodeify",
+  "main": "index.js",
+  "homepage": "https://github.com/matthew-andrews/denodeify",
+  "authors": [
+    "Matthew Andrews <matt@mattandre.ws>"
+  ],
+  "description": "Tool to turn functions with Node-style callback APIs into functions that return Promises.",
+  "keywords": [
+    "denodeify",
+    "Promise",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    ".editorconfig"
+  ]
+}

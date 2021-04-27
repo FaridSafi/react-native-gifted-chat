@@ -1,0 +1,30 @@
+{
+  "name": "react-native-iphone-x-helper",
+  "version": "1.3.1",
+  "description": "A library to help you design your react-native app for the iPhone X",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ptelad/react-native-iphone-x-helper.git"
+  },
+  "keywords": [
+    "react-native",
+    "ios",
+    "iphone-x",
+    "iphoneX",
+    "stylesheet"
+  ],
+  "author": "Elad Gil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ptelad/react-native-iphone-x-helper/issues"
+  },
+  "homepage": "https://github.com/ptelad/react-native-iphone-x-helper#readme",
+  "peerDependencies": {
+    "react-native": ">=0.42.0"
+  }
+}

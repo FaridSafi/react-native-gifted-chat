@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+  <head>
+    <title>advanced $script.js example</title>
+    <link rel="stylesheet" href="css/demos.css" type="text/css">
+    <script src="../dist/script.js"></script>
+  </head>
+  <body>
+
+      <h1>Using with Google Analytics</h1>
+      <p>As on <a href="http://twitter.com">twitter.com</a>:</p>
+
+      <pre>
+          &lt;script type="text/javascript"&gt;
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-XXXXX-X']);
+          _gaq.push(
+            ['_trackPageview'],
+            ['_setDomainName', 'twitter.com']
+          );
+
+          (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+          }());
+          &lt;/script&gt;
+      </pre>
+
+      <p>Which can be reduced to:</p>
+
+      <pre>
+          &lt;script&gt;
+          var _gaq=[['_setAccount','UA-XXXX-X'],['_trackPageview'],['_setDomainName','twitter.com']];
+          (function(d,t){
+              var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+              g.async=1;
+              g.src='//www.google-analytics.com/ga.js';
+              s.parentNode.insertBefore(g,s)
+          }(document,'script'));
+          &lt;/script&gt;
+      </pre>
+
+      <p>And with $script.js:</p>
+
+      <pre>
+          &lt;script&gt;
+          $script("//www.google-analytics.com/ga.js", function(){
+              var t = _gat._getTracker ("UA-XXXXX-X");
+              t._setDomainName("twitter.com");
+              //t._initData();
+              t._trackPageview();
+          });
+          &lt;/script&gt;
+      </pre>
+      <script>
+      // $script("//www.google-analytics.com/ga.js", function(){
+      //     var t = _gat._getTracker ("UA-XXXXX-X");
+      //     t._setDomainName("twitter.com");
+      //     //t._initData();
+      //     t._trackPageview();
+      // });
+      </script>
+  </body>
+</html>

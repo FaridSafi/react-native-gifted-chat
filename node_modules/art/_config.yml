@@ -1,0 +1,3 @@
+exclude: ['index.html.markdown']
+keep_files: ['.js']
+markdown: kramdown

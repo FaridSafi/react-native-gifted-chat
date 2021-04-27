@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"गृह खोज्नुहोस्"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"माथि खोज्नुहोस्"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"थप विकल्पहरू"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"सम्पन्न भयो"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"सबै हेर्नुहोस्"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"एउटा अनुप्रयोग छान्नुहोस्"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"निष्क्रिय पार्नुहोस्"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"सक्रिय गर्नुहोस्"</string>
+    <string msgid="1302280443949172191" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="1324831542140195728" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="8362206064229013510" name="abc_menu_delete_shortcut_label">"delete"</string>
+    <string msgid="8341180395196749340" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="4792426091847145555" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="7643535737296831317" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="8126296154200614004" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="2378550843553983978" name="abc_menu_space_shortcut_label">"space"</string>
+    <string msgid="9002602288060866689" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="1351762916121158029" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"खोज्नुहोस्..."</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"प्रश्‍न हटाउनुहोस्"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"जिज्ञासाको खोज गर्नुहोस्"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"खोज्नुहोस्"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"जिज्ञासा पेस गर्नुहोस्"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"भ्वाइस खोजी"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"साझेदारी गर्नुहोस्..."</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"<ns1:g id="APPLICATION_NAME">%s</ns1:g> सँग आदान प्रदान गर्नुहोस्"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"संक्षिप्त पार्नुहोस्"</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"सक्रिय गर्नुहोस्"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ले तपाईँले Google Play सेवाहरू सक्षम नगरेसम्म काम गर्दैन।"</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Google Play सेवाहरू सक्षम पार्नुहोस्"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"स्थापना गर्नुहोस्"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> Google Play services बिना सञ्चालन हुने छैन र तपाईँको यन्त्रमा Google Play services उपलब्ध छैनन्।"</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Google Play सेवाहरू प्राप्त गर्नुहोस्"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Google Play सेवाको उपलब्धता"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Google Play सेवाहरूका त्रुटि"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"<ns1:g id="APP_NAME">%1$s</ns1:g> लाई Google Play services सँग सहकार्य गर्न समस्या भइरहेको छ। कृपया फेरि प्रयास गर्नुहोस्।"</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> Google Play services बिना सञ्चालन हुने छैन र तपाईँको यन्त्रले Google Play services लाई समर्थन गर्दैन।"</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"अद्यावधिक गर्नुहोस्"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> तपाईंले Google प्ले सेवाहरू अद्यावधिक नगरेसम्म सञ्चालन हुँदैन।"</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Google Play सेवाहरू अद्यावधिक गर्नुहोस्"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"Google Play सेवाहरू <ns1:g id="APP_NAME">%1$s</ns1:g> बिना सञ्‍चालन हुँदैन, जुन हाल अद्यावधिक भइरहेका छन्।"</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"Google Play सेवाहरूको नयाँ संस्करण आवश्यक छ। यो आफै छिट्टै नै अद्यावधिक हुनेछ।"</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"फोनमा खोल्नुहोस्"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"साइन इन गर्नुहोस्"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Google मार्फत साइन‍ इन गर्नुहोस्"</string>
+    <string msgid="146198913615257606" name="search_menu_title">"खोज्नुहोस्"</string>
+    <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"९९९+"</string>
+</resources>

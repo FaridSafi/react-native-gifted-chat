@@ -1,0 +1,2 @@
+import*as React from'react';var context=React.createContext({showActionSheetWithOptions:function showActionSheetWithOptions(options,callback){}});export function useActionSheet(){return React.useContext(context);}var Provider=context.Provider,Consumer=context.Consumer;export{Provider,Consumer};
+//# sourceMappingURL=context.js.map

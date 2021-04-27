@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_enabled="false"
+        android:drawable="@drawable/common_google_signin_btn_text_disabled" />
+    <!-- Pressed state is handled by common_google_signin_btn_tint -->
+    <item
+        android:state_focused="true"
+        android:drawable="@drawable/common_google_signin_btn_text_light_focused" />
+    <item
+        android:drawable="@drawable/common_google_signin_btn_text_light_normal" />
+</selector>

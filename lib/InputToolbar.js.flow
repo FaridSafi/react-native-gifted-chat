@@ -1,0 +1,31 @@
+// @flow
+import * as React from 'react'
+import type { ComposerProps } from './Composer'
+import type { SendProps } from './Send'
+import type { ActionsProps } from './Actions'
+import type {
+  TextStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type InputToolbarProps = $ReadOnly<{|
+  options?: {
+    [key: string]: any,
+  },
+  optionTintColor?: string,
+  containerStyle?: ViewStyleProp,
+  primaryStyle?: ViewStyleProp,
+  accessoryStyle?: ViewStyleProp,
+  renderAccessory?: InputToolbarProps => React.Node,
+  renderActions?: ActionsProps => React.Node,
+  renderSend?: SendProps => React.Node,
+  renderComposer?: ComposerProps => React.Node,
+  onPressActionButton: () => void,
+|}>
+
+export default class InputToolbar extends React.Component<
+  InputToolbarProps,
+  {|
+    position: string,
+  |},
+> {}

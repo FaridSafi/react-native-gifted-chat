@@ -1,0 +1,3 @@
+someFunc@foo.js:4:0
+someOtherFunc@subdir1/bar.js:255:6
+fn@fileThatDoesntExist.js:10:20

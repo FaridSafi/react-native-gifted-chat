@@ -1,0 +1,40 @@
+{
+  "name": "slugify",
+  "version": "1.4.0",
+  "description": "Slugifies a String",
+  "keywords": [
+    "slugify",
+    "slug",
+    "url",
+    "urlify"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/simov/slugify",
+  "author": "Simeon Velichkov <simeonvelichkov@gmail.com> (https://simov.github.io)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simov/slugify.git"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0"
+  },
+  "main": "./slugify.js",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "slugify.d.ts",
+    "slugify.js"
+  ],
+  "types": "slugify.d.ts",
+  "scripts": {
+    "build": "node bin/build",
+    "test:ci": "mocha test/",
+    "test:cov": "istanbul cover _mocha",
+    "test": "npm run build && npm run test:ci"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}

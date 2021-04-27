@@ -1,0 +1,21 @@
+{
+  "name": "@react-native-community/cli-debugger-ui",
+  "version": "3.0.0",
+  "license": "MIT",
+  "main": "./build/middleware",
+  "scripts": {
+    "build": "yarn build:ui && yarn build:middleware",
+    "build:ui": "parcel build src/ui/index.html --out-dir build/ui --public-url '/debugger-ui'",
+    "build:middleware": "tsc"
+  },
+  "files": [
+    "build"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "serve-static": "^1.13.1"
+  }
+}

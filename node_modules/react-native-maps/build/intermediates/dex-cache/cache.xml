@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/b20b9ad411ad4d5cbf4140da2b6c594701538863/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="cf836a435a496eb22ff2aa69aa1e619462549f81">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_134da4565ed417fdd76b27003a3402291ded9d58.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/cb26d5325ec00f619afee6d93e8e79f43637388a/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="5a61f17cd72e20aa4323cbf5f909b7c609619275">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_88a8ad07bf6da38316c9a3d065b49fa52be4fa18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.m2/repository/com/google/code/findbugs/jsr305/3.0.0/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_756ea7307728fa82c8df0b6498f4bc9528a0a004.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/7edc74544a184dac950b84de4911d97f0f1c6339/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="050f688115ea65a0292d8483a6ffe6bcdab1e2ef">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_cccbb1f9b7713fc4e12ff83845d40f32ee9a8136.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_ea345792711ef1967b2ffde21951262940b4d689.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/c97c8b10574684ba262e7a6013ec9dfae5c4a5e4/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="93c10d68ab5ea070f15782ae6d3a28d1f1d8f45e">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_acda95d320e2ad512781e4b42f7e1f5981231ce8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.9.0/f824591a0016efbaeddb8300bee54832a1398cfa/okio-1.9.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/okio-1.9.0_a1b4d1fbd024fd98506517ec28872b7d426fe265.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/19388400d20de4068237fa649d710e0d0706fbe3/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="518768f3200963fbfec652f498da2c9d39245234">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_a5951bc5cf90fe0de9b8c665e4a87a7b0851623a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.1/c7c4f9e35c2fd5900da24f9872e3971801f08ce0/okhttp-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/okhttp-3.4.1_b8c510a922705cf270a807c010425b40963e376c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/0233b5cdf4e573209eb5f1760fe2035cb08aff72/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="ba9b39366b723ccff6359d1117332968e98a4aca">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_ac2aca87f5c02863bf1334d5e6ba7b9a68877958.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/2803449e219e57a4c49309978c6f137b088f2d8d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="dd1d0d84da2cff18f741c63a9c3af7d9aa89fdd6">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_d5f1288a34b4dd241b62bf1d804e7172b0baa0ea.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/9de07f855699b2b8ac2599d843a55b224abdffae/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="5cc5ef8347a6bafa14556cbd35230aa9b3431bb0">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_4356f623f965ecdaafc369f2e9f10a142d462050.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_7d031554792638a0455b85a5af3957220ee2170e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/de2f8319880835e03d534ba52bc709c676d6b64a/output/jars/libs/infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_1a9e2465ccae613362faa03562e92a0b2eda04c9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/63fa62dbc535954d274ee616ec8a670bc1b66bac/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="9ed08fab37c3a572da1d9ed2bf2e36c8d3e2bc48">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_f0c3829650337b31f653ad16a5109e8e6c72e92c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/bb57e68892baaf1788aca00350279837fd896638/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d9c4402c3057225d80cbbbec52154e7a25b0ebdf">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_8ab72737a02d5badcb170f89de9306ce555bc2fb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/283460cf218b572988a2ee8f0deefb072a62edca/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_e8d397d85625d1c2635d85874d518d125f7e25fa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/de2f8319880835e03d534ba52bc709c676d6b64a/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="0d3e48e200296061415952a358fad487e129adaa">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_4b9ca88d9c6e25fc6b979431312994109bc1afde.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/f9225df82d0f4ac14812ac823d5e016599b50c38/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="2668e49e4e31c7d451b76a36009b902bf44e0d70">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_f58061e22263dbf50ddc1f12aa9957b6d2b51004.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.0/support-annotations-25.3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="dd84903d2e1af25a6081ef9038ad863cb14ca3a0">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/support-annotations-25.3.0_d95a9fd2870e67913c6c9c7826032eb44309e6f1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/ed3e94ee80a3cb057e9ddff13401cd370e4c3f7d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="4b746ef0fd46acb5aaf3d9ab9a4cec22c28d3211">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_9d0e2bdcc822c3ed30e93b834bf754644fb67a3c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/7c70341499e6699670ddbb5702bdd8a88bbb716d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_76f7c20802d5da7e6a914ed7a3c1bc2c59b5efcd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/Desktop/OSS/react-native-maps/lib/android/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="c3daa482d7266a7dd9f345f6cdc234bb0591ea9a">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_c90fe24b23a0f0ffbd25a751c532596f006b6f8e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/af94b7b3c0189fd47f96792c422e037f8e5fe5fd/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6d0d5e86f5b7203834df01ed78ebfdd5cbf74d48">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_53b6597ee3007d981bd7dcdd74388322e9c290c1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/55f2c8bc7ea71daa8f5f55f56f77d23bb796791c/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="5803db663655ef5cb38c6bcb17ba326fdb9edfbd">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_3d9d84ffd4e5f0af78a2be007230c4e7507e6a7a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.4.1/63994437f62bc861bc20c605d12962f7246116d1/okhttp-urlconnection-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="63994437f62bc861bc20c605d12962f7246116d1">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.4.1_108cb52f5a05b21cccf3ae3833cfa1dfbab59cc5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/7bd41976306cb4860b859f303e91a4c8dcef037e/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="70f23cb87278f89aa51e6f57e8f0fd5266572d95">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_ec53f93b448c64bbf556e23cfa33cf98a996946c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/50b3cc8e688479ece0d3744abac5309843781020/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="93c1199fcb0a34b980e6fff8350daff62e696ec2">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_ff8ef5686992978e6dade196551403fe98a0f343.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/4823d382c6e53b3484bcbf31334b3feb94d716db/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="425c7b17887e5c3f8cbdf67ba171bc246f29b42c">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_207882f5c66bc571393603294ea3c23adda92ec1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-ws/3.4.1/8ace66ef7002d98f633377c9e67daeeb196d8c3b/okhttp-ws-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="8ace66ef7002d98f633377c9e67daeeb196d8c3b">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/okhttp-ws-3.4.1_f535d55fb32a3531903126496587f04e59e23c4c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/36a7b501a4fc4ebb7df2f33472c39d6fea484fcf/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d6a04527c17597019dad82777c5094a3d60d1c33">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_a31709cc130e7b6ae19e4efb2ce3b59b21a1dd1b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_d62ee606b503608423b9f0a9ab6250bd4012d9f1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/christopherdro/.android/build-cache/ab80f95d35804ea2b20c3c49c7d1dd53d0f0010f/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/christopherdro/Desktop/OSS/react-native-maps/example/android/app/build/intermediates/pre-dexed/debug/classes_30e14dcab7820830db864136e22836fe9c76d44f.jar" />
+    </item>
+
+</items>

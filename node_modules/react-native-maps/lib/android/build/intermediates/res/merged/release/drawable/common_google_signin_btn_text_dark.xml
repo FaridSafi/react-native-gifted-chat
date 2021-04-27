@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Currently Google SignIn button in Android does not support dark scheme.
+    Using light scheme instead -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_enabled="false"
+        android:drawable="@drawable/common_google_signin_btn_text_disabled" />
+    <!-- Pressed state is handled by common_google_signin_btn_tint -->
+    <item
+        android:state_focused="true"
+        android:drawable="@drawable/common_google_signin_btn_text_dark_focused" />
+    <item
+        android:drawable="@drawable/common_google_signin_btn_text_dark_normal" />
+</selector>

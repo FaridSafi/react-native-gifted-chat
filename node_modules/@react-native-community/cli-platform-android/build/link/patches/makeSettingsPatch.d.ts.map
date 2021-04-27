@@ -1,0 +1,1 @@
+{"version":3,"file":"makeSettingsPatch.d.ts","sourceRoot":"","sources":["../../../src/link/patches/makeSettingsPatch.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAMH,MAAM,CAAC,OAAO,UAAU,iBAAiB,CACvC,IAAI,EAAE,MAAM,EACZ,aAAa,EAAE;IAAC,SAAS,EAAE,MAAM,CAAA;CAAC,EAClC,aAAa,EAAE;IAAC,kBAAkB,EAAE,MAAM,CAAA;CAAC;;;EAkB5C"}

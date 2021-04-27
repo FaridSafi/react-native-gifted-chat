@@ -1,0 +1,35 @@
+{
+  "name": "react-native-lightbox",
+  "version": "0.8.1",
+  "description": "Images etc in Full Screen Lightbox Popovers for React Native",
+  "main": "Lightbox.js",
+  "scripts": {
+    "test": "flow check"
+  },
+  "keywords": [
+    "react-native",
+    "react-component",
+    "react-native-component",
+    "react",
+    "mobile",
+    "ios",
+    "android",
+    "ui",
+    "lightbox",
+    "gallery",
+    "image"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://oblador@github.com/oblador/react-native-lightbox.git"
+  },
+  "author": "Joel Arvidsson <joel@oblador.se>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oblador/react-native-lightbox/issues"
+  },
+  "homepage": "https://github.com/oblador/react-native-lightbox",
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  }
+}

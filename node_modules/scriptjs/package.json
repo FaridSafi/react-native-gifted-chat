@@ -1,0 +1,30 @@
+{
+  "name": "scriptjs",
+  "description": "Asyncronous JavaScript loader and dependency manager",
+  "keywords": [
+    "ender",
+    "script",
+    "dependency",
+    "ajax",
+    "jsonp",
+    "loader"
+  ],
+  "version": "2.5.9",
+  "license": "MIT",
+  "homepage": "https://github.com/ded/script.js",
+  "author": "Dustin Diaz <dustin@dustindiaz.com> (http://dustindiaz.com)",
+  "contributors": [
+    "Jacob Thornton <jacob@twitter.com> (https://github.com/fat)"
+  ],
+  "main": "./dist/script.js",
+  "ender": "./src/ender.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ded/script.js.git"
+  },
+  "devDependencies": {
+    "sink-test": "*",
+    "domready": "*",
+    "smoosh": "*"
+  }
+}

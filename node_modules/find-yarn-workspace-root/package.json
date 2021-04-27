@@ -1,0 +1,32 @@
+{
+  "name": "find-yarn-workspace-root",
+  "version": "1.2.1",
+  "description": "Algorithm for finding the root of a yarn workspace, extracted from yarnpkg.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/square/find-yarn-workspace-root.git"
+  },
+  "main": "index.js",
+  "types": "index.d.ts",
+  "author": "Square, Inc.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "mocha tests/**/*-test.js",
+    "commitmsg": "commitlint -e $GIT_PARAMS"
+  },
+  "files": [
+    "index.d.ts"
+  ],
+  "dependencies": {
+    "fs-extra": "^4.0.3",
+    "micromatch": "^3.1.4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^5.2.6",
+    "@commitlint/config-conventional": "^5.2.3",
+    "chai": "^4.1.2",
+    "husky": "^0.14.3",
+    "mocha": "^4.0.1",
+    "standard-version": "^4.2.0"
+  }
+}

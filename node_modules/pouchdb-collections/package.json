@@ -1,0 +1,24 @@
+{
+  "name": "pouchdb-collections",
+  "version": "1.0.1",
+  "description": "Map and Set shims for PouchDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nolanlawson/pouchdb-collections.git"
+  },
+  "keywords": [
+    "map",
+    "set",
+    "collections"
+  ],
+  "author": "Calvin Metcalf <cmetcalf@appgeo.com>",
+  "license": "Apache 2",
+  "bugs": {
+    "url": "https://github.com/nolanlawson/pouchdb-collections/issues"
+  },
+  "homepage": "https://github.com/nolanlawson/pouchdb-collections"
+}

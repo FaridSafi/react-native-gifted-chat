@@ -1,0 +1,54 @@
+{
+  "name": "react-native-parsed-text",
+  "version": "0.0.22",
+  "description": "Parse text and make them into multiple React Native Text elements",
+  "main": "src/ParsedText.js",
+  "types": "src/ParsedText.d.ts",
+  "scripts": {
+    "prettier": "prettier",
+    "prettier:all": "prettier --write '**/*.json' '**/*.js' '**/*.ts' ",
+    "lint": "eslint",
+    "test": "jest"
+  },
+  "bugs": {
+    "url": "https://github.com/taskrabbit/react-native-parsed-text/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/taskrabbit/react-native-parsed-text.git"
+  },
+  "homepage": "https://github.com/taskrabbit/react-native-parsed-text#readme",
+  "keywords": [
+    "text",
+    "react-native",
+    "url",
+    "phone",
+    "react",
+    "react-component"
+  ],
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@babel/core": "7.10.x",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "26.0.x",
+    "babel-preset-expo": "8.2.x",
+    "eslint": "7.2.x",
+    "jest": "26.0.x",
+    "metro-react-native-babel-preset": "0.57.x || 0.58.x || 0.59.x",
+    "prettier": "2.0.x",
+    "react": "16.13.x",
+    "react-native": "0.62.x",
+    "react-test-renderer": "16.13.x"
+  },
+  "author": "jrichardlai",
+  "license": "MIT",
+  "dependencies": {
+    "prop-types": "^15.7.x"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

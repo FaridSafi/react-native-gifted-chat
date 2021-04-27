@@ -1,0 +1,21 @@
+{
+  "name": "noop-fn",
+  "version": "1.0.0",
+  "description": "It's noop function. It does nothing.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inikulin/noop-fn.git"
+  },
+  "keywords": [
+    "noop",
+    "function",
+    "nothing"
+  ],
+  "author": "Ivan Nikulin (ifaaan@gmail.com, https://github.com/inikulin)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inikulin/noop-fn/issues"
+  },
+  "homepage": "https://github.com/inikulin/noop-fn#readme"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@react-native-community/cli-tools",
+  "version": "3.0.0",
+  "license": "MIT",
+  "main": "build/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "lodash": "^4.17.5",
+    "mime": "^2.4.1",
+    "node-fetch": "^2.5.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.123",
+    "@types/mime": "^2.0.1",
+    "@types/node-fetch": "^2.3.3"
+  },
+  "files": [
+    "build"
+  ],
+  "gitHead": "ba298d9c47af522f0377325bebc6c2075d41790a"
+}

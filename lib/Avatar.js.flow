@@ -1,0 +1,27 @@
+// @flow
+import * as React from 'react'
+import type { IMessage, User, LeftRightStyle } from './types'
+import type {
+  ImageStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type AvatarProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  currentMessage?: TMessage,
+  previousMessage?: TMessage,
+  nextMessage?: TMessage,
+  position: 'left' | 'right',
+  renderAvatarOnTop?: boolean,
+  showAvatarForEveryMessage?: boolean,
+  imageStyle?: LeftRightStyle<ImageStyleProp>,
+  containerStyle?: LeftRightStyle<ViewStyleProp>,
+  renderAvatar?:
+    | (($Diff<AvatarProps<TMessage>, {| renderAvatar: * |}>) => React.Node)
+    | null,
+  onPressAvatar?: User => void,
+  onLongPressAvatar?: User => void,
+|}>
+
+export default class Avatar<
+  TMessage: IMessage = IMessage,
+> extends React.Component<AvatarProps<TMessage>> {}

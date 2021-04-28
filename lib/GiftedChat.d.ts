@@ -18,7 +18,7 @@ import MessageContainer from './MessageContainer';
 import Send from './Send';
 import Time from './Time';
 import GiftedAvatar from './GiftedAvatar';
-import { IMessage, User, Reply, LeftRightStyle, MessageVideoProps, MessageAudioProps } from './Models';
+import { IMessage, User, Reply, LeftRightStyle } from './Models';
 import QuickReplies from './QuickReplies';
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     messages?: TMessage[];
@@ -77,13 +77,10 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode;
     renderAvatar?(props: Avatar<TMessage>['props']): React.ReactNode | null;
     renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode;
-    renderSystemMessage?(props: SystemMessage<TMessage>['props']): React.ReactNode;
     onLongPress?(context: any, message: any): void;
     renderMessage?(message: Message<TMessage>['props']): React.ReactNode;
     renderMessageText?(messageText: MessageText<TMessage>['props']): React.ReactNode;
     renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode;
-    renderMessageVideo?(props: MessageVideoProps<TMessage>): React.ReactNode;
-    renderMessageAudio?(props: MessageAudioProps<TMessage>): React.ReactNode;
     renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode;
     renderDay?(props: Day<TMessage>['props']): React.ReactNode;
     renderTime?(props: Time<TMessage>['props']): React.ReactNode;
@@ -147,11 +144,7 @@ declare class GiftedChat<TMessage extends IMessage = IMessage> extends React.Com
         renderMessage: null;
         renderMessageText: null;
         renderMessageImage: null;
-        renderMessageVideo: null;
-        renderMessageAudio: null;
         imageProps: {};
-        videoProps: {};
-        audioProps: {};
         lightboxProps: {};
         textInputProps: {};
         listViewProps: {};
@@ -215,8 +208,6 @@ declare class GiftedChat<TMessage extends IMessage = IMessage> extends React.Com
         renderMessageText: PropTypes.Requireable<(...args: any[]) => any>;
         renderMessageImage: PropTypes.Requireable<(...args: any[]) => any>;
         imageProps: PropTypes.Requireable<object>;
-        videoProps: PropTypes.Requireable<object>;
-        audioProps: PropTypes.Requireable<object>;
         lightboxProps: PropTypes.Requireable<object>;
         renderCustomView: PropTypes.Requireable<(...args: any[]) => any>;
         renderDay: PropTypes.Requireable<(...args: any[]) => any>;

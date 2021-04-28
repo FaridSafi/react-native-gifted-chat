@@ -5,10 +5,8 @@ import QuickReplies from './QuickReplies';
 import MessageText from './MessageText';
 import MessageImage from './MessageImage';
 import Time from './Time';
-import { User, IMessage, LeftRightStyle, Reply, Omit, MessageVideoProps, MessageAudioProps } from './Models';
+import { User, IMessage, LeftRightStyle, Reply, Omit } from './Models';
 export declare type RenderMessageImageProps<TMessage extends IMessage> = Omit<BubbleProps<TMessage>, 'containerStyle' | 'wrapperStyle'> & MessageImage['props'];
-export declare type RenderMessageVideoProps<TMessage extends IMessage> = Omit<BubbleProps<TMessage>, 'containerStyle' | 'wrapperStyle'> & MessageVideoProps<TMessage>;
-export declare type RenderMessageAudioProps<TMessage extends IMessage> = Omit<BubbleProps<TMessage>, 'containerStyle' | 'wrapperStyle'> & MessageAudioProps<TMessage>;
 export declare type RenderMessageTextProps<TMessage extends IMessage> = Omit<BubbleProps<TMessage>, 'containerStyle' | 'wrapperStyle'> & MessageText['props'];
 export interface BubbleProps<TMessage extends IMessage> {
     user?: User;
@@ -34,8 +32,6 @@ export interface BubbleProps<TMessage extends IMessage> {
     onLongPress?(context?: any, message?: any): void;
     onQuickReply?(replies: Reply[]): void;
     renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode;
-    renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode;
-    renderMessageAudio?(props: RenderMessageAudioProps<TMessage>): React.ReactNode;
     renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode;
     renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode;
     renderTime?(timeProps: Time['props']): React.ReactNode;
@@ -53,8 +49,6 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         onPress: null;
         onLongPress: null;
         renderMessageImage: null;
-        renderMessageVideo: null;
-        renderMessageAudio: null;
         renderMessageText: null;
         renderCustomView: null;
         renderUsername: null;
@@ -84,8 +78,6 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
         touchableProps: PropTypes.Requireable<object>;
         onLongPress: PropTypes.Requireable<(...args: any[]) => any>;
         renderMessageImage: PropTypes.Requireable<(...args: any[]) => any>;
-        renderMessageVideo: PropTypes.Requireable<(...args: any[]) => any>;
-        renderMessageAudio: PropTypes.Requireable<(...args: any[]) => any>;
         renderMessageText: PropTypes.Requireable<(...args: any[]) => any>;
         renderCustomView: PropTypes.Requireable<(...args: any[]) => any>;
         isCustomViewBottom: PropTypes.Requireable<boolean>;
@@ -138,8 +130,6 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
     renderQuickReplies(): {} | null | undefined;
     renderMessageText(): {} | null | undefined;
     renderMessageImage(): {} | null | undefined;
-    renderMessageVideo(): {} | null | undefined;
-    renderMessageAudio(): {} | null | undefined;
     renderTicks(): {} | null | undefined;
     renderTime(): {} | null | undefined;
     renderUsername(): JSX.Element | null;

@@ -1,8 +1,8 @@
 /// <reference types="react" />
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp } from 'react-native';
 export { ActionsProps } from './Actions';
 export { AvatarProps } from './Avatar';
-export { BubbleProps, RenderMessageImageProps, RenderMessageVideoProps, RenderMessageAudioProps, RenderMessageTextProps, } from './Bubble';
+export { BubbleProps, RenderMessageImageProps, RenderMessageTextProps, } from './Bubble';
 export { ComposerProps } from './Composer';
 export { DayProps } from './Day';
 export { GiftedAvatarProps } from './GiftedAvatar';
@@ -43,8 +43,6 @@ export interface IMessage {
     createdAt: Date | number;
     user: User;
     image?: string;
-    video?: string;
-    audio?: string;
     system?: boolean;
     sent?: boolean;
     received?: boolean;
@@ -52,16 +50,3 @@ export interface IMessage {
     quickReplies?: QuickReplies;
 }
 export declare type IChatMessage = IMessage;
-export interface MessageVideoProps<TMessage extends IMessage> {
-    currentMessage?: TMessage;
-    containerStyle?: StyleProp<ViewStyle>;
-    videoStyle?: StyleProp<ViewStyle>;
-    videoProps?: object;
-    lightboxProps?: object;
-}
-export interface MessageAudioProps<TMessage extends IMessage> {
-    currentMessage?: TMessage;
-    containerStyle?: StyleProp<ViewStyle>;
-    audioStyle?: StyleProp<ViewStyle>;
-    audioProps?: object;
-}

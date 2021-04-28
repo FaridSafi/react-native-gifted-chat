@@ -37,6 +37,9 @@ export interface QuickReplies {
     values: Reply[];
     keepIt?: boolean;
 }
+export interface ITag {
+    content: string;
+}
 export interface IMessage {
     _id: string | number;
     text: string;
@@ -48,5 +51,6 @@ export interface IMessage {
     received?: boolean;
     pending?: boolean;
     quickReplies?: QuickReplies;
+    tags?: Array<ITag>;
 }
 export declare type IChatMessage = IMessage;

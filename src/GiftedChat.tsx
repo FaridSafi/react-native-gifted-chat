@@ -45,14 +45,7 @@ import {
   TIME_FORMAT,
   DATE_FORMAT,
 } from './Constant'
-import {
-  IMessage,
-  User,
-  Reply,
-  LeftRightStyle,
-  MessageVideoProps,
-  MessageAudioProps,
-} from './Models'
+import { IMessage, User, Reply, LeftRightStyle } from './Models'
 import QuickReplies from './QuickReplies'
 
 dayjs.extend(localizedFormat)
@@ -131,7 +124,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   options?: { [key: string]: any }
   optionTintColor?: string
   quickReplyStyle?: StyleProp<ViewStyle>
-  /* optional prop used to place customView below text, image and video views; default is false */
+  /* optional prop used to place customView below text and image views; default is false */
   isCustomViewBottom?: boolean
   /* infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
   infiniteScroll?: boolean
@@ -161,8 +154,6 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   renderAvatar?(props: Avatar<TMessage>['props']): React.ReactNode | null
   /* Custom message bubble */
   renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
-  /*Custom system message */
-  renderSystemMessage?(props: SystemMessage<TMessage>['props']): React.ReactNode
   /* Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see example using showActionSheetWithOptions()) */
   onLongPress?(context: any, message: any): void
   /* Reverses display order of messages; default is true */
@@ -174,10 +165,6 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   ): React.ReactNode
   /* Custom message image */
   renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
-  /* Custom message video */
-  renderMessageVideo?(props: MessageVideoProps<TMessage>): React.ReactNode
-  /* Custom message video */
-  renderMessageAudio?(props: MessageAudioProps<TMessage>): React.ReactNode
   /* Custom view inside the bubble */
   renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom day above a message*/
@@ -265,11 +252,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderMessage: null,
     renderMessageText: null,
     renderMessageImage: null,
-    renderMessageVideo: null,
-    renderMessageAudio: null,
     imageProps: {},
-    videoProps: {},
-    audioProps: {},
     lightboxProps: {},
     textInputProps: {},
     listViewProps: {},
@@ -338,8 +321,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderMessageText: PropTypes.func,
     renderMessageImage: PropTypes.func,
     imageProps: PropTypes.object,
-    videoProps: PropTypes.object,
-    audioProps: PropTypes.object,
     lightboxProps: PropTypes.object,
     renderCustomView: PropTypes.func,
     renderDay: PropTypes.func,

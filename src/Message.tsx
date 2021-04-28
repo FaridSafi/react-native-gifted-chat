@@ -111,8 +111,6 @@ export default class Message<
       next.createdAt !== current.createdAt ||
       next.text !== current.text ||
       next.image !== current.image ||
-      next.video !== current.video ||
-      next.audio !== current.audio ||
       previousMessage !== nextPropsPreviousMessage ||
       nextMessage !== nextPropsMessage ||
       shouldUpdate

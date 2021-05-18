@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { View, StyleSheet, ViewStyle } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  ViewStyle,
+  TouchableWithoutFeedback,
+} from 'react-native'
 
 import Avatar from './Avatar'
 import Bubble from './Bubble'
@@ -176,25 +181,27 @@ export default class Message<
     if (currentMessage) {
       const sameUser = isSameUser(currentMessage, nextMessage!)
       return (
-        <View>
-          {this.renderDay()}
-          {currentMessage.system ? (
-            this.renderSystemMessage()
-          ) : (
-            <View
-              style={[
-                styles[position].container,
-                { marginBottom: sameUser ? 2 : 10 },
-                !this.props.inverted && { marginBottom: 2 },
-                containerStyle && containerStyle[position],
-              ]}
-            >
-              {this.props.position === 'left' ? this.renderAvatar() : null}
-              {this.renderBubble()}
-              {this.props.position === 'right' ? this.renderAvatar() : null}
-            </View>
-          )}
-        </View>
+        <TouchableWithoutFeedback>
+          <View>
+            {this.renderDay()}
+            {currentMessage.system ? (
+              this.renderSystemMessage()
+            ) : (
+              <View
+                style={[
+                  styles[position].container,
+                  { marginBottom: sameUser ? 2 : 10 },
+                  !this.props.inverted && { marginBottom: 2 },
+                  containerStyle && containerStyle[position],
+                ]}
+              >
+                {this.props.position === 'left' ? this.renderAvatar() : null}
+                {this.renderBubble()}
+                {this.props.position === 'right' ? this.renderAvatar() : null}
+              </View>
+            )}
+          </View>
+        </TouchableWithoutFeedback>
       )
     }
     return null

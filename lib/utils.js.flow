@@ -1,0 +1,16 @@
+// @flow
+import type { IMessage } from './types'
+
+declare export function isSameDay(
+  currentMessage: IMessage,
+  diffMessage: IMessage | null | void,
+): boolean
+
+declare export function isSameUser(
+  currentMessage: IMessage,
+  diffMessage: IMessage | null | void,
+): boolean
+
+declare export var warning: (...args: any) => void
+
+declare export var error: (...args: any) => void

@@ -56,15 +56,15 @@
 
 <p align="center">
   <br/>
-  <a href="https://getstream.io/chat/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">
+  <a href="https://getstream.io/chat/react-native-chat/tutorial/?utm_source=https://github.com/FaridSafi/react-native-gifted-chat&utm_medium=github&utm_content=developer&utm_term=react-native" target="_blank">
     <img src="https://i.imgur.com/oU7XYkk.png">
   </a>
   <br>
   <p align="center">
-    Scalable <a href="https://getstream.io/chat/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">chat API/Server</a> written in Go
+    Scalable <a href="https://getstream.io/chat/react-chat/tutorial/?utm_source=https://github.com/FaridSafi/react-native-gifted-chat&utm_medium=github&utm_content=developer&utm_term=react-native" target="_blank">chat API/Server</a> written in Go
   </p>
   <p align="center">
-    <a href="https://getstream.io/chat/get_started/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">API Tour</a> | <a href="https://dev.to/nickparsons/react-native-chat-with-chuck-norris-3h7m?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">React Native Gifted tutorial</a>
+    <a href="https://getstream.io/chat/get_started/?utm_source=https://github.com/FaridSafi/react-native-gifted-chat&utm_medium=github&utm_content=developer&utm_term=react-native" target="_blank">API Tour</a> | <a href="https://dev.to/nickparsons/react-native-chat-with-chuck-norris-3h7m?utm_source=https://github.com/FaridSafi/react-native-gifted-chat&utm_medium=github&utm_content=developer&utm_term=react-native" target="_blank">React Native Gifted tutorial</a>
   </p>
 </p>
 

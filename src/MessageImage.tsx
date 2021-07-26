@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 // TODO: support web
 // @ts-ignore
-import Lightbox from 'react-native-lightbox'
+import Lightbox from 'react-native-lightbox-v2'
 import { IMessage } from './Models'
 import { StylePropType } from './utils'
 

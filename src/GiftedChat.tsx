@@ -17,6 +17,8 @@ import {
   ActionSheetOptions,
 } from '@expo/react-native-action-sheet'
 import uuid from 'uuid'
+// import 'react-native-get-random-values';    // to fix the uuid problem V7 - Make sure to install react-native-get-random-values https://github.com/LinusU/react-native-get-random-values#readme
+// import { v4 as uuid } from 'uuid';          // to fix the uuid problem V7 - If you decide to upgrade uuid https://www.npmjs.com/package/uuid#upgrading-from-uuid3x
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
@@ -241,7 +243,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     text: undefined,
     placeholder: DEFAULT_PLACEHOLDER,
     disableComposer: false,
-    messageIdGenerator: () => uuid.v4(),
+    messageIdGenerator: () => uuid.v4(), // to fix the uuid problem V7, remove the .v4
     user: {},
     onSend: () => {},
     locale: null,

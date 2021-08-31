@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Platform, StyleSheet, TextInput, TextInputProps } from 'react-native'
+import { Platform, StyleSheet, TextInputProps } from 'react-native'
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
 import Color from './Color'
 import { StylePropType } from './utils'
+import { MentionInput, PartType } from 'react-native-controlled-mentions'
 
 const styles = StyleSheet.create({
   textInput: {
@@ -41,8 +42,9 @@ export interface ComposerProps {
   keyboardAppearance?: TextInputProps['keyboardAppearance']
   multiline?: boolean
   disableComposer?: boolean
-  onTextChanged?(text: string): void
+  onTextChanged?(text: string): any
   onInputSizeChanged?(layout: { width: number; height: number }): void
+  partTypes?: PartType[]
 }
 
 export default class Composer extends React.Component<ComposerProps> {
@@ -57,8 +59,8 @@ export default class Composer extends React.Component<ComposerProps> {
     textInputStyle: {},
     textInputAutoFocus: false,
     keyboardAppearance: 'default',
-    onTextChanged: () => {},
-    onInputSizeChanged: () => {},
+    onTextChanged: () => { },
+    onInputSizeChanged: () => { },
   }
 
   static propTypes = {
@@ -74,6 +76,7 @@ export default class Composer extends React.Component<ComposerProps> {
     textInputStyle: StylePropType,
     textInputAutoFocus: PropTypes.bool,
     keyboardAppearance: PropTypes.string,
+    partTypes: StylePropType
   }
 
   layout?: { width: number; height: number } = undefined
@@ -103,7 +106,7 @@ export default class Composer extends React.Component<ComposerProps> {
 
   render() {
     return (
-      <TextInput
+      <MentionInput
         testID={this.props.placeholder}
         accessible
         accessibilityLabel={this.props.placeholder}
@@ -112,7 +115,7 @@ export default class Composer extends React.Component<ComposerProps> {
         multiline={this.props.multiline}
         editable={!this.props.disableComposer}
         onLayout={this.onLayout}
-        onChangeText={this.onChangeText}
+        onChange={(value) => this.onChangeText(value)}
         style={[
           styles.textInput,
           this.props.textInputStyle,
@@ -128,11 +131,11 @@ export default class Composer extends React.Component<ComposerProps> {
           },
         ]}
         autoFocus={this.props.textInputAutoFocus}
-        value={this.props.text}
+        value={this.props.text!}
         enablesReturnKeyAutomatically
         underlineColorAndroid='transparent'
         keyboardAppearance={this.props.keyboardAppearance}
-        {...this.props.textInputProps}
+        partTypes={this.props.partTypes}
       />
     )
   }

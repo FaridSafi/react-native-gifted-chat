@@ -37,7 +37,7 @@ const styles = {
     container: {
       flex: 1,
       justifyContent: 'flex-start',
-      flexDirection:'row',
+      flexDirection: 'row',
     },
     wrapper: {
       borderRadius: 15,
@@ -60,8 +60,8 @@ const styles = {
   right: StyleSheet.create({
     container: {
       flex: 1,
-      flexDirection:'row',
-      justifyContent:'flex-end'
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
     },
     wrapper: {
       borderRadius: 15,
@@ -183,7 +183,7 @@ export default class Bubble<
     renderMessageAudio: null,
     renderMessageText: null,
     renderCustomView: null,
-	shareButton:null,
+    shareButton: null,
     renderUsername: null,
     renderTicks: null,
     renderTime: null,
@@ -520,7 +520,7 @@ export default class Bubble<
           containerStyle && containerStyle[position],
         ]}
       >
-        {position === 'right' &&  this.props.shareButton}
+        {position === 'right' && this.props.shareButton}
         <View
           style={[
             styles[position].wrapper,
@@ -550,7 +550,7 @@ export default class Bubble<
             </View>
           </TouchableWithoutFeedback>
         </View>
-        {position === 'left' &&  this.props.shareButton}
+        {position === 'left' && this.props.shareButton}
         {this.renderQuickReplies()}
       </View>
     )

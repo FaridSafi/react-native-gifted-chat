@@ -59,8 +59,8 @@ export default class Composer extends React.Component<ComposerProps> {
     textInputStyle: {},
     textInputAutoFocus: false,
     keyboardAppearance: 'default',
-    onTextChanged: () => { },
-    onInputSizeChanged: () => { },
+    onTextChanged: () => {},
+    onInputSizeChanged: () => {},
   }
 
   static propTypes = {
@@ -76,7 +76,7 @@ export default class Composer extends React.Component<ComposerProps> {
     textInputStyle: StylePropType,
     textInputAutoFocus: PropTypes.bool,
     keyboardAppearance: PropTypes.string,
-    partTypes: StylePropType
+    partTypes: StylePropType,
   }
 
   layout?: { width: number; height: number } = undefined
@@ -115,7 +115,7 @@ export default class Composer extends React.Component<ComposerProps> {
         multiline={this.props.multiline}
         editable={!this.props.disableComposer}
         onLayout={this.onLayout}
-        onChange={(value) => this.onChangeText(value)}
+        onChange={value => this.onChangeText(value)}
         style={[
           styles.textInput,
           this.props.textInputStyle,

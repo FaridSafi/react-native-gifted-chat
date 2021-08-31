@@ -317,7 +317,7 @@ export default class MessageContainer<
     } = this.props
     if (
       infiniteScroll &&
-      (this.state.hasScrolled || distanceFromEnd > 0) &&
+      this.state.hasScrolled &&
       distanceFromEnd <= 100 &&
       loadEarlier &&
       onLoadEarlier &&

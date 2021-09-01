@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Platform, StyleSheet, TextInputProps } from 'react-native'
-import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
+import { Platform, StyleSheet, TextInputProps, Dimensions } from 'react-native'
+import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER, MAX_COMPOSER_HEIGHT } from './Constant'
 import Color from './Color'
 import { StylePropType } from './utils'
 import { MentionInput, PartType } from 'react-native-controlled-mentions'
@@ -28,6 +28,12 @@ const styles = StyleSheet.create({
       android: 3,
       web: 4,
     }),
+    backgroundColor: 'white',
+    borderRadius: 25,
+    borderWidth: StyleSheet.hairlineWidth,
+    elevation: 3,
+    borderColor: '#e6e6e6',
+    overflow: 'hidden',
   },
 })
 
@@ -45,6 +51,7 @@ export interface ComposerProps {
   onTextChanged?(text: string): any
   onInputSizeChanged?(layout: { width: number; height: number }): void
   partTypes?: PartType[]
+  maxComposerHeight?:number
 }
 
 export default class Composer extends React.Component<ComposerProps> {
@@ -59,6 +66,7 @@ export default class Composer extends React.Component<ComposerProps> {
     textInputStyle: {},
     textInputAutoFocus: false,
     keyboardAppearance: 'default',
+    maxComposerHeight: MAX_COMPOSER_HEIGHT,
     onTextChanged: () => {},
     onInputSizeChanged: () => {},
   }
@@ -77,13 +85,14 @@ export default class Composer extends React.Component<ComposerProps> {
     textInputAutoFocus: PropTypes.bool,
     keyboardAppearance: PropTypes.string,
     partTypes: StylePropType,
+    maxComposerHeight:PropTypes.number
   }
 
   layout?: { width: number; height: number } = undefined
 
   onLayout = (e: any) => {
-    const { layout } = e.nativeEvent
-
+    const { contentSize } = e.nativeEvent
+    const layout = contentSize
     // Support earlier versions of React Native on Android.
     if (!layout) {
       return
@@ -116,19 +125,21 @@ export default class Composer extends React.Component<ComposerProps> {
         editable={!this.props.disableComposer}
         onLayout={this.onLayout}
         onChange={value => this.onChangeText(value)}
-        style={[
+        containerStyle={[
           styles.textInput,
-          this.props.textInputStyle,
           {
-            height: this.props.composerHeight,
-            ...Platform.select({
-              web: {
-                outlineWidth: 0,
-                outlineColor: 'transparent',
-                outlineOffset: 0,
-              },
-            }),
+            maxHeight: Math.min(
+              Dimensions.get('window').height -
+                this.props.maxComposerHeight! -
+                200,
+              this.props.maxComposerHeight! * 2.3,
+            ),
           },
+        ]}
+        onContentSizeChange={this.onLayout}
+        style={[
+          this.props.textInputStyle,
+          { height: this.props.composerHeight },
         ]}
         autoFocus={this.props.textInputAutoFocus}
         value={this.props.text!}

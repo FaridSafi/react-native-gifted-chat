@@ -215,6 +215,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     props: Message<TMessage>['props'],
     nextProps: Message<TMessage>['props'],
   ): boolean
+  textInputStyle?: StyleProp<TextInput>
 }
 
 export interface GiftedChatState<TMessage extends IMessage = IMessage> {
@@ -302,6 +303,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     minComposerHeight: MIN_COMPOSER_HEIGHT,
     maxComposerHeight: MAX_COMPOSER_HEIGHT,
     wrapInSafeArea: true,
+    textInputStyle: undefined
   }
 
   static propTypes = {
@@ -367,6 +369,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     maxComposerHeight: PropTypes.number,
     alignTop: PropTypes.bool,
     wrapInSafeArea: PropTypes.bool,
+    textInputStyle: utils.StylePropType
   }
 
   static append<TMessage extends IMessage>(

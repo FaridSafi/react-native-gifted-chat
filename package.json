@@ -99,14 +99,14 @@
     "react-test-renderer": "16.9.0",
     "tslint": "6.1.2",
     "tslint-config-prettier": "1.18.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "react-native-controlled-mentions": "^2.2.5"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^3.6.0",
     "dayjs": "^1.8.26",
     "prop-types": "^15.7.2",
     "react-native-communications": "^2.2.1",
-    "react-native-controlled-mentions": "^2.2.5",
     "react-native-iphone-x-helper": "^1.3.1",
     "react-native-lightbox": "^0.8.1",
     "react-native-parsed-text": "0.0.22",
@@ -116,7 +116,8 @@
   "peerDependencies": {
     "dayjs": "*",
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-controlled-mentions": "*"
   },
   "husky": {
     "hooks": {

@@ -41,7 +41,7 @@ const styles = {
     wrapper: {
       borderRadius: 15,
       backgroundColor: Color.leftBubbleBackground,
-      marginRight: 60,
+      marginRight: 10,
       minHeight: 20,
       justifyContent: 'flex-end',
     },
@@ -69,7 +69,7 @@ const styles = {
     wrapper: {
       borderRadius: 15,
       backgroundColor: Color.defaultBlue,
-      marginLeft: 60,
+      marginLeft: 10,
       minHeight: 20,
       justifyContent: 'flex-end',
     },

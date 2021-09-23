@@ -57,6 +57,7 @@ export type BubbleProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   renderCustomView?: (BubbleProps<TMessage>) => React.Node,
   renderTime?: (TimeProps: TMessage) => React.Node,
   renderTicks?: TMessage => React.Node,
+  renderEdge: ()=>React.Node,
   renderUsername?: () => React.Node,
   renderQuickReplySend?: () => React.Node,
   renderQuickReplies?: QuickRepliesProps => React.Node,

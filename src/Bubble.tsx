@@ -55,6 +55,11 @@ const styles = {
       flexDirection: 'row',
       justifyContent: 'flex-start',
     },
+    abc: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "flex-start",
+    },
   }),
   right: StyleSheet.create({
     container: {
@@ -77,6 +82,11 @@ const styles = {
     bottom: {
       flexDirection: 'row',
       justifyContent: 'flex-end',
+    },
+    abc: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "flex-end",
     },
   }),
   content: StyleSheet.create({
@@ -161,6 +171,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderTicks?(currentMessage: TMessage): React.ReactNode
   renderUsername?(): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
+  renderEdge?(): React.ReactNode
   renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
 }
 
@@ -180,6 +191,7 @@ export default class Bubble<
     renderMessageAudio: null,
     renderMessageText: null,
     renderCustomView: null,
+    renderEdge: null,
     renderUsername: null,
     renderTicks: null,
     renderTime: null,
@@ -207,6 +219,7 @@ export default class Bubble<
     user: PropTypes.object.isRequired,
     touchableProps: PropTypes.object,
     onLongPress: PropTypes.func,
+    renderEdge: PropTypes.func,
     renderMessageImage: PropTypes.func,
     renderMessageVideo: PropTypes.func,
     renderMessageAudio: PropTypes.func,
@@ -508,14 +521,17 @@ export default class Bubble<
       containerStyle,
       wrapperStyle,
       bottomContainerStyle,
+      
     } = this.props
     return (
       <View
         style={[
           styles[position].container,
           containerStyle && containerStyle[position],
+          styles[position].abc
         ]}
       >
+      {position == "right" && this.props.renderEdge()}
         <View
           style={[
             styles[position].wrapper,
@@ -545,6 +561,7 @@ export default class Bubble<
             </View>
           </TouchableWithoutFeedback>
         </View>
+        {position == "left" && this.props.renderEdge()}
         {this.renderQuickReplies()}
       </View>
     )

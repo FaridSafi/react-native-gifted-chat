@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { RefObject } from 'react';
-import { FlatList, ListViewProps, ListRenderItemInfo, NativeSyntheticEvent, NativeScrollEvent, StyleProp, ViewStyle } from 'react-native';
+import { FlatList, ListViewProps, ListRenderItemInfo, NativeSyntheticEvent, NativeScrollEvent, StyleProp, ViewStyle, EmitterSubscription } from 'react-native';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 import { User, IMessage, Reply } from './Models';
@@ -77,6 +77,10 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
     state: {
         showScrollBottom: boolean;
     };
+    willShowSub: EmitterSubscription;
+    didShowSub: EmitterSubscription;
+    willHideSub: EmitterSubscription;
+    didHideSub: EmitterSubscription;
     componentDidMount(): void;
     componentWillUnmount(): void;
     componentDidUpdate(prevProps: MessageContainerProps<TMessage>): void;
@@ -102,6 +106,5 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
     }) => void;
     keyExtractor: (item: TMessage) => string;
     render(): JSX.Element;
-    willShowSub: any;
 }
 export {};

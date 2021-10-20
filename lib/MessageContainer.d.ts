@@ -102,5 +102,6 @@ export default class MessageContainer<TMessage extends IMessage = IMessage> exte
     }) => void;
     keyExtractor: (item: TMessage) => string;
     render(): JSX.Element;
+    willShowSub: any;
 }
 export {};

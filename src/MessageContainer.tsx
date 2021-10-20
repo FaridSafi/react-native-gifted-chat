@@ -15,6 +15,7 @@ import {
   StyleProp,
   ViewStyle,
   Platform,
+  EmitterSubscription,
 } from 'react-native'
 
 import LoadEarlier from './LoadEarlier'
@@ -117,6 +118,7 @@ export default class MessageContainer<
     scrollToBottomStyle: {},
     infiniteScroll: false,
     isLoadingEarlier: false,
+
   }
 
   static propTypes = {
@@ -144,6 +146,10 @@ export default class MessageContainer<
   state = {
     showScrollBottom: false,
   }
+  willShowSub: EmitterSubscription;
+  didShowSub: EmitterSubscription;
+  willHideSub: EmitterSubscription;
+  didHideSub: EmitterSubscription;
 
   componentDidMount() {
     if (this.props.messages && this.props.messages.length === 0) {
@@ -173,44 +179,55 @@ export default class MessageContainer<
     }
   }
 
+  // 0.16.3-patch: https://github.com/FaridSafi/react-native-gifted-chat/issues/2112#issue-1000416894
   attachKeyboardListeners = () => {
     const { invertibleScrollViewProps: invertibleProps } = this.props
     if (invertibleProps) {
-      Keyboard.addListener(
+      // Keyboard.addListener(
+      //   'keyboardWillShow',
+      //   invertibleProps.onKeyboardWillShow,
+      // )
+      // Keyboard.addListener('keyboardDidShow', invertibleProps.onKeyboardDidShow)
+      // Keyboard.addListener(
+      //   'keyboardWillHide',
+      //   invertibleProps.onKeyboardWillHide,
+      // )
+      // Keyboard.addListener('keyboardDidHide', invertibleProps.onKeyboardDidHide)
+      this.willShowSub = Keyboard.addListener(
         'keyboardWillShow',
         invertibleProps.onKeyboardWillShow,
       )
-      Keyboard.addListener('keyboardDidShow', invertibleProps.onKeyboardDidShow)
-      Keyboard.addListener(
+      this.didShowSub = Keyboard.addListener('keyboardDidShow', invertibleProps.onKeyboardDidShow)
+      this.willHideSub = Keyboard.addListener(
         'keyboardWillHide',
         invertibleProps.onKeyboardWillHide,
       )
-      Keyboard.addListener('keyboardDidHide', invertibleProps.onKeyboardDidHide)
+      this.didHideSub = Keyboard.addListener('keyboardDidHide', invertibleProps.onKeyboardDidHide)
     }
   }
 
   detachKeyboardListeners = () => {
-    const { invertibleScrollViewProps: invertibleProps } = this.props
-    // @ts-ignore
-    Keyboard.remove(
-      'keyboardWillShow',
-      invertibleProps.onKeyboardWillShow,
-    )
-    // @ts-ignore
-    Keyboard.remove(
-      'keyboardDidShow',
-      invertibleProps.onKeyboardDidShow,
-    )
-    // @ts-ignore
-    Keyboard.remove(
-      'keyboardWillHide',
-      invertibleProps.onKeyboardWillHide,
-    )
-    // @ts-ignore
-    Keyboard.remove(
-      'keyboardDidHide',
-      invertibleProps.onKeyboardDidHide,
-    )
+    // const { invertibleScrollViewProps: invertibleProps } = this.props
+    // Keyboard.removeListener(
+    //   'keyboardWillShow',
+    //   invertibleProps.onKeyboardWillShow,
+    // )
+    // Keyboard.removeListener(
+    //   'keyboardDidShow',
+    //   invertibleProps.onKeyboardDidShow,
+    // )
+    // Keyboard.removeListener(
+    //   'keyboardWillHide',
+    //   invertibleProps.onKeyboardWillHide,
+    // )
+    // Keyboard.removeListener(
+    //   'keyboardDidHide',
+    //   invertibleProps.onKeyboardDidHide,
+    // )
+    this.willShowSub.remove();
+    this.didShowSub.remove();
+    this.willHideSub.remove();
+    this.didHideSub.remove();
   }
 
   renderTypingIndicator = () => {

@@ -77,7 +77,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   invertibleScrollViewProps?: any
   extraData?: any
   scrollToBottomOffset?: number
-  forwardRef?: RefObject<FlatList<IMessage>>
+  forwardRef?: RefObject<FlatList<TMessage>>
   renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactNode
@@ -91,6 +91,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
 
 interface State {
   showScrollBottom: boolean
+  hasScrolled: boolean
 }
 
 export default class MessageContainer<

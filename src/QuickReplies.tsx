@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
   },
 })
 
-export interface QuickRepliesProps {
-  nextMessage?: IMessage
-  currentMessage?: IMessage
+export interface QuickRepliesProps<TMessage extends IMessage> {
+  currentMessage?: TMessage
+  nextMessage?: TMessage
   color?: string
   sendText?: string
   quickReplyStyle?: StyleProp<ViewStyle>
@@ -62,10 +62,9 @@ const sameReply = (currentReply: Reply) => (reply: Reply) =>
 const diffReply = (currentReply: Reply) => (reply: Reply) =>
   currentReply.value !== reply.value
 
-export default class QuickReplies extends Component<
-  QuickRepliesProps,
-  QuickRepliesState
-> {
+export default class QuickReplies<
+  TMessage extends IMessage = IMessage
+> extends Component<QuickRepliesProps<TMessage>, QuickRepliesState> {
   static defaultProps = {
     currentMessage: {
       quickReplies: [],
@@ -80,6 +79,7 @@ export default class QuickReplies extends Component<
 
   static propTypes = {
     currentMessage: PropTypes.object.isRequired,
+    nextMessage: PropTypes.object,
     onQuickReply: PropTypes.func,
     color: PropTypes.string,
     sendText: PropTypes.string,

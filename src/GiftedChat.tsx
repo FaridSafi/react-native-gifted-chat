@@ -52,8 +52,21 @@ import {
   LeftRightStyle,
   MessageVideoProps,
   MessageAudioProps,
+  ActionsProps,
+  AvatarProps,
+  BubbleProps,
+  ComposerProps,
+  DayProps,
+  InputToolbarProps,
+  LoadEarlierProps,
+  MessageImageProps,
+  MessageProps,
+  MessageTextProps,
+  QuickRepliesProps,
+  SendProps,
+  SystemMessageProps,
+  TimeProps,
 } from './Models'
-import QuickReplies from './QuickReplies'
 
 dayjs.extend(localizedFormat)
 
@@ -101,7 +114,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   renderAvatarOnTop?: boolean
   inverted?: boolean
   /* Extra props to be passed to the <Image> component created by the default renderMessageImage */
-  imageProps?: Message<TMessage>['props']
+  imageProps?: MessageProps<TMessage>
   /*Extra props to be passed to the MessageImage's Lightbox */
   lightboxProps?: any
   /*Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar) */
@@ -156,34 +169,32 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*  Render a loading view when initializing */
   renderLoading?(): React.ReactNode
   /* Custom "Load earlier messages" button */
-  renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
+  renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   /* Custom message avatar; set to null to not render any avatar for the message */
-  renderAvatar?(props: Avatar<TMessage>['props']): React.ReactNode | null
+  renderAvatar?(props: AvatarProps<TMessage>): React.ReactNode | null
   /* Custom message bubble */
-  renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
+  renderBubble?(props: BubbleProps<TMessage>): React.ReactNode
   /*Custom system message */
-  renderSystemMessage?(props: SystemMessage<TMessage>['props']): React.ReactNode
+  renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
   /* Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see example using showActionSheetWithOptions()) */
   onLongPress?(context: any, message: any): void
   /* Reverses display order of messages; default is true */
   /*Custom message container */
-  renderMessage?(message: Message<TMessage>['props']): React.ReactNode
+  renderMessage?(message: MessageProps<TMessage>): React.ReactNode
   /* Custom message text */
-  renderMessageText?(
-    messageText: MessageText<TMessage>['props'],
-  ): React.ReactNode
+  renderMessageText?(messageText: MessageTextProps<TMessage>): React.ReactNode
   /* Custom message image */
-  renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
+  renderMessageImage?(props: MessageImageProps<TMessage>): React.ReactNode
   /* Custom message video */
   renderMessageVideo?(props: MessageVideoProps<TMessage>): React.ReactNode
   /* Custom message video */
   renderMessageAudio?(props: MessageAudioProps<TMessage>): React.ReactNode
   /* Custom view inside the bubble */
-  renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode
+  renderCustomView?(props: BubbleProps<TMessage>): React.ReactNode
   /*Custom day above a message*/
-  renderDay?(props: Day<TMessage>['props']): React.ReactNode
+  renderDay?(props: DayProps<TMessage>): React.ReactNode
   /* Custom time inside a message */
-  renderTime?(props: Time<TMessage>['props']): React.ReactNode
+  renderTime?(props: TimeProps<TMessage>): React.ReactNode
   /* Custom footer component on the ListView, e.g. 'User is typing...' */
   renderFooter?(): React.ReactNode
   /* Custom component to render in the ListView when messages are empty */
@@ -191,15 +202,15 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom component to render below the MessageContainer (separate from the ListView) */
   renderChatFooter?(): React.ReactNode
   /* Custom message composer container */
-  renderInputToolbar?(props: InputToolbar['props']): React.ReactNode
+  renderInputToolbar?(props: InputToolbarProps): React.ReactNode
   /*  Custom text input message composer */
-  renderComposer?(props: Composer['props']): React.ReactNode
+  renderComposer?(props: ComposerProps): React.ReactNode
   /* Custom action button on the left of the message composer */
-  renderActions?(props: Actions['props']): React.ReactNode
+  renderActions?(props: ActionsProps): React.ReactNode
   /* Custom send button; you can pass children to the original Send component quite easily, for example to use a custom icon (example) */
-  renderSend?(props: Send['props']): React.ReactNode
+  renderSend?(props: SendProps<TMessage>): React.ReactNode
   /*Custom second line of actions below the message composer */
-  renderAccessory?(props: InputToolbar['props']): React.ReactNode
+  renderAccessory?(props: InputToolbarProps): React.ReactNode
   /*Callback when the Action button is pressed (if set, the default actionSheet will not be used) */
   onPressActionButton?(): void
   /* Callback when the input text changes */
@@ -207,13 +218,15 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
   parsePatterns?(linkStyle: TextStyle): any
   onQuickReply?(replies: Reply[]): void
-  renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
+  renderQuickReplies?(
+    quickReplies: QuickRepliesProps<TMessage>,
+  ): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
   /* Scroll to bottom custom component */
   scrollToBottomComponent?(): React.ReactNode
   shouldUpdateMessage?(
-    props: Message<TMessage>['props'],
-    nextProps: Message<TMessage>['props'],
+    props: MessageProps<TMessage>,
+    nextProps: MessageProps<TMessage>,
   ): boolean
 }
 
@@ -403,7 +416,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   _locale: string = 'en'
   invertibleScrollViewProps: any = undefined
   _actionSheetRef: any = undefined
-  _messageContainerRef?: RefObject<FlatList<IMessage>> = React.createRef()
+  _messageContainerRef?: RefObject<FlatList<TMessage>> = React.createRef()
   _isTextInputWasFocused: boolean = false
   textInput?: any
 

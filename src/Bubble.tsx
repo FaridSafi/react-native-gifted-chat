@@ -30,6 +30,10 @@ import {
   Omit,
   MessageVideoProps,
   MessageAudioProps,
+  MessageImageProps,
+  MessageTextProps,
+  TimeProps,
+  QuickRepliesProps,
 } from './Models'
 
 const styles = {
@@ -109,7 +113,7 @@ export type RenderMessageImageProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
   'containerStyle' | 'wrapperStyle'
 > &
-  MessageImage['props']
+  MessageImageProps<TMessage>
 
 export type RenderMessageVideoProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
@@ -127,7 +131,13 @@ export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
   'containerStyle' | 'wrapperStyle'
 > &
-  MessageText['props']
+  MessageTextProps<TMessage>
+
+export type RenderTimeProps<TMessage extends IMessage> = Omit<
+  BubbleProps<TMessage>,
+  'containerStyle' | 'wrapperStyle'
+> &
+  TimeProps<TMessage>
 
 export interface BubbleProps<TMessage extends IMessage> {
   user?: User
@@ -156,12 +166,14 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode
   renderMessageAudio?(props: RenderMessageAudioProps<TMessage>): React.ReactNode
   renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
-  renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
-  renderTime?(timeProps: Time['props']): React.ReactNode
+  renderCustomView?(props: BubbleProps<TMessage>): React.ReactNode
+  renderTime?(props: RenderTimeProps<TMessage>): React.ReactNode
   renderTicks?(currentMessage: TMessage): React.ReactNode
   renderUsername?(): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
-  renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
+  renderQuickReplies?(
+    props: QuickRepliesProps<TMessage>,
+  ): QuickReplies<TMessage>
 }
 
 export default class Bubble<

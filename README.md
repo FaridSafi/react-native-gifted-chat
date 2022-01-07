@@ -56,15 +56,15 @@
 
 <p align="center">
   <br/>
-  <a href="https://getstream.io/chat/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">
+  <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_ReactChat&utm_term=react-virtuoso" target="_blank">
     <img src="https://i.imgur.com/oU7XYkk.png">
   </a>
   <br>
   <p align="center">
-    Scalable <a href="https://getstream.io/chat/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">chat API/Server</a> written in Go
+    Scalable <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_ReactChat&utm_term=react-virtuoso" target="_blank">chat API/Server</a> written in Go
   </p>
   <p align="center">
-    <a href="https://getstream.io/chat/react-chat/tutorial/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_ReactChat&utm_term=react-virtuoso" target="_blank">API Tour</a> | <a href="https://dev.to/nickparsons/react-native-chat-with-chuck-norris-3h7m?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">React Native Gifted tutorial</a>
+    <a href="https://getstream.io/chat/get_started/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_ReactChat&utm_term=react-virtuoso" target="_blank">API Tour</a> | <a href="https://dev.to/nickparsons/react-native-chat-with-chuck-norris-3h7m?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_ReactChat&utm_term=react-virtuoso" target="_blank">React Native Gifted tutorial</a>
   </p>
 </p>
 

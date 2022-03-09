@@ -49,6 +49,7 @@ export default class Composer extends React.Component<ComposerProps> {
   static defaultProps = {
     composerHeight: MIN_COMPOSER_HEIGHT,
     text: '',
+    defaultValue: '',
     placeholderTextColor: Color.defaultColor,
     placeholder: DEFAULT_PLACEHOLDER,
     textInputProps: null,
@@ -64,6 +65,7 @@ export default class Composer extends React.Component<ComposerProps> {
   static propTypes = {
     composerHeight: PropTypes.number,
     text: PropTypes.string,
+    defaultValue: PropTypes.string,
     placeholder: PropTypes.string,
     placeholderTextColor: PropTypes.string,
     textInputProps: PropTypes.object,
@@ -128,7 +130,8 @@ export default class Composer extends React.Component<ComposerProps> {
           },
         ]}
         autoFocus={this.props.textInputAutoFocus}
-        value={this.props.text}
+        value={undefined}
+        defaultValue={this.props.defaultValue} 
         enablesReturnKeyAutomatically
         underlineColorAndroid='transparent'
         keyboardAppearance={this.props.keyboardAppearance}

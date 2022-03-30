@@ -160,8 +160,8 @@ export interface BubbleProps<TMessage extends IMessage> {
   containerToNextStyle?: LeftRightStyle<ViewStyle>
   containerToPreviousStyle?: LeftRightStyle<ViewStyle>
   usernameStyle?: TextStyle
-  parentUsernameStyle?: TextStyle
-  parentTextStyle?: TextStyle
+  parentUsernameStyle?: LeftRightStyle<TextStyle>
+  parentTextStyle?: LeftRightStyle<TextStyle>
   quickReplyStyle?: StyleProp<ViewStyle>
   onPress?(context?: any, message?: any): void
   onLongPress?(context?: any, message?: any): void
@@ -258,8 +258,14 @@ export default class Bubble<
     }),
     tickStyle: StylePropType,
     usernameStyle: StylePropType,
-    parentUsernameStyle: StylePropType,
-    parentTextStyle: StylePropType,
+    parentUsernameStyle: PropTypes.shape({
+      left: StylePropType,
+      right: StylePropType,
+    }),
+    parentTextStyle: PropTypes.shape({
+      left: StylePropType,
+      right: StylePropType,
+    }),
     containerToNextStyle: PropTypes.shape({
       left: StylePropType,
       right: StylePropType,
@@ -411,8 +417,18 @@ export default class Bubble<
   }
 
   renderParentMessage() {
-    if (this.props.currentMessage && this.props.currentMessage.parent) {
-      const { currentMessage, parentMessageWrapperStyle } = this.props
+    if (
+      this.props.currentMessage &&
+      this.props.currentMessage.parent &&
+      this.props.position
+    ) {
+      const {
+        currentMessage,
+        parentMessageWrapperStyle,
+        position,
+        parentTextStyle,
+        parentUsernameStyle,
+      } = this.props
       return (
         <TouchableOpacity
           style={[
@@ -427,7 +443,7 @@ export default class Bubble<
               style={
                 [
                   styles.content.parentUsername,
-                  this.props.parentUsernameStyle,
+                  parentUsernameStyle && parentUsernameStyle[position],
                 ] as TextStyle
               }
             >
@@ -438,7 +454,7 @@ export default class Bubble<
             style={
               [
                 styles.content.parentText,
-                this.props.parentTextStyle,
+                parentTextStyle && parentTextStyle[position],
               ] as TextStyle
             }
             numberOfLines={4}
@@ -526,12 +542,10 @@ export default class Bubble<
   renderUsername() {
     const { currentMessage, user, previousMessage } = this.props
     if (this.props.renderUsernameOnMessage && currentMessage) {
-      if (
-        user &&
-        currentMessage.user._id === user._id &&
-        previousMessage &&
-        isSameUser(currentMessage, previousMessage)
-      ) {
+      if (user && currentMessage.user._id === user._id) {
+        return null
+      }
+      if (previousMessage && isSameUser(currentMessage, previousMessage)) {
         return null
       }
       return (

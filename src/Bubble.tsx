@@ -153,7 +153,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   optionTitles?: string[]
   containerStyle?: LeftRightStyle<ViewStyle>
   wrapperStyle?: LeftRightStyle<ViewStyle>
-  parentMessageWrapperStyle?: StyleProp<ViewStyle>
+  parentMessageWrapperStyle?: LeftRightStyle<ViewStyle>
   textStyle?: LeftRightStyle<TextStyle>
   bottomContainerStyle?: LeftRightStyle<ViewStyle>
   tickStyle?: StyleProp<TextStyle>
@@ -251,7 +251,10 @@ export default class Bubble<
       left: StylePropType,
       right: StylePropType,
     }),
-    parentMessageWrapperStyle: StylePropType,
+    parentMessageWrapperStyle: PropTypes.shape({
+      left: StylePropType,
+      right: StylePropType,
+    }),
     bottomContainerStyle: PropTypes.shape({
       left: StylePropType,
       right: StylePropType,
@@ -433,7 +436,7 @@ export default class Bubble<
         <TouchableOpacity
           style={[
             styles.content.parentMessageWrapper,
-            parentMessageWrapperStyle,
+            parentMessageWrapperStyle && parentMessageWrapperStyle[position],
           ]}
           activeOpacity={0.8}
           onPress={this.onParentMessagePress}

@@ -9,6 +9,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  TouchableOpacity,
 } from 'react-native'
 
 import QuickReplies from './QuickReplies'
@@ -413,11 +414,12 @@ export default class Bubble<
     if (this.props.currentMessage && this.props.currentMessage.parent) {
       const { currentMessage, parentMessageWrapperStyle } = this.props
       return (
-        <TouchableWithoutFeedback
+        <TouchableOpacity
           style={[
             styles.content.parentMessageWrapper,
             parentMessageWrapperStyle,
           ]}
+          activeOpacity={0.8}
           onPress={this.onParentMessagePress}
         >
           <Text
@@ -441,7 +443,7 @@ export default class Bubble<
           >
             {currentMessage?.parent?.text}
           </Text>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       )
     }
     return null

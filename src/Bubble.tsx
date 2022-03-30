@@ -467,7 +467,8 @@ export default class Bubble<
               [styles.content.username, this.props.usernameStyle] as TextStyle
             }
           >
-            ~ {currentMessage.user.name}
+            anshul
+            {/* {currentMessage.user.name} */}
           </Text>
         </View>
       )

@@ -61,6 +61,11 @@ export interface IMessage {
   received?: boolean
   pending?: boolean
   quickReplies?: QuickReplies
+  parent?: {
+    _id: string | number
+    text: string
+    name?: string
+  }
 }
 
 export type IChatMessage = IMessage

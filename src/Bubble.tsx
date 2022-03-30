@@ -97,6 +97,19 @@ const styles = {
     usernameView: {
       flexDirection: 'row',
     },
+    parentUsername: {
+      fontSize: 12,
+      backgroundColor: 'transparent',
+      color: '#aaa',
+    },
+    parentText: {
+      backgroundColor: 'transparent',
+      fontSize: 14,
+      lineHeight: 18,
+    },
+    parentMessageWrapper: {
+      padding: 8,
+    },
   }),
 }
 
@@ -139,15 +152,19 @@ export interface BubbleProps<TMessage extends IMessage> {
   optionTitles?: string[]
   containerStyle?: LeftRightStyle<ViewStyle>
   wrapperStyle?: LeftRightStyle<ViewStyle>
+  parentMessageWrapperStyle?: StyleProp<ViewStyle>
   textStyle?: LeftRightStyle<TextStyle>
   bottomContainerStyle?: LeftRightStyle<ViewStyle>
   tickStyle?: StyleProp<TextStyle>
   containerToNextStyle?: LeftRightStyle<ViewStyle>
   containerToPreviousStyle?: LeftRightStyle<ViewStyle>
   usernameStyle?: TextStyle
+  parentUsernameStyle?: TextStyle
+  parentTextStyle?: TextStyle
   quickReplyStyle?: StyleProp<ViewStyle>
   onPress?(context?: any, message?: any): void
   onLongPress?(context?: any, message?: any): void
+  onParentMessagePress?(context?: any, message?: any): void
   onQuickReply?(replies: Reply[]): void
   renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
   renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode
@@ -172,6 +189,7 @@ export default class Bubble<
     touchableProps: {},
     onPress: null,
     onLongPress: null,
+    onParentMessagePress: null,
     renderMessageImage: null,
     renderMessageVideo: null,
     renderMessageAudio: null,
@@ -193,9 +211,12 @@ export default class Bubble<
     previousMessage: {},
     containerStyle: {},
     wrapperStyle: {},
+    parentMessageWrapperStyle: {},
     bottomContainerStyle: {},
     tickStyle: {},
     usernameStyle: {},
+    parentUsernameStyle: {},
+    parentTextStyle: {},
     containerToNextStyle: {},
     containerToPreviousStyle: {},
   }
@@ -229,12 +250,15 @@ export default class Bubble<
       left: StylePropType,
       right: StylePropType,
     }),
+    parentMessageWrapperStyle: StylePropType,
     bottomContainerStyle: PropTypes.shape({
       left: StylePropType,
       right: StylePropType,
     }),
     tickStyle: StylePropType,
     usernameStyle: StylePropType,
+    parentUsernameStyle: StylePropType,
+    parentTextStyle: StylePropType,
     containerToNextStyle: PropTypes.shape({
       left: StylePropType,
       right: StylePropType,
@@ -248,6 +272,12 @@ export default class Bubble<
   onPress = () => {
     if (this.props.onPress) {
       this.props.onPress(this.context, this.props.currentMessage)
+    }
+  }
+
+  onParentMessagePress = () => {
+    if (this.props.onParentMessagePress) {
+      this.props.onParentMessagePress(this.context, this.props.currentMessage)
     }
   }
 
@@ -379,6 +409,43 @@ export default class Bubble<
     return null
   }
 
+  renderParentMessage() {
+    if (this.props.currentMessage && this.props.currentMessage.parent) {
+      const { currentMessage, parentMessageWrapperStyle } = this.props
+      return (
+        <TouchableWithoutFeedback
+          style={[
+            styles.content.parentMessageWrapper,
+            parentMessageWrapperStyle,
+          ]}
+          onPress={this.onParentMessagePress}
+        >
+          <Text
+            style={
+              [
+                styles.content.parentUsername,
+                this.props.parentUsernameStyle,
+              ] as TextStyle
+            }
+          >
+            {currentMessage?.parent?.name}
+          </Text>
+          <Text
+            style={
+              [
+                styles.content.parentText,
+                this.props.parentTextStyle,
+              ] as TextStyle
+            }
+          >
+            {currentMessage?.parent?.text}
+          </Text>
+        </TouchableWithoutFeedback>
+      )
+    }
+    return null
+  }
+
   renderMessageVideo() {
     if (this.props.currentMessage && this.props.currentMessage.video) {
       const { containerStyle, wrapperStyle, ...messageVideoProps } = this.props
@@ -488,6 +555,7 @@ export default class Bubble<
     return this.props.isCustomViewBottom ? (
       <View>
         {this.renderUsername()}
+        {this.renderParentMessage()}
         {this.renderMessageImage()}
         {this.renderMessageVideo()}
         {this.renderMessageAudio()}
@@ -497,6 +565,7 @@ export default class Bubble<
     ) : (
       <View>
         {this.renderUsername()}
+        {this.renderParentMessage()}
         {this.renderCustomView()}
         {this.renderMessageImage()}
         {this.renderMessageVideo()}

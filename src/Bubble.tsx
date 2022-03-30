@@ -437,6 +437,7 @@ export default class Bubble<
                 this.props.parentTextStyle,
               ] as TextStyle
             }
+            numberOfLines={5}
           >
             {currentMessage?.parent?.text}
           </Text>

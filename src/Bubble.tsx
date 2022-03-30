@@ -90,15 +90,12 @@ const styles = {
       marginRight: 10,
     },
     username: {
-      top: -3,
-      left: 0,
       fontSize: 12,
       backgroundColor: 'transparent',
       color: '#aaa',
     },
     usernameView: {
       flexDirection: 'row',
-      marginHorizontal: 10,
     },
   }),
 }
@@ -455,9 +452,14 @@ export default class Bubble<
   }
 
   renderUsername() {
-    const { currentMessage, user } = this.props
+    const { currentMessage, user, previousMessage } = this.props
     if (this.props.renderUsernameOnMessage && currentMessage) {
-      if (user && currentMessage.user._id === user._id) {
+      if (
+        user &&
+        currentMessage.user._id === user._id &&
+        previousMessage &&
+        isSameUser(currentMessage, previousMessage)
+      ) {
         return null
       }
       return (
@@ -467,8 +469,7 @@ export default class Bubble<
               [styles.content.username, this.props.usernameStyle] as TextStyle
             }
           >
-            anshul
-            {/* {currentMessage.user.name} */}
+            {currentMessage.user.name}
           </Text>
         </View>
       )
@@ -486,6 +487,7 @@ export default class Bubble<
   renderBubbleContent() {
     return this.props.isCustomViewBottom ? (
       <View>
+        {this.renderUsername()}
         {this.renderMessageImage()}
         {this.renderMessageVideo()}
         {this.renderMessageAudio()}
@@ -494,6 +496,7 @@ export default class Bubble<
       </View>
     ) : (
       <View>
+        {this.renderUsername()}
         {this.renderCustomView()}
         {this.renderMessageImage()}
         {this.renderMessageVideo()}
@@ -539,7 +542,6 @@ export default class Bubble<
                   bottomContainerStyle && bottomContainerStyle[position],
                 ]}
               >
-                {this.renderUsername()}
                 {this.renderTime()}
                 {this.renderTicks()}
               </View>

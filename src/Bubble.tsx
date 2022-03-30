@@ -109,7 +109,7 @@ const styles = {
       lineHeight: 18,
     },
     parentMessageWrapper: {
-      padding: 8,
+      padding: 0,
     },
   }),
 }
@@ -422,16 +422,18 @@ export default class Bubble<
           activeOpacity={0.8}
           onPress={this.onParentMessagePress}
         >
-          <Text
-            style={
-              [
-                styles.content.parentUsername,
-                this.props.parentUsernameStyle,
-              ] as TextStyle
-            }
-          >
-            {currentMessage?.parent?.name}
-          </Text>
+          {currentMessage?.parent?.name ? (
+            <Text
+              style={
+                [
+                  styles.content.parentUsername,
+                  this.props.parentUsernameStyle,
+                ] as TextStyle
+              }
+            >
+              {currentMessage?.parent?.name}
+            </Text>
+          ) : null}
           <Text
             style={
               [
@@ -439,7 +441,7 @@ export default class Bubble<
                 this.props.parentTextStyle,
               ] as TextStyle
             }
-            numberOfLines={5}
+            numberOfLines={4}
           >
             {currentMessage?.parent?.text}
           </Text>

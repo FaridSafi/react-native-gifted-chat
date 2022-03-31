@@ -39,7 +39,9 @@ export interface InputToolbarProps {
   containerStyle?: StyleProp<ViewStyle>
   primaryStyle?: StyleProp<ViewStyle>
   accessoryStyle?: StyleProp<ViewStyle>
+  topAccessoryStyle?: StyleProp<ViewStyle>
   renderAccessory?(props: InputToolbarProps): React.ReactNode
+  renderTopAccessory?(props: InputToolbarProps): React.ReactNode
   renderActions?(props: Actions['props']): React.ReactNode
   renderSend?(props: Send['props']): React.ReactNode
   renderComposer?(props: Composer['props']): React.ReactNode
@@ -52,17 +54,20 @@ export default class InputToolbar extends React.Component<
 > {
   static defaultProps = {
     renderAccessory: null,
+    renderTopAccessory: null,
     renderActions: null,
     renderSend: null,
     renderComposer: null,
     containerStyle: {},
     primaryStyle: {},
     accessoryStyle: {},
+    topAccessoryStyle: {},
     onPressActionButton: () => {},
   }
 
   static propTypes = {
     renderAccessory: PropTypes.func,
+    renderTopAccessory: PropTypes.func,
     renderActions: PropTypes.func,
     renderSend: PropTypes.func,
     renderComposer: PropTypes.func,
@@ -70,6 +75,7 @@ export default class InputToolbar extends React.Component<
     containerStyle: StylePropType,
     primaryStyle: StylePropType,
     accessoryStyle: StylePropType,
+    topAccessoryStyle: StylePropType,
   }
 
   state = {
@@ -151,6 +157,17 @@ export default class InputToolbar extends React.Component<
     return null
   }
 
+  renderTopAccessory() {
+    if (this.props.renderTopAccessory) {
+      return (
+        <View style={[this.props.topAccessoryStyle]}>
+          {this.props.renderTopAccessory(this.props)}
+        </View>
+      )
+    }
+    return null
+  }
+
   render() {
     return (
       <View
@@ -162,6 +179,7 @@ export default class InputToolbar extends React.Component<
           ] as ViewStyle
         }
       >
+        {this.renderTopAccessory()}
         <View style={[styles.primary, this.props.primaryStyle]}>
           {this.renderActions()}
           {this.renderComposer()}

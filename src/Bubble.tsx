@@ -11,6 +11,7 @@ import {
   TextStyle,
   TouchableOpacity,
 } from 'react-native'
+import { SwipeRow } from 'react-native-swipe-list-view'
 
 import QuickReplies from './QuickReplies'
 
@@ -166,6 +167,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   onPress?(context?: any, message?: any): void
   onLongPress?(context?: any, message?: any): void
   onParentMessagePress?(message?: any): void
+  onSwipe?(message?: any): void
   onQuickReply?(replies: Reply[]): void
   renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
   renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode
@@ -191,6 +193,7 @@ export default class Bubble<
     onPress: null,
     onLongPress: null,
     onParentMessagePress: null,
+    onSwipe: null,
     renderMessageImage: null,
     renderMessageVideo: null,
     renderMessageAudio: null,
@@ -597,6 +600,12 @@ export default class Bubble<
     )
   }
 
+  onSwipe = ({ isActivated }: { isActivated: boolean }) => {
+    if (isActivated && this.props.onSwipe) {
+      this.props.onSwipe(this.props.currentMessage)
+    }
+  }
+
   render() {
     const {
       position,
@@ -605,42 +614,51 @@ export default class Bubble<
       bottomContainerStyle,
     } = this.props
     return (
-      <View
-        style={[
-          styles[position].container,
-          containerStyle && containerStyle[position],
-        ]}
+      <SwipeRow
+        useNativeDriver
+        onLeftActionStatusChange={this.onSwipe}
+        disableLeftSwipe
+        leftActivationValue={90}
+        leftActionValue={0}
       >
+        <></>
         <View
           style={[
-            styles[position].wrapper,
-            this.styledBubbleToNext(),
-            this.styledBubbleToPrevious(),
-            wrapperStyle && wrapperStyle[position],
+            styles[position].container,
+            containerStyle && containerStyle[position],
           ]}
         >
-          <TouchableWithoutFeedback
-            onPress={this.onPress}
-            onLongPress={this.onLongPress}
-            accessibilityTraits='text'
-            {...this.props.touchableProps}
+          <View
+            style={[
+              styles[position].wrapper,
+              this.styledBubbleToNext(),
+              this.styledBubbleToPrevious(),
+              wrapperStyle && wrapperStyle[position],
+            ]}
           >
-            <View>
-              {this.renderBubbleContent()}
-              <View
-                style={[
-                  styles[position].bottom,
-                  bottomContainerStyle && bottomContainerStyle[position],
-                ]}
-              >
-                {this.renderTime()}
-                {this.renderTicks()}
+            <TouchableWithoutFeedback
+              onPress={this.onPress}
+              onLongPress={this.onLongPress}
+              accessibilityTraits='text'
+              {...this.props.touchableProps}
+            >
+              <View>
+                {this.renderBubbleContent()}
+                <View
+                  style={[
+                    styles[position].bottom,
+                    bottomContainerStyle && bottomContainerStyle[position],
+                  ]}
+                >
+                  {this.renderTime()}
+                  {this.renderTicks()}
+                </View>
               </View>
-            </View>
-          </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+          </View>
+          {this.renderQuickReplies()}
         </View>
-        {this.renderQuickReplies()}
-      </View>
+      </SwipeRow>
     )
   }
 }

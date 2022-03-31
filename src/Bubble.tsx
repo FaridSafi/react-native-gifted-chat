@@ -618,7 +618,7 @@ export default class Bubble<
         useNativeDriver
         onLeftActionStatusChange={this.onSwipe}
         disableLeftSwipe
-        leftActivationValue={90}
+        leftActivationValue={20}
         leftActionValue={0}
       >
         <></>

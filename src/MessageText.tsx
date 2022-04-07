@@ -137,7 +137,7 @@ export default class MessageText<
     const { optionTitles } = this.props
     const options =
       optionTitles && optionTitles.length > 0
-        ? optionTitles.slice(0, 3)
+        ? optionTitles.slice(0, 4)
         : DEFAULT_OPTION_TITLES
     const cancelButtonIndex = options.length - 1
     this.context.actionSheet().showActionSheetWithOptions(

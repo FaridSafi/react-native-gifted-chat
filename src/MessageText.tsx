@@ -13,6 +13,7 @@ import {
 // @ts-ignore
 import ParsedText from 'react-native-parsed-text'
 import Communications from 'react-native-communications'
+import Clipboard from '@react-native-clipboard/clipboard'
 import { LeftRightStyle, IMessage } from './Models'
 import { StylePropType } from './utils'
 
@@ -52,7 +53,7 @@ const styles = {
   }),
 }
 
-const DEFAULT_OPTION_TITLES = ['Call', 'Text', 'Cancel']
+const DEFAULT_OPTION_TITLES = ['Copy', 'Call', 'Text', 'Cancel']
 
 export interface MessageTextProps<TMessage extends IMessage> {
   position: 'left' | 'right'
@@ -147,9 +148,12 @@ export default class MessageText<
       (buttonIndex: number) => {
         switch (buttonIndex) {
           case 0:
-            Communications.phonecall(phone, true)
+            Clipboard.setString(phone || '')
             break
           case 1:
+            Communications.phonecall(phone, true)
+            break
+          case 2:
             Communications.text(phone)
             break
           default:

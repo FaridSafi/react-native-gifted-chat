@@ -12,6 +12,11 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import { SwipeRow } from 'react-native-swipe-list-view'
+import ParsedText from 'react-native-parsed-text'
+import {
+  mentionRegEx,
+  replaceMentionValues,
+} from 'react-native-controlled-mentions'
 
 import QuickReplies from './QuickReplies'
 
@@ -456,17 +461,24 @@ export default class Bubble<
               {currentMessage?.parent?.name}
             </Text>
           ) : null}
-          <Text
+          <ParsedText
             style={
               [
                 styles.content.parentText,
                 parentTextStyle && parentTextStyle[position],
               ] as TextStyle
             }
+            parse={[
+              {
+                pattern: mentionRegEx,
+                renderText: value =>
+                  replaceMentionValues(value, ({ name }) => `@${name}`),
+              },
+            ]}
             numberOfLines={4}
           >
             {currentMessage?.parent?.text}
-          </Text>
+          </ParsedText>
         </TouchableOpacity>
       )
     }

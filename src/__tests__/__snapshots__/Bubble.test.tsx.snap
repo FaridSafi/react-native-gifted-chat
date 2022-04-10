@@ -29,6 +29,7 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
     }
   >
     <View
+      accessibilityRole="text"
       accessible={true}
       focusable={true}
       onClick={[Function]}

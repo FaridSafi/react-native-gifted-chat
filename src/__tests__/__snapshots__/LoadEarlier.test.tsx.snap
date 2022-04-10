@@ -2,6 +2,7 @@
 
 exports[`should render <LoadEarlier /> and compare with snapshot 1`] = `
 <View
+  accessibilityRole="button"
   accessible={true}
   focusable={true}
   onClick={[Function]}

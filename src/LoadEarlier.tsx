@@ -63,7 +63,7 @@ export function LoadEarlier(props: LoadEarlierProps): React.ReactElement {
       style={[styles.container, props.containerStyle]}
       onPress={onLoadEarlier}
       disabled={isLoadingEarlier}
-      accessibilityTraits='button'
+      accessibilityRole='button'
     >
       <View style={[styles.wrapper, props.wrapperStyle]}>
         {isLoadingEarlier ? (

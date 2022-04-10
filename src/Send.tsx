@@ -77,7 +77,7 @@ export const Send = <TMessage extends IMessage = IMessage>({
         accessibilityLabel='send'
         style={[styles.container, containerStyle]}
         onPress={handleOnPress}
-        accessibilityTraits='button'
+        accessibilityRole='button'
         disabled={disabled}
         {...sendButtonProps}
       >

@@ -49,15 +49,14 @@ export function InputToolbar<TMessage extends IMessage = IMessage>(
       'keyboardWillShow',
       () => setPosition('relative'),
     )
-    return () => keyboardWillShowListener?.remove()
-  }, [])
-
-  useEffect(() => {
     const keyboardWillHideListener = Keyboard.addListener(
       'keyboardWillHide',
       () => setPosition('absolute'),
     )
-    return () => keyboardWillHideListener?.remove()
+    return () => {
+      keyboardWillShowListener?.remove()
+      keyboardWillHideListener?.remove()
+    }
   }, [])
 
   const { containerStyle, ...rest } = props

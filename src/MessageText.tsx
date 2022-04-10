@@ -95,7 +95,7 @@ export const MessageText = <TMessage extends IMessage = IMessage>({
     // When someone sends a message that includes a website address beginning with "www." (omitting the scheme),
     // react-native-parsed-text recognizes it as a valid url, but Linking fails to open due to the missing scheme.
     if (WWW_URL_PATTERN.test(url)) {
-      onUrlPress(`http://${url}`)
+      onUrlPress(`https://${url}`)
     } else {
       Linking.canOpenURL(url).then(supported => {
         if (!supported) {

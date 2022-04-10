@@ -83,6 +83,7 @@ exports[`Message component should render <Message /> and compare with snapshot 1
         }
       >
         <View
+          accessibilityRole="text"
           accessible={true}
           focusable={true}
           onClick={[Function]}
@@ -256,7 +257,7 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
       }
     >
       <View
-        accessibilityTraits="image"
+        accessibilityRole="image"
         style={
           Array [
             Object {
@@ -309,6 +310,7 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
         }
       >
         <View
+          accessibilityRole="text"
           accessible={true}
           focusable={true}
           onClick={[Function]}
@@ -498,6 +500,7 @@ exports[`Message component should render null if user has no Avatar 1`] = `
         }
       >
         <View
+          accessibilityRole="text"
           accessible={true}
           focusable={true}
           onClick={[Function]}

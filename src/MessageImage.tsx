@@ -15,7 +15,7 @@ import {
 import Lightbox from 'react-native-lightbox'
 import { IMessage } from './Models'
 import { StylePropType } from './utils'
-import { Feather } from '@expo/vector-icons'
+import { MaterialIcons } from '@expo/vector-icons'
 
 const styles = StyleSheet.create({
   container: {},
@@ -76,7 +76,7 @@ export default class MessageImage<
   renderHeader = (close: any) => {
     return (
       <TouchableOpacity style={styles.closeButton} onPress={close}>
-        <Feather name='x' size={24} />
+        <MaterialIcons name='close' size={24} />
       </TouchableOpacity>
     )
   }

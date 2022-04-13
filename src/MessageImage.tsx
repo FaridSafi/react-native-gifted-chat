@@ -8,12 +8,14 @@ import {
   ViewStyle,
   StyleProp,
   ImageStyle,
+  TouchableOpacity,
 } from 'react-native'
 // TODO: support web
 // @ts-ignore
 import Lightbox from 'react-native-lightbox'
 import { IMessage } from './Models'
 import { StylePropType } from './utils'
+import { Feather } from '@expo/vector-icons'
 
 const styles = StyleSheet.create({
   container: {},
@@ -27,6 +29,18 @@ const styles = StyleSheet.create({
   imageActive: {
     flex: 1,
     resizeMode: 'contain',
+  },
+  closeButton: {
+    width: 44,
+    height: 44,
+    backgroundColor: 'white',
+    borderRadius: 22,
+    position: 'absolute',
+    right: 12,
+    top: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 10,
   },
 })
 
@@ -58,6 +72,15 @@ export default class MessageImage<
     imageProps: PropTypes.object,
     lightboxProps: PropTypes.object,
   }
+
+  renderHeader = (close: any) => {
+    return (
+      <TouchableOpacity style={styles.closeButton} onPress={close}>
+        <Feather name='x' size={24} />
+      </TouchableOpacity>
+    )
+  }
+
   render() {
     const {
       containerStyle,
@@ -66,6 +89,7 @@ export default class MessageImage<
       imageStyle,
       currentMessage,
     } = this.props
+
     if (!!currentMessage) {
       return (
         <View style={[styles.container, containerStyle]}>
@@ -73,6 +97,7 @@ export default class MessageImage<
             activeProps={{
               style: styles.imageActive,
             }}
+            renderHeader={this.renderHeader}
             {...lightboxProps}
           >
             <Image

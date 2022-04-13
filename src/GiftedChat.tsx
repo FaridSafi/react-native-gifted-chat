@@ -18,7 +18,7 @@ import {
   ActionSheetOptions,
 } from '@expo/react-native-action-sheet'
 import uuid from 'uuid'
-import { getBottomSpace } from 'react-native-iphone-x-helper'
+import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 
@@ -230,6 +230,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   GiftedChatProps<TMessage>,
   GiftedChatState
 > {
+  static contextType = SafeAreaInsetsContext
   static defaultProps = {
     messages: [],
     messagesContainerStyle: undefined,
@@ -585,7 +586,9 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   safeAreaSupport = (bottomOffset?: number) => {
-    return bottomOffset != null ? bottomOffset : getBottomSpace()
+    console.log('this.context', this.context)
+
+    return bottomOffset != null ? bottomOffset : 1
   }
 
   /**

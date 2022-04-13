@@ -1,11 +1,13 @@
-import { Linking } from 'expo'
+import * as Linking from 'expo-linking'
 import * as Location from 'expo-location'
 import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker'
 
 import { Alert } from 'react-native'
 
-export default async function getPermissionAsync(permission) {
+export default async function getPermissionAsync(
+  permission: Permissions.PermissionType,
+) {
   const { status } = await Permissions.askAsync(permission)
   if (status !== 'granted') {
     const permissionName = permission.toLowerCase().replace('_', ' ')
@@ -27,7 +29,9 @@ export default async function getPermissionAsync(permission) {
   return true
 }
 
-export async function getLocationAsync(onSend) {
+export async function getLocationAsync(
+  onSend: (locations: { location: Location.LocationObjectCoords }[]) => void,
+) {
   if (await Location.requestForegroundPermissionsAsync()) {
     const location = await Location.getCurrentPositionAsync({})
     if (location) {
@@ -36,7 +40,9 @@ export async function getLocationAsync(onSend) {
   }
 }
 
-export async function pickImageAsync(onSend) {
+export async function pickImageAsync(
+  onSend: (images: { image: string }[]) => void,
+) {
   if (await ImagePicker.requestMediaLibraryPermissionsAsync()) {
     const result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
@@ -50,7 +56,9 @@ export async function pickImageAsync(onSend) {
   }
 }
 
-export async function takePictureAsync(onSend) {
+export async function takePictureAsync(
+  onSend: (images: { image: string }[]) => void,
+) {
   if (await ImagePicker.requestCameraPermissionsAsync()) {
     const result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,

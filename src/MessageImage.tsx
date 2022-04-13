@@ -9,13 +9,13 @@ import {
   StyleProp,
   ImageStyle,
   TouchableOpacity,
+  Text,
 } from 'react-native'
 // TODO: support web
 // @ts-ignore
 import Lightbox from 'react-native-lightbox'
 import { IMessage } from './Models'
 import { StylePropType } from './utils'
-import { MaterialIcons } from '@expo/vector-icons'
 
 const styles = StyleSheet.create({
   container: {},
@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 10,
+  },
+  closeButtonIcon: {
+    fontSize: 24,
   },
 })
 
@@ -76,7 +79,7 @@ export default class MessageImage<
   renderHeader = (close: any) => {
     return (
       <TouchableOpacity style={styles.closeButton} onPress={close}>
-        <MaterialIcons name='close' size={24} />
+        <Text style={styles.closeButtonIcon}>x</Text>
       </TouchableOpacity>
     )
   }

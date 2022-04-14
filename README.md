@@ -104,7 +104,7 @@ Please give us your advice: [Related PR](https://github.com/FaridSafi/react-nati
 - Redux support
 - System message
 - Quick Reply messages (bot)
-- Typying indicatior [react-native-typing-animation](https://github.com/watadarkstar/react-native-typing-animation)
+- Typing indicator [react-native-typing-animation](https://github.com/watadarkstar/react-native-typing-animation)
 
 ## Dependency
 

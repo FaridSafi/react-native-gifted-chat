@@ -57,7 +57,7 @@
     "flow-bin": "0.125.0",
     "husky": "4.2.5",
     "jest": "27.5.1",
-    "json": "9.0.6",
+    "json": "10.0.0",
     "metro-react-native-babel-preset": "0.70.1",
     "prettier": "2.0.5",
     "react": "16.13.1",

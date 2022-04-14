@@ -159,7 +159,7 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
             styles.avatarTransparent,
             this.props.avatarStyle,
           ]}
-          accessibilityTraits='image'
+          accessibilityRole='image'
         />
       )
     }
@@ -169,7 +169,7 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
           disabled={!this.props.onPress}
           onPress={this.props.onPress}
           onLongPress={this.props.onLongPress}
-          accessibilityTraits='image'
+          accessibilityRole='image'
         >
           {this.renderAvatar()}
         </TouchableOpacity>
@@ -188,7 +188,7 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
           { backgroundColor: this.avatarColor },
           this.props.avatarStyle,
         ]}
-        accessibilityTraits='image'
+        accessibilityRole='image'
       >
         {this.renderInitials()}
       </TouchableOpacity>

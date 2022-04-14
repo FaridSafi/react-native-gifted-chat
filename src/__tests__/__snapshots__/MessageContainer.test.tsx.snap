@@ -36,7 +36,6 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
     inverted={true}
     keyExtractor={[Function]}
     maxToRenderPerBatch={10}
-    numColumns={1}
     onContentSizeChange={[Function]}
     onEndReached={[Function]}
     onEndReachedThreshold={0.1}

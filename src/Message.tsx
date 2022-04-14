@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { View, StyleSheet, ViewStyle, LayoutChangeEvent } from 'react-native'
 
-import Avatar from './Avatar'
+import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
-import SystemMessage from './SystemMessage'
-import Day from './Day'
+import { SystemMessage, SystemMessageProps } from './SystemMessage'
+import { Day, DayProps } from './Day'
 
 import { StylePropType, isSameUser } from './utils'
 import { IMessage, User, LeftRightStyle } from './Models'
@@ -42,9 +42,9 @@ export interface MessageProps<TMessage extends IMessage> {
   inverted?: boolean
   containerStyle?: LeftRightStyle<ViewStyle>
   renderBubble?(props: Bubble['props']): React.ReactNode
-  renderDay?(props: Day['props']): React.ReactNode
-  renderSystemMessage?(props: SystemMessage['props']): React.ReactNode
-  renderAvatar?(props: Avatar['props']): React.ReactNode
+  renderDay?(props: DayProps<TMessage>): React.ReactNode
+  renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
+  renderAvatar?(props: AvatarProps<TMessage>): React.ReactNode
   shouldUpdateMessage?(
     props: MessageProps<IMessage>,
     nextProps: MessageProps<IMessage>,

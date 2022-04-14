@@ -1,9 +1,16 @@
 import PropTypes from 'prop-types'
-import React from 'react'
-import { Platform, StyleSheet, TextInput, TextInputProps } from 'react-native'
+import React, { useRef } from 'react'
+import {
+  Platform,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  LayoutChangeEvent,
+} from 'react-native'
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
 import Color from './Color'
 import { StylePropType } from './utils'
+import { useCallbackOne } from 'use-memo-one'
 
 const styles = StyleSheet.create({
   textInput: {
@@ -45,95 +52,93 @@ export interface ComposerProps {
   onInputSizeChanged?(layout: { width: number; height: number }): void
 }
 
-export default class Composer extends React.Component<ComposerProps> {
-  static defaultProps = {
-    composerHeight: MIN_COMPOSER_HEIGHT,
-    text: '',
-    placeholderTextColor: Color.defaultColor,
-    placeholder: DEFAULT_PLACEHOLDER,
-    textInputProps: null,
-    multiline: true,
-    disableComposer: false,
-    textInputStyle: {},
-    textInputAutoFocus: false,
-    keyboardAppearance: 'default',
-    onTextChanged: () => {},
-    onInputSizeChanged: () => {},
-  }
+export function Composer(props: ComposerProps): React.ReactElement {
+  const { placeholder, onTextChanged, text } = props
+  const layoutRef = useRef<{ width: number; height: number }>()
 
-  static propTypes = {
-    composerHeight: PropTypes.number,
-    text: PropTypes.string,
-    placeholder: PropTypes.string,
-    placeholderTextColor: PropTypes.string,
-    textInputProps: PropTypes.object,
-    onTextChanged: PropTypes.func,
-    onInputSizeChanged: PropTypes.func,
-    multiline: PropTypes.bool,
-    disableComposer: PropTypes.bool,
-    textInputStyle: StylePropType,
-    textInputAutoFocus: PropTypes.bool,
-    keyboardAppearance: PropTypes.string,
-  }
+  const handleOnLayout = useCallbackOne(
+    (e: LayoutChangeEvent) => {
+      const { layout } = e.nativeEvent
 
-  layout?: { width: number; height: number } = undefined
+      // Support earlier versions of React Native on Android.
+      if (!layout) {
+        return
+      }
 
-  onLayout = (e: any) => {
-    const { layout } = e.nativeEvent
+      if (
+        !layoutRef ||
+        (layoutRef.current &&
+          (layoutRef.current.width !== layoutRef.current.width ||
+            layoutRef.current.height !== layoutRef.current.height))
+      ) {
+        layoutRef.current = layout
+        props.onInputSizeChanged!(layout!)
+      }
+    },
+    [props.onInputSizeChanged],
+  )
 
-    // Support earlier versions of React Native on Android.
-    if (!layout) {
-      return
-    }
+  return (
+    <TextInput
+      testID={placeholder}
+      accessible
+      accessibilityLabel={placeholder}
+      placeholder={placeholder}
+      placeholderTextColor={props.placeholderTextColor}
+      multiline={props.multiline}
+      editable={!props.disableComposer}
+      onLayout={handleOnLayout}
+      onChangeText={onTextChanged}
+      style={[
+        styles.textInput,
+        props.textInputStyle,
+        {
+          height: props.composerHeight,
+          ...Platform.select({
+            web: {
+              outlineWidth: 0,
+              outlineColor: 'transparent',
+              outlineOffset: 0,
+            },
+          }),
+        },
+      ]}
+      autoFocus={props.textInputAutoFocus}
+      value={text}
+      enablesReturnKeyAutomatically
+      underlineColorAndroid='transparent'
+      keyboardAppearance={props.keyboardAppearance}
+      {...props.textInputProps}
+    />
+  )
+}
 
-    if (
-      !this.layout ||
-      (this.layout &&
-        (this.layout.width !== layout.width ||
-          this.layout.height !== layout.height))
-    ) {
-      this.layout = layout
-      this.props.onInputSizeChanged!(this.layout!)
-    }
-  }
+Composer.defaultProps = {
+  composerHeight: MIN_COMPOSER_HEIGHT,
+  text: '',
+  placeholderTextColor: Color.defaultColor,
+  placeholder: DEFAULT_PLACEHOLDER,
+  textInputProps: null,
+  multiline: true,
+  disableComposer: false,
+  textInputStyle: {},
+  textInputAutoFocus: false,
+  keyboardAppearance: 'default',
+  onTextChanged: () => {},
+  onInputSizeChanged: () => {},
+}
 
-  onChangeText = (text: string) => {
-    this.props.onTextChanged!(text)
-  }
-
-  render() {
-    return (
-      <TextInput
-        testID={this.props.placeholder}
-        accessible
-        accessibilityLabel={this.props.placeholder}
-        placeholder={this.props.placeholder}
-        placeholderTextColor={this.props.placeholderTextColor}
-        multiline={this.props.multiline}
-        editable={!this.props.disableComposer}
-        onLayout={this.onLayout}
-        onChangeText={this.onChangeText}
-        style={[
-          styles.textInput,
-          this.props.textInputStyle,
-          {
-            height: this.props.composerHeight,
-            ...Platform.select({
-              web: {
-                outlineWidth: 0,
-                outlineColor: 'transparent',
-                outlineOffset: 0,
-              },
-            }),
-          },
-        ]}
-        autoFocus={this.props.textInputAutoFocus}
-        value={this.props.text}
-        enablesReturnKeyAutomatically
-        underlineColorAndroid='transparent'
-        keyboardAppearance={this.props.keyboardAppearance}
-        {...this.props.textInputProps}
-      />
-    )
-  }
+Composer.propTypes = {
+  composerHeight: PropTypes.number,
+  text: PropTypes.string,
+  placeholder: PropTypes.string,
+  placeholderTextColor: PropTypes.string,
+  textInputProps: PropTypes.object,
+  onTextChanged: PropTypes.func,
+  onInputSizeChanged: PropTypes.func,
+  multiline: PropTypes.bool,
+  disableComposer: PropTypes.bool,
+  textInputStyle: StylePropType,
+  textInputAutoFocus: PropTypes.bool,
+  keyboardAppearance: PropTypes.string,
 }

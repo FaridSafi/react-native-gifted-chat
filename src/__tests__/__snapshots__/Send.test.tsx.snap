@@ -1,3 +1,93 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render <Send /> and compare with snapshot 1`] = `<View />`;
+exports[`Send should always render <Send /> and compare with snapshot 1`] = `
+<View
+  accessibilityLabel="send"
+  accessibilityRole="button"
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "height": 44,
+      "justifyContent": "flex-end",
+      "opacity": 1,
+    }
+  }
+  testID="send"
+>
+  <View>
+    <Text
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "color": "#0084ff",
+            "fontSize": 17,
+            "fontWeight": "600",
+            "marginBottom": 12,
+            "marginLeft": 10,
+            "marginRight": 10,
+          },
+          undefined,
+        ]
+      }
+    >
+      Send
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Send should not render <Send /> and compare with snapshot 1`] = `null`;
+
+exports[`Send should render <Send /> where there is input and compare with snapshot 1`] = `
+<View
+  accessibilityLabel="send"
+  accessibilityRole="button"
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "height": 44,
+      "justifyContent": "flex-end",
+      "opacity": 1,
+    }
+  }
+  testID="send"
+>
+  <View>
+    <Text
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "color": "#0084ff",
+            "fontSize": 17,
+            "fontWeight": "600",
+            "marginBottom": 12,
+            "marginLeft": 10,
+            "marginRight": 10,
+          },
+          undefined,
+        ]
+      }
+    >
+      Send
+    </Text>
+  </View>
+</View>
+`;

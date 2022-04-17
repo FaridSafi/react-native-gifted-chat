@@ -56,6 +56,7 @@ import {
   MessageVideoProps,
   MessageAudioProps,
 } from './Models'
+import { LightboxProps } from 'react-native-lightbox-v2'
 
 dayjs.extend(localizedFormat)
 
@@ -105,7 +106,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Extra props to be passed to the <Image> component created by the default renderMessageImage */
   imageProps?: Message<TMessage>['props']
   /*Extra props to be passed to the MessageImage's Lightbox */
-  lightboxProps?: any
+  lightboxProps?: LightboxProps
   /*Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar) */
   bottomOffset?: number
   /* Minimum height of the input toolbar; default is 44 */

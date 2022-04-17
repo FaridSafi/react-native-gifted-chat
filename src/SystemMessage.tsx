@@ -35,31 +35,23 @@ export interface SystemMessageProps<TMessage extends IMessage> {
   textStyle?: StyleProp<TextStyle>
 }
 
-export function SystemMessage<TMessage extends IMessage = IMessage>(
-  props: SystemMessageProps<TMessage>,
-) {
-  const { currentMessage, containerStyle, wrapperStyle, textStyle } = props
-
-  if (currentMessage) {
-    return (
-      <View style={[styles.container, containerStyle]}>
-        <View style={wrapperStyle}>
-          <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
-        </View>
-      </View>
-    )
+export function SystemMessage<TMessage extends IMessage = IMessage>({
+  currentMessage,
+  containerStyle,
+  wrapperStyle,
+  textStyle,
+}: SystemMessageProps<TMessage>) {
+  if (currentMessage == null || currentMessage.system == false) {
+    return null
   }
 
-  return null
-}
-
-SystemMessage.defaultProps = {
-  currentMessage: {
-    system: false,
-  },
-  containerStyle: {},
-  wrapperStyle: {},
-  textStyle: {},
+  return (
+    <View style={[styles.container, containerStyle]}>
+      <View style={wrapperStyle}>
+        <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
+      </View>
+    </View>
+  )
 }
 
 SystemMessage.propTypes = {

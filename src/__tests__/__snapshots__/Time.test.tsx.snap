@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render <Time /> and compare with snapshot 1`] = `
+exports[`Time should not render <Time /> and compare with snapshot 1`] = `null`;
+
+exports[`Time should render <Time /> and compare with snapshot 1`] = `
 <View
   style={
     Array [
@@ -26,7 +28,7 @@ exports[`should render <Time /> and compare with snapshot 1`] = `
       ]
     }
   >
-    Invalid Date
+    10:05 AM
   </Text>
 </View>
 `;

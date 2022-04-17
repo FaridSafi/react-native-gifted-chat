@@ -25,7 +25,7 @@ exports[`should render <Composer /> and compare with snapshot 1`] = `
         "marginLeft": 10,
         "marginTop": 6,
       },
-      Object {},
+      undefined,
       Object {
         "height": 33,
       },

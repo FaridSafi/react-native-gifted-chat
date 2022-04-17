@@ -85,17 +85,6 @@ export function InputToolbar<TMessage extends IMessage = IMessage>(
   )
 }
 
-InputToolbar.defaultProps = {
-  renderAccessory: null,
-  renderActions: null,
-  renderSend: null,
-  renderComposer: null,
-  containerStyle: {},
-  primaryStyle: {},
-  accessoryStyle: {},
-  onPressActionButton: () => {},
-}
-
 InputToolbar.propTypes = {
   renderAccessory: PropTypes.func,
   renderActions: PropTypes.func,

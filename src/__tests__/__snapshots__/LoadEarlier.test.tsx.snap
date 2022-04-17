@@ -33,7 +33,7 @@ exports[`should render <LoadEarlier /> and compare with snapshot 1`] = `
           "paddingLeft": 10,
           "paddingRight": 10,
         },
-        Object {},
+        undefined,
       ]
     }
   >
@@ -45,7 +45,7 @@ exports[`should render <LoadEarlier /> and compare with snapshot 1`] = `
             "color": "#fff",
             "fontSize": 12,
           },
-          Object {},
+          undefined,
         ]
       }
     >

@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render <SystemMessage /> and compare with snapshot 1`] = `
+exports[`SystemMessage should not render <SystemMessage /> and compare with snapshot 1`] = `null`;
+
+exports[`SystemMessage should render <SystemMessage /> and compare with snapshot 1`] = `
 <View
   style={
     Array [
@@ -11,13 +13,11 @@ exports[`should render <SystemMessage /> and compare with snapshot 1`] = `
         "marginBottom": 10,
         "marginTop": 5,
       },
-      Object {},
+      undefined,
     ]
   }
 >
-  <View
-    style={Object {}}
-  >
+  <View>
     <Text
       style={
         Array [
@@ -27,10 +27,12 @@ exports[`should render <SystemMessage /> and compare with snapshot 1`] = `
             "fontSize": 12,
             "fontWeight": "300",
           },
-          Object {},
+          undefined,
         ]
       }
-    />
+    >
+      test
+    </Text>
   </View>
 </View>
 `;

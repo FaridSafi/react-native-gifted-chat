@@ -30,7 +30,7 @@ exports[`should render <Actions /> and compare with snapshot 1`] = `
           "borderWidth": 2,
           "flex": 1,
         },
-        Object {},
+        undefined,
       ]
     }
   >
@@ -44,7 +44,7 @@ exports[`should render <Actions /> and compare with snapshot 1`] = `
             "fontWeight": "bold",
             "textAlign": "center",
           },
-          Object {},
+          undefined,
         ]
       }
     >

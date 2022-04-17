@@ -265,6 +265,9 @@ export default class App extends Component {
           renderCustomView={this.renderCustomView}
           renderSend={this.renderSend}
           quickReplyStyle={{ borderRadius: 2 }}
+          quickReplyTextStyle={{
+            fontWeight: '200',
+          }}
           renderQuickReplySend={this.renderQuickReplySend}
           inverted={Platform.OS !== 'web'}
           timeTextStyle={{ left: { color: 'red' }, right: { color: 'yellow' } }}

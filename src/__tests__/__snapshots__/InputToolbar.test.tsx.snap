@@ -15,7 +15,7 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
       Object {
         "position": "absolute",
       },
-      Object {},
+      undefined,
     ]
   }
 >
@@ -26,61 +26,10 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
           "alignItems": "flex-end",
           "flexDirection": "row",
         },
-        Object {},
+        undefined,
       ]
     }
   >
-    <View
-      accessible={true}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "height": 26,
-          "marginBottom": 10,
-          "marginLeft": 10,
-          "opacity": 1,
-          "width": 26,
-        }
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "borderColor": "#b2b2b2",
-              "borderRadius": 13,
-              "borderWidth": 2,
-              "flex": 1,
-            },
-            Object {},
-          ]
-        }
-      >
-        <Text
-          style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-                "color": "#b2b2b2",
-                "fontSize": 16,
-                "fontWeight": "bold",
-                "textAlign": "center",
-              },
-              Object {},
-            ]
-          }
-        >
-          +
-        </Text>
-      </View>
-    </View>
     <TextInput
       accessibilityLabel="Type a message..."
       accessible={true}
@@ -105,7 +54,7 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
             "marginLeft": 10,
             "marginTop": 6,
           },
-          Object {},
+          undefined,
           Object {
             "height": 33,
           },
@@ -115,7 +64,6 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
       underlineColorAndroid="transparent"
       value=""
     />
-    <View />
   </View>
 </View>
 `;

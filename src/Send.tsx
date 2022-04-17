@@ -48,15 +48,15 @@ export interface SendProps<TMessage extends IMessage> {
 }
 
 export const Send = <TMessage extends IMessage = IMessage>({
-  text,
+  text = '',
   containerStyle,
   children,
   textStyle,
-  label,
-  alwaysShowSend,
-  disabled,
+  label = 'Send',
+  alwaysShowSend = false,
+  disabled = false,
   sendButtonProps,
-  onSend,
+  onSend = () => {},
 }: SendProps<TMessage>) => {
   const handleOnPress = useCallbackOne(() => {
     if (text && onSend) {
@@ -69,37 +69,26 @@ export const Send = <TMessage extends IMessage = IMessage>({
     [alwaysShowSend, text],
   )
 
-  if (showSend) {
-    return (
-      <TouchableOpacity
-        testID='send'
-        accessible
-        accessibilityLabel='send'
-        style={[styles.container, containerStyle]}
-        onPress={handleOnPress}
-        accessibilityRole='button'
-        disabled={disabled}
-        {...sendButtonProps}
-      >
-        <View>
-          {children || <Text style={[styles.text, textStyle]}>{label}</Text>}
-        </View>
-      </TouchableOpacity>
-    )
+  if (!showSend) {
+    return null
   }
-  return <View />
-}
 
-Send.defaultProps = {
-  text: '',
-  onSend: () => {},
-  label: 'Send',
-  containerStyle: {},
-  textStyle: {},
-  children: null,
-  alwaysShowSend: false,
-  disabled: false,
-  sendButtonProps: null,
+  return (
+    <TouchableOpacity
+      testID='send'
+      accessible
+      accessibilityLabel='send'
+      style={[styles.container, containerStyle]}
+      onPress={handleOnPress}
+      accessibilityRole='button'
+      disabled={disabled}
+      {...sendButtonProps}
+    >
+      <View>
+        {children || <Text style={[styles.text, textStyle]}>{label}</Text>}
+      </View>
+    </TouchableOpacity>
+  )
 }
 
 Send.propTypes = {

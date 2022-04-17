@@ -24,18 +24,18 @@ export interface ActionsProps {
   onPressActionButton?(): void
 }
 
-export const Actions = ({
-  options,
-  optionTintColor,
+export function Actions({
+  options = {},
+  optionTintColor = Color.optionTintColor,
   icon,
   wrapperStyle,
   iconTextStyle,
   onPressActionButton,
   containerStyle,
-}: ActionsProps) => {
+}: ActionsProps) {
   const { actionSheet } = useChatContext()
   const onActionsPress = useCallbackOne(() => {
-    const optionKeys = Object.keys(options!)
+    const optionKeys = Object.keys(options)
     const cancelButtonIndex = optionKeys.indexOf('Cancel')
     actionSheet().showActionSheetWithOptions(
       {
@@ -46,7 +46,7 @@ export const Actions = ({
       (buttonIndex: number) => {
         const key = optionKeys[buttonIndex]
         if (key) {
-          options![key]()
+          options[key]()
         }
       },
     )
@@ -71,15 +71,6 @@ export const Actions = ({
       {renderIcon()}
     </TouchableOpacity>
   )
-}
-
-Actions.defaultProps = {
-  options: {},
-  optionTintColor: Color.optionTintColor,
-  icon: undefined,
-  containerStyle: {},
-  iconTextStyle: {},
-  wrapperStyle: {},
 }
 
 Actions.propTypes = {

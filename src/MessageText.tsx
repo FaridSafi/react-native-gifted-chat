@@ -58,7 +58,7 @@ const styles = {
 const DEFAULT_OPTION_TITLES = ['Call', 'Text', 'Cancel']
 
 export interface MessageTextProps<TMessage extends IMessage> {
-  position: 'left' | 'right'
+  position?: 'left' | 'right'
   optionTitles?: string[]
   currentMessage?: TMessage
   containerStyle?: LeftRightStyle<ViewStyle>
@@ -69,17 +69,17 @@ export interface MessageTextProps<TMessage extends IMessage> {
   parsePatterns?(linkStyle: TextStyle): any
 }
 
-export const MessageText = <TMessage extends IMessage = IMessage>({
-  currentMessage,
-  optionTitles,
-  position,
+export function MessageText<TMessage extends IMessage = IMessage>({
+  currentMessage = {} as TMessage,
+  optionTitles = DEFAULT_OPTION_TITLES,
+  position = 'left',
   containerStyle,
   textStyle,
   linkStyle: linkStyleProp,
   customTextStyle,
-  parsePatterns,
+  parsePatterns = () => [],
   textProps,
-}: MessageTextProps<TMessage>) => {
+}: MessageTextProps<TMessage>) {
   const { actionSheet } = useChatContext()
 
   // TODO: React.memo
@@ -165,20 +165,6 @@ export const MessageText = <TMessage extends IMessage = IMessage>({
       </ParsedText>
     </View>
   )
-}
-
-MessageText.defaultProps = {
-  position: 'left',
-  optionTitles: DEFAULT_OPTION_TITLES,
-  currentMessage: {
-    text: '',
-  },
-  containerStyle: {},
-  textStyle: {},
-  linkStyle: {},
-  customTextStyle: {},
-  textProps: {},
-  parsePatterns: () => [],
 }
 
 MessageText.propTypes = {

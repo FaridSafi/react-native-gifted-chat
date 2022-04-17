@@ -59,16 +59,15 @@ const sameReply = (currentReply: Reply) => (reply: Reply) =>
 const diffReply = (currentReply: Reply) => (reply: Reply) =>
   currentReply.value !== reply.value
 
-export function QuickReplies(props: QuickRepliesProps) {
-  const {
-    currentMessage,
-    nextMessage,
-    color,
-    quickReplyStyle,
-    onQuickReply,
-    sendText,
-    renderQuickReplySend,
-  } = props
+export function QuickReplies({
+  currentMessage,
+  nextMessage,
+  color = Color.peterRiver,
+  quickReplyStyle,
+  onQuickReply,
+  sendText = 'Send',
+  renderQuickReplySend,
+}: QuickRepliesProps) {
   const { type } = currentMessage!.quickReplies!
   const [replies, setReplies] = useState<Reply[]>([])
 
@@ -173,24 +172,11 @@ export function QuickReplies(props: QuickRepliesProps) {
   )
 }
 
-QuickReplies.defaultProps = {
-  currentMessage: {
-    quickReplies: [],
-  },
-  onQuickReply: () => {},
-  color: Color.peterRiver,
-  sendText: 'Send',
-  keepReplies: false,
-  renderQuickReplySend: undefined,
-  quickReplyStyle: undefined,
-}
-
 QuickReplies.propTypes = {
   currentMessage: PropTypes.object.isRequired,
   onQuickReply: PropTypes.func,
   color: PropTypes.string,
   sendText: PropTypes.string,
-  keepReplies: PropTypes.bool,
   renderQuickReplySend: PropTypes.func,
   quickReplyStyle: StylePropType,
 }

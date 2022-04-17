@@ -45,41 +45,31 @@ export interface DayProps<TMessage extends IMessage> {
   inverted?: boolean
 }
 
-export const Day = <TMessage extends IMessage = IMessage>({
-  dateFormat,
+export function Day<TMessage extends IMessage = IMessage>({
+  dateFormat = DATE_FORMAT,
   currentMessage,
   previousMessage,
   containerStyle,
   wrapperStyle,
   textStyle,
-}: DayProps<TMessage>) => {
+}: DayProps<TMessage>) {
   const { getLocale } = useChatContext()
-  if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
-    return (
-      <View style={[styles.container, containerStyle]}>
-        <View style={wrapperStyle}>
-          <Text style={[styles.text, textStyle]}>
-            {dayjs(currentMessage.createdAt)
-              .locale(getLocale())
-              .format(dateFormat)}
-          </Text>
-        </View>
-      </View>
-    )
-  }
-  return null
-}
 
-Day.defaultProps = {
-  currentMessage: {
-    createdAt: null,
-  },
-  previousMessage: {},
-  nextMessage: {},
-  containerStyle: {},
-  wrapperStyle: {},
-  textStyle: {},
-  dateFormat: DATE_FORMAT,
+  if (currentMessage == null || isSameDay(currentMessage, previousMessage)) {
+    return null
+  }
+
+  return (
+    <View style={[styles.container, containerStyle]}>
+      <View style={wrapperStyle}>
+        <Text style={[styles.text, textStyle]}>
+          {dayjs(currentMessage.createdAt)
+            .locale(getLocale())
+            .format(dateFormat)}
+        </Text>
+      </View>
+    </View>
+  )
 }
 
 Day.propTypes = {

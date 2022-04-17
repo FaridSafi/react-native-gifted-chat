@@ -62,7 +62,7 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
                   "marginTop": 5,
                 },
                 undefined,
-                Object {},
+                undefined,
               ]
             }
           >
@@ -80,7 +80,7 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
                       "marginTop": 5,
                     },
                     undefined,
-                    Object {},
+                    undefined,
                   ],
                   undefined,
                 ]

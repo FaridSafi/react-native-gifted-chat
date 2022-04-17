@@ -13,13 +13,11 @@ exports[`Message component should render <Message /> and compare with snapshot 1
           "marginBottom": 10,
           "marginTop": 5,
         },
-        Object {},
+        undefined,
       ]
     }
   >
-    <View
-      style={Object {}}
-    >
+    <View>
       <Text
         style={
           Array [
@@ -29,7 +27,7 @@ exports[`Message component should render <Message /> and compare with snapshot 1
               "fontSize": 12,
               "fontWeight": "600",
             },
-            Object {},
+            undefined,
           ]
         }
       >
@@ -116,7 +114,7 @@ exports[`Message component should render <Message /> and compare with snapshot 1
                       "marginTop": 5,
                     },
                     undefined,
-                    Object {},
+                    undefined,
                   ]
                 }
               >
@@ -134,7 +132,7 @@ exports[`Message component should render <Message /> and compare with snapshot 1
                           "marginTop": 5,
                         },
                         undefined,
-                        Object {},
+                        undefined,
                       ],
                       undefined,
                     ]
@@ -203,13 +201,11 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
           "marginBottom": 10,
           "marginTop": 5,
         },
-        Object {},
+        undefined,
       ]
     }
   >
-    <View
-      style={Object {}}
-    >
+    <View>
       <Text
         style={
           Array [
@@ -219,7 +215,7 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
               "fontSize": 12,
               "fontWeight": "600",
             },
-            Object {},
+            undefined,
           ]
         }
       >
@@ -343,7 +339,7 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
                       "marginTop": 5,
                     },
                     undefined,
-                    Object {},
+                    undefined,
                   ]
                 }
               >
@@ -361,7 +357,7 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
                           "marginTop": 5,
                         },
                         undefined,
-                        Object {},
+                        undefined,
                       ],
                       undefined,
                     ]
@@ -430,13 +426,11 @@ exports[`Message component should render null if user has no Avatar 1`] = `
           "marginBottom": 10,
           "marginTop": 5,
         },
-        Object {},
+        undefined,
       ]
     }
   >
-    <View
-      style={Object {}}
-    >
+    <View>
       <Text
         style={
           Array [
@@ -446,7 +440,7 @@ exports[`Message component should render null if user has no Avatar 1`] = `
               "fontSize": 12,
               "fontWeight": "600",
             },
-            Object {},
+            undefined,
           ]
         }
       >
@@ -533,7 +527,7 @@ exports[`Message component should render null if user has no Avatar 1`] = `
                       "marginTop": 5,
                     },
                     undefined,
-                    Object {},
+                    undefined,
                   ]
                 }
               >
@@ -551,7 +545,7 @@ exports[`Message component should render null if user has no Avatar 1`] = `
                           "marginTop": 5,
                         },
                         undefined,
-                        Object {},
+                        undefined,
                       ],
                       undefined,
                     ]

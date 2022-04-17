@@ -10,7 +10,7 @@ import {
   ImageStyle,
 } from 'react-native'
 // TODO: support web
-import Lightbox from 'react-native-lightbox-v2'
+import Lightbox, { LightboxProps } from 'react-native-lightbox-v2'
 import { IMessage } from './Models'
 import { StylePropType } from './utils'
 
@@ -34,50 +34,36 @@ export interface MessageImageProps<TMessage extends IMessage> {
   containerStyle?: StyleProp<ViewStyle>
   imageStyle?: StyleProp<ImageStyle>
   imageProps?: Partial<ImageProps>
-  lightboxProps?: object
+  lightboxProps?: LightboxProps
 }
 
-export function MessageImage<TMessage extends IMessage = IMessage>(
-  props: MessageImageProps<TMessage>,
-) {
-  const {
-    containerStyle,
-    lightboxProps,
-    imageProps,
-    imageStyle,
-    currentMessage,
-  } = props
-
-  if (!!currentMessage) {
-    return (
-      <View style={[styles.container, containerStyle]}>
-        <Lightbox
-          activeProps={{
-            style: styles.imageActive,
-          }}
-          {...lightboxProps}
-        >
-          <Image
-            {...imageProps}
-            style={[styles.image, imageStyle]}
-            source={{ uri: currentMessage.image }}
-          />
-        </Lightbox>
-      </View>
-    )
+export function MessageImage<TMessage extends IMessage = IMessage>({
+  containerStyle,
+  lightboxProps = {},
+  imageProps = {},
+  imageStyle,
+  currentMessage,
+}: MessageImageProps<TMessage>) {
+  if (currentMessage == null) {
+    return null
   }
 
-  return null
-}
-
-MessageImage.defaultProps = {
-  currentMessage: {
-    image: null,
-  },
-  containerStyle: {},
-  imageStyle: {},
-  imageProps: {},
-  lightboxProps: {},
+  return (
+    <View style={[styles.container, containerStyle]}>
+      <Lightbox
+        activeProps={{
+          style: styles.imageActive,
+        }}
+        {...lightboxProps}
+      >
+        <Image
+          {...imageProps}
+          style={[styles.image, imageStyle]}
+          source={{ uri: currentMessage.image }}
+        />
+      </Lightbox>
+    </View>
+  )
 }
 
 MessageImage.propTypes = {

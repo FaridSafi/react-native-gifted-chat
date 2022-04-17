@@ -55,46 +55,42 @@ export interface LoadEarlierProps {
   onLoadEarlier?(): void
 }
 
-export function LoadEarlier(props: LoadEarlierProps): React.ReactElement {
-  const { isLoadingEarlier, onLoadEarlier, label } = props
-
+export function LoadEarlier({
+  isLoadingEarlier = false,
+  onLoadEarlier = () => {},
+  label = 'Load earlier messages',
+  containerStyle,
+  wrapperStyle,
+  textStyle,
+  activityIndicatorColor = 'white',
+  activityIndicatorSize = 'small',
+  activityIndicatorStyle,
+}: LoadEarlierProps): React.ReactElement {
   return (
     <TouchableOpacity
-      style={[styles.container, props.containerStyle]}
+      style={[styles.container, containerStyle]}
       onPress={onLoadEarlier}
       disabled={isLoadingEarlier}
       accessibilityRole='button'
     >
-      <View style={[styles.wrapper, props.wrapperStyle]}>
+      <View style={[styles.wrapper, wrapperStyle]}>
         {isLoadingEarlier ? (
           <View>
-            <Text style={[styles.text, props.textStyle, { opacity: 0 }]}>
+            <Text style={[styles.text, textStyle, { opacity: 0 }]}>
               {label}
             </Text>
             <ActivityIndicator
-              color={props.activityIndicatorColor!}
-              size={props.activityIndicatorSize!}
-              style={[styles.activityIndicator, props.activityIndicatorStyle]}
+              color={activityIndicatorColor!}
+              size={activityIndicatorSize!}
+              style={[styles.activityIndicator, activityIndicatorStyle]}
             />
           </View>
         ) : (
-          <Text style={[styles.text, props.textStyle]}>{label}</Text>
+          <Text style={[styles.text, textStyle]}>{label}</Text>
         )}
       </View>
     </TouchableOpacity>
   )
-}
-
-LoadEarlier.defaultProps = {
-  onLoadEarlier: () => {},
-  isLoadingEarlier: false,
-  label: 'Load earlier messages',
-  containerStyle: {},
-  wrapperStyle: {},
-  textStyle: {},
-  activityIndicatorStyle: {},
-  activityIndicatorColor: 'white',
-  activityIndicatorSize: 'small',
 }
 
 LoadEarlier.propTypes = {

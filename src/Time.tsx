@@ -46,53 +46,42 @@ const styles = {
 }
 
 export interface TimeProps<TMessage extends IMessage> {
-  position: 'left' | 'right'
+  position?: 'left' | 'right'
   currentMessage?: TMessage
   containerStyle?: LeftRightStyle<ViewStyle>
   timeTextStyle?: LeftRightStyle<TextStyle>
   timeFormat?: string
 }
 
-export const Time = <TMessage extends IMessage = IMessage>({
-  position,
+export function Time<TMessage extends IMessage = IMessage>({
+  position = 'left',
   containerStyle,
   currentMessage,
-  timeFormat,
+  timeFormat = TIME_FORMAT,
   timeTextStyle,
-}: TimeProps<TMessage>) => {
+}: TimeProps<TMessage>) {
   const { getLocale } = useChatContext()
-  if (!!currentMessage) {
-    return (
-      <View
+  if (currentMessage == null) {
+    return null
+  }
+
+  return (
+    <View
+      style={[
+        styles[position].container,
+        containerStyle && containerStyle[position],
+      ]}
+    >
+      <Text
         style={[
-          styles[position].container,
-          containerStyle && containerStyle[position],
+          styles[position].text,
+          timeTextStyle && timeTextStyle[position],
         ]}
       >
-        <Text
-          style={[
-            styles[position].text,
-            timeTextStyle && timeTextStyle[position],
-          ]}
-        >
-          {dayjs(currentMessage.createdAt)
-            .locale(getLocale())
-            .format(timeFormat)}
-        </Text>
-      </View>
-    )
-  }
-  return null
-}
-
-Time.defaultProps = {
-  position: 'left',
-  currentMessage: {
-    createdAt: null,
-  },
-  containerStyle: {},
-  timeFormat: TIME_FORMAT,
-  timeTextStyle: {},
+        {dayjs(currentMessage.createdAt).locale(getLocale()).format(timeFormat)}
+      </Text>
+    </View>
+  )
 }
 
 Time.propTypes = {

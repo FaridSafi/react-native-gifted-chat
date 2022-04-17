@@ -52,14 +52,24 @@ export interface ComposerProps {
   onInputSizeChanged?(layout: { width: number; height: number }): void
 }
 
-export function Composer(props: ComposerProps): React.ReactElement {
-  const { placeholder, onTextChanged, text } = props
+export function Composer({
+  composerHeight = MIN_COMPOSER_HEIGHT,
+  disableComposer = false,
+  keyboardAppearance = 'default',
+  multiline = true,
+  onInputSizeChanged = () => {},
+  onTextChanged = () => {},
+  placeholder = DEFAULT_PLACEHOLDER,
+  placeholderTextColor = Color.defaultColor,
+  text = '',
+  textInputAutoFocus = false,
+  textInputProps = {},
+  textInputStyle,
+}: ComposerProps): React.ReactElement {
   const layoutRef = useRef<{ width: number; height: number }>()
 
   const handleOnLayout = useCallbackOne(
-    (e: LayoutChangeEvent) => {
-      const { layout } = e.nativeEvent
-
+    ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
       // Support earlier versions of React Native on Android.
       if (!layout) {
         return
@@ -72,10 +82,10 @@ export function Composer(props: ComposerProps): React.ReactElement {
             layoutRef.current.height !== layoutRef.current.height))
       ) {
         layoutRef.current = layout
-        props.onInputSizeChanged!(layout!)
+        onInputSizeChanged(layout)
       }
     },
-    [props.onInputSizeChanged],
+    [onInputSizeChanged],
   )
 
   return (
@@ -84,16 +94,16 @@ export function Composer(props: ComposerProps): React.ReactElement {
       accessible
       accessibilityLabel={placeholder}
       placeholder={placeholder}
-      placeholderTextColor={props.placeholderTextColor}
-      multiline={props.multiline}
-      editable={!props.disableComposer}
+      placeholderTextColor={placeholderTextColor}
+      multiline={multiline}
+      editable={!disableComposer}
       onLayout={handleOnLayout}
       onChangeText={onTextChanged}
       style={[
         styles.textInput,
-        props.textInputStyle,
+        textInputStyle,
         {
-          height: props.composerHeight,
+          height: composerHeight,
           ...Platform.select({
             web: {
               outlineWidth: 0,
@@ -103,29 +113,14 @@ export function Composer(props: ComposerProps): React.ReactElement {
           }),
         },
       ]}
-      autoFocus={props.textInputAutoFocus}
+      autoFocus={textInputAutoFocus}
       value={text}
       enablesReturnKeyAutomatically
       underlineColorAndroid='transparent'
-      keyboardAppearance={props.keyboardAppearance}
-      {...props.textInputProps}
+      keyboardAppearance={keyboardAppearance}
+      {...textInputProps}
     />
   )
-}
-
-Composer.defaultProps = {
-  composerHeight: MIN_COMPOSER_HEIGHT,
-  text: '',
-  placeholderTextColor: Color.defaultColor,
-  placeholder: DEFAULT_PLACEHOLDER,
-  textInputProps: null,
-  multiline: true,
-  disableComposer: false,
-  textInputStyle: {},
-  textInputAutoFocus: false,
-  keyboardAppearance: 'default',
-  onTextChanged: () => {},
-  onInputSizeChanged: () => {},
 }
 
 Composer.propTypes = {

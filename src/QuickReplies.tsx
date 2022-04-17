@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleProp,
   ViewStyle,
+  TextStyle,
 } from 'react-native'
 import { IMessage, Reply } from './Models'
 import Color from './Color'
@@ -49,6 +50,7 @@ export interface QuickRepliesProps {
   color?: string
   sendText?: string
   quickReplyStyle?: StyleProp<ViewStyle>
+  quickReplyTextStyle?: StyleProp<TextStyle>
   onQuickReply?(reply: Reply[]): void
   renderQuickReplySend?(): React.ReactNode
 }
@@ -64,6 +66,7 @@ export function QuickReplies({
   nextMessage,
   color = Color.peterRiver,
   quickReplyStyle,
+  quickReplyTextStyle,
   onQuickReply,
   sendText = 'Send',
   renderQuickReplySend,
@@ -150,6 +153,7 @@ export function QuickReplies({
                 style={[
                   styles.quickReplyText,
                   { color: selected ? Color.white : color },
+                  quickReplyTextStyle,
                 ]}
               >
                 {reply.title}

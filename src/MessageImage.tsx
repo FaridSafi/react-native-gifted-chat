@@ -10,7 +10,7 @@ import {
   ImageStyle,
 } from 'react-native'
 // TODO: support web
-import Lightbox from 'react-native-lightbox'
+import Lightbox from 'react-native-lightbox-v2'
 import { IMessage } from './Models'
 import { StylePropType } from './utils'
 

@@ -20,8 +20,10 @@ import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
 import Message from './Message'
 import Color from './Color'
 import { User, IMessage, Reply } from './Models'
-import { warning, StylePropType } from './utils'
 import TypingIndicator from './TypingIndicator'
+
+import { StylePropType } from './utils'
+import { warning } from './logging'
 
 const styles = StyleSheet.create({
   container: {

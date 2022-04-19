@@ -9,10 +9,11 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native'
+import { useCallbackOne } from 'use-memo-one'
 import { IMessage, Reply } from './Models'
 import Color from './Color'
-import { warning, StylePropType } from './utils'
-import { useCallbackOne } from 'use-memo-one'
+import { StylePropType } from './utils'
+import { warning } from './logging'
 
 const styles = StyleSheet.create({
   container: {

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export interface DayProps<TMessage extends IMessage> {
+export interface DayProps<TMessage extends IMessage = IMessage> {
   currentMessage?: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage

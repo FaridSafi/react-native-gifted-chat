@@ -11,6 +11,7 @@ import {
   TextStyle,
 } from 'react-native'
 
+import { GiftedChatContext } from './GiftedChatContext'
 import { QuickReplies, QuickRepliesProps } from './QuickReplies'
 import { MessageText, MessageTextProps } from './MessageText'
 import { MessageImage, MessageImageProps } from './MessageImage'
@@ -166,9 +167,7 @@ export interface BubbleProps<TMessage extends IMessage> {
 export default class Bubble<
   TMessage extends IMessage = IMessage
 > extends React.Component<BubbleProps<TMessage>> {
-  static contextTypes = {
-    actionSheet: PropTypes.func,
-  }
+  static contextType = GiftedChatContext
 
   static defaultProps = {
     touchableProps: {},

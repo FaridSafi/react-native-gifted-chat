@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Platform, View } from 'react-native'
+import { Text, Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export function NavBar() {

@@ -7,7 +7,6 @@ import {
   View,
   StyleProp,
   ViewStyle,
-  SafeAreaView,
   FlatList,
   TextStyle,
   KeyboardAvoidingView,
@@ -18,7 +17,7 @@ import {
   ActionSheetOptions,
 } from '@expo/react-native-action-sheet'
 import uuid from 'uuid'
-import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 
@@ -232,7 +231,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   GiftedChatProps<TMessage>,
   GiftedChatState
 > {
-  static contextType = SafeAreaInsetsContext
   static defaultProps = {
     messages: [],
     messagesContainerStyle: undefined,
@@ -400,7 +398,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   _isFirstLayout: boolean = true
   _locale: string = 'en'
   invertibleScrollViewProps: any = undefined
-  _actionSheetRef: any = undefined
+  _actionSheetRef: RefObject<ActionSheetProvider> = React.createRef()
   _messageContainerRef?: RefObject<FlatList<IMessage>> = React.createRef()
   _isTextInputWasFocused: boolean = false
   textInput?: any
@@ -588,8 +586,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   safeAreaSupport = (bottomOffset?: number) => {
-    console.log('this.context', this.context)
-
     return bottomOffset != null ? bottomOffset : 1
   }
 
@@ -876,7 +872,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       const { wrapInSafeArea } = this.props
       const Wrapper = wrapInSafeArea ? SafeAreaView : View
       const actionSheet =
-        this.props.actionSheet || (() => this._actionSheetRef.getContext())
+        this.props.actionSheet ||
+        (() => this._actionSheetRef.current?.getContext()!)
       const { getLocale } = this
       return (
         <GiftedChatContext.Provider
@@ -886,9 +883,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
           }}
         >
           <Wrapper style={styles.safeArea}>
-            <ActionSheetProvider
-              ref={(component: any) => (this._actionSheetRef = component)}
-            >
+            <ActionSheetProvider ref={this._actionSheetRef}>
               <View style={styles.container} onLayout={this.onMainViewLayout}>
                 {this.renderMessages()}
                 {this.renderInputToolbar()}

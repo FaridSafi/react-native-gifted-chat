@@ -16,6 +16,7 @@ import Communications from 'react-native-communications'
 import { LeftRightStyle, IMessage } from './Models'
 import { StylePropType } from './utils'
 import { useChatContext } from './GiftedChatContext'
+import { error } from './logging'
 
 const WWW_URL_PATTERN = /^www\./i
 
@@ -99,7 +100,7 @@ export function MessageText<TMessage extends IMessage = IMessage>({
     } else {
       Linking.canOpenURL(url).then(supported => {
         if (!supported) {
-          console.error('No handler for URL:', url)
+          error('No handler for URL:', url)
         } else {
           Linking.openURL(url)
         }

@@ -7,8 +7,6 @@ import {
   EmitterSubscription,
   StyleProp,
   ViewStyle,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native'
 
 import Composer from './Composer'
@@ -172,10 +170,8 @@ export default class InputToolbar extends React.Component<
 
   render() {
     return (
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'position'}
-        keyboardVerticalOffset={50}
-        contentContainerStyle={
+      <View
+        style={
           [
             styles.container,
             { position: this.state.position },
@@ -190,7 +186,7 @@ export default class InputToolbar extends React.Component<
           {this.renderSend()}
         </View>
         {this.renderAccessory()}
-      </KeyboardAvoidingView>
+      </View>
     )
   }
 }

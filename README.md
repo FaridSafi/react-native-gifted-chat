@@ -171,7 +171,7 @@ export function Example() {
 
 ## Advanced example
 
-See [`App.tsx`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master/App.tsx) for a working demo!
+See [`App.tsx`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master/example/App.tsx) for a working demo!
 
 ## "Slack" example
 
@@ -350,7 +350,7 @@ interface QuickReplies {
 - **`renderCustomView`** _(Function)_ - Custom view inside the bubble
 - **`renderDay`** _(Function)_ - Custom day above a message
 - **`renderTime`** _(Function)_ - Custom time inside a message
-- **`renderFooter`** _(Function)_ - Custom footer component on the ListView, e.g. `'User is typing...'`; see [App.tsx](/App.tsx) for an example. Overrides default typing indicator that triggers when `isTyping` is true.
+- **`renderFooter`** _(Function)_ - Custom footer component on the ListView, e.g. `'User is typing...'`; see [App.tsx](/example/App.tsx) for an example. Overrides default typing indicator that triggers when `isTyping` is true.
 - **`renderChatEmpty`** _(Function)_ - Custom component to render in the ListView when messages are empty
 - **`renderChatFooter`** _(Function)_ - Custom component to render below the MessageContainer (separate from the ListView)
 - **`renderInputToolbar`** _(Function)_ - Custom message composer container

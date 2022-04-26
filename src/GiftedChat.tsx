@@ -89,6 +89,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   dateFormat?: string
   /* Enables the "Load earlier messages" button */
   loadEarlier?: boolean
+  /*Display an ActivityIndicator when loading first chat messages*/
+  isLoadingChat?: boolean
   /*Display an ActivityIndicator when loading earlier messages*/
   isLoadingEarlier?: boolean
   /* Whether to render an avatar for the current user; default is false, only show avatars for other users */
@@ -252,6 +254,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     dateFormat: DATE_FORMAT,
     loadEarlier: false,
     onLoadEarlier: () => {},
+    isLoadingChat: true,
     isLoadingEarlier: false,
     renderLoading: null,
     renderLoadEarlier: null,
@@ -324,6 +327,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     isKeyboardInternallyHandled: PropTypes.bool,
     loadEarlier: PropTypes.bool,
     onLoadEarlier: PropTypes.func,
+    isLoadingChat: PropTypes.bool,
     isLoadingEarlier: PropTypes.bool,
     renderLoading: PropTypes.func,
     renderLoadEarlier: PropTypes.func,
@@ -885,7 +889,10 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   render() {
-    if (this.state.isInitialized === true) {
+    if (
+      this.state.isInitialized === true &&
+      this.props.isLoadingChat === false
+    ) {
       const { wrapInSafeArea } = this.props
       const Wrapper = wrapInSafeArea ? SafeAreaView : View
 

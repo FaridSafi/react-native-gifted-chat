@@ -2,7 +2,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import * as Linking from 'expo-linking'
 import AppLoading from 'expo-app-loading'
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, Platform } from 'react-native'
+import { StyleSheet, View, Text, Platform, Alert } from 'react-native'
 import {
   Bubble,
   GiftedChat,
@@ -256,6 +256,9 @@ export default class App extends Component {
           scrollToBottom
           onLongPressAvatar={user => alert(JSON.stringify(user))}
           onPressAvatar={() => alert('short press')}
+          onPress={() => {
+            Alert.alert('Bubble pressed')
+          }}
           onQuickReply={this.onQuickReply}
           keyboardShouldPersistTaps='never'
           renderAccessory={Platform.OS === 'web' ? null : this.renderAccessory}

@@ -12,7 +12,6 @@ import {
 
 // @ts-ignore
 import ParsedText from 'react-native-parsed-text'
-import Communications from 'react-native-communications'
 import { LeftRightStyle, IMessage } from './Models'
 import { StylePropType } from './utils'
 import { useChatContext } from './GiftedChatContext'
@@ -98,12 +97,8 @@ export function MessageText<TMessage extends IMessage = IMessage>({
     if (WWW_URL_PATTERN.test(url)) {
       onUrlPress(`https://${url}`)
     } else {
-      Linking.canOpenURL(url).then(supported => {
-        if (!supported) {
-          error('No handler for URL:', url)
-        } else {
-          Linking.openURL(url)
-        }
+      Linking.openURL(url).catch(e => {
+        error(e, 'No handler for URL:', url)
       })
     }
   }
@@ -122,10 +117,14 @@ export function MessageText<TMessage extends IMessage = IMessage>({
       (buttonIndex: number) => {
         switch (buttonIndex) {
           case 0:
-            Communications.phonecall(phone, true)
+            Linking.openURL(`tel:${phone}`).catch(e => {
+              error(e, 'No handler for telephone')
+            })
             break
           case 1:
-            Communications.text(phone)
+            Linking.openURL(`sms:${phone}`).catch(e => {
+              error(e, 'No handler for text')
+            })
             break
           default:
             break
@@ -135,7 +134,9 @@ export function MessageText<TMessage extends IMessage = IMessage>({
   }
 
   const onEmailPress = (email: string) =>
-    Communications.email([email], null, null, null, null)
+    Linking.openURL(`mailto:${email}`).catch(e =>
+      error(e, 'No handler for mailto'),
+    )
 
   const linkStyle = [
     styles[position].link,

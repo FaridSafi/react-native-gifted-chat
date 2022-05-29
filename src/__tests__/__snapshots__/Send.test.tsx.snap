@@ -20,7 +20,7 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
       "opacity": 1,
     }
   }
-  testID="send"
+  testID="GC_SEND_TOUCHABLE"
 >
   <View>
     <Text
@@ -67,7 +67,7 @@ exports[`Send should render <Send /> where there is input and compare with snaps
       "opacity": 1,
     }
   }
-  testID="send"
+  testID="GC_SEND_TOUCHABLE"
 >
   <View>
     <Text

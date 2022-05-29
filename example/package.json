@@ -20,7 +20,6 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-    "react-native-communications": "2.2.1",
     "react-native-lightbox-v2": "0.9.0",
     "react-native-maps": "0.29.4",
     "react-native-parsed-text": "0.0.22",

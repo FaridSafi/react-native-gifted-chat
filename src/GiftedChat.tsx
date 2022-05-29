@@ -46,6 +46,7 @@ import {
   DEFAULT_PLACEHOLDER,
   TIME_FORMAT,
   DATE_FORMAT,
+  TEST_ID,
 } from './Constant'
 import {
   IMessage,
@@ -884,7 +885,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
             getLocale,
           }}
         >
-          <Wrapper style={styles.safeArea}>
+          <Wrapper testID={TEST_ID.WRAPPER} style={styles.safeArea}>
             <ActionSheetProvider ref={this._actionSheetRef}>
               <View style={styles.container} onLayout={this.onMainViewLayout}>
                 {this.renderMessages()}
@@ -896,7 +897,11 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       )
     }
     return (
-      <View style={styles.container} onLayout={this.onInitialLayoutViewLayout}>
+      <View
+        testID={TEST_ID.LOADING_WRAPPER}
+        style={styles.container}
+        onLayout={this.onInitialLayoutViewLayout}
+      >
         {this.renderLoading()}
       </View>
     )

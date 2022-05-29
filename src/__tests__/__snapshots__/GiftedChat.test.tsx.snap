@@ -8,5 +8,6 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
       "flex": 1,
     }
   }
+  testID="GC_LOADING_CONTAINER"
 />
 `;

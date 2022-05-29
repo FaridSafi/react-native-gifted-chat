@@ -15,6 +15,7 @@ import { useCallbackOne, useMemoOne } from 'use-memo-one'
 import Color from './Color'
 import { IMessage } from './Models'
 import { StylePropType } from './utils'
+import { TEST_ID } from './Constant'
 
 const styles = StyleSheet.create({
   container: {
@@ -75,7 +76,7 @@ export const Send = <TMessage extends IMessage = IMessage>({
 
   return (
     <TouchableOpacity
-      testID='send'
+      testID={TEST_ID.SEND_TOUCHABLE}
       accessible
       accessibilityLabel='send'
       style={[styles.container, containerStyle]}

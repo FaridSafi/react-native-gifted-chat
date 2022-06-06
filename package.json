@@ -75,7 +75,7 @@
     "react-native-parsed-text": "0.0.22",
     "react-native-safe-area-context": "4.2.4",
     "react-native-typing-animation": "0.1.7",
-    "use-memo-one": "1.1.1",
+    "use-memo-one": "1.1.2",
     "uuid": "3.4.0"
   },
   "peerDependencies": {

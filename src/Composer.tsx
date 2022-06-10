@@ -78,8 +78,8 @@ export function Composer({
       if (
         !layoutRef ||
         (layoutRef.current &&
-          (layoutRef.current.width !== layoutRef.current.width ||
-            layoutRef.current.height !== layoutRef.current.height))
+          (layoutRef.current.width !== layout.width ||
+            layoutRef.current.height !== layout.height))
       ) {
         layoutRef.current = layout
         onInputSizeChanged(layout)

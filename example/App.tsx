@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
 })
 
+const findStep = step => message => message._id === step
+
 const user = {
   _id: 1,
   name: 'Developer',
@@ -106,7 +108,6 @@ export default class App extends Component {
   botSend = (step = 0) => {
     const newMessage = (messagesData as IMessage[])
       .reverse()
-      // .filter(filterBotMessages)
       .find(findStep(step))
     if (newMessage) {
       this.setState((previousState: any) => ({

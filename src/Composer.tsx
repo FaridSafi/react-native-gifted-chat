@@ -9,6 +9,7 @@ import {
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
 import Color from './Color'
 import { StylePropType } from './utils'
+import { useChatContext } from './GiftedChatContext'
 
 const styles = StyleSheet.create({
   textInput: {
@@ -62,7 +63,8 @@ export function Composer({
   textInputProps = {},
   textInputStyle,
 }: ComposerProps): React.ReactElement {
-  const [composerHeight, setComposerHeight] = React.useState(MIN_COMPOSER_HEIGHT)
+  const chatContext = useChatContext()
+  const [composerHeight, setComposerHeight] = React.useState(chatContext.minComposerHeight)
 
   return (
     <TextInput
@@ -71,7 +73,7 @@ export function Composer({
       accessibilityLabel={placeholder}
       onContentSizeChange={(e) => {
         const min = Math.min(e.nativeEvent.contentSize.height, 100)
-        const max = Math.max(min, MIN_COMPOSER_HEIGHT ?? 0)
+        const max = Math.max(min, chatContext.minComposerHeight)
         setComposerHeight(max)
       }}
       placeholder={placeholder}

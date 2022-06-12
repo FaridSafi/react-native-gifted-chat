@@ -827,6 +827,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
             value={{
               actionSheet,
               getLocale,
+              minComposerHeight: this.props.minComposerHeight ?? MIN_COMPOSER_HEIGHT ?? 0,
             }}
           >
 

@@ -70,6 +70,7 @@ export default class CustomActions extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 10,
     width: 26,
     height: 26,
     marginLeft: 10,

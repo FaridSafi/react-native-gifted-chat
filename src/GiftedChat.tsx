@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { RefObject } from 'react'
 import {
-  Animated,
   Platform,
   StyleSheet,
   View,
@@ -224,7 +223,6 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
 export interface GiftedChatState<TMessage extends IMessage = IMessage> {
   isInitialized: boolean
   composerHeight?: number
-  messagesContainerHeight?: number | Animated.Value
   typingDisabled: boolean
   text?: string
   messages?: TMessage[]
@@ -233,7 +231,7 @@ export interface GiftedChatState<TMessage extends IMessage = IMessage> {
 class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   GiftedChatProps<TMessage>,
   GiftedChatState
-> {
+  > {
   static defaultProps = {
     messages: [],
     messagesContainerStyle: undefined,
@@ -566,27 +564,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     )
   }
 
-  /**
-   * Returns the height, based on current window size, without taking the keyboard into account.
-   */
-  getBasicMessagesContainerHeight(composerHeight = this.state.composerHeight) {
-    return (
-      this.getMaxHeight()! - this.calculateInputToolbarHeight(composerHeight!)
-    )
-  }
 
-  /**
-   * Returns the height, based on current window size, taking the keyboard into account.
-   */
-  getMessagesContainerHeightWithKeyboard(
-    composerHeight = this.state.composerHeight,
-  ) {
-    return (
-      this.getBasicMessagesContainerHeight(composerHeight) -
-      this.getKeyboardHeight() +
-      this.getBottomOffset()
-    )
-  }
 
   safeAreaSupport = (bottomOffset?: number) => {
     return bottomOffset != null ? bottomOffset : 1
@@ -630,10 +608,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
         e.endCoordinates ? e.endCoordinates.height : e.end.height,
       )
       this.setBottomOffset(this.safeAreaSupport(this.props.bottomOffset))
-      const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard()
-      this.setState({
-        messagesContainerHeight: newMessagesContainerHeight,
-      })
     }
   }
 
@@ -644,10 +618,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       this.setIsTypingDisabled(true)
       this.setKeyboardHeight(0)
       this.setBottomOffset(0)
-      const newMessagesContainerHeight = this.getBasicMessagesContainerHeight()
-      this.setState({
-        messagesContainerHeight: newMessagesContainerHeight,
-      })
     }
   }
 
@@ -681,11 +651,11 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   renderMessages() {
     const { messagesContainerStyle, ...messagesContainerProps } = this.props
-    const fragment = (
+    return (
       <View
         style={[
           {
-            height: this.state.messagesContainerHeight,
+            flex: 1,
           },
           messagesContainerStyle,
         ]}
@@ -701,11 +671,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       </View>
     )
 
-    return this.props.isKeyboardInternallyHandled ? (
-      <KeyboardAvoidingView enabled>{fragment}</KeyboardAvoidingView>
-    ) : (
-      fragment
-    )
   }
 
   onSend = (messages: TMessage[] = [], shouldResetInputToolbar = false) => {
@@ -721,7 +686,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       }
     })
 
-    if (shouldResetInputToolbar === true) {
+    if (shouldResetInputToolbar) {
       this.setIsTypingDisabled(true)
       this.resetInputToolbar()
     }
@@ -729,9 +694,9 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       this.props.onSend(newMessages)
     }
 
-    if (shouldResetInputToolbar === true) {
+    if (shouldResetInputToolbar) {
       setTimeout(() => {
-        if (this.getIsMounted() === true) {
+        if (this.getIsMounted()) {
           this.setIsTypingDisabled(false)
         }
       }, 100)
@@ -744,13 +709,9 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     }
     this.notifyInputTextReset()
     const newComposerHeight = this.props.minComposerHeight
-    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
-      newComposerHeight,
-    )
     this.setState({
       text: this.getTextFromProp(''),
       composerHeight: newComposerHeight,
-      messagesContainerHeight: newMessagesContainerHeight,
     })
   }
 
@@ -765,12 +726,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       this.props.minComposerHeight!,
       Math.min(this.props.maxComposerHeight!, size.height),
     )
-    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
-      newComposerHeight,
-    )
     this.setState({
       composerHeight: newComposerHeight,
-      messagesContainerHeight: newMessagesContainerHeight,
     })
   }
 
@@ -801,15 +758,11 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     this.notifyInputTextReset()
     this.setMaxHeight(layout.height)
     const newComposerHeight = this.props.minComposerHeight
-    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(
-      newComposerHeight,
-    )
     const initialText = this.props.initialText || ''
     this.setState({
       isInitialized: true,
       text: this.getTextFromProp(initialText),
       composerHeight: newComposerHeight,
-      messagesContainerHeight: newMessagesContainerHeight,
     })
   }
 
@@ -818,17 +771,11 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     const { layout } = e.nativeEvent
     if (
       this.getMaxHeight() !== layout.height ||
-      this.getIsFirstLayout() === true
+      this.getIsFirstLayout()
     ) {
       this.setMaxHeight(layout.height)
-      this.setState({
-        messagesContainerHeight:
-          this._keyboardHeight > 0
-            ? this.getMessagesContainerHeightWithKeyboard()
-            : this.getBasicMessagesContainerHeight(),
-      })
     }
-    if (this.getIsFirstLayout() === true) {
+    if (this.getIsFirstLayout()) {
       this.setIsFirstLayout(false)
     }
   }
@@ -837,12 +784,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     const inputToolbarProps = {
       ...this.props,
       text: this.getTextFromProp(this.state.text!),
-      composerHeight: Math.max(
-        this.props.minComposerHeight!,
-        this.state.composerHeight!,
-      ),
       onSend: this.onSend,
-      onInputSizeChanged: this.onInputSizeChanged,
       onTextChanged: this.onInputTextChanged,
       textInputProps: {
         ...this.props.textInputProps,
@@ -871,7 +813,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   render() {
-    if (this.state.isInitialized === true) {
+    if (this.state.isInitialized) {
       const { wrapInSafeArea } = this.props
       const Wrapper = wrapInSafeArea ? SafeAreaView : View
       const actionSheet =
@@ -879,21 +821,27 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
         (() => this._actionSheetRef.current?.getContext()!)
       const { getLocale } = this
       return (
-        <GiftedChatContext.Provider
-          value={{
-            actionSheet,
-            getLocale,
-          }}
+        <KeyboardAvoidingView
+          style={{flex: 1}}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <Wrapper testID={TEST_ID.WRAPPER} style={styles.safeArea}>
-            <ActionSheetProvider ref={this._actionSheetRef}>
-              <View style={styles.container} onLayout={this.onMainViewLayout}>
-                {this.renderMessages()}
-                {this.renderInputToolbar()}
-              </View>
-            </ActionSheetProvider>
-          </Wrapper>
-        </GiftedChatContext.Provider>
+          <GiftedChatContext.Provider
+            value={{
+              actionSheet,
+              getLocale,
+            }}
+          >
+
+            <Wrapper testID={TEST_ID.WRAPPER} style={styles.safeArea}>
+              <ActionSheetProvider ref={this._actionSheetRef}>
+                <View style={styles.container} onLayout={this.onMainViewLayout}>
+                  {this.renderMessages()}
+                  {this.renderInputToolbar()}
+                </View>
+              </ActionSheetProvider>
+            </Wrapper>
+          </GiftedChatContext.Provider>
+        </KeyboardAvoidingView>
       )
     }
     return (
@@ -910,6 +858,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: "space-around",
     flex: 1,
   },
   safeArea: {

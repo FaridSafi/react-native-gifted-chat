@@ -23,10 +23,6 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
 })
 
-const filterBotMessages = message =>
-  !message.system && message.user && message.user._id && message.user._id === 2
-const findStep = step => message => message._id === step
-
 const user = {
   _id: 1,
   name: 'Developer',

@@ -128,7 +128,6 @@ export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
 export type GiftedChatState<TMessage: IMessage = IMessage> = {|
   isInitialized: boolean,
   composerHeight?: number,
-  messagesContainerHeight?: number | AnimatedValue,
   typingDisabled: boolean,
   text?: string,
   messages?: Array<TMessage>,

@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types'
-import React, { useRef } from 'react'
+import React from 'react'
 import {
   Platform,
   StyleSheet,
   TextInput,
   TextInputProps,
-  LayoutChangeEvent,
 } from 'react-native'
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
 import Color from './Color'
 import { StylePropType } from './utils'
-import { useCallbackOne } from 'use-memo-one'
 
 const styles = StyleSheet.create({
   textInput: {
@@ -18,6 +16,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
     lineHeight: 16,
+    paddingTop: 8,
     ...Platform.select({
       web: {
         paddingTop: 6,
@@ -49,15 +48,12 @@ export interface ComposerProps {
   multiline?: boolean
   disableComposer?: boolean
   onTextChanged?(text: string): void
-  onInputSizeChanged?(layout: { width: number; height: number }): void
 }
 
 export function Composer({
-  composerHeight = MIN_COMPOSER_HEIGHT,
   disableComposer = false,
   keyboardAppearance = 'default',
   multiline = true,
-  onInputSizeChanged = () => {},
   onTextChanged = () => {},
   placeholder = DEFAULT_PLACEHOLDER,
   placeholderTextColor = Color.defaultColor,
@@ -66,38 +62,22 @@ export function Composer({
   textInputProps = {},
   textInputStyle,
 }: ComposerProps): React.ReactElement {
-  const layoutRef = useRef<{ width: number; height: number }>()
-
-  const handleOnLayout = useCallbackOne(
-    ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
-      // Support earlier versions of React Native on Android.
-      if (!layout) {
-        return
-      }
-
-      if (
-        !layoutRef ||
-        (layoutRef.current &&
-          (layoutRef.current.width !== layoutRef.current.width ||
-            layoutRef.current.height !== layoutRef.current.height))
-      ) {
-        layoutRef.current = layout
-        onInputSizeChanged(layout)
-      }
-    },
-    [onInputSizeChanged],
-  )
+  const [composerHeight, setComposerHeight] = React.useState(MIN_COMPOSER_HEIGHT)
 
   return (
     <TextInput
       testID={placeholder}
       accessible
       accessibilityLabel={placeholder}
+      onContentSizeChange={(e) => {
+        const min = Math.min(e.nativeEvent.contentSize.height, 100)
+        const max = Math.max(min, MIN_COMPOSER_HEIGHT ?? 0)
+        setComposerHeight(max)
+      }}
       placeholder={placeholder}
       placeholderTextColor={placeholderTextColor}
       multiline={multiline}
       editable={!disableComposer}
-      onLayout={handleOnLayout}
       onChangeText={onTextChanged}
       style={[
         styles.textInput,

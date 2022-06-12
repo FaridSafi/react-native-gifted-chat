@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Keyboard, StyleProp, ViewStyle } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native'
 
 import { Composer, ComposerProps } from './Composer'
 import { Send, SendProps } from './Send'
@@ -11,6 +11,7 @@ import { IMessage } from './Models'
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow : 0,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: Color.defaultColor,
     backgroundColor: Color.white,
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
   },
   primary: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center',
   },
   accessory: {
     height: 44,
@@ -43,22 +44,6 @@ export interface InputToolbarProps<TMessage extends IMessage> {
 export function InputToolbar<TMessage extends IMessage = IMessage>(
   props: InputToolbarProps<TMessage>,
 ) {
-  const [position, setPosition] = useState('absolute')
-  useEffect(() => {
-    const keyboardWillShowListener = Keyboard.addListener(
-      'keyboardWillShow',
-      () => setPosition('relative'),
-    )
-    const keyboardWillHideListener = Keyboard.addListener(
-      'keyboardWillHide',
-      () => setPosition('absolute'),
-    )
-    return () => {
-      keyboardWillShowListener?.remove()
-      keyboardWillHideListener?.remove()
-    }
-  }, [])
-
   const { containerStyle, ...rest } = props
   const {
     renderActions,
@@ -69,7 +54,7 @@ export function InputToolbar<TMessage extends IMessage = IMessage>(
   } = rest
 
   return (
-    <View style={[styles.container, { position }, containerStyle] as ViewStyle}>
+    <View style={[styles.container, containerStyle] as ViewStyle}>
       <View style={[styles.primary, props.primaryStyle]}>
         {renderActions?.(rest) ||
           (onPressActionButton && <Actions {...rest} />)}

@@ -91,10 +91,6 @@ export function QuickReplies({
     return false
   }, [currentMessage, nextMessage])
 
-  if (!shouldComponentDisplay) {
-    return null
-  }
-
   const handlePress = useCallbackOne(
     (reply: Reply) => () => {
       if (currentMessage) {
@@ -129,6 +125,10 @@ export function QuickReplies({
         messageId: currentMessage!._id,
       })),
     )
+  }
+
+  if (!shouldComponentDisplay) {
+    return null
   }
 
   return (

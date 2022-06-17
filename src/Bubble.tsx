@@ -168,6 +168,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   usernameStyle?: TextStyle
   parentUsernameStyle?: LeftRightStyle<TextStyle>
   parentTextStyle?: LeftRightStyle<TextStyle>
+  parentViewMoreBtnTextStyle?: TextStyle
   quickReplyStyle?: StyleProp<ViewStyle>
   onPress?(context?: any, message?: any): void
   onLongPress?(context?: any, message?: any): void
@@ -226,6 +227,7 @@ export default class Bubble<
     usernameStyle: {},
     parentUsernameStyle: {},
     parentTextStyle: {},
+    parentViewMoreBtnTextStyle: {},
     containerToNextStyle: {},
     containerToPreviousStyle: {},
   }
@@ -277,6 +279,7 @@ export default class Bubble<
       left: StylePropType,
       right: StylePropType,
     }),
+    parentViewMoreBtnTextStyle: StylePropType,
     containerToNextStyle: PropTypes.shape({
       left: StylePropType,
       right: StylePropType,
@@ -428,11 +431,21 @@ export default class Bubble<
   }
 
   renderViewMore(onPress: any) {
-    return <Text onPress={onPress}>show more</Text>
+    const { parentViewMoreBtnTextStyle } = this.props
+    return (
+      <Text onPress={onPress} style={parentViewMoreBtnTextStyle}>
+        show more
+      </Text>
+    )
   }
 
   renderViewLess(onPress: any) {
-    return <Text onPress={onPress}>show less</Text>
+    const { parentViewMoreBtnTextStyle } = this.props
+    return (
+      <Text onPress={onPress} style={parentViewMoreBtnTextStyle}>
+        show less
+      </Text>
+    )
   }
 
   renderParentMessage() {

@@ -430,7 +430,7 @@ export default class Bubble<
     return null
   }
 
-  renderViewMore(onPress: any) {
+  renderViewMore = (onPress: any) => {
     const { parentViewMoreBtnTextStyle } = this.props
     return (
       <Text onPress={onPress} style={parentViewMoreBtnTextStyle}>
@@ -439,7 +439,7 @@ export default class Bubble<
     )
   }
 
-  renderViewLess(onPress: any) {
+  renderViewLess = (onPress: any) => {
     const { parentViewMoreBtnTextStyle } = this.props
     return (
       <Text onPress={onPress} style={parentViewMoreBtnTextStyle}>

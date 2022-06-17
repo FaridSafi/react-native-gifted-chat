@@ -468,7 +468,7 @@ export default class Bubble<
             </Text>
           ) : null}
           <ViewMoreText
-            numberOfLines={12}
+            numberOfLines={5}
             renderViewMore={this.renderViewMore}
             renderViewLess={this.renderViewLess}
             style={
@@ -479,6 +479,12 @@ export default class Bubble<
             }
           >
             <ParsedText
+              style={
+                [
+                  styles.content.parentText,
+                  parentTextStyle && parentTextStyle[position],
+                ] as TextStyle
+              }
               parse={[
                 {
                   pattern: mentionRegEx,

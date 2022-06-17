@@ -112,6 +112,7 @@
     "react-native-parsed-text": "0.0.22",
     "react-native-swipe-list-view": "^3.2.9",
     "react-native-typing-animation": "^0.1.7",
+    "react-native-view-more-text": "^2.1.0",
     "uuid": "3.4.0"
   },
   "peerDependencies": {

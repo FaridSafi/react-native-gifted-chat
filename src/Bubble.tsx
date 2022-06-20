@@ -9,9 +9,9 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
-  TouchableOpacity,
 } from 'react-native'
 import { SwipeRow } from 'react-native-swipe-list-view'
+import ViewMoreText from 'react-native-view-more-text'
 import ParsedText from 'react-native-parsed-text'
 import {
   mentionRegEx,
@@ -168,6 +168,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   usernameStyle?: TextStyle
   parentUsernameStyle?: LeftRightStyle<TextStyle>
   parentTextStyle?: LeftRightStyle<TextStyle>
+  parentViewMoreBtnTextStyle?: TextStyle
   quickReplyStyle?: StyleProp<ViewStyle>
   onPress?(context?: any, message?: any): void
   onLongPress?(context?: any, message?: any): void
@@ -226,6 +227,7 @@ export default class Bubble<
     usernameStyle: {},
     parentUsernameStyle: {},
     parentTextStyle: {},
+    parentViewMoreBtnTextStyle: {},
     containerToNextStyle: {},
     containerToPreviousStyle: {},
   }
@@ -277,6 +279,7 @@ export default class Bubble<
       left: StylePropType,
       right: StylePropType,
     }),
+    parentViewMoreBtnTextStyle: StylePropType,
     containerToNextStyle: PropTypes.shape({
       left: StylePropType,
       right: StylePropType,
@@ -427,6 +430,24 @@ export default class Bubble<
     return null
   }
 
+  renderViewMore = (onPress: any) => {
+    const { parentViewMoreBtnTextStyle } = this.props
+    return (
+      <Text onPress={onPress} style={parentViewMoreBtnTextStyle}>
+        show more
+      </Text>
+    )
+  }
+
+  renderViewLess = (onPress: any) => {
+    const { parentViewMoreBtnTextStyle } = this.props
+    return (
+      <Text onPress={onPress} style={parentViewMoreBtnTextStyle}>
+        show less
+      </Text>
+    )
+  }
+
   renderParentMessage() {
     if (
       this.props.currentMessage &&
@@ -441,13 +462,11 @@ export default class Bubble<
         parentUsernameStyle,
       } = this.props
       return (
-        <TouchableOpacity
+        <View
           style={[
             styles.content.parentMessageWrapper,
             parentMessageWrapperStyle && parentMessageWrapperStyle[position],
           ]}
-          activeOpacity={0.8}
-          onPress={this.onParentMessagePress}
         >
           {currentMessage?.parent?.name ? (
             <Text
@@ -461,25 +480,37 @@ export default class Bubble<
               {currentMessage?.parent?.name}
             </Text>
           ) : null}
-          <ParsedText
+          <ViewMoreText
+            numberOfLines={5}
+            renderViewMore={this.renderViewMore}
+            renderViewLess={this.renderViewLess}
             style={
               [
                 styles.content.parentText,
                 parentTextStyle && parentTextStyle[position],
               ] as TextStyle
             }
-            parse={[
-              {
-                pattern: mentionRegEx,
-                renderText: value =>
-                  replaceMentionValues(value, ({ name }) => `@${name}`),
-              },
-            ]}
-            numberOfLines={4}
           >
-            {currentMessage?.parent?.text}
-          </ParsedText>
-        </TouchableOpacity>
+            <ParsedText
+              style={
+                [
+                  styles.content.parentText,
+                  parentTextStyle && parentTextStyle[position],
+                ] as TextStyle
+              }
+              parse={[
+                {
+                  pattern: mentionRegEx,
+                  renderText: value =>
+                    replaceMentionValues(value, ({ name }) => `@${name}`),
+                },
+              ]}
+              numberOfLines={4}
+            >
+              {currentMessage?.parent?.text}
+            </ParsedText>
+          </ViewMoreText>
+        </View>
       )
     }
     return null

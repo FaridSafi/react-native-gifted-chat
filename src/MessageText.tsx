@@ -133,24 +133,6 @@ export default class MessageText<
     }
   }
 
-  onUrlWithoutPrefixPress = (url: string) => {
-    let updatedUrl
-    const urlHttpsPattern = /^https:\/\//i
-    const urlHttpPattern = /^http:\/\//i
-    if (urlHttpsPattern.test(url) || urlHttpPattern.test(url)) {
-      updatedUrl = url
-    } else {
-      updatedUrl = 'https://' + url
-    }
-    Linking.canOpenURL(updatedUrl).then(supported => {
-      if (!supported) {
-        console.error('No handler for URL:', url)
-      } else {
-        Linking.openURL(url)
-      }
-    })
-  }
-
   onPhonePress = (phone: string) => {
     const { optionTitles } = this.props
     const options =
@@ -203,17 +185,7 @@ export default class MessageText<
             this.props.textStyle && this.props.textStyle[this.props.position],
             this.props.customTextStyle,
           ]}
-          parse={[
-            ...this.props.parsePatterns!(linkStyle as TextStyle),
-            { type: 'url', style: linkStyle, onPress: this.onUrlPress },
-            { type: 'phone', style: linkStyle, onPress: this.onPhonePress },
-            { type: 'email', style: linkStyle, onPress: this.onEmailPress },
-            {
-              pattern: /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi,
-              style: linkStyle,
-              onPress: this.onUrlWithoutPrefixPress,
-            },
-          ]}
+          parse={[...this.props.parsePatterns!(linkStyle as TextStyle)]}
           childrenProps={{ ...this.props.textProps }}
         >
           {this.props.currentMessage!.text}

@@ -18,7 +18,7 @@ import { warning } from './logging'
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     flexWrap: 'wrap',
     // maxWidth: 800,
   },
@@ -136,46 +136,21 @@ export function QuickReplies({
     <View style={styles.container}>
 
         <FlatList 
-          data={currentMessage.quickReplies.values}
-          key={currentMessage.quickReplies.values.length}
-          numColumns={currentMessage.quickReplies.values.length > 2 ? Math.ceil(currentMessage.quickReplies.values.length/2) : 2}
-          keyExtractor={dataItem => dataItem.value.toString()}
-          renderItem={(reply, index) => {
-              const selected = type === 'checkbox' && replies.find(sameReply(reply));
-              console.log(reply)
-              return (
-              <TouchableOpacity onPress={handlePress(reply.item)} style={[
-                      styles.quickReply,
-                      quickReplyStyle,
-                      { borderColor: color },
-                      selected && { backgroundColor: color },
-                  ]} key={`${reply.item.value}-${index}`}>
-                  <Text numberOfLines={10} ellipsizeMode={'tail'} style={[
-                          styles.quickReplyText,
-                          { color: selected ? Color.white : color },
-                          quickReplyTextStyle,
-                      ]}>
-                      {reply.item.title}
-                  </Text>
-              </TouchableOpacity>
-              )
-          }}
-        />
-
-      {/* {currentMessage!.quickReplies!.values.map(
-        (reply: Reply, index: number) => {
-          const selected = type === 'checkbox' && replies.find(sameReply(reply))
-
-          return (
-            <TouchableOpacity
-              onPress={handlePress(reply)}
+          data={currentMessage!.quickReplies!.values}
+          key={currentMessage!.quickReplies!.values.length}
+          numColumns={currentMessage!.quickReplies!.values.length > 2 ? Math.ceil(currentMessage!.quickReplies!.values.length/2) : 2}
+          renderItem={(reply : Reply, index: number) => {
+            const selected = type === 'checkbox' && replies.find(sameReply(reply.item));
+            return (
+            <TouchableOpacity 
+              onPress={handlePress(reply.item)} 
               style={[
                 styles.quickReply,
                 quickReplyStyle,
                 { borderColor: color },
                 selected && { backgroundColor: color },
               ]}
-              key={`${reply.value}-${index}`}
+              key={`${reply.item.value}-${index}`}
             >
               <Text
                 numberOfLines={10}
@@ -186,12 +161,13 @@ export function QuickReplies({
                   quickReplyTextStyle,
                 ]}
               >
-                {reply.title}
+                {reply.item.title}
               </Text>
             </TouchableOpacity>
-          )
-        },
-      )} */}
+            )
+          }}
+        />
+
       {replies.length > 0 && (
         <TouchableOpacity
           style={[styles.quickReply, styles.sendLink]}

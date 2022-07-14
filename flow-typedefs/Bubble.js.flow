@@ -59,7 +59,7 @@ export type BubbleProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   renderTicks?: TMessage => React.Node,
   renderUsername?: () => React.Node,
   renderQuickReplySend?: () => React.Node,
-  renderQuickReplies?: QuickRepliesProps => React.Node,
+  renderQuickReplies?: (QuickRepliesProps<TMessage>) => React.Node,
 |}>
 
 export default class Bubble<

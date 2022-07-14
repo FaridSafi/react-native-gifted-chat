@@ -3,9 +3,9 @@ import * as React from 'react'
 import type { IMessage, Reply } from './types'
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
-export type QuickRepliesProps = $ReadOnly<{|
-  nextMessage?: IMessage,
-  currentMessage?: IMessage,
+export type QuickRepliesProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  nextMessage?: TMessage,
+  currentMessage?: TMessage,
   color?: string,
   sendText?: string,
   quickReplyStyle?: ViewStyleProp,

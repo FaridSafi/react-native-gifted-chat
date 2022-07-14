@@ -257,6 +257,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     onPressAvatar: null,
     onLongPressAvatar: null,
     renderUsernameOnMessage: false,
+    renderUsernameForEveryMessage: true,
     renderAvatarOnTop: false,
     renderBubble: null,
     renderSystemMessage: null,

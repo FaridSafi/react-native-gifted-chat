@@ -132,6 +132,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   user?: User
   touchableProps?: object
   renderUsernameOnMessage?: boolean
+  renderUsernameForEveryMessage?: boolean
   isCustomViewBottom?: boolean
   inverted?: boolean
   position: 'left' | 'right'
@@ -212,6 +213,7 @@ export default class Bubble<
     renderCustomView: PropTypes.func,
     isCustomViewBottom: PropTypes.bool,
     renderUsernameOnMessage: PropTypes.bool,
+    renderUsernameForEveryMessage: PropTypes.bool,
     renderUsername: PropTypes.func,
     renderTime: PropTypes.func,
     renderTicks: PropTypes.func,
@@ -455,9 +457,13 @@ export default class Bubble<
   }
 
   renderUsername() {
-    const { currentMessage, user } = this.props
+    const { currentMessage, user, nextMessage } = this.props
     if (this.props.renderUsernameOnMessage && currentMessage) {
-      if (user && currentMessage.user._id === user._id) {
+      if (user && currentMessage.user._id === user._id
+        || (!this.props.renderUsernameForEveryMessage
+            && isSameUser(currentMessage, nextMessage)
+            && isSameDay(currentMessage, nextMessage))
+      ) {
         return null
       }
       return (

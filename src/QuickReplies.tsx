@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
   },
 })
 
-export interface QuickRepliesProps {
-  nextMessage?: IMessage
-  currentMessage?: IMessage
+export interface QuickRepliesProps<TMessage extends IMessage = IMessage> {
+  nextMessage?: TMessage
+  currentMessage?: TMessage
   color?: string
   sendText?: string
   quickReplyStyle?: StyleProp<ViewStyle>
@@ -71,7 +71,7 @@ export function QuickReplies({
   onQuickReply,
   sendText = 'Send',
   renderQuickReplySend,
-}: QuickRepliesProps) {
+}: QuickRepliesProps<IMessage>) {
   const { type } = currentMessage!.quickReplies!
   const [replies, setReplies] = useState<Reply[]>([])
 

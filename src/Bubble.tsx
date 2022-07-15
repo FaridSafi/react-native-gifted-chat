@@ -161,7 +161,9 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderTicks?(currentMessage: TMessage): React.ReactNode
   renderUsername?(): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
-  renderQuickReplies?(quickReplies: QuickRepliesProps): React.ReactNode
+  renderQuickReplies?(
+    quickReplies: QuickRepliesProps<TMessage>,
+  ): React.ReactNode
 }
 
 export default class Bubble<
@@ -341,14 +343,12 @@ export default class Bubble<
       }
       return (
         <QuickReplies
-          {...{
-            currentMessage,
-            onQuickReply,
-            nextMessage,
-            renderQuickReplySend,
-            quickReplyStyle,
-            quickReplyTextStyle,
-          }}
+          currentMessage={currentMessage}
+          onQuickReply={onQuickReply}
+          renderQuickReplySend={renderQuickReplySend}
+          quickReplyStyle={quickReplyStyle}
+          quickReplyTextStyle={quickReplyTextStyle}
+          nextMessage={nextMessage}
         />
       )
     }

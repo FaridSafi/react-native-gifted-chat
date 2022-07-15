@@ -329,6 +329,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     onPressAvatar: PropTypes.func,
     onLongPressAvatar: PropTypes.func,
     renderUsernameOnMessage: PropTypes.bool,
+    renderUsernameForEveryMessage: PropTypes.bool,
     renderAvatarOnTop: PropTypes.bool,
     isCustomViewBottom: PropTypes.bool,
     renderBubble: PropTypes.func,

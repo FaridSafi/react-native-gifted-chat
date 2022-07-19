@@ -171,6 +171,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   onPress?(context: any, message: TMessage): void
   /* Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see example using showActionSheetWithOptions()) */
   onLongPress?(context: any, message: TMessage): void
+  /*Custom Username container */
+  renderUsername?(user: User): React.ReactNode
   /* Reverses display order of messages; default is true */
   /*Custom message container */
   renderMessage?(message: Message<TMessage>['props']): React.ReactNode
@@ -261,6 +263,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderBubble: null,
     renderSystemMessage: null,
     onLongPress: null,
+    renderUserName: null,
     renderMessage: null,
     renderMessageText: null,
     renderMessageImage: null,

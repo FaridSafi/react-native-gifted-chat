@@ -27,7 +27,7 @@ import { warning } from './logging'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'row',
   },
   containerAlignTop: {
     flexDirection: 'row',
@@ -336,14 +336,14 @@ export default class MessageContainer<
   render() {
     const { inverted } = this.props
     return (
-      <View
-        style={
-          this.props.alignTop ? styles.containerAlignTop : styles.container
-        }
-      >
-        {this.state.showScrollBottom && this.props.scrollToBottom
-          ? this.renderScrollToBottomWrapper()
-          : null}
+        <View
+          style={
+            this.props.alignTop ? styles.containerAlignTop : styles.container
+          }
+        >
+          {this.state.showScrollBottom && this.props.scrollToBottom
+            ? this.renderScrollToBottomWrapper()
+            : null}
         <FlatList
           ref={this.props.forwardRef}
           extraData={[this.props.extraData, this.props.isTyping]}

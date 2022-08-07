@@ -23,8 +23,6 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
 })
 
-const filterBotMessages = message =>
-  !message.system && message.user && message.user._id && message.user._id === 2
 const findStep = step => message => message._id === step
 
 const user = {
@@ -103,25 +101,8 @@ export default class App extends Component {
         step,
       }
     })
-    // for demo purpose
-    // setTimeout(() => this.botSend(step), Math.round(Math.random() * 1000))
   }
 
-  botSend = (step = 0) => {
-    const newMessage = (messagesData as IMessage[])
-      .reverse()
-      // .filter(filterBotMessages)
-      .find(findStep(step))
-    if (newMessage) {
-      this.setState((previousState: any) => ({
-        messages: GiftedChat.append(
-          previousState.messages,
-          [newMessage],
-          Platform.OS !== 'web',
-        ),
-      }))
-    }
-  }
 
   parsePatterns = (_linkStyle: any) => {
     return [
@@ -135,25 +116,6 @@ export default class App extends Component {
 
   renderCustomView(props) {
     return <CustomView {...props} />
-  }
-
-  onReceive = (text: string) => {
-    this.setState((previousState: any) => {
-      return {
-        messages: GiftedChat.append(
-          previousState.messages as any,
-          [
-            {
-              _id: Math.round(Math.random() * 1000000),
-              text,
-              createdAt: new Date(),
-              user: otherUser,
-            },
-          ],
-          Platform.OS !== 'web',
-        ),
-      }
-    })
   }
 
   onSendFromUser = (messages: IMessage[] = []) => {
@@ -246,6 +208,7 @@ export default class App extends Component {
       >
         <NavBar />
         <GiftedChat
+          minComposerHeight={150}
           messages={this.state.messages}
           onSend={this.onSend}
           loadEarlier={this.state.loadEarlier}

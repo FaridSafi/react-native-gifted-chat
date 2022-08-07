@@ -4,7 +4,7 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
 <View
   style={
     Object {
-      "flex": 1,
+      "flexDirection": "row",
     }
   }
 >
@@ -100,7 +100,7 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
       <View
         style={
           Object {
-            "flex": 1,
+            "flexDirection": "row",
           }
         }
       />

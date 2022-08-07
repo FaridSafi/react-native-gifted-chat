@@ -208,7 +208,7 @@ export default class App extends Component {
       >
         <NavBar />
         <GiftedChat
-          minComposerHeight={150}
+          minComposerHeight={70}
           messages={this.state.messages}
           onSend={this.onSend}
           loadEarlier={this.state.loadEarlier}

@@ -2,20 +2,20 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {
   Linking,
-  StyleSheet,
-  View,
-  TextProps,
   StyleProp,
-  ViewStyle,
+  StyleSheet,
+  TextProps,
   TextStyle,
+  View,
+  ViewStyle,
 } from 'react-native'
 
 // @ts-ignore
-import ParsedText from 'react-native-parsed-text'
-import { LeftRightStyle, IMessage } from './Models'
-import { StylePropType } from './utils'
+import ParsedText, { ParsedTextProps } from 'react-native-parsed-text'
 import { useChatContext } from './GiftedChatContext'
 import { error } from './logging'
+import { IMessage, LeftRightStyle } from './Models'
+import { StylePropType } from './utils'
 
 const WWW_URL_PATTERN = /^www\./i
 
@@ -57,6 +57,10 @@ const styles = {
 
 const DEFAULT_OPTION_TITLES = ['Call', 'Text', 'Cancel']
 
+// ParsedShape type extraction
+type ParseProp = Pick<ParsedTextProps, 'parse'>
+type ParsedShape = ParseProp[keyof ParseProp]
+
 export interface MessageTextProps<TMessage extends IMessage> {
   position?: 'left' | 'right'
   optionTitles?: string[]
@@ -66,7 +70,7 @@ export interface MessageTextProps<TMessage extends IMessage> {
   linkStyle?: LeftRightStyle<TextStyle>
   textProps?: TextProps
   customTextStyle?: StyleProp<TextStyle>
-  parsePatterns?(linkStyle: TextStyle): any
+  parsePatterns?(linkStyle: StyleProp<TextStyle>): ParsedShape
 }
 
 export function MessageText<TMessage extends IMessage = IMessage>({
@@ -141,7 +145,8 @@ export function MessageText<TMessage extends IMessage = IMessage>({
   const linkStyle = [
     styles[position].link,
     linkStyleProp && linkStyleProp[position],
-  ]
+  ] as StyleProp<TextStyle>
+
   return (
     <View
       style={[
@@ -156,12 +161,12 @@ export function MessageText<TMessage extends IMessage = IMessage>({
           customTextStyle,
         ]}
         parse={[
-          ...parsePatterns!(linkStyle as TextStyle),
+          ...parsePatterns!(linkStyle)!,
           { type: 'url', style: linkStyle, onPress: onUrlPress },
           { type: 'phone', style: linkStyle, onPress: onPhonePress },
           { type: 'email', style: linkStyle, onPress: onEmailPress },
         ]}
-        childrenProps={{ ...textProps }}
+        childrenProps={textProps}
       >
         {currentMessage!.text}
       </ParsedText>

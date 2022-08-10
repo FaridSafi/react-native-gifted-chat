@@ -407,6 +407,7 @@ interface QuickReplies {
 * **`scrollToBottomComponent`** _(Function)_ - Custom Scroll To Bottom Component container
 * **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)
 * **`scrollToBottomStyle`** _(Object)_ - Custom style for Bottom Component container
+- **`onScrolledToBottom`** _(Function)_ - Callback when the scroll to bottom component toggles visibility, must be used with `scrollToBottom`
 * **`alignTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 * **`onQuickReply`** _(Function)_ - Callback when sending a quick reply (to backend server)
 * **`renderQuickReplies`** _(Function)_ - Custom all quick reply view

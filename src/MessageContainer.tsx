@@ -86,6 +86,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   scrollToBottomComponent?(): React.ReactNode
   onLoadEarlier?(): void
+  onScrolledToBottom?(atBottom: boolean): void
   onQuickReply?(replies: Reply[]): void
   infiniteScroll?: boolean
   isLoadingEarlier?: boolean
@@ -107,6 +108,7 @@ export default class MessageContainer<
     renderFooter: null,
     renderMessage: null,
     onLoadEarlier: () => {},
+    onScrolledToBottom: () => {},
     onQuickReply: () => {},
     inverted: true,
     loadEarlier: false,
@@ -130,6 +132,7 @@ export default class MessageContainer<
     renderMessage: PropTypes.func,
     renderLoadEarlier: PropTypes.func,
     onLoadEarlier: PropTypes.func,
+    onScrolledToBottom: PropTypes.func,
     listViewProps: PropTypes.object,
     inverted: PropTypes.bool,
     loadEarlier: PropTypes.bool,
@@ -146,6 +149,19 @@ export default class MessageContainer<
   state = {
     showScrollBottom: false,
     hasScrolled: false,
+  }
+
+  componentDidUpdate = (
+    _: MessageContainerProps<TMessage>,
+    prevState: State,
+  ) => {
+    if (
+      this.props.onScrolledToBottom &&
+      prevState.showScrollBottom !== this.state.showScrollBottom
+    ) {
+      if (this.props.onScrolledToBottom)
+        this.props.onScrolledToBottom(!this.state.showScrollBottom)
+    }
   }
 
   renderTypingIndicator = () => {

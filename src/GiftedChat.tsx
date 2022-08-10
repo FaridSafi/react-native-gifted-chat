@@ -157,6 +157,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   onSend?(messages: TMessage[]): void
   /*Callback when loading earlier messages*/
   onLoadEarlier?(): void
+  /*Callback when scroll to bottom*/
+  onScrolledToBottom?(atBottom: boolean): void
   /*  Render a loading view when initializing */
   renderLoading?(): React.ReactNode
   /* Custom "Load earlier messages" button */
@@ -250,6 +252,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     dateFormat: DATE_FORMAT,
     loadEarlier: false,
     onLoadEarlier: () => {},
+    onScrolledToBottom: () => {},
     isLoadingEarlier: false,
     renderLoading: null,
     renderLoadEarlier: null,
@@ -321,6 +324,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     isKeyboardInternallyHandled: PropTypes.bool,
     loadEarlier: PropTypes.bool,
     onLoadEarlier: PropTypes.func,
+    onScrolledToBottom: PropTypes.func,
     isLoadingEarlier: PropTypes.bool,
     renderLoading: PropTypes.func,
     renderLoadEarlier: PropTypes.func,
@@ -694,6 +698,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       >
         <MessageContainer<TMessage>
           {...messagesContainerProps}
+          onScrolledToBottom={this.props.onScrolledToBottom}
           invertibleScrollViewProps={this.invertibleScrollViewProps}
           messages={this.getMessages()}
           forwardRef={this._messageContainerRef}

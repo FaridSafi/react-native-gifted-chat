@@ -9,7 +9,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native'
-
 // @ts-ignore
 import ParsedText, { ParsedTextProps } from 'react-native-parsed-text'
 import { useChatContext } from './GiftedChatContext'
@@ -58,8 +57,7 @@ const styles = {
 const DEFAULT_OPTION_TITLES = ['Call', 'Text', 'Cancel']
 
 // ParsedShape type extraction
-type ParseProp = Pick<ParsedTextProps, 'parse'>
-type ParsedShape = ParseProp[keyof ParseProp]
+type ParsedShape = ParsedTextProps['parse']
 
 export interface MessageTextProps<TMessage extends IMessage> {
   position?: 'left' | 'right'

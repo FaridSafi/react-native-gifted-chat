@@ -207,7 +207,7 @@ export interface IMessage {
   text: string
   createdAt: Date | number
   user: User
-  image?: string
+  image?: string | number
   video?: string
   audio?: string
   system?: boolean

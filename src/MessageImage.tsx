@@ -44,7 +44,7 @@ export function MessageImage<TMessage extends IMessage = IMessage>({
   imageStyle,
   currentMessage,
 }: MessageImageProps<TMessage>) {
-  if (currentMessage == null) {
+  if (currentMessage == null || currentMessage.image == undefined) {
     return null
   }
 
@@ -59,7 +59,9 @@ export function MessageImage<TMessage extends IMessage = IMessage>({
         <Image
           {...imageProps}
           style={[styles.image, imageStyle]}
-          source={{ uri: currentMessage.image }}
+          source={
+            typeof (currentMessage.image) === 'string' ? { uri: currentMessage.image } : currentMessage.image
+          }
         />
       </Lightbox>
     </View>

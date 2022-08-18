@@ -79,15 +79,8 @@
     "uuid": "3.4.0"
   },
   "peerDependencies": {
-    "@expo/react-native-action-sheet": "*",
-    "dayjs": "*",
     "react": "*",
-    "react-native": "*",
-    "react-native-communications": "*",
-    "react-native-lightbox": "*",
-    "react-native-parsed-text": "*",
-    "react-native-safe-area-context": "*",
-    "react-native-typing-animation": "*"
+    "react-native": "*"
   },
   "husky": {
     "hooks": {

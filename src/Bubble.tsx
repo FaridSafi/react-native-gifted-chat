@@ -11,16 +11,15 @@ import {
   TextStyle,
 } from 'react-native'
 
-import QuickReplies from './QuickReplies'
+import { GiftedChatContext } from './GiftedChatContext'
+import { QuickReplies, QuickRepliesProps } from './QuickReplies'
+import { MessageText, MessageTextProps } from './MessageText'
+import { MessageImage, MessageImageProps } from './MessageImage'
+import { MessageVideo } from './MessageVideo'
+import { MessageAudio } from './MessageAudio'
+import { Time, TimeProps } from './Time'
 
-import MessageText from './MessageText'
-import MessageImage from './MessageImage'
-import MessageVideo from './MessageVideo'
-import MessageAudio from './MessageAudio'
-
-import Time from './Time'
 import Color from './Color'
-
 import { StylePropType, isSameUser, isSameDay } from './utils'
 import {
   User,
@@ -109,7 +108,7 @@ export type RenderMessageImageProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
   'containerStyle' | 'wrapperStyle'
 > &
-  MessageImage['props']
+  MessageImageProps<TMessage>
 
 export type RenderMessageVideoProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
@@ -127,7 +126,7 @@ export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
   'containerStyle' | 'wrapperStyle'
 > &
-  MessageText['props']
+  MessageTextProps<TMessage>
 
 export interface BubbleProps<TMessage extends IMessage> {
   user?: User
@@ -149,6 +148,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   containerToPreviousStyle?: LeftRightStyle<ViewStyle>
   usernameStyle?: TextStyle
   quickReplyStyle?: StyleProp<ViewStyle>
+  quickReplyTextStyle?: StyleProp<TextStyle>
   onPress?(context?: any, message?: any): void
   onLongPress?(context?: any, message?: any): void
   onQuickReply?(replies: Reply[]): void
@@ -157,19 +157,19 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderMessageAudio?(props: RenderMessageAudioProps<TMessage>): React.ReactNode
   renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
   renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
-  renderTime?(timeProps: Time['props']): React.ReactNode
+  renderTime?(timeProps: TimeProps<TMessage>): React.ReactNode
   renderTicks?(currentMessage: TMessage): React.ReactNode
   renderUsername?(): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
-  renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
+  renderQuickReplies?(
+    quickReplies: QuickRepliesProps<TMessage>,
+  ): React.ReactNode
 }
 
 export default class Bubble<
   TMessage extends IMessage = IMessage
 > extends React.Component<BubbleProps<TMessage>> {
-  static contextTypes = {
-    actionSheet: PropTypes.func,
-  }
+  static contextType = GiftedChatContext
 
   static defaultProps = {
     touchableProps: {},
@@ -334,6 +334,7 @@ export default class Bubble<
       nextMessage,
       renderQuickReplySend,
       quickReplyStyle,
+      quickReplyTextStyle,
     } = this.props
     if (currentMessage && currentMessage.quickReplies) {
       const { containerStyle, wrapperStyle, ...quickReplyProps } = this.props
@@ -342,13 +343,12 @@ export default class Bubble<
       }
       return (
         <QuickReplies
-          {...{
-            currentMessage,
-            onQuickReply,
-            nextMessage,
-            renderQuickReplySend,
-            quickReplyStyle,
-          }}
+          currentMessage={currentMessage}
+          onQuickReply={onQuickReply}
+          renderQuickReplySend={renderQuickReplySend}
+          quickReplyStyle={quickReplyStyle}
+          quickReplyTextStyle={quickReplyTextStyle}
+          nextMessage={nextMessage}
         />
       )
     }
@@ -527,7 +527,7 @@ export default class Bubble<
           <TouchableWithoutFeedback
             onPress={this.onPress}
             onLongPress={this.onLongPress}
-            accessibilityTraits='text'
+            accessibilityRole='text'
             {...this.props.touchableProps}
           >
             <View>

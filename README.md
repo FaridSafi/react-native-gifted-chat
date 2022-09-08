@@ -56,15 +56,15 @@
 
 <p align="center">
   <br/>
-  <a href="https://getstream.io/chat/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">
+  <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">
     <img src="https://i.imgur.com/oU7XYkk.png">
   </a>
   <br>
   <p align="center">
-    Scalable <a href="https://getstream.io/chat/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">chat API/Server</a> written in Go
+    Scalable <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">chat API/Server</a> written in Go
   </p>
   <p align="center">
-    <a href="https://getstream.io/chat/get_started/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">API Tour</a> | <a href="https://dev.to/nickparsons/react-native-chat-with-chuck-norris-3h7m?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">React Native Gifted tutorial</a>
+    <a href="https://getstream.io/chat/get_started/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">API Tour</a> | <a href="https://dev.to/nickparsons/react-native-chat-with-chuck-norris-3h7m?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">React Native Gifted tutorial</a>
   </p>
 </p>
 
@@ -104,13 +104,33 @@ Please give us your advice: [Related PR](https://github.com/FaridSafi/react-nati
 - Redux support
 - System message
 - Quick Reply messages (bot)
-- Typying indicatior [react-native-typing-animation](https://github.com/watadarkstar/react-native-typing-animation)
+- Typing indicator [react-native-typing-animation](https://github.com/watadarkstar/react-native-typing-animation)
 
 ## Dependency
 
 - Use version `0.2.x` for RN `>= 0.44.0`
 - Use version `0.1.x` for RN `>= 0.40.0`
 - Use version `0.0.10` for RN `< 0.40.0`
+
+## Testing
+`Test_ID` is exported as constants that can be used in your testing library of choice
+
+Gifted Chat uses `onLayout` to determine the height of the chat container.  To trigger `onLayout` during your tests, you can run the following bits of code.
+
+```typescript
+const WIDTH = 200 // or any number
+const HEIGHT = 2000 // or any number
+
+const loadingWrapper = getByTestId(Test_ID.LOADING.WRAPPER)
+fireEvent(loadingWrapper, "layout", {
+  nativeEvent: {
+    layout: {
+      width: WIDTH,
+      height: HEIGHT,
+    },
+  },
+});
+```
 
 ## Installation
 
@@ -171,7 +191,7 @@ export function Example() {
 
 ## Advanced example
 
-See [`App.tsx`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master/App.tsx) for a working demo!
+See [`App.tsx`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master/example/App.tsx) for a working demo!
 
 ## "Slack" example
 
@@ -318,8 +338,8 @@ interface QuickReplies {
 - **`onSend`** _(Function)_ - Callback when sending a message
 - **`alwaysShowSend`** _(Bool)_ - Always show send button in input text composer; default `false`, show only when text input is not empty
 - **`locale`** _(String)_ - Locale to localize the dates. You need first to import the locale you need (ie. `require('dayjs/locale/de')` or `import 'dayjs/locale/fr'`)
-- **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'`
-- **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'ll'`
+- **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
+- **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'ll'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`loadEarlier`** _(Bool)_ - Enables the "load earlier messages" button, required for `infiniteScroll`
 - **`isKeyboardInternallyHandled`** _(Bool)_ - Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true`
 - **`onLoadEarlier`** _(Function)_ - Callback when loading earlier messages
@@ -350,7 +370,7 @@ interface QuickReplies {
 - **`renderCustomView`** _(Function)_ - Custom view inside the bubble
 - **`renderDay`** _(Function)_ - Custom day above a message
 - **`renderTime`** _(Function)_ - Custom time inside a message
-- **`renderFooter`** _(Function)_ - Custom footer component on the ListView, e.g. `'User is typing...'`; see [App.tsx](/App.tsx) for an example. Overrides default typing indicator that triggers when `isTyping` is true.
+- **`renderFooter`** _(Function)_ - Custom footer component on the ListView, e.g. `'User is typing...'`; see [App.tsx](/example/App.tsx) for an example. Overrides default typing indicator that triggers when `isTyping` is true.
 - **`renderChatEmpty`** _(Function)_ - Custom component to render in the ListView when messages are empty
 - **`renderChatFooter`** _(Function)_ - Custom component to render below the MessageContainer (separate from the ListView)
 - **`renderInputToolbar`** _(Function)_ - Custom message composer container

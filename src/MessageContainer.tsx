@@ -16,12 +16,14 @@ import {
   Platform,
 } from 'react-native'
 
-import LoadEarlier from './LoadEarlier'
+import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
 import Message from './Message'
 import Color from './Color'
 import { User, IMessage, Reply } from './Models'
-import { warning, StylePropType } from './utils'
 import TypingIndicator from './TypingIndicator'
+
+import { StylePropType } from './utils'
+import { warning } from './logging'
 
 const styles = StyleSheet.create({
   container: {
@@ -81,7 +83,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactNode
-  renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
+  renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   scrollToBottomComponent?(): React.ReactNode
   onLoadEarlier?(): void
   onQuickReply?(replies: Reply[]): void
@@ -91,6 +93,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
 
 interface State {
   showScrollBottom: boolean
+  hasScrolled: boolean
 }
 
 export default class MessageContainer<

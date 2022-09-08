@@ -96,7 +96,8 @@ export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   renderAvatar?: ((AvatarProps<TMessage>) => React.Node) | null,
   renderBubble?: (BubbleProps<TMessage>) => React.Node,
   renderSystemMessage?: (SystemMessageProps<TMessage>) => React.Node,
-  onLongPress?: (context: any, message: any) => void,
+  onPress?: (context: any, message: TMessage) => void,
+  onLongPress?: (context: any, message: TMessage) => void,
   renderMessage?: (MessageProps<TMessage>) => React.Node,
   renderMessageText?: (MessageTextProps<TMessage>) => React.Node,
   renderMessageImage?: (MessageImageProps<TMessage>) => React.Node,
@@ -116,7 +117,7 @@ export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   onInputTextChanged?: (text: string) => void,
   parsePatterns?: () => React.Node,
   onQuickReply?: (Array<Reply>) => void,
-  renderQuickReplies?: QuickRepliesProps => React.Node,
+  renderQuickReplies?: (QuickRepliesProps<TMessage>) => React.Node,
   renderQuickReplySend?: () => React.Node,
   shouldUpdateMessage?: (
     props: MessageProps<TMessage>,

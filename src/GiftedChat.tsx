@@ -7,35 +7,37 @@ import {
   View,
   StyleProp,
   ViewStyle,
-  SafeAreaView,
   FlatList,
   TextStyle,
   KeyboardAvoidingView,
+  LayoutChangeEvent,
 } from 'react-native'
 import {
   ActionSheetProvider,
   ActionSheetOptions,
 } from '@expo/react-native-action-sheet'
 import uuid from 'uuid'
-import { getBottomSpace } from 'react-native-iphone-x-helper'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 import * as utils from './utils'
-import Actions from './Actions'
-import Avatar from './Avatar'
+import { Actions, ActionsProps } from './Actions'
+import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
-import SystemMessage from './SystemMessage'
-import MessageImage from './MessageImage'
-import MessageText from './MessageText'
-import Composer from './Composer'
-import Day from './Day'
-import InputToolbar from './InputToolbar'
-import LoadEarlier from './LoadEarlier'
+import { SystemMessage, SystemMessageProps } from './SystemMessage'
+import { MessageImage, MessageImageProps } from './MessageImage'
+import { MessageText, MessageTextProps } from './MessageText'
+import { Composer, ComposerProps } from './Composer'
+import { Day, DayProps } from './Day'
+import { InputToolbar, InputToolbarProps } from './InputToolbar'
+import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
 import Message from './Message'
 import MessageContainer from './MessageContainer'
-import Send from './Send'
-import Time from './Time'
+import { Send, SendProps } from './Send'
+import { GiftedChatContext } from './GiftedChatContext'
+import { Time, TimeProps } from './Time'
+import { QuickRepliesProps } from './QuickReplies'
 import GiftedAvatar from './GiftedAvatar'
 
 import {
@@ -44,6 +46,7 @@ import {
   DEFAULT_PLACEHOLDER,
   TIME_FORMAT,
   DATE_FORMAT,
+  TEST_ID,
 } from './Constant'
 import {
   IMessage,
@@ -53,7 +56,7 @@ import {
   MessageVideoProps,
   MessageAudioProps,
 } from './Models'
-import QuickReplies from './QuickReplies'
+import { LightboxProps } from 'react-native-lightbox-v2'
 
 dayjs.extend(localizedFormat)
 
@@ -103,7 +106,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Extra props to be passed to the <Image> component created by the default renderMessageImage */
   imageProps?: Message<TMessage>['props']
   /*Extra props to be passed to the MessageImage's Lightbox */
-  lightboxProps?: any
+  lightboxProps?: LightboxProps
   /*Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar) */
   bottomOffset?: number
   /* Minimum height of the input toolbar; default is 44 */
@@ -131,6 +134,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   options?: { [key: string]: any }
   optionTintColor?: string
   quickReplyStyle?: StyleProp<ViewStyle>
+  quickReplyTextStyle?: StyleProp<TextStyle>
   /* optional prop used to place customView below text, image and video views; default is false */
   isCustomViewBottom?: boolean
   /* infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
@@ -156,24 +160,24 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*  Render a loading view when initializing */
   renderLoading?(): React.ReactNode
   /* Custom "Load earlier messages" button */
-  renderLoadEarlier?(props: LoadEarlier['props']): React.ReactNode
+  renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   /* Custom message avatar; set to null to not render any avatar for the message */
-  renderAvatar?(props: Avatar<TMessage>['props']): React.ReactNode | null
+  renderAvatar?(props: AvatarProps<TMessage>): React.ReactNode | null
   /* Custom message bubble */
   renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom system message */
-  renderSystemMessage?(props: SystemMessage<TMessage>['props']): React.ReactNode
+  renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
+  /* Callback when a message bubble is pressed; default is to do nothing */
+  onPress?(context: any, message: TMessage): void
   /* Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see example using showActionSheetWithOptions()) */
-  onLongPress?(context: any, message: any): void
+  onLongPress?(context: any, message: TMessage): void
   /* Reverses display order of messages; default is true */
   /*Custom message container */
   renderMessage?(message: Message<TMessage>['props']): React.ReactNode
   /* Custom message text */
-  renderMessageText?(
-    messageText: MessageText<TMessage>['props'],
-  ): React.ReactNode
+  renderMessageText?(messageText: MessageTextProps<TMessage>): React.ReactNode
   /* Custom message image */
-  renderMessageImage?(props: MessageImage<TMessage>['props']): React.ReactNode
+  renderMessageImage?(props: MessageImageProps<TMessage>): React.ReactNode
   /* Custom message video */
   renderMessageVideo?(props: MessageVideoProps<TMessage>): React.ReactNode
   /* Custom message video */
@@ -181,9 +185,9 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom view inside the bubble */
   renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom day above a message*/
-  renderDay?(props: Day<TMessage>['props']): React.ReactNode
+  renderDay?(props: DayProps<TMessage>): React.ReactNode
   /* Custom time inside a message */
-  renderTime?(props: Time<TMessage>['props']): React.ReactNode
+  renderTime?(props: TimeProps<TMessage>): React.ReactNode
   /* Custom footer component on the ListView, e.g. 'User is typing...' */
   renderFooter?(): React.ReactNode
   /* Custom component to render in the ListView when messages are empty */
@@ -191,15 +195,15 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom component to render below the MessageContainer (separate from the ListView) */
   renderChatFooter?(): React.ReactNode
   /* Custom message composer container */
-  renderInputToolbar?(props: InputToolbar['props']): React.ReactNode
+  renderInputToolbar?(props: InputToolbarProps<TMessage>): React.ReactNode
   /*  Custom text input message composer */
-  renderComposer?(props: Composer['props']): React.ReactNode
+  renderComposer?(props: ComposerProps): React.ReactNode
   /* Custom action button on the left of the message composer */
-  renderActions?(props: Actions['props']): React.ReactNode
+  renderActions?(props: ActionsProps): React.ReactNode
   /* Custom send button; you can pass children to the original Send component quite easily, for example to use a custom icon (example) */
-  renderSend?(props: Send['props']): React.ReactNode
+  renderSend?(props: SendProps<TMessage>): React.ReactNode
   /*Custom second line of actions below the message composer */
-  renderAccessory?(props: InputToolbar['props']): React.ReactNode
+  renderAccessory?(props: InputToolbarProps<TMessage>): React.ReactNode
   /*Callback when the Action button is pressed (if set, the default actionSheet will not be used) */
   onPressActionButton?(): void
   /* Callback when the input text changes */
@@ -207,7 +211,9 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
   parsePatterns?(linkStyle: TextStyle): any
   onQuickReply?(replies: Reply[]): void
-  renderQuickReplies?(quickReplies: QuickReplies['props']): React.ReactNode
+  renderQuickReplies?(
+    quickReplies: QuickRepliesProps<TMessage>,
+  ): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
   /* Scroll to bottom custom component */
   scrollToBottomComponent?(): React.ReactNode
@@ -230,11 +236,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   GiftedChatProps<TMessage>,
   GiftedChatState
 > {
-  static childContextTypes = {
-    actionSheet: PropTypes.func,
-    getLocale: PropTypes.func,
-  }
-
   static defaultProps = {
     messages: [],
     messagesContainerStyle: undefined,
@@ -402,7 +403,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   _isFirstLayout: boolean = true
   _locale: string = 'en'
   invertibleScrollViewProps: any = undefined
-  _actionSheetRef: any = undefined
+  _actionSheetRef: RefObject<ActionSheetProvider> = React.createRef()
   _messageContainerRef?: RefObject<FlatList<IMessage>> = React.createRef()
   _isTextInputWasFocused: boolean = false
   textInput?: any
@@ -426,14 +427,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       onKeyboardWillHide: this.onKeyboardWillHide,
       onKeyboardDidShow: this.onKeyboardDidShow,
       onKeyboardDidHide: this.onKeyboardDidHide,
-    }
-  }
-
-  getChildContext() {
-    return {
-      actionSheet:
-        this.props.actionSheet || (() => this._actionSheetRef.getContext()),
-      getLocale: this.getLocale,
     }
   }
 
@@ -598,7 +591,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   safeAreaSupport = (bottomOffset?: number) => {
-    return bottomOffset != null ? bottomOffset : getBottomSpace()
+    return bottomOffset != null ? bottomOffset : 1
   }
 
   /**
@@ -822,8 +815,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     })
   }
 
-  onMainViewLayout = (e: any) => {
-    // fix an issue when keyboard is dismissing during the initialization
+  onMainViewLayout = (e: LayoutChangeEvent) => {
+    // TODO: fix an issue when keyboard is dismissing during the initialization
     const { layout } = e.nativeEvent
     if (
       this.getMaxHeight() !== layout.height ||
@@ -883,22 +876,34 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     if (this.state.isInitialized === true) {
       const { wrapInSafeArea } = this.props
       const Wrapper = wrapInSafeArea ? SafeAreaView : View
-
+      const actionSheet =
+        this.props.actionSheet ||
+        (() => this._actionSheetRef.current?.getContext()!)
+      const { getLocale } = this
       return (
-        <Wrapper style={styles.safeArea}>
-          <ActionSheetProvider
-            ref={(component: any) => (this._actionSheetRef = component)}
-          >
-            <View style={styles.container} onLayout={this.onMainViewLayout}>
-              {this.renderMessages()}
-              {this.renderInputToolbar()}
-            </View>
-          </ActionSheetProvider>
-        </Wrapper>
+        <GiftedChatContext.Provider
+          value={{
+            actionSheet,
+            getLocale,
+          }}
+        >
+          <Wrapper testID={TEST_ID.WRAPPER} style={styles.safeArea}>
+            <ActionSheetProvider ref={this._actionSheetRef}>
+              <View style={styles.container} onLayout={this.onMainViewLayout}>
+                {this.renderMessages()}
+                {this.renderInputToolbar()}
+              </View>
+            </ActionSheetProvider>
+          </Wrapper>
+        </GiftedChatContext.Provider>
       )
     }
     return (
-      <View style={styles.container} onLayout={this.onInitialLayoutViewLayout}>
+      <View
+        testID={TEST_ID.LOADING_WRAPPER}
+        style={styles.container}
+        onLayout={this.onInitialLayoutViewLayout}
+      >
         {this.renderLoading()}
       </View>
     )

@@ -1,4 +1,5 @@
 import { StyleProp, ViewStyle } from 'react-native'
+import { LightboxProps } from 'react-native-lightbox-v2'
 
 export { ActionsProps } from './Actions'
 export { AvatarProps } from './Avatar'
@@ -70,8 +71,7 @@ export interface MessageVideoProps<TMessage extends IMessage> {
   containerStyle?: StyleProp<ViewStyle>
   videoStyle?: StyleProp<ViewStyle>
   videoProps?: object
-  // TODO: should be LightBox properties
-  lightboxProps?: object
+  lightboxProps?: LightboxProps
 }
 
 export interface MessageAudioProps<TMessage extends IMessage> {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
   Text,
   StyleSheet,
@@ -7,10 +7,13 @@ import {
   TouchableOpacity,
   StyleProp,
   ViewStyle,
+  TextStyle,
 } from 'react-native'
+import { useCallbackOne } from 'use-memo-one'
 import { IMessage, Reply } from './Models'
 import Color from './Color'
-import { warning, StylePropType } from './utils'
+import { StylePropType } from './utils'
+import { warning } from './logging'
 
 const styles = StyleSheet.create({
   container: {
@@ -42,18 +45,15 @@ const styles = StyleSheet.create({
   },
 })
 
-export interface QuickRepliesProps {
-  nextMessage?: IMessage
-  currentMessage?: IMessage
+export interface QuickRepliesProps<TMessage extends IMessage = IMessage> {
+  nextMessage?: TMessage
+  currentMessage?: TMessage
   color?: string
   sendText?: string
   quickReplyStyle?: StyleProp<ViewStyle>
+  quickReplyTextStyle?: StyleProp<TextStyle>
   onQuickReply?(reply: Reply[]): void
   renderQuickReplySend?(): React.ReactNode
-}
-
-export interface QuickRepliesState {
-  replies: Reply[]
 }
 
 const sameReply = (currentReply: Reply) => (reply: Reply) =>
@@ -62,80 +62,20 @@ const sameReply = (currentReply: Reply) => (reply: Reply) =>
 const diffReply = (currentReply: Reply) => (reply: Reply) =>
   currentReply.value !== reply.value
 
-export default class QuickReplies extends Component<
-  QuickRepliesProps,
-  QuickRepliesState
-> {
-  static defaultProps = {
-    currentMessage: {
-      quickReplies: [],
-    },
-    onQuickReply: () => {},
-    color: Color.peterRiver,
-    sendText: 'Send',
-    keepReplies: false,
-    renderQuickReplySend: undefined,
-    quickReplyStyle: undefined,
-  }
+export function QuickReplies({
+  currentMessage,
+  nextMessage,
+  color = Color.peterRiver,
+  quickReplyStyle,
+  quickReplyTextStyle,
+  onQuickReply,
+  sendText = 'Send',
+  renderQuickReplySend,
+}: QuickRepliesProps<IMessage>) {
+  const { type } = currentMessage!.quickReplies!
+  const [replies, setReplies] = useState<Reply[]>([])
 
-  static propTypes = {
-    currentMessage: PropTypes.object.isRequired,
-    onQuickReply: PropTypes.func,
-    color: PropTypes.string,
-    sendText: PropTypes.string,
-    keepReplies: PropTypes.bool,
-    renderQuickReplySend: PropTypes.func,
-    quickReplyStyle: StylePropType,
-  }
-
-  state = {
-    replies: [],
-  }
-
-  handlePress = (reply: Reply) => () => {
-    const { currentMessage } = this.props
-    const { replies } = this.state
-    if (currentMessage) {
-      const { type } = currentMessage.quickReplies!
-      switch (type) {
-        case 'radio': {
-          this.handleSend([reply])()
-          return
-        }
-
-        case 'checkbox': {
-          if (replies.find(sameReply(reply))) {
-            this.setState({
-              replies: this.state.replies.filter(diffReply(reply)),
-            })
-          } else {
-            this.setState({ replies: [...this.state.replies, reply] })
-          }
-          return
-        }
-
-        default: {
-          warning(`onQuickReply unknown type: ${type}`)
-          return
-        }
-      }
-    }
-  }
-
-  handleSend = (replies: Reply[]) => () => {
-    const { currentMessage } = this.props
-    if (this.props.onQuickReply) {
-      this.props.onQuickReply(
-        replies.map((reply: Reply) => ({
-          ...reply,
-          messageId: currentMessage!._id,
-        })),
-      )
-    }
-  }
-
-  shouldComponentDisplay = () => {
-    const { currentMessage, nextMessage } = this.props
+  const shouldComponentDisplay = useMemo(() => {
     const hasReplies = !!currentMessage && !!currentMessage!.quickReplies
     const hasNext = !!nextMessage && !!nextMessage!._id
     const keepIt = currentMessage!.quickReplies!.keepIt
@@ -143,73 +83,105 @@ export default class QuickReplies extends Component<
     if (hasReplies && !hasNext) {
       return true
     }
+
     if (hasReplies && hasNext && keepIt) {
       return true
     }
+
     return false
-  }
+  }, [currentMessage, nextMessage])
 
-  renderQuickReplySend = () => {
-    const { replies } = this.state
-    const { sendText, renderQuickReplySend: customSend } = this.props
+  const handlePress = useCallbackOne(
+    (reply: Reply) => () => {
+      if (currentMessage) {
+        const { type } = currentMessage.quickReplies!
+        switch (type) {
+          case 'radio': {
+            handleSend([reply])()
+            return
+          }
+          case 'checkbox': {
+            if (replies.find(sameReply(reply))) {
+              setReplies(replies.filter(diffReply(reply)))
+            } else {
+              setReplies([...replies, reply])
+            }
+            return
+          }
+          default: {
+            warning(`onQuickReply unknown type: ${type}`)
+            return
+          }
+        }
+      }
+    },
+    [replies, currentMessage],
+  )
 
-    return (
-      <TouchableOpacity
-        style={[styles.quickReply, styles.sendLink]}
-        onPress={this.handleSend(replies)}
-      >
-        {customSend ? (
-          customSend()
-        ) : (
-          <Text style={styles.sendLinkText}>{sendText}</Text>
-        )}
-      </TouchableOpacity>
+  const handleSend = (repliesData: Reply[]) => () => {
+    onQuickReply?.(
+      repliesData.map((reply: Reply) => ({
+        ...reply,
+        messageId: currentMessage!._id,
+      })),
     )
   }
 
-  render() {
-    const { currentMessage, color, quickReplyStyle } = this.props
-    const { replies } = this.state
+  if (!shouldComponentDisplay) {
+    return null
+  }
 
-    if (!this.shouldComponentDisplay()) {
-      return null
-    }
+  return (
+    <View style={styles.container}>
+      {currentMessage!.quickReplies!.values.map(
+        (reply: Reply, index: number) => {
+          const selected = type === 'checkbox' && replies.find(sameReply(reply))
 
-    const { type } = currentMessage!.quickReplies!
-
-    return (
-      <View style={styles.container}>
-        {currentMessage!.quickReplies!.values.map(
-          (reply: Reply, index: number) => {
-            const selected =
-              type === 'checkbox' && replies.find(sameReply(reply))
-            return (
-              <TouchableOpacity
-                onPress={this.handlePress(reply)}
+          return (
+            <TouchableOpacity
+              onPress={handlePress(reply)}
+              style={[
+                styles.quickReply,
+                quickReplyStyle,
+                { borderColor: color },
+                selected && { backgroundColor: color },
+              ]}
+              key={`${reply.value}-${index}`}
+            >
+              <Text
+                numberOfLines={10}
+                ellipsizeMode={'tail'}
                 style={[
-                  styles.quickReply,
-                  quickReplyStyle,
-                  { borderColor: color },
-                  selected && { backgroundColor: color },
+                  styles.quickReplyText,
+                  { color: selected ? Color.white : color },
+                  quickReplyTextStyle,
                 ]}
-                key={`${reply.value}-${index}`}
               >
-                <Text
-                  numberOfLines={10}
-                  ellipsizeMode={'tail'}
-                  style={[
-                    styles.quickReplyText,
-                    { color: selected ? Color.white : color },
-                  ]}
-                >
-                  {reply.title}
-                </Text>
-              </TouchableOpacity>
-            )
-          },
-        )}
-        {replies.length > 0 && this.renderQuickReplySend()}
-      </View>
-    )
-  }
+                {reply.title}
+              </Text>
+            </TouchableOpacity>
+          )
+        },
+      )}
+      {replies.length > 0 && (
+        <TouchableOpacity
+          style={[styles.quickReply, styles.sendLink]}
+          onPress={handleSend(replies)}
+        >
+          {renderQuickReplySend?.() || (
+            <Text style={styles.sendLinkText}>{sendText}</Text>
+          )}
+        </TouchableOpacity>
+      )}
+    </View>
+  )
+}
+
+QuickReplies.propTypes = {
+  currentMessage: PropTypes.object.isRequired,
+  onQuickReply: PropTypes.func,
+  color: PropTypes.string,
+  sendText: PropTypes.string,
+  renderQuickReplySend: PropTypes.func,
+  quickReplyStyle: StylePropType,
 }

@@ -1,15 +1,23 @@
-import { MaterialIcons } from '@expo/vector-icons'
-import { AppLoading, Asset, Linking } from 'expo'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'
+import * as Linking from 'expo-linking'
+import AppLoading from 'expo-app-loading'
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, Platform } from 'react-native'
-import { Bubble, GiftedChat, SystemMessage, IMessage, Send } from './src'
+import { StyleSheet, View, Text, Platform, Alert } from 'react-native'
+import {
+  Bubble,
+  GiftedChat,
+  SystemMessage,
+  IMessage,
+  Send,
+  SendProps,
+} from 'react-native-gifted-chat'
 
 import AccessoryBar from './example-expo/AccessoryBar'
 import CustomActions from './example-expo/CustomActions'
 import CustomView from './example-expo/CustomView'
-import NavBar from './example-expo/NavBar'
 import messagesData from './example-expo/data/messages'
 import earlierMessages from './example-expo/data/earlierMessages'
+import { NavBar } from './components/navbar'
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
@@ -219,7 +227,7 @@ export default class App extends Component {
 
   renderQuickReplySend = () => <Text>{' custom send =>'}</Text>
 
-  renderSend = (props: Send['props']) => (
+  renderSend = (props: SendProps<IMessage>) => (
     <Send {...props} containerStyle={{ justifyContent: 'center' }}>
       <MaterialIcons size={30} color={'tomato'} name={'send'} />
     </Send>
@@ -247,6 +255,9 @@ export default class App extends Component {
           scrollToBottom
           onLongPressAvatar={user => alert(JSON.stringify(user))}
           onPressAvatar={() => alert('short press')}
+          onPress={() => {
+            Alert.alert('Bubble pressed')
+          }}
           onQuickReply={this.onQuickReply}
           keyboardShouldPersistTaps='never'
           renderAccessory={Platform.OS === 'web' ? null : this.renderAccessory}
@@ -256,6 +267,9 @@ export default class App extends Component {
           renderCustomView={this.renderCustomView}
           renderSend={this.renderSend}
           quickReplyStyle={{ borderRadius: 2 }}
+          quickReplyTextStyle={{
+            fontWeight: '200',
+          }}
           renderQuickReplySend={this.renderQuickReplySend}
           inverted={Platform.OS !== 'web'}
           timeTextStyle={{ left: { color: 'red' }, right: { color: 'yellow' } }}

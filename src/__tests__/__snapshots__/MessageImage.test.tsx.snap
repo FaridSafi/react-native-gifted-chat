@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render <MessageImage /> and compare with snapshot 1`] = `
+exports[`MessageImage should  render <MessageImage /> and compare with snapshot 1`] = `
 <View
   style={
     Array [
       Object {},
-      Object {},
+      undefined,
     ]
   }
 >
@@ -22,7 +22,6 @@ exports[`should render <MessageImage /> and compare with snapshot 1`] = `
       <View
         accessible={true}
         focusable={true}
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -30,12 +29,11 @@ exports[`should render <MessageImage /> and compare with snapshot 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        style={null}
       >
         <Image
           source={
             Object {
-              "uri": null,
+              "uri": "url://to/image.png",
             }
           }
           style={
@@ -47,7 +45,7 @@ exports[`should render <MessageImage /> and compare with snapshot 1`] = `
                 "resizeMode": "cover",
                 "width": 150,
               },
-              Object {},
+              undefined,
             ]
           }
         />
@@ -73,18 +71,6 @@ exports[`should render <MessageImage /> and compare with snapshot 1`] = `
         }
       />
       <View
-        onMoveShouldSetResponder={[Function]}
-        onMoveShouldSetResponderCapture={[Function]}
-        onResponderEnd={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderReject={[Function]}
-        onResponderRelease={[Function]}
-        onResponderStart={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        onStartShouldSetResponderCapture={[Function]}
         style={
           Object {
             "backgroundColor": "transparent",
@@ -101,7 +87,7 @@ exports[`should render <MessageImage /> and compare with snapshot 1`] = `
         <Image
           source={
             Object {
-              "uri": null,
+              "uri": "url://to/image.png",
             }
           }
           style={
@@ -127,7 +113,6 @@ exports[`should render <MessageImage /> and compare with snapshot 1`] = `
         <View
           accessible={true}
           focusable={true}
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -146,7 +131,7 @@ exports[`should render <MessageImage /> and compare with snapshot 1`] = `
               Object {
                 "color": "white",
                 "fontSize": 35,
-                "lineHeight": 40,
+                "lineHeight": 60,
                 "shadowColor": "black",
                 "shadowOffset": Object {
                   "height": 0,
@@ -155,7 +140,7 @@ exports[`should render <MessageImage /> and compare with snapshot 1`] = `
                 "shadowOpacity": 0.8,
                 "shadowRadius": 1.5,
                 "textAlign": "center",
-                "width": 40,
+                "width": 70,
               }
             }
           >
@@ -167,3 +152,5 @@ exports[`should render <MessageImage /> and compare with snapshot 1`] = `
   </View>
 </View>
 `;
+
+exports[`MessageImage should not render <MessageImage /> and compare with snapshot 1`] = `null`;

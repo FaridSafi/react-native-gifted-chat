@@ -140,6 +140,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
   infiniteScroll?: boolean
   timeTextStyle?: LeftRightStyle<TextStyle>
+  /* to get ref of flatlist from outside (to scroll to a specific chat) */
+  messageFlatlistRef?: RefObject<FlatList<IMessage>>
   /* Custom action sheet */
   actionSheet?(): {
     showActionSheetWithOptions: (
@@ -404,7 +406,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   _locale: string = 'en'
   invertibleScrollViewProps: any = undefined
   _actionSheetRef: RefObject<ActionSheetProvider> = React.createRef()
-  _messageContainerRef?: RefObject<FlatList<IMessage>> = React.createRef()
+  _messageContainerRef?: RefObject<FlatList<IMessage>> =
+    this.props.messageFlatlistRef || React.createRef()
   _isTextInputWasFocused: boolean = false
   textInput?: any
 

@@ -89,7 +89,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   onQuickReply?(replies: Reply[]): void
   infiniteScroll?: boolean
   isLoadingEarlier?: boolean
-  renderUnread?(messageID: TMessage["_id"]): React.ReactNode;
+  renderUnread?(messageID: TMessage['_id']): React.ReactNode
 }
 
 interface State {

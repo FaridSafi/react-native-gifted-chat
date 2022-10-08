@@ -163,6 +163,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   /* Custom message avatar; set to null to not render any avatar for the message */
   renderAvatar?(props: AvatarProps<TMessage>): React.ReactNode | null
+  /* Custom content above messages */
+  renderAboveMessages?(): React.ReactNode | null;
   /* Custom message bubble */
   renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom system message */
@@ -368,6 +370,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     maxComposerHeight: PropTypes.number,
     alignTop: PropTypes.bool,
     wrapInSafeArea: PropTypes.bool,
+    renderAboveMessages: PropTypes.func,
   }
 
   static append<TMessage extends IMessage>(
@@ -872,6 +875,13 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     return null
   }
 
+  renderViewAboveMessages() {
+    if (this.props.renderAboveMessages) {
+      return this.props.renderAboveMessages();
+    }
+    return null
+  }
+
   render() {
     if (this.state.isInitialized === true) {
       const { wrapInSafeArea } = this.props
@@ -890,6 +900,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
           <Wrapper testID={TEST_ID.WRAPPER} style={styles.safeArea}>
             <ActionSheetProvider ref={this._actionSheetRef}>
               <View style={styles.container} onLayout={this.onMainViewLayout}>
+                {this.renderViewAboveMessages()}
                 {this.renderMessages()}
                 {this.renderInputToolbar()}
               </View>

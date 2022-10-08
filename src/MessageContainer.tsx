@@ -89,6 +89,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   onQuickReply?(replies: Reply[]): void
   infiniteScroll?: boolean
   isLoadingEarlier?: boolean
+  renderUnread?(messageID: TMessage["_id"]): React.ReactNode;
 }
 
 interface State {
@@ -129,6 +130,7 @@ export default class MessageContainer<
     renderFooter: PropTypes.func,
     renderMessage: PropTypes.func,
     renderLoadEarlier: PropTypes.func,
+    renderUnread: PropTypes.func,
     onLoadEarlier: PropTypes.func,
     listViewProps: PropTypes.object,
     inverted: PropTypes.bool,
@@ -252,7 +254,13 @@ export default class MessageContainer<
       if (this.props.renderMessage) {
         return this.props.renderMessage(messageProps)
       }
-      return <Message {...messageProps} />
+
+      return (
+        <>
+          {this.props.renderUnread?.(item._id)}
+          <Message {...messageProps} />^
+        </>
+      )
     }
     return null
   }

@@ -167,6 +167,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
   /*Custom system message */
   renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
+  /* Render an unread box component BEFORE the message with this id */
+  renderUnread?(messageID: TMessage["_id"]): React.ReactNode;
   /* Callback when a message bubble is pressed; default is to do nothing */
   onPress?(context: any, message: TMessage): void
   /* Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see example using showActionSheetWithOptions()) */
@@ -352,6 +354,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     renderComposer: PropTypes.func,
     renderActions: PropTypes.func,
     renderSend: PropTypes.func,
+    renderUnread: PropTypes.func,
     renderAccessory: PropTypes.func,
     onPressActionButton: PropTypes.func,
     bottomOffset: PropTypes.number,

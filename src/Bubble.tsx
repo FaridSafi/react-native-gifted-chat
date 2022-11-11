@@ -66,24 +66,24 @@ const styles = {
   right: StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'flex-start',
+      alignItems: 'flex-end',
     },
     wrapper: {
       borderRadius: 15,
-      backgroundColor: Color.leftBubbleBackground,
-      marginRight: 60,
+      backgroundColor: Color.defaultBlue,
+      marginLeft: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
     },
     containerToNext: {
-      borderBottomLeftRadius: 3,
+      borderBottomRightRadius: 3,
     },
     containerToPrevious: {
-      borderTopLeftRadius: 3,
+      borderTopRightRadius: 3,
     },
     bottom: {
       flexDirection: 'row',
-      justifyContent: 'flex-start',
+      justifyContent: 'flex-end',
     },
   }),
   content: StyleSheet.create({
@@ -686,7 +686,6 @@ export default class Bubble<
               {...this.props.touchableProps}
             >
               <View>
-                <Text>hello</Text>
                 {this.renderBubbleContent()}
                 <View
                   style={[

@@ -66,24 +66,24 @@ const styles = {
   right: StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'flex-end',
+      alignItems: 'flex-start',
     },
     wrapper: {
       borderRadius: 15,
-      backgroundColor: Color.defaultBlue,
-      marginLeft: 60,
+      backgroundColor: Color.leftBubbleBackground,
+      marginRight: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
     },
     containerToNext: {
-      borderBottomRightRadius: 3,
+      borderBottomLeftRadius: 3,
     },
     containerToPrevious: {
-      borderTopRightRadius: 3,
+      borderTopLeftRadius: 3,
     },
     bottom: {
       flexDirection: 'row',
-      justifyContent: 'flex-end',
+      justifyContent: 'flex-start',
     },
   }),
   content: StyleSheet.create({
@@ -685,6 +685,7 @@ export default class Bubble<
               accessibilityTraits='text'
               {...this.props.touchableProps}
             >
+              <Text>hello</Text>
               <View>
                 {this.renderBubbleContent()}
                 <View

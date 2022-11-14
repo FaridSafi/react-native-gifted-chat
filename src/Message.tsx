@@ -24,9 +24,9 @@ const styles = {
     container: {
       flexDirection: 'row',
       alignItems: 'flex-end',
-      justifyContent: 'flex-start',
-      marginLeft: 8,
-      marginRight: 0,
+      justifyContent: 'flex-end',
+      marginLeft: 0,
+      marginRight: 8,
     },
   }),
 }

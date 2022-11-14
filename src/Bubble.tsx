@@ -631,7 +631,7 @@ export default class Bubble<
 
     const isSameThread =
     isSameUser(currentMessage, previousMessage) &&
-    isSameDay(currentMessage, previousMessage;
+    isSameDay(currentMessage, previousMessage);
 
     const messageHeader = isSameThread ? null : (
       <View style={styles.header.container}>

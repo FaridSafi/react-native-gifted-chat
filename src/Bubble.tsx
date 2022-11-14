@@ -118,6 +118,12 @@ const styles = {
       padding: 0,
     },
   }),
+  header: StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      alignItems: 'center'
+    }
+  })
 }
 
 const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel']
@@ -621,12 +627,21 @@ export default class Bubble<
   }
 
   renderBubbleContent() {
+
+    const isSameThread =
+    isSameUser(this.props.currentMessage, this.props.previousMessage) &&
+    isSameDay(this.props.currentMessage, this.props.previousMessage);
+
+    const messageHeader = isSameThread ? null : (
+      <View style={styles.header.container}>
+        {this.renderUsername()}
+        {this.renderTime()}
+      </View>
+    );
+
     return this.props.isCustomViewBottom ? (
       <View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          {this.renderUsername()}
-          {this.renderTime()}
-        </View>
+        {messageHeader}
         {this.renderParentMessage()}
         {this.renderMessageImage()}
         {this.renderMessageVideo()}
@@ -636,10 +651,7 @@ export default class Bubble<
       </View>
     ) : (
       <View>
-       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          {this.renderUsername()}
-          {this.renderTime()}
-        </View>
+        {messageHeader}
         {this.renderParentMessage()}
         {this.renderCustomView()}
         {this.renderMessageImage()}

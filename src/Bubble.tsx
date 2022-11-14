@@ -629,7 +629,7 @@ export default class Bubble<
   renderBubbleContent() {
     const { currentMessage, previousMessage } = this.props;
 
-    const isSameThread = currentMessage && previousMessage && isSameUser(currentMessage, previousMessage);
+    const isSameThread = currentMessage && previousMessage && isSameUser(currentMessage, previousMessage) && isSameDay(currentMessage, previousMessage);
 
     const messageHeader = isSameThread ? null : (
       <View style={styles.header.container}>

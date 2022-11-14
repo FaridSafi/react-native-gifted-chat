@@ -591,9 +591,9 @@ export default class Bubble<
   renderUsername() {
     const { currentMessage, user, previousMessage } = this.props
     if (this.props.renderUsernameOnMessage && currentMessage) {
-      if (user && currentMessage.user._id === user._id) {
-        return null
-      }
+      // if (user && currentMessage.user._id === user._id) {
+      //   return null
+      // }
       if (previousMessage && isSameUser(currentMessage, previousMessage)) {
         return null
       }
@@ -622,7 +622,10 @@ export default class Bubble<
   renderBubbleContent() {
     return this.props.isCustomViewBottom ? (
       <View>
-        {this.renderUsername()}
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          {this.renderUsername()}
+          {this.renderTime()}
+        </View>
         {this.renderParentMessage()}
         {this.renderMessageImage()}
         {this.renderMessageVideo()}
@@ -632,7 +635,10 @@ export default class Bubble<
       </View>
     ) : (
       <View>
-        {this.renderUsername()}
+       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          {this.renderUsername()}
+          {this.renderTime()}
+        </View>
         {this.renderParentMessage()}
         {this.renderCustomView()}
         {this.renderMessageImage()}
@@ -693,7 +699,6 @@ export default class Bubble<
                     bottomContainerStyle && bottomContainerStyle[position],
                   ]}
                 >
-                  {this.renderTime()}
                   {this.renderTicks()}
                 </View>
               </View>

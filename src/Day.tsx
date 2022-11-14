@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   divider: {
-    flex: 1, height: 1, backgroundColor: '#222222'
+    flex: 1, height: StyleSheet.hairlineWidth, backgroundColor: '#666666'
   }
 })
 

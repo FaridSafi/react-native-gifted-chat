@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
   },
+  divider: {
+    flex: 1, height: 1, backgroundColor: '#222222'
+  }
 })
 
 export interface DayProps<TMessage extends IMessage> {
@@ -91,11 +94,13 @@ export default class Day<
       return (
         <View style={[styles.container, containerStyle]}>
           <View style={wrapperStyle}>
+            <View style={styles.divider} />
             <Text style={[styles.text, textStyle]} {...textProps}>
               {dayjs(currentMessage.createdAt)
                 .locale(this.context.getLocale())
                 .format(dateFormat)}
             </Text>
+            <View style={styles.divider} />
           </View>
         </View>
       )

@@ -601,9 +601,9 @@ export default class Bubble<
       // if (user && currentMessage.user._id === user._id) {
       //   return null
       // }
-      if (previousMessage && isSameUser(currentMessage, previousMessage)) {
-        return null
-      }
+      // if (previousMessage && isSameUser(currentMessage, previousMessage)) {
+      //   return null
+      // }
       return (
         <View style={styles.content.usernameView}>
           <Text
@@ -630,12 +630,8 @@ export default class Bubble<
     const { currentMessage, previousMessage } = this.props;
 
     const isSameThread = currentMessage && previousMessage && isSameUser(currentMessage, previousMessage);
-    const isDiffDay = currentMessage && previousMessage && !isSameDay(currentMessage, previousMessage)
 
-    const messageHeader = isDiffDay ?  <View style={styles.header.container}>
-    {this.renderUsername()}
-    {this.renderTime()}
-  </View> : isSameThread ? null : (
+    const messageHeader = isSameThread ? null : (
       <View style={styles.header.container}>
         {this.renderUsername()}
         {this.renderTime()}

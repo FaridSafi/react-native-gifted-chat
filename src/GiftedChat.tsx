@@ -11,6 +11,8 @@ import {
   TextStyle,
   KeyboardAvoidingView,
   LayoutChangeEvent,
+  LayoutAnimation,
+  UIManager,
 } from 'react-native'
 import {
   ActionSheetProvider,
@@ -59,6 +61,12 @@ import {
 import { LightboxProps } from 'react-native-lightbox-v2'
 
 dayjs.extend(localizedFormat)
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true)
+  }
+}
 
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Messages to display */
@@ -444,6 +452,8 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   componentDidUpdate(prevProps: GiftedChatProps<TMessage> = {}) {
     const { messages, text, inverted } = this.props
+
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
 
     if (this.props !== prevProps) {
       this.setMessages(messages || [])

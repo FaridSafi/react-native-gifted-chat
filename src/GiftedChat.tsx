@@ -57,6 +57,7 @@ import {
   MessageAudioProps,
 } from './Models'
 import { LightboxProps } from 'react-native-lightbox-v2'
+import { ActionSheetProviderRef } from '@expo/react-native-action-sheet'
 
 dayjs.extend(localizedFormat)
 
@@ -406,7 +407,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   _isFirstLayout: boolean = true
   _locale: string = 'en'
   invertibleScrollViewProps: any = undefined
-  _actionSheetRef: RefObject<ActionSheetProvider> = React.createRef()
+  _actionSheetRef: RefObject<ActionSheetProviderRef> = React.createRef()
   _messageContainerRef?: RefObject<FlatList<IMessage>> = React.createRef()
   _isTextInputWasFocused: boolean = false
   textInput?: any

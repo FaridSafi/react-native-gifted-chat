@@ -68,18 +68,6 @@
   </p>
 </p>
 
-<p align="center">
-  <br/>
-  <a href="https://www.docdok.health/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">
-    <img src="https://www.dropbox.com/s/g4dcq267aqbykpz/logo.png?dl=0&raw=1">
-  </a>
-  <br>
-  <p align="center">Delivering Personalized Healthcare</p>
-  <p align="center">
-    <a href="https://www.docdok.health/?utm_source=github&utm_medium=react-native-gifted-chat&utm_campaign=sponsorship" target="_blank">      Find out more</a>
-  </p>
-</p>
-
 ## The future of GiftedChat 🎉 
 Please give us your advice: [Related PR](https://github.com/FaridSafi/react-native-gifted-chat/pull/1775)
 

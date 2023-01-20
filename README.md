@@ -391,7 +391,7 @@ interface QuickReplies {
 - **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
-
+* **`wrapInSafeArea`** _(Bool)_ - Wrap GiftedChat in a [SafeAreaView](https://reactnative.dev/docs/safeareaview). (Default is true).
 * **`scrollToBottom`** _(Bool)_ - Enables the scroll to bottom Component (Default is false)
 * **`scrollToBottomComponent`** _(Function)_ - Custom Scroll To Bottom Component container
 * **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)

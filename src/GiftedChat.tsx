@@ -411,6 +411,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   _messageContainerRef?: RefObject<FlatList<IMessage>> = React.createRef()
   _isTextInputWasFocused: boolean = false
   textInput?: any
+  _emptyArray = [] as TMessage[]
 
   state = {
     isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -435,10 +436,9 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   componentDidMount() {
-    const { messages, text } = this.props
+    const { text } = this.props
     this.setIsMounted(true)
     this.initLocale()
-    this.setMessages(messages || [])
     this.setTextFromProp(text)
   }
 
@@ -448,10 +448,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   componentDidUpdate(prevProps: GiftedChatProps<TMessage> = {}) {
     const { messages, text, inverted } = this.props
-
-    if (this.props !== prevProps) {
-      this.setMessages(messages || [])
-    }
 
     if (
       inverted === false &&
@@ -493,14 +489,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       return fallback
     }
     return this.props.text
-  }
-
-  setMessages(messages: TMessage[]) {
-    this.setState({ messages })
-  }
-
-  getMessages() {
-    return this.state.messages
   }
 
   setMaxHeight(height: number) {
@@ -699,7 +687,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
         <MessageContainer<TMessage>
           {...messagesContainerProps}
           invertibleScrollViewProps={this.invertibleScrollViewProps}
-          messages={this.getMessages()}
+          messages={this.props.messages || this._emptyArray}
           forwardRef={this._messageContainerRef}
           isTyping={this.props.isTyping}
         />

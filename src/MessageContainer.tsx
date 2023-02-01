@@ -147,6 +147,7 @@ export default class MessageContainer<
     showScrollBottom: false,
     hasScrolled: false,
   }
+  _extraData = [undefined, undefined]
 
   renderTypingIndicator = () => {
     if (Platform.OS === 'web') {
@@ -335,6 +336,12 @@ export default class MessageContainer<
 
   render() {
     const { inverted } = this.props
+    if (
+      this._extraData[0] !== this.props.extraData ||
+      this._extraData[1] !== this.props.isTyping
+    ) {
+      this._extraData = [this.props.extraData, this.props.isTyping]
+    }
     return (
       <View
         style={
@@ -343,7 +350,7 @@ export default class MessageContainer<
       >
         <FlatList
           ref={this.props.forwardRef}
-          extraData={[this.props.extraData, this.props.isTyping]}
+          extraData={this._extraData}
           keyExtractor={this.keyExtractor}
           enableEmptySections
           automaticallyAdjustContentInsets={false}

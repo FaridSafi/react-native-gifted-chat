@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   androidWorkaround: {
-    transform: [{rotate: '180deg'}]
+    transform: [{ rotate: '180deg' }],
   },
   text: {
     backgroundColor: Color.backgroundTransparent,
@@ -31,7 +31,10 @@ const styles = StyleSheet.create({
   },
 })
 
-const androidWorkaroundContainerStyle = StyleSheet.compose<any>(styles.container, styles.androidWorkaround);
+const androidWorkaroundContainerStyle = StyleSheet.compose<any>(
+  styles.container,
+  styles.androidWorkaround,
+)
 
 export interface SystemMessageProps<TMessage extends IMessage> {
   currentMessage?: TMessage
@@ -51,7 +54,7 @@ export default class SystemMessage<
     containerStyle: {},
     wrapperStyle: {},
     textStyle: {},
-    androidWorkaround: false
+    androidWorkaround: false,
   }
 
   static propTypes = {
@@ -59,7 +62,7 @@ export default class SystemMessage<
     containerStyle: StylePropType,
     wrapperStyle: StylePropType,
     textStyle: StylePropType,
-    androidWorkaround: PropTypes.bool
+    androidWorkaround: PropTypes.bool,
   }
 
   render() {
@@ -68,11 +71,18 @@ export default class SystemMessage<
       containerStyle,
       wrapperStyle,
       textStyle,
-      androidWorkaround
+      androidWorkaround,
     } = this.props
     if (currentMessage) {
       return (
-        <View style={[androidWorkaround ? androidWorkaroundContainerStyle : styles.container, containerStyle]}>
+        <View
+          style={[
+            androidWorkaround
+              ? androidWorkaroundContainerStyle
+              : styles.container,
+            containerStyle,
+          ]}
+        >
           <View style={wrapperStyle}>
             <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
           </View>

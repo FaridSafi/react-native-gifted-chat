@@ -291,7 +291,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     minComposerHeight: MIN_COMPOSER_HEIGHT,
     maxComposerHeight: MAX_COMPOSER_HEIGHT,
     wrapInSafeArea: true,
-    androidWorkaround: false
+    androidWorkaround: false,
   }
 
   static propTypes = {
@@ -357,7 +357,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     maxComposerHeight: PropTypes.number,
     alignTop: PropTypes.bool,
     wrapInSafeArea: PropTypes.bool,
-    androidWorkaround: PropTypes.bool
+    androidWorkaround: PropTypes.bool,
   }
 
   static append<TMessage extends IMessage>(

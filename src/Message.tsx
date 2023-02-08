@@ -31,18 +31,24 @@ const styles = {
   }),
   androidWorkaround: StyleSheet.create({
     androidWorkaround: {
-      transform: [{rotate: '180deg'}]
-    }
+      transform: [{ rotate: '180deg' }],
+    },
   }),
 }
 
 const androidWorkaroundStyles = {
   left: {
-    container: StyleSheet.compose<any>(styles.left.container, styles.androidWorkaround.androidWorkaround),
+    container: StyleSheet.compose<any>(
+      styles.left.container,
+      styles.androidWorkaround.androidWorkaround,
+    ),
   },
   right: {
-    container: StyleSheet.compose<any>(styles.right.container, styles.androidWorkaround.androidWorkaround)
-  }
+    container: StyleSheet.compose<any>(
+      styles.right.container,
+      styles.androidWorkaround.androidWorkaround,
+    ),
+  },
 }
 
 export interface MessageProps<TMessage extends IMessage> {
@@ -83,7 +89,7 @@ export default class Message<
     showUserAvatar: false,
     inverted: true,
     shouldUpdateMessage: undefined,
-    androidWorkaround: false
+    androidWorkaround: false,
   }
 
   static propTypes = {
@@ -103,7 +109,7 @@ export default class Message<
       right: StylePropType,
     }),
     shouldUpdateMessage: PropTypes.func,
-    androidWorkaround: PropTypes.bool
+    androidWorkaround: PropTypes.bool,
   }
 
   shouldComponentUpdate(nextProps: MessageProps<TMessage>) {
@@ -189,7 +195,13 @@ export default class Message<
   }
 
   render() {
-    const { currentMessage, nextMessage, position, containerStyle, androidWorkaround } = this.props
+    const {
+      currentMessage,
+      nextMessage,
+      position,
+      containerStyle,
+      androidWorkaround,
+    } = this.props
     if (currentMessage) {
       const sameUser = isSameUser(currentMessage, nextMessage!)
       return (
@@ -200,7 +212,9 @@ export default class Message<
           ) : (
             <View
               style={[
-                androidWorkaround ? androidWorkaroundStyles[position].container : styles[position].container,
+                androidWorkaround
+                  ? androidWorkaroundStyles[position].container
+                  : styles[position].container,
                 { marginBottom: sameUser ? 2 : 10 },
                 !this.props.inverted && { marginBottom: 2 },
                 containerStyle && containerStyle[position],

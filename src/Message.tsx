@@ -29,6 +29,20 @@ const styles = {
       marginRight: 8,
     },
   }),
+  androidWorkaround: StyleSheet.create({
+    androidWorkaround: {
+      transform: [{rotate: '180deg'}]
+    }
+  }),
+}
+
+const androidWorkaroundStyles = {
+  left: {
+    container: StyleSheet.compose<any>(styles.left.container, styles.androidWorkaround.androidWorkaround),
+  },
+  right: {
+    container: StyleSheet.compose<any>(styles.right.container, styles.androidWorkaround.androidWorkaround)
+  }
 }
 
 export interface MessageProps<TMessage extends IMessage> {
@@ -41,6 +55,7 @@ export interface MessageProps<TMessage extends IMessage> {
   user: User
   inverted?: boolean
   containerStyle?: LeftRightStyle<ViewStyle>
+  androidWorkaround?: boolean
   renderBubble?(props: Bubble['props']): React.ReactNode
   renderDay?(props: Day['props']): React.ReactNode
   renderSystemMessage?(props: SystemMessage['props']): React.ReactNode
@@ -68,6 +83,7 @@ export default class Message<
     showUserAvatar: false,
     inverted: true,
     shouldUpdateMessage: undefined,
+    androidWorkaround: false
   }
 
   static propTypes = {
@@ -87,6 +103,7 @@ export default class Message<
       right: StylePropType,
     }),
     shouldUpdateMessage: PropTypes.func,
+    androidWorkaround: PropTypes.bool
   }
 
   shouldComponentUpdate(nextProps: MessageProps<TMessage>) {
@@ -172,7 +189,7 @@ export default class Message<
   }
 
   render() {
-    const { currentMessage, nextMessage, position, containerStyle } = this.props
+    const { currentMessage, nextMessage, position, containerStyle, androidWorkaround } = this.props
     if (currentMessage) {
       const sameUser = isSameUser(currentMessage, nextMessage!)
       return (
@@ -183,7 +200,7 @@ export default class Message<
           ) : (
             <View
               style={[
-                styles[position].container,
+                androidWorkaround ? androidWorkaroundStyles[position].container : styles[position].container,
                 { marginBottom: sameUser ? 2 : 10 },
                 !this.props.inverted && { marginBottom: 2 },
                 containerStyle && containerStyle[position],

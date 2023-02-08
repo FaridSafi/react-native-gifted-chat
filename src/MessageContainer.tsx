@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
   listStyle: {
     flex: 1,
   },
+  androidWorkaround: {
+    transform: [{rotate: '180deg'}]
+  },
   scrollToBottomStyle: {
     opacity: 0.8,
     position: 'absolute',
@@ -64,6 +67,8 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
   },
 })
+
+const androidWorkaroundListStyle = StyleSheet.compose<any>(styles.listStyle, styles.androidWorkaround);
 
 export interface MessageContainerProps<TMessage extends IMessage> {
   messages?: TMessage[]
@@ -88,6 +93,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   onQuickReply?(replies: Reply[]): void
   infiniteScroll?: boolean
   isLoadingEarlier?: boolean
+  androidWorkaround?: boolean
 }
 
 interface State {
@@ -117,6 +123,7 @@ export default class MessageContainer<
     scrollToBottomStyle: {},
     infiniteScroll: false,
     isLoadingEarlier: false,
+    androidWorkaround: false
   }
 
   static propTypes = {
@@ -139,6 +146,7 @@ export default class MessageContainer<
     alignTop: PropTypes.bool,
     scrollToBottomStyle: StylePropType,
     infiniteScroll: PropTypes.bool,
+    androidWorkaround: PropTypes.bool
   }
 
   state = {
@@ -308,6 +316,7 @@ export default class MessageContainer<
         inverted,
         nextMessage,
         position: item.user._id === user._id ? 'right' : 'left',
+        androidWorkaround: this.props.androidWorkaround
       }
 
       if (this.props.renderMessage) {
@@ -396,6 +405,7 @@ export default class MessageContainer<
 
   render() {
     const { inverted } = this.props
+
     return (
       <View
         style={
@@ -413,7 +423,7 @@ export default class MessageContainer<
           automaticallyAdjustContentInsets={false}
           inverted={inverted}
           data={this.props.messages}
-          style={styles.listStyle}
+          style={this.props.androidWorkaround ? androidWorkaroundListStyle : styles.listStyle}
           contentContainerStyle={styles.contentContainerStyle}
           renderItem={this.renderRow}
           {...this.props.invertibleScrollViewProps}

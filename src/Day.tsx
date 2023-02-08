@@ -29,7 +29,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
   },
+  androidWorkaround: {
+    transform: [{rotate: '180deg'}]
+  }
 })
+
+const androidWorkaroundContainer = StyleSheet.compose<any>(styles.container, styles.androidWorkaround)
 
 export interface DayProps<TMessage extends IMessage> {
   currentMessage?: TMessage
@@ -40,6 +45,7 @@ export interface DayProps<TMessage extends IMessage> {
   textStyle?: StyleProp<TextStyle>
   dateFormat?: string
   inverted?: boolean
+  androidWorkaround?: boolean
 }
 
 export default class Day<
@@ -59,6 +65,7 @@ export default class Day<
     wrapperStyle: {},
     textStyle: {},
     dateFormat: DATE_FORMAT,
+    androidWorkaround: false
   }
 
   static propTypes = {
@@ -70,6 +77,7 @@ export default class Day<
     wrapperStyle: StylePropType,
     textStyle: StylePropType,
     dateFormat: PropTypes.string,
+    androidWorkaround: PropTypes.bool
   }
 
   render() {
@@ -80,11 +88,12 @@ export default class Day<
       containerStyle,
       wrapperStyle,
       textStyle,
+      androidWorkaround,
     } = this.props
 
     if (currentMessage && !isSameDay(currentMessage, previousMessage!)) {
       return (
-        <View style={[styles.container, containerStyle]}>
+        <View style={[androidWorkaround ? androidWorkaroundContainer : styles.container, containerStyle]}>
           <View style={wrapperStyle}>
             <Text style={[styles.text, textStyle]}>
               {dayjs(currentMessage.createdAt)

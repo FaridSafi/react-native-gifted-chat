@@ -129,6 +129,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
   infiniteScroll?: boolean
   timeTextStyle?: LeftRightStyle<TextStyle>
+  androidWorkaround?: boolean
+
   /* Custom action sheet */
   actionSheet?(): {
     showActionSheetWithOptions: (
@@ -289,6 +291,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     minComposerHeight: MIN_COMPOSER_HEIGHT,
     maxComposerHeight: MAX_COMPOSER_HEIGHT,
     wrapInSafeArea: true,
+    androidWorkaround: false
   }
 
   static propTypes = {
@@ -354,6 +357,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     maxComposerHeight: PropTypes.number,
     alignTop: PropTypes.bool,
     wrapInSafeArea: PropTypes.bool,
+    androidWorkaround: PropTypes.bool
   }
 
   static append<TMessage extends IMessage>(
@@ -406,7 +410,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     super(props)
 
     this.invertibleScrollViewProps = {
-      inverted: this.props.inverted,
+      inverted: this.props.androidWorkaround ? false : this.props.inverted,
       keyboardShouldPersistTaps: this.props.keyboardShouldPersistTaps,
       onKeyboardWillShow: this.onKeyboardWillShow,
       onKeyboardWillHide: this.onKeyboardWillHide,
@@ -662,6 +666,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
           messages={this.getMessages()}
           forwardRef={this._messageContainerRef}
           isTyping={this.props.isTyping}
+          androidWorkaround={this.props.androidWorkaround}
         />
         {this.renderChatFooter()}
       </View>

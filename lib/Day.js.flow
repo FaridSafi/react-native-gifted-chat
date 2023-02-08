@@ -1,0 +1,23 @@
+// @flow
+import { PureComponent } from 'react'
+import type { IMessage } from './types'
+import type {
+  ViewStyleProp,
+  ImageStyleProp,
+  TextStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+
+export type DayProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  currentMessage?: TMessage,
+  nextMessage?: TMessage,
+  previousMessage?: TMessage,
+  containerStyle?: ViewStyleProp,
+  wrapperStyle?: ViewStyleProp,
+  textStyle?: TextStyleProp,
+  dateFormat?: string,
+  inverted?: boolean,
+|}>
+
+export default class Day<TMessage: IMessage = IMessage> extends PureComponent<
+  DayProps<TMessage>,
+> {}

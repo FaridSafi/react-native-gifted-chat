@@ -1,0 +1,154 @@
+// @flow
+import * as React from 'react'
+import Actions from './Actions'
+import type { ActionsProps } from './Actions'
+import Avatar from './Avatar'
+import type { AvatarProps } from './Avatar'
+import Bubble from './Bubble'
+import type { BubbleProps } from './Bubble'
+import SystemMessage from './SystemMessage'
+import type { SystemMessageProps } from './SystemMessage'
+import MessageImage from './MessageImage'
+import type { MessageImageProps } from './MessageImage'
+import MessageText from './MessageText'
+import type { MessageTextProps } from './MessageText'
+import Composer from './Composer'
+import type { ComposerProps } from './Composer'
+import Day from './Day'
+import type { DayProps } from './Day'
+import InputToolbar from './InputToolbar'
+import type { InputToolbarProps } from './InputToolbar'
+import LoadEarlier from './LoadEarlier'
+import type { LoadEarlierProps } from './LoadEarlier'
+import Message from './Message'
+import type { MessageProps } from './Message'
+import Send from './Send'
+import type { SendProps } from './Send'
+import Time from './Time'
+import type { TimeProps } from './Time'
+import QuickReplies from './QuickReplies'
+import type { QuickRepliesProps } from './QuickReplies'
+import MessageContainer from './MessageContainer.js.flow'
+import GiftedAvatar from './GiftedAvatar.js.flow'
+import type { IMessage, User, Reply, LeftRightStyle } from './types'
+import type AnimatedValue from 'react-native/Libraries/Animated/src/nodes/AnimatedValue'
+import type {
+  TextStyleProp,
+  ImageStyleProp,
+  ViewStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet'
+import { FlatList } from 'react-native'
+import * as utils from './utils'
+
+export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
+  messages?: Array<TMessage>,
+  text?: string,
+  alignTop?: boolean,
+  scrollToBottom?: boolean,
+  scrollToBottomStyle?: ViewStyleProp,
+  scrollToBottomComponent?: () => React.Node,
+  initialText?: string,
+  placeholder?: string,
+  user?: User,
+  locale?: string,
+  timeFormat?: string,
+  dateFormat?: string,
+  isKeyboardInternallyHandled?: boolean,
+  loadEarlier?: boolean,
+  isLoadingEarlier?: boolean,
+  showUserAvatar?: boolean,
+  showAvatarForEveryMessage?: boolean,
+  renderAvatarOnTop?: boolean,
+  inverted?: boolean,
+  imageProps?: MessageProps<TMessage>,
+  lightboxProps?: any,
+  bottomOffset?: number,
+  minInputToolbarHeight?: number,
+  listViewProps?: $Shape<React.ElementProps<typeof FlatList>>,
+  textInputProps?: any,
+  textInputStyle?: any,
+  keyboardShouldPersistTaps?: any,
+  maxInputLength?: number,
+  forceGetKeyboardHeight?: boolean,
+  alwaysShowSend?: boolean,
+  imageStyle?: ImageStyleProp,
+  extraData?: any,
+  minComposerHeight?: number,
+  maxComposerHeight?: number,
+  options?: {
+    [key: string]: any,
+  },
+  optionTintColor?: string,
+  quickReplyStyle?: ViewStyleProp,
+  isCustomViewBottom?: boolean,
+  timeTextStyle?: LeftRightStyle<TextStyleProp>,
+  onPressAvatar?: User => void,
+  onLongPressAvatar?: User => void,
+  messageIdGenerator?: (message?: TMessage) => string,
+  onSend?: (messages: Array<TMessage>) => void,
+  onLoadEarlier?: () => void,
+  renderLoading?: () => React.Node,
+  renderLoadEarlier?: LoadEarlierProps => React.Node,
+  renderAvatar?: ((AvatarProps<TMessage>) => React.Node) | null,
+  renderBubble?: (BubbleProps<TMessage>) => React.Node,
+  renderSystemMessage?: (SystemMessageProps<TMessage>) => React.Node,
+  onLongPress?: (context: any, message: any) => void,
+  renderMessage?: (MessageProps<TMessage>) => React.Node,
+  renderMessageText?: (MessageTextProps<TMessage>) => React.Node,
+  renderMessageImage?: (MessageImageProps<TMessage>) => React.Node,
+  renderCustomView?: (BubbleProps<TMessage>) => React.Node,
+  renderDay?: (DayProps<TMessage>) => React.Node,
+  renderTime?: (TimeProps<TMessage>) => React.Node,
+  renderFooter?: () => React.Node,
+  renderChatFooter?: () => React.Node,
+  renderInputToolbar?: InputToolbarProps => React.Node,
+  renderComposer?: ComposerProps => React.Node,
+  renderActions?: ActionsProps => React.Node,
+  renderSend?: SendProps => React.Node,
+  renderAccessory?: InputToolbarProps => React.Node,
+  onPressActionButton?: () => void,
+  onInputTextChanged?: (text: string) => void,
+  parsePatterns?: () => React.Node,
+  onQuickReply?: (Array<Reply>) => void,
+  renderQuickReplies?: QuickRepliesProps => React.Node,
+  renderQuickReplySend?: () => React.Node,
+  shouldUpdateMessage?: (
+    props: MessageProps<TMessage>,
+    nextProps: MessageProps<TMessage>,
+  ) => boolean,
+|}>
+
+export type GiftedChatState<TMessage: IMessage = IMessage> = {|
+  isInitialized: boolean,
+  composerHeight?: number,
+  messagesContainerHeight?: number | AnimatedValue,
+  typingDisabled: boolean,
+  text?: string,
+  messages?: Array<TMessage>,
+|}
+
+class GiftedChat<TMessage: IMessage = IMessage> extends React.Component<
+  GiftedChatProps<TMessage>,
+  GiftedChatState<TMessage>,
+> {}
+
+export * from './types'
+export {
+  GiftedChat,
+  Actions,
+  Avatar,
+  Bubble,
+  SystemMessage,
+  MessageImage,
+  MessageText,
+  Composer,
+  Day,
+  InputToolbar,
+  LoadEarlier,
+  Message,
+  MessageContainer,
+  Send,
+  Time,
+  GiftedAvatar,
+  utils,
+}

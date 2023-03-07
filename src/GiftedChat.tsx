@@ -17,7 +17,6 @@ import {
   ActionSheetOptions,
 } from '@expo/react-native-action-sheet'
 import uuid from 'uuid'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 
@@ -72,8 +71,6 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   text?: string
   /* Controls whether or not the message bubbles appear at the top of the chat */
   alignTop?: boolean
-  /* Determine whether is wrapped in a SafeAreaView */
-  wrapInSafeArea?: boolean
   /* enables the scrollToBottom Component */
   scrollToBottom?: boolean
   /* Scroll to bottom wrapper style */
@@ -306,7 +303,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     extraData: null,
     minComposerHeight: MIN_COMPOSER_HEIGHT,
     maxComposerHeight: MAX_COMPOSER_HEIGHT,
-    wrapInSafeArea: true,
   }
 
   static propTypes = {
@@ -371,7 +367,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     minComposerHeight: PropTypes.number,
     maxComposerHeight: PropTypes.number,
     alignTop: PropTypes.bool,
-    wrapInSafeArea: PropTypes.bool,
   }
 
   static append<TMessage extends IMessage>(
@@ -594,10 +589,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     )
   }
 
-  safeAreaSupport = (bottomOffset?: number) => {
-    return bottomOffset != null ? bottomOffset : 1
-  }
-
   /**
    * Store text input focus status when keyboard hide to retrieve
    * it after wards if needed.
@@ -635,7 +626,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       this.setKeyboardHeight(
         e.endCoordinates ? e.endCoordinates.height : e.end.height,
       )
-      this.setBottomOffset(this.safeAreaSupport(this.props.bottomOffset))
       const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard()
       this.setState({
         messagesContainerHeight: newMessagesContainerHeight,
@@ -878,8 +868,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   render() {
     if (this.state.isInitialized === true) {
-      const { wrapInSafeArea } = this.props
-      const Wrapper = wrapInSafeArea ? SafeAreaView : View
       const actionSheet =
         this.props.actionSheet ||
         (() => this._actionSheetRef.current?.getContext()!)
@@ -891,14 +879,14 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
             getLocale,
           }}
         >
-          <Wrapper testID={TEST_ID.WRAPPER} style={styles.safeArea}>
+          <View testID={TEST_ID.WRAPPER} style={styles.wrapper}>
             <ActionSheetProvider ref={this._actionSheetRef}>
               <View style={styles.container} onLayout={this.onMainViewLayout}>
                 {this.renderMessages()}
                 {this.renderInputToolbar()}
               </View>
             </ActionSheetProvider>
-          </Wrapper>
+          </View>
         </GiftedChatContext.Provider>
       )
     }
@@ -918,7 +906,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  safeArea: {
+  wrapper: {
     flex: 1,
   },
 })

@@ -1,5 +1,6 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import * as Linking from 'expo-linking'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import AppLoading from 'expo-app-loading'
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Platform, Alert } from 'react-native'
@@ -20,7 +21,8 @@ import earlierMessages from './example-expo/data/earlierMessages'
 import { NavBar } from './components/navbar'
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, backgroundColor: '#f5f5f5', },
+  content: { backgroundColor: "#ffffff", flex: 1, }
 })
 
 const filterBotMessages = message =>
@@ -238,45 +240,47 @@ export default class App extends Component {
       return <AppLoading />
     }
     return (
-      <View
+      <SafeAreaView
         style={styles.container}
         accessibilityLabel='main'
         testID='main'
       >
         <NavBar />
-        <GiftedChat
-          messages={this.state.messages}
-          onSend={this.onSend}
-          loadEarlier={this.state.loadEarlier}
-          onLoadEarlier={this.onLoadEarlier}
-          isLoadingEarlier={this.state.isLoadingEarlier}
-          parsePatterns={this.parsePatterns}
-          user={user}
-          scrollToBottom
-          onLongPressAvatar={user => alert(JSON.stringify(user))}
-          onPressAvatar={() => alert('short press')}
-          onPress={() => {
-            Alert.alert('Bubble pressed')
-          }}
-          onQuickReply={this.onQuickReply}
-          keyboardShouldPersistTaps='never'
-          renderAccessory={Platform.OS === 'web' ? null : this.renderAccessory}
-          renderActions={this.renderCustomActions}
-          renderBubble={this.renderBubble}
-          renderSystemMessage={this.renderSystemMessage}
-          renderCustomView={this.renderCustomView}
-          renderSend={this.renderSend}
-          quickReplyStyle={{ borderRadius: 2 }}
-          quickReplyTextStyle={{
-            fontWeight: '200',
-          }}
-          renderQuickReplySend={this.renderQuickReplySend}
-          inverted={Platform.OS !== 'web'}
-          timeTextStyle={{ left: { color: 'red' }, right: { color: 'yellow' } }}
-          isTyping={this.state.isTyping}
-          infiniteScroll
-        />
-      </View>
+        <View style={styles.content}>
+          <GiftedChat
+            messages={this.state.messages}
+            onSend={this.onSend}
+            loadEarlier={this.state.loadEarlier}
+            onLoadEarlier={this.onLoadEarlier}
+            isLoadingEarlier={this.state.isLoadingEarlier}
+            parsePatterns={this.parsePatterns}
+            user={user}
+            scrollToBottom
+            onLongPressAvatar={user => alert(JSON.stringify(user))}
+            onPressAvatar={() => alert('short press')}
+            onPress={() => {
+              Alert.alert('Bubble pressed')
+            }}
+            onQuickReply={this.onQuickReply}
+            keyboardShouldPersistTaps='never'
+            renderAccessory={Platform.OS === 'web' ? null : this.renderAccessory}
+            renderActions={this.renderCustomActions}
+            renderBubble={this.renderBubble}
+            renderSystemMessage={this.renderSystemMessage}
+            renderCustomView={this.renderCustomView}
+            renderSend={this.renderSend}
+            quickReplyStyle={{ borderRadius: 2 }}
+            quickReplyTextStyle={{
+              fontWeight: '200',
+            }}
+            renderQuickReplySend={this.renderQuickReplySend}
+            inverted={Platform.OS !== 'web'}
+            timeTextStyle={{ left: { color: 'red' }, right: { color: 'yellow' } }}
+            isTyping={this.state.isTyping}
+            infiniteScroll
+          />
+        </View>
+      </SafeAreaView>
     )
   }
 }

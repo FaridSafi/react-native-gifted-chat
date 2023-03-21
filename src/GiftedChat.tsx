@@ -626,6 +626,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       this.setKeyboardHeight(
         e.endCoordinates ? e.endCoordinates.height : e.end.height,
       )
+      this.setBottomOffset(this.props.bottomOffset != null ? this.props.bottomOffset : 1)
       const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard()
       this.setState({
         messagesContainerHeight: newMessagesContainerHeight,

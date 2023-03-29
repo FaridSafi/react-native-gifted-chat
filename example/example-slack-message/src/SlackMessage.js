@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { View, ViewPropTypes, StyleSheet } from 'react-native'
 
-import { Avatar, Day, utils } from 'react-native-gifted-chat'
-import Bubble from './SlackBubble'
+import { Avatar, Day, utils, Message } from 'react-native-gifted-chat'
+import SlackBubble from './SlackBubble'
 
 const { isSameUser, isSameDay } = utils
 
-export default class Message extends React.Component {
+export default class SlackMessage extends Message {
   getInnerComponentProps() {
     const { containerStyle, ...props } = this.props
     return {
@@ -36,7 +36,7 @@ export default class Message extends React.Component {
     if (this.props.renderBubble) {
       return this.props.renderBubble(bubbleProps)
     }
-    return <Bubble {...bubbleProps} />
+    return <SlackBubble {...bubbleProps} />
   }
 
   renderAvatar() {

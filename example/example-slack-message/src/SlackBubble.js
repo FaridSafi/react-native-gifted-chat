@@ -17,11 +17,12 @@ import {
   MessageImage,
   Time,
   utils,
+  Bubble
 } from 'react-native-gifted-chat'
 
 const { isSameUser, isSameDay } = utils
 
-export default class Bubble extends React.Component {
+export default class SlackBubble extends Bubble {
   constructor(props) {
     super(props)
     this.onLongPress = this.onLongPress.bind(this)

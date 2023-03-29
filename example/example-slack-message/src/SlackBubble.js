@@ -25,10 +25,10 @@ const { isSameUser, isSameDay } = utils
 export default class SlackBubble extends Bubble {
   constructor(props) {
     super(props)
-    this.onLongPress = this.onLongPress.bind(this)
+    }
   }
 
-  onLongPress() {
+  onLongPress = () => {
     if (this.props.onLongPress) {
       this.props.onLongPress(this.context, this.props.currentMessage)
     } else {
@@ -50,7 +50,6 @@ export default class SlackBubble extends Bubble {
         )
       }
     }
-  }
 
   renderMessageText() {
     if (this.props.currentMessage.text) {

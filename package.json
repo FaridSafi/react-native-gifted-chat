@@ -1,6 +1,6 @@
 {
-  "name": "react-native-gifted-chat",
-  "version": "2.0.1",
+  "name": "react-native-gifted-chat-modern-love",
+  "version": "1.0.0",
   "description": "The most complete chat UI for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -18,7 +18,7 @@
     "message",
     "chat"
   ],
-  "author": "Farid Safi",
+  "author": "Zeng Hou Lim",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/FaridSafi/react-native-gifted-chat/issues"

@@ -230,6 +230,7 @@ export interface GiftedChatState<TMessage extends IMessage = IMessage> {
   typingDisabled: boolean
   text?: string
   messages?: TMessage[]
+  contextValues:{}
 }
 
 class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
@@ -414,6 +415,12 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     typingDisabled: false,
     text: undefined,
     messages: undefined,
+    contextValues: {
+      getLocale: () => 'en',
+      actionSheet: () => ({
+        showActionSheetWithOptions: () => {},
+      }),
+    },
   }
 
   constructor(props: GiftedChatProps<TMessage>) {
@@ -435,6 +442,11 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     this.initLocale()
     this.setMessages(messages || [])
     this.setTextFromProp(text)
+    this.setState({contextValues: {
+      actionSheet: this.props.actionSheet ||
+        (() => { var _a; return (_a = this._actionSheetRef.current) === null || _a === void 0 ? void 0 : _a.getContext(); }),
+      getLocale: this.getLocale,
+    }})
   }
 
   componentWillUnmount() {
@@ -843,7 +855,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       onTextChanged: this.onInputTextChanged,
       textInputProps: {
         ...this.props.textInputProps,
-        ref: (textInput: any) => (this.textInput = textInput),
+      ref: (textInput: any) => (this.textInput = textInput),
         maxLength: this.getIsTypingDisabled() ? 0 : this.props.maxInputLength,
       },
     }
@@ -869,17 +881,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
 
   render() {
     if (this.state.isInitialized === true) {
-      const actionSheet =
-        this.props.actionSheet ||
-        (() => this._actionSheetRef.current?.getContext()!)
-      const { getLocale } = this
-      return (
-        <GiftedChatContext.Provider
-          value={{
-            actionSheet,
-            getLocale,
-          }}
-        >
+      return (<GiftedChatContext.Provider value={this.state.contextValues}>
           <View testID={TEST_ID.WRAPPER} style={styles.wrapper}>
             <ActionSheetProvider ref={this._actionSheetRef}>
               <View style={styles.container} onLayout={this.onMainViewLayout}>

@@ -305,14 +305,13 @@ function GiftedChat(props: GiftedChatProps) {
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
   } = props
 
-  const _isMounted = useRef(false)
-  const _keyboardHeight = useRef(0)
-  const _bottomOffset = useRef(0)
-  const _maxHeight = useRef<number | undefined>(undefined)
-  const _isFirstLayout = useRef(true)
-  let _locale: string = 'en'
-  let _actionSheetRef = useRef<ActionSheetProviderRef>()
-  let _messageContainerRef = useRef<FlatList<IMessage> | null>()
+  const isMountedRef = useRef(false)
+  const keyboardHeightRef = useRef(0)
+  const bottomOffsetRef = useRef(0)
+  const maxHeightRef = useRef<number | undefined>(undefined)
+  const isFirstLayoutRef = useRef(true)
+  const actionSheetRef = useRef<ActionSheetProviderRef>()
+  const messageContainerRef = useRef<FlatList<IMessage> | null>()
   let _isTextInputWasFocused: boolean = false
   let textInputRef = useRef<TextInput>()
 
@@ -326,66 +325,30 @@ function GiftedChat(props: GiftedChatProps) {
   })
 
   useEffect(() => {
-    setIsMounted(true)
-    initLocale()
-    setMessages(messages)
-    setTextFromProp(text)
+    isMountedRef.current = true
+
+    setState({
+      ...state,
+      messages,
+      // Text prop takes precedence over state.
+      ...(text !== undefined && text !== state.text && { text: text }),
+    })
 
     if (inverted === false && messages?.length) {
       setTimeout(() => scrollToBottom(false), 200)
     }
 
     return () => {
-      setIsMounted(false)
+      isMountedRef.current = false
     }
   }, [messages, text])
-
-  const initLocale = () => {
-    if (locale === null) {
-      setLocale('en')
-    } else {
-      setLocale(locale || 'en')
-    }
-  }
-
-  const setLocale = (locale: string) => {
-    _locale = locale
-  }
-
-  const getLocale = () => _locale
-
-  const setTextFromProp = (textProp?: string) => {
-    // Text prop takes precedence over state.
-    if (textProp !== undefined && textProp !== state.text) {
-      setState({ ...state, text: textProp })
-    }
-  }
 
   const getTextFromProp = (fallback: string) => {
     if (text === undefined) {
       return fallback
     }
+
     return text
-  }
-
-  const setMessages = (messages: TMessage[]) => {
-    setState({ ...state, messages })
-  }
-
-  const getMessages = () => {
-    return state.messages
-  }
-
-  const setMaxHeight = (height: number) => {
-    _maxHeight.current = height
-  }
-
-  const getMaxHeight = () => {
-    return _maxHeight.current
-  }
-
-  const setKeyboardHeight = (height: number) => {
-    _keyboardHeight.current = height
   }
 
   const getKeyboardHeight = () => {
@@ -395,50 +358,16 @@ function GiftedChat(props: GiftedChatProps) {
       // So for calculate the messages container height ignore keyboard height.
       return 0
     }
-    return _keyboardHeight.current
-  }
 
-  const setBottomOffset = (value: number) => {
-    _bottomOffset.current = value
-  }
-
-  const getBottomOffset = () => {
-    return _bottomOffset.current
-  }
-
-  const setIsFirstLayout = (value: boolean) => {
-    _isFirstLayout.current = value
-  }
-
-  const getIsFirstLayout = () => {
-    return _isFirstLayout.current
-  }
-
-  const setIsTypingDisabled = (value: boolean) => {
-    setState({
-      ...state,
-      typingDisabled: value,
-    })
-  }
-
-  const getIsTypingDisabled = () => {
-    return state.typingDisabled
-  }
-
-  const setIsMounted = (value: boolean) => {
-    _isMounted.current = value
-  }
-
-  const getIsMounted = () => {
-    return _isMounted.current
-  }
-
-  const getMinInputToolbarHeight = () => {
-    return renderAccessory ? minInputToolbarHeight! * 2 : minInputToolbarHeight
+    return keyboardHeightRef.current
   }
 
   const calculateInputToolbarHeight = (composerHeight: number) => {
-    return composerHeight + (getMinInputToolbarHeight()! - minComposerHeight!)
+    const getMinInputToolbarHeight = renderAccessory
+      ? minInputToolbarHeight! * 2
+      : minInputToolbarHeight
+
+    return composerHeight + (getMinInputToolbarHeight! - minComposerHeight!)
   }
 
   /**
@@ -447,7 +376,7 @@ function GiftedChat(props: GiftedChatProps) {
   const getBasicMessagesContainerHeight = (
     composerHeight = state.composerHeight,
   ) => {
-    return getMaxHeight()! - calculateInputToolbarHeight(composerHeight!)
+    return maxHeightRef.current! - calculateInputToolbarHeight(composerHeight!)
   }
 
   /**
@@ -459,7 +388,7 @@ function GiftedChat(props: GiftedChatProps) {
     return (
       getBasicMessagesContainerHeight(composerHeight) -
       getKeyboardHeight() +
-      getBottomOffset()
+      bottomOffsetRef.current
     )
   }
 
@@ -496,14 +425,15 @@ function GiftedChat(props: GiftedChatProps) {
     handleTextInputFocusWhenKeyboardShow()
 
     if (isKeyboardInternallyHandled) {
-      setIsTypingDisabled(true)
-      setKeyboardHeight(
-        e.endCoordinates ? e.endCoordinates.height : e.end.height,
-      )
-      setBottomOffset(bottomOffset != null ? bottomOffset : 1)
+      keyboardHeightRef.current = e.endCoordinates
+        ? e.endCoordinates.height
+        : e.end.height
+      bottomOffsetRef.current = bottomOffset != null ? bottomOffset : 1
       const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard()
+
       setState({
         ...state,
+        typingDisabled: true,
         messagesContainerHeight: newMessagesContainerHeight,
       })
     }
@@ -513,12 +443,14 @@ function GiftedChat(props: GiftedChatProps) {
     handleTextInputFocusWhenKeyboardHide()
 
     if (isKeyboardInternallyHandled) {
-      setIsTypingDisabled(true)
-      setKeyboardHeight(0)
-      setBottomOffset(0)
+      keyboardHeightRef.current = 0
+      bottomOffsetRef.current = 0
+
       const newMessagesContainerHeight = getBasicMessagesContainerHeight()
+
       setState({
         ...state,
+        typingDisabled: true,
         messagesContainerHeight: newMessagesContainerHeight,
       })
     }
@@ -528,23 +460,30 @@ function GiftedChat(props: GiftedChatProps) {
     if (Platform.OS === 'android') {
       onKeyboardWillShow(e)
     }
-    setIsTypingDisabled(false)
+
+    setState({
+      ...state,
+      typingDisabled: false,
+    })
   }
 
   const onKeyboardDidHide = (e: any) => {
     if (Platform.OS === 'android') {
       onKeyboardWillHide(e)
     }
-    setIsTypingDisabled(false)
+
+    setState({
+      ...state,
+      typingDisabled: false,
+    })
   }
 
   const scrollToBottom = (animated = true) => {
-    if (_messageContainerRef && _messageContainerRef.current) {
-      const { inverted } = props
+    if (messageContainerRef?.current) {
       if (!inverted) {
-        _messageContainerRef.current.scrollToEnd({ animated })
+        messageContainerRef.current.scrollToEnd({ animated })
       } else {
-        _messageContainerRef.current.scrollToOffset({
+        messageContainerRef.current.scrollToOffset({
           offset: 0,
           animated,
         })
@@ -554,6 +493,7 @@ function GiftedChat(props: GiftedChatProps) {
 
   const renderMessages = () => {
     const { messagesContainerStyle, ...messagesContainerProps } = props
+
     const fragment = (
       <View
         style={[
@@ -573,8 +513,8 @@ function GiftedChat(props: GiftedChatProps) {
             onKeyboardDidShow: onKeyboardDidShow,
             onKeyboardDidHide: onKeyboardDidHide,
           }}
-          messages={getMessages()}
-          forwardRef={_messageContainerRef}
+          messages={state.messages}
+          forwardRef={messageContainerRef}
           isTyping={isTyping}
         />
         {_renderChatFooter()}
@@ -595,6 +535,7 @@ function GiftedChat(props: GiftedChatProps) {
     if (!Array.isArray(messages)) {
       messages = [messages]
     }
+
     const newMessages: TMessage[] = messages.map(message => {
       return {
         ...message,
@@ -605,17 +546,25 @@ function GiftedChat(props: GiftedChatProps) {
     })
 
     if (shouldResetInputToolbar === true) {
-      setIsTypingDisabled(true)
+      setState({
+        ...state,
+        typingDisabled: true,
+      })
+
       resetInputToolbar()
     }
+
     if (onSend) {
       onSend(newMessages)
     }
 
     // if (shouldResetInputToolbar === true) {
     //   setTimeout(() => {
-    //     if (getIsMounted() === true) {
-    //       setIsTypingDisabled(false)
+    //     if (isMountedRef.current === true) {
+    //       setState({
+    //         ...state,
+    //         typingDisabled: false,
+    //       })
     //     }
     //   }, 100)
     // }
@@ -625,11 +574,15 @@ function GiftedChat(props: GiftedChatProps) {
     if (textInputRef.current) {
       textInputRef.current.clear()
     }
+
     notifyInputTextReset()
+
     const newComposerHeight = minComposerHeight
+
     const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
       newComposerHeight,
     )
+
     setState({
       ...state,
       text: getTextFromProp(''),
@@ -638,20 +591,16 @@ function GiftedChat(props: GiftedChatProps) {
     })
   }
 
-  const focusTextInput = () => {
-    if (textInputRef.current) {
-      textInputRef.current.focus()
-    }
-  }
-
   const onInputSizeChanged = (size: { height: number }) => {
     const newComposerHeight = Math.max(
       minComposerHeight!,
       Math.min(maxComposerHeight!, size.height),
     )
+
     const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
       newComposerHeight,
     )
+
     setState({
       ...state,
       composerHeight: newComposerHeight,
@@ -660,12 +609,14 @@ function GiftedChat(props: GiftedChatProps) {
   }
 
   const _onInputTextChanged = (_text: string) => {
-    if (getIsTypingDisabled()) {
+    if (state.typingDisabled) {
       return
     }
+
     if (onInputTextChanged) {
       onInputTextChanged(_text)
     }
+
     // Only set state if it's not being overridden by a prop.
     if (text === undefined) {
       setState({ ...state, text: _text })
@@ -680,15 +631,20 @@ function GiftedChat(props: GiftedChatProps) {
 
   const onInitialLayoutViewLayout = (e: any) => {
     const { layout } = e.nativeEvent
+
     if (layout.height <= 0) {
       return
     }
+
     notifyInputTextReset()
-    setMaxHeight(layout.height)
+
+    maxHeightRef.current = layout.height
+
     const newComposerHeight = minComposerHeight
     const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
       newComposerHeight,
     )
+
     setState({
       ...state,
       isInitialized: true,
@@ -701,18 +657,24 @@ function GiftedChat(props: GiftedChatProps) {
   const onMainViewLayout = (e: LayoutChangeEvent) => {
     // TODO: fix an issue when keyboard is dismissing during the initialization
     const { layout } = e.nativeEvent
-    if (getMaxHeight() !== layout.height || getIsFirstLayout() === true) {
-      setMaxHeight(layout.height)
+
+    if (
+      maxHeightRef.current !== layout.height ||
+      isFirstLayoutRef.current === true
+    ) {
+      maxHeightRef.current = layout.height
+
       setState({
         ...state,
         messagesContainerHeight:
-          _keyboardHeight.current > 0
+          keyboardHeightRef.current > 0
             ? getMessagesContainerHeightWithKeyboard()
             : getBasicMessagesContainerHeight(),
       })
     }
-    if (getIsFirstLayout() === true) {
-      setIsFirstLayout(false)
+
+    if (isFirstLayoutRef.current === true) {
+      isFirstLayoutRef.current = false
     }
   }
 
@@ -727,12 +689,14 @@ function GiftedChat(props: GiftedChatProps) {
       textInputProps: {
         ...textInputProps,
         ref: (textInput: any) => (textInputRef = textInput),
-        maxLength: getIsTypingDisabled() ? 0 : maxInputLength,
+        maxLength: state.typingDisabled ? 0 : maxInputLength,
       },
     }
+
     if (renderInputToolbar) {
       return renderInputToolbar(inputToolbarProps)
     }
+
     return <InputToolbar {...inputToolbarProps} />
   }
 
@@ -740,6 +704,7 @@ function GiftedChat(props: GiftedChatProps) {
     if (renderChatFooter) {
       return renderChatFooter()
     }
+
     return null
   }
 
@@ -747,21 +712,22 @@ function GiftedChat(props: GiftedChatProps) {
     if (renderLoading) {
       return renderLoading()
     }
+
     return null
   }
 
   if (state.isInitialized === true) {
     const _actionSheet =
-      actionSheet || (() => _actionSheetRef.current?.getContext()!)
+      actionSheet || (() => actionSheetRef.current?.getContext()!)
     return (
       <GiftedChatContext.Provider
         value={{
           actionSheet: _actionSheet,
-          getLocale: getLocale,
+          getLocale: () => locale || 'en',
         }}
       >
         <View testID={TEST_ID.WRAPPER} style={styles.wrapper}>
-          <ActionSheetProvider ref={_actionSheetRef}>
+          <ActionSheetProvider ref={actionSheetRef}>
             <View style={styles.container} onLayout={onMainViewLayout}>
               {renderMessages()}
               {_renderInputToolbar()}
@@ -771,6 +737,7 @@ function GiftedChat(props: GiftedChatProps) {
       </GiftedChatContext.Provider>
     )
   }
+
   return (
     <View
       testID={TEST_ID.LOADING_WRAPPER}

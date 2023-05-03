@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useMemo } from 'react'
 import {
   Animated,
   Platform,
@@ -717,14 +717,13 @@ function GiftedChat(props: GiftedChatProps) {
   }
 
   if (state.isInitialized === true) {
-    const _actionSheet =
-      actionSheet || (() => actionSheetRef.current?.getContext()!)
+    const contextValues = useMemo(() => ({
+      actionSheet: actionSheet || (() => _actionSheetRef.current?.getContext()!),
+      getLocale: getLocale,
+    }), [actionSheet, locale])
     return (
       <GiftedChatContext.Provider
-        value={{
-          actionSheet: _actionSheet,
-          getLocale: () => locale || 'en',
-        }}
+        value={contextValues}
       >
         <View testID={TEST_ID.WRAPPER} style={styles.wrapper}>
           <ActionSheetProvider ref={actionSheetRef}>

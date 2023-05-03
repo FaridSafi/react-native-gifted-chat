@@ -28,7 +28,6 @@ jobs:
 
       - name: Node modules
         run: |
-          echo //npm.pkg.github.com/:_authToken=${{secrets.CORE_PAT}} >> .npmrc
           yarn install
 
       - name: Lint

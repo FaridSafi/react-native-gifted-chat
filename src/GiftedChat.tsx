@@ -26,14 +26,7 @@ import { Actions, ActionsProps } from './Actions'
 import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
 import { Composer, ComposerProps } from './Composer'
-import {
-  // DATE_FORMAT,
-  // DEFAULT_PLACEHOLDER,
-  MAX_COMPOSER_HEIGHT,
-  MIN_COMPOSER_HEIGHT,
-  TEST_ID,
-  // TIME_FORMAT,
-} from './Constant'
+import { MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TEST_ID } from './Constant'
 import { Day, DayProps } from './Day'
 import GiftedAvatar from './GiftedAvatar'
 import { GiftedChatContext } from './GiftedChatContext'
@@ -236,59 +229,20 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 ) {
   const {
     messages = [],
-    // messagesContainerStyle = undefined,
     text = undefined,
     initialText = '',
     isTyping,
-    // placeholder = DEFAULT_PLACEHOLDER,
-    // disableComposer = false,
     messageIdGenerator = () => uuid.v4(),
     user = {},
     onSend = () => {},
     locale = 'en',
-    // timeFormat = TIME_FORMAT,
-    // dateFormat = DATE_FORMAT,
-    // loadEarlier = false,
-    // onLoadEarlier = () => {},
-    // isLoadingEarlier = false,
     renderLoading = null,
-    // renderLoadEarlier = null,
-    // renderAvatar = undefined,
-    // showUserAvatar = false,
     actionSheet = null,
-    // onPressAvatar = null,
-    // onLongPressAvatar = null,
-    // renderUsernameOnMessage = false,
-    // renderAvatarOnTop = false,
-    // renderBubble = null,
-    // renderSystemMessage = null,
-    // onLongPress = null,
-    // renderUserName = null,
-    // renderMessage = null,
-    // renderMessageText = null,
-    // renderMessageImage = null,
-    // renderMessageVideo = null,
-    // renderMessageAudio = null,
-    // imageProps = {},
-    // videoProps = {},
-    // audioProps = {},
-    // lightboxProps = {},
     textInputProps = {},
-    // listViewProps = {},
-    // renderCustomView = null,
-    // isCustomViewBottom = false,
-    // renderDay = null,
-    // renderTime = null,
-    // renderFooter = null,
-    // renderChatEmpty = null,
     renderChatFooter = null,
     renderInputToolbar = null,
-    // renderComposer = null,
-    // renderActions = null,
-    // renderSend = null,
     renderAccessory = null,
     isKeyboardInternallyHandled = true,
-    // onPressActionButton = null,
     bottomOffset = null,
     minInputToolbarHeight = 44,
     keyboardShouldPersistTaps = Platform.select({
@@ -300,7 +254,6 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     maxInputLength = null,
     forceGetKeyboardHeight = false,
     inverted = true,
-    // extraData = null,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
   } = props

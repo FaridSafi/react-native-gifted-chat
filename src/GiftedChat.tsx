@@ -1,63 +1,61 @@
-import PropTypes from 'prop-types'
-import React, { useRef, useEffect, useState, useMemo } from 'react'
 import {
-  Animated,
-  Platform,
-  StyleSheet,
-  View,
-  StyleProp,
-  ViewStyle,
-  FlatList,
-  TextStyle,
-  KeyboardAvoidingView,
-  LayoutChangeEvent,
-  TextInput,
-} from 'react-native'
-import {
-  ActionSheetProvider,
   ActionSheetOptions,
+  ActionSheetProvider,
+  ActionSheetProviderRef,
 } from '@expo/react-native-action-sheet'
-import uuid from 'uuid'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
-
-import * as utils from './utils'
+import PropTypes from 'prop-types'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import {
+  Animated,
+  FlatList,
+  KeyboardAvoidingView,
+  LayoutChangeEvent,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native'
+import { LightboxProps } from 'react-native-lightbox-v2'
+import uuid from 'uuid'
 import { Actions, ActionsProps } from './Actions'
 import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
-import { SystemMessage, SystemMessageProps } from './SystemMessage'
-import { MessageImage, MessageImageProps } from './MessageImage'
-import { MessageText, MessageTextProps } from './MessageText'
 import { Composer, ComposerProps } from './Composer'
+import {
+  DATE_FORMAT,
+  DEFAULT_PLACEHOLDER,
+  MAX_COMPOSER_HEIGHT,
+  MIN_COMPOSER_HEIGHT,
+  TEST_ID,
+  TIME_FORMAT,
+} from './Constant'
 import { Day, DayProps } from './Day'
+import GiftedAvatar from './GiftedAvatar'
+import { GiftedChatContext } from './GiftedChatContext'
 import { InputToolbar, InputToolbarProps } from './InputToolbar'
 import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
 import Message from './Message'
 import MessageContainer from './MessageContainer'
-import { Send, SendProps } from './Send'
-import { GiftedChatContext } from './GiftedChatContext'
-import { Time, TimeProps } from './Time'
-import { QuickRepliesProps } from './QuickReplies'
-import GiftedAvatar from './GiftedAvatar'
-
-import {
-  MIN_COMPOSER_HEIGHT,
-  MAX_COMPOSER_HEIGHT,
-  DEFAULT_PLACEHOLDER,
-  TIME_FORMAT,
-  DATE_FORMAT,
-  TEST_ID,
-} from './Constant'
+import { MessageImage, MessageImageProps } from './MessageImage'
+import { MessageText, MessageTextProps } from './MessageText'
 import {
   IMessage,
-  User,
-  Reply,
   LeftRightStyle,
-  MessageVideoProps,
   MessageAudioProps,
+  MessageVideoProps,
+  Reply,
+  User,
 } from './Models'
-import { LightboxProps } from 'react-native-lightbox-v2'
-import { ActionSheetProviderRef } from '@expo/react-native-action-sheet'
+import { QuickRepliesProps } from './QuickReplies'
+import { Send, SendProps } from './Send'
+import { SystemMessage, SystemMessageProps } from './SystemMessage'
+import { Time, TimeProps } from './Time'
+import * as utils from './utils'
 
 dayjs.extend(localizedFormat)
 
@@ -850,7 +848,6 @@ const styles = StyleSheet.create({
 })
 
 export * from './Models'
-
 export {
   GiftedChat,
   Actions,

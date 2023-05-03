@@ -311,7 +311,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
   const maxHeightRef = useRef<number | undefined>(undefined)
   const isFirstLayoutRef = useRef(true)
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
-  const messageContainerRef = useRef<FlatList<IMessage> | null>()
+  const messageContainerRef = useRef<FlatList<IMessage>>(null)
   let _isTextInputWasFocused: boolean = false
   let textInputRef = useRef<TextInput>()
 
@@ -497,13 +497,13 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     const fragment = (
       <View
         style={[
-          state.messagesContainerHeight && {
+          typeof state.messagesContainerHeight === 'number' && {
             height: state.messagesContainerHeight,
           },
           messagesContainerStyle,
         ]}
       >
-        <MessageContainer<TMessage>
+        <MessageContainer
           {...messagesContainerProps}
           invertibleScrollViewProps={{
             inverted: inverted,

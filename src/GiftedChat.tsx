@@ -381,7 +381,9 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
       keyboardHeightRef.current = e.endCoordinates
         ? e.endCoordinates.height
         : e.end.height
+
       bottomOffsetRef.current = bottomOffset != null ? bottomOffset : 1
+
       const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard()
 
       setState({
@@ -530,16 +532,14 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 
     notifyInputTextReset()
 
-    const newComposerHeight = minComposerHeight
-
     const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
-      newComposerHeight,
+      minComposerHeight,
     )
 
     setState({
       ...state,
       text: getTextFromProp(''),
-      composerHeight: newComposerHeight,
+      composerHeight: minComposerHeight,
       messagesContainerHeight: newMessagesContainerHeight,
     })
   }
@@ -593,16 +593,15 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 
     maxHeightRef.current = layout.height
 
-    const newComposerHeight = minComposerHeight
     const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
-      newComposerHeight,
+      minComposerHeight,
     )
 
     setState({
       ...state,
       isInitialized: true,
       text: getTextFromProp(initialText),
-      composerHeight: newComposerHeight,
+      composerHeight: minComposerHeight,
       messagesContainerHeight: newMessagesContainerHeight,
     })
   }

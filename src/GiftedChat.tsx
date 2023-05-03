@@ -231,7 +231,9 @@ export interface GiftedChatState<TMessage extends IMessage = IMessage> {
   messages?: TMessage[]
 }
 
-function GiftedChat(props: GiftedChatProps) {
+function GiftedChat<TMessage extends IMessage = IMessage>(
+  props: GiftedChatProps,
+) {
   const {
     messages = [],
     // messagesContainerStyle = undefined,

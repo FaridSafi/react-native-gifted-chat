@@ -243,7 +243,7 @@ function GiftedChat(props: GiftedChatProps) {
     messageIdGenerator = () => uuid.v4(),
     user = {},
     onSend = () => {},
-    locale = null,
+    locale = 'en',
     // timeFormat = TIME_FORMAT,
     // dateFormat = DATE_FORMAT,
     // loadEarlier = false,
@@ -717,7 +717,7 @@ function GiftedChat(props: GiftedChatProps) {
   const contextValues = useMemo(
     () => ({
       actionSheet: actionSheet || (() => actionSheetRef.current?.getContext()!),
-      getLocale: () => locale || 'en',
+      getLocale: () => locale,
     }),
     [actionSheet, locale],
   )

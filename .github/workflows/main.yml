@@ -29,7 +29,7 @@ jobs:
       - name: Node modules
         run: |
           echo //npm.pkg.github.com/:_authToken=${{secrets.CORE_PAT}} >> .npmrc
-          yarn install--prefer-offline --no-audit
+          yarn install
 
       - name: Lint
         run: |

@@ -26,18 +26,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node${{ matrix.node-version }}-mobile-${{ hashFiles('./package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node${{ matrix.node-version }}-mobile-
-
-      - name: NPM install
+      - name: Node modules
         run: |
           echo //npm.pkg.github.com/:_authToken=${{secrets.CORE_PAT}} >> .npmrc
-          npm ci --prefer-offline --no-audit
+          yarn install--prefer-offline --no-audit
 
       - name: Lint
         run: |
-          npm run prepublishOnly
+          yarn prepublishOnly

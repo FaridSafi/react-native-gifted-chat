@@ -1,0 +1,43 @@
+name: Mobile CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tsc:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+      contents: read
+
+    strategy:
+      matrix:
+        node-version: [16]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node${{ matrix.node-version }}-mobile-${{ hashFiles('./package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node${{ matrix.node-version }}-mobile-
+
+      - name: NPM install
+        run: |
+          echo //npm.pkg.github.com/:_authToken=${{secrets.CORE_PAT}} >> .npmrc
+          npm ci --prefer-offline --no-audit
+
+      - name: Lint
+        run: |
+          npm run prepublishOnly

@@ -716,15 +716,17 @@ function GiftedChat(props: GiftedChatProps) {
     return null
   }
 
+  const contextValues = useMemo(
+    () => ({
+      actionSheet: actionSheet || (() => actionSheetRef.current?.getContext()!),
+      getLocale: () => locale || 'en',
+    }),
+    [actionSheet, locale],
+  )
+
   if (state.isInitialized === true) {
-    const contextValues = useMemo(() => ({
-      actionSheet: actionSheet || (() => _actionSheetRef.current?.getContext()!),
-      getLocale: getLocale,
-    }), [actionSheet, locale])
     return (
-      <GiftedChatContext.Provider
-        value={contextValues}
-      >
+      <GiftedChatContext.Provider value={contextValues}>
         <View testID={TEST_ID.WRAPPER} style={styles.wrapper}>
           <ActionSheetProvider ref={actionSheetRef}>
             <View style={styles.container} onLayout={onMainViewLayout}>

@@ -310,7 +310,7 @@ function GiftedChat(props: GiftedChatProps) {
   const bottomOffsetRef = useRef(0)
   const maxHeightRef = useRef<number | undefined>(undefined)
   const isFirstLayoutRef = useRef(true)
-  const actionSheetRef = useRef<ActionSheetProviderRef>()
+  const actionSheetRef = useRef<ActionSheetProviderRef>(null)
   const messageContainerRef = useRef<FlatList<IMessage> | null>()
   let _isTextInputWasFocused: boolean = false
   let textInputRef = useRef<TextInput>()

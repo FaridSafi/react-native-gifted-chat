@@ -27,4 +27,4 @@ jobs:
 
       - name: Lint
         run: |
-          yarn prepublishOnly
+          yarn build

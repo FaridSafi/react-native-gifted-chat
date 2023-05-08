@@ -436,6 +436,9 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
   const scrollToBottom = (animated = true) => {
     if (messageContainerRef?.current) {
       if (!inverted) {
+        if (!messages?.length) {
+          return;
+        }
         messageContainerRef.current.scrollToEnd({ animated })
       } else {
         messageContainerRef.current.scrollToOffset({

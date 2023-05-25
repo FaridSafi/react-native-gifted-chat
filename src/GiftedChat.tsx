@@ -67,6 +67,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   scrollToBottom?: boolean
   /* Scroll to bottom wrapper style */
   scrollToBottomStyle?: StyleProp<ViewStyle>
+  /* Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200) */
+  scrollToBottomOffset?: number
   initialText?: string
   /* Placeholder when text is empty; default is 'Type a message...' */
   placeholder?: string
@@ -764,6 +766,7 @@ GiftedChat.propTypes = {
   minComposerHeight: PropTypes.number,
   maxComposerHeight: PropTypes.number,
   alignTop: PropTypes.bool,
+  scrollToBottomOffset: PropTypes.number,
 }
 
 GiftedChat.append = <TMessage extends IMessage>(

@@ -5,7 +5,8 @@ import {
   StyleSheet,
   TextInput,
   TextInputProps,
-  LayoutChangeEvent,
+  NativeSyntheticEvent,
+  TextInputContentSizeChangeEventData,
 } from 'react-native'
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
 import Color from './Color'
@@ -66,27 +67,33 @@ export function Composer({
   textInputProps = {},
   textInputStyle,
 }: ComposerProps): React.ReactElement {
-  const layoutRef = useRef<{ width: number; height: number }>()
+  const dimensionsRef = useRef<{ width: number; height: number }>()
 
-  const handleOnLayout = useCallbackOne(
-    ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
+  const determineInputSizeChange = useCallbackOne(
+    (dimensions: { width: number; height: number }) => {
       // Support earlier versions of React Native on Android.
-      if (!layout) {
+      if (!dimensions) {
         return
       }
 
       if (
-        !layoutRef ||
-        (layoutRef.current &&
-          (layoutRef.current.width !== layout.width ||
-            layoutRef.current.height !== layout.height))
+        !dimensionsRef ||
+        !dimensionsRef.current ||
+        (dimensionsRef.current &&
+          (dimensionsRef.current.width !== dimensions.width ||
+            dimensionsRef.current.height !== dimensions.height))
       ) {
-        layoutRef.current = layout
-        onInputSizeChanged(layout)
+        dimensionsRef.current = dimensions
+        onInputSizeChanged(dimensions)
       }
     },
     [onInputSizeChanged],
   )
+
+  const handleContentSizeChange = ({
+    nativeEvent: { contentSize },
+  }: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) =>
+    determineInputSizeChange(contentSize)
 
   return (
     <TextInput
@@ -97,7 +104,7 @@ export function Composer({
       placeholderTextColor={placeholderTextColor}
       multiline={multiline}
       editable={!disableComposer}
-      onLayout={handleOnLayout}
+      onContentSizeChange={handleContentSizeChange}
       onChangeText={onTextChanged}
       style={[
         styles.textInput,

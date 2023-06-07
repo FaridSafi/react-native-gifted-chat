@@ -74,7 +74,7 @@
     "react-native-lightbox-v2": "0.9.0",
     "react-native-parsed-text": "0.0.22",
     "react-native-typing-animation": "0.1.7",
-    "use-memo-one": "1.1.2",
+    "use-memo-one": "1.1.3",
     "uuid": "3.4.0"
   },
   "peerDependencies": {

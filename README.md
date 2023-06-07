@@ -67,12 +67,14 @@
   </p>
 </p>
 
-## The future of GiftedChat 🎉 
+## The future of GiftedChat 🎉
+
 Please give us your advice: [Related PR](https://github.com/FaridSafi/react-native-gifted-chat/pull/1775)
 
 ## Please vote
 
 **GiftedChat** depends on other packages and some needs a boost, please vote for PRs will improve it, thanks:
+
 - https://github.com/watadarkstar/react-native-typing-animation/issues/18
 
 ## Features
@@ -100,23 +102,24 @@ Please give us your advice: [Related PR](https://github.com/FaridSafi/react-nati
 - Use version `0.0.10` for RN `< 0.40.0`
 
 ## Testing
+
 `Test_ID` is exported as constants that can be used in your testing library of choice
 
-Gifted Chat uses `onLayout` to determine the height of the chat container.  To trigger `onLayout` during your tests, you can run the following bits of code.
+Gifted Chat uses `onLayout` to determine the height of the chat container. To trigger `onLayout` during your tests, you can run the following bits of code.
 
 ```typescript
 const WIDTH = 200 // or any number
 const HEIGHT = 2000 // or any number
 
-const loadingWrapper = getByTestId(Test_ID.LOADING.WRAPPER)
-fireEvent(loadingWrapper, "layout", {
+const loadingWrapper = getByTestId(TEST_ID.LOADING_WRAPPER)
+fireEvent(loadingWrapper, 'layout', {
   nativeEvent: {
     layout: {
       width: WIDTH,
       height: HEIGHT,
     },
   },
-});
+})
 ```
 
 ## Installation
@@ -143,7 +146,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 
 export function Example() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([])
 
   useEffect(() => {
     setMessages([
@@ -161,7 +164,9 @@ export function Example() {
   }, [])
 
   const onSend = useCallback((messages = []) => {
-    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+    setMessages(previousMessages =>
+      GiftedChat.append(previousMessages, messages),
+    )
   }, [])
 
   return (

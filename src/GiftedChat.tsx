@@ -6,7 +6,7 @@ import {
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import PropTypes from 'prop-types'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { createRef, useEffect, useMemo, useRef, useState } from 'react'
 import {
   Animated,
   FlatList,
@@ -53,6 +53,8 @@ import * as utils from './utils'
 dayjs.extend(localizedFormat)
 
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
+  /* Message container ref */
+  messageContainerRef?: React.RefObject<FlatList<IMessage>>
   /* Messages to display */
   messages?: TMessage[]
   /* Typing Indicator state */
@@ -256,6 +258,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     inverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
+    messageContainerRef = createRef<FlatList<IMessage>>(),
   } = props
 
   const isMountedRef = useRef(false)
@@ -264,7 +267,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
   const maxHeightRef = useRef<number | undefined>(undefined)
   const isFirstLayoutRef = useRef(true)
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
-  const messageContainerRef = useRef<FlatList<IMessage>>(null)
+
   let _isTextInputWasFocused: boolean = false
   let textInputRef = useRef<TextInput>()
 

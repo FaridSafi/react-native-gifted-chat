@@ -1,33 +1,20 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons'
-import * as Linking from 'expo-linking'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import AppLoading from 'expo-app-loading'
-import React, { Component } from 'react'
-import { StyleSheet, View, Text, Platform, Alert } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
+import React, { useCallback, useReducer } from 'react'
+import { Alert, Linking, Platform, StyleSheet, Text, View } from 'react-native'
 import {
-  Bubble,
   GiftedChat,
-  SystemMessage,
   IMessage,
   Send,
   SendProps,
+  SystemMessage,
 } from 'react-native-gifted-chat'
-
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { NavBar } from './components/navbar'
 import AccessoryBar from './example-expo/AccessoryBar'
 import CustomActions from './example-expo/CustomActions'
 import CustomView from './example-expo/CustomView'
-import messagesData from './example-expo/data/messages'
 import earlierMessages from './example-expo/data/earlierMessages'
-import { NavBar } from './components/navbar'
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f5f5f5', },
-  content: { backgroundColor: "#ffffff", flex: 1, }
-})
-
-const filterBotMessages = message =>
-  !message.system && message.user && message.user._id && message.user._id === 2
-const findStep = step => message => message._id === step
+import messagesData from './example-expo/data/messages'
 
 const user = {
   _id: 1,
@@ -40,92 +27,98 @@ const otherUser = {
   avatar: 'https://facebook.github.io/react/img/logo_og.png',
 }
 
-export default class App extends Component {
-  state = {
-    inverted: false,
-    step: 0,
-    messages: [],
-    loadEarlier: true,
-    typingText: null,
-    isLoadingEarlier: false,
-    appIsReady: false,
-    isTyping: false,
-  }
+interface IState {
+  messages: any[]
+  step: number
+  loadEarlier?: boolean
+  isLoadingEarlier?: boolean
+  isTyping: boolean
+}
 
-  _isMounted = false
+enum ActionKind {
+  SEND_MESSAGE = 'SEND_MESSAGE',
+  LOAD_EARLIER_MESSAGES = 'LOAD_EARLIER_MESSAGES',
+  LOAD_EARLIER_START = 'LOAD_EARLIER_START',
+  SET_IS_TYPING = 'SET_IS_TYPING',
+  // LOAD_EARLIER_END = 'LOAD_EARLIER_END',
+}
 
-  componentDidMount() {
-    this._isMounted = true
-    // init with only system messages
-    this.setState({
-      messages: messagesData, // messagesData.filter(message => message.system),
-      appIsReady: true,
-      isTyping: false,
-    })
-  }
+// An interface for our actions
+interface StateAction {
+  type: ActionKind
+  payload?: any
+}
 
-  componentWillUnmount() {
-    this._isMounted = false
-  }
-
-  onLoadEarlier = () => {
-    this.setState(() => {
+function reducer(state: IState, action: StateAction) {
+  switch (action.type) {
+    case ActionKind.SEND_MESSAGE: {
       return {
+        ...state,
+        step: state.step + 1,
+        messages: action.payload,
+      }
+    }
+    case ActionKind.LOAD_EARLIER_MESSAGES: {
+      return {
+        ...state,
+        loadEarlier: true,
+        isLoadingEarlier: false,
+        messages: action.payload,
+      }
+    }
+    case ActionKind.LOAD_EARLIER_START: {
+      return {
+        ...state,
         isLoadingEarlier: true,
       }
-    })
-
-    setTimeout(() => {
-      if (this._isMounted === true) {
-        this.setState((previousState: any) => {
-          return {
-            messages: GiftedChat.prepend(
-              previousState.messages,
-              earlierMessages() as IMessage[],
-              Platform.OS !== 'web',
-            ),
-            loadEarlier: true,
-            isLoadingEarlier: false,
-          }
-        })
-      }
-    }, 1500) // simulating network
-  }
-
-  onSend = (messages = []) => {
-    const step = this.state.step + 1
-    this.setState((previousState: any) => {
-      const sentMessages = [{ ...messages[0], sent: true, received: true }]
+    }
+    case ActionKind.SET_IS_TYPING: {
       return {
-        messages: GiftedChat.append(
-          previousState.messages,
-          sentMessages,
-          Platform.OS !== 'web',
-        ),
-        step,
+        ...state,
+        isTyping: action.payload,
       }
-    })
-    // for demo purpose
-    // setTimeout(() => this.botSend(step), Math.round(Math.random() * 1000))
-  }
-
-  botSend = (step = 0) => {
-    const newMessage = (messagesData as IMessage[])
-      .reverse()
-      // .filter(filterBotMessages)
-      .find(findStep(step))
-    if (newMessage) {
-      this.setState((previousState: any) => ({
-        messages: GiftedChat.append(
-          previousState.messages,
-          [newMessage],
-          Platform.OS !== 'web',
-        ),
-      }))
     }
   }
+}
 
-  parsePatterns = (_linkStyle: any) => {
+const App = () => {
+  const [state, dispatch] = useReducer(reducer, {
+    messages: messagesData,
+    step: 0,
+    loadEarlier: true,
+    isLoadingEarlier: false,
+    isTyping: false,
+  })
+
+  const onSend = useCallback(
+    (messages: any[]) => {
+      const sentMessages = [{ ...messages[0], sent: true, received: true }]
+      const newMessages = GiftedChat.append(
+        state.messages,
+        sentMessages,
+        Platform.OS !== 'web',
+      )
+
+      dispatch({ type: ActionKind.SEND_MESSAGE, payload: newMessages })
+    },
+    [dispatch, state.messages],
+  )
+
+  const onLoadEarlier = useCallback(() => {
+    console.log('loading')
+    dispatch({ type: ActionKind.LOAD_EARLIER_START })
+    setTimeout(() => {
+      const newMessages = GiftedChat.prepend(
+        state.messages,
+        earlierMessages() as IMessage[],
+        Platform.OS !== 'web',
+      )
+
+      dispatch({ type: ActionKind.LOAD_EARLIER_MESSAGES, payload: newMessages })
+    }, 1500) // simulating network
+  }, [dispatch, state.messages])
+
+  const parsePatterns = useCallback((_linkStyle: any) => {
     return [
       {
         pattern: /#(\w+)/,
@@ -133,62 +126,85 @@ export default class App extends Component {
         onPress: () => Linking.openURL('http://gifted.chat'),
       },
     ]
-  }
+  }, [])
 
-  renderCustomView(props) {
-    return <CustomView {...props} />
-  }
+  const onLongPressAvatar = useCallback((pressedUser: any) => {
+    Alert.alert(JSON.stringify(pressedUser))
+  }, [])
 
-  onReceive = (text: string) => {
-    this.setState((previousState: any) => {
-      return {
-        messages: GiftedChat.append(
-          previousState.messages as any,
-          [
-            {
-              _id: Math.round(Math.random() * 1000000),
-              text,
-              createdAt: new Date(),
-              user: otherUser,
-            },
-          ],
-          Platform.OS !== 'web',
-        ),
-      }
-    })
-  }
+  const onPressAvatar = useCallback(() => {
+    Alert.alert('On avatar press')
+  }, [])
 
-  onSendFromUser = (messages: IMessage[] = []) => {
+  const onQuickReply = useCallback((replies: any[]) => {
     const createdAt = new Date()
-    const messagesToUpload = messages.map(message => ({
-      ...message,
-      user,
-      createdAt,
-      _id: Math.round(Math.random() * 1000000),
-    }))
-    this.onSend(messagesToUpload)
-  }
+    if (replies.length === 1) {
+      onSend([
+        {
+          createdAt,
+          _id: Math.round(Math.random() * 1000000),
+          text: replies[0].title,
+          user,
+        },
+      ])
+    } else if (replies.length > 1) {
+      onSend([
+        {
+          createdAt,
+          _id: Math.round(Math.random() * 1000000),
+          text: replies.map(reply => reply.title).join(', '),
+          user,
+        },
+      ])
+    } else {
+      console.warn('replies param is not set correctly')
+    }
+  }, [])
 
-  setIsTyping = () => {
-    this.setState({
-      isTyping: !this.state.isTyping,
-    })
-  }
+  const renderQuickReplySend = useCallback(() => {
+    return <Text>{' custom send =>'}</Text>
+  }, [])
 
-  renderAccessory = () => (
-    <AccessoryBar onSend={this.onSendFromUser} isTyping={this.setIsTyping} />
+  const setIsTyping = useCallback(
+    (isTyping: boolean) => {
+      dispatch({ type: ActionKind.SET_IS_TYPING, payload: isTyping })
+    },
+    [dispatch],
   )
 
-  renderCustomActions = props =>
-    Platform.OS === 'web' ? null : (
-      <CustomActions {...props} onSend={this.onSendFromUser} />
+  const onSendFromUser = useCallback(
+    (messages: IMessage[] = []) => {
+      const createdAt = new Date()
+      const messagesToUpload = messages.map(message => ({
+        ...message,
+        user,
+        createdAt,
+        _id: Math.round(Math.random() * 1000000),
+      }))
+
+      onSend(messagesToUpload)
+    },
+    [onSend],
+  )
+
+  const renderAccessory = useCallback(() => {
+    return (
+      <AccessoryBar
+        onSend={onSendFromUser}
+        isTyping={() => setIsTyping(true)}
+      />
     )
+  }, [onSendFromUser, setIsTyping])
 
-  renderBubble = (props: any) => {
-    return <Bubble {...props} />
-  }
+  const renderCustomActions = useCallback(
+    props =>
+      Platform.OS === 'web' ? null : (
+        <CustomActions {...props} onSend={onSendFromUser} />
+      ),
+    [onSendFromUser],
+  )
 
-  renderSystemMessage = props => {
+  const renderSystemMessage = useCallback(props => {
     return (
       <SystemMessage
         {...props}
@@ -200,87 +216,63 @@ export default class App extends Component {
         }}
       />
     )
-  }
+  }, [])
 
-  onQuickReply = replies => {
-    const createdAt = new Date()
-    if (replies.length === 1) {
-      this.onSend([
-        {
-          createdAt,
-          _id: Math.round(Math.random() * 1000000),
-          text: replies[0].title,
-          user,
-        },
-      ])
-    } else if (replies.length > 1) {
-      this.onSend([
-        {
-          createdAt,
-          _id: Math.round(Math.random() * 1000000),
-          text: replies.map(reply => reply.title).join(', '),
-          user,
-        },
-      ])
-    } else {
-      console.warn('replies param is not set correctly')
-    }
-  }
+  const renderCustomView = useCallback(props => {
+    return <CustomView {...props} />
+  }, [])
 
-  renderQuickReplySend = () => <Text>{' custom send =>'}</Text>
-
-  renderSend = (props: SendProps<IMessage>) => (
-    <Send {...props} containerStyle={{ justifyContent: 'center' }}>
-      <MaterialIcons size={30} color={'tomato'} name={'send'} />
-    </Send>
-  )
-
-  render() {
-    if (!this.state.appIsReady) {
-      return <AppLoading />
-    }
+  const renderSend = useCallback((props: SendProps<IMessage>) => {
     return (
-      <SafeAreaView
-        style={styles.container}
-        accessibilityLabel='main'
-        testID='main'
-      >
-        <NavBar />
-        <View style={styles.content}>
-          <GiftedChat
-            messages={this.state.messages}
-            onSend={this.onSend}
-            loadEarlier={this.state.loadEarlier}
-            onLoadEarlier={this.onLoadEarlier}
-            isLoadingEarlier={this.state.isLoadingEarlier}
-            parsePatterns={this.parsePatterns}
-            user={user}
-            scrollToBottom
-            onLongPressAvatar={user => alert(JSON.stringify(user))}
-            onPressAvatar={() => alert('short press')}
-            onPress={() => {
-              Alert.alert('Bubble pressed')
-            }}
-            onQuickReply={this.onQuickReply}
-            keyboardShouldPersistTaps='never'
-            renderAccessory={Platform.OS === 'web' ? null : this.renderAccessory}
-            renderActions={this.renderCustomActions}
-            renderBubble={this.renderBubble}
-            renderSystemMessage={this.renderSystemMessage}
-            renderCustomView={this.renderCustomView}
-            renderSend={this.renderSend}
-            quickReplyStyle={{ borderRadius: 2 }}
-            quickReplyTextStyle={{
-              fontWeight: '200',
-            }}
-            renderQuickReplySend={this.renderQuickReplySend}
-            inverted={Platform.OS !== 'web'}
-            timeTextStyle={{ left: { color: 'red' }, right: { color: 'yellow' } }}
-            isTyping={this.state.isTyping}
-            infiniteScroll
-          />
-        </View>
-      </SafeAreaView>
+      <Send {...props} containerStyle={{ justifyContent: 'center' }}>
+        <MaterialIcons size={30} color={'tomato'} name={'send'} />
+      </Send>
     )
-  }
+  }, [])
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <NavBar />
+      <View style={styles.content}>
+        <GiftedChat
+          messages={state.messages}
+          onSend={onSend}
+          loadEarlier={state.loadEarlier}
+          onLoadEarlier={onLoadEarlier}
+          isLoadingEarlier={state.isLoadingEarlier}
+          parsePatterns={parsePatterns}
+          user={user}
+          scrollToBottom
+          onLongPressAvatar={onLongPressAvatar}
+          onPressAvatar={onPressAvatar}
+          onQuickReply={onQuickReply}
+          quickReplyStyle={{ borderRadius: 2 }}
+          quickReplyTextStyle={{
+            fontWeight: '200',
+          }}
+          renderQuickReplySend={renderQuickReplySend}
+          renderAccessory={renderAccessory}
+          renderActions={renderCustomActions}
+          renderSystemMessage={renderSystemMessage}
+          renderCustomView={renderCustomView}
+          renderSend={renderSend}
+          keyboardShouldPersistTaps='never'
+          timeTextStyle={{
+            left: { color: 'red' },
+            right: { color: 'yellow' },
+          }}
+          isTyping={state.isTyping}
+          inverted={Platform.OS !== 'web'}
+          infiniteScroll
+        />
+      </View>
+    </SafeAreaView>
+  )
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#f5f5f5' },
+  content: { backgroundColor: '#ffffff', flex: 1 },
+})
+
+export default App

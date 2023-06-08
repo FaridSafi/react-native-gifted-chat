@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-chat",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "The most complete chat UI for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

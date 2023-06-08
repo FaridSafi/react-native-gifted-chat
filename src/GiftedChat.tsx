@@ -55,6 +55,8 @@ dayjs.extend(localizedFormat)
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Message container ref */
   messageContainerRef?: React.RefObject<FlatList<IMessage>>
+  /* text input ref */
+  textInputRef?: React.RefObject<TextInput>
   /* Messages to display */
   messages?: TMessage[]
   /* Typing Indicator state */
@@ -259,6 +261,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
     messageContainerRef = createRef<FlatList<IMessage>>(),
+    textInputRef = createRef<TextInput>(),
   } = props
 
   const isMountedRef = useRef(false)
@@ -269,7 +272,6 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
 
   let _isTextInputWasFocused: boolean = false
-  let textInputRef = useRef<TextInput>()
 
   const [state, setState] = useState<GiftedChatState>({
     isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -643,7 +645,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
       onTextChanged: _onInputTextChanged,
       textInputProps: {
         ...textInputProps,
-        ref: (textInput: any) => (textInputRef = textInput),
+        ref: textInputRef,
         maxLength: state.typingDisabled ? 0 : maxInputLength,
       },
     }

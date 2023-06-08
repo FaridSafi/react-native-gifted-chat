@@ -321,6 +321,8 @@ interface QuickReplies {
 
 ## Props
 
+- **`messageContainerRef`** _(FlatList ref)_ - Ref to the flatlist
+- **`textInputRef`** _(TextInput ref)_ - Ref to the text input
 - **`messages`** _(Array)_ - Messages to display
 - **`isTyping`** _(Bool)_ - Typing Indicator state; default `false`. If you use`renderFooter` it will override this.
 - **`text`** _(String)_ - Input text; default is `undefined`, but if specified, it will override GiftedChat's internal state (e.g. for redux; [see notes below](#notes-for-redux))
@@ -407,10 +409,6 @@ interface QuickReplies {
 * **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
 * **`shouldUpdateMessage`** _(Function)_ - Lets the message component know when to update outside of normal cases.
 * **`infiniteScroll`** _(Bool)_ - infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist (not yet supported for the web). You need to add `loadEarlier` prop too.
-
-## Imperative methods
-
-- `focusTextInput()` - Open the keyboard and focus the text input box
 
 ## Notes for [Redux](https://github.com/reactjs/redux)
 

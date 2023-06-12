@@ -1,67 +1,62 @@
-import PropTypes from 'prop-types'
-import React, { useRef, useEffect, useState, useMemo } from 'react'
 import {
-  Animated,
-  Platform,
-  StyleSheet,
-  View,
-  StyleProp,
-  ViewStyle,
-  FlatList,
-  TextStyle,
-  KeyboardAvoidingView,
-  LayoutChangeEvent,
-  TextInput,
-} from 'react-native'
-import {
-  ActionSheetProvider,
   ActionSheetOptions,
+  ActionSheetProvider,
+  ActionSheetProviderRef,
 } from '@expo/react-native-action-sheet'
-import uuid from 'uuid'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
-
-import * as utils from './utils'
+import PropTypes from 'prop-types'
+import React, { createRef, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  Animated,
+  FlatList,
+  KeyboardAvoidingView,
+  LayoutChangeEvent,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native'
+import { LightboxProps } from 'react-native-lightbox-v2'
+import uuid from 'uuid'
 import { Actions, ActionsProps } from './Actions'
 import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
-import { SystemMessage, SystemMessageProps } from './SystemMessage'
-import { MessageImage, MessageImageProps } from './MessageImage'
-import { MessageText, MessageTextProps } from './MessageText'
 import { Composer, ComposerProps } from './Composer'
+import { MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TEST_ID } from './Constant'
 import { Day, DayProps } from './Day'
+import GiftedAvatar from './GiftedAvatar'
+import { GiftedChatContext } from './GiftedChatContext'
 import { InputToolbar, InputToolbarProps } from './InputToolbar'
 import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
 import Message from './Message'
 import MessageContainer from './MessageContainer'
-import { Send, SendProps } from './Send'
-import { GiftedChatContext } from './GiftedChatContext'
-import { Time, TimeProps } from './Time'
-import { QuickRepliesProps } from './QuickReplies'
-import GiftedAvatar from './GiftedAvatar'
-
-import {
-  MIN_COMPOSER_HEIGHT,
-  MAX_COMPOSER_HEIGHT,
-  DEFAULT_PLACEHOLDER,
-  TIME_FORMAT,
-  DATE_FORMAT,
-  TEST_ID,
-} from './Constant'
+import { MessageImage, MessageImageProps } from './MessageImage'
+import { MessageText, MessageTextProps } from './MessageText'
 import {
   IMessage,
-  User,
-  Reply,
   LeftRightStyle,
-  MessageVideoProps,
   MessageAudioProps,
+  MessageVideoProps,
+  Reply,
+  User,
 } from './Models'
-import { LightboxProps } from 'react-native-lightbox-v2'
-import { ActionSheetProviderRef } from '@expo/react-native-action-sheet'
+import { QuickRepliesProps } from './QuickReplies'
+import { Send, SendProps } from './Send'
+import { SystemMessage, SystemMessageProps } from './SystemMessage'
+import { Time, TimeProps } from './Time'
+import * as utils from './utils'
 
 dayjs.extend(localizedFormat)
 
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
+  /* Message container ref */
+  messageContainerRef?: React.RefObject<FlatList<IMessage>>
+  /* text input ref */
+  textInputRef?: React.RefObject<TextInput>
   /* Messages to display */
   messages?: TMessage[]
   /* Typing Indicator state */
@@ -233,62 +228,25 @@ export interface GiftedChatState<TMessage extends IMessage = IMessage> {
   messages?: TMessage[]
 }
 
-function GiftedChat(props: GiftedChatProps) {
+function GiftedChat<TMessage extends IMessage = IMessage>(
+  props: GiftedChatProps,
+) {
   const {
     messages = [],
-    messagesContainerStyle = undefined,
     text = undefined,
     initialText = '',
     isTyping,
-    placeholder = DEFAULT_PLACEHOLDER,
-    disableComposer = false,
     messageIdGenerator = () => uuid.v4(),
     user = {},
     onSend = () => {},
-    locale = null,
-    timeFormat = TIME_FORMAT,
-    dateFormat = DATE_FORMAT,
-    loadEarlier = false,
-    onLoadEarlier = () => {},
-    isLoadingEarlier = false,
+    locale = 'en',
     renderLoading = null,
-    renderLoadEarlier = null,
-    renderAvatar = undefined,
-    showUserAvatar = false,
     actionSheet = null,
-    onPressAvatar = null,
-    onLongPressAvatar = null,
-    renderUsernameOnMessage = false,
-    renderAvatarOnTop = false,
-    renderBubble = null,
-    renderSystemMessage = null,
-    onLongPress = null,
-    renderUserName = null,
-    renderMessage = null,
-    renderMessageText = null,
-    renderMessageImage = null,
-    renderMessageVideo = null,
-    renderMessageAudio = null,
-    imageProps = {},
-    videoProps = {},
-    audioProps = {},
-    lightboxProps = {},
     textInputProps = {},
-    listViewProps = {},
-    renderCustomView = null,
-    isCustomViewBottom = false,
-    renderDay = null,
-    renderTime = null,
-    renderFooter = null,
-    renderChatEmpty = null,
     renderChatFooter = null,
     renderInputToolbar = null,
-    renderComposer = null,
-    renderActions = null,
-    renderSend = null,
     renderAccessory = null,
     isKeyboardInternallyHandled = true,
-    onPressActionButton = null,
     bottomOffset = null,
     minInputToolbarHeight = 44,
     keyboardShouldPersistTaps = Platform.select({
@@ -300,21 +258,20 @@ function GiftedChat(props: GiftedChatProps) {
     maxInputLength = null,
     forceGetKeyboardHeight = false,
     inverted = true,
-    extraData = null,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
+    messageContainerRef = createRef<FlatList<IMessage>>(),
+    textInputRef = createRef<TextInput>(),
   } = props
 
-  const _isMounted = useRef(false)
-  const _keyboardHeight = useRef(0)
-  const _bottomOffset = useRef(0)
-  const _maxHeight = useRef<number | undefined>(undefined)
-  const _isFirstLayout = useRef(true)
-  let _locale: string = 'en'
-  let _actionSheetRef = useRef<ActionSheetProviderRef>()
-  let _messageContainerRef = useRef<FlatList<IMessage> | null>()
+  const isMountedRef = useRef(false)
+  const keyboardHeightRef = useRef(0)
+  const bottomOffsetRef = useRef(0)
+  const maxHeightRef = useRef<number | undefined>(undefined)
+  const isFirstLayoutRef = useRef(true)
+  const actionSheetRef = useRef<ActionSheetProviderRef>(null)
+
   let _isTextInputWasFocused: boolean = false
-  let textInputRef = useRef<TextInput>()
 
   const [state, setState] = useState<GiftedChatState>({
     isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -326,66 +283,30 @@ function GiftedChat(props: GiftedChatProps) {
   })
 
   useEffect(() => {
-    setIsMounted(true)
-    initLocale()
-    setMessages(messages)
-    setTextFromProp(text)
+    isMountedRef.current = true
+
+    setState({
+      ...state,
+      messages,
+      // Text prop takes precedence over state.
+      ...(text !== undefined && text !== state.text && { text: text }),
+    })
 
     if (inverted === false && messages?.length) {
       setTimeout(() => scrollToBottom(false), 200)
     }
 
     return () => {
-      setIsMounted(false)
+      isMountedRef.current = false
     }
   }, [messages, text])
-
-  const initLocale = () => {
-    if (locale === null) {
-      setLocale('en')
-    } else {
-      setLocale(locale || 'en')
-    }
-  }
-
-  const setLocale = (locale: string) => {
-    _locale = locale
-  }
-
-  const getLocale = () => _locale
-
-  const setTextFromProp = (textProp?: string) => {
-    // Text prop takes precedence over state.
-    if (textProp !== undefined && textProp !== state.text) {
-      setState({ ...state, text: textProp })
-    }
-  }
 
   const getTextFromProp = (fallback: string) => {
     if (text === undefined) {
       return fallback
     }
+
     return text
-  }
-
-  const setMessages = (messages: TMessage[]) => {
-    setState({ ...state, messages })
-  }
-
-  const getMessages = () => {
-    return state.messages
-  }
-
-  const setMaxHeight = (height: number) => {
-    _maxHeight.current = height
-  }
-
-  const getMaxHeight = () => {
-    return _maxHeight.current
-  }
-
-  const setKeyboardHeight = (height: number) => {
-    _keyboardHeight.current = height
   }
 
   const getKeyboardHeight = () => {
@@ -395,50 +316,16 @@ function GiftedChat(props: GiftedChatProps) {
       // So for calculate the messages container height ignore keyboard height.
       return 0
     }
-    return _keyboardHeight.current
-  }
 
-  const setBottomOffset = (value: number) => {
-    _bottomOffset.current = value
-  }
-
-  const getBottomOffset = () => {
-    return _bottomOffset.current
-  }
-
-  const setIsFirstLayout = (value: boolean) => {
-    _isFirstLayout.current = value
-  }
-
-  const getIsFirstLayout = () => {
-    return _isFirstLayout.current
-  }
-
-  const setIsTypingDisabled = (value: boolean) => {
-    setState({
-      ...state,
-      typingDisabled: value,
-    })
-  }
-
-  const getIsTypingDisabled = () => {
-    return state.typingDisabled
-  }
-
-  const setIsMounted = (value: boolean) => {
-    _isMounted.current = value
-  }
-
-  const getIsMounted = () => {
-    return _isMounted.current
-  }
-
-  const getMinInputToolbarHeight = () => {
-    return renderAccessory ? minInputToolbarHeight! * 2 : minInputToolbarHeight
+    return keyboardHeightRef.current
   }
 
   const calculateInputToolbarHeight = (composerHeight: number) => {
-    return composerHeight + (getMinInputToolbarHeight()! - minComposerHeight!)
+    const getMinInputToolbarHeight = renderAccessory
+      ? minInputToolbarHeight! * 2
+      : minInputToolbarHeight
+
+    return composerHeight + (getMinInputToolbarHeight! - minComposerHeight!)
   }
 
   /**
@@ -447,7 +334,7 @@ function GiftedChat(props: GiftedChatProps) {
   const getBasicMessagesContainerHeight = (
     composerHeight = state.composerHeight,
   ) => {
-    return getMaxHeight()! - calculateInputToolbarHeight(composerHeight!)
+    return maxHeightRef.current! - calculateInputToolbarHeight(composerHeight!)
   }
 
   /**
@@ -459,7 +346,7 @@ function GiftedChat(props: GiftedChatProps) {
     return (
       getBasicMessagesContainerHeight(composerHeight) -
       getKeyboardHeight() +
-      getBottomOffset()
+      bottomOffsetRef.current
     )
   }
 
@@ -496,14 +383,17 @@ function GiftedChat(props: GiftedChatProps) {
     handleTextInputFocusWhenKeyboardShow()
 
     if (isKeyboardInternallyHandled) {
-      setIsTypingDisabled(true)
-      setKeyboardHeight(
-        e.endCoordinates ? e.endCoordinates.height : e.end.height,
-      )
-      setBottomOffset(bottomOffset != null ? bottomOffset : 1)
+      keyboardHeightRef.current = e.endCoordinates
+        ? e.endCoordinates.height
+        : e.end.height
+
+      bottomOffsetRef.current = bottomOffset != null ? bottomOffset : 1
+
       const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard()
+
       setState({
         ...state,
+        typingDisabled: true,
         messagesContainerHeight: newMessagesContainerHeight,
       })
     }
@@ -513,12 +403,14 @@ function GiftedChat(props: GiftedChatProps) {
     handleTextInputFocusWhenKeyboardHide()
 
     if (isKeyboardInternallyHandled) {
-      setIsTypingDisabled(true)
-      setKeyboardHeight(0)
-      setBottomOffset(0)
+      keyboardHeightRef.current = 0
+      bottomOffsetRef.current = 0
+
       const newMessagesContainerHeight = getBasicMessagesContainerHeight()
+
       setState({
         ...state,
+        typingDisabled: true,
         messagesContainerHeight: newMessagesContainerHeight,
       })
     }
@@ -528,23 +420,30 @@ function GiftedChat(props: GiftedChatProps) {
     if (Platform.OS === 'android') {
       onKeyboardWillShow(e)
     }
-    setIsTypingDisabled(false)
+
+    setState({
+      ...state,
+      typingDisabled: false,
+    })
   }
 
   const onKeyboardDidHide = (e: any) => {
     if (Platform.OS === 'android') {
       onKeyboardWillHide(e)
     }
-    setIsTypingDisabled(false)
+
+    setState({
+      ...state,
+      typingDisabled: false,
+    })
   }
 
   const scrollToBottom = (animated = true) => {
-    if (_messageContainerRef && _messageContainerRef.current) {
-      const { inverted } = props
+    if (messageContainerRef?.current) {
       if (!inverted) {
-        _messageContainerRef.current.scrollToEnd({ animated })
+        messageContainerRef.current.scrollToEnd({ animated })
       } else {
-        _messageContainerRef.current.scrollToOffset({
+        messageContainerRef.current.scrollToOffset({
           offset: 0,
           animated,
         })
@@ -554,16 +453,17 @@ function GiftedChat(props: GiftedChatProps) {
 
   const renderMessages = () => {
     const { messagesContainerStyle, ...messagesContainerProps } = props
+
     const fragment = (
       <View
         style={[
-          state.messagesContainerHeight && {
+          typeof state.messagesContainerHeight === 'number' && {
             height: state.messagesContainerHeight,
           },
           messagesContainerStyle,
         ]}
       >
-        <MessageContainer<TMessage>
+        <MessageContainer
           {...messagesContainerProps}
           invertibleScrollViewProps={{
             inverted: inverted,
@@ -573,8 +473,8 @@ function GiftedChat(props: GiftedChatProps) {
             onKeyboardDidShow: onKeyboardDidShow,
             onKeyboardDidHide: onKeyboardDidHide,
           }}
-          messages={getMessages()}
-          forwardRef={_messageContainerRef}
+          messages={state.messages}
+          forwardRef={messageContainerRef}
           isTyping={isTyping}
         />
         {_renderChatFooter()}
@@ -595,6 +495,7 @@ function GiftedChat(props: GiftedChatProps) {
     if (!Array.isArray(messages)) {
       messages = [messages]
     }
+
     const newMessages: TMessage[] = messages.map(message => {
       return {
         ...message,
@@ -605,17 +506,25 @@ function GiftedChat(props: GiftedChatProps) {
     })
 
     if (shouldResetInputToolbar === true) {
-      setIsTypingDisabled(true)
+      setState({
+        ...state,
+        typingDisabled: true,
+      })
+
       resetInputToolbar()
     }
+
     if (onSend) {
       onSend(newMessages)
     }
 
     // if (shouldResetInputToolbar === true) {
     //   setTimeout(() => {
-    //     if (getIsMounted() === true) {
-    //       setIsTypingDisabled(false)
+    //     if (isMountedRef.current === true) {
+    //       setState({
+    //         ...state,
+    //         typingDisabled: false,
+    //       })
     //     }
     //   }, 100)
     // }
@@ -625,23 +534,19 @@ function GiftedChat(props: GiftedChatProps) {
     if (textInputRef.current) {
       textInputRef.current.clear()
     }
+
     notifyInputTextReset()
-    const newComposerHeight = minComposerHeight
+
     const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
-      newComposerHeight,
+      minComposerHeight,
     )
+
     setState({
       ...state,
       text: getTextFromProp(''),
-      composerHeight: newComposerHeight,
+      composerHeight: minComposerHeight,
       messagesContainerHeight: newMessagesContainerHeight,
     })
-  }
-
-  const focusTextInput = () => {
-    if (textInputRef.current) {
-      textInputRef.current.focus()
-    }
   }
 
   const onInputSizeChanged = (size: { height: number }) => {
@@ -649,9 +554,11 @@ function GiftedChat(props: GiftedChatProps) {
       minComposerHeight!,
       Math.min(maxComposerHeight!, size.height),
     )
+
     const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
       newComposerHeight,
     )
+
     setState({
       ...state,
       composerHeight: newComposerHeight,
@@ -660,12 +567,14 @@ function GiftedChat(props: GiftedChatProps) {
   }
 
   const _onInputTextChanged = (_text: string) => {
-    if (getIsTypingDisabled()) {
+    if (state.typingDisabled) {
       return
     }
+
     if (onInputTextChanged) {
       onInputTextChanged(_text)
     }
+
     // Only set state if it's not being overridden by a prop.
     if (text === undefined) {
       setState({ ...state, text: _text })
@@ -680,20 +589,24 @@ function GiftedChat(props: GiftedChatProps) {
 
   const onInitialLayoutViewLayout = (e: any) => {
     const { layout } = e.nativeEvent
+
     if (layout.height <= 0) {
       return
     }
+
     notifyInputTextReset()
-    setMaxHeight(layout.height)
-    const newComposerHeight = minComposerHeight
+
+    maxHeightRef.current = layout.height
+
     const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
-      newComposerHeight,
+      minComposerHeight,
     )
+
     setState({
       ...state,
       isInitialized: true,
       text: getTextFromProp(initialText),
-      composerHeight: newComposerHeight,
+      composerHeight: minComposerHeight,
       messagesContainerHeight: newMessagesContainerHeight,
     })
   }
@@ -701,18 +614,24 @@ function GiftedChat(props: GiftedChatProps) {
   const onMainViewLayout = (e: LayoutChangeEvent) => {
     // TODO: fix an issue when keyboard is dismissing during the initialization
     const { layout } = e.nativeEvent
-    if (getMaxHeight() !== layout.height || getIsFirstLayout() === true) {
-      setMaxHeight(layout.height)
+
+    if (
+      maxHeightRef.current !== layout.height ||
+      isFirstLayoutRef.current === true
+    ) {
+      maxHeightRef.current = layout.height
+
       setState({
         ...state,
         messagesContainerHeight:
-          _keyboardHeight.current > 0
+          keyboardHeightRef.current > 0
             ? getMessagesContainerHeightWithKeyboard()
             : getBasicMessagesContainerHeight(),
       })
     }
-    if (getIsFirstLayout() === true) {
-      setIsFirstLayout(false)
+
+    if (isFirstLayoutRef.current === true) {
+      isFirstLayoutRef.current = false
     }
   }
 
@@ -726,13 +645,15 @@ function GiftedChat(props: GiftedChatProps) {
       onTextChanged: _onInputTextChanged,
       textInputProps: {
         ...textInputProps,
-        ref: (textInput: any) => (textInputRef = textInput),
-        maxLength: getIsTypingDisabled() ? 0 : maxInputLength,
+        ref: textInputRef,
+        maxLength: state.typingDisabled ? 0 : maxInputLength,
       },
     }
+
     if (renderInputToolbar) {
       return renderInputToolbar(inputToolbarProps)
     }
+
     return <InputToolbar {...inputToolbarProps} />
   }
 
@@ -740,6 +661,7 @@ function GiftedChat(props: GiftedChatProps) {
     if (renderChatFooter) {
       return renderChatFooter()
     }
+
     return null
   }
 
@@ -747,20 +669,23 @@ function GiftedChat(props: GiftedChatProps) {
     if (renderLoading) {
       return renderLoading()
     }
+
     return null
   }
 
+  const contextValues = useMemo(
+    () => ({
+      actionSheet: actionSheet || (() => actionSheetRef.current?.getContext()!),
+      getLocale: () => locale,
+    }),
+    [actionSheet, locale],
+  )
+
   if (state.isInitialized === true) {
-    const contextValues = useMemo(() => ({
-      actionSheet: actionSheet || (() => _actionSheetRef.current?.getContext()!),
-      getLocale: getLocale,
-    }), [actionSheet, locale])
     return (
-      <GiftedChatContext.Provider
-        value={contextValues}
-      >
+      <GiftedChatContext.Provider value={contextValues}>
         <View testID={TEST_ID.WRAPPER} style={styles.wrapper}>
-          <ActionSheetProvider ref={_actionSheetRef}>
+          <ActionSheetProvider ref={actionSheetRef}>
             <View style={styles.container} onLayout={onMainViewLayout}>
               {renderMessages()}
               {_renderInputToolbar()}
@@ -770,6 +695,7 @@ function GiftedChat(props: GiftedChatProps) {
       </GiftedChatContext.Provider>
     )
   }
+
   return (
     <View
       testID={TEST_ID.LOADING_WRAPPER}
@@ -881,7 +807,6 @@ const styles = StyleSheet.create({
 })
 
 export * from './Models'
-
 export {
   GiftedChat,
   Actions,

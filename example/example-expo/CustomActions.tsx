@@ -1,21 +1,41 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useCallback } from 'react'
 import {
+  StyleProp,
   StyleSheet,
   Text,
+  TextStyle,
   TouchableOpacity,
   View,
   ViewPropTypes,
+  ViewStyle,
 } from 'react-native'
 
+import { useActionSheet } from '@expo/react-native-action-sheet'
 import {
   getLocationAsync,
   pickImageAsync,
   takePictureAsync,
 } from './mediaUtils'
 
-export default class CustomActions extends React.Component {
-  onActionsPress = () => {
+interface Props {
+  renderIcon?: () => React.ReactNode
+  wrapperStyle?: StyleProp<ViewStyle>
+  containerStyle?: StyleProp<ViewStyle>
+  iconTextStyle?: StyleProp<TextStyle>
+  onSend: (messages: any) => void
+}
+
+const CustomActions = ({
+  renderIcon,
+  iconTextStyle,
+  containerStyle,
+  wrapperStyle,
+  onSend,
+}: Props) => {
+  const { showActionSheetWithOptions } = useActionSheet()
+
+  const onActionsPress = useCallback(() => {
     const options = [
       'Choose From Library',
       'Take Picture',
@@ -23,13 +43,12 @@ export default class CustomActions extends React.Component {
       'Cancel',
     ]
     const cancelButtonIndex = options.length - 1
-    this.context.actionSheet().showActionSheetWithOptions(
+    showActionSheetWithOptions(
       {
         options,
         cancelButtonIndex,
       },
       async buttonIndex => {
-        const { onSend } = this.props
         switch (buttonIndex) {
           case 0:
             pickImageAsync(onSend)
@@ -43,30 +62,30 @@ export default class CustomActions extends React.Component {
         }
       },
     )
-  }
+  }, [showActionSheetWithOptions])
 
-  renderIcon = () => {
-    if (this.props.renderIcon) {
-      return this.props.renderIcon()
+  const renderIconComponent = useCallback(() => {
+    if (renderIcon) {
+      return renderIcon()
     }
     return (
-      <View style={[styles.wrapper, this.props.wrapperStyle]}>
-        <Text style={[styles.iconText, this.props.iconTextStyle]}>+</Text>
+      <View style={[styles.wrapper, wrapperStyle]}>
+        <Text style={[styles.iconText, iconTextStyle]}>+</Text>
       </View>
     )
-  }
+  }, [])
 
-  render() {
-    return (
-      <TouchableOpacity
-        style={[styles.container, this.props.containerStyle]}
-        onPress={this.onActionsPress}
-      >
-        {this.renderIcon()}
-      </TouchableOpacity>
-    )
-  }
+  return (
+    <TouchableOpacity
+      style={[styles.container, containerStyle]}
+      onPress={onActionsPress}
+    >
+      <>{renderIconComponent()}</>
+    </TouchableOpacity>
+  )
 }
+
+export default CustomActions
 
 const styles = StyleSheet.create({
   container: {

@@ -8,18 +8,13 @@ on:
 jobs:
   checks:
     runs-on: ubuntu-latest
-    permissions:
-      packages: read
-      contents: read
 
     strategy:
       matrix:
-        node-version: [16]
+        node-version: [16, 18]
 
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -32,4 +27,4 @@ jobs:
 
       - name: Lint
         run: |
-          yarn prepublishOnly
+          yarn build

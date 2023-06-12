@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-chat",
-  "version": "2.0.1",
+  "version": "2.3.0",
   "description": "The most complete chat UI for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -78,14 +78,8 @@
     "uuid": "3.4.0"
   },
   "peerDependencies": {
-    "@expo/react-native-action-sheet": "*",
-    "dayjs": "*",
     "react": "*",
-    "react-native": "*",
-    "react-native-communications": "*",
-    "react-native-lightbox": "*",
-    "react-native-parsed-text": "*",
-    "react-native-typing-animation": "*"
+    "react-native": "*"
   },
   "husky": {
     "hooks": {

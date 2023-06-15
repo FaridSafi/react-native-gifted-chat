@@ -77,7 +77,7 @@
     A complete app engine featuring GiftedChat
   </p>
   <p align="center">
-    <a href="https://github.com/dappros/ethora" target="_blank">Check out our GitHub</a>
+    <a href="https://bit.ly/ethorachat" target="_blank">Check out our GitHub</a>
   </p>
 </p>
 

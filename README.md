@@ -67,6 +67,20 @@
   </p>
 </p>
 
+<p align="center">
+  <br/>
+  <a href="https://www.ethora.com" target="_blank">
+    <img src="https://www.dappros.com/wp-content/uploads/2023/06/Ethora-HLogo-V2.png" width="300px">
+  </a>
+  <br>
+  <p align="center">
+    A complete app engine featuring GiftedChat
+  </p>
+  <p align="center">
+    <a href="https://github.com/dappros/ethora" target="_blank">Check out our GitHub</a>
+  </p>
+</p>
+
 ## The future of GiftedChat 🎉
 
 Please give us your advice: [Related PR](https://github.com/FaridSafi/react-native-gifted-chat/pull/1775)

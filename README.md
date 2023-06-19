@@ -200,7 +200,7 @@ See [`App.tsx`](https://github.com/FaridSafi/react-native-gifted-chat/blob/maste
 
 ## "Slack" example
 
-See the files in [`example-slack-message`](example-slack-message) for an example of how to override the default UI to make something that looks more like Slack -- with usernames displayed and all messages on the left.
+See the files in [`example/example-slack-message`](example/example-slack-message) for an example of how to override the default UI to make something that looks more like Slack -- with usernames displayed and all messages on the left.
 
 ## Message object
 

@@ -55,7 +55,10 @@ export function Day<TMessage extends IMessage = IMessage>({
 }: DayProps<TMessage>) {
   const { getLocale } = useChatContext()
 
-  if (currentMessage == null || isSameDay(currentMessage, previousMessage)) {
+  if (
+    currentMessage === undefined ||
+    isSameDay(currentMessage, previousMessage)
+  ) {
     return null
   }
 

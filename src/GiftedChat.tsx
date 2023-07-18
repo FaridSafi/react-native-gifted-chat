@@ -229,7 +229,7 @@ export interface GiftedChatState<TMessage extends IMessage = IMessage> {
 }
 
 function GiftedChat<TMessage extends IMessage = IMessage>(
-  props: GiftedChatProps,
+  props: GiftedChatProps<TMessage>,
 ) {
   const {
     messages = [],

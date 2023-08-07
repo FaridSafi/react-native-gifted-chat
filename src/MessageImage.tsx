@@ -62,7 +62,7 @@ export function MessageImage<TMessage extends IMessage = IMessage>({
         <Image
           {...imageProps}
           style={[styles.image, imageStyle]}
-          source={{ uri: currentMessage.image, ...imageSourceProps }}
+          source={{ ...imageSourceProps, uri: currentMessage.image }}
         />
       </Lightbox>
     </View>

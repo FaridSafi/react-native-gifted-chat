@@ -8,6 +8,7 @@ import {
   ViewStyle,
   StyleProp,
   ImageStyle,
+  ImageURISource,
 } from 'react-native'
 // TODO: support web
 import Lightbox, { LightboxProps } from 'react-native-lightbox-v2'
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
 export interface MessageImageProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   containerStyle?: StyleProp<ViewStyle>
+  imageSourceProps?: Partial<ImageURISource>
   imageStyle?: StyleProp<ImageStyle>
   imageProps?: Partial<ImageProps>
   lightboxProps?: LightboxProps
@@ -41,6 +43,7 @@ export function MessageImage<TMessage extends IMessage = IMessage>({
   containerStyle,
   lightboxProps = {},
   imageProps = {},
+  imageSourceProps = {},
   imageStyle,
   currentMessage,
 }: MessageImageProps<TMessage>) {
@@ -59,7 +62,7 @@ export function MessageImage<TMessage extends IMessage = IMessage>({
         <Image
           {...imageProps}
           style={[styles.image, imageStyle]}
-          source={{ uri: currentMessage.image }}
+          source={{ ...imageSourceProps, uri: currentMessage.image }}
         />
       </Lightbox>
     </View>
@@ -69,6 +72,7 @@ export function MessageImage<TMessage extends IMessage = IMessage>({
 MessageImage.propTypes = {
   currentMessage: PropTypes.object,
   containerStyle: StylePropType,
+  imageSourceProps: PropTypes.object,
   imageStyle: StylePropType,
   imageProps: PropTypes.object,
   lightboxProps: PropTypes.object,

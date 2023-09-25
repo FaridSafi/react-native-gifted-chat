@@ -1,12 +1,12 @@
 {
-  "name": "react-native-gifted-chat",
+  "name": "react-native-gifted-chat-forked",
   "version": "2.4.0",
   "description": "The most complete chat UI for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
+    "url": "git+https://github.com/allisonee/react-native-gifted-chat-forked.git"
   },
   "keywords": [
     "android",

@@ -601,7 +601,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
       minComposerHeight,
     )
 
-    setIsInitialized(true);
+    setIsInitialized(true)
     setState({
       ...state,
       text: getTextFromProp(initialText),

@@ -272,7 +272,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 
   let _isTextInputWasFocused: boolean = false
 
-  const [isInitialized, setIsInitialized] = useState(false);  // initialization will calculate maxHeight before rendering the chat
+  const [isInitialized, setIsInitialized] = useState(false) // initialization will calculate maxHeight before rendering the chat
   const [state, setState] = useState<GiftedChatState>({
     composerHeight: minComposerHeight,
     messagesContainerHeight: undefined,

@@ -6,7 +6,14 @@ import {
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import PropTypes from 'prop-types'
-import React, { createRef, useEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  createRef,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+} from 'react'
 import {
   Animated,
   FlatList,
@@ -220,6 +227,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
 }
 
 export interface GiftedChatState<TMessage extends IMessage = IMessage> {
+  isInitialized: boolean
   composerHeight?: number
   messagesContainerHeight?: number | Animated.Value
   typingDisabled: boolean
@@ -272,24 +280,20 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 
   let _isTextInputWasFocused: boolean = false
 
-  const [isInitialized, setIsInitialized] = useState(false) // initialization will calculate maxHeight before rendering the chat
-  const [state, setState] = useState<GiftedChatState>({
-    composerHeight: minComposerHeight,
-    messagesContainerHeight: undefined,
-    typingDisabled: false,
-    text: undefined,
-    messages: undefined,
-  })
+  const [isInitialized, setIsInitialized] = useState(false)
+  const [composerHeight, setComposerHeight] = useState(minComposerHeight)
+  const [messagesContainerHeight, setMessagesContainerHeight] = useState<
+    number
+  >()
+  const [typingDisabled, setTypingDisabled] = useState(false)
+  const [textState, setTextState] = useState<string | undefined>(text)
 
   useEffect(() => {
     isMountedRef.current = true
 
-    setState({
-      ...state,
-      messages,
-      // Text prop takes precedence over state.
-      ...(text !== undefined && text !== state.text && { text: text }),
-    })
+    if (text !== undefined && text !== textState) {
+      setTextState(text)
+    }
 
     if (inverted === false && messages?.length) {
       setTimeout(() => scrollToBottom(false), 200)
@@ -298,17 +302,20 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     return () => {
       isMountedRef.current = false
     }
-  }, [messages, text])
+  }, [messages?.length, text])
 
-  const getTextFromProp = (fallback: string) => {
-    if (text === undefined) {
-      return fallback
-    }
+  const getTextFromProp = useCallback(
+    (fallback: string) => {
+      if (text === undefined) {
+        return fallback
+      }
 
-    return text
-  }
+      return text
+    },
+    [text],
+  )
 
-  const getKeyboardHeight = () => {
+  const getKeyboardHeight = useCallback(() => {
     if (Platform.OS === 'android' && !forceGetKeyboardHeight) {
       // For android: on-screen keyboard resized main container and has own height.
       // @see https://developer.android.com/training/keyboard-input/visibility.html
@@ -317,37 +324,45 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     }
 
     return keyboardHeightRef.current
-  }
+  }, [forceGetKeyboardHeight])
 
-  const calculateInputToolbarHeight = (composerHeight: number) => {
-    const getMinInputToolbarHeight = renderAccessory
-      ? minInputToolbarHeight! * 2
-      : minInputToolbarHeight
+  const calculateInputToolbarHeight = useCallback(
+    (composerHeight: number) => {
+      const getMinInputToolbarHeight = renderAccessory
+        ? minInputToolbarHeight! * 2
+        : minInputToolbarHeight
 
-    return composerHeight + (getMinInputToolbarHeight! - minComposerHeight!)
-  }
+      return composerHeight + (getMinInputToolbarHeight! - minComposerHeight!)
+    },
+    [minInputToolbarHeight, minComposerHeight],
+  )
 
   /**
    * Returns the height, based on current window size, without taking the keyboard into account.
    */
-  const getBasicMessagesContainerHeight = (
-    composerHeight = state.composerHeight,
-  ) => {
-    return maxHeightRef.current! - calculateInputToolbarHeight(composerHeight!)
-  }
+  const getBasicMessagesContainerHeight = useCallback(
+    (composerHeightParameter = composerHeight) => {
+      return (
+        maxHeightRef.current! -
+        calculateInputToolbarHeight(composerHeightParameter!)
+      )
+    },
+    [composerHeight],
+  )
 
   /**
    * Returns the height, based on current window size, taking the keyboard into account.
    */
-  const getMessagesContainerHeightWithKeyboard = (
-    composerHeight = state.composerHeight,
-  ) => {
-    return (
-      getBasicMessagesContainerHeight(composerHeight) -
-      getKeyboardHeight() +
-      bottomOffsetRef.current
-    )
-  }
+  const getMessagesContainerHeightWithKeyboard = useCallback(
+    (composerHeightParameter = composerHeight) => {
+      return (
+        getBasicMessagesContainerHeight(composerHeightParameter) -
+        getKeyboardHeight() +
+        bottomOffsetRef.current
+      )
+    },
+    [composerHeight],
+  )
 
   /**
    * Store text input focus status when keyboard hide to retrieve
@@ -355,17 +370,17 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
    * `onKeyboardWillHide` may be called twice in sequence so we
    * make a guard condition (eg. showing image picker)
    */
-  const handleTextInputFocusWhenKeyboardHide = () => {
+  const handleTextInputFocusWhenKeyboardHide = useCallback(() => {
     if (!_isTextInputWasFocused) {
       _isTextInputWasFocused = textInputRef.current?.isFocused() || false
     }
-  }
+  }, [_isTextInputWasFocused, textInputRef])
 
   /**
    * Refocus the text input only if it was focused before showing keyboard.
    * This is needed in some cases (eg. showing image picker).
    */
-  const handleTextInputFocusWhenKeyboardShow = () => {
+  const handleTextInputFocusWhenKeyboardShow = useCallback(() => {
     if (
       textInputRef.current &&
       _isTextInputWasFocused &&
@@ -376,79 +391,93 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 
     // Reset the indicator since the keyboard is shown
     _isTextInputWasFocused = false
-  }
+  }, [_isTextInputWasFocused, textInputRef])
 
-  const onKeyboardWillShow = (e: any) => {
-    handleTextInputFocusWhenKeyboardShow()
+  const onKeyboardWillShow = useCallback(
+    (e: any) => {
+      handleTextInputFocusWhenKeyboardShow()
 
-    if (isKeyboardInternallyHandled) {
-      keyboardHeightRef.current = e.endCoordinates
-        ? e.endCoordinates.height
-        : e.end.height
+      if (isKeyboardInternallyHandled) {
+        keyboardHeightRef.current = e.endCoordinates
+          ? e.endCoordinates.height
+          : e.end.height
 
-      bottomOffsetRef.current = bottomOffset != null ? bottomOffset : 1
+        bottomOffsetRef.current = bottomOffset != null ? bottomOffset : 1
 
-      const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard()
-
-      setState({
-        ...state,
-        typingDisabled: true,
-        messagesContainerHeight: newMessagesContainerHeight,
-      })
-    }
-  }
-
-  const onKeyboardWillHide = (_e: any) => {
-    handleTextInputFocusWhenKeyboardHide()
-
-    if (isKeyboardInternallyHandled) {
-      keyboardHeightRef.current = 0
-      bottomOffsetRef.current = 0
-
-      const newMessagesContainerHeight = getBasicMessagesContainerHeight()
-
-      setState({
-        ...state,
-        typingDisabled: true,
-        messagesContainerHeight: newMessagesContainerHeight,
-      })
-    }
-  }
-
-  const onKeyboardDidShow = (e: any) => {
-    if (Platform.OS === 'android') {
-      onKeyboardWillShow(e)
-    }
-
-    setState({
-      ...state,
-      typingDisabled: false,
-    })
-  }
-
-  const onKeyboardDidHide = (e: any) => {
-    if (Platform.OS === 'android') {
-      onKeyboardWillHide(e)
-    }
-
-    setState({
-      ...state,
-      typingDisabled: false,
-    })
-  }
-
-  const scrollToBottom = (animated = true) => {
-    if (messageContainerRef?.current) {
-      if (!inverted) {
-        messageContainerRef.current.scrollToEnd({ animated })
-      } else {
-        messageContainerRef.current.scrollToOffset({
-          offset: 0,
-          animated,
-        })
+        const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard()
+        setTypingDisabled(true)
+        setMessagesContainerHeight(newMessagesContainerHeight)
       }
-    }
-  }
+    },
+    [
+      handleTextInputFocusWhenKeyboardShow,
+      isKeyboardInternallyHandled,
+      keyboardHeightRef,
+      bottomOffsetRef,
+      bottomOffset,
+    ],
+  )
+
+  const onKeyboardWillHide = useCallback(
+    (_e: any) => {
+      handleTextInputFocusWhenKeyboardHide()
+
+      if (isKeyboardInternallyHandled) {
+        keyboardHeightRef.current = 0
+        bottomOffsetRef.current = 0
+
+        const newMessagesContainerHeight = getBasicMessagesContainerHeight()
+
+        setTypingDisabled(true)
+        setMessagesContainerHeight(newMessagesContainerHeight)
+      }
+    },
+    [
+      isKeyboardInternallyHandled,
+      keyboardHeightRef,
+      bottomOffsetRef,
+      getBasicMessagesContainerHeight,
+      handleTextInputFocusWhenKeyboardHide,
+    ],
+  )
+
+  const onKeyboardDidShow = useCallback(
+    (e: any) => {
+      if (Platform.OS === 'android') {
+        onKeyboardWillShow(e)
+      }
+
+      setTypingDisabled(false)
+    },
+    [onKeyboardWillShow],
+  )
+
+  const onKeyboardDidHide = useCallback(
+    (e: any) => {
+      if (Platform.OS === 'android') {
+        onKeyboardWillHide(e)
+      }
+
+      setTypingDisabled(false)
+    },
+    [onKeyboardWillHide],
+  )
+
+  const scrollToBottom = useCallback(
+    (animated = true) => {
+      if (messageContainerRef?.current) {
+        if (!inverted) {
+          messageContainerRef.current.scrollToEnd({ animated })
+        } else {
+          messageContainerRef.current.scrollToOffset({
+            offset: 0,
+            animated,
+          })
+        }
+      }
+    },
+    [messageContainerRef, inverted],
+  )
 
   const renderMessages = () => {
     const { messagesContainerStyle, ...messagesContainerProps } = props
@@ -456,8 +485,8 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     const fragment = (
       <View
         style={[
-          typeof state.messagesContainerHeight === 'number' && {
-            height: state.messagesContainerHeight,
+          {
+            height: messagesContainerHeight,
           },
           messagesContainerStyle,
         ]}
@@ -472,7 +501,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
             onKeyboardDidShow: onKeyboardDidShow,
             onKeyboardDidHide: onKeyboardDidHide,
           }}
-          messages={state.messages}
+          messages={messages}
           forwardRef={messageContainerRef}
           isTyping={isTyping}
         />
@@ -487,49 +516,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     )
   }
 
-  const _onSend = (
-    messages: TMessage[] = [],
-    shouldResetInputToolbar = false,
-  ) => {
-    if (!Array.isArray(messages)) {
-      messages = [messages]
-    }
-
-    const newMessages: TMessage[] = messages.map(message => {
-      return {
-        ...message,
-        user: user!,
-        createdAt: new Date(),
-        _id: messageIdGenerator && messageIdGenerator(),
-      }
-    })
-
-    if (shouldResetInputToolbar === true) {
-      setState({
-        ...state,
-        typingDisabled: true,
-      })
-
-      resetInputToolbar()
-    }
-
-    if (onSend) {
-      onSend(newMessages)
-    }
-
-    // if (shouldResetInputToolbar === true) {
-    //   setTimeout(() => {
-    //     if (isMountedRef.current === true) {
-    //       setState({
-    //         ...state,
-    //         typingDisabled: false,
-    //       })
-    //     }
-    //   }, 100)
-    // }
-  }
-
-  const resetInputToolbar = () => {
+  const resetInputToolbar = useCallback(() => {
     if (textInputRef.current) {
       textInputRef.current.clear()
     }
@@ -540,33 +527,63 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
       minComposerHeight,
     )
 
-    setState({
-      ...state,
-      text: getTextFromProp(''),
-      composerHeight: minComposerHeight,
-      messagesContainerHeight: newMessagesContainerHeight,
-    })
-  }
+    setTextState(getTextFromProp(''))
+    setComposerHeight(minComposerHeight)
+    setMessagesContainerHeight(newMessagesContainerHeight)
+  }, [
+    minComposerHeight,
+    getMessagesContainerHeightWithKeyboard,
+    textInputRef,
+    getTextFromProp,
+  ])
 
-  const onInputSizeChanged = (size: { height: number }) => {
-    const newComposerHeight = Math.max(
-      minComposerHeight!,
-      Math.min(maxComposerHeight!, size.height),
-    )
+  const _onSend = useCallback(
+    (messages: TMessage[] = [], shouldResetInputToolbar = false) => {
+      if (!Array.isArray(messages)) {
+        messages = [messages]
+      }
 
-    const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
-      newComposerHeight,
-    )
+      const newMessages: TMessage[] = messages.map(message => {
+        return {
+          ...message,
+          user: user!,
+          createdAt: new Date(),
+          _id: messageIdGenerator && messageIdGenerator(),
+        }
+      })
 
-    setState({
-      ...state,
-      composerHeight: newComposerHeight,
-      messagesContainerHeight: newMessagesContainerHeight,
-    })
-  }
+      if (shouldResetInputToolbar === true) {
+        setTypingDisabled(true)
 
-  const _onInputTextChanged = (_text: string) => {
-    if (state.typingDisabled) {
+        resetInputToolbar()
+      }
+
+      if (onSend) {
+        onSend(newMessages)
+      }
+    },
+    [resetInputToolbar, messageIdGenerator, onSend],
+  )
+
+  const onInputSizeChanged = useCallback(
+    (size: { height: number }) => {
+      const newComposerHeight = Math.max(
+        minComposerHeight!,
+        Math.min(maxComposerHeight!, size.height),
+      )
+
+      const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
+        newComposerHeight,
+      )
+
+      setComposerHeight(newComposerHeight)
+      setMessagesContainerHeight(newMessagesContainerHeight)
+    },
+    [maxComposerHeight, minComposerHeight],
+  )
+
+  const _onInputTextChanged = useCallback((_text: string) => {
+    if (typingDisabled) {
       return
     }
 
@@ -576,76 +593,83 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 
     // Only set state if it's not being overridden by a prop.
     if (text === undefined) {
-      setState({ ...state, text: _text })
+      setTextState(_text)
     }
-  }
+  }, [])
 
-  const notifyInputTextReset = () => {
+  const notifyInputTextReset = useCallback(() => {
     if (onInputTextChanged) {
       onInputTextChanged('')
     }
-  }
+  }, [onInputTextChanged])
 
-  const onInitialLayoutViewLayout = (e: any) => {
-    const { layout } = e.nativeEvent
+  const onInitialLayoutViewLayout = useCallback(
+    (e: any) => {
+      const { layout } = e.nativeEvent
 
-    if (layout.height <= 0) {
-      return
-    }
+      if (layout.height <= 0) {
+        return
+      }
 
-    notifyInputTextReset()
+      notifyInputTextReset()
 
-    maxHeightRef.current = layout.height
-
-    const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
-      minComposerHeight,
-    )
-
-    setIsInitialized(true)
-    setState({
-      ...state,
-      text: getTextFromProp(initialText),
-      composerHeight: minComposerHeight,
-      messagesContainerHeight: newMessagesContainerHeight,
-    })
-  }
-
-  const onMainViewLayout = (e: LayoutChangeEvent) => {
-    // TODO: fix an issue when keyboard is dismissing during the initialization
-    const { layout } = e.nativeEvent
-
-    if (
-      maxHeightRef.current !== layout.height ||
-      isFirstLayoutRef.current === true
-    ) {
       maxHeightRef.current = layout.height
 
-      setState({
-        ...state,
-        messagesContainerHeight:
+      const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard(
+        minComposerHeight,
+      )
+
+      setIsInitialized(true)
+      setTextState(getTextFromProp(initialText))
+      setComposerHeight(minComposerHeight)
+      setMessagesContainerHeight(newMessagesContainerHeight)
+    },
+    [initialText, minComposerHeight, maxHeightRef, notifyInputTextReset],
+  )
+
+  const onMainViewLayout = useCallback(
+    (e: LayoutChangeEvent) => {
+      // TODO: fix an issue when keyboard is dismissing during the initialization
+      const { layout } = e.nativeEvent
+
+      if (
+        maxHeightRef.current !== layout.height ||
+        isFirstLayoutRef.current === true
+      ) {
+        maxHeightRef.current = layout.height
+
+        setMessagesContainerHeight(
           keyboardHeightRef.current > 0
             ? getMessagesContainerHeightWithKeyboard()
             : getBasicMessagesContainerHeight(),
-      })
-    }
+        )
+      }
 
-    if (isFirstLayoutRef.current === true) {
-      isFirstLayoutRef.current = false
-    }
-  }
+      if (isFirstLayoutRef.current === true) {
+        isFirstLayoutRef.current = false
+      }
+    },
+    [
+      maxHeightRef,
+      isFirstLayoutRef,
+      keyboardHeightRef,
+      getMessagesContainerHeightWithKeyboard,
+      getBasicMessagesContainerHeight,
+    ],
+  )
 
   const _renderInputToolbar = () => {
     const inputToolbarProps = {
       ...props,
-      text: getTextFromProp(state.text!),
-      composerHeight: Math.max(minComposerHeight!, state.composerHeight!),
+      text: getTextFromProp(textState!),
+      composerHeight: Math.max(minComposerHeight!, composerHeight!),
       onSend: _onSend,
       onInputSizeChanged: onInputSizeChanged,
       onTextChanged: _onInputTextChanged,
       textInputProps: {
         ...textInputProps,
         ref: textInputRef,
-        maxLength: state.typingDisabled ? 0 : maxInputLength,
+        maxLength: typingDisabled ? 0 : maxInputLength,
       },
     }
 
@@ -656,21 +680,21 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     return <InputToolbar {...inputToolbarProps} />
   }
 
-  const _renderChatFooter = () => {
+  const _renderChatFooter = useCallback(() => {
     if (renderChatFooter) {
       return renderChatFooter()
     }
 
     return null
-  }
+  }, [renderChatFooter])
 
-  const _renderLoading = () => {
+  const _renderLoading = useCallback(() => {
     if (renderLoading) {
       return renderLoading()
     }
 
     return null
-  }
+  }, [renderLoading])
 
   const contextValues = useMemo(
     () => ({

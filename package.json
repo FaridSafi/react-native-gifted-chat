@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-chat-forked",
-  "version": "2.4.0",
+  "version": "0.2.0",
   "description": "The most complete chat UI for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -36,8 +36,7 @@
     "test:watch": "TZ=Europe/Paris jest --watch",
     "test:coverage": "TZ=Europe/Paris jest --coverage",
     "prepublishOnly": "yarn lint && yarn build && yarn test",
-    "prettier": "./node_modules/.bin/prettier --write \"src/**/*.{ts,tsx}\"",
-    "postinstall": "yarn build"
+    "prettier": "./node_modules/.bin/prettier --write \"src/**/*.{ts,tsx}\""
   },
   "devDependencies": {
     "@babel/core": "7.17.9",

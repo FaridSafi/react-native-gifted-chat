@@ -36,7 +36,8 @@
     "test:watch": "TZ=Europe/Paris jest --watch",
     "test:coverage": "TZ=Europe/Paris jest --coverage",
     "prepublishOnly": "yarn lint && yarn build && yarn test",
-    "prettier": "./node_modules/.bin/prettier --write \"src/**/*.{ts,tsx}\""
+    "prettier": "./node_modules/.bin/prettier --write \"src/**/*.{ts,tsx}\"",
+    "postinstall": "npm run build"
   },
   "devDependencies": {
     "@babel/core": "7.17.9",

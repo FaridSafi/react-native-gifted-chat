@@ -237,7 +237,10 @@ export default class MessageContainer<
         (inverted ? messages[index + 1] : messages[index - 1]) || {}
       const nextMessage =
         (inverted ? messages[index - 1] : messages[index + 1]) || {}
-
+      const isStartingMessage =
+        !previousMessage || item?.user?._id !== previousMessage?.user?._id
+      const isEndingMessage =
+        !nextMessage || item?.user?._id !== nextMessage?.user?._id
       const messageProps: Message['props'] = {
         ...restProps,
         user,
@@ -246,6 +249,8 @@ export default class MessageContainer<
         previousMessage,
         inverted,
         nextMessage,
+        isStartingMessage,
+        isEndingMessage,
         position: item.user._id === user._id ? 'right' : 'left',
       }
 

@@ -58,7 +58,7 @@ const styles = {
   right: StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'flex-end',
+      alignItems: 'flex-start',
     },
     wrapper: {
       borderRadius: 15,

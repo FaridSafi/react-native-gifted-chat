@@ -10,6 +10,15 @@ import { Day, DayProps } from './Day'
 import { StylePropType, isSameUser } from './utils'
 import { IMessage, User, LeftRightStyle } from './Models'
 
+const commonStyles = {
+  defaultLeftMessageStyle: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'flex-start',
+    backgroundColor: 'white',
+    paddingLeft: 22,
+  } as const,
+}
 const styles = {
   left: StyleSheet.create({
     container: {
@@ -29,6 +38,24 @@ const styles = {
       marginRight: 8,
     },
   }),
+  startingStyle: {
+    ...commonStyles.defaultLeftMessageStyle,
+    paddingTop: 22,
+    borderRadius: 20,
+  },
+  middleStyle: {
+    ...commonStyles.defaultLeftMessageStyle,
+    paddingVertical: 10,
+    marginTop: -5,
+  },
+  endingStyle: {
+    ...commonStyles.defaultLeftMessageStyle,
+    marginTop: -5,
+    paddingTop: 15,
+    paddingBottom: 22,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
 }
 
 export interface MessageProps<TMessage extends IMessage> {
@@ -38,6 +65,8 @@ export interface MessageProps<TMessage extends IMessage> {
   currentMessage?: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage
+  isStartingMessage?: boolean
+  isEndingMessage?: boolean
   user: User
   inverted?: boolean
   containerStyle?: LeftRightStyle<ViewStyle>
@@ -64,6 +93,8 @@ export default class Message<
     currentMessage: {},
     nextMessage: {},
     previousMessage: {},
+    isStartingMessage: true,
+    isEndingMessage: false,
     user: {},
     containerStyle: {},
     showUserAvatar: false,
@@ -82,6 +113,8 @@ export default class Message<
     currentMessage: PropTypes.object,
     nextMessage: PropTypes.object,
     previousMessage: PropTypes.object,
+    isStartingMessage: PropTypes.bool,
+    isEndingMessage: PropTypes.bool,
     user: PropTypes.object,
     inverted: PropTypes.bool,
     containerStyle: PropTypes.shape({
@@ -173,7 +206,21 @@ export default class Message<
     const { containerStyle, onMessageLayout, ...props } = this.props
     return <Avatar {...props} />
   }
-
+  getBubbleStyle() {
+    const { isStartingMessage, isEndingMessage } = this.props
+    if (isStartingMessage) {
+      return {
+        ...styles.startingStyle,
+        borderBottomLeftRadius: isEndingMessage ? 20 : 0,
+        borderBottomRightRadius: isEndingMessage ? 20 : 0,
+        paddingBottom: isEndingMessage ? 22 : 0,
+      }
+    } else if (isEndingMessage) {
+      return styles.endingStyle
+    } else {
+      return styles.middleStyle
+    }
+  }
   render() {
     const {
       currentMessage,
@@ -198,9 +245,19 @@ export default class Message<
                 containerStyle && containerStyle[position],
               ]}
             >
-              {this.props.position === 'left' ? this.renderAvatar() : null}
-              {this.renderBubble()}
-              {this.props.position === 'right' ? this.renderAvatar() : null}
+              {position === 'left' ? (
+                // Container for left position
+                <View style={this.getBubbleStyle()}>
+                  {this.renderAvatar()}
+                  {this.renderBubble()}
+                </View>
+              ) : (
+                // No container for right position
+                <>
+                  {this.renderBubble()}
+                  {this.renderAvatar()}
+                </>
+              )}
             </View>
           )}
         </View>

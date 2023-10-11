@@ -387,7 +387,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
         ? e.endCoordinates.height
         : e.end.height
 
-      bottomOffsetRef.current = bottomOffset != null ? bottomOffset : 1
+      bottomOffsetRef.current = bottomOffset !== null ? bottomOffset : 1
 
       const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard()
 

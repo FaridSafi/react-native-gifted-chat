@@ -21,7 +21,7 @@ import {
   ViewStyle,
 } from 'react-native'
 import { LightboxProps } from 'react-native-lightbox-v2'
-import uuid from 'uuid'
+import { v4 as uuidV4 } from 'uuid'
 import { Actions, ActionsProps } from './Actions'
 import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
@@ -219,13 +219,12 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   ): boolean
 }
 
-export interface GiftedChatState<TMessage extends IMessage = IMessage> {
+export interface GiftedChatState {
   isInitialized: boolean
   composerHeight?: number
   messagesContainerHeight?: number | Animated.Value
   typingDisabled: boolean
   text?: string
-  messages?: TMessage[]
 }
 
 function GiftedChat<TMessage extends IMessage = IMessage>(
@@ -236,7 +235,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     text = undefined,
     initialText = '',
     isTyping,
-    messageIdGenerator = () => uuid.v4(),
+    messageIdGenerator = () => uuidV4(),
     user = {},
     onSend = () => {},
     locale = 'en',
@@ -279,7 +278,6 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     messagesContainerHeight: undefined,
     typingDisabled: false,
     text: undefined,
-    messages: undefined,
   })
 
   useEffect(() => {
@@ -287,7 +285,6 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 
     setState({
       ...state,
-      messages,
       // Text prop takes precedence over state.
       ...(text !== undefined && text !== state.text && { text: text }),
     })
@@ -473,7 +470,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
             onKeyboardDidShow: onKeyboardDidShow,
             onKeyboardDidHide: onKeyboardDidHide,
           }}
-          messages={state.messages}
+          messages={messages}
           forwardRef={messageContainerRef}
           isTyping={isTyping}
         />

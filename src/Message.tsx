@@ -7,7 +7,7 @@ import Bubble from './Bubble'
 import { SystemMessage, SystemMessageProps } from './SystemMessage'
 import { Day, DayProps } from './Day'
 
-import { StylePropType, isSameUser } from './utils'
+import { StylePropType, isSameUser, isSameDay } from './utils'
 import { IMessage, User, LeftRightStyle } from './Models'
 
 const styles = {
@@ -121,7 +121,10 @@ export default class Message<
 
   renderDay() {
     if (this.props.currentMessage && this.props.currentMessage.createdAt) {
-      const { containerStyle, onMessageLayout, ...props } = this.props
+      const { containerStyle, onMessageLayout, ...props } = this.props;
+      if (this.props.currentMessage == null || this.props.previousMessage != null && isSameDay(this.props.currentMessage, this.props.previousMessage)) {
+        return null;
+      }
       if (this.props.renderDay) {
         return this.props.renderDay(props)
       }

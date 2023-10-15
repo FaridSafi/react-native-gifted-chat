@@ -3,27 +3,27 @@ import React, { RefObject } from 'react'
 
 import {
   FlatList,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  ListViewProps,
   ListRenderItemInfo,
-  NativeSyntheticEvent,
+  ListViewProps,
   NativeScrollEvent,
-  StyleProp,
-  ViewStyle,
+  NativeSyntheticEvent,
   Platform,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native'
 
+import Color from './Color'
 import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
 import Message from './Message'
-import Color from './Color'
-import { User, IMessage, Reply } from './Models'
+import { IMessage, Reply, User } from './Models'
 import TypingIndicator from './TypingIndicator'
 
-import { StylePropType } from './utils'
 import { warning } from './logging'
+import { StylePropType } from './utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -80,6 +80,10 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   extraData?: any
   scrollToBottomOffset?: number
   forwardRef?: RefObject<FlatList<IMessage>>
+  getItemLayout?: (
+    data: Array<any> | null | undefined,
+    index: number,
+  ) => { length: number; offset: number; index: number }
   renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactNode
@@ -349,6 +353,7 @@ export default class MessageContainer<
           automaticallyAdjustContentInsets={false}
           inverted={inverted}
           data={this.props.messages}
+          getItemLayout={this.props.getItemLayout}
           style={styles.listStyle}
           contentContainerStyle={styles.contentContainerStyle}
           renderItem={this.renderRow}

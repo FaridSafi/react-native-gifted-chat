@@ -134,6 +134,10 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
   infiniteScroll?: boolean
   timeTextStyle?: LeftRightStyle<TextStyle>
+  getItemLayout?: (
+    data: Array<any> | null | undefined,
+    index: number,
+  ) => { length: number; offset: number; index: number }
   /* Custom action sheet */
   actionSheet?(): {
     showActionSheetWithOptions: (
@@ -452,7 +456,11 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
   }
 
   const renderMessages = () => {
-    const { messagesContainerStyle, ...messagesContainerProps } = props
+    const {
+      messagesContainerStyle,
+      getItemLayout,
+      ...messagesContainerProps
+    } = props
 
     const fragment = (
       <View
@@ -475,6 +483,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
           }}
           messages={state.messages}
           forwardRef={messageContainerRef}
+          getItemLayout={getItemLayout}
           isTyping={isTyping}
         />
         {_renderChatFooter()}
@@ -808,21 +817,21 @@ const styles = StyleSheet.create({
 
 export * from './Models'
 export {
-  GiftedChat,
   Actions,
   Avatar,
   Bubble,
-  SystemMessage,
-  MessageImage,
-  MessageText,
   Composer,
   Day,
+  GiftedAvatar,
+  GiftedChat,
   InputToolbar,
   LoadEarlier,
   Message,
   MessageContainer,
+  MessageImage,
+  MessageText,
   Send,
+  SystemMessage,
   Time,
-  GiftedAvatar,
   utils,
 }

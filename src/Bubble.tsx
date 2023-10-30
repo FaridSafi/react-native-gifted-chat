@@ -149,6 +149,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   usernameStyle?: TextStyle
   quickReplyStyle?: StyleProp<ViewStyle>
   quickReplyTextStyle?: StyleProp<TextStyle>
+  quickReplyContainerStyle?: StyleProp<ViewStyle>
   onPress?(context?: any, message?: any): void
   onLongPress?(context?: any, message?: any): void
   onQuickReply?(replies: Reply[]): void
@@ -335,6 +336,7 @@ export default class Bubble<
       renderQuickReplySend,
       quickReplyStyle,
       quickReplyTextStyle,
+      quickReplyContainerStyle,
     } = this.props
     if (currentMessage && currentMessage.quickReplies) {
       const { containerStyle, wrapperStyle, ...quickReplyProps } = this.props
@@ -348,6 +350,7 @@ export default class Bubble<
           renderQuickReplySend={renderQuickReplySend}
           quickReplyStyle={quickReplyStyle}
           quickReplyTextStyle={quickReplyTextStyle}
+          quickReplyContainerStyle={quickReplyContainerStyle}
           nextMessage={nextMessage}
         />
       )

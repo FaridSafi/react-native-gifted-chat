@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { IMessage, Reply } from './types'
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
+import type { ViewStyleProp, TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export type QuickRepliesProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   nextMessage?: TMessage,
@@ -9,6 +9,8 @@ export type QuickRepliesProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   color?: string,
   sendText?: string,
   quickReplyStyle?: ViewStyleProp,
+  quickReplyTextStyle?: TextStyleProp,
+  quickReplyContainerStyle?: ViewStyleProp,
   onQuickReply: (Array<Reply>) => void,
   renderQuickReplySend?: () => React.Node,
 |}>

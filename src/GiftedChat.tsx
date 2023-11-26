@@ -220,7 +220,6 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
 }
 
 export interface GiftedChatState<TMessage extends IMessage = IMessage> {
-  isInitialized: boolean
   composerHeight?: number
   messagesContainerHeight?: number | Animated.Value
   typingDisabled: boolean
@@ -274,13 +273,14 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
   let _isTextInputWasFocused: boolean = false
 
   const [state, setState] = useState<GiftedChatState>({
-    isInitialized: false, // initialization will calculate maxHeight before rendering the chat
     composerHeight: minComposerHeight,
     messagesContainerHeight: undefined,
     typingDisabled: false,
     text: undefined,
     messages: undefined,
   })
+
+  const [isInitialized,setIsInitialized] = useState(false);
 
   useEffect(() => {
     isMountedRef.current = true
@@ -604,11 +604,11 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 
     setState({
       ...state,
-      isInitialized: true,
       text: getTextFromProp(initialText),
       composerHeight: minComposerHeight,
       messagesContainerHeight: newMessagesContainerHeight,
-    })
+    });
+    setIsInitialized(true);
   }
 
   const onMainViewLayout = (e: LayoutChangeEvent) => {
@@ -681,7 +681,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     [actionSheet, locale],
   )
 
-  if (state.isInitialized === true) {
+  if (isInitialized === true) {
     return (
       <GiftedChatContext.Provider value={contextValues}>
         <View testID={TEST_ID.WRAPPER} style={styles.wrapper}>

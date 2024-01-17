@@ -89,6 +89,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   onQuickReply?(replies: Reply[]): void
   infiniteScroll?: boolean
   isLoadingEarlier?: boolean
+  initialNumToRender?: number
 }
 
 interface State {
@@ -119,6 +120,7 @@ export default class MessageContainer<
     scrollToBottomStyle: {},
     infiniteScroll: false,
     isLoadingEarlier: false,
+    initialNumToRender: 10,
   }
 
   static propTypes = {
@@ -141,6 +143,7 @@ export default class MessageContainer<
     alignTop: PropTypes.bool,
     scrollToBottomStyle: StylePropType,
     infiniteScroll: PropTypes.bool,
+    initialNumToRender: PropTypes.number,
   }
 
   state = {
@@ -344,6 +347,7 @@ export default class MessageContainer<
         <FlatList
           ref={this.props.forwardRef}
           extraData={[this.props.extraData, this.props.isTyping]}
+          initialNumToRender={this.props.initialNumToRender}
           keyExtractor={this.keyExtractor}
           enableEmptySections
           automaticallyAdjustContentInsets={false}

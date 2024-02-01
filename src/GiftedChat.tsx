@@ -289,7 +289,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
       ...prevState,
       messages,
       // Text prop takes precedence over state.
-      ...(text !== undefined && text !== state.text && { text: text }),
+      ...(text !== undefined && text !== prevState.text && { text: text }),
     }))
 
     if (inverted === false && messages?.length) {

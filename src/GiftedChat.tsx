@@ -54,7 +54,7 @@ dayjs.extend(localizedFormat)
 
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Message container ref */
-  messageContainerRef?: React.RefObject<FlatList<IMessage>>
+  messageContainerRef?: React.RefObject<FlatList<TMessage>>
   /* text input ref */
   textInputRef?: React.RefObject<TextInput>
   /* Messages to display */
@@ -229,7 +229,7 @@ export interface GiftedChatState<TMessage extends IMessage = IMessage> {
 }
 
 function GiftedChat<TMessage extends IMessage = IMessage>(
-  props: GiftedChatProps,
+  props: GiftedChatProps<TMessage>,
 ) {
   const {
     messages = [],

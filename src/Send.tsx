@@ -60,19 +60,17 @@ export const Send = <TMessage extends IMessage = IMessage>({
   onSend = () => {},
 }: SendProps<TMessage>) => {
   const handleOnPress = useCallbackOne(() => {
-    if (text && onSend) {
+    if (text && onSend)
       onSend({ text: text.trim() } as Partial<TMessage>, true)
-    }
   }, [text, onSend])
 
   const showSend = useMemoOne(
     () => alwaysShowSend || (text && text.trim().length > 0),
-    [alwaysShowSend, text],
+    [alwaysShowSend, text]
   )
 
-  if (!showSend) {
+  if (!showSend)
     return null
-  }
 
   return (
     <TouchableOpacity

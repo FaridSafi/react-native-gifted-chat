@@ -57,8 +57,8 @@ export interface AvatarProps<TMessage extends IMessage> {
   onLongPressAvatar?(user: User): void
 }
 
-export function Avatar<TMessage extends IMessage = IMessage>(
-  props: AvatarProps<TMessage>,
+export function Avatar<TMessage extends IMessage = IMessage> (
+  props: AvatarProps<TMessage>
 ) {
   const {
     renderAvatarOnTop,
@@ -74,9 +74,8 @@ export function Avatar<TMessage extends IMessage = IMessage>(
   const messageToCompare = renderAvatarOnTop ? previousMessage : nextMessage
   const computedStyle = renderAvatarOnTop ? 'onTop' : 'onBottom'
 
-  if (renderAvatar === null) {
+  if (renderAvatar === null)
     return null
-  }
 
   if (
     !showAvatarForEveryMessage &&
@@ -84,7 +83,7 @@ export function Avatar<TMessage extends IMessage = IMessage>(
     messageToCompare &&
     isSameUser(currentMessage, messageToCompare) &&
     isSameDay(currentMessage, messageToCompare)
-  ) {
+  )
     return (
       <View
         style={[
@@ -102,7 +101,6 @@ export function Avatar<TMessage extends IMessage = IMessage>(
         />
       </View>
     )
-  }
 
   const renderAvatarComponent = () => {
     if (props.renderAvatar) {
@@ -110,7 +108,7 @@ export function Avatar<TMessage extends IMessage = IMessage>(
       return props.renderAvatar(avatarProps)
     }
 
-    if (props.currentMessage) {
+    if (props.currentMessage)
       return (
         <GiftedAvatar
           avatarStyle={
@@ -126,7 +124,6 @@ export function Avatar<TMessage extends IMessage = IMessage>(
           }
         />
       )
-    }
 
     return null
   }

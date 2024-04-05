@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {
   Text,
-  Clipboard,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
@@ -10,6 +9,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native'
+import * as Clipboard from 'expo-clipboard'
 
 import { GiftedChatContext } from './GiftedChatContext'
 import { QuickReplies, QuickRepliesProps } from './QuickReplies'
@@ -249,9 +249,8 @@ export default class Bubble<
   }
 
   onPress = () => {
-    if (this.props.onPress) {
+    if (this.props.onPress)
       this.props.onPress(this.context, this.props.currentMessage)
-    }
   }
 
   onLongPress = () => {
@@ -273,17 +272,17 @@ export default class Bubble<
         (buttonIndex: number) => {
           switch (buttonIndex) {
             case 0:
-              Clipboard.setString(currentMessage.text)
+              Clipboard.setStringAsync(currentMessage.text)
               break
             default:
               break
           }
-        },
+        }
       )
     }
   }
 
-  styledBubbleToNext() {
+  styledBubbleToNext () {
     const {
       currentMessage,
       nextMessage,
@@ -296,16 +295,16 @@ export default class Bubble<
       position &&
       isSameUser(currentMessage, nextMessage) &&
       isSameDay(currentMessage, nextMessage)
-    ) {
+    )
       return [
         styles[position].containerToNext,
         containerToNextStyle && containerToNextStyle[position],
       ]
-    }
+
     return null
   }
 
-  styledBubbleToPrevious() {
+  styledBubbleToPrevious () {
     const {
       currentMessage,
       previousMessage,
@@ -318,16 +317,16 @@ export default class Bubble<
       position &&
       isSameUser(currentMessage, previousMessage) &&
       isSameDay(currentMessage, previousMessage)
-    ) {
+    )
       return [
         styles[position].containerToPrevious,
         containerToPreviousStyle && containerToPreviousStyle[position],
       ]
-    }
+
     return null
   }
 
-  renderQuickReplies() {
+  renderQuickReplies () {
     const {
       currentMessage,
       onQuickReply,
@@ -338,9 +337,9 @@ export default class Bubble<
     } = this.props
     if (currentMessage && currentMessage.quickReplies) {
       const { containerStyle, wrapperStyle, ...quickReplyProps } = this.props
-      if (this.props.renderQuickReplies) {
+      if (this.props.renderQuickReplies)
         return this.props.renderQuickReplies(quickReplyProps)
-      }
+
       return (
         <QuickReplies
           currentMessage={currentMessage}
@@ -355,7 +354,7 @@ export default class Bubble<
     return null
   }
 
-  renderMessageText() {
+  renderMessageText () {
     if (this.props.currentMessage && this.props.currentMessage.text) {
       const {
         containerStyle,
@@ -363,82 +362,82 @@ export default class Bubble<
         optionTitles,
         ...messageTextProps
       } = this.props
-      if (this.props.renderMessageText) {
+      if (this.props.renderMessageText)
         return this.props.renderMessageText(messageTextProps)
-      }
+
       return <MessageText {...messageTextProps} />
     }
     return null
   }
 
-  renderMessageImage() {
+  renderMessageImage () {
     if (this.props.currentMessage && this.props.currentMessage.image) {
       const { containerStyle, wrapperStyle, ...messageImageProps } = this.props
-      if (this.props.renderMessageImage) {
+      if (this.props.renderMessageImage)
         return this.props.renderMessageImage(messageImageProps)
-      }
+
       return <MessageImage {...messageImageProps} />
     }
     return null
   }
 
-  renderMessageVideo() {
+  renderMessageVideo () {
     if (this.props.currentMessage && this.props.currentMessage.video) {
       const { containerStyle, wrapperStyle, ...messageVideoProps } = this.props
-      if (this.props.renderMessageVideo) {
+      if (this.props.renderMessageVideo)
         return this.props.renderMessageVideo(messageVideoProps)
-      }
+
       return <MessageVideo {...messageVideoProps} />
     }
     return null
   }
 
-  renderMessageAudio() {
+  renderMessageAudio () {
     if (this.props.currentMessage && this.props.currentMessage.audio) {
       const { containerStyle, wrapperStyle, ...messageAudioProps } = this.props
-      if (this.props.renderMessageAudio) {
+      if (this.props.renderMessageAudio)
         return this.props.renderMessageAudio(messageAudioProps)
-      }
+
       return <MessageAudio {...messageAudioProps} />
     }
     return null
   }
 
-  renderTicks() {
+  renderTicks () {
     const { currentMessage, renderTicks, user } = this.props
-    if (renderTicks && currentMessage) {
+    if (renderTicks && currentMessage)
       return renderTicks(currentMessage)
-    }
+
     if (
       currentMessage &&
       user &&
       currentMessage.user &&
       currentMessage.user._id !== user._id
-    ) {
+    )
       return null
-    }
+
     if (
       currentMessage &&
       (currentMessage.sent || currentMessage.received || currentMessage.pending)
-    ) {
+    )
       return (
         <View style={styles.content.tickView}>
           {!!currentMessage.sent && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>✓</Text>
+            <Text style={[styles.content.tick, this.props.tickStyle]}>{'✓'}</Text>
           )}
           {!!currentMessage.received && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>✓</Text>
+            <Text style={[styles.content.tick, this.props.tickStyle]}>{'✓'}</Text>
           )}
           {!!currentMessage.pending && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>🕓</Text>
+            <Text style={[styles.content.tick, this.props.tickStyle]}>{'🕓'}</Text>
           )}
         </View>
       )
-    }
+
     return null
   }
 
-  renderTime() {
+  renderTime () {
     if (this.props.currentMessage && this.props.currentMessage.createdAt) {
       const {
         containerStyle,
@@ -446,23 +445,23 @@ export default class Bubble<
         textStyle,
         ...timeProps
       } = this.props
-      if (this.props.renderTime) {
+      if (this.props.renderTime)
         return this.props.renderTime(timeProps)
-      }
+
       return <Time {...timeProps} />
     }
     return null
   }
 
-  renderUsername() {
+  renderUsername () {
     const { currentMessage, user, renderUsername } = this.props
     if (this.props.renderUsernameOnMessage && currentMessage) {
-      if (user && currentMessage.user._id === user._id) {
+      if (user && currentMessage.user._id === user._id)
         return null
-      }
-      if (renderUsername) {
+
+      if (renderUsername)
         return renderUsername(currentMessage.user)
-      }
+
       return (
         <View style={styles.content.usernameView}>
           <Text
@@ -470,7 +469,7 @@ export default class Bubble<
               [styles.content.username, this.props.usernameStyle] as TextStyle
             }
           >
-            ~ {currentMessage.user.name}
+            {'~ '}{currentMessage.user.name}
           </Text>
         </View>
       )
@@ -478,34 +477,36 @@ export default class Bubble<
     return null
   }
 
-  renderCustomView() {
-    if (this.props.renderCustomView) {
+  renderCustomView () {
+    if (this.props.renderCustomView)
       return this.props.renderCustomView(this.props)
-    }
+
     return null
   }
 
-  renderBubbleContent() {
-    return this.props.isCustomViewBottom ? (
-      <View>
-        {this.renderMessageImage()}
-        {this.renderMessageVideo()}
-        {this.renderMessageAudio()}
-        {this.renderMessageText()}
-        {this.renderCustomView()}
-      </View>
-    ) : (
-      <View>
-        {this.renderCustomView()}
-        {this.renderMessageImage()}
-        {this.renderMessageVideo()}
-        {this.renderMessageAudio()}
-        {this.renderMessageText()}
-      </View>
-    )
+  renderBubbleContent () {
+    return this.props.isCustomViewBottom
+      ? (
+        <View>
+          {this.renderMessageImage()}
+          {this.renderMessageVideo()}
+          {this.renderMessageAudio()}
+          {this.renderMessageText()}
+          {this.renderCustomView()}
+        </View>
+      )
+      : (
+        <View>
+          {this.renderCustomView()}
+          {this.renderMessageImage()}
+          {this.renderMessageVideo()}
+          {this.renderMessageAudio()}
+          {this.renderMessageText()}
+        </View>
+      )
   }
 
-  render() {
+  render () {
     const {
       position,
       containerStyle,

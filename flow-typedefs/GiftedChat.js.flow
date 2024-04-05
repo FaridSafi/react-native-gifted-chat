@@ -66,7 +66,6 @@ export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   inverted?: boolean,
   imageProps?: MessageProps<TMessage>,
   lightboxProps?: any,
-  bottomOffset?: number,
   minInputToolbarHeight?: number,
   listViewProps?: $Shape<React.ElementProps<typeof FlatList>>,
   textInputProps?: any,
@@ -128,8 +127,7 @@ export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
 export type GiftedChatState<TMessage: IMessage = IMessage> = {|
   isInitialized: boolean,
   composerHeight?: number,
-  messagesContainerHeight?: number | AnimatedValue,
-  typingDisabled: boolean,
+  isTypingDisabled: boolean,
   text?: string,
   messages?: Array<TMessage>,
 |}

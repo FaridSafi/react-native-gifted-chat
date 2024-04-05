@@ -92,7 +92,7 @@ export default class Message<
     onMessageLayout: PropTypes.func,
   }
 
-  shouldComponentUpdate(nextProps: MessageProps<TMessage>) {
+  shouldComponentUpdate (nextProps: MessageProps<TMessage>) {
     const next = nextProps.currentMessage!
     const current = this.props.currentMessage!
     const { previousMessage, nextMessage } = this.props
@@ -119,36 +119,36 @@ export default class Message<
     )
   }
 
-  renderDay() {
+  renderDay () {
     if (this.props.currentMessage && this.props.currentMessage.createdAt) {
       const { containerStyle, onMessageLayout, ...props } = this.props
-      if (this.props.renderDay) {
+      if (this.props.renderDay)
         return this.props.renderDay(props)
-      }
+
       return <Day {...props} />
     }
     return null
   }
 
-  renderBubble() {
+  renderBubble () {
     const { containerStyle, onMessageLayout, ...props } = this.props
-    if (this.props.renderBubble) {
+    if (this.props.renderBubble)
       return this.props.renderBubble(props)
-    }
+
     // @ts-ignore
     return <Bubble {...props} />
   }
 
-  renderSystemMessage() {
+  renderSystemMessage () {
     const { containerStyle, onMessageLayout, ...props } = this.props
 
-    if (this.props.renderSystemMessage) {
+    if (this.props.renderSystemMessage)
       return this.props.renderSystemMessage(props)
-    }
+
     return <SystemMessage {...props} />
   }
 
-  renderAvatar() {
+  renderAvatar () {
     const { user, currentMessage, showUserAvatar } = this.props
 
     if (
@@ -158,23 +158,21 @@ export default class Message<
       currentMessage.user &&
       user._id === currentMessage.user._id &&
       !showUserAvatar
-    ) {
+    )
       return null
-    }
 
     if (
       currentMessage &&
       currentMessage.user &&
       currentMessage.user.avatar === null
-    ) {
+    )
       return null
-    }
 
     const { containerStyle, onMessageLayout, ...props } = this.props
     return <Avatar {...props} />
   }
 
-  render() {
+  render () {
     const {
       currentMessage,
       onMessageLayout,
@@ -187,22 +185,24 @@ export default class Message<
       return (
         <View onLayout={onMessageLayout}>
           {this.renderDay()}
-          {currentMessage.system ? (
-            this.renderSystemMessage()
-          ) : (
-            <View
-              style={[
-                styles[position].container,
-                { marginBottom: sameUser ? 2 : 10 },
-                !this.props.inverted && { marginBottom: 2 },
-                containerStyle && containerStyle[position],
-              ]}
-            >
-              {this.props.position === 'left' ? this.renderAvatar() : null}
-              {this.renderBubble()}
-              {this.props.position === 'right' ? this.renderAvatar() : null}
-            </View>
-          )}
+          {currentMessage.system
+            ? (
+              this.renderSystemMessage()
+            )
+            : (
+              <View
+                style={[
+                  styles[position].container,
+                  { marginBottom: sameUser ? 2 : 10 },
+                  !this.props.inverted && { marginBottom: 2 },
+                  containerStyle && containerStyle[position],
+                ]}
+              >
+                {this.props.position === 'left' ? this.renderAvatar() : null}
+                {this.renderBubble()}
+                {this.props.position === 'right' ? this.renderAvatar() : null}
+              </View>
+            )}
         </View>
       )
     }

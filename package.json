@@ -101,6 +101,7 @@
     "react": "*",
     "react-native": "*",
     "react-native-get-random-values": "*",
-    "react-native-reanimated": "*"
+    "react-native-reanimated": "*",
+    "react-native-safe-area-context": "*"
   }
 }

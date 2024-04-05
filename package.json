@@ -2,12 +2,6 @@
   "name": "react-native-gifted-chat",
   "version": "2.4.0",
   "description": "The most complete chat UI for React Native",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
-  },
   "keywords": [
     "android",
     "ios",
@@ -18,25 +12,48 @@
     "message",
     "chat"
   ],
-  "author": "Farid Safi",
-  "license": "MIT",
+  "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
   "bugs": {
     "url": "https://github.com/FaridSafi/react-native-gifted-chat/issues"
   },
-  "homepage": "https://github.com/FaridSafi/react-native-gifted-chat#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FaridSafi/react-native-gifted-chat.git"
+  },
+  "license": "MIT",
+  "author": "Farid Safi",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
+    "build": "rm -rf lib/ && node_modules/.bin/tsc && cp flow-typedefs/*.js.flow lib/",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "./node_modules/.bin/eslint ./src/*.{ts,tsx} --fix",
-    "tsc": "node_modules/.bin/tsc --noEmit",
-    "tsc:watch": "node_modules/.bin/tsc --watch --noEmit",
+    "prepublishOnly": "yarn lint && yarn build && yarn test",
+    "prettier": "./node_modules/.bin/prettier --write \"src/**/*.{ts,tsx}\"",
     "start": "cd example && expo start",
     "start:web": "cd example && expo start -w --dev",
-    "build": "rm -rf lib/ && node_modules/.bin/tsc && cp flow-typedefs/*.js.flow lib/",
     "test": "TZ=Europe/Paris jest --no-watchman",
-    "test:watch": "TZ=Europe/Paris jest --watch",
     "test:coverage": "TZ=Europe/Paris jest --coverage",
-    "prepublishOnly": "yarn lint && yarn build && yarn test",
-    "prettier": "./node_modules/.bin/prettier --write \"src/**/*.{ts,tsx}\""
+    "test:watch": "TZ=Europe/Paris jest --watch",
+    "tsc": "node_modules/.bin/tsc --noEmit",
+    "tsc:watch": "node_modules/.bin/tsc --watch --noEmit"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:fix && yarn prettier && yarn tsc"
+    }
+  },
+  "dependencies": {
+    "@expo/react-native-action-sheet": "4.0.1",
+    "dayjs": "1.8.26",
+    "prop-types": "15.7.2",
+    "react-native-communications": "2.2.1",
+    "react-native-iphone-x-helper": "1.3.1",
+    "react-native-lightbox-v2": "0.9.0",
+    "react-native-parsed-text": "0.0.22",
+    "react-native-typing-animation": "0.1.7",
+    "use-memo-one": "1.1.3",
+    "uuid": "3.4.0"
   },
   "devDependencies": {
     "@babel/core": "7.17.9",
@@ -65,25 +82,8 @@
     "react-test-renderer": "16.9.0",
     "typescript": "4.6.3"
   },
-  "dependencies": {
-    "@expo/react-native-action-sheet": "4.0.1",
-    "dayjs": "1.8.26",
-    "prop-types": "15.7.2",
-    "react-native-communications": "2.2.1",
-    "react-native-iphone-x-helper": "1.3.1",
-    "react-native-lightbox-v2": "0.9.0",
-    "react-native-parsed-text": "0.0.22",
-    "react-native-typing-animation": "0.1.7",
-    "use-memo-one": "1.1.3",
-    "uuid": "3.4.0"
-  },
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint:fix && yarn prettier && yarn tsc"
-    }
   }
 }

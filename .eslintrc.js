@@ -5,7 +5,7 @@ module.exports = {
   },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
-  // extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  extends: ['@react-native'],
   rules: {
     'member-access': 0,
     'interface-name': 0,

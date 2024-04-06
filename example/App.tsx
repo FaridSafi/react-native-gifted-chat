@@ -225,7 +225,7 @@ const App = () => {
 
   const renderSend = useCallback((props: SendProps<IMessage>) => {
     return (
-      <Send {...props} containerStyle={{ justifyContent: 'center' }}>
+      <Send {...props} containerStyle={{ justifyContent: 'center', paddingHorizontal: 10 }}>
         <MaterialIcons size={30} color={'tomato'} name={'send'} />
       </Send>
     )

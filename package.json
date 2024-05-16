@@ -24,6 +24,10 @@
   "author": "Farid Safi",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "src",
+    "lib"
+  ],
   "scripts": {
     "build": "rm -rf lib/ && node_modules/.bin/tsc && cp flow-typedefs/*.js.flow lib/",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",

@@ -19,7 +19,6 @@ const { containerStyle } = StyleSheet.create({
 const { textStyle } = StyleSheet.create({
   textStyle: {
     fontSize: 10,
-    backgroundColor: 'transparent',
     textAlign: 'right',
   },
 })
@@ -53,7 +52,7 @@ export interface TimeProps<TMessage extends IMessage> {
   timeFormat?: string
 }
 
-export function Time<TMessage extends IMessage = IMessage>({
+export function Time<TMessage extends IMessage = IMessage> ({
   position = 'left',
   containerStyle,
   currentMessage,
@@ -61,9 +60,8 @@ export function Time<TMessage extends IMessage = IMessage>({
   timeTextStyle,
 }: TimeProps<TMessage>) {
   const { getLocale } = useChatContext()
-  if (currentMessage == null) {
+  if (currentMessage == null)
     return null
-  }
 
   return (
     <View

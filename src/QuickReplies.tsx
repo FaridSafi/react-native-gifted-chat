@@ -62,7 +62,7 @@ const sameReply = (currentReply: Reply) => (reply: Reply) =>
 const diffReply = (currentReply: Reply) => (reply: Reply) =>
   currentReply.value !== reply.value
 
-export function QuickReplies({
+export function QuickReplies ({
   currentMessage,
   nextMessage,
   color = Color.peterRiver,
@@ -80,13 +80,11 @@ export function QuickReplies({
     const hasNext = !!nextMessage && !!nextMessage!._id
     const keepIt = currentMessage!.quickReplies!.keepIt
 
-    if (hasReplies && !hasNext) {
+    if (hasReplies && !hasNext)
       return true
-    }
 
-    if (hasReplies && hasNext && keepIt) {
+    if (hasReplies && hasNext && keepIt)
       return true
-    }
 
     return false
   }, [currentMessage, nextMessage])
@@ -101,21 +99,20 @@ export function QuickReplies({
             return
           }
           case 'checkbox': {
-            if (replies.find(sameReply(reply))) {
+            if (replies.find(sameReply(reply)))
               setReplies(replies.filter(diffReply(reply)))
-            } else {
+            else
               setReplies([...replies, reply])
-            }
+
             return
           }
           default: {
             warning(`onQuickReply unknown type: ${type}`)
-            return
           }
         }
       }
     },
-    [replies, currentMessage],
+    [replies, currentMessage]
   )
 
   const handleSend = (repliesData: Reply[]) => () => {
@@ -123,13 +120,12 @@ export function QuickReplies({
       repliesData.map((reply: Reply) => ({
         ...reply,
         messageId: currentMessage!._id,
-      })),
+      }))
     )
   }
 
-  if (!shouldComponentDisplay) {
+  if (!shouldComponentDisplay)
     return null
-  }
 
   return (
     <View style={styles.container}>
@@ -150,7 +146,7 @@ export function QuickReplies({
             >
               <Text
                 numberOfLines={10}
-                ellipsizeMode={'tail'}
+                ellipsizeMode='tail'
                 style={[
                   styles.quickReplyText,
                   { color: selected ? Color.white : color },
@@ -161,7 +157,7 @@ export function QuickReplies({
               </Text>
             </TouchableOpacity>
           )
-        },
+        }
       )}
       {replies.length > 0 && (
         <TouchableOpacity

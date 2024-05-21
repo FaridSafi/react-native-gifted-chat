@@ -45,7 +45,7 @@ export interface DayProps<TMessage extends IMessage = IMessage> {
   inverted?: boolean
 }
 
-export function Day<TMessage extends IMessage = IMessage>({
+export function Day<TMessage extends IMessage = IMessage> ({
   dateFormat = DATE_FORMAT,
   currentMessage,
   previousMessage,
@@ -55,9 +55,8 @@ export function Day<TMessage extends IMessage = IMessage>({
 }: DayProps<TMessage>) {
   const { getLocale } = useChatContext()
 
-  if (currentMessage == null || isSameDay(currentMessage, previousMessage)) {
+  if (currentMessage == null || isSameDay(currentMessage, previousMessage))
     return null
-  }
 
   return (
     <View style={[styles.container, containerStyle]}>

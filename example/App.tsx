@@ -1,6 +1,7 @@
-import { MaterialIcons } from '@expo/vector-icons'
+import 'react-native-get-random-values'
 import React, { useCallback, useReducer } from 'react'
 import { Alert, Linking, Platform, StyleSheet, Text, View } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
 import {
   GiftedChat,
   IMessage,
@@ -8,7 +9,7 @@ import {
   SendProps,
   SystemMessage,
 } from 'react-native-gifted-chat'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { NavBar } from './components/navbar'
 import AccessoryBar from './example-expo/AccessoryBar'
 import CustomActions from './example-expo/CustomActions'
@@ -224,16 +225,16 @@ const App = () => {
 
   const renderSend = useCallback((props: SendProps<IMessage>) => {
     return (
-      <Send {...props} containerStyle={{ justifyContent: 'center' }}>
+      <Send {...props} containerStyle={{ justifyContent: 'center', paddingHorizontal: 10 }}>
         <MaterialIcons size={30} color={'tomato'} name={'send'} />
       </Send>
     )
   }, [])
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.fill, styles.container]}>
       <NavBar />
-      <View style={styles.content}>
+      <View style={[styles.fill, styles.content]}>
         <GiftedChat
           messages={state.messages}
           onSend={onSend}
@@ -270,9 +271,24 @@ const App = () => {
   )
 }
 
+const AppWrapper = () => {
+  return (
+    <SafeAreaProvider>
+      <App />
+    </SafeAreaProvider>
+  )
+}
+
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f5f5f5' },
-  content: { backgroundColor: '#ffffff', flex: 1 },
+  fill: {
+    flex: 1,
+  },
+  container: {
+    backgroundColor: '#f5f5f5',
+  },
+  content: {
+    backgroundColor: '#ffffff',
+  },
 })
 
-export default App
+export default AppWrapper

@@ -24,7 +24,7 @@ export interface ActionsProps {
   onPressActionButton?(): void
 }
 
-export function Actions({
+export function Actions ({
   options = {},
   optionTintColor = Color.optionTintColor,
   icon,
@@ -34,9 +34,11 @@ export function Actions({
   containerStyle,
 }: ActionsProps) {
   const { actionSheet } = useChatContext()
+
   const onActionsPress = useCallbackOne(() => {
     const optionKeys = Object.keys(options)
     const cancelButtonIndex = optionKeys.indexOf('Cancel')
+
     actionSheet().showActionSheetWithOptions(
       {
         options: optionKeys,
@@ -45,20 +47,19 @@ export function Actions({
       },
       (buttonIndex: number) => {
         const key = optionKeys[buttonIndex]
-        if (key) {
+        if (key)
           options[key]()
-        }
-      },
+      }
     )
   }, [])
 
   const renderIcon = useCallbackOne(() => {
-    if (icon) {
+    if (icon)
       return icon()
-    }
+
     return (
       <View style={[styles.wrapper, wrapperStyle]}>
-        <Text style={[styles.iconText, iconTextStyle]}>+</Text>
+        <Text style={[styles.iconText, iconTextStyle]}>{'+'}</Text>
       </View>
     )
   }, [])
@@ -95,11 +96,14 @@ const styles = StyleSheet.create({
     borderColor: Color.defaultColor,
     borderWidth: 2,
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconText: {
     color: Color.defaultColor,
     fontWeight: 'bold',
     fontSize: 16,
+    lineHeight: 16,
     backgroundColor: Color.backgroundTransparent,
     textAlign: 'center',
   },

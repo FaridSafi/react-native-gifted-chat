@@ -15,7 +15,7 @@ it('should render <Bubble /> and compare with snapshot', () => {
           createdAt: 1554744013721,
           user: { _id: 1 },
         }}
-      />,
+      />
     )
     .toJSON()
 

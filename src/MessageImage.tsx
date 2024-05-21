@@ -47,9 +47,7 @@ export function MessageImage<TMessage extends IMessage = IMessage>({
   imageStyle,
   currentMessage,
 }: MessageImageProps<TMessage>) {
-  if (currentMessage == null) {
-    return null
-  }
+  if (currentMessage == null) return null
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -57,7 +55,7 @@ export function MessageImage<TMessage extends IMessage = IMessage>({
         activeProps={{
           style: styles.imageActive,
         }}
-        {...lightboxProps}
+        {...(lightboxProps as any)}
       >
         <Image
           {...imageProps}

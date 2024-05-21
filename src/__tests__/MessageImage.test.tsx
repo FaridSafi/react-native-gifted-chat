@@ -19,7 +19,7 @@ describe('MessageImage', () => {
             ...DEFAULT_TEST_MESSAGE,
             image: 'url://to/image.png',
           }}
-        />,
+        />
       )
       .toJSON()
     expect(tree).toMatchSnapshot()

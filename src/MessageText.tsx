@@ -69,7 +69,7 @@ export interface MessageTextProps<TMessage extends IMessage> {
   parsePatterns?(linkStyle: TextStyle): any
 }
 
-export function MessageText<TMessage extends IMessage = IMessage>({
+export function MessageText<TMessage extends IMessage = IMessage> ({
   currentMessage = {} as TMessage,
   optionTitles = DEFAULT_OPTION_TITLES,
   position = 'left',
@@ -94,13 +94,12 @@ export function MessageText<TMessage extends IMessage = IMessage>({
   const onUrlPress = (url: string) => {
     // When someone sends a message that includes a website address beginning with "www." (omitting the scheme),
     // react-native-parsed-text recognizes it as a valid url, but Linking fails to open due to the missing scheme.
-    if (WWW_URL_PATTERN.test(url)) {
+    if (WWW_URL_PATTERN.test(url))
       onUrlPress(`https://${url}`)
-    } else {
+    else
       Linking.openURL(url).catch(e => {
         error(e, 'No handler for URL:', url)
       })
-    }
   }
 
   const onPhonePress = (phone: string) => {
@@ -129,13 +128,13 @@ export function MessageText<TMessage extends IMessage = IMessage>({
           default:
             break
         }
-      },
+      }
     )
   }
 
   const onEmailPress = (email: string) =>
     Linking.openURL(`mailto:${email}`).catch(e =>
-      error(e, 'No handler for mailto'),
+      error(e, 'No handler for mailto')
     )
 
   const linkStyle = [

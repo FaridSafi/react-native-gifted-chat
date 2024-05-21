@@ -25,7 +25,7 @@ it('should render <GiftedChat/> and compare with snapshot', () => {
         user={{
           _id: 1,
         }}
-      />,
+      />
     )
     .toJSON()
 

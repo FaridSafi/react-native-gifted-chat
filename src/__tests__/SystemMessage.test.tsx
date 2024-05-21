@@ -19,7 +19,7 @@ describe('SystemMessage', () => {
             ...DEFAULT_TEST_MESSAGE,
             system: true,
           }}
-        />,
+        />
       )
       .toJSON()
     expect(tree).toMatchSnapshot()

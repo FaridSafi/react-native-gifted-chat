@@ -12,3 +12,9 @@ web-build/
 
 # macOS
 .DS_Store
+
+ios/.xcode.env.local
+*.hprof
+.cxx/
+
+/vendor/bundle/

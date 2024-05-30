@@ -286,12 +286,12 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
   useEffect(() => {
     isMountedRef.current = true
 
-    setState({
-      ...state,
+    setState((prevState:GiftedChatState) => ({
+      ...prevState,
       messages,
       // Text prop takes precedence over state.
-      ...(text !== undefined && text !== state.text && { text: text }),
-    })
+      ...(text !== undefined && text !== prevState.text && { text: text }),
+    }))
 
     if (inverted === false && messages?.length) {
       setTimeout(() => scrollToBottom(false), 200)
@@ -392,11 +392,11 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 
       const newMessagesContainerHeight = getMessagesContainerHeightWithKeyboard()
 
-      setState({
-        ...state,
+      setState((prevState:GiftedChatState) => ({
+        ...prevState,
         typingDisabled: true,
         messagesContainerHeight: newMessagesContainerHeight,
-      })
+      }))
     }
   }
 
@@ -409,11 +409,11 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 
       const newMessagesContainerHeight = getBasicMessagesContainerHeight()
 
-      setState({
-        ...state,
+      setState((prevState:GiftedChatState) => ({
+        ...prevState,
         typingDisabled: true,
         messagesContainerHeight: newMessagesContainerHeight,
-      })
+      }))
     }
   }
 
@@ -422,10 +422,10 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
       onKeyboardWillShow(e)
     }
 
-    setState({
-      ...state,
+    setState((prevState:GiftedChatState) => ({
+      ...prevState,
       typingDisabled: false,
-    })
+    }))
   }
 
   const onKeyboardDidHide = (e: any) => {
@@ -433,10 +433,10 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
       onKeyboardWillHide(e)
     }
 
-    setState({
-      ...state,
+    setState((prevState:GiftedChatState) => ({
+      ...prevState,
       typingDisabled: false,
-    })
+    }))
   }
 
   const scrollToBottom = (animated = true) => {
@@ -507,10 +507,10 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     })
 
     if (shouldResetInputToolbar === true) {
-      setState({
-        ...state,
+      setState((prevState:GiftedChatState) => ({
+        ...prevState,
         typingDisabled: true,
-      })
+      }))
 
       resetInputToolbar()
     }
@@ -542,12 +542,12 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
       minComposerHeight,
     )
 
-    setState({
-      ...state,
+    setState((prevState:GiftedChatState) => ({
+      ...prevState,
       text: getTextFromProp(''),
       composerHeight: minComposerHeight,
       messagesContainerHeight: newMessagesContainerHeight,
-    })
+    }))
   }
 
   const onInputSizeChanged = (size: { height: number }) => {
@@ -560,11 +560,11 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
       newComposerHeight,
     )
 
-    setState({
-      ...state,
+    setState((prevState:GiftedChatState) => ({
+      ...prevState,
       composerHeight: newComposerHeight,
       messagesContainerHeight: newMessagesContainerHeight,
-    })
+    }))
   }
 
   const _onInputTextChanged = (_text: string) => {
@@ -578,7 +578,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
 
     // Only set state if it's not being overridden by a prop.
     if (text === undefined) {
-      setState({ ...state, text: _text })
+      setState((prevState:GiftedChatState) => ({ ...prevState, text: _text }))
     }
   }
 
@@ -603,13 +603,13 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
       minComposerHeight,
     )
 
-    setState({
-      ...state,
+    setState((prevState:GiftedChatState) =>({
+      ...prevState,
       isInitialized: true,
       text: getTextFromProp(initialText),
       composerHeight: minComposerHeight,
       messagesContainerHeight: newMessagesContainerHeight,
-    })
+    }))
   }
 
   const onMainViewLayout = (e: LayoutChangeEvent) => {
@@ -622,13 +622,13 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     ) {
       maxHeightRef.current = layout.height
 
-      setState({
-        ...state,
+      setState((prevState:GiftedChatState) =>({
+        ...prevState,
         messagesContainerHeight:
           keyboardHeightRef.current > 0
             ? getMessagesContainerHeightWithKeyboard()
             : getBasicMessagesContainerHeight(),
-      })
+      }))
     }
 
     if (isFirstLayoutRef.current === true) {

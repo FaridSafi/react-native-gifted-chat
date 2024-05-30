@@ -84,6 +84,8 @@ export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   },
   optionTintColor?: string,
   quickReplyStyle?: ViewStyleProp,
+  quickReplyTextStyle?: TextStyleProp,
+  quickReplyContainerStyle?: ViewStyleProp,
   isCustomViewBottom?: boolean,
   timeTextStyle?: LeftRightStyle<TextStyleProp>,
   onPressAvatar?: User => void,

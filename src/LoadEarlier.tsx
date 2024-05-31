@@ -55,7 +55,7 @@ export interface LoadEarlierProps {
   onLoadEarlier?(): void
 }
 
-export function LoadEarlier({
+export function LoadEarlier ({
   isLoadingEarlier = false,
   onLoadEarlier = () => {},
   label = 'Load earlier messages',
@@ -74,20 +74,22 @@ export function LoadEarlier({
       accessibilityRole='button'
     >
       <View style={[styles.wrapper, wrapperStyle]}>
-        {isLoadingEarlier ? (
-          <View>
-            <Text style={[styles.text, textStyle, { opacity: 0 }]}>
-              {label}
-            </Text>
-            <ActivityIndicator
-              color={activityIndicatorColor!}
-              size={activityIndicatorSize!}
-              style={[styles.activityIndicator, activityIndicatorStyle]}
-            />
-          </View>
-        ) : (
-          <Text style={[styles.text, textStyle]}>{label}</Text>
-        )}
+        {isLoadingEarlier
+          ? (
+            <View>
+              <Text style={[styles.text, textStyle, { opacity: 0 }]}>
+                {label}
+              </Text>
+              <ActivityIndicator
+                color={activityIndicatorColor!}
+                size={activityIndicatorSize!}
+                style={[styles.activityIndicator, activityIndicatorStyle]}
+              />
+            </View>
+          )
+          : (
+            <Text style={[styles.text, textStyle]}>{label}</Text>
+          )}
       </View>
     </TouchableOpacity>
   )

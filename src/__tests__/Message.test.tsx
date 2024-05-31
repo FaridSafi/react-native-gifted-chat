@@ -17,7 +17,7 @@ describe('Message component', () => {
             createdAt: 1554744013721,
             user: { _id: 1 },
           }}
-        />,
+        />
       )
       .toJSON()
 
@@ -45,7 +45,7 @@ describe('Message component', () => {
             user: { _id: 1 },
           }}
           showUserAvatar
-        />,
+        />
       )
       .toJSON()
 
@@ -68,7 +68,7 @@ describe('Message component', () => {
             },
           }}
           showUserAvatar
-        />,
+        />
       )
       .toJSON()
 

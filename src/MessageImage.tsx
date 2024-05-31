@@ -39,7 +39,7 @@ export interface MessageImageProps<TMessage extends IMessage> {
   lightboxProps?: LightboxProps
 }
 
-export function MessageImage<TMessage extends IMessage = IMessage>({
+export function MessageImage<TMessage extends IMessage = IMessage> ({
   containerStyle,
   lightboxProps = {},
   imageProps = {},
@@ -47,9 +47,8 @@ export function MessageImage<TMessage extends IMessage = IMessage>({
   imageStyle,
   currentMessage,
 }: MessageImageProps<TMessage>) {
-  if (currentMessage == null) {
+  if (currentMessage == null)
     return null
-  }
 
   return (
     <View style={[styles.container, containerStyle]}>

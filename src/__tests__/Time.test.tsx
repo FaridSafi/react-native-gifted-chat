@@ -20,7 +20,7 @@ describe('Time', () => {
           ...DEFAULT_TEST_MESSAGE,
           createdAt: new Date(2022, 3, 17, 10, 5, 2),
         }}
-      />,
+      />
     )
     const tree = component.toJSON()
 

@@ -74,21 +74,19 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
   avatarName?: string = undefined
   avatarColor?: string = undefined
 
-  setAvatarColor() {
+  setAvatarColor () {
     const userName = (this.props.user && this.props.user.name) || ''
     const name = userName.toUpperCase().split(' ')
-    if (name.length === 1) {
+    if (name.length === 1)
       this.avatarName = `${name[0].charAt(0)}`
-    } else if (name.length > 1) {
+    else if (name.length > 1)
       this.avatarName = `${name[0].charAt(0)}${name[1].charAt(0)}`
-    } else {
+    else
       this.avatarName = ''
-    }
 
     let sumChars = 0
-    for (let i = 0; i < userName.length; i += 1) {
+    for (let i = 0; i < userName.length; i += 1)
       sumChars += userName.charCodeAt(i)
-    }
 
     // inspired by https://github.com/wbinnssmith/react-user-avatar
     // colors from https://flatuicolors.com/
@@ -105,31 +103,30 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
     this.avatarColor = colors[sumChars % colors.length]
   }
 
-  renderAvatar() {
+  renderAvatar () {
     const { user } = this.props
-    if (user) {
-      if (typeof user.avatar === 'function') {
+    if (user)
+      if (typeof user.avatar === 'function')
         return user.avatar([styles.avatarStyle, this.props.avatarStyle])
-      } else if (typeof user.avatar === 'string') {
+      else if (typeof user.avatar === 'string')
         return (
           <Image
             source={{ uri: user.avatar }}
             style={[styles.avatarStyle, this.props.avatarStyle]}
           />
         )
-      } else if (typeof user.avatar === 'number') {
+      else if (typeof user.avatar === 'number')
         return (
           <Image
             source={user.avatar}
             style={[styles.avatarStyle, this.props.avatarStyle]}
           />
         )
-      }
-    }
+
     return null
   }
 
-  renderInitials() {
+  renderInitials () {
     return (
       <Text style={[styles.textStyle, this.props.textStyle]}>
         {this.avatarName}
@@ -139,18 +136,17 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
 
   handleOnPress = () => {
     const { onPress, ...other } = this.props
-    if (this.props.onPress) {
+    if (this.props.onPress)
       this.props.onPress(other)
-    }
   }
 
   handleOnLongPress = () => {}
 
-  render() {
+  render () {
     if (
       !this.props.user ||
       (!this.props.user.name && !this.props.user.avatar)
-    ) {
+    )
       // render placeholder
       return (
         <View
@@ -162,8 +158,8 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
           accessibilityRole='image'
         />
       )
-    }
-    if (this.props.user.avatar) {
+
+    if (this.props.user.avatar)
       return (
         <TouchableOpacity
           disabled={!this.props.onPress}
@@ -174,7 +170,6 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
           {this.renderAvatar()}
         </TouchableOpacity>
       )
-    }
 
     this.setAvatarColor()
 

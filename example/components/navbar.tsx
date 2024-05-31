@@ -9,6 +9,7 @@ export function NavBar() {
     <View
       style={{
         alignItems: 'center',
+        paddingTop: 10,
       }}
     >
       <Text>💬 Gifted Chat{'\n'}</Text>

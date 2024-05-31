@@ -2,13 +2,12 @@ import PropTypes from 'prop-types'
 import React, { useCallback } from 'react'
 import {
   StyleProp,
+  ViewStyle,
+  TextStyle,
   StyleSheet,
   Text,
-  TextStyle,
   TouchableOpacity,
   View,
-  ViewPropTypes,
-  ViewStyle,
 } from 'react-native'
 
 import { useActionSheet } from '@expo/react-native-action-sheet'
@@ -43,6 +42,7 @@ const CustomActions = ({
       'Cancel',
     ]
     const cancelButtonIndex = options.length - 1
+
     showActionSheetWithOptions(
       {
         options,
@@ -65,22 +65,22 @@ const CustomActions = ({
   }, [showActionSheetWithOptions])
 
   const renderIconComponent = useCallback(() => {
-    if (renderIcon) {
+    if (renderIcon)
       return renderIcon()
-    }
+
     return (
       <View style={[styles.wrapper, wrapperStyle]}>
         <Text style={[styles.iconText, iconTextStyle]}>+</Text>
       </View>
     )
-  }, [])
+  }, [renderIcon])
 
   return (
     <TouchableOpacity
       style={[styles.container, containerStyle]}
       onPress={onActionsPress}
     >
-      <>{renderIconComponent()}</>
+      {renderIconComponent()}
     </TouchableOpacity>
   )
 }
@@ -99,11 +99,14 @@ const styles = StyleSheet.create({
     borderColor: '#b2b2b2',
     borderWidth: 2,
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconText: {
     color: '#b2b2b2',
     fontWeight: 'bold',
     fontSize: 16,
+    lineHeight: 16,
     backgroundColor: 'transparent',
     textAlign: 'center',
   },
@@ -111,22 +114,4 @@ const styles = StyleSheet.create({
 
 CustomActions.contextTypes = {
   actionSheet: PropTypes.func,
-}
-
-CustomActions.defaultProps = {
-  onSend: () => {},
-  options: {},
-  renderIcon: null,
-  containerStyle: {},
-  wrapperStyle: {},
-  iconTextStyle: {},
-}
-
-CustomActions.propTypes = {
-  onSend: PropTypes.func,
-  options: PropTypes.object,
-  renderIcon: PropTypes.func,
-  containerStyle: ViewPropTypes.style,
-  wrapperStyle: ViewPropTypes.style,
-  iconTextStyle: Text.propTypes.style,
 }

@@ -15,7 +15,7 @@ describe('Day', () => {
 
   it('should render <Day /> and compare with snapshot', () => {
     const component = renderer.create(
-      <Day currentMessage={DEFAULT_TEST_MESSAGE} />,
+      <Day currentMessage={DEFAULT_TEST_MESSAGE} />
     )
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()

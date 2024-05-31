@@ -15,16 +15,15 @@ const TypingIndicator = ({ isTyping }: Props) => {
       heightScale: new Animated.Value(0),
       marginScale: new Animated.Value(0),
     }),
-    [],
+    []
   )
 
   // on isTyping fire side effect
   useUpdateLayoutEffect(() => {
-    if (isTyping) {
+    if (isTyping)
       slideIn()
-    } else {
+    else
       slideOut()
-    }
   }, [isTyping])
 
   // side effect
@@ -81,14 +80,16 @@ const TypingIndicator = ({ isTyping }: Props) => {
         },
       ]}
     >
-      {isTyping ? (
-        <TypingAnimation
-          style={{ marginLeft: 6, marginTop: 7.2 }}
-          dotRadius={4}
-          dotMargin={5.5}
-          dotColor={'rgba(0, 0, 0, 0.38)'}
-        />
-      ) : null}
+      {isTyping
+        ? (
+          <TypingAnimation
+            style={{ marginLeft: 6, marginTop: 7.2 }}
+            dotRadius={4}
+            dotMargin={5.5}
+            dotColor='rgba(0, 0, 0, 0.38)'
+          />
+        )
+        : null}
     </Animated.View>
   )
 }

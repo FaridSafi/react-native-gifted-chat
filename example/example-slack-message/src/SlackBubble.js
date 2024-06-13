@@ -17,17 +17,17 @@ import {
   MessageImage,
   Time,
   utils,
+  Bubble
 } from 'react-native-gifted-chat'
 
 const { isSameUser, isSameDay } = utils
 
-export default class Bubble extends React.Component {
+export default class SlackBubble extends Bubble {
   constructor(props) {
     super(props)
-    this.onLongPress = this.onLongPress.bind(this)
   }
 
-  onLongPress() {
+  onLongPress = () => {
     if (this.props.onLongPress) {
       this.props.onLongPress(this.context, this.props.currentMessage)
     } else {
@@ -49,7 +49,6 @@ export default class Bubble extends React.Component {
         )
       }
     }
-  }
 
   renderMessageText() {
     if (this.props.currentMessage.text) {
@@ -270,11 +269,11 @@ const styles = StyleSheet.create({
   },
 })
 
-Bubble.contextTypes = {
+SlackBubble.contextTypes = {
   actionSheet: PropTypes.func,
 }
 
-Bubble.defaultProps = {
+SlackBubble.defaultProps = {
   touchableProps: {},
   onLongPress: null,
   renderMessageImage: null,
@@ -295,7 +294,7 @@ Bubble.defaultProps = {
   containerToPreviousStyle: {},
 }
 
-Bubble.propTypes = {
+SlackBubble.propTypes = {
   touchableProps: PropTypes.object,
   onLongPress: PropTypes.func,
   renderMessageImage: PropTypes.func,

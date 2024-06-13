@@ -61,7 +61,7 @@ export function Time<TMessage extends IMessage = IMessage>({
   timeTextStyle,
 }: TimeProps<TMessage>) {
   const { getLocale } = useChatContext()
-  if (currentMessage == null) {
+  if (currentMessage === undefined) {
     return null
   }
 

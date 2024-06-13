@@ -47,7 +47,7 @@ export function MessageImage<TMessage extends IMessage = IMessage>({
   imageStyle,
   currentMessage,
 }: MessageImageProps<TMessage>) {
-  if (currentMessage == null) {
+  if (currentMessage === undefined) {
     return null
   }
 

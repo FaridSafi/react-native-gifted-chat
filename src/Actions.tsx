@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useCallback } from 'react'
 import {
   StyleSheet,
   Text,
@@ -12,7 +12,6 @@ import {
 import Color from './Color'
 import { StylePropType } from './utils'
 import { useChatContext } from './GiftedChatContext'
-import { useCallbackOne } from 'use-memo-one'
 
 export interface ActionsProps {
   options?: { [key: string]: any }
@@ -25,7 +24,7 @@ export interface ActionsProps {
 }
 
 export function Actions ({
-  options = {},
+  options,
   optionTintColor = Color.optionTintColor,
   icon,
   wrapperStyle,
@@ -35,7 +34,9 @@ export function Actions ({
 }: ActionsProps) {
   const { actionSheet } = useChatContext()
 
-  const onActionsPress = useCallbackOne(() => {
+  const onActionsPress = useCallback(() => {
+    if (!options) return
+
     const optionKeys = Object.keys(options)
     const cancelButtonIndex = optionKeys.indexOf('Cancel')
 
@@ -51,9 +52,9 @@ export function Actions ({
           options[key]()
       }
     )
-  }, [])
+  }, [actionSheet, options, optionTintColor])
 
-  const renderIcon = useCallbackOne(() => {
+  const renderIcon = useCallback(() => {
     if (icon)
       return icon()
 
@@ -62,7 +63,7 @@ export function Actions ({
         <Text style={[styles.iconText, iconTextStyle]}>{'+'}</Text>
       </View>
     )
-  }, [])
+  }, [icon, iconTextStyle, wrapperStyle])
 
   return (
     <TouchableOpacity
@@ -75,7 +76,6 @@ export function Actions ({
 }
 
 Actions.propTypes = {
-  onSend: PropTypes.func,
   options: PropTypes.object,
   optionTintColor: PropTypes.string,
   icon: PropTypes.func,

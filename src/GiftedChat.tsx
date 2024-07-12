@@ -238,11 +238,17 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     inverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
-    messageContainerRef = createRef<FlatList<IMessage>>(),
-    textInputRef = createRef<TextInput>(),
   } = props
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
+
+  const messageContainerRef = useMemo(() =>
+    props.messageContainerRef || createRef<FlatList<IMessage>>()
+  , [props.messageContainerRef])
+
+  const textInputRef = useMemo(() =>
+    props.textInputRef || createRef<TextInput>()
+  , [props.textInputRef])
 
   const isTextInputWasFocused: MutableRefObject<boolean> = useRef(false)
 
@@ -326,7 +332,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     messageContainerRef.current.scrollToEnd({ animated: isAnimated })
   }, [inverted, messageContainerRef])
 
-  const renderMessages = useCallback(() => {
+  const renderMessages = useMemo(() => {
+    if (!isInitialized) return null
+
     const { messagesContainerStyle, ...messagesContainerProps } = props
 
     const fragment = (
@@ -352,6 +360,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
     return fragment
   }, [
+    isInitialized,
     isTyping,
     messages,
     props,
@@ -416,9 +425,8 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     onInputTextChanged?.(_text)
 
     // Only set state if it's not being overridden by a prop.
-    if (props.text === undefined) {
+    if (props.text === undefined)
       setText(_text)
-    }
   }, [onInputTextChanged, isTypingDisabled, props.text])
 
   const onInitialLayoutViewLayout = useCallback((e: any) => {
@@ -518,7 +526,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     [keyboard, trackingKeyboardMovement, insets, handleTextInputFocusWhenKeyboardHide, handleTextInputFocusWhenKeyboardShow, enableTyping, diableTyping, debounceEnableTyping]
   )
 
-
   return (
     <GiftedChatContext.Provider value={contextValues}>
       <ActionSheetProvider ref={actionSheetRef}>
@@ -531,7 +538,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
             isInitialized
               ? (
                 <Animated.View style={[styles.fill, contentStyleAnim]}>
-                  {renderMessages()}
+                  {renderMessages}
                   {inputToolbarFragment}
                 </Animated.View>
               )

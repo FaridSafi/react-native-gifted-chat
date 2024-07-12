@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native'
 
 import { Composer, ComposerProps } from './Composer'
@@ -20,26 +20,56 @@ export interface InputToolbarProps<TMessage extends IMessage> {
   renderSend?(props: SendProps<TMessage>): React.ReactNode
   renderComposer?(props: ComposerProps): React.ReactNode
   onPressActionButton?(): void
+  icon?: () => React.ReactNode
+  wrapperStyle?: StyleProp<ViewStyle>
 }
 
 export function InputToolbar<TMessage extends IMessage = IMessage> (
   props: InputToolbarProps<TMessage>
 ) {
-  const { containerStyle, ...rest } = props
   const {
     renderActions,
     onPressActionButton,
     renderComposer,
     renderSend,
     renderAccessory,
-  } = rest
+    options,
+    optionTintColor,
+    icon,
+    wrapperStyle,
+    containerStyle,
+  } = props
+
+  const actionsFragment = useMemo(() => {
+    const props = {
+      options,
+      optionTintColor,
+      icon,
+      wrapperStyle,
+      containerStyle,
+    }
+
+    return renderActions?.(props) ||
+      (onPressActionButton && <Actions {...props} />)
+  }, [
+    renderActions,
+    onPressActionButton,
+    options,
+    optionTintColor,
+    icon,
+    wrapperStyle,
+    containerStyle,
+  ])
+
+  const composerFragment = useMemo(() => {
+    return renderComposer?.(props as ComposerProps) || <Composer {...props as ComposerProps} />
+  }, [renderComposer, props])
 
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={[styles.primary, props.primaryStyle]}>
-        {renderActions?.(rest) ||
-          (onPressActionButton && <Actions {...rest} />)}
-        {renderComposer?.(props as ComposerProps) || <Composer {...props} />}
+        {actionsFragment}
+        {composerFragment}
         {renderSend?.(props) || <Send {...props} />}
       </View>
       {renderAccessory && (

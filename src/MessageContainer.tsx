@@ -329,6 +329,7 @@ export default class MessageContainer<
 
   render () {
     const { inverted } = this.props
+
     return (
       <View
         style={

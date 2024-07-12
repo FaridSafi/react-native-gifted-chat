@@ -106,7 +106,6 @@ const App = () => {
   )
 
   const onLoadEarlier = useCallback(() => {
-    console.log('loading')
     dispatch({ type: ActionKind.LOAD_EARLIER_START })
     setTimeout(() => {
       const newMessages = GiftedChat.prepend(

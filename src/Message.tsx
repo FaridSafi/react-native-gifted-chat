@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { View, StyleSheet, ViewStyle, LayoutChangeEvent } from 'react-native'
+import isEqual from 'lodash.isequal'
 
 import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
@@ -99,24 +100,16 @@ export default class Message<
     const nextPropsMessage = nextProps.nextMessage
     const nextPropsPreviousMessage = nextProps.previousMessage
 
-    const shouldUpdate =
-      (this.props.shouldUpdateMessage &&
-        this.props.shouldUpdateMessage(this.props, nextProps)) ||
+    let shouldUpdate =
+      this.props.shouldUpdateMessage?.(this.props, nextProps) ||
       false
 
-    return (
-      next.sent !== current.sent ||
-      next.received !== current.received ||
-      next.pending !== current.pending ||
-      next.createdAt !== current.createdAt ||
-      next.text !== current.text ||
-      next.image !== current.image ||
-      next.video !== current.video ||
-      next.audio !== current.audio ||
-      previousMessage !== nextPropsPreviousMessage ||
-      nextMessage !== nextPropsMessage ||
-      shouldUpdate
-    )
+    shouldUpdate = shouldUpdate ||
+      !isEqual(current, next) ||
+      !isEqual(previousMessage, nextPropsPreviousMessage) ||
+      !isEqual(nextMessage, nextPropsMessage)
+
+    return shouldUpdate
   }
 
   renderDay () {

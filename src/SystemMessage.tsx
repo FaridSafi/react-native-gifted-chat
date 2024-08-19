@@ -41,7 +41,7 @@ export function SystemMessage<TMessage extends IMessage = IMessage> ({
   wrapperStyle,
   textStyle,
 }: SystemMessageProps<TMessage>) {
-  if (currentMessage == null || currentMessage.system == false)
+  if (currentMessage == null || currentMessage.system === false)
     return null
 
   return (

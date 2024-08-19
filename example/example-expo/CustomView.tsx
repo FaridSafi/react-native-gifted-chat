@@ -37,43 +37,44 @@ const CustomView = ({
 
     try {
       const supported = await Linking.canOpenURL(url)
-      if (supported) {
+      if (supported)
         return Linking.openURL(url)
-      }
+
       alert('Opening the map is not supported.')
     } catch (e) {
       alert(e.message)
     }
   }, [currentMessage])
 
-  if (currentMessage.location) {
+  if (currentMessage.location)
     return (
       <TouchableOpacity
         style={[styles.container, containerStyle]}
         onPress={openMapAsync}
       >
-        {Platform.OS !== 'web' ? (
-          <MapView
-            style={[styles.mapView, mapViewStyle]}
-            region={{
-              latitude: currentMessage.location.latitude,
-              longitude: currentMessage.location.longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-            scrollEnabled={false}
-            zoomEnabled={false}
-          />
-        ) : (
-          <View style={{ padding: 15 }}>
-            <Text style={{ color: 'tomato', fontWeight: 'bold' }}>
+        {Platform.OS !== 'web'
+          ? (
+            <MapView
+              style={[styles.mapView, mapViewStyle]}
+              region={{
+                latitude: currentMessage.location.latitude,
+                longitude: currentMessage.location.longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+              scrollEnabled={false}
+              zoomEnabled={false}
+            />
+          )
+          : (
+            <View style={{ padding: 15 }}>
+              <Text style={{ color: 'tomato', fontWeight: 'bold' }}>
               Map not supported in web yet, sorry!
-            </Text>
-          </View>
-        )}
+              </Text>
+            </View>
+          )}
       </TouchableOpacity>
     )
-  }
 
   return null
 }

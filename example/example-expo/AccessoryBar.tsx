@@ -9,7 +9,7 @@ import {
 } from './mediaUtils'
 
 export default class AccessoryBar extends React.Component<any> {
-  render() {
+  render () {
     const { onSend, isTyping } = this.props
 
     return (

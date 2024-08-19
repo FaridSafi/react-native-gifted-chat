@@ -483,7 +483,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const contextValues = useMemo(
     () => ({
-      actionSheet: actionSheet || (() => actionSheetRef.current?.getContext()!),
+      actionSheet: actionSheet || (() => actionSheetRef.current?.getContext()),
       getLocale: () => locale,
     }),
     [actionSheet, locale]

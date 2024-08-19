@@ -15,8 +15,8 @@ it('should test if same day', () => {
         text: 'test2',
         createdAt: now,
         user: { _id: 2 },
-      },
-    ),
+      }
+    )
   ).toBe(true)
 })
 

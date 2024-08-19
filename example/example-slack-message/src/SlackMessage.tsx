@@ -1,6 +1,3 @@
-/* eslint-disable no-underscore-dangle, no-use-before-define */
-
-import PropTypes from 'prop-types'
 import React, { useCallback, useMemo } from 'react'
 import {
   View,
@@ -15,13 +12,12 @@ import Bubble from './SlackBubble'
 const { isSameUser, isSameDay } = utils
 
 interface Props {
-  renderAvatar: () => {},
-  renderBubble: () => {},
-  renderDay: () => {},
+  renderAvatar: () => void,
+  renderBubble: () => void,
+  renderDay: () => void,
   currentMessage: any,
   nextMessage: any,
   previousMessage: any,
-  user: any,
   containerStyle?: {
     left: StyleProp<ViewStyle>,
     right: StyleProp<ViewStyle>,
@@ -33,7 +29,6 @@ const Message = (props: Props) => {
     currentMessage,
     nextMessage,
     previousMessage,
-    user,
     containerStyle,
   } = props
 
@@ -49,9 +44,9 @@ const Message = (props: Props) => {
   const renderDay = useCallback(() => {
     if (currentMessage.createdAt) {
       const dayProps = getInnerComponentProps()
-      if (props.renderDay) {
+      if (props.renderDay)
         return props.renderDay(dayProps)
-      }
+
       return <Day {...dayProps} />
     }
     return null
@@ -59,9 +54,9 @@ const Message = (props: Props) => {
 
   const renderBubble = useCallback(() => {
     const bubbleProps = getInnerComponentProps()
-    if (props.renderBubble) {
+    if (props.renderBubble)
       return props.renderBubble(bubbleProps)
-    }
+
     return <Bubble {...bubbleProps} />
   }, [])
 
@@ -70,10 +65,9 @@ const Message = (props: Props) => {
     if (
       isSameUser(currentMessage, previousMessage) &&
       isSameDay(currentMessage, previousMessage)
-    ) {
+    )
       // Set the invisible avatar height to 0, but keep the width, padding, etc.
       extraStyle = { height: 0 }
-    }
 
     const avatarProps = getInnerComponentProps()
 
@@ -93,7 +87,7 @@ const Message = (props: Props) => {
   const marginBottom = useMemo(() =>
     isSameUser(
       currentMessage,
-      nextMessage,
+      nextMessage
     )
       ? 2
       : 10

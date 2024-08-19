@@ -114,7 +114,14 @@ export default class Message<
 
   renderDay () {
     if (this.props.currentMessage && this.props.currentMessage.createdAt) {
-      const { containerStyle, onMessageLayout, ...props } = this.props
+      const {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        containerStyle,
+        onMessageLayout,
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+        ...props
+      } = this.props
+
       if (this.props.renderDay)
         return this.props.renderDay(props)
 
@@ -124,16 +131,28 @@ export default class Message<
   }
 
   renderBubble () {
-    const { containerStyle, onMessageLayout, ...props } = this.props
+    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      containerStyle,
+      onMessageLayout,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      ...props
+    } = this.props
+
     if (this.props.renderBubble)
       return this.props.renderBubble(props)
 
-    // @ts-ignore
     return <Bubble {...props} />
   }
 
   renderSystemMessage () {
-    const { containerStyle, onMessageLayout, ...props } = this.props
+    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      containerStyle,
+      onMessageLayout,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      ...props
+    } = this.props
 
     if (this.props.renderSystemMessage)
       return this.props.renderSystemMessage(props)
@@ -161,7 +180,14 @@ export default class Message<
     )
       return null
 
-    const { containerStyle, onMessageLayout, ...props } = this.props
+    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      containerStyle,
+      onMessageLayout,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      ...props
+    } = this.props
+
     return <Avatar {...props} />
   }
 

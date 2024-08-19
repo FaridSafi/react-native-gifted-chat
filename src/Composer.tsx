@@ -63,7 +63,7 @@ export function Composer ({
     [onInputSizeChanged]
   )
 
-  const handleContentSizeChange = useCallback(({ nativeEvent: { contentSize }}: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) =>
+  const handleContentSizeChange = useCallback(({ nativeEvent: { contentSize } }: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) =>
     determineInputSizeChange(contentSize)
   , [determineInputSizeChange])
 

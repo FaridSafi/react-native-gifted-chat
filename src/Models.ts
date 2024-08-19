@@ -8,7 +8,7 @@ export {
   RenderMessageImageProps,
   RenderMessageVideoProps,
   RenderMessageAudioProps,
-  RenderMessageTextProps,
+  RenderMessageTextProps
 } from './Bubble'
 export { ComposerProps } from './Composer'
 export { DayProps } from './Day'

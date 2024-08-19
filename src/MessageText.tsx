@@ -10,7 +10,6 @@ import {
   TextStyle,
 } from 'react-native'
 
-// @ts-ignore
 import ParsedText from 'react-native-parsed-text'
 import { LeftRightStyle, IMessage } from './Models'
 import { StylePropType } from './utils'

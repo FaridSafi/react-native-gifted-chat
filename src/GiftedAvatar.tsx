@@ -135,9 +135,15 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
   }
 
   handleOnPress = () => {
-    const { onPress, ...other } = this.props
+    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      onPress,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      ...rest
+    } = this.props
+
     if (this.props.onPress)
-      this.props.onPress(other)
+      this.props.onPress(rest)
   }
 
   handleOnLongPress = () => {}

@@ -5,8 +5,8 @@ import * as ImagePicker from 'expo-image-picker'
 
 import { Alert } from 'react-native'
 
-export default async function getPermissionAsync(
-  permission: Permissions.PermissionType,
+export default async function getPermissionAsync (
+  permission: Permissions.PermissionType
 ) {
   const { status } = await Permissions.askAsync(permission)
   if (status !== 'granted') {
@@ -16,12 +16,12 @@ export default async function getPermissionAsync(
       `If you would like to use this feature, you'll need to enable the ${permissionName} permission in your phone settings.`,
       [
         {
-          text: "Let's go!",
+          text: 'Let\'s go!',
           onPress: () => Linking.openURL('app-settings:'),
         },
         { text: 'Nevermind', onPress: () => {}, style: 'cancel' },
       ],
-      { cancelable: true },
+      { cancelable: true }
     )
 
     return false
@@ -29,19 +29,18 @@ export default async function getPermissionAsync(
   return true
 }
 
-export async function getLocationAsync(
-  onSend: (locations: { location: Location.LocationObjectCoords }[]) => void,
+export async function getLocationAsync (
+  onSend: (locations: { location: Location.LocationObjectCoords }[]) => void
 ) {
   if (await Location.requestForegroundPermissionsAsync()) {
     const location = await Location.getCurrentPositionAsync({})
-    if (location) {
+    if (location)
       onSend([{ location: location.coords }])
-    }
   }
 }
 
-export async function pickImageAsync(
-  onSend: (images: { image: string }[]) => void,
+export async function pickImageAsync (
+  onSend: (images: { image: string }[]) => void
 ) {
   if (await ImagePicker.requestMediaLibraryPermissionsAsync()) {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -56,8 +55,8 @@ export async function pickImageAsync(
   }
 }
 
-export async function takePictureAsync(
-  onSend: (images: { image: string }[]) => void,
+export async function takePictureAsync (
+  onSend: (images: { image: string }[]) => void
 ) {
   if (await ImagePicker.requestCameraPermissionsAsync()) {
     const result = await ImagePicker.launchCameraAsync({

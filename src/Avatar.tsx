@@ -101,7 +101,7 @@ export function Avatar<TMessage extends IMessage = IMessage> (
     )
 
   const renderAvatarComponent = () => {
-    if (renderAvatar) {
+    if (renderAvatar)
       return renderAvatar({
         renderAvatarOnTop,
         showAvatarForEveryMessage,
@@ -114,7 +114,6 @@ export function Avatar<TMessage extends IMessage = IMessage> (
         onPressAvatar,
         onLongPressAvatar,
       })
-    }
 
     if (props.currentMessage)
       return (

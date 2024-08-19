@@ -104,6 +104,6 @@ const messages = [
       avatar: 'https://placeimg.com/140/140/any',
     },
   },
-];
+]
 
-export default messages;
+export default messages

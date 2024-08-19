@@ -58,9 +58,8 @@ const CustomActions = ({
             return
           case 2:
             getLocationAsync(onSend)
-            return
         }
-      },
+      }
     )
   }, [showActionSheetWithOptions])
 

@@ -22,11 +22,11 @@ const user = {
   name: 'Developer',
 }
 
-const otherUser = {
-  _id: 2,
-  name: 'React Native',
-  avatar: 'https://facebook.github.io/react/img/logo_og.png',
-}
+// const otherUser = {
+//   _id: 2,
+//   name: 'React Native',
+//   avatar: 'https://facebook.github.io/react/img/logo_og.png',
+// }
 
 interface IState {
   messages: any[]
@@ -50,7 +50,7 @@ interface StateAction {
   payload?: any
 }
 
-function reducer(state: IState, action: StateAction) {
+function reducer (state: IState, action: StateAction) {
   switch (action.type) {
     case ActionKind.SEND_MESSAGE: {
       return {
@@ -97,12 +97,12 @@ const App = () => {
       const newMessages = GiftedChat.append(
         state.messages,
         sentMessages,
-        Platform.OS !== 'web',
+        Platform.OS !== 'web'
       )
 
       dispatch({ type: ActionKind.SEND_MESSAGE, payload: newMessages })
     },
-    [dispatch, state.messages],
+    [dispatch, state.messages]
   )
 
   const onLoadEarlier = useCallback(() => {
@@ -111,14 +111,14 @@ const App = () => {
       const newMessages = GiftedChat.prepend(
         state.messages,
         earlierMessages() as IMessage[],
-        Platform.OS !== 'web',
+        Platform.OS !== 'web'
       )
 
       dispatch({ type: ActionKind.LOAD_EARLIER_MESSAGES, payload: newMessages })
     }, 1500) // simulating network
   }, [dispatch, state.messages])
 
-  const parsePatterns = useCallback((_linkStyle: any) => {
+  const parsePatterns = useCallback(() => {
     return [
       {
         pattern: /#(\w+)/,
@@ -138,7 +138,7 @@ const App = () => {
 
   const onQuickReply = useCallback((replies: any[]) => {
     const createdAt = new Date()
-    if (replies.length === 1) {
+    if (replies.length === 1)
       onSend([
         {
           createdAt,
@@ -147,7 +147,7 @@ const App = () => {
           user,
         },
       ])
-    } else if (replies.length > 1) {
+    else if (replies.length > 1)
       onSend([
         {
           createdAt,
@@ -156,9 +156,8 @@ const App = () => {
           user,
         },
       ])
-    } else {
+    else
       console.warn('replies param is not set correctly')
-    }
   }, [])
 
   const renderQuickReplySend = useCallback(() => {
@@ -169,7 +168,7 @@ const App = () => {
     (isTyping: boolean) => {
       dispatch({ type: ActionKind.SET_IS_TYPING, payload: isTyping })
     },
-    [dispatch],
+    [dispatch]
   )
 
   const onSendFromUser = useCallback(
@@ -184,7 +183,7 @@ const App = () => {
 
       onSend(messagesToUpload)
     },
-    [onSend],
+    [onSend]
   )
 
   const renderAccessory = useCallback(() => {
@@ -198,10 +197,12 @@ const App = () => {
 
   const renderCustomActions = useCallback(
     props =>
-      Platform.OS === 'web' ? null : (
-        <CustomActions {...props} onSend={onSendFromUser} />
-      ),
-    [onSendFromUser],
+      Platform.OS === 'web'
+        ? null
+        : (
+          <CustomActions {...props} onSend={onSendFromUser} />
+        ),
+    [onSendFromUser]
   )
 
   const renderSystemMessage = useCallback(props => {

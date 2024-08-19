@@ -104,6 +104,7 @@ const styles = {
 
 const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel']
 
+/* eslint-disable no-use-before-define */
 export type RenderMessageImageProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
   'containerStyle' | 'wrapperStyle'
@@ -127,6 +128,7 @@ export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
   'containerStyle' | 'wrapperStyle'
 > &
   MessageTextProps<TMessage>
+/* eslint-enable no-use-before-define */
 
 export interface BubbleProps<TMessage extends IMessage> {
   user?: User
@@ -265,6 +267,7 @@ export default class Bubble<
           ? optionTitles.slice(0, 2)
           : DEFAULT_OPTION_TITLES
       const cancelButtonIndex = options.length - 1
+
       this.context.actionSheet().showActionSheetWithOptions(
         {
           options,
@@ -299,7 +302,7 @@ export default class Bubble<
     )
       return [
         styles[position].containerToNext,
-        containerToNextStyle && containerToNextStyle[position],
+        containerToNextStyle?.[position],
       ]
 
     return null
@@ -338,7 +341,14 @@ export default class Bubble<
       quickReplyContainerStyle,
     } = this.props
     if (currentMessage && currentMessage.quickReplies) {
-      const { containerStyle, wrapperStyle, ...quickReplyProps } = this.props
+      const {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        containerStyle,
+        wrapperStyle,
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+        ...quickReplyProps
+      } = this.props
+
       if (this.props.renderQuickReplies)
         return this.props.renderQuickReplies(quickReplyProps)
 
@@ -360,9 +370,11 @@ export default class Bubble<
   renderMessageText () {
     if (this.props.currentMessage && this.props.currentMessage.text) {
       const {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,
         wrapperStyle,
         optionTitles,
+        /* eslint-enable @typescript-eslint/no-unused-vars */
         ...messageTextProps
       } = this.props
       if (this.props.renderMessageText)
@@ -375,7 +387,14 @@ export default class Bubble<
 
   renderMessageImage () {
     if (this.props.currentMessage && this.props.currentMessage.image) {
-      const { containerStyle, wrapperStyle, ...messageImageProps } = this.props
+      const {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        containerStyle,
+        wrapperStyle,
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+        ...messageImageProps
+      } = this.props
+
       if (this.props.renderMessageImage)
         return this.props.renderMessageImage(messageImageProps)
 
@@ -386,7 +405,14 @@ export default class Bubble<
 
   renderMessageVideo () {
     if (this.props.currentMessage && this.props.currentMessage.video) {
-      const { containerStyle, wrapperStyle, ...messageVideoProps } = this.props
+      const {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        containerStyle,
+        wrapperStyle,
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+        ...messageVideoProps
+      } = this.props
+
       if (this.props.renderMessageVideo)
         return this.props.renderMessageVideo(messageVideoProps)
 
@@ -397,7 +423,14 @@ export default class Bubble<
 
   renderMessageAudio () {
     if (this.props.currentMessage && this.props.currentMessage.audio) {
-      const { containerStyle, wrapperStyle, ...messageAudioProps } = this.props
+      const {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        containerStyle,
+        wrapperStyle,
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+        ...messageAudioProps
+      } = this.props
+
       if (this.props.renderMessageAudio)
         return this.props.renderMessageAudio(messageAudioProps)
 
@@ -443,11 +476,14 @@ export default class Bubble<
   renderTime () {
     if (this.props.currentMessage && this.props.currentMessage.createdAt) {
       const {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,
         wrapperStyle,
         textStyle,
+        /* eslint-enable @typescript-eslint/no-unused-vars */
         ...timeProps
       } = this.props
+
       if (this.props.renderTime)
         return this.props.renderTime(timeProps)
 

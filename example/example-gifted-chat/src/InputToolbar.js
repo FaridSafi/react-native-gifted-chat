@@ -1,10 +1,8 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { Image } from 'react-native';
-import { InputToolbar, Actions, Composer, Send } from 'react-native-gifted-chat';
+import React from 'react'
+import { Image } from 'react-native'
+import { InputToolbar, Actions, Composer, Send } from 'react-native-gifted-chat'
 
-export const renderInputToolbar = (props) => (
+export const renderInputToolbar = props => (
   <InputToolbar
     {...props}
     containerStyle={{
@@ -13,9 +11,9 @@ export const renderInputToolbar = (props) => (
     }}
     primaryStyle={{ alignItems: 'center' }}
   />
-);
+)
 
-export const renderActions = (props) => (
+export const renderActions = props => (
   <Actions
     {...props}
     containerStyle={{
@@ -37,17 +35,17 @@ export const renderActions = (props) => (
     )}
     options={{
       'Choose From Library': () => {
-        console.log('Choose From Library');
+        console.log('Choose From Library')
       },
       Cancel: () => {
-        console.log('Cancel');
+        console.log('Cancel')
       },
     }}
     optionTintColor="#222B45"
   />
-);
+)
 
-export const renderComposer = (props) => (
+export const renderComposer = props => (
   <Composer
     {...props}
     textInputStyle={{
@@ -61,9 +59,9 @@ export const renderComposer = (props) => (
       marginLeft: 0,
     }}
   />
-);
+)
 
-export const renderSend = (props) => (
+export const renderSend = props => (
   <Send
     {...props}
     disabled={!props.text}
@@ -82,4 +80,4 @@ export const renderSend = (props) => (
       }}
     />
   </Send>
-);
+)

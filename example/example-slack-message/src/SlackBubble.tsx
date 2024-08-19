@@ -1,7 +1,5 @@
-/* eslint-disable no-underscore-dangle, no-use-before-define */
-
-import PropTypes from 'prop-types'
 import React, { useCallback, useMemo } from 'react'
+import PropTypes from 'prop-types'
 import {
   Text,
   StyleSheet,
@@ -25,13 +23,13 @@ const { isSameUser, isSameDay } = utils
 
 interface Props {
   touchableProps: any
-  onLongPress: (context: any, currentMessage: any) => void
-  renderMessageImage: () => void
-  renderMessageText: () => void
-  renderCustomView: (props: Props) => void
-  renderUsername: () => void
-  renderTime: () => void
-  renderTicks: () => void
+  onLongPress?: (context: any, currentMessage: any) => void
+  renderMessageImage?: (props: Props) => React.ReactNode
+  renderMessageText?: (props: Props) => React.ReactNode
+  renderCustomView?: (props: Props) => React.ReactNode
+  renderUsername?: (props: Props) => React.ReactNode
+  renderTime?: (props: Props) => React.ReactNode
+  renderTicks?: (currentMessage: any) => React.ReactNode
   currentMessage: any
   nextMessage: any
   previousMessage: any
@@ -55,6 +53,9 @@ interface Props {
     left: StyleProp<ViewStyle>
     right: StyleProp<ViewStyle>
   }
+  imageStyle: StyleProp<ViewStyle>
+  textStyle: StyleProp<TextStyle>
+  position: 'left' | 'right'
 }
 
 const Bubble = (props: Props) => {
@@ -63,16 +64,13 @@ const Bubble = (props: Props) => {
     onLongPress,
     renderCustomView,
     currentMessage,
-    nextMessage,
     previousMessage,
     user,
     containerStyle,
     wrapperStyle,
-    messageTextStyle,
     usernameStyle,
     tickStyle,
-    containerToNextStyle,
-    containerToPreviousStyle,
+    position,
   } = props
 
   const context = useChatContext()
@@ -80,48 +78,43 @@ const Bubble = (props: Props) => {
   const handleLongPress = useCallback(() => {
     if (onLongPress) {
       onLongPress(context, currentMessage)
-    } else {
-      if (currentMessage.text) {
-        const options = ['Copy Text', 'Cancel']
-        const cancelButtonIndex = options.length - 1
-        context.actionSheet().showActionSheetWithOptions(
-          {
-            options,
-            cancelButtonIndex,
-          },
-          buttonIndex => {
-            switch (buttonIndex) {
-              case 0:
-                Clipboard.setString(currentMessage.text)
-                break
-            }
-          },
-        )
-      }
+      return
     }
+
+    if (!currentMessage.text)
+      return
+
+    const options = ['Copy Text', 'Cancel']
+    const cancelButtonIndex = options.length - 1
+    context.actionSheet().showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+      },
+      (buttonIndex: number) => {
+        switch (buttonIndex) {
+          case 0:
+            Clipboard.setString(currentMessage.text)
+            break
+        }
+      }
+    )
   }, [])
 
   const renderMessageText = useCallback(() => {
     if (currentMessage.text) {
-      const {
-        containerStyle,
-        wrapperStyle,
-        messageTextStyle,
-        ...messageTextProps
-      } = props
-
       if (props.renderMessageText)
-        return props.renderMessageText(messageTextProps)
+        return props.renderMessageText(props)
 
       return (
         <MessageText
-          {...messageTextProps}
+          {...props}
           textStyle={{
             left: [
               styles.standardFont,
               styles.slackMessageText,
-              messageTexttextStyle,
-              messageTextStyle,
+              props.textStyle,
+              props.messageTextStyle,
             ],
           }}
         />
@@ -131,16 +124,15 @@ const Bubble = (props: Props) => {
     return null
   }, [])
 
-  const renderMessageImage = useCallback(() {
+  const renderMessageImage = useCallback(() => {
     if (currentMessage.image) {
-      const { containerStyle, wrapperStyle, ...messageImageProps } = props
-      if (props.renderMessageImage) {
-        return props.renderMessageImage(messageImageProps)
-      }
+      if (props.renderMessageImage)
+        return props.renderMessageImage(props)
+
       return (
         <MessageImage
-          {...messageImageProps}
-          imageStyle={[styles.slackImage, messageImageimageStyle]}
+          {...props}
+          imageStyle={[styles.slackImage, props.imageStyle]}
         />
       )
     }
@@ -150,13 +142,13 @@ const Bubble = (props: Props) => {
 
   const renderTicks = useCallback(() => {
     const { currentMessage } = props
-    if (props.renderTicks) {
+    if (props.renderTicks)
       return props.renderTicks(currentMessage)
-    }
-    if (currentMessage.user._id !== user._id) {
+
+    if (currentMessage.user._id !== user._id)
       return null
-    }
-    if (currentMessage.sent || currentMessage.received) {
+
+    if (currentMessage.sent || currentMessage.received)
       return (
         <View style={[styles.headerItem, styles.tickView]}>
           {currentMessage.sent && (
@@ -175,17 +167,16 @@ const Bubble = (props: Props) => {
           )}
         </View>
       )
-    }
+
     return null
   }, [])
 
   const renderUsername = useCallback(() => {
     const username = currentMessage.user.name
     if (username) {
-      const { containerStyle, wrapperStyle, ...usernameProps } = props
-      if (props.renderUsername) {
-        return props.renderUsername(usernameProps)
-      }
+      if (props.renderUsername)
+        return props.renderUsername(props)
+
       return (
         <Text
           style={[
@@ -205,18 +196,18 @@ const Bubble = (props: Props) => {
   const renderTime = useCallback(() => {
     if (currentMessage.createdAt) {
       if (props.renderTime)
-        return props.renderTime(timeProps)
+        return props.renderTime(props)
 
       return (
         <Time
-          {...timeProps}
+          {...props}
           containerStyle={{ left: [styles.timeContainer] }}
           textStyle={{
             left: [
               styles.standardFont,
               styles.headerItem,
               styles.time,
-              timetextStyle,
+              props.textStyle,
             ],
           }}
         />
@@ -229,7 +220,7 @@ const Bubble = (props: Props) => {
   const isSameThread = useMemo(() =>
     isSameUser(currentMessage, previousMessage) &&
     isSameDay(currentMessage, previousMessage)
-  , [])
+  , [currentMessage, previousMessage])
 
   const messageHeader = useMemo(() => {
     if (isSameThread)
@@ -242,16 +233,16 @@ const Bubble = (props: Props) => {
         {renderTicks()}
       </View>
     )
-  }, [isSameThread])
+  }, [isSameThread, renderUsername, renderTime, renderTicks])
 
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={[styles.container, containerStyle?.[position]]}>
       <TouchableOpacity
         onLongPress={handleLongPress}
         accessibilityTraits='text'
         {...touchableProps}
       >
-        <View style={[styles.wrapper, wrapperStyle]}>
+        <View style={[styles.wrapper, wrapperStyle?.[position]]}>
           <View>
             {renderCustomView?.(props)}
             {messageHeader}
@@ -304,12 +295,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'baseline',
   },
-  /* eslint-disable react-native/no-color-literals */
   tick: {
     backgroundColor: 'transparent',
     color: 'white',
   },
-  /* eslint-enable react-native/no-color-literals */
   tickView: {
     flexDirection: 'row',
   },

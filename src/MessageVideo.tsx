@@ -2,7 +2,7 @@ import React from 'react'
 import Color from './Color'
 import { View, Text } from 'react-native'
 
-export function MessageVideo (_props: any) {
+export function MessageVideo () {
   return (
     <View style={{ padding: 20 }}>
       <Text style={{ color: Color.alizarin, fontWeight: '600' }}>

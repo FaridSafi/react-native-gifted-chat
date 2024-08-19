@@ -52,6 +52,7 @@ export interface QuickRepliesProps<TMessage extends IMessage = IMessage> {
   sendText?: string
   quickReplyStyle?: StyleProp<ViewStyle>
   quickReplyTextStyle?: StyleProp<TextStyle>
+  quickReplyContainerStyle?: StyleProp<ViewStyle>
   onQuickReply?(reply: Reply[]): void
   renderQuickReplySend?(): React.ReactNode
 }
@@ -68,6 +69,7 @@ export function QuickReplies ({
   color = Color.peterRiver,
   quickReplyStyle,
   quickReplyTextStyle,
+  quickReplyContainerStyle,
   onQuickReply,
   sendText = 'Send',
   renderQuickReplySend,
@@ -128,7 +130,7 @@ export function QuickReplies ({
     return null
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, quickReplyContainerStyle]}>
       {currentMessage!.quickReplies!.values.map(
         (reply: Reply, index: number) => {
           const selected = type === 'checkbox' && replies.find(sameReply(reply))

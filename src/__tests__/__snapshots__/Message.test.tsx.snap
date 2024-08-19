@@ -251,33 +251,7 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
           undefined,
         ]
       }
-    >
-      <View
-        accessibilityRole="image"
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderRadius": 20,
-              "height": 40,
-              "justifyContent": "center",
-              "width": 40,
-            },
-            Object {
-              "backgroundColor": "transparent",
-            },
-            Array [
-              Object {
-                "borderRadius": 18,
-                "height": 36,
-                "width": 36,
-              },
-              undefined,
-            ],
-          ]
-        }
-      />
-    </View>
+    />
     <View
       style={
         Array [

@@ -5,7 +5,7 @@ import type { ViewStyleProp, TextStyleProp } from 'react-native/Libraries/StyleS
 
 export type QuickRepliesProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   nextMessage?: TMessage,
-  currentMessage?: TMessage,
+  currentMessage: TMessage,
   color?: string,
   sendText?: string,
   quickReplyStyle?: ViewStyleProp,

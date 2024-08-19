@@ -43,18 +43,18 @@ const styles: { [key: string]: any } = {
 }
 
 export interface AvatarProps<TMessage extends IMessage> {
-  currentMessage?: TMessage
+  currentMessage: TMessage
   previousMessage?: TMessage
   nextMessage?: TMessage
-  position: 'left' | 'right' | string // Allow string as a fallback value
+  position: 'left' | 'right'
   renderAvatarOnTop?: boolean
   showAvatarForEveryMessage?: boolean
   imageStyle?: LeftRightStyle<ImageStyle>
   containerStyle?: LeftRightStyle<ViewStyle>
   textStyle?: TextStyle
   renderAvatar?(props: Omit<AvatarProps<TMessage>, 'renderAvatar'>): ReactNode
-  onPressAvatar?(user: User): void
-  onLongPressAvatar?(user: User): void
+  onPressAvatar?: (user: User) => void
+  onLongPressAvatar?: (user: User) => void
 }
 
 export function Avatar<TMessage extends IMessage = IMessage> (
@@ -70,7 +70,10 @@ export function Avatar<TMessage extends IMessage = IMessage> (
     previousMessage,
     nextMessage,
     imageStyle,
+    onPressAvatar,
+    onLongPressAvatar,
   } = props
+
   const messageToCompare = renderAvatarOnTop ? previousMessage : nextMessage
   const computedStyle = renderAvatarOnTop ? 'onTop' : 'onBottom'
 
@@ -123,8 +126,8 @@ export function Avatar<TMessage extends IMessage = IMessage> (
             imageStyle && imageStyle[position],
           ]}
           user={currentMessage.user}
-          onPress={() => onPressAvatar(currentMessage.user)}
-          onLongPress={() => onLongPressAvatar(currentMessage.user)}
+          onPress={() => onPressAvatar?.(currentMessage.user)}
+          onLongPress={() => onLongPressAvatar?.(currentMessage.user)}
         />
       )
 

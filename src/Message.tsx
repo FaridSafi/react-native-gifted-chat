@@ -36,7 +36,7 @@ export interface MessageProps<TMessage extends IMessage> {
   key: any
   showUserAvatar?: boolean
   position: 'left' | 'right'
-  currentMessage?: TMessage
+  currentMessage: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage
   user: User

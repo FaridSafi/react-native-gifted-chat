@@ -59,7 +59,7 @@ const DEFAULT_OPTION_TITLES = ['Call', 'Text', 'Cancel']
 export interface MessageTextProps<TMessage extends IMessage> {
   position?: 'left' | 'right'
   optionTitles?: string[]
-  currentMessage?: TMessage
+  currentMessage: TMessage
   containerStyle?: LeftRightStyle<ViewStyle>
   textStyle?: LeftRightStyle<TextStyle>
   linkStyle?: LeftRightStyle<TextStyle>

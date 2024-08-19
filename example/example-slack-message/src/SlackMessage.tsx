@@ -7,17 +7,18 @@ import {
 } from 'react-native'
 
 import { Avatar, Day, utils } from 'react-native-gifted-chat'
+import type { DayProps, BubbleProps, AvatarProps, IMessage } from 'react-native-gifted-chat'
 import Bubble from './SlackBubble'
 
 const { isSameUser, isSameDay } = utils
 
 interface Props {
-  renderAvatar: () => void,
-  renderBubble: () => void,
-  renderDay: () => void,
+  renderAvatar?: (props: AvatarProps<IMessage>) => void,
+  renderBubble?: (props: BubbleProps<IMessage>) => void,
+  renderDay?: (props: DayProps) => void,
   currentMessage: any,
-  nextMessage: any,
-  previousMessage: any,
+  nextMessage?: any,
+  previousMessage?: any,
   containerStyle?: {
     left: StyleProp<ViewStyle>,
     right: StyleProp<ViewStyle>,
@@ -38,22 +39,26 @@ const Message = (props: Props) => {
       position: 'left',
       isSameUser,
       isSameDay,
+      containerStyle: props.containerStyle?.left,
     }
   }, [props])
 
   const renderDay = useCallback(() => {
     if (currentMessage.createdAt) {
       const dayProps = getInnerComponentProps()
+
       if (props.renderDay)
         return props.renderDay(dayProps)
 
       return <Day {...dayProps} />
     }
+
     return null
   }, [])
 
   const renderBubble = useCallback(() => {
     const bubbleProps = getInnerComponentProps()
+
     if (props.renderBubble)
       return props.renderBubble(bubbleProps)
 

@@ -29,6 +29,6 @@
     "lib": ["ES2020"],
     "typeRoots": ["./node_modules/@types", "./@types"]
   },
-  "include": ["src", "./types.d.ts", "example"],
-  "exclude": ["node_modules", "src/__tests__", "example/node_modules"]
+  "include": ["src", "./types.d.ts"],
+  "exclude": ["node_modules", "src/__tests__", "example/node_modules", "lib"]
 }

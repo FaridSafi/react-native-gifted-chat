@@ -8,7 +8,7 @@ import type {
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export type MessageImageProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
-  currentMessage?: TMessage,
+  currentMessage: TMessage,
   containerStyle?: ViewStyleProp,
   imageStyle?: ImageStyleProp,
   imageProps?: $Shape<React.ElementProps<typeof Image>>,

@@ -67,7 +67,7 @@ export interface IMessage {
 export type IChatMessage = IMessage
 
 export interface MessageVideoProps<TMessage extends IMessage> {
-  currentMessage?: TMessage
+  currentMessage: TMessage
   containerStyle?: StyleProp<ViewStyle>
   videoStyle?: StyleProp<ViewStyle>
   videoProps?: object
@@ -75,7 +75,7 @@ export interface MessageVideoProps<TMessage extends IMessage> {
 }
 
 export interface MessageAudioProps<TMessage extends IMessage> {
-  currentMessage?: TMessage
+  currentMessage: TMessage
   containerStyle?: StyleProp<ViewStyle>
   audioStyle?: StyleProp<ViewStyle>
   audioProps?: object

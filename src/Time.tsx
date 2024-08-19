@@ -46,7 +46,7 @@ const styles = {
 
 export interface TimeProps<TMessage extends IMessage> {
   position?: 'left' | 'right'
-  currentMessage?: TMessage
+  currentMessage: TMessage
   containerStyle?: LeftRightStyle<ViewStyle>
   timeTextStyle?: LeftRightStyle<TextStyle>
   timeFormat?: string

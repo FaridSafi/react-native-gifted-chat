@@ -260,7 +260,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const keyboard = useAnimatedKeyboard()
   const trackingKeyboardMovement = useSharedValue(false)
-  const debounceEnableTypingTimeoutId = useRef()
+  const debounceEnableTypingTimeoutId = useRef<ReturnType<typeof setTimeout>>()
   const insets = useSafeAreaInsets()
   const keyboardOffsetBottom = useSharedValue(0)
 
@@ -282,7 +282,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
    * make a guard condition (eg. showing image picker)
    */
   const handleTextInputFocusWhenKeyboardHide = useCallback(() => {
-    if (!isTextInputWasFocused)
+    if (!isTextInputWasFocused.current)
       isTextInputWasFocused.current = textInputRef.current?.isFocused() || false
   }, [textInputRef])
 
@@ -445,6 +445,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const inputToolbarFragment = useMemo(() => {
     if (!isInitialized) return null
+    if (!text) return null
 
     const inputToolbarProps = {
       ...props,
@@ -483,7 +484,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const contextValues = useMemo(
     () => ({
-      actionSheet: actionSheet || (() => actionSheetRef.current?.getContext()),
+      actionSheet: actionSheet || (() => ({
+        showActionSheetWithOptions: actionSheetRef.current!.showActionSheetWithOptions,
+      })),
       getLocale: () => locale,
     }),
     [actionSheet, locale]
@@ -524,7 +527,16 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         }
       }
     },
-    [keyboard, trackingKeyboardMovement, insets, handleTextInputFocusWhenKeyboardHide, handleTextInputFocusWhenKeyboardShow, enableTyping, diableTyping, debounceEnableTyping]
+    [
+      keyboard,
+      trackingKeyboardMovement,
+      insets,
+      handleTextInputFocusWhenKeyboardHide,
+      handleTextInputFocusWhenKeyboardShow,
+      enableTyping,
+      diableTyping,
+      debounceEnableTyping,
+    ]
   )
 
   return (

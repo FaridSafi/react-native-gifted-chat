@@ -137,7 +137,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   isCustomViewBottom?: boolean
   inverted?: boolean
   position: 'left' | 'right'
-  currentMessage?: TMessage
+  currentMessage: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage
   optionTitles?: string[]
@@ -268,7 +268,7 @@ export default class Bubble<
           : DEFAULT_OPTION_TITLES
       const cancelButtonIndex = options.length - 1
 
-      this.context.actionSheet().showActionSheetWithOptions(
+      ;(this.context as any).actionSheet().showActionSheetWithOptions(
         {
           options,
           cancelButtonIndex,
@@ -404,39 +404,39 @@ export default class Bubble<
   }
 
   renderMessageVideo () {
-    if (this.props.currentMessage && this.props.currentMessage.video) {
-      const {
-        /* eslint-disable @typescript-eslint/no-unused-vars */
-        containerStyle,
-        wrapperStyle,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
-        ...messageVideoProps
-      } = this.props
+    if (!this.props.currentMessage?.video)
+      return null
 
-      if (this.props.renderMessageVideo)
-        return this.props.renderMessageVideo(messageVideoProps)
+    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      containerStyle,
+      wrapperStyle,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      ...messageVideoProps
+    } = this.props
 
-      return <MessageVideo {...messageVideoProps} />
-    }
-    return null
+    if (this.props.renderMessageVideo)
+      return this.props.renderMessageVideo(messageVideoProps)
+
+    return <MessageVideo />
   }
 
   renderMessageAudio () {
-    if (this.props.currentMessage && this.props.currentMessage.audio) {
-      const {
-        /* eslint-disable @typescript-eslint/no-unused-vars */
-        containerStyle,
-        wrapperStyle,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
-        ...messageAudioProps
-      } = this.props
+    if (!this.props.currentMessage?.audio)
+      return null
 
-      if (this.props.renderMessageAudio)
-        return this.props.renderMessageAudio(messageAudioProps)
+    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      containerStyle,
+      wrapperStyle,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      ...messageAudioProps
+    } = this.props
 
-      return <MessageAudio {...messageAudioProps} />
-    }
-    return null
+    if (this.props.renderMessageAudio)
+      return this.props.renderMessageAudio(messageAudioProps)
+
+    return <MessageAudio />
   }
 
   renderTicks () {

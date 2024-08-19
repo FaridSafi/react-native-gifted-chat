@@ -4,7 +4,7 @@ import type { IMessage } from './types'
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export type MessageVideoProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
-  currentMessage?: TMessage,
+  currentMessage: TMessage,
   containerStyle?: ViewStyleProp,
   videoStyle?: ViewStyleProp,
   videoProps?: Object,

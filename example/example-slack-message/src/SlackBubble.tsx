@@ -53,7 +53,7 @@ interface Props {
     left: StyleProp<ViewStyle>
     right: StyleProp<ViewStyle>
   }
-  imageStyle: StyleProp<ViewStyle>
+  imageStyle?: StyleProp<ViewStyle>
   textStyle: StyleProp<TextStyle>
   position: 'left' | 'right'
 }
@@ -142,6 +142,7 @@ const Bubble = (props: Props) => {
 
   const renderTicks = useCallback(() => {
     const { currentMessage } = props
+
     if (props.renderTicks)
       return props.renderTicks(currentMessage)
 

@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 })
 
 export interface SystemMessageProps<TMessage extends IMessage> {
-  currentMessage?: TMessage
+  currentMessage: TMessage
   containerStyle?: StyleProp<ViewStyle>
   wrapperStyle?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>

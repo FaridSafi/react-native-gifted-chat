@@ -14,10 +14,10 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "4.1.0",
+    "@react-native-clipboard/clipboard": "^1.14.1",
     "@react-navigation/native": "6.1.18",
     "expo": "~51.0.28",
     "expo-app-loading": "~2.1.1",
-    "expo-clipboard": "^6.0.3",
     "expo-image-picker": "~15.0.7",
     "expo-linking": "6.3.1",
     "expo-location": "~17.0.1",

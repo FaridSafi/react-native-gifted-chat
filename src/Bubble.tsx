@@ -9,7 +9,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native'
-import * as Clipboard from 'expo-clipboard'
+import Clipboard from '@react-native-clipboard/clipboard'
 
 import { GiftedChatContext } from './GiftedChatContext'
 import { QuickReplies, QuickRepliesProps } from './QuickReplies'
@@ -273,7 +273,7 @@ export default class Bubble<
         (buttonIndex: number) => {
           switch (buttonIndex) {
             case 0:
-              Clipboard.setStringAsync(currentMessage.text)
+              Clipboard.setString(currentMessage.text)
               break
             default:
               break

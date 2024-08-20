@@ -111,6 +111,7 @@ module.exports = {
     'brace-style': ['error', '1tbs', { allowSingleLine: false }],
     'nonblock-statement-body-position': ['error', 'below'],
     '@stylistic/jsx-closing-bracket-location': ['error', 'line-aligned'],
+    'no-unreachable': 'error',
   },
   globals: {
     describe: 'readonly',

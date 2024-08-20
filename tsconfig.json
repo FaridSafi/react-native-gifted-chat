@@ -12,6 +12,8 @@
     "experimentalDecorators": true,
     "preserveConstEnums": true,
     "sourceMap": true,
+    "allowJs": true,
+    "checkJs": true,
     "strictNullChecks": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,

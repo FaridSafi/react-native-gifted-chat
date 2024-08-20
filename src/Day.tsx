@@ -57,8 +57,6 @@ export function Day<TMessage extends IMessage = IMessage> ({
   if (currentMessage == null || isSameDay(currentMessage, previousMessage))
     return null
 
-  return null
-
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={wrapperStyle}>

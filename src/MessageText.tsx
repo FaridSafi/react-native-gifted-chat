@@ -65,7 +65,7 @@ export interface MessageTextProps<TMessage extends IMessage> {
   linkStyle?: LeftRightStyle<TextStyle>
   textProps?: TextProps
   customTextStyle?: StyleProp<TextStyle>
-  parsePatterns?(linkStyle: TextStyle): any
+  parsePatterns?: (linkStyle: TextStyle) => []
 }
 
 export function MessageText<TMessage extends IMessage = IMessage> ({
@@ -76,7 +76,7 @@ export function MessageText<TMessage extends IMessage = IMessage> ({
   textStyle,
   linkStyle: linkStyleProp,
   customTextStyle,
-  parsePatterns = () => [],
+  parsePatterns,
   textProps,
 }: MessageTextProps<TMessage>) {
   const { actionSheet } = useChatContext()
@@ -112,7 +112,7 @@ export function MessageText<TMessage extends IMessage = IMessage> ({
         options,
         cancelButtonIndex,
       },
-      (buttonIndex: number) => {
+      (buttonIndex?: number) => {
         switch (buttonIndex) {
           case 0:
             Linking.openURL(`tel:${phone}`).catch(e => {
@@ -123,8 +123,6 @@ export function MessageText<TMessage extends IMessage = IMessage> ({
             Linking.openURL(`sms:${phone}`).catch(e => {
               error(e, 'No handler for text')
             })
-            break
-          default:
             break
         }
       }
@@ -138,7 +136,7 @@ export function MessageText<TMessage extends IMessage = IMessage> ({
 
   const linkStyle = [
     styles[position].link,
-    linkStyleProp && linkStyleProp[position],
+    linkStyleProp?.[position],
   ]
   return (
     <View
@@ -154,7 +152,7 @@ export function MessageText<TMessage extends IMessage = IMessage> ({
           customTextStyle,
         ]}
         parse={[
-          ...parsePatterns!(linkStyle as TextStyle),
+          ...(parsePatterns ? parsePatterns(linkStyle as TextStyle) : []),
           { type: 'url', style: linkStyle, onPress: onUrlPress },
           { type: 'phone', style: linkStyle, onPress: onPhonePress },
           { type: 'email', style: linkStyle, onPress: onEmailPress },

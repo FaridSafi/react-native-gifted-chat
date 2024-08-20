@@ -41,10 +41,9 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
+    '@stylistic',
     'react',
     'react-hooks',
-    // 'jest',
-    '@typescript-eslint',
   ],
   settings: {
     react: {
@@ -53,20 +52,35 @@ module.exports = {
   },
   rules: {
     'react/react-in-jsx-scope': 0,
-    '@typescript-eslint/no-explicit-any': 'off',
+    '@stylistic/no-explicit-any': 'off',
     'react/no-unknown-property': 0,
-    indent: [
+    'indent': [
       'error',
       2,
       {
         SwitchCase: 1,
+        VariableDeclarator: 'first',
         ignoredNodes: ['TemplateLiteral'],
       },
     ],
     'template-curly-spacing': 'off',
     'linebreak-style': ['off', 'unix'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'never'],
+    'quotes': ['error', 'single'],
+    'jsx-quotes': ['error', 'prefer-single'],
+    '@stylistic/semi': ['error', 'never'],
+    '@stylistic/member-delimiter-style': [
+      'error',
+      {
+        multiline: {
+          delimiter: 'none', // No semicolon for multiline
+          requireLast: true,
+        },
+        singleline: {
+          delimiter: 'comma', // Use comma for single line
+          requireLast: false,
+        },
+      },
+    ],
     'comma-dangle': [
       'error',
       {
@@ -81,7 +95,7 @@ module.exports = {
     'no-func-assign': 'off',
     'no-class-assign': 'off',
     'no-useless-escape': 'off',
-    curly: [2, 'multi', 'consistent'],
+    'curly': [2, 'multi', 'consistent'],
     'react/prop-types': 'off', // TODO: TURN ON AND FIX ALL WARNINGS
     'react/display-name': 'off',
     'react-hooks/exhaustive-deps': [
@@ -93,8 +107,10 @@ module.exports = {
         // USE RULE FUNC/FUNC/DEPS
       },
     ],
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['error'],
+    'no-unused-vars': ['error'],
+    'brace-style': ['error', '1tbs', { allowSingleLine: false }],
+    'nonblock-statement-body-position': ['error', 'below'],
+    '@stylistic/jsx-closing-bracket-location': ['error', 'line-aligned'],
   },
   globals: {
     describe: 'readonly',

@@ -14,7 +14,7 @@ import { StylePropType } from './utils'
 import { useChatContext } from './GiftedChatContext'
 
 export interface ActionsProps {
-  options?: { [key: string]: any }
+  options?: { [key: string]: () => void }
   optionTintColor?: string
   icon?: () => ReactNode
   wrapperStyle?: StyleProp<ViewStyle>
@@ -35,7 +35,8 @@ export function Actions ({
   const { actionSheet } = useChatContext()
 
   const onActionsPress = useCallback(() => {
-    if (!options) return
+    if (!options)
+      return
 
     const optionKeys = Object.keys(options)
     const cancelButtonIndex = optionKeys.indexOf('Cancel')
@@ -46,7 +47,10 @@ export function Actions ({
         cancelButtonIndex,
         tintColor: optionTintColor,
       },
-      (buttonIndex: number) => {
+      (buttonIndex: number | undefined) => {
+        if (buttonIndex === undefined)
+          return
+
         const key = optionKeys[buttonIndex]
         if (key)
           options[key]()

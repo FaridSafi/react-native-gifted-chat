@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
 import React, { RefObject } from 'react'
+import PropTypes from 'prop-types'
 
 import {
   FlatList,
@@ -69,19 +69,19 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   messages?: TMessage[]
   isTyping?: boolean
   user?: User
-  listViewProps: any
+  listViewProps: object
   inverted?: boolean
   loadEarlier?: boolean
   alignTop?: boolean
   scrollToBottom?: boolean
   scrollToBottomStyle?: StyleProp<ViewStyle>
-  invertibleScrollViewProps?: any
-  extraData?: any
+  invertibleScrollViewProps?: object
+  extraData?: object
   scrollToBottomOffset?: number
-  forwardRef?: RefObject<FlatList<IMessage>>
+  forwardRef?: RefObject<FlatList<TMessage>>
   renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
-  renderMessage?(props: Message['props']): React.ReactNode
+  renderMessage?(props: Message['props']): React.ReactElement
   renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   scrollToBottomComponent?(): React.ReactNode
   onLoadEarlier?(): void
@@ -96,7 +96,7 @@ interface State {
 }
 
 export default class MessageContainer<
-  TMessage extends IMessage = IMessage
+  TMessage extends IMessage = IMessage,
 > extends React.PureComponent<MessageContainerProps<TMessage>, State> {
   static defaultProps = {
     messages: [],
@@ -174,8 +174,8 @@ export default class MessageContainer<
     return null
   }
 
-  scrollTo (options: { animated?: boolean; offset: number }) {
-    if (this.props.forwardRef && this.props.forwardRef.current && options)
+  scrollTo (options: { animated?: boolean, offset: number }) {
+    if (this.props.forwardRef?.current && options)
       this.props.forwardRef.current.scrollToOffset(options)
   }
 
@@ -183,8 +183,8 @@ export default class MessageContainer<
     const { inverted } = this.props
     if (inverted)
       this.scrollTo({ offset: 0, animated })
-    else if (this.props.forwardRef && this.props.forwardRef.current)
-      this.props.forwardRef!.current!.scrollToEnd({ animated })
+    else if (this.props.forwardRef?.current)
+      this.props.forwardRef.current.scrollToEnd({ animated })
   }
 
   handleOnScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -201,18 +201,16 @@ export default class MessageContainer<
         this.setState({ showScrollBottom: true, hasScrolled: true })
       else
         this.setState({ showScrollBottom: false, hasScrolled: true })
-
+    else if (
+      contentOffsetY < scrollToBottomOffset! &&
+      contentSizeHeight - layoutMeasurementHeight > scrollToBottomOffset!
+    )
+      this.setState({ showScrollBottom: true, hasScrolled: true })
     else
-      if (
-        contentOffsetY < scrollToBottomOffset! &&
-        contentSizeHeight - layoutMeasurementHeight > scrollToBottomOffset!
-      )
-        this.setState({ showScrollBottom: true, hasScrolled: true })
-      else
-        this.setState({ showScrollBottom: false, hasScrolled: true })
+      this.setState({ showScrollBottom: false, hasScrolled: true })
   }
 
-  renderRow = ({ item, index }: ListRenderItemInfo<TMessage>) => {
+  renderRow = ({ item, index }: ListRenderItemInfo<TMessage>): React.ReactElement | null => {
     if (!item._id && item._id !== 0)
       warning('GiftedChat: `_id` is missing for message', JSON.stringify(item))
 
@@ -235,7 +233,7 @@ export default class MessageContainer<
       const messageProps: Message['props'] = {
         ...restProps,
         user,
-        key: item._id,
+        key: item._id.toString(),
         currentMessage: item,
         previousMessage,
         inverted,
@@ -306,12 +304,8 @@ export default class MessageContainer<
   }
 
   onEndReached = ({ distanceFromEnd }: { distanceFromEnd: number }) => {
-    const {
-      loadEarlier,
-      onLoadEarlier,
-      infiniteScroll,
-      isLoadingEarlier,
-    } = this.props
+    const { loadEarlier, onLoadEarlier, infiniteScroll, isLoadingEarlier } =
+      this.props
     if (
       infiniteScroll &&
       (this.state.hasScrolled || distanceFromEnd > 0) &&
@@ -339,7 +333,6 @@ export default class MessageContainer<
           ref={this.props.forwardRef}
           extraData={[this.props.extraData, this.props.isTyping]}
           keyExtractor={this.keyExtractor}
-          enableEmptySections
           automaticallyAdjustContentInsets={false}
           inverted={inverted}
           data={this.props.messages}

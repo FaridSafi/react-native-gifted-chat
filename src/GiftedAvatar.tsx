@@ -47,8 +47,8 @@ export interface GiftedAvatarProps {
   user?: User
   avatarStyle?: StyleProp<ImageStyle>
   textStyle?: StyleProp<TextStyle>
-  onPress?(props: any): void
-  onLongPress?(props: any): void
+  onPress?: (props: GiftedAvatarProps) => void
+  onLongPress?: (props: GiftedAvatarProps) => void
 }
 
 export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
@@ -146,13 +146,20 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
       this.props.onPress(rest)
   }
 
-  handleOnLongPress = () => {}
+  handleOnLongPress = () => {
+    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      onLongPress,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      ...rest
+    } = this.props
+
+    if (this.props.onLongPress)
+      this.props.onLongPress(rest)
+  }
 
   render () {
-    if (
-      !this.props.user ||
-      (!this.props.user.name && !this.props.user.avatar)
-    )
+    if (!this.props.user || (!this.props.user.name && !this.props.user.avatar))
       // render placeholder
       return (
         <View
@@ -169,8 +176,8 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
       return (
         <TouchableOpacity
           disabled={!this.props.onPress}
-          onPress={this.props.onPress}
-          onLongPress={this.props.onLongPress}
+          onPress={this.handleOnPress}
+          onLongPress={this.handleOnLongPress}
           accessibilityRole='image'
         >
           {this.renderAvatar()}
@@ -182,8 +189,8 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
     return (
       <TouchableOpacity
         disabled={!this.props.onPress}
-        onPress={this.props.onPress}
-        onLongPress={this.props.onLongPress}
+        onPress={this.handleOnPress}
+        onLongPress={this.handleOnLongPress}
         style={[
           styles.avatarStyle,
           { backgroundColor: this.avatarColor },

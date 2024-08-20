@@ -264,7 +264,7 @@ See PR [#1211](https://github.com/FaridSafi/react-native-gifted-chat/pull/1211)
 interface Reply {
   title: string
   value: string
-  messageId?: any
+  messageId?: number | string
 }
 
 interface QuickReplies {

@@ -30,7 +30,9 @@ export interface LeftRightStyle<T> {
   left?: StyleProp<T>
   right?: StyleProp<T>
 }
-type renderFunction = (x: any) => JSX.Element
+
+type renderFunction = (x: unknown) => JSX.Element
+
 export interface User {
   _id: string | number
   name?: string
@@ -40,7 +42,7 @@ export interface User {
 export interface Reply {
   title: string
   value: string
-  messageId?: any
+  messageId?: number | string
 }
 
 export interface QuickReplies {

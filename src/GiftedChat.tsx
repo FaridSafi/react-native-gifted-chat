@@ -1,4 +1,12 @@
-import React, { createRef, useEffect, useMemo, useRef, useState, useCallback, MutableRefObject } from 'react'
+import React, {
+  createRef,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+  MutableRefObject,
+} from 'react'
 import 'react-native-get-random-values' // NOTE: FOR "uuid" SUPPORT
 import {
   ActionSheetOptions,
@@ -16,6 +24,7 @@ import {
   TextStyle,
   View,
   ViewStyle,
+  LayoutChangeEvent,
 } from 'react-native'
 import { LightboxProps } from 'react-native-lightbox-v2'
 import { v4 as uuidv4 } from 'uuid'
@@ -46,7 +55,14 @@ import { Send, SendProps } from './Send'
 import { SystemMessage, SystemMessageProps } from './SystemMessage'
 import { Time, TimeProps } from './Time'
 import * as utils from './utils'
-import Animated, { useAnimatedKeyboard, useAnimatedStyle, useAnimatedReaction, useSharedValue, withTiming, runOnJS } from 'react-native-reanimated'
+import Animated, {
+  useAnimatedKeyboard,
+  useAnimatedStyle,
+  useAnimatedReaction,
+  useSharedValue,
+  withTiming,
+  runOnJS,
+} from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 dayjs.extend(localizedFormat)
@@ -101,24 +117,24 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Minimum height of the input toolbar; default is 44 */
   minInputToolbarHeight?: number
   /* Extra props to be passed to the messages <ListView>; some props can't be overridden, see the code in MessageContainer.render() for details */
-  listViewProps?: any
+  listViewProps?: object
   /*  Extra props to be passed to the <TextInput> */
-  textInputProps?: any
+  textInputProps?: object
   /* Determines whether the keyboard should stay visible after a tap; see <ScrollView> docs */
-  keyboardShouldPersistTaps?: any
+  keyboardShouldPersistTaps?: boolean
   /* Max message composer TextInput length */
   maxInputLength?: number
   /* Force send button */
   alwaysShowSend?: boolean
   /* Image style */
   imageStyle?: StyleProp<ViewStyle>
-  /* This can be used to pass any data which needs to be re-rendered */
-  extraData?: any
+  /* This can be used to pass unknown data which needs to be re-rendered */
+  extraData?: object
   /* composer min Height */
   minComposerHeight?: number
   /* composer min Height */
   maxComposerHeight?: number
-  options?: { [key: string]: any }
+  options?: { [key: string]: () => void }
   optionTintColor?: string
   quickReplyStyle?: StyleProp<ViewStyle>
   quickReplyTextStyle?: StyleProp<TextStyle>
@@ -132,7 +148,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   actionSheet?(): {
     showActionSheetWithOptions: (
       options: ActionSheetOptions,
-      callback: (i: number) => void,
+      callback: (buttonIndex: number) => void | Promise<void>,
     ) => void
   }
   /* Callback when a message avatar is tapped */
@@ -156,14 +172,14 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Custom system message */
   renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
   /* Callback when a message bubble is pressed; default is to do nothing */
-  onPress?(context: any, message: TMessage): void
+  onPress?(context: unknown, message: TMessage): void
   /* Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see example using showActionSheetWithOptions()) */
-  onLongPress?(context: any, message: TMessage): void
+  onLongPress?(context: unknown, message: TMessage): void
   /* Custom Username container */
   renderUsername?(user: User): React.ReactNode
   /* Reverses display order of messages; default is true */
   /* Custom message container */
-  renderMessage?(message: Message<TMessage>['props']): React.ReactNode
+  renderMessage?(message: Message<TMessage>['props']): React.ReactElement
   /* Custom message text */
   renderMessageText?(messageText: MessageTextProps<TMessage>): React.ReactNode
   /* Custom message image */
@@ -199,7 +215,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Callback when the input text changes */
   onInputTextChanged?(text: string): void
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
-  parsePatterns?(linkStyle: TextStyle): any
+  parsePatterns?: (linkStyle: TextStyle) => []
   onQuickReply?(replies: Reply[]): void
   renderQuickReplies?(
     quickReplies: QuickRepliesProps<TMessage>,
@@ -243,18 +259,22 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
 
-  const messageContainerRef = useMemo(() =>
-    props.messageContainerRef || createRef<FlatList<IMessage>>()
-  , [props.messageContainerRef])
+  const messageContainerRef = useMemo(
+    () => props.messageContainerRef || createRef<FlatList<IMessage>>(),
+    [props.messageContainerRef]
+  )
 
-  const textInputRef = useMemo(() =>
-    props.textInputRef || createRef<TextInput>()
-  , [props.textInputRef])
+  const textInputRef = useMemo(
+    () => props.textInputRef || createRef<TextInput>(),
+    [props.textInputRef]
+  )
 
   const isTextInputWasFocused: MutableRefObject<boolean> = useRef(false)
 
   const [isInitialized, setIsInitialized] = useState<boolean>(false)
-  const [composerHeight, setComposerHeight] = useState<number>(minComposerHeight!)
+  const [composerHeight, setComposerHeight] = useState<number>(
+    minComposerHeight!
+  )
   const [text, setText] = useState<string | undefined>(() => props.text || '')
   const [isTypingDisabled, setIsTypingDisabled] = useState<boolean>(false)
 
@@ -264,16 +284,24 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const insets = useSafeAreaInsets()
   const keyboardOffsetBottom = useSharedValue(0)
 
-  const contentStyleAnim = useAnimatedStyle(() => ({
-    transform: [{ translateY: -keyboard.height.value + keyboardOffsetBottom.value }],
-  }), [keyboard, keyboardOffsetBottom])
+  const contentStyleAnim = useAnimatedStyle(
+    () => ({
+      transform: [
+        { translateY: -keyboard.height.value + keyboardOffsetBottom.value },
+      ],
+    }),
+    [keyboard, keyboardOffsetBottom]
+  )
 
-  const getTextFromProp = useCallback((fallback: string) => {
-    if (props.text === undefined)
-      return fallback
+  const getTextFromProp = useCallback(
+    (fallback: string) => {
+      if (props.text === undefined)
+        return fallback
 
-    return props.text
-  }, [props.text])
+      return props.text
+    },
+    [props.text]
+  )
 
   /**
    * Store text input focus status when keyboard hide to retrieve
@@ -283,7 +311,8 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
    */
   const handleTextInputFocusWhenKeyboardHide = useCallback(() => {
     if (!isTextInputWasFocused.current)
-      isTextInputWasFocused.current = textInputRef.current?.isFocused() || false
+      isTextInputWasFocused.current =
+        textInputRef.current?.isFocused() || false
   }, [textInputRef])
 
   /**
@@ -302,7 +331,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     isTextInputWasFocused.current = false
   }, [textInputRef])
 
-  const diableTyping = useCallback(() => {
+  const disableTyping = useCallback(() => {
     clearTimeout(debounceEnableTypingTimeoutId.current)
     setIsTypingDisabled(true)
   }, [])
@@ -319,32 +348,32 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     }, 50)
   }, [enableTyping])
 
-  const scrollToBottom = useCallback((isAnimated = true) => {
-    if (!messageContainerRef?.current) return
+  const scrollToBottom = useCallback(
+    (isAnimated = true) => {
+      if (!messageContainerRef?.current)
+        return
 
-    if (inverted) {
-      messageContainerRef.current.scrollToOffset({
-        offset: 0,
-        animated: isAnimated,
-      })
-      return
-    }
+      if (inverted) {
+        messageContainerRef.current.scrollToOffset({
+          offset: 0,
+          animated: isAnimated,
+        })
+        return
+      }
 
-    messageContainerRef.current.scrollToEnd({ animated: isAnimated })
-  }, [inverted, messageContainerRef])
+      messageContainerRef.current.scrollToEnd({ animated: isAnimated })
+    },
+    [inverted, messageContainerRef]
+  )
 
   const renderMessages = useMemo(() => {
-    if (!isInitialized) return null
+    if (!isInitialized)
+      return null
 
     const { messagesContainerStyle, ...messagesContainerProps } = props
 
     const fragment = (
-      <View
-        style={[
-          styles.fill,
-          messagesContainerStyle,
-        ]}
-      >
+      <View style={[styles.fill, messagesContainerStyle]}>
         <MessageContainer
           {...messagesContainerProps}
           invertibleScrollViewProps={{
@@ -383,69 +412,86 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     setComposerHeight(minComposerHeight!)
     setText(getTextFromProp(''))
     enableTyping()
-  }, [minComposerHeight, getTextFromProp, textInputRef, notifyInputTextReset, enableTyping])
+  }, [
+    minComposerHeight,
+    getTextFromProp,
+    textInputRef,
+    notifyInputTextReset,
+    enableTyping,
+  ])
 
-  const _onSend = useCallback((
-    messages: TMessage[] = [],
-    shouldResetInputToolbar = false
-  ) => {
-    if (!Array.isArray(messages))
-      messages = [messages]
+  const _onSend = useCallback(
+    (messages: TMessage[] = [], shouldResetInputToolbar = false) => {
+      if (!Array.isArray(messages))
+        messages = [messages]
 
-    const newMessages: TMessage[] = messages.map(message => {
-      return {
-        ...message,
-        user: user!,
-        createdAt: new Date(),
-        _id: messageIdGenerator?.(),
+      const newMessages: TMessage[] = messages.map(message => {
+        return {
+          ...message,
+          user: user!,
+          createdAt: new Date(),
+          _id: messageIdGenerator?.(),
+        }
+      })
+
+      if (shouldResetInputToolbar === true) {
+        disableTyping()
+
+        resetInputToolbar()
       }
-    })
 
-    if (shouldResetInputToolbar === true) {
-      diableTyping()
+      onSend?.(newMessages)
+    },
+    [messageIdGenerator, onSend, user, resetInputToolbar, disableTyping]
+  )
 
-      resetInputToolbar()
-    }
+  const onInputSizeChanged = useCallback(
+    (size: { height: number }) => {
+      const newComposerHeight = Math.max(
+        minComposerHeight!,
+        Math.min(maxComposerHeight!, size.height)
+      )
 
-    onSend?.(newMessages)
-  }, [messageIdGenerator, onSend, user, resetInputToolbar, diableTyping])
+      setComposerHeight(newComposerHeight)
+    },
+    [maxComposerHeight, minComposerHeight]
+  )
 
-  const onInputSizeChanged = useCallback((size: { height: number }) => {
-    const newComposerHeight = Math.max(
-      minComposerHeight!,
-      Math.min(maxComposerHeight!, size.height)
-    )
+  const _onInputTextChanged = useCallback(
+    (_text: string) => {
+      if (isTypingDisabled)
+        return
 
-    setComposerHeight(newComposerHeight)
-  }, [maxComposerHeight, minComposerHeight])
+      onInputTextChanged?.(_text)
 
-  const _onInputTextChanged = useCallback((_text: string) => {
-    if (isTypingDisabled)
-      return
+      // Only set state if it's not being overridden by a prop.
+      if (props.text === undefined)
+        setText(_text)
+    },
+    [onInputTextChanged, isTypingDisabled, props.text]
+  )
 
-    onInputTextChanged?.(_text)
+  const onInitialLayoutViewLayout = useCallback(
+    (e: LayoutChangeEvent) => {
+      const { layout } = e.nativeEvent
 
-    // Only set state if it's not being overridden by a prop.
-    if (props.text === undefined)
-      setText(_text)
-  }, [onInputTextChanged, isTypingDisabled, props.text])
+      if (layout.height <= 0)
+        return
 
-  const onInitialLayoutViewLayout = useCallback((e: any) => {
-    const { layout } = e.nativeEvent
+      notifyInputTextReset()
 
-    if (layout.height <= 0)
-      return
-
-    notifyInputTextReset()
-
-    setIsInitialized(true)
-    setComposerHeight(minComposerHeight!)
-    setText(getTextFromProp(initialText))
-  }, [initialText, minComposerHeight, notifyInputTextReset, getTextFromProp])
+      setIsInitialized(true)
+      setComposerHeight(minComposerHeight!)
+      setText(getTextFromProp(initialText))
+    },
+    [initialText, minComposerHeight, notifyInputTextReset, getTextFromProp]
+  )
 
   const inputToolbarFragment = useMemo(() => {
-    if (!isInitialized) return null
-    if (!text) return null
+    if (!isInitialized)
+      return null
+    if (!text)
+      return null
 
     const inputToolbarProps = {
       ...props,
@@ -484,9 +530,12 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const contextValues = useMemo(
     () => ({
-      actionSheet: actionSheet || (() => ({
-        showActionSheetWithOptions: actionSheetRef.current!.showActionSheetWithOptions,
-      })),
+      actionSheet:
+        actionSheet ||
+        (() => ({
+          showActionSheetWithOptions:
+            actionSheetRef.current!.showActionSheetWithOptions,
+        })),
       getLocale: () => locale,
     }),
     [actionSheet, locale]
@@ -509,9 +558,12 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         const isKeyboardMovingUp = value > prevValue
         if (isKeyboardMovingUp !== trackingKeyboardMovement.value) {
           trackingKeyboardMovement.value = isKeyboardMovingUp
-          keyboardOffsetBottom.value = withTiming(isKeyboardMovingUp ? insets.bottom : 0, {
-            duration: 400,
-          })
+          keyboardOffsetBottom.value = withTiming(
+            isKeyboardMovingUp ? insets.bottom : 0,
+            {
+              duration: 400,
+            }
+          )
 
           if (isKeyboardMovingUp)
             runOnJS(handleTextInputFocusWhenKeyboardShow)()
@@ -521,7 +573,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
           if (value === 0) {
             runOnJS(enableTyping)()
           } else {
-            runOnJS(diableTyping)()
+            runOnJS(disableTyping)()
             runOnJS(debounceEnableTyping)()
           }
         }
@@ -534,7 +586,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       handleTextInputFocusWhenKeyboardHide,
       handleTextInputFocusWhenKeyboardShow,
       enableTyping,
-      diableTyping,
+      disableTyping,
       debounceEnableTyping,
     ]
   )
@@ -547,19 +599,16 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
           style={[styles.fill, styles.contentContainer]}
           onLayout={onInitialLayoutViewLayout}
         >
-          {
-            isInitialized
-              ? (
-                <Animated.View style={[styles.fill, contentStyleAnim]}>
-                  {renderMessages}
-                  {inputToolbarFragment}
-                </Animated.View>
-              )
-              : (
-                renderLoading?.()
-              )
-          }
-
+          {isInitialized
+            ? (
+              <Animated.View style={[styles.fill, contentStyleAnim]}>
+                {renderMessages}
+                {inputToolbarFragment}
+              </Animated.View>
+            )
+            : (
+              renderLoading?.()
+            )}
         </View>
       </ActionSheetProvider>
     </GiftedChatContext.Provider>

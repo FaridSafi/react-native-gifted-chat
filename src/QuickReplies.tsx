@@ -133,7 +133,8 @@ export function QuickReplies ({
     <View style={[styles.container, quickReplyContainerStyle]}>
       {currentMessage!.quickReplies!.values.map(
         (reply: Reply, index: number) => {
-          const selected = type === 'checkbox' && replies.find(sameReply(reply))
+          const selected =
+            type === 'checkbox' && replies.find(sameReply(reply))
 
           return (
             <TouchableOpacity

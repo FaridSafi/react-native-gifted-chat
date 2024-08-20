@@ -25,7 +25,7 @@ export interface ComposerProps {
   multiline?: boolean
   disableComposer?: boolean
   onTextChanged?(text: string): void
-  onInputSizeChanged?(layout: { width: number; height: number }): void
+  onInputSizeChanged?(layout: { width: number, height: number }): void
 }
 
 export function Composer ({
@@ -42,10 +42,10 @@ export function Composer ({
   textInputProps,
   textInputStyle,
 }: ComposerProps): React.ReactElement {
-  const dimensionsRef = useRef<{ width: number; height: number }>()
+  const dimensionsRef = useRef<{ width: number, height: number }>()
 
   const determineInputSizeChange = useCallbackOne(
-    (dimensions: { width: number; height: number }) => {
+    (dimensions: { width: number, height: number }) => {
       // Support earlier versions of React Native on Android.
       if (!dimensions)
         return
@@ -63,9 +63,13 @@ export function Composer ({
     [onInputSizeChanged]
   )
 
-  const handleContentSizeChange = useCallback(({ nativeEvent: { contentSize } }: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) =>
-    determineInputSizeChange(contentSize)
-  , [determineInputSizeChange])
+  const handleContentSizeChange = useCallback(
+    ({
+      nativeEvent: { contentSize },
+    }: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) =>
+      determineInputSizeChange(contentSize),
+    [determineInputSizeChange]
+  )
 
   return (
     <TextInput

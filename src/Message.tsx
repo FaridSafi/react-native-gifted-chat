@@ -33,7 +33,7 @@ const styles = {
 }
 
 export interface MessageProps<TMessage extends IMessage> {
-  key: any
+  key: string
   showUserAvatar?: boolean
   position: 'left' | 'right'
   currentMessage: TMessage
@@ -54,7 +54,7 @@ export interface MessageProps<TMessage extends IMessage> {
 }
 
 export default class Message<
-  TMessage extends IMessage = IMessage
+  TMessage extends IMessage = IMessage,
 > extends React.Component<MessageProps<TMessage>> {
   static defaultProps = {
     renderAvatar: undefined,
@@ -101,10 +101,10 @@ export default class Message<
     const nextPropsPreviousMessage = nextProps.previousMessage
 
     let shouldUpdate =
-      this.props.shouldUpdateMessage?.(this.props, nextProps) ||
-      false
+      this.props.shouldUpdateMessage?.(this.props, nextProps) || false
 
-    shouldUpdate = shouldUpdate ||
+    shouldUpdate =
+      shouldUpdate ||
       !isEqual(current, next) ||
       !isEqual(previousMessage, nextPropsPreviousMessage) ||
       !isEqual(nextMessage, nextPropsMessage)

@@ -11,3 +11,4 @@ Exponent-*.app
 lib/
 coverage/
 web-build/
+.eslintcache

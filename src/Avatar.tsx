@@ -11,7 +11,20 @@ import GiftedAvatar from './GiftedAvatar'
 import { StylePropType, isSameUser, isSameDay } from './utils'
 import { IMessage, LeftRightStyle, User } from './Models'
 
-const styles: { [key: string]: any } = {
+interface Styles {
+  left: {
+    container: ViewStyle
+    onTop: ViewStyle
+    image: ImageStyle
+  }
+  right: {
+    container: ViewStyle
+    onTop: ViewStyle
+    image: ImageStyle
+  }
+}
+
+const styles: Styles = {
   left: StyleSheet.create({
     container: {
       marginRight: 8,
@@ -19,7 +32,6 @@ const styles: { [key: string]: any } = {
     onTop: {
       alignSelf: 'flex-start',
     },
-    onBottom: {},
     image: {
       height: 36,
       width: 36,
@@ -33,7 +45,6 @@ const styles: { [key: string]: any } = {
     onTop: {
       alignSelf: 'flex-start',
     },
-    onBottom: {},
     image: {
       height: 36,
       width: 36,
@@ -75,7 +86,6 @@ export function Avatar<TMessage extends IMessage = IMessage> (
   } = props
 
   const messageToCompare = renderAvatarOnTop ? previousMessage : nextMessage
-  const computedStyle = renderAvatarOnTop ? 'onTop' : 'onBottom'
 
   if (renderAvatar === null)
     return null
@@ -138,7 +148,7 @@ export function Avatar<TMessage extends IMessage = IMessage> (
     <View
       style={[
         styles[position].container,
-        styles[position][computedStyle],
+        renderAvatarOnTop && styles[position].onTop,
         containerStyle && containerStyle[position],
       ]}
     >

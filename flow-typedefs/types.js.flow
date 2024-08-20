@@ -16,7 +16,7 @@ export type User = {
 export type Reply = {
   title: string,
   value: string,
-  messageId?: any,
+  messageId?: number | string,
 }
 
 export type QuickReplies = {

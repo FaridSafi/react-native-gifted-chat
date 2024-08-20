@@ -22,7 +22,7 @@ interface Props {
   wrapperStyle?: StyleProp<ViewStyle>
   containerStyle?: StyleProp<ViewStyle>
   iconTextStyle?: StyleProp<TextStyle>
-  onSend: (messages: any) => void
+  onSend: (messages: unknown) => void
 }
 
 const CustomActions = ({

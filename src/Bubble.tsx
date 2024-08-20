@@ -152,12 +152,18 @@ export interface BubbleProps<TMessage extends IMessage> {
   quickReplyStyle?: StyleProp<ViewStyle>
   quickReplyTextStyle?: StyleProp<TextStyle>
   quickReplyContainerStyle?: StyleProp<ViewStyle>
-  onPress?(context?: any, message?: any): void
-  onLongPress?(context?: any, message?: any): void
+  onPress?(context?: unknown, message?: unknown): void
+  onLongPress?(context?: unknown, message?: unknown): void
   onQuickReply?(replies: Reply[]): void
-  renderMessageImage?(props: RenderMessageImageProps<TMessage>): React.ReactNode
-  renderMessageVideo?(props: RenderMessageVideoProps<TMessage>): React.ReactNode
-  renderMessageAudio?(props: RenderMessageAudioProps<TMessage>): React.ReactNode
+  renderMessageImage?(
+    props: RenderMessageImageProps<TMessage>,
+  ): React.ReactNode
+  renderMessageVideo?(
+    props: RenderMessageVideoProps<TMessage>,
+  ): React.ReactNode
+  renderMessageAudio?(
+    props: RenderMessageAudioProps<TMessage>,
+  ): React.ReactNode
   renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
   renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
   renderTime?(timeProps: TimeProps<TMessage>): React.ReactNode
@@ -170,7 +176,7 @@ export interface BubbleProps<TMessage extends IMessage> {
 }
 
 export default class Bubble<
-  TMessage extends IMessage = IMessage
+  TMessage extends IMessage = IMessage,
 > extends React.Component<BubbleProps<TMessage>> {
   static contextType = GiftedChatContext
 
@@ -268,6 +274,7 @@ export default class Bubble<
           : DEFAULT_OPTION_TITLES
       const cancelButtonIndex = options.length - 1
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ;(this.context as any).actionSheet().showActionSheetWithOptions(
         {
           options,
@@ -287,12 +294,8 @@ export default class Bubble<
   }
 
   styledBubbleToNext () {
-    const {
-      currentMessage,
-      nextMessage,
-      position,
-      containerToNextStyle,
-    } = this.props
+    const { currentMessage, nextMessage, position, containerToNextStyle } =
+      this.props
     if (
       currentMessage &&
       nextMessage &&
@@ -459,13 +462,19 @@ export default class Bubble<
       return (
         <View style={styles.content.tickView}>
           {!!currentMessage.sent && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>{'✓'}</Text>
+            <Text style={[styles.content.tick, this.props.tickStyle]}>
+              {'✓'}
+            </Text>
           )}
           {!!currentMessage.received && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>{'✓'}</Text>
+            <Text style={[styles.content.tick, this.props.tickStyle]}>
+              {'✓'}
+            </Text>
           )}
           {!!currentMessage.pending && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>{'🕓'}</Text>
+            <Text style={[styles.content.tick, this.props.tickStyle]}>
+              {'🕓'}
+            </Text>
           )}
         </View>
       )
@@ -508,7 +517,8 @@ export default class Bubble<
               [styles.content.username, this.props.usernameStyle] as TextStyle
             }
           >
-            {'~ '}{currentMessage.user.name}
+            {'~ '}
+            {currentMessage.user.name}
           </Text>
         </View>
       )
@@ -546,12 +556,8 @@ export default class Bubble<
   }
 
   render () {
-    const {
-      position,
-      containerStyle,
-      wrapperStyle,
-      bottomContainerStyle,
-    } = this.props
+    const { position, containerStyle, wrapperStyle, bottomContainerStyle } =
+      this.props
     return (
       <View
         style={[

@@ -10,7 +10,7 @@ import { StylePropType } from './utils'
 import { IMessage } from './Models'
 
 export interface InputToolbarProps<TMessage extends IMessage> {
-  options?: { [key: string]: any }
+  options?: { [key: string]: () => void }
   optionTintColor?: string
   containerStyle?: StyleProp<ViewStyle>
   primaryStyle?: StyleProp<ViewStyle>
@@ -49,8 +49,9 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
       containerStyle,
     }
 
-    return renderActions?.(props) ||
-      (onPressActionButton && <Actions {...props} />)
+    return (
+      renderActions?.(props) || (onPressActionButton && <Actions {...props} />)
+    )
   }, [
     renderActions,
     onPressActionButton,
@@ -62,7 +63,11 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
   ])
 
   const composerFragment = useMemo(() => {
-    return renderComposer?.(props as ComposerProps) || <Composer {...props as ComposerProps} />
+    return (
+      renderComposer?.(props as ComposerProps) || (
+        <Composer {...(props as ComposerProps)} />
+      )
+    )
   }, [renderComposer, props])
 
   return (

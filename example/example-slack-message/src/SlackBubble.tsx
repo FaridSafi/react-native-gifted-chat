@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo } from 'react'
-import PropTypes from 'prop-types'
 import {
   Text,
   StyleSheet,
@@ -17,23 +16,23 @@ import {
   utils,
   useChatContext,
 } from 'react-native-gifted-chat'
-import Clipboard from '@react-native-clipboard/clipboard'
+import * as Clipboard from 'expo-clipboard'
 
 const { isSameUser, isSameDay } = utils
 
 interface Props {
-  touchableProps: any
-  onLongPress?: (context: any, currentMessage: any) => void
+  touchableProps: object
+  onLongPress?: (context: unknown, currentMessage: object) => void
   renderMessageImage?: (props: Props) => React.ReactNode
   renderMessageText?: (props: Props) => React.ReactNode
   renderCustomView?: (props: Props) => React.ReactNode
   renderUsername?: (props: Props) => React.ReactNode
   renderTime?: (props: Props) => React.ReactNode
-  renderTicks?: (currentMessage: any) => React.ReactNode
-  currentMessage: any
-  nextMessage: any
-  previousMessage: any
-  user: any
+  renderTicks?: (currentMessage: object) => React.ReactNode
+  currentMessage: object
+  nextMessage: object
+  previousMessage: object
+  user: object
   containerStyle: {
     left: StyleProp<ViewStyle>
     right: StyleProp<ViewStyle>
@@ -94,7 +93,7 @@ const Bubble = (props: Props) => {
       (buttonIndex: number) => {
         switch (buttonIndex) {
           case 0:
-            Clipboard.setString(currentMessage.text)
+            Clipboard.setStringAsync(currentMessage.text)
             break
         }
       }
@@ -311,7 +310,3 @@ const styles = StyleSheet.create({
 })
 
 export default Bubble
-
-Bubble.contextTypes = {
-  actionSheet: PropTypes.func,
-}

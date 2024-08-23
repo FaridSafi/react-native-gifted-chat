@@ -33,7 +33,6 @@ const styles = {
 }
 
 export interface MessageProps<TMessage extends IMessage> {
-  key: string
   showUserAvatar?: boolean
   position: 'left' | 'right'
   currentMessage: TMessage

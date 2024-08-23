@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { useCallback } from 'react'
 import {
   StyleProp,
@@ -61,7 +60,7 @@ const CustomActions = ({
         }
       }
     )
-  }, [showActionSheetWithOptions])
+  }, [showActionSheetWithOptions, onSend])
 
   const renderIconComponent = useCallback(() => {
     if (renderIcon)
@@ -72,7 +71,7 @@ const CustomActions = ({
         <Text style={[styles.iconText, iconTextStyle]}>+</Text>
       </View>
     )
-  }, [renderIcon])
+  }, [renderIcon, wrapperStyle, iconTextStyle])
 
   return (
     <TouchableOpacity
@@ -110,7 +109,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 })
-
-CustomActions.contextTypes = {
-  actionSheet: PropTypes.func,
-}

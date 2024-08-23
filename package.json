@@ -52,9 +52,9 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "4.1.0",
-    "@react-native-clipboard/clipboard": "^1.14.1",
     "@types/lodash.isequal": "^4.5.8",
     "dayjs": "1.11.13",
+    "expo-clipboard": "^6.0.3",
     "lodash.isequal": "^4.5.0",
     "prop-types": "15.8.1",
     "react-native-communications": "2.2.1",

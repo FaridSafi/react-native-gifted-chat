@@ -9,7 +9,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native'
-import Clipboard from '@react-native-clipboard/clipboard'
+import * as Clipboard from 'expo-clipboard'
 
 import { GiftedChatContext } from './GiftedChatContext'
 import { QuickReplies, QuickRepliesProps } from './QuickReplies'
@@ -269,7 +269,7 @@ export default class Bubble<
     } else if (currentMessage && currentMessage.text) {
       const { optionTitles } = this.props
       const options =
-        optionTitles && optionTitles.length > 0
+        optionTitles?.length
           ? optionTitles.slice(0, 2)
           : DEFAULT_OPTION_TITLES
       const cancelButtonIndex = options.length - 1
@@ -283,7 +283,7 @@ export default class Bubble<
         (buttonIndex: number) => {
           switch (buttonIndex) {
             case 0:
-              Clipboard.setString(currentMessage.text)
+              Clipboard.setStringAsync(currentMessage.text)
               break
             default:
               break

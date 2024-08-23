@@ -27,9 +27,6 @@ config.resolver = {
         if (name === 'react-native-gifted-chat')
           return path.join(process.cwd(), '../src')
 
-        if (name === 'lodash.isequal')
-          return path.join(process.cwd(), `../node_modules/${name}`)
-
         return path.join(process.cwd(), `node_modules/${name}`)
       },
     }

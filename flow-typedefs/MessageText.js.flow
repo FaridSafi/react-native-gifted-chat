@@ -9,7 +9,7 @@ import * as React from 'react'
 
 export type MessageTextProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   position: 'left' | 'right',
-  currentMessage?: TMessage,
+  currentMessage: TMessage,
   containerStyle: LeftRightStyle<ViewStyleProp>,
   textStyle?: LeftRightStyle<TextStyleProp>,
   linkStyle?: LeftRightStyle<TextStyleProp>,

@@ -8,7 +8,7 @@ import type {
 
 export type TimeProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   position: 'left' | 'right',
-  currentMessage?: TMessage,
+  currentMessage: TMessage,
   containerStyle?: LeftRightStyle<ViewStyleProp>,
   timeTextStyle?: LeftRightStyle<TextStyleProp>,
   timeFormat?: string,

@@ -1,39 +1,34 @@
+import React, { useCallback } from 'react'
 import * as Linking from 'expo-linking'
-import PropTypes from 'prop-types'
-import React from 'react'
 import {
   Platform,
   StyleSheet,
   TouchableOpacity,
-  ViewPropTypes,
   View,
   Text,
+  StyleProp,
+  ViewStyle,
 } from 'react-native'
 import MapView from 'react-native-maps'
 
-export default class CustomView extends React.Component<{
+interface Props {
   currentMessage: any
-  containerStyle: any
-  mapViewStyle: any
-}> {
-  static propTypes = {
-    currentMessage: PropTypes.object,
-    containerStyle: ViewPropTypes.style,
-    mapViewStyle: ViewPropTypes.style,
-  }
+  containerStyle?: StyleProp<ViewStyle>
+  mapViewStyle?: StyleProp<ViewStyle>
+}
 
-  static defaultProps = {
-    currentMessage: {},
-    containerStyle: {},
-    mapViewStyle: {},
-  }
-
-  openMapAsync = async () => {
+const CustomView = ({
+  currentMessage,
+  containerStyle,
+  mapViewStyle,
+}: Props) => {
+  const openMapAsync = useCallback(async () => {
     if (Platform.OS === 'web') {
       alert('Opening the map is not supported.')
       return
     }
-    const { currentMessage: { location = {} } = {} } = this.props
+
+    const { location = {} } = currentMessage
 
     const url = Platform.select({
       ios: `http://maps.apple.com/?ll=${location.latitude},${location.longitude}`,
@@ -42,24 +37,23 @@ export default class CustomView extends React.Component<{
 
     try {
       const supported = await Linking.canOpenURL(url)
-      if (supported) {
+      if (supported)
         return Linking.openURL(url)
-      }
-      alert('Opening the map is not supported.')
-    } catch ({ message }) {
-      alert(message)
-    }
-  }
 
-  render() {
-    const { currentMessage, containerStyle, mapViewStyle } = this.props
-    if (currentMessage.location) {
-      return (
-        <TouchableOpacity
-          style={[styles.container, containerStyle]}
-          onPress={this.openMapAsync}
-        >
-          {Platform.OS !== 'web' ? (
+      alert('Opening the map is not supported.')
+    } catch (e) {
+      alert(e.message)
+    }
+  }, [currentMessage])
+
+  if (currentMessage.location)
+    return (
+      <TouchableOpacity
+        style={[styles.container, containerStyle]}
+        onPress={openMapAsync}
+      >
+        {Platform.OS !== 'web'
+          ? (
             <MapView
               style={[styles.mapView, mapViewStyle]}
               region={{
@@ -71,19 +65,21 @@ export default class CustomView extends React.Component<{
               scrollEnabled={false}
               zoomEnabled={false}
             />
-          ) : (
+          )
+          : (
             <View style={{ padding: 15 }}>
               <Text style={{ color: 'tomato', fontWeight: 'bold' }}>
-                Map not supported in web yet, sorry!
+              Map not supported in web yet, sorry!
               </Text>
             </View>
           )}
-        </TouchableOpacity>
-      )
-    }
-    return null
-  }
+      </TouchableOpacity>
+    )
+
+  return null
 }
+
+export default CustomView
 
 const styles = StyleSheet.create({
   container: {},

@@ -6,17 +6,16 @@ import { DependencyList, useLayoutEffect, useRef } from 'react'
  * @param {()=>void} effect the function to call
  * @param {DependencyList} dependencies the state(s) that fires the update
  */
-export function useUpdateLayoutEffect(
+export function useUpdateLayoutEffect (
   effect: () => void,
-  dependencies: DependencyList = [],
+  dependencies: DependencyList = []
 ) {
   const isInitialMount = useRef(true)
 
   useLayoutEffect(() => {
-    if (isInitialMount.current) {
+    if (isInitialMount.current)
       isInitialMount.current = false
-    } else {
+    else
       effect()
-    }
   }, dependencies)
 }

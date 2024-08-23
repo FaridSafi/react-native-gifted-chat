@@ -11,7 +11,20 @@ import GiftedAvatar from './GiftedAvatar'
 import { StylePropType, isSameUser, isSameDay } from './utils'
 import { IMessage, LeftRightStyle, User } from './Models'
 
-const styles: { [key: string]: any } = {
+interface Styles {
+  left: {
+    container: ViewStyle
+    onTop: ViewStyle
+    image: ImageStyle
+  }
+  right: {
+    container: ViewStyle
+    onTop: ViewStyle
+    image: ImageStyle
+  }
+}
+
+const styles: Styles = {
   left: StyleSheet.create({
     container: {
       marginRight: 8,
@@ -19,7 +32,6 @@ const styles: { [key: string]: any } = {
     onTop: {
       alignSelf: 'flex-start',
     },
-    onBottom: {},
     image: {
       height: 36,
       width: 36,
@@ -33,7 +45,6 @@ const styles: { [key: string]: any } = {
     onTop: {
       alignSelf: 'flex-start',
     },
-    onBottom: {},
     image: {
       height: 36,
       width: 36,
@@ -43,39 +54,41 @@ const styles: { [key: string]: any } = {
 }
 
 export interface AvatarProps<TMessage extends IMessage> {
-  currentMessage?: TMessage
+  currentMessage: TMessage
   previousMessage?: TMessage
   nextMessage?: TMessage
-  position: 'left' | 'right' | string // Allow string as a fallback value
+  position: 'left' | 'right'
   renderAvatarOnTop?: boolean
   showAvatarForEveryMessage?: boolean
   imageStyle?: LeftRightStyle<ImageStyle>
   containerStyle?: LeftRightStyle<ViewStyle>
   textStyle?: TextStyle
   renderAvatar?(props: Omit<AvatarProps<TMessage>, 'renderAvatar'>): ReactNode
-  onPressAvatar?(user: User): void
-  onLongPressAvatar?(user: User): void
+  onPressAvatar?: (user: User) => void
+  onLongPressAvatar?: (user: User) => void
 }
 
-export function Avatar({
-  renderAvatarOnTop = false,
-  showAvatarForEveryMessage = false,
-  containerStyle = {} as { [key: string]: any },
-  position = 'left',
-  currentMessage = {} as IMessage,
-  previousMessage = {} as IMessage,
-  nextMessage = {} as IMessage,
-  renderAvatar = (({}) => null) as AvatarProps<IMessage>['renderAvatar'],
-  imageStyle = {} as { [key: string]: any },
-  onPressAvatar = ({}) => {},
-  onLongPressAvatar = ({}) => {},
-}) {
-  const messageToCompare = renderAvatarOnTop ? previousMessage : nextMessage
-  const computedStyle = renderAvatarOnTop ? 'onTop' : 'onBottom'
+export function Avatar<TMessage extends IMessage = IMessage> (
+  props: AvatarProps<TMessage>
+) {
+  const {
+    renderAvatarOnTop,
+    showAvatarForEveryMessage,
+    containerStyle,
+    position,
+    currentMessage,
+    renderAvatar,
+    previousMessage,
+    nextMessage,
+    imageStyle,
+    onPressAvatar,
+    onLongPressAvatar,
+  } = props
 
-  if (renderAvatar === null) {
+  const messageToCompare = renderAvatarOnTop ? previousMessage : nextMessage
+
+  if (renderAvatar === null)
     return null
-  }
 
   if (
     !showAvatarForEveryMessage &&
@@ -83,7 +96,7 @@ export function Avatar({
     messageToCompare &&
     isSameUser(currentMessage, messageToCompare) &&
     isSameDay(currentMessage, messageToCompare)
-  ) {
+  )
     return (
       <View
         style={[
@@ -99,10 +112,9 @@ export function Avatar({
         />
       </View>
     )
-  }
 
   const renderAvatarComponent = () => {
-    if (renderAvatar) {
+    if (renderAvatar)
       return renderAvatar({
         renderAvatarOnTop,
         showAvatarForEveryMessage,
@@ -115,8 +127,8 @@ export function Avatar({
         onPressAvatar,
         onLongPressAvatar,
       })
-    }
-    if (currentMessage) {
+
+    if (props.currentMessage)
       return (
         <GiftedAvatar
           avatarStyle={[
@@ -124,11 +136,11 @@ export function Avatar({
             imageStyle && imageStyle[position],
           ]}
           user={currentMessage.user}
-          onPress={() => onPressAvatar(currentMessage.user)}
-          onLongPress={() => onLongPressAvatar(currentMessage.user)}
+          onPress={() => onPressAvatar?.(currentMessage.user)}
+          onLongPress={() => onLongPressAvatar?.(currentMessage.user)}
         />
       )
-    }
+
     return null
   }
 
@@ -136,7 +148,7 @@ export function Avatar({
     <View
       style={[
         styles[position].container,
-        styles[position][computedStyle],
+        renderAvatarOnTop && styles[position].onTop,
         containerStyle && containerStyle[position],
       ]}
     >

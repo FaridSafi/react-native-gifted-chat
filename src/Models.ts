@@ -8,7 +8,7 @@ export {
   RenderMessageImageProps,
   RenderMessageVideoProps,
   RenderMessageAudioProps,
-  RenderMessageTextProps,
+  RenderMessageTextProps
 } from './Bubble'
 export { ComposerProps } from './Composer'
 export { DayProps } from './Day'
@@ -30,7 +30,9 @@ export interface LeftRightStyle<T> {
   left?: StyleProp<T>
   right?: StyleProp<T>
 }
-type renderFunction = (x: any) => JSX.Element
+
+type renderFunction = (x: unknown) => JSX.Element
+
 export interface User {
   _id: string | number
   name?: string
@@ -40,7 +42,7 @@ export interface User {
 export interface Reply {
   title: string
   value: string
-  messageId?: any
+  messageId?: number | string
 }
 
 export interface QuickReplies {
@@ -67,7 +69,7 @@ export interface IMessage {
 export type IChatMessage = IMessage
 
 export interface MessageVideoProps<TMessage extends IMessage> {
-  currentMessage?: TMessage
+  currentMessage: TMessage
   containerStyle?: StyleProp<ViewStyle>
   videoStyle?: StyleProp<ViewStyle>
   videoProps?: object
@@ -75,7 +77,7 @@ export interface MessageVideoProps<TMessage extends IMessage> {
 }
 
 export interface MessageAudioProps<TMessage extends IMessage> {
-  currentMessage?: TMessage
+  currentMessage: TMessage
   containerStyle?: StyleProp<ViewStyle>
   audioStyle?: StyleProp<ViewStyle>
   audioProps?: object

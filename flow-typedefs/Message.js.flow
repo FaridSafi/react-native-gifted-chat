@@ -11,7 +11,7 @@ export type MessageProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   key: React$Key,
   showUserAvatar?: boolean,
   position: 'left' | 'right',
-  currentMessage?: TMessage,
+  currentMessage: TMessage,
   nextMessage?: TMessage,
   previousMessage?: TMessage,
   user: User,

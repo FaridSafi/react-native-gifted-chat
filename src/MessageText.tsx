@@ -10,7 +10,6 @@ import {
   TextStyle,
 } from 'react-native'
 
-// @ts-ignore
 import ParsedText from 'react-native-parsed-text'
 import { LeftRightStyle, IMessage } from './Models'
 import { StylePropType } from './utils'
@@ -60,16 +59,16 @@ const DEFAULT_OPTION_TITLES = ['Call', 'Text', 'Cancel']
 export interface MessageTextProps<TMessage extends IMessage> {
   position?: 'left' | 'right'
   optionTitles?: string[]
-  currentMessage?: TMessage
+  currentMessage: TMessage
   containerStyle?: LeftRightStyle<ViewStyle>
   textStyle?: LeftRightStyle<TextStyle>
   linkStyle?: LeftRightStyle<TextStyle>
   textProps?: TextProps
   customTextStyle?: StyleProp<TextStyle>
-  parsePatterns?(linkStyle: TextStyle): any
+  parsePatterns?: (linkStyle: TextStyle) => []
 }
 
-export function MessageText<TMessage extends IMessage = IMessage>({
+export function MessageText<TMessage extends IMessage = IMessage> ({
   currentMessage = {} as TMessage,
   optionTitles = DEFAULT_OPTION_TITLES,
   position = 'left',
@@ -77,7 +76,7 @@ export function MessageText<TMessage extends IMessage = IMessage>({
   textStyle,
   linkStyle: linkStyleProp,
   customTextStyle,
-  parsePatterns = () => [],
+  parsePatterns,
   textProps,
 }: MessageTextProps<TMessage>) {
   const { actionSheet } = useChatContext()
@@ -94,13 +93,12 @@ export function MessageText<TMessage extends IMessage = IMessage>({
   const onUrlPress = (url: string) => {
     // When someone sends a message that includes a website address beginning with "www." (omitting the scheme),
     // react-native-parsed-text recognizes it as a valid url, but Linking fails to open due to the missing scheme.
-    if (WWW_URL_PATTERN.test(url)) {
+    if (WWW_URL_PATTERN.test(url))
       onUrlPress(`https://${url}`)
-    } else {
+    else
       Linking.openURL(url).catch(e => {
         error(e, 'No handler for URL:', url)
       })
-    }
   }
 
   const onPhonePress = (phone: string) => {
@@ -114,7 +112,7 @@ export function MessageText<TMessage extends IMessage = IMessage>({
         options,
         cancelButtonIndex,
       },
-      (buttonIndex: number) => {
+      (buttonIndex?: number) => {
         switch (buttonIndex) {
           case 0:
             Linking.openURL(`tel:${phone}`).catch(e => {
@@ -126,21 +124,19 @@ export function MessageText<TMessage extends IMessage = IMessage>({
               error(e, 'No handler for text')
             })
             break
-          default:
-            break
         }
-      },
+      }
     )
   }
 
   const onEmailPress = (email: string) =>
     Linking.openURL(`mailto:${email}`).catch(e =>
-      error(e, 'No handler for mailto'),
+      error(e, 'No handler for mailto')
     )
 
   const linkStyle = [
     styles[position].link,
-    linkStyleProp && linkStyleProp[position],
+    linkStyleProp?.[position],
   ]
   return (
     <View
@@ -156,7 +152,7 @@ export function MessageText<TMessage extends IMessage = IMessage>({
           customTextStyle,
         ]}
         parse={[
-          ...parsePatterns!(linkStyle as TextStyle),
+          ...(parsePatterns ? parsePatterns(linkStyle as TextStyle) : []),
           { type: 'url', style: linkStyle, onPress: onUrlPress },
           { type: 'phone', style: linkStyle, onPress: onPhonePress },
           { type: 'email', style: linkStyle, onPress: onEmailPress },

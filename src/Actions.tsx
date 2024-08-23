@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useCallback } from 'react'
 import {
   StyleSheet,
   Text,
@@ -12,10 +12,9 @@ import {
 import Color from './Color'
 import { StylePropType } from './utils'
 import { useChatContext } from './GiftedChatContext'
-import { useCallbackOne } from 'use-memo-one'
 
 export interface ActionsProps {
-  options?: { [key: string]: any }
+  options?: { [key: string]: () => void }
   optionTintColor?: string
   icon?: () => ReactNode
   wrapperStyle?: StyleProp<ViewStyle>
@@ -24,8 +23,8 @@ export interface ActionsProps {
   onPressActionButton?(): void
 }
 
-export function Actions({
-  options = {},
+export function Actions ({
+  options,
   optionTintColor = Color.optionTintColor,
   icon,
   wrapperStyle,
@@ -34,34 +33,41 @@ export function Actions({
   containerStyle,
 }: ActionsProps) {
   const { actionSheet } = useChatContext()
-  const onActionsPress = useCallbackOne(() => {
+
+  const onActionsPress = useCallback(() => {
+    if (!options)
+      return
+
     const optionKeys = Object.keys(options)
     const cancelButtonIndex = optionKeys.indexOf('Cancel')
+
     actionSheet().showActionSheetWithOptions(
       {
         options: optionKeys,
         cancelButtonIndex,
         tintColor: optionTintColor,
       },
-      (buttonIndex: number) => {
-        const key = optionKeys[buttonIndex]
-        if (key) {
-          options[key]()
-        }
-      },
-    )
-  }, [])
+      (buttonIndex: number | undefined) => {
+        if (buttonIndex === undefined)
+          return
 
-  const renderIcon = useCallbackOne(() => {
-    if (icon) {
+        const key = optionKeys[buttonIndex]
+        if (key)
+          options[key]()
+      }
+    )
+  }, [actionSheet, options, optionTintColor])
+
+  const renderIcon = useCallback(() => {
+    if (icon)
       return icon()
-    }
+
     return (
       <View style={[styles.wrapper, wrapperStyle]}>
-        <Text style={[styles.iconText, iconTextStyle]}>+</Text>
+        <Text style={[styles.iconText, iconTextStyle]}>{'+'}</Text>
       </View>
     )
-  }, [])
+  }, [icon, iconTextStyle, wrapperStyle])
 
   return (
     <TouchableOpacity
@@ -74,7 +80,6 @@ export function Actions({
 }
 
 Actions.propTypes = {
-  onSend: PropTypes.func,
   options: PropTypes.object,
   optionTintColor: PropTypes.string,
   icon: PropTypes.func,
@@ -95,11 +100,14 @@ const styles = StyleSheet.create({
     borderColor: Color.defaultColor,
     borderWidth: 2,
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconText: {
     color: Color.defaultColor,
     fontWeight: 'bold',
     fontSize: 16,
+    lineHeight: 16,
     backgroundColor: Color.backgroundTransparent,
     textAlign: 'center',
   },

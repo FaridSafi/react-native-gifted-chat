@@ -29,21 +29,20 @@ const styles = StyleSheet.create({
 })
 
 export interface SystemMessageProps<TMessage extends IMessage> {
-  currentMessage?: TMessage
+  currentMessage: TMessage
   containerStyle?: StyleProp<ViewStyle>
   wrapperStyle?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
 }
 
-export function SystemMessage<TMessage extends IMessage = IMessage>({
+export function SystemMessage<TMessage extends IMessage = IMessage> ({
   currentMessage,
   containerStyle,
   wrapperStyle,
   textStyle,
 }: SystemMessageProps<TMessage>) {
-  if (currentMessage == null || currentMessage.system == false) {
+  if (currentMessage == null || currentMessage.system === false)
     return null
-  }
 
   return (
     <View style={[styles.container, containerStyle]}>

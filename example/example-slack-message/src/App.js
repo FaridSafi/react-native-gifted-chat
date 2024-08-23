@@ -1,6 +1,5 @@
 import React from 'react'
 import { Platform } from 'react-native'
-import PropTypes from 'prop-types'
 import { GiftedChat } from 'react-native-gifted-chat'
 import emojiUtils from 'emoji-utils'
 
@@ -11,7 +10,7 @@ export default class App extends React.Component {
     messages: [],
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setState({
       messages: [
         {
@@ -28,13 +27,13 @@ export default class App extends React.Component {
     })
   }
 
-  onSend(messages = []) {
+  onSend (messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
     }))
   }
 
-  renderMessage(props) {
+  renderMessage (props) {
     const {
       currentMessage: { text: currText },
     } = props
@@ -42,18 +41,17 @@ export default class App extends React.Component {
     let messageTextStyle
 
     // Make "pure emoji" messages much bigger than plain text.
-    if (currText && emojiUtils.isPureEmojiString(currText)) {
+    if (currText && emojiUtils.isPureEmojiString(currText))
       messageTextStyle = {
         fontSize: 28,
         // Emoji get clipped if lineHeight isn't increased; make it consistent across platforms.
         lineHeight: Platform.OS === 'android' ? 34 : 30,
       }
-    }
 
     return <SlackMessage {...props} messageTextStyle={messageTextStyle} />
   }
 
-  render() {
+  render () {
     return (
       <GiftedChat
         messages={this.state.messages}

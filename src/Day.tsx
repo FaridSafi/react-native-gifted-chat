@@ -1,5 +1,4 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import {
   StyleSheet,
   Text,
@@ -12,7 +11,7 @@ import {
 import dayjs from 'dayjs'
 
 import Color from './Color'
-import { StylePropType, isSameDay } from './utils'
+import { isSameDay } from './utils'
 import { DATE_FORMAT } from './Constant'
 import { IMessage } from './Models'
 
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
 })
 
 export interface DayProps<TMessage extends IMessage = IMessage> {
-  currentMessage?: TMessage
+  currentMessage: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage
   containerStyle?: StyleProp<ViewStyle>
@@ -45,7 +44,7 @@ export interface DayProps<TMessage extends IMessage = IMessage> {
   inverted?: boolean
 }
 
-export function Day<TMessage extends IMessage = IMessage>({
+export function Day<TMessage extends IMessage = IMessage> ({
   dateFormat = DATE_FORMAT,
   currentMessage,
   previousMessage,
@@ -55,9 +54,8 @@ export function Day<TMessage extends IMessage = IMessage>({
 }: DayProps<TMessage>) {
   const { getLocale } = useChatContext()
 
-  if (currentMessage == null || isSameDay(currentMessage, previousMessage)) {
+  if (currentMessage == null || isSameDay(currentMessage, previousMessage))
     return null
-  }
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -70,15 +68,4 @@ export function Day<TMessage extends IMessage = IMessage>({
       </View>
     </View>
   )
-}
-
-Day.propTypes = {
-  currentMessage: PropTypes.object,
-  previousMessage: PropTypes.object,
-  nextMessage: PropTypes.object,
-  inverted: PropTypes.bool,
-  containerStyle: StylePropType,
-  wrapperStyle: StylePropType,
-  textStyle: StylePropType,
-  dateFormat: PropTypes.string,
 }

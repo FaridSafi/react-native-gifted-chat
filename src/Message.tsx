@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { View, StyleSheet, ViewStyle, LayoutChangeEvent } from 'react-native'
+import isEqual from 'lodash.isequal'
 
 import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
@@ -32,10 +33,9 @@ const styles = {
 }
 
 export interface MessageProps<TMessage extends IMessage> {
-  key: any
   showUserAvatar?: boolean
   position: 'left' | 'right'
-  currentMessage?: TMessage
+  currentMessage: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage
   user: User
@@ -53,7 +53,7 @@ export interface MessageProps<TMessage extends IMessage> {
 }
 
 export default class Message<
-  TMessage extends IMessage = IMessage
+  TMessage extends IMessage = IMessage,
 > extends React.Component<MessageProps<TMessage>> {
   static defaultProps = {
     renderAvatar: undefined,
@@ -92,63 +92,74 @@ export default class Message<
     onMessageLayout: PropTypes.func,
   }
 
-  shouldComponentUpdate(nextProps: MessageProps<TMessage>) {
+  shouldComponentUpdate (nextProps: MessageProps<TMessage>) {
     const next = nextProps.currentMessage!
     const current = this.props.currentMessage!
     const { previousMessage, nextMessage } = this.props
     const nextPropsMessage = nextProps.nextMessage
     const nextPropsPreviousMessage = nextProps.previousMessage
 
-    const shouldUpdate =
-      (this.props.shouldUpdateMessage &&
-        this.props.shouldUpdateMessage(this.props, nextProps)) ||
-      false
+    let shouldUpdate =
+      this.props.shouldUpdateMessage?.(this.props, nextProps) || false
 
-    return (
-      next.sent !== current.sent ||
-      next.received !== current.received ||
-      next.pending !== current.pending ||
-      next.createdAt !== current.createdAt ||
-      next.text !== current.text ||
-      next.image !== current.image ||
-      next.video !== current.video ||
-      next.audio !== current.audio ||
-      previousMessage !== nextPropsPreviousMessage ||
-      nextMessage !== nextPropsMessage ||
-      shouldUpdate
-    )
+    shouldUpdate =
+      shouldUpdate ||
+      !isEqual(current, next) ||
+      !isEqual(previousMessage, nextPropsPreviousMessage) ||
+      !isEqual(nextMessage, nextPropsMessage)
+
+    return shouldUpdate
   }
 
-  renderDay() {
+  renderDay () {
     if (this.props.currentMessage && this.props.currentMessage.createdAt) {
-      const { containerStyle, onMessageLayout, ...props } = this.props
-      if (this.props.renderDay) {
+      const {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        containerStyle,
+        onMessageLayout,
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+        ...props
+      } = this.props
+
+      if (this.props.renderDay)
         return this.props.renderDay(props)
-      }
+
       return <Day {...props} />
     }
     return null
   }
 
-  renderBubble() {
-    const { containerStyle, onMessageLayout, ...props } = this.props
-    if (this.props.renderBubble) {
+  renderBubble () {
+    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      containerStyle,
+      onMessageLayout,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      ...props
+    } = this.props
+
+    if (this.props.renderBubble)
       return this.props.renderBubble(props)
-    }
-    // @ts-ignore
+
     return <Bubble {...props} />
   }
 
-  renderSystemMessage() {
-    const { containerStyle, onMessageLayout, ...props } = this.props
+  renderSystemMessage () {
+    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      containerStyle,
+      onMessageLayout,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      ...props
+    } = this.props
 
-    if (this.props.renderSystemMessage) {
+    if (this.props.renderSystemMessage)
       return this.props.renderSystemMessage(props)
-    }
+
     return <SystemMessage {...props} />
   }
 
-  renderAvatar() {
+  renderAvatar () {
     const { user, currentMessage, showUserAvatar } = this.props
 
     if (
@@ -158,23 +169,28 @@ export default class Message<
       currentMessage.user &&
       user._id === currentMessage.user._id &&
       !showUserAvatar
-    ) {
+    )
       return null
-    }
 
     if (
       currentMessage &&
       currentMessage.user &&
       currentMessage.user.avatar === null
-    ) {
+    )
       return null
-    }
 
-    const { containerStyle, onMessageLayout, ...props } = this.props
+    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      containerStyle,
+      onMessageLayout,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      ...props
+    } = this.props
+
     return <Avatar {...props} />
   }
 
-  render() {
+  render () {
     const {
       currentMessage,
       onMessageLayout,
@@ -187,22 +203,24 @@ export default class Message<
       return (
         <View onLayout={onMessageLayout}>
           {this.renderDay()}
-          {currentMessage.system ? (
-            this.renderSystemMessage()
-          ) : (
-            <View
-              style={[
-                styles[position].container,
-                { marginBottom: sameUser ? 2 : 10 },
-                !this.props.inverted && { marginBottom: 2 },
-                containerStyle && containerStyle[position],
-              ]}
-            >
-              {this.props.position === 'left' ? this.renderAvatar() : null}
-              {this.renderBubble()}
-              {this.props.position === 'right' ? this.renderAvatar() : null}
-            </View>
-          )}
+          {currentMessage.system
+            ? (
+              this.renderSystemMessage()
+            )
+            : (
+              <View
+                style={[
+                  styles[position].container,
+                  { marginBottom: sameUser ? 2 : 10 },
+                  !this.props.inverted && { marginBottom: 2 },
+                  containerStyle && containerStyle[position],
+                ]}
+              >
+                {this.props.position === 'left' ? this.renderAvatar() : null}
+                {this.renderBubble()}
+                {this.props.position === 'right' ? this.renderAvatar() : null}
+              </View>
+            )}
         </View>
       )
     }

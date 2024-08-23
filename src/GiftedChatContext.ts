@@ -1,7 +1,15 @@
 import * as React from 'react'
+import {
+  ActionSheetOptions,
+} from '@expo/react-native-action-sheet'
 
 export interface IGiftedChatContext {
-  actionSheet(): { showActionSheetWithOptions: (option?: any, cb?: any) => any }
+  actionSheet(): {
+    showActionSheetWithOptions: (
+      options: ActionSheetOptions,
+      callback: (buttonIndex?: number) => void | Promise<void>
+    ) => void
+  }
   getLocale(): string
 }
 

@@ -4,7 +4,6 @@ module.exports = {
     // jest: true,
     browser: true,
     node: true,
-    // 'jest/globals': true,
   },
   parser: '@typescript-eslint/parser',
   extends: [
@@ -28,10 +27,13 @@ module.exports = {
         project: './tsconfig.json',
       },
     },
-    // {
-    //   files: ['*.snap'],
-    //   processor: 'jest/.snap',
-    // },
+    {
+      files: ["tests/**/*"],
+      plugins: ["jest"],
+      env: {
+        'jest/globals': true,
+      },
+    },
   ],
   parserOptions: {
     ecmaFeatures: {

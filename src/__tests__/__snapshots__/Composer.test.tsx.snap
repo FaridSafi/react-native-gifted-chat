@@ -4,29 +4,26 @@ exports[`should render <Composer /> and compare with snapshot 1`] = `
 <TextInput
   accessibilityLabel="Type a message..."
   accessible={true}
-  allowFontScaling={true}
   autoFocus={false}
   editable={true}
   enablesReturnKeyAutomatically={true}
   keyboardAppearance="default"
   multiline={true}
-  onChangeText={[Function]}
   onContentSizeChange={[Function]}
   placeholder="Type a message..."
   placeholderTextColor="#b2b2b2"
-  rejectResponderTermination={true}
   style={
-    Array [
-      Object {
+    [
+      {
         "flex": 1,
         "fontSize": 16,
-        "lineHeight": 16,
+        "lineHeight": 22,
         "marginBottom": 5,
         "marginLeft": 10,
         "marginTop": 6,
       },
       undefined,
-      Object {
+      {
         "height": 33,
       },
     ]

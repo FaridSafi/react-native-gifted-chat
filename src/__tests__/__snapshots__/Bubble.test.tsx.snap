@@ -3,8 +3,8 @@
 exports[`should render <Bubble /> and compare with snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "flex-start",
         "flex": 1,
       },
@@ -14,8 +14,8 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
 >
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "backgroundColor": "#f0f0f0",
           "borderRadius": 15,
           "justifyContent": "flex-end",
@@ -30,6 +30,15 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
   >
     <View
       accessibilityRole="text"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
       accessible={true}
       focusable={true}
       onClick={[Function]}
@@ -43,16 +52,16 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
       <View>
         <View
           style={
-            Array [
-              Object {},
+            [
+              {},
               undefined,
             ]
           }
         >
           <Text
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "black",
                   "fontSize": 16,
                   "lineHeight": 20,
@@ -68,9 +77,9 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
           >
             <Text
               style={
-                Array [
-                  Array [
-                    Object {
+                [
+                  [
+                    {
                       "color": "black",
                       "fontSize": 16,
                       "lineHeight": 20,
@@ -93,8 +102,8 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "justifyContent": "flex-start",
             },
@@ -104,8 +113,8 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "marginBottom": 5,
                 "marginLeft": 10,
                 "marginRight": 10,
@@ -116,9 +125,8 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
         >
           <Text
             style={
-              Array [
-                Object {
-                  "backgroundColor": "transparent",
+              [
+                {
                   "color": "#aaa",
                   "fontSize": 10,
                   "textAlign": "right",
@@ -127,7 +135,7 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
               ]
             }
           >
-            7:20 PM
+            8:20 PM
           </Text>
         </View>
       </View>

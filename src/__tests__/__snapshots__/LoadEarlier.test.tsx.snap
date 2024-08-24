@@ -3,7 +3,25 @@
 exports[`should render <LoadEarlier /> and compare with snapshot 1`] = `
 <View
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
+  collapsable={false}
   focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
@@ -13,7 +31,7 @@ exports[`should render <LoadEarlier /> and compare with snapshot 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "marginBottom": 10,
       "marginTop": 5,
@@ -23,8 +41,8 @@ exports[`should render <LoadEarlier /> and compare with snapshot 1`] = `
 >
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "backgroundColor": "#b2b2b2",
           "borderRadius": 15,
@@ -39,8 +57,8 @@ exports[`should render <LoadEarlier /> and compare with snapshot 1`] = `
   >
     <Text
       style={
-        Array [
-          Object {
+        [
+          {
             "backgroundColor": "transparent",
             "color": "#fff",
             "fontSize": 12,

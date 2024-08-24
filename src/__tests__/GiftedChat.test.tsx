@@ -1,6 +1,7 @@
 import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { GiftedChat } from '../GiftedChat'
 
@@ -19,13 +20,15 @@ const messages = [
 it('should render <GiftedChat/> and compare with snapshot', () => {
   const tree = renderer
     .create(
-      <GiftedChat
-        messages={messages}
-        onSend={() => {}}
-        user={{
-          _id: 1,
-        }}
-      />
+      <SafeAreaProvider>
+        <GiftedChat
+          messages={messages}
+          onSend={() => { }}
+          user={{
+            _id: 1,
+          }}
+        />
+      </SafeAreaProvider>
     )
     .toJSON()
 

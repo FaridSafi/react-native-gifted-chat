@@ -5,8 +5,8 @@ exports[`SystemMessage should not render <SystemMessage /> and compare with snap
 exports[`SystemMessage should render <SystemMessage /> and compare with snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -20,8 +20,8 @@ exports[`SystemMessage should render <SystemMessage /> and compare with snapshot
   <View>
     <Text
       style={
-        Array [
-          Object {
+        [
+          {
             "backgroundColor": "transparent",
             "color": "#b2b2b2",
             "fontSize": 12,

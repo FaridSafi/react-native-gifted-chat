@@ -3,16 +3,16 @@
 exports[`should render <MessageText /> and compare with snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {},
+    [
+      {},
       undefined,
     ]
   }
 >
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "color": "black",
           "fontSize": 16,
           "lineHeight": 20,

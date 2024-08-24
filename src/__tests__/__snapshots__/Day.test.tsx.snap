@@ -5,8 +5,8 @@ exports[`Day should not render <Day /> and compare with snapshot 1`] = `null`;
 exports[`Day should render <Day /> and compare with snapshot 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "justifyContent": "center",
         "marginBottom": 10,
@@ -19,8 +19,8 @@ exports[`Day should render <Day /> and compare with snapshot 1`] = `
   <View>
     <Text
       style={
-        Array [
-          Object {
+        [
+          {
             "backgroundColor": "transparent",
             "color": "#b2b2b2",
             "fontSize": 12,

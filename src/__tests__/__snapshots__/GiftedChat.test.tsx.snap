@@ -1,13 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
-<View
-  onLayout={[Function]}
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
   style={
-    Object {
-      "flex": 1,
-    }
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
   }
-  testID="GC_LOADING_CONTAINER"
 />
 `;

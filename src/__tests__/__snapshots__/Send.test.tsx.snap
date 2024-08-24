@@ -4,7 +4,25 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
 <View
   accessibilityLabel="send"
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
+  collapsable={false}
   focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
@@ -14,7 +32,7 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "height": 44,
       "justifyContent": "flex-end",
       "opacity": 1,
@@ -25,8 +43,8 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
   <View>
     <Text
       style={
-        Array [
-          Object {
+        [
+          {
             "backgroundColor": "transparent",
             "color": "#0084ff",
             "fontSize": 17,
@@ -51,7 +69,25 @@ exports[`Send should render <Send /> where there is input and compare with snaps
 <View
   accessibilityLabel="send"
   accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
+  collapsable={false}
   focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
@@ -61,7 +97,7 @@ exports[`Send should render <Send /> where there is input and compare with snaps
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "height": 44,
       "justifyContent": "flex-end",
       "opacity": 1,
@@ -72,8 +108,8 @@ exports[`Send should render <Send /> where there is input and compare with snaps
   <View>
     <Text
       style={
-        Array [
-          Object {
+        [
+          {
             "backgroundColor": "transparent",
             "color": "#0084ff",
             "fontSize": 17,

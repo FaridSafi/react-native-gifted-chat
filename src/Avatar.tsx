@@ -101,13 +101,13 @@ export function Avatar<TMessage extends IMessage = IMessage> (
       <View
         style={[
           styles[position].container,
-          containerStyle && containerStyle[position],
+          containerStyle?.[position],
         ]}
       >
         <GiftedAvatar
           avatarStyle={[
             styles[position].image,
-            imageStyle && imageStyle[position],
+            imageStyle?.[position],
           ]}
         />
       </View>
@@ -133,7 +133,7 @@ export function Avatar<TMessage extends IMessage = IMessage> (
         <GiftedAvatar
           avatarStyle={[
             styles[position].image,
-            imageStyle && imageStyle[position],
+            imageStyle?.[position],
           ]}
           user={currentMessage.user}
           onPress={() => onPressAvatar?.(currentMessage.user)}
@@ -149,7 +149,7 @@ export function Avatar<TMessage extends IMessage = IMessage> (
       style={[
         styles[position].container,
         renderAvatarOnTop && styles[position].onTop,
-        containerStyle && containerStyle[position],
+        containerStyle?.[position],
       ]}
     >
       {renderAvatarComponent()}

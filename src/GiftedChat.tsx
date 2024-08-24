@@ -547,7 +547,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   useEffect(() => {
     if (!inverted && messages?.length)
       setTimeout(() => scrollToBottom(false), 200)
-  }, [messages, inverted, scrollToBottom])
+  }, [messages?.length, inverted, scrollToBottom])
 
   useAnimatedReaction(
     () => keyboard.height.value,

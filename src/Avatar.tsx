@@ -128,7 +128,7 @@ export function Avatar<TMessage extends IMessage = IMessage> (
         onLongPressAvatar,
       })
 
-    if (props.currentMessage)
+    if (currentMessage)
       return (
         <GiftedAvatar
           avatarStyle={[

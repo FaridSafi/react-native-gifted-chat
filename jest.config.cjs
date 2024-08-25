@@ -4,7 +4,7 @@ module.exports = {
   setupFiles: [
     './node_modules/react-native/jest-preset',
     // './node_modules/react-native/jest/setup.js',
-    './tests/setup.js'
+    './tests/setup.js',
   ],
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
   moduleNameMapper: {

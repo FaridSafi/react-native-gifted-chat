@@ -55,6 +55,7 @@
     "@types/lodash.isequal": "^4.5.8",
     "dayjs": "1.11.13",
     "expo-clipboard": "^6.0.3",
+    "expo-modules-core": "^1.12.23",
     "lodash.isequal": "^4.5.0",
     "prop-types": "15.8.1",
     "react-native-communications": "2.2.1",

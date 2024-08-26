@@ -113,6 +113,24 @@ Please give us your advice: [Related PR](https://github.com/FaridSafi/react-nati
 - Use version `0.1.x` for RN `>= 0.40.0`
 - Use version `0.0.10` for RN `< 0.40.0`
 
+## Installation
+
+Yarn:
+```bash
+yarn install react-native-gifted-chat react-native-reanimated
+```
+
+Npm:
+
+```bash
+npm install --save react-native-gifted-chat react-native-reanimated
+```
+
+Expo
+```bash
+npx expo install react-native-gifted-chat react-native-reanimated
+```
+
 ## Testing
 `TEST_ID` is exported as constants that can be used in your testing library of choice
 

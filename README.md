@@ -117,7 +117,7 @@ Please give us your advice: [Related PR](https://github.com/FaridSafi/react-nati
 
 Yarn:
 ```bash
-yarn install react-native-gifted-chat react-native-reanimated
+yarn add react-native-gifted-chat react-native-reanimated
 ```
 
 Npm:

@@ -113,23 +113,33 @@ Please give us your advice: [Related PR](https://github.com/FaridSafi/react-nati
 - Use version `0.1.x` for RN `>= 0.40.0`
 - Use version `0.0.10` for RN `< 0.40.0`
 
+# Getting started
+
 ## Installation
+
+### Install dependencies
 
 Yarn:
 ```bash
-yarn add react-native-gifted-chat react-native-reanimated
+yarn add react-native-gifted-chat react-native-reanimated react-native-safe-area-context
 ```
 
 Npm:
 
 ```bash
-npm install --save react-native-gifted-chat react-native-reanimated
+npm install --save react-native-gifted-chat react-native-reanimated react-native-safe-area-context
 ```
 
 Expo
 ```bash
-npx expo install react-native-gifted-chat react-native-reanimated
+npx expo install react-native-gifted-chat react-native-reanimated react-native-safe-area-context
 ```
+
+### Setup react-native-safe-area-context
+
+Follow guide: https://github.com/th3rdwave/react-native-safe-area-context?tab=readme-ov-file#api
+
+##
 
 ## Testing
 `TEST_ID` is exported as constants that can be used in your testing library of choice
@@ -378,7 +388,7 @@ interface QuickReplies {
 - **`renderTicks`** _(Function(`message`))_ - Custom ticks indicator to display message status
 - **`renderSystemMessage`** _(Function)_ - Custom system message
 - **`onPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is pressed
-- **`onLongPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
+- **`onLongPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
 - **`inverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
 - **`renderUsernameOnMessage`** _(Bool)_ - Indicate whether to show the user's username inside the message bubble; default is `false`
 - **`renderUsername`** _(Function)_ - Custom Username container

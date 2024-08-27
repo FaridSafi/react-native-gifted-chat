@@ -39,7 +39,7 @@ export type BubbleProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   currentMessage: TMessage,
   nextMessage?: TMessage,
   previousMessage?: TMessage,
-  optionTitles?: string,
+  optionTitles?: (Array<string>),
   containerStyle?: LeftRightStyle<ViewStyleProp>,
   wrapperStyle?: LeftRightStyle<ViewStyleProp>,
   textStyle?: LeftRightStyle<TextStyleProp>,

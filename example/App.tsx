@@ -16,6 +16,7 @@ import CustomActions from './example-expo/CustomActions'
 import CustomView from './example-expo/CustomView'
 import earlierMessages from './example-expo/data/earlierMessages'
 import messagesData from './example-expo/data/messages'
+import * as Clipboard from 'expo-clipboard'
 
 const user = {
   _id: 1,
@@ -136,6 +137,35 @@ const App = () => {
     Alert.alert('On avatar press')
   }, [])
 
+  const handleLongPress = useCallback((context: unknown, currentMessage: object) => {
+    if (!currentMessage.text)
+      return
+
+    const options = [
+      'Copy text',
+      'Cancel',
+    ]
+
+    const cancelButtonIndex = options.length - 1
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(context as any).actionSheet().showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+      },
+      (buttonIndex: number) => {
+        switch (buttonIndex) {
+          case 0:
+            Clipboard.setStringAsync(currentMessage.text)
+            break
+          default:
+            break
+        }
+      }
+    )
+  }, [])
+
   const onQuickReply = useCallback((replies: any[]) => {
     const createdAt = new Date()
     if (replies.length === 1)
@@ -244,8 +274,9 @@ const App = () => {
           parsePatterns={parsePatterns}
           user={user}
           scrollToBottom
-          onLongPressAvatar={onLongPressAvatar}
           onPressAvatar={onPressAvatar}
+          onLongPressAvatar={onLongPressAvatar}
+          onLongPress={handleLongPress}
           onQuickReply={onQuickReply}
           quickReplyStyle={{ borderRadius: 2 }}
           quickReplyTextStyle={{

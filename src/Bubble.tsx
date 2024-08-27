@@ -9,7 +9,6 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native'
-import * as Clipboard from 'expo-clipboard'
 
 import { GiftedChatContext } from './GiftedChatContext'
 import { QuickReplies, QuickRepliesProps } from './QuickReplies'
@@ -102,8 +101,6 @@ const styles = {
   }),
 }
 
-const DEFAULT_OPTION_TITLES = ['Copy Text', 'Cancel']
-
 /* eslint-disable no-use-before-define */
 export type RenderMessageImageProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
@@ -195,7 +192,6 @@ export default class Bubble<
     renderQuickReplies: null,
     onQuickReply: null,
     position: 'left',
-    optionTitles: DEFAULT_OPTION_TITLES,
     currentMessage: {
       text: null,
       createdAt: null,
@@ -263,34 +259,33 @@ export default class Bubble<
   }
 
   onLongPress = () => {
-    const { currentMessage } = this.props
-    if (this.props.onLongPress) {
-      this.props.onLongPress(this.context, this.props.currentMessage)
-    } else if (currentMessage && currentMessage.text) {
-      const { optionTitles } = this.props
-      const options =
-        optionTitles?.length
-          ? optionTitles.slice(0, 2)
-          : DEFAULT_OPTION_TITLES
-      const cancelButtonIndex = options.length - 1
+    const {
+      currentMessage,
+      onLongPress,
+      optionTitles,
+    } = this.props
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ;(this.context as any).actionSheet().showActionSheetWithOptions(
-        {
-          options,
-          cancelButtonIndex,
-        },
-        (buttonIndex: number) => {
-          switch (buttonIndex) {
-            case 0:
-              Clipboard.setStringAsync(currentMessage.text)
-              break
-            default:
-              break
-          }
-        }
-      )
+    if (onLongPress) {
+      onLongPress(this.context, currentMessage)
+      return
     }
+
+    if (!optionTitles?.length)
+      return
+
+    const options = optionTitles
+    const cancelButtonIndex = options.length - 1
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(this.context as any).actionSheet().showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+      },
+      (buttonIndex: number) => {
+        console.log('onLongPress', { buttonIndex })
+      }
+    )
   }
 
   styledBubbleToNext () {

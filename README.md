@@ -565,6 +565,7 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 - Kfir Golan [kfiroo](https://github.com/kfiroo)
 - Bruno Cascio [brunocascio](https://github.com/brunocascio)
 - Xavier Carpentier [xcarpentier](https://github.com/xcarpentier)
+- Kesha Antonov [kesha-antonov](https://github.com/kesha-antonov)
 - [more](https://github.com/FaridSafi/react-native-gifted-chat/graphs/contributors)
 
 ## Hire an expert!

@@ -16,7 +16,7 @@ import {
   utils,
   useChatContext,
 } from 'react-native-gifted-chat'
-import Clipboard from '@react-native-clipboard/clipboard'
+import * as Clipboard from 'expo-clipboard'
 
 const { isSameUser, isSameDay } = utils
 
@@ -93,7 +93,7 @@ const Bubble = (props: Props) => {
       (buttonIndex: number) => {
         switch (buttonIndex) {
           case 0:
-            Clipboard.setString(currentMessage.text)
+            Clipboard.setStringAsync(currentMessage.text)
             break
         }
       }

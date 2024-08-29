@@ -74,26 +74,7 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
             ],
           }
         }
-      >
-        <View
-          collapsable={false}
-          style={
-            {
-              "backgroundColor": "#f0f0f0",
-              "borderRadius": 15,
-              "height": 0,
-              "marginBottom": 0,
-              "marginLeft": 8,
-              "transform": [
-                {
-                  "translateY": 200,
-                },
-              ],
-              "width": 45,
-            }
-          }
-        />
-      </View>
+      />
       <View
         style={
           {

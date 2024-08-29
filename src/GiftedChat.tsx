@@ -7,7 +7,6 @@ import React, {
   useCallback,
   MutableRefObject,
 } from 'react'
-import 'react-native-get-random-values' // NOTE: FOR "uuid" SUPPORT
 import {
   ActionSheetOptions,
   ActionSheetProvider,

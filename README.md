@@ -135,6 +135,12 @@ Expo
 npx expo install react-native-gifted-chat react-native-reanimated react-native-safe-area-context
 ```
 
+### Non-expo users
+
+```bash
+npx pod-install
+```
+
 ### Setup react-native-safe-area-context
 
 Follow guide: [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context?tab=readme-ov-file#api)

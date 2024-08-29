@@ -1,4 +1,3 @@
-import 'react-native-get-random-values'
 import React, { useCallback, useReducer } from 'react'
 import { Alert, Linking, Platform, StyleSheet, Text, View } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'

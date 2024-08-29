@@ -83,12 +83,6 @@
 
 Please give us your advice: [Related PR](https://github.com/FaridSafi/react-native-gifted-chat/pull/1775)
 
-## Please vote
-
-**GiftedChat** depends on other packages and some needs a boost, please vote for PRs will improve it, thanks:
-
-- https://github.com/watadarkstar/react-native-typing-animation/issues/18
-
 ## Features
 
 - 🎉 **_`react-native-web`able_ (since 0.10.0)** [web configuration](#react-native-web)
@@ -105,7 +99,7 @@ Please give us your advice: [Related PR](https://github.com/FaridSafi/react-nati
 - Redux support
 - System message
 - Quick Reply messages (bot)
-- Typing indicator [react-native-typing-animation](https://github.com/watadarkstar/react-native-typing-animation)
+- Typing indicator
 
 ## Dependency
 

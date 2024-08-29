@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
 import React, { useCallback, useRef } from 'react'
+import PropTypes from 'prop-types'
 import {
   Platform,
   StyleSheet,
@@ -11,7 +11,6 @@ import {
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
 import Color from './Color'
 import { StylePropType } from './utils'
-import { useCallbackOne } from 'use-memo-one'
 
 export interface ComposerProps {
   composerHeight?: number
@@ -44,7 +43,7 @@ export function Composer ({
 }: ComposerProps): React.ReactElement {
   const dimensionsRef = useRef<{ width: number, height: number }>()
 
-  const determineInputSizeChange = useCallbackOne(
+  const determineInputSizeChange = useCallback(
     (dimensions: { width: number, height: number }) => {
       // Support earlier versions of React Native on Android.
       if (!dimensions)

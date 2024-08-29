@@ -219,10 +219,10 @@ const App = () => {
     return (
       <AccessoryBar
         onSend={onSendFromUser}
-        isTyping={() => setIsTyping(true)}
+        isTyping={() => setIsTyping(!state.isTyping)}
       />
     )
-  }, [onSendFromUser, setIsTyping])
+  }, [onSendFromUser, setIsTyping, state.isTyping])
 
   const renderCustomActions = useCallback(
     props =>

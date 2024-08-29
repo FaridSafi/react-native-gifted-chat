@@ -1,5 +1,5 @@
+import React, { useState, useMemo, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import React, { useState, useMemo } from 'react'
 import {
   Text,
   StyleSheet,
@@ -9,7 +9,6 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native'
-import { useCallbackOne } from 'use-memo-one'
 import { IMessage, Reply } from './Models'
 import Color from './Color'
 import { StylePropType } from './utils'
@@ -91,7 +90,7 @@ export function QuickReplies ({
     return false
   }, [currentMessage, nextMessage])
 
-  const handlePress = useCallbackOne(
+  const handlePress = useCallback(
     (reply: Reply) => () => {
       if (currentMessage) {
         const { type } = currentMessage.quickReplies!

@@ -120,7 +120,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*  Extra props to be passed to the <TextInput> */
   textInputProps?: object
   /* Determines whether the keyboard should stay visible after a tap; see <ScrollView> docs */
-  keyboardShouldPersistTaps?: boolean
+  keyboardShouldPersistTaps?: 'always' | 'never' | 'handled'
   /* Max message composer TextInput length */
   maxInputLength?: number
   /* Force send button */
@@ -214,7 +214,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* Callback when the input text changes */
   onInputTextChanged?(text: string): void
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
-  parsePatterns?: (linkStyle: TextStyle) => []
+  parsePatterns?: (linkStyle?: TextStyle) => { type?: string, pattern?: RegExp, style?: StyleProp<TextStyle> | object, onPress?: unknown, renderText?: unknown }[]
   onQuickReply?(replies: Reply[]): void
   renderQuickReplies?(
     quickReplies: QuickRepliesProps<TMessage>,

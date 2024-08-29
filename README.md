@@ -79,10 +79,6 @@
   </p>
 </p>
 
-## The future of GiftedChat 🎉
-
-Please give us your advice: [Related PR](https://github.com/FaridSafi/react-native-gifted-chat/pull/1775)
-
 ## Features
 
 - 🎉 **_`react-native-web`able_ (since 0.10.0)** [web configuration](#react-native-web)
@@ -100,12 +96,6 @@ Please give us your advice: [Related PR](https://github.com/FaridSafi/react-nati
 - System message
 - Quick Reply messages (bot)
 - Typing indicator
-
-## Dependency
-
-- Use version `0.2.x` for RN `>= 0.44.0`
-- Use version `0.1.x` for RN `>= 0.40.0`
-- Use version `0.0.10` for RN `< 0.40.0`
 
 # Getting started
 

@@ -20,3 +20,8 @@ web-build/
 !.yarn/sdks
 !.yarn/versions
 yarn-error.log
+
+example_bare/vendor
+example_bare/**/build
+example_bare/ios/Pods
+example_bare/android/.gradle

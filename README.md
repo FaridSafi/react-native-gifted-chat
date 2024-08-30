@@ -105,18 +105,18 @@
 
 Yarn:
 ```bash
-yarn add react-native-gifted-chat react-native-reanimated react-native-safe-area-context
+yarn add react-native-gifted-chat react-native-reanimated react-native-safe-area-context react-native-get-random-values
 ```
 
 Npm:
 
 ```bash
-npm install --save react-native-gifted-chat react-native-reanimated react-native-safe-area-context
+npm install --save react-native-gifted-chat react-native-reanimated react-native-safe-area-context react-native-get-random-values
 ```
 
 Expo
 ```bash
-npx expo install react-native-gifted-chat react-native-reanimated react-native-safe-area-context
+npx expo install react-native-gifted-chat react-native-reanimated react-native-safe-area-context react-native-get-random-values
 ```
 
 ### Non-expo users

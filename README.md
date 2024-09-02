@@ -129,6 +129,10 @@ npx pod-install
 
 Follow guide: [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context?tab=readme-ov-file#api)
 
+### Setup react-native-reanimated
+
+Follow guide: [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/#step-2-add-reanimateds-babel-plugin)
+
 ### react-native-video and expo-av
 
 - Both dependencies are removed since `0.11.0`.

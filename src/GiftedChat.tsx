@@ -113,6 +113,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   imageProps?: Message<TMessage>['props']
   /* Extra props to be passed to the MessageImage's Lightbox */
   lightboxProps?: LightboxProps
+  /* Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar); default is 0 */
+  bottomOffset?: number
   /* Minimum height of the input toolbar; default is 44 */
   minInputToolbarHeight?: number
   /* Extra props to be passed to the messages <ListView>; some props can't be overridden, see the code in MessageContainer.render() for details */
@@ -244,6 +246,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     textInputProps,
     renderChatFooter = null,
     renderInputToolbar = null,
+    bottomOffset = 0,
     keyboardShouldPersistTaps = Platform.select({
       ios: 'never',
       android: 'always',
@@ -556,9 +559,10 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         if (isKeyboardMovingUp !== trackingKeyboardMovement.value) {
           trackingKeyboardMovement.value = isKeyboardMovingUp
           keyboardOffsetBottom.value = withTiming(
-            isKeyboardMovingUp ? insets.bottom : 0,
+            isKeyboardMovingUp ? insets.bottom + bottomOffset : 0,
             {
-              duration: 400,
+              // If `bottomOffset` exists, we change the duration to a smaller value to fix the delay in the keyboard animation speed
+              duration: bottomOffset ? 150 : 400,
             }
           )
 

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useCallback, useRef } from 'react'
 import {
   Image,
   Text,
@@ -51,38 +51,32 @@ export interface GiftedAvatarProps {
   onLongPress?: (props: GiftedAvatarProps) => void
 }
 
-export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
-  static defaultProps = {
-    user: {
+export function GiftedAvatar (
+  props: GiftedAvatarProps
+) {
+  const avatarNameRef = useRef<string | undefined>(undefined)
+  const avatarColorRef = useRef<string | undefined>(undefined)
+
+  const {
+    user = {
       name: null,
       avatar: null,
     },
-    onPress: undefined,
-    onLongPress: undefined,
-    avatarStyle: {},
-    textStyle: {},
-  }
+    avatarStyle = {},
+    textStyle = {},
+    onPress,
+  } = props
 
-  static propTypes = {
-    user: PropTypes.object,
-    onPress: PropTypes.func,
-    onLongPress: PropTypes.func,
-    avatarStyle: StylePropType,
-    textStyle: StylePropType,
-  }
-
-  avatarName?: string = undefined
-  avatarColor?: string = undefined
-
-  setAvatarColor () {
-    const userName = (this.props.user && this.props.user.name) || ''
+  const setAvatarColor = useCallback(() => {
+    const userName = user.name || ''
     const name = userName.toUpperCase().split(' ')
+
     if (name.length === 1)
-      this.avatarName = `${name[0].charAt(0)}`
+      avatarNameRef.current = `${name[0].charAt(0)}`
     else if (name.length > 1)
-      this.avatarName = `${name[0].charAt(0)}${name[1].charAt(0)}`
+      avatarNameRef.current = `${name[0].charAt(0)}${name[1].charAt(0)}`
     else
-      this.avatarName = ''
+      avatarNameRef.current = ''
 
     let sumChars = 0
     for (let i = 0; i < userName.length; i += 1)
@@ -100,106 +94,108 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
       midnightBlue,
     ]
 
-    this.avatarColor = colors[sumChars % colors.length]
-  }
+    avatarColorRef.current = colors[sumChars % colors.length]
+  }, [user.name])
 
-  renderAvatar () {
-    const { user } = this.props
-    if (user)
-      if (typeof user.avatar === 'function')
-        return user.avatar([styles.avatarStyle, this.props.avatarStyle])
-      else if (typeof user.avatar === 'string')
+  const renderAvatar = useCallback(() => {
+    switch (typeof user.avatar) {
+      case 'function':
+        return user.avatar([styles.avatarStyle, avatarStyle])
+      case 'string':
         return (
           <Image
             source={{ uri: user.avatar }}
-            style={[styles.avatarStyle, this.props.avatarStyle]}
+            style={[styles.avatarStyle, avatarStyle]}
           />
         )
-      else if (typeof user.avatar === 'number')
+      case 'number':
         return (
           <Image
             source={user.avatar}
-            style={[styles.avatarStyle, this.props.avatarStyle]}
+            style={[styles.avatarStyle, avatarStyle]}
           />
         )
+      default:
+        return null
+    }
+  }, [user.name, user.avatar, avatarStyle])
 
-    return null
-  }
-
-  renderInitials () {
+  const renderInitials = useCallback(() => {
     return (
-      <Text style={[styles.textStyle, this.props.textStyle]}>
-        {this.avatarName}
+      <Text style={[styles.textStyle, textStyle]}>
+        {avatarNameRef.current}
       </Text>
     )
-  }
+  }, [textStyle])
 
-  handleOnPress = () => {
+  const handleOnPress = () => {
     const {
-      /* eslint-disable @typescript-eslint/no-unused-vars */
       onPress,
-      /* eslint-enable @typescript-eslint/no-unused-vars */
       ...rest
-    } = this.props
+    } = props
 
-    if (this.props.onPress)
-      this.props.onPress(rest)
+    if (onPress)
+      onPress(rest)
   }
 
-  handleOnLongPress = () => {
+  const handleOnLongPress = () => {
     const {
-      /* eslint-disable @typescript-eslint/no-unused-vars */
       onLongPress,
-      /* eslint-enable @typescript-eslint/no-unused-vars */
       ...rest
-    } = this.props
+    } = props
 
-    if (this.props.onLongPress)
-      this.props.onLongPress(rest)
+    if (onLongPress)
+      onLongPress(rest)
   }
 
-  render () {
-    if (!this.props.user || (!this.props.user.name && !this.props.user.avatar))
-      // render placeholder
-      return (
-        <View
-          style={[
-            styles.avatarStyle,
-            styles.avatarTransparent,
-            this.props.avatarStyle,
-          ]}
-          accessibilityRole='image'
-        />
-      )
-
-    if (this.props.user.avatar)
-      return (
-        <TouchableOpacity
-          disabled={!this.props.onPress}
-          onPress={this.handleOnPress}
-          onLongPress={this.handleOnLongPress}
-          accessibilityRole='image'
-        >
-          {this.renderAvatar()}
-        </TouchableOpacity>
-      )
-
-    this.setAvatarColor()
-
+  if (!user || (!user.name && !user.avatar))
+    // render placeholder
     return (
-      <TouchableOpacity
-        disabled={!this.props.onPress}
-        onPress={this.handleOnPress}
-        onLongPress={this.handleOnLongPress}
+      <View
         style={[
           styles.avatarStyle,
-          { backgroundColor: this.avatarColor },
-          this.props.avatarStyle,
+          styles.avatarTransparent,
+          avatarStyle,
         ]}
         accessibilityRole='image'
+      />
+    )
+
+  if (user.avatar)
+    return (
+      <TouchableOpacity
+        disabled={!onPress}
+        onPress={handleOnPress}
+        onLongPress={handleOnLongPress}
+        accessibilityRole='image'
       >
-        {this.renderInitials()}
+        {renderAvatar()}
       </TouchableOpacity>
     )
-  }
+
+  setAvatarColor()
+
+  return (
+    <TouchableOpacity
+      disabled={!onPress}
+      onPress={handleOnPress}
+      onLongPress={handleOnLongPress}
+      style={[
+        styles.avatarStyle,
+        { backgroundColor: avatarColorRef.current },
+        avatarStyle,
+      ]}
+      accessibilityRole='image'
+    >
+      {renderInitials()}
+    </TouchableOpacity>
+  )
+}
+
+GiftedAvatar.propTypes = {
+  user: PropTypes.object,
+  onPress: PropTypes.func,
+  onLongPress: PropTypes.func,
+  avatarStyle: StylePropType,
+  textStyle: StylePropType,
 }

@@ -75,6 +75,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   messages?: TMessage[]
   /* Typing Indicator state */
   isTyping?: boolean
+  /* Controls whether or not to show user.name property in the message bubble */
+  renderUsernameOnMessage?: boolean
   /* Messages container style */
   messagesContainerStyle?: StyleProp<ViewStyle>
   /* Input text; default is undefined, but if specified, it will override GiftedChat's internal state */

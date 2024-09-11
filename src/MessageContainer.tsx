@@ -148,9 +148,6 @@ export default class MessageContainer<
   }
 
   renderTypingIndicator = () => {
-    if (Platform.OS === 'web')
-      return null
-
     return <TypingIndicator isTyping={this.props.isTyping || false} />
   }
 

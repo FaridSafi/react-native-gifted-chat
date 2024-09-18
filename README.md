@@ -434,6 +434,7 @@ interface QuickReplies {
 * **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
 * **`shouldUpdateMessage`** _(Function)_ - Lets the message component know when to update outside of normal cases.
 * **`infiniteScroll`** _(Bool)_ - infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist (not yet supported for the web). You need to add `loadEarlier` prop too.
+* **`isStatusBarTranslucentAndroid`** _(Bool)_ - If you use translucent status bar on Android, set this option to true. Ignored on iOS.
 
 ## Notes for [Redux](https://github.com/reactjs/redux)
 

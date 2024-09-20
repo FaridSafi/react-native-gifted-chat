@@ -104,6 +104,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   loadEarlier?: boolean
   /* Display an ActivityIndicator when loading earlier messages */
   isLoadingEarlier?: boolean
+  /* Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true` */
+  isKeyboardInternallyHandled?: boolean
   /* Whether to render an avatar for the current user; default is false, only show avatars for other users */
   showUserAvatar?: boolean
   /* When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is false */
@@ -259,6 +261,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     inverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
+    isKeyboardInternallyHandled = true,
   } = props
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
@@ -604,7 +607,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         >
           {isInitialized
             ? (
-              <Animated.View style={[styles.fill, contentStyleAnim]}>
+              <Animated.View style={[styles.fill, isKeyboardInternallyHandled ? contentStyleAnim : {}]}>
                 {renderMessages}
                 {inputToolbarFragment}
               </Animated.View>

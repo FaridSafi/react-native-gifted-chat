@@ -480,6 +480,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const onInitialLayoutViewLayout = useCallback(
     (e: LayoutChangeEvent) => {
+      if (isInitialized)
+        return
+
       const { layout } = e.nativeEvent
 
       if (layout.height <= 0)

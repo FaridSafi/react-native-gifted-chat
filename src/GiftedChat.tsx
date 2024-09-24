@@ -147,6 +147,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
   infiniteScroll?: boolean
   timeTextStyle?: LeftRightStyle<TextStyle>
+  /** If you use translucent status bar on Android, set this option to true. Ignored on iOS. */
+  isStatusBarTranslucentAndroid?: boolean
   /* Custom action sheet */
   actionSheet?(): {
     showActionSheetWithOptions: (
@@ -259,6 +261,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     inverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
+    isStatusBarTranslucentAndroid,
   } = props
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
@@ -282,7 +285,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const [text, setText] = useState<string | undefined>(() => props.text || '')
   const [isTypingDisabled, setIsTypingDisabled] = useState<boolean>(false)
 
-  const keyboard = useAnimatedKeyboard()
+  const keyboard = useAnimatedKeyboard({ isStatusBarTranslucentAndroid })
   const trackingKeyboardMovement = useSharedValue(false)
   const debounceEnableTypingTimeoutId = useRef<ReturnType<typeof setTimeout>>()
   const insets = useSafeAreaInsets()

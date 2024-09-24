@@ -494,7 +494,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       setComposerHeight(minComposerHeight!)
       setText(getTextFromProp(initialText))
     },
-    [initialText, minComposerHeight, notifyInputTextReset, getTextFromProp]
+    [isInitialized, initialText, minComposerHeight, notifyInputTextReset, getTextFromProp]
   )
 
   const inputToolbarFragment = useMemo(() => {

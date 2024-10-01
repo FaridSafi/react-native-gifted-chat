@@ -104,6 +104,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   loadEarlier?: boolean
   /* Display an ActivityIndicator when loading earlier messages */
   isLoadingEarlier?: boolean
+  /* Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true` */
+  isKeyboardInternallyHandled?: boolean
   /* Whether to render an avatar for the current user; default is false, only show avatars for other users */
   showUserAvatar?: boolean
   /* When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is false */
@@ -261,6 +263,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     inverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
+    isKeyboardInternallyHandled = true,
     isStatusBarTranslucentAndroid,
   } = props
 
@@ -480,6 +483,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const onInitialLayoutViewLayout = useCallback(
     (e: LayoutChangeEvent) => {
+      if (isInitialized)
+        return
+
       const { layout } = e.nativeEvent
 
       if (layout.height <= 0)
@@ -491,7 +497,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       setComposerHeight(minComposerHeight!)
       setText(getTextFromProp(initialText))
     },
-    [initialText, minComposerHeight, notifyInputTextReset, getTextFromProp]
+    [isInitialized, initialText, minComposerHeight, notifyInputTextReset, getTextFromProp]
   )
 
   const inputToolbarFragment = useMemo(() => {
@@ -607,7 +613,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         >
           {isInitialized
             ? (
-              <Animated.View style={[styles.fill, contentStyleAnim]}>
+              <Animated.View style={[styles.fill, isKeyboardInternallyHandled ? contentStyleAnim : {}]}>
                 {renderMessages}
                 {inputToolbarFragment}
               </Animated.View>

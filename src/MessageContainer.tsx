@@ -88,6 +88,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   onQuickReply?(replies: Reply[]): void
   infiniteScroll?: boolean
   isLoadingEarlier?: boolean
+  onScroll?(event: NativeSyntheticEvent<NativeScrollEvent>): void
 }
 
 interface State {
@@ -118,6 +119,7 @@ export default class MessageContainer<
     scrollToBottomStyle: {},
     infiniteScroll: false,
     isLoadingEarlier: false,
+    onScroll: null,
   }
 
   static propTypes = {
@@ -140,6 +142,7 @@ export default class MessageContainer<
     alignTop: PropTypes.bool,
     scrollToBottomStyle: StylePropType,
     infiniteScroll: PropTypes.bool,
+    onScroll: PropTypes.func,
   }
 
   state = {
@@ -192,7 +195,7 @@ export default class MessageContainer<
         layoutMeasurement: { height: layoutMeasurementHeight },
       },
     } = event
-    const { scrollToBottomOffset } = this.props
+    const { scrollToBottomOffset, onScroll } = this.props
     if (this.props.inverted)
       if (contentOffsetY > scrollToBottomOffset!)
         this.setState({ showScrollBottom: true, hasScrolled: true })
@@ -205,6 +208,9 @@ export default class MessageContainer<
       this.setState({ showScrollBottom: true, hasScrolled: true })
     else
       this.setState({ showScrollBottom: false, hasScrolled: true })
+
+    if (onScroll)
+      onScroll(event)
   }
 
   renderRow = ({ item, index }: ListRenderItemInfo<TMessage>): React.ReactElement | null => {

@@ -24,6 +24,8 @@ import {
   View,
   ViewStyle,
   LayoutChangeEvent,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
 } from 'react-native'
 import { LightboxProps } from 'react-native-lightbox-v2'
 import { v4 as uuidv4 } from 'uuid'
@@ -232,6 +234,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     props: Message<TMessage>['props'],
     nextProps: Message<TMessage>['props'],
   ): boolean
+  onScroll?(event: NativeSyntheticEvent<NativeScrollEvent>): void
 }
 
 function GiftedChat<TMessage extends IMessage = IMessage> (

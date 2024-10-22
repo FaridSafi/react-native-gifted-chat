@@ -149,6 +149,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   timeTextStyle?: LeftRightStyle<TextStyle>
   /** If you use translucent status bar on Android, set this option to true. Ignored on iOS. */
   isStatusBarTranslucentAndroid?: boolean
+  /** If you enable [edge-to-edge mode](https://developer.android.com/develop/ui/views/layout/edge-to-edge) on Android (which is enforced on Android 15 (API level 35) and higher), set this option to true. Ignored on iOS. **Require React Native Reanimated v3.16.1 or higher.** */
+  isNavigationBarTranslucentAndroid?: boolean
   /* Custom action sheet */
   actionSheet?(): {
     showActionSheetWithOptions: (
@@ -262,6 +264,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
     isStatusBarTranslucentAndroid,
+    isNavigationBarTranslucentAndroid,
   } = props
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
@@ -285,7 +288,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const [text, setText] = useState<string | undefined>(() => props.text || '')
   const [isTypingDisabled, setIsTypingDisabled] = useState<boolean>(false)
 
-  const keyboard = useAnimatedKeyboard({ isStatusBarTranslucentAndroid })
+  const keyboard = useAnimatedKeyboard({ isStatusBarTranslucentAndroid, isNavigationBarTranslucentAndroid })
   const trackingKeyboardMovement = useSharedValue(false)
   const debounceEnableTypingTimeoutId = useRef<ReturnType<typeof setTimeout>>()
   const insets = useSafeAreaInsets()

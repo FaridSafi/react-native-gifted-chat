@@ -67,168 +67,168 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 dayjs.extend(localizedFormat)
 
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
-  /* Message container ref */
+  /** Message container ref */
   messageContainerRef?: React.RefObject<FlatList<IMessage>>
-  /* text input ref */
+  /** Text input ref */
   textInputRef?: React.RefObject<TextInput>
-  /* Messages to display */
+  /** Messages to display */
   messages?: TMessage[]
-  /* Typing Indicator state */
+  /** Typing Indicator state */
   isTyping?: boolean
-  /* Controls whether or not to show user.name property in the message bubble */
+  /** Controls whether or not to show user.name property in the message bubble */
   renderUsernameOnMessage?: boolean
-  /* Messages container style */
+  /** Messages container style */
   messagesContainerStyle?: StyleProp<ViewStyle>
-  /* Input text; default is undefined, but if specified, it will override GiftedChat's internal state */
+  /** Input text; default is undefined, but if specified, it will override GiftedChat's internal state */
   text?: string
-  /* Controls whether or not the message bubbles appear at the top of the chat */
+  /** Controls whether or not the message bubbles appear at the top of the chat */
   alignTop?: boolean
-  /* enables the scrollToBottom Component */
+  /** enables the scrollToBottom Component */
   scrollToBottom?: boolean
-  /* Scroll to bottom wrapper style */
+  /** Scroll to bottom wrapper style */
   scrollToBottomStyle?: StyleProp<ViewStyle>
   initialText?: string
-  /* Placeholder when text is empty; default is 'Type a message...' */
+  /** Placeholder when text is empty; default is 'Type a message...' */
   placeholder?: string
-  /* Makes the composer not editable */
+  /** Makes the composer not editable */
   disableComposer?: boolean
-  /* User sending the messages: { _id, name, avatar } */
+  /** User sending the messages: { _id, name, avatar } */
   user?: User
-  /*  Locale to localize the dates */
+  /**  Locale to localize the dates */
   locale?: string
-  /* Format to use for rendering times; default is 'LT' */
+  /** Format to use for rendering times; default is 'LT' */
   timeFormat?: string
-  /* Format to use for rendering dates; default is 'll' */
+  /** Format to use for rendering dates; default is 'll' */
   dateFormat?: string
-  /* Enables the "Load earlier messages" button */
+  /** Enables the "Load earlier messages" button */
   loadEarlier?: boolean
-  /* Display an ActivityIndicator when loading earlier messages */
+  /** Display an ActivityIndicator when loading earlier messages */
   isLoadingEarlier?: boolean
-  /* Whether to render an avatar for the current user; default is false, only show avatars for other users */
+  /** Whether to render an avatar for the current user; default is false, only show avatars for other users */
   showUserAvatar?: boolean
-  /* When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is false */
+  /** When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is false */
   showAvatarForEveryMessage?: boolean
-  /* Render the message avatar at the top of consecutive messages, rather than the bottom; default is false */
+  /** Render the message avatar at the top of consecutive messages, rather than the bottom; default is false */
   renderAvatarOnTop?: boolean
   inverted?: boolean
-  /* Extra props to be passed to the <Image> component created by the default renderMessageImage */
+  /** Extra props to be passed to the <Image> component created by the default renderMessageImage */
   imageProps?: Message<TMessage>['props']
-  /* Extra props to be passed to the MessageImage's Lightbox */
+  /** Extra props to be passed to the MessageImage's Lightbox */
   lightboxProps?: LightboxProps
-  /* Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar); default is 0 */
+  /** Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar); default is 0 */
   bottomOffset?: number
-  /* Minimum height of the input toolbar; default is 44 */
+  /** Minimum height of the input toolbar; default is 44 */
   minInputToolbarHeight?: number
-  /* Extra props to be passed to the messages <ListView>; some props can't be overridden, see the code in MessageContainer.render() for details */
+  /** Extra props to be passed to the messages <ListView>; some props can't be overridden, see the code in MessageContainer.render() for details */
   listViewProps?: object
-  /*  Extra props to be passed to the <TextInput> */
+  /**  Extra props to be passed to the <TextInput> */
   textInputProps?: object
-  /* Determines whether the keyboard should stay visible after a tap; see <ScrollView> docs */
+  /** Determines whether the keyboard should stay visible after a tap; see <ScrollView> docs */
   keyboardShouldPersistTaps?: 'always' | 'never' | 'handled'
-  /* Max message composer TextInput length */
+  /** Max message composer TextInput length */
   maxInputLength?: number
-  /* Force send button */
+  /** Force send button */
   alwaysShowSend?: boolean
-  /* Image style */
+  /** Image style */
   imageStyle?: StyleProp<ViewStyle>
-  /* This can be used to pass unknown data which needs to be re-rendered */
+  /** This can be used to pass unknown data which needs to be re-rendered */
   extraData?: object
-  /* composer min Height */
+  /** composer min Height */
   minComposerHeight?: number
-  /* composer min Height */
+  /** composer min Height */
   maxComposerHeight?: number
   options?: { [key: string]: () => void }
   optionTintColor?: string
   quickReplyStyle?: StyleProp<ViewStyle>
   quickReplyTextStyle?: StyleProp<TextStyle>
   quickReplyContainerStyle?: StyleProp<ViewStyle>
-  /* optional prop used to place customView below text, image and video views; default is false */
+  /** optional prop used to place customView below text, image and video views; default is false */
   isCustomViewBottom?: boolean
-  /* infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
+  /** infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
   infiniteScroll?: boolean
   timeTextStyle?: LeftRightStyle<TextStyle>
   /** If you use translucent status bar on Android, set this option to true. Ignored on iOS. */
   isStatusBarTranslucentAndroid?: boolean
   /** If you enable [edge-to-edge mode](https://developer.android.com/develop/ui/views/layout/edge-to-edge) on Android (which is enforced on Android 15 (API level 35) and higher), set this option to true. Ignored on iOS. **Require React Native Reanimated v3.16.1 or higher.** */
   isNavigationBarTranslucentAndroid?: boolean
-  /* Custom action sheet */
+  /** Custom action sheet */
   actionSheet?(): {
     showActionSheetWithOptions: (
       options: ActionSheetOptions,
       callback: (buttonIndex: number) => void | Promise<void>,
     ) => void
   }
-  /* Callback when a message avatar is tapped */
+  /** Callback when a message avatar is tapped */
   onPressAvatar?(user: User): void
-  /* Callback when a message avatar is tapped */
+  /** Callback when a message avatar is tapped */
   onLongPressAvatar?(user: User): void
-  /* Generate an id for new messages. Defaults to UUID v4, generated by uuid */
+  /** Generate an id for new messages. Defaults to UUID v4, generated by uuid */
   messageIdGenerator?(message?: TMessage): string
-  /* Callback when sending a message */
+  /** Callback when sending a message */
   onSend?(messages: TMessage[]): void
-  /* Callback when loading earlier messages */
+  /** Callback when loading earlier messages */
   onLoadEarlier?(): void
-  /*  Render a loading view when initializing */
+  /**  Render a loading view when initializing */
   renderLoading?(): React.ReactNode
-  /* Custom "Load earlier messages" button */
+  /** Custom "Load earlier messages" button */
   renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
-  /* Custom message avatar; set to null to not render any avatar for the message */
+  /** Custom message avatar; set to null to not render any avatar for the message */
   renderAvatar?: null | ((props: AvatarProps<TMessage>) => React.ReactNode)
-  /* Custom message bubble */
+  /** Custom message bubble */
   renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
-  /* Custom system message */
+  /** Custom system message */
   renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
-  /* Callback when a message bubble is pressed; default is to do nothing */
+  /** Callback when a message bubble is pressed; default is to do nothing */
   onPress?(context: unknown, message: TMessage): void
-  /* Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see example using showActionSheetWithOptions()) */
+  /** Callback when a message bubble is long-pressed; default is to show an ActionSheet with "Copy Text" (see example using showActionSheetWithOptions()) */
   onLongPress?(context: unknown, message: TMessage): void
-  /* Custom Username container */
+  /** Custom Username container */
   renderUsername?(user: User): React.ReactNode
-  /* Reverses display order of messages; default is true */
-  /* Custom message container */
+  /** Reverses display order of messages; default is true */
+  /** Custom message container */
   renderMessage?(message: Message<TMessage>['props']): React.ReactElement
-  /* Custom message text */
+  /** Custom message text */
   renderMessageText?(messageText: MessageTextProps<TMessage>): React.ReactNode
-  /* Custom message image */
+  /** Custom message image */
   renderMessageImage?(props: MessageImageProps<TMessage>): React.ReactNode
-  /* Custom message video */
+  /** Custom message video */
   renderMessageVideo?(props: MessageVideoProps<TMessage>): React.ReactNode
-  /* Custom message video */
+  /** Custom message video */
   renderMessageAudio?(props: MessageAudioProps<TMessage>): React.ReactNode
-  /* Custom view inside the bubble */
+  /** Custom view inside the bubble */
   renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode
-  /* Custom day above a message */
+  /** Custom day above a message */
   renderDay?(props: DayProps<TMessage>): React.ReactNode
-  /* Custom time inside a message */
+  /** Custom time inside a message */
   renderTime?(props: TimeProps<TMessage>): React.ReactNode
-  /* Custom footer component on the ListView, e.g. 'User is typing...' */
+  /** Custom footer component on the ListView, e.g. 'User is typing...' */
   renderFooter?(): React.ReactNode
-  /* Custom component to render in the ListView when messages are empty */
+  /** Custom component to render in the ListView when messages are empty */
   renderChatEmpty?(): React.ReactNode
-  /* Custom component to render below the MessageContainer (separate from the ListView) */
+  /** Custom component to render below the MessageContainer (separate from the ListView) */
   renderChatFooter?(): React.ReactNode
-  /* Custom message composer container */
+  /** Custom message composer container */
   renderInputToolbar?(props: InputToolbarProps<TMessage>): React.ReactNode
-  /*  Custom text input message composer */
+  /**  Custom text input message composer */
   renderComposer?(props: ComposerProps): React.ReactNode
-  /* Custom action button on the left of the message composer */
+  /** Custom action button on the left of the message composer */
   renderActions?(props: ActionsProps): React.ReactNode
-  /* Custom send button; you can pass children to the original Send component quite easily, for example to use a custom icon (example) */
+  /** Custom send button; you can pass children to the original Send component quite easily, for example to use a custom icon (example) */
   renderSend?(props: SendProps<TMessage>): React.ReactNode
-  /* Custom second line of actions below the message composer */
+  /** Custom second line of actions below the message composer */
   renderAccessory?(props: InputToolbarProps<TMessage>): React.ReactNode
-  /* Callback when the Action button is pressed (if set, the default actionSheet will not be used) */
+  /** Callback when the Action button is pressed (if set, the default actionSheet will not be used) */
   onPressActionButton?(): void
-  /* Callback when the input text changes */
+  /** Callback when the input text changes */
   onInputTextChanged?(text: string): void
-  /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
+  /** Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
   parsePatterns?: (linkStyle?: TextStyle) => { type?: string, pattern?: RegExp, style?: StyleProp<TextStyle> | object, onPress?: unknown, renderText?: unknown }[]
   onQuickReply?(replies: Reply[]): void
   renderQuickReplies?(
     quickReplies: QuickRepliesProps<TMessage>,
   ): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
-  /* Scroll to bottom custom component */
+  /** Scroll to bottom custom component */
   scrollToBottomComponent?(): React.ReactNode
   shouldUpdateMessage?(
     props: Message<TMessage>['props'],

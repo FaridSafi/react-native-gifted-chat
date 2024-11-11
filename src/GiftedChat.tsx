@@ -559,7 +559,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   useAnimatedReaction(
     () => keyboard.height.value,
     (value, prevValue) => {
-      if (prevValue && value !== prevValue) {
+      if (prevValue !== null && value !== prevValue) {
         const isKeyboardMovingUp = value > prevValue
         if (isKeyboardMovingUp !== trackingKeyboardMovement.value) {
           trackingKeyboardMovement.value = isKeyboardMovingUp

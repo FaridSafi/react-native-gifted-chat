@@ -42,6 +42,7 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
 
   const actionsFragment = useMemo(() => {
     const props = {
+      onPressActionButton,
       options,
       optionTintColor,
       icon,

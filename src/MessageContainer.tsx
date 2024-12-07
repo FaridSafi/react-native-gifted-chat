@@ -162,16 +162,12 @@ export default class MessageContainer<
     return this.renderTypingIndicator()
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  renderLoadEarlier = (_props: LoadEarlierProps) => {
+  renderLoadEarlier = (props: LoadEarlierProps) => {
     if (this.props.loadEarlier === true) {
-      const loadEarlierProps = {
-        ...this.props,
-      }
       if (this.props.renderLoadEarlier)
-        return this.props.renderLoadEarlier(loadEarlierProps)
+        return this.props.renderLoadEarlier(props)
 
-      return <LoadEarlier {...loadEarlierProps} />
+      return <LoadEarlier {...props} />
     }
     return null
   }
@@ -267,7 +263,7 @@ export default class MessageContainer<
   }
 
   renderHeaderWrapper = () => (
-    <View style={styles.headerWrapper}>{this.renderLoadEarlier(this.props)}</View>
+    <View style={styles.headerWrapper}>{this.renderLoadEarlier({ ...this.props })}</View>
   )
 
   renderScrollBottomComponent () {

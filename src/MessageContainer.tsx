@@ -162,7 +162,8 @@ export default class MessageContainer<
     return this.renderTypingIndicator()
   }
 
-  renderLoadEarlier = (props: LoadEarlierProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  renderLoadEarlier = (_props: LoadEarlierProps) => {
     if (this.props.loadEarlier === true) {
       const loadEarlierProps = {
         ...this.props,
@@ -172,7 +173,7 @@ export default class MessageContainer<
 
       return <LoadEarlier {...loadEarlierProps} />
     }
-    return this.props.renderLoadEarlier?.(props)
+    return null
   }
 
   scrollTo (options: { animated?: boolean, offset: number }) {

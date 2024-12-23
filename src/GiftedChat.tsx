@@ -117,6 +117,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   lightboxProps?: LightboxProps
   /* Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar); default is 0 */
   bottomOffset?: number
+  /* Focus on <TextInput> automatically when opening the keyboard; default is true */
+  focusOnInputWhenOpeningKeyboard?: boolean
   /* Minimum height of the input toolbar; default is 44 */
   minInputToolbarHeight?: number
   /* Extra props to be passed to the messages <ListView>; some props can't be overridden, see the code in MessageContainer.render() for details */
@@ -251,6 +253,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     renderChatFooter = null,
     renderInputToolbar = null,
     bottomOffset = 0,
+    focusOnInputWhenOpeningKeyboard = true,
     keyboardShouldPersistTaps = Platform.select({
       ios: 'never',
       android: 'always',
@@ -571,10 +574,11 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
             }
           )
 
-          if (isKeyboardMovingUp)
-            runOnJS(handleTextInputFocusWhenKeyboardShow)()
-          else
-            runOnJS(handleTextInputFocusWhenKeyboardHide)()
+          if (focusOnInputWhenOpeningKeyboard)
+            if (isKeyboardMovingUp)
+              runOnJS(handleTextInputFocusWhenKeyboardShow)()
+            else
+              runOnJS(handleTextInputFocusWhenKeyboardHide)()
 
           if (value === 0) {
             runOnJS(enableTyping)()
@@ -588,6 +592,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     [
       keyboard,
       trackingKeyboardMovement,
+      focusOnInputWhenOpeningKeyboard,
       insets,
       handleTextInputFocusWhenKeyboardHide,
       handleTextInputFocusWhenKeyboardShow,

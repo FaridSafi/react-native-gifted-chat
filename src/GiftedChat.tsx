@@ -66,7 +66,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 dayjs.extend(localizedFormat)
 
-export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
+export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends Partial<Omit<MessageContainer<TMessage>, 'scrollToBottom'>> {
   /* Message container ref */
   messageContainerRef?: React.RefObject<FlatList<IMessage>>
   /* text input ref */

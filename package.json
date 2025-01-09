@@ -50,6 +50,9 @@
       "bash -c 'yarn tsc:write'"
     ]
   },
+  "resolutions": {
+    "@babel/plugin-transform-flow-strip-types": "^7.25.0"
+  },
   "dependencies": {
     "@expo/react-native-action-sheet": "^4.1.0",
     "@types/lodash.isequal": "^4.5.8",
@@ -64,6 +67,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
+    "@babel/plugin-transform-flow-strip-types": "^7.25.9",
     "@babel/plugin-transform-react-jsx": "^7.25.9",
     "@babel/plugin-transform-unicode-property-regex": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
@@ -98,7 +102,7 @@
     "react-native-get-random-values": "^1.11.0",
     "react-native-reanimated": "^3.16.6",
     "react-native-safe-area-context": "^5.1.0",
-    "react-test-renderer": "^19.0.0",
+    "react-test-renderer": "^18.3.1",
     "typescript": "^5.7.3"
   },
   "peerDependencies": {

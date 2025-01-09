@@ -618,7 +618,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         >
           {isInitialized
             ? (
-              <Animated.View style={[styles.fill, isKeyboardInternallyHandled ? contentStyleAnim : {}]}>
+              <Animated.View style={[styles.fill, isKeyboardInternallyHandled && contentStyleAnim]}>
                 {renderMessages}
                 {inputToolbarFragment}
               </Animated.View>

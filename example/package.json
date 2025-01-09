@@ -24,6 +24,7 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.75.2",
+    "react-native-get-random-values": "^1.11.0",
     "react-native-gifted-chat": "./..",
     "react-native-maps": "^1.18.0",
     "react-native-reanimated": "~3.10.1",

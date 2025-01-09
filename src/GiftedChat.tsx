@@ -329,7 +329,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const handleTextInputFocusWhenKeyboardShow = useCallback(() => {
     if (
       textInputRef.current &&
-      isTextInputWasFocused &&
+      isTextInputWasFocused.current &&
       !textInputRef.current.isFocused()
     )
       textInputRef.current.focus()

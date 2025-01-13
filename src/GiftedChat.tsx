@@ -38,7 +38,7 @@ import { GiftedChatContext } from './GiftedChatContext'
 import { InputToolbar, InputToolbarProps } from './InputToolbar'
 import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
 import Message from './Message'
-import MessageContainer from './MessageContainer'
+import MessageContainer, { MessageContainerProps } from './MessageContainer'
 import { MessageImage, MessageImageProps } from './MessageImage'
 import { MessageText, MessageTextProps } from './MessageText'
 import {
@@ -66,9 +66,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 dayjs.extend(localizedFormat)
 
-export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends Partial<Omit<MessageContainer<TMessage>, 'scrollToBottom'>> {
+export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends Partial<MessageContainerProps<TMessage>> {
   /* Message container ref */
-  messageContainerRef?: React.RefObject<FlatList<IMessage>>
+  messageContainerRef?: React.RefObject<FlatList<TMessage>>
   /* text input ref */
   textInputRef?: React.RefObject<TextInput>
   /* Messages to display */
@@ -204,7 +204,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends P
   /* Custom time inside a message */
   renderTime?(props: TimeProps<TMessage>): React.ReactNode
   /* Custom footer component on the ListView, e.g. 'User is typing...' */
-  renderFooter?(): React.ReactNode
+  renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   /* Custom component to render in the ListView when messages are empty */
   renderChatEmpty?(): React.ReactNode
   /* Custom component to render below the MessageContainer (separate from the ListView) */
@@ -239,7 +239,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends P
 }
 
 function GiftedChat<TMessage extends IMessage = IMessage> (
-  props: GiftedChatProps
+  props: GiftedChatProps<TMessage>
 ) {
   const {
     messages = [],
@@ -273,7 +273,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
 
   const messageContainerRef = useMemo(
-    () => props.messageContainerRef || createRef<FlatList<IMessage>>(),
+    () => props.messageContainerRef || createRef<FlatList<TMessage>>(),
     [props.messageContainerRef]
   )
 
@@ -387,7 +387,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
     const fragment = (
       <View style={[styles.fill, messagesContainerStyle]}>
-        <MessageContainer
+        <MessageContainer<TMessage>
           {...messagesContainerProps}
           invertibleScrollViewProps={{
             inverted,

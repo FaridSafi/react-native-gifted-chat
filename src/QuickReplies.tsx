@@ -182,4 +182,5 @@ QuickReplies.propTypes = {
   sendText: PropTypes.string,
   renderQuickReplySend: PropTypes.func,
   quickReplyStyle: StylePropType,
+  quickReplyContainerStyle: StylePropType,
 }

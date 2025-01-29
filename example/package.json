@@ -13,32 +13,32 @@
     "fresh": "yarn start --reset-cache"
   },
   "dependencies": {
-    "expo": "~51.0.29",
-    "expo-app-loading": "~2.1.1",
-    "expo-clipboard": "^6.0.3",
-    "expo-image-picker": "~15.0.7",
-    "expo-linking": "6.3.1",
-    "expo-location": "~17.0.1",
-    "expo-permissions": "~14.4.0",
-    "expo-status-bar": "~1.12.1",
+    "expo": "^52.0.28",
+    "expo-app-loading": "^2.1.1",
+    "expo-clipboard": "^7.0.1",
+    "expo-image-picker": "^16.0.4",
+    "expo-linking": "^7.0.5",
+    "expo-location": "^18.0.5",
+    "expo-permissions": "^14.4.0",
+    "expo-status-bar": "^2.0.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-native": "0.75.2",
+    "react-native": "0.76.6",
     "react-native-get-random-values": "^1.11.0",
     "react-native-gifted-chat": "./..",
-    "react-native-maps": "^1.18.0",
-    "react-native-reanimated": "~3.10.1",
-    "react-native-safe-area-context": "4.10.9"
+    "react-native-maps": "^1.20.1",
+    "react-native-reanimated": "^3.16.7",
+    "react-native-safe-area-context": "5.1.0"
   },
   "devDependencies": {
-    "@react-native/metro-config": "0.75.2",
-    "@react-native/typescript-config": "0.75.2",
+    "@react-native/metro-config": "0.76.6",
+    "@react-native/typescript-config": "0.76.6",
     "@types/react": "^18.3.3",
     "@types/react-test-renderer": "^18.3.0",
     "babel-plugin-module-resolver": "^5.0.2",
     "jest": "^29.7.0",
     "react-test-renderer": "18.3.1",
-    "typescript": "5.5.4"
+    "typescript": "5.7.3"
   },
   "engines": {
     "node": ">=18"

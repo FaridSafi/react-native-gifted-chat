@@ -1,10 +1,8 @@
 import React, { RefObject } from 'react'
 import PropTypes from 'prop-types'
-
 import {
   FlatList,
   View,
-  StyleSheet,
   TouchableOpacity,
   Text,
   ListRenderItemInfo,
@@ -15,55 +13,14 @@ import {
   Platform,
 } from 'react-native'
 
-import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
-import Message from './Message'
-import Color from './Color'
-import { User, IMessage, Reply } from './Models'
-import TypingIndicator from './TypingIndicator'
+import { LoadEarlier, LoadEarlierProps } from 'react-native-gifted-chat/src/LoadEarlier'
+import Message from 'react-native-gifted-chat/src/Message'
+import { User, IMessage, Reply } from 'react-native-gifted-chat/src/Models'
+import TypingIndicator from 'react-native-gifted-chat/src/TypingIndicator'
 
-import { StylePropType } from './utils'
-import { warning } from './logging'
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  containerAlignTop: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
-  contentContainerStyle: {
-    flexGrow: 1,
-    justifyContent: 'flex-start',
-  },
-  emptyChatContainer: {
-    flex: 1,
-    transform: [{ scaleY: -1 }],
-  },
-  headerWrapper: {
-    flex: 1,
-  },
-  listStyle: {
-    flex: 1,
-  },
-  scrollToBottomStyle: {
-    opacity: 0.8,
-    position: 'absolute',
-    right: 10,
-    bottom: 30,
-    zIndex: 999,
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    backgroundColor: Color.white,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: Color.black,
-    shadowOpacity: 0.5,
-    shadowOffset: { width: 0, height: 0 },
-    shadowRadius: 1,
-  },
-})
+import { StylePropType } from 'react-native-gifted-chat/src/utils'
+import { warning } from 'react-native-gifted-chat/src/logging'
+import styles from './styles'
 
 export interface MessageContainerProps<TMessage extends IMessage> {
   messages?: TMessage[]

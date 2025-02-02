@@ -66,8 +66,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 dayjs.extend(localizedFormat)
 
-export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
-  /** Message container ref */
+export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends Partial<Omit<MessageContainer<TMessage>, 'scrollToBottom'>> {
+  /* Message container ref */
   messageContainerRef?: React.RefObject<FlatList<IMessage>>
   /** Text input ref */
   textInputRef?: React.RefObject<TextInput>
@@ -104,6 +104,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   loadEarlier?: boolean
   /** Display an ActivityIndicator when loading earlier messages */
   isLoadingEarlier?: boolean
+  /** Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true` */
+  isKeyboardInternallyHandled?: boolean
   /** Whether to render an avatar for the current user; default is false, only show avatars for other users */
   showUserAvatar?: boolean
   /** When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is false */
@@ -117,6 +119,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   lightboxProps?: LightboxProps
   /** Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar); default is 0 */
   bottomOffset?: number
+  /** Focus on <TextInput> automatically when opening the keyboard; default is true */
+  focusOnInputWhenOpeningKeyboard?: boolean
   /** Minimum height of the input toolbar; default is 44 */
   minInputToolbarHeight?: number
   /** Extra props to be passed to the messages <ListView>; some props can't be overridden, see the code in MessageContainer.render() for details */
@@ -253,6 +257,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     renderChatFooter = null,
     renderInputToolbar = null,
     bottomOffset = 0,
+    focusOnInputWhenOpeningKeyboard = true,
     keyboardShouldPersistTaps = Platform.select({
       ios: 'never',
       android: 'always',
@@ -263,6 +268,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     inverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
+    isKeyboardInternallyHandled = true,
     isStatusBarTranslucentAndroid,
     isNavigationBarTranslucentAndroid,
   } = props
@@ -332,7 +338,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const handleTextInputFocusWhenKeyboardShow = useCallback(() => {
     if (
       textInputRef.current &&
-      isTextInputWasFocused &&
+      isTextInputWasFocused.current &&
       !textInputRef.current.isFocused()
     )
       textInputRef.current.focus()
@@ -483,6 +489,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const onInitialLayoutViewLayout = useCallback(
     (e: LayoutChangeEvent) => {
+      if (isInitialized)
+        return
+
       const { layout } = e.nativeEvent
 
       if (layout.height <= 0)
@@ -494,7 +503,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       setComposerHeight(minComposerHeight!)
       setText(getTextFromProp(initialText))
     },
-    [initialText, minComposerHeight, notifyInputTextReset, getTextFromProp]
+    [isInitialized, initialText, minComposerHeight, notifyInputTextReset, getTextFromProp]
   )
 
   const inputToolbarFragment = useMemo(() => {
@@ -562,7 +571,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   useAnimatedReaction(
     () => keyboard.height.value,
     (value, prevValue) => {
-      if (prevValue && value !== prevValue) {
+      if (prevValue !== null && value !== prevValue) {
         const isKeyboardMovingUp = value > prevValue
         if (isKeyboardMovingUp !== trackingKeyboardMovement.value) {
           trackingKeyboardMovement.value = isKeyboardMovingUp
@@ -574,10 +583,11 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
             }
           )
 
-          if (isKeyboardMovingUp)
-            runOnJS(handleTextInputFocusWhenKeyboardShow)()
-          else
-            runOnJS(handleTextInputFocusWhenKeyboardHide)()
+          if (focusOnInputWhenOpeningKeyboard)
+            if (isKeyboardMovingUp)
+              runOnJS(handleTextInputFocusWhenKeyboardShow)()
+            else
+              runOnJS(handleTextInputFocusWhenKeyboardHide)()
 
           if (value === 0) {
             runOnJS(enableTyping)()
@@ -591,6 +601,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     [
       keyboard,
       trackingKeyboardMovement,
+      focusOnInputWhenOpeningKeyboard,
       insets,
       handleTextInputFocusWhenKeyboardHide,
       handleTextInputFocusWhenKeyboardShow,
@@ -610,7 +621,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         >
           {isInitialized
             ? (
-              <Animated.View style={[styles.fill, contentStyleAnim]}>
+              <Animated.View style={[styles.fill, isKeyboardInternallyHandled && contentStyleAnim]}>
                 {renderMessages}
                 {inputToolbarFragment}
               </Animated.View>

@@ -83,11 +83,13 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactElement
   renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
+  renderTypingIndicator?(): React.ReactNode
   scrollToBottomComponent?(): React.ReactNode
   onLoadEarlier?(): void
   onQuickReply?(replies: Reply[]): void
   infiniteScroll?: boolean
   isLoadingEarlier?: boolean
+  handleOnScroll?(event: NativeSyntheticEvent<NativeScrollEvent>): void
 }
 
 interface State {
@@ -148,6 +150,8 @@ export default class MessageContainer<
   }
 
   renderTypingIndicator = () => {
+    if (this.props.renderTypingIndicator)
+      return this.props.renderTypingIndicator()
     return <TypingIndicator isTyping={this.props.isTyping || false} />
   }
 
@@ -158,15 +162,12 @@ export default class MessageContainer<
     return this.renderTypingIndicator()
   }
 
-  renderLoadEarlier = () => {
+  renderLoadEarlier = (props: LoadEarlierProps) => {
     if (this.props.loadEarlier === true) {
-      const loadEarlierProps = {
-        ...this.props,
-      }
       if (this.props.renderLoadEarlier)
-        return this.props.renderLoadEarlier(loadEarlierProps)
+        return this.props.renderLoadEarlier(props)
 
-      return <LoadEarlier {...loadEarlierProps} />
+      return <LoadEarlier {...props} />
     }
     return null
   }
@@ -185,6 +186,7 @@ export default class MessageContainer<
   }
 
   handleOnScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    this.props.handleOnScroll?.(event)
     const {
       nativeEvent: {
         contentOffset: { y: contentOffsetY },
@@ -261,7 +263,7 @@ export default class MessageContainer<
   }
 
   renderHeaderWrapper = () => (
-    <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>
+    <View style={styles.headerWrapper}>{this.renderLoadEarlier({ ...this.props })}</View>
   )
 
   renderScrollBottomComponent () {

@@ -24,9 +24,6 @@ config.resolver = {
         if (Object.prototype.hasOwnProperty.call(target, name))
           return target[name]
 
-        if (name === 'react-native-gifted-chat')
-          return path.join(process.cwd(), '../src')
-
         return path.join(process.cwd(), `node_modules/${name}`)
       },
     }

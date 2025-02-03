@@ -15,7 +15,6 @@ import {
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import {
-  FlatList,
   Platform,
   StyleProp,
   StyleSheet,
@@ -25,6 +24,7 @@ import {
   ViewStyle,
   LayoutChangeEvent,
 } from 'react-native'
+import { FlashList } from '@shopify/flash-list'
 import { LightboxProps } from 'react-native-lightbox-v2'
 import { v4 as uuidv4 } from 'uuid'
 import { Actions, ActionsProps } from './Actions'
@@ -68,7 +68,7 @@ dayjs.extend(localizedFormat)
 
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends Partial<Omit<MessageContainer<TMessage>, 'scrollToBottom'>> {
   /* Message container ref */
-  messageContainerRef?: React.RefObject<FlatList<IMessage>>
+  messageContainerRef?: React.RefObject<FlashList<IMessage>>
   /* text input ref */
   textInputRef?: React.RefObject<TextInput>
   /* Messages to display */
@@ -273,7 +273,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
 
   const messageContainerRef = useMemo(
-    () => props.messageContainerRef || createRef<FlatList<IMessage>>(),
+    () => props.messageContainerRef || createRef<FlashList<IMessage>>(),
     [props.messageContainerRef]
   )
 

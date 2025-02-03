@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react'
 import {
-  FlatList,
   View,
   TouchableOpacity,
   Text,
@@ -9,6 +8,7 @@ import {
   NativeScrollEvent,
   Platform,
 } from 'react-native'
+import { FlashList } from '@shopify/flash-list'
 
 import { LoadEarlier } from '../LoadEarlier'
 import Message from '../Message'
@@ -208,11 +208,10 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       )
   }, [inverted, messages, doScrollToBottom])
 
-  const onEndReached = useCallback(({ distanceFromEnd }: { distanceFromEnd: number }) => {
+  const onEndReached = useCallback(() => {
     if (
       infiniteScroll &&
-      (hasScrolled || distanceFromEnd > 0) &&
-      distanceFromEnd <= 100 &&
+      hasScrolled &&
       loadEarlier &&
       onLoadEarlier &&
       !isLoadingEarlier &&
@@ -229,7 +228,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         alignTop ? styles.containerAlignTop : styles.container
       }
     >
-      <FlatList
+      <FlashList
         ref={forwardRef}
         extraData={[extraData, isTyping]}
         keyExtractor={keyExtractor}

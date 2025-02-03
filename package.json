@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^4.1.0",
+    "@shopify/flash-list": "^1.7.3",
     "@types/lodash.isequal": "^4.5.8",
     "dayjs": "^1.11.13",
     "lodash.isequal": "^4.5.0",

@@ -347,7 +347,7 @@ interface QuickReplies {
 
 ## Props
 
-- **`messageContainerRef`** _(FlatList ref)_ - Ref to the flatlist
+- **`messageContainerRef`** _(FlashList ref)_ - Ref to the flashlist
 - **`textInputRef`** _(TextInput ref)_ - Ref to the text input
 - **`messages`** _(Array)_ - Messages to display
 - **`isTyping`** _(Bool)_ - Typing Indicator state; default `false`. If you use`renderFooter` it will override this.
@@ -421,7 +421,7 @@ interface QuickReplies {
  />
 ```
 
-- **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
+- **`extraData`** _(Object)_ - Extra props for re-rendering FlashList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
 

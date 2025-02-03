@@ -1,11 +1,11 @@
 import React, { RefObject } from 'react'
 import {
-  FlatList,
   NativeSyntheticEvent,
   NativeScrollEvent,
   StyleProp,
   ViewStyle,
 } from 'react-native'
+import { FlashList } from '@shopify/flash-list'
 
 import { LoadEarlierProps } from 'react-native-gifted-chat/src/LoadEarlier'
 import Message from 'react-native-gifted-chat/src/Message'
@@ -24,7 +24,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   invertibleScrollViewProps?: object
   extraData?: object
   scrollToBottomOffset?: number
-  forwardRef?: RefObject<FlatList<TMessage>>
+  forwardRef?: RefObject<FlashList<TMessage>>
   renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactElement

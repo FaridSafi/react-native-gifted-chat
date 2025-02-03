@@ -112,7 +112,7 @@ export default class Message<
   }
 
   renderDay () {
-    if (this.props.currentMessage && this.props.currentMessage.createdAt) {
+    if (this.props.currentMessage?.createdAt) {
       const {
         /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,

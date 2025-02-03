@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react'
+import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import {
   FlatList,
@@ -8,142 +8,91 @@ import {
   ListRenderItemInfo,
   NativeSyntheticEvent,
   NativeScrollEvent,
-  StyleProp,
-  ViewStyle,
   Platform,
 } from 'react-native'
 
 import { LoadEarlier, LoadEarlierProps } from 'react-native-gifted-chat/src/LoadEarlier'
 import Message from 'react-native-gifted-chat/src/Message'
-import { User, IMessage, Reply } from 'react-native-gifted-chat/src/Models'
+import { IMessage } from 'react-native-gifted-chat/src/Models'
 import TypingIndicator from 'react-native-gifted-chat/src/TypingIndicator'
+import { State, MessageContainerProps } from './types'
 
 import { StylePropType } from 'react-native-gifted-chat/src/utils'
 import { warning } from 'react-native-gifted-chat/src/logging'
 import styles from './styles'
 
-export interface MessageContainerProps<TMessage extends IMessage> {
-  messages?: TMessage[]
-  isTyping?: boolean
-  user?: User
-  listViewProps: object
-  inverted?: boolean
-  loadEarlier?: boolean
-  alignTop?: boolean
-  scrollToBottom?: boolean
-  scrollToBottomStyle?: StyleProp<ViewStyle>
-  invertibleScrollViewProps?: object
-  extraData?: object
-  scrollToBottomOffset?: number
-  forwardRef?: RefObject<FlatList<TMessage>>
-  renderChatEmpty?(): React.ReactNode
-  renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
-  renderMessage?(props: Message['props']): React.ReactElement
-  renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
-  renderTypingIndicator?(): React.ReactNode
-  scrollToBottomComponent?(): React.ReactNode
-  onLoadEarlier?(): void
-  onQuickReply?(replies: Reply[]): void
-  infiniteScroll?: boolean
-  isLoadingEarlier?: boolean
-  handleOnScroll?(event: NativeSyntheticEvent<NativeScrollEvent>): void
-}
+export * from './types'
 
-interface State {
-  showScrollBottom: boolean
-  hasScrolled: boolean
-}
+function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
+  const {
+    messages = [],
+    user = {},
+    isTyping = false,
+    renderChatEmpty: renderChatEmptyProp,
+    renderMessage: renderMessageProp,
+    onLoadEarlier,
+    onQuickReply,
+    inverted = true,
+    loadEarlier = false,
+    listViewProps = {},
+    invertibleScrollViewProps = {},
+    extraData = null,
+    scrollToBottom = false,
+    scrollToBottomOffset = 200,
+    alignTop = false,
+    scrollToBottomStyle = {},
+    infiniteScroll = false,
+    isLoadingEarlier = false,
+    renderTypingIndicator: renderTypingIndicatorProp,
+    renderFooter: renderFooterProp,
+    renderLoadEarlier: renderLoadEarlierProp,
+    forwardRef,
+    handleOnScroll: handleOnScrollProp,
+    scrollToBottomComponent: scrollToBottomComponentProp
+  } = props
 
-export default class MessageContainer<
-  TMessage extends IMessage = IMessage,
-> extends React.PureComponent<MessageContainerProps<TMessage>, State> {
-  static defaultProps = {
-    messages: [],
-    user: {},
-    isTyping: false,
-    renderChatEmpty: null,
-    renderFooter: null,
-    renderMessage: null,
-    onLoadEarlier: () => {},
-    onQuickReply: () => {},
-    inverted: true,
-    loadEarlier: false,
-    listViewProps: {},
-    invertibleScrollViewProps: {},
-    extraData: null,
-    scrollToBottom: false,
-    scrollToBottomOffset: 200,
-    alignTop: false,
-    scrollToBottomStyle: {},
-    infiniteScroll: false,
-    isLoadingEarlier: false,
-  }
+  const [showScrollBottom, setShowScrollBottom] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
 
-  static propTypes = {
-    messages: PropTypes.arrayOf(PropTypes.object),
-    isTyping: PropTypes.bool,
-    user: PropTypes.object,
-    renderChatEmpty: PropTypes.func,
-    renderFooter: PropTypes.func,
-    renderMessage: PropTypes.func,
-    renderLoadEarlier: PropTypes.func,
-    onLoadEarlier: PropTypes.func,
-    listViewProps: PropTypes.object,
-    inverted: PropTypes.bool,
-    loadEarlier: PropTypes.bool,
-    invertibleScrollViewProps: PropTypes.object,
-    extraData: PropTypes.object,
-    scrollToBottom: PropTypes.bool,
-    scrollToBottomOffset: PropTypes.number,
-    scrollToBottomComponent: PropTypes.func,
-    alignTop: PropTypes.bool,
-    scrollToBottomStyle: StylePropType,
-    infiniteScroll: PropTypes.bool,
-  }
+  const renderTypingIndicator = useCallback(() => {
+    if (renderTypingIndicatorProp)
+      return renderTypingIndicatorProp()
 
-  state = {
-    showScrollBottom: false,
-    hasScrolled: false,
-  }
+    return <TypingIndicator isTyping={isTyping || false} />
+  }, [isTyping, renderTypingIndicatorProp])
 
-  renderTypingIndicator = () => {
-    if (this.props.renderTypingIndicator)
-      return this.props.renderTypingIndicator()
-    return <TypingIndicator isTyping={this.props.isTyping || false} />
-  }
+  const renderFooter = useCallback(() => {
+    if (renderFooterProp)
+      return renderFooterProp(props)
 
-  renderFooter = () => {
-    if (this.props.renderFooter)
-      return this.props.renderFooter(this.props)
+    return renderTypingIndicator()
+  }, [renderFooterProp, renderTypingIndicator, props])
 
-    return this.renderTypingIndicator()
-  }
-
-  renderLoadEarlier = (props: LoadEarlierProps) => {
-    if (this.props.loadEarlier === true) {
-      if (this.props.renderLoadEarlier)
-        return this.props.renderLoadEarlier(props)
+  const renderLoadEarlier = useCallback(() => {
+    if (loadEarlier === true) {
+      if (renderLoadEarlierProp)
+        return renderLoadEarlierProp(props)
 
       return <LoadEarlier {...props} />
     }
     return null
-  }
+  }, [loadEarlier, renderLoadEarlierProp, props])
 
-  scrollTo (options: { animated?: boolean, offset: number }) {
-    if (this.props.forwardRef?.current && options)
-      this.props.forwardRef.current.scrollToOffset(options)
-  }
+  const scrollTo = useCallback((options: { animated?: boolean, offset: number }) => {
+    if (forwardRef?.current && options)
+      forwardRef.current.scrollToOffset(options)
+  }, [forwardRef])
 
-  scrollToBottom = (animated: boolean = true) => {
-    const { inverted } = this.props
+  const doScrollToBottom = useCallback((animated: boolean = true) => {
     if (inverted)
-      this.scrollTo({ offset: 0, animated })
-    else if (this.props.forwardRef?.current)
-      this.props.forwardRef.current.scrollToEnd({ animated })
-  }
+      scrollTo({ offset: 0, animated })
+    else if (forwardRef?.current)
+      forwardRef.current.scrollToEnd({ animated })
+  }, [forwardRef, inverted, scrollTo])
 
-  handleOnScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    this.props.handleOnScroll?.(event)
+  const handleOnScroll = useCallback((event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    handleOnScrollProp?.(event)
+
     const {
       nativeEvent: {
         contentOffset: { y: contentOffsetY },
@@ -151,22 +100,24 @@ export default class MessageContainer<
         layoutMeasurement: { height: layoutMeasurementHeight },
       },
     } = event
-    const { scrollToBottomOffset } = this.props
-    if (this.props.inverted)
+
+    if (inverted)
       if (contentOffsetY > scrollToBottomOffset!)
-        this.setState({ showScrollBottom: true, hasScrolled: true })
+        setShowScrollBottom(true)
       else
-        this.setState({ showScrollBottom: false, hasScrolled: true })
+        setShowScrollBottom(false)
     else if (
       contentOffsetY < scrollToBottomOffset! &&
       contentSizeHeight - layoutMeasurementHeight > scrollToBottomOffset!
     )
-      this.setState({ showScrollBottom: true, hasScrolled: true })
+      setShowScrollBottom(true)
     else
-      this.setState({ showScrollBottom: false, hasScrolled: true })
-  }
+      setShowScrollBottom(false)
 
-  renderRow = ({ item, index }: ListRenderItemInfo<TMessage>): React.ReactElement | null => {
+    setHasScrolled(true)
+  }, [handleOnScrollProp, inverted, scrollToBottomOffset])
+
+  const renderRow = useCallback(({ item, index }: ListRenderItemInfo<TMessage>): React.ReactElement | null => {
     if (!item._id && item._id !== 0)
       warning('GiftedChat: `_id` is missing for message', JSON.stringify(item))
 
@@ -179,7 +130,7 @@ export default class MessageContainer<
 
       item.user = { _id: 0 }
     }
-    const { messages, user, inverted, ...restProps } = this.props
+    const { messages, user, inverted, ...restProps } = props
     if (messages && user) {
       const previousMessage =
         (inverted ? messages[index + 1] : messages[index - 1]) || {}
@@ -196,74 +147,70 @@ export default class MessageContainer<
         position: item.user._id === user._id ? 'right' : 'left',
       }
 
-      if (this.props.renderMessage)
-        return this.props.renderMessage(messageProps)
+      if (renderMessageProp)
+        return renderMessageProp(messageProps)
 
       return <Message key={item._id.toString()} {...messageProps} />
     }
     return null
-  }
+  }, [props, renderMessageProp])
 
-  renderChatEmpty = () => {
-    if (this.props.renderChatEmpty)
-      return this.props.inverted
+  const renderChatEmpty = useCallback(() => {
+    if (renderChatEmptyProp)
+      return inverted
         ? (
-          this.props.renderChatEmpty()
+          renderChatEmptyProp()
         )
         : (
           <View style={styles.emptyChatContainer}>
-            {this.props.renderChatEmpty()}
+            {renderChatEmptyProp()}
           </View>
         )
 
     return <View style={styles.container} />
-  }
+  }, [inverted, renderChatEmptyProp])
 
-  renderHeaderWrapper = () => (
-    <View style={styles.headerWrapper}>{this.renderLoadEarlier({ ...this.props })}</View>
-  )
+  const renderHeaderWrapper = useCallback(() => (
+    renderLoadEarlierProp ? <View style={styles.headerWrapper}>{renderLoadEarlierProp({ ...props })}</View> : null
+  ), [renderLoadEarlierProp, props])
 
-  renderScrollBottomComponent () {
-    const { scrollToBottomComponent } = this.props
-
-    if (scrollToBottomComponent)
-      return scrollToBottomComponent()
+  const renderScrollBottomComponent = useCallback(() => {
+    if (scrollToBottomComponentProp)
+      return scrollToBottomComponentProp()
 
     return <Text>{'V'}</Text>
-  }
+  }, [scrollToBottomComponentProp])
 
-  renderScrollToBottomWrapper () {
-    const propsStyle = this.props.scrollToBottomStyle || {}
+  const renderScrollToBottomWrapper = useCallback(() => {
+    const propsStyle = scrollToBottomStyle || {}
     return (
       <View style={[styles.scrollToBottomStyle, propsStyle]}>
         <TouchableOpacity
-          onPress={() => this.scrollToBottom()}
+          onPress={() => doScrollToBottom()}
           hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}
         >
-          {this.renderScrollBottomComponent()}
+          {renderScrollBottomComponent()}
         </TouchableOpacity>
       </View>
     )
-  }
+  }, [scrollToBottomStyle, renderScrollBottomComponent, doScrollToBottom])
 
-  onLayoutList = () => {
+  const onLayoutList = useCallback(() => {
     if (
-      !this.props.inverted &&
-      !!this.props.messages &&
-      this.props.messages!.length
+      !inverted &&
+      !!messages &&
+      messages!.length
     )
       setTimeout(
-        () => this.scrollToBottom && this.scrollToBottom(false),
-        15 * this.props.messages!.length
+        () => doScrollToBottom(false),
+        15 * messages!.length
       )
-  }
+  }, [inverted, messages, doScrollToBottom])
 
-  onEndReached = ({ distanceFromEnd }: { distanceFromEnd: number }) => {
-    const { loadEarlier, onLoadEarlier, infiniteScroll, isLoadingEarlier } =
-      this.props
+  const onEndReached = useCallback(({ distanceFromEnd }: { distanceFromEnd: number }) => {
     if (
       infiniteScroll &&
-      (this.state.hasScrolled || distanceFromEnd > 0) &&
+      (hasScrolled || distanceFromEnd > 0) &&
       distanceFromEnd <= 100 &&
       loadEarlier &&
       onLoadEarlier &&
@@ -271,48 +218,46 @@ export default class MessageContainer<
       Platform.OS !== 'web'
     )
       onLoadEarlier()
-  }
+  }, [hasScrolled, infiniteScroll, loadEarlier, onLoadEarlier, isLoadingEarlier])
 
-  keyExtractor = (item: TMessage) => `${item._id}`
+  const keyExtractor = useCallback((item: TMessage) => `${item._id}`, [])
 
-  render () {
-    const { inverted } = this.props
-
-    return (
-      <View
-        style={
-          this.props.alignTop ? styles.containerAlignTop : styles.container
+  return (
+    <View
+      style={
+        alignTop ? styles.containerAlignTop : styles.container
+      }
+    >
+      <FlatList
+        ref={forwardRef}
+        extraData={[extraData, isTyping]}
+        keyExtractor={keyExtractor}
+        automaticallyAdjustContentInsets={false}
+        inverted={inverted}
+        data={messages}
+        style={styles.listStyle}
+        contentContainerStyle={styles.contentContainerStyle}
+        renderItem={renderRow}
+        {...invertibleScrollViewProps}
+        ListEmptyComponent={renderChatEmpty}
+        ListFooterComponent={
+          inverted ? renderHeaderWrapper : renderFooter
         }
-      >
-        <FlatList
-          ref={this.props.forwardRef}
-          extraData={[this.props.extraData, this.props.isTyping]}
-          keyExtractor={this.keyExtractor}
-          automaticallyAdjustContentInsets={false}
-          inverted={inverted}
-          data={this.props.messages}
-          style={styles.listStyle}
-          contentContainerStyle={styles.contentContainerStyle}
-          renderItem={this.renderRow}
-          {...this.props.invertibleScrollViewProps}
-          ListEmptyComponent={this.renderChatEmpty}
-          ListFooterComponent={
-            inverted ? this.renderHeaderWrapper : this.renderFooter
-          }
-          ListHeaderComponent={
-            inverted ? this.renderFooter : this.renderHeaderWrapper
-          }
-          onScroll={this.handleOnScroll}
-          scrollEventThrottle={100}
-          onLayout={this.onLayoutList}
-          onEndReached={this.onEndReached}
-          onEndReachedThreshold={0.1}
-          {...this.props.listViewProps}
-        />
-        {this.state.showScrollBottom && this.props.scrollToBottom
-          ? this.renderScrollToBottomWrapper()
-          : null}
-      </View>
-    )
-  }
+        ListHeaderComponent={
+          inverted ? renderFooter : renderHeaderWrapper
+        }
+        onScroll={handleOnScroll}
+        scrollEventThrottle={100}
+        onLayout={onLayoutList}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.1}
+        {...listViewProps}
+      />
+      {showScrollBottom && scrollToBottom
+        ? renderScrollToBottomWrapper()
+        : null}
+    </View>
+  )
 }
+
+export default MessageContainer

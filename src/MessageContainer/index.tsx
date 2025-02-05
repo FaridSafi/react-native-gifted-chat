@@ -3,12 +3,11 @@ import {
   View,
   TouchableOpacity,
   Text,
-  ListRenderItemInfo,
   NativeSyntheticEvent,
   NativeScrollEvent,
   Platform,
 } from 'react-native'
-import { FlashList } from '@shopify/flash-list'
+import { FlashList, ListRenderItemInfo } from '@shopify/flash-list'
 
 import { LoadEarlier } from '../LoadEarlier'
 import Message from '../Message'
@@ -17,9 +16,28 @@ import TypingIndicator from '../TypingIndicator'
 import { MessageContainerProps } from './types'
 
 import { warning } from '../logging'
+import stylesCommon from '../styles'
 import styles from './styles'
+import Animated, { useAnimatedStyle } from 'react-native-reanimated'
 
 export * from './types'
+
+const DayAnimated = () => {
+  const contentStyle = useAnimatedStyle(() => ({
+    opacity: 0.85,
+  }), [])
+
+  return (
+    <View style={[stylesCommon.centerItems, styles.dayAnimated]}>
+      <Animated.View
+        style={[styles.dayAnimatedContent, contentStyle]}
+        pointerEvents='none'
+      >
+        <Text style={styles.dayAnimatedText}>{'Today'}</Text>
+      </Animated.View>
+    </View>
+  )
+}
 
 function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
   const {
@@ -224,9 +242,10 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
 
   return (
     <View
-      style={
-        alignTop ? styles.containerAlignTop : styles.container
-      }
+      style={[
+        styles.contentContainerStyle,
+        alignTop ? styles.containerAlignTop : styles.container,
+      ]}
     >
       <FlashList
         ref={forwardRef}
@@ -236,7 +255,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         inverted={inverted}
         data={messages}
         style={styles.listStyle}
-        contentContainerStyle={styles.contentContainerStyle}
         renderItem={renderRow}
         {...invertibleScrollViewProps}
         ListEmptyComponent={renderChatEmpty}
@@ -256,6 +274,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       {isScrollToBottomVisible && scrollToBottom
         ? renderScrollToBottomWrapper()
         : null}
+      <DayAnimated />
     </View>
   )
 }

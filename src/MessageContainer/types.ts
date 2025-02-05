@@ -7,9 +7,9 @@ import {
 } from 'react-native'
 import { FlashList } from '@shopify/flash-list'
 
-import { LoadEarlierProps } from 'react-native-gifted-chat/src/LoadEarlier'
-import Message from 'react-native-gifted-chat/src/Message'
-import { User, IMessage, Reply } from 'react-native-gifted-chat/src/Models'
+import { LoadEarlierProps } from '../LoadEarlier'
+import Message from '../Message'
+import { User, IMessage, Reply } from '../Models'
 
 export interface MessageContainerProps<TMessage extends IMessage> {
   messages?: TMessage[]

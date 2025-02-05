@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native'
-import Color from 'react-native-gifted-chat/src/Color'
-
-console.log('Color', Color)
+import Color from '../Color'
 
 export default StyleSheet.create({
   container: {
@@ -41,5 +39,19 @@ export default StyleSheet.create({
     shadowOpacity: 0.5,
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 1,
+  },
+  dayAnimated: {
+    position: 'absolute',
+    top: 10,
+    width: '100%',
+  },
+  dayAnimatedContent: {
+    backgroundColor: '#000',
+    padding: 5,
+    borderRadius: 15,
+  },
+  dayAnimatedText: {
+    fontSize: 12,
+    color: 'white',
   },
 })

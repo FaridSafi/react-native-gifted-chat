@@ -63,6 +63,7 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import stylesCommon from './styles'
 
 dayjs.extend(localizedFormat)
 
@@ -386,7 +387,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     const { messagesContainerStyle, ...messagesContainerProps } = props
 
     const fragment = (
-      <View style={[styles.fill, messagesContainerStyle]}>
+      <View style={[stylesCommon.fill, messagesContainerStyle]}>
         <MessageContainer
           {...messagesContainerProps}
           invertibleScrollViewProps={{
@@ -613,12 +614,12 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       <ActionSheetProvider ref={actionSheetRef}>
         <View
           testID={TEST_ID.WRAPPER}
-          style={[styles.fill, styles.contentContainer]}
+          style={[stylesCommon.fill, styles.contentContainer]}
           onLayout={onInitialLayoutViewLayout}
         >
           {isInitialized
             ? (
-              <Animated.View style={[styles.fill, isKeyboardInternallyHandled && contentStyleAnim]}>
+              <Animated.View style={[stylesCommon.fill, isKeyboardInternallyHandled && contentStyleAnim]}>
                 {renderMessages}
                 {inputToolbarFragment}
               </Animated.View>
@@ -659,9 +660,6 @@ GiftedChat.prepend = <TMessage extends IMessage>(
 }
 
 const styles = StyleSheet.create({
-  fill: {
-    flex: 1,
-  },
   contentContainer: {
     overflow: 'hidden',
   },

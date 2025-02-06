@@ -1,57 +1,20 @@
 import React, { memo, useCallback } from 'react'
-import { View, StyleSheet, ViewStyle, LayoutChangeEvent } from 'react-native'
+import { View } from 'react-native'
 import isEqual from 'lodash.isequal'
 
-import { Avatar, AvatarProps } from './Avatar'
-import Bubble from './Bubble'
-import { SystemMessage, SystemMessageProps } from './SystemMessage'
-import { Day, DayProps } from './Day'
+import { Avatar } from '../Avatar'
+import Bubble from '../Bubble'
+import { SystemMessage } from '../SystemMessage'
+import { Day } from '../Day'
 
-import { isSameUser } from './utils'
-import { IMessage, User, LeftRightStyle } from './Models'
+import { isSameUser } from '../utils'
+import { IMessage } from '../Models'
+import { MessageProps } from './types'
+import styles from './styles'
 
-const styles = {
-  left: StyleSheet.create({
-    container: {
-      flexDirection: 'row',
-      alignItems: 'flex-end',
-      justifyContent: 'flex-start',
-      marginLeft: 8,
-      marginRight: 0,
-    },
-  }),
-  right: StyleSheet.create({
-    container: {
-      flexDirection: 'row',
-      alignItems: 'flex-end',
-      justifyContent: 'flex-end',
-      marginLeft: 0,
-      marginRight: 8,
-    },
-  }),
-}
+export * from './types'
 
-export interface MessageProps<TMessage extends IMessage> {
-  showUserAvatar?: boolean
-  position: 'left' | 'right'
-  currentMessage: TMessage
-  nextMessage?: TMessage
-  previousMessage?: TMessage
-  user: User
-  inverted?: boolean
-  containerStyle?: LeftRightStyle<ViewStyle>
-  renderBubble?(props: Bubble['props']): React.ReactNode
-  renderDay?(props: DayProps<TMessage>): React.ReactNode
-  renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
-  renderAvatar?(props: AvatarProps<TMessage>): React.ReactNode
-  shouldUpdateMessage?(
-    props: MessageProps<IMessage>,
-    nextProps: MessageProps<IMessage>,
-  ): boolean
-  onMessageLayout?(event: LayoutChangeEvent): void
-}
-
-let Message: React.FC<MessageProps<IMessage>> = (props) => {
+let Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) => {
   const {
     currentMessage,
     renderDay: renderDayProp,
@@ -140,35 +103,34 @@ let Message: React.FC<MessageProps<IMessage>> = (props) => {
     return <Avatar {...rest} />
   }, [props])
 
-  if (currentMessage) {
-    const sameUser = isSameUser(currentMessage, nextMessage!)
+  if (!currentMessage)
+    return null
 
-    return (
-      <View onLayout={onMessageLayout}>
-        {renderDay()}
-        {currentMessage.system
-          ? (
-            renderSystemMessage()
-          )
-          : (
-            <View
-              style={[
-                styles[position].container,
-                { marginBottom: sameUser ? 2 : 10 },
-                !props.inverted && { marginBottom: 2 },
-                containerStyle && containerStyle[position],
-              ]}
-            >
-              {position === 'left' ? renderAvatar() : null}
-              {renderBubble()}
-              {position === 'right' ? renderAvatar() : null}
-            </View>
-          )}
-      </View>
-    )
-  }
+  const sameUser = isSameUser(currentMessage, nextMessage!)
 
-  return null
+  return (
+    <View onLayout={onMessageLayout}>
+      {renderDay()}
+      {currentMessage.system
+        ? (
+          renderSystemMessage()
+        )
+        : (
+          <View
+            style={[
+              styles[position].container,
+              { marginBottom: sameUser ? 2 : 10 },
+              !props.inverted && { marginBottom: 2 },
+              containerStyle?.[position],
+            ]}
+          >
+            {position === 'left' ? renderAvatar() : null}
+            {renderBubble()}
+            {position === 'right' ? renderAvatar() : null}
+          </View>
+        )}
+    </View>
+  )
 }
 
 Message = memo(Message, (props, nextProps) => {

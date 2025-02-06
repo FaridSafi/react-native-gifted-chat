@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { memo, useCallback } from 'react'
 import { View, StyleSheet, ViewStyle, LayoutChangeEvent } from 'react-native'
 import isEqual from 'lodash.isequal'
 
@@ -8,7 +7,7 @@ import Bubble from './Bubble'
 import { SystemMessage, SystemMessageProps } from './SystemMessage'
 import { Day, DayProps } from './Day'
 
-import { StylePropType, isSameUser } from './utils'
+import { isSameUser } from './utils'
 import { IMessage, User, LeftRightStyle } from './Models'
 
 const styles = {
@@ -52,131 +51,82 @@ export interface MessageProps<TMessage extends IMessage> {
   onMessageLayout?(event: LayoutChangeEvent): void
 }
 
-export default class Message<
-  TMessage extends IMessage = IMessage,
-> extends React.Component<MessageProps<TMessage>> {
-  static defaultProps = {
-    renderAvatar: undefined,
-    renderBubble: null,
-    renderDay: null,
-    renderSystemMessage: null,
-    position: 'left',
-    currentMessage: {},
-    nextMessage: {},
-    previousMessage: {},
-    user: {},
-    containerStyle: {},
-    showUserAvatar: false,
-    inverted: true,
-    shouldUpdateMessage: undefined,
-    onMessageLayout: undefined,
-  }
+let Message: React.FC<MessageProps<IMessage>> = (props) => {
+  const {
+    currentMessage,
+    renderDay: renderDayProp,
+    renderBubble: renderBubbleProp,
+    renderSystemMessage: renderSystemMessageProp,
+    onMessageLayout,
+    nextMessage,
+    position,
+    containerStyle,
+  } = props
 
-  static propTypes = {
-    renderAvatar: PropTypes.func,
-    showUserAvatar: PropTypes.bool,
-    renderBubble: PropTypes.func,
-    renderDay: PropTypes.func,
-    renderSystemMessage: PropTypes.func,
-    position: PropTypes.oneOf(['left', 'right']),
-    currentMessage: PropTypes.object,
-    nextMessage: PropTypes.object,
-    previousMessage: PropTypes.object,
-    user: PropTypes.object,
-    inverted: PropTypes.bool,
-    containerStyle: PropTypes.shape({
-      left: StylePropType,
-      right: StylePropType,
-    }),
-    shouldUpdateMessage: PropTypes.func,
-    onMessageLayout: PropTypes.func,
-  }
+  const renderDay = useCallback(() => {
+    if (!currentMessage?.createdAt)
+      return null
 
-  shouldComponentUpdate (nextProps: MessageProps<TMessage>) {
-    const next = nextProps.currentMessage!
-    const current = this.props.currentMessage!
-    const { previousMessage, nextMessage } = this.props
-    const nextPropsMessage = nextProps.nextMessage
-    const nextPropsPreviousMessage = nextProps.previousMessage
-
-    let shouldUpdate =
-      this.props.shouldUpdateMessage?.(this.props, nextProps) || false
-
-    shouldUpdate =
-      shouldUpdate ||
-      !isEqual(current, next) ||
-      !isEqual(previousMessage, nextPropsPreviousMessage) ||
-      !isEqual(nextMessage, nextPropsMessage)
-
-    return shouldUpdate
-  }
-
-  renderDay () {
-    if (this.props.currentMessage?.createdAt) {
-      const {
-        /* eslint-disable @typescript-eslint/no-unused-vars */
-        containerStyle,
-        onMessageLayout,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
-        ...props
-      } = this.props
-
-      if (this.props.renderDay)
-        return this.props.renderDay(props)
-
-      return <Day {...props} />
-    }
-    return null
-  }
-
-  renderBubble () {
     const {
       /* eslint-disable @typescript-eslint/no-unused-vars */
       containerStyle,
       onMessageLayout,
       /* eslint-enable @typescript-eslint/no-unused-vars */
-      ...props
-    } = this.props
+      ...rest
+    } = props
 
-    if (this.props.renderBubble)
-      return this.props.renderBubble(props)
+    if (renderDayProp)
+      return renderDayProp(rest)
 
-    return <Bubble {...props} />
-  }
+    return <Day {...rest} />
+  }, [currentMessage, props, renderDayProp])
 
-  renderSystemMessage () {
+  const renderBubble = useCallback(() => {
     const {
       /* eslint-disable @typescript-eslint/no-unused-vars */
       containerStyle,
       onMessageLayout,
       /* eslint-enable @typescript-eslint/no-unused-vars */
-      ...props
-    } = this.props
+      ...rest
+    } = props
 
-    if (this.props.renderSystemMessage)
-      return this.props.renderSystemMessage(props)
+    if (renderBubbleProp)
+      return renderBubbleProp(rest)
 
-    return <SystemMessage {...props} />
-  }
+    return <Bubble {...rest} />
+  }, [props, renderBubbleProp])
 
-  renderAvatar () {
-    const { user, currentMessage, showUserAvatar } = this.props
+  const renderSystemMessage = useCallback(() => {
+    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      containerStyle,
+      onMessageLayout,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      ...rest
+    } = props
+
+    if (renderSystemMessageProp)
+      return renderSystemMessageProp(rest)
+
+    return <SystemMessage {...rest} />
+  }, [props, renderSystemMessageProp])
+
+  const renderAvatar = useCallback(() => {
+    const {
+      user,
+      currentMessage,
+      showUserAvatar,
+    } = props
 
     if (
-      user &&
-      user._id &&
-      currentMessage &&
-      currentMessage.user &&
+      user?._id &&
+      currentMessage?.user &&
       user._id === currentMessage.user._id &&
       !showUserAvatar
     )
       return null
 
-    if (
-      currentMessage &&
-      currentMessage.user &&
-      currentMessage.user.avatar === null
-    )
+    if (currentMessage?.user?.avatar === null)
       return null
 
     const {
@@ -184,46 +134,60 @@ export default class Message<
       containerStyle,
       onMessageLayout,
       /* eslint-enable @typescript-eslint/no-unused-vars */
-      ...props
-    } = this.props
+      ...rest
+    } = props
 
-    return <Avatar {...props} />
+    return <Avatar {...rest} />
+  }, [props])
+
+  if (currentMessage) {
+    const sameUser = isSameUser(currentMessage, nextMessage!)
+
+    return (
+      <View onLayout={onMessageLayout}>
+        {renderDay()}
+        {currentMessage.system
+          ? (
+            renderSystemMessage()
+          )
+          : (
+            <View
+              style={[
+                styles[position].container,
+                { marginBottom: sameUser ? 2 : 10 },
+                !props.inverted && { marginBottom: 2 },
+                containerStyle && containerStyle[position],
+              ]}
+            >
+              {position === 'left' ? renderAvatar() : null}
+              {renderBubble()}
+              {position === 'right' ? renderAvatar() : null}
+            </View>
+          )}
+      </View>
+    )
   }
 
-  render () {
-    const {
-      currentMessage,
-      onMessageLayout,
-      nextMessage,
-      position,
-      containerStyle,
-    } = this.props
-    if (currentMessage) {
-      const sameUser = isSameUser(currentMessage, nextMessage!)
-      return (
-        <View onLayout={onMessageLayout}>
-          {this.renderDay()}
-          {currentMessage.system
-            ? (
-              this.renderSystemMessage()
-            )
-            : (
-              <View
-                style={[
-                  styles[position].container,
-                  { marginBottom: sameUser ? 2 : 10 },
-                  !this.props.inverted && { marginBottom: 2 },
-                  containerStyle && containerStyle[position],
-                ]}
-              >
-                {this.props.position === 'left' ? this.renderAvatar() : null}
-                {this.renderBubble()}
-                {this.props.position === 'right' ? this.renderAvatar() : null}
-              </View>
-            )}
-        </View>
-      )
-    }
-    return null
-  }
+  return null
 }
+
+Message = memo(Message, (props, nextProps) => {
+  const next = nextProps.currentMessage!
+  const current = props.currentMessage!
+  const { previousMessage, nextMessage } = props
+  const nextPropsMessage = nextProps.nextMessage
+  const nextPropsPreviousMessage = nextProps.previousMessage
+
+  let shouldUpdate =
+    props.shouldUpdateMessage?.(props, nextProps) || false
+
+  shouldUpdate =
+    shouldUpdate ||
+    !isEqual(current, next) ||
+    !isEqual(previousMessage, nextPropsPreviousMessage) ||
+    !isEqual(nextMessage, nextPropsMessage)
+
+  return shouldUpdate
+})
+
+export default Message

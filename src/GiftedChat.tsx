@@ -37,7 +37,7 @@ import { GiftedAvatar } from './GiftedAvatar'
 import { GiftedChatContext } from './GiftedChatContext'
 import { InputToolbar, InputToolbarProps } from './InputToolbar'
 import { LoadEarlier, LoadEarlierProps } from './LoadEarlier'
-import Message from './Message'
+import Message, { MessageProps } from './Message'
 import MessageContainer from './MessageContainer'
 import { MessageImage, MessageImageProps } from './MessageImage'
 import { MessageText, MessageTextProps } from './MessageText'
@@ -67,7 +67,7 @@ import stylesCommon from './styles'
 
 dayjs.extend(localizedFormat)
 
-export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends Partial<Omit<MessageContainer<TMessage>, 'scrollToBottom'>> {
+export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends Partial<Omit<typeof MessageContainer<TMessage>, 'scrollToBottom'>> {
   /* Message container ref */
   messageContainerRef?: React.RefObject<FlashList<IMessage>>
   /* text input ref */
@@ -115,7 +115,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends P
   renderAvatarOnTop?: boolean
   inverted?: boolean
   /* Extra props to be passed to the <Image> component created by the default renderMessageImage */
-  imageProps?: Message<TMessage>['props']
+  imageProps?: MessageImageProps<TMessage>
   /* Extra props to be passed to the MessageImage's Lightbox */
   lightboxProps?: LightboxProps
   /* Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar); default is 0 */
@@ -189,7 +189,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends P
   renderUsername?(user: User): React.ReactNode
   /* Reverses display order of messages; default is true */
   /* Custom message container */
-  renderMessage?(message: Message<TMessage>['props']): React.ReactElement
+  renderMessage?(message: MessageProps<TMessage>): React.ReactElement
   /* Custom message text */
   renderMessageText?(messageText: MessageTextProps<TMessage>): React.ReactNode
   /* Custom message image */
@@ -234,8 +234,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends P
   /* Scroll to bottom custom component */
   scrollToBottomComponent?(): React.ReactNode
   shouldUpdateMessage?(
-    props: Message<TMessage>['props'],
-    nextProps: Message<TMessage>['props'],
+    props: MessageProps<TMessage>,
+    nextProps: MessageProps<TMessage>,
   ): boolean
 }
 

@@ -455,8 +455,10 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       }
 
       onSend?.(newMessages)
+
+      setTimeout(() => scrollToBottom(), 10)
     },
-    [messageIdGenerator, onSend, user, resetInputToolbar, disableTyping]
+    [messageIdGenerator, onSend, user, resetInputToolbar, disableTyping, scrollToBottom]
   )
 
   const onInputSizeChanged = useCallback(
@@ -560,11 +562,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     if (props.text != null)
       setText(props.text)
   }, [props.text])
-
-  useEffect(() => {
-    if (!inverted && messages?.length)
-      setTimeout(() => scrollToBottom(false), 200)
-  }, [messages?.length, inverted, scrollToBottom])
 
   useAnimatedReaction(
     () => keyboard.height.value,

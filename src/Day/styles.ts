@@ -3,8 +3,6 @@ import Color from '../Color'
 
 export default StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
     marginTop: 5,
     marginBottom: 10,
   },

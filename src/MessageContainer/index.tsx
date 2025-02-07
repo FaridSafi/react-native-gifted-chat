@@ -16,7 +16,7 @@ import { MessageContainerProps } from './types'
 import { warning } from '../logging'
 import stylesCommon from '../styles'
 import styles from './styles'
-import Animated, { runOnJS, useAnimatedReaction, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
+import Animated, { interpolate, runOnJS, useAnimatedReaction, useAnimatedScrollHandler, useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
 import { Day } from '../Day'
 import { isSameDay } from '../utils'
@@ -25,14 +25,54 @@ export * from './types'
 
 const AnimatedFlashList = Animated.createAnimatedComponent(FlashList)
 
-const DayAnimated = ({ scrolledY, daysPositions }: {
+interface ViewLayout {
+  x: number
+  y: number
+  width: number
+  height: number
+}
+
+const DayAnimated = ({ scrolledY, daysPositions, offsetY }: {
   scrolledY: { value: number }
-  daysPositions: { value: { [key: string]: number } }
+  daysPositions: { value: { [key: string]: ViewLayout } }
+  offsetY: { value: number }
 }) => {
   const opacity = useSharedValue(0)
   const fadeOutOpacityTimeoutId = useSharedValue<ReturnType<typeof setTimeout> | null>(null)
+  const containerHeight = useSharedValue(0)
+
+  const top = useSharedValue(10)
 
   const isScrolledOnMount = useSharedValue(false)
+
+  const daysPositionsArray = useDerivedValue(() => Object.values(daysPositions.value).sort((a, b) => a.y - b.y))
+
+  const topOffset = useDerivedValue(() => {
+    const currentDayPosition = daysPositionsArray.value.find((day, index) => {
+      const scrolledPosition = offsetY.value + scrolledY.value - containerHeight.value - 10 - 10 // 10 - margin bottom, 10 - top offset
+      const dayPosition = day.y + day.height
+
+      return (scrolledPosition < dayPosition) || index === daysPositionsArray.value.length - 1
+    })
+
+    const scrolledBottomY = offsetY.value + scrolledY.value - (currentDayPosition?.height ?? 0) - 10 // 10 is marginBottom in Day component. TODO: render Day component here
+    const dateBottomY = currentDayPosition?.y ?? 0
+
+    const topOffset = scrolledBottomY - dateBottomY
+
+    console.log('topOffset', currentDayPosition)
+
+    return topOffset
+  }, [offsetY, scrolledY, daysPositionsArray, containerHeight])
+
+  const style = useAnimatedStyle(() => ({
+    top: interpolate(
+      topOffset.value,
+      [-10, -0.0001, 0, containerHeight.value + 10],
+      [10, 10, -containerHeight.value, 10],
+      'clamp'
+    ),
+  }), [topOffset, containerHeight])
 
   const contentStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
@@ -51,35 +91,49 @@ const DayAnimated = ({ scrolledY, daysPositions }: {
     fadeOutOpacityTimeoutId.value = setTimeout(fadeOut, 2000)
   }, [fadeOut, fadeOutOpacityTimeoutId])
 
+  const handleLayout = useCallback(({ nativeEvent }) => {
+    containerHeight.value = nativeEvent.layout.height
+  }, [containerHeight])
+
   useAnimatedReaction(
-    () => scrolledY.value,
+    () => [scrolledY.value, daysPositionsArray],
     (value, prevValue) => {
-      console.log('DayAnimated: daysPositions', daysPositions.value)
+      // console.log('DayAnimated: daysPositions', daysPositions.value)
 
       if (!isScrolledOnMount.value) {
         isScrolledOnMount.value = true
         return
       }
 
-      if (value === prevValue)
+      if (value[0] === prevValue?.[0])
         return
 
       opacity.value = withTiming(1, { duration: 500 })
 
       runOnJS(scheduleFadeOut)()
+
+      // const scrolledBottomY = offsetY.value + scrolledY.value - (daysPositionsArray.value[0]?.height ?? 0) - 10 // 10 is marginBottom in Day component. TODO: render Day component here
+      // const dateBottomY = daysPositionsArray.value[0]?.y ?? 0
+
+      // console.log('!', scrolledBottomY, dateBottomY, scrolledBottomY - dateBottomY, daysPositionsArray.value)
     },
-    [scrolledY, scheduleFadeOut, daysPositions]
+    [scrolledY, scheduleFadeOut, daysPositionsArray]
   )
 
   return (
-    <View style={[stylesCommon.centerItems, styles.dayAnimated]}>
+    <Animated.View
+      style={[stylesCommon.centerItems, styles.dayAnimated, style]}
+      onLayout={handleLayout}
+    >
       <Animated.View
         style={[styles.dayAnimatedContent, contentStyle]}
         pointerEvents='none'
       >
         <Text style={styles.dayAnimatedText}>{'Today'}</Text>
+        {/* TODO */}
+        {/* renderDay || <Day {...rest} /> */}
       </Animated.View>
-    </View>
+    </Animated.View>
   )
 }
 
@@ -112,10 +166,6 @@ const DayWrapper = forwardRef<View, MessageProps<IMessage>>((props, ref) => {
   )
 })
 
-interface HandleLayoutDayRef {
-  (id: string | number, ref: View | null): void
-}
-
 function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
   const {
     messages = [],
@@ -146,7 +196,8 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   const [isScrollToBottomVisible, setIsScrollToBottomVisible] = useState(false)
   const [hasScrolled, setHasScrolled] = useState(false)
 
-  const daysPositions = useSharedValue<{ [key: string]: number }>({})
+  const daysPositions = useSharedValue<{ [key: string]: ViewLayout }>({})
+  const listHeight = useSharedValue(0)
 
   const renderTypingIndicator = useCallback(() => {
     if (renderTypingIndicatorProp)
@@ -210,24 +261,44 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     setHasScrolled(true)
   }, [handleOnScrollProp, inverted, scrollToBottomOffset])
 
-  const handleLayoutDayRef: HandleLayoutDayRef = useCallback((id, ref) => {
-    'worklet'
-
-    if (ref) {
-      ref?.measure((_x: number, _y: number, _width: number, _height: number, _pageX: number, pageY: number) => {
-        'worklet'
-
-        daysPositions.value = {
-          ...daysPositions.value,
-          [id]: pageY,
-        }
-      })
+  const handleLayoutItem = useCallback((id: string | number, ref) => {
+    const itemLayout = forwardRef?.current?.recyclerlistview_unsafe?.getLayout(messages.findIndex(m => m._id === id))
+    if (ref && itemLayout) {
+      daysPositions.value = {
+        ...daysPositions.value,
+        [id]: { ...itemLayout },
+      }
     } else if (daysPositions.value[id] != null) {
       const nextDaysPositions = { ...daysPositions.value }
       delete nextDaysPositions[id]
       daysPositions.value = nextDaysPositions
     }
-  }, [daysPositions])
+  }, [messages, daysPositions, forwardRef])
+
+  // const handleLayoutDayRef: HandleLayoutDayRef = useCallback((id, ref) => {
+  //   handleLayoutItem(id)
+
+  //   // 'worklet'
+
+  //   // if (ref) {
+  //   //   // ref?.measure((_x: number, _y: number, _width: number, _height: number, _pageX: number, pageY: number) => {
+  //   //   ref?.measureInWindow((_x: number, _y: number, _width: number, _height: number) => {
+  //   //     // 'worklet'
+
+  //   //     // daysPositions.value = {
+  //   //     //   ...daysPositions.value,
+  //   //     //   [id]: pageY,
+  //   //     // }
+
+  //   //     // console.log('item: measureInWindow-1', id, _x, _y, _width, _height)
+  //   //     console.log('item: measureInWindow-2', id, messages.findIndex(item => item._id === id), forwardRef?.current?.recyclerlistview_unsafe?.getLayout(messages.findIndex(item => item._id === id)))
+  //   //   })
+  //   // } else if (daysPositions.value[id] != null) {
+  //   //   const nextDaysPositions = { ...daysPositions.value }
+  //   //   delete nextDaysPositions[id]
+  //   //   daysPositions.value = nextDaysPositions
+  //   // }
+  // }, [daysPositions, forwardRef, messages, handleLayoutItem])
 
   const renderItem = useCallback(({ item, index }: ListRenderItemInfo<TMessage>): React.ReactElement | null => {
     if (!item._id && item._id !== 0)
@@ -266,14 +337,15 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         <View key={item._id.toString()}>
           <DayWrapper
             {...messageProps}
-            ref={ref => handleLayoutDayRef(item._id, ref)}
+            ref={(ref) => handleLayoutItem(item._id, ref)}
           />
           <Message {...messageProps} />
         </View>
       )
     }
+
     return null
-  }, [props, renderMessageProp, user, inverted, handleLayoutDayRef])
+  }, [props, renderMessageProp, user, inverted, handleLayoutItem])
 
   const renderChatEmpty = useCallback(() => {
     if (renderChatEmptyProp)
@@ -282,16 +354,16 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
           renderChatEmptyProp()
         )
         : (
-          <View style={styles.emptyChatContainer}>
+          <View style={[stylesCommon.fill, styles.emptyChatContainer]}>
             {renderChatEmptyProp()}
           </View>
         )
 
-    return <View style={styles.container} />
+    return <View style={stylesCommon.fill} />
   }, [inverted, renderChatEmptyProp])
 
   const renderHeaderWrapper = useCallback(() => (
-    <View style={styles.headerWrapper}>{renderLoadEarlier()}</View>
+    <View style={stylesCommon.fill}>{renderLoadEarlier()}</View>
   ), [renderLoadEarlier])
 
   const renderScrollBottomComponent = useCallback(() => {
@@ -314,7 +386,11 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     )
   }, [scrollToBottomStyle, renderScrollBottomComponent, doScrollToBottom])
 
-  const onLayoutList = useCallback(() => {
+  const onLayoutList = useCallback(({ nativeEvent }) => {
+    // console.log('onLayoutList', nativeEvent)
+
+    listHeight.value = nativeEvent.layout.height
+
     if (
       !inverted &&
       messages?.length
@@ -323,6 +399,8 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         () => doScrollToBottom(false),
         15 * messages.length
       )
+
+    listViewProps?.onLayout?.(nativeEvent)
   }, [inverted, messages, doScrollToBottom])
 
   const onEndReached = useCallback(() => {
@@ -344,6 +422,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: event => {
       scrolledY.value = event.contentOffset.y
+      // console.log('onScroll', event.contentOffset.y)
 
       runOnJS(handleOnScroll)(event)
     },
@@ -353,7 +432,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     <View
       style={[
         styles.contentContainerStyle,
-        alignTop ? styles.containerAlignTop : styles.container,
+        alignTop ? styles.containerAlignTop : stylesCommon.fill,
       ]}
     >
       <AnimatedFlashList
@@ -363,7 +442,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         automaticallyAdjustContentInsets={false}
         inverted={inverted}
         data={messages}
-        style={styles.listStyle}
+        style={stylesCommon.fill}
         renderItem={renderItem}
         {...invertibleScrollViewProps}
         ListEmptyComponent={renderChatEmpty}
@@ -375,11 +454,11 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         }
         onScroll={scrollHandler}
         scrollEventThrottle={16}
-        onLayout={onLayoutList}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
         estimatedItemSize={100}
         {...listViewProps}
+        onLayout={onLayoutList}
       />
       {isScrollToBottomVisible && scrollToBottom
         ? renderScrollToBottomWrapper()
@@ -387,6 +466,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       <DayAnimated
         scrolledY={scrolledY}
         daysPositions={daysPositions}
+        offsetY={listHeight}
       />
     </View>
   )

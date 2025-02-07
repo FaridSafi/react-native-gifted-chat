@@ -10,6 +10,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated'
+import stylesCommon from './styles'
 
 const DotsAnimation = () => {
   const dot1 = useSharedValue(0)
@@ -76,7 +77,7 @@ const DotsAnimation = () => {
   }, [dot3, topY, bottomY, duration])
 
   return (
-    <View style={styles.dots}>
+    <View style={[stylesCommon.fill, stylesCommon.centerItems, styles.dots]}>
       <Animated.View style={[styles.dot, dot1Style]} />
       <Animated.View style={[styles.dot, dot2Style]} />
       <Animated.View style={[styles.dot, dot3Style]} />
@@ -162,9 +163,6 @@ const styles = StyleSheet.create({
   },
   dots: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
   },
   dot: {
     marginLeft: 2,

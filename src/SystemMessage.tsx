@@ -11,12 +11,10 @@ import PropTypes from 'prop-types'
 import Color from './Color'
 import { IMessage } from './Models'
 import { StylePropType } from './utils'
+import stylesCommon from './styles'
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
     marginTop: 5,
     marginBottom: 10,
   },
@@ -45,7 +43,7 @@ export function SystemMessage<TMessage extends IMessage = IMessage> ({
     return null
 
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={[stylesCommon.fill, stylesCommon.centerItems, styles.container, containerStyle]}>
       <View style={wrapperStyle}>
         <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
       </View>

@@ -14,6 +14,7 @@ import {
 import Lightbox, { LightboxProps } from 'react-native-lightbox-v2'
 import { IMessage } from './Models'
 import { StylePropType } from './utils'
+import stylesCommon from './styles'
 
 const styles = StyleSheet.create({
   image: {
@@ -24,7 +25,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   imageActive: {
-    flex: 1,
     resizeMode: 'contain',
   },
 })
@@ -54,7 +54,7 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
       {/* @ts-expect-error: Lightbox types are not fully compatible */}
       <Lightbox
         activeProps={{
-          style: styles.imageActive,
+          style: [stylesCommon.fill, styles.imageActive],
         }}
         {...lightboxProps}
       >

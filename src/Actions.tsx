@@ -13,6 +13,8 @@ import Color from './Color'
 import { StylePropType } from './utils'
 import { useChatContext } from './GiftedChatContext'
 
+import stylesCommon from './styles'
+
 export interface ActionsProps {
   options?: { [key: string]: () => void }
   optionTintColor?: string
@@ -63,7 +65,7 @@ export function Actions ({
       return icon()
 
     return (
-      <View style={[styles.wrapper, wrapperStyle]}>
+      <View style={[stylesCommon.fill, stylesCommon.centerItems, styles.wrapper, wrapperStyle]}>
         <Text style={[styles.iconText, iconTextStyle]}>{'+'}</Text>
       </View>
     )
@@ -99,9 +101,6 @@ const styles = StyleSheet.create({
     borderRadius: 13,
     borderColor: Color.defaultColor,
     borderWidth: 2,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   iconText: {
     color: Color.defaultColor,

@@ -11,6 +11,7 @@ import {
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
 import Color from './Color'
 import { StylePropType } from './utils'
+import stylesCommon from './styles'
 
 export interface ComposerProps {
   composerHeight?: number
@@ -82,6 +83,7 @@ export function Composer ({
       onContentSizeChange={handleContentSizeChange}
       onChangeText={onTextChanged}
       style={[
+        stylesCommon.fill,
         styles.textInput,
         textInputStyle,
         {
@@ -122,7 +124,6 @@ Composer.propTypes = {
 
 const styles = StyleSheet.create({
   textInput: {
-    flex: 1,
     marginLeft: 10,
     fontSize: 16,
     lineHeight: 22,

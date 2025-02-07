@@ -2,9 +2,6 @@ import { StyleSheet } from 'react-native'
 import Color from '../Color'
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   containerAlignTop: {
     flexDirection: 'row',
     alignItems: 'flex-start',
@@ -14,14 +11,7 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
   },
   emptyChatContainer: {
-    flex: 1,
     transform: [{ scaleY: -1 }],
-  },
-  headerWrapper: {
-    flex: 1,
-  },
-  listStyle: {
-    flex: 1,
   },
   scrollToBottomStyle: {
     opacity: 0.8,

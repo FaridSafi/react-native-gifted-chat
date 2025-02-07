@@ -29,11 +29,11 @@ import {
   MessageVideoProps,
   MessageAudioProps,
 } from './Models'
+import stylesCommon from './styles'
 
 const styles = {
   left: StyleSheet.create({
     container: {
-      flex: 1,
       alignItems: 'flex-start',
     },
     wrapper: {
@@ -56,7 +56,6 @@ const styles = {
   }),
   right: StyleSheet.create({
     container: {
-      flex: 1,
       alignItems: 'flex-end',
     },
     wrapper: {
@@ -556,6 +555,7 @@ export default class Bubble<
     return (
       <View
         style={[
+          stylesCommon.fill,
           styles[position].container,
           containerStyle && containerStyle[position],
         ]}

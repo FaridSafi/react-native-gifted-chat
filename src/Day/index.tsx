@@ -10,6 +10,7 @@ import { IMessage } from '../Models'
 import { DayProps } from './types'
 
 import { useChatContext } from '../GiftedChatContext'
+import stylesCommon from '../styles'
 import styles from './styles'
 
 export * from './types'
@@ -27,7 +28,7 @@ export function Day<TMessage extends IMessage = IMessage> ({
     return null
 
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={[stylesCommon.centerItems, styles.container, containerStyle]}>
       <View style={wrapperStyle}>
         <Text style={[styles.text, textStyle]}>
           {dayjs(currentMessage.createdAt)

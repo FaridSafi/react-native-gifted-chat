@@ -5,7 +5,6 @@ import isEqual from 'lodash.isequal'
 import { Avatar } from '../Avatar'
 import Bubble from '../Bubble'
 import { SystemMessage } from '../SystemMessage'
-import { Day } from '../Day'
 
 import { isSameUser } from '../utils'
 import { IMessage } from '../Models'
@@ -17,7 +16,6 @@ export * from './types'
 let Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) => {
   const {
     currentMessage,
-    renderDay: renderDayProp,
     renderBubble: renderBubbleProp,
     renderSystemMessage: renderSystemMessageProp,
     onMessageLayout,
@@ -25,24 +23,6 @@ let Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) 
     position,
     containerStyle,
   } = props
-
-  const renderDay = useCallback(() => {
-    if (!currentMessage?.createdAt)
-      return null
-
-    const {
-      /* eslint-disable @typescript-eslint/no-unused-vars */
-      containerStyle,
-      onMessageLayout,
-      /* eslint-enable @typescript-eslint/no-unused-vars */
-      ...rest
-    } = props
-
-    if (renderDayProp)
-      return renderDayProp(rest)
-
-    return <Day {...rest} />
-  }, [currentMessage, props, renderDayProp])
 
   const renderBubble = useCallback(() => {
     const {
@@ -110,7 +90,6 @@ let Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) 
 
   return (
     <View onLayout={onMessageLayout}>
-      {renderDay()}
       {currentMessage.system
         ? (
           renderSystemMessage()

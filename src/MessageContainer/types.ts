@@ -1,15 +1,14 @@
 import React, { RefObject } from 'react'
 import {
-  NativeSyntheticEvent,
-  NativeScrollEvent,
   StyleProp,
   ViewStyle,
 } from 'react-native'
 import { FlashList } from '@shopify/flash-list'
 
 import { LoadEarlierProps } from '../LoadEarlier'
-import Message from '../Message'
+import { MessageProps } from '../Message'
 import { User, IMessage, Reply } from '../Models'
+import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
 
 export interface MessageContainerProps<TMessage extends IMessage> {
   messages?: TMessage[]
@@ -27,7 +26,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   forwardRef?: RefObject<FlashList<TMessage>>
   renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
-  renderMessage?(props: Message['props']): React.ReactElement
+  renderMessage?(props: MessageProps<TMessage>): React.ReactElement
   renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   renderTypingIndicator?(): React.ReactNode
   scrollToBottomComponent?(): React.ReactNode
@@ -35,7 +34,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   onQuickReply?(replies: Reply[]): void
   infiniteScroll?: boolean
   isLoadingEarlier?: boolean
-  handleOnScroll?(event: NativeSyntheticEvent<NativeScrollEvent>): void
+  handleOnScroll?(event: ReanimatedScrollEvent): void
 }
 
 export interface State {

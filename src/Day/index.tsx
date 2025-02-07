@@ -5,7 +5,6 @@ import {
 } from 'react-native'
 import dayjs from 'dayjs'
 
-import { isSameDay } from '../utils'
 import { DATE_FORMAT } from '../Constant'
 import { IMessage } from '../Models'
 import { DayProps } from './types'
@@ -18,14 +17,13 @@ export * from './types'
 export function Day<TMessage extends IMessage = IMessage> ({
   dateFormat = DATE_FORMAT,
   currentMessage,
-  previousMessage,
   containerStyle,
   wrapperStyle,
   textStyle,
 }: DayProps<TMessage>) {
   const { getLocale } = useChatContext()
 
-  if (currentMessage == null || isSameDay(currentMessage, previousMessage))
+  if (currentMessage == null)
     return null
 
   return (

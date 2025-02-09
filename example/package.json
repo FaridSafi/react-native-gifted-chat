@@ -13,10 +13,10 @@
     "fresh": "yarn start --reset-cache"
   },
   "dependencies": {
-    "expo": "^52.0.28",
+    "expo": "^52.0.31",
     "expo-app-loading": "^2.1.1",
     "expo-clipboard": "^7.0.1",
-    "expo-image-picker": "^16.0.4",
+    "expo-image-picker": "^16.0.5",
     "expo-linking": "^7.0.5",
     "expo-location": "^18.0.5",
     "expo-permissions": "^14.4.0",
@@ -28,7 +28,7 @@
     "react-native-gifted-chat": "./..",
     "react-native-maps": "^1.20.1",
     "react-native-reanimated": "^3.16.7",
-    "react-native-safe-area-context": "5.1.0"
+    "react-native-safe-area-context": "5.2.0"
   },
   "devDependencies": {
     "@react-native/metro-config": "0.76.6",

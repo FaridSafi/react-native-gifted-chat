@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useRef, useState } from 'react'
+import React, { forwardRef, useCallback, useMemo, useState } from 'react'
 import {
   View,
   TouchableOpacity,
@@ -375,7 +375,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
 
   const renderScrollToBottomWrapper = useCallback(() => {
     return (
-      <View style={[styles.scrollToBottomStyle, scrollToBottomStyle]}>
+      <View style={[stylesCommon.centerItems, styles.scrollToBottomStyle, scrollToBottomStyle]}>
         <TouchableOpacity
           onPress={() => doScrollToBottom()}
           hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}
@@ -395,13 +395,16 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       !inverted &&
       messages?.length
     )
-      setTimeout(
-        () => doScrollToBottom(false),
-        15 * messages.length
-      )
+      // setTimeout(
+      //   () => doScrollToBottom(false),
+      //   15 * messages.length
+      // )
+      setTimeout(() => {
+        doScrollToBottom(false)
+      }, 500)
 
     listViewProps?.onLayout?.(nativeEvent)
-  }, [inverted, messages, doScrollToBottom])
+  }, [inverted, messages, doScrollToBottom, listHeight, listViewProps])
 
   const onEndReached = useCallback(() => {
     if (

@@ -13,6 +13,7 @@ import {
 import Color from './Color'
 import { User } from './Models'
 import { StylePropType } from './utils'
+import stylesCommon from './styles'
 
 const {
   carrot,
@@ -26,8 +27,6 @@ const {
 
 const styles = StyleSheet.create({
   avatarStyle: {
-    justifyContent: 'center',
-    alignItems: 'center',
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -100,25 +99,25 @@ export function GiftedAvatar (
   const renderAvatar = useCallback(() => {
     switch (typeof user.avatar) {
       case 'function':
-        return user.avatar([styles.avatarStyle, avatarStyle])
+        return user.avatar([stylesCommon.centerItems, styles.avatarStyle, avatarStyle])
       case 'string':
         return (
           <Image
             source={{ uri: user.avatar }}
-            style={[styles.avatarStyle, avatarStyle]}
+            style={[stylesCommon.centerItems, styles.avatarStyle, avatarStyle]}
           />
         )
       case 'number':
         return (
           <Image
             source={user.avatar}
-            style={[styles.avatarStyle, avatarStyle]}
+            style={[stylesCommon.centerItems, styles.avatarStyle, avatarStyle]}
           />
         )
       default:
         return null
     }
-  }, [user.name, user.avatar, avatarStyle])
+  }, [user, avatarStyle])
 
   const renderInitials = useCallback(() => {
     return (
@@ -153,6 +152,7 @@ export function GiftedAvatar (
     return (
       <View
         style={[
+          stylesCommon.centerItems,
           styles.avatarStyle,
           styles.avatarTransparent,
           avatarStyle,
@@ -181,6 +181,7 @@ export function GiftedAvatar (
       onPress={handleOnPress}
       onLongPress={handleOnLongPress}
       style={[
+        stylesCommon.centerItems,
         styles.avatarStyle,
         { backgroundColor: avatarColorRef.current },
         avatarStyle,

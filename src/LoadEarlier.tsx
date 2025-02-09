@@ -13,6 +13,7 @@ import {
 } from 'react-native'
 import Color from './Color'
 import { StylePropType } from './utils'
+import stylesCommon from './styles'
 
 const styles = StyleSheet.create({
   container: {
@@ -21,8 +22,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   wrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: Color.defaultColor,
     borderRadius: 15,
     height: 30,
@@ -73,7 +72,7 @@ export function LoadEarlier ({
       disabled={isLoadingEarlier}
       accessibilityRole='button'
     >
-      <View style={[styles.wrapper, wrapperStyle]}>
+      <View style={[stylesCommon.centerItems, styles.wrapper, wrapperStyle]}>
         {isLoadingEarlier
           ? (
             <View>

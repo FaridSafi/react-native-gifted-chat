@@ -23,8 +23,6 @@ export default StyleSheet.create({
     width: 40,
     borderRadius: 20,
     backgroundColor: Color.white,
-    alignItems: 'center',
-    justifyContent: 'center',
     shadowColor: Color.black,
     shadowOpacity: 0.5,
     shadowOffset: { width: 0, height: 0 },

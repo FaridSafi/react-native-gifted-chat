@@ -13,6 +13,7 @@ import { IMessage, Reply } from './Models'
 import Color from './Color'
 import { StylePropType } from './utils'
 import { warning } from './logging'
+import stylesCommon from './styles'
 
 const styles = StyleSheet.create({
   container: {
@@ -21,8 +22,6 @@ const styles = StyleSheet.create({
     maxWidth: 300,
   },
   quickReply: {
-    justifyContent: 'center',
-    alignItems: 'center',
     borderWidth: 1,
     maxWidth: 200,
     paddingVertical: 7,
@@ -139,6 +138,7 @@ export function QuickReplies ({
             <TouchableOpacity
               onPress={handlePress(reply)}
               style={[
+                stylesCommon.centerItems,
                 styles.quickReply,
                 quickReplyStyle,
                 { borderColor: color },
@@ -163,7 +163,7 @@ export function QuickReplies ({
       )}
       {replies.length > 0 && (
         <TouchableOpacity
-          style={[styles.quickReply, styles.sendLink]}
+          style={[stylesCommon.centerItems, styles.quickReply, styles.sendLink]}
           onPress={handleSend(replies)}
         >
           {renderQuickReplySend?.() || (

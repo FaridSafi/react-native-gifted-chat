@@ -337,7 +337,8 @@ export default class Bubble<
       quickReplyTextStyle,
       quickReplyContainerStyle,
     } = this.props
-    if (currentMessage && currentMessage.quickReplies) {
+
+    if (currentMessage?.quickReplies) {
       const {
         /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,
@@ -361,11 +362,12 @@ export default class Bubble<
         />
       )
     }
+
     return null
   }
 
   renderMessageText () {
-    if (this.props.currentMessage && this.props.currentMessage.text) {
+    if (this.props.currentMessage?.text) {
       const {
         /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,
@@ -383,7 +385,7 @@ export default class Bubble<
   }
 
   renderMessageImage () {
-    if (this.props.currentMessage && this.props.currentMessage.image) {
+    if (this.props.currentMessage?.image) {
       const {
         /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,
@@ -437,14 +439,18 @@ export default class Bubble<
   }
 
   renderTicks () {
-    const { currentMessage, renderTicks, user } = this.props
+    const {
+      currentMessage,
+      renderTicks,
+      user,
+    } = this.props
+
     if (renderTicks && currentMessage)
       return renderTicks(currentMessage)
 
     if (
-      currentMessage &&
       user &&
-      currentMessage.user &&
+      currentMessage?.user &&
       currentMessage.user._id !== user._id
     )
       return null
@@ -477,7 +483,7 @@ export default class Bubble<
   }
 
   renderTime () {
-    if (this.props.currentMessage && this.props.currentMessage.createdAt) {
+    if (this.props.currentMessage?.createdAt) {
       const {
         /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,
@@ -496,7 +502,12 @@ export default class Bubble<
   }
 
   renderUsername () {
-    const { currentMessage, user, renderUsername } = this.props
+    const {
+      currentMessage,
+      user,
+      renderUsername,
+    } = this.props
+
     if (this.props.renderUsernameOnMessage && currentMessage) {
       if (user && currentMessage.user._id === user._id)
         return null
@@ -517,6 +528,7 @@ export default class Bubble<
         </View>
       )
     }
+
     return null
   }
 
@@ -528,30 +540,26 @@ export default class Bubble<
   }
 
   renderBubbleContent () {
-    return this.props.isCustomViewBottom
-      ? (
-        <View>
-          {this.renderMessageImage()}
-          {this.renderMessageVideo()}
-          {this.renderMessageAudio()}
-          {this.renderMessageText()}
-          {this.renderCustomView()}
-        </View>
-      )
-      : (
-        <View>
-          {this.renderCustomView()}
-          {this.renderMessageImage()}
-          {this.renderMessageVideo()}
-          {this.renderMessageAudio()}
-          {this.renderMessageText()}
-        </View>
-      )
+    return (
+      <View>
+        {!this.props.isCustomViewBottom && this.renderCustomView()}
+        {this.renderMessageImage()}
+        {this.renderMessageVideo()}
+        {this.renderMessageAudio()}
+        {this.renderMessageText()}
+        {this.props.isCustomViewBottom && this.renderCustomView()}
+      </View>
+    )
   }
 
   render () {
-    const { position, containerStyle, wrapperStyle, bottomContainerStyle } =
-      this.props
+    const {
+      position,
+      containerStyle,
+      wrapperStyle,
+      bottomContainerStyle,
+    } = this.props
+
     return (
       <View
         style={[

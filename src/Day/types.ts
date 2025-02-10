@@ -3,10 +3,9 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native'
-import { IMessage } from '../Models'
 
-export interface DayProps<TMessage extends IMessage = IMessage> {
-  currentMessage: TMessage
+export interface DayProps {
+  createdAt: Date | number
   dateFormat?: string
   containerStyle?: StyleProp<ViewStyle>
   wrapperStyle?: StyleProp<ViewStyle>

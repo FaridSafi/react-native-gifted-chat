@@ -6,7 +6,6 @@ import {
 import dayjs from 'dayjs'
 
 import { DATE_FORMAT } from '../Constant'
-import { IMessage } from '../Models'
 import { DayProps } from './types'
 
 import { useChatContext } from '../GiftedChatContext'
@@ -15,23 +14,23 @@ import styles from './styles'
 
 export * from './types'
 
-export function Day<TMessage extends IMessage = IMessage> ({
+export function Day ({
   dateFormat = DATE_FORMAT,
-  currentMessage,
+  createdAt,
   containerStyle,
   wrapperStyle,
   textStyle,
-}: DayProps<TMessage>) {
+}: DayProps) {
   const { getLocale } = useChatContext()
 
-  if (currentMessage == null)
+  if (createdAt == null)
     return null
 
   return (
     <View style={[stylesCommon.centerItems, styles.container, containerStyle]}>
       <View style={[styles.wrapper, wrapperStyle]}>
         <Text style={[styles.text, textStyle]}>
-          {dayjs(currentMessage.createdAt)
+          {dayjs(createdAt)
             .locale(getLocale())
             .format(dateFormat)}
         </Text>

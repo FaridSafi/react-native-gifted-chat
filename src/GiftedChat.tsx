@@ -201,7 +201,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends P
   /* Custom view inside the bubble */
   renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode
   /* Custom day above a message */
-  renderDay?(props: DayProps<TMessage>): React.ReactNode
+  renderDay?(props: DayProps): React.ReactNode
   /* Custom time inside a message */
   renderTime?(props: TimeProps<TMessage>): React.ReactNode
   /* Custom footer component on the ListView, e.g. 'User is typing...' */

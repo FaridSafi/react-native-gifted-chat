@@ -31,7 +31,6 @@ export default StyleSheet.create({
 
   dayAnimated: {
     position: 'absolute',
-    top: 10,
     width: '100%',
   },
   dayAnimatedDayContainerStyle: {

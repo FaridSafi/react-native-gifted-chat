@@ -44,15 +44,15 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, ...rest 
   const fadeOutOpacityTimeoutId = useSharedValue<ReturnType<typeof setTimeout> | null>(null)
   const containerHeight = useSharedValue(0)
 
-  const top = useSharedValue(10)
-
   const isScrolledOnMount = useSharedValue(false)
 
   const daysPositionsArray = useDerivedValue(() => Object.values(daysPositions.value).sort((a, b) => a.y - b.y))
 
+  const dayTopOffset = useMemo(() => 10, [])
+
   const topOffset = useDerivedValue(() => {
     const currentDayPosition = daysPositionsArray.value.find((day, index) => {
-      const scrolledPosition = listHeight.value + scrolledY.value - containerHeight.value - 10 - 10 // 10 - margin bottom, 10 - top offset
+      const scrolledPosition = listHeight.value + scrolledY.value - containerHeight.value - 10 - dayTopOffset // 10 - margin bottom in Day component
       const dayPosition = day.y + day.height
 
       return (scrolledPosition < dayPosition) || index === daysPositionsArray.value.length - 1
@@ -66,16 +66,16 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, ...rest 
     console.log('topOffset', currentDayPosition)
 
     return topOffset
-  }, [listHeight, scrolledY, daysPositionsArray, containerHeight])
+  }, [listHeight, scrolledY, daysPositionsArray, containerHeight, dayTopOffset])
 
   const style = useAnimatedStyle(() => ({
     top: interpolate(
       topOffset.value,
-      [-10, -0.0001, 0, containerHeight.value + 10],
-      [10, 10, -containerHeight.value, 10],
+      [-dayTopOffset, -0.0001, 0, containerHeight.value + dayTopOffset],
+      [dayTopOffset, dayTopOffset, -containerHeight.value, dayTopOffset],
       'clamp'
     ),
-  }), [topOffset, containerHeight])
+  }), [topOffset, containerHeight, dayTopOffset])
 
   const contentStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
@@ -95,6 +95,7 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, ...rest 
   }, [fadeOut, fadeOutOpacityTimeoutId])
 
   const handleLayout = useCallback(({ nativeEvent }) => {
+    console.log('handleLayout', nativeEvent)
     containerHeight.value = nativeEvent.layout.height
   }, [containerHeight])
 

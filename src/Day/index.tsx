@@ -29,7 +29,7 @@ export function Day<TMessage extends IMessage = IMessage> ({
 
   return (
     <View style={[stylesCommon.centerItems, styles.container, containerStyle]}>
-      <View style={wrapperStyle}>
+      <View style={[styles.wrapper, wrapperStyle]}>
         <Text style={[styles.text, textStyle]}>
           {dayjs(currentMessage.createdAt)
             .locale(getLocale())

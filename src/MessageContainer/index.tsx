@@ -18,7 +18,7 @@ import stylesCommon from '../styles'
 import styles from './styles'
 import Animated, { interpolate, runOnJS, useAnimatedReaction, useAnimatedScrollHandler, useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
-import { Day } from '../Day'
+import { Day, DayProps } from '../Day'
 import { isSameDay } from '../utils'
 
 export * from './types'
@@ -32,11 +32,14 @@ interface ViewLayout {
   height: number
 }
 
-const DayAnimated = ({ scrolledY, daysPositions, offsetY }: {
+interface DayAnimatedProps extends DayProps<IMessage> {
   scrolledY: { value: number }
   daysPositions: { value: { [key: string]: ViewLayout } }
-  offsetY: { value: number }
-}) => {
+  listHeight: { value: number }
+  renderDay?: (props: DayProps<IMessage>) => React.ReactNode
+}
+
+const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, ...rest }: DayAnimatedProps) => {
   const opacity = useSharedValue(0)
   const fadeOutOpacityTimeoutId = useSharedValue<ReturnType<typeof setTimeout> | null>(null)
   const containerHeight = useSharedValue(0)
@@ -49,13 +52,13 @@ const DayAnimated = ({ scrolledY, daysPositions, offsetY }: {
 
   const topOffset = useDerivedValue(() => {
     const currentDayPosition = daysPositionsArray.value.find((day, index) => {
-      const scrolledPosition = offsetY.value + scrolledY.value - containerHeight.value - 10 - 10 // 10 - margin bottom, 10 - top offset
+      const scrolledPosition = listHeight.value + scrolledY.value - containerHeight.value - 10 - 10 // 10 - margin bottom, 10 - top offset
       const dayPosition = day.y + day.height
 
       return (scrolledPosition < dayPosition) || index === daysPositionsArray.value.length - 1
     })
 
-    const scrolledBottomY = offsetY.value + scrolledY.value - (currentDayPosition?.height ?? 0) - 10 // 10 is marginBottom in Day component. TODO: render Day component here
+    const scrolledBottomY = listHeight.value + scrolledY.value - (currentDayPosition?.height ?? 0) - 5 // 5 is marginTop in Day component.
     const dateBottomY = currentDayPosition?.y ?? 0
 
     const topOffset = scrolledBottomY - dateBottomY
@@ -63,7 +66,7 @@ const DayAnimated = ({ scrolledY, daysPositions, offsetY }: {
     console.log('topOffset', currentDayPosition)
 
     return topOffset
-  }, [offsetY, scrolledY, daysPositionsArray, containerHeight])
+  }, [listHeight, scrolledY, daysPositionsArray, containerHeight])
 
   const style = useAnimatedStyle(() => ({
     top: interpolate(
@@ -112,7 +115,7 @@ const DayAnimated = ({ scrolledY, daysPositions, offsetY }: {
 
       runOnJS(scheduleFadeOut)()
 
-      // const scrolledBottomY = offsetY.value + scrolledY.value - (daysPositionsArray.value[0]?.height ?? 0) - 10 // 10 is marginBottom in Day component. TODO: render Day component here
+      // const scrolledBottomY = listHeight.value + scrolledY.value - (daysPositionsArray.value[0]?.height ?? 0) - 10 // 10 is marginBottom in Day component. TODO: render Day component here
       // const dateBottomY = daysPositionsArray.value[0]?.y ?? 0
 
       // console.log('!', scrolledBottomY, dateBottomY, scrolledBottomY - dateBottomY, daysPositionsArray.value)
@@ -126,12 +129,15 @@ const DayAnimated = ({ scrolledY, daysPositions, offsetY }: {
       onLayout={handleLayout}
     >
       <Animated.View
-        style={[styles.dayAnimatedContent, contentStyle]}
+        style={contentStyle}
         pointerEvents='none'
       >
-        <Text style={styles.dayAnimatedText}>{'Today'}</Text>
-        {/* TODO */}
-        {/* renderDay || <Day {...rest} /> */}
+        {/* <Text style={styles.dayAnimatedText}>{'Today'}</Text> */}
+        {
+          renderDay
+            ? renderDay(rest)
+            : <Day {...rest} containerStyle={[styles.dayAnimatedDayContainerStyle, rest.containerStyle]} />
+        }
       </Animated.View>
     </Animated.View>
   )
@@ -469,7 +475,8 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       <DayAnimated
         scrolledY={scrolledY}
         daysPositions={daysPositions}
-        offsetY={listHeight}
+        listHeight={listHeight}
+        currentMessage={messages[0]}
       />
     </View>
   )

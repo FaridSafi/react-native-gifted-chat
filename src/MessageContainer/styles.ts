@@ -28,15 +28,15 @@ export default StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 1,
   },
+
   dayAnimated: {
     position: 'absolute',
     top: 10,
     width: '100%',
   },
-  dayAnimatedContent: {
-    backgroundColor: '#000',
-    padding: 5,
-    borderRadius: 15,
+  dayAnimatedDayContainerStyle: {
+    marginTop: 0,
+    marginBottom: 0,
   },
   dayAnimatedText: {
     fontSize: 12,

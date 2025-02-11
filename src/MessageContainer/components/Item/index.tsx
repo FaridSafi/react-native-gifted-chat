@@ -3,9 +3,12 @@ import { View } from 'react-native'
 import { IMessage } from '../../../Models'
 import Message, { MessageProps } from '../../../Message'
 import Animated, { interpolate, useAnimatedStyle, useDerivedValue, useSharedValue } from 'react-native-reanimated'
-import { MessageContainerProps, DaysPositions } from '../../types'
+import { DaysPositions } from '../../types'
 import { Day } from '../../../Day'
 import { isSameDay } from '../../../utils'
+import { ItemProps } from './types'
+
+export * from './types'
 
 export const useScrolledPosition = (listHeight: { value: number }, scrolledY: { value: number }, containerHeight: { value: number }, dayBottomMargin: number, dayTopOffset: number) => {
   const scrolledPosition = useDerivedValue(() =>
@@ -74,17 +77,6 @@ const DayWrapper = forwardRef<View, MessageProps<IMessage>>((props, ref) => {
     </View>
   )
 })
-
-interface ItemProps extends MessageContainerProps<IMessage> {
-  onRefDayWrapper: (ref: any, id: string | number, createdAt: number) => void
-  currentMessage: IMessage
-  previousMessage?: IMessage
-  nextMessage?: IMessage
-  position: 'left' | 'right'
-  scrolledY: { value: number }
-  daysPositions: { value: DaysPositions }
-  listHeight: { value: number }
-}
 
 const Item = (props: ItemProps) => {
   const {

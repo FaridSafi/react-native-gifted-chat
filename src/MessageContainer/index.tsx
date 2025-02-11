@@ -15,6 +15,7 @@ import { LoadEarlier } from '../LoadEarlier'
 import { IMessage } from '../Models'
 import TypingIndicator from '../TypingIndicator'
 import { MessageContainerProps, DaysPositions } from './types'
+import { ItemProps } from './components/Item/types'
 
 import { warning } from '../logging'
 import stylesCommon from '../styles'
@@ -153,7 +154,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       item.user = { _id: 0 }
     }
 
-    const { messages, ...restProps } = props
+    const { messages, user, ...restProps } = props
 
     if (messages && user) {
       const previousMessage =
@@ -161,27 +162,25 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       const nextMessage =
         (inverted ? messages[index - 1] : messages[index + 1]) || {}
 
-      const messageProps: Message['props'] = {
+      const messageProps: ItemProps = {
         ...restProps,
         currentMessage: item,
         previousMessage,
         nextMessage,
         position: item.user._id === user._id ? 'right' : 'left',
+        onRefDayWrapper: handleLayoutDayWrapper,
+        scrolledY,
+        daysPositions,
+        listHeight,
       }
 
       return (
-        <Item
-          {...messageProps}
-          onRefDayWrapper={handleLayoutDayWrapper}
-          scrolledY={scrolledY}
-          daysPositions={daysPositions}
-          listHeight={listHeight}
-        />
+        <Item {...messageProps} />
       )
     }
 
     return null
-  }, [props, user, inverted, handleLayoutDayWrapper, scrolledY, daysPositions, listHeight])
+  }, [props, inverted, handleLayoutDayWrapper, scrolledY, daysPositions, listHeight])
 
   const renderChatEmpty = useCallback(() => {
     if (renderChatEmptyProp)

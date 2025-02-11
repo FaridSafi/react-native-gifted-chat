@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useMemo, useState } from 'react'
+import React, { forwardRef, useCallback, useDebugValue, useEffect, useMemo, useState } from 'react'
 import {
   View,
   TouchableOpacity,
@@ -40,6 +40,7 @@ interface DayAnimatedProps extends Omit<DayProps, 'createdAt'> {
   listHeight: { value: number }
   renderDay?: (props: DayProps) => React.ReactNode
   messages: IMessage[]
+  isLoadingEarlier: boolean
 }
 
 const useScrolledPosition = (listHeight: { value: number }, scrolledY: { value: number }, containerHeight: { value: number }, dayBottomMargin: number, dayTopOffset: number) => {
@@ -81,12 +82,13 @@ const useTopOffset = (
   return topOffset
 }
 
-const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages, ...rest }: DayAnimatedProps) => {
+const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages, isLoadingEarlier, ...rest }: DayAnimatedProps) => {
   const opacity = useSharedValue(0)
   const fadeOutOpacityTimeoutId = useSharedValue<ReturnType<typeof setTimeout> | null>(null)
   const containerHeight = useSharedValue(0)
 
   const isScrolledOnMount = useSharedValue(false)
+  const isLoadingEarlierAnim = useSharedValue(isLoadingEarlier)
 
   const daysPositionsArray = useDerivedValue(() => Object.values(daysPositions.value).sort((a, b) => a.y - b.y))
 
@@ -117,23 +119,20 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
       const dayPosition = day.y + day.height - containerHeight.value - dayBottomMargin
 
       if (scrolledPosition.value < dayPosition)
-        return messagesDates[i]
-
-      if (i === daysPositionsArray.value.length - 1)
-        return messagesDates[i + 1]
+        return day.createdAt
     }
 
-    return null
+    return messagesDates[messagesDates.length - 1]
   }, [daysPositionsArray, scrolledPosition, messagesDates, containerHeight, dayBottomMargin])
 
   const style = useAnimatedStyle(() => ({
     top: interpolate(
       topOffset.value,
-      [-dayTopOffset, -0.0001, 0, containerHeight.value + dayTopOffset],
-      [dayTopOffset, dayTopOffset, -containerHeight.value, dayTopOffset],
+      [-dayTopOffset, -0.0001, 0, isLoadingEarlierAnim.value ? 0 : containerHeight.value + dayTopOffset],
+      [dayTopOffset, dayTopOffset, -containerHeight.value, isLoadingEarlierAnim.value ? -containerHeight.value : dayTopOffset],
       'clamp'
     ),
-  }), [topOffset, containerHeight, dayTopOffset])
+  }), [topOffset, containerHeight, dayTopOffset, isLoadingEarlierAnim])
 
   const contentStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
@@ -182,6 +181,10 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
     },
     [createdAtDate]
   )
+
+  useEffect(() => {
+    isLoadingEarlierAnim.value = isLoadingEarlier
+  }, [isLoadingEarlier])
 
   if (!createdAt)
     return null
@@ -239,7 +242,7 @@ const DayWrapper = forwardRef<View, MessageProps<IMessage>>((props, ref) => {
 })
 
 interface ItemProps extends MessageContainerProps<IMessage> {
-  onRefDayWrapper: (ref: any, id: string | number, createdAt: Date | number) => void
+  onRefDayWrapper: (ref: any, id: string | number, createdAt: number) => void
   currentMessage: IMessage
   previousMessage?: IMessage
   nextMessage?: IMessage
@@ -277,12 +280,22 @@ const Item = (props: ItemProps) => {
     ),
   }), [topOffset, containerHeight, dayTopOffset])
 
+  const handleRef = useCallback((ref: any) => {
+    onRefDayWrapper(
+      ref,
+      props.currentMessage._id,
+      props.currentMessage.createdAt instanceof Date
+        ? props.currentMessage.createdAt.getTime()
+        : props.currentMessage.createdAt
+    )
+  }, [onRefDayWrapper, props.currentMessage])
+
   return (
-    <View>
+    <View key={props.currentMessage._id.toString()}>
       <Animated.View style={style} onLayout={handleLayout}>
         <DayWrapper
           {...rest as MessageProps<IMessage>}
-          ref={ref => onRefDayWrapper(ref, props.currentMessage._id, props.currentMessage.createdAt)}
+          ref={handleRef}
         />
       </Animated.View>
       {
@@ -389,16 +402,16 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     setHasScrolled(true)
   }, [handleOnScrollProp, inverted, scrollToBottomOffset])
 
-  const handleLayoutDayWrapper = useCallback((ref: any, id: string | number, createdAt: Date | number) => {
-    setTimeout(() => {
+  const handleLayoutDayWrapper = useCallback((ref: any, id: string | number, createdAt: number) => {
+    setTimeout(() => { // do not delete "setTimeout". It's necessary for get correct layout.
       const itemLayout = forwardRef?.current?.recyclerlistview_unsafe?.getLayout(messages.findIndex(m => m._id === id))
-      console.log('handleLayoutDayWrapper', id, itemLayout)
+
       if (ref && itemLayout) {
         daysPositions.value = {
           ...daysPositions.value,
           [id]: {
             ...itemLayout,
-            createdAt: createdAt instanceof Date ? createdAt.getTime() : createdAt,
+            createdAt,
           },
         }
       } else if (daysPositions.value[id] != null) {
@@ -408,31 +421,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       }
     }, 100)
   }, [messages, daysPositions, forwardRef])
-
-  // const handleLayoutDayRef: HandleLayoutDayRef = useCallback((id, ref) => {
-  //   handleLayoutDayWrapper(id)
-
-  //   // 'worklet'
-
-  //   // if (ref) {
-  //   //   // ref?.measure((_x: number, _y: number, _width: number, _height: number, _pageX: number, pageY: number) => {
-  //   //   ref?.measureInWindow((_x: number, _y: number, _width: number, _height: number) => {
-  //   //     // 'worklet'
-
-  //   //     // daysPositions.value = {
-  //   //     //   ...daysPositions.value,
-  //   //     //   [id]: pageY,
-  //   //     // }
-
-  //   //     // console.log('item: measureInWindow-1', id, _x, _y, _width, _height)
-  //   //     console.log('item: measureInWindow-2', id, messages.findIndex(item => item._id === id), forwardRef?.current?.recyclerlistview_unsafe?.getLayout(messages.findIndex(item => item._id === id)))
-  //   //   })
-  //   // } else if (daysPositions.value[id] != null) {
-  //   //   const nextDaysPositions = { ...daysPositions.value }
-  //   //   delete nextDaysPositions[id]
-  //   //   daysPositions.value = nextDaysPositions
-  //   // }
-  // }, [daysPositions, forwardRef, messages, handleLayoutDayWrapper])
 
   const renderItem = useCallback(({ item, index }: ListRenderItemInfo<TMessage>): React.ReactElement | null => {
     if (!item._id && item._id !== 0)
@@ -518,8 +506,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   }, [scrollToBottomStyle, renderScrollBottomComponent, doScrollToBottom])
 
   const onLayoutList = useCallback(({ nativeEvent }) => {
-    // console.log('onLayoutList', nativeEvent)
-
     listHeight.value = nativeEvent.layout.height
 
     if (
@@ -554,7 +540,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: event => {
       scrolledY.value = event.contentOffset.y
-      // console.log('onScroll', event.contentOffset.y)
 
       runOnJS(handleOnScroll)(event)
     },
@@ -600,6 +585,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         daysPositions={daysPositions}
         listHeight={listHeight}
         messages={messages}
+        isLoadingEarlier={isLoadingEarlier}
       />
     </View>
   )

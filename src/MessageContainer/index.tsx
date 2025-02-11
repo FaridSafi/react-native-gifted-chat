@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useDebugValue, useEffect, useMemo, useState } from 'react'
+import React, { forwardRef, useCallback, useEffect, useMemo, useState } from 'react'
 import {
   View,
   TouchableOpacity,
@@ -148,7 +148,7 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
     if (fadeOutOpacityTimeoutId.value)
       clearTimeout(fadeOutOpacityTimeoutId.value)
 
-    fadeOutOpacityTimeoutId.value = setTimeout(fadeOut, 2000)
+    fadeOutOpacityTimeoutId.value = setTimeout(fadeOut, 500)
   }, [fadeOut, fadeOutOpacityTimeoutId])
 
   const handleLayout = useCallback(({ nativeEvent }) => {

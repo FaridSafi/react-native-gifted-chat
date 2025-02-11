@@ -41,3 +41,12 @@ export interface State {
   showScrollBottom: boolean
   hasScrolled: boolean
 }
+
+interface ViewLayout {
+  x: number
+  y: number
+  width: number
+  height: number
+}
+
+export type DaysPositions = { [key: string]: ViewLayout & { createdAt: number } }

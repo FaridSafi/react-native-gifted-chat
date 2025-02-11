@@ -28,17 +28,4 @@ export default StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 1,
   },
-
-  dayAnimated: {
-    position: 'absolute',
-    width: '100%',
-  },
-  dayAnimatedDayContainerStyle: {
-    marginTop: 0,
-    marginBottom: 0,
-  },
-  dayAnimatedText: {
-    fontSize: 12,
-    color: 'white',
-  },
 })

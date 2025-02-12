@@ -22,6 +22,8 @@ let Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) 
     nextMessage,
     position,
     containerStyle,
+    user,
+    showUserAvatar,
   } = props
 
   const renderBubble = useCallback(() => {
@@ -55,12 +57,6 @@ let Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) 
   }, [props, renderSystemMessageProp])
 
   const renderAvatar = useCallback(() => {
-    const {
-      user,
-      currentMessage,
-      showUserAvatar,
-    } = props
-
     if (
       user?._id &&
       currentMessage?.user &&
@@ -81,7 +77,12 @@ let Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) 
     } = props
 
     return <Avatar {...rest} />
-  }, [props])
+  }, [
+    props,
+    user,
+    currentMessage,
+    showUserAvatar,
+  ])
 
   if (!currentMessage)
     return null

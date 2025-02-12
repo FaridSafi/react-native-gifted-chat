@@ -29,6 +29,7 @@ const AnimatedFlashList = Animated.createAnimatedComponent(FlashList)
 function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
   const {
     messages = [],
+    user,
     isTyping = false,
     renderChatEmpty: renderChatEmptyProp,
     onLoadEarlier,
@@ -156,7 +157,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       messageItem.user = { _id: 0 }
     }
 
-    const { messages, user, ...restProps } = props
+    const { messages, ...restProps } = props
 
     if (messages && user) {
       const previousMessage =
@@ -182,7 +183,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     }
 
     return null
-  }, [props, inverted, handleLayoutDayWrapper, scrolledY, daysPositions, listHeight])
+  }, [props, inverted, handleLayoutDayWrapper, scrolledY, daysPositions, listHeight, user])
 
   const renderChatEmpty = useCallback(() => {
     if (renderChatEmptyProp)

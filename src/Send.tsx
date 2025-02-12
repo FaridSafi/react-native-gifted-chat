@@ -1,5 +1,4 @@
 import React, { useMemo, useCallback } from 'react'
-import PropTypes from 'prop-types'
 import {
   StyleSheet,
   Text,
@@ -12,8 +11,7 @@ import {
 } from 'react-native'
 
 import Color from './Color'
-import { IMessage } from './Models'
-import { StylePropType } from './utils'
+import { IMessage } from './types'
 import { TEST_ID } from './Constant'
 
 const styles = StyleSheet.create({
@@ -87,16 +85,4 @@ export const Send = <TMessage extends IMessage = IMessage>({
       </View>
     </TouchableOpacity>
   )
-}
-
-Send.propTypes = {
-  text: PropTypes.string,
-  onSend: PropTypes.func,
-  label: PropTypes.string,
-  containerStyle: StylePropType,
-  textStyle: StylePropType,
-  children: PropTypes.element,
-  alwaysShowSend: PropTypes.bool,
-  disabled: PropTypes.bool,
-  sendButtonProps: PropTypes.object,
 }

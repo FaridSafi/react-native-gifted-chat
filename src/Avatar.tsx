@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useCallback } from 'react'
 import {
   ImageStyle,
   StyleSheet,
@@ -8,8 +7,8 @@ import {
   ViewStyle,
 } from 'react-native'
 import { GiftedAvatar } from './GiftedAvatar'
-import { StylePropType, isSameUser, isSameDay } from './utils'
-import { IMessage, LeftRightStyle, User } from './Models'
+import { isSameUser, isSameDay } from './utils'
+import { IMessage, LeftRightStyle, User } from './types'
 
 interface Styles {
   left: {
@@ -87,33 +86,7 @@ export function Avatar<TMessage extends IMessage = IMessage> (
 
   const messageToCompare = renderAvatarOnTop ? previousMessage : nextMessage
 
-  if (renderAvatar === null)
-    return null
-
-  if (
-    !showAvatarForEveryMessage &&
-    currentMessage &&
-    messageToCompare &&
-    isSameUser(currentMessage, messageToCompare) &&
-    isSameDay(currentMessage, messageToCompare)
-  )
-    return (
-      <View
-        style={[
-          styles[position].container,
-          containerStyle?.[position],
-        ]}
-      >
-        <GiftedAvatar
-          avatarStyle={[
-            styles[position].image,
-            imageStyle?.[position],
-          ]}
-        />
-      </View>
-    )
-
-  const renderAvatarComponent = () => {
+  const renderAvatarComponent = useCallback(() => {
     if (renderAvatar)
       return renderAvatar({
         renderAvatarOnTop,
@@ -142,7 +115,45 @@ export function Avatar<TMessage extends IMessage = IMessage> (
       )
 
     return null
-  }
+  }, [
+    renderAvatar,
+    renderAvatarOnTop,
+    showAvatarForEveryMessage,
+    containerStyle,
+    position,
+    currentMessage,
+    previousMessage,
+    nextMessage,
+    imageStyle,
+    onPressAvatar,
+    onLongPressAvatar,
+  ])
+
+  if (renderAvatar === null)
+    return null
+
+  if (
+    !showAvatarForEveryMessage &&
+    currentMessage &&
+    messageToCompare &&
+    isSameUser(currentMessage, messageToCompare) &&
+    isSameDay(currentMessage, messageToCompare)
+  )
+    return (
+      <View
+        style={[
+          styles[position].container,
+          containerStyle?.[position],
+        ]}
+      >
+        <GiftedAvatar
+          avatarStyle={[
+            styles[position].image,
+            imageStyle?.[position],
+          ]}
+        />
+      </View>
+    )
 
   return (
     <View
@@ -155,24 +166,4 @@ export function Avatar<TMessage extends IMessage = IMessage> (
       {renderAvatarComponent()}
     </View>
   )
-}
-
-Avatar.propTypes = {
-  renderAvatarOnTop: PropTypes.bool,
-  showAvatarForEveryMessage: PropTypes.bool,
-  position: PropTypes.oneOf(['left', 'right']),
-  currentMessage: PropTypes.object,
-  previousMessage: PropTypes.object,
-  nextMessage: PropTypes.object,
-  onPressAvatar: PropTypes.func,
-  onLongPressAvatar: PropTypes.func,
-  renderAvatar: PropTypes.func,
-  containerStyle: PropTypes.shape({
-    left: StylePropType,
-    right: StylePropType,
-  }),
-  imageStyle: PropTypes.shape({
-    left: StylePropType,
-    right: StylePropType,
-  }),
 }

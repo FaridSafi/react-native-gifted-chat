@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useCallback } from 'react'
-import PropTypes from 'prop-types'
 import {
   Text,
   StyleSheet,
@@ -9,10 +8,10 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native'
-import { IMessage, Reply } from './Models'
+import { IMessage, Reply } from './types'
 import Color from './Color'
-import { StylePropType } from './utils'
 import { warning } from './logging'
+import stylesCommon from './styles'
 
 const styles = StyleSheet.create({
   container: {
@@ -21,8 +20,6 @@ const styles = StyleSheet.create({
     maxWidth: 300,
   },
   quickReply: {
-    justifyContent: 'center',
-    alignItems: 'center',
     borderWidth: 1,
     maxWidth: 200,
     paddingVertical: 7,
@@ -90,6 +87,15 @@ export function QuickReplies ({
     return false
   }, [currentMessage, nextMessage])
 
+  const handleSend = useCallback((repliesData: Reply[]) => () => {
+    onQuickReply?.(
+      repliesData.map((reply: Reply) => ({
+        ...reply,
+        messageId: currentMessage!._id,
+      }))
+    )
+  }, [onQuickReply, currentMessage])
+
   const handlePress = useCallback(
     (reply: Reply) => () => {
       if (currentMessage) {
@@ -113,17 +119,8 @@ export function QuickReplies ({
         }
       }
     },
-    [replies, currentMessage]
+    [replies, currentMessage, handleSend]
   )
-
-  const handleSend = (repliesData: Reply[]) => () => {
-    onQuickReply?.(
-      repliesData.map((reply: Reply) => ({
-        ...reply,
-        messageId: currentMessage!._id,
-      }))
-    )
-  }
 
   if (!shouldComponentDisplay)
     return null
@@ -139,6 +136,7 @@ export function QuickReplies ({
             <TouchableOpacity
               onPress={handlePress(reply)}
               style={[
+                stylesCommon.centerItems,
                 styles.quickReply,
                 quickReplyStyle,
                 { borderColor: color },
@@ -163,7 +161,7 @@ export function QuickReplies ({
       )}
       {replies.length > 0 && (
         <TouchableOpacity
-          style={[styles.quickReply, styles.sendLink]}
+          style={[stylesCommon.centerItems, styles.quickReply, styles.sendLink]}
           onPress={handleSend(replies)}
         >
           {renderQuickReplySend?.() || (
@@ -173,13 +171,4 @@ export function QuickReplies ({
       )}
     </View>
   )
-}
-
-QuickReplies.propTypes = {
-  currentMessage: PropTypes.object.isRequired,
-  onQuickReply: PropTypes.func,
-  color: PropTypes.string,
-  sendText: PropTypes.string,
-  renderQuickReplySend: PropTypes.func,
-  quickReplyStyle: StylePropType,
 }

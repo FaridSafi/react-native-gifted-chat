@@ -98,7 +98,6 @@ module.exports = {
     'no-class-assign': 'off',
     'no-useless-escape': 'off',
     'curly': [2, 'multi', 'consistent'],
-    'react/prop-types': 'off', // TODO: TURN ON AND FIX ALL WARNINGS
     'react/display-name': 'off',
     'react-hooks/exhaustive-deps': [
       'warn',

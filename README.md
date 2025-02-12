@@ -105,18 +105,18 @@
 
 Yarn:
 ```bash
-yarn add react-native-gifted-chat react-native-reanimated react-native-safe-area-context react-native-get-random-values
+yarn add react-native-gifted-chat
 ```
 
 Npm:
 
 ```bash
-npm install --save react-native-gifted-chat react-native-reanimated react-native-safe-area-context react-native-get-random-values
+npm install --save react-native-gifted-chat
 ```
 
 Expo
 ```bash
-npx expo install react-native-gifted-chat react-native-reanimated react-native-safe-area-context react-native-get-random-values
+npx expo install react-native-gifted-chat
 ```
 
 ### Non-expo users
@@ -347,7 +347,7 @@ interface QuickReplies {
 
 ## Props
 
-- **`messageContainerRef`** _(FlatList ref)_ - Ref to the flatlist
+- **`messageContainerRef`** _(FlashList ref)_ - Ref to the flashlist
 - **`textInputRef`** _(TextInput ref)_ - Ref to the text input
 - **`messages`** _(Array)_ - Messages to display
 - **`isTyping`** _(Bool)_ - Typing Indicator state; default `false`. If you use`renderFooter` it will override this.
@@ -360,7 +360,8 @@ interface QuickReplies {
 - **`alwaysShowSend`** _(Bool)_ - Always show send button in input text composer; default `false`, show only when text input is not empty
 - **`locale`** _(String)_ - Locale to localize the dates. You need first to import the locale you need (ie. `require('dayjs/locale/de')` or `import 'dayjs/locale/fr'`)
 - **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
-- **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'ll'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
+- **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'D MMMM'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
+- **`dateFormatCalendar`** _(String)_ - Format to use for rendering relative times; Today - for now (see [Day.js Calendar](https://day.js.org/docs/en/plugin/calendar))
 - **`loadEarlier`** _(Bool)_ - Enables the "load earlier messages" button, required for `infiniteScroll`
 - **`onLoadEarlier`** _(Function)_ - Callback when loading earlier messages
 - **`isLoadingEarlier`** _(Bool)_ - Display an `ActivityIndicator` when loading earlier messages
@@ -421,7 +422,7 @@ interface QuickReplies {
  />
 ```
 
-- **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
+- **`extraData`** _(Object)_ - Extra props for re-rendering FlashList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
 

@@ -116,6 +116,7 @@ const App = () => {
 
       dispatch({ type: ActionKind.LOAD_EARLIER_MESSAGES, payload: newMessages })
     }, 1500) // simulating network
+    // }, 15000) // for debug with long loading
   }, [dispatch, state.messages])
 
   const parsePatterns = useCallback(() => {

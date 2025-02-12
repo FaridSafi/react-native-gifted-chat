@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { ReactNode, useCallback } from 'react'
 import {
   StyleSheet,
@@ -10,8 +9,9 @@ import {
   TextStyle,
 } from 'react-native'
 import Color from './Color'
-import { StylePropType } from './utils'
 import { useChatContext } from './GiftedChatContext'
+
+import stylesCommon from './styles'
 
 export interface ActionsProps {
   options?: { [key: string]: () => void }
@@ -63,7 +63,7 @@ export function Actions ({
       return icon()
 
     return (
-      <View style={[styles.wrapper, wrapperStyle]}>
+      <View style={[stylesCommon.fill, stylesCommon.centerItems, styles.wrapper, wrapperStyle]}>
         <Text style={[styles.iconText, iconTextStyle]}>{'+'}</Text>
       </View>
     )
@@ -79,15 +79,6 @@ export function Actions ({
   )
 }
 
-Actions.propTypes = {
-  options: PropTypes.object,
-  optionTintColor: PropTypes.string,
-  icon: PropTypes.func,
-  onPressActionButton: PropTypes.func,
-  wrapperStyle: StylePropType,
-  containerStyle: StylePropType,
-}
-
 const styles = StyleSheet.create({
   container: {
     width: 26,
@@ -99,9 +90,6 @@ const styles = StyleSheet.create({
     borderRadius: 13,
     borderColor: Color.defaultColor,
     borderWidth: 2,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   iconText: {
     color: Color.defaultColor,

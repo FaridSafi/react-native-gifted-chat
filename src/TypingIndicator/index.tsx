@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react'
-import { StyleSheet, View } from 'react-native'
-import Color from './Color'
+import { View } from 'react-native'
 import Animated, {
   runOnJS,
   useAnimatedStyle,
@@ -10,6 +9,12 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated'
+import { TypingIndicatorProps } from './types'
+
+import stylesCommon from '../styles'
+import styles from './styles'
+
+export * from './types'
 
 const DotsAnimation = () => {
   const dot1 = useSharedValue(0)
@@ -76,7 +81,7 @@ const DotsAnimation = () => {
   }, [dot3, topY, bottomY, duration])
 
   return (
-    <View style={styles.dots}>
+    <View style={[stylesCommon.fill, stylesCommon.centerItems, styles.dots]}>
       <Animated.View style={[styles.dot, dot1Style]} />
       <Animated.View style={[styles.dot, dot2Style]} />
       <Animated.View style={[styles.dot, dot3Style]} />
@@ -84,11 +89,7 @@ const DotsAnimation = () => {
   )
 }
 
-interface Props {
-  isTyping?: boolean
-}
-
-const TypingIndicator = ({ isTyping }: Props) => {
+const TypingIndicator = ({ isTyping }: TypingIndicatorProps) => {
   const yCoords = useSharedValue(200)
   const heightScale = useSharedValue(0)
   const marginScale = useSharedValue(0)
@@ -113,16 +114,15 @@ const TypingIndicator = ({ isTyping }: Props) => {
     marginScale.value = withTiming(8, { duration })
   }, [yCoords, heightScale, marginScale])
 
-  // side effect
   const slideOut = useCallback(() => {
     const duration = 250
 
-    yCoords.value = withTiming(200, { duration })
-    heightScale.value = withTiming(0, { duration })
-    marginScale.value = withTiming(0, { duration }, isFinished => {
+    yCoords.value = withTiming(200, { duration }, isFinished => {
       if (isFinished)
         runOnJS(setIsVisible)(false)
     })
+    heightScale.value = withTiming(0, { duration })
+    marginScale.value = withTiming(0, { duration })
   }, [yCoords, heightScale, marginScale])
 
   useEffect(() => {
@@ -152,28 +152,5 @@ const TypingIndicator = ({ isTyping }: Props) => {
     </Animated.View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginLeft: 8,
-    width: 45,
-    borderRadius: 15,
-    backgroundColor: Color.leftBubbleBackground,
-  },
-  dots: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
-  dot: {
-    marginLeft: 2,
-    marginRight: 2,
-    borderRadius: 4,
-    width: 8,
-    height: 8,
-    backgroundColor: 'rgba(0, 0, 0, 0.38)',
-  },
-})
 
 export default TypingIndicator

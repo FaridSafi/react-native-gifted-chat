@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native'
 
@@ -6,8 +5,7 @@ import { Composer, ComposerProps } from './Composer'
 import { Send, SendProps } from './Send'
 import { Actions, ActionsProps } from './Actions'
 import Color from './Color'
-import { StylePropType } from './utils'
-import { IMessage } from './Models'
+import { IMessage } from './types'
 
 export interface InputToolbarProps<TMessage extends IMessage> {
   options?: { [key: string]: () => void }
@@ -84,17 +82,6 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
       )}
     </View>
   )
-}
-
-InputToolbar.propTypes = {
-  renderAccessory: PropTypes.func,
-  renderActions: PropTypes.func,
-  renderSend: PropTypes.func,
-  renderComposer: PropTypes.func,
-  onPressActionButton: PropTypes.func,
-  containerStyle: StylePropType,
-  primaryStyle: StylePropType,
-  accessoryStyle: StylePropType,
 }
 
 const styles = StyleSheet.create({

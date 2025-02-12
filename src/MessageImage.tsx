@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import {
   Image,
@@ -12,8 +11,7 @@ import {
 } from 'react-native'
 // TODO: support web
 import Lightbox, { LightboxProps } from 'react-native-lightbox-v2'
-import { IMessage } from './Models'
-import { StylePropType } from './utils'
+import { IMessage } from './types'
 import stylesCommon from './styles'
 
 const styles = StyleSheet.create({
@@ -66,13 +64,4 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
       </Lightbox>
     </View>
   )
-}
-
-MessageImage.propTypes = {
-  currentMessage: PropTypes.object,
-  containerStyle: StylePropType,
-  imageSourceProps: PropTypes.object,
-  imageStyle: StylePropType,
-  imageProps: PropTypes.object,
-  lightboxProps: PropTypes.object,
 }

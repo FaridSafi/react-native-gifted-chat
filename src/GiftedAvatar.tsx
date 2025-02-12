@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { useCallback, useRef } from 'react'
 import {
   Image,
@@ -11,8 +10,7 @@ import {
   TextStyle,
 } from 'react-native'
 import Color from './Color'
-import { User } from './Models'
-import { StylePropType } from './utils'
+import { User } from './types'
 import stylesCommon from './styles'
 
 const {
@@ -191,12 +189,4 @@ export function GiftedAvatar (
       {renderInitials()}
     </TouchableOpacity>
   )
-}
-
-GiftedAvatar.propTypes = {
-  user: PropTypes.object,
-  onPress: PropTypes.func,
-  onLongPress: PropTypes.func,
-  avatarStyle: StylePropType,
-  textStyle: StylePropType,
 }

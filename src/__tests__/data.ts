@@ -1,4 +1,4 @@
-import { IMessage } from '../Models'
+import { IMessage } from '../types'
 
 export const DEFAULT_TEST_MESSAGE: IMessage = {
   _id: 'test',

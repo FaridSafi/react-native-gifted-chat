@@ -30,7 +30,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "rm -rf lib/ && yarn tsc && cp flow-typedefs/*.js.flow lib/",
+    "build": "rm -rf lib/ && yarn tsc",
     "lint": "yarn eslint src",
     "lint:fix": "yarn eslint --cache --fix",
     "prepublishOnly": "yarn lint && yarn build && yarn test",
@@ -50,9 +50,6 @@
       "bash -c 'yarn tsc:write'"
     ]
   },
-  "resolutions": {
-    "@babel/plugin-transform-flow-strip-types": "^7.25.0"
-  },
   "dependencies": {
     "@expo/react-native-action-sheet": "^4.1.0",
     "@shopify/flash-list": "^1.7.3",
@@ -70,7 +67,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.8",
-    "@babel/plugin-transform-flow-strip-types": "^7.26.5",
     "@babel/plugin-transform-react-jsx": "^7.25.9",
     "@babel/plugin-transform-unicode-property-regex": "^7.25.9",
     "@babel/preset-env": "^7.26.8",

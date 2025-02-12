@@ -8,7 +8,6 @@ module.exports = function (api) {
       '@babel/preset-typescript',
     ],
     plugins: [
-      '@babel/plugin-transform-flow-strip-types',
       '@babel/plugin-transform-unicode-property-regex',
       '@babel/plugin-transform-react-jsx',
       'react-native-reanimated/plugin',

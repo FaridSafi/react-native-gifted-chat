@@ -1,14 +1,6 @@
-import PropTypes from 'prop-types'
 import dayjs from 'dayjs'
 
-import { IMessage } from './Models'
-
-export const StylePropType = PropTypes.oneOfType([
-  PropTypes.array,
-  PropTypes.object,
-  PropTypes.number,
-  PropTypes.bool,
-])
+import { IMessage } from './types'
 
 export function isSameDay (
   currentMessage: IMessage,

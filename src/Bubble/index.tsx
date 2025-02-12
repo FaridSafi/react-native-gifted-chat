@@ -1,256 +1,31 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import {
   Text,
-  StyleSheet,
   TouchableWithoutFeedback,
   View,
-  StyleProp,
-  ViewStyle,
-  TextStyle,
 } from 'react-native'
 
-import { GiftedChatContext } from './GiftedChatContext'
-import { QuickReplies, QuickRepliesProps } from './QuickReplies'
-import { MessageText, MessageTextProps } from './MessageText'
-import { MessageImage, MessageImageProps } from './MessageImage'
-import { MessageVideo } from './MessageVideo'
-import { MessageAudio } from './MessageAudio'
-import { Time, TimeProps } from './Time'
+import { GiftedChatContext } from '../GiftedChatContext'
+import { QuickReplies } from '../QuickReplies'
+import { MessageText } from '../MessageText'
+import { MessageImage } from '../MessageImage'
+import { MessageVideo } from '../MessageVideo'
+import { MessageAudio } from '../MessageAudio'
+import { Time } from '../Time'
 
-import Color from './Color'
-import { StylePropType, isSameUser, isSameDay } from './utils'
-import {
-  User,
-  IMessage,
-  LeftRightStyle,
-  Reply,
-  Omit,
-  MessageVideoProps,
-  MessageAudioProps,
-} from './Models'
-import stylesCommon from './styles'
+import { isSameUser, isSameDay } from '../utils'
+import { IMessage } from '../types'
+import { BubbleProps } from './types'
 
-const styles = {
-  left: StyleSheet.create({
-    container: {
-      alignItems: 'flex-start',
-    },
-    wrapper: {
-      borderRadius: 15,
-      backgroundColor: Color.leftBubbleBackground,
-      marginRight: 60,
-      minHeight: 20,
-      justifyContent: 'flex-end',
-    },
-    containerToNext: {
-      borderBottomLeftRadius: 3,
-    },
-    containerToPrevious: {
-      borderTopLeftRadius: 3,
-    },
-    bottom: {
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-    },
-  }),
-  right: StyleSheet.create({
-    container: {
-      alignItems: 'flex-end',
-    },
-    wrapper: {
-      borderRadius: 15,
-      backgroundColor: Color.defaultBlue,
-      marginLeft: 60,
-      minHeight: 20,
-      justifyContent: 'flex-end',
-    },
-    containerToNext: {
-      borderBottomRightRadius: 3,
-    },
-    containerToPrevious: {
-      borderTopRightRadius: 3,
-    },
-    bottom: {
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-    },
-  }),
-  content: StyleSheet.create({
-    tick: {
-      fontSize: 10,
-      backgroundColor: Color.backgroundTransparent,
-      color: Color.white,
-    },
-    tickView: {
-      flexDirection: 'row',
-      marginRight: 10,
-    },
-    username: {
-      top: -3,
-      left: 0,
-      fontSize: 12,
-      backgroundColor: 'transparent',
-      color: '#aaa',
-    },
-    usernameView: {
-      flexDirection: 'row',
-      marginHorizontal: 10,
-    },
-  }),
-}
+import stylesCommon from '../styles'
+import styles from './styles'
 
-/* eslint-disable no-use-before-define */
-export type RenderMessageImageProps<TMessage extends IMessage> = Omit<
-  BubbleProps<TMessage>,
-  'containerStyle' | 'wrapperStyle'
-> &
-  MessageImageProps<TMessage>
-
-export type RenderMessageVideoProps<TMessage extends IMessage> = Omit<
-  BubbleProps<TMessage>,
-  'containerStyle' | 'wrapperStyle'
-> &
-  MessageVideoProps<TMessage>
-
-export type RenderMessageAudioProps<TMessage extends IMessage> = Omit<
-  BubbleProps<TMessage>,
-  'containerStyle' | 'wrapperStyle'
-> &
-  MessageAudioProps<TMessage>
-
-export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
-  BubbleProps<TMessage>,
-  'containerStyle' | 'wrapperStyle'
-> &
-  MessageTextProps<TMessage>
-/* eslint-enable no-use-before-define */
-
-export interface BubbleProps<TMessage extends IMessage> {
-  user?: User
-  touchableProps?: object
-  renderUsernameOnMessage?: boolean
-  isCustomViewBottom?: boolean
-  inverted?: boolean
-  position: 'left' | 'right'
-  currentMessage: TMessage
-  nextMessage?: TMessage
-  previousMessage?: TMessage
-  optionTitles?: string[]
-  containerStyle?: LeftRightStyle<ViewStyle>
-  wrapperStyle?: LeftRightStyle<ViewStyle>
-  textStyle?: LeftRightStyle<TextStyle>
-  bottomContainerStyle?: LeftRightStyle<ViewStyle>
-  tickStyle?: StyleProp<TextStyle>
-  containerToNextStyle?: LeftRightStyle<ViewStyle>
-  containerToPreviousStyle?: LeftRightStyle<ViewStyle>
-  usernameStyle?: TextStyle
-  quickReplyStyle?: StyleProp<ViewStyle>
-  quickReplyTextStyle?: StyleProp<TextStyle>
-  quickReplyContainerStyle?: StyleProp<ViewStyle>
-  onPress?(context?: unknown, message?: unknown): void
-  onLongPress?(context?: unknown, message?: unknown): void
-  onQuickReply?(replies: Reply[]): void
-  renderMessageImage?(
-    props: RenderMessageImageProps<TMessage>,
-  ): React.ReactNode
-  renderMessageVideo?(
-    props: RenderMessageVideoProps<TMessage>,
-  ): React.ReactNode
-  renderMessageAudio?(
-    props: RenderMessageAudioProps<TMessage>,
-  ): React.ReactNode
-  renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
-  renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
-  renderTime?(timeProps: TimeProps<TMessage>): React.ReactNode
-  renderTicks?(currentMessage: TMessage): React.ReactNode
-  renderUsername?(user?: TMessage['user']): React.ReactNode
-  renderQuickReplySend?(): React.ReactNode
-  renderQuickReplies?(
-    quickReplies: QuickRepliesProps<TMessage>,
-  ): React.ReactNode
-}
+export * from './types'
 
 export default class Bubble<
   TMessage extends IMessage = IMessage,
 > extends React.Component<BubbleProps<TMessage>> {
   static contextType = GiftedChatContext
-
-  static defaultProps = {
-    touchableProps: {},
-    onPress: null,
-    onLongPress: null,
-    renderMessageImage: null,
-    renderMessageVideo: null,
-    renderMessageAudio: null,
-    renderMessageText: null,
-    renderCustomView: null,
-    renderUsername: null,
-    renderTicks: null,
-    renderTime: null,
-    renderQuickReplies: null,
-    onQuickReply: null,
-    position: 'left',
-    currentMessage: {
-      text: null,
-      createdAt: null,
-      image: null,
-    },
-    nextMessage: {},
-    previousMessage: {},
-    containerStyle: {},
-    wrapperStyle: {},
-    bottomContainerStyle: {},
-    tickStyle: {},
-    usernameStyle: {},
-    containerToNextStyle: {},
-    containerToPreviousStyle: {},
-  }
-
-  static propTypes = {
-    user: PropTypes.object.isRequired,
-    touchableProps: PropTypes.object,
-    onLongPress: PropTypes.func,
-    renderMessageImage: PropTypes.func,
-    renderMessageVideo: PropTypes.func,
-    renderMessageAudio: PropTypes.func,
-    renderMessageText: PropTypes.func,
-    renderCustomView: PropTypes.func,
-    isCustomViewBottom: PropTypes.bool,
-    renderUsernameOnMessage: PropTypes.bool,
-    renderUsername: PropTypes.func,
-    renderTime: PropTypes.func,
-    renderTicks: PropTypes.func,
-    renderQuickReplies: PropTypes.func,
-    onQuickReply: PropTypes.func,
-    position: PropTypes.oneOf(['left', 'right']),
-    optionTitles: PropTypes.arrayOf(PropTypes.string),
-    currentMessage: PropTypes.object,
-    nextMessage: PropTypes.object,
-    previousMessage: PropTypes.object,
-    containerStyle: PropTypes.shape({
-      left: StylePropType,
-      right: StylePropType,
-    }),
-    wrapperStyle: PropTypes.shape({
-      left: StylePropType,
-      right: StylePropType,
-    }),
-    bottomContainerStyle: PropTypes.shape({
-      left: StylePropType,
-      right: StylePropType,
-    }),
-    tickStyle: StylePropType,
-    usernameStyle: StylePropType,
-    containerToNextStyle: PropTypes.shape({
-      left: StylePropType,
-      right: StylePropType,
-    }),
-    containerToPreviousStyle: PropTypes.shape({
-      left: StylePropType,
-      right: StylePropType,
-    }),
-  }
 
   onPress = () => {
     if (this.props.onPress)

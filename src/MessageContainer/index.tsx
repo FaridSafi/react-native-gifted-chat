@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Text,
   Platform,
+  LayoutChangeEvent,
 } from 'react-native'
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list'
 import Animated, { runOnJS, useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
@@ -12,7 +13,7 @@ import DayAnimated from './components/DayAnimated'
 import Item from './components/Item'
 
 import { LoadEarlier } from '../LoadEarlier'
-import { IMessage } from '../Models'
+import { IMessage } from '../types'
 import TypingIndicator from '../TypingIndicator'
 import { MessageContainerProps, DaysPositions } from './types'
 import { ItemProps } from './components/Item/types'
@@ -28,19 +29,18 @@ const AnimatedFlashList = Animated.createAnimatedComponent(FlashList)
 function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
   const {
     messages = [],
-    user = {},
     isTyping = false,
     renderChatEmpty: renderChatEmptyProp,
     onLoadEarlier,
     inverted = true,
     loadEarlier = false,
-    listViewProps = {},
-    invertibleScrollViewProps = {},
+    listViewProps,
+    invertibleScrollViewProps,
     extraData = null,
     scrollToBottom = false,
     scrollToBottomOffset = 200,
     alignTop = false,
-    scrollToBottomStyle = {},
+    scrollToBottomStyle,
     infiniteScroll = false,
     isLoadingEarlier = false,
     renderTypingIndicator: renderTypingIndicatorProp,
@@ -62,7 +62,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     if (renderTypingIndicatorProp)
       return renderTypingIndicatorProp()
 
-    return <TypingIndicator isTyping={isTyping || false} />
+    return <TypingIndicator isTyping={isTyping} />
   }, [isTyping, renderTypingIndicatorProp])
 
   const renderFooter = useCallback(() => {
@@ -140,18 +140,20 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     }, 100)
   }, [messages, daysPositions, forwardRef])
 
-  const renderItem = useCallback(({ item, index }: ListRenderItemInfo<TMessage>): React.ReactElement | null => {
-    if (!item._id && item._id !== 0)
+  const renderItem = useCallback(({ item, index }: ListRenderItemInfo<unknown>): React.ReactElement | null => {
+    const messageItem = item as TMessage
+
+    if (!messageItem._id && messageItem._id !== 0)
       warning('GiftedChat: `_id` is missing for message', JSON.stringify(item))
 
-    if (!item.user) {
-      if (!item.system)
+    if (!messageItem.user) {
+      if (!messageItem.system)
         warning(
           'GiftedChat: `user` is missing for message',
-          JSON.stringify(item)
+          JSON.stringify(messageItem)
         )
 
-      item.user = { _id: 0 }
+      messageItem.user = { _id: 0 }
     }
 
     const { messages, user, ...restProps } = props
@@ -164,10 +166,10 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
 
       const messageProps: ItemProps = {
         ...restProps,
-        currentMessage: item,
+        currentMessage: messageItem,
         previousMessage,
         nextMessage,
-        position: item.user._id === user._id ? 'right' : 'left',
+        position: messageItem.user._id === user._id ? 'right' : 'left',
         onRefDayWrapper: handleLayoutDayWrapper,
         scrolledY,
         daysPositions,
@@ -228,8 +230,8 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     )
   }, [scrollToBottomStyle, renderScrollBottomComponent, doScrollToBottom])
 
-  const onLayoutList = useCallback(({ nativeEvent }) => {
-    listHeight.value = nativeEvent.layout.height
+  const onLayoutList = useCallback((event: LayoutChangeEvent) => {
+    listHeight.value = event.nativeEvent.layout.height
 
     if (
       !inverted &&
@@ -239,7 +241,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         doScrollToBottom(false)
       }, 500)
 
-    listViewProps?.onLayout?.(nativeEvent)
+    listViewProps?.onLayout?.(event)
   }, [inverted, messages, doScrollToBottom, listHeight, listViewProps])
 
   const onEndReached = useCallback(() => {
@@ -254,7 +256,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       onLoadEarlier()
   }, [hasScrolled, infiniteScroll, loadEarlier, onLoadEarlier, isLoadingEarlier])
 
-  const keyExtractor = useCallback((item: TMessage) => `${item._id}`, [])
+  const keyExtractor = useCallback((item: unknown) => (item as TMessage)._id.toString(), [])
 
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: event => {

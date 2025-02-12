@@ -1,20 +1,29 @@
-import React, { RefObject } from 'react'
+import React, { Component, RefObject } from 'react'
 import {
+  LayoutChangeEvent,
   StyleProp,
   ViewStyle,
 } from 'react-native'
-import { FlashList } from '@shopify/flash-list'
+import { FlashList, FlashListProps } from '@shopify/flash-list'
 
 import { LoadEarlierProps } from '../LoadEarlier'
 import { MessageProps } from '../Message'
-import { User, IMessage, Reply } from '../Models'
+import { User, IMessage, Reply } from '../types'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
+import { AnimateProps } from 'react-native-reanimated'
+
+export type ListViewProps = {
+  onLayout?: (event: LayoutChangeEvent) => void
+} & object
+
+export type AnimatedList = Component<AnimateProps<FlashListProps<unknown>>, unknown, unknown> & FlashList<FlashListProps<unknown>>
 
 export interface MessageContainerProps<TMessage extends IMessage> {
+  forwardRef?: RefObject<AnimatedList | null>
   messages?: TMessage[]
   isTyping?: boolean
   user?: User
-  listViewProps: object
+  listViewProps?: ListViewProps
   inverted?: boolean
   loadEarlier?: boolean
   alignTop?: boolean
@@ -23,7 +32,6 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   invertibleScrollViewProps?: object
   extraData?: object
   scrollToBottomOffset?: number
-  forwardRef?: RefObject<FlashList<TMessage>>
   renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: MessageProps<TMessage>): React.ReactElement

@@ -2,7 +2,7 @@ import { ViewStyle, LayoutChangeEvent } from 'react-native'
 import { AvatarProps } from '../Avatar'
 import { SystemMessageProps } from '../SystemMessage'
 import { DayProps } from '../Day'
-import { IMessage, User, LeftRightStyle } from '../Models'
+import { IMessage, User, LeftRightStyle } from '../types'
 import Bubble from '../Bubble'
 
 export interface MessageProps<TMessage extends IMessage> {

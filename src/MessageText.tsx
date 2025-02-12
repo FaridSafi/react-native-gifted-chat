@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import {
   Linking,
@@ -11,8 +10,7 @@ import {
 } from 'react-native'
 
 import ParsedText from 'react-native-parsed-text'
-import { LeftRightStyle, IMessage } from './Models'
-import { StylePropType } from './utils'
+import { LeftRightStyle, IMessage } from './types'
 import { useChatContext } from './GiftedChatContext'
 import { error } from './logging'
 
@@ -163,25 +161,4 @@ export function MessageText<TMessage extends IMessage = IMessage> ({
       </ParsedText>
     </View>
   )
-}
-
-MessageText.propTypes = {
-  position: PropTypes.oneOf(['left', 'right']),
-  optionTitles: PropTypes.arrayOf(PropTypes.string),
-  currentMessage: PropTypes.object,
-  containerStyle: PropTypes.shape({
-    left: StylePropType,
-    right: StylePropType,
-  }),
-  textStyle: PropTypes.shape({
-    left: StylePropType,
-    right: StylePropType,
-  }),
-  linkStyle: PropTypes.shape({
-    left: StylePropType,
-    right: StylePropType,
-  }),
-  parsePatterns: PropTypes.func,
-  textProps: PropTypes.object,
-  customTextStyle: StylePropType,
 }

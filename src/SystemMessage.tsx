@@ -7,10 +7,8 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native'
-import PropTypes from 'prop-types'
 import Color from './Color'
-import { IMessage } from './Models'
-import { StylePropType } from './utils'
+import { IMessage } from './types'
 import stylesCommon from './styles'
 
 const styles = StyleSheet.create({
@@ -49,11 +47,4 @@ export function SystemMessage<TMessage extends IMessage = IMessage> ({
       </View>
     </View>
   )
-}
-
-SystemMessage.propTypes = {
-  currentMessage: PropTypes.object,
-  containerStyle: StylePropType,
-  wrapperStyle: StylePropType,
-  textStyle: StylePropType,
 }

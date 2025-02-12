@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { LayoutChangeEvent } from 'react-native'
 import Animated, { interpolate, useAnimatedStyle, useDerivedValue, useSharedValue, useAnimatedReaction, withTiming, runOnJS } from 'react-native-reanimated'
 import { Day } from '../../../Day'
 import { isSameDay } from '../../../utils'
@@ -12,7 +13,7 @@ export * from './types'
 
 const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages, isLoadingEarlier, ...rest }: DayAnimatedProps) => {
   const opacity = useSharedValue(0)
-  const fadeOutOpacityTimeoutId = useSharedValue<ReturnType<typeof setTimeout> | null>(null)
+  const fadeOutOpacityTimeoutId = useSharedValue<ReturnType<typeof setTimeout> | undefined>(undefined)
   const containerHeight = useSharedValue(0)
 
   const isScrolledOnMount = useSharedValue(false)
@@ -73,13 +74,12 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
   }, [opacity])
 
   const scheduleFadeOut = useCallback(() => {
-    if (fadeOutOpacityTimeoutId.value)
-      clearTimeout(fadeOutOpacityTimeoutId.value)
+    clearTimeout(fadeOutOpacityTimeoutId.value)
 
     fadeOutOpacityTimeoutId.value = setTimeout(fadeOut, 500)
   }, [fadeOut, fadeOutOpacityTimeoutId])
 
-  const handleLayout = useCallback(({ nativeEvent }) => {
+  const handleLayout = useCallback(({ nativeEvent }: LayoutChangeEvent) => {
     containerHeight.value = nativeEvent.layout.height
   }, [containerHeight])
 

@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useMemo } from 'react'
-import { View } from 'react-native'
-import { IMessage } from '../../../Models'
+import { LayoutChangeEvent, View } from 'react-native'
+import { IMessage } from '../../../types'
 import Message, { MessageProps } from '../../../Message'
 import Animated, { interpolate, useAnimatedStyle, useDerivedValue, useSharedValue } from 'react-native-reanimated'
 import { DaysPositions } from '../../types'
@@ -93,7 +93,7 @@ const Item = (props: ItemProps) => {
   const dayBottomMargin = useMemo(() => 10, [])
   const topOffset = useTopOffset(listHeight, scrolledY, daysPositions, containerHeight, dayBottomMargin, dayTopOffset)
 
-  const handleLayout = useCallback(({ nativeEvent }) => {
+  const handleLayout = useCallback(({ nativeEvent }: LayoutChangeEvent) => {
     containerHeight.value = nativeEvent.layout.height
   }, [containerHeight])
 

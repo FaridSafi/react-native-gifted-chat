@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { ReactNode, useCallback } from 'react'
 import {
   StyleSheet,
@@ -10,7 +9,6 @@ import {
   TextStyle,
 } from 'react-native'
 import Color from './Color'
-import { StylePropType } from './utils'
 import { useChatContext } from './GiftedChatContext'
 
 import stylesCommon from './styles'
@@ -79,15 +77,6 @@ export function Actions ({
       {renderIcon()}
     </TouchableOpacity>
   )
-}
-
-Actions.propTypes = {
-  options: PropTypes.object,
-  optionTintColor: PropTypes.string,
-  icon: PropTypes.func,
-  onPressActionButton: PropTypes.func,
-  wrapperStyle: StylePropType,
-  containerStyle: StylePropType,
 }
 
 const styles = StyleSheet.create({

@@ -7,7 +7,7 @@ import Bubble from '../Bubble'
 import { SystemMessage } from '../SystemMessage'
 
 import { isSameUser } from '../utils'
-import { IMessage } from '../Models'
+import { IMessage } from '../types'
 import { MessageProps } from './types'
 import styles from './styles'
 

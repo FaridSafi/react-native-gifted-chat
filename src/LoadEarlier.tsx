@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import {
   ActivityIndicator,
@@ -12,7 +11,6 @@ import {
   TextStyle,
 } from 'react-native'
 import Color from './Color'
-import { StylePropType } from './utils'
 import stylesCommon from './styles'
 
 const styles = StyleSheet.create({
@@ -92,16 +90,4 @@ export function LoadEarlier ({
       </View>
     </TouchableOpacity>
   )
-}
-
-LoadEarlier.propTypes = {
-  onLoadEarlier: PropTypes.func,
-  isLoadingEarlier: PropTypes.bool,
-  label: PropTypes.string,
-  containerStyle: StylePropType,
-  wrapperStyle: StylePropType,
-  textStyle: StylePropType,
-  activityIndicatorStyle: StylePropType,
-  activityIndicatorColor: PropTypes.string,
-  activityIndicatorSize: PropTypes.string,
 }

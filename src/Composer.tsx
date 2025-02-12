@@ -1,5 +1,4 @@
 import React, { useCallback, useRef } from 'react'
-import PropTypes from 'prop-types'
 import {
   Platform,
   StyleSheet,
@@ -10,7 +9,6 @@ import {
 } from 'react-native'
 import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
 import Color from './Color'
-import { StylePropType } from './utils'
 import stylesCommon from './styles'
 
 export interface ComposerProps {
@@ -42,7 +40,7 @@ export function Composer ({
   textInputProps,
   textInputStyle,
 }: ComposerProps): React.ReactElement {
-  const dimensionsRef = useRef<{ width: number, height: number }>()
+  const dimensionsRef = useRef<{ width: number, height: number }>(null)
 
   const determineInputSizeChange = useCallback(
     (dimensions: { width: number, height: number }) => {
@@ -105,21 +103,6 @@ export function Composer ({
       {...textInputProps}
     />
   )
-}
-
-Composer.propTypes = {
-  composerHeight: PropTypes.number,
-  text: PropTypes.string,
-  placeholder: PropTypes.string,
-  placeholderTextColor: PropTypes.string,
-  textInputProps: PropTypes.object,
-  onTextChanged: PropTypes.func,
-  onInputSizeChanged: PropTypes.func,
-  multiline: PropTypes.bool,
-  disableComposer: PropTypes.bool,
-  textInputStyle: StylePropType,
-  textInputAutoFocus: PropTypes.bool,
-  keyboardAppearance: PropTypes.string,
 }
 
 const styles = StyleSheet.create({

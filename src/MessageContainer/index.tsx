@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import {
   View,
   TouchableOpacity,
@@ -66,11 +66,11 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     return <TypingIndicator isTyping={isTyping} />
   }, [isTyping, renderTypingIndicatorProp])
 
-  const renderFooter = useCallback(() => {
+  const ListFooterComponent = useMemo(() => {
     if (renderFooterProp)
-      return renderFooterProp(props)
+      return <>{renderFooterProp(props)}</>
 
-    return renderTypingIndicator()
+    return <>{renderTypingIndicator()}</>
   }, [renderFooterProp, renderTypingIndicator, props])
 
   const renderLoadEarlier = useCallback(() => {
@@ -200,7 +200,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     return <View style={stylesCommon.fill} />
   }, [inverted, renderChatEmptyProp])
 
-  const renderHeaderWrapper = useCallback(() => {
+  const ListHeaderComponent = useMemo(() => {
     const content = renderLoadEarlier()
 
     if (!content)
@@ -286,10 +286,10 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         {...invertibleScrollViewProps}
         ListEmptyComponent={renderChatEmpty}
         ListFooterComponent={
-          inverted ? renderHeaderWrapper : renderFooter
+          inverted ? ListHeaderComponent : ListFooterComponent
         }
         ListHeaderComponent={
-          inverted ? renderFooter : renderHeaderWrapper
+          inverted ? ListFooterComponent : ListHeaderComponent
         }
         onScroll={scrollHandler}
         scrollEventThrottle={16}

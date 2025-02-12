@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   Image,
   Text,
@@ -51,8 +51,8 @@ export interface GiftedAvatarProps {
 export function GiftedAvatar (
   props: GiftedAvatarProps
 ) {
-  const avatarNameRef = useRef<string | undefined>(undefined)
-  const avatarColorRef = useRef<string | undefined>(undefined)
+  const [avatarName, setAvatarName] = useState<string | undefined>(undefined)
+  const [backgroundColor, setBackgroundColor] = useState<string | undefined>(undefined)
 
   const {
     user = {
@@ -65,15 +65,18 @@ export function GiftedAvatar (
   } = props
 
   const setAvatarColor = useCallback(() => {
+    if (backgroundColor)
+      return
+
     const userName = user.name || ''
     const name = userName.toUpperCase().split(' ')
 
     if (name.length === 1)
-      avatarNameRef.current = `${name[0].charAt(0)}`
+      setAvatarName(`${name[0].charAt(0)}`)
     else if (name.length > 1)
-      avatarNameRef.current = `${name[0].charAt(0)}${name[1].charAt(0)}`
+      setAvatarName(`${name[0].charAt(0)}${name[1].charAt(0)}`)
     else
-      avatarNameRef.current = ''
+      setAvatarName('')
 
     let sumChars = 0
     for (let i = 0; i < userName.length; i += 1)
@@ -91,8 +94,8 @@ export function GiftedAvatar (
       midnightBlue,
     ]
 
-    avatarColorRef.current = colors[sumChars % colors.length]
-  }, [user.name])
+    setBackgroundColor(colors[sumChars % colors.length])
+  }, [user.name, backgroundColor])
 
   const renderAvatar = useCallback(() => {
     switch (typeof user.avatar) {
@@ -120,10 +123,10 @@ export function GiftedAvatar (
   const renderInitials = useCallback(() => {
     return (
       <Text style={[styles.textStyle, textStyle]}>
-        {avatarNameRef.current}
+        {avatarName}
       </Text>
     )
-  }, [textStyle])
+  }, [textStyle, avatarName])
 
   const handleOnPress = () => {
     const {
@@ -144,6 +147,10 @@ export function GiftedAvatar (
     if (onLongPress)
       onLongPress(rest)
   }
+
+  useEffect(() => {
+    setAvatarColor()
+  }, [setAvatarColor])
 
   if (!user || (!user.name && !user.avatar))
     // render placeholder
@@ -171,8 +178,6 @@ export function GiftedAvatar (
       </TouchableOpacity>
     )
 
-  setAvatarColor()
-
   return (
     <TouchableOpacity
       disabled={!onPress}
@@ -181,7 +186,7 @@ export function GiftedAvatar (
       style={[
         stylesCommon.centerItems,
         styles.avatarStyle,
-        { backgroundColor: avatarColorRef.current },
+        { backgroundColor },
         avatarStyle,
       ]}
       accessibilityRole='image'

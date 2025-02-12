@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useCallback } from 'react'
 import {
   ImageStyle,
   StyleSheet,
@@ -86,33 +86,7 @@ export function Avatar<TMessage extends IMessage = IMessage> (
 
   const messageToCompare = renderAvatarOnTop ? previousMessage : nextMessage
 
-  if (renderAvatar === null)
-    return null
-
-  if (
-    !showAvatarForEveryMessage &&
-    currentMessage &&
-    messageToCompare &&
-    isSameUser(currentMessage, messageToCompare) &&
-    isSameDay(currentMessage, messageToCompare)
-  )
-    return (
-      <View
-        style={[
-          styles[position].container,
-          containerStyle?.[position],
-        ]}
-      >
-        <GiftedAvatar
-          avatarStyle={[
-            styles[position].image,
-            imageStyle?.[position],
-          ]}
-        />
-      </View>
-    )
-
-  const renderAvatarComponent = () => {
+  const renderAvatarComponent = useCallback(() => {
     if (renderAvatar)
       return renderAvatar({
         renderAvatarOnTop,
@@ -141,7 +115,45 @@ export function Avatar<TMessage extends IMessage = IMessage> (
       )
 
     return null
-  }
+  }, [
+    renderAvatar,
+    renderAvatarOnTop,
+    showAvatarForEveryMessage,
+    containerStyle,
+    position,
+    currentMessage,
+    previousMessage,
+    nextMessage,
+    imageStyle,
+    onPressAvatar,
+    onLongPressAvatar,
+  ])
+
+  if (renderAvatar === null)
+    return null
+
+  if (
+    !showAvatarForEveryMessage &&
+    currentMessage &&
+    messageToCompare &&
+    isSameUser(currentMessage, messageToCompare) &&
+    isSameDay(currentMessage, messageToCompare)
+  )
+    return (
+      <View
+        style={[
+          styles[position].container,
+          containerStyle?.[position],
+        ]}
+      >
+        <GiftedAvatar
+          avatarStyle={[
+            styles[position].image,
+            imageStyle?.[position],
+          ]}
+        />
+      </View>
+    )
 
   return (
     <View

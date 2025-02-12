@@ -13,12 +13,12 @@
     "fresh": "yarn start --reset-cache"
   },
   "dependencies": {
-    "expo": "^52.0.31",
+    "expo": "^52.0.32",
     "expo-app-loading": "^2.1.1",
     "expo-clipboard": "^7.0.1",
-    "expo-image-picker": "^16.0.5",
+    "expo-image-picker": "^16.0.6",
     "expo-linking": "^7.0.5",
-    "expo-location": "^18.0.5",
+    "expo-location": "^18.0.6",
     "expo-permissions": "^14.4.0",
     "expo-status-bar": "^2.0.1",
     "react": "18.3.1",

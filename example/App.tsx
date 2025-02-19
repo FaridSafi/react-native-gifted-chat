@@ -8,7 +8,7 @@ import {
   SendProps,
   SystemMessage,
 } from 'react-native-gifted-chat'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { NavBar } from './components/navbar'
 import AccessoryBar from './example-expo/AccessoryBar'
 import CustomActions from './example-expo/CustomActions'
@@ -261,6 +261,8 @@ const App = () => {
     )
   }, [])
 
+  const insets = useSafeAreaInsets()
+
   return (
     <SafeAreaView style={[styles.fill, styles.container]}>
       <NavBar />
@@ -296,6 +298,7 @@ const App = () => {
           isTyping={state.isTyping}
           inverted={Platform.OS !== 'web'}
           infiniteScroll
+          bottomOffset={-insets.bottom}
         />
       </View>
     </SafeAreaView>

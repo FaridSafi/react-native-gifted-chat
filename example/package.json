@@ -2,19 +2,20 @@
   "name": "example",
   "version": "1.0.0",
   "private": true,
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "android": "expo start --android",
+    "android": "expo run:android",
     "eject": "expo eject",
-    "ios": "expo start --ios",
-    "start": "expo start",
+    "ios": "expo run:ios",
+    "start": "expo start --dev-client",
     "test": "jest",
     "web": "expo start --web",
     "fresh": "yarn start --reset-cache"
   },
   "dependencies": {
+    "@shopify/flash-list": "^1.7.3",
     "expo": "^52.0.32",
     "expo-app-loading": "^2.1.1",
+    "expo-build-properties": "~0.13.2",
     "expo-clipboard": "^7.0.1",
     "expo-image-picker": "^16.0.6",
     "expo-linking": "^7.0.5",
@@ -23,14 +24,15 @@
     "expo-status-bar": "^2.0.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-native": "0.76.6",
-    "react-native-get-random-values": "^1.11.0",
+    "react-native": "0.76.7",
     "react-native-gifted-chat": "./..",
+    "react-native-keyboard-controller": "^1.16.3",
     "react-native-maps": "^1.20.1",
     "react-native-reanimated": "^3.16.7",
-    "react-native-safe-area-context": "5.2.0"
+    "react-native-safe-area-context": "^5.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.0",
     "@react-native/metro-config": "0.76.6",
     "@react-native/typescript-config": "0.76.6",
     "@types/react": "^18.3.3",
@@ -43,5 +45,5 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

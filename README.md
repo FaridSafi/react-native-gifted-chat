@@ -105,18 +105,18 @@
 
 Yarn:
 ```bash
-yarn add react-native-gifted-chat
+yarn add react-native-gifted-chat @shopify/flash-list react-native-reanimated react-native-keyboard-controller
 ```
 
 Npm:
 
 ```bash
-npm install --save react-native-gifted-chat
+npm install --save react-native-gifted-chat @shopify/flash-list react-native-reanimated react-native-keyboard-controller
 ```
 
 Expo
 ```bash
-npx expo install react-native-gifted-chat
+npx expo install react-native-gifted-chat @shopify/flash-list react-native-reanimated react-native-keyboard-controller
 ```
 
 ### Non-expo users
@@ -125,18 +125,9 @@ npx expo install react-native-gifted-chat
 npx pod-install
 ```
 
-### Setup react-native-safe-area-context
-
-Follow guide: [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context?tab=readme-ov-file#api)
-
 ### Setup react-native-reanimated
 
 Follow guide: [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/#step-2-add-reanimateds-babel-plugin)
-
-### react-native-video and expo-av
-
-- Both dependencies are removed since `0.11.0`.
-- You still be able to provide a `video` but you need to provide `renderMessageVideo` prop.
 
 ## Testing
 `TEST_ID` is exported as constants that can be used in your testing library of choice
@@ -437,7 +428,6 @@ interface QuickReplies {
 * **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
 * **`shouldUpdateMessage`** _(Function)_ - Lets the message component know when to update outside of normal cases.
 * **`infiniteScroll`** _(Bool)_ - infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist (not yet supported for the web). You need to add `loadEarlier` prop too.
-* **`isStatusBarTranslucentAndroid`** _(Bool)_ - If you use translucent status bar on Android, set this option to true. Ignored on iOS.
 
 ## Notes for [Redux](https://github.com/reactjs/redux)
 

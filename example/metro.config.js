@@ -6,8 +6,11 @@
 */
 
 /* eslint-disable @typescript-eslint/no-require-imports */
-const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
+const { mergeConfig } = require('@react-native/metro-config')
+const { getDefaultConfig } = require('@expo/metro-config')
 const path = require('path')
+// const { wrapWithReanimatedMetroConfig } = require('react-native-reanimated/metro-config')
+
 /* eslint-enable @typescript-eslint/no-require-imports */
 const config = {
   watchFolders: [
@@ -32,4 +35,5 @@ const config = {
   },
 }
 
+// module.exports = wrapWithReanimatedMetroConfig(mergeConfig(getDefaultConfig(__dirname), config))
 module.exports = mergeConfig(getDefaultConfig(__dirname), config)

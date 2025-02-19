@@ -85,11 +85,13 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   }, [loadEarlier, renderLoadEarlierProp, props])
 
   const scrollTo = useCallback((options: { animated?: boolean, offset: number }) => {
+    console.log('scrollTo-1', !!forwardRef?.current, options)
     if (forwardRef?.current && options)
       forwardRef.current.scrollToOffset(options)
   }, [forwardRef])
 
   const doScrollToBottom = useCallback((animated: boolean = true) => {
+    console.log('doScrollToBottom-1', inverted, !!forwardRef?.current)
     if (inverted)
       scrollTo({ offset: 0, animated })
     else if (forwardRef?.current)

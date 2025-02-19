@@ -120,8 +120,6 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends P
   /* infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
   infiniteScroll?: boolean
   timeTextStyle?: LeftRightStyle<TextStyle>
-  /** If you use translucent status bar on Android, set this option to true. Ignored on iOS. */
-  isStatusBarTranslucentAndroid?: boolean
   /* Custom action sheet */
   actionSheet?(): {
     showActionSheetWithOptions: (

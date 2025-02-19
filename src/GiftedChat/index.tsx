@@ -19,7 +19,6 @@ import {
   View,
   LayoutChangeEvent,
 } from 'react-native'
-import { v4 as uuidv4 } from 'uuid'
 import { Actions } from '../Actions'
 import { Avatar } from '../Avatar'
 import Bubble from '../Bubble'
@@ -42,14 +41,13 @@ import { SystemMessage } from '../SystemMessage'
 import { Time } from '../Time'
 import * as utils from '../utils'
 import Animated, {
-  useAnimatedKeyboard,
   useAnimatedStyle,
   useAnimatedReaction,
   useSharedValue,
   withTiming,
   runOnJS,
 } from 'react-native-reanimated'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { KeyboardProvider, useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller'
 import { GiftedChatProps } from './types'
 
 import stylesCommon from '../styles'
@@ -64,7 +62,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     messages = [],
     initialText = '',
     isTyping,
-    messageIdGenerator = () => uuidv4(),
+    messageIdGenerator = () => crypto.randomUUID(),
     user = {},
     onSend,
     locale = 'en',
@@ -86,7 +84,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
     isKeyboardInternallyHandled = true,
-    isStatusBarTranslucentAndroid,
   } = props
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
@@ -110,16 +107,15 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const [text, setText] = useState<string | undefined>(() => props.text || '')
   const [isTypingDisabled, setIsTypingDisabled] = useState<boolean>(false)
 
-  const keyboard = useAnimatedKeyboard({ isStatusBarTranslucentAndroid })
+  const keyboard = useReanimatedKeyboardAnimation()
   const trackingKeyboardMovement = useSharedValue(false)
   const debounceEnableTypingTimeoutId = useRef<ReturnType<typeof setTimeout>>(undefined)
-  const insets = useSafeAreaInsets()
   const keyboardOffsetBottom = useSharedValue(0)
 
   const contentStyleAnim = useAnimatedStyle(
     () => ({
       transform: [
-        { translateY: -keyboard.height.value + keyboardOffsetBottom.value },
+        { translateY: keyboard.height.value - keyboardOffsetBottom.value },
       ],
     }),
     [keyboard, keyboardOffsetBottom]
@@ -182,9 +178,11 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const scrollToBottom = useCallback(
     (isAnimated = true) => {
+      console.log('scrollToBottom-1')
       if (!messageContainerRef?.current)
         return
 
+      console.log('scrollToBottom-2')
       if (inverted) {
         messageContainerRef.current.scrollToOffset({
           offset: 0,
@@ -193,6 +191,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         return
       }
 
+      console.log('scrollToBottom-3')
       messageContainerRef.current.scrollToEnd({ animated: isAnimated })
     },
     [inverted, messageContainerRef]
@@ -382,14 +381,14 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   }, [props.text])
 
   useAnimatedReaction(
-    () => keyboard.height.value,
+    () => -keyboard.height.value,
     (value, prevValue) => {
       if (prevValue !== null && value !== prevValue) {
         const isKeyboardMovingUp = value > prevValue
         if (isKeyboardMovingUp !== trackingKeyboardMovement.value) {
           trackingKeyboardMovement.value = isKeyboardMovingUp
           keyboardOffsetBottom.value = withTiming(
-            isKeyboardMovingUp ? insets.bottom + bottomOffset : 0,
+            isKeyboardMovingUp ? bottomOffset : 0,
             {
               // If `bottomOffset` exists, we change the duration to a smaller value to fix the delay in the keyboard animation speed
               duration: bottomOffset ? 150 : 400,
@@ -415,12 +414,12 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       keyboard,
       trackingKeyboardMovement,
       focusOnInputWhenOpeningKeyboard,
-      insets,
       handleTextInputFocusWhenKeyboardHide,
       handleTextInputFocusWhenKeyboardShow,
       enableTyping,
       disableTyping,
       debounceEnableTyping,
+      bottomOffset,
     ]
   )
 
@@ -448,7 +447,15 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   )
 }
 
-GiftedChat.append = <TMessage extends IMessage>(
+function GiftedChatWrapper (props: GiftedChatProps) {
+  return (
+    <KeyboardProvider>
+      <GiftedChat {...props} />
+    </KeyboardProvider>
+  )
+}
+
+GiftedChatWrapper.append = <TMessage extends IMessage>(
   currentMessages: TMessage[] = [],
   messages: TMessage[],
   inverted = true
@@ -461,7 +468,7 @@ GiftedChat.append = <TMessage extends IMessage>(
     : currentMessages.concat(messages)
 }
 
-GiftedChat.prepend = <TMessage extends IMessage>(
+GiftedChatWrapper.prepend = <TMessage extends IMessage>(
   currentMessages: TMessage[] = [],
   messages: TMessage[],
   inverted = true
@@ -477,7 +484,7 @@ GiftedChat.prepend = <TMessage extends IMessage>(
 export * from '../types'
 
 export {
-  GiftedChat,
+  GiftedChatWrapper as GiftedChat,
   Actions,
   Avatar,
   Bubble,

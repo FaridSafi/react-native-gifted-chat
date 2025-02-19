@@ -178,11 +178,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const scrollToBottom = useCallback(
     (isAnimated = true) => {
-      console.log('scrollToBottom-1')
       if (!messageContainerRef?.current)
         return
 
-      console.log('scrollToBottom-2')
       if (inverted) {
         messageContainerRef.current.scrollToOffset({
           offset: 0,
@@ -191,7 +189,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         return
       }
 
-      console.log('scrollToBottom-3')
       messageContainerRef.current.scrollToEnd({ animated: isAnimated })
     },
     [inverted, messageContainerRef]

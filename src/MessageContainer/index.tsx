@@ -24,7 +24,8 @@ import styles from './styles'
 
 export * from './types'
 
-const AnimatedFlashList = Animated.createAnimatedComponent(FlashList)
+// TODO: fix it later
+const AnimatedFlashList = Animated.createAnimatedComponent(FlashList<any>)
 
 function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
   const {
@@ -77,7 +78,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   }, [renderFooterProp, renderTypingIndicator, props])
 
   const renderLoadEarlier = useCallback(() => {
-    if (loadEarlier === true) {
+    if (loadEarlier) {
       if (renderLoadEarlierProp)
         return renderLoadEarlierProp(props)
 
@@ -180,7 +181,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       const nextMessage =
         (inverted ? messages[index - 1] : messages[index + 1]) || {}
 
-      const messageProps: ItemProps = {
+      const messageProps: ItemProps<TMessage> = {
         ...restProps,
         currentMessage: messageItem,
         previousMessage,
@@ -193,7 +194,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       }
 
       return (
-        <Item {...messageProps} />
+        <Item<TMessage> {...messageProps} />
       )
     }
 

@@ -31,7 +31,7 @@ export interface LeftRightStyle<T> {
   right?: StyleProp<T>
 }
 
-type renderFunction = (x: unknown) => React.ReactElement
+type renderFunction = (x: unknown) => React.ReactNode
 
 export interface User {
   _id: string | number

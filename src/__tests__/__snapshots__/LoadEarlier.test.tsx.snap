@@ -44,10 +44,12 @@ exports[`should render <LoadEarlier /> and compare with snapshot 1`] = `
       [
         {
           "alignItems": "center",
+          "justifyContent": "center",
+        },
+        {
           "backgroundColor": "#b2b2b2",
           "borderRadius": 15,
           "height": 30,
-          "justifyContent": "center",
           "paddingLeft": 10,
           "paddingRight": 10,
         },

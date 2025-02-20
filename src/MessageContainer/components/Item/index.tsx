@@ -106,7 +106,7 @@ const Item = (props: ItemProps) => {
     ),
   }), [topOffset, containerHeight, dayTopOffset])
 
-  const handleRef = useCallback((ref: any) => {
+  const handleRef = useCallback((ref: unknown) => {
     onRefDayWrapper(
       ref,
       props.currentMessage._id,

@@ -7,15 +7,17 @@ exports[`should render <GiftedAvatar /> and compare with snapshot 1`] = `
     [
       {
         "alignItems": "center",
+        "justifyContent": "center",
+      },
+      {
         "borderRadius": 20,
         "height": 40,
-        "justifyContent": "center",
         "width": 40,
       },
       {
         "backgroundColor": "transparent",
       },
-      {},
+      undefined,
     ]
   }
 />

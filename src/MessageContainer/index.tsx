@@ -121,7 +121,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     setHasScrolled(true)
   }, [handleOnScrollProp, inverted, scrollToBottomOffset])
 
-  const handleLayoutDayWrapper = useCallback((ref: any, id: string | number, createdAt: number) => {
+  const handleLayoutDayWrapper = useCallback((ref: unknown, id: string | number, createdAt: number) => {
     setTimeout(() => { // do not delete "setTimeout". It's necessary for get correct layout.
       const itemLayout = forwardRef?.current?.recyclerlistview_unsafe?.getLayout(messages.findIndex(m => m._id === id))
 

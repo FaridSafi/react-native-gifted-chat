@@ -7,9 +7,6 @@ module.exports = {
     './tests/setup.js',
   ],
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
-  moduleNameMapper: {
-    uuid: require.resolve('uuid'),
-  },
   transform: {
     '\\.js$': ['babel-jest', { configFile: './babel.config.cjs' }],
   },

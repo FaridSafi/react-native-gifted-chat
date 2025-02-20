@@ -5,8 +5,10 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
   style={
     [
       {
-        "alignItems": "flex-start",
         "flex": 1,
+      },
+      {
+        "alignItems": "flex-start",
       },
       undefined,
     ]

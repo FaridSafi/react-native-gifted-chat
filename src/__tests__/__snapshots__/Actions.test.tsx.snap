@@ -43,12 +43,16 @@ exports[`should render <Actions /> and compare with snapshot 1`] = `
     style={
       [
         {
+          "flex": 1,
+        },
+        {
           "alignItems": "center",
+          "justifyContent": "center",
+        },
+        {
           "borderColor": "#b2b2b2",
           "borderRadius": 13,
           "borderWidth": 2,
-          "flex": 1,
-          "justifyContent": "center",
         },
         undefined,
       ]

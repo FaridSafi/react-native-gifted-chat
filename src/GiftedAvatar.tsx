@@ -55,12 +55,9 @@ export function GiftedAvatar (
   const [backgroundColor, setBackgroundColor] = useState<string | undefined>(undefined)
 
   const {
-    user = {
-      name: null,
-      avatar: null,
-    },
-    avatarStyle = {},
-    textStyle = {},
+    user,
+    avatarStyle,
+    textStyle,
     onPress,
   } = props
 
@@ -68,7 +65,7 @@ export function GiftedAvatar (
     if (backgroundColor)
       return
 
-    const userName = user.name || ''
+    const userName = user?.name || ''
     const name = userName.toUpperCase().split(' ')
 
     if (name.length === 1)
@@ -95,10 +92,10 @@ export function GiftedAvatar (
     ]
 
     setBackgroundColor(colors[sumChars % colors.length])
-  }, [user.name, backgroundColor])
+  }, [user?.name, backgroundColor])
 
   const renderAvatar = useCallback(() => {
-    switch (typeof user.avatar) {
+    switch (typeof user?.avatar) {
       case 'function':
         return user.avatar([stylesCommon.centerItems, styles.avatarStyle, avatarStyle])
       case 'string':

@@ -16,6 +16,8 @@ exports[`should render <Composer /> and compare with snapshot 1`] = `
     [
       {
         "flex": 1,
+      },
+      {
         "fontSize": 16,
         "lineHeight": 22,
         "marginBottom": 5,

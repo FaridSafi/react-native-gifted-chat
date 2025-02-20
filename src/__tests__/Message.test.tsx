@@ -17,6 +17,7 @@ describe('Message component', () => {
             createdAt: 1554744013721,
             user: { _id: 1 },
           }}
+          position='left'
         />
       )
       .toJSON()
@@ -26,7 +27,7 @@ describe('Message component', () => {
 
   it('should NOT render <Message />', () => {
     const tree = renderer
-      .create(<Message key='123' user={{ _id: 1 }} currentMessage={null} />)
+      .create(<Message key='123' user={{ _id: 1 }} currentMessage={null} position='left'  />)
       .toJSON()
 
     expect(tree).toMatchSnapshot()
@@ -44,6 +45,7 @@ describe('Message component', () => {
             createdAt: 1554744013721,
             user: { _id: 1 },
           }}
+          position='left'
           showUserAvatar
         />
       )
@@ -67,6 +69,7 @@ describe('Message component', () => {
               avatar: null,
             },
           }}
+          position='left'
           showUserAvatar
         />
       )

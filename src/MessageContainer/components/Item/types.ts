@@ -2,7 +2,7 @@ import { MessageContainerProps, DaysPositions } from '../../types'
 import { IMessage } from '../../../types'
 
 export interface ItemProps extends MessageContainerProps<IMessage> {
-  onRefDayWrapper: (ref: any, id: string | number, createdAt: number) => void
+  onRefDayWrapper: (ref: unknown, id: string | number, createdAt: number) => void
   currentMessage: IMessage
   previousMessage?: IMessage
   nextMessage?: IMessage

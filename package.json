@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-chat",
-  "version": "2.6.5",
+  "version": "2.7.1",
   "description": "The most complete chat UI for React Native",
   "keywords": [
     "android",
@@ -30,7 +30,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "rm -rf lib/ && yarn tsc && cp flow-typedefs/*.js.flow lib/",
+    "build": "rm -rf lib/ && yarn tsc",
     "lint": "yarn eslint src",
     "lint:fix": "yarn eslint --cache --fix",
     "prepublishOnly": "yarn lint && yarn build && yarn test",
@@ -50,67 +50,59 @@
       "bash -c 'yarn tsc:write'"
     ]
   },
-  "resolutions": {
-    "@babel/plugin-transform-flow-strip-types": "^7.25.0"
-  },
   "dependencies": {
     "@expo/react-native-action-sheet": "^4.1.0",
     "@types/lodash.isequal": "^4.5.8",
     "dayjs": "^1.11.13",
     "lodash.isequal": "^4.5.0",
-    "prop-types": "^15.8.1",
     "react-native-communications": "^2.2.1",
     "react-native-iphone-x-helper": "^1.3.1",
     "react-native-lightbox-v2": "^0.9.2",
-    "react-native-parsed-text": "^0.0.22",
-    "uuid": "^11.0.4"
+    "react-native-parsed-text": "^0.0.22"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/plugin-transform-flow-strip-types": "^7.25.9",
+    "@babel/core": "^7.26.8",
     "@babel/plugin-transform-react-jsx": "^7.25.9",
     "@babel/plugin-transform-unicode-property-regex": "^7.25.9",
-    "@babel/preset-env": "^7.26.0",
-    "@react-native/eslint-config": "^0.76.5",
-    "@stylistic/eslint-plugin": "^2.12.1",
+    "@babel/preset-env": "^7.26.8",
+    "@react-native/eslint-config": "^0.76.6",
+    "@shopify/flash-list": "^1.7.3",
+    "@stylistic/eslint-plugin": "^3.1.0",
     "@types/jest": "^29.5.14",
-    "@types/react": "^18.3.3",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "@types/react-native": "^0.72.8",
-    "@types/react-test-renderer": "^18.3.0",
-    "@types/uuid": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.19.1",
-    "@typescript-eslint/parser": "^8.19.1",
+    "@typescript-eslint/eslint-plugin": "^8.23.0",
+    "@typescript-eslint/parser": "^8.23.0",
     "babel-jest": "^29.7.0",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-config-standard-jsx": "^11.0.0",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jest": "^28.10.0",
+    "eslint-plugin-jest": "^28.11.0",
     "eslint-plugin-json": "^4.0.1",
     "eslint-plugin-n": "^17.15.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^7.2.1",
-    "eslint-plugin-react": "^7.37.3",
-    "flow-bin": "^0.258.1",
+    "eslint-plugin-react": "^7.37.4",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "json": "^11.0.0",
-    "lint-staged": "^15.3.0",
+    "lint-staged": "^15.4.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-native": "^0.76.5",
-    "react-native-get-random-values": "^1.11.0",
-    "react-native-reanimated": "^3.16.6",
-    "react-native-safe-area-context": "^5.1.0",
+    "react-native": "^0.76.6",
+    "react-native-keyboard-controller": "^1.16.3",
+    "react-native-reanimated": "^3.16.7",
     "react-test-renderer": "^18.3.1",
     "typescript": "^5.7.3"
   },
   "peerDependencies": {
+    "@shopify/flash-list": ">=1.0.0",
     "react": "*",
     "react-native": "*",
-    "react-native-get-random-values": "*",
-    "react-native-reanimated": "*",
-    "react-native-safe-area-context": "*"
+    "react-native-keyboard-controller": ">=1.0.0",
+    "react-native-reanimated": ">=2.0.0"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "engines": {

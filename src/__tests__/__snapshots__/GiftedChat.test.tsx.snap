@@ -1,15 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
-<RNCSafeAreaProvider
-  onInsetsChange={[Function]}
-  style={
-    [
+<KeyboardProvider>
+  <View
+    style={
       {
         "flex": 1,
-      },
-      undefined,
-    ]
-  }
-/>
+      }
+    }
+  >
+    <View
+      onLayout={[Function]}
+      style={
+        [
+          {
+            "flex": 1,
+          },
+          {
+            "overflow": "hidden",
+          },
+        ]
+      }
+      testID="GC_WRAPPER"
+    />
+  </View>
+</KeyboardProvider>
 `;

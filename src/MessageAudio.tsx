@@ -9,10 +9,7 @@ export function MessageAudio () {
         {'Audio is not implemented by GiftedChat.'}
       </Text>
       <Text style={{ color: Color.alizarin, fontWeight: '600' }}>
-        {
-          'You need to provide your own implementation by using renderMessageAudio'
-        }
-        {'prop.'}
+        {'\nYou need to provide your own implementation by using renderMessageAudio prop.'}
       </Text>
     </View>
   )

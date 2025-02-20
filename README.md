@@ -105,18 +105,18 @@
 
 Yarn:
 ```bash
-yarn add react-native-gifted-chat react-native-reanimated react-native-safe-area-context react-native-get-random-values
+yarn add react-native-gifted-chat @shopify/flash-list react-native-reanimated react-native-keyboard-controller
 ```
 
 Npm:
 
 ```bash
-npm install --save react-native-gifted-chat react-native-reanimated react-native-safe-area-context react-native-get-random-values
+npm install --save react-native-gifted-chat @shopify/flash-list react-native-reanimated react-native-keyboard-controller
 ```
 
 Expo
 ```bash
-npx expo install react-native-gifted-chat react-native-reanimated react-native-safe-area-context react-native-get-random-values
+npx expo install react-native-gifted-chat @shopify/flash-list react-native-reanimated react-native-keyboard-controller
 ```
 
 ### Non-expo users
@@ -125,18 +125,9 @@ npx expo install react-native-gifted-chat react-native-reanimated react-native-s
 npx pod-install
 ```
 
-### Setup react-native-safe-area-context
-
-Follow guide: [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context?tab=readme-ov-file#api)
-
 ### Setup react-native-reanimated
 
 Follow guide: [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/#step-2-add-reanimateds-babel-plugin)
-
-### react-native-video and expo-av
-
-- Both dependencies are removed since `0.11.0`.
-- You still be able to provide a `video` but you need to provide `renderMessageVideo` prop.
 
 ## Testing
 `TEST_ID` is exported as constants that can be used in your testing library of choice
@@ -347,7 +338,7 @@ interface QuickReplies {
 
 ## Props
 
-- **`messageContainerRef`** _(FlatList ref)_ - Ref to the flatlist
+- **`messageContainerRef`** _(FlashList ref)_ - Ref to the flashlist
 - **`textInputRef`** _(TextInput ref)_ - Ref to the text input
 - **`messages`** _(Array)_ - Messages to display
 - **`isTyping`** _(Bool)_ - Typing Indicator state; default `false`. If you use`renderFooter` it will override this.
@@ -360,7 +351,8 @@ interface QuickReplies {
 - **`alwaysShowSend`** _(Bool)_ - Always show send button in input text composer; default `false`, show only when text input is not empty
 - **`locale`** _(String)_ - Locale to localize the dates. You need first to import the locale you need (ie. `require('dayjs/locale/de')` or `import 'dayjs/locale/fr'`)
 - **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
-- **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'ll'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
+- **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'D MMMM'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
+- **`dateFormatCalendar`** _(String)_ - Format to use for rendering relative times; Today - for now (see [Day.js Calendar](https://day.js.org/docs/en/plugin/calendar))
 - **`loadEarlier`** _(Bool)_ - Enables the "load earlier messages" button, required for `infiniteScroll`
 - **`onLoadEarlier`** _(Function)_ - Callback when loading earlier messages
 - **`isLoadingEarlier`** _(Bool)_ - Display an `ActivityIndicator` when loading earlier messages
@@ -421,11 +413,11 @@ interface QuickReplies {
  />
 ```
 
-- **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
+- **`extraData`** _(Object)_ - Extra props for re-rendering FlashList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
 
-* **`scrollToBottom`** _(Bool)_ - Enables the scroll to bottom Component (Default is false)
+* **`isScrollToBottomEnabled`** _(Bool)_ - Enables the scroll to bottom Component (Default is false)
 * **`scrollToBottomComponent`** _(Function)_ - Custom Scroll To Bottom Component container
 * **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)
 * **`scrollToBottomStyle`** _(Object)_ - Custom style for Bottom Component container
@@ -436,7 +428,6 @@ interface QuickReplies {
 * **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
 * **`shouldUpdateMessage`** _(Function)_ - Lets the message component know when to update outside of normal cases.
 * **`infiniteScroll`** _(Bool)_ - infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist (not yet supported for the web). You need to add `loadEarlier` prop too.
-* **`isStatusBarTranslucentAndroid`** _(Bool)_ - If you use translucent status bar on Android, set this option to true. Ignored on iOS.
 
 ## Notes for [Redux](https://github.com/reactjs/redux)
 

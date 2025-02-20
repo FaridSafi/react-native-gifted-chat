@@ -6,31 +6,34 @@
 */
 
 /* eslint-disable @typescript-eslint/no-require-imports */
-const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
+const { mergeConfig } = require('@react-native/metro-config')
+const { getDefaultConfig } = require('@expo/metro-config')
 const path = require('path')
+// const { wrapWithReanimatedMetroConfig } = require('react-native-reanimated/metro-config')
+
 /* eslint-enable @typescript-eslint/no-require-imports */
-const config = {}
+const config = {
+  watchFolders: [
+    path.resolve(__dirname, '../src'),
+  ],
+  resolver: {
+    extraNodeModules: new Proxy(
+      {},
+      {
+        get: (target, name) => {
+          // console.log(`example/metro name: ${name}`, Object.prototype.hasOwnProperty.call(target, name))
+          if (Object.prototype.hasOwnProperty.call(target, name))
+            return target[name]
 
-config.watchFolders = [
-  path.resolve(__dirname, '../src'),
-]
+          if (name === 'react-native-gifted-chat')
+            return path.join(process.cwd(), '../src')
 
-config.resolver = {
-  extraNodeModules: new Proxy(
-    {},
-    {
-      get: (target, name) => {
-        // console.log(`example/metro name: ${name}`, Object.prototype.hasOwnProperty.call(target, name))
-        if (Object.prototype.hasOwnProperty.call(target, name))
-          return target[name]
-
-        if (name === 'react-native-gifted-chat')
-          return path.join(process.cwd(), '../src')
-
-        return path.join(process.cwd(), `node_modules/${name}`)
-      },
-    }
-  ),
+          return path.join(process.cwd(), `node_modules/${name}`)
+        },
+      }
+    ),
+  },
 }
 
+// module.exports = wrapWithReanimatedMetroConfig(mergeConfig(getDefaultConfig(__dirname), config))
 module.exports = mergeConfig(getDefaultConfig(__dirname), config)

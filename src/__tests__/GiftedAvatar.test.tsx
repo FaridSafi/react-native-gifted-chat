@@ -5,7 +5,11 @@ import renderer from 'react-test-renderer'
 import { GiftedAvatar } from '../GiftedChat'
 
 it('should render <GiftedAvatar /> and compare with snapshot', () => {
-  const tree = renderer.create(<GiftedAvatar />).toJSON()
+  let tree
 
-  expect(tree).toMatchSnapshot()
+  renderer.act(() => {
+    tree = renderer.create(<GiftedAvatar />)
+  })
+
+  expect(tree.toJSON()).toMatchSnapshot()
 })

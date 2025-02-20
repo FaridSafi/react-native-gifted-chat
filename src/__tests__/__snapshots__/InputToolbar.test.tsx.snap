@@ -39,6 +39,8 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
         [
           {
             "flex": 1,
+          },
+          {
             "fontSize": 16,
             "lineHeight": 22,
             "marginBottom": 5,

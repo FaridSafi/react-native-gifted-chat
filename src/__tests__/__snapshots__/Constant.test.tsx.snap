@@ -2,7 +2,7 @@
 
 exports[`should compare Constant with snapshot 1`] = `
 {
-  "DATE_FORMAT": "ll",
+  "DATE_FORMAT": "D MMMM",
   "DEFAULT_PLACEHOLDER": "Type a message...",
   "MAX_COMPOSER_HEIGHT": 200,
   "MIN_COMPOSER_HEIGHT": 33,

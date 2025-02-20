@@ -1,9 +1,9 @@
 import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { GiftedChat } from '../GiftedChat'
+import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller'
 
 const messages = [
   {
@@ -18,19 +18,25 @@ const messages = [
 ]
 
 it('should render <GiftedChat/> and compare with snapshot', () => {
-  const tree = renderer
-    .create(
-      <SafeAreaProvider>
-        <GiftedChat
-          messages={messages}
-          onSend={() => { }}
-          user={{
-            _id: 1,
-          }}
-        />
-      </SafeAreaProvider>
-    )
-    .toJSON()
+  let tree
 
-  expect(tree).toMatchSnapshot()
+  renderer.act(() => {
+    (useReanimatedKeyboardAnimation as jest.Mock).mockReturnValue({
+      height: {
+        value: 0,
+      },
+    })
+
+    tree = renderer.create(
+      <GiftedChat
+        messages={messages}
+        onSend={() => {}}
+        user={{
+          _id: 1,
+        }}
+      />
+    )
+  })
+
+  expect(tree.toJSON()).toMatchSnapshot()
 })

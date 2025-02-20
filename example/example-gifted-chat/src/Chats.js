@@ -36,7 +36,7 @@ const Chats = () => {
       }}
       alignTop
       alwaysShowSend
-      scrollToBottom
+      isScrollToBottomEnabled
       // showUserAvatar
       renderAvatarOnTop
       renderUsernameOnMessage

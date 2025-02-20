@@ -5,8 +5,10 @@ import renderer from 'react-test-renderer'
 import { Bubble } from '../GiftedChat'
 
 it('should render <Bubble /> and compare with snapshot', () => {
-  const tree = renderer
-    .create(
+  let tree
+
+  renderer.act(() => {
+    tree = renderer.create(
       <Bubble
         user={{ _id: 1 }}
         currentMessage={{
@@ -15,9 +17,10 @@ it('should render <Bubble /> and compare with snapshot', () => {
           createdAt: 1554744013721,
           user: { _id: 1 },
         }}
+        position='left'
       />
     )
-    .toJSON()
+  })
 
-  expect(tree).toMatchSnapshot()
+  expect(tree.toJSON()).toMatchSnapshot()
 })

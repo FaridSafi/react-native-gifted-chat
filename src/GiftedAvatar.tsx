@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types'
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   Image,
   Text,
@@ -11,8 +10,8 @@ import {
   TextStyle,
 } from 'react-native'
 import Color from './Color'
-import { User } from './Models'
-import { StylePropType } from './utils'
+import { User } from './types'
+import stylesCommon from './styles'
 
 const {
   carrot,
@@ -26,8 +25,6 @@ const {
 
 const styles = StyleSheet.create({
   avatarStyle: {
-    justifyContent: 'center',
-    alignItems: 'center',
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -54,29 +51,29 @@ export interface GiftedAvatarProps {
 export function GiftedAvatar (
   props: GiftedAvatarProps
 ) {
-  const avatarNameRef = useRef<string | undefined>(undefined)
-  const avatarColorRef = useRef<string | undefined>(undefined)
+  const [avatarName, setAvatarName] = useState<string | undefined>(undefined)
+  const [backgroundColor, setBackgroundColor] = useState<string | undefined>(undefined)
 
   const {
-    user = {
-      name: null,
-      avatar: null,
-    },
-    avatarStyle = {},
-    textStyle = {},
+    user,
+    avatarStyle,
+    textStyle,
     onPress,
   } = props
 
   const setAvatarColor = useCallback(() => {
-    const userName = user.name || ''
+    if (backgroundColor)
+      return
+
+    const userName = user?.name || ''
     const name = userName.toUpperCase().split(' ')
 
     if (name.length === 1)
-      avatarNameRef.current = `${name[0].charAt(0)}`
+      setAvatarName(`${name[0].charAt(0)}`)
     else if (name.length > 1)
-      avatarNameRef.current = `${name[0].charAt(0)}${name[1].charAt(0)}`
+      setAvatarName(`${name[0].charAt(0)}${name[1].charAt(0)}`)
     else
-      avatarNameRef.current = ''
+      setAvatarName('')
 
     let sumChars = 0
     for (let i = 0; i < userName.length; i += 1)
@@ -94,39 +91,39 @@ export function GiftedAvatar (
       midnightBlue,
     ]
 
-    avatarColorRef.current = colors[sumChars % colors.length]
-  }, [user.name])
+    setBackgroundColor(colors[sumChars % colors.length])
+  }, [user?.name, backgroundColor])
 
   const renderAvatar = useCallback(() => {
-    switch (typeof user.avatar) {
+    switch (typeof user?.avatar) {
       case 'function':
-        return user.avatar([styles.avatarStyle, avatarStyle])
+        return user.avatar([stylesCommon.centerItems, styles.avatarStyle, avatarStyle])
       case 'string':
         return (
           <Image
             source={{ uri: user.avatar }}
-            style={[styles.avatarStyle, avatarStyle]}
+            style={[stylesCommon.centerItems, styles.avatarStyle, avatarStyle]}
           />
         )
       case 'number':
         return (
           <Image
             source={user.avatar}
-            style={[styles.avatarStyle, avatarStyle]}
+            style={[stylesCommon.centerItems, styles.avatarStyle, avatarStyle]}
           />
         )
       default:
         return null
     }
-  }, [user.name, user.avatar, avatarStyle])
+  }, [user, avatarStyle])
 
   const renderInitials = useCallback(() => {
     return (
       <Text style={[styles.textStyle, textStyle]}>
-        {avatarNameRef.current}
+        {avatarName}
       </Text>
     )
-  }, [textStyle])
+  }, [textStyle, avatarName])
 
   const handleOnPress = () => {
     const {
@@ -148,11 +145,16 @@ export function GiftedAvatar (
       onLongPress(rest)
   }
 
+  useEffect(() => {
+    setAvatarColor()
+  }, [setAvatarColor])
+
   if (!user || (!user.name && !user.avatar))
     // render placeholder
     return (
       <View
         style={[
+          stylesCommon.centerItems,
           styles.avatarStyle,
           styles.avatarTransparent,
           avatarStyle,
@@ -173,16 +175,15 @@ export function GiftedAvatar (
       </TouchableOpacity>
     )
 
-  setAvatarColor()
-
   return (
     <TouchableOpacity
       disabled={!onPress}
       onPress={handleOnPress}
       onLongPress={handleOnLongPress}
       style={[
+        stylesCommon.centerItems,
         styles.avatarStyle,
-        { backgroundColor: avatarColorRef.current },
+        { backgroundColor },
         avatarStyle,
       ]}
       accessibilityRole='image'
@@ -190,12 +191,4 @@ export function GiftedAvatar (
       {renderInitials()}
     </TouchableOpacity>
   )
-}
-
-GiftedAvatar.propTypes = {
-  user: PropTypes.object,
-  onPress: PropTypes.func,
-  onLongPress: PropTypes.func,
-  avatarStyle: StylePropType,
-  textStyle: StylePropType,
 }

@@ -1,8 +1,14 @@
+import dayjs from 'dayjs'
+
+const date1 = dayjs()
+const date2 = date1.clone().subtract(1, 'day')
+const date3 = date2.clone().subtract(1, 'week')
+
 export default [
   {
     _id: 9,
     text: '#awesome 3',
-    createdAt: new Date(),
+    createdAt: date1,
     user: {
       _id: 1,
       name: 'Developer',
@@ -11,7 +17,7 @@ export default [
   {
     _id: 8,
     text: '#awesome 2',
-    createdAt: new Date(),
+    createdAt: date1,
     user: {
       _id: 1,
       name: 'Developer',
@@ -20,7 +26,7 @@ export default [
   {
     _id: 7,
     text: '#awesome',
-    createdAt: new Date(),
+    createdAt: date1,
     user: {
       _id: 1,
       name: 'Developer',
@@ -29,7 +35,7 @@ export default [
   {
     _id: 6,
     text: 'Paris',
-    createdAt: new Date(),
+    createdAt: date2,
     user: {
       _id: 2,
       name: 'React Native',
@@ -42,7 +48,7 @@ export default [
   {
     _id: 5,
     text: 'Send me a picture!',
-    createdAt: new Date(),
+    createdAt: date2,
     user: {
       _id: 1,
       name: 'Developer',
@@ -51,7 +57,7 @@ export default [
   {
     _id: 4,
     text: '',
-    createdAt: new Date(),
+    createdAt: date2,
     user: {
       _id: 2,
       name: 'React Native',
@@ -66,7 +72,7 @@ export default [
   {
     _id: 3,
     text: 'Where are you?',
-    createdAt: new Date(),
+    createdAt: date2,
     user: {
       _id: 1,
       name: 'Developer',
@@ -75,7 +81,7 @@ export default [
   {
     _id: 2,
     text: 'Yes, and I use #GiftedChat!',
-    createdAt: new Date(),
+    createdAt: date3,
     user: {
       _id: 2,
       name: 'React Native',
@@ -86,7 +92,7 @@ export default [
   {
     _id: 1,
     text: 'Are you building a chat app?',
-    createdAt: new Date(),
+    createdAt: date3,
     user: {
       _id: 1,
       name: 'Developer',
@@ -95,7 +101,7 @@ export default [
   {
     _id: 10,
     text: 'This is a quick reply. Do you love Gifted Chat? (radio) KEEP IT',
-    createdAt: new Date(),
+    createdAt: date3,
     quickReplies: {
       type: 'radio', // or 'checkbox',
       keepIt: true,
@@ -123,7 +129,7 @@ export default [
   {
     _id: 20,
     text: 'This is a quick reply. Do you love Gifted Chat? (checkbox)',
-    createdAt: new Date(),
+    createdAt: date3,
     quickReplies: {
       type: 'checkbox', // or 'checkbox',
       values: [
@@ -148,7 +154,7 @@ export default [
   },
   {
     _id: 30,
-    createdAt: new Date(),
+    createdAt: date3,
     video: 'https://media.giphy.com/media/3o6ZthZjk09Xx4ktZ6/giphy.mp4',
     user: {
       _id: 2,
@@ -157,7 +163,7 @@ export default [
   },
   {
     _id: 31,
-    createdAt: new Date(),
+    createdAt: date3,
     audio:
       'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3',
     user: {

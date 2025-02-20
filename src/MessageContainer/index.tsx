@@ -140,19 +140,23 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     setTimeout(() => { // do not delete "setTimeout". It's necessary for get correct layout.
       const itemLayout = forwardRef?.current?.recyclerlistview_unsafe?.getLayout(messages.findIndex(m => m._id === id))
 
-      if (ref && itemLayout) {
-        daysPositions.value = {
-          ...daysPositions.value,
-          [id]: {
+      if (ref && itemLayout)
+        daysPositions.modify(value => {
+          'worklet'
+
+          value[id] = {
             ...itemLayout,
             createdAt,
-          },
-        }
-      } else if (daysPositions.value[id] != null) {
-        const nextDaysPositions = { ...daysPositions.value }
-        delete nextDaysPositions[id]
-        daysPositions.value = nextDaysPositions
-      }
+          }
+          return value
+        })
+      else if (daysPositions.value[id] != null)
+        daysPositions.modify(value => {
+          'worklet'
+
+          delete value[id]
+          return value
+        })
     }, 100)
   }, [messages, daysPositions, forwardRef])
 

@@ -39,7 +39,7 @@ export function Day ({
     if (!now.isSame(date, 'year'))
       return date.format('D MMMM YYYY')
 
-    if (now.diff(date, 'days') <= 1)
+    if (now.diff(date, 'days') < 1)
       return date.calendar(now, {
         sameDay: '[Today]',
         ...dateFormatCalendar,

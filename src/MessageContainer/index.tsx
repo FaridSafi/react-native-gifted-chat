@@ -110,28 +110,30 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
 
     const duration = 250
 
-    if (inverted) {
-      if (contentOffsetY > scrollToBottomOffset!) {
-        setIsScrollToBottomVisible(true)
-        scrollToBottomOpacity.value = withTiming(1, { duration })
-      } else {
-        scrollToBottomOpacity.value = withTiming(0, { duration }, isFinished => {
-          if (isFinished)
-            runOnJS(setIsScrollToBottomVisible)(false)
-        })
-      }
-    } else if (
-      contentOffsetY < scrollToBottomOffset! &&
-      contentSizeHeight - layoutMeasurementHeight > scrollToBottomOffset!
-    ) {
+    const makeScrollToBottomVisible = () => {
       setIsScrollToBottomVisible(true)
       scrollToBottomOpacity.value = withTiming(1, { duration })
-    } else {
+    }
+
+    const makeScrollToBottomHidden = () => {
       scrollToBottomOpacity.value = withTiming(0, { duration }, isFinished => {
         if (isFinished)
           runOnJS(setIsScrollToBottomVisible)(false)
       })
     }
+
+    if (inverted)
+      if (contentOffsetY > scrollToBottomOffset!)
+        makeScrollToBottomVisible()
+      else
+        makeScrollToBottomHidden()
+    else if (
+      contentOffsetY < scrollToBottomOffset! &&
+      contentSizeHeight - layoutMeasurementHeight > scrollToBottomOffset!
+    )
+      makeScrollToBottomVisible()
+    else
+      makeScrollToBottomHidden()
   }, [handleOnScrollProp, inverted, scrollToBottomOffset, scrollToBottomOpacity])
 
   const handleLayoutDayWrapper = useCallback((ref: unknown, id: string | number, createdAt: number) => {

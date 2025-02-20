@@ -58,8 +58,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     opacity: scrollToBottomOpacity.value,
   }), [scrollToBottomOpacity])
 
-  const [hasScrolled, setHasScrolled] = useState(false)
-
   const daysPositions = useSharedValue<DaysPositions>({})
   const listHeight = useSharedValue(0)
   const scrolledY = useSharedValue(0)
@@ -134,8 +132,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
           runOnJS(setIsScrollToBottomVisible)(false)
       })
     }
-
-    setHasScrolled(true)
   }, [handleOnScrollProp, inverted, scrollToBottomOffset, scrollToBottomOpacity])
 
   const handleLayoutDayWrapper = useCallback((ref: unknown, id: string | number, createdAt: number) => {
@@ -275,14 +271,13 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   const onEndReached = useCallback(() => {
     if (
       infiniteScroll &&
-      hasScrolled &&
       loadEarlier &&
       onLoadEarlier &&
       !isLoadingEarlier &&
       Platform.OS !== 'web'
     )
       onLoadEarlier()
-  }, [hasScrolled, infiniteScroll, loadEarlier, onLoadEarlier, isLoadingEarlier])
+  }, [infiniteScroll, loadEarlier, onLoadEarlier, isLoadingEarlier])
 
   const keyExtractor = useCallback((item: unknown) => (item as TMessage)._id.toString(), [])
 

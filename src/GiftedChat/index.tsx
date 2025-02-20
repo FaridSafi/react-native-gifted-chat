@@ -420,8 +420,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     ]
   )
 
-  console.log('!')
-
   return (
     <GiftedChatContext.Provider value={contextValues}>
       <ActionSheetProvider ref={actionSheetRef}>

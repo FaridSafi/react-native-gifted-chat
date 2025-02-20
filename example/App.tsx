@@ -275,7 +275,7 @@ const App = () => {
           isLoadingEarlier={state.isLoadingEarlier}
           parsePatterns={parsePatterns}
           user={user}
-          scrollToBottom
+          isScrollToBottomEnabled
           onPressAvatar={onPressAvatar}
           onLongPressAvatar={onLongPressAvatar}
           onLongPress={handleLongPress}

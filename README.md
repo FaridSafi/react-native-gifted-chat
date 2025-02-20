@@ -417,7 +417,7 @@ interface QuickReplies {
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
 
-* **`scrollToBottom`** _(Bool)_ - Enables the scroll to bottom Component (Default is false)
+* **`isScrollToBottomEnabled`** _(Bool)_ - Enables the scroll to bottom Component (Default is false)
 * **`scrollToBottomComponent`** _(Function)_ - Custom Scroll To Bottom Component container
 * **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)
 * **`scrollToBottomStyle`** _(Object)_ - Custom style for Bottom Component container

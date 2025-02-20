@@ -33,7 +33,7 @@ import { TimeProps } from '../Time'
 import MessageContainer, { AnimatedList, ListViewProps } from '../MessageContainer'
 import Bubble from '../Bubble'
 
-export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends Partial<Omit<typeof MessageContainer<TMessage>, 'scrollToBottom'>> {
+export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends Partial<Omit<typeof MessageContainer<TMessage>, 'isScrollToBottomEnabled'>> {
   /* Message container ref */
   messageContainerRef?: RefObject<AnimatedList>
   /* text input ref */
@@ -50,8 +50,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends P
   text?: string
   /* Controls whether or not the message bubbles appear at the top of the chat */
   alignTop?: boolean
-  /* enables the scrollToBottom Component */
-  scrollToBottom?: boolean
+  /* enables the isScrollToBottomEnabled Component */
+  isScrollToBottomEnabled?: boolean
   /* Scroll to bottom wrapper style */
   scrollToBottomStyle?: StyleProp<ViewStyle>
   initialText?: string

@@ -7,7 +7,7 @@ import {
   LayoutChangeEvent,
 } from 'react-native'
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list'
-import Animated, { runOnJS, useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated'
+import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
 import DayAnimated from './components/DayAnimated'
 import Item from './components/Item'
@@ -38,7 +38,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     listViewProps,
     invertibleScrollViewProps,
     extraData = null,
-    scrollToBottom = false,
+    isScrollToBottomEnabled = false,
     scrollToBottomOffset = 200,
     alignTop = false,
     scrollToBottomStyle,
@@ -52,7 +52,12 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     scrollToBottomComponent: scrollToBottomComponentProp,
   } = props
 
+  const scrollToBottomOpacity = useSharedValue(0)
   const [isScrollToBottomVisible, setIsScrollToBottomVisible] = useState(false)
+  const scrollToBottomStyleAnim = useAnimatedStyle(() => ({
+    opacity: scrollToBottomOpacity.value,
+  }), [scrollToBottomOpacity])
+
   const [hasScrolled, setHasScrolled] = useState(false)
 
   const daysPositions = useSharedValue<DaysPositions>({})
@@ -105,21 +110,33 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       layoutMeasurement: { height: layoutMeasurementHeight },
     } = event
 
-    if (inverted)
-      if (contentOffsetY > scrollToBottomOffset!)
+    const duration = 250
+
+    if (inverted) {
+      if (contentOffsetY > scrollToBottomOffset!) {
         setIsScrollToBottomVisible(true)
-      else
-        setIsScrollToBottomVisible(false)
-    else if (
+        scrollToBottomOpacity.value = withTiming(1, { duration })
+      } else {
+        scrollToBottomOpacity.value = withTiming(0, { duration }, isFinished => {
+          if (isFinished)
+            runOnJS(setIsScrollToBottomVisible)(false)
+        })
+      }
+    } else if (
       contentOffsetY < scrollToBottomOffset! &&
       contentSizeHeight - layoutMeasurementHeight > scrollToBottomOffset!
-    )
+    ) {
       setIsScrollToBottomVisible(true)
-    else
-      setIsScrollToBottomVisible(false)
+      scrollToBottomOpacity.value = withTiming(1, { duration })
+    } else {
+      scrollToBottomOpacity.value = withTiming(0, { duration }, isFinished => {
+        if (isFinished)
+          runOnJS(setIsScrollToBottomVisible)(false)
+      })
+    }
 
     setHasScrolled(true)
-  }, [handleOnScrollProp, inverted, scrollToBottomOffset])
+  }, [handleOnScrollProp, inverted, scrollToBottomOffset, scrollToBottomOpacity])
 
   const handleLayoutDayWrapper = useCallback((ref: unknown, id: string | number, createdAt: number) => {
     setTimeout(() => { // do not delete "setTimeout". It's necessary for get correct layout.
@@ -219,17 +236,27 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   }, [scrollToBottomComponentProp])
 
   const renderScrollToBottomWrapper = useCallback(() => {
+    if (!isScrollToBottomVisible)
+      return null
+
     return (
-      <View style={[stylesCommon.centerItems, styles.scrollToBottomStyle, scrollToBottomStyle]}>
+      <Animated.View
+        style={[
+          stylesCommon.centerItems,
+          styles.scrollToBottomStyle,
+          scrollToBottomStyle,
+          scrollToBottomStyleAnim,
+        ]}
+      >
         <TouchableOpacity
           onPress={() => doScrollToBottom()}
           hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}
         >
           {renderScrollBottomComponent()}
         </TouchableOpacity>
-      </View>
+      </Animated.View>
     )
-  }, [scrollToBottomStyle, renderScrollBottomComponent, doScrollToBottom])
+  }, [scrollToBottomStyle, renderScrollBottomComponent, doScrollToBottom, scrollToBottomStyleAnim, isScrollToBottomVisible])
 
   const onLayoutList = useCallback((event: LayoutChangeEvent) => {
     listHeight.value = event.nativeEvent.layout.height
@@ -299,7 +326,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         {...listViewProps}
         onLayout={onLayoutList}
       />
-      {isScrollToBottomVisible && scrollToBottom
+      {isScrollToBottomEnabled
         ? renderScrollToBottomWrapper()
         : null}
       <DayAnimated

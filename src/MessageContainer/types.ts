@@ -27,7 +27,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   inverted?: boolean
   loadEarlier?: boolean
   alignTop?: boolean
-  scrollToBottom?: boolean
+  isScrollToBottomEnabled?: boolean
   scrollToBottomStyle?: StyleProp<ViewStyle>
   invertibleScrollViewProps?: object
   extraData?: object

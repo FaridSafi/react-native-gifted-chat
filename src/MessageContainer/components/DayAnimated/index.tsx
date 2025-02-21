@@ -3,7 +3,7 @@ import { LayoutChangeEvent } from 'react-native'
 import Animated, { interpolate, useAnimatedStyle, useDerivedValue, useSharedValue, useAnimatedReaction, withTiming, runOnJS } from 'react-native-reanimated'
 import { Day } from '../../../Day'
 import { isSameDay } from '../../../utils'
-import { useScrolledPosition, useTopOffset } from '../Item'
+import { useScrolledPositionToBottomOfDay, useTopOffset } from '../Item'
 import { DayAnimatedProps } from './types'
 
 import stylesCommon from '../../../styles'
@@ -25,7 +25,7 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
 
   const dayTopOffset = useMemo(() => 10, [])
   const dayBottomMargin = useMemo(() => 10, [])
-  const scrolledPosition = useScrolledPosition(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
+  const scrolledPositionToBottomOfDay = useScrolledPositionToBottomOfDay(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
   const topOffset = useTopOffset(listHeight, scrolledY, daysPositions, containerHeight, dayBottomMargin, dayTopOffset)
 
   const messagesDates = useMemo(() => {
@@ -47,12 +47,12 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
       const day = daysPositionsArray.value[i]
       const dayPosition = day.y + day.height - containerHeight.value - dayBottomMargin
 
-      if (scrolledPosition.value < dayPosition)
+      if (scrolledPositionToBottomOfDay.value < dayPosition)
         return day.createdAt
     }
 
     return messagesDates[messagesDates.length - 1]
-  }, [daysPositionsArray, scrolledPosition, messagesDates, containerHeight, dayBottomMargin])
+  }, [daysPositionsArray, scrolledPositionToBottomOfDay, messagesDates, containerHeight, dayBottomMargin])
 
   const style = useAnimatedStyle(() => ({
     top: interpolate(

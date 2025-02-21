@@ -11,12 +11,12 @@ import { ItemProps } from './types'
 export * from './types'
 
 // y-position of current scroll position relative to the bottom of the day container. (since we have inverted list it is bottom)
-export const useScrolledPosition = (listHeight: { value: number }, scrolledY: { value: number }, containerHeight: { value: number }, dayBottomMargin: number, dayTopOffset: number) => {
-  const scrolledPosition = useDerivedValue(() =>
+export const useScrolledPositionToBottomOfDay = (listHeight: { value: number }, scrolledY: { value: number }, containerHeight: { value: number }, dayBottomMargin: number, dayTopOffset: number) => {
+  const scrolledPositionToBottomOfDay = useDerivedValue(() =>
     listHeight.value + scrolledY.value - containerHeight.value - dayBottomMargin - dayTopOffset
   , [listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset])
 
-  return scrolledPosition
+  return scrolledPositionToBottomOfDay
 }
 
 export const useTopOffset = (
@@ -28,7 +28,7 @@ export const useTopOffset = (
   dayTopOffset: number,
   createdAt?: number
 ) => {
-  const scrolledPosition = useScrolledPosition(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
+  const scrolledPositionToBottomOfDay = useScrolledPositionToBottomOfDay(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
 
   // sorted array of days positions by y
   const daysPositionsArray = useDerivedValue(() => Object.values(daysPositions.value).sort((a, b) => a.y - b.y))
@@ -43,9 +43,9 @@ export const useTopOffset = (
 
     return daysPositionsArray.value.find((day, index) => {
       const dayPosition = day.y + day.height
-      return (scrolledPosition.value < dayPosition) || index === daysPositionsArray.value.length - 1
+      return (scrolledPositionToBottomOfDay.value < dayPosition) || index === daysPositionsArray.value.length - 1
     })
-  }, [daysPositionsArray, scrolledPosition, createdAt])
+  }, [daysPositionsArray, scrolledPositionToBottomOfDay, createdAt])
 
   const topOffset = useDerivedValue(() => {
     const scrolledBottomY = listHeight.value + scrolledY.value - (currentDayPosition.value?.height ?? 0) - 5 // 5 is marginTop in Day component.
@@ -107,11 +107,6 @@ const Item = (props: ItemProps) => {
   , [props.currentMessage.createdAt])
 
   const topOffset = useTopOffset(listHeight, scrolledY, daysPositions, dayContainerHeight, dayBottomMargin, dayTopOffset, createdAt)
-  const scrolledPosition = useScrolledPosition(listHeight, scrolledY, dayContainerHeight, dayBottomMargin, dayTopOffset)
-
-  const scrolledPositionStyle = useAnimatedStyle(() => ({
-    bottom: scrolledPosition.value,
-  }), [scrolledPosition])
 
   const handleLayoutDayContainer = useCallback(({ nativeEvent }: LayoutChangeEvent) => {
     dayContainerHeight.value = nativeEvent.layout.height

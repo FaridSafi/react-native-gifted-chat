@@ -72,7 +72,7 @@ export default [
   {
     _id: 3,
     text: 'Where are you?',
-    createdAt: date2,
+    createdAt: date3,
     user: {
       _id: 1,
       name: 'Developer',

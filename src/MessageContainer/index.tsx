@@ -144,6 +144,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         daysPositions.modify(value => {
           'worklet'
 
+          // @ts-expect-error: https://docs.swmansion.com/react-native-reanimated/docs/core/useSharedValue#remarks
           value[id] = {
             ...itemLayout,
             createdAt,

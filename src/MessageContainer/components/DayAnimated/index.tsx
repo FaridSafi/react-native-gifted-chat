@@ -3,7 +3,7 @@ import { LayoutChangeEvent } from 'react-native'
 import Animated, { interpolate, useAnimatedStyle, useDerivedValue, useSharedValue, useAnimatedReaction, withTiming, runOnJS } from 'react-native-reanimated'
 import { Day } from '../../../Day'
 import { isSameDay } from '../../../utils'
-import { useScrolledPositionToBottomOfDay, useRelativeScrolledPositionToDay } from '../Item'
+import { useAbsoluteScrolledPositionToBottomOfDay, useRelativeScrolledPositionToBottomOfDay } from '../Item'
 import { DayAnimatedProps } from './types'
 
 import stylesCommon from '../../../styles'
@@ -25,8 +25,8 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
 
   const dayTopOffset = useMemo(() => 10, [])
   const dayBottomMargin = useMemo(() => 10, [])
-  const scrolledPositionToBottomOfDay = useScrolledPositionToBottomOfDay(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
-  const relativeScrolledPositionToDay = useRelativeScrolledPositionToDay(listHeight, scrolledY, daysPositions, containerHeight, dayBottomMargin, dayTopOffset)
+  const absoluteScrolledPositionToBottomOfDay = useAbsoluteScrolledPositionToBottomOfDay(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
+  const relativeScrolledPositionToBottomOfDay = useRelativeScrolledPositionToBottomOfDay(listHeight, scrolledY, daysPositions, containerHeight, dayBottomMargin, dayTopOffset)
 
   const messagesDates = useMemo(() => {
     const messagesDates: number[] = []
@@ -47,21 +47,21 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
       const day = daysPositionsArray.value[i]
       const dayPosition = day.y + day.height - containerHeight.value - dayBottomMargin
 
-      if (scrolledPositionToBottomOfDay.value < dayPosition)
+      if (absoluteScrolledPositionToBottomOfDay.value < dayPosition)
         return day.createdAt
     }
 
     return messagesDates[messagesDates.length - 1]
-  }, [daysPositionsArray, scrolledPositionToBottomOfDay, messagesDates, containerHeight, dayBottomMargin])
+  }, [daysPositionsArray, absoluteScrolledPositionToBottomOfDay, messagesDates, containerHeight, dayBottomMargin])
 
   const style = useAnimatedStyle(() => ({
     top: interpolate(
-      relativeScrolledPositionToDay.value,
+      relativeScrolledPositionToBottomOfDay.value,
       [-dayTopOffset, -0.0001, 0, isLoadingEarlierAnim.value ? 0 : containerHeight.value + dayTopOffset],
       [dayTopOffset, dayTopOffset, -containerHeight.value, isLoadingEarlierAnim.value ? -containerHeight.value : dayTopOffset],
       'clamp'
     ),
-  }), [relativeScrolledPositionToDay, containerHeight, dayTopOffset, isLoadingEarlierAnim])
+  }), [relativeScrolledPositionToBottomOfDay, containerHeight, dayTopOffset, isLoadingEarlierAnim])
 
   const contentStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,

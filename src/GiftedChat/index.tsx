@@ -62,7 +62,12 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     messages = [],
     initialText = '',
     isTyping,
-    messageIdGenerator = () => crypto.randomUUID(),
+
+    // "random" function from here: https://stackoverflow.com/a/8084248/3452513
+    // we do not use uuid since it would add extra native dependency (https://www.npmjs.com/package/react-native-get-random-values)
+    // lib's user can decide which algorithm to use and pass it as a prop
+    messageIdGenerator = () => (Math.random() + 1).toString(36).substring(7),
+
     user = {},
     onSend,
     locale = 'en',

@@ -19,7 +19,7 @@ export const useScrolledPositionToBottomOfDay = (listHeight: { value: number }, 
   return scrolledPositionToBottomOfDay
 }
 
-export const useTopOffset = (
+export const useRelativeScrolledPositionToDay = (
   listHeight: { value: number },
   scrolledY: { value: number },
   daysPositions: { value: DaysPositions },
@@ -28,6 +28,8 @@ export const useTopOffset = (
   dayTopOffset: number,
   createdAt?: number
 ) => {
+  const dayMarginTop = useMemo(() => 5, [])
+
   const scrolledPositionToBottomOfDay = useScrolledPositionToBottomOfDay(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
 
   // sorted array of days positions by y
@@ -47,16 +49,17 @@ export const useTopOffset = (
     })
   }, [daysPositionsArray, scrolledPositionToBottomOfDay, createdAt])
 
-  const topOffset = useDerivedValue(() => {
-    const scrolledBottomY = listHeight.value + scrolledY.value - (currentDayPosition.value?.height ?? 0) - 5 // 5 is marginTop in Day component.
-    const dateBottomY = currentDayPosition.value?.y ?? 0
+  const relativeScrolledPositionToDay = useDerivedValue(() => {
+    const scrolledBottomY = listHeight.value + scrolledY.value - (
+      (currentDayPosition.value?.y ?? 0) +
+      (currentDayPosition.value?.height ?? 0) +
+      dayMarginTop
+    )
 
-    const topOffset = scrolledBottomY - dateBottomY
+    return scrolledBottomY
+  }, [listHeight, scrolledY, currentDayPosition, dayMarginTop])
 
-    return topOffset
-  }, [listHeight, scrolledY, currentDayPosition])
-
-  return topOffset
+  return relativeScrolledPositionToDay
 }
 
 const DayWrapper = forwardRef<View, MessageProps<IMessage>>((props, ref) => {
@@ -106,7 +109,7 @@ const Item = (props: ItemProps) => {
     new Date(props.currentMessage.createdAt).getTime()
   , [props.currentMessage.createdAt])
 
-  const topOffset = useTopOffset(listHeight, scrolledY, daysPositions, dayContainerHeight, dayBottomMargin, dayTopOffset, createdAt)
+  const relativeScrolledPositionToDay = useRelativeScrolledPositionToDay(listHeight, scrolledY, daysPositions, dayContainerHeight, dayBottomMargin, dayTopOffset, createdAt)
 
   const handleLayoutDayContainer = useCallback(({ nativeEvent }: LayoutChangeEvent) => {
     dayContainerHeight.value = nativeEvent.layout.height
@@ -114,7 +117,7 @@ const Item = (props: ItemProps) => {
 
   const style = useAnimatedStyle(() => ({
     opacity: interpolate(
-      topOffset.value,
+      relativeScrolledPositionToDay.value,
       [
         -dayTopOffset,
         -0.0001,
@@ -129,7 +132,7 @@ const Item = (props: ItemProps) => {
       ],
       'clamp'
     ),
-  }), [topOffset, dayContainerHeight, dayTopOffset])
+  }), [relativeScrolledPositionToDay, dayContainerHeight, dayTopOffset])
 
   const handleRef = useCallback((ref: unknown) => {
     onRefDayWrapper(

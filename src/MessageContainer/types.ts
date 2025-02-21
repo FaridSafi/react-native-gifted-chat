@@ -16,10 +16,10 @@ export type ListViewProps = {
   onLayout?: (event: LayoutChangeEvent) => void
 } & object
 
-export type AnimatedList = Component<AnimateProps<FlashListProps<unknown>>, unknown, unknown> & FlashList<FlashListProps<unknown>>
+export type AnimatedList<TMessage> = Component<AnimateProps<FlashListProps<TMessage>>, unknown, unknown> & FlashList<FlashListProps<TMessage>>
 
 export interface MessageContainerProps<TMessage extends IMessage> {
-  forwardRef?: RefObject<AnimatedList | null>
+  forwardRef?: RefObject<AnimatedList<TMessage> | null>
   messages?: TMessage[]
   isTyping?: boolean
   user?: User

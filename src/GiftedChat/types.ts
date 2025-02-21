@@ -30,12 +30,12 @@ import { QuickRepliesProps } from '../QuickReplies'
 import { SendProps } from '../Send'
 import { SystemMessageProps } from '../SystemMessage'
 import { TimeProps } from '../Time'
-import MessageContainer, { AnimatedList, ListViewProps } from '../MessageContainer'
+import { AnimatedList, ListViewProps, MessageContainerProps } from '../MessageContainer'
 import Bubble from '../Bubble'
 
-export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends Partial<Omit<typeof MessageContainer<TMessage>, 'isScrollToBottomEnabled'>> {
+export interface GiftedChatProps<TMessage extends IMessage> extends Partial<MessageContainerProps<TMessage>> {
   /* Message container ref */
-  messageContainerRef?: RefObject<AnimatedList>
+  messageContainerRef?: RefObject<AnimatedList<TMessage>>
   /* text input ref */
   textInputRef?: RefObject<TextInput>
   /* Messages to display */
@@ -171,7 +171,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> extends P
   /* Custom time inside a message */
   renderTime?(props: TimeProps<TMessage>): React.ReactNode
   /* Custom footer component on the ListView, e.g. 'User is typing...' */
-  renderFooter?(): React.ReactNode
+  renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   /* Custom component to render in the ListView when messages are empty */
   renderChatEmpty?(): React.ReactNode
   /* Custom component to render below the MessageContainer (separate from the ListView) */

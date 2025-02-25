@@ -91,7 +91,7 @@ const DayWrapper = forwardRef<View, MessageProps<IMessage>>((props, ref) => {
   )
 })
 
-const Item = (props: ItemProps) => {
+const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
   const {
     onRefDayWrapper,
     renderMessage: renderMessageProp,
@@ -149,14 +149,14 @@ const Item = (props: ItemProps) => {
         onLayout={handleLayoutDayContainer}
       >
         <DayWrapper
-          {...rest as MessageProps<IMessage>}
+          {...rest as MessageProps<TMessage>}
           ref={handleRef}
         />
       </Animated.View>
       {
         renderMessageProp
-          ? renderMessageProp(rest as MessageProps<IMessage>)
-          : <Message {...rest as MessageProps<IMessage>} />
+          ? renderMessageProp(rest as MessageProps<TMessage>)
+          : <Message {...rest as MessageProps<TMessage>} />
       }
     </View>
   )

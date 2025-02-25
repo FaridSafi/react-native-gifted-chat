@@ -1,11 +1,11 @@
 import { MessageContainerProps, DaysPositions } from '../../types'
 import { IMessage } from '../../../types'
 
-export interface ItemProps<TMessage extends IMessage> extends MessageContainerProps<TMessage> {
+export interface ItemProps extends MessageContainerProps<IMessage> {
   onRefDayWrapper: (ref: unknown, id: string | number, createdAt: number) => void
-  currentMessage: TMessage
-  previousMessage?: TMessage
-  nextMessage?: TMessage
+  currentMessage: IMessage
+  previousMessage?: IMessage
+  nextMessage?: IMessage
   position: 'left' | 'right'
   scrolledY: { value: number }
   daysPositions: { value: DaysPositions }

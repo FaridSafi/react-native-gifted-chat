@@ -56,7 +56,7 @@ import styles from './styles'
 dayjs.extend(localizedFormat)
 
 function GiftedChat<TMessage extends IMessage = IMessage> (
-  props: GiftedChatProps<TMessage>
+  props: GiftedChatProps
 ) {
   const {
     messages = [],
@@ -94,7 +94,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
 
   const messageContainerRef = useMemo(
-    () => props.messageContainerRef || createRef<AnimatedList<TMessage>>(),
+    () => props.messageContainerRef || createRef<AnimatedList>(),
     [props.messageContainerRef]
   )
 
@@ -207,7 +207,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
     const fragment = (
       <View style={[stylesCommon.fill, messagesContainerStyle]}>
-        <MessageContainer<TMessage>
+        <MessageContainer
           {...messagesContainerProps}
           invertibleScrollViewProps={{
             inverted,
@@ -449,10 +449,10 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   )
 }
 
-function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedChatProps<TMessage>) {
+function GiftedChatWrapper (props: GiftedChatProps) {
   return (
     <KeyboardProvider>
-      <GiftedChat<TMessage> {...props} />
+      <GiftedChat {...props} />
     </KeyboardProvider>
   )
 }

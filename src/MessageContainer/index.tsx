@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { ComponentType, useCallback, useEffect, useMemo, useState } from 'react'
 import {
   View,
   TouchableOpacity,
@@ -8,8 +8,9 @@ import {
   ListRenderItemInfo,
   FlatList,
   CellRendererProps,
+  ListRenderItem,
 } from 'react-native'
-import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated'
+import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
 import DayAnimated from './components/DayAnimated'
 import Item from './components/Item'
@@ -139,7 +140,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       makeScrollToBottomHidden()
   }, [handleOnScrollProp, inverted, scrollToBottomOffset, scrollToBottomOpacity])
 
-  const renderItem = useCallback(({ item, index }: ListRenderItemInfo<IMessage>): React.ReactElement | null => {
+  const renderItem = useCallback(({ item, index }: ListRenderItemInfo<unknown>): React.ReactElement | null => {
     const messageItem = item as TMessage
 
     if (!messageItem._id && messageItem._id !== 0)
@@ -273,10 +274,10 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     },
   }, [handleOnScroll])
 
-  const renderCell = useCallback((props: CellRendererProps<IMessage>) => {
+  const renderCell = useCallback((props: CellRendererProps<unknown>) => {
     const handleOnLayout = (event: LayoutChangeEvent) => {
       const prevMessage = messages[props.index + (inverted ? 1 : -1)]
-      if (prevMessage && isSameDay(props.item, prevMessage))
+      if (prevMessage && isSameDay(props.item as IMessage, prevMessage))
         return
 
       const { y, height } = event.nativeEvent.layout
@@ -284,7 +285,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       const newValue = {
         y,
         height,
-        createdAt: new Date(props.item.createdAt).getTime(),
+        createdAt: new Date((props.item as IMessage).createdAt).getTime(),
       }
 
       daysPositions.modify(value => {
@@ -351,7 +352,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
           inverted ? ListFooterComponent : ListHeaderComponent
         }
         onScroll={scrollHandler}
-        scrollEventThrottle={16}
+        scrollEventThrottle={1}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
         {...listViewProps}

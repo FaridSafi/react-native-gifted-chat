@@ -1,5 +1,6 @@
-import React, { RefObject } from 'react'
+import React, { Component, Ref } from 'react'
 import {
+  FlatListProps,
   LayoutChangeEvent,
   StyleProp,
   ViewStyle,
@@ -10,15 +11,16 @@ import { MessageProps } from '../Message'
 import { User, IMessage, Reply } from '../types'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
 import { FlatList } from 'react-native-reanimated/lib/typescript/Animated'
+import { AnimateProps } from 'react-native-reanimated'
 
 export type ListViewProps = {
   onLayout?: (event: LayoutChangeEvent) => void
 } & object
 
-export type AnimatedList = FlatList<IMessage>
+export type AnimatedList<TMessage> = Component<AnimateProps<FlatListProps<TMessage>>, unknown, unknown> & FlatList<FlatListProps<TMessage>>
 
 export interface MessageContainerProps<TMessage extends IMessage = IMessage> {
-  forwardRef?: RefObject<FlatList<TMessage>>
+  forwardRef?: Ref<Component<AnimateProps<FlatListProps<unknown>>, unknown, unknown>>
   messages?: TMessage[]
   isTyping?: boolean
   user?: User

@@ -105,6 +105,8 @@ There's currently WIP going on to make the library more performant, modern in te
 
 The most stable version is `2.6.5`. If you want to use the latest version, please be aware that it's a work in progress.
 
+Readme for this version: [2.6.5 readme](https://github.com/FaridSafi/react-native-gifted-chat/blob/eebab3751fcbe07715135e6e7b2aa3f76a10d8ac/README.md)
+
 ## Installation
 
 ### Install dependencies

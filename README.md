@@ -105,18 +105,18 @@
 
 Yarn:
 ```bash
-yarn add react-native-gifted-chat @shopify/flash-list react-native-reanimated react-native-keyboard-controller
+yarn add react-native-gifted-chat react-native-reanimated react-native-keyboard-controller
 ```
 
 Npm:
 
 ```bash
-npm install --save react-native-gifted-chat @shopify/flash-list react-native-reanimated react-native-keyboard-controller
+npm install --save react-native-gifted-chat react-native-reanimated react-native-keyboard-controller
 ```
 
 Expo
 ```bash
-npx expo install react-native-gifted-chat @shopify/flash-list react-native-reanimated react-native-keyboard-controller
+npx expo install react-native-gifted-chat react-native-reanimated react-native-keyboard-controller
 ```
 
 ### Non-expo users
@@ -338,7 +338,7 @@ interface QuickReplies {
 
 ## Props
 
-- **`messageContainerRef`** _(FlashList ref)_ - Ref to the flashlist
+- **`messageContainerRef`** _(FlatList ref)_ - Ref to the flatlist
 - **`textInputRef`** _(TextInput ref)_ - Ref to the text input
 - **`messages`** _(Array)_ - Messages to display
 - **`isTyping`** _(Bool)_ - Typing Indicator state; default `false`. If you use`renderFooter` it will override this.
@@ -413,7 +413,7 @@ interface QuickReplies {
  />
 ```
 
-- **`extraData`** _(Object)_ - Extra props for re-rendering FlashList on demand. This will be useful for rendering footer etc.
+- **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
 

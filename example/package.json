@@ -12,7 +12,6 @@
     "fresh": "yarn start --reset-cache"
   },
   "dependencies": {
-    "@shopify/flash-list": "^1.7.3",
     "expo": "^52.0.32",
     "expo-app-loading": "^2.1.1",
     "expo-build-properties": "~0.13.2",

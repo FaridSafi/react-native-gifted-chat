@@ -94,7 +94,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
 
   const messageContainerRef = useMemo(
-    () => props.messageContainerRef || createRef<AnimatedList<TMessage>>(),
+    () => props.messageContainerRef || createRef<AnimatedList>(),
     [props.messageContainerRef]
   )
 

@@ -66,7 +66,6 @@
     "@babel/plugin-transform-unicode-property-regex": "^7.25.9",
     "@babel/preset-env": "^7.26.8",
     "@react-native/eslint-config": "^0.76.6",
-    "@shopify/flash-list": "^1.7.3",
     "@stylistic/eslint-plugin": "^3.1.0",
     "@types/jest": "^29.5.14",
     "@types/react": "^19.0.10",
@@ -98,7 +97,6 @@
     "typescript": "^5.7.3"
   },
   "peerDependencies": {
-    "@shopify/flash-list": ">=1.0.0",
     "react": "*",
     "react-native": "*",
     "react-native-keyboard-controller": ">=1.0.0",

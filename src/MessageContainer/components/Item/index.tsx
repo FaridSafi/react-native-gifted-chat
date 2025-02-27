@@ -93,7 +93,6 @@ const DayWrapper = forwardRef<View, MessageProps<IMessage>>((props, ref) => {
 
 const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
   const {
-    onRefDayWrapper,
     renderMessage: renderMessageProp,
     scrolledY,
     daysPositions,
@@ -134,24 +133,13 @@ const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
     ),
   }), [relativeScrolledPositionToBottomOfDay, dayContainerHeight, dayTopOffset])
 
-  const handleRef = useCallback((ref: unknown) => {
-    onRefDayWrapper(
-      ref,
-      props.currentMessage._id,
-      new Date(props.currentMessage.createdAt).getTime()
-    )
-  }, [onRefDayWrapper, props.currentMessage])
-
   return (
     <View key={props.currentMessage._id.toString()}>
       <Animated.View
         style={style}
         onLayout={handleLayoutDayContainer}
       >
-        <DayWrapper
-          {...rest as MessageProps<TMessage>}
-          ref={handleRef}
-        />
+        <DayWrapper {...rest as MessageProps<TMessage>} />
       </Animated.View>
       {
         renderMessageProp

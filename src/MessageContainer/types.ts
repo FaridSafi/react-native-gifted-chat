@@ -1,25 +1,24 @@
-import React, { Component, RefObject } from 'react'
+import React, { RefObject } from 'react'
 import {
   LayoutChangeEvent,
   StyleProp,
   ViewStyle,
 } from 'react-native'
-import { FlashList, FlashListProps } from '@shopify/flash-list'
 
 import { LoadEarlierProps } from '../LoadEarlier'
 import { MessageProps } from '../Message'
 import { User, IMessage, Reply } from '../types'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
-import { AnimateProps } from 'react-native-reanimated'
+import { FlatList } from 'react-native-reanimated/lib/typescript/Animated'
 
 export type ListViewProps = {
   onLayout?: (event: LayoutChangeEvent) => void
 } & object
 
-export type AnimatedList<TMessage> = Component<AnimateProps<FlashListProps<TMessage>>, unknown, unknown> & FlashList<FlashListProps<TMessage>>
+export type AnimatedList = FlatList<IMessage>
 
-export interface MessageContainerProps<TMessage extends IMessage> {
-  forwardRef?: RefObject<AnimatedList<TMessage> | null>
+export interface MessageContainerProps<TMessage extends IMessage = IMessage> {
+  forwardRef?: RefObject<FlatList<TMessage>>
   messages?: TMessage[]
   isTyping?: boolean
   user?: User

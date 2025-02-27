@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { createContext, useContext } from 'react'
 import {
   ActionSheetOptions,
 } from '@expo/react-native-action-sheet'
@@ -13,11 +13,11 @@ export interface IGiftedChatContext {
   getLocale(): string
 }
 
-export const GiftedChatContext = React.createContext<IGiftedChatContext>({
+export const GiftedChatContext = createContext<IGiftedChatContext>({
   getLocale: () => 'en',
   actionSheet: () => ({
     showActionSheetWithOptions: () => {},
   }),
 })
 
-export const useChatContext = () => React.useContext(GiftedChatContext)
+export const useChatContext = () => useContext(GiftedChatContext)

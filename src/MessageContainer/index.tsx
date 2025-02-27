@@ -265,14 +265,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
 
   const keyExtractor = useCallback((item: unknown) => (item as TMessage)._id.toString(), [])
 
-  const scrollHandler = useAnimatedScrollHandler({
-    onScroll: event => {
-      scrolledY.value = event.contentOffset.y
-
-      runOnJS(handleOnScroll)(event)
-    },
-  }, [handleOnScroll])
-
   const renderCell = useCallback((props: CellRendererProps<unknown>) => {
     const handleOnLayout = (event: LayoutChangeEvent) => {
       const prevMessage = messages[props.index + (inverted ? 1 : -1)]
@@ -303,6 +295,14 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       />
     )
   }, [daysPositions, messages, inverted])
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: event => {
+      scrolledY.value = event.contentOffset.y
+
+      runOnJS(handleOnScroll)(event)
+    },
+  }, [handleOnScroll])
 
   // removes unrendered days positions when messages are added/removed
   useEffect(() => {

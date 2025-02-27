@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useMemo } from 'react'
 import {
   Text,
   View,
@@ -29,7 +29,7 @@ export function Day ({
 }: DayProps) {
   const { getLocale } = useChatContext()
 
-  const dateStr = React.useMemo(() => {
+  const dateStr = useMemo(() => {
     if (createdAt == null)
       return null
 

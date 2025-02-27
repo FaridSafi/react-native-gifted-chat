@@ -113,6 +113,7 @@ module.exports = {
     'nonblock-statement-body-position': ['error', 'below'],
     '@stylistic/jsx-closing-bracket-location': ['error', 'line-aligned'],
     'no-unreachable': 'error',
+    'react/prop-types': 'off',
   },
   globals: {
     describe: 'readonly',

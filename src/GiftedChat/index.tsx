@@ -94,9 +94,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
 
   const messageContainerRef = useMemo(
-    () => props.messageContainerRef || createRef<AnimatedList>(),
+    () => props.messageContainerRef || createRef<AnimatedList<TMessage>>(),
     [props.messageContainerRef]
-  )
+  ) as RefObject<AnimatedList<TMessage>>
 
   const textInputRef = useMemo(
     () => props.textInputRef || createRef<TextInput>(),
@@ -205,7 +205,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
     const { messagesContainerStyle, ...messagesContainerProps } = props
 
-    const fragment = (
+    return (
       <View style={[stylesCommon.fill, messagesContainerStyle]}>
         <MessageContainer<TMessage>
           {...messagesContainerProps}
@@ -220,8 +220,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         {renderChatFooter?.()}
       </View>
     )
-
-    return fragment
   }, [
     isInitialized,
     isTyping,

@@ -1,4 +1,4 @@
-import React, { Component, Ref } from 'react'
+import React, { Component, RefObject } from 'react'
 import {
   FlatListProps,
   LayoutChangeEvent,
@@ -20,7 +20,7 @@ export type ListViewProps = {
 export type AnimatedList<TMessage> = Component<AnimateProps<FlatListProps<TMessage>>, unknown, unknown> & FlatList<FlatListProps<TMessage>>
 
 export interface MessageContainerProps<TMessage extends IMessage = IMessage> {
-  forwardRef?: Ref<Component<AnimateProps<FlatListProps<unknown>>, unknown, unknown>>
+  forwardRef?: RefObject<AnimatedList<TMessage>>
   messages?: TMessage[]
   isTyping?: boolean
   user?: User

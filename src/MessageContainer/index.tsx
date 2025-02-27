@@ -1,4 +1,4 @@
-import React, { ComponentType, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   View,
   TouchableOpacity,
@@ -8,7 +8,6 @@ import {
   ListRenderItemInfo,
   FlatList,
   CellRendererProps,
-  ListRenderItem,
 } from 'react-native'
 import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
@@ -335,7 +334,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       ]}
     >
       <AnimatedFlatList
-        ref={forwardRef}
+        ref={forwardRef as React.Ref<FlatList<unknown>>}
         extraData={[extraData, isTyping]}
         keyExtractor={keyExtractor}
         automaticallyAdjustContentInsets={false}

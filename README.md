@@ -99,6 +99,12 @@
 
 # Getting started
 
+## 🚧👷 Important notice
+
+There's currently WIP going on to make the library more performant, modern in terms of chat UI and easier to maintain. If you have any issues, please report them. If you want to contribute, please do so.
+
+The most stable version is `2.6.5`. If you want to use the latest version, please be aware that it's a work in progress.
+
 ## Installation
 
 ### Install dependencies

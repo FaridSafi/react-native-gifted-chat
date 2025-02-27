@@ -1,3 +1,4 @@
+import React from 'react'
 import { StyleSheet, Text, View, ViewStyle, TextStyle } from 'react-native'
 import dayjs from 'dayjs'
 

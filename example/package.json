@@ -12,26 +12,26 @@
     "fresh": "yarn start --reset-cache"
   },
   "dependencies": {
-    "expo": "^52.0.32",
+    "expo": "^52.0.40",
     "expo-app-loading": "^2.1.1",
     "expo-build-properties": "~0.13.2",
     "expo-clipboard": "^7.0.1",
     "expo-image-picker": "^16.0.6",
     "expo-linking": "^7.0.5",
-    "expo-location": "^18.0.6",
+    "expo-location": "^18.0.8",
     "expo-permissions": "^14.4.0",
     "expo-status-bar": "^2.0.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.7",
     "react-native-gifted-chat": "./..",
-    "react-native-keyboard-controller": "^1.16.3",
+    "react-native-keyboard-controller": "^1.16.8",
     "react-native-maps": "^1.20.1",
-    "react-native-reanimated": "^3.16.7",
-    "react-native-safe-area-context": "^5.2.0"
+    "react-native-reanimated": "^3.17.1",
+    "react-native-safe-area-context": "^5.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "^7.26.10",
     "@react-native/metro-config": "0.76.6",
     "@react-native/typescript-config": "0.76.6",
     "@types/react": "^18.3.3",
@@ -39,7 +39,7 @@
     "babel-plugin-module-resolver": "^5.0.2",
     "jest": "^29.7.0",
     "react-test-renderer": "18.3.1",
-    "typescript": "5.7.3"
+    "typescript": "5.8.2"
   },
   "engines": {
     "node": ">=18"

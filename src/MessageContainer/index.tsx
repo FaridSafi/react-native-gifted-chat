@@ -277,8 +277,19 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       daysPositions.modify(value => {
         'worklet'
 
+        const isSameDay = (date1: number, date2: number) => {
+          const d1 = new Date(date1)
+          const d2 = new Date(date2)
+
+          return (
+            d1.getDate() === d2.getDate() &&
+            d1.getMonth() === d2.getMonth() &&
+            d1.getFullYear() === d2.getFullYear()
+          )
+        }
+
         for (const [key, item] of Object.entries(value))
-          if (newValue.createdAt === item.createdAt && (inverted ? item.y <= newValue.y : item.y >= newValue.y)) {
+          if (isSameDay(newValue.createdAt, item.createdAt) && (inverted ? item.y <= newValue.y : item.y >= newValue.y)) {
             delete value[key]
             break
           }
@@ -310,7 +321,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   // removes unrendered days positions when messages are added/removed
   useEffect(() => {
     Object.keys(daysPositions.value).forEach(key => {
-      const messageIndex = messages.findIndex(m => m._id === key)
+      const messageIndex = messages.findIndex(m => m._id.toString() === key)
       let shouldRemove = messageIndex === -1
 
       if (!shouldRemove) {

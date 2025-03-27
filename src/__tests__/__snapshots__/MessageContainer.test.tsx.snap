@@ -28,12 +28,7 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
     automaticallyAdjustContentInsets={false}
     collapsable={false}
     data={[]}
-    extraData={
-      [
-        null,
-        false,
-      ]
-    }
+    extraData={null}
     getItem={[Function]}
     getItemCount={[Function]}
     invertStickyHeaders={true}

@@ -31,7 +31,7 @@ import { SendProps } from '../Send'
 import { SystemMessageProps } from '../SystemMessage'
 import { TimeProps } from '../Time'
 import { AnimatedList, ListViewProps, MessageContainerProps } from '../MessageContainer'
-import Bubble from '../Bubble'
+import { BubbleProps } from '../Bubble'
 
 export interface GiftedChatProps<TMessage extends IMessage> extends Partial<MessageContainerProps<TMessage>> {
   /* Message container ref */
@@ -144,7 +144,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Custom message avatar; set to null to not render any avatar for the message */
   renderAvatar?: null | ((props: AvatarProps<TMessage>) => React.ReactNode)
   /* Custom message bubble */
-  renderBubble?(props: Bubble<TMessage>['props']): React.ReactNode
+  renderBubble?(props: BubbleProps<TMessage>): React.ReactNode
   /* Custom system message */
   renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
   /* Callback when a message bubble is pressed; default is to do nothing */
@@ -165,7 +165,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Custom message video */
   renderMessageAudio?(props: MessageAudioProps<TMessage>): React.ReactNode
   /* Custom view inside the bubble */
-  renderCustomView?(props: Bubble<TMessage>['props']): React.ReactNode
+  renderCustomView?(props: BubbleProps<TMessage>): React.ReactNode
   /* Custom day above a message */
   renderDay?(props: DayProps): React.ReactNode
   /* Custom time inside a message */

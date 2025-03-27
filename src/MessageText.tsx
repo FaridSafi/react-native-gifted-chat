@@ -140,13 +140,13 @@ export function MessageText<TMessage extends IMessage = IMessage> ({
     <View
       style={[
         styles[position].container,
-        containerStyle && containerStyle[position],
+        containerStyle?.[position],
       ]}
     >
       <ParsedText
         style={[
           styles[position].text,
-          textStyle && textStyle[position],
+          textStyle?.[position],
           customTextStyle,
         ]}
         parse={[

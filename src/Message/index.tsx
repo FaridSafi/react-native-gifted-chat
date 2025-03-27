@@ -114,22 +114,16 @@ let Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) 
 }
 
 Message = memo(Message, (props, nextProps) => {
-  const next = nextProps.currentMessage!
-  const current = props.currentMessage!
-  const { previousMessage, nextMessage } = props
-  const nextPropsMessage = nextProps.nextMessage
-  const nextPropsPreviousMessage = nextProps.previousMessage
+  const shouldUpdate =
+    props.shouldUpdateMessage?.(props, nextProps) ||
+    !isEqual(props.currentMessage!, nextProps.currentMessage!) ||
+    !isEqual(props.previousMessage, nextProps.previousMessage) ||
+    !isEqual(props.nextMessage, nextProps.nextMessage)
 
-  let shouldUpdate =
-    props.shouldUpdateMessage?.(props, nextProps) || false
+  if (shouldUpdate)
+    return false
 
-  shouldUpdate =
-    shouldUpdate ||
-    !isEqual(current, next) ||
-    !isEqual(previousMessage, nextPropsPreviousMessage) ||
-    !isEqual(nextMessage, nextPropsMessage)
-
-  return shouldUpdate
+  return true
 })
 
 export default Message

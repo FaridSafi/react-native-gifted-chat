@@ -3,6 +3,7 @@
 .circleci/
 .github/
 .vscode/
+example/
 example-expo/
 example-slack-message/
 example-gifted-chat/
@@ -25,4 +26,3 @@ flow-typedefs/
 yarn-error.log
 web-build/
 types.d.ts
-example

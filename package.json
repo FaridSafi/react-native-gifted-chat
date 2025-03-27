@@ -51,7 +51,7 @@
     ]
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "^4.1.0",
+    "@expo/react-native-action-sheet": "^4.1.1",
     "@types/lodash.isequal": "^4.5.8",
     "dayjs": "^1.11.13",
     "lodash.isequal": "^4.5.0",
@@ -61,18 +61,18 @@
     "react-native-parsed-text": "^0.0.22"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.8",
+    "@babel/core": "^7.26.10",
     "@babel/plugin-transform-react-jsx": "^7.25.9",
     "@babel/plugin-transform-unicode-property-regex": "^7.25.9",
-    "@babel/preset-env": "^7.26.8",
+    "@babel/preset-env": "^7.26.9",
     "@react-native/eslint-config": "^0.76.6",
     "@stylistic/eslint-plugin": "^3.1.0",
     "@types/jest": "^29.5.14",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@types/react-native": "^0.72.8",
-    "@typescript-eslint/eslint-plugin": "^8.23.0",
-    "@typescript-eslint/parser": "^8.23.0",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
     "babel-jest": "^29.7.0",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
@@ -80,27 +80,27 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jest": "^28.11.0",
     "eslint-plugin-json": "^4.0.1",
-    "eslint-plugin-n": "^17.15.1",
+    "eslint-plugin-n": "^17.17.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^7.2.1",
     "eslint-plugin-react": "^7.37.4",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "json": "^11.0.0",
-    "lint-staged": "^15.4.3",
+    "lint-staged": "^15.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-native": "^0.76.6",
-    "react-native-keyboard-controller": "^1.16.3",
-    "react-native-reanimated": "^3.16.7",
+    "react-native-keyboard-controller": "^1.16.8",
+    "react-native-reanimated": "^3.17.1",
     "react-test-renderer": "^18.3.1",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.2"
   },
   "peerDependencies": {
-    "react": "*",
+    "react": ">=18.0.0",
     "react-native": "*",
     "react-native-keyboard-controller": ">=1.0.0",
-    "react-native-reanimated": ">=2.0.0"
+    "react-native-reanimated": ">=3.0.0"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "engines": {

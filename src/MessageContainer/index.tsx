@@ -220,21 +220,18 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       return null
 
     return (
-      <Animated.View
-        style={[
-          stylesCommon.centerItems,
-          styles.scrollToBottomStyle,
-          scrollToBottomStyle,
-          scrollToBottomStyleAnim,
-        ]}
-      >
-        <TouchableOpacity
-          onPress={() => doScrollToBottom()}
-          hitSlop={{ top: 5, left: 5, right: 5, bottom: 5 }}
+      <TouchableOpacity onPress={() => doScrollToBottom()}>
+        <Animated.View
+          style={[
+            stylesCommon.centerItems,
+            styles.scrollToBottomStyle,
+            scrollToBottomStyle,
+            scrollToBottomStyleAnim,
+          ]}
         >
           {renderScrollBottomComponent()}
-        </TouchableOpacity>
-      </Animated.View>
+        </Animated.View>
+      </TouchableOpacity>
     )
   }, [scrollToBottomStyle, renderScrollBottomComponent, doScrollToBottom, scrollToBottomStyleAnim, isScrollToBottomVisible])
 
@@ -267,9 +264,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
 
   const renderCell = useCallback((props: CellRendererProps<unknown>) => {
     const handleOnLayout = (event: LayoutChangeEvent) => {
-      const prevMessage = messages[props.index + (inverted ? 1 : -1)]
-      if (prevMessage && isSameDay(props.item as IMessage, prevMessage))
-        return
+      props.onLayout?.(event)
 
       const { y, height } = event.nativeEvent.layout
 
@@ -282,6 +277,23 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       daysPositions.modify(value => {
         'worklet'
 
+        const isSameDay = (date1: number, date2: number) => {
+          const d1 = new Date(date1)
+          const d2 = new Date(date2)
+
+          return (
+            d1.getDate() === d2.getDate() &&
+            d1.getMonth() === d2.getMonth() &&
+            d1.getFullYear() === d2.getFullYear()
+          )
+        }
+
+        for (const [key, item] of Object.entries(value))
+          if (isSameDay(newValue.createdAt, item.createdAt) && (inverted ? item.y <= newValue.y : item.y >= newValue.y)) {
+            delete value[key]
+            break
+          }
+
         // @ts-expect-error: https://docs.swmansion.com/react-native-reanimated/docs/core/useSharedValue#remarks
         value[props.item._id] = newValue
         return value
@@ -289,12 +301,14 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     }
 
     return (
-      <Animated.View
+      <View
         {...props}
         onLayout={handleOnLayout}
-      />
+      >
+        {props.children}
+      </View>
     )
-  }, [daysPositions, messages, inverted])
+  }, [daysPositions, inverted])
 
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: event => {
@@ -307,7 +321,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   // removes unrendered days positions when messages are added/removed
   useEffect(() => {
     Object.keys(daysPositions.value).forEach(key => {
-      const messageIndex = messages.findIndex(m => m._id === key)
+      const messageIndex = messages.findIndex(m => m._id.toString() === key)
       let shouldRemove = messageIndex === -1
 
       if (!shouldRemove) {
@@ -334,14 +348,14 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       ]}
     >
       <AnimatedFlatList
+        extraData={extraData}
         ref={forwardRef as React.Ref<FlatList<unknown>>}
-        extraData={[extraData, isTyping]}
         keyExtractor={keyExtractor}
-        automaticallyAdjustContentInsets={false}
-        inverted={inverted}
         data={messages}
-        style={stylesCommon.fill}
         renderItem={renderItem}
+        inverted={inverted}
+        automaticallyAdjustContentInsets={false}
+        style={stylesCommon.fill}
         {...invertibleScrollViewProps}
         ListEmptyComponent={renderChatEmpty}
         ListFooterComponent={

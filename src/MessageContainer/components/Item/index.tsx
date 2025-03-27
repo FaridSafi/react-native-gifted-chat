@@ -134,6 +134,7 @@ const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
   }), [relativeScrolledPositionToBottomOfDay, dayContainerHeight, dayTopOffset])
 
   return (
+    // do not remove key. it helps to get correct position of the day container
     <View key={props.currentMessage._id.toString()}>
       <Animated.View
         style={style}

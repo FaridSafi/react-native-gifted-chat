@@ -10,6 +10,7 @@ import {
   ViewStyle,
 } from 'react-native'
 import MapView from 'react-native-maps'
+// import { ProgressBar } from 'react-native-paper'
 
 interface Props {
   currentMessage: any
@@ -45,6 +46,11 @@ const CustomView = ({
       alert(e.message)
     }
   }, [currentMessage])
+
+  // left this here for testing re-rendering of messages on send
+  // return (
+  //   <ProgressBar style = {{ minHeight: 50 }} progress={0.9} color='red' />
+  // )
 
   if (currentMessage.location)
     return (

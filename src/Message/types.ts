@@ -3,7 +3,7 @@ import { AvatarProps } from '../Avatar'
 import { SystemMessageProps } from '../SystemMessage'
 import { DayProps } from '../Day'
 import { IMessage, User, LeftRightStyle } from '../types'
-import Bubble from '../Bubble'
+import { BubbleProps } from '../Bubble'
 
 export interface MessageProps<TMessage extends IMessage> {
   showUserAvatar?: boolean
@@ -14,7 +14,7 @@ export interface MessageProps<TMessage extends IMessage> {
   user: User
   inverted?: boolean
   containerStyle?: LeftRightStyle<ViewStyle>
-  renderBubble?(props: Bubble['props']): React.ReactNode
+  renderBubble?(props: BubbleProps<TMessage>): React.ReactNode
   renderDay?(props: DayProps): React.ReactNode
   renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
   renderAvatar?(props: AvatarProps<TMessage>): React.ReactNode

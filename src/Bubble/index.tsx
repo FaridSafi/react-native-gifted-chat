@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import {
   Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
 
-import { GiftedChatContext } from '../GiftedChatContext'
+import { useChatContext } from '../GiftedChatContext'
 import { QuickReplies } from '../QuickReplies'
 import { MessageText } from '../MessageText'
 import { MessageImage } from '../MessageImage'
@@ -22,25 +22,39 @@ import styles from './styles'
 
 export * from './types'
 
-export default class Bubble<
-  TMessage extends IMessage = IMessage,
-> extends React.Component<BubbleProps<TMessage>> {
-  static contextType = GiftedChatContext
+const Bubble: React.FC<BubbleProps<IMessage>> = (props: BubbleProps<IMessage>) => {
+  const {
+    currentMessage,
+    nextMessage,
+    position,
+    containerToNextStyle,
+    previousMessage,
+    containerToPreviousStyle,
+    onQuickReply,
+    renderQuickReplySend,
+    quickReplyStyle,
+    quickReplyTextStyle,
+    quickReplyContainerStyle,
+    containerStyle,
+    wrapperStyle,
+    bottomContainerStyle,
+  } = props
 
-  onPress = () => {
-    if (this.props.onPress)
-      this.props.onPress(this.context, this.props.currentMessage)
-  }
+  const context = useChatContext()
 
-  onLongPress = () => {
+  const onPress = useCallback(() => {
+    if (props.onPress)
+      props.onPress(context, currentMessage)
+  }, [context, props, currentMessage])
+
+  const onLongPress = useCallback(() => {
     const {
-      currentMessage,
       onLongPress,
       optionTitles,
-    } = this.props
+    } = props
 
     if (onLongPress) {
-      onLongPress(this.context, currentMessage)
+      onLongPress(context, currentMessage)
       return
     }
 
@@ -51,7 +65,7 @@ export default class Bubble<
     const cancelButtonIndex = options.length - 1
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(this.context as any).actionSheet().showActionSheetWithOptions(
+    ;(context as any).actionSheet().showActionSheetWithOptions(
       {
         options,
         cancelButtonIndex,
@@ -60,11 +74,13 @@ export default class Bubble<
         console.log('onLongPress', { buttonIndex })
       }
     )
-  }
+  }, [
+    currentMessage,
+    context,
+    props,
+  ])
 
-  styledBubbleToNext () {
-    const { currentMessage, nextMessage, position, containerToNextStyle } =
-      this.props
+  const styledBubbleToNext = useCallback(() => {
     if (
       currentMessage &&
       nextMessage &&
@@ -78,15 +94,14 @@ export default class Bubble<
       ]
 
     return null
-  }
+  }, [
+    currentMessage,
+    nextMessage,
+    position,
+    containerToNextStyle,
+  ])
 
-  styledBubbleToPrevious () {
-    const {
-      currentMessage,
-      previousMessage,
-      position,
-      containerToPreviousStyle,
-    } = this.props
+  const styledBubbleToPrevious = useCallback(() => {
     if (
       currentMessage &&
       previousMessage &&
@@ -100,19 +115,14 @@ export default class Bubble<
       ]
 
     return null
-  }
+  }, [
+    currentMessage,
+    previousMessage,
+    position,
+    containerToPreviousStyle,
+  ])
 
-  renderQuickReplies () {
-    const {
-      currentMessage,
-      onQuickReply,
-      nextMessage,
-      renderQuickReplySend,
-      quickReplyStyle,
-      quickReplyTextStyle,
-      quickReplyContainerStyle,
-    } = this.props
-
+  const renderQuickReplies = useCallback(() => {
     if (currentMessage?.quickReplies) {
       const {
         /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -120,10 +130,10 @@ export default class Bubble<
         wrapperStyle,
         /* eslint-enable @typescript-eslint/no-unused-vars */
         ...quickReplyProps
-      } = this.props
+      } = props
 
-      if (this.props.renderQuickReplies)
-        return this.props.renderQuickReplies(quickReplyProps)
+      if (props.renderQuickReplies)
+        return props.renderQuickReplies(quickReplyProps)
 
       return (
         <QuickReplies
@@ -139,10 +149,19 @@ export default class Bubble<
     }
 
     return null
-  }
+  }, [
+    currentMessage,
+    onQuickReply,
+    renderQuickReplySend,
+    quickReplyStyle,
+    quickReplyTextStyle,
+    quickReplyContainerStyle,
+    nextMessage,
+    props,
+  ])
 
-  renderMessageText () {
-    if (this.props.currentMessage?.text) {
+  const renderMessageText = useCallback(() => {
+    if (currentMessage?.text) {
       const {
         /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,
@@ -150,35 +169,36 @@ export default class Bubble<
         optionTitles,
         /* eslint-enable @typescript-eslint/no-unused-vars */
         ...messageTextProps
-      } = this.props
-      if (this.props.renderMessageText)
-        return this.props.renderMessageText(messageTextProps)
+      } = props
+
+      if (props.renderMessageText)
+        return props.renderMessageText(messageTextProps)
 
       return <MessageText {...messageTextProps} />
     }
     return null
-  }
+  }, [props, currentMessage])
 
-  renderMessageImage () {
-    if (this.props.currentMessage?.image) {
+  const renderMessageImage = useCallback(() => {
+    if (currentMessage?.image) {
       const {
         /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,
         wrapperStyle,
         /* eslint-enable @typescript-eslint/no-unused-vars */
         ...messageImageProps
-      } = this.props
+      } = props
 
-      if (this.props.renderMessageImage)
-        return this.props.renderMessageImage(messageImageProps)
+      if (props.renderMessageImage)
+        return props.renderMessageImage(messageImageProps)
 
       return <MessageImage {...messageImageProps} />
     }
     return null
-  }
+  }, [props, currentMessage])
 
-  renderMessageVideo () {
-    if (!this.props.currentMessage?.video)
+  const renderMessageVideo = useCallback(() => {
+    if (!currentMessage?.video)
       return null
 
     const {
@@ -187,16 +207,16 @@ export default class Bubble<
       wrapperStyle,
       /* eslint-enable @typescript-eslint/no-unused-vars */
       ...messageVideoProps
-    } = this.props
+    } = props
 
-    if (this.props.renderMessageVideo)
-      return this.props.renderMessageVideo(messageVideoProps)
+    if (props.renderMessageVideo)
+      return props.renderMessageVideo(messageVideoProps)
 
     return <MessageVideo />
-  }
+  }, [props, currentMessage])
 
-  renderMessageAudio () {
-    if (!this.props.currentMessage?.audio)
+  const renderMessageAudio = useCallback(() => {
+    if (!currentMessage?.audio)
       return null
 
     const {
@@ -205,20 +225,19 @@ export default class Bubble<
       wrapperStyle,
       /* eslint-enable @typescript-eslint/no-unused-vars */
       ...messageAudioProps
-    } = this.props
+    } = props
 
-    if (this.props.renderMessageAudio)
-      return this.props.renderMessageAudio(messageAudioProps)
+    if (props.renderMessageAudio)
+      return props.renderMessageAudio(messageAudioProps)
 
     return <MessageAudio />
-  }
+  }, [props, currentMessage])
 
-  renderTicks () {
+  const renderTicks = useCallback(() => {
     const {
-      currentMessage,
       renderTicks,
       user,
-    } = this.props
+    } = props
 
     if (renderTicks && currentMessage)
       return renderTicks(currentMessage)
@@ -237,17 +256,17 @@ export default class Bubble<
       return (
         <View style={styles.content.tickView}>
           {!!currentMessage.sent && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>
+            <Text style={[styles.content.tick, props.tickStyle]}>
               {'✓'}
             </Text>
           )}
           {!!currentMessage.received && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>
+            <Text style={[styles.content.tick, props.tickStyle]}>
               {'✓'}
             </Text>
           )}
           {!!currentMessage.pending && (
-            <Text style={[styles.content.tick, this.props.tickStyle]}>
+            <Text style={[styles.content.tick, props.tickStyle]}>
               {'🕓'}
             </Text>
           )}
@@ -255,10 +274,13 @@ export default class Bubble<
       )
 
     return null
-  }
+  }, [
+    props,
+    currentMessage,
+  ])
 
-  renderTime () {
-    if (this.props.currentMessage?.createdAt) {
+  const renderTime = useCallback(() => {
+    if (currentMessage?.createdAt) {
       const {
         /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,
@@ -266,24 +288,23 @@ export default class Bubble<
         textStyle,
         /* eslint-enable @typescript-eslint/no-unused-vars */
         ...timeProps
-      } = this.props
+      } = props
 
-      if (this.props.renderTime)
-        return this.props.renderTime(timeProps)
+      if (props.renderTime)
+        return props.renderTime(timeProps)
 
       return <Time {...timeProps} />
     }
     return null
-  }
+  }, [props, currentMessage])
 
-  renderUsername () {
+  const renderUsername = useCallback(() => {
     const {
-      currentMessage,
       user,
       renderUsername,
-    } = this.props
+    } = props
 
-    if (this.props.renderUsernameOnMessage && currentMessage) {
+    if (props.renderUsernameOnMessage && currentMessage) {
       if (user && currentMessage.user._id === user._id)
         return null
 
@@ -294,7 +315,7 @@ export default class Bubble<
         <View style={styles.content.usernameView}>
           <Text
             style={
-              [styles.content.username, this.props.usernameStyle]
+              [styles.content.username, props.usernameStyle]
             }
           >
             {'~ '}
@@ -305,75 +326,78 @@ export default class Bubble<
     }
 
     return null
-  }
+  }, [
+    currentMessage,
+    props,
+  ])
 
-  renderCustomView () {
-    if (this.props.renderCustomView)
-      return this.props.renderCustomView(this.props)
+  const renderCustomView = useCallback(() => {
+    if (props.renderCustomView)
+      return props.renderCustomView(props)
 
     return null
-  }
+  }, [props])
 
-  renderBubbleContent () {
+  const renderBubbleContent = useCallback(() => {
     return (
       <View>
-        {!this.props.isCustomViewBottom && this.renderCustomView()}
-        {this.renderMessageImage()}
-        {this.renderMessageVideo()}
-        {this.renderMessageAudio()}
-        {this.renderMessageText()}
-        {this.props.isCustomViewBottom && this.renderCustomView()}
+        {!props.isCustomViewBottom && renderCustomView()}
+        {renderMessageImage()}
+        {renderMessageVideo()}
+        {renderMessageAudio()}
+        {renderMessageText()}
+        {props.isCustomViewBottom && renderCustomView()}
       </View>
     )
-  }
+  }, [
+    renderCustomView,
+    renderMessageImage,
+    renderMessageVideo,
+    renderMessageAudio,
+    renderMessageText,
+    props.isCustomViewBottom,
+  ])
 
-  render () {
-    const {
-      position,
-      containerStyle,
-      wrapperStyle,
-      bottomContainerStyle,
-    } = this.props
-
-    return (
+  return (
+    <View
+      style={[
+        stylesCommon.fill,
+        styles[position].container,
+        containerStyle && containerStyle[position],
+      ]}
+    >
       <View
         style={[
-          stylesCommon.fill,
-          styles[position].container,
-          containerStyle && containerStyle[position],
+          styles[position].wrapper,
+          styledBubbleToNext(),
+          styledBubbleToPrevious(),
+          wrapperStyle && wrapperStyle[position],
         ]}
       >
-        <View
-          style={[
-            styles[position].wrapper,
-            this.styledBubbleToNext(),
-            this.styledBubbleToPrevious(),
-            wrapperStyle && wrapperStyle[position],
-          ]}
+        <TouchableWithoutFeedback
+          onPress={onPress}
+          onLongPress={onLongPress}
+          accessibilityRole='text'
+          {...props.touchableProps}
         >
-          <TouchableWithoutFeedback
-            onPress={this.onPress}
-            onLongPress={this.onLongPress}
-            accessibilityRole='text'
-            {...this.props.touchableProps}
-          >
-            <View>
-              {this.renderBubbleContent()}
-              <View
-                style={[
-                  styles[position].bottom,
-                  bottomContainerStyle && bottomContainerStyle[position],
-                ]}
-              >
-                {this.renderUsername()}
-                {this.renderTime()}
-                {this.renderTicks()}
-              </View>
+          <View>
+            {renderBubbleContent()}
+            <View
+              style={[
+                styles[position].bottom,
+                bottomContainerStyle && bottomContainerStyle[position],
+              ]}
+            >
+              {renderUsername()}
+              {renderTime()}
+              {renderTicks()}
             </View>
-          </TouchableWithoutFeedback>
-        </View>
-        {this.renderQuickReplies()}
+          </View>
+        </TouchableWithoutFeedback>
       </View>
-    )
-  }
+      {renderQuickReplies()}
+    </View>
+  )
 }
+
+export default Bubble

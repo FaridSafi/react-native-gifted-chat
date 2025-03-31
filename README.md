@@ -360,7 +360,7 @@ interface QuickReplies {
 - **`locale`** _(String)_ - Locale to localize the dates. You need first to import the locale you need (ie. `require('dayjs/locale/de')` or `import 'dayjs/locale/fr'`)
 - **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'D MMMM'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
-- **`dateFormatCalendar`** _(String)_ - Format to use for rendering relative times; Today - for now (see [Day.js Calendar](https://day.js.org/docs/en/plugin/calendar))
+- **`dateFormatCalendar`** _(Object)_ - Format to use for rendering relative times; Today - for now (see [Day.js Calendar](https://day.js.org/docs/en/plugin/calendar))
 - **`loadEarlier`** _(Bool)_ - Enables the "load earlier messages" button, required for `infiniteScroll`
 - **`onLoadEarlier`** _(Function)_ - Callback when loading earlier messages
 - **`isLoadingEarlier`** _(Bool)_ - Display an `ActivityIndicator` when loading earlier messages

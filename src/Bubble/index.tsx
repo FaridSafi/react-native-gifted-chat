@@ -64,16 +64,16 @@ const Bubble: React.FC<BubbleProps<IMessage>> = (props: BubbleProps<IMessage>) =
     const options = optionTitles
     const cancelButtonIndex = options.length - 1
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(context as any).actionSheet().showActionSheetWithOptions(
-      {
-        options,
-        cancelButtonIndex,
-      },
-      (buttonIndex: number) => {
-        console.log('onLongPress', { buttonIndex })
-      }
-    )
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(context as any).actionSheet().showActionSheetWithOptions(
+        {
+          options,
+          cancelButtonIndex,
+        },
+        (buttonIndex: number) => {
+          console.log('onLongPress', { buttonIndex })
+        }
+      )
   }, [
     currentMessage,
     context,
@@ -385,7 +385,7 @@ const Bubble: React.FC<BubbleProps<IMessage>> = (props: BubbleProps<IMessage>) =
             <View
               style={[
                 styles[position].bottom,
-                bottomContainerStyle && bottomContainerStyle[position],
+                bottomContainerStyle?.[position],
               ]}
             >
               {renderUsername()}

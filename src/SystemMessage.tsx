@@ -29,6 +29,7 @@ export interface SystemMessageProps<TMessage extends IMessage> {
   containerStyle?: StyleProp<ViewStyle>
   wrapperStyle?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
+  children?: React.ReactNode
 }
 
 export function SystemMessage<TMessage extends IMessage = IMessage> ({
@@ -36,6 +37,7 @@ export function SystemMessage<TMessage extends IMessage = IMessage> ({
   containerStyle,
   wrapperStyle,
   textStyle,
+  children,
 }: SystemMessageProps<TMessage>) {
   if (currentMessage == null || currentMessage.system === false)
     return null
@@ -43,7 +45,8 @@ export function SystemMessage<TMessage extends IMessage = IMessage> ({
   return (
     <View style={[stylesCommon.fill, stylesCommon.centerItems, styles.container, containerStyle]}>
       <View style={wrapperStyle}>
-        <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
+        {!!currentMessage.text && <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>}
+        {children}
       </View>
     </View>
   )

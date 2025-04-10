@@ -15,6 +15,7 @@ import { AnimateProps } from 'react-native-reanimated'
 
 export type ListViewProps = {
   onLayout?: (event: LayoutChangeEvent) => void
+  contentContainerStyle?: StyleProp<ViewStyle>
 } & object
 
 export type AnimatedList<TMessage> = Component<AnimateProps<FlatListProps<TMessage>>, unknown, unknown> & FlatList<FlatListProps<TMessage>>

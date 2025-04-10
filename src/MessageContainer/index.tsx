@@ -13,6 +13,7 @@ import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useShare
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
 import DayAnimated from './components/DayAnimated'
 import Item from './components/Item'
+import { useReanimatedKeyboardAnimation, KeyboardProvider } from 'react-native-keyboard-controller'
 
 import { LoadEarlier } from '../LoadEarlier'
 import { IMessage } from '../types'
@@ -60,6 +61,8 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   const scrollToBottomStyleAnim = useAnimatedStyle(() => ({
     opacity: scrollToBottomOpacity.value,
   }), [scrollToBottomOpacity])
+
+  const keyboard = useReanimatedKeyboardAnimation()
 
   const daysPositions = useSharedValue<DaysPositions>({})
   const listHeight = useSharedValue(0)
@@ -341,48 +344,56 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   }, [messages, daysPositions, inverted])
 
   return (
-    <View
-      style={[
-        styles.contentContainerStyle,
-        alignTop ? styles.containerAlignTop : stylesCommon.fill,
-      ]}
-    >
-      <AnimatedFlatList
-        extraData={extraData}
-        ref={forwardRef as React.Ref<FlatList<unknown>>}
-        keyExtractor={keyExtractor}
-        data={messages}
-        renderItem={renderItem}
-        inverted={inverted}
-        automaticallyAdjustContentInsets={false}
-        style={stylesCommon.fill}
-        {...invertibleScrollViewProps}
-        ListEmptyComponent={renderChatEmpty}
-        ListFooterComponent={
-          inverted ? ListHeaderComponent : ListFooterComponent
-        }
-        ListHeaderComponent={
-          inverted ? ListFooterComponent : ListHeaderComponent
-        }
-        onScroll={scrollHandler}
-        scrollEventThrottle={1}
-        onEndReached={onEndReached}
-        onEndReachedThreshold={0.1}
-        {...listViewProps}
-        onLayout={onLayoutList}
-        CellRendererComponent={renderCell}
-      />
-      {isScrollToBottomEnabled
-        ? renderScrollToBottomWrapper()
-        : null}
-      <DayAnimated
-        scrolledY={scrolledY}
-        daysPositions={daysPositions}
-        listHeight={listHeight}
-        messages={messages}
-        isLoadingEarlier={isLoadingEarlier}
-      />
-    </View>
+    <KeyboardProvider>
+      <View
+        style={[
+          styles.contentContainerStyle,
+          alignTop ? styles.containerAlignTop : stylesCommon.fill,
+        ]}
+      >
+        <AnimatedFlatList
+          extraData={extraData}
+          ref={forwardRef as React.Ref<FlatList<unknown>>}
+          keyExtractor={keyExtractor}
+          data={messages}
+          renderItem={renderItem}
+          inverted={inverted}
+          automaticallyAdjustContentInsets={false}
+          style={stylesCommon.fill}
+          {...invertibleScrollViewProps}
+          ListEmptyComponent={renderChatEmpty}
+          ListFooterComponent={
+            inverted ? ListHeaderComponent : ListFooterComponent
+          }
+          ListHeaderComponent={
+            inverted ? ListFooterComponent : ListHeaderComponent
+          }
+          onScroll={scrollHandler}
+          scrollEventThrottle={1}
+          onEndReached={onEndReached}
+          onEndReachedThreshold={0.1}
+          {...listViewProps}
+          onLayout={onLayoutList}
+          CellRendererComponent={renderCell}
+          contentContainerStyle={[
+            {
+              paddingBottom: Math.abs(keyboard.height.value),
+            },
+            listViewProps?.contentContainerStyle,
+          ]}
+        />
+        {isScrollToBottomEnabled
+          ? renderScrollToBottomWrapper()
+          : null}
+        <DayAnimated
+          scrolledY={scrolledY}
+          daysPositions={daysPositions}
+          listHeight={listHeight}
+          messages={messages}
+          isLoadingEarlier={isLoadingEarlier}
+        />
+      </View>
+    </KeyboardProvider>
   )
 }
 

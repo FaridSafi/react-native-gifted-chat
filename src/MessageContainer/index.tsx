@@ -377,7 +377,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
           CellRendererComponent={renderCell}
           contentContainerStyle={[
             {
-              paddingBottom: Math.abs(keyboard.height.value),
+              paddingBottom: -keyboard.height.value,
             },
             listViewProps?.contentContainerStyle,
           ]}

@@ -109,7 +109,7 @@ export function Composer({
       style={[
         styles.textInput,
         textInputStyle,
-        {
+        {// testttt
           height: composerHeight,
           ...Platform.select({
             web: {

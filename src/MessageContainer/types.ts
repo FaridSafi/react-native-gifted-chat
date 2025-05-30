@@ -1,7 +1,6 @@
 import React, { Component, RefObject } from 'react'
 import {
   FlatListProps,
-  LayoutChangeEvent,
   StyleProp,
   ViewStyle,
 } from 'react-native'
@@ -13,9 +12,7 @@ import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/ho
 import { FlatList } from 'react-native-reanimated/lib/typescript/Animated'
 import { AnimateProps } from 'react-native-reanimated'
 
-export type ListViewProps = {
-  onLayout?: (event: LayoutChangeEvent) => void
-} & object
+export type ListViewProps<TMessage extends IMessage = IMessage> = Partial<FlatListProps<TMessage>>;
 
 export type AnimatedList<TMessage> = Component<AnimateProps<FlatListProps<TMessage>>, unknown, unknown> & FlatList<FlatListProps<TMessage>>
 

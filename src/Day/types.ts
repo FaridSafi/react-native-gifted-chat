@@ -11,4 +11,5 @@ export interface DayProps {
   containerStyle?: StyleProp<ViewStyle>
   wrapperStyle?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
+  todayLocalized?: Record<string, string>
 }

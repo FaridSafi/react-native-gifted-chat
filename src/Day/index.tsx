@@ -26,6 +26,7 @@ export function Day ({
   containerStyle,
   wrapperStyle,
   textStyle,
+  todayLocalized,
 }: DayProps) {
   const { getLocale } = useChatContext()
 
@@ -41,12 +42,12 @@ export function Day ({
 
     if (now.diff(date, 'days') < 1)
       return date.calendar(now, {
-        sameDay: '[Today]',
+        sameDay: todayLocalized?.[getLocale()] ? `[${todayLocalized[getLocale()]}]` : '[Today]',
         ...dateFormatCalendar,
       })
 
     return date.format(dateFormat)
-  }, [createdAt, dateFormat, getLocale, dateFormatCalendar])
+  }, [createdAt, getLocale, todayLocalized, dateFormatCalendar, dateFormat])
 
   if (!dateStr)
     return null
@@ -54,9 +55,7 @@ export function Day ({
   return (
     <View style={[stylesCommon.centerItems, styles.container, containerStyle]}>
       <View style={[styles.wrapper, wrapperStyle]}>
-        <Text style={[styles.text, textStyle]}>
-          {dateStr}
-        </Text>
+        <Text style={[styles.text, textStyle]}>{dateStr}</Text>
       </View>
     </View>
   )

@@ -27,6 +27,14 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
     }
     automaticallyAdjustContentInsets={false}
     collapsable={false}
+    contentContainerStyle={
+      [
+        {
+          "paddingBottom": -0,
+        },
+        undefined,
+      ]
+    }
     data={[]}
     extraData={null}
     getItem={[Function]}

@@ -53,6 +53,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     forwardRef,
     handleOnScroll: handleOnScrollProp,
     scrollToBottomComponent: scrollToBottomComponentProp,
+    renderDay: renderDayProp,
   } = props
 
   const scrollToBottomOpacity = useSharedValue(0)
@@ -379,6 +380,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         scrolledY={scrolledY}
         daysPositions={daysPositions}
         listHeight={listHeight}
+        renderDay={renderDayProp}
         messages={messages}
         isLoadingEarlier={isLoadingEarlier}
       />

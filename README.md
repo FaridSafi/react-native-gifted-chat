@@ -29,7 +29,7 @@
   <a href="https://reverent-bardeen-47c862.netlify.com/" target="_blank">Demo Web 🖥</a>
 </p>
 <p align="center">
-  <a href="https://snack.expo.io/@xcarpentier/giftedchat-playground" target="_blank">Snack GiftedChat playground</a>
+  <a href="https://snack.expo.dev/UV4_xttBKve_gwCdqjIvp" target="_blank">Snack GiftedChat playground</a>
   <img height="18" src="https://snack.expo.io/favicon.ico" />
 </p>
 

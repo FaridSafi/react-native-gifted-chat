@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { JSX, useCallback } from 'react'
 import {
   Text,
   TouchableWithoutFeedback,
@@ -22,7 +22,7 @@ import styles from './styles'
 
 export * from './types'
 
-const Bubble: React.FC<BubbleProps<IMessage>> = (props: BubbleProps<IMessage>) => {
+const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessage>): JSX.Element => {
   const {
     currentMessage,
     nextMessage,

@@ -89,14 +89,14 @@ const DotsAnimation = () => {
   )
 }
 
-const TypingIndicator = ({ isTyping }: TypingIndicatorProps) => {
+const TypingIndicator = ({ isTyping, containerStyle }: TypingIndicatorProps) => {
   const yCoords = useSharedValue(200)
   const heightScale = useSharedValue(0)
   const marginScale = useSharedValue(0)
 
   const [isVisible, setIsVisible] = useState(isTyping)
 
-  const containerStyle = useAnimatedStyle(() => ({
+  const animatedContainerStyle = useAnimatedStyle(() => ({
     transform: [
       {
         translateY: yCoords.value,
@@ -145,6 +145,7 @@ const TypingIndicator = ({ isTyping }: TypingIndicatorProps) => {
     <Animated.View
       style={[
         styles.container,
+        animatedContainerStyle,
         containerStyle,
       ]}
     >

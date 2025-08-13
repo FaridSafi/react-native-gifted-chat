@@ -7,12 +7,12 @@ import {
 
 import { LoadEarlierProps } from '../LoadEarlier'
 import { MessageProps } from '../Message'
-import {User, IMessage, Reply, DayProps} from '../types'
+import { User, IMessage, Reply, DayProps } from '../types'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
 import { FlatList } from 'react-native-reanimated/lib/typescript/Animated'
 import { AnimateProps } from 'react-native-reanimated'
 
-export type ListViewProps<TMessage extends IMessage = IMessage> = Partial<FlatListProps<TMessage>>;
+export type ListViewProps<TMessage extends IMessage = IMessage> = Partial<FlatListProps<TMessage>>
 
 export type AnimatedList<TMessage> = Component<AnimateProps<FlatListProps<TMessage>>, unknown, unknown> & FlatList<FlatListProps<TMessage>>
 

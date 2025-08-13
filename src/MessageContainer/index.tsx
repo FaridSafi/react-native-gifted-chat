@@ -26,7 +26,7 @@ import { isSameDay } from '../utils'
 
 export * from './types'
 
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
 function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
   const {
@@ -52,7 +52,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     forwardRef,
     handleOnScroll: handleOnScrollProp,
     scrollToBottomComponent: scrollToBottomComponentProp,
-    renderDay: renderDayProp,
   } = props
 
   const scrollToBottomOpacity = useSharedValue(0)
@@ -139,7 +138,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       makeScrollToBottomHidden()
   }, [handleOnScrollProp, inverted, scrollToBottomOffset, scrollToBottomOpacity])
 
-  const renderItem = useCallback(({ item, index }: ListRenderItemInfo<unknown>): React.ReactElement | null => {
+  const renderItem = useCallback(({ item, index }: ListRenderItemInfo<TMessage>): React.ReactElement | null => {
     const messageItem = item as TMessage
 
     if (!messageItem._id && messageItem._id !== 0)
@@ -260,9 +259,9 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       onLoadEarlier()
   }, [infiniteScroll, loadEarlier, onLoadEarlier, isLoadingEarlier])
 
-  const keyExtractor = useCallback((item: unknown) => (item as TMessage)._id.toString(), [])
+  const keyExtractor = useCallback((item: TMessage) => item._id.toString(), [])
 
-  const renderCell = useCallback((props: CellRendererProps<unknown>) => {
+  const renderCell = useCallback((props: CellRendererProps<TMessage>) => {
     const handleOnLayout = (event: LayoutChangeEvent) => {
       props.onLayout?.(event)
 
@@ -295,7 +294,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
           }
 
         // @ts-expect-error: https://docs.swmansion.com/react-native-reanimated/docs/core/useSharedValue#remarks
-        value[props.item._id] = newValue
+        value[(props.item as IMessage)._id] = newValue
         return value
       })
     }
@@ -349,7 +348,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     >
       <AnimatedFlatList
         extraData={extraData}
-        ref={forwardRef as React.Ref<FlatList<unknown>>}
+        ref={forwardRef}
         keyExtractor={keyExtractor}
         data={messages}
         renderItem={renderItem}

@@ -1,13 +1,6 @@
 import React, { RefObject } from 'react'
-import {
-  ActionSheetOptions,
-} from '@expo/react-native-action-sheet'
-import {
-  TextInput,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-} from 'react-native'
+import { ActionSheetOptions } from '@expo/react-native-action-sheet'
+import { TextInput, StyleProp, TextStyle, ViewStyle } from 'react-native'
 import { LightboxProps } from 'react-native-lightbox-v2'
 import { ActionsProps } from '../Actions'
 import { AvatarProps } from '../Avatar'
@@ -30,10 +23,15 @@ import { QuickRepliesProps } from '../QuickReplies'
 import { SendProps } from '../Send'
 import { SystemMessageProps } from '../SystemMessage'
 import { TimeProps } from '../Time'
-import { AnimatedList, ListViewProps, MessageContainerProps } from '../MessageContainer'
+import {
+  AnimatedList,
+  ListViewProps,
+  MessageContainerProps,
+} from '../MessageContainer'
 import { BubbleProps } from '../Bubble'
 
-export interface GiftedChatProps<TMessage extends IMessage> extends Partial<MessageContainerProps<TMessage>> {
+export interface GiftedChatProps<TMessage extends IMessage>
+  extends Partial<MessageContainerProps<TMessage>> {
   /* Message container ref */
   messageContainerRef?: RefObject<AnimatedList<TMessage>>
   /* text input ref */
@@ -124,7 +122,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   actionSheet?(): {
     showActionSheetWithOptions: (
       options: ActionSheetOptions,
-      callback: (buttonIndex: number) => void | Promise<void>,
+      callback: (buttonIndex: number) => void | Promise<void>
     ) => void
   }
   /* Callback when a message avatar is tapped */
@@ -176,6 +174,8 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   renderChatEmpty?(): React.ReactNode
   /* Custom component to render below the MessageContainer (separate from the ListView) */
   renderChatFooter?(): React.ReactNode
+  /* Enables the floating animated day header. Default is true. */
+  isDayAnimatedEnabled?: boolean
   /* Custom message composer container */
   renderInputToolbar?(props: InputToolbarProps<TMessage>): React.ReactNode
   /*  Custom text input message composer */
@@ -191,16 +191,22 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Callback when the input text changes */
   onInputTextChanged?(text: string): void
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
-  parsePatterns?: (linkStyle?: TextStyle) => { type?: string, pattern?: RegExp, style?: StyleProp<TextStyle> | object, onPress?: unknown, renderText?: unknown }[]
+  parsePatterns?: (linkStyle?: TextStyle) => {
+    type?: string
+    pattern?: RegExp
+    style?: StyleProp<TextStyle> | object
+    onPress?: unknown
+    renderText?: unknown
+  }[]
   onQuickReply?(replies: Reply[]): void
   renderQuickReplies?(
-    quickReplies: QuickRepliesProps<TMessage>,
+    quickReplies: QuickRepliesProps<TMessage>
   ): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
   /* Scroll to bottom custom component */
   scrollToBottomComponent?(): React.ReactNode
   shouldUpdateMessage?(
     props: MessageProps<TMessage>,
-    nextProps: MessageProps<TMessage>,
+    nextProps: MessageProps<TMessage>
   ): boolean
 }

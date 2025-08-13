@@ -47,7 +47,7 @@ import Animated, {
   withTiming,
   runOnJS,
 } from 'react-native-reanimated'
-import { KeyboardProvider, useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller'
+import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller'
 import { GiftedChatProps } from './types'
 
 import stylesCommon from '../styles'
@@ -448,11 +448,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 }
 
 function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedChatProps<TMessage>) {
-  return (
-    <KeyboardProvider>
-      <GiftedChat<TMessage> {...props} />
-    </KeyboardProvider>
-  )
+  return <GiftedChat<TMessage> {...props} />
 }
 
 GiftedChatWrapper.append = <TMessage extends IMessage>(

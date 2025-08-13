@@ -11,7 +11,6 @@ import {
 } from 'react-native'
 import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
-import DayAnimated from './components/DayAnimated'
 import Item from './components/Item'
 
 import { LoadEarlier } from '../LoadEarlier'
@@ -376,14 +375,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       {isScrollToBottomEnabled
         ? renderScrollToBottomWrapper()
         : null}
-      <DayAnimated
-        scrolledY={scrolledY}
-        daysPositions={daysPositions}
-        listHeight={listHeight}
-        renderDay={renderDayProp}
-        messages={messages}
-        isLoadingEarlier={isLoadingEarlier}
-      />
     </View>
   )
 }

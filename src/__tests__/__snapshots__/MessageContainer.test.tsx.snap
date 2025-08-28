@@ -153,6 +153,11 @@ exports[`should render <MessageContainer /> with showStickyDate=false 1`] = `
     invertStickyHeaders={true}
     inverted={true}
     isInvertedVirtualizedList={true}
+    jestAnimatedProps={
+      {
+        "value": {},
+      }
+    }
     jestAnimatedStyle={
       {
         "value": {},
@@ -186,9 +191,11 @@ exports[`should render <MessageContainer /> with showStickyDate=false 1`] = `
             },
           ],
         },
-        {
-          "flex": 1,
-        },
+        [
+          {
+            "flex": 1,
+          },
+        ],
       ]
     }
     viewabilityConfigCallbackPairs={[]}
@@ -289,6 +296,11 @@ exports[`should render <MessageContainer /> with showStickyDate=true (default) 1
     invertStickyHeaders={true}
     inverted={true}
     isInvertedVirtualizedList={true}
+    jestAnimatedProps={
+      {
+        "value": {},
+      }
+    }
     jestAnimatedStyle={
       {
         "value": {},
@@ -322,9 +334,11 @@ exports[`should render <MessageContainer /> with showStickyDate=true (default) 1
             },
           ],
         },
-        {
-          "flex": 1,
-        },
+        [
+          {
+            "flex": 1,
+          },
+        ],
       ]
     }
     viewabilityConfigCallbackPairs={[]}

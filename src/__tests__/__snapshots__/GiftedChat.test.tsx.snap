@@ -26,3 +26,28 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
   </View>
 </KeyboardProvider>
 `;
+
+exports[`should render <GiftedChat/> with disableKeyboardController=true 1`] = `
+<View
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        {
+          "overflow": "hidden",
+        },
+      ]
+    }
+    testID="GC_WRAPPER"
+  />
+</View>
+`;

@@ -27,7 +27,8 @@ import { isSameDay } from '../utils'
 
 export * from './types'
 
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
 function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
   const {
@@ -350,7 +351,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     >
       <AnimatedFlatList
         extraData={extraData}
-        ref={forwardRef as React.Ref<FlatList<unknown>>}
+        ref={forwardRef}
         keyExtractor={keyExtractor}
         data={messages}
         renderItem={renderItem}

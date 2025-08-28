@@ -242,14 +242,15 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
 
     if (
       !inverted &&
-      messages?.length
+      messages?.length &&
+      isScrollToBottomEnabled
     )
       setTimeout(() => {
         doScrollToBottom(false)
       }, 500)
 
     listViewProps?.onLayout?.(event)
-  }, [inverted, messages, doScrollToBottom, listHeight, listViewProps])
+  }, [inverted, messages, doScrollToBottom, listHeight, listViewProps, isScrollToBottomEnabled])
 
   const onEndReached = useCallback(() => {
     if (

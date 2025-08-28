@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DayAnimated should render DayAnimated with default Day component 1`] = `null`;
+
+exports[`DayAnimated should use custom renderDay when provided 1`] = `null`;

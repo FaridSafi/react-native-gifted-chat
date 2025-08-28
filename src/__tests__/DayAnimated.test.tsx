@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
-import { DayAnimated } from '../MessageContainer/components/DayAnimated'
+import DayAnimated from '../MessageContainer/components/DayAnimated'
 import { DayProps } from '../Day'
 
 const mockDaysPositions = { value: {} }

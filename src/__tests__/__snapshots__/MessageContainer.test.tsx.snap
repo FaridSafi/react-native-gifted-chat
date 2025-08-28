@@ -99,3 +99,275 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
   </RCTScrollView>
 </View>
 `;
+
+exports[`should render <MessageContainer /> with showStickyDate=false 1`] = `
+<View
+  style={
+    [
+      {
+        "flexGrow": 1,
+        "justifyContent": "flex-start",
+      },
+      {
+        "flex": 1,
+      },
+    ]
+  }
+>
+  <RCTScrollView
+    CellRendererComponent={[Function]}
+    ListEmptyComponent={[Function]}
+    ListFooterComponent={null}
+    ListHeaderComponent={
+      <React.Fragment>
+        <TypingIndicator
+          isTyping={false}
+        />
+      </React.Fragment>
+    }
+    automaticallyAdjustContentInsets={false}
+    collapsable={false}
+    data={
+      [
+        {
+          "_id": 1,
+          "createdAt": 2023-01-01T12:00:00.000Z,
+          "text": "Hello developer",
+          "user": {
+            "_id": 2,
+            "name": "React Native",
+          },
+        },
+      ]
+    }
+    extraData={null}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    invertStickyHeaders={true}
+    inverted={true}
+    isInvertedVirtualizedList={true}
+    jestAnimatedStyle={
+      {
+        "value": {},
+      }
+    }
+    jestInlineStyle={
+      {
+        "flex": 1,
+      }
+    }
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onEndReached={[Function]}
+    onEndReachedThreshold={0.1}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={1}
+    stickyHeaderIndices={[]}
+    style={
+      [
+        {
+          "transform": [
+            {
+              "scaleY": -1,
+            },
+          ],
+        },
+        {
+          "flex": 1,
+        },
+      ]
+    }
+    viewabilityConfigCallbackPairs={[]}
+  >
+    <View>
+      <View
+        collapsable={false}
+        onLayout={[Function]}
+        style={
+          {
+            "transform": [
+              {
+                "scaleY": -1,
+              },
+            ],
+          }
+        }
+      />
+      <View
+        cellKey="1"
+        index={0}
+        item={
+          {
+            "_id": 1,
+            "createdAt": 2023-01-01T12:00:00.000Z,
+            "text": "Hello developer",
+            "user": {
+              "_id": 2,
+              "name": "React Native",
+            },
+          }
+        }
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "column-reverse",
+            },
+            {
+              "transform": [
+                {
+                  "scaleY": -1,
+                },
+              ],
+            },
+          ]
+        }
+      />
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
+exports[`should render <MessageContainer /> with showStickyDate=true (default) 1`] = `
+<View
+  style={
+    [
+      {
+        "flexGrow": 1,
+        "justifyContent": "flex-start",
+      },
+      {
+        "flex": 1,
+      },
+    ]
+  }
+>
+  <RCTScrollView
+    CellRendererComponent={[Function]}
+    ListEmptyComponent={[Function]}
+    ListFooterComponent={null}
+    ListHeaderComponent={
+      <React.Fragment>
+        <TypingIndicator
+          isTyping={false}
+        />
+      </React.Fragment>
+    }
+    automaticallyAdjustContentInsets={false}
+    collapsable={false}
+    data={
+      [
+        {
+          "_id": 1,
+          "createdAt": 2023-01-01T12:00:00.000Z,
+          "text": "Hello developer",
+          "user": {
+            "_id": 2,
+            "name": "React Native",
+          },
+        },
+      ]
+    }
+    extraData={null}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    invertStickyHeaders={true}
+    inverted={true}
+    isInvertedVirtualizedList={true}
+    jestAnimatedStyle={
+      {
+        "value": {},
+      }
+    }
+    jestInlineStyle={
+      {
+        "flex": 1,
+      }
+    }
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onEndReached={[Function]}
+    onEndReachedThreshold={0.1}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={1}
+    stickyHeaderIndices={[]}
+    style={
+      [
+        {
+          "transform": [
+            {
+              "scaleY": -1,
+            },
+          ],
+        },
+        {
+          "flex": 1,
+        },
+      ]
+    }
+    viewabilityConfigCallbackPairs={[]}
+  >
+    <View>
+      <View
+        collapsable={false}
+        onLayout={[Function]}
+        style={
+          {
+            "transform": [
+              {
+                "scaleY": -1,
+              },
+            ],
+          }
+        }
+      />
+      <View
+        cellKey="1"
+        index={0}
+        item={
+          {
+            "_id": 1,
+            "createdAt": 2023-01-01T12:00:00.000Z,
+            "text": "Hello developer",
+            "user": {
+              "_id": 2,
+              "name": "React Native",
+            },
+          }
+        }
+        onFocusCapture={[Function]}
+        onLayout={[Function]}
+        style={
+          [
+            {
+              "flexDirection": "column-reverse",
+            },
+            {
+              "transform": [
+                {
+                  "scaleY": -1,
+                },
+              ],
+            },
+          ]
+        }
+      />
+    </View>
+  </RCTScrollView>
+</View>
+`;

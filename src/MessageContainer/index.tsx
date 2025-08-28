@@ -54,6 +54,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     handleOnScroll: handleOnScrollProp,
     scrollToBottomComponent: scrollToBottomComponentProp,
     renderDay: renderDayProp,
+    showStickyDate = true,
   } = props
 
   const scrollToBottomOpacity = useSharedValue(0)
@@ -376,14 +377,18 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       {isScrollToBottomEnabled
         ? renderScrollToBottomWrapper()
         : null}
-      <DayAnimated
-        scrolledY={scrolledY}
-        daysPositions={daysPositions}
-        listHeight={listHeight}
-        renderDay={renderDayProp}
-        messages={messages}
-        isLoadingEarlier={isLoadingEarlier}
-      />
+      {showStickyDate
+        ? (
+          <DayAnimated
+            scrolledY={scrolledY}
+            daysPositions={daysPositions}
+            listHeight={listHeight}
+            renderDay={renderDayProp}
+            messages={messages}
+            isLoadingEarlier={isLoadingEarlier}
+          />
+        )
+        : null}
     </View>
   )
 }

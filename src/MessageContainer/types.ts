@@ -7,7 +7,7 @@ import {
 
 import { LoadEarlierProps } from '../LoadEarlier'
 import { MessageProps } from '../Message'
-import {User, IMessage, Reply, DayProps} from '../types'
+import { User, IMessage, Reply, DayProps } from '../types'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
 import { FlatList } from 'react-native-reanimated/lib/typescript/Animated'
 import { AnimateProps } from 'react-native-reanimated'
@@ -34,6 +34,7 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage> {
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: MessageProps<TMessage>): React.ReactElement
   renderDay?(props: DayProps): React.ReactNode
+  showStickyDate?: boolean
   renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   renderTypingIndicator?(): React.ReactNode
   scrollToBottomComponent?(): React.ReactNode

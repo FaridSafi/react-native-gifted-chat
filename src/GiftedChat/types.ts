@@ -168,6 +168,8 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   renderCustomView?(props: BubbleProps<TMessage>): React.ReactNode
   /* Custom day above a message */
   renderDay?(props: DayProps): React.ReactNode
+  /* Controls whether to show the floating sticky date; default is true */
+  showStickyDate?: boolean
   /* Custom time inside a message */
   renderTime?(props: TimeProps<TMessage>): React.ReactNode
   /* Custom footer component on the ListView, e.g. 'User is typing...' */

@@ -30,7 +30,7 @@ export * from './types'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
-function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
+function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageContainerProps<TMessage>) {
   const {
     messages = [],
     user,
@@ -266,15 +266,18 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   const keyExtractor = useCallback((item: unknown) => (item as TMessage)._id.toString(), [])
 
   const renderCell = useCallback((props: CellRendererProps<unknown>) => {
+    const { item, onLayout: onLayoutProp, children } = props
+    const id = (item as IMessage)._id.toString()
+
     const handleOnLayout = (event: LayoutChangeEvent) => {
-      props.onLayout?.(event)
+      onLayoutProp?.(event)
 
       const { y, height } = event.nativeEvent.layout
 
       const newValue = {
         y,
         height,
-        createdAt: new Date((props.item as IMessage).createdAt).getTime(),
+        createdAt: new Date((item as IMessage).createdAt).getTime(),
       }
 
       daysPositions.modify(value => {
@@ -298,7 +301,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
           }
 
         // @ts-expect-error: https://docs.swmansion.com/react-native-reanimated/docs/core/useSharedValue#remarks
-        value[props.item._id] = newValue
+        value[id] = newValue
         return value
       })
     }
@@ -308,7 +311,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         {...props}
         onLayout={handleOnLayout}
       >
-        {props.children}
+        {children}
       </View>
     )
   }, [daysPositions, inverted])

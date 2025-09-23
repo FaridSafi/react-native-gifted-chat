@@ -13,12 +13,13 @@ export default StyleSheet.create({
   emptyChatContainer: {
     transform: [{ scaleY: -1 }],
   },
-  scrollToBottomStyle: {
-    opacity: 0.8,
+  scrollToBottom: {
     position: 'absolute',
     right: 10,
     bottom: 30,
     zIndex: 999,
+  },
+  scrollToBottomContent: {
     height: 40,
     width: 40,
     borderRadius: 20,

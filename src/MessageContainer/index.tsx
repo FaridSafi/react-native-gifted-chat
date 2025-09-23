@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   View,
-  TouchableOpacity,
+  Pressable,
   Text,
   Platform,
   LayoutChangeEvent,
@@ -58,6 +58,8 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
   } = props
 
   const scrollToBottomOpacity = useSharedValue(0)
+  const isScrollingDown = useSharedValue(false)
+  const lastScrolledY = useSharedValue(0)
   const [isScrollToBottomVisible, setIsScrollToBottomVisible] = useState(false)
   const scrollToBottomStyleAnim = useAnimatedStyle(() => ({
     opacity: scrollToBottomOpacity.value,
@@ -76,9 +78,9 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
 
   const ListFooterComponent = useMemo(() => {
     if (renderFooterProp)
-      return <>{renderFooterProp(props)}</>
+      return renderFooterProp(props)
 
-    return <>{renderTypingIndicator()}</>
+    return renderTypingIndicator()
   }, [renderFooterProp, renderTypingIndicator, props])
 
   const renderLoadEarlier = useCallback(() => {
@@ -92,17 +94,34 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
     return null
   }, [loadEarlier, renderLoadEarlierProp, props])
 
+  const makeScrollToBottomVisible = useCallback(() => {
+    if (isScrollingDown.value) return
+
+    setIsScrollToBottomVisible(true)
+    scrollToBottomOpacity.value = withTiming(1, { duration: 250 })
+  }, [scrollToBottomOpacity])
+
+  const makeScrollToBottomHidden = useCallback(() => {
+    scrollToBottomOpacity.value = withTiming(0, { duration: 250 }, isFinished => {
+      if (isFinished)
+        runOnJS(setIsScrollToBottomVisible)(false)
+    })
+  }, [scrollToBottomOpacity])
+
   const scrollTo = useCallback((options: { animated?: boolean, offset: number }) => {
-    if (forwardRef?.current && options)
-      forwardRef.current.scrollToOffset(options)
+    if (options)
+      forwardRef?.current?.scrollToOffset(options)
   }, [forwardRef])
 
   const doScrollToBottom = useCallback((animated: boolean = true) => {
+    isScrollingDown.value = true
+    makeScrollToBottomHidden()
+
     if (inverted)
       scrollTo({ offset: 0, animated })
     else if (forwardRef?.current)
       forwardRef.current.scrollToEnd({ animated })
-  }, [forwardRef, inverted, scrollTo])
+  }, [forwardRef, inverted, scrollTo, isScrollingDown, makeScrollToBottomHidden])
 
   const handleOnScroll = useCallback((event: ReanimatedScrollEvent) => {
     handleOnScrollProp?.(event)
@@ -113,19 +132,11 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
       layoutMeasurement: { height: layoutMeasurementHeight },
     } = event
 
-    const duration = 250
+    isScrollingDown.value =
+      inverted && lastScrolledY.value > contentOffsetY ||
+      !inverted && lastScrolledY.value < contentOffsetY
 
-    const makeScrollToBottomVisible = () => {
-      setIsScrollToBottomVisible(true)
-      scrollToBottomOpacity.value = withTiming(1, { duration })
-    }
-
-    const makeScrollToBottomHidden = () => {
-      scrollToBottomOpacity.value = withTiming(0, { duration }, isFinished => {
-        if (isFinished)
-          runOnJS(setIsScrollToBottomVisible)(false)
-      })
-    }
+    lastScrolledY.value = contentOffsetY
 
     if (inverted)
       if (contentOffsetY > scrollToBottomOffset!)
@@ -217,25 +228,28 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
     return <Text>{'V'}</Text>
   }, [scrollToBottomComponentProp])
 
-  const renderScrollToBottomWrapper = useCallback(() => {
-    if (!isScrollToBottomVisible)
-      return null
+  const ScrollToBottomWrapper = useCallback(() => {
+    if (!isScrollToBottomEnabled) return null
+    if (!isScrollToBottomVisible) return null
 
     return (
-      <TouchableOpacity onPress={() => doScrollToBottom()}>
+      <Pressable
+        style={styles.scrollToBottom}
+        onPress={() => doScrollToBottom()}
+      >
         <Animated.View
           style={[
             stylesCommon.centerItems,
-            styles.scrollToBottomStyle,
+            styles.scrollToBottomContent,
             scrollToBottomStyle,
             scrollToBottomStyleAnim,
           ]}
         >
           {renderScrollBottomComponent()}
         </Animated.View>
-      </TouchableOpacity>
+      </Pressable>
     )
-  }, [scrollToBottomStyle, renderScrollBottomComponent, doScrollToBottom, scrollToBottomStyleAnim, isScrollToBottomVisible])
+  }, [scrollToBottomStyle, renderScrollBottomComponent, doScrollToBottom, scrollToBottomStyleAnim, isScrollToBottomEnabled, isScrollToBottomVisible])
 
   const onLayoutList = useCallback((event: LayoutChangeEvent) => {
     listHeight.value = event.nativeEvent.layout.height
@@ -378,9 +392,7 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
         onLayout={onLayoutList}
         CellRendererComponent={renderCell}
       />
-      {isScrollToBottomEnabled
-        ? renderScrollToBottomWrapper()
-        : null}
+      <ScrollToBottomWrapper />
       <DayAnimated
         scrolledY={scrolledY}
         daysPositions={daysPositions}

@@ -30,7 +30,7 @@ export * from './types'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
-function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageContainerProps<TMessage>) {
+function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
   const {
     messages = [],
     user,
@@ -95,7 +95,8 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
   }, [loadEarlier, renderLoadEarlierProp, props])
 
   const makeScrollToBottomVisible = useCallback(() => {
-    if (isScrollingDown.value) return
+    if (isScrollingDown.value)
+      return
 
     setIsScrollToBottomVisible(true)
     scrollToBottomOpacity.value = withTiming(1, { duration: 250 })
@@ -229,8 +230,10 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
   }, [scrollToBottomComponentProp])
 
   const ScrollToBottomWrapper = useCallback(() => {
-    if (!isScrollToBottomEnabled) return null
-    if (!isScrollToBottomVisible) return null
+    if (!isScrollToBottomEnabled)
+      return null
+    if (!isScrollToBottomVisible)
+      return null
 
     return (
       <Pressable

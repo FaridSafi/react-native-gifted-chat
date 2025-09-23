@@ -19,11 +19,9 @@ exports[`should render <MessageContainer /> and compare with snapshot 1`] = `
     ListEmptyComponent={[Function]}
     ListFooterComponent={null}
     ListHeaderComponent={
-      <React.Fragment>
-        <TypingIndicator
-          isTyping={false}
-        />
-      </React.Fragment>
+      <TypingIndicator
+        isTyping={false}
+      />
     }
     automaticallyAdjustContentInsets={false}
     collapsable={false}

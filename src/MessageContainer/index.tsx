@@ -23,14 +23,14 @@ import { ItemProps } from './components/Item/types'
 import { warning } from '../logging'
 import stylesCommon from '../styles'
 import styles from './styles'
-import { isSameDay } from '../utils'
+import { isSameDay, useCallbackDebounced } from '../utils'
 
 export * from './types'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
-function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
+function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageContainerProps<TMessage>) {
   const {
     messages = [],
     user,
@@ -94,17 +94,15 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     return null
   }, [loadEarlier, renderLoadEarlierProp, props])
 
-  const makeScrollToBottomVisible = useCallback(() => {
-    if (isScrollingDown.value)
+  const changeScrollToBottomVisibility: (isVisible: boolean) => void = useCallbackDebounced(10, (isVisible: boolean) => {
+    if (isScrollingDown.value && isVisible)
       return
 
-    setIsScrollToBottomVisible(true)
-    scrollToBottomOpacity.value = withTiming(1, { duration: 250 })
-  }, [scrollToBottomOpacity])
+    if (isVisible)
+      setIsScrollToBottomVisible(true)
 
-  const makeScrollToBottomHidden = useCallback(() => {
-    scrollToBottomOpacity.value = withTiming(0, { duration: 250 }, isFinished => {
-      if (isFinished)
+    scrollToBottomOpacity.value = withTiming(isVisible ? 1 : 0, { duration: 250 }, isFinished => {
+      if (isFinished && !isVisible)
         runOnJS(setIsScrollToBottomVisible)(false)
     })
   }, [scrollToBottomOpacity])
@@ -116,13 +114,13 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
 
   const doScrollToBottom = useCallback((animated: boolean = true) => {
     isScrollingDown.value = true
-    makeScrollToBottomHidden()
+    changeScrollToBottomVisibility(false)
 
     if (inverted)
       scrollTo({ offset: 0, animated })
     else if (forwardRef?.current)
       forwardRef.current.scrollToEnd({ animated })
-  }, [forwardRef, inverted, scrollTo, isScrollingDown, makeScrollToBottomHidden])
+  }, [forwardRef, inverted, scrollTo, isScrollingDown, changeScrollToBottomVisibility])
 
   const handleOnScroll = useCallback((event: ReanimatedScrollEvent) => {
     handleOnScrollProp?.(event)
@@ -134,24 +132,24 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     } = event
 
     isScrollingDown.value =
-      inverted && lastScrolledY.value > contentOffsetY ||
-      !inverted && lastScrolledY.value < contentOffsetY
+      (inverted && lastScrolledY.value > contentOffsetY) ||
+      (!inverted && lastScrolledY.value < contentOffsetY)
 
     lastScrolledY.value = contentOffsetY
 
     if (inverted)
       if (contentOffsetY > scrollToBottomOffset!)
-        makeScrollToBottomVisible()
+        changeScrollToBottomVisibility(true)
       else
-        makeScrollToBottomHidden()
+        changeScrollToBottomVisibility(false)
     else if (
       contentOffsetY < scrollToBottomOffset! &&
       contentSizeHeight - layoutMeasurementHeight > scrollToBottomOffset!
     )
-      makeScrollToBottomVisible()
+      changeScrollToBottomVisibility(false)
     else
-      makeScrollToBottomHidden()
-  }, [handleOnScrollProp, inverted, scrollToBottomOffset, scrollToBottomOpacity])
+      changeScrollToBottomVisibility(false)
+  }, [handleOnScrollProp, inverted, scrollToBottomOffset, changeScrollToBottomVisibility, isScrollingDown, lastScrolledY])
 
   const renderItem = useCallback(({ item, index }: ListRenderItemInfo<unknown>): React.ReactElement | null => {
     const messageItem = item as TMessage
@@ -232,6 +230,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   const ScrollToBottomWrapper = useCallback(() => {
     if (!isScrollToBottomEnabled)
       return null
+
     if (!isScrollToBottomVisible)
       return null
 

@@ -33,11 +33,10 @@ import { isSameDay } from '../utils'
 
 export * from './types'
 
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
-function MessageContainer<TMessage extends IMessage = IMessage> (
-  props: MessageContainerProps<TMessage>
-) {
+function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageContainerProps<TMessage>) {
   const {
     messages = [],
     user,
@@ -264,27 +263,22 @@ function MessageContainer<TMessage extends IMessage = IMessage> (
         </Animated.View>
       </TouchableOpacity>
     )
-  }, [
-    scrollToBottomStyle,
-    renderScrollBottomComponent,
-    doScrollToBottom,
-    scrollToBottomStyleAnim,
-    isScrollToBottomVisible,
-  ])
+  }, [scrollToBottomStyle, renderScrollBottomComponent, doScrollToBottom, scrollToBottomStyleAnim, isScrollToBottomVisible])
 
-  const onLayoutList = useCallback(
-    (event: LayoutChangeEvent) => {
-      listHeight.value = event.nativeEvent.layout.height
+  const onLayoutList = useCallback((event: LayoutChangeEvent) => {
+    listHeight.value = event.nativeEvent.layout.height
 
-      if (!inverted && messages?.length)
-        setTimeout(() => {
-          doScrollToBottom(false)
-        }, 500)
+    if (
+      !inverted &&
+      messages?.length &&
+      isScrollToBottomEnabled
+    )
+      setTimeout(() => {
+        doScrollToBottom(false)
+      }, 500)
 
-      listViewProps?.onLayout?.(event)
-    },
-    [inverted, messages, doScrollToBottom, listHeight, listViewProps]
-  )
+    listViewProps?.onLayout?.(event)
+  }, [inverted, messages, doScrollToBottom, listHeight, listViewProps, isScrollToBottomEnabled])
 
   const onEndReached = useCallback(() => {
     if (
@@ -302,18 +296,19 @@ function MessageContainer<TMessage extends IMessage = IMessage> (
     []
   )
 
-  const renderCell = useCallback(
-    (props: CellRendererProps<unknown>) => {
-      const handleOnLayout = (event: LayoutChangeEvent) => {
-        props.onLayout?.(event)
+  const renderCell = useCallback((props: CellRendererProps<unknown>) => {
+    const { item, onLayout: onLayoutProp, children } = props
+    const id = (item as IMessage)._id.toString()
+
+    const handleOnLayout = (event: LayoutChangeEvent) => {
+      onLayoutProp?.(event)
 
         const { y, height } = event.nativeEvent.layout
-
-        const newValue = {
-          y,
-          height,
-          createdAt: new Date((props.item as IMessage).createdAt).getTime(),
-        }
+      const newValue = {
+        y,
+        height,
+        createdAt: new Date((item as IMessage).createdAt).getTime(),
+      }
 
         daysPositions.modify(value => {
           'worklet'
@@ -329,29 +324,21 @@ function MessageContainer<TMessage extends IMessage = IMessage> (
             )
           }
 
-          for (const [key, item] of Object.entries(value))
-            if (
-              isSameDay(newValue.createdAt, item.createdAt) &&
-              (inverted ? item.y <= newValue.y : item.y >= newValue.y)
-            ) {
-              delete value[key]
-              break
-            }
+        // @ts-expect-error: https://docs.swmansion.com/react-native-reanimated/docs/core/useSharedValue#remarks
+        value[id] = newValue
+        return value
+      })
+    }
 
-          // @ts-expect-error: https://docs.swmansion.com/react-native-reanimated/docs/core/useSharedValue#remarks
-          value[props.item._id] = newValue
-          return value
-        })
-      }
-
-      return (
-        <View {...props} onLayout={handleOnLayout}>
-          {props.children}
-        </View>
-      )
-    },
-    [daysPositions, inverted]
-  )
+    return (
+      <View
+        {...props}
+        onLayout={handleOnLayout}
+      >
+        {children}
+      </View>
+    )
+  }, [daysPositions, inverted])
 
   const scrollHandler = useAnimatedScrollHandler(
     {
@@ -395,7 +382,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (
     >
       <AnimatedFlatList
         extraData={extraData}
-        ref={forwardRef as React.Ref<FlatList<unknown>>}
+        ref={forwardRef}
         keyExtractor={keyExtractor}
         data={messages}
         renderItem={renderItem}

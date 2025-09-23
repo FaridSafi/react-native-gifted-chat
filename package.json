@@ -92,7 +92,7 @@
     "react-dom": "^18.3.1",
     "react-native": "^0.76.6",
     "react-native-keyboard-controller": "^1.18.6",
-    "react-native-reanimated": "^3.17.1",
+    "react-native-reanimated": "^3.19.1",
     "react-test-renderer": "^18.3.1",
     "typescript": "^5.9.2"
   },

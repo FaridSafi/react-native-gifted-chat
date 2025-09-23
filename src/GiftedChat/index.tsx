@@ -114,7 +114,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const keyboard = useReanimatedKeyboardAnimation()
   const trackingKeyboardMovement = useSharedValue(false)
-  const debounceEnableTypingTimeoutId = useRef<ReturnType<typeof setTimeout>>(undefined)
   const keyboardOffsetBottom = useSharedValue(0)
 
   const contentStyleAnim = useAnimatedStyle(
@@ -165,21 +164,12 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   }, [textInputRef])
 
   const disableTyping = useCallback(() => {
-    clearTimeout(debounceEnableTypingTimeoutId.current)
     setIsTypingDisabled(true)
   }, [])
 
   const enableTyping = useCallback(() => {
-    clearTimeout(debounceEnableTypingTimeoutId.current)
     setIsTypingDisabled(false)
   }, [])
-
-  const debounceEnableTyping = useCallback(() => {
-    clearTimeout(debounceEnableTypingTimeoutId.current)
-    debounceEnableTypingTimeoutId.current = setTimeout(() => {
-      enableTyping()
-    }, 50)
-  }, [enableTyping])
 
   const scrollToBottom = useCallback(
     (isAnimated = true) => {
@@ -401,12 +391,10 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
             else
               runOnJS(handleTextInputFocusWhenKeyboardHide)()
 
-          if (value === 0) {
+          // Only manage typing state when keyboard is completely hidden
+          // Removing the typing disable logic when keyboard is visible to fix iOS typing issues
+          if (value === 0)
             runOnJS(enableTyping)()
-          } else {
-            runOnJS(disableTyping)()
-            runOnJS(debounceEnableTyping)()
-          }
         }
       }
     },
@@ -417,8 +405,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       handleTextInputFocusWhenKeyboardHide,
       handleTextInputFocusWhenKeyboardShow,
       enableTyping,
-      disableTyping,
-      debounceEnableTyping,
       bottomOffset,
     ]
   )

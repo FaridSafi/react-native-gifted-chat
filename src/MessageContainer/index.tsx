@@ -23,7 +23,7 @@ import { ItemProps } from './components/Item/types'
 import { warning } from '../logging'
 import stylesCommon from '../styles'
 import styles from './styles'
-import { isSameDay, useCallbackDebounced } from '../utils'
+import { isSameDay, useCallbackThrottled } from '../utils'
 
 export * from './types'
 
@@ -94,7 +94,7 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
     return null
   }, [loadEarlier, renderLoadEarlierProp, props])
 
-  const changeScrollToBottomVisibility: (isVisible: boolean) => void = useCallbackDebounced(10, (isVisible: boolean) => {
+  const changeScrollToBottomVisibility: (isVisible: boolean) => void = useCallbackThrottled(50, (isVisible: boolean) => {
     if (isScrollingDown.value && isVisible)
       return
 

@@ -12,7 +12,7 @@ const mockMessage = {
   _id: 1,
   text: 'Hello',
   createdAt: new Date('2023-01-01'),
-  user: { _id: 1, name: 'User 1' }
+  user: { _id: 1, name: 'User 1' },
 }
 
 describe('DayAnimated', () => {
@@ -31,8 +31,8 @@ describe('DayAnimated', () => {
   })
 
   it('should use custom renderDay when provided', () => {
-    const customRenderDay = jest.fn((props: DayProps) => <div data-testid="custom-day">Custom Day: {props.createdAt}</div>)
-    
+    const customRenderDay = jest.fn((props: DayProps) => <div data-testid='custom-day'>Custom Day: {props.createdAt}</div>)
+
     const component = renderer.create(
       <DayAnimated
         scrolledY={mockScrolledY}
@@ -43,10 +43,10 @@ describe('DayAnimated', () => {
         renderDay={customRenderDay}
       />
     )
-    
+
     // Force render to trigger the renderDay call if there's a createdAt
     component.getInstance()
-    
+
     // The custom renderDay function should be available in the component
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()

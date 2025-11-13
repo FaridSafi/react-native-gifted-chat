@@ -40,3 +40,28 @@ it('should render <GiftedChat/> and compare with snapshot', () => {
 
   expect(tree.toJSON()).toMatchSnapshot()
 })
+
+it('should render <GiftedChat/> with disableKeyboardController=true', () => {
+  let tree
+
+  renderer.act(() => {
+    (useReanimatedKeyboardAnimation as jest.Mock).mockReturnValue({
+      height: {
+        value: 0,
+      },
+    })
+
+    tree = renderer.create(
+      <GiftedChat
+        messages={messages}
+        onSend={() => {}}
+        user={{
+          _id: 1,
+        }}
+        disableKeyboardController={true}
+      />
+    )
+  })
+
+  expect(tree.toJSON()).toMatchSnapshot()
+})

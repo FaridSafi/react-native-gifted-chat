@@ -75,6 +75,8 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   isLoadingEarlier?: boolean
   /* Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true` */
   isKeyboardInternallyHandled?: boolean
+  /* Completely disable react-native-keyboard-controller. Useful when using react-native-navigation or other conflicting keyboard libraries; default is `false` */
+  disableKeyboardController?: boolean
   /* Whether to render an avatar for the current user; default is false, only show avatars for other users */
   showUserAvatar?: boolean
   /* When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is false */

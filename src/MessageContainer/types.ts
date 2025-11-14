@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react'
+import React, { RefObject, Component } from 'react'
 import {
   FlatListProps,
   StyleProp,
@@ -11,9 +11,16 @@ import { MessageProps } from '../Message'
 import { User, IMessage, Reply, DayProps } from '../types'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
 
-export type ListViewProps<TMessage extends IMessage = IMessage> = Partial<FlatListProps<TMessage>>
+export type ListViewProps<TMessage extends IMessage = IMessage> = Partial<
+  FlatListProps<TMessage>
+>
 
-export type AnimatedList<TMessage> = FlatList<TMessage>
+export type AnimatedList<TMessage> = Component<
+  AnimateProps<FlatListProps<TMessage>>,
+  unknown,
+  unknown
+> &
+  FlatList<FlatListProps<TMessage>>
 
 export interface MessageContainerProps<TMessage extends IMessage = IMessage> {
   forwardRef?: RefObject<AnimatedList<TMessage>>
@@ -29,6 +36,7 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage> {
   invertibleScrollViewProps?: object
   extraData?: object
   scrollToBottomOffset?: number
+  isDayAnimatedEnabled?: boolean
   renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: MessageProps<TMessage>): React.ReactElement
@@ -55,4 +63,6 @@ interface ViewLayout {
   height: number
 }
 
-export type DaysPositions = { [key: string]: ViewLayout & { createdAt: number } }
+export type DaysPositions = {
+  [key: string]: ViewLayout & { createdAt: number }
+}

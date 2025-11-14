@@ -9,7 +9,13 @@ import {
   FlatList,
   CellRendererProps,
 } from 'react-native'
-import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
+import Animated, {
+  runOnJS,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated'
 import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
 import DayAnimated from './components/DayAnimated'
 import Item from './components/Item'
@@ -55,15 +61,19 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
     handleOnScroll: handleOnScrollProp,
     scrollToBottomComponent: scrollToBottomComponentProp,
     renderDay: renderDayProp,
+    isDayAnimatedEnabled = true,
   } = props
 
   const scrollToBottomOpacity = useSharedValue(0)
   const isScrollingDown = useSharedValue(false)
   const lastScrolledY = useSharedValue(0)
   const [isScrollToBottomVisible, setIsScrollToBottomVisible] = useState(false)
-  const scrollToBottomStyleAnim = useAnimatedStyle(() => ({
-    opacity: scrollToBottomOpacity.value,
-  }), [scrollToBottomOpacity])
+  const scrollToBottomStyleAnim = useAnimatedStyle(
+    () => ({
+      opacity: scrollToBottomOpacity.value,
+    }),
+    [scrollToBottomOpacity]
+  )
 
   const daysPositions = useSharedValue<DaysPositions>({})
   const listHeight = useSharedValue(0)
@@ -122,77 +132,100 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
       forwardRef.current.scrollToEnd({ animated })
   }, [forwardRef, inverted, scrollTo, isScrollingDown, changeScrollToBottomVisibility])
 
-  const handleOnScroll = useCallback((event: ReanimatedScrollEvent) => {
-    handleOnScrollProp?.(event)
+  const handleOnScroll = useCallback(
+    (event: ReanimatedScrollEvent) => {
+      handleOnScrollProp?.(event)
 
-    const {
-      contentOffset: { y: contentOffsetY },
-      contentSize: { height: contentSizeHeight },
-      layoutMeasurement: { height: layoutMeasurementHeight },
-    } = event
+      const {
+        contentOffset: { y: contentOffsetY },
+        contentSize: { height: contentSizeHeight },
+        layoutMeasurement: { height: layoutMeasurementHeight },
+      } = event
 
-    isScrollingDown.value =
-      (inverted && lastScrolledY.value > contentOffsetY) ||
-      (!inverted && lastScrolledY.value < contentOffsetY)
 
-    lastScrolledY.value = contentOffsetY
+      const duration = 250
 
-    if (inverted)
-      if (contentOffsetY > scrollToBottomOffset!)
-        changeScrollToBottomVisibility(true)
-      else
-        changeScrollToBottomVisibility(false)
-    else if (
-      contentOffsetY < scrollToBottomOffset! &&
-      contentSizeHeight - layoutMeasurementHeight > scrollToBottomOffset!
-    )
-      changeScrollToBottomVisibility(false)
-    else
-      changeScrollToBottomVisibility(false)
-  }, [handleOnScrollProp, inverted, scrollToBottomOffset, changeScrollToBottomVisibility, isScrollingDown, lastScrolledY])
-
-  const renderItem = useCallback(({ item, index }: ListRenderItemInfo<unknown>): React.ReactElement | null => {
-    const messageItem = item as TMessage
-
-    if (!messageItem._id && messageItem._id !== 0)
-      warning('GiftedChat: `_id` is missing for message', JSON.stringify(item))
-
-    if (!messageItem.user) {
-      if (!messageItem.system)
-        warning(
-          'GiftedChat: `user` is missing for message',
-          JSON.stringify(messageItem)
-        )
-
-      messageItem.user = { _id: 0 }
-    }
-
-    const { messages, ...restProps } = props
-
-    if (messages && user) {
-      const previousMessage =
-        (inverted ? messages[index + 1] : messages[index - 1]) || {}
-      const nextMessage =
-        (inverted ? messages[index - 1] : messages[index + 1]) || {}
-
-      const messageProps: ItemProps<TMessage> = {
-        ...restProps,
-        currentMessage: messageItem,
-        previousMessage,
-        nextMessage,
-        position: messageItem.user._id === user._id ? 'right' : 'left',
-        scrolledY,
-        daysPositions,
-        listHeight,
+      const makeScrollToBottomVisible = () => {
+        setIsScrollToBottomVisible(true)
+        scrollToBottomOpacity.value = withTiming(1, { duration })
       }
 
-      return (
-        <Item<TMessage> {...messageProps} />
-      )
-    }
+      const makeScrollToBottomHidden = () => {
+        scrollToBottomOpacity.value = withTiming(
+          0,
+          { duration },
+          isFinished => {
+            if (isFinished)
+              runOnJS(setIsScrollToBottomVisible)(false)
+          }
+        )
+      }
 
-    return null
-  }, [props, inverted, scrolledY, daysPositions, listHeight, user])
+      if (inverted)
+        if (contentOffsetY > scrollToBottomOffset!)
+          makeScrollToBottomVisible()
+        else
+          makeScrollToBottomHidden()
+      else if (
+        contentOffsetY < scrollToBottomOffset! &&
+        contentSizeHeight - layoutMeasurementHeight > scrollToBottomOffset!
+      )
+        makeScrollToBottomVisible()
+      else
+        makeScrollToBottomHidden()
+    },
+    [handleOnScrollProp, inverted, scrollToBottomOffset, scrollToBottomOpacity]
+  )
+
+  const renderItem = useCallback(
+    ({
+      item,
+      index,
+    }: ListRenderItemInfo<unknown>): React.ReactElement | null => {
+      const messageItem = item as TMessage
+
+      if (!messageItem._id && messageItem._id !== 0)
+        warning(
+          'GiftedChat: `_id` is missing for message',
+          JSON.stringify(item)
+        )
+
+      if (!messageItem.user) {
+        if (!messageItem.system)
+          warning(
+            'GiftedChat: `user` is missing for message',
+            JSON.stringify(messageItem)
+          )
+
+        messageItem.user = { _id: 0 }
+      }
+
+      const { messages, ...restProps } = props
+
+      if (messages && user) {
+        const previousMessage =
+          (inverted ? messages[index + 1] : messages[index - 1]) || {}
+        const nextMessage =
+          (inverted ? messages[index - 1] : messages[index + 1]) || {}
+
+        const messageProps: ItemProps<TMessage> = {
+          ...restProps,
+          currentMessage: messageItem,
+          previousMessage,
+          nextMessage,
+          position: messageItem.user._id === user._id ? 'right' : 'left',
+          scrolledY,
+          daysPositions,
+          listHeight,
+        }
+
+        return <Item<TMessage> {...messageProps} />
+      }
+
+      return null
+    },
+    [props, inverted, scrolledY, daysPositions, listHeight, user]
+  )
 
   const renderChatEmpty = useCallback(() => {
     if (renderChatEmptyProp)
@@ -215,9 +248,7 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
     if (!content)
       return null
 
-    return (
-      <View style={stylesCommon.fill}>{content}</View>
-    )
+    return <View style={stylesCommon.fill}>{content}</View>
   }, [renderLoadEarlier])
 
   const renderScrollBottomComponent = useCallback(() => {
@@ -279,7 +310,10 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
       onLoadEarlier()
   }, [infiniteScroll, loadEarlier, onLoadEarlier, isLoadingEarlier])
 
-  const keyExtractor = useCallback((item: unknown) => (item as TMessage)._id.toString(), [])
+  const keyExtractor = useCallback(
+    (item: unknown) => (item as TMessage)._id.toString(),
+    []
+  )
 
   const renderCell = useCallback((props: CellRendererProps<unknown>) => {
     const { item, onLayout: onLayoutProp, children } = props
@@ -288,32 +322,25 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
     const handleOnLayout = (event: LayoutChangeEvent) => {
       onLayoutProp?.(event)
 
-      const { y, height } = event.nativeEvent.layout
-
+        const { y, height } = event.nativeEvent.layout
       const newValue = {
         y,
         height,
         createdAt: new Date((item as IMessage).createdAt).getTime(),
       }
 
-      daysPositions.modify(value => {
-        'worklet'
+        daysPositions.modify(value => {
+          'worklet'
 
-        const isSameDay = (date1: number, date2: number) => {
-          const d1 = new Date(date1)
-          const d2 = new Date(date2)
+          const isSameDay = (date1: number, date2: number) => {
+            const d1 = new Date(date1)
+            const d2 = new Date(date2)
 
-          return (
-            d1.getDate() === d2.getDate() &&
-            d1.getMonth() === d2.getMonth() &&
-            d1.getFullYear() === d2.getFullYear()
-          )
-        }
-
-        for (const [key, item] of Object.entries(value))
-          if (isSameDay(newValue.createdAt, item.createdAt) && (inverted ? item.y <= newValue.y : item.y >= newValue.y)) {
-            delete value[key]
-            break
+            return (
+              d1.getDate() === d2.getDate() &&
+              d1.getMonth() === d2.getMonth() &&
+              d1.getFullYear() === d2.getFullYear()
+            )
           }
 
         // @ts-expect-error: https://docs.swmansion.com/react-native-reanimated/docs/core/useSharedValue#remarks
@@ -332,13 +359,16 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
     )
   }, [daysPositions, inverted])
 
-  const scrollHandler = useAnimatedScrollHandler({
-    onScroll: event => {
-      scrolledY.value = event.contentOffset.y
+  const scrollHandler = useAnimatedScrollHandler(
+    {
+      onScroll: event => {
+        scrolledY.value = event.contentOffset.y
 
-      runOnJS(handleOnScroll)(event)
+        runOnJS(handleOnScroll)(event)
+      },
     },
-  }, [handleOnScroll])
+    [handleOnScroll]
+  )
 
   // removes unrendered days positions when messages are added/removed
   useEffect(() => {
@@ -394,6 +424,7 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
         onLayout={onLayoutList}
         CellRendererComponent={renderCell}
       />
+
       <ScrollToBottomWrapper />
       <DayAnimated
         scrolledY={scrolledY}

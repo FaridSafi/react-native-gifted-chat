@@ -10,7 +10,8 @@
     "web": "npx expo start --web --clear",
     "lint": "expo lint",
     "fresh": "yarn start --reset-cache",
-    "pod:install": "RCT_NEW_ARCH_ENABLED=1 npx -y pod-install"
+    "pod:install": "RCT_NEW_ARCH_ENABLED=1 npx -y pod-install",
+    "rebuildNativeDeps": "yarn expo prebuild"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",

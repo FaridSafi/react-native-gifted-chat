@@ -193,7 +193,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Callback when the input text changes */
   onInputTextChanged?(text: string): void
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
-  parsePatterns?: (linkStyle?: TextStyle) => { type?: string, pattern?: RegExp, style?: StyleProp<TextStyle> | object, onPress?: unknown, renderText?: unknown }[]
+  matchers?: MessageTextProps<TMessage>['matchers']
   onQuickReply?(replies: Reply[]): void
   renderQuickReplies?(
     quickReplies: QuickRepliesProps<TMessage>,

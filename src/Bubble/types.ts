@@ -5,7 +5,7 @@ import {
   TextStyle,
 } from 'react-native'
 import { QuickRepliesProps } from '../QuickReplies'
-import { MessageTextProps } from '../MessageText'
+import { MessageTextProps, MessageOption } from '../MessageText'
 import { MessageImageProps } from '../MessageImage'
 import { TimeProps } from '../Time'
 import {
@@ -39,7 +39,7 @@ export type RenderMessageAudioProps<TMessage extends IMessage> = Omit<
 
 export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
-  'containerStyle' | 'wrapperStyle'
+  'containerStyle' | 'wrapperStyle' | 'options'
 > &
   MessageTextProps<TMessage>
 /* eslint-enable no-use-before-define */
@@ -54,7 +54,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   currentMessage: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage
-  optionTitles?: string[]
+  options?: MessageOption[]
   containerStyle?: LeftRightStyle<ViewStyle>
   wrapperStyle?: LeftRightStyle<ViewStyle>
   textStyle?: LeftRightStyle<TextStyle>

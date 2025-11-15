@@ -38,46 +38,22 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
     containerStyle,
     wrapperStyle,
     bottomContainerStyle,
+    onPress: onPressProp,
+    onLongPress: onLongPressProp,
   } = props
 
   const context = useChatContext()
 
   const onPress = useCallback(() => {
-    if (props.onPress)
-      props.onPress(context, currentMessage)
-  }, [context, props, currentMessage])
+    onPressProp?.(context, currentMessage)
+  }, [onPressProp, context, currentMessage])
 
   const onLongPress = useCallback(() => {
-    const {
-      onLongPress,
-      optionTitles,
-    } = props
-
-    if (onLongPress) {
-      onLongPress(context, currentMessage)
-      return
-    }
-
-    if (!optionTitles?.length)
-      return
-
-    const options = optionTitles
-    const cancelButtonIndex = options.length - 1
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ;(context as any).actionSheet().showActionSheetWithOptions(
-      {
-        options,
-        cancelButtonIndex,
-      },
-      (buttonIndex: number) => {
-        console.log('onLongPress', { buttonIndex })
-      }
-    )
+    onLongPressProp?.(context, currentMessage)
   }, [
     currentMessage,
     context,
-    props,
+    onLongPressProp,
   ])
 
   const styledBubbleToNext = useCallback(() => {
@@ -111,7 +87,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
     )
       return [
         styles[position].containerToPrevious,
-        containerToPreviousStyle && containerToPreviousStyle[position],
+        containerToPreviousStyle?.[position],
       ]
 
     return null
@@ -166,7 +142,6 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
         /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,
         wrapperStyle,
-        optionTitles,
         /* eslint-enable @typescript-eslint/no-unused-vars */
         ...messageTextProps
       } = props

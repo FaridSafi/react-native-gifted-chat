@@ -33,7 +33,13 @@ export const useRelativeScrolledPositionToBottomOfDay = (
   const absoluteScrolledPositionToBottomOfDay = useAbsoluteScrolledPositionToBottomOfDay(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
 
   // sorted array of days positions by y
-  const daysPositionsArray = useDerivedValue(() => Object.values(daysPositions.value).sort((a, b) => a.y - b.y))
+  const daysPositionsArray = useDerivedValue(() => {
+    return Object.values(daysPositions.value).sort((a, b) => {
+      'worklet'
+
+      return a.y - b.y
+    })
+  })
 
   // find current day position by scrolled position
   const currentDayPosition = useDerivedValue(() => {

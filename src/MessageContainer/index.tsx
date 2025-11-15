@@ -10,7 +10,7 @@ import {
   CellRendererProps,
 } from 'react-native'
 import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
-import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
+import { ReanimatedScrollEvent } from '../reanimatedCompat'
 import DayAnimated from './components/DayAnimated'
 import Item from './components/Item'
 

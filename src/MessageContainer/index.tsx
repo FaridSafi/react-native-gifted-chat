@@ -10,7 +10,7 @@ import {
   CellRendererProps,
 } from 'react-native'
 import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
-import { ReanimatedScrollEvent } from 'react-native-reanimated/lib/typescript/hook/commonTypes'
+import { ReanimatedScrollEvent } from '../reanimatedCompat'
 import DayAnimated from './components/DayAnimated'
 import Item from './components/Item'
 
@@ -30,7 +30,7 @@ export * from './types'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
-function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageContainerProps<TMessage>) {
+function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
   const {
     messages = [],
     user,
@@ -94,7 +94,7 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
     return null
   }, [loadEarlier, renderLoadEarlierProp, props])
 
-  const changeScrollToBottomVisibility: (isVisible: boolean) => void = useCallbackThrottled(50, (isVisible: boolean) => {
+  const changeScrollToBottomVisibility: (isVisible: boolean) => void = useCallbackThrottled((isVisible: boolean) => {
     if (isScrollingDown.value && isVisible)
       return
 
@@ -105,7 +105,7 @@ function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageCo
       if (isFinished && !isVisible)
         runOnJS(setIsScrollToBottomVisible)(false)
     })
-  }, [scrollToBottomOpacity])
+  }, [scrollToBottomOpacity, isScrollingDown], 50)
 
   const scrollTo = useCallback((options: { animated?: boolean, offset: number }) => {
     if (options)

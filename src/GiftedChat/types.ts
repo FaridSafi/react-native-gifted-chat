@@ -75,6 +75,8 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   isLoadingEarlier?: boolean
   /* Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true` */
   isKeyboardInternallyHandled?: boolean
+  /* Completely disable react-native-keyboard-controller. Useful when using react-native-navigation or other conflicting keyboard libraries; default is `false` */
+  disableKeyboardController?: boolean
   /* Whether to render an avatar for the current user; default is false, only show avatars for other users */
   showUserAvatar?: boolean
   /* When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is false */
@@ -191,7 +193,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Callback when the input text changes */
   onInputTextChanged?(text: string): void
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
-  parsePatterns?: (linkStyle?: TextStyle) => { type?: string, pattern?: RegExp, style?: StyleProp<TextStyle> | object, onPress?: unknown, renderText?: unknown }[]
+  matchers?: MessageTextProps<TMessage>['matchers']
   onQuickReply?(replies: Reply[]): void
   renderQuickReplies?(
     quickReplies: QuickRepliesProps<TMessage>,

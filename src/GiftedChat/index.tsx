@@ -89,6 +89,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
     isKeyboardInternallyHandled = true,
+    disableKeyboardController = false,
   } = props
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
@@ -112,7 +113,16 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const [text, setText] = useState<string | undefined>(() => props.text || '')
   const [isTypingDisabled, setIsTypingDisabled] = useState<boolean>(false)
 
-  const keyboard = useReanimatedKeyboardAnimation()
+  // Always call the hook, but conditionally use its data
+  const keyboardControllerData = useReanimatedKeyboardAnimation()
+
+  // Create a mock keyboard object when disabled
+  const keyboard = useMemo(() => {
+    if (disableKeyboardController)
+      return { height: { value: 0 } }
+    return keyboardControllerData
+  }, [disableKeyboardController, keyboardControllerData])
+
   const trackingKeyboardMovement = useSharedValue(false)
   const debounceEnableTypingTimeoutId = useRef<ReturnType<typeof setTimeout>>(undefined)
   const keyboardOffsetBottom = useSharedValue(0)
@@ -380,9 +390,14 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       setText(props.text)
   }, [props.text])
 
+  // Only set up keyboard animation when keyboard controller is enabled
   useAnimatedReaction(
-    () => -keyboard.height.value,
+    () => disableKeyboardController ? 0 : -keyboard.height.value,
     (value, prevValue) => {
+      // Skip keyboard handling when disabled
+      if (disableKeyboardController)
+        return
+
       if (prevValue !== null && value !== prevValue) {
         const isKeyboardMovingUp = value > prevValue
         if (isKeyboardMovingUp !== trackingKeyboardMovement.value) {
@@ -420,6 +435,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       disableTyping,
       debounceEnableTyping,
       bottomOffset,
+      disableKeyboardController,
     ]
   )
 
@@ -433,7 +449,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         >
           {isInitialized
             ? (
-              <Animated.View style={[stylesCommon.fill, isKeyboardInternallyHandled && contentStyleAnim]}>
+              <Animated.View style={[stylesCommon.fill, (isKeyboardInternallyHandled && !disableKeyboardController) && contentStyleAnim]}>
                 {renderMessages}
                 {inputToolbarFragment}
               </Animated.View>
@@ -448,6 +464,10 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 }
 
 function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedChatProps<TMessage>) {
+  // Don't use KeyboardProvider when keyboard controller is disabled
+  if (props.disableKeyboardController)
+    return <GiftedChat<TMessage> {...props} />
+
   return (
     <KeyboardProvider>
       <GiftedChat<TMessage> {...props} />

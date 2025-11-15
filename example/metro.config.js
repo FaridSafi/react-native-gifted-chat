@@ -1,39 +1,50 @@
-/**
- * Metro configuration
- * https://facebook.github.io/metro/docs/configuration
-*
-* @type {import('metro-config').MetroConfig}
-*/
-
-/* eslint-disable @typescript-eslint/no-require-imports */
-const { mergeConfig } = require('@react-native/metro-config')
-const { getDefaultConfig } = require('@expo/metro-config')
+const fs = require('fs')
 const path = require('path')
-// const { wrapWithReanimatedMetroConfig } = require('react-native-reanimated/metro-config')
+const escape = require('escape-string-regexp')
+const { getDefaultConfig } = require('expo/metro-config')
 
-/* eslint-enable @typescript-eslint/no-require-imports */
-const config = {
-  watchFolders: [
-    path.resolve(__dirname, '../src'),
-  ],
+const config = getDefaultConfig(__dirname)
+const { transformer, resolver } = config
+const defaultWatchFolders = config.watchFolders ?? []
+
+const root = path.resolve(__dirname, '..')
+const rootPak = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
+
+const modules = [
+  '@babel/runtime',
+  'metro-runtime',
+  'react-native-web',
+  ...Object.keys({
+    ...rootPak.dependencies,
+    ...rootPak.peerDependencies,
+  }),
+]
+
+module.exports = {
+  ...config,
+
+  projectRoot: __dirname,
+  watchFolders: [...defaultWatchFolders, root],
+
+  // We need to make sure that only one version is loaded for peerDependencies
+  // So we blocklist them at the root, and alias them to the versions in example's node_modules
   resolver: {
-    extraNodeModules: new Proxy(
-      {},
-      {
-        get: (target, name) => {
-          // console.log(`example/metro name: ${name}`, Object.prototype.hasOwnProperty.call(target, name))
-          if (Object.prototype.hasOwnProperty.call(target, name))
-            return target[name]
+    ...resolver,
+    blockList: [new RegExp(`^${escape(path.join(root, 'node_modules'))}\\/.*$`)],
+    extraNodeModules: modules.reduce((acc, name) => {
+      acc[name] = path.join(__dirname, 'node_modules', name)
+      return acc
+    }, {}),
+    unstable_enablePackageExports: false,
+  },
 
-          if (name === 'react-native-gifted-chat')
-            return path.join(process.cwd(), '../src')
-
-          return path.join(process.cwd(), `node_modules/${name}`)
-        },
-      }
-    ),
+  transformer: {
+    ...transformer,
+    getTransformOptions: async () => ({
+      transform: {
+        experimentalImportSupport: false,
+        inlineRequires: true,
+      },
+    }),
   },
 }
-
-// module.exports = wrapWithReanimatedMetroConfig(mergeConfig(getDefaultConfig(__dirname), config))
-module.exports = mergeConfig(getDefaultConfig(__dirname), config)

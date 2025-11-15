@@ -103,9 +103,7 @@ module.exports = {
       'warn',
       {
         additionalHooks:
-          '(useAnimatedStyle|useSharedValue|useAnimatedGestureHandler|useAnimatedScrollHandler|useAnimatedProps|useDerivedValue|useAnimatedRef|useAnimatedReact|useAnimatedReaction)',
-        // useAnimatedReaction
-        // USE RULE FUNC/FUNC/DEPS
+          '(useAnimatedStyle|useSharedValue|useAnimatedGestureHandler|useAnimatedScrollHandler|useAnimatedProps|useDerivedValue|useAnimatedRef|useAnimatedReact|useAnimatedReaction|useCallbackDebounced|useCallbackThrottled)',
       },
     ],
     'no-unused-vars': ['error'],

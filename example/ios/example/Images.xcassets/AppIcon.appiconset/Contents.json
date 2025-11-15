@@ -1,13 +1,14 @@
 {
-  "images" : [
+  "images": [
     {
-      "idiom" : "universal",
-      "platform" : "ios",
-      "size" : "1024x1024"
+      "filename": "App-Icon-1024x1024@1x.png",
+      "idiom": "universal",
+      "platform": "ios",
+      "size": "1024x1024"
     }
   ],
-  "info" : {
-    "version" : 1,
-    "author" : "expo"
+  "info": {
+    "version": 1,
+    "author": "expo"
   }
 }

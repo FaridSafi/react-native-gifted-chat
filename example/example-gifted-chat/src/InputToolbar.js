@@ -41,7 +41,7 @@ export const renderActions = props => (
         console.log('Cancel')
       },
     }}
-    optionTintColor="#222B45"
+    optionTintColor='#222B45'
   />
 )
 

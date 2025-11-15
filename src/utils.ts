@@ -30,11 +30,10 @@ export function isSameUser (
   )
 }
 
-function processCallbackArguments (args: any) {
+function processCallbackArguments (args: unknown[]): unknown[] {
   const [e, ...rest] = args
-  const { nativeEvent } = e || {}
-
-  let params = []
+  const { nativeEvent } = (e as { nativeEvent?: unknown }) || {}
+  let params: unknown[] = []
   if (e) {
     if (nativeEvent)
       params.push({ nativeEvent })
@@ -47,36 +46,37 @@ function processCallbackArguments (args: any) {
   return params
 }
 
-export function useCallbackDebounced (time: number, callbackFunc: (...args: any[]) => void, deps: any[] = []) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function useCallbackDebounced<T extends (...args: any[]) => any>(callbackFunc: T, deps: React.DependencyList = [], time: number): (...args: Parameters<T>) => void {
   const timeoutId = useRef<ReturnType<typeof setTimeout>>(undefined)
 
-  // we use function instead of arrow to access arguments object
-  const savedFunc = useCallback(function () {
-    const args = arguments
+  const savedFunc = useCallback((...args: Parameters<T>) => {
     const params = processCallbackArguments(args)
-
-    clearTimeout(timeoutId.current)
+    if (timeoutId.current)
+      clearTimeout(timeoutId.current)
     timeoutId.current = setTimeout(() => {
-      callbackFunc(...params)
+      callbackFunc(...params as Parameters<T>)
     }, time)
-  }, [callbackFunc, time, deps])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [callbackFunc, time, ...deps])
 
   useEffect(() => {
     return () => {
-      clearTimeout(timeoutId.current)
+      if (timeoutId.current)
+        clearTimeout(timeoutId.current)
     }
   }, [])
 
   return savedFunc
 }
 
-export function useCallbackThrottled (time: number, callbackFunc: (...args: any[]) => void, deps: any[] = []) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function useCallbackThrottled<T extends (...args: any[]) => any>(callbackFunc: T, deps: React.DependencyList = [], time: number): (...args: Parameters<T>) => void {
   const lastExecution = useRef<number>(0)
   const timeoutId = useRef<ReturnType<typeof setTimeout>>(undefined)
 
   // we use function instead of arrow to access arguments object
-  const savedFunc = useCallback(function () {
-    const args = arguments
+  const savedFunc = useCallback((...args: Parameters<T>) => {
     const params = processCallbackArguments(args)
 
     const now = Date.now()
@@ -85,16 +85,17 @@ export function useCallbackThrottled (time: number, callbackFunc: (...args: any[
     if (timeSinceLastExecution >= time) {
       // Execute immediately if enough time has passed
       lastExecution.current = now
-      callbackFunc(...params)
+      callbackFunc(...params as Parameters<T>)
     } else {
       // Schedule execution for the remaining time
       clearTimeout(timeoutId.current)
       timeoutId.current = setTimeout(() => {
         lastExecution.current = Date.now()
-        callbackFunc(...params)
+        callbackFunc(...params as Parameters<T>)
       }, time - timeSinceLastExecution)
     }
-  }, [callbackFunc, time, deps])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [callbackFunc, time, ...deps])
 
   useEffect(() => {
     return () => {

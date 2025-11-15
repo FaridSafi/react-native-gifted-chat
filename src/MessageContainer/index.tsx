@@ -94,7 +94,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     return null
   }, [loadEarlier, renderLoadEarlierProp, props])
 
-  const changeScrollToBottomVisibility: (isVisible: boolean) => void = useCallbackThrottled(50, (isVisible: boolean) => {
+  const changeScrollToBottomVisibility: (isVisible: boolean) => void = useCallbackThrottled((isVisible: boolean) => {
     if (isScrollingDown.value && isVisible)
       return
 
@@ -105,7 +105,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       if (isFinished && !isVisible)
         runOnJS(setIsScrollToBottomVisible)(false)
     })
-  }, [scrollToBottomOpacity])
+  }, [scrollToBottomOpacity, isScrollingDown], 50)
 
   const scrollTo = useCallback((options: { animated?: boolean, offset: number }) => {
     if (options)

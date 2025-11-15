@@ -6939,8 +6939,10 @@ react-native-gesture-handler@~2.29.1:
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
 
-"react-native-gifted-chat@file:..":
-  version "2.8.1"
+react-native-gifted-chat@^2.8.2-alpha.0:
+  version "2.8.2-alpha.0"
+  resolved "https://registry.yarnpkg.com/react-native-gifted-chat/-/react-native-gifted-chat-2.8.2-alpha.0.tgz#41f7e2168ba774adf568e2441cb7cd07f882b1a2"
+  integrity sha512-BxMLyCtXuKcHz/eU4UAUlK48ZIUMLGoHqjS0FIjqNrP/t3THUApERvP3R+64qqWbYx4SVxvbBPQCfcseL8LmFQ==
   dependencies:
     "@expo/react-native-action-sheet" "^4.1.1"
     "@types/lodash.isequal" "^4.5.8"

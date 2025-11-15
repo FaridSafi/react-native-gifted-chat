@@ -1,27 +1,50 @@
-const { getDefaultConfig } = require('expo/metro-config')
+const fs = require('fs')
 const path = require('path')
+const escape = require('escape-string-regexp')
+const { getDefaultConfig } = require('expo/metro-config')
 
 const config = getDefaultConfig(__dirname)
+const { transformer, resolver } = config
+const defaultWatchFolders = config.watchFolders ?? []
 
-// Point to the parent directory (the library root)
-const projectRoot = __dirname
-const workspaceRoot = path.resolve(projectRoot, '..')
+const root = path.resolve(__dirname, '..')
+const rootPak = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
 
-// Watch the parent directory for changes
-config.watchFolders = [workspaceRoot]
-
-// Resolve react-native-gifted-chat from the local src directory
-config.resolver.extraNodeModules = {
-  'react-native-gifted-chat': path.resolve(workspaceRoot, 'src'),
-}
-
-// Ensure we're resolving from both the project and workspace
-config.resolver.nodeModulesPaths = [
-  path.resolve(projectRoot, 'node_modules'),
-  path.resolve(workspaceRoot, 'node_modules'),
+const modules = [
+  '@babel/runtime',
+  'metro-runtime',
+  'react-native-web',
+  ...Object.keys({
+    ...rootPak.dependencies,
+    ...rootPak.peerDependencies,
+  }),
 ]
 
-// Ensure TypeScript files are resolved
-config.resolver.sourceExts = [...(config.resolver.sourceExts || []), 'tsx', 'ts']
+module.exports = {
+  ...config,
 
-module.exports = config
+  projectRoot: __dirname,
+  watchFolders: [...defaultWatchFolders, root],
+
+  // We need to make sure that only one version is loaded for peerDependencies
+  // So we blocklist them at the root, and alias them to the versions in example's node_modules
+  resolver: {
+    ...resolver,
+    blockList: [new RegExp(`^${escape(path.join(root, 'node_modules'))}\\/.*$`)],
+    extraNodeModules: modules.reduce((acc, name) => {
+      acc[name] = path.join(__dirname, 'node_modules', name)
+      return acc
+    }, {}),
+    unstable_enablePackageExports: false,
+  },
+
+  transformer: {
+    ...transformer,
+    getTransformOptions: async () => ({
+      transform: {
+        experimentalImportSupport: false,
+        inlineRequires: true,
+      },
+    }),
+  },
+}

@@ -7,7 +7,6 @@ TODO.md
 .vscode
 Exponent-*.app
 *.log
-lib/
 coverage/
 web-build/
 .eslintcache

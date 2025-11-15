@@ -40,7 +40,7 @@
     "react-native": "0.81.5",
     "react-native-autolink": "^4.2.0",
     "react-native-gesture-handler": "~2.29.1",
-    "react-native-gifted-chat": "*",
+    "react-native-gifted-chat": "file:..",
     "react-native-keyboard-controller": "^1.19.5",
     "react-native-maps": "1.20.1",
     "react-native-paper": "^5.14.5",

@@ -3392,7 +3392,7 @@ data-view-byte-offset@^1.0.1:
     es-errors "^1.3.0"
     is-data-view "^1.0.1"
 
-dayjs@^1.11.13:
+dayjs@^1.11.18:
   version "1.11.19"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.19.tgz#15dc98e854bb43917f12021806af897c58ae2938"
   integrity sha512-t5EcLVS6QPBNqM2z8fakk/NKel+Xzshgt8FFKAn+qwlD1pzZWxh0nVCrvFK7ZDb6XucZeF9z8C7CBWTRIVApAw==
@@ -6817,7 +6817,7 @@ prompts@^2.0.1, prompts@^2.3.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.7.x, prop-types@^15.8.1:
+prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -6939,19 +6939,17 @@ react-native-gesture-handler@~2.29.1:
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
 
-react-native-gifted-chat@*:
+"react-native-gifted-chat@file:..":
   version "2.8.1"
-  resolved "https://registry.yarnpkg.com/react-native-gifted-chat/-/react-native-gifted-chat-2.8.1.tgz#92380aceb56024103de7c0003e3b43572c5a5641"
-  integrity sha512-x4Kq0YvmaHqQg/ENAmFzwcjJyH31cGrCWETFzUMmTZgWsXkkiJ1MamTnkLGQp6deVxM6G0QNxrF7IZnBOeMbsw==
   dependencies:
     "@expo/react-native-action-sheet" "^4.1.1"
     "@types/lodash.isequal" "^4.5.8"
-    dayjs "^1.11.13"
+    dayjs "^1.11.18"
     lodash.isequal "^4.5.0"
+    react-native-autolink "^4.2.0"
     react-native-communications "^2.2.1"
     react-native-iphone-x-helper "^1.3.1"
     react-native-lightbox-v2 "^0.9.2"
-    react-native-parsed-text "^0.0.22"
 
 react-native-iphone-x-helper@^1.3.1:
   version "1.3.1"
@@ -6990,13 +6988,6 @@ react-native-paper@^5.14.5:
     "@callstack/react-theme-provider" "^3.0.9"
     color "^3.1.2"
     use-latest-callback "^0.2.3"
-
-react-native-parsed-text@^0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/react-native-parsed-text/-/react-native-parsed-text-0.0.22.tgz#a23c756eaa5d6724296814755085127f9072e5f5"
-  integrity sha512-hfD83RDXZf9Fvth3DowR7j65fMnlqM9PpxZBGWkzVcUTFtqe6/yPcIoIAgrJbKn6YmtzkivmhWE2MCE4JKBXrQ==
-  dependencies:
-    prop-types "^15.7.x"
 
 react-native-reanimated@~4.1.5:
   version "4.1.5"

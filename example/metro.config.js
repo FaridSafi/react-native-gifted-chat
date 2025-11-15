@@ -21,4 +21,7 @@ config.resolver.nodeModulesPaths = [
   path.resolve(workspaceRoot, 'node_modules'),
 ];
 
+// Ensure TypeScript files are resolved
+config.resolver.sourceExts = [...(config.resolver.sourceExts || []), 'tsx', 'ts'];
+
 module.exports = config;

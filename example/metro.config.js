@@ -1,39 +1,24 @@
-/**
- * Metro configuration
- * https://facebook.github.io/metro/docs/configuration
-*
-* @type {import('metro-config').MetroConfig}
-*/
+const { getDefaultConfig } = require('expo/metro-config');
+const path = require('path');
 
-/* eslint-disable @typescript-eslint/no-require-imports */
-const { mergeConfig } = require('@react-native/metro-config')
-const { getDefaultConfig } = require('@expo/metro-config')
-const path = require('path')
-// const { wrapWithReanimatedMetroConfig } = require('react-native-reanimated/metro-config')
+const config = getDefaultConfig(__dirname);
 
-/* eslint-enable @typescript-eslint/no-require-imports */
-const config = {
-  watchFolders: [
-    path.resolve(__dirname, '../src'),
-  ],
-  resolver: {
-    extraNodeModules: new Proxy(
-      {},
-      {
-        get: (target, name) => {
-          // console.log(`example/metro name: ${name}`, Object.prototype.hasOwnProperty.call(target, name))
-          if (Object.prototype.hasOwnProperty.call(target, name))
-            return target[name]
+// Point to the parent directory (the library root)
+const projectRoot = __dirname;
+const workspaceRoot = path.resolve(projectRoot, '..');
 
-          if (name === 'react-native-gifted-chat')
-            return path.join(process.cwd(), '../src')
+// Watch the parent directory for changes
+config.watchFolders = [workspaceRoot];
 
-          return path.join(process.cwd(), `node_modules/${name}`)
-        },
-      }
-    ),
-  },
-}
+// Resolve react-native-gifted-chat from the local src directory
+config.resolver.extraNodeModules = {
+  'react-native-gifted-chat': path.resolve(workspaceRoot, 'src'),
+};
 
-// module.exports = wrapWithReanimatedMetroConfig(mergeConfig(getDefaultConfig(__dirname), config))
-module.exports = mergeConfig(getDefaultConfig(__dirname), config)
+// Ensure we're resolving from both the project and workspace
+config.resolver.nodeModulesPaths = [
+  path.resolve(projectRoot, 'node_modules'),
+  path.resolve(workspaceRoot, 'node_modules'),
+];
+
+module.exports = config;

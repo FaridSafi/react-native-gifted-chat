@@ -69,11 +69,11 @@ const initialMessages: IMessage[] = [
   },
 ]
 
-export default function LinksExample() {
+export default function LinksExample () {
   const [messages, setMessages] = useState<IMessage[]>(initialMessages)
 
   const onSend = useCallback((newMessages: IMessage[] = []) => {
-    setMessages((previousMessages) =>
+    setMessages(previousMessages =>
       GiftedChat.append(previousMessages, newMessages)
     )
   }, [])

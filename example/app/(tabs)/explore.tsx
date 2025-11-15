@@ -1,39 +1,39 @@
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState } from 'react'
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { useThemeColor } from '@/hooks/use-theme-color';
+import { ThemedText } from '@/components/themed-text'
+import { ThemedView } from '@/components/themed-view'
+import { useThemeColor } from '@/hooks/use-theme-color'
 
-import ExpoExample from '@/components/chat-examples/ExpoExample';
-import GiftedChatExample from '@/components/chat-examples/GiftedChatExample';
-import SlackExample from '@/components/chat-examples/SlackExample';
-import LinksExample from '@/components/chat-examples/LinksExample';
+import ExpoExample from '@/components/chat-examples/ExpoExample'
+import GiftedChatExample from '@/components/chat-examples/GiftedChatExample'
+import SlackExample from '@/components/chat-examples/SlackExample'
+import LinksExample from '@/components/chat-examples/LinksExample'
 
-type ChatExample = 'expo' | 'gifted' | 'slack' | 'links';
+type ChatExample = 'expo' | 'gifted' | 'slack' | 'links'
 
 const examples = [
   { id: 'expo' as ChatExample, title: 'Expo Example', description: 'Full featured example with custom actions, accessories, and media' },
   { id: 'gifted' as ChatExample, title: 'Gifted Chat', description: 'Customized chat with all rendering options' },
   { id: 'slack' as ChatExample, title: 'Slack Style', description: 'Slack-like message styling' },
   { id: 'links' as ChatExample, title: 'Links & Patterns', description: 'Phone numbers, emails, URLs, hashtags, and mentions' },
-];
+]
 
-export default function ExploreScreen() {
-  const [selectedExample, setSelectedExample] = useState<ChatExample | null>(null);
-  const backgroundColor = useThemeColor({}, 'background');
-  const tintColor = useThemeColor({}, 'tint');
-  const borderColor = useThemeColor({ light: '#e0e0e0', dark: '#444' }, 'icon');
+export default function ExploreScreen () {
+  const [selectedExample, setSelectedExample] = useState<ChatExample | null>(null)
+  const backgroundColor = useThemeColor({}, 'background')
+  const tintColor = useThemeColor({}, 'tint')
+  const borderColor = useThemeColor({ light: '#e0e0e0', dark: '#444' }, 'icon')
 
-  if (selectedExample) {
+  if (selectedExample)
     return (
       <SafeAreaView style={[styles.container, { backgroundColor }]}>
         <View style={[styles.header, { borderBottomColor: borderColor }]}>
           <TouchableOpacity onPress={() => setSelectedExample(null)} style={styles.backButton}>
-            <ThemedText type="link">← Back</ThemedText>
+            <ThemedText type='link'>← Back</ThemedText>
           </TouchableOpacity>
-          <ThemedText type="subtitle">
+          <ThemedText type='subtitle'>
             {examples.find(e => e.id === selectedExample)?.title}
           </ThemedText>
         </View>
@@ -44,14 +44,13 @@ export default function ExploreScreen() {
           {selectedExample === 'links' && <LinksExample />}
         </View>
       </SafeAreaView>
-    );
-  }
+    )
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor }]} edges={['top', 'left', 'right']}>
       <ScrollView style={styles.scrollView}>
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Explore Chat Examples</ThemedText>
+          <ThemedText type='title'>Explore Chat Examples</ThemedText>
         </ThemedView>
         <ThemedView style={styles.description}>
           <ThemedText>
@@ -59,19 +58,19 @@ export default function ExploreScreen() {
           </ThemedText>
         </ThemedView>
         <View style={styles.examplesContainer}>
-          {examples.map((example) => (
+          {examples.map(example => (
             <TouchableOpacity
               key={example.id}
               style={[styles.exampleCard, { borderColor }]}
               onPress={() => setSelectedExample(example.id)}
             >
-              <ThemedText type="subtitle" style={styles.exampleTitle}>
+              <ThemedText type='subtitle' style={styles.exampleTitle}>
                 {example.title}
               </ThemedText>
               <ThemedText style={styles.exampleDescription}>
                 {example.description}
               </ThemedText>
-              <ThemedText type="link" style={styles.tryButton}>
+              <ThemedText type='link' style={styles.tryButton}>
                 Try it →
               </ThemedText>
             </TouchableOpacity>
@@ -79,7 +78,7 @@ export default function ExploreScreen() {
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -130,4 +129,4 @@ const styles = StyleSheet.create({
   chatContainer: {
     flex: 1,
   },
-});
+})

@@ -30,7 +30,7 @@ export * from './types'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
-function MessageContainer<TMessage extends IMessage = IMessage>(props: MessageContainerProps<TMessage>) {
+function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
   const {
     messages = [],
     user,

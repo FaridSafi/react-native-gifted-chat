@@ -13,16 +13,16 @@ import Bubble from './SlackBubble'
 const { isSameUser, isSameDay } = utils
 
 interface Props {
-  renderAvatar?: (props: AvatarProps<IMessage>) => void,
-  renderBubble?: (props: BubbleProps<IMessage>) => void,
-  renderDay?: (props: DayProps) => void,
-  currentMessage: any,
-  nextMessage?: any,
-  previousMessage?: any,
+  renderAvatar?: (props: AvatarProps<IMessage>) => void
+  renderBubble?: (props: BubbleProps<IMessage>) => void
+  renderDay?: (props: DayProps) => void
+  currentMessage: any
+  nextMessage?: any
+  previousMessage?: any
   containerStyle?: {
-    left: StyleProp<ViewStyle>,
-    right: StyleProp<ViewStyle>,
-  },
+    left: StyleProp<ViewStyle>
+    right: StyleProp<ViewStyle>
+  }
 }
 
 const Message = (props: Props) => {

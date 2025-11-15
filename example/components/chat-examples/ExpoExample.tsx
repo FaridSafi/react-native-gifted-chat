@@ -7,13 +7,13 @@ import CustomView from '../../example-expo/CustomView'
 import earlierMessages from '../../example-expo/data/earlierMessages'
 import messagesData from '../../example-expo/data/messages'
 
-export default function ExpoExample() {
+export default function ExpoExample () {
   const [messages, setMessages] = useState<IMessage[]>(messagesData)
   const [isLoadingEarlier, setIsLoadingEarlier] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
 
   const onSend = useCallback((newMessages: IMessage[] = []) => {
-    setMessages((previousMessages) =>
+    setMessages(previousMessages =>
       GiftedChat.append(previousMessages, newMessages)
     )
   }, [])
@@ -21,7 +21,7 @@ export default function ExpoExample() {
   const onLoadEarlier = useCallback(() => {
     setIsLoadingEarlier(true)
     setTimeout(() => {
-      setMessages((previousMessages) =>
+      setMessages(previousMessages =>
         GiftedChat.prepend(previousMessages, earlierMessages)
       )
       setIsLoadingEarlier(false)

@@ -1,13 +1,13 @@
-import { Image } from 'expo-image';
-import { Linking, StyleSheet, Text } from 'react-native';
+import { Image } from 'expo-image'
+import { Linking, StyleSheet, Text } from 'react-native'
 
-import { ExternalLink } from '@/components/external-link';
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import { ExternalLink } from '@/components/external-link'
+import { HelloWave } from '@/components/hello-wave'
+import ParallaxScrollView from '@/components/parallax-scroll-view'
+import { ThemedText } from '@/components/themed-text'
+import { ThemedView } from '@/components/themed-view'
 
-export default function HomeScreen() {
+export default function HomeScreen () {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -16,18 +16,19 @@ export default function HomeScreen() {
           source={require('@/assets/images/partial-react-logo.png')}
           style={styles.reactLogo}
         />
-      }>
+      }
+    >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type='title'>Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">React Native Gifted Chat</ThemedText>
+        <ThemedText type='subtitle'>React Native Gifted Chat</ThemedText>
         <ThemedText>
           The most complete chat UI for React Native
         </ThemedText>
-        <ExternalLink href="https://github.com/FaridSafi/react-native-gifted-chat">
-          <ThemedText type="link">View on GitHub</ThemedText>
+        <ExternalLink href='https://github.com/FaridSafi/react-native-gifted-chat'>
+          <ThemedText type='link'>View on GitHub</ThemedText>
         </ExternalLink>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
@@ -36,7 +37,7 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -56,4 +57,4 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
   },
-});
+})

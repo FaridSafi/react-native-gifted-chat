@@ -4,11 +4,11 @@ import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import messagesData from '../../example-expo/data/messages'
 import SlackMessage from '../../example-slack-message/src/SlackMessage'
 
-export default function SlackExample() {
+export default function SlackExample () {
   const [messages, setMessages] = useState<IMessage[]>(messagesData)
 
   const onSend = useCallback((newMessages: IMessage[] = []) => {
-    setMessages((previousMessages) =>
+    setMessages(previousMessages =>
       GiftedChat.append(previousMessages, newMessages)
     )
   }, [])
@@ -22,7 +22,7 @@ export default function SlackExample() {
           _id: 1,
           name: 'Developer',
         }}
-        renderMessage={(props) => <SlackMessage {...props} />}
+        renderMessage={props => <SlackMessage {...props} />}
       />
     </View>
   )

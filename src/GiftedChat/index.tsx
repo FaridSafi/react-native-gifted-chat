@@ -78,11 +78,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     renderInputToolbar,
     bottomOffset = 0,
     focusOnInputWhenOpeningKeyboard = true,
-    keyboardShouldPersistTaps = Platform.select({
-      ios: 'never',
-      android: 'always',
-      default: 'never',
-    }),
     onInputTextChanged,
     inverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
@@ -199,10 +194,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       <View style={[stylesCommon.fill, messagesContainerStyle]}>
         <MessageContainer<TMessage>
           {...messagesContainerProps}
-          invertibleScrollViewProps={{
-            inverted,
-            keyboardShouldPersistTaps,
-          }}
+          inverted={inverted}
           messages={messages}
           forwardRef={messageContainerRef}
           isTyping={isTyping}
@@ -216,7 +208,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     messages,
     props,
     inverted,
-    keyboardShouldPersistTaps,
     messageContainerRef,
     renderChatFooter,
   ])

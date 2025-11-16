@@ -410,7 +410,6 @@ interface QuickReplies {
 - **`minInputToolbarHeight`** _(Integer)_ - Minimum height of the input toolbar; default is `44`
 - **`listProps`** _(Object)_ - Extra props to be passed to the messages [`<FlatList>`](https://reactnative.dev/docs/flatlist.html); some props can't be overridden, see the code in `MessageContainer.render()` for details
 - **`textInputProps`** _(Object)_ - props to be passed to the [`<TextInput>`](https://reactnative.dev/docs/textinput.html).
-- **`keyboardShouldPersistTaps`** _(Enum)_ - Determines whether the keyboard should stay visible after a tap; see [`<ScrollView>`](https://reactnative.dev/docs/scrollview.html) docs
 - **`matchers`** _(Array)_ - Custom matchers for [react-native-autolink](https://github.com/joshswan/react-native-autolink) used to linking message content (like URLs and phone numbers), e.g.:
 
 ```js

@@ -26,7 +26,6 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage> {
   alignTop?: boolean
   isScrollToBottomEnabled?: boolean
   scrollToBottomStyle?: StyleProp<ViewStyle>
-  invertibleScrollViewProps?: object
   extraData?: object
   scrollToBottomOffset?: number
   renderChatEmpty?(): React.ReactNode

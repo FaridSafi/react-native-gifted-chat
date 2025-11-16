@@ -23,12 +23,12 @@ const examples = [
 export default function ExploreScreen () {
   const [selectedExample, setSelectedExample] = useState<ChatExample | null>(null)
   const backgroundColor = useThemeColor({}, 'background')
-  const tintColor = useThemeColor({}, 'tint')
   const borderColor = useThemeColor({ light: '#e0e0e0', dark: '#444' }, 'icon')
 
+  let selectedExampleContent
   if (selectedExample)
-    return (
-      <SafeAreaView style={[styles.container, { backgroundColor }]}>
+    selectedExampleContent = (
+      <>
         <View style={[styles.header, { borderBottomColor: borderColor }]}>
           <TouchableOpacity onPress={() => setSelectedExample(null)} style={styles.backButton}>
             <ThemedText type='link'>← Back</ThemedText>
@@ -43,40 +43,46 @@ export default function ExploreScreen () {
           {selectedExample === 'slack' && <SlackExample />}
           {selectedExample === 'links' && <LinksExample />}
         </View>
-      </SafeAreaView>
+      </>
     )
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor }]} edges={['top', 'left', 'right']}>
-      <ScrollView style={styles.scrollView}>
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type='title'>Explore Chat Examples</ThemedText>
-        </ThemedView>
-        <ThemedView style={styles.description}>
-          <ThemedText>
-            Choose from different chat implementations to see various features and styling options.
-          </ThemedText>
-        </ThemedView>
-        <View style={styles.examplesContainer}>
-          {examples.map(example => (
-            <TouchableOpacity
-              key={example.id}
-              style={[styles.exampleCard, { borderColor }]}
-              onPress={() => setSelectedExample(example.id)}
-            >
-              <ThemedText type='subtitle' style={styles.exampleTitle}>
-                {example.title}
-              </ThemedText>
-              <ThemedText style={styles.exampleDescription}>
-                {example.description}
-              </ThemedText>
-              <ThemedText type='link' style={styles.tryButton}>
-                Try it →
-              </ThemedText>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </ScrollView>
+      {
+        selectedExampleContent
+          ? selectedExampleContent
+          : (
+            <ScrollView style={styles.scrollView}>
+              <ThemedView style={styles.titleContainer}>
+                <ThemedText type='title'>Explore Chat Examples</ThemedText>
+              </ThemedView>
+              <ThemedView style={styles.description}>
+                <ThemedText>
+                  Choose from different chat implementations to see various features and styling options.
+                </ThemedText>
+              </ThemedView>
+              <View style={styles.examplesContainer}>
+                {examples.map(example => (
+                  <TouchableOpacity
+                    key={example.id}
+                    style={[styles.exampleCard, { borderColor }]}
+                    onPress={() => setSelectedExample(example.id)}
+                  >
+                    <ThemedText type='subtitle' style={styles.exampleTitle}>
+                      {example.title}
+                    </ThemedText>
+                    <ThemedText style={styles.exampleDescription}>
+                      {example.description}
+                    </ThemedText>
+                    <ThemedText type='link' style={styles.tryButton}>
+                      Try it →
+                    </ThemedText>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </ScrollView>
+          )
+      }
     </SafeAreaView>
   )
 }

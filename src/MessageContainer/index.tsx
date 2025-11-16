@@ -40,7 +40,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     inverted = true,
     loadEarlier = false,
     listProps,
-    invertibleScrollViewProps,
     extraData,
     isScrollToBottomEnabled = false,
     scrollToBottomOffset = 200,
@@ -399,7 +398,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         inverted={inverted}
         automaticallyAdjustContentInsets={false}
         style={stylesCommon.fill}
-        {...invertibleScrollViewProps}
         ListEmptyComponent={renderChatEmpty}
         ListFooterComponent={
           inverted ? ListHeaderComponent : ListFooterComponent

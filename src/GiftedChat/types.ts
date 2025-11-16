@@ -94,8 +94,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   listProps?: ListProps
   /*  Extra props to be passed to the <TextInput>. See https://reactnative.dev/docs/textinput */
   textInputProps?: Partial<React.ComponentProps<typeof TextInput>>
-  /* Determines whether the keyboard should stay visible after a tap; see <ScrollView> docs */
-  keyboardShouldPersistTaps?: 'always' | 'never' | 'handled'
   /* Force send button */
   alwaysShowSend?: boolean
   /* Image style */

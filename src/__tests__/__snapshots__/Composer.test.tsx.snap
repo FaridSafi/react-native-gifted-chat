@@ -23,6 +23,7 @@ exports[`should render <Composer /> and compare with snapshot 1`] = `
         "marginTop": 6,
       },
       undefined,
+      undefined,
       {
         "height": 33,
       },

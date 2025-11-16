@@ -54,6 +54,7 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
             "marginRight": 10,
           },
           undefined,
+          undefined,
         ]
       }
     >
@@ -118,6 +119,7 @@ exports[`Send should render <Send /> where there is input and compare with snaps
             "marginLeft": 10,
             "marginRight": 10,
           },
+          undefined,
           undefined,
         ]
       }

@@ -10,6 +10,7 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
         "borderTopWidth": 0.5,
       },
       undefined,
+      undefined,
     ]
   }
 >
@@ -45,6 +46,7 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
             "marginLeft": 10,
             "marginTop": 6,
           },
+          undefined,
           undefined,
           {
             "height": 33,

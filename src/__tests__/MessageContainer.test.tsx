@@ -5,7 +5,7 @@ import { MessageContainer } from '../GiftedChat'
 import { DEFAULT_TEST_MESSAGE } from './data'
 
 it('should render <MessageContainer /> without crashing', () => {
-  const { getByTestId } = render(
+  render(
     <MessageContainer
       messages={[DEFAULT_TEST_MESSAGE]}
       user={{ _id: 'test' }}

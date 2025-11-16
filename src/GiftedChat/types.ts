@@ -12,9 +12,7 @@ import { LightboxProps } from 'react-native-lightbox-v2'
 import { ActionsProps } from '../Actions'
 import { AvatarProps } from '../Avatar'
 import { ComposerProps } from '../Composer'
-import { DayProps } from '../Day'
 import { InputToolbarProps } from '../InputToolbar'
-import { LoadEarlierProps } from '../LoadEarlier'
 import { MessageProps } from '../Message'
 import { MessageImageProps } from '../MessageImage'
 import { MessageTextProps } from '../MessageText'
@@ -23,7 +21,6 @@ import {
   LeftRightStyle,
   MessageAudioProps,
   MessageVideoProps,
-  Reply,
   User,
 } from '../types'
 import { QuickRepliesProps } from '../QuickReplies'

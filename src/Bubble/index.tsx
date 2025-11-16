@@ -38,22 +38,22 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
     containerStyle,
     wrapperStyle,
     bottomContainerStyle,
-    onPress: onPressProp,
-    onLongPress: onLongPressProp,
+    onPressMessage: onPressMessageProp,
+    onLongPressMessage: onLongPressMessageProp,
   } = props
 
   const context = useChatContext()
 
   const onPress = useCallback(() => {
-    onPressProp?.(context, currentMessage)
-  }, [onPressProp, context, currentMessage])
+    onPressMessageProp?.(context, currentMessage)
+  }, [onPressMessageProp, context, currentMessage])
 
   const onLongPress = useCallback(() => {
-    onLongPressProp?.(context, currentMessage)
+    onLongPressMessageProp?.(context, currentMessage)
   }, [
     currentMessage,
     context,
-    onLongPressProp,
+    onLongPressMessageProp,
   ])
 
   const styledBubbleToNext = useCallback(() => {

@@ -66,8 +66,8 @@ export interface BubbleProps<TMessage extends IMessage> {
   quickReplyStyle?: StyleProp<ViewStyle>
   quickReplyTextStyle?: StyleProp<TextStyle>
   quickReplyContainerStyle?: StyleProp<ViewStyle>
-  onPress?(context?: unknown, message?: unknown): void
-  onLongPress?(context?: unknown, message?: unknown): void
+  onPressMessage?(context?: unknown, message?: unknown): void
+  onLongPressMessage?(context?: unknown, message?: unknown): void
   onQuickReply?(replies: Reply[]): void
   renderMessageImage?(
     props: RenderMessageImageProps<TMessage>,

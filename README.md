@@ -379,8 +379,8 @@ interface QuickReplies {
 - **`renderBubble`** _(Function)_ - Custom message bubble
 - **`renderTicks`** _(Function(`message`))_ - Custom ticks indicator to display message status
 - **`renderSystemMessage`** _(Function)_ - Custom system message
-- **`onPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is pressed
-- **`onLongPress`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
+- **`onPressMessage`** _(Function(`context`, `message`))_ - Callback when a message bubble is pressed
+- **`onLongPressMessage`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
 - **`inverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
 - **`renderUsernameOnMessage`** _(Bool)_ - Indicate whether to show the user's username inside the message bubble; default is `false`
 - **`renderUsername`** _(Function)_ - Custom Username container

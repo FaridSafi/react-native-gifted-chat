@@ -7,31 +7,23 @@ import {
   NativeSyntheticEvent,
   TextInputContentSizeChangeEventData,
 } from 'react-native'
-import { MIN_COMPOSER_HEIGHT, DEFAULT_PLACEHOLDER } from './Constant'
+import { MIN_COMPOSER_HEIGHT } from './Constant'
 import Color from './Color'
 import stylesCommon from './styles'
 
 export interface ComposerProps {
   composerHeight?: number
   text?: string
-  placeholder?: string
-  placeholderTextColor?: string
   textInputProps?: Partial<TextInputProps>
-  textInputAutoFocus?: boolean
-  keyboardAppearance?: TextInputProps['keyboardAppearance']
   onTextChanged?(text: string): void
   onInputSizeChanged?(layout: { width: number, height: number }): void
 }
 
 export function Composer ({
   composerHeight = MIN_COMPOSER_HEIGHT,
-  keyboardAppearance = 'default',
   onInputSizeChanged,
   onTextChanged,
-  placeholder = DEFAULT_PLACEHOLDER,
-  placeholderTextColor = Color.defaultColor,
   text = '',
-  textInputAutoFocus = false,
   textInputProps,
 }: ComposerProps): React.ReactElement {
   const dimensionsRef = useRef<{ width: number, height: number }>(null)
@@ -63,13 +55,14 @@ export function Composer ({
     [determineInputSizeChange]
   )
 
+  const placeholder = textInputProps?.placeholder ?? 'Type a message...'
+
   return (
     <TextInput
       testID={placeholder}
       accessible
       accessibilityLabel={placeholder}
-      placeholder={placeholder}
-      placeholderTextColor={placeholderTextColor}
+      placeholderTextColor={Color.defaultColor}
       onContentSizeChange={handleContentSizeChange}
       onChangeText={onTextChanged}
       style={[
@@ -87,12 +80,12 @@ export function Composer ({
           }),
         },
       ]}
-      autoFocus={textInputAutoFocus}
       value={text}
       enablesReturnKeyAutomatically
       underlineColorAndroid='transparent'
-      keyboardAppearance={keyboardAppearance}
-      multiline={textInputProps?.multiline ?? true}
+      keyboardAppearance='default'
+      multiline
+      placeholder={placeholder}
       {...textInputProps}
     />
   )

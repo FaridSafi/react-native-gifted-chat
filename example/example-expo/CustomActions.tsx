@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  useColorScheme,
 } from 'react-native'
 
 import { useActionSheet } from '@expo/react-native-action-sheet'
@@ -33,6 +34,7 @@ const CustomActions = ({
   onSend,
 }: Props) => {
   const { showActionSheetWithOptions } = useActionSheet()
+  const colorScheme = useColorScheme()
 
   const onActionsPress = useCallback(() => {
     const options: { title: string; action?: () => Promise<void> }[] = [
@@ -62,11 +64,11 @@ const CustomActions = ({
       return renderIcon()
 
     return (
-      <View style={[styles.wrapper, wrapperStyle]}>
-        <Text style={[styles.iconText, iconTextStyle]}>+</Text>
+      <View style={[styles.wrapper, styles[`wrapper_${colorScheme}`], wrapperStyle]}>
+        <Text style={[styles.iconText, styles[`iconText_${colorScheme}`], iconTextStyle]}>+</Text>
       </View>
     )
-  }, [renderIcon, wrapperStyle, iconTextStyle])
+  }, [renderIcon, wrapperStyle, iconTextStyle, colorScheme])
 
   return (
     <TouchableOpacity
@@ -95,6 +97,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  wrapper_dark: {
+    borderColor: '#666',
+  },
   iconText: {
     color: '#b2b2b2',
     fontWeight: 'bold',
@@ -102,5 +107,8 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     backgroundColor: 'transparent',
     textAlign: 'center',
+  },
+  iconText_dark: {
+    color: '#999',
   },
 })

@@ -8,6 +8,7 @@ import {
   ViewStyle,
   TextStyle,
   TouchableOpacityProps,
+  useColorScheme,
 } from 'react-native'
 
 import Color from './Color'
@@ -27,6 +28,9 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     marginLeft: 10,
     marginRight: 10,
+  },
+  text_dark: {
+    color: '#4da6ff',
   },
 })
 
@@ -56,6 +60,8 @@ export const Send = <TMessage extends IMessage = IMessage>({
   sendButtonProps,
   onSend,
 }: SendProps<TMessage>) => {
+  const colorScheme = useColorScheme()
+
   const handleOnPress = useCallback(() => {
     if (text && onSend)
       onSend({ text: text.trim() } as Partial<TMessage>, true)
@@ -81,7 +87,7 @@ export const Send = <TMessage extends IMessage = IMessage>({
       {...sendButtonProps}
     >
       <View>
-        {children || <Text style={[styles.text, textStyle]}>{label}</Text>}
+        {children || <Text style={[styles.text, styles[`text_${colorScheme}`], textStyle]}>{label}</Text>}
       </View>
     </TouchableOpacity>
   )

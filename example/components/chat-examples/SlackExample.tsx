@@ -1,11 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, useColorScheme } from 'react-native'
 import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import messagesData from '../../example-expo/data/messages'
 import SlackMessage from '../../example-slack-message/src/SlackMessage'
 
 export default function SlackExample () {
   const [messages, setMessages] = useState<IMessage[]>(messagesData)
+  const colorScheme = useColorScheme()
 
   const user = useMemo(() => ({
     _id: 1,
@@ -23,13 +24,19 @@ export default function SlackExample () {
     )
   }, [user])
 
+  const isDark = colorScheme === 'dark'
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isDark && styles.containerDark]}>
       <GiftedChat
         messages={messages}
         onSend={onSend}
         user={user}
         renderMessage={props => <SlackMessage {...props} />}
+        messagesContainerStyle={isDark && styles.messagesContainerDark}
+        textInputProps={{
+          style: isDark && styles.composerDark,
+        }}
       />
     </View>
   )
@@ -38,5 +45,16 @@ export default function SlackExample () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
+  },
+  containerDark: {
+    backgroundColor: '#000',
+  },
+  messagesContainerDark: {
+    backgroundColor: '#000',
+  },
+  composerDark: {
+    backgroundColor: '#1a1a1a',
+    color: '#fff',
   },
 })

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useColorScheme } from 'react-native'
 import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import initialMessages from './messages'
 import { renderInputToolbar, renderActions, renderComposer, renderSend } from './InputToolbar'
@@ -14,13 +15,15 @@ import { Match } from 'autolinker/dist/es2015'
 
 const Chats = () => {
   const [text, setText] = useState('')
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState<IMessage[]>([])
+  const colorScheme = useColorScheme()
+  const isDark = colorScheme === 'dark'
 
   useEffect(() => {
     setMessages(initialMessages.reverse())
   }, [])
 
-  const onSend = (newMessages = []) => {
+  const onSend = (newMessages: IMessage[] = []) => {
     setMessages(prevMessages => GiftedChat.append(prevMessages, newMessages))
   }
 
@@ -54,7 +57,10 @@ const Chats = () => {
       // renderMessageImage
       renderCustomView={renderCustomView}
       isCustomViewBottom
-      messagesContainerStyle={{ backgroundColor: 'indigo' }}
+      messagesContainerStyle={{ backgroundColor: isDark ? '#1a1a1a' : 'indigo' }}
+      textInputProps={{
+        style: isDark && { backgroundColor: '#2a2a2a', color: '#fff' },
+      }}
       matchers={[
         {
           pattern: /#(\w+)/,

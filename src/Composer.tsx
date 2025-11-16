@@ -6,6 +6,7 @@ import {
   TextInputProps,
   NativeSyntheticEvent,
   TextInputContentSizeChangeEventData,
+  useColorScheme,
 } from 'react-native'
 import { MIN_COMPOSER_HEIGHT } from './Constant'
 import Color from './Color'
@@ -27,6 +28,8 @@ export function Composer ({
   textInputProps,
 }: ComposerProps): React.ReactElement {
   const dimensionsRef = useRef<{ width: number, height: number }>(null)
+  const colorScheme = useColorScheme()
+  const isDark = colorScheme === 'dark'
 
   const determineInputSizeChange = useCallback(
     (dimensions: { width: number, height: number }) => {
@@ -62,12 +65,20 @@ export function Composer ({
       testID={placeholder}
       accessible
       accessibilityLabel={placeholder}
-      placeholderTextColor={Color.defaultColor}
+      placeholderTextColor={textInputProps?.placeholderTextColor ?? (isDark ? '#888' : Color.defaultColor)}
       onContentSizeChange={handleContentSizeChange}
       onChangeText={onTextChanged}
+      value={text}
+      enablesReturnKeyAutomatically
+      underlineColorAndroid='transparent'
+      keyboardAppearance={isDark ? 'dark' : 'default'}
+      multiline
+      placeholder={placeholder}
+      {...textInputProps}
       style={[
         stylesCommon.fill,
         styles.textInput,
+        styles[`textInput_${colorScheme}`],
         textInputProps?.style,
         {
           height: composerHeight,
@@ -80,13 +91,6 @@ export function Composer ({
           }),
         },
       ]}
-      value={text}
-      enablesReturnKeyAutomatically
-      underlineColorAndroid='transparent'
-      keyboardAppearance='default'
-      multiline
-      placeholder={placeholder}
-      {...textInputProps}
     />
   )
 }
@@ -112,5 +116,8 @@ const styles = StyleSheet.create({
       android: 3,
       web: 4,
     }),
+  },
+  textInput_dark: {
+    color: '#fff',
   },
 })

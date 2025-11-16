@@ -1,6 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons'
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, useColorScheme } from 'react-native'
 
 import {
   getLocationAsync,
@@ -8,24 +8,36 @@ import {
   takePictureAsync,
 } from './mediaUtils'
 
-export default class AccessoryBar extends React.Component<any> {
-  render () {
-    const { onSend, isTyping } = this.props
+export default function AccessoryBar ({ onSend, isTyping }: any) {
+  const colorScheme = useColorScheme()
+  const isDark = colorScheme === 'dark'
 
-    return (
-      <View style={styles.container}>
-        <Button onPress={() => pickImageAsync(onSend)} name='photo' />
-        <Button onPress={() => takePictureAsync(onSend)} name='camera' />
-        <Button onPress={() => getLocationAsync(onSend)} name='my-location' />
-        <Button
-          onPress={() => {
-            isTyping()
-          }}
-          name='chat'
-        />
-      </View>
-    )
-  }
+  return (
+    <View style={[styles.container, styles[`container_${colorScheme}`]]}>
+      <Button
+        onPress={() => pickImageAsync(onSend)}
+        name='photo'
+        color={isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)'}
+      />
+      <Button
+        onPress={() => takePictureAsync(onSend)}
+        name='camera'
+        color={isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)'}
+      />
+      <Button
+        onPress={() => getLocationAsync(onSend)}
+        name='my-location'
+        color={isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)'}
+      />
+      <Button
+        onPress={() => {
+          isTyping()
+        }}
+        name='chat'
+        color={isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)'}
+      />
+    </View>
+  )
 }
 
 const Button = ({
@@ -49,5 +61,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: 'rgba(0,0,0,0.3)',
+  },
+  container_dark: {
+    backgroundColor: '#1a1a1a',
+    borderTopColor: 'rgba(255,255,255,0.2)',
   },
 })

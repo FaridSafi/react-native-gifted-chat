@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, useColorScheme } from 'react-native'
 import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import AccessoryBar from '../../example-expo/AccessoryBar'
 import CustomActions from '../../example-expo/CustomActions'
@@ -11,6 +11,7 @@ export default function ExpoExample () {
   const [messages, setMessages] = useState<IMessage[]>(messagesData)
   const [isLoadingEarlier, setIsLoadingEarlier] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
+  const colorScheme = useColorScheme()
 
   const user = useMemo(() => ({
     _id: 1,
@@ -50,8 +51,10 @@ export default function ExpoExample () {
     [onSend]
   )
 
+  const isDark = colorScheme === 'dark'
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isDark && styles.containerDark]}>
       <GiftedChat
         messages={messages}
         onSend={onSend}
@@ -63,6 +66,10 @@ export default function ExpoExample () {
         renderAccessory={renderAccessory}
         renderCustomView={renderCustomView}
         isTyping={isTyping}
+        messagesContainerStyle={isDark && styles.messagesContainerDark}
+        textInputProps={{
+          style: isDark && styles.composerDark,
+        }}
       />
     </View>
   )
@@ -71,5 +78,16 @@ export default function ExpoExample () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
+  },
+  containerDark: {
+    backgroundColor: '#000',
+  },
+  messagesContainerDark: {
+    backgroundColor: '#000',
+  },
+  composerDark: {
+    backgroundColor: '#1a1a1a',
+    color: '#fff',
   },
 })

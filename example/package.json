@@ -11,7 +11,7 @@
     "lint": "expo lint",
     "fresh": "yarn start --reset-cache",
     "pod:install": "RCT_NEW_ARCH_ENABLED=1 npx -y pod-install",
-    "ios:installDevBuild": "expo run:ios --clear",
+    "ios:installDevBuild": "expo run:ios",
     "rebuildNativeDeps": "yarn expo prebuild",
     "rebuildNativeDeps:clean": "yarn expo prebuild --clean"
   },

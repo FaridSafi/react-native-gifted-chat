@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native'
+import { StyleSheet, View, StyleProp, ViewStyle, useColorScheme } from 'react-native'
 
 import { Composer, ComposerProps } from './Composer'
 import { Send, SendProps } from './Send'
@@ -37,6 +37,8 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
     wrapperStyle,
     containerStyle,
   } = props
+
+  const colorScheme = useColorScheme()
 
   const actionsFragment = useMemo(() => {
     const props = {
@@ -85,7 +87,7 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
   }, [renderAccessory, props])
 
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={[styles.container, styles[`container_${colorScheme}`], containerStyle]}>
       <View style={[styles.primary, props.primaryStyle]}>
         {actionsFragment}
         {composerFragment}
@@ -101,6 +103,10 @@ const styles = StyleSheet.create({
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: Color.defaultColor,
     backgroundColor: Color.white,
+  },
+  container_dark: {
+    backgroundColor: '#1a1a1a',
+    borderTopColor: '#444',
   },
   primary: {
     flexDirection: 'row',

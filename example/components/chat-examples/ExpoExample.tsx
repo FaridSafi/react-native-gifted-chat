@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import AccessoryBar from '../../example-expo/AccessoryBar'
@@ -12,11 +12,21 @@ export default function ExpoExample () {
   const [isLoadingEarlier, setIsLoadingEarlier] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
 
+  const user = useMemo(() => ({
+    _id: 1,
+    name: 'Developer',
+  }), [])
+
   const onSend = useCallback((newMessages: IMessage[] = []) => {
+    const messagesWithIds = newMessages.map(msg => ({
+      ...msg,
+      _id: msg._id || Math.random().toString(36).substring(7),
+      user: msg.user || user,
+    }))
     setMessages(previousMessages =>
-      GiftedChat.append(previousMessages, newMessages)
+      GiftedChat.append(previousMessages, messagesWithIds)
     )
-  }, [])
+  }, [user])
 
   const onLoadEarlier = useCallback(() => {
     setIsLoadingEarlier(true)
@@ -48,10 +58,7 @@ export default function ExpoExample () {
         loadEarlier
         isLoadingEarlier={isLoadingEarlier}
         onLoadEarlier={onLoadEarlier}
-        user={{
-          _id: 1,
-          name: 'Developer',
-        }}
+        user={user}
         renderActions={renderActions}
         renderAccessory={renderAccessory}
         renderCustomView={renderCustomView}

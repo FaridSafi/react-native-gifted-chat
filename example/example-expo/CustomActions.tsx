@@ -15,13 +15,14 @@ import {
   pickImageAsync,
   takePictureAsync,
 } from './mediaUtils'
+import { LocationObjectCoords } from 'expo-location'
 
 interface Props {
   renderIcon?: () => React.ReactNode
   wrapperStyle?: StyleProp<ViewStyle>
   containerStyle?: StyleProp<ViewStyle>
   iconTextStyle?: StyleProp<TextStyle>
-  onSend: (messages: unknown) => void
+  onSend: (messages: { location?: LocationObjectCoords, image?: string }[]) => void
 }
 
 const CustomActions = ({
@@ -34,29 +35,23 @@ const CustomActions = ({
   const { showActionSheetWithOptions } = useActionSheet()
 
   const onActionsPress = useCallback(() => {
-    const options = [
-      'Choose From Library',
-      'Take Picture',
-      'Send Location',
-      'Cancel',
+    const options: { title: string; action?: () => Promise<void> }[] = [
+      { title: 'Choose From Library', action: () => pickImageAsync(onSend) },
+      { title: 'Take Picture', action: () => takePictureAsync(onSend) },
+      { title: 'Send Location', action: () => getLocationAsync(onSend) },
+      { title: 'Cancel' },
     ]
     const cancelButtonIndex = options.length - 1
 
     showActionSheetWithOptions(
       {
-        options,
+        options: options.map(o => o.title),
         cancelButtonIndex,
       },
       async buttonIndex => {
-        switch (buttonIndex) {
-          case 0:
-            pickImageAsync(onSend)
-            return
-          case 1:
-            takePictureAsync(onSend)
-            return
-          case 2:
-            getLocationAsync(onSend)
+        if (buttonIndex !== undefined) {
+          const selectedOption = options[buttonIndex]
+          selectedOption?.action?.()
         }
       }
     )

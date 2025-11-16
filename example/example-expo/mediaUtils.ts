@@ -1,9 +1,9 @@
 import * as Linking from 'expo-linking'
-import * as Location from 'expo-location'
 import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker'
 
 import { Alert } from 'react-native'
+import { getCurrentPositionAsync, LocationObjectCoords, requestForegroundPermissionsAsync } from 'expo-location'
 
 export default async function getPermissionAsync (
   permission: Permissions.PermissionType
@@ -30,17 +30,17 @@ export default async function getPermissionAsync (
 }
 
 export async function getLocationAsync (
-  onSend: (locations: { location: Location.LocationObjectCoords }[]) => void
+  onSend: (locations: { location: LocationObjectCoords }[]) => void
 ) {
-  const response = await Location.requestForegroundPermissionsAsync()
+  const response = await requestForegroundPermissionsAsync()
   if (!response.granted)
     return
 
-  const location = await Location.getCurrentPositionAsync()
+  const location = await getCurrentPositionAsync()
   if (!location)
     return
 
-  onSend([{ location: location.coords }])
+  onSend([{ _id: Math.random().toString(36).substring(7), location: location.coords }])
 }
 
 export async function pickImageAsync (
@@ -58,7 +58,10 @@ export async function pickImageAsync (
   if (result.canceled)
     return
 
-  const images = result.assets.map(({ uri: image }) => ({ image }))
+  const images = result.assets.map(({ uri: image }) => ({
+    _id: Math.random().toString(36).substring(7),
+    image
+  }))
   onSend(images)
 }
 
@@ -77,6 +80,9 @@ export async function takePictureAsync (
   if (result.canceled)
     return
 
-  const images = result.assets.map(({ uri: image }) => ({ image }))
+  const images = result.assets.map(({ uri: image }) => ({
+    _id: Math.random().toString(36).substring(7),
+    image
+  }))
   onSend(images)
 }

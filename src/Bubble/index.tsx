@@ -151,6 +151,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
 
       return <MessageText {...messageTextProps} />
     }
+
     return null
   }, [props, currentMessage])
 
@@ -169,6 +170,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
 
       return <MessageImage {...messageImageProps} />
     }
+
     return null
   }, [props, currentMessage])
 

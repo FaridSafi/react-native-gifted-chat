@@ -5,6 +5,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  View,
 } from 'react-native'
 
 import Autolink, { AutolinkProps } from 'react-native-autolink'
@@ -41,15 +42,6 @@ export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
   onPress: onPressProp,
   ...rest
 }) => {
-  // TODO: React.memo
-  // const shouldComponentUpdate = (nextProps: MessageTextProps<TMessage>) => {
-  //   return (
-  //     !!currentMessage &&
-  //     !!nextProps.currentMessage &&
-  //     currentMessage.text !== nextProps.currentMessage.text
-  //   )
-  // }
-
   const onUrlPress = useCallback((url: string) => {
     if (/^www\./i.test(url))
       url = `https://${url}`
@@ -89,33 +81,36 @@ export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
   }, [onUrlPress, onPhonePress, onEmailPress, onPressProp, currentMessage])
 
   const style = useMemo(() => [
-    containerStyle?.[position],
     styles[`text_${position}`],
     textStyle?.[position],
     customTextStyle,
-  ], [containerStyle, position, textStyle, customTextStyle])
+  ], [position, textStyle, customTextStyle])
 
   return (
-    <Autolink
-      style={style}
-      {...rest}
-      text={currentMessage!.text}
-      email
-      link
-      linkStyle={linkStyle}
-      onPress={handlePress}
-    />
+    <View style={[styles.container, containerStyle?.[position]]}>
+      <Autolink
+        style={style}
+        {...rest}
+        text={currentMessage!.text}
+        email
+        link
+        linkStyle={linkStyle}
+        onPress={handlePress}
+      />
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 16,
-    lineHeight: 20,
+  container: {
     marginTop: 5,
     marginBottom: 5,
     marginLeft: 10,
     marginRight: 10,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 20,
   },
   text_left: {
     color: 'black',

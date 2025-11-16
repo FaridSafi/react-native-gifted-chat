@@ -25,3 +25,7 @@
    ```bash
    yarn ios:start
    ```
+
+# Dark Theme Support
+
+To switch theme press `Cmd + Shift + A` in iOS simulator.

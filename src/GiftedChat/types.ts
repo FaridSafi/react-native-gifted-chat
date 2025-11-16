@@ -30,7 +30,7 @@ import { QuickRepliesProps } from '../QuickReplies'
 import { SendProps } from '../Send'
 import { SystemMessageProps } from '../SystemMessage'
 import { TimeProps } from '../Time'
-import { AnimatedList, ListProps, MessageContainerProps } from '../MessageContainer'
+import { AnimatedList, MessageContainerProps } from '../MessageContainer'
 import { BubbleProps } from '../Bubble'
 
 export interface GiftedChatProps<TMessage extends IMessage> extends Partial<MessageContainerProps<TMessage>> {
@@ -38,22 +38,12 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   messageContainerRef?: RefObject<AnimatedList<TMessage>>
   /* text input ref */
   textInputRef?: RefObject<TextInput>
-  /* Messages to display */
-  messages?: TMessage[]
-  /* Typing Indicator state */
-  isTyping?: boolean
   /* Controls whether or not to show user.name property in the message bubble */
   renderUsernameOnMessage?: boolean
   /* Messages container style */
   messagesContainerStyle?: StyleProp<ViewStyle>
   /* Input text; default is undefined, but if specified, it will override GiftedChat's internal state */
   text?: string
-  /* Controls whether or not the message bubbles appear at the top of the chat */
-  alignTop?: boolean
-  /* enables the isScrollToBottomEnabled Component */
-  isScrollToBottomEnabled?: boolean
-  /* Scroll to bottom wrapper style */
-  scrollToBottomStyle?: StyleProp<ViewStyle>
   initialText?: string
   /* User sending the messages: { _id, name, avatar } */
   user?: User
@@ -65,10 +55,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   dateFormat?: string
   /* Format to use for rendering relative times; Today - for now. See more: https://day.js.org/docs/en/plugin/calendar */
   dateFormatCalendar?: object
-  /* Enables the "Load earlier messages" button */
-  loadEarlier?: boolean
-  /* Display an ActivityIndicator when loading earlier messages */
-  isLoadingEarlier?: boolean
   /* Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true` */
   isKeyboardInternallyHandled?: boolean
   /* Completely disable react-native-keyboard-controller. Useful when using react-native-navigation or other conflicting keyboard libraries; default is `false` */
@@ -79,7 +65,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   showAvatarForEveryMessage?: boolean
   /* Render the message avatar at the top of consecutive messages, rather than the bottom; default is false */
   renderAvatarOnTop?: boolean
-  inverted?: boolean
   /* Extra props to be passed to the <Image> component created by the default renderMessageImage */
   imageProps?: MessageImageProps<TMessage>
   /* Extra props to be passed to the MessageImage's Lightbox */
@@ -90,16 +75,12 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   focusOnInputWhenOpeningKeyboard?: boolean
   /* Minimum height of the input toolbar; default is 44 */
   minInputToolbarHeight?: number
-  /* Extra props to be passed to the messages <ListView>; some props can't be overridden, see the code in MessageContainer.render() for details */
-  listProps?: ListProps
   /*  Extra props to be passed to the <TextInput>. See https://reactnative.dev/docs/textinput */
   textInputProps?: Partial<React.ComponentProps<typeof TextInput>>
   /* Force send button */
   alwaysShowSend?: boolean
   /* Image style */
   imageStyle?: StyleProp<ViewStyle>
-  /* This can be used to pass unknown data which needs to be re-rendered */
-  extraData?: object
   /* composer min Height */
   minComposerHeight?: number
   /* composer min Height */
@@ -111,8 +92,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   quickReplyContainerStyle?: StyleProp<ViewStyle>
   /* optional prop used to place customView below text, image and video views; default is false */
   isCustomViewBottom?: boolean
-  /* infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
-  infiniteScroll?: boolean
   timeTextStyle?: LeftRightStyle<TextStyle>
   /* Custom action sheet */
   actionSheet?(): {
@@ -129,12 +108,8 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   messageIdGenerator?(message?: TMessage): string
   /* Callback when sending a message */
   onSend?(messages: TMessage[]): void
-  /* Callback when loading earlier messages */
-  onLoadEarlier?(): void
   /*  Render a loading view when initializing */
   renderLoading?(): React.ReactNode
-  /* Custom "Load earlier messages" button */
-  renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   /* Custom message avatar; set to null to not render any avatar for the message */
   renderAvatar?: null | ((props: AvatarProps<TMessage>) => React.ReactNode)
   /* Custom message bubble */
@@ -148,8 +123,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Custom Username container */
   renderUsername?(user: User): React.ReactNode
   /* Reverses display order of messages; default is true */
-  /* Custom message container */
-  renderMessage?(message: MessageProps<TMessage>): React.ReactElement
   /* Custom message text */
   renderMessageText?(messageText: MessageTextProps<TMessage>): React.ReactNode
   /* Custom message image */
@@ -160,14 +133,8 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   renderMessageAudio?(props: MessageAudioProps<TMessage>): React.ReactNode
   /* Custom view inside the bubble */
   renderCustomView?(props: BubbleProps<TMessage>): React.ReactNode
-  /* Custom day above a message */
-  renderDay?(props: DayProps): React.ReactNode
   /* Custom time inside a message */
   renderTime?(props: TimeProps<TMessage>): React.ReactNode
-  /* Custom footer component on the ListView, e.g. 'User is typing...' */
-  renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
-  /* Custom component to render in the ListView when messages are empty */
-  renderChatEmpty?(): React.ReactNode
   /* Custom component to render below the MessageContainer (separate from the ListView) */
   renderChatFooter?(): React.ReactNode
   /* Custom message composer container */
@@ -186,13 +153,10 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   onInputTextChanged?(text: string): void
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
   matchers?: MessageTextProps<TMessage>['matchers']
-  onQuickReply?(replies: Reply[]): void
   renderQuickReplies?(
     quickReplies: QuickRepliesProps<TMessage>,
   ): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
-  /* Scroll to bottom custom component */
-  scrollToBottomComponent?(): React.ReactNode
   shouldUpdateMessage?(
     props: MessageProps<TMessage>,
     nextProps: MessageProps<TMessage>,

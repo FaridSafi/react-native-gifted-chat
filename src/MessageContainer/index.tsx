@@ -72,8 +72,8 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     if (renderTypingIndicatorProp)
       return renderTypingIndicatorProp()
 
-    return <TypingIndicator isTyping={isTyping} />
-  }, [isTyping, renderTypingIndicatorProp])
+    return <TypingIndicator isTyping={isTyping} style={props.typingIndicatorStyle} />
+  }, [isTyping, renderTypingIndicatorProp, props.typingIndicatorStyle])
 
   const ListFooterComponent = useMemo(() => {
     if (renderFooterProp)

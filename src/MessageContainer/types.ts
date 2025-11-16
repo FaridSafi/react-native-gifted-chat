@@ -10,36 +10,62 @@ import { LoadEarlierProps } from '../LoadEarlier'
 import { MessageProps } from '../Message'
 import { User, IMessage, Reply, DayProps } from '../types'
 import { ReanimatedScrollEvent } from '../reanimatedCompat'
+import { TypingIndicatorProps } from '../TypingIndicator/types'
 
 export type ListProps<TMessage extends IMessage = IMessage> = Partial<FlatListProps<TMessage>>
 
 export type AnimatedList<TMessage> = FlatList<TMessage>
 
-export interface MessageContainerProps<TMessage extends IMessage = IMessage> {
+export interface MessageContainerProps<TMessage extends IMessage = IMessage>
+  extends Omit<TypingIndicatorProps, 'style'> {
+  /** Ref for the FlatList message container */
   forwardRef?: RefObject<AnimatedList<TMessage>>
+  /** Messages to display */
   messages?: TMessage[]
-  isTyping?: boolean
+  /** User sending the messages: { _id, name, avatar } */
   user?: User
-  listProps?: ListProps
+  /** Additional props for FlatList */
+  listProps?: ListProps<TMessage>
+  /** Reverses display order of messages; default is true */
   inverted?: boolean
+  /** Enables the "Load earlier messages" button */
   loadEarlier?: boolean
+  /** Controls whether or not the message bubbles appear at the top of the chat */
   alignTop?: boolean
+  /** Enables the isScrollToBottomEnabled Component */
   isScrollToBottomEnabled?: boolean
+  /** Scroll to bottom wrapper style */
   scrollToBottomStyle?: StyleProp<ViewStyle>
+  /** This can be used to pass unknown data which needs to be re-rendered */
   extraData?: object
+  /** Distance from bottom before showing scroll to bottom button */
   scrollToBottomOffset?: number
+  /** Custom component to render when messages are empty */
   renderChatEmpty?(): React.ReactNode
+  /** Custom footer component on the ListView, e.g. 'User is typing...' */
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
+  /** Custom message container */
   renderMessage?(props: MessageProps<TMessage>): React.ReactElement
+  /** Custom day above a message */
   renderDay?(props: DayProps): React.ReactNode
+  /** Custom "Load earlier messages" button */
   renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
+  /** Custom typing indicator */
   renderTypingIndicator?(): React.ReactNode
+  /** Scroll to bottom custom component */
   scrollToBottomComponent?(): React.ReactNode
+  /** Callback when loading earlier messages */
   onLoadEarlier?(): void
+  /** Callback when quick reply is sent */
   onQuickReply?(replies: Reply[]): void
+  /** Infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
   infiniteScroll?: boolean
+  /** Display an ActivityIndicator when loading earlier messages */
   isLoadingEarlier?: boolean
+  /** Custom scroll event handler */
   handleOnScroll?(event: ReanimatedScrollEvent): void
+  /** Style for TypingIndicator component */
+  typingIndicatorStyle?: StyleProp<ViewStyle>
 }
 
 export interface State {

@@ -89,7 +89,7 @@ const DotsAnimation = () => {
   )
 }
 
-const TypingIndicator = ({ isTyping }: TypingIndicatorProps) => {
+const TypingIndicator = ({ isTyping, style }: TypingIndicatorProps) => {
   const yCoords = useSharedValue(200)
   const heightScale = useSharedValue(0)
   const marginScale = useSharedValue(0)
@@ -146,6 +146,7 @@ const TypingIndicator = ({ isTyping }: TypingIndicatorProps) => {
       style={[
         styles.container,
         containerStyle,
+        style,
       ]}
     >
       <DotsAnimation />

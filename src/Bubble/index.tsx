@@ -1,7 +1,7 @@
 import React, { JSX, useCallback } from 'react'
 import {
   Text,
-  TouchableWithoutFeedback,
+  Pressable,
   View,
 } from 'react-native'
 
@@ -349,10 +349,9 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
           wrapperStyle && wrapperStyle[position],
         ]}
       >
-        <TouchableWithoutFeedback
+        <Pressable
           onPress={onPress}
           onLongPress={onLongPress}
-          accessibilityRole='text'
           {...props.touchableProps}
         >
           <View>
@@ -368,7 +367,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
               {renderTicks()}
             </View>
           </View>
-        </TouchableWithoutFeedback>
+        </Pressable>
       </View>
       {renderQuickReplies()}
     </View>

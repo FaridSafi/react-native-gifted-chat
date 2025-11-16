@@ -114,6 +114,19 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
     isLoadingEarlierAnim.value = isLoadingEarlier
   }, [isLoadingEarlierAnim, isLoadingEarlier])
 
+  const dayContent = useMemo(() => {
+    if (!createdAt)
+      return null
+
+    return renderDay
+      ? renderDay({ ...rest, createdAt })
+      : <Day
+        {...rest}
+        containerStyle={[styles.dayAnimatedDayContainerStyle, rest.containerStyle]}
+        createdAt={createdAt}
+      />
+  }, [createdAt, renderDay, rest])
+
   if (!createdAt)
     return null
 
@@ -126,15 +139,7 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
         style={contentStyle}
         pointerEvents='none'
       >
-        {
-          renderDay
-            ? renderDay({ ...rest, createdAt })
-            : <Day
-              {...rest}
-              containerStyle={[styles.dayAnimatedDayContainerStyle, rest.containerStyle]}
-              createdAt={createdAt}
-            />
-        }
+        {dayContent}
       </Animated.View>
     </Animated.View>
   )

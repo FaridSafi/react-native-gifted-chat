@@ -40,7 +40,7 @@ const CustomView = ({
   if (currentMessage.location)
     return (
       <TouchableOpacity
-        style={[styles.container, containerStyle]}
+        style={containerStyle}
         onPress={openMapAsync}
       >
         <MapView
@@ -54,7 +54,6 @@ const CustomView = ({
           scrollEnabled={false}
           zoomEnabled={false}
         />
-      )
       </TouchableOpacity>
     )
 

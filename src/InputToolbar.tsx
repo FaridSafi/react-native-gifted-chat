@@ -69,18 +69,29 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
     )
   }, [renderComposer, props])
 
+  const sendFragment = useMemo(() => {
+    return renderSend?.(props) || <Send {...props} />
+  }, [renderSend, props])
+
+  const accessoryFragment = useMemo(() => {
+    if (!renderAccessory)
+      return null
+
+    return (
+      <View style={[styles.accessory, props.accessoryStyle]}>
+        {renderAccessory(props)}
+      </View>
+    )
+  }, [renderAccessory, props])
+
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={[styles.primary, props.primaryStyle]}>
         {actionsFragment}
         {composerFragment}
-        {renderSend?.(props) || <Send {...props} />}
+        {sendFragment}
       </View>
-      {renderAccessory && (
-        <View style={[styles.accessory, props.accessoryStyle]}>
-          {renderAccessory(props)}
-        </View>
-      )}
+      {accessoryFragment}
     </View>
   )
 }

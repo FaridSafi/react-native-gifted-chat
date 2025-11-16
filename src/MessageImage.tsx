@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   Image,
   StyleSheet,
@@ -44,6 +44,20 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
   imageStyle,
   currentMessage,
 }: MessageImageProps<TMessage>) {
+  const imageSource = useMemo(() => ({
+    ...imageSourceProps,
+    uri: currentMessage?.image,
+  }), [imageSourceProps, currentMessage?.image])
+
+  const computedImageStyle = useMemo(() => [
+    styles.image,
+    imageStyle,
+  ], [imageStyle])
+
+  const activePropsStyle = useMemo(() => [{
+    style: [stylesCommon.fill, styles.imageActive],
+  }], [])
+
   if (currentMessage == null)
     return null
 
@@ -51,15 +65,13 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
     <View style={containerStyle}>
       {/* @ts-expect-error: Lightbox types are not fully compatible */}
       <Lightbox
-        activeProps={{
-          style: [stylesCommon.fill, styles.imageActive],
-        }}
+        activeProps={activePropsStyle}
         {...lightboxProps}
       >
         <Image
           {...imageProps}
-          style={[styles.image, imageStyle]}
-          source={{ ...imageSourceProps, uri: currentMessage.image }}
+          style={computedImageStyle}
+          source={imageSource}
         />
       </Lightbox>
     </View>

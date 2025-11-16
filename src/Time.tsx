@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { StyleSheet, Text, View, ViewStyle, TextStyle } from 'react-native'
 import dayjs from 'dayjs'
 
@@ -60,6 +60,13 @@ export function Time<TMessage extends IMessage = IMessage> ({
 }: TimeProps<TMessage>) {
   const { getLocale } = useChatContext()
 
+  const formattedTime = useMemo(() => {
+    if (currentMessage == null)
+      return null
+
+    return dayjs(currentMessage.createdAt).locale(getLocale()).format(timeFormat)
+  }, [currentMessage, getLocale, timeFormat])
+
   if (currentMessage == null)
     return null
 
@@ -76,7 +83,7 @@ export function Time<TMessage extends IMessage = IMessage> ({
           timeTextStyle?.[position],
         ]}
       >
-        {dayjs(currentMessage.createdAt).locale(getLocale()).format(timeFormat)}
+        {formattedTime}
       </Text>
     </View>
   )

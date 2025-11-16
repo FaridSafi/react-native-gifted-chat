@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import {
   Image,
   Text,
@@ -51,9 +51,6 @@ export interface GiftedAvatarProps {
 export function GiftedAvatar (
   props: GiftedAvatarProps
 ) {
-  const [avatarName, setAvatarName] = useState<string | undefined>(undefined)
-  const [backgroundColor, setBackgroundColor] = useState<string | undefined>(undefined)
-
   const {
     user,
     avatarStyle,
@@ -61,23 +58,23 @@ export function GiftedAvatar (
     onPress,
   } = props
 
-  const setAvatarColor = useCallback(() => {
-    if (backgroundColor)
-      return
-
+  const avatarName = useMemo(() => {
     const userName = user?.name || ''
     const name = userName.toUpperCase().split(' ')
 
     if (name.length === 1)
-      setAvatarName(`${name[0].charAt(0)}`)
+      return `${name[0].charAt(0)}`
     else if (name.length > 1)
-      setAvatarName(`${name[0].charAt(0)}${name[1].charAt(0)}`)
+      return `${name[0].charAt(0)}${name[1].charAt(0)}`
     else
-      setAvatarName('')
+      return ''
+  }, [user?.name])
 
+  const backgroundColor = useMemo(() => {
     let sumChars = 0
-    for (let i = 0; i < userName.length; i += 1)
-      sumChars += userName.charCodeAt(i)
+    if (user?.name)
+      for (let i = 0; i < user.name.length; i += 1)
+        sumChars += user.name.charCodeAt(i)
 
     // inspired by https://github.com/wbinnssmith/react-user-avatar
     // colors from https://flatuicolors.com/
@@ -91,8 +88,8 @@ export function GiftedAvatar (
       midnightBlue,
     ]
 
-    setBackgroundColor(colors[sumChars % colors.length])
-  }, [user?.name, backgroundColor])
+    return colors[sumChars % colors.length]
+  }, [user?.name])
 
   const renderAvatar = useCallback(() => {
     switch (typeof user?.avatar) {
@@ -125,17 +122,16 @@ export function GiftedAvatar (
     )
   }, [textStyle, avatarName])
 
-  const handleOnPress = () => {
+  const handleOnPress = useCallback(() => {
     const {
       onPress,
       ...rest
     } = props
 
-    if (onPress)
-      onPress(rest)
-  }
+    onPress?.(rest)
+  }, [props])
 
-  const handleOnLongPress = () => {
+  const handleOnLongPress = useCallback(() => {
     const {
       onLongPress,
       ...rest
@@ -143,25 +139,23 @@ export function GiftedAvatar (
 
     if (onLongPress)
       onLongPress(rest)
-  }
+  }, [props])
 
-  useEffect(() => {
-    setAvatarColor()
-  }, [setAvatarColor])
+  const placeholderView = useMemo(() => (
+    <View
+      style={[
+        stylesCommon.centerItems,
+        styles.avatarStyle,
+        styles.avatarTransparent,
+        avatarStyle,
+      ]}
+      accessibilityRole='image'
+    />
+  ), [avatarStyle])
 
   if (!user || (!user.name && !user.avatar))
     // render placeholder
-    return (
-      <View
-        style={[
-          stylesCommon.centerItems,
-          styles.avatarStyle,
-          styles.avatarTransparent,
-          avatarStyle,
-        ]}
-        accessibilityRole='image'
-      />
-    )
+    return placeholderView
 
   if (user.avatar)
     return (

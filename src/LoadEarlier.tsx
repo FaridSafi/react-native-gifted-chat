@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   ActivityIndicator,
   Platform,
@@ -63,6 +63,23 @@ export function LoadEarlier ({
   activityIndicatorSize = 'small',
   activityIndicatorStyle,
 }: LoadEarlierProps): React.ReactElement {
+  const loadingContent = useMemo(() => (
+    <View>
+      <Text style={[styles.text, textStyle, { opacity: 0 }]}>
+        {label}
+      </Text>
+      <ActivityIndicator
+        color={activityIndicatorColor!}
+        size={activityIndicatorSize!}
+        style={[styles.activityIndicator, activityIndicatorStyle]}
+      />
+    </View>
+  ), [label, textStyle, activityIndicatorColor, activityIndicatorSize, activityIndicatorStyle])
+
+  const labelContent = useMemo(() => (
+    <Text style={[styles.text, textStyle]}>{label}</Text>
+  ), [label, textStyle])
+
   return (
     <TouchableOpacity
       style={[styles.container, containerStyle]}
@@ -71,22 +88,7 @@ export function LoadEarlier ({
       accessibilityRole='button'
     >
       <View style={[stylesCommon.centerItems, styles.wrapper, wrapperStyle]}>
-        {isLoadingEarlier
-          ? (
-            <View>
-              <Text style={[styles.text, textStyle, { opacity: 0 }]}>
-                {label}
-              </Text>
-              <ActivityIndicator
-                color={activityIndicatorColor!}
-                size={activityIndicatorSize!}
-                style={[styles.activityIndicator, activityIndicatorStyle]}
-              />
-            </View>
-          )
-          : (
-            <Text style={[styles.text, textStyle]}>{label}</Text>
-          )}
+        {isLoadingEarlier ? loadingContent : labelContent}
       </View>
     </TouchableOpacity>
   )

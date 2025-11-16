@@ -151,6 +151,11 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
       changeScrollToBottomVisibility(false)
   }, [handleOnScrollProp, inverted, scrollToBottomOffset, changeScrollToBottomVisibility, isScrollingDown, lastScrolledY])
 
+  const restProps = useMemo(() => {
+    const { messages: _, ...rest } = props
+    return rest
+  }, [props])
+
   const renderItem = useCallback(({ item, index }: ListRenderItemInfo<unknown>): React.ReactElement | null => {
     const messageItem = item as TMessage
 
@@ -166,8 +171,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
 
       messageItem.user = { _id: 0 }
     }
-
-    const { messages, ...restProps } = props
 
     if (messages && user) {
       const previousMessage =
@@ -192,22 +195,29 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     }
 
     return null
-  }, [props, inverted, scrolledY, daysPositions, listHeight, user])
+  }, [messages, restProps, inverted, scrolledY, daysPositions, listHeight, user])
+
+  const emptyContent = useMemo(() => {
+    if (!renderChatEmptyProp)
+      return null
+
+    return renderChatEmptyProp()
+  }, [renderChatEmptyProp])
 
   const renderChatEmpty = useCallback(() => {
     if (renderChatEmptyProp)
       return inverted
         ? (
-          renderChatEmptyProp()
+          emptyContent
         )
         : (
           <View style={[stylesCommon.fill, styles.emptyChatContainer]}>
-            {renderChatEmptyProp()}
+            {emptyContent}
           </View>
         )
 
     return <View style={stylesCommon.fill} />
-  }, [inverted, renderChatEmptyProp])
+  }, [inverted, renderChatEmptyProp, emptyContent])
 
   const ListHeaderComponent = useMemo(() => {
     const content = renderLoadEarlier()
@@ -227,6 +237,25 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     return <Text>{'V'}</Text>
   }, [scrollToBottomComponentProp])
 
+  const handleScrollToBottomPress = useCallback(() => {
+    doScrollToBottom()
+  }, [doScrollToBottom])
+
+  const scrollToBottomContent = useMemo(() => {
+    return (
+      <Animated.View
+        style={[
+          stylesCommon.centerItems,
+          styles.scrollToBottomContent,
+          scrollToBottomStyle,
+          scrollToBottomStyleAnim,
+        ]}
+      >
+        {renderScrollBottomComponent()}
+      </Animated.View>
+    )
+  }, [scrollToBottomStyle, scrollToBottomStyleAnim, renderScrollBottomComponent])
+
   const ScrollToBottomWrapper = useCallback(() => {
     if (!isScrollToBottomEnabled)
       return null
@@ -237,21 +266,12 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     return (
       <Pressable
         style={styles.scrollToBottom}
-        onPress={() => doScrollToBottom()}
+        onPress={handleScrollToBottomPress}
       >
-        <Animated.View
-          style={[
-            stylesCommon.centerItems,
-            styles.scrollToBottomContent,
-            scrollToBottomStyle,
-            scrollToBottomStyleAnim,
-          ]}
-        >
-          {renderScrollBottomComponent()}
-        </Animated.View>
+        {scrollToBottomContent}
       </Pressable>
     )
-  }, [scrollToBottomStyle, renderScrollBottomComponent, doScrollToBottom, scrollToBottomStyleAnim, isScrollToBottomEnabled, isScrollToBottomVisible])
+  }, [isScrollToBottomEnabled, isScrollToBottomVisible, handleScrollToBottomPress, scrollToBottomContent])
 
   const onLayoutList = useCallback((event: LayoutChangeEvent) => {
     listHeight.value = event.nativeEvent.layout.height

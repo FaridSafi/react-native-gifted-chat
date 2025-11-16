@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   StyleSheet,
   Text,
@@ -39,13 +39,20 @@ export function SystemMessage<TMessage extends IMessage = IMessage> ({
   textStyle,
   children,
 }: SystemMessageProps<TMessage>) {
+  const textContent = useMemo(() => {
+    if (!currentMessage?.text)
+      return null
+
+    return <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
+  }, [currentMessage?.text, textStyle])
+
   if (currentMessage == null || currentMessage.system === false)
     return null
 
   return (
     <View style={[stylesCommon.fill, stylesCommon.centerItems, styles.container, containerStyle]}>
       <View style={wrapperStyle}>
-        {!!currentMessage.text && <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>}
+        {textContent}
         {children}
       </View>
     </View>

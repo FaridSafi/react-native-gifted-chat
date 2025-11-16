@@ -389,7 +389,7 @@ interface QuickReplies {
 - **`renderMessageText`** _(Function)_ - Custom message text
 - **`renderMessageImage`** _(Function)_ - Custom message image
 - **`renderMessageVideo`** _(Function)_ - Custom message video
-- **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://facebook.github.io/react-native/docs/image.html) component created by the default `renderMessageImage`
+- **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://reactnative.dev/docs/image.html) component created by the default `renderMessageImage`
 - **`videoProps`** _(Object)_ - Extra props to be passed to the video component created by the required `renderMessageVideo`
 - **`lightboxProps`** _(Object)_ - Extra props to be passed to the `MessageImage`'s [Lightbox](https://github.com/oblador/react-native-lightbox)
 - **`isCustomViewBottom`** _(Bool)_ - Determine whether renderCustomView is displayed before or after the text, image and video views; default is `false`
@@ -408,11 +408,9 @@ interface QuickReplies {
 - **`bottomOffset`** _(Integer)_ - Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar)
 - **`focusOnInputWhenOpeningKeyboard`** _(Bool)_ - Focus on <TextInput> automatically when opening the keyboard; default `true`
 - **`minInputToolbarHeight`** _(Integer)_ - Minimum height of the input toolbar; default is `44`
-- **`listViewProps`** _(Object)_ - Extra props to be passed to the messages [`<ListView>`](https://facebook.github.io/react-native/docs/listview.html); some props can't be overridden, see the code in `MessageContainer.render()` for details
-- **`textInputProps`** _(Object)_ - Extra props to be passed to the [`<TextInput>`](https://facebook.github.io/react-native/docs/textinput.html)
-- **`textInputStyle`** _(Object)_ - Custom style to be passed to the [`<TextInput>`](https://facebook.github.io/react-native/docs/textinput.html)
-- **`multiline`** _(Bool)_ - Indicates whether to allow the [`<TextInput>`](https://facebook.github.io/react-native/docs/textinput.html) to be multiple lines or not; default `true`.
-- **`keyboardShouldPersistTaps`** _(Enum)_ - Determines whether the keyboard should stay visible after a tap; see [`<ScrollView>`](https://facebook.github.io/react-native/docs/scrollview.html) docs
+- **`listProps`** _(Object)_ - Extra props to be passed to the messages [`<FlatList>`](https://reactnative.dev/docs/flatlist.html); some props can't be overridden, see the code in `MessageContainer.render()` for details
+- **`textInputProps`** _(Object)_ - Extra props to be passed to the [`<TextInput>`](https://reactnative.dev/docs/textinput.html)
+- **`keyboardShouldPersistTaps`** _(Enum)_ - Determines whether the keyboard should stay visible after a tap; see [`<ScrollView>`](https://reactnative.dev/docs/scrollview.html) docs
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
 - **`matchers`** _(Array)_ - Custom matchers for [react-native-autolink](https://github.com/joshswan/react-native-autolink) used to linking message content (like URLs and phone numbers), e.g.:
 
@@ -473,7 +471,7 @@ If you are using Create React Native App / Expo, no Android specific installatio
 
 - For **Expo**, there are at least 2 solutions to fix it:
 
-  - Append [`KeyboardAvoidingView`](https://facebook.github.io/react-native/docs/keyboardavoidingview) after GiftedChat. This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
+  - Append [`KeyboardAvoidingView`](https://reactnative.dev/docs/keyboardavoidingview) after GiftedChat. This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
 
 ```
 <View style={{ flex: 1 }}>

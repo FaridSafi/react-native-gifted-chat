@@ -30,7 +30,7 @@ import { QuickRepliesProps } from '../QuickReplies'
 import { SendProps } from '../Send'
 import { SystemMessageProps } from '../SystemMessage'
 import { TimeProps } from '../Time'
-import { AnimatedList, ListViewProps, MessageContainerProps } from '../MessageContainer'
+import { AnimatedList, ListProps, MessageContainerProps } from '../MessageContainer'
 import { BubbleProps } from '../Bubble'
 
 export interface GiftedChatProps<TMessage extends IMessage> extends Partial<MessageContainerProps<TMessage>> {
@@ -55,10 +55,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Scroll to bottom wrapper style */
   scrollToBottomStyle?: StyleProp<ViewStyle>
   initialText?: string
-  /* Placeholder when text is empty; default is 'Type a message...' */
-  placeholder?: string
-  /* Makes the composer not editable */
-  disableComposer?: boolean
   /* User sending the messages: { _id, name, avatar } */
   user?: User
   /*  Locale to localize the dates */
@@ -95,8 +91,8 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Minimum height of the input toolbar; default is 44 */
   minInputToolbarHeight?: number
   /* Extra props to be passed to the messages <ListView>; some props can't be overridden, see the code in MessageContainer.render() for details */
-  listViewProps?: ListViewProps
-  /*  Extra props to be passed to the <TextInput> */
+  listProps?: ListProps
+  /*  Extra props to be passed to the <TextInput>. See https://reactnative.dev/docs/textinput */
   textInputProps?: object
   /* Determines whether the keyboard should stay visible after a tap; see <ScrollView> docs */
   keyboardShouldPersistTaps?: 'always' | 'never' | 'handled'

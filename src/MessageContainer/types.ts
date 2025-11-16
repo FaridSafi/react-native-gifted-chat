@@ -11,7 +11,7 @@ import { MessageProps } from '../Message'
 import { User, IMessage, Reply, DayProps } from '../types'
 import { ReanimatedScrollEvent } from '../reanimatedCompat'
 
-export type ListViewProps<TMessage extends IMessage = IMessage> = Partial<FlatListProps<TMessage>>
+export type ListProps<TMessage extends IMessage = IMessage> = Partial<FlatListProps<TMessage>>
 
 export type AnimatedList<TMessage> = FlatList<TMessage>
 
@@ -20,7 +20,7 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage> {
   messages?: TMessage[]
   isTyping?: boolean
   user?: User
-  listViewProps?: ListViewProps
+  listProps?: ListProps
   inverted?: boolean
   loadEarlier?: boolean
   alignTop?: boolean

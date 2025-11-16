@@ -39,9 +39,9 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     onLoadEarlier,
     inverted = true,
     loadEarlier = false,
-    listViewProps,
+    listProps,
     invertibleScrollViewProps,
-    extraData = null,
+    extraData,
     isScrollToBottomEnabled = false,
     scrollToBottomOffset = 200,
     alignTop = false,
@@ -285,8 +285,8 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         doScrollToBottom(false)
       }, 500)
 
-    listViewProps?.onLayout?.(event)
-  }, [inverted, messages, doScrollToBottom, listHeight, listViewProps, isScrollToBottomEnabled])
+    listProps?.onLayout?.(event)
+  }, [inverted, messages, doScrollToBottom, listHeight, listProps, isScrollToBottomEnabled])
 
   const onEndReached = useCallback(() => {
     if (
@@ -410,7 +410,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         scrollEventThrottle={1}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
-        {...listViewProps}
+        {...listProps}
         onLayout={onLayoutList}
         CellRendererComponent={renderCell}
       />

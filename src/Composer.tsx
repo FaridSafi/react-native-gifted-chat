@@ -17,20 +17,15 @@ export interface ComposerProps {
   placeholder?: string
   placeholderTextColor?: string
   textInputProps?: Partial<TextInputProps>
-  textInputStyle?: TextInputProps['style']
   textInputAutoFocus?: boolean
   keyboardAppearance?: TextInputProps['keyboardAppearance']
-  multiline?: boolean
-  disableComposer?: boolean
   onTextChanged?(text: string): void
   onInputSizeChanged?(layout: { width: number, height: number }): void
 }
 
 export function Composer ({
   composerHeight = MIN_COMPOSER_HEIGHT,
-  disableComposer = false,
   keyboardAppearance = 'default',
-  multiline = true,
   onInputSizeChanged,
   onTextChanged,
   placeholder = DEFAULT_PLACEHOLDER,
@@ -38,7 +33,6 @@ export function Composer ({
   text = '',
   textInputAutoFocus = false,
   textInputProps,
-  textInputStyle,
 }: ComposerProps): React.ReactElement {
   const dimensionsRef = useRef<{ width: number, height: number }>(null)
 
@@ -76,14 +70,12 @@ export function Composer ({
       accessibilityLabel={placeholder}
       placeholder={placeholder}
       placeholderTextColor={placeholderTextColor}
-      multiline={multiline}
-      editable={!disableComposer}
       onContentSizeChange={handleContentSizeChange}
       onChangeText={onTextChanged}
       style={[
         stylesCommon.fill,
         styles.textInput,
-        textInputStyle,
+        textInputProps?.style,
         {
           height: composerHeight,
           ...Platform.select({
@@ -100,6 +92,7 @@ export function Composer ({
       enablesReturnKeyAutomatically
       underlineColorAndroid='transparent'
       keyboardAppearance={keyboardAppearance}
+      multiline={textInputProps?.multiline ?? true}
       {...textInputProps}
     />
   )

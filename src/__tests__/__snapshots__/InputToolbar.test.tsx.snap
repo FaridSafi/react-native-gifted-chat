@@ -28,7 +28,6 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
       accessibilityLabel="Type a message..."
       accessible={true}
       autoFocus={false}
-      editable={true}
       enablesReturnKeyAutomatically={true}
       keyboardAppearance="default"
       multiline={true}

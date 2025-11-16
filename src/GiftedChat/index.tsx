@@ -110,7 +110,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     minComposerHeight!
   )
   const [text, setText] = useState<string | undefined>(() => props.text || '')
-  const [isTypingDisabled, setIsTypingDisabled] = useState<boolean>(false)
 
   // Always call the hook, but conditionally use its data
   const keyboardControllerData = useReanimatedKeyboardAnimation()
@@ -123,7 +122,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   }, [disableKeyboardController, keyboardControllerData])
 
   const trackingKeyboardMovement = useSharedValue(false)
-  const debounceEnableTypingTimeoutId = useRef<ReturnType<typeof setTimeout>>(undefined)
   const keyboardOffsetBottom = useSharedValue(0)
 
   const contentStyleAnim = useAnimatedStyle(
@@ -172,23 +170,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     // Reset the indicator since the keyboard is shown
     isTextInputWasFocused.current = false
   }, [textInputRef])
-
-  const disableTyping = useCallback(() => {
-    clearTimeout(debounceEnableTypingTimeoutId.current)
-    setIsTypingDisabled(true)
-  }, [])
-
-  const enableTyping = useCallback(() => {
-    clearTimeout(debounceEnableTypingTimeoutId.current)
-    setIsTypingDisabled(false)
-  }, [])
-
-  const debounceEnableTyping = useCallback(() => {
-    clearTimeout(debounceEnableTypingTimeoutId.current)
-    debounceEnableTypingTimeoutId.current = setTimeout(() => {
-      enableTyping()
-    }, 50)
-  }, [enableTyping])
 
   const scrollToBottom = useCallback(
     (isAnimated = true) => {
@@ -251,13 +232,11 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
     setComposerHeight(minComposerHeight!)
     setText(getTextFromProp(''))
-    enableTyping()
   }, [
     minComposerHeight,
     getTextFromProp,
     textInputRef,
     notifyInputTextReset,
-    enableTyping,
   ])
 
   const _onSend = useCallback(
@@ -274,17 +253,14 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         }
       })
 
-      if (shouldResetInputToolbar === true) {
-        disableTyping()
-
+      if (shouldResetInputToolbar === true)
         resetInputToolbar()
-      }
 
       onSend?.(newMessages)
 
       setTimeout(() => scrollToBottom(), 10)
     },
-    [messageIdGenerator, onSend, user, resetInputToolbar, disableTyping, scrollToBottom]
+    [messageIdGenerator, onSend, user, resetInputToolbar, scrollToBottom]
   )
 
   const onInputSizeChanged = useCallback(
@@ -301,16 +277,13 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const _onInputTextChanged = useCallback(
     (text: string) => {
-      if (isTypingDisabled)
-        return
-
       onInputTextChanged?.(text)
 
       // Only set state if it's not being overridden by a prop.
       if (props.text === undefined)
         setText(text)
     },
-    [onInputTextChanged, isTypingDisabled, props.text]
+    [onInputTextChanged, props.text]
   )
 
   const onInitialLayoutViewLayout = useCallback(
@@ -346,7 +319,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       textInputProps: {
         ...textInputProps,
         ref: textInputRef,
-        editable: !isTypingDisabled,
       },
     }
 
@@ -364,7 +336,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     text,
     renderInputToolbar,
     composerHeight,
-    isTypingDisabled,
     textInputRef,
     textInputProps,
     _onInputTextChanged,
@@ -413,13 +384,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
               runOnJS(handleTextInputFocusWhenKeyboardShow)()
             else
               runOnJS(handleTextInputFocusWhenKeyboardHide)()
-
-          if (value === 0) {
-            runOnJS(enableTyping)()
-          } else {
-            runOnJS(disableTyping)()
-            runOnJS(debounceEnableTyping)()
-          }
         }
       }
     },
@@ -429,9 +393,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       focusOnInputWhenOpeningKeyboard,
       handleTextInputFocusWhenKeyboardHide,
       handleTextInputFocusWhenKeyboardShow,
-      enableTyping,
-      disableTyping,
-      debounceEnableTyping,
       bottomOffset,
       disableKeyboardController,
     ]

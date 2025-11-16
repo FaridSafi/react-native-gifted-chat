@@ -154,7 +154,6 @@ export function GiftedAvatar (
   ), [avatarStyle])
 
   if (!user || (!user.name && !user.avatar))
-    // render placeholder
     return placeholderView
 
   if (user.avatar)

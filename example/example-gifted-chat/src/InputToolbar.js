@@ -48,15 +48,17 @@ export const renderActions = props => (
 export const renderComposer = props => (
   <Composer
     {...props}
-    textInputStyle={{
-      color: '#222B45',
-      backgroundColor: '#EDF1F7',
-      borderWidth: 1,
-      borderRadius: 5,
-      borderColor: '#E4E9F2',
-      paddingTop: 8.5,
-      paddingHorizontal: 12,
-      marginLeft: 0,
+    textInputProps={{
+      style: {
+        color: '#222B45',
+        backgroundColor: '#EDF1F7',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#E4E9F2',
+        paddingTop: 8.5,
+        paddingHorizontal: 12,
+        marginLeft: 0,
+      },
     }}
   />
 )

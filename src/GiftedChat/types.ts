@@ -100,8 +100,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   textInputProps?: object
   /* Determines whether the keyboard should stay visible after a tap; see <ScrollView> docs */
   keyboardShouldPersistTaps?: 'always' | 'never' | 'handled'
-  /* Max message composer TextInput length */
-  maxInputLength?: number
   /* Force send button */
   alwaysShowSend?: boolean
   /* Image style */

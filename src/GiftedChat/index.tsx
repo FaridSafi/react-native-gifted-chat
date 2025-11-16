@@ -72,10 +72,10 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     onSend,
     locale = 'en',
     renderLoading,
-    actionSheet = null,
+    actionSheet,
     textInputProps,
-    renderChatFooter = null,
-    renderInputToolbar = null,
+    renderChatFooter,
+    renderInputToolbar,
     bottomOffset = 0,
     focusOnInputWhenOpeningKeyboard = true,
     keyboardShouldPersistTaps = Platform.select({
@@ -83,8 +83,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       android: 'always',
       default: 'never',
     }),
-    onInputTextChanged = null,
-    maxInputLength = null,
+    onInputTextChanged,
     inverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
@@ -301,15 +300,15 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   )
 
   const _onInputTextChanged = useCallback(
-    (_text: string) => {
+    (text: string) => {
       if (isTypingDisabled)
         return
 
-      onInputTextChanged?.(_text)
+      onInputTextChanged?.(text)
 
       // Only set state if it's not being overridden by a prop.
       if (props.text === undefined)
-        setText(_text)
+        setText(text)
     },
     [onInputTextChanged, isTypingDisabled, props.text]
   )
@@ -347,7 +346,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       textInputProps: {
         ...textInputProps,
         ref: textInputRef,
-        maxLength: isTypingDisabled ? 0 : maxInputLength,
+        editable: !isTypingDisabled,
       },
     }
 
@@ -359,7 +358,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     isInitialized,
     _onSend,
     getTextFromProp,
-    maxInputLength,
     minComposerHeight,
     onInputSizeChanged,
     props,

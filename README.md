@@ -414,7 +414,6 @@ interface QuickReplies {
 - **`multiline`** _(Bool)_ - Indicates whether to allow the [`<TextInput>`](https://facebook.github.io/react-native/docs/textinput.html) to be multiple lines or not; default `true`.
 - **`keyboardShouldPersistTaps`** _(Enum)_ - Determines whether the keyboard should stay visible after a tap; see [`<ScrollView>`](https://facebook.github.io/react-native/docs/scrollview.html) docs
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
-- **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
 - **`matchers`** _(Array)_ - Custom matchers for [react-native-autolink](https://github.com/joshswan/react-native-autolink) used to linking message content (like URLs and phone numbers), e.g.:
 
 ```js

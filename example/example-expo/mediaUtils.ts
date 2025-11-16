@@ -29,9 +29,7 @@ export default async function getPermissionAsync (
   return true
 }
 
-export async function getLocationAsync (
-  onSend: (locations: { location: LocationObjectCoords }[]) => void
-) {
+export async function getLocationAsync (): Promise<LocationObjectCoords | undefined> {
   const response = await requestForegroundPermissionsAsync()
   if (!response.granted)
     return
@@ -40,12 +38,10 @@ export async function getLocationAsync (
   if (!location)
     return
 
-  onSend([{ _id: Math.random().toString(36).substring(7), location: location.coords }])
+  return location.coords
 }
 
-export async function pickImageAsync (
-  onSend: (images: { image: string }[]) => void
-) {
+export async function pickImageAsync (): Promise<string[] | undefined> {
   const response = await ImagePicker.requestMediaLibraryPermissionsAsync()
   if (!response.granted)
     return
@@ -58,16 +54,10 @@ export async function pickImageAsync (
   if (result.canceled)
     return
 
-  const images = result.assets.map(({ uri: image }) => ({
-    _id: Math.random().toString(36).substring(7),
-    image
-  }))
-  onSend(images)
+  return result.assets.map(({ uri }) => uri)
 }
 
-export async function takePictureAsync (
-  onSend: (images: { image: string }[]) => void
-) {
+export async function takePictureAsync (): Promise<string[] | undefined> {
   const response = await ImagePicker.requestCameraPermissionsAsync()
   if (!response.granted)
     return
@@ -80,9 +70,5 @@ export async function takePictureAsync (
   if (result.canceled)
     return
 
-  const images = result.assets.map(({ uri: image }) => ({
-    _id: Math.random().toString(36).substring(7),
-    image
-  }))
-  onSend(images)
+  return result.assets.map(({ uri }) => uri)
 }

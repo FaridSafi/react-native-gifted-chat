@@ -16,14 +16,15 @@ import {
   pickImageAsync,
   takePictureAsync,
 } from './mediaUtils'
-import { LocationObjectCoords } from 'expo-location'
+import { IMessage, User } from '../../src'
 
 interface Props {
   renderIcon?: () => React.ReactNode
   wrapperStyle?: StyleProp<ViewStyle>
   containerStyle?: StyleProp<ViewStyle>
   iconTextStyle?: StyleProp<TextStyle>
-  onSend: (messages: { location?: LocationObjectCoords, image?: string }[]) => void
+  onSend: (messages: IMessage[]) => void
+  user: User
 }
 
 const CustomActions = ({
@@ -32,15 +33,58 @@ const CustomActions = ({
   containerStyle,
   wrapperStyle,
   onSend,
+  user,
 }: Props) => {
   const { showActionSheetWithOptions } = useActionSheet()
   const colorScheme = useColorScheme()
 
+  const handlePickImage = useCallback(async () => {
+    const images = await pickImageAsync()
+    if (!images) return
+
+    const messages: IMessage[] = images.map(image => ({
+      _id: Math.random().toString(36).substring(7),
+      image,
+      text: '',
+      createdAt: new Date(),
+      user,
+    }))
+    onSend(messages)
+  }, [onSend, user])
+
+  const handleTakePicture = useCallback(async () => {
+    const images = await takePictureAsync()
+    if (!images) return
+
+    const messages: IMessage[] = images.map(image => ({
+      _id: Math.random().toString(36).substring(7),
+      image,
+      text: '',
+      createdAt: new Date(),
+      user,
+    }))
+    onSend(messages)
+  }, [onSend, user])
+
+  const handleSendLocation = useCallback(async () => {
+    const location = await getLocationAsync()
+    if (!location) return
+
+    const message: IMessage = {
+      _id: Math.random().toString(36).substring(7),
+      location,
+      text: '',
+      createdAt: new Date(),
+      user,
+    }
+    onSend([message])
+  }, [onSend, user])
+
   const onActionsPress = useCallback(() => {
     const options: { title: string; action?: () => Promise<void> }[] = [
-      { title: 'Choose From Library', action: () => pickImageAsync(onSend) },
-      { title: 'Take Picture', action: () => takePictureAsync(onSend) },
-      { title: 'Send Location', action: () => getLocationAsync(onSend) },
+      { title: 'Choose From Library', action: handlePickImage },
+      { title: 'Take Picture', action: handleTakePicture },
+      { title: 'Send Location', action: handleSendLocation },
       { title: 'Cancel' },
     ]
     const cancelButtonIndex = options.length - 1
@@ -57,15 +101,18 @@ const CustomActions = ({
         }
       }
     )
-  }, [showActionSheetWithOptions, onSend])
+  }, [showActionSheetWithOptions, handlePickImage, handleTakePicture, handleSendLocation])
 
   const renderIconComponent = useCallback(() => {
     if (renderIcon)
       return renderIcon()
 
+    const wrapperColorStyle = colorScheme === 'dark' ? styles.wrapper_dark : {}
+    const iconTextColorStyle = colorScheme === 'dark' ? styles.iconText_dark : {}
+
     return (
-      <View style={[styles.wrapper, styles[`wrapper_${colorScheme}`], wrapperStyle]}>
-        <Text style={[styles.iconText, styles[`iconText_${colorScheme}`], iconTextStyle]}>+</Text>
+      <View style={[styles.wrapper, wrapperColorStyle, wrapperStyle]}>
+        <Text style={[styles.iconText, iconTextColorStyle, iconTextStyle]}>+</Text>
       </View>
     )
   }, [renderIcon, wrapperStyle, iconTextStyle, colorScheme])

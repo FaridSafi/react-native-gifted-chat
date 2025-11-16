@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import * as Linking from 'expo-linking'
 import {
   Platform,
+  Text,
   TouchableOpacity,
 } from 'react-native'
 import MapView from 'react-native-maps'
@@ -19,7 +20,7 @@ const CustomView = ({
       return
     }
 
-    const { location = {} } = currentMessage
+    const { location } = currentMessage
 
     const url = Platform.select({
       ios: `http://maps.apple.com/?ll=${location.latitude},${location.longitude}`,

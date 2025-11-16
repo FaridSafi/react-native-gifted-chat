@@ -33,22 +33,22 @@ export default function ExpoExample () {
     setIsLoadingEarlier(true)
     setTimeout(() => {
       setMessages(previousMessages =>
-        GiftedChat.prepend(previousMessages, earlierMessages)
+        GiftedChat.prepend(previousMessages, earlierMessages())
       )
       setIsLoadingEarlier(false)
     }, 1500)
   }, [])
 
   const renderAccessory = useCallback(
-    () => <AccessoryBar onSend={onSend} isTyping={() => setIsTyping(!isTyping)} />,
-    [onSend, isTyping]
+    () => <AccessoryBar onSend={onSend} isTyping={() => setIsTyping(!isTyping)} user={user} />,
+    [onSend, isTyping, user]
   )
 
   const renderCustomView = useCallback((props: any) => <CustomView {...props} />, [])
 
   const renderActions = useCallback(
-    (props: any) => <CustomActions {...props} onSend={onSend} />,
-    [onSend]
+    (props: any) => <CustomActions {...props} onSend={onSend} user={user} />,
+    [onSend, user]
   )
 
   const isDark = colorScheme === 'dark'

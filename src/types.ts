@@ -64,6 +64,10 @@ export interface IMessage {
   received?: boolean
   pending?: boolean
   quickReplies?: QuickReplies
+  location?: {
+    latitude: number
+    longitude: number
+  }
 }
 
 export type IChatMessage = IMessage

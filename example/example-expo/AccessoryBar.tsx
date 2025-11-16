@@ -7,25 +7,70 @@ import {
   pickImageAsync,
   takePictureAsync,
 } from './mediaUtils'
+import { IMessage, User } from '../../src'
 
-export default function AccessoryBar ({ onSend, isTyping }: any) {
+export default function AccessoryBar ({ onSend, isTyping, user }: { onSend: (messages: IMessage[]) => void, isTyping: () => void, user: User }) {
   const colorScheme = useColorScheme()
   const isDark = colorScheme === 'dark'
 
+  const handlePickImage = async () => {
+    const images = await pickImageAsync()
+    if (!images) return
+
+    const messages: IMessage[] = images.map(image => ({
+      _id: Math.random().toString(36).substring(7),
+      image,
+      text: '',
+      createdAt: new Date(),
+      user,
+    }))
+    onSend(messages)
+  }
+
+  const handleTakePicture = async () => {
+    const images = await takePictureAsync()
+    if (!images) return
+
+    const messages: IMessage[] = images.map(image => ({
+      _id: Math.random().toString(36).substring(7),
+      image,
+      text: '',
+      createdAt: new Date(),
+      user,
+    }))
+    onSend(messages)
+  }
+
+  const handleSendLocation = async () => {
+    const location = await getLocationAsync()
+    if (!location) return
+
+    const message: IMessage = {
+      _id: Math.random().toString(36).substring(7),
+      location,
+      text: '',
+      createdAt: new Date(),
+      user,
+    }
+    onSend([message])
+  }
+
+  const containerColorStyle = colorScheme === 'dark' ? styles.container_dark : {}
+
   return (
-    <View style={[styles.container, styles[`container_${colorScheme}`]]}>
+    <View style={[styles.container, containerColorStyle]}>
       <Button
-        onPress={() => pickImageAsync(onSend)}
+        onPress={handlePickImage}
         name='photo'
         color={isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)'}
       />
       <Button
-        onPress={() => takePictureAsync(onSend)}
+        onPress={handleTakePicture}
         name='camera'
         color={isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)'}
       />
       <Button
-        onPress={() => getLocationAsync(onSend)}
+        onPress={handleSendLocation}
         name='my-location'
         color={isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)'}
       />
@@ -44,10 +89,15 @@ const Button = ({
   onPress,
   size = 30,
   color = 'rgba(0,0,0,0.5)',
-  ...props
+  name,
+}: {
+  onPress: () => void
+  size?: number
+  color?: string
+  name: React.ComponentProps<typeof MaterialIcons>['name']
 }) => (
   <TouchableOpacity onPress={onPress}>
-    <MaterialIcons size={size} color={color} {...props} />
+    <MaterialIcons size={size} color={color} name={name} />
   </TouchableOpacity>
 )
 

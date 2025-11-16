@@ -5,8 +5,8 @@ import { Avatar, Bubble, SystemMessage, Message, MessageText } from 'react-nativ
 export const renderAvatar = props => (
   <Avatar
     {...props}
-    containerStyle={{ left: { borderWidth: 3, borderColor: 'red' }, right: {} }}
-    imageStyle={{ left: { borderWidth: 3, borderColor: 'blue' }, right: {} }}
+    containerStyle={{ left: { borderWidth: 3, borderColor: 'red' } }}
+    imageStyle={{ left: { borderWidth: 3, borderColor: 'blue' } }}
   />
 )
 
@@ -17,25 +17,19 @@ export const renderBubble = props => (
     // renderTicks={() => <Text>Ticks</Text>}
     containerStyle={{
       left: { borderColor: 'teal', borderWidth: 8 },
-      right: {},
     }}
     wrapperStyle={{
       left: { borderColor: 'tomato', borderWidth: 4 },
-      right: {},
     }}
     bottomContainerStyle={{
       left: { borderColor: 'purple', borderWidth: 4 },
-      right: {},
     }}
-    tickStyle={{}}
     usernameStyle={{ color: 'tomato', fontWeight: '100' }}
     containerToNextStyle={{
       left: { borderColor: 'navy', borderWidth: 4 },
-      right: {},
     }}
     containerToPreviousStyle={{
       left: { borderColor: 'mediumorchid', borderWidth: 4 },
-      right: {},
     }}
   />
 )

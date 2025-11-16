@@ -4,16 +4,18 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
 <View>
   <Lightbox
     activeProps={
-      {
-        "style": [
-          {
-            "flex": 1,
-          },
-          {
-            "resizeMode": "contain",
-          },
-        ],
-      }
+      [
+        {
+          "style": [
+            {
+              "flex": 1,
+            },
+            {
+              "resizeMode": "contain",
+            },
+          ],
+        },
+      ]
     }
   >
     <Image

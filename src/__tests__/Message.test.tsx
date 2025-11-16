@@ -1,80 +1,73 @@
-import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react-native'
 
 import { Message } from '../GiftedChat'
 
 describe('Message component', () => {
   it('should render <Message /> and compare with snapshot', () => {
-    const tree = renderer
-      .create(
-        <Message
-          key='123'
-          user={{ _id: 1 }}
-          currentMessage={{
-            _id: 1,
-            text: 'test',
-            createdAt: 1554744013721,
-            user: { _id: 1 },
-          }}
-          position='left'
-        />
-      )
-      .toJSON()
+    const { toJSON } = render(
+      <Message
+        key='123'
+        user={{ _id: 1 }}
+        currentMessage={{
+          _id: 1,
+          text: 'test',
+          createdAt: 1554744013721,
+          user: { _id: 1 },
+        }}
+        position='left'
+      />
+    )
 
-    expect(tree).toMatchSnapshot()
+    expect(toJSON()).toMatchSnapshot()
   })
 
   it('should NOT render <Message />', () => {
-    const tree = renderer
-      .create(<Message key='123' user={{ _id: 1 }} currentMessage={null} position='left' />)
-      .toJSON()
+    const { toJSON } = render(
+      <Message key='123' user={{ _id: 1 }} currentMessage={null} position='left' />
+    )
 
-    expect(tree).toMatchSnapshot()
+    expect(toJSON()).toMatchSnapshot()
   })
 
   it('should render <Message /> with Avatar', () => {
-    const tree = renderer
-      .create(
-        <Message
-          key='123'
-          user={{ _id: 1 }}
-          currentMessage={{
-            _id: 1,
-            text: 'test',
-            createdAt: 1554744013721,
-            user: { _id: 1 },
-          }}
-          position='left'
-          showUserAvatar
-        />
-      )
-      .toJSON()
+    const { toJSON } = render(
+      <Message
+        key='123'
+        user={{ _id: 1 }}
+        currentMessage={{
+          _id: 1,
+          text: 'test',
+          createdAt: 1554744013721,
+          user: { _id: 1 },
+        }}
+        position='left'
+        showUserAvatar
+      />
+    )
 
-    expect(tree).toMatchSnapshot()
+    expect(toJSON()).toMatchSnapshot()
   })
 
   it('should render null if user has no Avatar', () => {
-    const tree = renderer
-      .create(
-        <Message
-          key='123'
-          user={{ _id: 1 }}
-          currentMessage={{
+    const { toJSON } = render(
+      <Message
+        key='123'
+        user={{ _id: 1 }}
+        currentMessage={{
+          _id: 1,
+          text: 'test',
+          createdAt: 1554744013721,
+          user: {
             _id: 1,
-            text: 'test',
-            createdAt: 1554744013721,
-            user: {
-              _id: 1,
-              avatar: null,
-            },
-          }}
-          position='left'
-          showUserAvatar
-        />
-      )
-      .toJSON()
+            avatar: null,
+          },
+        }}
+        position='left'
+        showUserAvatar
+      />
+    )
 
-    expect(tree).toMatchSnapshot()
+    expect(toJSON()).toMatchSnapshot()
   })
 })

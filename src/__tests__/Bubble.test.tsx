@@ -1,26 +1,21 @@
-import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react-native'
 
 import { Bubble } from '../GiftedChat'
 
 it('should render <Bubble /> and compare with snapshot', () => {
-  let tree
+  const { toJSON } = render(
+    <Bubble
+      user={{ _id: 1 }}
+      currentMessage={{
+        _id: 1,
+        text: 'test',
+        createdAt: 1554744013721,
+        user: { _id: 1 },
+      }}
+      position='left'
+    />
+  )
 
-  renderer.act(() => {
-    tree = renderer.create(
-      <Bubble
-        user={{ _id: 1 }}
-        currentMessage={{
-          _id: 1,
-          text: 'test',
-          createdAt: 1554744013721,
-          user: { _id: 1 },
-        }}
-        position='left'
-      />
-    )
-  })
-
-  expect(tree.toJSON()).toMatchSnapshot()
+  expect(toJSON()).toMatchSnapshot()
 })

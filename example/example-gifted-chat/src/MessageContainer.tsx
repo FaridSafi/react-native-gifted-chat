@@ -1,8 +1,21 @@
 import React from 'react'
-import { View, Text } from 'react-native'
-import { Avatar, Bubble, SystemMessage, Message, MessageText } from 'react-native-gifted-chat'
+import { View, Text, StyleProp, ViewStyle } from 'react-native'
+import {
+  Avatar,
+  Bubble,
+  SystemMessage,
+  Message,
+  MessageText,
+  IMessage,
+  User,
+  AvatarProps,
+  BubbleProps,
+  SystemMessageProps,
+  MessageProps,
+  MessageTextProps,
+} from 'react-native-gifted-chat'
 
-export const renderAvatar = props => (
+export const renderAvatar = (props: AvatarProps<IMessage>) => (
   <Avatar
     {...props}
     containerStyle={{ left: { borderWidth: 3, borderColor: 'red' } }}
@@ -10,7 +23,7 @@ export const renderAvatar = props => (
   />
 )
 
-export const renderBubble = props => (
+export const renderBubble = (props: BubbleProps<IMessage>) => (
   <Bubble
     {...props}
     // renderTime={() => <Text>Time</Text>}
@@ -34,7 +47,7 @@ export const renderBubble = props => (
   />
 )
 
-export const renderSystemMessage = props => (
+export const renderSystemMessage = (props: SystemMessageProps<IMessage>) => (
   <SystemMessage
     {...props}
     containerStyle={{ backgroundColor: 'pink' }}
@@ -43,7 +56,7 @@ export const renderSystemMessage = props => (
   />
 )
 
-export const renderMessage = props => (
+export const renderMessage = (props: MessageProps<IMessage>) => (
   <Message
     {...props}
     // renderDay={() => <Text>Date</Text>}
@@ -54,7 +67,7 @@ export const renderMessage = props => (
   />
 )
 
-export const renderMessageText = props => (
+export const renderMessageText = (props: MessageTextProps<IMessage>) => (
   <MessageText
     {...props}
     containerStyle={{
@@ -73,7 +86,11 @@ export const renderMessageText = props => (
   />
 )
 
-export const renderCustomView = ({ user }) => (
+interface CustomViewProps {
+  user: User
+}
+
+export const renderCustomView = ({ user }: CustomViewProps) => (
   <View style={{ minHeight: 20, alignItems: 'center' }}>
     <Text>
       Current user:

@@ -1,9 +1,14 @@
-const messages = [
+import { IMessage } from 'react-native-gifted-chat'
+
+const messages: IMessage[] = [
   {
     _id: 1,
     text: 'This is a system message',
     createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
     system: true,
+    user: {
+      _id: 0,
+    },
   },
   {
     _id: 2,

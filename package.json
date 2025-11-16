@@ -69,9 +69,12 @@
     "@react-native/metro-config": "0.81.5",
     "@react-native/typescript-config": "0.81.5",
     "@stylistic/eslint-plugin": "^3.1.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/react-native": "^13.3.3",
     "@types/jest": "^29.5.13",
-    "@types/react": "^19.1.0",
-    "@types/react-dom": "^19.1.0",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
     "@types/react-native": "^0.72.8",
     "@types/react-test-renderer": "^19.1.0",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
@@ -96,7 +99,7 @@
     "react-native": "0.81.5",
     "react-native-keyboard-controller": "^1.19.5",
     "react-native-reanimated": "^3.19.4",
-    "react-test-renderer": "19.2.0",
+    "react-test-renderer": "19.1.0",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {

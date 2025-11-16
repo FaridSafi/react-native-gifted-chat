@@ -1,14 +1,15 @@
 import dayjs from 'dayjs'
+import { IMessage } from 'react-native-gifted-chat'
 
 const date1 = dayjs()
 const date2 = date1.clone().subtract(1, 'day')
 const date3 = date2.clone().subtract(1, 'week')
 
-export default [
+const messages: IMessage[] = [
   {
     _id: 9,
     text: '#awesome 3',
-    createdAt: date1,
+    createdAt: date1.toDate(),
     user: {
       _id: 1,
       name: 'Developer',
@@ -17,7 +18,7 @@ export default [
   {
     _id: 8,
     text: '#awesome 2',
-    createdAt: date1,
+    createdAt: date1.toDate(),
     user: {
       _id: 1,
       name: 'Developer',
@@ -26,7 +27,7 @@ export default [
   {
     _id: 7,
     text: '#awesome',
-    createdAt: date1,
+    createdAt: date1.toDate(),
     user: {
       _id: 1,
       name: 'Developer',
@@ -35,7 +36,7 @@ export default [
   {
     _id: 6,
     text: 'Paris',
-    createdAt: date2,
+    createdAt: date2.toDate(),
     user: {
       _id: 2,
       name: 'React Native',
@@ -48,7 +49,7 @@ export default [
   {
     _id: 5,
     text: 'Send me a picture!',
-    createdAt: date2,
+    createdAt: date2.toDate(),
     user: {
       _id: 1,
       name: 'Developer',
@@ -57,22 +58,18 @@ export default [
   {
     _id: 4,
     text: '',
-    createdAt: date2,
+    createdAt: date2.toDate(),
     user: {
       _id: 2,
       name: 'React Native',
     },
     sent: true,
     received: true,
-    location: {
-      latitude: 48.864601,
-      longitude: 2.398704,
-    },
   },
   {
     _id: 3,
     text: 'Where are you?',
-    createdAt: date3,
+    createdAt: date3.toDate(),
     user: {
       _id: 1,
       name: 'Developer',
@@ -81,7 +78,7 @@ export default [
   {
     _id: 2,
     text: 'Yes, and I use #GiftedChat!',
-    createdAt: date3,
+    createdAt: date3.toDate(),
     user: {
       _id: 2,
       name: 'React Native',
@@ -92,7 +89,7 @@ export default [
   {
     _id: 1,
     text: 'Are you building a chat app?',
-    createdAt: date3,
+    createdAt: date3.toDate(),
     user: {
       _id: 1,
       name: 'Developer',
@@ -101,7 +98,7 @@ export default [
   {
     _id: 10,
     text: 'This is a quick reply. Do you love Gifted Chat? (radio) KEEP IT',
-    createdAt: date3,
+    createdAt: date3.toDate(),
     quickReplies: {
       type: 'radio', // or 'checkbox',
       keepIt: true,
@@ -129,7 +126,7 @@ export default [
   {
     _id: 20,
     text: 'This is a quick reply. Do you love Gifted Chat? (checkbox)',
-    createdAt: date3,
+    createdAt: date3.toDate(),
     quickReplies: {
       type: 'checkbox', // or 'checkbox',
       values: [
@@ -154,7 +151,8 @@ export default [
   },
   {
     _id: 30,
-    createdAt: date3,
+    text: '',
+    createdAt: date3.toDate(),
     video: 'https://media.giphy.com/media/3o6ZthZjk09Xx4ktZ6/giphy.mp4',
     user: {
       _id: 2,
@@ -163,7 +161,8 @@ export default [
   },
   {
     _id: 31,
-    createdAt: date3,
+    text: '',
+    createdAt: date3.toDate(),
     audio:
       'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3',
     user: {
@@ -172,3 +171,5 @@ export default [
     },
   },
 ]
+
+export default messages

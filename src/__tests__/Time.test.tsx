@@ -1,20 +1,18 @@
-import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react-native'
 
 import { Time } from '../GiftedChat'
 import { DEFAULT_TEST_MESSAGE } from './data'
 
 describe('Time', () => {
   it('should not render <Time /> and compare with snapshot', () => {
-    const component = renderer.create(<Time />)
-    const tree = component.toJSON()
+    const { toJSON } = render(<Time />)
 
-    expect(tree).toMatchSnapshot()
+    expect(toJSON()).toMatchSnapshot()
   })
 
   it('should render <Time /> and compare with snapshot', () => {
-    const component = renderer.create(
+    const { toJSON } = render(
       <Time
         currentMessage={{
           ...DEFAULT_TEST_MESSAGE,
@@ -22,8 +20,7 @@ describe('Time', () => {
         }}
       />
     )
-    const tree = component.toJSON()
 
-    expect(tree).toMatchSnapshot()
+    expect(toJSON()).toMatchSnapshot()
   })
 })

@@ -1,6 +1,5 @@
-import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react-native'
 
 import { GiftedChat } from '../GiftedChat'
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller'
@@ -18,50 +17,42 @@ const messages = [
 ]
 
 it('should render <GiftedChat/> and compare with snapshot', () => {
-  let tree
-
-  renderer.act(() => {
-    (useReanimatedKeyboardAnimation as jest.Mock).mockReturnValue({
-      height: {
-        value: 0,
-      },
-    })
-
-    tree = renderer.create(
-      <GiftedChat
-        messages={messages}
-        onSend={() => {}}
-        user={{
-          _id: 1,
-        }}
-      />
-    )
+  (useReanimatedKeyboardAnimation as jest.Mock).mockReturnValue({
+    height: {
+      value: 0,
+    },
   })
 
-  expect(tree.toJSON()).toMatchSnapshot()
+  const { toJSON } = render(
+    <GiftedChat
+      messages={messages}
+      onSend={() => {}}
+      user={{
+        _id: 1,
+      }}
+    />
+  )
+
+  expect(toJSON()).toMatchSnapshot()
 })
 
 it('should render <GiftedChat/> with disableKeyboardController=true', () => {
-  let tree
-
-  renderer.act(() => {
-    (useReanimatedKeyboardAnimation as jest.Mock).mockReturnValue({
-      height: {
-        value: 0,
-      },
-    })
-
-    tree = renderer.create(
-      <GiftedChat
-        messages={messages}
-        onSend={() => {}}
-        user={{
-          _id: 1,
-        }}
-        disableKeyboardController={true}
-      />
-    )
+  (useReanimatedKeyboardAnimation as jest.Mock).mockReturnValue({
+    height: {
+      value: 0,
+    },
   })
 
-  expect(tree.toJSON()).toMatchSnapshot()
+  const { toJSON } = render(
+    <GiftedChat
+      messages={messages}
+      onSend={() => {}}
+      user={{
+        _id: 1,
+      }}
+      disableKeyboardController={true}
+    />
+  )
+
+  expect(toJSON()).toMatchSnapshot()
 })

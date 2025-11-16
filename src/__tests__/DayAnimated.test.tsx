@@ -1,6 +1,6 @@
-import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react-native'
+import { View, Text } from 'react-native'
 import DayAnimated from '../MessageContainer/components/DayAnimated'
 import { DayProps } from '../Day'
 
@@ -17,7 +17,7 @@ const mockMessage = {
 
 describe('DayAnimated', () => {
   it('should render DayAnimated with default Day component', () => {
-    const component = renderer.create(
+    const { toJSON } = render(
       <DayAnimated
         scrolledY={mockScrolledY}
         daysPositions={mockDaysPositions}
@@ -26,14 +26,17 @@ describe('DayAnimated', () => {
         isLoadingEarlier={false}
       />
     )
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
+    expect(toJSON()).toMatchSnapshot()
   })
 
   it('should use custom renderDay when provided', () => {
-    const customRenderDay = jest.fn((props: DayProps) => <div data-testid='custom-day'>Custom Day: {props.createdAt}</div>)
+    const customRenderDay = jest.fn((props: DayProps) => (
+      <View testID='custom-day'>
+        <Text>Custom Day: {props.createdAt}</Text>
+      </View>
+    ))
 
-    const component = renderer.create(
+    const { toJSON } = render(
       <DayAnimated
         scrolledY={mockScrolledY}
         daysPositions={mockDaysPositions}
@@ -44,11 +47,6 @@ describe('DayAnimated', () => {
       />
     )
 
-    // Force render to trigger the renderDay call if there's a createdAt
-    component.getInstance()
-
-    // The custom renderDay function should be available in the component
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
+    expect(toJSON()).toMatchSnapshot()
   })
 })

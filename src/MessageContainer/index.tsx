@@ -152,6 +152,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   }, [handleOnScrollProp, inverted, scrollToBottomOffset, changeScrollToBottomVisibility, isScrollingDown, lastScrolledY])
 
   const restProps = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { messages: _, ...rest } = props
     return rest
   }, [props])

@@ -1,8 +1,18 @@
 import React from 'react'
 import { Image } from 'react-native'
-import { InputToolbar, Actions, Composer, Send } from 'react-native-gifted-chat'
+import {
+  InputToolbar,
+  Actions,
+  Composer,
+  Send,
+  IMessage,
+  InputToolbarProps,
+  ActionsProps,
+  ComposerProps,
+  SendProps,
+} from 'react-native-gifted-chat'
 
-export const renderInputToolbar = props => (
+export const renderInputToolbar = (props: InputToolbarProps<IMessage>) => (
   <InputToolbar
     {...props}
     containerStyle={{
@@ -13,7 +23,7 @@ export const renderInputToolbar = props => (
   />
 )
 
-export const renderActions = props => (
+export const renderActions = (props: ActionsProps) => (
   <Actions
     {...props}
     containerStyle={{
@@ -45,7 +55,7 @@ export const renderActions = props => (
   />
 )
 
-export const renderComposer = props => (
+export const renderComposer = (props: ComposerProps) => (
   <Composer
     {...props}
     textInputProps={{
@@ -63,7 +73,7 @@ export const renderComposer = props => (
   />
 )
 
-export const renderSend = props => (
+export const renderSend = (props: SendProps<IMessage>) => (
   <Send
     {...props}
     disabled={!props.text}

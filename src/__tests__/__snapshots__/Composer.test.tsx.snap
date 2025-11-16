@@ -4,7 +4,6 @@ exports[`should render <Composer /> and compare with snapshot 1`] = `
 <TextInput
   accessibilityLabel="Type a message..."
   accessible={true}
-  autoFocus={false}
   enablesReturnKeyAutomatically={true}
   keyboardAppearance="default"
   multiline={true}

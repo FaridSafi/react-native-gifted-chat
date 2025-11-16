@@ -1,11 +1,10 @@
-import 'react-native'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react-native'
 
 import { LoadEarlier } from '../GiftedChat'
 
 it('should render <LoadEarlier /> and compare with snapshot', () => {
-  const tree = renderer.create(<LoadEarlier />).toJSON()
+  const { toJSON } = render(<LoadEarlier />)
 
-  expect(tree).toMatchSnapshot()
+  expect(toJSON()).toMatchSnapshot()
 })

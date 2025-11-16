@@ -54,7 +54,6 @@ exports[`Message component should render <Message /> and compare with snapshot 1
         }
       >
         <View
-          accessibilityRole="text"
           accessibilityState={
             {
               "busy": undefined,
@@ -64,9 +63,20 @@ exports[`Message component should render <Message /> and compare with snapshot 1
               "selected": undefined,
             }
           }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -75,27 +85,62 @@ exports[`Message component should render <Message /> and compare with snapshot 1
           onStartShouldSetResponder={[Function]}
         >
           <View>
-            <View
-              style={
-                [
-                  {},
-                  undefined,
-                ]
-              }
-            >
-              <Text
+            <View>
+              <View
                 style={
                   [
                     {
-                      "color": "black",
-                      "fontSize": 16,
-                      "lineHeight": 20,
                       "marginBottom": 5,
                       "marginLeft": 10,
                       "marginRight": 10,
                       "marginTop": 5,
                     },
                     undefined,
+                  ]
+                }
+              >
+                <Text
+                  link={true}
+                  style={
+                    [
+                      {
+                        "color": "black",
+                      },
+                      undefined,
+                      undefined,
+                    ]
+                  }
+                  user={
+                    {
+                      "_id": 1,
+                    }
+                  }
+                >
+                  <Text>
+                    test
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={
+                [
+                  {
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  [
+                    {
+                      "marginBottom": 5,
+                      "marginLeft": 10,
+                      "marginRight": 10,
+                    },
                     undefined,
                   ]
                 }
@@ -103,65 +148,18 @@ exports[`Message component should render <Message /> and compare with snapshot 1
                 <Text
                   style={
                     [
-                      [
-                        {
-                          "color": "black",
-                          "fontSize": 16,
-                          "lineHeight": 20,
-                          "marginBottom": 5,
-                          "marginLeft": 10,
-                          "marginRight": 10,
-                          "marginTop": 5,
-                        },
-                        undefined,
-                        undefined,
-                      ],
+                      {
+                        "color": "#aaa",
+                        "fontSize": 10,
+                        "textAlign": "right",
+                      },
                       undefined,
                     ]
                   }
                 >
-                  test
+                  7:20 PM
                 </Text>
-              </Text>
-            </View>
-          </View>
-          <View
-            style={
-              [
-                {
-                  "flexDirection": "row",
-                  "justifyContent": "flex-start",
-                },
-                undefined,
-              ]
-            }
-          >
-            <View
-              style={
-                [
-                  {
-                    "marginBottom": 5,
-                    "marginLeft": 10,
-                    "marginRight": 10,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              <Text
-                style={
-                  [
-                    {
-                      "color": "#aaa",
-                      "fontSize": 10,
-                      "textAlign": "right",
-                    },
-                    undefined,
-                  ]
-                }
-              >
-                7:20 PM
-              </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -262,7 +260,6 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
         }
       >
         <View
-          accessibilityRole="text"
           accessibilityState={
             {
               "busy": undefined,
@@ -272,9 +269,20 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
               "selected": undefined,
             }
           }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -283,27 +291,63 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
           onStartShouldSetResponder={[Function]}
         >
           <View>
-            <View
-              style={
-                [
-                  {},
-                  undefined,
-                ]
-              }
-            >
-              <Text
+            <View>
+              <View
                 style={
                   [
                     {
-                      "color": "black",
-                      "fontSize": 16,
-                      "lineHeight": 20,
                       "marginBottom": 5,
                       "marginLeft": 10,
                       "marginRight": 10,
                       "marginTop": 5,
                     },
                     undefined,
+                  ]
+                }
+              >
+                <Text
+                  link={true}
+                  showUserAvatar={true}
+                  style={
+                    [
+                      {
+                        "color": "black",
+                      },
+                      undefined,
+                      undefined,
+                    ]
+                  }
+                  user={
+                    {
+                      "_id": 1,
+                    }
+                  }
+                >
+                  <Text>
+                    test
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={
+                [
+                  {
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  [
+                    {
+                      "marginBottom": 5,
+                      "marginLeft": 10,
+                      "marginRight": 10,
+                    },
                     undefined,
                   ]
                 }
@@ -311,65 +355,18 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
                 <Text
                   style={
                     [
-                      [
-                        {
-                          "color": "black",
-                          "fontSize": 16,
-                          "lineHeight": 20,
-                          "marginBottom": 5,
-                          "marginLeft": 10,
-                          "marginRight": 10,
-                          "marginTop": 5,
-                        },
-                        undefined,
-                        undefined,
-                      ],
+                      {
+                        "color": "#aaa",
+                        "fontSize": 10,
+                        "textAlign": "right",
+                      },
                       undefined,
                     ]
                   }
                 >
-                  test
+                  7:20 PM
                 </Text>
-              </Text>
-            </View>
-          </View>
-          <View
-            style={
-              [
-                {
-                  "flexDirection": "row",
-                  "justifyContent": "flex-start",
-                },
-                undefined,
-              ]
-            }
-          >
-            <View
-              style={
-                [
-                  {
-                    "marginBottom": 5,
-                    "marginLeft": 10,
-                    "marginRight": 10,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              <Text
-                style={
-                  [
-                    {
-                      "color": "#aaa",
-                      "fontSize": 10,
-                      "textAlign": "right",
-                    },
-                    undefined,
-                  ]
-                }
-              >
-                7:20 PM
-              </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -431,7 +428,6 @@ exports[`Message component should render null if user has no Avatar 1`] = `
         }
       >
         <View
-          accessibilityRole="text"
           accessibilityState={
             {
               "busy": undefined,
@@ -441,9 +437,20 @@ exports[`Message component should render null if user has no Avatar 1`] = `
               "selected": undefined,
             }
           }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
+          collapsable={false}
           focusable={true}
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -452,27 +459,63 @@ exports[`Message component should render null if user has no Avatar 1`] = `
           onStartShouldSetResponder={[Function]}
         >
           <View>
-            <View
-              style={
-                [
-                  {},
-                  undefined,
-                ]
-              }
-            >
-              <Text
+            <View>
+              <View
                 style={
                   [
                     {
-                      "color": "black",
-                      "fontSize": 16,
-                      "lineHeight": 20,
                       "marginBottom": 5,
                       "marginLeft": 10,
                       "marginRight": 10,
                       "marginTop": 5,
                     },
                     undefined,
+                  ]
+                }
+              >
+                <Text
+                  link={true}
+                  showUserAvatar={true}
+                  style={
+                    [
+                      {
+                        "color": "black",
+                      },
+                      undefined,
+                      undefined,
+                    ]
+                  }
+                  user={
+                    {
+                      "_id": 1,
+                    }
+                  }
+                >
+                  <Text>
+                    test
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={
+                [
+                  {
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <View
+                style={
+                  [
+                    {
+                      "marginBottom": 5,
+                      "marginLeft": 10,
+                      "marginRight": 10,
+                    },
                     undefined,
                   ]
                 }
@@ -480,65 +523,18 @@ exports[`Message component should render null if user has no Avatar 1`] = `
                 <Text
                   style={
                     [
-                      [
-                        {
-                          "color": "black",
-                          "fontSize": 16,
-                          "lineHeight": 20,
-                          "marginBottom": 5,
-                          "marginLeft": 10,
-                          "marginRight": 10,
-                          "marginTop": 5,
-                        },
-                        undefined,
-                        undefined,
-                      ],
+                      {
+                        "color": "#aaa",
+                        "fontSize": 10,
+                        "textAlign": "right",
+                      },
                       undefined,
                     ]
                   }
                 >
-                  test
+                  7:20 PM
                 </Text>
-              </Text>
-            </View>
-          </View>
-          <View
-            style={
-              [
-                {
-                  "flexDirection": "row",
-                  "justifyContent": "flex-start",
-                },
-                undefined,
-              ]
-            }
-          >
-            <View
-              style={
-                [
-                  {
-                    "marginBottom": 5,
-                    "marginLeft": 10,
-                    "marginRight": 10,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              <Text
-                style={
-                  [
-                    {
-                      "color": "#aaa",
-                      "fontSize": 10,
-                      "textAlign": "right",
-                    },
-                    undefined,
-                  ]
-                }
-              >
-                7:20 PM
-              </Text>
+              </View>
             </View>
           </View>
         </View>

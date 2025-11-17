@@ -148,6 +148,8 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   onPressActionButton?(): void
   /* Callback when the input text changes */
   onInputTextChanged?(text: string): void
+  /* Extra props to be passed to the MessageText component */
+  messageTextProps?: Partial<MessageTextProps<TMessage>>
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
   matchers?: MessageTextProps<TMessage>['matchers']
   renderQuickReplies?(

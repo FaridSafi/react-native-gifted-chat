@@ -410,16 +410,37 @@ interface QuickReplies {
 - **`minInputToolbarHeight`** _(Integer)_ - Minimum height of the input toolbar; default is `44`
 - **`listProps`** _(Object)_ - Extra props to be passed to the messages [`<FlatList>`](https://reactnative.dev/docs/flatlist.html); some props can't be overridden, see the code in `MessageContainer.render()` for details
 - **`textInputProps`** _(Object)_ - props to be passed to the [`<TextInput>`](https://reactnative.dev/docs/textinput.html).
-- **`matchers`** _(Array)_ - Custom matchers for [react-native-autolink](https://github.com/joshswan/react-native-autolink) used to linking message content (like URLs and phone numbers), e.g.:
+- **`messageTextProps`** _(Object)_ - Extra props to be passed to the MessageText component. Useful for customizing link parsing behavior, text styles, and matchers. Supports all [react-native-autolink](https://github.com/joshswan/react-native-autolink) props including:
+  - `matchers` - Custom matchers for linking message content (like URLs, phone numbers, hashtags, mentions)
+  - `linkStyle` - Custom style for links
+  - `email` - Enable/disable email parsing (default: true)
+  - `phone` - Enable/disable phone number parsing (default: true)
+  - `url` - Enable/disable URL parsing (default: true)
+
+Example:
 
 ```js
- <GiftedChat
-   matchers={[
-     { type: 'phone', style: linkStyle, onPress: onPressPhoneNumber },
-     { pattern: /#(\w+)/, style: [linkStyle, styles.hashtag], onPress: onPressHashtag },
-   ]}
- />
+<GiftedChat
+  messageTextProps={{
+    matchers: [
+      {
+        pattern: /#(\w+)/g,
+        style: { color: '#0084ff', fontWeight: 'bold' },
+        onPress: (match) => console.log('Hashtag:', match.getAnchorText()),
+      },
+      {
+        pattern: /(?<![\.\w])@(?!__ELEMENT-)([\w-]+)/g,
+        style: { color: '#0084ff', fontWeight: 'bold' },
+        onPress: (match) => console.log('Mention:', match.getAnchorText()),
+      },
+    ],
+    linkStyle: { left: { color: 'blue' }, right: { color: 'lightblue' } },
+    phone: false,
+  }}
+/>
 ```
+
+- **`matchers`** _(Array)_ - **Deprecated:** Use `messageTextProps.matchers` instead. Custom matchers for [react-native-autolink](https://github.com/joshswan/react-native-autolink) used to linking message content (like URLs and phone numbers).
 
 - **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.

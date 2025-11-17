@@ -16,6 +16,7 @@
     "rebuildNativeDeps:clean": "yarn expo prebuild --clean"
   },
   "dependencies": {
+    "@expo/react-native-action-sheet": "^4.1.1",
     "@expo/vector-icons": "^15.0.3",
     "@react-navigation/bottom-tabs": "^7.8.5",
     "@react-navigation/elements": "^2.8.2",

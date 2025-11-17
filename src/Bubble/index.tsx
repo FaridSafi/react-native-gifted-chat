@@ -15,7 +15,7 @@ import { Time } from '../Time'
 
 import { isSameUser, isSameDay } from '../utils'
 import { IMessage } from '../types'
-import { BubbleProps } from './types'
+import { BubbleProps, RenderMessageTextProps } from './types'
 
 import stylesCommon from '../styles'
 import styles from './styles'
@@ -142,14 +142,17 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
         /* eslint-disable @typescript-eslint/no-unused-vars */
         containerStyle,
         wrapperStyle,
+        messageTextProps,
         /* eslint-enable @typescript-eslint/no-unused-vars */
-        ...messageTextProps
+        ...messageTextPropsRest
       } = props
 
-      if (props.renderMessageText)
-        return props.renderMessageText(messageTextProps)
+      const combinedProps = { ...messageTextPropsRest, ...messageTextProps } as RenderMessageTextProps<TMessage>
 
-      return <MessageText {...messageTextProps} />
+      if (props.renderMessageText)
+        return props.renderMessageText(combinedProps)
+
+      return <MessageText {...combinedProps} />
     }
 
     return null

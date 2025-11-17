@@ -1,6 +1,5 @@
 import React, { useMemo, useCallback } from 'react'
 import {
-  Linking,
   StyleSheet,
   StyleProp,
   ViewStyle,
@@ -11,12 +10,6 @@ import {
 import Autolink, { AutolinkProps } from 'react-native-autolink'
 import { Match } from 'autolinker/dist/es2015'
 import { LeftRightStyle, IMessage } from './types'
-import { error } from './logging'
-
-export interface MessageOption {
-  title: string
-  action: (phone: string) => void
-}
 
 export type MessageTextProps<TMessage extends IMessage> = {
   position?: 'left' | 'right'
@@ -42,43 +35,10 @@ export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
   onPress: onPressProp,
   ...rest
 }) => {
-  const onUrlPress = useCallback((url: string) => {
-    if (/^www\./i.test(url))
-      url = `https://${url}`
-
-    Linking.openURL(url).catch(e => {
-      error(e, 'No handler for URL:', url)
-    })
-  }, [])
-
-  const onPhonePress = useCallback((phone: string) => {
-    Linking.openURL(`tel:${phone}`).catch(e => {
-      error(e, 'No handler for telephone')
-    })
-  }, [])
-
-  const onEmailPress = useCallback((email: string) =>
-    Linking.openURL(`mailto:${email}`).catch(e =>
-      error(e, 'No handler for mailto')
-    ), [])
-
   const linkStyle = useMemo(() => StyleSheet.flatten([
     styles.link,
     linkStyleProp?.[position],
   ]), [position, linkStyleProp])
-
-  const handlePress = useCallback((url: string, match: Match) => {
-    const type = match.getType()
-
-    if (onPressProp)
-      onPressProp(currentMessage, url, match)
-    else if (type === 'url')
-      onUrlPress(url)
-    else if (type === 'phone')
-      onPhonePress(url)
-    else if (type === 'email')
-      onEmailPress(url)
-  }, [onUrlPress, onPhonePress, onEmailPress, onPressProp, currentMessage])
 
   const style = useMemo(() => [
     styles[`text_${position}`],
@@ -86,16 +46,21 @@ export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
     customTextStyle,
   ], [position, textStyle, customTextStyle])
 
+  const handlePress = useCallback((url: string, match: Match) => {
+    onPressProp?.(currentMessage, url, match)
+  }, [onPressProp, currentMessage])
+
   return (
     <View style={[styles.container, containerStyle?.[position]]}>
       <Autolink
-        style={style}
-        {...rest}
-        text={currentMessage!.text}
         email
-        link
+        phone
+        link={false}
+        {...rest}
+        onPress={onPressProp ? handlePress : undefined}
         linkStyle={linkStyle}
-        onPress={handlePress}
+        style={style}
+        text={currentMessage!.text}
       />
     </View>
   )

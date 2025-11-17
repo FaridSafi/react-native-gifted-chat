@@ -1,6 +1,5 @@
 import React, { memo, useCallback } from 'react'
 import { View } from 'react-native'
-import isEqual from 'lodash.isequal'
 
 import { Avatar } from '../Avatar'
 import Bubble from '../Bubble'
@@ -13,7 +12,7 @@ import styles from './styles'
 
 export * from './types'
 
-let Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) => {
+const Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) => {
   const {
     currentMessage,
     renderBubble: renderBubbleProp,
@@ -113,17 +112,4 @@ let Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) 
   )
 }
 
-Message = memo(Message, (props, nextProps) => {
-  const shouldUpdate =
-    props.shouldUpdateMessage?.(props, nextProps) ||
-    !isEqual(props.currentMessage!, nextProps.currentMessage!) ||
-    !isEqual(props.previousMessage, nextProps.previousMessage) ||
-    !isEqual(props.nextMessage, nextProps.nextMessage)
-
-  if (shouldUpdate)
-    return false
-
-  return true
-})
-
-export default Message
+export default memo(Message)

@@ -85,7 +85,6 @@
 
 ## Features
 
-- react-native-web [web configuration](#react-native-web)
 - Write with **TypeScript**
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
@@ -99,6 +98,7 @@
 - System message
 - Quick Reply messages (bot)
 - Typing indicator
+- react-native-web [web configuration](#react-native-web)
 
 # Getting started
 

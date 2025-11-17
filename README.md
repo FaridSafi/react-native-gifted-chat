@@ -85,18 +85,17 @@
 
 ## Features
 
-- 🎉 **_`react-native-web`able_ (since 0.10.0)** [web configuration](#react-native-web)
-- Write with **TypeScript** (since 0.8.0)
+- react-native-web [web configuration](#react-native-web)
+- Write with **TypeScript**
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
 - Load earlier messages
 - Copy messages to clipboard
-- Touchable links using [react-native-parsed-text](https://github.com/taskrabbit/react-native-parsed-text)
+- Touchable links using [react-native-autolink](https://github.com/joshswan/react-native-autolink)
 - Avatar as user's initials
 - Localized dates
 - Multi-line TextInput
 - InputToolbar avoiding keyboard
-- Redux support
 - System message
 - Quick Reply messages (bot)
 - Typing indicator

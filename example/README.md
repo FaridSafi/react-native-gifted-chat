@@ -14,13 +14,17 @@
    yarn pod:install
    ```
 
-3. Install iOS dev build (only needed once or after rebuilding native dependencies):
+3. Switch to development build:
+
+Press `s` in terminal with metro
+
+4. Install iOS dev build (only needed once or after rebuilding native dependencies):
 
    ```bash
    yarn ios:installDevBuild
    ```
 
-4. Start the example app on iOS simulator:
+5. Start the example app on iOS simulator:
 
    ```bash
    yarn ios:start

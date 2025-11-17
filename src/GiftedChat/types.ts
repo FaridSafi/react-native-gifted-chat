@@ -67,7 +67,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Extra props to be passed to the MessageImage's Lightbox */
   lightboxProps?: LightboxProps
   /* Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar); default is 0 */
-  bottomOffset?: number
+  keyboardBottomOffset?: number
   /* Focus on <TextInput> automatically when opening the keyboard; default is true */
   focusOnInputWhenOpeningKeyboard?: boolean
   /* Minimum height of the input toolbar; default is 44 */

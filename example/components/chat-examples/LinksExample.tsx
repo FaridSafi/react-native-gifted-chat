@@ -4,9 +4,14 @@ import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import { ActionSheetProvider, useActionSheet } from '@expo/react-native-action-sheet'
 import { AutolinkProps, CustomMatch, ReplacerArgs } from 'react-native-autolink'
 import { setStringAsync } from 'expo-clipboard'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const LinksExample: React.FC = () => {
   const { showActionSheetWithOptions } = useActionSheet()
+  const insets = useSafeAreaInsets()
+
+  const tabbarHeight = 50
+  const keyboardBottomOffset = insets.bottom + tabbarHeight
 
   const initialMessages: IMessage[] = useMemo(() => [
     {
@@ -141,6 +146,7 @@ const LinksExample: React.FC = () => {
             phone: false,
             matchers,
           }}
+          keyboardBottomOffset={keyboardBottomOffset}
         />
       </View>
     </ActionSheetProvider>

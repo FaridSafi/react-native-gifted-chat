@@ -45,8 +45,9 @@ import Animated, {
   useSharedValue,
   withTiming,
   runOnJS,
+  useDerivedValue,
 } from 'react-native-reanimated'
-import { KeyboardProvider, useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller'
+import { KeyboardProvider, useReanimatedKeyboardAnimation, useWindowDimensions } from 'react-native-keyboard-controller'
 import { GiftedChatProps } from './types'
 
 import stylesCommon from '../styles'
@@ -75,7 +76,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     textInputProps,
     renderChatFooter,
     renderInputToolbar,
-    bottomOffset = 0,
+    keyboardBottomOffset = 0,
     focusOnInputWhenOpeningKeyboard = true,
     onInputTextChanged,
     inverted = true,
@@ -112,19 +113,24 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const keyboard = useMemo(() => {
     if (disableKeyboardController)
       return { height: { value: 0 } }
+
     return keyboardControllerData
   }, [disableKeyboardController, keyboardControllerData])
 
+  useDerivedValue(() => {
+    console.log('Keyboard height:', keyboard.height.value)
+  }, [keyboard.height])
+
   const trackingKeyboardMovement = useSharedValue(false)
-  const keyboardOffsetBottom = useSharedValue(0)
+  const keyboardBottomOffsetAnim = useSharedValue(0)
 
   const contentStyleAnim = useAnimatedStyle(
     () => ({
       transform: [
-        { translateY: keyboard.height.value - keyboardOffsetBottom.value },
+        { translateY: keyboard.height.value + keyboardBottomOffsetAnim.value },
       ],
     }),
-    [keyboard, keyboardOffsetBottom]
+    [keyboard, keyboardBottomOffsetAnim]
   )
 
   const getTextFromProp = useCallback(
@@ -276,8 +282,12 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     [onInputTextChanged, props.text]
   )
 
+  const deviceHeight = useWindowDimensions()
+  console.log('deviceHeight', deviceHeight)
+
   const onInitialLayoutViewLayout = useCallback(
     (e: LayoutChangeEvent) => {
+      console.log('onInitialLayoutViewLayout', e.nativeEvent.layout.height)
       if (isInitialized)
         return
 
@@ -351,21 +361,21 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   // Only set up keyboard animation when keyboard controller is enabled
   useAnimatedReaction(
-    () => disableKeyboardController ? 0 : -keyboard.height.value,
+    () => disableKeyboardController ? 0 : keyboard.height.value,
     (value, prevValue) => {
       // Skip keyboard handling when disabled
       if (disableKeyboardController)
         return
 
       if (prevValue !== null && value !== prevValue) {
-        const isKeyboardMovingUp = value > prevValue
+        const isKeyboardMovingUp = value < prevValue
         if (isKeyboardMovingUp !== trackingKeyboardMovement.value) {
           trackingKeyboardMovement.value = isKeyboardMovingUp
-          keyboardOffsetBottom.value = withTiming(
-            isKeyboardMovingUp ? bottomOffset : 0,
+          keyboardBottomOffsetAnim.value = withTiming(
+            isKeyboardMovingUp ? keyboardBottomOffset : 0,
             {
-              // If `bottomOffset` exists, we change the duration to a smaller value to fix the delay in the keyboard animation speed
-              duration: bottomOffset ? 150 : 400,
+              // If `keyboardBottomOffset` exists, we change the duration to a smaller value to fix the delay in the keyboard animation speed
+              duration: keyboardBottomOffset ? 150 : 400,
             }
           )
 
@@ -383,7 +393,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       focusOnInputWhenOpeningKeyboard,
       handleTextInputFocusWhenKeyboardHide,
       handleTextInputFocusWhenKeyboardShow,
-      bottomOffset,
+      keyboardBottomOffset,
       disableKeyboardController,
     ]
   )

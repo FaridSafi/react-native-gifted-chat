@@ -9,7 +9,7 @@ import earlierMessages from '../../example-expo/data/earlierMessages'
 import messagesData from '../../example-expo/data/messages'
 import { getColorSchemeStyle } from '../../utils/styleUtils'
 
-export default function ExpoExample () {
+export default function CustomizedFeaturesExample () {
   const [messages, setMessages] = useState<IMessage[]>(messagesData)
   const [isLoadingEarlier, setIsLoadingEarlier] = useState(false)
   const [isTyping, setIsTyping] = useState(false)

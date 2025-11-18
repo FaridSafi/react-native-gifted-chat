@@ -79,7 +79,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   }, [renderFooterProp, renderTypingIndicator, props])
 
   const renderLoadEarlier = useCallback(() => {
-    if (loadEarlierMessagesProps?.onPress && loadEarlierMessagesProps?.isAvailable) {
+    if (loadEarlierMessagesProps?.isAvailable) {
       if (renderLoadEarlierProp)
         return renderLoadEarlierProp(loadEarlierMessagesProps)
 
@@ -286,10 +286,10 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
 
   const onEndReached = useCallback(() => {
     if (
-      loadEarlierMessagesProps?.isInfiniteScrollEnabled &&
-      loadEarlierMessagesProps?.onPress &&
-      loadEarlierMessagesProps?.isAvailable &&
-      !loadEarlierMessagesProps?.isLoading
+      loadEarlierMessagesProps &&
+      loadEarlierMessagesProps.isAvailable &&
+      loadEarlierMessagesProps.isInfiniteScrollEnabled &&
+      !loadEarlierMessagesProps.isLoading
     )
       loadEarlierMessagesProps.onPress()
   }, [loadEarlierMessagesProps])

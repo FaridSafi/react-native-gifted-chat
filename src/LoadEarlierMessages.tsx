@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import {
   ActivityIndicator,
-  Platform,
   StyleSheet,
   Text,
   View,
@@ -13,36 +12,10 @@ import Color from './Color'
 import { TouchableOpacity } from './components/TouchableOpacity'
 import stylesCommon from './styles'
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 10,
-  },
-  wrapper: {
-    backgroundColor: Color.defaultColor,
-    borderRadius: 15,
-    height: 30,
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  text: {
-    backgroundColor: Color.backgroundTransparent,
-    color: Color.white,
-    fontSize: 12,
-  },
-  activityIndicator: {
-    marginTop: Platform.select({
-      ios: -14,
-      android: -16,
-      default: -15,
-    }),
-  },
-})
-
 export interface LoadEarlierMessagesProps {
-  isAvailable?: boolean
-  isLoading?: boolean
+  isAvailable: boolean
+  isLoading: boolean
+  onPress: () => void
   isInfiniteScrollEnabled?: boolean
   label?: string
   containerStyle?: StyleProp<ViewStyle>
@@ -51,7 +24,6 @@ export interface LoadEarlierMessagesProps {
   activityIndicatorStyle?: StyleProp<ViewStyle>
   activityIndicatorColor?: string
   activityIndicatorSize?: number | 'small' | 'large'
-  onPress: () => void
 }
 
 export const LoadEarlierMessages: React.FC<LoadEarlierMessagesProps> = ({
@@ -65,23 +37,6 @@ export const LoadEarlierMessages: React.FC<LoadEarlierMessagesProps> = ({
   activityIndicatorSize = 'small',
   activityIndicatorStyle,
 }) => {
-  const loadingContent = useMemo(() => (
-    <View>
-      <Text style={[styles.text, textStyle, { opacity: 0 }]}>
-        {label}
-      </Text>
-      <ActivityIndicator
-        color={activityIndicatorColor!}
-        size={activityIndicatorSize!}
-        style={[styles.activityIndicator, activityIndicatorStyle]}
-      />
-    </View>
-  ), [label, textStyle, activityIndicatorColor, activityIndicatorSize, activityIndicatorStyle])
-
-  const labelContent = useMemo(() => (
-    <Text style={[styles.text, textStyle]}>{label}</Text>
-  ), [label, textStyle])
-
   return (
     <TouchableOpacity
       style={[styles.container, containerStyle]}
@@ -90,8 +45,50 @@ export const LoadEarlierMessages: React.FC<LoadEarlierMessagesProps> = ({
       accessibilityRole='button'
     >
       <View style={[stylesCommon.centerItems, styles.wrapper, wrapperStyle]}>
-        {isLoading ? loadingContent : labelContent}
+        {
+          isLoading
+            ? (
+              <ActivityIndicator
+                color={activityIndicatorColor}
+                size={activityIndicatorSize}
+                style={[styles.activityIndicator, activityIndicatorStyle]}
+              />
+            )
+            : (
+              <View style={styles.textContainer}>
+                <Text style={[styles.text, textStyle]}>
+                  {label}
+                </Text>
+              </View>
+            )
+        }
       </View>
     </TouchableOpacity>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  wrapper: {
+    backgroundColor: Color.defaultColor,
+    borderRadius: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
+  textContainer: {
+    paddingTop: 3,
+    paddingBottom: 4,
+  },
+  text: {
+    backgroundColor: Color.backgroundTransparent,
+    color: Color.white,
+    fontSize: 12,
+    lineHeight: 13,
+  },
+  activityIndicator: {
+    paddingHorizontal: 20,
+  },
+})

@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import ExpoExample from '@/components/chat-examples/ExpoExample'
+import CustomizedFeaturesExample from '@/components/chat-examples/CustomizedFeaturesExample'
 import GiftedChatExample from '@/components/chat-examples/GiftedChatExample'
 import LinksExample from '@/components/chat-examples/LinksExample'
 
@@ -12,17 +12,17 @@ import { ThemedText } from '@/components/themed-text'
 import { ThemedView } from '@/components/themed-view'
 import { useThemeColor } from '@/hooks/use-theme-color'
 
-type ChatExample = 'expo' | 'gifted' | 'slack' | 'links'
+type ChatExample = 'customizedFeatures' | 'customizedRendering' | 'slack' | 'links'
 
-const examples = [
-  { id: 'expo' as ChatExample, title: 'Expo Example', description: 'Full featured example with custom actions, accessories, and media' },
-  { id: 'gifted' as ChatExample, title: 'Gifted Chat', description: 'Customized chat with all rendering options' },
-  { id: 'slack' as ChatExample, title: 'Slack Style', description: 'Slack-like message styling' },
-  { id: 'links' as ChatExample, title: 'Links & Patterns', description: 'Phone numbers, emails, URLs, hashtags, and mentions' },
+const examples: Array<{ id: ChatExample, title: string, description: string }> = [
+  { id: 'customizedFeatures', title: 'Customized Features', description: 'Full featured example with custom actions, accessories, and media' },
+  { id: 'customizedRendering', title: 'Customized Rendering', description: 'Customized chat with all rendering options' },
+  { id: 'slack', title: 'Slack Style', description: 'Slack-like message styling' },
+  { id: 'links', title: 'Links & Patterns', description: 'Phone numbers, emails, URLs, hashtags, and mentions' },
 ]
 
 export default function ExploreScreen () {
-  const [selectedExample, setSelectedExample] = useState<ChatExample | null>(null)
+  const [selectedExample, setSelectedExample] = useState<ChatExample>()
   const backgroundColor = useThemeColor({}, 'background')
   const borderColor = useThemeColor({ light: '#e0e0e0', dark: '#444' }, 'icon')
 
@@ -31,7 +31,7 @@ export default function ExploreScreen () {
     selectedExampleContent = (
       <>
         <View style={[styles.header, { borderBottomColor: borderColor }]}>
-          <RectButton onPress={() => setSelectedExample(null)} style={styles.backButton}>
+          <RectButton onPress={() => setSelectedExample(undefined)} style={styles.backButton}>
             <ThemedText type='link'>← Back</ThemedText>
           </RectButton>
           <ThemedText type='subtitle'>
@@ -39,8 +39,8 @@ export default function ExploreScreen () {
           </ThemedText>
         </View>
         <View style={styles.chatContainer}>
-          {selectedExample === 'expo' && <ExpoExample />}
-          {selectedExample === 'gifted' && <GiftedChatExample />}
+          {selectedExample === 'customizedFeatures' && <CustomizedFeaturesExample />}
+          {selectedExample === 'customizedRendering' && <GiftedChatExample />}
           {selectedExample === 'slack' && <SlackExample />}
           {selectedExample === 'links' && <LinksExample />}
         </View>
@@ -48,12 +48,12 @@ export default function ExploreScreen () {
     )
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor }]} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={[styles.fill, { backgroundColor }]} edges={['top', 'left', 'right']}>
       {
         selectedExampleContent
           ? selectedExampleContent
           : (
-            <ScrollView style={styles.scrollView}>
+            <ScrollView style={styles.fill}>
               <ThemedView style={styles.titleContainer}>
                 <ThemedText type='title'>Explore Chat Examples</ThemedText>
               </ThemedView>
@@ -89,10 +89,7 @@ export default function ExploreScreen () {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrollView: {
+  fill: {
     flex: 1,
   },
   titleContainer: {

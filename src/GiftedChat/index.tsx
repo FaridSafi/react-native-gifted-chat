@@ -280,7 +280,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const onInitialLayoutViewLayout = useCallback(
     (e: LayoutChangeEvent) => {
-      console.log('onInitialLayoutViewLayout', e.nativeEvent.layout.height)
       if (isInitialized)
         return
 
@@ -416,10 +415,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 }
 
 function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedChatProps<TMessage>) {
-  // Don't use KeyboardProvider when keyboard is not internally handled
-  if (!props.isKeyboardInternallyHandled)
-    return <GiftedChat<TMessage> {...props} />
-
   return (
     <KeyboardProvider>
       <GestureHandlerRootView style={styles.fill}>

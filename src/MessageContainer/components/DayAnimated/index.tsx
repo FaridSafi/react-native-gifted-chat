@@ -134,6 +134,7 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
     <Animated.View
       style={[stylesCommon.centerItems, styles.dayAnimated, style]}
       onLayout={handleLayout}
+      pointerEvents='none'
     >
       <Animated.View
         style={contentStyle}

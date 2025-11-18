@@ -6,40 +6,51 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
-
-export interface TouchableOpacityProps extends React.ComponentProps<typeof AnimatedPressable> {
+export type TouchableOpacityProps = React.ComponentProps<typeof Pressable> & {
   activeOpacity?: number
-}
+} & React.ComponentProps<typeof Animated.View>
 
-export function TouchableOpacity({
+export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({
   children,
   style,
   activeOpacity = 0.2,
+  onPress,
   ...rest
-}: TouchableOpacityProps) {
+}) => {
   const opacity = useSharedValue(1)
+  const isAnimationInFinished = useSharedValue(false)
 
   const handlePressIn = useCallback(() => {
-    opacity.value = withTiming(activeOpacity, { duration: 150 })
-  }, [activeOpacity, opacity])
+    opacity.value = withTiming(activeOpacity, { duration: 150 }, () => {
+      isAnimationInFinished.value = true
+    })
+  }, [activeOpacity, opacity, isAnimationInFinished])
 
   const handlePressOut = useCallback(() => {
-    opacity.value = withTiming(1, { duration: 150 })
-  }, [opacity])
+    setTimeout(() => {
+      'worklet'
+
+      opacity.value = withTiming(1, { duration: 150 })
+      isAnimationInFinished.value = false
+    }, isAnimationInFinished.value ? 0 : 150)
+  }, [opacity, isAnimationInFinished])
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
   }))
 
   return (
-    <AnimatedPressable
-      {...rest}
+    <Pressable
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
-      style={[style, animatedStyle]}
+      onPress={onPress}
     >
-      {children}
-    </AnimatedPressable>
+      <Animated.View
+        {...rest}
+        style={[style, animatedStyle]}
+      >
+        {children}
+      </Animated.View>
+    </Pressable>
   )
 }

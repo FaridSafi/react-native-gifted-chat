@@ -217,7 +217,7 @@ export function Example() {
 
 ## Advanced example
 
-See [`App.tsx`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master/example/App.tsx) for a working demo!
+See [`examples`](example) for a working demo!
 
 ## "Slack" example
 

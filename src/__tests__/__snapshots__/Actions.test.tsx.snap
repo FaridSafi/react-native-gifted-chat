@@ -22,7 +22,34 @@ exports[`should render <Actions /> and compare with snapshot 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  jestAnimatedProps={
+    {
+      "value": {},
+    }
+  }
+  jestAnimatedStyle={
+    {
+      "value": {
+        "opacity": 1,
+      },
+    }
+  }
+  jestInlineStyle={
+    [
+      [
+        {
+          "height": 26,
+          "marginBottom": 10,
+          "marginLeft": 10,
+          "width": 26,
+        },
+        undefined,
+      ],
+    ]
+  }
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -30,13 +57,18 @@ exports[`should render <Actions /> and compare with snapshot 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    {
-      "height": 26,
-      "marginBottom": 10,
-      "marginLeft": 10,
-      "opacity": 1,
-      "width": 26,
-    }
+    [
+      {
+        "height": 26,
+        "marginBottom": 10,
+        "marginLeft": 10,
+        "width": 26,
+      },
+      undefined,
+      {
+        "opacity": 1,
+      },
+    ]
   }
 >
   <View

@@ -1,9 +1,9 @@
 module.exports = {
   preset: 'react-native',
   resetMocks: true,
-  setupFiles: [
+  setupFilesAfterEnv: [
     './node_modules/react-native/jest-preset',
-    // './node_modules/react-native/jest/setup.js',
+    './node_modules/react-native-gesture-handler/jestSetup.js',
     './tests/setup.ts',
   ],
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],

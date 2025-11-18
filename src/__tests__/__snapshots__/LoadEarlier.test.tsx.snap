@@ -23,7 +23,33 @@ exports[`should render <LoadEarlier /> and compare with snapshot 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  jestAnimatedProps={
+    {
+      "value": {},
+    }
+  }
+  jestAnimatedStyle={
+    {
+      "value": {
+        "opacity": 1,
+      },
+    }
+  }
+  jestInlineStyle={
+    [
+      [
+        {
+          "alignItems": "center",
+          "marginBottom": 10,
+          "marginTop": 5,
+        },
+        undefined,
+      ],
+    ]
+  }
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -31,12 +57,17 @@ exports[`should render <LoadEarlier /> and compare with snapshot 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    {
-      "alignItems": "center",
-      "marginBottom": 10,
-      "marginTop": 5,
-      "opacity": 1,
-    }
+    [
+      {
+        "alignItems": "center",
+        "marginBottom": 10,
+        "marginTop": 5,
+      },
+      undefined,
+      {
+        "opacity": 1,
+      },
+    ]
   }
 >
   <View

@@ -1,42 +1,17 @@
 require('react-native-reanimated').setUpTests()
 
-// mocks
 jest.mock('react-native-keyboard-controller', () =>
   require('react-native-keyboard-controller/jest')
 )
-jest.mock('react-native-gesture-handler', () => {
-  const View = require('react-native/Libraries/Components/View/View')
-  const FlatList = require('react-native/Libraries/Lists/FlatList')
+
+jest.mock('react-native-safe-area-context', () => {
+  const inset = { top: 0, right: 0, bottom: 0, left: 0 }
   return {
-    TouchableWithoutFeedback: View,
-    TouchableHighlight: View,
-    Swipeable: View,
-    DrawerLayout: View,
-    State: {},
-    ScrollView: View,
-    Slider: View,
-    Switch: View,
-    TextInput: View,
-    ToolbarAndroid: View,
-    ViewPagerAndroid: View,
-    DrawerLayoutAndroid: View,
-    WebView: View,
-    NativeViewGestureHandler: View,
-    TapGestureHandler: View,
-    FlingGestureHandler: View,
-    ForceTouchGestureHandler: View,
-    LongPressGestureHandler: View,
-    PanGestureHandler: View,
-    PinchGestureHandler: View,
-    RotationGestureHandler: View,
-    RawButton: View,
-    BaseButton: View,
-    RectButton: View,
-    BorderlessButton: View,
-    FlatList: FlatList,
-    Pressable: View,
-    GestureHandlerRootView: View,
-    gestureHandlerRootHOC: jest.fn(component => component),
-    Directions: {},
+    SafeAreaProvider: ({ children }: any) => children,
+    SafeAreaInsetsContext: {
+      Consumer: ({ children }: any) => children(inset),
+    },
+    useSafeAreaInsets: () => inset,
+    useSafeAreaFrame: () => ({ x: 0, y: 0, width: 390, height: 844 }),
   }
 })

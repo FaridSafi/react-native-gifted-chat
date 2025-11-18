@@ -24,7 +24,32 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  jestAnimatedProps={
+    {
+      "value": {},
+    }
+  }
+  jestAnimatedStyle={
+    {
+      "value": {
+        "opacity": 1,
+      },
+    }
+  }
+  jestInlineStyle={
+    [
+      [
+        {
+          "height": 44,
+          "justifyContent": "flex-end",
+        },
+        undefined,
+      ],
+    ]
+  }
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -32,11 +57,16 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    {
-      "height": 44,
-      "justifyContent": "flex-end",
-      "opacity": 1,
-    }
+    [
+      {
+        "height": 44,
+        "justifyContent": "flex-end",
+      },
+      undefined,
+      {
+        "opacity": 1,
+      },
+    ]
   }
   testID="GC_SEND_TOUCHABLE"
 >
@@ -90,7 +120,32 @@ exports[`Send should render <Send /> where there is input and compare with snaps
   accessible={true}
   collapsable={false}
   focusable={true}
+  jestAnimatedProps={
+    {
+      "value": {},
+    }
+  }
+  jestAnimatedStyle={
+    {
+      "value": {
+        "opacity": 1,
+      },
+    }
+  }
+  jestInlineStyle={
+    [
+      [
+        {
+          "height": 44,
+          "justifyContent": "flex-end",
+        },
+        undefined,
+      ],
+    ]
+  }
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -98,11 +153,16 @@ exports[`Send should render <Send /> where there is input and compare with snaps
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    {
-      "height": 44,
-      "justifyContent": "flex-end",
-      "opacity": 1,
-    }
+    [
+      {
+        "height": 44,
+        "justifyContent": "flex-end",
+      },
+      undefined,
+      {
+        "opacity": 1,
+      },
+    ]
   }
   testID="GC_SEND_TOUCHABLE"
 >

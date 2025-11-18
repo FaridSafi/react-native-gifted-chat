@@ -52,7 +52,7 @@ export interface LoadEarlierProps {
   onLoadEarlier?(): void
 }
 
-export function LoadEarlier ({
+export const LoadEarlier: React.FC<LoadEarlierProps> = ({
   isLoadingEarlier = false,
   onLoadEarlier = () => {},
   label = 'Load earlier messages',
@@ -62,7 +62,7 @@ export function LoadEarlier ({
   activityIndicatorColor = 'white',
   activityIndicatorSize = 'small',
   activityIndicatorStyle,
-}: LoadEarlierProps): React.ReactElement {
+}) => {
   const loadingContent = useMemo(() => (
     <View>
       <Text style={[styles.text, textStyle, { opacity: 0 }]}>

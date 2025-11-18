@@ -1,13 +1,13 @@
 import React from 'react'
 import { StyleSheet, View, useColorScheme } from 'react-native'
 import Chats from '../../example-gifted-chat/src/Chats'
+import { getColorSchemeStyle } from '../../utils/styleUtils'
 
 export default function GiftedChatExample () {
   const colorScheme = useColorScheme()
-  const isDark = colorScheme === 'dark'
 
   return (
-    <View style={[styles.container, isDark && styles.containerDark]}>
+    <View style={[styles.container, getColorSchemeStyle(styles, 'container', colorScheme)]}>
       <Chats />
     </View>
   )
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  containerDark: {
+  container_dark: {
     backgroundColor: '#000',
   },
 })

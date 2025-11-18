@@ -7,6 +7,7 @@ import CustomActions from '../../example-expo/CustomActions'
 import CustomView from '../../example-expo/CustomView'
 import earlierMessages from '../../example-expo/data/earlierMessages'
 import messagesData from '../../example-expo/data/messages'
+import { getColorSchemeStyle } from '../../utils/styleUtils'
 
 export default function ExpoExample () {
   const [messages, setMessages] = useState<IMessage[]>(messagesData)
@@ -45,8 +46,8 @@ export default function ExpoExample () {
   }, [])
 
   const renderAccessory = useCallback(
-    () => <AccessoryBar onSend={onSend} isTyping={() => setIsTyping(!isTyping)} user={user} />,
-    [onSend, isTyping, user]
+    () => <AccessoryBar onSend={onSend} isTyping={() => setIsTyping(isTyping => !isTyping)} user={user} />,
+    [onSend, user]
   )
 
   const renderCustomView = useCallback((props: any) => <CustomView {...props} />, [])
@@ -56,10 +57,8 @@ export default function ExpoExample () {
     [onSend, user]
   )
 
-  const isDark = colorScheme === 'dark'
-
   return (
-    <View style={[styles.container, isDark && styles.containerDark]}>
+    <View style={[styles.container, getColorSchemeStyle(styles, 'container', colorScheme)]}>
       <GiftedChat
         messages={messages}
         onSend={onSend}
@@ -69,9 +68,9 @@ export default function ExpoExample () {
         renderAccessory={renderAccessory}
         renderCustomView={renderCustomView}
         isTyping={isTyping}
-        messagesContainerStyle={isDark && styles.messagesContainerDark}
+        messagesContainerStyle={getColorSchemeStyle(styles, 'messagesContainer', colorScheme)}
         textInputProps={{
-          style: isDark && styles.composerDark,
+          style: getColorSchemeStyle(styles, 'composer', colorScheme),
         }}
         keyboardBottomOffset={keyboardBottomOffset}
       />
@@ -84,13 +83,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  containerDark: {
+  container_dark: {
     backgroundColor: '#000',
   },
-  messagesContainerDark: {
+  messagesContainer_dark: {
     backgroundColor: '#000',
   },
-  composerDark: {
+  composer_dark: {
     backgroundColor: '#1a1a1a',
     color: '#fff',
   },

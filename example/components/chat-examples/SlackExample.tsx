@@ -4,6 +4,7 @@ import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import messagesData from '../../example-expo/data/messages'
 import SlackMessage from '../../example-slack-message/src/SlackMessage'
+import { getColorSchemeStyle } from '../../utils/styleUtils'
 
 export default function SlackExample () {
   const [messages, setMessages] = useState<IMessage[]>(messagesData)
@@ -29,18 +30,16 @@ export default function SlackExample () {
     )
   }, [user])
 
-  const isDark = colorScheme === 'dark'
-
   return (
-    <View style={[styles.container, isDark && styles.containerDark]}>
+    <View style={[styles.container, getColorSchemeStyle(styles, 'container', colorScheme)]}>
       <GiftedChat
         messages={messages}
         onSend={onSend}
         user={user}
         renderMessage={props => <SlackMessage {...props} />}
-        messagesContainerStyle={isDark && styles.messagesContainerDark}
+        messagesContainerStyle={getColorSchemeStyle(styles, 'messagesContainer', colorScheme)}
         textInputProps={{
-          style: isDark && styles.composerDark,
+          style: getColorSchemeStyle(styles, 'composer', colorScheme),
         }}
         keyboardBottomOffset={keyboardBottomOffset}
       />
@@ -53,13 +52,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  containerDark: {
+  container_dark: {
     backgroundColor: '#000',
   },
-  messagesContainerDark: {
+  messagesContainer_dark: {
     backgroundColor: '#000',
   },
-  composerDark: {
+  composer_dark: {
     backgroundColor: '#1a1a1a',
     color: '#fff',
   },

@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
@@ -10,12 +9,20 @@ import { ActionSheetProvider, useActionSheet } from '@expo/react-native-action-s
 import { MaterialIcons } from '@expo/vector-icons'
 import dayjs from 'dayjs'
 import * as ImagePicker from 'expo-image-picker'
-import * as Linking from 'expo-linking'
 import { getCurrentPositionAsync, requestForegroundPermissionsAsync } from 'expo-location'
 import { RectButton } from 'react-native-gesture-handler'
 import { GiftedChat } from 'react-native-gifted-chat'
 import type { IMessage, User } from 'react-native-gifted-chat'
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
+
+// ============================================================================
+// Helper Functions
+// ============================================================================
+
+function getColorSchemeStyle<T>(styles: T, baseName: string, colorScheme: string | null | undefined) {
+  const key = `${baseName}_${colorScheme}` as keyof T
+  return styles[key]
+}
 
 // ============================================================================
 // Data
@@ -365,12 +372,13 @@ const CustomActions = ({
           const selectedOption = options[buttonIndex]
           selectedOption?.action?.()
         }
-      },
+      }
     )
   }, [showActionSheetWithOptions, handlePickImage, handleTakePicture, handleSendLocation])
 
   const renderIconComponent = useCallback(() => {
-    if (renderIcon) return renderIcon()
+    if (renderIcon) 
+      return renderIcon()
 
     const wrapperColorStyle = colorScheme === 'dark' ? customActionsStyles.wrapper_dark : {}
     const iconTextColorStyle = colorScheme === 'dark' ? customActionsStyles.iconText_dark : {}
@@ -485,24 +493,24 @@ const AccessoryBar = ({ onSend, isTyping, user }: AccessoryBarProps) => {
     <View style={[accessoryBarStyles.container, containerColorStyle]}>
       <Button
         onPress={handlePickImage}
-        name="photo"
+        name='photo'
         color={isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)'}
       />
       <Button
         onPress={handleTakePicture}
-        name="camera"
+        name='camera'
         color={isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)'}
       />
       <Button
         onPress={handleSendLocation}
-        name="my-location"
+        name='my-location'
         color={isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)'}
       />
       <Button
         onPress={() => {
           isTyping()
         }}
-        name="chat"
+        name='chat'
         color={isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)'}
       />
     </View>
@@ -570,7 +578,7 @@ function ChatExample() {
       }))
       setMessages(previousMessages => GiftedChat.append(previousMessages, messagesWithIds))
     },
-    [user],
+    [user]
   )
 
   const onPressLoadEarlierMessages = useCallback(() => {
@@ -582,8 +590,8 @@ function ChatExample() {
   }, [])
 
   const renderAccessory = useCallback(
-    () => <AccessoryBar onSend={onSend} isTyping={() => setIsTyping(!isTyping)} user={user} />,
-    [onSend, isTyping, user]
+    () => <AccessoryBar onSend={onSend} isTyping={() => setIsTyping(isTyping => !isTyping)} user={user} />,
+    [onSend, user]
   )
 
   const renderActions = useCallback(
@@ -591,10 +599,8 @@ function ChatExample() {
     [onSend, user]
   )
 
-  const isDark = colorScheme === 'dark'
-
   return (
-    <View style={[styles.container, isDark && styles.containerDark]}>
+    <View style={[styles.container, getColorSchemeStyle(styles, 'container', colorScheme)]}>
       <GiftedChat
         messages={messages}
         onSend={onSend}
@@ -603,9 +609,9 @@ function ChatExample() {
         renderActions={renderActions}
         renderAccessory={renderAccessory}
         isTyping={isTyping}
-        messagesContainerStyle={isDark && styles.messagesContainerDark}
+        messagesContainerStyle={getColorSchemeStyle(styles, 'messagesContainer', colorScheme)}
         textInputProps={{
-          style: isDark && styles.composerDark,
+          style: getColorSchemeStyle(styles, 'composer', colorScheme),
         }}
         bottomOffset={insets.bottom}
       />
@@ -618,13 +624,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  containerDark: {
+  container_dark: {
     backgroundColor: '#000',
   },
-  messagesContainerDark: {
+  messagesContainer_dark: {
     backgroundColor: '#000',
   },
-  composerDark: {
+  composer_dark: {
     backgroundColor: '#1a1a1a',
     color: '#fff',
   },

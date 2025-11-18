@@ -5,13 +5,6 @@ import { MessageContainer } from '../GiftedChat'
 import { DEFAULT_TEST_MESSAGE } from './data'
 
 it('should render <MessageContainer /> without crashing', () => {
-  render(
-    <MessageContainer
-      messages={[DEFAULT_TEST_MESSAGE]}
-      user={{ _id: 'test' }}
-    />
-  )
-
   // Just verify it renders without throwing
   expect(() => render(
     <MessageContainer

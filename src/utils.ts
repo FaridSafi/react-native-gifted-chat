@@ -46,7 +46,6 @@ function processCallbackArguments (args: unknown[]): unknown[] {
   return params
 }
 
- 
 export function useCallbackDebounced<T extends (...args: any[]) => any>(callbackFunc: T, deps: React.DependencyList = [], time: number): (...args: Parameters<T>) => void {
   const timeoutId = useRef<ReturnType<typeof setTimeout>>(undefined)
 
@@ -70,7 +69,6 @@ export function useCallbackDebounced<T extends (...args: any[]) => any>(callback
   return savedFunc
 }
 
- 
 export function useCallbackThrottled<T extends (...args: any[]) => any>(callbackFunc: T, deps: React.DependencyList = [], time: number): (...args: Parameters<T>) => void {
   const lastExecution = useRef<number>(0)
   const timeoutId = useRef<ReturnType<typeof setTimeout>>(undefined)

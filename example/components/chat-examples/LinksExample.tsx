@@ -15,6 +15,12 @@ const LinksExample: React.FC = () => {
 
   const initialMessages: IMessage[] = useMemo(() => [
     {
+      _id: 8,
+      text: 'System message with link: Check out our documentation at https://github.com/FaridSafi/react-native-gifted-chat',
+      createdAt: new Date(Date.now() - 7 * 60000),
+      system: true,
+    },
+    {
       _id: 7,
       text: 'You can mention people like @kesha-antonov or @john-doe',
       createdAt: new Date(Date.now() - 6 * 60000),

@@ -22,21 +22,49 @@ exports[`SystemMessage should render <SystemMessage /> and compare with snapshot
   }
 >
   <View>
-    <Text
+    <View
       style={
         [
           {
-            "backgroundColor": "transparent",
-            "color": "#b2b2b2",
-            "fontSize": 12,
-            "fontWeight": "300",
+            "marginBottom": 5,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 5,
           },
-          undefined,
+          {
+            "marginBottom": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+          },
         ]
       }
     >
-      test
-    </Text>
+      <Text
+        link={true}
+        style={
+          [
+            {
+              "color": "black",
+            },
+            undefined,
+            [
+              {
+                "backgroundColor": "transparent",
+                "color": "#b2b2b2",
+                "fontSize": 12,
+                "fontWeight": "300",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        <Text>
+          test
+        </Text>
+      </Text>
+    </View>
   </View>
 </View>
 `;

@@ -116,18 +116,18 @@ Readme for this version: [2.6.5 readme](https://github.com/FaridSafi/react-nativ
 
 Yarn:
 ```bash
-yarn add react-native-gifted-chat react-native-reanimated react-native-keyboard-controller react-native-gesture-handler
+yarn add react-native-gifted-chat react-native-reanimated react-native-keyboard-controller react-native-gesture-handler react-native-safe-area-context
 ```
 
 Npm:
 
 ```bash
-npm install --save react-native-gifted-chat react-native-reanimated react-native-keyboard-controller react-native-gesture-handler
+npm install --save react-native-gifted-chat react-native-reanimated react-native-keyboard-controller react-native-gesture-handler react-native-safe-area-context
 ```
 
 Expo
 ```bash
-npx expo install react-native-gifted-chat react-native-reanimated react-native-keyboard-controller react-native-gesture-handler
+npx expo install react-native-gifted-chat react-native-reanimated react-native-keyboard-controller react-native-gesture-handler react-native-safe-area-context
 ```
 
 ### Non-expo users
@@ -390,7 +390,6 @@ interface QuickReplies {
 - **`renderMessageVideo`** _(Function)_ - Custom message video
 - **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://reactnative.dev/docs/image.html) component created by the default `renderMessageImage`
 - **`videoProps`** _(Object)_ - Extra props to be passed to the video component created by the required `renderMessageVideo`
-- **`lightboxProps`** _(Object)_ - Extra props to be passed to the `MessageImage`'s [Lightbox](https://github.com/oblador/react-native-lightbox)
 - **`isCustomViewBottom`** _(Bool)_ - Determine whether renderCustomView is displayed before or after the text, image and video views; default is `false`
 - **`renderCustomView`** _(Function)_ - Custom view inside the bubble
 - **`renderDay`** _(Function)_ - Custom day above a message
@@ -533,7 +532,7 @@ If you use React Navigation, additional handling may be required to account for 
 module.exports = function override(config, env) {
   config.module.rules.push({
     test: /\.js$/,
-    exclude: /node_modules[/\\](?!react-native-gifted-chat|react-native-lightbox|react-native-parsed-text)/,
+    exclude: /node_modules[/\\](?!react-native-gifted-chat)/,
     use: {
       loader: 'babel-loader',
       options: {

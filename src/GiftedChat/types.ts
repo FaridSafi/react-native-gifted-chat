@@ -8,7 +8,6 @@ import {
 import {
   ActionSheetOptions,
 } from '@expo/react-native-action-sheet'
-import { LightboxProps } from 'react-native-lightbox-v2'
 import { ActionsProps } from '../Actions'
 import { AvatarProps } from '../Avatar'
 import { BubbleProps } from '../Bubble'
@@ -62,8 +61,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   renderAvatarOnTop?: boolean
   /* Extra props to be passed to the <Image> component created by the default renderMessageImage */
   imageProps?: MessageImageProps<TMessage>
-  /* Extra props to be passed to the MessageImage's Lightbox */
-  lightboxProps?: LightboxProps
   /* Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar); default is 0 */
   keyboardBottomOffset?: number
   /* Focus on <TextInput> automatically when opening the keyboard; default is true */
@@ -148,7 +145,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   onInputTextChanged?(text: string): void
   /* Extra props to be passed to the MessageText component */
   messageTextProps?: Partial<MessageTextProps<TMessage>>
-  /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
+  /* Custom parse patterns for react-native-autolink used to linking message content (like URLs and phone numbers) */
   matchers?: MessageTextProps<TMessage>['matchers']
   renderQuickReplies?(
     quickReplies: QuickRepliesProps<TMessage>,

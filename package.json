@@ -53,7 +53,7 @@
     "dayjs": "^1.11.19",
     "lodash.isequal": "^4.5.0",
     "react-native-autolink": "^4.2.0",
-    "react-native-lightbox-v2": "^0.9.2"
+    "react-native-zoom-reanimated": "^1.4.10"
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",
@@ -95,6 +95,7 @@
     "react-native-gesture-handler": "^2.29.1",
     "react-native-keyboard-controller": "^1.19.5",
     "react-native-reanimated": "^3.19.4",
+    "react-native-safe-area-context": "^5.6.2",
     "react-test-renderer": "19.1.0",
     "typescript": "^5.9.3"
   },
@@ -103,7 +104,8 @@
     "react-native": "*",
     "react-native-gesture-handler": ">=2.0.0",
     "react-native-keyboard-controller": ">=1.0.0",
-    "react-native-reanimated": ">=3.0.0 || ^4.0.0"
+    "react-native-reanimated": ">=3.0.0 || ^4.0.0",
+    "react-native-safe-area-context": ">=5.0.0"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "engines": {

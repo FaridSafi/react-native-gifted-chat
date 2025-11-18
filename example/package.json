@@ -49,7 +49,7 @@
     "react-native-maps": "1.20.1",
     "react-native-paper": "^5.14.5",
     "react-native-reanimated": "~4.1.1",
-    "react-native-safe-area-context": "~5.6.2",
+    "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.16.0",
     "react-native-web": "~0.21.2",
     "react-native-worklets": "0.6.1"

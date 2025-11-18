@@ -27,6 +27,7 @@ import Animated, {
   withTiming,
   runOnJS,
 } from 'react-native-reanimated'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Actions } from '../Actions'
 import { Avatar } from '../Avatar'
 import Bubble from '../Bubble'
@@ -45,14 +46,13 @@ import { Send } from '../Send'
 import stylesCommon from '../styles'
 import { SystemMessage } from '../SystemMessage'
 import { Time } from '../Time'
+
 import {
   IMessage,
 } from '../types'
-
 import * as utils from '../utils'
 import styles from './styles'
 import { GiftedChatProps } from './types'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 dayjs.extend(localizedFormat)
 

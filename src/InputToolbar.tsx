@@ -8,8 +8,8 @@ import { Send, SendProps } from './Send'
 import { IMessage } from './types'
 
 export interface InputToolbarProps<TMessage extends IMessage> {
-  options?: { [key: string]: () => void }
-  optionTintColor?: string
+  actions?: Array<{ title: string, action: () => void }>
+  actionSheetOptionTintColor?: string
   containerStyle?: StyleProp<ViewStyle>
   primaryStyle?: StyleProp<ViewStyle>
   accessoryStyle?: StyleProp<ViewStyle>
@@ -31,8 +31,8 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
     renderComposer,
     renderSend,
     renderAccessory,
-    options,
-    optionTintColor,
+    actions,
+    actionSheetOptionTintColor,
     icon,
     wrapperStyle,
     containerStyle,
@@ -43,8 +43,8 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
   const actionsFragment = useMemo(() => {
     const props = {
       onPressActionButton,
-      options,
-      optionTintColor,
+      actions,
+      actionSheetOptionTintColor,
       icon,
       wrapperStyle,
       containerStyle,
@@ -56,8 +56,8 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
   }, [
     renderActions,
     onPressActionButton,
-    options,
-    optionTintColor,
+    actions,
+    actionSheetOptionTintColor,
     icon,
     wrapperStyle,
     containerStyle,

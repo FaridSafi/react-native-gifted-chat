@@ -14,8 +14,8 @@ import { useChatContext } from './GiftedChatContext'
 import stylesCommon from './styles'
 
 export interface ActionsProps {
-  options?: { [key: string]: () => void }
-  optionTintColor?: string
+  actions?: Array<{ title: string, action: () => void }>
+  actionSheetOptionTintColor?: string
   icon?: () => ReactNode
   wrapperStyle?: StyleProp<ViewStyle>
   iconTextStyle?: StyleProp<TextStyle>
@@ -24,8 +24,8 @@ export interface ActionsProps {
 }
 
 export function Actions ({
-  options,
-  optionTintColor = Color.optionTintColor,
+  actions,
+  actionSheetOptionTintColor = Color.optionTintColor,
   icon,
   wrapperStyle,
   iconTextStyle,
@@ -35,28 +35,26 @@ export function Actions ({
   const { actionSheet } = useChatContext()
 
   const onActionsPress = useCallback(() => {
-    if (!options)
+    if (!actions?.length)
       return
 
-    const optionKeys = Object.keys(options)
-    const cancelButtonIndex = optionKeys.indexOf('Cancel')
+    const titles = actions.map(item => item.title)
 
     actionSheet().showActionSheetWithOptions(
       {
-        options: optionKeys,
-        cancelButtonIndex,
-        tintColor: optionTintColor,
+        options: titles,
+        cancelButtonIndex: titles.length - 1,
+        tintColor: actionSheetOptionTintColor,
       },
-      (buttonIndex: number | undefined) => {
+      (buttonIndex?: number) => {
         if (buttonIndex === undefined)
           return
 
-        const key = optionKeys[buttonIndex]
-        if (key)
-          options[key]()
+        const item = actions[buttonIndex]
+        item.action?.()
       }
     )
-  }, [actionSheet, options, optionTintColor])
+  }, [actionSheet, actions, actionSheetOptionTintColor])
 
   const renderIcon = useCallback(() => {
     if (icon)

@@ -77,8 +77,8 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   minComposerHeight?: number
   /* composer min Height */
   maxComposerHeight?: number
-  options?: { [key: string]: () => void }
-  optionTintColor?: string
+  actions?: Array<{ title: string, action: () => void }>
+  actionSheetOptionTintColor?: string
   quickReplyStyle?: StyleProp<ViewStyle>
   quickReplyTextStyle?: StyleProp<TextStyle>
   quickReplyContainerStyle?: StyleProp<ViewStyle>

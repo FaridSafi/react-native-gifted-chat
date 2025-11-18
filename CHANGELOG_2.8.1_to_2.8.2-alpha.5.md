@@ -39,31 +39,34 @@
 - ❌ `disableComposer` - removed (use `textInputProps.editable={false}` instead)
 
 #### Load Earlier Props
-- ❌ `loadEarlier` - removed (use `loadEarlierMessagesProps` instead)
-- ❌ `isLoadingEarlier` - removed (use `loadEarlierMessagesProps` instead)
-- ❌ `onLoadEarlier` - removed (use `loadEarlierMessagesProps.onLoadEarlier` instead)
-- ❌ `renderLoadEarlier` - removed (use `loadEarlierMessagesProps.renderLoadEarlier` instead)
-- ❌ `infiniteScroll` - removed
+- ❌ `loadEarlier` - removed from GiftedChatProps (use `loadEarlierMessagesProps.isAvailable` instead)
+- ❌ `isLoadingEarlier` - removed from GiftedChatProps (use `loadEarlierMessagesProps.isLoading` instead)
+- ❌ `onLoadEarlier` - removed from GiftedChatProps (use `loadEarlierMessagesProps.onPress` instead)
+- ❌ `infiniteScroll` - removed (use `loadEarlierMessagesProps.isInfiniteScrollEnabled` instead)
 
-#### ListView & Layout Props
-- ❌ `alignTop` - removed
-- ❌ `listViewProps` - removed
-- ❌ `extraData` - removed
-- ❌ `isScrollToBottomEnabled` - removed
-- ❌ `scrollToBottomStyle` - removed
-- ❌ `scrollToBottomComponent` - removed
-
-#### Render Props
-- ❌ `renderMessage` - removed
-- ❌ `renderFooter` - removed
-- ❌ `renderChatEmpty` - removed
-- ❌ `renderDay` - removed
-
-#### Quick Replies
-- ❌ `onQuickReply` - removed
+#### ListView Props
+- ❌ `listViewProps` - removed (use `listProps` via MessageContainerProps instead)
 
 #### Parse Patterns
 - ❌ `parsePatterns` - removed (replaced with `matchers`)
+
+#### Explicit Props Moved to Parent Interface
+The following props were explicitly listed in GiftedChatProps in v2.8.1 but are now only available through the extended `MessageContainerProps`:
+- ❌ `messages` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `isTyping` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `inverted` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `alignTop` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `isScrollToBottomEnabled` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `scrollToBottomStyle` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `extraData` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `renderMessage` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `renderFooter` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `renderChatEmpty` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `renderDay` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `renderLoadEarlier` - removed as explicit prop (still available via MessageContainerProps)
+- ❌ `onQuickReply` - removed as explicit prop (still available via MessageContainerProps)
+
+**Important:** Since `GiftedChatProps` extends `Partial<MessageContainerProps<TMessage>>` in both versions, all MessageContainerProps are still available on GiftedChat. The difference is they're no longer explicitly redefined in the GiftedChatProps interface.
 
 ### Removed Props (ComposerProps)
 - ❌ `placeholder` - removed (use `textInputProps.placeholder` instead)

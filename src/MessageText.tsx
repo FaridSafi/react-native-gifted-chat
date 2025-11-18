@@ -55,7 +55,8 @@ export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
       <Autolink
         email
         phone
-        link
+        url
+        stripPrefix={false}
         {...rest}
         onPress={onPressProp ? handlePress : undefined}
         linkStyle={linkStyle}

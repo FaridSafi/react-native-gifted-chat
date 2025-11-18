@@ -8,5 +8,5 @@ export interface DayAnimatedProps extends Omit<DayProps, 'createdAt'> {
   listHeight: { value: number }
   renderDay?: (props: DayProps) => React.ReactNode
   messages: IMessage[]
-  isLoadingEarlier: boolean
+  isLoading: boolean
 }

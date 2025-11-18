@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
-import { LoadEarlier } from '../LoadEarlier'
+import { LoadEarlierMessages } from '../LoadEarlierMessages'
 import { warning } from '../logging'
 import { ReanimatedScrollEvent } from '../reanimatedCompat'
 
@@ -36,7 +36,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     user,
     isTyping = false,
     renderChatEmpty: renderChatEmptyProp,
-    onLoadEarlier,
     inverted = true,
     listProps,
     extraData,
@@ -44,8 +43,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     scrollToBottomOffset = 200,
     alignTop = false,
     scrollToBottomStyle,
-    infiniteScroll = false,
-    isLoadingEarlier = false,
+    loadEarlierMessagesProps,
     renderTypingIndicator: renderTypingIndicatorProp,
     renderFooter: renderFooterProp,
     renderLoadEarlier: renderLoadEarlierProp,
@@ -82,15 +80,15 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   }, [renderFooterProp, renderTypingIndicator, props])
 
   const renderLoadEarlier = useCallback(() => {
-    if (onLoadEarlier) {
+    if (loadEarlierMessagesProps?.onPress && loadEarlierMessagesProps?.isAvailable) {
       if (renderLoadEarlierProp)
-        return renderLoadEarlierProp({ ...props, onLoadEarlier })
+        return renderLoadEarlierProp(loadEarlierMessagesProps)
 
-      return <LoadEarlier {...props} onLoadEarlier={onLoadEarlier} />
+      return <LoadEarlierMessages {...loadEarlierMessagesProps} />
     }
 
     return null
-  }, [onLoadEarlier, renderLoadEarlierProp, props])
+  }, [loadEarlierMessagesProps, renderLoadEarlierProp])
 
   const changeScrollToBottomVisibility: (isVisible: boolean) => void = useCallbackThrottled((isVisible: boolean) => {
     if (isScrollingDown.value && isVisible)
@@ -289,13 +287,13 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
 
   const onEndReached = useCallback(() => {
     if (
-      infiniteScroll &&
-      onLoadEarlier &&
-      !isLoadingEarlier &&
-      Platform.OS !== 'web'
+      loadEarlierMessagesProps?.isInfiniteScrollEnabled &&
+      loadEarlierMessagesProps?.onPress &&
+      loadEarlierMessagesProps?.isAvailable &&
+      !loadEarlierMessagesProps?.isLoading
     )
-      onLoadEarlier()
-  }, [infiniteScroll, onLoadEarlier, isLoadingEarlier])
+      loadEarlierMessagesProps.onPress()
+  }, [loadEarlierMessagesProps])
 
   const keyExtractor = useCallback((item: unknown) => (item as TMessage)._id.toString(), [])
 
@@ -418,7 +416,7 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
         listHeight={listHeight}
         renderDay={renderDayProp}
         messages={messages}
-        isLoadingEarlier={isLoadingEarlier}
+        isLoading={loadEarlierMessagesProps?.isLoading ?? false}
       />
     </View>
   )

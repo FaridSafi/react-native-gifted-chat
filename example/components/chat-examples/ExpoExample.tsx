@@ -34,7 +34,7 @@ export default function ExpoExample () {
     )
   }, [user])
 
-  const onLoadEarlier = useCallback(() => {
+  const onPressLoadEarlierMessages = useCallback(() => {
     setIsLoadingEarlier(true)
     setTimeout(() => {
       setMessages(previousMessages =>
@@ -63,8 +63,7 @@ export default function ExpoExample () {
       <GiftedChat
         messages={messages}
         onSend={onSend}
-        isLoadingEarlier={isLoadingEarlier}
-        onLoadEarlier={onLoadEarlier}
+        loadEarlierMessagesProps={{ isAvailable: true, isLoading: isLoadingEarlier, onPress: onPressLoadEarlierMessages }}
         user={user}
         renderActions={renderActions}
         renderAccessory={renderAccessory}

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render <LoadEarlier /> and compare with snapshot 1`] = `
+exports[`should render <LoadEarlierMessages /> and compare with snapshot 1`] = `
 <View
   accessibilityRole="button"
   accessibilityState={

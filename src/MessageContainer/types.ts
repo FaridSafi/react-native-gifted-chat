@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 
-import { LoadEarlierProps } from '../LoadEarlier'
+import { LoadEarlierMessagesProps } from '../LoadEarlierMessages'
 import { MessageProps } from '../Message'
 import { ReanimatedScrollEvent } from '../reanimatedCompat'
 import { User, IMessage, Reply, DayProps } from '../types'
@@ -47,19 +47,15 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage>
   /** Custom day above a message */
   renderDay?(props: DayProps): React.ReactNode
   /** Custom "Load earlier messages" button */
-  renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
+  renderLoadEarlier?(props: LoadEarlierMessagesProps): React.ReactNode
   /** Custom typing indicator */
   renderTypingIndicator?(): React.ReactNode
   /** Scroll to bottom custom component */
   scrollToBottomComponent?(): React.ReactNode
-  /** Callback when loading earlier messages */
-  onLoadEarlier?(): void
   /** Callback when quick reply is sent */
   onQuickReply?(replies: Reply[]): void
-  /** Infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
-  infiniteScroll?: boolean
-  /** Display an ActivityIndicator when loading earlier messages */
-  isLoadingEarlier?: boolean
+  /** Props to pass to the LoadEarlierMessages component. The LoadEarlierMessages button is only visible when isAvailable is true. Includes isAvailable (controls button visibility), isInfiniteScrollEnabled (infinite scroll up when reach the top of messages container, automatically call onPress function if it exists - not yet supported for web), onPress (callback when button is pressed), isLoading (display loading indicator), label (override default "Load earlier messages" text), and styling props (containerStyle, wrapperStyle, textStyle, activityIndicatorStyle, activityIndicatorColor, activityIndicatorSize). */
+  loadEarlierMessagesProps?: LoadEarlierMessagesProps
   /** Custom scroll event handler */
   handleOnScroll?(event: ReanimatedScrollEvent): void
   /** Style for TypingIndicator component */

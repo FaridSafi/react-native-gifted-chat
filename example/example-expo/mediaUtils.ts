@@ -1,33 +1,6 @@
-import { Alert } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
-import * as Linking from 'expo-linking'
 
 import { getCurrentPositionAsync, LocationObjectCoords, requestForegroundPermissionsAsync } from 'expo-location'
-import * as Permissions from 'expo-permissions'
-
-export default async function getPermissionAsync (
-  permission: Permissions.PermissionType
-) {
-  const { status } = await Permissions.askAsync(permission)
-  if (status !== 'granted') {
-    const permissionName = permission.toLowerCase().replace('_', ' ')
-    Alert.alert(
-      'Cannot be done 😞',
-      `If you would like to use this feature, you'll need to enable the ${permissionName} permission in your phone settings.`,
-      [
-        {
-          text: 'Let\'s go!',
-          onPress: () => Linking.openURL('app-settings:'),
-        },
-        { text: 'Nevermind', onPress: () => {}, style: 'cancel' },
-      ],
-      { cancelable: true }
-    )
-
-    return false
-  }
-  return true
-}
 
 export async function getLocationAsync (): Promise<LocationObjectCoords | undefined> {
   const response = await requestForegroundPermissionsAsync()

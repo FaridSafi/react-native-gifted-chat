@@ -368,8 +368,7 @@ interface QuickReplies {
 - **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'D MMMM'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`dateFormatCalendar`** _(Object)_ - Format to use for rendering relative times; default is `{ sameDay: '[Today]' }` (see [Day.js Calendar](https://day.js.org/docs/en/plugin/calendar))
-- **`onLoadEarlier`** _(Function)_ - Callback when loading earlier messages. When provided, displays "Load earlier messages" button
-- **`isLoadingEarlier`** _(Bool)_ - Display an `ActivityIndicator` when loading earlier messages
+- **`loadEarlierMessagesProps`** _(Object)_ - Props to pass to the LoadEarlierMessages component. The LoadEarlierMessages button is only visible when `isAvailable` is set to `true`. Include `isAvailable: true` to show the button, `isInfiniteScrollEnabled: true` to enable infinite scroll up when reaching the top of messages container (automatically calls `onPress`), `onPress` callback to handle button press, `isLoading: true` to display a loading indicator, and `label` to override the default "Load earlier messages" text. Also supports styling props: `containerStyle`, `wrapperStyle`, `textStyle`, `activityIndicatorStyle`, `activityIndicatorColor`, `activityIndicatorSize`
 - **`renderLoading`** _(Function)_ - Render a loading view when initializing
 - **`renderLoadEarlier`** _(Function)_ - Custom "Load earlier messages" button
 - **`renderAvatar`** _(Function)_ - Custom message avatar; set to `null` to not render any avatar for the message
@@ -455,7 +454,6 @@ Example:
 * **`quickReplyStyle`** _(StyleProp<ViewStyle>)_ - Custom quick reply view style
 * **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
 * **`shouldUpdateMessage`** _(Function)_ - Lets the message component know when to update outside of normal cases.
-* **`infiniteScroll`** _(Bool)_ - infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if it exists (not yet supported for the web).
 * **`typingIndicatorStyle`** _(StyleProp<ViewStyle>)_ - Custom style for the TypingIndicator component.
 
 ## Notes for [Redux](https://github.com/reactjs/redux)

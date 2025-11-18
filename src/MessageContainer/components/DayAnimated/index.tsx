@@ -11,13 +11,13 @@ import { DayAnimatedProps } from './types'
 
 export * from './types'
 
-const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages, isLoadingEarlier, ...rest }: DayAnimatedProps) => {
+const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages, isLoading, ...rest }: DayAnimatedProps) => {
   const opacity = useSharedValue(0)
   const fadeOutOpacityTimeoutId = useSharedValue<ReturnType<typeof setTimeout> | undefined>(undefined)
   const containerHeight = useSharedValue(0)
 
   const isScrolledOnMount = useSharedValue(false)
-  const isLoadingEarlierAnim = useSharedValue(isLoadingEarlier)
+  const isLoadingAnim = useSharedValue(isLoading)
 
   const daysPositionsArray = useDerivedValue(() => Object.values(daysPositions.value).sort((a, b) => a.y - b.y))
 
@@ -57,11 +57,11 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
   const style = useAnimatedStyle(() => ({
     top: interpolate(
       relativeScrolledPositionToBottomOfDay.value,
-      [-dayTopOffset, -0.0001, 0, isLoadingEarlierAnim.value ? 0 : containerHeight.value + dayTopOffset],
-      [dayTopOffset, dayTopOffset, -containerHeight.value, isLoadingEarlierAnim.value ? -containerHeight.value : dayTopOffset],
+      [-dayTopOffset, -0.0001, 0, isLoadingAnim.value ? 0 : containerHeight.value + dayTopOffset],
+      [dayTopOffset, dayTopOffset, -containerHeight.value, isLoadingAnim.value ? -containerHeight.value : dayTopOffset],
       'clamp'
     ),
-  }), [relativeScrolledPositionToBottomOfDay, containerHeight, dayTopOffset, isLoadingEarlierAnim])
+  }), [relativeScrolledPositionToBottomOfDay, containerHeight, dayTopOffset, isLoadingAnim])
 
   const contentStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
@@ -111,8 +111,8 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
   )
 
   useEffect(() => {
-    isLoadingEarlierAnim.value = isLoadingEarlier
-  }, [isLoadingEarlierAnim, isLoadingEarlier])
+    isLoadingAnim.value = isLoading
+  }, [isLoadingAnim, isLoading])
 
   const dayContent = useMemo(() => {
     if (!createdAt)

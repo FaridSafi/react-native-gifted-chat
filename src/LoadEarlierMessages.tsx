@@ -41,7 +41,9 @@ const styles = StyleSheet.create({
 })
 
 export interface LoadEarlierMessagesProps {
-  isLoadingEarlier?: boolean
+  isAvailable?: boolean
+  isLoading?: boolean
+  isInfiniteScrollEnabled?: boolean
   label?: string
   containerStyle?: StyleProp<ViewStyle>
   wrapperStyle?: StyleProp<ViewStyle>
@@ -53,7 +55,7 @@ export interface LoadEarlierMessagesProps {
 }
 
 export const LoadEarlierMessages: React.FC<LoadEarlierMessagesProps> = ({
-  isLoadingEarlier = false,
+  isLoading = false,
   onPress,
   label = 'Load earlier messages',
   containerStyle,
@@ -84,11 +86,11 @@ export const LoadEarlierMessages: React.FC<LoadEarlierMessagesProps> = ({
     <TouchableOpacity
       style={[styles.container, containerStyle]}
       onPress={onPress}
-      disabled={isLoadingEarlier}
+      disabled={isLoading}
       accessibilityRole='button'
     >
       <View style={[stylesCommon.centerItems, styles.wrapper, wrapperStyle]}>
-        {isLoadingEarlier ? loadingContent : labelContent}
+        {isLoading ? loadingContent : labelContent}
       </View>
     </TouchableOpacity>
   )

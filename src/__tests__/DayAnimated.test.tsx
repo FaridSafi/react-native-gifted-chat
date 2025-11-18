@@ -23,7 +23,7 @@ describe('DayAnimated', () => {
         daysPositions={mockDaysPositions}
         listHeight={mockListHeight}
         messages={[mockMessage]}
-        isLoadingEarlier={false}
+        isLoading={false}
       />
     )
     expect(toJSON()).toMatchSnapshot()
@@ -42,7 +42,7 @@ describe('DayAnimated', () => {
         daysPositions={mockDaysPositions}
         listHeight={mockListHeight}
         messages={[mockMessage]}
-        isLoadingEarlier={false}
+        isLoading={false}
         renderDay={customRenderDay}
       />
     )

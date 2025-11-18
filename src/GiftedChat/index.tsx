@@ -36,7 +36,7 @@ import { Day } from '../Day'
 import { GiftedAvatar } from '../GiftedAvatar'
 import { GiftedChatContext } from '../GiftedChatContext'
 import { InputToolbar } from '../InputToolbar'
-import { LoadEarlier } from '../LoadEarlier'
+import { LoadEarlierMessages } from '../LoadEarlierMessages'
 import Message from '../Message'
 import MessageContainer, { AnimatedList } from '../MessageContainer'
 import { MessageImage } from '../MessageImage'
@@ -52,6 +52,7 @@ import {
 import * as utils from '../utils'
 import styles from './styles'
 import { GiftedChatProps } from './types'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 dayjs.extend(localizedFormat)
 
@@ -421,9 +422,11 @@ function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedC
 
   return (
     <GestureHandlerRootView style={styles.fill}>
-      <KeyboardProvider>
-        <GiftedChat<TMessage> {...props} />
-      </KeyboardProvider>
+      <SafeAreaProvider>
+        <KeyboardProvider>
+          <GiftedChat<TMessage> {...props} />
+        </KeyboardProvider>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   )
 }
@@ -467,7 +470,7 @@ export {
   Composer,
   Day,
   InputToolbar,
-  LoadEarlier,
+  LoadEarlierMessages,
   Message,
   MessageContainer,
   Send,

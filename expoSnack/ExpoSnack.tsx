@@ -573,7 +573,7 @@ function ChatExample() {
     [user],
   )
 
-  const onLoadEarlier = useCallback(() => {
+  const onPressLoadEarlierMessages = useCallback(() => {
     setIsLoadingEarlier(true)
     setTimeout(() => {
       setMessages(previousMessages => GiftedChat.prepend(previousMessages, getEarlierMessages()))
@@ -598,8 +598,7 @@ function ChatExample() {
       <GiftedChat
         messages={messages}
         onSend={onSend}
-        isLoadingEarlier={isLoadingEarlier}
-        onLoadEarlier={onLoadEarlier}
+        loadEarlierMessagesProps={{ isAvailable: true, isLoading: isLoadingEarlier, onPress: onPressLoadEarlierMessages }}
         user={user}
         renderActions={renderActions}
         renderAccessory={renderAccessory}

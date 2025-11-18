@@ -368,7 +368,18 @@ interface QuickReplies {
 - **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'D MMMM'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`dateFormatCalendar`** _(Object)_ - Format to use for rendering relative times; default is `{ sameDay: '[Today]' }` (see [Day.js Calendar](https://day.js.org/docs/en/plugin/calendar))
-- **`loadEarlierMessagesProps`** _(Object)_ - Props to pass to the LoadEarlierMessages component. The LoadEarlierMessages button is only visible when `isAvailable` is set to `true`. Include `isAvailable: true` to show the button, `isInfiniteScrollEnabled: true` to enable infinite scroll up when reaching the top of messages container (automatically calls `onPress`), `onPress` callback to handle button press, `isLoading: true` to display a loading indicator, and `label` to override the default "Load earlier messages" text. Also supports styling props: `containerStyle`, `wrapperStyle`, `textStyle`, `activityIndicatorStyle`, `activityIndicatorColor`, `activityIndicatorSize`
+- **`loadEarlierMessagesProps`** _(Object)_ - Props to pass to the LoadEarlierMessages component. The button is only visible when `isAvailable` is `true`. Supports the following props:
+  - `isAvailable` - Controls button visibility (default: false)
+  - `onPress` - Callback when button is pressed
+  - `isLoading` - Display loading indicator (default: false)
+  - `isInfiniteScrollEnabled` - Enable infinite scroll up when reaching the top of messages container, automatically calls `onPress` (not yet supported for web)
+  - `label` - Override the default "Load earlier messages" text
+  - `containerStyle` - Custom style for the button container
+  - `wrapperStyle` - Custom style for the button wrapper
+  - `textStyle` - Custom style for the button text
+  - `activityIndicatorStyle` - Custom style for the loading indicator
+  - `activityIndicatorColor` - Color of the loading indicator (default: 'white')
+  - `activityIndicatorSize` - Size of the loading indicator (default: 'small')
 - **`renderLoading`** _(Function)_ - Render a loading view when initializing
 - **`renderLoadEarlier`** _(Function)_ - Custom "Load earlier messages" button
 - **`renderAvatar`** _(Function)_ - Custom message avatar; set to `null` to not render any avatar for the message

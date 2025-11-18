@@ -1,5 +1,5 @@
+import { StyleSheet } from 'react-native'
 import { Image } from 'expo-image'
-import { Linking, StyleSheet, Text } from 'react-native'
 
 import { ExternalLink } from '@/components/external-link'
 import { HelloWave } from '@/components/hello-wave'

@@ -5,10 +5,10 @@ import { Avatar } from '../Avatar'
 import Bubble from '../Bubble'
 import { SystemMessage } from '../SystemMessage'
 
-import { isSameUser } from '../utils'
 import { IMessage } from '../types'
-import { MessageProps } from './types'
+import { isSameUser } from '../utils'
 import styles from './styles'
+import { MessageProps } from './types'
 
 export * from './types'
 

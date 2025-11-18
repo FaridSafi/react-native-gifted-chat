@@ -1,7 +1,7 @@
-const fs = require('fs')
-const path = require('path')
 const escape = require('escape-string-regexp')
 const { getDefaultConfig } = require('expo/metro-config')
+const fs = require('fs')
+const path = require('path')
 
 const config = getDefaultConfig(__dirname)
 const { transformer, resolver } = config

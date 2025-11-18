@@ -1,21 +1,27 @@
 import React, { RefObject } from 'react'
 import {
-  ActionSheetOptions,
-} from '@expo/react-native-action-sheet'
-import {
   TextInput,
   StyleProp,
   TextStyle,
   ViewStyle,
 } from 'react-native'
+import {
+  ActionSheetOptions,
+} from '@expo/react-native-action-sheet'
 import { LightboxProps } from 'react-native-lightbox-v2'
 import { ActionsProps } from '../Actions'
 import { AvatarProps } from '../Avatar'
+import { BubbleProps } from '../Bubble'
 import { ComposerProps } from '../Composer'
 import { InputToolbarProps } from '../InputToolbar'
 import { MessageProps } from '../Message'
+import { AnimatedList, MessageContainerProps } from '../MessageContainer'
 import { MessageImageProps } from '../MessageImage'
 import { MessageTextProps } from '../MessageText'
+import { QuickRepliesProps } from '../QuickReplies'
+import { SendProps } from '../Send'
+import { SystemMessageProps } from '../SystemMessage'
+import { TimeProps } from '../Time'
 import {
   IMessage,
   LeftRightStyle,
@@ -23,12 +29,6 @@ import {
   MessageVideoProps,
   User,
 } from '../types'
-import { QuickRepliesProps } from '../QuickReplies'
-import { SendProps } from '../Send'
-import { SystemMessageProps } from '../SystemMessage'
-import { TimeProps } from '../Time'
-import { AnimatedList, MessageContainerProps } from '../MessageContainer'
-import { BubbleProps } from '../Bubble'
 
 export interface GiftedChatProps<TMessage extends IMessage> extends Partial<MessageContainerProps<TMessage>> {
   /* Message container ref */

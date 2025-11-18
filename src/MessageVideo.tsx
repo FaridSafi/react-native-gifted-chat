@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
-import Color from './Color'
 import { View, Text, StyleSheet } from 'react-native'
+import Color from './Color'
 
 const styles = StyleSheet.create({
   container: {

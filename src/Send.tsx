@@ -2,18 +2,17 @@ import React, { useMemo, useCallback } from 'react'
 import {
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   StyleProp,
   ViewStyle,
   TextStyle,
-  TouchableOpacityProps,
   useColorScheme,
 } from 'react-native'
-
 import Color from './Color'
-import { IMessage } from './types'
+
+import { TouchableOpacity, TouchableOpacityProps } from './components/TouchableOpacity'
 import { TEST_ID } from './Constant'
+import { IMessage } from './types'
 
 const styles = StyleSheet.create({
   container: {

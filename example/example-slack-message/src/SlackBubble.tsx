@@ -2,21 +2,23 @@ import React, { useCallback, useMemo } from 'react'
 import {
   Text,
   StyleSheet,
-  TouchableOpacity,
   View,
   Platform,
   StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native'
+import * as Clipboard from 'expo-clipboard'
+import { RectButton } from 'react-native-gesture-handler'
 import {
   MessageText,
   MessageImage,
   Time,
   utils,
   useChatContext,
+  IMessage,
+  User,
 } from 'react-native-gifted-chat'
-import * as Clipboard from 'expo-clipboard'
 
 const { isSameUser, isSameDay } = utils
 
@@ -28,18 +30,18 @@ interface Props {
   renderCustomView?: (props: Props) => React.ReactNode
   renderUsername?: (props: Props) => React.ReactNode
   renderTime?: (props: Props) => React.ReactNode
-  renderTicks?: (currentMessage: object) => React.ReactNode
-  currentMessage: object
-  nextMessage: object
-  previousMessage: object
-  user: object
-  containerStyle: {
-    left: StyleProp<ViewStyle>
-    right: StyleProp<ViewStyle>
+  renderTicks?: (currentMessage: IMessage) => React.ReactNode
+  currentMessage: IMessage
+  nextMessage: IMessage
+  previousMessage: IMessage
+  user: User
+  containerStyle?: {
+    left?: StyleProp<ViewStyle>
+    right?: StyleProp<ViewStyle>
   }
-  wrapperStyle: {
-    left: StyleProp<ViewStyle>
-    right: StyleProp<ViewStyle>
+  wrapperStyle?: {
+    left?: StyleProp<ViewStyle>
+    right?: StyleProp<ViewStyle>
   }
   messageTextStyle: StyleProp<TextStyle>
   usernameStyle: StyleProp<TextStyle>
@@ -53,7 +55,7 @@ interface Props {
     right: StyleProp<ViewStyle>
   }
   imageStyle?: StyleProp<ViewStyle>
-  textStyle: StyleProp<TextStyle>
+  textStyle?: StyleProp<TextStyle>
   position: 'left' | 'right'
 }
 
@@ -90,7 +92,7 @@ const Bubble = (props: Props) => {
         options,
         cancelButtonIndex,
       },
-      (buttonIndex: number) => {
+      (buttonIndex?: number) => {
         switch (buttonIndex) {
           case 0:
             Clipboard.setStringAsync(currentMessage.text)
@@ -98,7 +100,7 @@ const Bubble = (props: Props) => {
         }
       }
     )
-  }, [])
+  }, [context, currentMessage, onLongPress])
 
   const renderMessageText = useCallback(() => {
     if (currentMessage.text) {
@@ -121,7 +123,7 @@ const Bubble = (props: Props) => {
     }
 
     return null
-  }, [])
+  }, [currentMessage.text, props])
 
   const renderMessageImage = useCallback(() => {
     if (currentMessage.image) {
@@ -137,7 +139,7 @@ const Bubble = (props: Props) => {
     }
 
     return null
-  }, [])
+  }, [currentMessage.image, props])
 
   const renderTicks = useCallback(() => {
     const { currentMessage } = props
@@ -169,7 +171,7 @@ const Bubble = (props: Props) => {
       )
 
     return null
-  }, [])
+  }, [props, tickStyle, user._id])
 
   const renderUsername = useCallback(() => {
     const username = currentMessage.user.name
@@ -191,7 +193,7 @@ const Bubble = (props: Props) => {
       )
     }
     return null
-  }, [])
+  }, [currentMessage.user.name, props, usernameStyle])
 
   const renderTime = useCallback(() => {
     if (currentMessage.createdAt) {
@@ -215,7 +217,7 @@ const Bubble = (props: Props) => {
     }
 
     return null
-  }, [])
+  }, [currentMessage.createdAt, props])
 
   const isSameThread = useMemo(() =>
     isSameUser(currentMessage, previousMessage) &&
@@ -237,9 +239,9 @@ const Bubble = (props: Props) => {
 
   return (
     <View style={[styles.container, containerStyle?.[position]]}>
-      <TouchableOpacity
+      <RectButton
         onLongPress={handleLongPress}
-        accessibilityTraits='text'
+        accessibilityRole='text'
         {...touchableProps}
       >
         <View style={[styles.wrapper, wrapperStyle?.[position]]}>
@@ -250,7 +252,7 @@ const Bubble = (props: Props) => {
             {renderMessageText()}
           </View>
         </View>
-      </TouchableOpacity>
+      </RectButton>
     </View>
   )
 }

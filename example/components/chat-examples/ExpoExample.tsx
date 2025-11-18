@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { StyleSheet, View, useColorScheme } from 'react-native'
 import { GiftedChat, IMessage } from 'react-native-gifted-chat'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import AccessoryBar from '../../example-expo/AccessoryBar'
 import CustomActions from '../../example-expo/CustomActions'
 import CustomView from '../../example-expo/CustomView'
@@ -12,6 +13,10 @@ export default function ExpoExample () {
   const [isLoadingEarlier, setIsLoadingEarlier] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
   const colorScheme = useColorScheme()
+  const insets = useSafeAreaInsets()
+
+  const tabbarHeight = 50
+  const keyboardBottomOffset = insets.bottom + tabbarHeight
 
   const user = useMemo(() => ({
     _id: 1,
@@ -70,6 +75,7 @@ export default function ExpoExample () {
         textInputProps={{
           style: isDark && styles.composerDark,
         }}
+        keyboardBottomOffset={keyboardBottomOffset}
       />
     </View>
   )

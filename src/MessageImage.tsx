@@ -11,8 +11,8 @@ import {
 } from 'react-native'
 // TODO: support web
 import Lightbox, { LightboxProps } from 'react-native-lightbox-v2'
-import { IMessage } from './types'
 import stylesCommon from './styles'
+import { IMessage } from './types'
 
 const styles = StyleSheet.create({
   image: {

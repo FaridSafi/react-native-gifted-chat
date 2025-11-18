@@ -12,7 +12,7 @@ import {
   SendProps,
 } from 'react-native-gifted-chat'
 
-export const renderInputToolbar = (props: InputToolbarProps<IMessage>) => {
+export const RenderInputToolbar = (props: InputToolbarProps<IMessage>) => {
   const colorScheme = useColorScheme()
   const isDark = colorScheme === 'dark'
 
@@ -28,7 +28,7 @@ export const renderInputToolbar = (props: InputToolbarProps<IMessage>) => {
   )
 }
 
-export const renderActions = (props: ActionsProps) => {
+export const RenderActions = (props: ActionsProps) => {
   const colorScheme = useColorScheme()
   const isDark = colorScheme === 'dark'
 
@@ -65,7 +65,7 @@ export const renderActions = (props: ActionsProps) => {
   )
 }
 
-export const renderComposer = (props: ComposerProps) => {
+export const RenderComposer = (props: ComposerProps) => {
   const colorScheme = useColorScheme()
   const isDark = colorScheme === 'dark'
 

@@ -4,13 +4,13 @@ import {
   Platform,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native'
 import Color from './Color'
+import { TouchableOpacity } from './components/TouchableOpacity'
 import stylesCommon from './styles'
 
 const styles = StyleSheet.create({

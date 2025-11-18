@@ -2,7 +2,6 @@ import React, { useCallback, useMemo } from 'react'
 import {
   Image,
   Text,
-  TouchableOpacity,
   View,
   StyleSheet,
   StyleProp,
@@ -10,8 +9,9 @@ import {
   TextStyle,
 } from 'react-native'
 import Color from './Color'
-import { User } from './types'
+import { TouchableOpacity } from './components/TouchableOpacity'
 import stylesCommon from './styles'
+import { User } from './types'
 
 const {
   carrot,

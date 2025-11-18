@@ -5,18 +5,17 @@ import {
   TextStyle,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   useColorScheme,
 } from 'react-native'
-
 import { useActionSheet } from '@expo/react-native-action-sheet'
+import { RectButton } from 'react-native-gesture-handler'
+import { IMessage, User } from '../../src'
 import {
   getLocationAsync,
   pickImageAsync,
   takePictureAsync,
 } from './mediaUtils'
-import { IMessage, User } from '../../src'
 
 interface Props {
   renderIcon?: () => React.ReactNode
@@ -40,7 +39,8 @@ const CustomActions = ({
 
   const handlePickImage = useCallback(async () => {
     const images = await pickImageAsync()
-    if (!images) return
+    if (!images)
+      return
 
     const messages: IMessage[] = images.map(image => ({
       _id: Math.random().toString(36).substring(7),
@@ -54,7 +54,8 @@ const CustomActions = ({
 
   const handleTakePicture = useCallback(async () => {
     const images = await takePictureAsync()
-    if (!images) return
+    if (!images)
+      return
 
     const messages: IMessage[] = images.map(image => ({
       _id: Math.random().toString(36).substring(7),
@@ -68,7 +69,8 @@ const CustomActions = ({
 
   const handleSendLocation = useCallback(async () => {
     const location = await getLocationAsync()
-    if (!location) return
+    if (!location)
+      return
 
     const message: IMessage = {
       _id: Math.random().toString(36).substring(7),
@@ -81,7 +83,7 @@ const CustomActions = ({
   }, [onSend, user])
 
   const onActionsPress = useCallback(() => {
-    const options: { title: string; action?: () => Promise<void> }[] = [
+    const options: { title: string, action?: () => Promise<void> }[] = [
       { title: 'Choose From Library', action: handlePickImage },
       { title: 'Take Picture', action: handleTakePicture },
       { title: 'Send Location', action: handleSendLocation },
@@ -118,12 +120,12 @@ const CustomActions = ({
   }, [renderIcon, wrapperStyle, iconTextStyle, colorScheme])
 
   return (
-    <TouchableOpacity
+    <RectButton
       style={[styles.container, containerStyle]}
       onPress={onActionsPress}
     >
       {renderIconComponent()}
-    </TouchableOpacity>
+    </RectButton>
   )
 }
 

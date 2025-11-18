@@ -1,8 +1,8 @@
 import React from 'react'
-import { render } from '@testing-library/react-native'
 import { View, Text } from 'react-native'
-import DayAnimated from '../MessageContainer/components/DayAnimated'
+import { render } from '@testing-library/react-native'
 import { DayProps } from '../Day'
+import DayAnimated from '../MessageContainer/components/DayAnimated'
 
 const mockDaysPositions = { value: {} }
 const mockScrolledY = { value: 0 }

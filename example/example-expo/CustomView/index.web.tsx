@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react'
 import {
-  TouchableOpacity,
   View,
   Text,
 } from 'react-native'
-import type { CustomViewProps } from './types'
+import { RectButton } from 'react-native-gesture-handler'
 import { styles } from './styles'
+import type { CustomViewProps } from './types'
 
 const CustomView = ({
   currentMessage,
@@ -17,7 +17,7 @@ const CustomView = ({
 
   if (currentMessage.location)
     return (
-      <TouchableOpacity
+      <RectButton
         style={[styles.container, containerStyle]}
         onPress={openMapAsync}
       >
@@ -26,7 +26,7 @@ const CustomView = ({
             Map not supported in web yet, sorry!
           </Text>
         </View>
-      </TouchableOpacity>
+      </RectButton>
     )
 
   return null

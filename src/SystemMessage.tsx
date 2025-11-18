@@ -8,8 +8,8 @@ import {
   TextStyle,
 } from 'react-native'
 import Color from './Color'
-import { IMessage } from './types'
 import stylesCommon from './styles'
+import { IMessage } from './types'
 
 const styles = StyleSheet.create({
   container: {

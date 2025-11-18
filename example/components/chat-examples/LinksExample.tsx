@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { Linking, StyleSheet, View } from 'react-native'
-import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import { ActionSheetProvider, useActionSheet } from '@expo/react-native-action-sheet'
-import { AutolinkProps, CustomMatch, ReplacerArgs } from 'react-native-autolink'
 import { setStringAsync } from 'expo-clipboard'
+import { AutolinkProps, CustomMatch, ReplacerArgs } from 'react-native-autolink'
+import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const LinksExample: React.FC = () => {

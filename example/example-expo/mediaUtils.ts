@@ -1,9 +1,9 @@
-import * as Linking from 'expo-linking'
-import * as Permissions from 'expo-permissions'
-import * as ImagePicker from 'expo-image-picker'
-
 import { Alert } from 'react-native'
+import * as ImagePicker from 'expo-image-picker'
+import * as Linking from 'expo-linking'
+
 import { getCurrentPositionAsync, LocationObjectCoords, requestForegroundPermissionsAsync } from 'expo-location'
+import * as Permissions from 'expo-permissions'
 
 export default async function getPermissionAsync (
   permission: Permissions.PermissionType

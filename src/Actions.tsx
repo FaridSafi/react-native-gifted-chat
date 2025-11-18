@@ -2,13 +2,13 @@ import React, { ReactNode, useCallback } from 'react'
 import {
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native'
 import Color from './Color'
+import { TouchableOpacity } from './components/TouchableOpacity'
 import { useChatContext } from './GiftedChatContext'
 
 import stylesCommon from './styles'

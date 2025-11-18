@@ -4,8 +4,8 @@ import dayjs from 'dayjs'
 
 import Color from './Color'
 import { TIME_FORMAT } from './Constant'
-import { LeftRightStyle, IMessage } from './types'
 import { useChatContext } from './GiftedChatContext'
+import { LeftRightStyle, IMessage } from './types'
 
 const { containerStyle } = StyleSheet.create({
   containerStyle: {

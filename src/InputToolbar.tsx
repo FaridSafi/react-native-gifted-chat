@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react'
 import { StyleSheet, View, StyleProp, ViewStyle, useColorScheme } from 'react-native'
 
-import { Composer, ComposerProps } from './Composer'
-import { Send, SendProps } from './Send'
 import { Actions, ActionsProps } from './Actions'
 import Color from './Color'
+import { Composer, ComposerProps } from './Composer'
+import { Send, SendProps } from './Send'
 import { IMessage } from './types'
 
 export interface InputToolbarProps<TMessage extends IMessage> {

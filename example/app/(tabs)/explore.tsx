@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
-
-import { ThemedText } from '@/components/themed-text'
-import { ThemedView } from '@/components/themed-view'
-import { useThemeColor } from '@/hooks/use-theme-color'
 
 import ExpoExample from '@/components/chat-examples/ExpoExample'
 import GiftedChatExample from '@/components/chat-examples/GiftedChatExample'
-import SlackExample from '@/components/chat-examples/SlackExample'
 import LinksExample from '@/components/chat-examples/LinksExample'
+
+import SlackExample from '@/components/chat-examples/SlackExample'
+import { ThemedText } from '@/components/themed-text'
+import { ThemedView } from '@/components/themed-view'
+import { useThemeColor } from '@/hooks/use-theme-color'
 
 type ChatExample = 'expo' | 'gifted' | 'slack' | 'links'
 
@@ -30,9 +31,9 @@ export default function ExploreScreen () {
     selectedExampleContent = (
       <>
         <View style={[styles.header, { borderBottomColor: borderColor }]}>
-          <TouchableOpacity onPress={() => setSelectedExample(null)} style={styles.backButton}>
+          <RectButton onPress={() => setSelectedExample(null)} style={styles.backButton}>
             <ThemedText type='link'>← Back</ThemedText>
-          </TouchableOpacity>
+          </RectButton>
           <ThemedText type='subtitle'>
             {examples.find(e => e.id === selectedExample)?.title}
           </ThemedText>
@@ -63,7 +64,7 @@ export default function ExploreScreen () {
               </ThemedView>
               <View style={styles.examplesContainer}>
                 {examples.map(example => (
-                  <TouchableOpacity
+                  <RectButton
                     key={example.id}
                     style={[styles.exampleCard, { borderColor }]}
                     onPress={() => setSelectedExample(example.id)}
@@ -77,7 +78,7 @@ export default function ExploreScreen () {
                     <ThemedText type='link' style={styles.tryButton}>
                       Try it →
                     </ThemedText>
-                  </TouchableOpacity>
+                  </RectButton>
                 ))}
               </View>
             </ScrollView>

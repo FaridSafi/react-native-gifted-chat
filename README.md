@@ -116,18 +116,18 @@ Readme for this version: [2.6.5 readme](https://github.com/FaridSafi/react-nativ
 
 Yarn:
 ```bash
-yarn add react-native-gifted-chat react-native-reanimated react-native-keyboard-controller
+yarn add react-native-gifted-chat react-native-reanimated react-native-keyboard-controller react-native-gesture-handler
 ```
 
 Npm:
 
 ```bash
-npm install --save react-native-gifted-chat react-native-reanimated react-native-keyboard-controller
+npm install --save react-native-gifted-chat react-native-reanimated react-native-keyboard-controller react-native-gesture-handler
 ```
 
 Expo
 ```bash
-npx expo install react-native-gifted-chat react-native-reanimated react-native-keyboard-controller
+npx expo install react-native-gifted-chat react-native-reanimated react-native-keyboard-controller react-native-gesture-handler
 ```
 
 ### Non-expo users

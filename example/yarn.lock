@@ -6925,11 +6925,6 @@ react-native-autolink@^4.2.0:
   dependencies:
     autolinker "^3.16.2"
 
-react-native-communications@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
-  integrity sha512-5+C0X9mopI0+qxyQHzOPEi5v5rxNBQjxydPPiKMQSlX1RBIcJ8uTcqUPssQ9Mo8p6c1IKIWJUSqCj4jAmD0qVQ==
-
 react-native-gesture-handler@~2.29.1:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.29.1.tgz#d13041f739b9da91a7a8b8e66b840c7396037fe0"

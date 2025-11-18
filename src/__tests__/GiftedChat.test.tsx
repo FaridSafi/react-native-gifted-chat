@@ -1,8 +1,8 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
 
-import { GiftedChat } from '../GiftedChat'
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller'
+import { GiftedChat } from '../GiftedChat'
 
 const messages = [
   {

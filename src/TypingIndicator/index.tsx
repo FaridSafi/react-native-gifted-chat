@@ -9,10 +9,10 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated'
-import { TypingIndicatorProps } from './types'
-
 import stylesCommon from '../styles'
+
 import styles from './styles'
+import { TypingIndicatorProps } from './types'
 
 export * from './types'
 

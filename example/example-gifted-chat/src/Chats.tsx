@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useColorScheme } from 'react-native'
 import { GiftedChat, IMessage } from 'react-native-gifted-chat'
-import initialMessages from './messages'
-import { renderInputToolbar, renderActions, renderComposer, renderSend } from './InputToolbar'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { RenderInputToolbar, RenderActions, RenderComposer, renderSend } from './InputToolbar'
 import {
   renderAvatar,
   renderBubble,
@@ -11,13 +11,17 @@ import {
   renderMessageText,
   renderCustomView,
 } from './MessageContainer'
-import { Match } from 'autolinker/dist/es2015'
+import initialMessages from './messages'
 
 const Chats = () => {
   const [text, setText] = useState('')
   const [messages, setMessages] = useState<IMessage[]>([])
   const colorScheme = useColorScheme()
   const isDark = colorScheme === 'dark'
+  const insets = useSafeAreaInsets()
+
+  const tabbarHeight = 50
+  const keyboardBottomOffset = insets.bottom + tabbarHeight
 
   useEffect(() => {
     setMessages(initialMessages.reverse())
@@ -45,9 +49,9 @@ const Chats = () => {
       renderAvatarOnTop
       renderUsernameOnMessage
       onPressAvatar={console.log}
-      renderInputToolbar={renderInputToolbar}
-      renderActions={renderActions}
-      renderComposer={renderComposer}
+      renderInputToolbar={RenderInputToolbar}
+      renderActions={RenderActions}
+      renderComposer={RenderComposer}
       renderSend={renderSend}
       renderAvatar={renderAvatar}
       renderBubble={renderBubble}
@@ -61,12 +65,7 @@ const Chats = () => {
       textInputProps={{
         style: isDark && { backgroundColor: '#2a2a2a', color: '#fff' },
       }}
-      matchers={[
-        {
-          pattern: /#(\w+)/,
-          onPress: (_currentMessage: IMessage, tag: string, _match: Match) => console.log(`Pressed on hashtag: ${tag}`),
-        },
-      ]}
+      keyboardBottomOffset={keyboardBottomOffset}
     />
   )
 }

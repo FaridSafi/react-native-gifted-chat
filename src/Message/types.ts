@@ -1,9 +1,9 @@
 import { ViewStyle, LayoutChangeEvent } from 'react-native'
 import { AvatarProps } from '../Avatar'
-import { SystemMessageProps } from '../SystemMessage'
-import { DayProps } from '../Day'
-import { IMessage, User, LeftRightStyle } from '../types'
 import { BubbleProps } from '../Bubble'
+import { DayProps } from '../Day'
+import { SystemMessageProps } from '../SystemMessage'
+import { IMessage, User, LeftRightStyle } from '../types'
 
 export interface MessageProps<TMessage extends IMessage> {
   showUserAvatar?: boolean

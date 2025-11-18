@@ -8,16 +8,25 @@ import React, {
   RefObject,
 } from 'react'
 import {
+  TextInput,
+  View,
+  LayoutChangeEvent,
+} from 'react-native'
+import {
   ActionSheetProvider,
   ActionSheetProviderRef,
 } from '@expo/react-native-action-sheet'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
-import {
-  TextInput,
-  View,
-  LayoutChangeEvent,
-} from 'react-native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { KeyboardProvider, useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller'
+import Animated, {
+  useAnimatedStyle,
+  useAnimatedReaction,
+  useSharedValue,
+  withTiming,
+  runOnJS,
+} from 'react-native-reanimated'
 import { Actions } from '../Actions'
 import { Avatar } from '../Avatar'
 import Bubble from '../Bubble'
@@ -32,26 +41,17 @@ import Message from '../Message'
 import MessageContainer, { AnimatedList } from '../MessageContainer'
 import { MessageImage } from '../MessageImage'
 import { MessageText } from '../MessageText'
+import { Send } from '../Send'
+import stylesCommon from '../styles'
+import { SystemMessage } from '../SystemMessage'
+import { Time } from '../Time'
 import {
   IMessage,
 } from '../types'
-import { Send } from '../Send'
-import { SystemMessage } from '../SystemMessage'
-import { Time } from '../Time'
-import * as utils from '../utils'
-import Animated, {
-  useAnimatedStyle,
-  useAnimatedReaction,
-  useSharedValue,
-  withTiming,
-  runOnJS,
-  useDerivedValue,
-} from 'react-native-reanimated'
-import { KeyboardProvider, useReanimatedKeyboardAnimation, useWindowDimensions } from 'react-native-keyboard-controller'
-import { GiftedChatProps } from './types'
 
-import stylesCommon from '../styles'
+import * as utils from '../utils'
 import styles from './styles'
+import { GiftedChatProps } from './types'
 
 dayjs.extend(localizedFormat)
 
@@ -116,10 +116,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
     return keyboardControllerData
   }, [disableKeyboardController, keyboardControllerData])
-
-  useDerivedValue(() => {
-    console.log('Keyboard height:', keyboard.height.value)
-  }, [keyboard.height])
 
   const trackingKeyboardMovement = useSharedValue(false)
   const keyboardBottomOffsetAnim = useSharedValue(0)
@@ -282,9 +278,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     [onInputTextChanged, props.text]
   )
 
-  const deviceHeight = useWindowDimensions()
-  console.log('deviceHeight', deviceHeight)
-
   const onInitialLayoutViewLayout = useCallback(
     (e: LayoutChangeEvent) => {
       console.log('onInitialLayoutViewLayout', e.nativeEvent.layout.height)
@@ -428,9 +421,11 @@ function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedC
     return <GiftedChat<TMessage> {...props} />
 
   return (
-    <KeyboardProvider>
-      <GiftedChat<TMessage> {...props} />
-    </KeyboardProvider>
+    <GestureHandlerRootView style={styles.fill}>
+      <KeyboardProvider>
+        <GiftedChat<TMessage> {...props} />
+      </KeyboardProvider>
+    </GestureHandlerRootView>
   )
 }
 

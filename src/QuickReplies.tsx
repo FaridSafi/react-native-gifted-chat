@@ -3,15 +3,15 @@ import {
   Text,
   StyleSheet,
   View,
-  TouchableOpacity,
   StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native'
-import { IMessage, Reply } from './types'
 import Color from './Color'
+import { TouchableOpacity } from './components/TouchableOpacity'
 import { warning } from './logging'
 import stylesCommon from './styles'
+import { IMessage, Reply } from './types'
 
 const styles = StyleSheet.create({
   container: {

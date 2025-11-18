@@ -46,7 +46,7 @@ function processCallbackArguments (args: unknown[]): unknown[] {
   return params
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 export function useCallbackDebounced<T extends (...args: any[]) => any>(callbackFunc: T, deps: React.DependencyList = [], time: number): (...args: Parameters<T>) => void {
   const timeoutId = useRef<ReturnType<typeof setTimeout>>(undefined)
 
@@ -70,7 +70,7 @@ export function useCallbackDebounced<T extends (...args: any[]) => any>(callback
   return savedFunc
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 export function useCallbackThrottled<T extends (...args: any[]) => any>(callbackFunc: T, deps: React.DependencyList = [], time: number): (...args: Parameters<T>) => void {
   const lastExecution = useRef<number>(0)
   const timeoutId = useRef<ReturnType<typeof setTimeout>>(undefined)

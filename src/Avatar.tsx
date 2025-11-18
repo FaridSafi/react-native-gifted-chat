@@ -7,8 +7,8 @@ import {
   ViewStyle,
 } from 'react-native'
 import { GiftedAvatar } from './GiftedAvatar'
-import { isSameUser, isSameDay } from './utils'
 import { IMessage, LeftRightStyle, User } from './types'
+import { isSameUser, isSameDay } from './utils'
 
 interface Styles {
   left: {

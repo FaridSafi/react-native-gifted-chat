@@ -6,19 +6,19 @@ import {
 } from 'react-native'
 
 import { useChatContext } from '../GiftedChatContext'
-import { QuickReplies } from '../QuickReplies'
-import { MessageText } from '../MessageText'
-import { MessageImage } from '../MessageImage'
-import { MessageVideo } from '../MessageVideo'
 import { MessageAudio } from '../MessageAudio'
-import { Time } from '../Time'
-
-import { isSameUser, isSameDay } from '../utils'
-import { IMessage } from '../types'
-import { BubbleProps, RenderMessageTextProps } from './types'
-
+import { MessageImage } from '../MessageImage'
+import { MessageText } from '../MessageText'
+import { MessageVideo } from '../MessageVideo'
+import { QuickReplies } from '../QuickReplies'
 import stylesCommon from '../styles'
+
+import { Time } from '../Time'
+import { IMessage } from '../types'
+import { isSameUser, isSameDay } from '../utils'
+
 import styles from './styles'
+import { BubbleProps, RenderMessageTextProps } from './types'
 
 export * from './types'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleProp, ViewStyle } from 'react-native'
+import { View, Text } from 'react-native'
 import {
   Avatar,
   Bubble,
@@ -90,7 +90,7 @@ interface CustomViewProps {
   user: User
 }
 
-export const renderCustomView = ({ user }: CustomViewProps) => (
+export const renderCustomView: React.FC<CustomViewProps> = ({ user }) => (
   <View style={{ minHeight: 20, alignItems: 'center' }}>
     <Text>
       Current user:

@@ -53,7 +53,6 @@
     "dayjs": "^1.11.19",
     "lodash.isequal": "^4.5.0",
     "react-native-autolink": "^4.2.0",
-    "react-native-communications": "^2.2.1",
     "react-native-lightbox-v2": "^0.9.2"
   },
   "devDependencies": {
@@ -80,16 +79,12 @@
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
     "babel-jest": "^29.7.0",
-    "eslint": "^8.57.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-config-standard-jsx": "^11.0.0",
+    "eslint": "^9.18.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jest": "^28.11.0",
-    "eslint-plugin-json": "^4.0.1",
-    "eslint-plugin-n": "^17.23.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-perfectionist": "^4.15.1",
     "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.1.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "json": "^11.0.0",
@@ -97,6 +92,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-native": "0.81.5",
+    "react-native-gesture-handler": "^2.29.1",
     "react-native-keyboard-controller": "^1.19.5",
     "react-native-reanimated": "^3.19.4",
     "react-test-renderer": "19.1.0",
@@ -105,6 +101,7 @@
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-native": "*",
+    "react-native-gesture-handler": ">=2.0.0",
     "react-native-keyboard-controller": ">=1.0.0",
     "react-native-reanimated": ">=3.0.0 || ^4.0.0"
   },

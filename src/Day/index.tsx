@@ -4,15 +4,15 @@ import {
   View,
 } from 'react-native'
 import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import calendar from 'dayjs/plugin/calendar'
+import relativeTime from 'dayjs/plugin/relativeTime'
 
 import { DATE_FORMAT } from '../Constant'
-import { DayProps } from './types'
-
 import { useChatContext } from '../GiftedChatContext'
+
 import stylesCommon from '../styles'
 import styles from './styles'
+import { DayProps } from './types'
 
 export * from './types'
 

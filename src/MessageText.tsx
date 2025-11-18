@@ -7,8 +7,8 @@ import {
   View,
 } from 'react-native'
 
-import Autolink, { AutolinkProps } from 'react-native-autolink'
 import { Match } from 'autolinker/dist/es2015'
+import Autolink, { AutolinkProps } from 'react-native-autolink'
 import { LeftRightStyle, IMessage } from './types'
 
 export type MessageTextProps<TMessage extends IMessage> = {

@@ -54,7 +54,7 @@ const Message = (props: Props) => {
     }
 
     return null
-  }, [])
+  }, [currentMessage.createdAt, getInnerComponentProps, props])
 
   const renderBubble = useCallback(() => {
     const bubbleProps = getInnerComponentProps()
@@ -63,7 +63,7 @@ const Message = (props: Props) => {
       return props.renderBubble(bubbleProps)
 
     return <Bubble {...bubbleProps} />
-  }, [])
+  }, [getInnerComponentProps, props])
 
   const renderAvatar = useCallback(() => {
     let extraStyle
@@ -87,7 +87,7 @@ const Message = (props: Props) => {
         }}
       />
     )
-  }, [])
+  }, [currentMessage, previousMessage, getInnerComponentProps, props])
 
   const marginBottom = useMemo(() =>
     isSameUser(

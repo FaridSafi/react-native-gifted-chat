@@ -4,9 +4,9 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native'
-import { QuickRepliesProps } from '../QuickReplies'
-import { MessageTextProps, MessageOption } from '../MessageText'
 import { MessageImageProps } from '../MessageImage'
+import { MessageTextProps, MessageOption } from '../MessageText'
+import { QuickRepliesProps } from '../QuickReplies'
 import { TimeProps } from '../Time'
 import {
   User,
@@ -18,7 +18,7 @@ import {
   MessageAudioProps,
 } from '../types'
 
-/* eslint-disable no-use-before-define */
+ 
 export type RenderMessageImageProps<TMessage extends IMessage> = Omit<
   BubbleProps<TMessage>,
   'containerStyle' | 'wrapperStyle'
@@ -42,7 +42,7 @@ export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
   'containerStyle' | 'wrapperStyle' | 'options'
 > &
   MessageTextProps<TMessage>
-/* eslint-enable no-use-before-define */
+ 
 
 export interface BubbleProps<TMessage extends IMessage> {
   user?: User

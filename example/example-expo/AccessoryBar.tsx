@@ -1,13 +1,14 @@
-import { MaterialIcons } from '@expo/vector-icons'
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View, useColorScheme } from 'react-native'
+import { StyleSheet, View, useColorScheme } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
+import { RectButton } from 'react-native-gesture-handler'
 
+import { IMessage, User } from '../../src'
 import {
   getLocationAsync,
   pickImageAsync,
   takePictureAsync,
 } from './mediaUtils'
-import { IMessage, User } from '../../src'
 
 export default function AccessoryBar ({ onSend, isTyping, user }: { onSend: (messages: IMessage[]) => void, isTyping: () => void, user: User }) {
   const colorScheme = useColorScheme()
@@ -15,7 +16,8 @@ export default function AccessoryBar ({ onSend, isTyping, user }: { onSend: (mes
 
   const handlePickImage = async () => {
     const images = await pickImageAsync()
-    if (!images) return
+    if (!images)
+      return
 
     const messages: IMessage[] = images.map(image => ({
       _id: Math.random().toString(36).substring(7),
@@ -29,7 +31,8 @@ export default function AccessoryBar ({ onSend, isTyping, user }: { onSend: (mes
 
   const handleTakePicture = async () => {
     const images = await takePictureAsync()
-    if (!images) return
+    if (!images)
+      return
 
     const messages: IMessage[] = images.map(image => ({
       _id: Math.random().toString(36).substring(7),
@@ -43,7 +46,8 @@ export default function AccessoryBar ({ onSend, isTyping, user }: { onSend: (mes
 
   const handleSendLocation = async () => {
     const location = await getLocationAsync()
-    if (!location) return
+    if (!location)
+      return
 
     const message: IMessage = {
       _id: Math.random().toString(36).substring(7),
@@ -96,9 +100,9 @@ const Button = ({
   color?: string
   name: React.ComponentProps<typeof MaterialIcons>['name']
 }) => (
-  <TouchableOpacity onPress={onPress}>
+  <RectButton onPress={onPress}>
     <MaterialIcons size={size} color={color} name={name} />
-  </TouchableOpacity>
+  </RectButton>
 )
 
 const styles = StyleSheet.create({

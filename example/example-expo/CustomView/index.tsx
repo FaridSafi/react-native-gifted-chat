@@ -1,13 +1,10 @@
 import React, { useCallback } from 'react'
+import { Platform } from 'react-native'
 import * as Linking from 'expo-linking'
-import {
-  Platform,
-  Text,
-  TouchableOpacity,
-} from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
 import MapView from 'react-native-maps'
-import type { CustomViewProps } from './types'
 import { styles } from './styles'
+import type { CustomViewProps } from './types'
 
 const CustomView = ({
   currentMessage,
@@ -40,7 +37,7 @@ const CustomView = ({
 
   if (currentMessage.location)
     return (
-      <TouchableOpacity
+      <RectButton
         style={containerStyle}
         onPress={openMapAsync}
       >
@@ -55,7 +52,7 @@ const CustomView = ({
           scrollEnabled={false}
           zoomEnabled={false}
         />
-      </TouchableOpacity>
+      </RectButton>
     )
 
   return null

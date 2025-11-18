@@ -2,12 +2,12 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { LayoutChangeEvent } from 'react-native'
 import Animated, { interpolate, useAnimatedStyle, useDerivedValue, useSharedValue, useAnimatedReaction, withTiming, runOnJS } from 'react-native-reanimated'
 import { Day } from '../../../Day'
+import stylesCommon from '../../../styles'
 import { isSameDay } from '../../../utils'
 import { useAbsoluteScrolledPositionToBottomOfDay, useRelativeScrolledPositionToBottomOfDay } from '../Item'
-import { DayAnimatedProps } from './types'
 
-import stylesCommon from '../../../styles'
 import styles from './styles'
+import { DayAnimatedProps } from './types'
 
 export * from './types'
 

@@ -6,28 +6,28 @@ import {
   Platform,
   LayoutChangeEvent,
   ListRenderItemInfo,
-  FlatList,
   CellRendererProps,
 } from 'react-native'
+import { FlatList } from 'react-native-gesture-handler'
 import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
-import { ReanimatedScrollEvent } from '../reanimatedCompat'
-import DayAnimated from './components/DayAnimated'
-import Item from './components/Item'
-
 import { LoadEarlier } from '../LoadEarlier'
+import { warning } from '../logging'
+import { ReanimatedScrollEvent } from '../reanimatedCompat'
+
+import stylesCommon from '../styles'
 import { IMessage } from '../types'
 import TypingIndicator from '../TypingIndicator'
-import { MessageContainerProps, DaysPositions } from './types'
-import { ItemProps } from './components/Item/types'
-
-import { warning } from '../logging'
-import stylesCommon from '../styles'
-import styles from './styles'
 import { isSameDay, useCallbackThrottled } from '../utils'
+import DayAnimated from './components/DayAnimated'
+
+import Item from './components/Item'
+import { ItemProps } from './components/Item/types'
+import styles from './styles'
+import { MessageContainerProps, DaysPositions } from './types'
 
 export * from './types'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
 function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {

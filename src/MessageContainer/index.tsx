@@ -3,7 +3,6 @@ import {
   View,
   Pressable,
   Text,
-  Platform,
   LayoutChangeEvent,
   ListRenderItemInfo,
   CellRendererProps,

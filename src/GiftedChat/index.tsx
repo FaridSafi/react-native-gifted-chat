@@ -421,13 +421,13 @@ function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedC
     return <GiftedChat<TMessage> {...props} />
 
   return (
-    <GestureHandlerRootView style={styles.fill}>
-      <SafeAreaProvider>
-        <KeyboardProvider>
+    <KeyboardProvider>
+      <GestureHandlerRootView style={styles.fill}>
+        <SafeAreaProvider>
           <GiftedChat<TMessage> {...props} />
-        </KeyboardProvider>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
+    </KeyboardProvider>
   )
 }
 

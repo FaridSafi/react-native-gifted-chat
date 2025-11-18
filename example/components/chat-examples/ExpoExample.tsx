@@ -63,7 +63,6 @@ export default function ExpoExample () {
       <GiftedChat
         messages={messages}
         onSend={onSend}
-        loadEarlier
         isLoadingEarlier={isLoadingEarlier}
         onLoadEarlier={onLoadEarlier}
         user={user}

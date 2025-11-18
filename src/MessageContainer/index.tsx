@@ -27,7 +27,7 @@ import { MessageContainerProps, DaysPositions } from './types'
 
 export * from './types'
 
- 
+
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
 function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
@@ -38,7 +38,6 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     renderChatEmpty: renderChatEmptyProp,
     onLoadEarlier,
     inverted = true,
-    loadEarlier = false,
     listProps,
     extraData,
     isScrollToBottomEnabled = false,
@@ -83,15 +82,15 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   }, [renderFooterProp, renderTypingIndicator, props])
 
   const renderLoadEarlier = useCallback(() => {
-    if (loadEarlier) {
+    if (onLoadEarlier) {
       if (renderLoadEarlierProp)
-        return renderLoadEarlierProp(props)
+        return renderLoadEarlierProp({ ...props, onLoadEarlier })
 
-      return <LoadEarlier {...props} />
+      return <LoadEarlier {...props} onLoadEarlier={onLoadEarlier} />
     }
 
     return null
-  }, [loadEarlier, renderLoadEarlierProp, props])
+  }, [onLoadEarlier, renderLoadEarlierProp, props])
 
   const changeScrollToBottomVisibility: (isVisible: boolean) => void = useCallbackThrottled((isVisible: boolean) => {
     if (isScrollingDown.value && isVisible)
@@ -291,13 +290,12 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
   const onEndReached = useCallback(() => {
     if (
       infiniteScroll &&
-      loadEarlier &&
       onLoadEarlier &&
       !isLoadingEarlier &&
       Platform.OS !== 'web'
     )
       onLoadEarlier()
-  }, [infiniteScroll, loadEarlier, onLoadEarlier, isLoadingEarlier])
+  }, [infiniteScroll, onLoadEarlier, isLoadingEarlier])
 
   const keyExtractor = useCallback((item: unknown) => (item as TMessage)._id.toString(), [])
 

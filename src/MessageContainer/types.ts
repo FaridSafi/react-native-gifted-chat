@@ -28,8 +28,6 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage>
   listProps?: ListProps<TMessage>
   /** Reverses display order of messages; default is true */
   inverted?: boolean
-  /** Enables the "Load earlier messages" button */
-  loadEarlier?: boolean
   /** Controls whether or not the message bubbles appear at the top of the chat */
   alignTop?: boolean
   /** Enables the isScrollToBottomEnabled Component */

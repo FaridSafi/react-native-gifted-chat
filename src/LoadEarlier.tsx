@@ -49,12 +49,12 @@ export interface LoadEarlierProps {
   activityIndicatorStyle?: StyleProp<ViewStyle>
   activityIndicatorColor?: string
   activityIndicatorSize?: number | 'small' | 'large'
-  onLoadEarlier?(): void
+  onLoadEarlier: () => void
 }
 
 export const LoadEarlier: React.FC<LoadEarlierProps> = ({
   isLoadingEarlier = false,
-  onLoadEarlier = () => {},
+  onLoadEarlier,
   label = 'Load earlier messages',
   containerStyle,
   wrapperStyle,

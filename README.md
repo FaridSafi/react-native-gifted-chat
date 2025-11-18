@@ -26,10 +26,7 @@
 </p>
 
 <p align="center">
-  <a href="https://reverent-bardeen-47c862.netlify.com/" target="_blank">Demo Web 🖥</a>
-</p>
-<p align="center">
-  <a href="https://snack.expo.io/@xcarpentier/giftedchat-playground" target="_blank">Snack GiftedChat playground</a>
+  <a href="https://snack.expo.dev/@kesha-antonov/gifted-chat-playground" target="_blank">Snack GiftedChat playground</a>
   <img height="18" src="https://snack.expo.io/favicon.ico" />
 </p>
 
@@ -371,8 +368,7 @@ interface QuickReplies {
 - **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'D MMMM'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`dateFormatCalendar`** _(Object)_ - Format to use for rendering relative times; default is `{ sameDay: '[Today]' }` (see [Day.js Calendar](https://day.js.org/docs/en/plugin/calendar))
-- **`loadEarlier`** _(Bool)_ - Enables the "load earlier messages" button, required for `infiniteScroll`
-- **`onLoadEarlier`** _(Function)_ - Callback when loading earlier messages
+- **`onLoadEarlier`** _(Function)_ - Callback when loading earlier messages. When provided, displays "Load earlier messages" button
 - **`isLoadingEarlier`** _(Bool)_ - Display an `ActivityIndicator` when loading earlier messages
 - **`renderLoading`** _(Function)_ - Render a loading view when initializing
 - **`renderLoadEarlier`** _(Function)_ - Custom "Load earlier messages" button
@@ -459,7 +455,7 @@ Example:
 * **`quickReplyStyle`** _(StyleProp<ViewStyle>)_ - Custom quick reply view style
 * **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
 * **`shouldUpdateMessage`** _(Function)_ - Lets the message component know when to update outside of normal cases.
-* **`infiniteScroll`** _(Bool)_ - infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist (not yet supported for the web). You need to add `loadEarlier` prop too.
+* **`infiniteScroll`** _(Bool)_ - infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if it exists (not yet supported for the web).
 * **`typingIndicatorStyle`** _(StyleProp<ViewStyle>)_ - Custom style for the TypingIndicator component.
 
 ## Notes for [Redux](https://github.com/reactjs/redux)

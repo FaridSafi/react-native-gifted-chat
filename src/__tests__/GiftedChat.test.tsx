@@ -36,7 +36,7 @@ it('should render <GiftedChat/> and compare with snapshot', () => {
   expect(toJSON()).toMatchSnapshot()
 })
 
-it('should render <GiftedChat/> with disableKeyboardController=true', () => {
+it('should render <GiftedChat/> with isKeyboardInternallyHandled=false', () => {
   (useReanimatedKeyboardAnimation as jest.Mock).mockReturnValue({
     height: {
       value: 0,
@@ -50,7 +50,7 @@ it('should render <GiftedChat/> with disableKeyboardController=true', () => {
       user={{
         _id: 1,
       }}
-      disableKeyboardController={true}
+      isKeyboardInternallyHandled={false}
     />
   )
 

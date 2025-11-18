@@ -27,7 +27,7 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
 </KeyboardProvider>
 `;
 
-exports[`should render <GiftedChat/> with disableKeyboardController=true 1`] = `
+exports[`should render <GiftedChat/> with isKeyboardInternallyHandled=false 1`] = `
 <View
   style={
     {

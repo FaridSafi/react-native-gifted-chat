@@ -85,7 +85,6 @@
 
 ## Features
 
-- Write with **TypeScript**
 - Fully customizable components
 - Composer actions (to attach photos, etc.)
 - Load earlier messages
@@ -172,9 +171,15 @@ fireEvent(loadingWrapper, 'layout', {
 ```jsx
 import React, { useState, useCallback, useEffect } from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export function Example() {
   const [messages, setMessages] = useState([])
+  const insets = useSafeAreaInsets()
+
+  // If you have a tab bar, include its height
+  const tabbarHeight = 50
+  const keyboardBottomOffset = insets.bottom + tabbarHeight
 
   useEffect(() => {
     setMessages([
@@ -204,6 +209,7 @@ export function Example() {
       user={{
         _id: 1,
       }}
+      keyboardBottomOffset={keyboardBottomOffset}
     />
   )
 }

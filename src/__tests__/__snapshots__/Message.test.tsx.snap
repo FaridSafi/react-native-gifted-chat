@@ -100,7 +100,6 @@ exports[`Message component should render <Message /> and compare with snapshot 1
                 }
               >
                 <Text
-                  link={true}
                   style={
                     [
                       {
@@ -306,7 +305,6 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
                 }
               >
                 <Text
-                  link={true}
                   showUserAvatar={true}
                   style={
                     [
@@ -474,7 +472,6 @@ exports[`Message component should render null if user has no Avatar 1`] = `
                 }
               >
                 <Text
-                  link={true}
                   showUserAvatar={true}
                   style={
                     [

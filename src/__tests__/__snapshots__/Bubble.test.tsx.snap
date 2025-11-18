@@ -77,7 +77,6 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
             }
           >
             <Text
-              link={true}
               style={
                 [
                   {

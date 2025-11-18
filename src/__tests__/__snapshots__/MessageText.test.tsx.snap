@@ -15,7 +15,6 @@ exports[`should render <MessageText /> and compare with snapshot 1`] = `
   }
 >
   <Text
-    link={true}
     style={
       [
         {

@@ -191,7 +191,7 @@ Check out code of [`examples`](example)
 
 ## Data structure
 
-Messages, system messages, quick replies etc.: [data structure](src/types.ts)
+Messages, system messages, quick replies etc.: [data structure](src/Models.ts)
 
 ## Props
 
@@ -259,7 +259,7 @@ Messages, system messages, quick replies etc.: [data structure](src/types.ts)
 - **`isCustomViewBottom`** _(Bool)_ - Determine whether renderCustomView is displayed before or after the text, image and video views; default is `false`
 - **`renderTicks`** _(Component | Function(`message`))_ - Custom ticks indicator to display message status
 - **`onPressMessage`** _(Function(`context`, `message`))_ - Callback when a message bubble is pressed
-- **`onLongPressMessage`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
+- **`onLongPressMessage`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; you can use this to show action sheets (e.g., copy, delete, reply)
 - **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://reactnative.dev/docs/image.html) component created by the default `renderMessageImage`
 - **`imageStyle`** _(Object)_ - Custom style for message images
 - **`videoProps`** _(Object)_ - Extra props to be passed to the video component created by the required `renderMessageVideo`
@@ -368,7 +368,7 @@ See full example in [LinksExample](example/components/chat-examples/LinksExample
 - **`isTyping`** _(Bool)_ - Typing Indicator state; default `false`. If you use`renderFooter` it will override this.
 - **`renderTypingIndicator`** _(Component | Function)_ - Custom typing indicator component
 - **`typingIndicatorStyle`** _(StyleProp<ViewStyle>)_ - Custom style for the TypingIndicator component.
-- **`renderFooter`** _(Component | Function)_ - Custom footer component on the ListView, e.g. `'User is typing...'`; see [App.tsx](/example/App.tsx) for an example. Overrides default typing indicator that triggers when `isTyping` is true.
+- **`renderFooter`** _(Component | Function)_ - Custom footer component on the ListView, e.g. `'User is typing...'`; see [CustomizedFeaturesExample.tsx](example/components/chat-examples/CustomizedFeaturesExample.tsx) for an example. Overrides default typing indicator that triggers when `isTyping` is true.
 
 ### Quick Replies
 

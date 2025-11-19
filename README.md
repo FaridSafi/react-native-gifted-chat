@@ -458,8 +458,6 @@ Example:
 />
 ```
 
-- **`matchers`** _(Array)_ - **Deprecated:** Use `messageTextProps.matchers` instead. Custom matchers for [react-native-autolink](https://github.com/joshswan/react-native-autolink) used to linking message content (like URLs and phone numbers).
-
 - **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.

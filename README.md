@@ -437,26 +437,53 @@ interface QuickReplies {
 
 Example:
 
-```js
+```tsx
 <GiftedChat
   messageTextProps={{
+    phone: false, // Disable default phone number linking
     matchers: [
       {
-        pattern: /#(\w+)/g,
-        style: { color: '#0084ff', fontWeight: 'bold' },
-        onPress: (match) => console.log('Hashtag:', match.getAnchorText()),
-      },
-      {
-        pattern: /(?<![\.\w])@(?!__ELEMENT-)([\w-]+)/g,
-        style: { color: '#0084ff', fontWeight: 'bold' },
-        onPress: (match) => console.log('Mention:', match.getAnchorText()),
+        type: 'phone',
+        pattern: /\+?[1-9][0-9\-\(\) ]{7,}[0-9]/g,
+        getLinkUrl: (replacerArgs: ReplacerArgs): string => {
+          return replacerArgs[0].replace(/[\-\(\) ]/g, '')
+        },
+        getLinkText: (replacerArgs: ReplacerArgs): string => {
+          return replacerArgs[0]
+        },
+        style: styles.linkStyle,
+        onPress: (match: CustomMatch) => {
+          const url = match.getAnchorHref()
+
+          const options: {
+            title: string
+            action?: () => void
+          }[] = [
+            { title: 'Copy', action: () => setStringAsync(url) },
+            { title: 'Call', action: () => Linking.openURL(`tel:${url}`) },
+            { title: 'Send SMS', action: () => Linking.openURL(`sms:${url}`) },
+            { title: 'Cancel' },
+          ]
+
+          showActionSheetWithOptions({
+            options: options.map(o => o.title),
+            cancelButtonIndex: options.length - 1,
+          }, (buttonIndex?: number) => {
+            if (buttonIndex === undefined)
+              return
+
+            const option = options[buttonIndex]
+            option.action?.()
+          })
+        },
       },
     ],
     linkStyle: { left: { color: 'blue' }, right: { color: 'lightblue' } },
-    phone: false,
   }}
 />
 ```
+
+See full example in [LinksExample](example/components/chat-examples/LinksExample.tsx)
 
 - **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.

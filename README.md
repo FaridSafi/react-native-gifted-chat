@@ -136,34 +136,7 @@ npx pod-install
 
 Follow guide: [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/#step-2-add-reanimateds-babel-plugin)
 
-## Testing
-`TEST_ID` is exported as constants that can be used in your testing library of choice
-
-Gifted Chat uses `onLayout` to determine the height of the chat container. To trigger `onLayout` during your tests, you can run the following bits of code.
-
-```typescript
-const WIDTH = 200; // or any number
-const HEIGHT = 2000; // or any number
-
-const loadingWrapper = getByTestId(TEST_ID.LOADING_WRAPPER)
-fireEvent(loadingWrapper, 'layout', {
-  nativeEvent: {
-    layout: {
-      width: WIDTH,
-      height: HEIGHT,
-    },
-  },
-})
-```
-
-## You have a question?
-
-1. Please check this readme and may find a response
-1. Please ask on StackOverflow first: https://stackoverflow.com/questions/tagged/react-native-gifted-chat
-1. Find response on existing issues
-1. Try to keep issues for issues
-
-## Example
+## Simple example
 
 ```jsx
 import React, { useState, useCallback, useEffect } from 'react'
@@ -212,143 +185,13 @@ export function Example() {
 }
 ```
 
-## Advanced example
+## Different examples
 
-See [`examples`](example) for a working demo!
+Check out code of [`examples`](example)
 
-## "Slack" example
+## Data structure
 
-See the files in [`example/example-slack-message`](example/example-slack-message) for an example of how to override the default UI to make something that looks more like Slack -- with usernames displayed and all messages on the left.
-
-## Message object
-
-> e.g. Chat Message
-
-```ts
-export interface IMessage {
-  _id: string | number
-  text: string
-  createdAt: Date | number
-  user: User
-  image?: string
-  video?: string
-  audio?: string
-  system?: boolean
-  sent?: boolean
-  received?: boolean
-  pending?: boolean
-  quickReplies?: QuickReplies
-}
-```
-
-```js
-{
-  _id: 1,
-  text: 'My message',
-  createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
-  user: {
-    _id: 2,
-    name: 'React Native',
-    avatar: 'https://facebook.github.io/react/img/logo_og.png',
-  },
-  image: 'https://facebook.github.io/react/img/logo_og.png',
-  // You can also add a video prop:
-  video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-  // Mark the message as sent, using one tick
-  sent: true,
-  // Mark the message as received, using two tick
-  received: true,
-  // Mark the message as pending with a clock loader
-  pending: true,
-  // Any additional custom parameters are passed through
-}
-```
-
-> e.g. System Message
-
-```js
-{
-  _id: 1,
-  text: 'This is a system message',
-  createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
-  system: true,
-  // Any additional custom parameters are passed through
-}
-```
-
-> e.g. Chat Message with Quick Reply options
-
-See PR [#1211](https://github.com/FaridSafi/react-native-gifted-chat/pull/1211)
-
-```ts
-interface Reply {
-  title: string
-  value: string
-  messageId?: number | string
-}
-
-interface QuickReplies {
-  type: 'radio' | 'checkbox'
-  values: Reply[]
-  keepIt?: boolean
-}
-```
-
-```js
-  {
-    _id: 1,
-    text: 'This is a quick reply. Do you love Gifted Chat? (radio) KEEP IT',
-    createdAt: new Date(),
-    quickReplies: {
-      type: 'radio', // or 'checkbox',
-      keepIt: true,
-      values: [
-        {
-          title: '😋 Yes',
-          value: 'yes',
-        },
-        {
-          title: '📷 Yes, let me show you with a picture!',
-          value: 'yes_picture',
-        },
-        {
-          title: '😞 Nope. What?',
-          value: 'no',
-        },
-      ],
-    },
-    user: {
-      _id: 2,
-      name: 'React Native',
-    },
-  },
-  {
-    _id: 2,
-    text: 'This is a quick reply. Do you love Gifted Chat? (checkbox)',
-    createdAt: new Date(),
-    quickReplies: {
-      type: 'checkbox', // or 'radio',
-      values: [
-        {
-          title: 'Yes',
-          value: 'yes',
-        },
-        {
-          title: 'Yes, let me show you with a picture!',
-          value: 'yes_picture',
-        },
-        {
-          title: 'Nope. What?',
-          value: 'no',
-        },
-      ],
-    },
-    user: {
-      _id: 2,
-      name: 'React Native',
-    },
-  }
-```
+Messages, system messages, quick replies etc.: [data structure](src/types.ts)
 
 ## Props
 
@@ -529,6 +372,8 @@ See full example in [LinksExample](example/components/chat-examples/LinksExample
 
 ### Quick Replies
 
+See [Quick Replies example in messages.ts](example/example-expo/data/messages.ts)
+
 - **`onQuickReply`** _(Function)_ - Callback when sending a quick reply (to backend server)
 - **`renderQuickReplies`** _(Function)_ - Custom all quick reply view
 - **`quickReplyStyle`** _(StyleProp<ViewStyle>)_ - Custom quick reply view style
@@ -626,6 +471,26 @@ module.exports = function override(config, env) {
 
 > Another example with **Gatsby** : [xcarpentier/clean-archi-boilerplate](https://github.com/xcarpentier/clean-archi-boilerplate/tree/develop/apps/web)
 
+## Testing
+`TEST_ID` is exported as constants that can be used in your testing library of choice
+
+Gifted Chat uses `onLayout` to determine the height of the chat container. To trigger `onLayout` during your tests, you can run the following bits of code.
+
+```typescript
+const WIDTH = 200; // or any number
+const HEIGHT = 2000; // or any number
+
+const loadingWrapper = getByTestId(TEST_ID.LOADING_WRAPPER)
+fireEvent(loadingWrapper, 'layout', {
+  nativeEvent: {
+    layout: {
+      width: WIDTH,
+      height: HEIGHT,
+    },
+  },
+})
+```
+
 ## Questions
 
 - [How can I set Bubble color for each user?](https://github.com/FaridSafi/react-native-gifted-chat/issues/672)
@@ -637,6 +502,13 @@ module.exports = function override(config, env) {
 - [Why TextInput is hidden on Android?](https://github.com/FaridSafi/react-native-gifted-chat/issues/680#issuecomment-359699364)
 - [How to use renderLoading?](https://github.com/FaridSafi/react-native-gifted-chat/issues/298)
 - [Can I use MySql to save the message?](https://github.com/FaridSafi/react-native-gifted-chat/issues/738)
+
+## You have a question?
+
+1. Please check this readme and may find a response
+1. Please ask on StackOverflow first: https://stackoverflow.com/questions/tagged/react-native-gifted-chat
+1. Find response on existing issues
+1. Try to keep issues for issues
 
 ## License
 

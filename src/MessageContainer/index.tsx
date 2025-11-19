@@ -37,7 +37,6 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
     renderChatEmpty: renderChatEmptyProp,
     inverted = true,
     listProps,
-    extraData,
     isScrollToBottomEnabled = false,
     scrollToBottomOffset = 200,
     alignTop = false,
@@ -47,10 +46,11 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
     renderFooter: renderFooterProp,
     renderLoadEarlier: renderLoadEarlierProp,
     forwardRef,
-    handleOnScroll: handleOnScrollProp,
     scrollToBottomComponent: scrollToBottomComponentProp,
     renderDay: renderDayProp,
   } = props
+
+  const listPropsOnScrollProp = listProps?.onScroll
 
   const scrollToBottomOpacity = useSharedValue(0)
   const isScrollingDown = useSharedValue(false)
@@ -118,7 +118,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
   }, [forwardRef, inverted, scrollTo, isScrollingDown, changeScrollToBottomVisibility])
 
   const handleOnScroll = useCallback((event: ReanimatedScrollEvent) => {
-    handleOnScrollProp?.(event)
+    listPropsOnScrollProp?.(event as any)
 
     const {
       contentOffset: { y: contentOffsetY },
@@ -144,7 +144,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
       changeScrollToBottomVisibility(false)
     else
       changeScrollToBottomVisibility(false)
-  }, [handleOnScrollProp, inverted, scrollToBottomOffset, changeScrollToBottomVisibility, isScrollingDown, lastScrolledY])
+  }, [inverted, scrollToBottomOffset, changeScrollToBottomVisibility, isScrollingDown, lastScrolledY, listPropsOnScrollProp])
 
   const restProps = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -385,7 +385,6 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
       ]}
     >
       <AnimatedFlatList
-        extraData={extraData}
         ref={forwardRef}
         keyExtractor={keyExtractor}
         data={messages}
@@ -400,11 +399,11 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
         ListHeaderComponent={
           inverted ? ListFooterComponent : ListHeaderComponent
         }
-        onScroll={scrollHandler}
         scrollEventThrottle={1}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
         {...listProps}
+        onScroll={scrollHandler}
         onLayout={onLayoutList}
         CellRendererComponent={renderCell}
       />

@@ -485,7 +485,6 @@ Example:
 
 See full example in [LinksExample](example/components/chat-examples/LinksExample.tsx)
 
-- **`extraData`** _(Object)_ - Extra props for re-rendering FlatList on demand. This will be useful for rendering footer etc.
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
 
@@ -500,9 +499,7 @@ See full example in [LinksExample](example/components/chat-examples/LinksExample
 * **`quickReplyTextStyle`** _(StyleProp<TextStyle>)_ - Custom text style for quick reply buttons
 * **`quickReplyContainerStyle`** _(StyleProp<ViewStyle>)_ - Custom container style for quick replies
 * **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
-* **`shouldUpdateMessage`** _(Function)_ - Lets the message component know when to update outside of normal cases.
 * **`typingIndicatorStyle`** _(StyleProp<ViewStyle>)_ - Custom style for the TypingIndicator component.
-* **`handleOnScroll`** _(Function)_ - Custom scroll event handler for the message list
 
 ## Notes for [Redux](https://github.com/reactjs/redux)
 

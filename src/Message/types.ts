@@ -18,9 +18,5 @@ export interface MessageProps<TMessage extends IMessage> {
   renderDay?(props: DayProps): React.ReactNode
   renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode
   renderAvatar?(props: AvatarProps<TMessage>): React.ReactNode
-  shouldUpdateMessage?(
-    props: MessageProps<IMessage>,
-    nextProps: MessageProps<IMessage>,
-  ): boolean
   onMessageLayout?(event: LayoutChangeEvent): void
 }

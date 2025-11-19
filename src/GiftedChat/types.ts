@@ -149,8 +149,4 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
     quickReplies: QuickRepliesProps<TMessage>,
   ): React.ReactNode
   renderQuickReplySend?(): React.ReactNode
-  shouldUpdateMessage?(
-    props: MessageProps<TMessage>,
-    nextProps: MessageProps<TMessage>,
-  ): boolean
 }

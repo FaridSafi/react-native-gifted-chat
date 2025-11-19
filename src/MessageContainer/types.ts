@@ -34,8 +34,6 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage>
   isScrollToBottomEnabled?: boolean
   /** Scroll to bottom wrapper style */
   scrollToBottomStyle?: StyleProp<ViewStyle>
-  /** This can be used to pass unknown data which needs to be re-rendered */
-  extraData?: object
   /** Distance from bottom before showing scroll to bottom button */
   scrollToBottomOffset?: number
   /** Custom component to render when messages are empty */
@@ -56,8 +54,6 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage>
   onQuickReply?(replies: Reply[]): void
   /** Props to pass to the LoadEarlierMessages component. The LoadEarlierMessages button is only visible when isAvailable is true. Includes isAvailable (controls button visibility), isInfiniteScrollEnabled (infinite scroll up when reach the top of messages container, automatically call onPress function if it exists - not yet supported for web), onPress (callback when button is pressed), isLoading (display loading indicator), label (override default "Load earlier messages" text), and styling props (containerStyle, wrapperStyle, textStyle, activityIndicatorStyle, activityIndicatorColor, activityIndicatorSize). */
   loadEarlierMessagesProps?: LoadEarlierMessagesProps
-  /** Custom scroll event handler */
-  handleOnScroll?(event: ReanimatedScrollEvent): void
   /** Style for TypingIndicator component */
   typingIndicatorStyle?: StyleProp<ViewStyle>
 }

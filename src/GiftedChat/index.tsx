@@ -28,29 +28,15 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { Actions } from '../Actions'
-import { Avatar } from '../Avatar'
-import Bubble from '../Bubble'
-import { Composer } from '../Composer'
 import { MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TEST_ID } from '../Constant'
-import { Day } from '../Day'
-import { GiftedAvatar } from '../GiftedAvatar'
 import { GiftedChatContext } from '../GiftedChatContext'
 import { InputToolbar } from '../InputToolbar'
-import { LoadEarlierMessages } from '../LoadEarlierMessages'
-import Message from '../Message'
 import MessageContainer, { AnimatedList } from '../MessageContainer'
-import { MessageImage } from '../MessageImage'
-import { MessageText } from '../MessageText'
-import { Send } from '../Send'
 import stylesCommon from '../styles'
-import { SystemMessage } from '../SystemMessage'
-import { Time } from '../Time'
 
 import {
   IMessage,
 } from '../types'
-import * as utils from '../utils'
 import styles from './styles'
 import { GiftedChatProps } from './types'
 
@@ -452,24 +438,6 @@ GiftedChatWrapper.prepend = <TMessage extends IMessage>(
     : messages.concat(currentMessages)
 }
 
-export * from '../types'
-
 export {
-  GiftedChatWrapper as GiftedChat,
-  Actions,
-  Avatar,
-  Bubble,
-  SystemMessage,
-  MessageImage,
-  MessageText,
-  Composer,
-  Day,
-  InputToolbar,
-  LoadEarlierMessages,
-  Message,
-  MessageContainer,
-  Send,
-  Time,
-  GiftedAvatar,
-  utils
+  GiftedChatWrapper as GiftedChat
 }

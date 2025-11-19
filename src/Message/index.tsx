@@ -3,9 +3,8 @@ import { View } from 'react-native'
 
 import { Avatar } from '../Avatar'
 import { Bubble } from '../Bubble'
+import { IMessage } from '../Models'
 import { SystemMessage } from '../SystemMessage'
-
-import { IMessage } from '../types'
 import { isSameUser, renderComponentOrElement } from '../utils'
 import styles from './styles'
 import { MessageProps } from './types'

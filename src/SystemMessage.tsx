@@ -8,8 +8,8 @@ import {
 } from 'react-native'
 import { Color } from './Color'
 import { MessageText } from './MessageText'
+import { IMessage } from './Models'
 import stylesCommon from './styles'
-import { IMessage } from './types'
 
 export interface SystemMessageProps<TMessage extends IMessage> {
   currentMessage: TMessage

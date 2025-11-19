@@ -6,8 +6,6 @@ import {
 } from 'react-native'
 import { MessageImageProps } from '../MessageImage'
 import { MessageTextProps } from '../MessageText'
-import { QuickRepliesProps } from '../QuickReplies'
-import { TimeProps } from '../Time'
 import {
   User,
   IMessage,
@@ -16,7 +14,9 @@ import {
   Omit,
   MessageVideoProps,
   MessageAudioProps,
-} from '../types'
+} from '../Models'
+import { QuickRepliesProps } from '../QuickReplies'
+import { TimeProps } from '../Time'
 
 
 export type RenderMessageImageProps<TMessage extends IMessage> = Omit<

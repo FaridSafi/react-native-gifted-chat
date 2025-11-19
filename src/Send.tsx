@@ -12,7 +12,7 @@ import { Color } from './Color'
 
 import { TouchableOpacity, TouchableOpacityProps } from './components/TouchableOpacity'
 import { TEST_ID } from './Constant'
-import { IMessage } from './types'
+import { IMessage } from './Models'
 
 const styles = StyleSheet.create({
   container: {

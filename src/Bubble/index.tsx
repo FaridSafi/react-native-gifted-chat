@@ -10,11 +10,11 @@ import { MessageAudio } from '../MessageAudio'
 import { MessageImage } from '../MessageImage'
 import { MessageText } from '../MessageText'
 import { MessageVideo } from '../MessageVideo'
+import { IMessage } from '../Models'
 import { QuickReplies } from '../QuickReplies'
 import stylesCommon from '../styles'
 
 import { Time } from '../Time'
-import { IMessage } from '../types'
 import { isSameUser, isSameDay, renderComponentOrElement } from '../utils'
 
 import styles from './styles'

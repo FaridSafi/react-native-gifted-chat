@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react'
 import dayjs from 'dayjs'
-import { IMessage } from './types'
+import { IMessage } from './Models'
 
 export function renderComponentOrElement<TProps extends Record<string, any>>(
   component: React.ComponentType<TProps> | React.ReactElement | ((props: TProps) => React.ReactNode) | null | undefined,

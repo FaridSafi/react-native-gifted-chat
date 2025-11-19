@@ -1,5 +1,5 @@
 import { DayProps } from '../../../Day'
-import { IMessage } from '../../../types'
+import { IMessage } from '../../../Models'
 import { DaysPositions } from '../../types'
 
 export interface DayAnimatedProps extends Omit<DayProps, 'createdAt'> {

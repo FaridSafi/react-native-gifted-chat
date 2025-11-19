@@ -16,8 +16,8 @@ import {
 import { BaseButton, GestureHandlerRootView, Text } from 'react-native-gesture-handler'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Zoom from 'react-native-zoom-reanimated'
+import { IMessage } from './Models'
 import commonStyles from './styles'
-import { IMessage } from './types'
 
 const styles = StyleSheet.create({
   image: {

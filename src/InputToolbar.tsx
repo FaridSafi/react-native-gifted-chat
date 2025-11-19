@@ -4,8 +4,8 @@ import { StyleSheet, View, StyleProp, ViewStyle, useColorScheme } from 'react-na
 import { Actions, ActionsProps } from './Actions'
 import { Color } from './Color'
 import { Composer, ComposerProps } from './Composer'
+import { IMessage } from './Models'
 import { Send, SendProps } from './Send'
-import { IMessage } from './types'
 import { renderComponentOrElement } from './utils'
 
 export interface InputToolbarProps<TMessage extends IMessage> {

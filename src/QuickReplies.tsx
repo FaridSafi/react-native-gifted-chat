@@ -10,8 +10,8 @@ import {
 import { Color } from './Color'
 import { TouchableOpacity } from './components/TouchableOpacity'
 import { warning } from './logging'
+import { IMessage, Reply } from './Models'
 import stylesCommon from './styles'
-import { IMessage, Reply } from './types'
 
 const styles = StyleSheet.create({
   container: {

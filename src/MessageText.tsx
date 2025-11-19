@@ -9,7 +9,7 @@ import {
 
 import { Match } from 'autolinker/dist/es2015'
 import Autolink, { AutolinkProps } from 'react-native-autolink'
-import { LeftRightStyle, IMessage } from './types'
+import { LeftRightStyle, IMessage } from './Models'
 
 export type MessageTextProps<TMessage extends IMessage> = {
   position?: 'left' | 'right'

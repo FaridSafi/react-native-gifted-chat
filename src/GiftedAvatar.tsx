@@ -10,8 +10,8 @@ import {
 } from 'react-native'
 import { Color } from './Color'
 import { TouchableOpacity } from './components/TouchableOpacity'
+import { User } from './Models'
 import stylesCommon from './styles'
-import { User } from './types'
 
 const {
   carrot,

@@ -6,10 +6,10 @@ import {
 } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 
+import { DayProps } from '../Day'
 import { LoadEarlierMessagesProps } from '../LoadEarlierMessages'
 import { MessageProps } from '../Message'
-import { ReanimatedScrollEvent } from '../reanimatedCompat'
-import { User, IMessage, Reply, DayProps } from '../types'
+import { User, IMessage, Reply } from '../Models'
 import { TypingIndicatorProps } from '../TypingIndicator/types'
 
 export type ListProps<TMessage extends IMessage = IMessage> = Partial<FlatListProps<TMessage>>

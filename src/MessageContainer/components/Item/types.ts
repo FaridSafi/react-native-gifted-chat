@@ -1,4 +1,4 @@
-import { IMessage } from '../../../types'
+import { IMessage } from '../../../Models'
 import { MessageContainerProps, DaysPositions } from '../../types'
 
 export interface ItemProps<TMessage extends IMessage> extends MessageContainerProps<TMessage> {

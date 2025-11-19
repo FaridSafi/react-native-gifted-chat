@@ -32,10 +32,8 @@ import { MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TEST_ID } from '../Constant'
 import { GiftedChatContext } from '../GiftedChatContext'
 import { InputToolbar } from '../InputToolbar'
 import { MessageContainer, AnimatedList } from '../MessageContainer'
+import { IMessage } from '../Models'
 import stylesCommon from '../styles'
-import {
-  IMessage,
-} from '../types'
 import { renderComponentOrElement } from '../utils'
 import styles from './styles'
 import { GiftedChatProps } from './types'

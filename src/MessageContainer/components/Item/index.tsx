@@ -1,8 +1,8 @@
-import React, { forwardRef, useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { LayoutChangeEvent, View } from 'react-native'
 import Animated, { interpolate, useAnimatedStyle, useDerivedValue, useSharedValue } from 'react-native-reanimated'
 import { Day } from '../../../Day'
-import Message, { MessageProps } from '../../../Message'
+import { Message,MessageProps } from '../../../Message'
 import { IMessage } from '../../../types'
 import { isSameDay } from '../../../utils'
 import { DaysPositions } from '../../types'
@@ -68,7 +68,7 @@ export const useRelativeScrolledPositionToBottomOfDay = (
   return relativeScrolledPositionToBottomOfDay
 }
 
-const DayWrapper = forwardRef<View, MessageProps<IMessage>>((props, ref) => {
+const DayWrapper = <TMessage extends IMessage>(props: MessageProps<TMessage>) => {
   const {
     renderDay: renderDayProp,
     currentMessage,
@@ -87,7 +87,7 @@ const DayWrapper = forwardRef<View, MessageProps<IMessage>>((props, ref) => {
   } = props
 
   return (
-    <View ref={ref}>
+    <View>
       {
         renderDayProp
           ? renderDayProp({ ...rest, createdAt: currentMessage.createdAt })
@@ -95,9 +95,9 @@ const DayWrapper = forwardRef<View, MessageProps<IMessage>>((props, ref) => {
       }
     </View>
   )
-})
+}
 
-const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
+export const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
   const {
     renderMessage: renderMessageProp,
     scrolledY,
@@ -146,15 +146,13 @@ const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
         style={style}
         onLayout={handleLayoutDayContainer}
       >
-        <DayWrapper {...rest as MessageProps<TMessage>} />
+        <DayWrapper<TMessage> {...rest as MessageProps<TMessage>} />
       </Animated.View>
       {
         renderMessageProp
           ? renderMessageProp(rest as MessageProps<TMessage>)
-          : <Message {...rest as MessageProps<TMessage>} />
+          : <Message<TMessage> {...rest as MessageProps<TMessage>} />
       }
     </View>
   )
 }
-
-export default Item

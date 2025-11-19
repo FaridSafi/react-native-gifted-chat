@@ -1,6 +1,6 @@
 export * from './GiftedChat'
 export * from './Constant'
-export * from './utils'
+export * as utils from './utils'
 export * from './GiftedChatContext'
 export * from './types'
 export * from './Actions'

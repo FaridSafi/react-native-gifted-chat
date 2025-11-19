@@ -11,7 +11,7 @@ import { DayAnimatedProps } from './types'
 
 export * from './types'
 
-const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages, isLoading, ...rest }: DayAnimatedProps) => {
+export const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages, isLoading, ...rest }: DayAnimatedProps) => {
   const opacity = useSharedValue(0)
   const fadeOutOpacityTimeoutId = useSharedValue<ReturnType<typeof setTimeout> | undefined>(undefined)
   const containerHeight = useSharedValue(0)
@@ -145,5 +145,3 @@ const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages
     </Animated.View>
   )
 }
-
-export default DayAnimated

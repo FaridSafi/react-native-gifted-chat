@@ -129,8 +129,8 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   renderTime?(props: TimeProps<TMessage>): React.ReactNode
   /* Custom component to render below the MessageContainer (separate from the ListView) */
   renderChatFooter?(): React.ReactNode
-  /* Custom message composer container */
-  renderInputToolbar?(props: InputToolbarProps<TMessage>): React.ReactNode
+  /* Custom message composer container. Can be a component, element, render function, or null */
+  renderInputToolbar?: React.ComponentType<InputToolbarProps<TMessage>> | React.ReactElement | ((props: InputToolbarProps<TMessage>) => React.ReactNode) | null
   /*  Custom text input message composer */
   renderComposer?(props: ComposerProps): React.ReactNode
   /* Custom action button on the left of the message composer */

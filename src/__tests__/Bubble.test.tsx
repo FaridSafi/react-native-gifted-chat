@@ -1,18 +1,14 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
 
-import { Bubble } from '../GiftedChat'
+import { Bubble } from '..'
+import { DEFAULT_TEST_MESSAGE } from './data'
 
 it('should render <Bubble /> and compare with snapshot', () => {
   const { toJSON } = render(
     <Bubble
       user={{ _id: 1 }}
-      currentMessage={{
-        _id: 1,
-        text: 'test',
-        createdAt: 1554744013721,
-        user: { _id: 1 },
-      }}
+      currentMessage={DEFAULT_TEST_MESSAGE}
       position='left'
     />
   )

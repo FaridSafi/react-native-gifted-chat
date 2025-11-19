@@ -6,7 +6,7 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native'
-import Color from './Color'
+import { Color } from './Color'
 import { MessageText } from './MessageText'
 import stylesCommon from './styles'
 import { IMessage } from './types'

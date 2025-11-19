@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
 
-import { Send } from '../GiftedChat'
+import { Send } from '..'
 
 describe('Send', () => {
   it('should not render <Send /> and compare with snapshot', () => {

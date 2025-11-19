@@ -133,7 +133,7 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
                 ]
               }
             >
-              7:20 PM
+              12:00 AM
             </Text>
           </View>
         </View>

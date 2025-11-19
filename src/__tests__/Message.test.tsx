@@ -1,7 +1,8 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
 
-import { Message } from '../GiftedChat'
+import { Message } from '..'
+import { DEFAULT_TEST_MESSAGE } from './data'
 
 describe('Message component', () => {
   it('should render <Message /> and compare with snapshot', () => {
@@ -35,12 +36,7 @@ describe('Message component', () => {
       <Message
         key='123'
         user={{ _id: 1 }}
-        currentMessage={{
-          _id: 1,
-          text: 'test',
-          createdAt: 1554744013721,
-          user: { _id: 1 },
-        }}
+        currentMessage={DEFAULT_TEST_MESSAGE}
         position='left'
         showUserAvatar
       />
@@ -55,12 +51,10 @@ describe('Message component', () => {
         key='123'
         user={{ _id: 1 }}
         currentMessage={{
-          _id: 1,
-          text: 'test',
-          createdAt: 1554744013721,
+          ...DEFAULT_TEST_MESSAGE,
           user: {
             _id: 1,
-            avatar: null,
+            avatar: undefined,
           },
         }}
         position='left'

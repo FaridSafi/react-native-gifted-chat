@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
 
-import { MessageContainer } from '../GiftedChat'
+import { MessageContainer } from '..'
 import { DEFAULT_TEST_MESSAGE } from './data'
 
 it('should render <MessageContainer /> without crashing', () => {
@@ -9,7 +9,7 @@ it('should render <MessageContainer /> without crashing', () => {
   expect(() => render(
     <MessageContainer
       messages={[DEFAULT_TEST_MESSAGE]}
-      user={{ _id: 'test' }}
+      user={{ _id: 1 }}
     />
   )).not.toThrow()
 })
@@ -23,7 +23,7 @@ it('should render <MessageContainer /> with multiple messages', () => {
   expect(() => render(
     <MessageContainer
       messages={messages}
-      user={{ _id: 'test' }}
+      user={{ _id: 1 }}
     />
   )).not.toThrow()
 })
@@ -32,7 +32,7 @@ it('should render <MessageContainer /> with empty messages', () => {
   expect(() => render(
     <MessageContainer
       messages={[]}
-      user={{ _id: 'test' }}
+      user={{ _id: 1 }}
     />
   )).not.toThrow()
 })

@@ -66,8 +66,45 @@ export default [
       react: {
         version: 'detect',
       },
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.json',
+        },
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+      },
+      'import/core-modules': ['react', 'react-native'],
     },
     rules: {
+      // Import rules
+      'import/no-unresolved': 'error',
+      'import/named': 'error',
+      'import/default': 'error',
+      'import/namespace': 'error',
+      'import/export': 'error',
+      'import/no-absolute-path': 'error',
+      'import/no-self-import': 'error',
+      'import/no-cycle': 'warn',
+      'import/no-useless-path-segments': 'error',
+      'import/no-duplicates': 'error',
+      'import/first': 'error',
+      'import/newline-after-import': 'warn',
+      'import/extensions': [
+        'error',
+        'ignorePackages',
+        {
+          js: 'never',
+          jsx: 'never',
+          ts: 'never',
+          tsx: 'never',
+        },
+      ],
+
       // React rules
       'react/react-in-jsx-scope': 'off',
       'react/no-unknown-property': 'off',

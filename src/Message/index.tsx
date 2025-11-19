@@ -1,18 +1,18 @@
-import React, { memo, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { View } from 'react-native'
 
 import { Avatar } from '../Avatar'
-import Bubble from '../Bubble'
+import { Bubble } from '../Bubble'
 import { SystemMessage } from '../SystemMessage'
 
 import { IMessage } from '../types'
-import { isSameUser } from '../utils'
+import { isSameUser, renderComponentOrElement } from '../utils'
 import styles from './styles'
 import { MessageProps } from './types'
 
 export * from './types'
 
-const Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>) => {
+export const Message = <TMessage extends IMessage = IMessage>(props: MessageProps<TMessage>) => {
   const {
     currentMessage,
     renderBubble: renderBubbleProp,
@@ -35,7 +35,7 @@ const Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>
     } = props
 
     if (renderBubbleProp)
-      return renderBubbleProp(rest)
+      return renderComponentOrElement(renderBubbleProp, rest)
 
     return <Bubble {...rest} />
   }, [props, renderBubbleProp])
@@ -50,7 +50,7 @@ const Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>
     } = props
 
     if (renderSystemMessageProp)
-      return renderSystemMessageProp(rest)
+      return renderComponentOrElement(renderSystemMessageProp, rest)
 
     return <SystemMessage {...rest} />
   }, [props, renderSystemMessageProp])
@@ -111,5 +111,3 @@ const Message: React.FC<MessageProps<IMessage>> = (props: MessageProps<IMessage>
     </View>
   )
 }
-
-export default memo(Message)

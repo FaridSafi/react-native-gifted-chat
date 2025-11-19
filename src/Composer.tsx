@@ -8,7 +8,7 @@ import {
   TextInputContentSizeChangeEventData,
   useColorScheme,
 } from 'react-native'
-import Color from './Color'
+import { Color } from './Color'
 import { MIN_COMPOSER_HEIGHT } from './Constant'
 import stylesCommon from './styles'
 

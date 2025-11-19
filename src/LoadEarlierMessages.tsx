@@ -8,7 +8,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native'
-import Color from './Color'
+import { Color } from './Color'
 import { TouchableOpacity } from './components/TouchableOpacity'
 import stylesCommon from './styles'
 

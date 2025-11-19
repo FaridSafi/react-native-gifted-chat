@@ -8,7 +8,7 @@ import {
   TextStyle,
   useColorScheme,
 } from 'react-native'
-import Color from './Color'
+import { Color } from './Color'
 
 import { TouchableOpacity, TouchableOpacityProps } from './components/TouchableOpacity'
 import { TEST_ID } from './Constant'

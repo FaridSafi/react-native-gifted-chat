@@ -31,12 +31,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TEST_ID } from '../Constant'
 import { GiftedChatContext } from '../GiftedChatContext'
 import { InputToolbar } from '../InputToolbar'
-import MessageContainer, { AnimatedList } from '../MessageContainer'
+import { MessageContainer, AnimatedList } from '../MessageContainer'
 import stylesCommon from '../styles'
-
 import {
   IMessage,
 } from '../types'
+import { renderComponentOrElement } from '../utils'
 import styles from './styles'
 import { GiftedChatProps } from './types'
 
@@ -186,7 +186,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
           forwardRef={messageContainerRef}
           isTyping={isTyping}
         />
-        {renderChatFooter?.()}
+        {renderComponentOrElement(renderChatFooter, {})}
       </View>
     )
   }, [
@@ -301,7 +301,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     }
 
     if (renderInputToolbar)
-      return renderInputToolbar(inputToolbarProps)
+      return renderComponentOrElement(renderInputToolbar, inputToolbarProps)
 
     return <InputToolbar {...inputToolbarProps} />
   }, [
@@ -392,7 +392,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
               </Animated.View>
             )
             : (
-              renderLoading?.()
+              renderComponentOrElement(renderLoading, {})
             )}
         </View>
       </ActionSheetProvider>

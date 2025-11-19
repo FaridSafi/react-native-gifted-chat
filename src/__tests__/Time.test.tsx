@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
 
-import { Time } from '../GiftedChat'
+import { Time } from '..'
 import { DEFAULT_TEST_MESSAGE } from './data'
 
 describe('Time', () => {

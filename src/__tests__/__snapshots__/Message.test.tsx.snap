@@ -362,7 +362,7 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
                     ]
                   }
                 >
-                  7:20 PM
+                  12:00 AM
                 </Text>
               </View>
             </View>
@@ -396,6 +396,45 @@ exports[`Message component should render null if user has no Avatar 1`] = `
       ]
     }
   >
+    <View
+      style={
+        [
+          {
+            "marginRight": 8,
+          },
+          undefined,
+          undefined,
+        ]
+      }
+    >
+      <View
+        accessibilityRole="image"
+        style={
+          [
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+              "height": 40,
+              "width": 40,
+            },
+            {
+              "backgroundColor": "transparent",
+            },
+            [
+              {
+                "borderRadius": 18,
+                "height": 36,
+                "width": 36,
+              },
+              undefined,
+            ],
+          ]
+        }
+      />
+    </View>
     <View
       style={
         [
@@ -529,7 +568,7 @@ exports[`Message component should render null if user has no Avatar 1`] = `
                     ]
                   }
                 >
-                  7:20 PM
+                  12:00 AM
                 </Text>
               </View>
             </View>

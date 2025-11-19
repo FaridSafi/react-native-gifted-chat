@@ -4,7 +4,7 @@ import { RectButton } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import CustomizedFeaturesExample from '@/components/chat-examples/CustomizedFeaturesExample'
-import GiftedChatExample from '@/components/chat-examples/GiftedChatExample'
+import CustomizedRenderingExample from '@/components/chat-examples/CustomizedRenderingExample'
 import LinksExample from '@/components/chat-examples/LinksExample'
 
 import SlackExample from '@/components/chat-examples/SlackExample'
@@ -40,7 +40,7 @@ export default function ExploreScreen () {
         </View>
         <View style={styles.chatContainer}>
           {selectedExample === 'customizedFeatures' && <CustomizedFeaturesExample />}
-          {selectedExample === 'customizedRendering' && <GiftedChatExample />}
+          {selectedExample === 'customizedRendering' && <CustomizedRenderingExample />}
           {selectedExample === 'slack' && <SlackExample />}
           {selectedExample === 'links' && <LinksExample />}
         </View>

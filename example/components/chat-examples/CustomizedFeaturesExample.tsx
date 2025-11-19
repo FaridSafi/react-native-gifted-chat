@@ -73,6 +73,7 @@ export default function CustomizedFeaturesExample () {
           style: getColorSchemeStyle(styles, 'composer', colorScheme),
         }}
         keyboardBottomOffset={keyboardBottomOffset}
+        isScrollToBottomEnabled
       />
     </View>
   )

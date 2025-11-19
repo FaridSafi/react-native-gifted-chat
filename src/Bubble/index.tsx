@@ -15,14 +15,14 @@ import stylesCommon from '../styles'
 
 import { Time } from '../Time'
 import { IMessage } from '../types'
-import { isSameUser, isSameDay } from '../utils'
+import { isSameUser, isSameDay, renderComponentOrElement } from '../utils'
 
 import styles from './styles'
 import { BubbleProps, RenderMessageTextProps } from './types'
 
 export * from './types'
 
-const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessage>): JSX.Element => {
+export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessage>): JSX.Element => {
   const {
     currentMessage,
     nextMessage,
@@ -109,7 +109,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
       } = props
 
       if (props.renderQuickReplies)
-        return props.renderQuickReplies(quickReplyProps)
+        return renderComponentOrElement(props.renderQuickReplies, quickReplyProps)
 
       return (
         <QuickReplies
@@ -150,9 +150,9 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
       const combinedProps = { ...messageTextPropsRest, ...messageTextProps } as RenderMessageTextProps<TMessage>
 
       if (props.renderMessageText)
-        return props.renderMessageText(combinedProps)
+        return renderComponentOrElement(props.renderMessageText, combinedProps)
 
-      return <MessageText {...combinedProps} />
+      return <MessageText {...combinedProps as any} />
     }
 
     return null
@@ -169,7 +169,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
       } = props
 
       if (props.renderMessageImage)
-        return props.renderMessageImage(messageImageProps)
+        return renderComponentOrElement(props.renderMessageImage, messageImageProps)
 
       return <MessageImage {...messageImageProps} />
     }
@@ -190,7 +190,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
     } = props
 
     if (props.renderMessageVideo)
-      return props.renderMessageVideo(messageVideoProps)
+      return renderComponentOrElement(props.renderMessageVideo, messageVideoProps)
 
     return <MessageVideo />
   }, [props, currentMessage])
@@ -208,7 +208,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
     } = props
 
     if (props.renderMessageAudio)
-      return props.renderMessageAudio(messageAudioProps)
+      return renderComponentOrElement(props.renderMessageAudio, messageAudioProps)
 
     return <MessageAudio />
   }, [props, currentMessage])
@@ -220,7 +220,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
     } = props
 
     if (renderTicks && currentMessage)
-      return renderTicks(currentMessage)
+      return renderComponentOrElement(renderTicks, currentMessage)
 
     if (
       user &&
@@ -271,7 +271,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
       } = props
 
       if (props.renderTime)
-        return props.renderTime(timeProps)
+        return renderComponentOrElement(props.renderTime, timeProps)
 
       return <Time {...timeProps} />
     }
@@ -289,7 +289,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
         return null
 
       if (renderUsername)
-        return renderUsername(currentMessage.user)
+        return renderComponentOrElement(renderUsername, currentMessage.user)
 
       return (
         <View style={styles.content.usernameView}>
@@ -313,7 +313,7 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
 
   const renderCustomView = useCallback(() => {
     if (props.renderCustomView)
-      return props.renderCustomView(props)
+      return renderComponentOrElement(props.renderCustomView, props)
 
     return null
   }, [props])
@@ -378,5 +378,3 @@ const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessag
     </View>
   )
 }
-
-export default Bubble

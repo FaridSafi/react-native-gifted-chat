@@ -1,12 +1,13 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
 
-import { MessageText } from '../GiftedChat'
+import { MessageText } from '..'
+import { DEFAULT_TEST_MESSAGE } from './data'
 
 it('should render <MessageText /> and compare with snapshot', () => {
   const { toJSON } = render(
     <MessageText
-      currentMessage={{ _id: 1, createdAt: new Date(), text: 'test message' }}
+      currentMessage={DEFAULT_TEST_MESSAGE}
     />
   )
 

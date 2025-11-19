@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-chat",
-  "version": "2.8.2-alpha.7",
+  "version": "2.9.0-alpha.0",
   "description": "The most complete chat UI for React Native",
   "keywords": [
     "android",
@@ -80,6 +80,7 @@
     "@typescript-eslint/parser": "^8.46.4",
     "babel-jest": "^29.7.0",
     "eslint": "^9.18.0",
+    "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jest": "^28.11.0",
     "eslint-plugin-perfectionist": "^4.15.1",

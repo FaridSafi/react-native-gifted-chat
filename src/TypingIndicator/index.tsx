@@ -89,7 +89,7 @@ const DotsAnimation = () => {
   )
 }
 
-const TypingIndicator = ({ isTyping, style }: TypingIndicatorProps) => {
+export const TypingIndicator = ({ isTyping, style }: TypingIndicatorProps) => {
   const yCoords = useSharedValue(200)
   const heightScale = useSharedValue(0)
   const marginScale = useSharedValue(0)
@@ -153,5 +153,3 @@ const TypingIndicator = ({ isTyping, style }: TypingIndicatorProps) => {
     </Animated.View>
   )
 }
-
-export default TypingIndicator

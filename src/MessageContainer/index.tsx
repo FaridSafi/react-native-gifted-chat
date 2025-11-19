@@ -15,11 +15,11 @@ import { ReanimatedScrollEvent } from '../reanimatedCompat'
 
 import stylesCommon from '../styles'
 import { IMessage } from '../types'
-import TypingIndicator from '../TypingIndicator'
+import { TypingIndicator } from '../TypingIndicator'
 import { isSameDay, useCallbackThrottled } from '../utils'
-import DayAnimated from './components/DayAnimated'
+import { DayAnimated } from './components/DayAnimated'
 
-import Item from './components/Item'
+import { Item } from './components/Item'
 import { ItemProps } from './components/Item/types'
 import styles from './styles'
 import { MessageContainerProps, DaysPositions } from './types'
@@ -29,7 +29,7 @@ export * from './types'
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
-function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageContainerProps<TMessage>) {
+export const MessageContainer = <TMessage extends IMessage>(props: MessageContainerProps<TMessage>) => {
   const {
     messages = [],
     user,
@@ -420,5 +420,3 @@ function MessageContainer<TMessage extends IMessage = IMessage> (props: MessageC
     </View>
   )
 }
-
-export default MessageContainer

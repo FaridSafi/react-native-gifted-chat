@@ -382,44 +382,44 @@ interface QuickReplies {
   - `activityIndicatorStyle` - Custom style for the loading indicator
   - `activityIndicatorColor` - Color of the loading indicator (default: 'white')
   - `activityIndicatorSize` - Size of the loading indicator (default: 'small')
-- **`renderLoading`** _(Function)_ - Render a loading view when initializing
-- **`renderLoadEarlier`** _(Function)_ - Custom "Load earlier messages" button
-- **`renderAvatar`** _(Function)_ - Custom message avatar; set to `null` to not render any avatar for the message
+- **`renderLoading`** _(Component | Function)_ - Render a loading view when initializing
+- **`renderLoadEarlier`** _(Component | Function)_ - Custom "Load earlier messages" button
+- **`renderAvatar`** _(Component | Function)_ - Custom message avatar; set to `null` to not render any avatar for the message
 - **`showUserAvatar`** _(Bool)_ - Whether to render an avatar for the current user; default is `false`, only show avatars for other users
 - **`showAvatarForEveryMessage`** _(Bool)_ - When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is `false`
 - **`onPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is tapped
 - **`onLongPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is long-pressed
 - **`renderAvatarOnTop`** _(Bool)_ - Render the message avatar at the top of consecutive messages, rather than the bottom; default is `false`
-- **`renderBubble`** _(Function)_ - Custom message bubble
-- **`renderTicks`** _(Function(`message`))_ - Custom ticks indicator to display message status
-- **`renderSystemMessage`** _(Function)_ - Custom system message
+- **`renderBubble`** _(Component | Function)_ - Custom message bubble
+- **`renderTicks`** _(Component | Function(`message`))_ - Custom ticks indicator to display message status
+- **`renderSystemMessage`** _(Component | Function)_ - Custom system message
 - **`onPressMessage`** _(Function(`context`, `message`))_ - Callback when a message bubble is pressed
 - **`onLongPressMessage`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed (see [example using `showActionSheetWithOptions()`](https://github.com/FaridSafi/react-native-gifted-chat/blob/master@%7B2017-09-25%7D/src/Bubble.js#L96-L119))
 - **`inverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
 - **`renderUsernameOnMessage`** _(Bool)_ - Indicate whether to show the user's username inside the message bubble; default is `false`
-- **`renderUsername`** _(Function)_ - Custom Username container
-- **`renderMessage`** _(Function)_ - Custom message container
-- **`renderMessageText`** _(Function)_ - Custom message text
-- **`renderMessageImage`** _(Function)_ - Custom message image
-- **`renderMessageVideo`** _(Function)_ - Custom message video
-- **`renderMessageAudio`** _(Function)_ - Custom message audio
+- **`renderUsername`** _(Component | Function)_ - Custom Username container
+- **`renderMessage`** _(Component | Function)_ - Custom message container
+- **`renderMessageText`** _(Component | Function)_ - Custom message text
+- **`renderMessageImage`** _(Component | Function)_ - Custom message image
+- **`renderMessageVideo`** _(Component | Function)_ - Custom message video
+- **`renderMessageAudio`** _(Component | Function)_ - Custom message audio
 - **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://reactnative.dev/docs/image.html) component created by the default `renderMessageImage`
 - **`imageStyle`** _(Object)_ - Custom style for message images
 - **`videoProps`** _(Object)_ - Extra props to be passed to the video component created by the required `renderMessageVideo`
 - **`isCustomViewBottom`** _(Bool)_ - Determine whether renderCustomView is displayed before or after the text, image and video views; default is `false`
-- **`renderCustomView`** _(Function)_ - Custom view inside the bubble
-- **`renderDay`** _(Function)_ - Custom day above a message
-- **`renderTime`** _(Function)_ - Custom time inside a message
+- **`renderCustomView`** _(Component | Function)_ - Custom view inside the bubble
+- **`renderDay`** _(Component | Function)_ - Custom day above a message
+- **`renderTime`** _(Component | Function)_ - Custom time inside a message
 - **`timeTextStyle`** _(Object)_ - Custom text style for time inside messages (supports left/right styles)
-- **`renderFooter`** _(Function)_ - Custom footer component on the ListView, e.g. `'User is typing...'`; see [App.tsx](/example/App.tsx) for an example. Overrides default typing indicator that triggers when `isTyping` is true.
-- **`renderTypingIndicator`** _(Function)_ - Custom typing indicator component
-- **`renderChatEmpty`** _(Function)_ - Custom component to render in the ListView when messages are empty
-- **`renderChatFooter`** _(Function)_ - Custom component to render below the MessageContainer (separate from the ListView)
-- **`renderInputToolbar`** _(Function)_ - Custom message composer container
-- **`renderComposer`** _(Function)_ - Custom text input message composer
-- **`renderActions`** _(Function)_ - Custom action button on the left of the message composer
-- **`renderSend`** _(Function)_ - Custom send button; you can pass children to the original `Send` component quite easily, for example, to use a custom icon ([example](https://github.com/FaridSafi/react-native-gifted-chat/pull/487))
-- **`renderAccessory`** _(Function)_ - Custom second line of actions below the message composer
+- **`renderFooter`** _(Component | Function)_ - Custom footer component on the ListView, e.g. `'User is typing...'`; see [App.tsx](/example/App.tsx) for an example. Overrides default typing indicator that triggers when `isTyping` is true.
+- **`renderTypingIndicator`** _(Component | Function)_ - Custom typing indicator component
+- **`renderChatEmpty`** _(Component | Function)_ - Custom component to render in the ListView when messages are empty
+- **`renderChatFooter`** _(Component | Function)_ - Custom component to render below the MessageContainer (separate from the ListView)
+- **`renderInputToolbar`** _(Component | Function)_ - Custom message composer container
+- **`renderComposer`** _(Component | Function)_ - Custom text input message composer
+- **`renderActions`** _(Component | Function)_ - Custom action button on the left of the message composer
+- **`renderSend`** _(Component | Function)_ - Custom send button; you can pass children to the original `Send` component quite easily, for example, to use a custom icon ([example](https://github.com/FaridSafi/react-native-gifted-chat/pull/487))
+- **`renderAccessory`** _(Component | Function)_ - Custom second line of actions below the message composer
 - **`onPressActionButton`** _(Function)_ - Callback when the Action button is pressed (if set, the default `actionSheet` will not be used)
 - **`actionSheet`** _(Function)_ - Custom action sheet interface for showing action options
 - **`actions`** _(Array)_ - Custom action options for the input toolbar action button; array of objects with `title` (string) and `action` (function) properties

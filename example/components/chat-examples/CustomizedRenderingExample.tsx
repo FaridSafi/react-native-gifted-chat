@@ -3,7 +3,7 @@ import { StyleSheet, View, useColorScheme } from 'react-native'
 import Chats from '../../example-gifted-chat/src/Chats'
 import { getColorSchemeStyle } from '../../utils/styleUtils'
 
-export default function GiftedChatExample () {
+export default function CustomizedRenderingExample () {
   const colorScheme = useColorScheme()
 
   return (

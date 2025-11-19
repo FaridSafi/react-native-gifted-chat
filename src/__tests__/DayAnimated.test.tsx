@@ -2,18 +2,12 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { render } from '@testing-library/react-native'
 import { DayProps } from '../Day'
-import DayAnimated from '../MessageContainer/components/DayAnimated'
+import { DayAnimated } from '../MessageContainer/components/DayAnimated'
+import { DEFAULT_TEST_MESSAGE } from './data'
 
 const mockDaysPositions = { value: {} }
 const mockScrolledY = { value: 0 }
 const mockListHeight = { value: 800 }
-
-const mockMessage = {
-  _id: 1,
-  text: 'Hello',
-  createdAt: new Date('2023-01-01'),
-  user: { _id: 1, name: 'User 1' },
-}
 
 describe('DayAnimated', () => {
   it('should render DayAnimated with default Day component', () => {
@@ -22,7 +16,7 @@ describe('DayAnimated', () => {
         scrolledY={mockScrolledY}
         daysPositions={mockDaysPositions}
         listHeight={mockListHeight}
-        messages={[mockMessage]}
+        messages={[DEFAULT_TEST_MESSAGE]}
         isLoading={false}
       />
     )
@@ -32,7 +26,7 @@ describe('DayAnimated', () => {
   it('should use custom renderDay when provided', () => {
     const customRenderDay = jest.fn((props: DayProps) => (
       <View testID='custom-day'>
-        <Text>Custom Day: {props.createdAt}</Text>
+        <Text>Custom Day: {props.createdAt.toLocaleString()}</Text>
       </View>
     ))
 
@@ -41,7 +35,7 @@ describe('DayAnimated', () => {
         scrolledY={mockScrolledY}
         daysPositions={mockDaysPositions}
         listHeight={mockListHeight}
-        messages={[mockMessage]}
+        messages={[DEFAULT_TEST_MESSAGE]}
         isLoading={false}
         renderDay={customRenderDay}
       />

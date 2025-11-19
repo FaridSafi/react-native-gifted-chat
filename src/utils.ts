@@ -1,6 +1,27 @@
-import { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import dayjs from 'dayjs'
 import { IMessage } from './types'
+
+export function renderComponentOrElement<TProps extends Record<string, any>>(
+  component: React.ComponentType<TProps> | React.ReactElement | ((props: TProps) => React.ReactNode) | null | undefined,
+  props: TProps
+): React.ReactNode {
+  if (!component)
+    return null
+
+  if (React.isValidElement(component))
+    // If it's already a React element, clone it with props
+    return React.cloneElement(component, props as any)
+
+  if (typeof component === 'function') {
+    // If it's a component or render function
+    const Component = component as React.ComponentType<TProps>
+    return React.createElement(Component, props as any)
+  }
+
+  // If it's neither, return it as-is
+  return component
+}
 
 export function isSameDay (
   currentMessage: IMessage,

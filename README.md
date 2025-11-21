@@ -512,7 +512,9 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 
 ## Maintainer
 
-Need expert help with React Native Gifted Chat or any other questions? Reach out to [Kesha Antonov](https://github.com/kesha-antonov)
+Have any questions? Reach out to [Kesha Antonov](https://github.com/kesha-antonov)
+
+Please note that I'm maintaining this project in my free time for free. If you find any issues, feel free to open them on GitHub, and I'll do my best to address them as time permits.
 
 ## Hire an expert
 

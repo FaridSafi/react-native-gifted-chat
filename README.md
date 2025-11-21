@@ -1,11 +1,3 @@
-<p align="center">
-<p align="center">
-   <a href="https://reactnative.gallery/FaridSafi/gifted-chat">
-    <img alt="react-native-gifted-chat" src="https://thumbs.gfycat.com/AbsoluteSadDobermanpinscher-size_restricted.gif" width="260" height="510" />
- </a>
-
-</p>
-
 <h3 align="center">
   💬 Gifted Chat
 </h3>
@@ -16,13 +8,7 @@
   <a href="https://www.npmjs.com/package/react-native-gifted-chat">
   <img alt="npm downloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>
   <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
-</p>
-<p align="center">
   <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=shield" alt="build"></a>
-  <a title='License' href="https://github.com/FaridSafi/react-native-gifted-chat/blob/master/LICENSE" height="18">
-    <img src='https://img.shields.io/badge/license-MIT-blue.svg' />
-  </a>
-  <a href="#hire-an-expert"><img src="https://img.shields.io/badge/%F0%9F%92%AA-hire%20an%20expert-brightgreen"/></a>
 </p>
 
 ---

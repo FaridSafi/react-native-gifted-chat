@@ -1,9 +1,7 @@
 <p align="center">
-  <img width="200" alt="Simulator Screenshot - iPhone 16e - 2025-11-21 at 13 53 11" src="https://github.com/user-attachments/assets/c9da88f5-0b20-471c-8cd7-373bdb767517" />
-  <span>    </span>
-  <img width="200" alt="Simulator Screenshot - iPhone 16e - 2025-11-21 at 13 53 15" src="https://github.com/user-attachments/assets/f72b17f1-6c2e-43b5-87e7-477011aa3b07" />
-  <span>    </span>
-  <img width="200" alt="Simulator Screenshot - iPhone 16e - 2025-11-21 at 13 53 28" src="https://github.com/user-attachments/assets/86711e73-ee3c-4527-b38d-e4dab47a44fe" />
+  <img width="200" src="https://github.com/user-attachments/assets/c9da88f5-0b20-471c-8cd7-373bdb767517" />
+  <img width="200" src="https://github.com/user-attachments/assets/f72b17f1-6c2e-43b5-87e7-477011aa3b07" style="margin: 0 20px;" />
+  <img width="200" src="https://github.com/user-attachments/assets/86711e73-ee3c-4527-b38d-e4dab47a44fe" />
 </p>
 
 <h3 align="center">

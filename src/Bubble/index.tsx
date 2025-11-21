@@ -284,7 +284,7 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
       renderUsername,
     } = props
 
-    if (props.renderUsernameOnMessage && currentMessage) {
+    if (props.isUsernameVisible && currentMessage) {
       if (user && currentMessage.user._id === user._id)
         return null
 

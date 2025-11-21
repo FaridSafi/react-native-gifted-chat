@@ -34,7 +34,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* text input ref */
   textInputRef?: RefObject<TextInput>
   /* Controls whether or not to show user.name property in the message bubble */
-  renderUsernameOnMessage?: boolean
+  isUsernameVisible?: boolean
   /* Messages container style */
   messagesContainerStyle?: StyleProp<ViewStyle>
   /* Input text; default is undefined, but if specified, it will override GiftedChat's internal state */
@@ -53,17 +53,17 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true` */
   isKeyboardInternallyHandled?: boolean
   /* Whether to render an avatar for the current user; default is false, only show avatars for other users */
-  showUserAvatar?: boolean
+  isUserAvatarVisible?: boolean
   /* When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is false */
-  showAvatarForEveryMessage?: boolean
+  isAvatarVisibleForEveryMessage?: boolean
   /* Render the message avatar at the top of consecutive messages, rather than the bottom; default is false */
-  renderAvatarOnTop?: boolean
+  isAvatarOnTop?: boolean
   /* Extra props to be passed to the <Image> component created by the default renderMessageImage */
   imageProps?: MessageImageProps<TMessage>
   /* Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar); default is 0 */
   keyboardBottomOffset?: number
   /* Focus on <TextInput> automatically when opening the keyboard; default is true */
-  focusOnInputWhenOpeningKeyboard?: boolean
+  shouldFocusInputOnKeyboardOpen?: boolean
   /* Minimum height of the input toolbar; default is 44 */
   minInputToolbarHeight?: number
   /*  Extra props to be passed to the <TextInput>. See https://reactnative.dev/docs/textinput */

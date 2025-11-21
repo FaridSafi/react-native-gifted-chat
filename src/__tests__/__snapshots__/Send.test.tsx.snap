@@ -2,11 +2,13 @@
 
 exports[`Send should always render <Send /> and compare with snapshot 1`] = `
 <View
+  accessibilityLabel="send"
+  accessibilityRole="button"
   accessibilityState={
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -20,95 +22,29 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
     }
   }
   accessible={true}
-  collapsable={false}
   focusable={true}
-  onBlur={[Function]}
   onClick={[Function]}
-  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
->
-  <View
-    accessibilityLabel="send"
-    accessibilityRole="button"
-    accessible={true}
-    collapsable={false}
-    disabled={false}
-    jestAnimatedProps={
-      {
-        "value": {},
-      }
-    }
-    jestAnimatedStyle={
-      {
-        "value": {
-          "opacity": 1,
-        },
-      }
-    }
-    jestInlineStyle={
-      [
-        [
-          {
-            "height": 44,
-            "justifyContent": "flex-end",
-          },
-          undefined,
-        ],
-      ]
-    }
-    style={
-      [
-        {
-          "height": 44,
-          "justifyContent": "flex-end",
-        },
-        undefined,
-        {
-          "opacity": 1,
-        },
-      ]
-    }
-    testID="GC_SEND_TOUCHABLE"
-  >
-    <View>
-      <Text
-        style={
-          [
-            {
-              "backgroundColor": "transparent",
-              "color": "#0084ff",
-              "fontSize": 17,
-              "fontWeight": "600",
-              "marginBottom": 12,
-              "marginLeft": 10,
-              "marginRight": 10,
-            },
-            undefined,
-            undefined,
-          ]
-        }
-      >
-        Send
-      </Text>
-    </View>
-  </View>
-</View>
+  testID="GC_SEND_TOUCHABLE"
+/>
 `;
 
 exports[`Send should not render <Send /> and compare with snapshot 1`] = `null`;
 
 exports[`Send should render <Send /> where there is input and compare with snapshot 1`] = `
 <View
+  accessibilityLabel="send"
+  accessibilityRole="button"
   accessibilityState={
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -122,82 +58,14 @@ exports[`Send should render <Send /> where there is input and compare with snaps
     }
   }
   accessible={true}
-  collapsable={false}
   focusable={true}
-  onBlur={[Function]}
   onClick={[Function]}
-  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
->
-  <View
-    accessibilityLabel="send"
-    accessibilityRole="button"
-    accessible={true}
-    collapsable={false}
-    disabled={false}
-    jestAnimatedProps={
-      {
-        "value": {},
-      }
-    }
-    jestAnimatedStyle={
-      {
-        "value": {
-          "opacity": 1,
-        },
-      }
-    }
-    jestInlineStyle={
-      [
-        [
-          {
-            "height": 44,
-            "justifyContent": "flex-end",
-          },
-          undefined,
-        ],
-      ]
-    }
-    style={
-      [
-        {
-          "height": 44,
-          "justifyContent": "flex-end",
-        },
-        undefined,
-        {
-          "opacity": 1,
-        },
-      ]
-    }
-    testID="GC_SEND_TOUCHABLE"
-  >
-    <View>
-      <Text
-        style={
-          [
-            {
-              "backgroundColor": "transparent",
-              "color": "#0084ff",
-              "fontSize": 17,
-              "fontWeight": "600",
-              "marginBottom": 12,
-              "marginLeft": 10,
-              "marginRight": 10,
-            },
-            undefined,
-            undefined,
-          ]
-        }
-      >
-        Send
-      </Text>
-    </View>
-  </View>
-</View>
+  testID="GC_SEND_TOUCHABLE"
+/>
 `;

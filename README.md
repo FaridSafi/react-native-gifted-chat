@@ -212,9 +212,9 @@ Messages, system messages, quick replies etc.: [data structure](src/Models.ts)
 
 - **`keyboardBottomOffset`** _(Integer)_ - Distance between the bottom of the screen and bottom of the `GiftedChat` component. Useful when you have a tab bar or navigation bar; default is `0`. Needed for correct keyboard avoiding behavior. Without it you might see gap between the keyboard and the input toolbar if you have a tab bar, navigation bar, or safe area.
 - **`isKeyboardInternallyHandled`** _(Bool)_ - Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true`
-- **`focusOnInputWhenOpeningKeyboard`** _(Bool)_ - Focus on <TextInput> automatically when opening the keyboard; default `true`
-- **`alignTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
-- **`inverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
+- **`shouldFocusInputOnKeyboardOpen`** _(Bool)_ - Focus on <TextInput> automatically when opening the keyboard; default `true`
+- **`isAlignedTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
+- **`isInverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
 
 ### Text Input & Composer
 
@@ -322,15 +322,15 @@ See full example in [LinksExample](example/components/chat-examples/LinksExample
 ### Avatars
 
 - **`renderAvatar`** _(Component | Function)_ - Custom message avatar; set to `null` to not render any avatar for the message
-- **`showUserAvatar`** _(Bool)_ - Whether to render an avatar for the current user; default is `false`, only show avatars for other users
-- **`showAvatarForEveryMessage`** _(Bool)_ - When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is `false`
+- **`isUserAvatarVisible`** _(Bool)_ - Whether to render an avatar for the current user; default is `false`, only show avatars for other users
+- **`isAvatarVisibleForEveryMessage`** _(Bool)_ - When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is `false`
 - **`onPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is tapped
 - **`onLongPressAvatar`** _(Function(`user`))_ - Callback when a message avatar is long-pressed
-- **`renderAvatarOnTop`** _(Bool)_ - Render the message avatar at the top of consecutive messages, rather than the bottom; default is `false`
+- **`isAvatarOnTop`** _(Bool)_ - Render the message avatar at the top of consecutive messages, rather than the bottom; default is `false`
 
 ### Username
 
-- **`renderUsernameOnMessage`** _(Bool)_ - Indicate whether to show the user's username inside the message bubble; default is `false`
+- **`isUsernameVisible`** _(Bool)_ - Indicate whether to show the user's username inside the message bubble; default is `false`
 - **`renderUsername`** _(Component | Function)_ - Custom Username container
 
 ### Date & Time

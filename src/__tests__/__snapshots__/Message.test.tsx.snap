@@ -305,7 +305,7 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
                 }
               >
                 <Text
-                  showUserAvatar={true}
+                  isUserAvatarVisible={true}
                   style={
                     [
                       {
@@ -511,7 +511,7 @@ exports[`Message component should render null if user has no Avatar 1`] = `
                 }
               >
                 <Text
-                  showUserAvatar={true}
+                  isUserAvatarVisible={true}
                   style={
                     [
                       {

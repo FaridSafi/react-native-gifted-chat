@@ -34,11 +34,11 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
     user,
     isTyping = false,
     renderChatEmpty: renderChatEmptyProp,
-    inverted = true,
+    isInverted = true,
     listProps,
     isScrollToBottomEnabled = false,
     scrollToBottomOffset = 200,
-    alignTop = false,
+    isAlignedTop = false,
     scrollToBottomStyle,
     loadEarlierMessagesProps,
     renderTypingIndicator: renderTypingIndicatorProp,
@@ -110,11 +110,11 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
     isScrollingDown.value = true
     changeScrollToBottomVisibility(false)
 
-    if (inverted)
+    if (isInverted)
       scrollTo({ offset: 0, animated })
     else if (forwardRef?.current)
       forwardRef.current.scrollToEnd({ animated })
-  }, [forwardRef, inverted, scrollTo, isScrollingDown, changeScrollToBottomVisibility])
+  }, [forwardRef, isInverted, scrollTo, isScrollingDown, changeScrollToBottomVisibility])
 
   const handleOnScroll = useCallback((event: ReanimatedScrollEvent) => {
     listPropsOnScrollProp?.(event as any)
@@ -126,12 +126,12 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
     } = event
 
     isScrollingDown.value =
-      (inverted && lastScrolledY.value > contentOffsetY) ||
-      (!inverted && lastScrolledY.value < contentOffsetY)
+      (isInverted && lastScrolledY.value > contentOffsetY) ||
+      (!isInverted && lastScrolledY.value < contentOffsetY)
 
     lastScrolledY.value = contentOffsetY
 
-    if (inverted)
+    if (isInverted)
       if (contentOffsetY > scrollToBottomOffset!)
         changeScrollToBottomVisibility(true)
       else
@@ -143,7 +143,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
       changeScrollToBottomVisibility(false)
     else
       changeScrollToBottomVisibility(false)
-  }, [inverted, scrollToBottomOffset, changeScrollToBottomVisibility, isScrollingDown, lastScrolledY, listPropsOnScrollProp])
+  }, [isInverted, scrollToBottomOffset, changeScrollToBottomVisibility, isScrollingDown, lastScrolledY, listPropsOnScrollProp])
 
   const restProps = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -169,9 +169,9 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
 
     if (messages && user) {
       const previousMessage =
-        (inverted ? messages[index + 1] : messages[index - 1]) || {}
+        (isInverted ? messages[index + 1] : messages[index - 1]) || {}
       const nextMessage =
-        (inverted ? messages[index - 1] : messages[index + 1]) || {}
+        (isInverted ? messages[index - 1] : messages[index + 1]) || {}
 
       const messageProps: ItemProps<TMessage> = {
         ...restProps,
@@ -190,7 +190,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
     }
 
     return null
-  }, [messages, restProps, inverted, scrolledY, daysPositions, listHeight, user])
+  }, [messages, restProps, isInverted, scrolledY, daysPositions, listHeight, user])
 
   const emptyContent = useMemo(() => {
     if (!renderChatEmptyProp)
@@ -201,7 +201,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
 
   const renderChatEmpty = useCallback(() => {
     if (renderChatEmptyProp)
-      return inverted
+      return isInverted
         ? (
           emptyContent
         )
@@ -212,7 +212,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
         )
 
     return <View style={stylesCommon.fill} />
-  }, [inverted, renderChatEmptyProp, emptyContent])
+  }, [isInverted, renderChatEmptyProp, emptyContent])
 
   const ListHeaderComponent = useMemo(() => {
     const content = renderLoadEarlier()
@@ -272,7 +272,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
     listHeight.value = event.nativeEvent.layout.height
 
     if (
-      !inverted &&
+      !isInverted &&
       messages?.length &&
       isScrollToBottomEnabled
     )
@@ -281,7 +281,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
       }, 500)
 
     listProps?.onLayout?.(event)
-  }, [inverted, messages, doScrollToBottom, listHeight, listProps, isScrollToBottomEnabled])
+  }, [isInverted, messages, doScrollToBottom, listHeight, listProps, isScrollToBottomEnabled])
 
   const onEndReached = useCallback(() => {
     if (
@@ -325,7 +325,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
         }
 
         for (const [key, item] of Object.entries(value))
-          if (isSameDay(newValue.createdAt, item.createdAt) && (inverted ? item.y <= newValue.y : item.y >= newValue.y)) {
+          if (isSameDay(newValue.createdAt, item.createdAt) && (isInverted ? item.y <= newValue.y : item.y >= newValue.y)) {
             delete value[key]
             break
           }
@@ -344,7 +344,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
         {children}
       </View>
     )
-  }, [daysPositions, inverted])
+  }, [daysPositions, isInverted])
 
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: event => {
@@ -361,7 +361,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
       let shouldRemove = messageIndex === -1
 
       if (!shouldRemove) {
-        const prevMessage = messages[messageIndex + (inverted ? 1 : -1)]
+        const prevMessage = messages[messageIndex + (isInverted ? 1 : -1)]
         const message = messages[messageIndex]
         shouldRemove = !!prevMessage && isSameDay(message, prevMessage)
       }
@@ -374,13 +374,13 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
           return value
         })
     })
-  }, [messages, daysPositions, inverted])
+  }, [messages, daysPositions, isInverted])
 
   return (
     <View
       style={[
         styles.contentContainerStyle,
-        alignTop ? styles.containerAlignTop : stylesCommon.fill,
+        isAlignedTop ? styles.containerAlignTop : stylesCommon.fill,
       ]}
     >
       <AnimatedFlatList
@@ -388,15 +388,15 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
         keyExtractor={keyExtractor}
         data={messages}
         renderItem={renderItem}
-        inverted={inverted}
+        inverted={isInverted}
         automaticallyAdjustContentInsets={false}
         style={stylesCommon.fill}
         ListEmptyComponent={renderChatEmpty}
         ListFooterComponent={
-          inverted ? ListHeaderComponent : ListFooterComponent
+          isInverted ? ListHeaderComponent : ListFooterComponent
         }
         ListHeaderComponent={
-          inverted ? ListFooterComponent : ListHeaderComponent
+          isInverted ? ListFooterComponent : ListHeaderComponent
         }
         scrollEventThrottle={1}
         onEndReached={onEndReached}

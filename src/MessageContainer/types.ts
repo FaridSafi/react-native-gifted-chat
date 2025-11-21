@@ -27,9 +27,9 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage>
   /** Additional props for FlatList */
   listProps?: ListProps<TMessage>
   /** Reverses display order of messages; default is true */
-  inverted?: boolean
+  isInverted?: boolean
   /** Controls whether or not the message bubbles appear at the top of the chat */
-  alignTop?: boolean
+  isAlignedTop?: boolean
   /** Enables the isScrollToBottomEnabled Component */
   isScrollToBottomEnabled?: boolean
   /** Scroll to bottom wrapper style */

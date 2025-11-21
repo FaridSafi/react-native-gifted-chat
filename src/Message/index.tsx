@@ -21,7 +21,7 @@ export const Message = <TMessage extends IMessage = IMessage>(props: MessageProp
     position,
     containerStyle,
     user,
-    showUserAvatar,
+    isUserAvatarVisible,
   } = props
 
   const renderBubble = useCallback(() => {
@@ -59,7 +59,7 @@ export const Message = <TMessage extends IMessage = IMessage>(props: MessageProp
       user?._id &&
       currentMessage?.user &&
       user._id === currentMessage.user._id &&
-      !showUserAvatar
+      !isUserAvatarVisible
     )
       return null
 
@@ -79,7 +79,7 @@ export const Message = <TMessage extends IMessage = IMessage>(props: MessageProp
     props,
     user,
     currentMessage,
-    showUserAvatar,
+    isUserAvatarVisible,
   ])
 
   if (!currentMessage)
@@ -98,7 +98,7 @@ export const Message = <TMessage extends IMessage = IMessage>(props: MessageProp
             style={[
               styles[position].container,
               { marginBottom: sameUser ? 2 : 10 },
-              !props.inverted && { marginBottom: 2 },
+              !props.isInverted && { marginBottom: 2 },
               containerStyle?.[position],
             ]}
           >

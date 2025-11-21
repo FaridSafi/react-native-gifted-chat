@@ -57,8 +57,8 @@ export interface AvatarProps<TMessage extends IMessage> {
   previousMessage?: TMessage
   nextMessage?: TMessage
   position: 'left' | 'right'
-  renderAvatarOnTop?: boolean
-  showAvatarForEveryMessage?: boolean
+  isAvatarOnTop?: boolean
+  isAvatarVisibleForEveryMessage?: boolean
   imageStyle?: LeftRightStyle<ImageStyle>
   containerStyle?: LeftRightStyle<ViewStyle>
   textStyle?: TextStyle
@@ -71,8 +71,8 @@ export function Avatar<TMessage extends IMessage = IMessage> (
   props: AvatarProps<TMessage>
 ) {
   const {
-    renderAvatarOnTop,
-    showAvatarForEveryMessage,
+    isAvatarOnTop,
+    isAvatarVisibleForEveryMessage,
     containerStyle,
     position,
     currentMessage,
@@ -84,13 +84,13 @@ export function Avatar<TMessage extends IMessage = IMessage> (
     onLongPressAvatar,
   } = props
 
-  const messageToCompare = renderAvatarOnTop ? previousMessage : nextMessage
+  const messageToCompare = isAvatarOnTop ? previousMessage : nextMessage
 
   const renderAvatarComponent = useCallback(() => {
     if (renderAvatar)
       return renderAvatar({
-        renderAvatarOnTop,
-        showAvatarForEveryMessage,
+        isAvatarOnTop,
+        isAvatarVisibleForEveryMessage,
         containerStyle,
         position,
         currentMessage,
@@ -117,8 +117,8 @@ export function Avatar<TMessage extends IMessage = IMessage> (
     return null
   }, [
     renderAvatar,
-    renderAvatarOnTop,
-    showAvatarForEveryMessage,
+    isAvatarOnTop,
+    isAvatarVisibleForEveryMessage,
     containerStyle,
     position,
     currentMessage,
@@ -133,7 +133,7 @@ export function Avatar<TMessage extends IMessage = IMessage> (
     return null
 
   if (
-    !showAvatarForEveryMessage &&
+    !isAvatarVisibleForEveryMessage &&
     currentMessage &&
     messageToCompare &&
     isSameUser(currentMessage, messageToCompare) &&
@@ -159,7 +159,7 @@ export function Avatar<TMessage extends IMessage = IMessage> (
     <View
       style={[
         styles[position].container,
-        renderAvatarOnTop && styles[position].onTop,
+        isAvatarOnTop && styles[position].onTop,
         containerStyle?.[position],
       ]}
     >

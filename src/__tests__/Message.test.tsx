@@ -38,7 +38,7 @@ describe('Message component', () => {
         user={{ _id: 1 }}
         currentMessage={DEFAULT_TEST_MESSAGE}
         position='left'
-        showUserAvatar
+        isUserAvatarVisible
       />
     )
 
@@ -58,7 +58,7 @@ describe('Message component', () => {
           },
         }}
         position='left'
-        showUserAvatar
+        isUserAvatarVisible
       />
     )
 

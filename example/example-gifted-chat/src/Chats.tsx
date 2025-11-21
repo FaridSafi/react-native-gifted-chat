@@ -41,12 +41,12 @@ const Chats = () => {
         name: 'Aaron',
         avatar: 'https://placeimg.com/150/150/any',
       }}
-      alignTop
+      isAlignedTop
       isSendButtonAlwaysVisible
       isScrollToBottomEnabled
-      // showUserAvatar
-      renderAvatarOnTop
-      renderUsernameOnMessage
+      // isUserAvatarVisible
+      isAvatarOnTop
+      isUsernameVisible
       onPressAvatar={console.log}
       renderInputToolbar={RenderInputToolbar}
       renderActions={RenderActions}

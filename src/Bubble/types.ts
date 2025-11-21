@@ -47,9 +47,9 @@ export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
 export interface BubbleProps<TMessage extends IMessage> {
   user?: User
   touchableProps?: object
-  renderUsernameOnMessage?: boolean
+  isUsernameVisible?: boolean
   isCustomViewBottom?: boolean
-  inverted?: boolean
+  isInverted?: boolean
   position: 'left' | 'right'
   currentMessage: TMessage
   nextMessage?: TMessage

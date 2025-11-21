@@ -6,13 +6,13 @@ import { IMessage, User, LeftRightStyle } from '../Models'
 import { SystemMessageProps } from '../SystemMessage'
 
 export interface MessageProps<TMessage extends IMessage> {
-  showUserAvatar?: boolean
+  isUserAvatarVisible?: boolean
   position: 'left' | 'right'
   currentMessage: TMessage
   nextMessage?: TMessage
   previousMessage?: TMessage
   user: User
-  inverted?: boolean
+  isInverted?: boolean
   containerStyle?: LeftRightStyle<ViewStyle>
   renderBubble?: (props: BubbleProps<TMessage>) => React.ReactNode
   renderDay?: (props: DayProps) => React.ReactNode

@@ -62,8 +62,8 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     renderChatFooter,
     renderInputToolbar,
     keyboardBottomOffset = 0,
-    focusOnInputWhenOpeningKeyboard = true,
-    inverted = true,
+    shouldFocusInputOnKeyboardOpen = true,
+    isInverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
     isKeyboardInternallyHandled = true,
@@ -155,7 +155,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       if (!messageContainerRef?.current)
         return
 
-      if (inverted) {
+      if (isInverted) {
         messageContainerRef.current.scrollToOffset({
           offset: 0,
           animated: isAnimated,
@@ -165,7 +165,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
       messageContainerRef.current.scrollToEnd({ animated: isAnimated })
     },
-    [inverted, messageContainerRef]
+    [isInverted, messageContainerRef]
   )
 
   const renderMessages = useMemo(() => {
@@ -178,7 +178,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       <View style={[stylesCommon.fill, messagesContainerStyle]}>
         <MessageContainer<TMessage>
           {...messagesContainerProps}
-          inverted={inverted}
+          isInverted={isInverted}
           messages={messages}
           forwardRef={messageContainerRef}
           isTyping={isTyping}
@@ -191,7 +191,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     isTyping,
     messages,
     props,
-    inverted,
+    isInverted,
     messageContainerRef,
     renderChatFooter,
   ])
@@ -354,7 +354,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
             }
           )
 
-          if (focusOnInputWhenOpeningKeyboard)
+          if (shouldFocusInputOnKeyboardOpen)
             if (isKeyboardMovingUp)
               runOnJS(handleTextInputFocusWhenKeyboardShow)()
             else
@@ -365,7 +365,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     [
       keyboard,
       trackingKeyboardMovement,
-      focusOnInputWhenOpeningKeyboard,
+      shouldFocusInputOnKeyboardOpen,
       handleTextInputFocusWhenKeyboardHide,
       handleTextInputFocusWhenKeyboardShow,
       keyboardBottomOffset,
@@ -412,12 +412,12 @@ function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedC
 GiftedChatWrapper.append = <TMessage extends IMessage>(
   currentMessages: TMessage[] = [],
   messages: TMessage[],
-  inverted = true
+  isInverted = true
 ) => {
   if (!Array.isArray(messages))
     messages = [messages]
 
-  return inverted
+  return isInverted
     ? messages.concat(currentMessages)
     : currentMessages.concat(messages)
 }
@@ -425,12 +425,12 @@ GiftedChatWrapper.append = <TMessage extends IMessage>(
 GiftedChatWrapper.prepend = <TMessage extends IMessage>(
   currentMessages: TMessage[] = [],
   messages: TMessage[],
-  inverted = true
+  isInverted = true
 ) => {
   if (!Array.isArray(messages))
     messages = [messages]
 
-  return inverted
+  return isInverted
     ? currentMessages.concat(messages)
     : messages.concat(currentMessages)
 }

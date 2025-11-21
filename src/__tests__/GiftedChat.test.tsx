@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
 
-import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller'
+import { useAnimatedKeyboard } from 'react-native-reanimated'
 import { GiftedChat } from '..'
 
 const messages = [
@@ -17,7 +17,7 @@ const messages = [
 ]
 
 it('should render <GiftedChat/> and compare with snapshot', () => {
-  (useReanimatedKeyboardAnimation as jest.Mock).mockReturnValue({
+  (useAnimatedKeyboard as jest.Mock).mockReturnValue({
     height: {
       value: 0,
     },
@@ -37,7 +37,7 @@ it('should render <GiftedChat/> and compare with snapshot', () => {
 })
 
 it('should render <GiftedChat/> with isKeyboardInternallyHandled=false', () => {
-  (useReanimatedKeyboardAnimation as jest.Mock).mockReturnValue({
+  (useAnimatedKeyboard as jest.Mock).mockReturnValue({
     height: {
       value: 0,
     },

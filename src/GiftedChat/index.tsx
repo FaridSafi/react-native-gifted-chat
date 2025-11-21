@@ -19,13 +19,13 @@ import {
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { KeyboardProvider, useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller'
 import Animated, {
   useAnimatedStyle,
   useAnimatedReaction,
   useSharedValue,
   withTiming,
   runOnJS,
+  useAnimatedKeyboard,
 } from 'react-native-reanimated'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TEST_ID } from '../Constant'
@@ -90,15 +90,15 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const [text, setText] = useState<string | undefined>(() => props.text || '')
 
   // Always call the hook, but conditionally use its data
-  const keyboardControllerData = useReanimatedKeyboardAnimation()
+  const keyboardData = useAnimatedKeyboard()
 
   // Create a mock keyboard object when keyboard is not internally handled
   const keyboard = useMemo(() => {
     if (!isKeyboardInternallyHandled)
       return { height: { value: 0 } }
 
-    return keyboardControllerData
-  }, [isKeyboardInternallyHandled, keyboardControllerData])
+    return keyboardData
+  }, [isKeyboardInternallyHandled, keyboardData])
 
   const trackingKeyboardMovement = useSharedValue(false)
   const keyboardBottomOffsetAnim = useSharedValue(0)
@@ -399,13 +399,11 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
 function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedChatProps<TMessage>) {
   return (
-    <KeyboardProvider>
-      <GestureHandlerRootView style={styles.fill}>
-        <SafeAreaProvider>
-          <GiftedChat<TMessage> {...props} />
-        </SafeAreaProvider>
-      </GestureHandlerRootView>
-    </KeyboardProvider>
+    <GestureHandlerRootView style={styles.fill}>
+      <SafeAreaProvider>
+        <GiftedChat<TMessage> {...props} />
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   )
 }
 

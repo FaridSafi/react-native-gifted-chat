@@ -46,7 +46,7 @@
 <p align="center">
   <br/>
   <a href="https://www.lereacteur.io" target="_blank">
-    <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/logo_sponsor.png">
+    <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/logo_sponsor.png" width="200">
   </a>
   <br>
   <p align="center">
@@ -62,7 +62,7 @@
 <p align="center">
   <br/>
   <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">
-    <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/stream-logo.png" height="50">
+    <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/stream-logo.png" height="40">
   </a>
   <br>
   <p align="center">
@@ -76,7 +76,7 @@
 <p align="center">
   <br/>
   <a href="https://www.ethora.com" target="_blank">
-    <img src="https://www.dappros.com/wp-content/uploads/2023/12/Ethora-Logo.png" width="300px">
+    <img src="https://www.dappros.com/wp-content/uploads/2023/12/Ethora-Logo.png" width="200">
   </a>
   <br>
   <p align="center">

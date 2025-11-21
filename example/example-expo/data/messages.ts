@@ -113,7 +113,7 @@ const messages: IMessage[] = [
         },
         {
           title:
-            '📷 Yes, let me show you with a picture! Again let me show you with a picture!',
+            '📷 Yes, let me show you with a picture!',
           value: 'yes_picture',
         },
         {

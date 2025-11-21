@@ -8,6 +8,7 @@ import CustomView from '../../example-expo/CustomView'
 import earlierMessages from '../../example-expo/data/earlierMessages'
 import messagesData from '../../example-expo/data/messages'
 import { getColorSchemeStyle } from '../../utils/styleUtils'
+import { AutolinkProps } from 'react-native-autolink'
 
 export default function CustomizedFeaturesExample () {
   const [messages, setMessages] = useState<IMessage[]>(messagesData)
@@ -71,6 +72,9 @@ export default function CustomizedFeaturesExample () {
         messagesContainerStyle={getColorSchemeStyle(styles, 'messagesContainer', colorScheme)}
         textInputProps={{
           style: getColorSchemeStyle(styles, 'composer', colorScheme),
+        }}
+        messageTextProps={{
+          hashtag: 'twitter',
         }}
         keyboardBottomOffset={keyboardBottomOffset}
         isScrollToBottomEnabled

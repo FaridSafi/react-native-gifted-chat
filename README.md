@@ -25,10 +25,21 @@
   <a href="#hire-an-expert"><img src="https://img.shields.io/badge/%F0%9F%92%AA-hire%20an%20expert-brightgreen"/></a>
 </p>
 
+---
+
+<h3 align="center">
+  🚀 Try it now in your browser!
+</h3>
 <p align="center">
-  <a href="https://snack.expo.dev/@kesha-antonov/gifted-chat-playground" target="_blank">Snack GiftedChat playground</a>
-  <img height="18" src="https://snack.expo.io/favicon.ico" />
+  <a href="https://snack.expo.dev/@kesha-antonov/gifted-chat-playground" target="_blank">
+    <img src="https://img.shields.io/badge/▶️_Try_GiftedChat_Playground-4630EB?style=for-the-badge&logo=expo&logoColor=white" alt="Try GiftedChat on Expo Snack"/>
+  </a>
 </p>
+<p align="center">
+  <strong>No installation required • Interactive examples • Edit and run in real-time</strong>
+</p>
+
+---
 
 ## Sponsor
 

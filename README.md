@@ -508,7 +508,7 @@ fireEvent(loadingWrapper, 'layout', {
 
 ## Author
 
-Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi)! or [@xcapetir](https://www.twitter.com/xcapetir)!
+Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi) or [@xcapetir](https://www.twitter.com/xcapetir)
 
 ## Maintainer
 
@@ -516,4 +516,4 @@ Need expert help with React Native Gifted Chat or any other questions? Reach out
 
 ## Hire an expert
 
-Looking for a React Native freelance expert with more than 14 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
+Looking for a React Native freelance expert with more than 14 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)

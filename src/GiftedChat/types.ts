@@ -69,7 +69,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /*  Extra props to be passed to the <TextInput>. See https://reactnative.dev/docs/textinput */
   textInputProps?: Partial<React.ComponentProps<typeof TextInput>>
   /* Force send button */
-  alwaysShowSend?: boolean
+  isSendButtonAlwaysVisible?: boolean
   /* Image style */
   imageStyle?: StyleProp<ViewStyle>
   /* composer min Height */

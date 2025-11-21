@@ -42,7 +42,7 @@ const Chats = () => {
         avatar: 'https://placeimg.com/150/150/any',
       }}
       alignTop
-      alwaysShowSend
+      isSendButtonAlwaysVisible
       isScrollToBottomEnabled
       // showUserAvatar
       renderAvatarOnTop

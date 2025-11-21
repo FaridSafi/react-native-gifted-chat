@@ -10,7 +10,7 @@ describe('Send', () => {
   })
 
   it('should always render <Send /> and compare with snapshot', () => {
-    const { toJSON } = render(<Send alwaysShowSend />)
+    const { toJSON } = render(<Send isSendButtonAlwaysVisible />)
     expect(toJSON()).toMatchSnapshot()
   })
 

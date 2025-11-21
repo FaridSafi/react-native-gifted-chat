@@ -39,8 +39,7 @@ export interface SendProps<TMessage extends IMessage> {
   containerStyle?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
   children?: React.ReactNode
-  alwaysShowSend?: boolean
-  disabled?: boolean
+  isSendButtonAlwaysVisible?: boolean
   sendButtonProps?: Partial<TouchableOpacityProps>
   onSend?(
     messages: Partial<TMessage> | Partial<TMessage>[],
@@ -54,8 +53,7 @@ export const Send = <TMessage extends IMessage = IMessage>({
   children,
   textStyle,
   label = 'Send',
-  alwaysShowSend = false,
-  disabled = false,
+  isSendButtonAlwaysVisible = false,
   sendButtonProps,
   onSend,
 }: SendProps<TMessage>) => {
@@ -67,8 +65,8 @@ export const Send = <TMessage extends IMessage = IMessage>({
   }, [text, onSend])
 
   const showSend = useMemo(
-    () => alwaysShowSend || (text && text.trim().length > 0),
-    [alwaysShowSend, text]
+    () => isSendButtonAlwaysVisible || (text && text.trim().length > 0),
+    [isSendButtonAlwaysVisible, text]
   )
 
   if (!showSend)
@@ -77,12 +75,11 @@ export const Send = <TMessage extends IMessage = IMessage>({
   return (
     <TouchableOpacity
       testID={TEST_ID.SEND_TOUCHABLE}
-      accessible
-      accessibilityLabel='send'
       style={[styles.container, containerStyle]}
       onPress={handleOnPress}
+      accessible
+      accessibilityLabel='send'
       accessibilityRole='button'
-      disabled={disabled}
       {...sendButtonProps}
     >
       <View>

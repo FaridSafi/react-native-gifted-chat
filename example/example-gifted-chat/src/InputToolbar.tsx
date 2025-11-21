@@ -92,7 +92,7 @@ export const RenderComposer = (props: ComposerProps) => {
 export const renderSend = (props: SendProps<IMessage>) => (
   <Send
     {...props}
-    disabled={!props.text}
+    isDisabled={!props.text}
     containerStyle={{
       width: 44,
       height: 44,

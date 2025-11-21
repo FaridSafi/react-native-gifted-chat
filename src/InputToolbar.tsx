@@ -14,11 +14,11 @@ export interface InputToolbarProps<TMessage extends IMessage> {
   containerStyle?: StyleProp<ViewStyle>
   primaryStyle?: StyleProp<ViewStyle>
   accessoryStyle?: StyleProp<ViewStyle>
-  renderAccessory?(props: InputToolbarProps<TMessage>): React.ReactNode
-  renderActions?(props: ActionsProps): React.ReactNode
-  renderSend?(props: SendProps<TMessage>): React.ReactNode
-  renderComposer?(props: ComposerProps): React.ReactNode
-  onPressActionButton?(): void
+  renderAccessory?: (props: InputToolbarProps<TMessage>) => React.ReactNode
+  renderActions?: (props: ActionsProps) => React.ReactNode
+  renderSend?: (props: SendProps<TMessage>) => React.ReactNode
+  renderComposer?: (props: ComposerProps) => React.ReactNode
+  onPressActionButton?: () => void
   icon?: () => React.ReactNode
   wrapperStyle?: StyleProp<ViewStyle>
 }

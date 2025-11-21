@@ -37,21 +37,21 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage>
   /** Distance from bottom before showing scroll to bottom button */
   scrollToBottomOffset?: number
   /** Custom component to render when messages are empty */
-  renderChatEmpty?(): React.ReactNode
+  renderChatEmpty?: () => React.ReactNode
   /** Custom footer component on the ListView, e.g. 'User is typing...' */
-  renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
+  renderFooter?: (props: MessageContainerProps<TMessage>) => React.ReactNode
   /** Custom message container */
-  renderMessage?(props: MessageProps<TMessage>): React.ReactElement
+  renderMessage?: (props: MessageProps<TMessage>) => React.ReactElement
   /** Custom day above a message */
-  renderDay?(props: DayProps): React.ReactNode
+  renderDay?: (props: DayProps) => React.ReactNode
   /** Custom "Load earlier messages" button */
-  renderLoadEarlier?(props: LoadEarlierMessagesProps): React.ReactNode
+  renderLoadEarlier?: (props: LoadEarlierMessagesProps) => React.ReactNode
   /** Custom typing indicator */
-  renderTypingIndicator?(): React.ReactNode
+  renderTypingIndicator?: () => React.ReactNode
   /** Scroll to bottom custom component */
-  scrollToBottomComponent?(): React.ReactNode
+  scrollToBottomComponent?: () => React.ReactNode
   /** Callback when quick reply is sent */
-  onQuickReply?(replies: Reply[]): void
+  onQuickReply?: (replies: Reply[]) => void
   /** Props to pass to the LoadEarlierMessages component. The LoadEarlierMessages button is only visible when isAvailable is true. Includes isAvailable (controls button visibility), isInfiniteScrollEnabled (infinite scroll up when reach the top of messages container, automatically call onPress function if it exists - not yet supported for web), onPress (callback when button is pressed), isLoading (display loading indicator), label (override default "Load earlier messages" text), and styling props (containerStyle, wrapperStyle, textStyle, activityIndicatorStyle, activityIndicatorColor, activityIndicatorSize). */
   loadEarlierMessagesProps?: LoadEarlierMessagesProps
   /** Style for TypingIndicator component */

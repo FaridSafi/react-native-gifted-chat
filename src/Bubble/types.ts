@@ -66,25 +66,25 @@ export interface BubbleProps<TMessage extends IMessage> {
   quickReplyTextStyle?: StyleProp<TextStyle>
   quickReplyContainerStyle?: StyleProp<ViewStyle>
   messageTextProps?: Partial<MessageTextProps<TMessage>>
-  onPressMessage?(context?: unknown, message?: unknown): void
-  onLongPressMessage?(context?: unknown, message?: unknown): void
-  onQuickReply?(replies: Reply[]): void
-  renderMessageImage?(
+  onPressMessage?: (context?: unknown, message?: unknown) => void
+  onLongPressMessage?: (context?: unknown, message?: unknown) => void
+  onQuickReply?: (replies: Reply[]) => void
+  renderMessageImage?: (
     props: RenderMessageImageProps<TMessage>,
-  ): React.ReactNode
-  renderMessageVideo?(
+  ) => React.ReactNode
+  renderMessageVideo?: (
     props: RenderMessageVideoProps<TMessage>,
-  ): React.ReactNode
-  renderMessageAudio?(
+  ) => React.ReactNode
+  renderMessageAudio?: (
     props: RenderMessageAudioProps<TMessage>,
-  ): React.ReactNode
-  renderMessageText?(props: RenderMessageTextProps<TMessage>): React.ReactNode
-  renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode
-  renderTime?(timeProps: TimeProps<TMessage>): React.ReactNode
-  renderTicks?(currentMessage: TMessage): React.ReactNode
-  renderUsername?(user?: TMessage['user']): React.ReactNode
-  renderQuickReplySend?(): React.ReactNode
-  renderQuickReplies?(
+  ) => React.ReactNode
+  renderMessageText?: (props: RenderMessageTextProps<TMessage>) => React.ReactNode
+  renderCustomView?: (bubbleProps: BubbleProps<TMessage>) => React.ReactNode
+  renderTime?: (timeProps: TimeProps<TMessage>) => React.ReactNode
+  renderTicks?: (currentMessage: TMessage) => React.ReactNode
+  renderUsername?: (user?: TMessage['user']) => React.ReactNode
+  renderQuickReplySend?: () => React.ReactNode
+  renderQuickReplies?: (
     quickReplies: QuickRepliesProps<TMessage>,
-  ): React.ReactNode
+  ) => React.ReactNode
 }

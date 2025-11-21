@@ -520,27 +520,14 @@ fireEvent(loadingWrapper, 'layout', {
 1. Find responses in existing issues
 1. Try to keep issues for issues
 
-## License
-
-- [MIT](LICENSE)
-
 ## Author
 
 Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi)! or [@xcapetir](https://www.twitter.com/xcapetir)!
 
-## Contributors
+## Maintainer
 
-- Kevin Cooper [cooperka](https://github.com/cooperka)
-- Kfir Golan [kfiroo](https://github.com/kfiroo)
-- Bruno Cascio [brunocascio](https://github.com/brunocascio)
-- Xavier Carpentier [xcarpentier](https://github.com/xcarpentier)
-- Kesha Antonov [kesha-antonov](https://github.com/kesha-antonov)
-- [more](https://github.com/FaridSafi/react-native-gifted-chat/graphs/contributors)
+Need expert help with React Native Gifted Chat or any other questions? Reach out to [Kesha Antonov](https://github.com/kesha-antonov)
 
 ## Hire an expert
 
 Looking for a React Native freelance expert with more than 14 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
-
-## Maintainer
-
-Need expert help with React Native Gifted Chat or any other questions? Reach out to [Kesha Antonov](https://github.com/kesha-antonov)

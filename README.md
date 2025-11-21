@@ -541,4 +541,6 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 
 Looking for a React Native freelance expert with more than 14 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
 
-Need expert help with React Native Gifted Chat? Reach out to [Kesha Antonov](mailto:innokenty.longway@gmail.com)
+## Maintainer
+
+Need expert help with React Native Gifted Chat or any other questions? Reach out to [Kesha Antonov](https://github.com/kesha-antonov)

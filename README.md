@@ -39,6 +39,22 @@
 
 ---
 
+## Features
+
+- Fully customizable components
+- Composer actions (to attach photos, etc.)
+- Load earlier messages
+- Copy messages to clipboard
+- Touchable links using [react-native-autolink](https://github.com/joshswan/react-native-autolink)
+- Avatar as user's initials
+- Localized dates
+- Multi-line TextInput
+- InputToolbar avoiding keyboard
+- System message
+- Quick Reply messages (bot)
+- Typing indicator
+- react-native-web [web configuration](#react-native-web)
+
 ## Sponsor
 
 <p align="center">
@@ -88,22 +104,6 @@
 <p align="center">
  <a href="https://amzn.to/3ZmTyb2" target="_blank">React Key Concepts: Consolidate your knowledge of React’s core features (2nd ed. Edition)</a>
 </p>
-
-## Features
-
-- Fully customizable components
-- Composer actions (to attach photos, etc.)
-- Load earlier messages
-- Copy messages to clipboard
-- Touchable links using [react-native-autolink](https://github.com/joshswan/react-native-autolink)
-- Avatar as user's initials
-- Localized dates
-- Multi-line TextInput
-- InputToolbar avoiding keyboard
-- System message
-- Quick Reply messages (bot)
-- Typing indicator
-- react-native-web [web configuration](#react-native-web)
 
 # Getting started
 

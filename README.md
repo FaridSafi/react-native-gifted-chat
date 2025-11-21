@@ -25,8 +25,6 @@
   <strong>No installation required • Interactive examples • Edit and run in real-time</strong>
 </p>
 
----
-
 <!-- previews -->
 
 <p align="center">
@@ -106,14 +104,6 @@
 - react-native-web [web configuration](#react-native-web)
 
 # Getting started
-
-## 🚧👷 Important notice
-
-There's currently WIP going on to make the library more performant, modern in terms of chat UI and easier to maintain. If you have any issues, please report them. If you want to contribute, please do so.
-
-The most stable version is `2.6.5`. If you want to use the latest version, please be aware that it's a work in progress.
-
-Readme for this version: [2.6.5 readme](https://github.com/FaridSafi/react-native-gifted-chat/blob/eebab3751fcbe07715135e6e7b2aa3f76a10d8ac/README.md)
 
 ## Installation
 

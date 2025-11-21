@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react'
-import { Pressable } from 'react-native-gesture-handler'
+import { BaseButton } from 'react-native-gesture-handler'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
 
-export type TouchableOpacityProps = React.ComponentProps<typeof Pressable> & {
+export type TouchableOpacityProps = Omit<React.ComponentProps<typeof BaseButton>, 'onPress'> & {
   activeOpacity?: number
+  onPress?: () => void
 } & React.ComponentProps<typeof Animated.View>
 
 export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({
@@ -35,22 +36,32 @@ export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({
     }, isAnimationInFinished.value ? 0 : 150)
   }, [opacity, isAnimationInFinished])
 
+  const handleActiveStateChange = useCallback((isActive: boolean) => {
+    if (isActive)
+      handlePressIn()
+    else
+      handlePressOut()
+  }, [handlePressIn, handlePressOut])
+
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
   }))
 
+  const handlePress = useCallback(() => {
+    onPress?.()
+  }, [onPress])
+
   return (
-    <Pressable
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
-      onPress={onPress}
+    <BaseButton
+      {...rest}
+      onPress={handlePress}
+      onActiveStateChange={handleActiveStateChange}
     >
       <Animated.View
-        {...rest}
         style={[style, animatedStyle]}
       >
         {children}
       </Animated.View>
-    </Pressable>
+    </BaseButton>
   )
 }

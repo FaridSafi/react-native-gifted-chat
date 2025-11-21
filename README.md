@@ -505,9 +505,9 @@ fireEvent(loadingWrapper, 'layout', {
 
 ## You have a question?
 
-1. Please check this readme and may find a response
+1. Please check this readme and you might find a response
 1. Please ask on StackOverflow first: https://stackoverflow.com/questions/tagged/react-native-gifted-chat
-1. Find response on existing issues
+1. Find responses in existing issues
 1. Try to keep issues for issues
 
 ## License
@@ -529,5 +529,6 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 
 ## Hire an expert!
 
-- Looking for a React Native freelance expert with more than 14 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
-- Need expert help with React Native Gifted Chat? Reach out to [Kesha Antonov](mailto:innokenty.longway@gmail.com)
+Looking for a React Native freelance expert with more than 14 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
+
+Need expert help with React Native Gifted Chat? Reach out to [Kesha Antonov](mailto:innokenty.longway@gmail.com)

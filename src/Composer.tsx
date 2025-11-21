@@ -16,14 +16,12 @@ export interface ComposerProps {
   composerHeight?: number
   text?: string
   textInputProps?: Partial<TextInputProps>
-  onChangeText?(text: string): void
   onInputSizeChanged?(layout: { width: number, height: number }): void
 }
 
 export function Composer ({
   composerHeight = MIN_COMPOSER_HEIGHT,
   onInputSizeChanged,
-  onChangeText,
   text = '',
   textInputProps,
 }: ComposerProps): React.ReactElement {
@@ -74,7 +72,6 @@ export function Composer ({
       multiline
       placeholder={placeholder}
       {...textInputProps}
-      onChangeText={onChangeText}
       style={[
         stylesCommon.fill,
         styles.textInput,

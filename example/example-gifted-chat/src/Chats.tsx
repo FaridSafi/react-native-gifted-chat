@@ -35,7 +35,6 @@ const Chats = () => {
     <GiftedChat
       messages={messages}
       text={text}
-      onChangeText={setText}
       onSend={onSend}
       user={{
         _id: 1,
@@ -64,6 +63,7 @@ const Chats = () => {
       messagesContainerStyle={{ backgroundColor: isDark ? '#1a1a1a' : 'indigo' }}
       textInputProps={{
         style: isDark && { backgroundColor: '#2a2a2a', color: '#fff' },
+        onChangeText: setText,
       }}
       keyboardBottomOffset={keyboardBottomOffset}
     />

@@ -63,7 +63,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     renderInputToolbar,
     keyboardBottomOffset = 0,
     focusOnInputWhenOpeningKeyboard = true,
-    onChangeText,
     inverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
@@ -198,8 +197,8 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   ])
 
   const notifyInputTextReset = useCallback(() => {
-    onChangeText?.('')
-  }, [onChangeText])
+    props.textInputProps?.onChangeText?.('')
+  }, [props.textInputProps])
 
   const resetInputToolbar = useCallback(() => {
     textInputRef.current?.clear()
@@ -253,13 +252,13 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const _onChangeText = useCallback(
     (text: string) => {
-      onChangeText?.(text)
+      props.textInputProps?.onChangeText?.(text)
 
       // Only set state if it's not being overridden by a prop.
       if (props.text === undefined)
         setText(text)
     },
-    [onChangeText, props.text]
+    [props.text, props.textInputProps]
   )
 
   const onInitialLayoutViewLayout = useCallback(
@@ -291,9 +290,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       composerHeight: Math.max(minComposerHeight!, composerHeight),
       onSend: _onSend,
       onInputSizeChanged,
-      onChangeText: _onChangeText,
       textInputProps: {
         ...textInputProps,
+        onChangeText: _onChangeText,
         ref: textInputRef,
       },
     }

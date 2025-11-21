@@ -537,7 +537,7 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 - Kesha Antonov [kesha-antonov](https://github.com/kesha-antonov)
 - [more](https://github.com/FaridSafi/react-native-gifted-chat/graphs/contributors)
 
-## Hire an expert!
+## Hire an expert
 
 Looking for a React Native freelance expert with more than 14 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)!
 

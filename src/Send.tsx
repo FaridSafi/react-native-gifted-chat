@@ -14,25 +14,6 @@ import { TouchableOpacity, TouchableOpacityProps } from './components/TouchableO
 import { TEST_ID } from './Constant'
 import { IMessage } from './Models'
 
-const styles = StyleSheet.create({
-  container: {
-    height: 44,
-    justifyContent: 'flex-end',
-  },
-  text: {
-    color: Color.defaultBlue,
-    fontWeight: '600',
-    fontSize: 17,
-    backgroundColor: Color.backgroundTransparent,
-    marginBottom: 12,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  text_dark: {
-    color: '#4da6ff',
-  },
-})
-
 export interface SendProps<TMessage extends IMessage> {
   text?: string
   label?: string
@@ -60,12 +41,14 @@ export const Send = <TMessage extends IMessage = IMessage>({
   const colorScheme = useColorScheme()
 
   const handleOnPress = useCallback(() => {
-    if (text && onSend)
-      onSend({ text: text.trim() } as Partial<TMessage>, true)
+    const message = { text: text?.trim() } as Partial<TMessage>
+
+    if (onSend && message.text?.length)
+      onSend(message, true)
   }, [text, onSend])
 
   const showSend = useMemo(
-    () => isSendButtonAlwaysVisible || (text && text.trim().length > 0),
+    () => isSendButtonAlwaysVisible || !!text?.trim().length,
     [isSendButtonAlwaysVisible, text]
   )
 
@@ -88,3 +71,22 @@ export const Send = <TMessage extends IMessage = IMessage>({
     </TouchableOpacity>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: 44,
+    justifyContent: 'flex-end',
+  },
+  text: {
+    color: Color.defaultBlue,
+    fontWeight: '600',
+    fontSize: 17,
+    backgroundColor: Color.backgroundTransparent,
+    marginBottom: 12,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  text_dark: {
+    color: '#4da6ff',
+  },
+})

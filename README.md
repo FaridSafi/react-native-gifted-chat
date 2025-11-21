@@ -137,7 +137,9 @@ npx pod-install
 
 Follow guide: [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/#step-2-add-reanimateds-babel-plugin)
 
-## Simple example
+## Examples
+
+### Basic usage
 
 ```jsx
 import React, { useState, useCallback, useEffect } from 'react'
@@ -186,7 +188,7 @@ export function Example() {
 }
 ```
 
-## Different examples
+### Other examples
 
 Check out code of [`examples`](example)
 

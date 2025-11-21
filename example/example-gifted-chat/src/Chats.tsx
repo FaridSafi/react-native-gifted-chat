@@ -35,7 +35,7 @@ const Chats = () => {
     <GiftedChat
       messages={messages}
       text={text}
-      onInputTextChanged={setText}
+      onChangeText={setText}
       onSend={onSend}
       user={{
         _id: 1,

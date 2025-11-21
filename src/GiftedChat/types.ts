@@ -141,7 +141,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Callback when the Action button is pressed (if set, the default actionSheet will not be used) */
   onPressActionButton?(): void
   /* Callback when the input text changes */
-  onInputTextChanged?(text: string): void
+  onChangeText?(text: string): void
   /* Extra props to be passed to the MessageText component */
   messageTextProps?: Partial<MessageTextProps<TMessage>>
   renderQuickReplies?(

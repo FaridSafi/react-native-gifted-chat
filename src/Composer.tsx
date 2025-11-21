@@ -16,14 +16,14 @@ export interface ComposerProps {
   composerHeight?: number
   text?: string
   textInputProps?: Partial<TextInputProps>
-  onTextChanged?(text: string): void
+  onChangeText?(text: string): void
   onInputSizeChanged?(layout: { width: number, height: number }): void
 }
 
 export function Composer ({
   composerHeight = MIN_COMPOSER_HEIGHT,
   onInputSizeChanged,
-  onTextChanged,
+  onChangeText,
   text = '',
   textInputProps,
 }: ComposerProps): React.ReactElement {
@@ -67,7 +67,6 @@ export function Composer ({
       accessibilityLabel={placeholder}
       placeholderTextColor={textInputProps?.placeholderTextColor ?? (isDark ? '#888' : Color.defaultColor)}
       onContentSizeChange={handleContentSizeChange}
-      onChangeText={onTextChanged}
       value={text}
       enablesReturnKeyAutomatically
       underlineColorAndroid='transparent'
@@ -75,6 +74,7 @@ export function Composer ({
       multiline
       placeholder={placeholder}
       {...textInputProps}
+      onChangeText={onChangeText}
       style={[
         stylesCommon.fill,
         styles.textInput,

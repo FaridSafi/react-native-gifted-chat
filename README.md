@@ -506,6 +506,10 @@ fireEvent(loadingWrapper, 'layout', {
 1. Find responses in existing issues
 1. Try to keep issues for issues
 
+## Hire an expert
+
+Looking for a React Native freelance expert with more than 14 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)
+
 ## Author
 
 Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi) or [@xcapetir](https://www.twitter.com/xcapetir)
@@ -515,7 +519,3 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/Fa
 Have any questions? Reach out to [Kesha Antonov](https://github.com/kesha-antonov)
 
 Please note that I'm maintaining this project in my free time for free. If you find any issues, feel free to open them, and I'll do my best to address them as time permits.
-
-## Hire an expert
-
-Looking for a React Native freelance expert with more than 14 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)

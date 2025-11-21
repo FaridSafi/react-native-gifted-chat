@@ -30,10 +30,26 @@
 <!-- previews -->
 
 <p align="center">
-  <img width="200" src="https://github.com/user-attachments/assets/c9da88f5-0b20-471c-8cd7-373bdb767517" style="margin: 0 10px; border-radius: 8px; border: 1px solid #ddd;" />
-  <img width="200" src="https://github.com/user-attachments/assets/f72b17f1-6c2e-43b5-87e7-477011aa3b07" style="margin: 0 10px; border-radius: 8px; border: 1px solid #ddd;" />
-  <img width="200" src="https://github.com/user-attachments/assets/86711e73-ee3c-4527-b38d-e4dab47a44fe" style="margin: 0 10px; border-radius: 8px; border: 1px solid #ddd;" />
+  <picture>
+    <img width="200" src="https://github.com/user-attachments/assets/c9da88f5-0b20-471c-8cd7-373bdb767517" />
+  </picture>
+  &nbsp;&nbsp;
+  <picture>
+    <img width="200" src="https://github.com/user-attachments/assets/f72b17f1-6c2e-43b5-87e7-477011aa3b07" />
+  </picture>
+  &nbsp;&nbsp;
+  <picture>
+    <img width="200" src="https://github.com/user-attachments/assets/86711e73-ee3c-4527-b38d-e4dab47a44fe" />
+  </picture>
 </p>
+
+<style>
+  p picture img {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin: 0 10px;
+  }
+</style>
 
 ---
 

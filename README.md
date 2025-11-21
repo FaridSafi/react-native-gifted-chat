@@ -46,7 +46,7 @@
 <p align="center">
   <br/>
   <a href="https://www.lereacteur.io" target="_blank">
-    <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/logo_sponsor.png" height="40">
+    <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/logo_sponsor.png" height="60">
   </a>
   <br>
   <p align="center">
@@ -76,7 +76,7 @@
 <p align="center">
   <br/>
   <a href="https://www.ethora.com" target="_blank">
-    <img src="https://www.dappros.com/wp-content/uploads/2023/12/Ethora-Logo.png" height="40">
+    <img src="https://www.dappros.com/wp-content/uploads/2023/12/Ethora-Logo.png" height="60">
   </a>
   <br>
   <p align="center">

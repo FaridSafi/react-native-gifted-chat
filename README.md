@@ -25,7 +25,7 @@
   <strong>No installation required • Interactive examples • Edit and run in real-time</strong>
 </p>
 
----
+<br />
 
 <!-- previews -->
 

@@ -24,7 +24,6 @@ import { MessagesContainerProps, DaysPositions } from './types'
 
 export * from './types'
 
-
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
 export const MessagesContainer = <TMessage extends IMessage>(props: MessagesContainerProps<TMessage>) => {
@@ -182,6 +181,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         scrolledY,
         daysPositions,
         listHeight,
+        isDayAnimationEnabled,
       }
 
       return (
@@ -190,7 +190,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
     }
 
     return null
-  }, [messages, restProps, isInverted, scrolledY, daysPositions, listHeight, user])
+  }, [messages, restProps, isInverted, scrolledY, daysPositions, listHeight, isDayAnimationEnabled, user])
 
   const emptyContent = useMemo(() => {
     if (!renderChatEmptyProp)

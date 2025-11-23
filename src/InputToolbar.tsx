@@ -6,6 +6,7 @@ import { Color } from './Color'
 import { Composer, ComposerProps } from './Composer'
 import { IMessage } from './Models'
 import { Send, SendProps } from './Send'
+import { getColorSchemeStyle } from './styles'
 import { renderComponentOrElement } from './utils'
 
 export interface InputToolbarProps<TMessage extends IMessage> {
@@ -13,7 +14,6 @@ export interface InputToolbarProps<TMessage extends IMessage> {
   actionSheetOptionTintColor?: string
   containerStyle?: StyleProp<ViewStyle>
   primaryStyle?: StyleProp<ViewStyle>
-  accessoryStyle?: StyleProp<ViewStyle>
   renderAccessory?: (props: InputToolbarProps<TMessage>) => React.ReactNode
   renderActions?: (props: ActionsProps) => React.ReactNode
   renderSend?: (props: SendProps<TMessage>) => React.ReactNode
@@ -88,16 +88,14 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
     if (!renderAccessory)
       return null
 
-    return (
-      <View style={[styles.accessory, props.accessoryStyle]}>
-        {renderComponentOrElement(renderAccessory, props)}
-      </View>
-    )
+    return renderComponentOrElement(renderAccessory, props)
   }, [renderAccessory, props])
 
   return (
-    <View style={[styles.container, colorScheme === 'dark' && styles.container_dark, containerStyle]}>
-      <View style={[styles.primary, props.primaryStyle]}>
+    <View
+      style={[getColorSchemeStyle(styles, 'container', colorScheme), containerStyle]}
+    >
+      <View style={[getColorSchemeStyle(styles, 'primary', colorScheme), props.primaryStyle]}>
         {actionsFragment}
         {composerFragment}
         {sendFragment}
@@ -120,8 +118,5 @@ const styles = StyleSheet.create({
   primary: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-  },
-  accessory: {
-    height: 44,
   },
 })

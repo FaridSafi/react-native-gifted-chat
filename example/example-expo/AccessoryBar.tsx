@@ -107,14 +107,13 @@ const Button = ({
 
 const styles = StyleSheet.create({
   container: {
-    height: 44,
-    width: '100%',
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: 'rgba(0,0,0,0.3)',
+    paddingVertical: 5,
   },
   container_dark: {
     backgroundColor: '#1a1a1a',

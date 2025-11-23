@@ -133,16 +133,15 @@ export default CustomActions
 
 const styles = StyleSheet.create({
   container: {
-    width: 26,
-    height: 26,
-    marginLeft: 10,
-    marginBottom: 10,
+    paddingHorizontal: 8,
+    paddingVertical: 7,
   },
   wrapper: {
+    width: 26,
+    height: 26,
     borderRadius: 13,
     borderColor: '#b2b2b2',
     borderWidth: 2,
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

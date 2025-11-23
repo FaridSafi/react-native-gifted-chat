@@ -1,12 +1,3 @@
-import { Platform } from 'react-native'
-
-export const MIN_COMPOSER_HEIGHT = Platform.select({
-  ios: 33,
-  android: 41,
-  web: 34,
-  windows: 34,
-})
-export const MAX_COMPOSER_HEIGHT = 200
 export const DATE_FORMAT = 'D MMMM'
 export const TIME_FORMAT = 'LT'
 

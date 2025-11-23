@@ -19,7 +19,7 @@ export interface ActionsProps {
   icon?: () => ReactNode
   wrapperStyle?: StyleProp<ViewStyle>
   iconTextStyle?: StyleProp<TextStyle>
-  containerStyle?: StyleProp<ViewStyle>
+  buttonStyle?: StyleProp<ViewStyle>
   onPressActionButton?(): void
 }
 
@@ -30,11 +30,16 @@ export function Actions ({
   wrapperStyle,
   iconTextStyle,
   onPressActionButton,
-  containerStyle,
+  buttonStyle,
 }: ActionsProps) {
   const { actionSheet } = useChatContext()
 
-  const onActionsPress = useCallback(() => {
+  const handlePress = useCallback(() => {
+    if (onPressActionButton) {
+      onPressActionButton()
+      return
+    }
+
     if (!actions?.length)
       return
 
@@ -54,47 +59,51 @@ export function Actions ({
         item.action?.()
       }
     )
-  }, [actionSheet, actions, actionSheetOptionTintColor])
+  }, [actionSheet, actions, actionSheetOptionTintColor, onPressActionButton])
 
   const renderIcon = useCallback(() => {
     if (icon)
       return icon()
 
     return (
-      <View style={[stylesCommon.fill, stylesCommon.centerItems, styles.wrapper, wrapperStyle]}>
+      <View style={[stylesCommon.centerItems, styles.wrapper, wrapperStyle]}>
         <Text style={[styles.iconText, iconTextStyle]}>{'+'}</Text>
       </View>
     )
   }, [icon, iconTextStyle, wrapperStyle])
 
   return (
-    <TouchableOpacity
-      style={[styles.container, containerStyle]}
-      onPress={onPressActionButton || onActionsPress}
-    >
-      {renderIcon()}
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={handlePress}
+        style={[styles.button, buttonStyle]}
+      >
+        {renderIcon()}
+      </TouchableOpacity>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: 26,
-    height: 26,
-    marginLeft: 10,
-    marginBottom: 10,
+    alignItems: 'flex-end',
   },
+  button: {
+    paddingHorizontal: 8,
+    paddingVertical: 7,
+  },
+
   wrapper: {
-    borderRadius: 13,
     borderColor: Color.defaultColor,
     borderWidth: 2,
+    width: 26,
+    height: 26,
+    borderRadius: 13,
   },
   iconText: {
     color: Color.defaultColor,
     fontWeight: 'bold',
     fontSize: 16,
     lineHeight: 16,
-    backgroundColor: Color.backgroundTransparent,
-    textAlign: 'center',
   },
 })

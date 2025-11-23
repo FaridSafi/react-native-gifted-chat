@@ -21,7 +21,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { KeyboardAvoidingView, KeyboardProvider } from 'react-native-keyboard-controller'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TEST_ID } from '../Constant'
+import { TEST_ID } from '../Constant'
 import { GiftedChatContext } from '../GiftedChatContext'
 import { InputToolbar } from '../InputToolbar'
 import { MessageContainer, AnimatedList } from '../MessageContainer'
@@ -55,8 +55,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     renderChatFooter,
     renderInputToolbar,
     isInverted = true,
-    minComposerHeight = MIN_COMPOSER_HEIGHT,
-    maxComposerHeight = MAX_COMPOSER_HEIGHT,
   } = props
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
@@ -72,9 +70,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   )
 
   const [isInitialized, setIsInitialized] = useState<boolean>(false)
-  const [composerHeight, setComposerHeight] = useState<number>(
-    minComposerHeight!
-  )
+  const [composerHeight, setComposerHeight] = useState<number>()
   const [text, setText] = useState<string | undefined>(() => props.text || '')
 
   const getTextFromProp = useCallback(
@@ -142,10 +138,8 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
     notifyInputTextReset()
 
-    setComposerHeight(minComposerHeight!)
     setText(getTextFromProp(''))
   }, [
-    minComposerHeight,
     getTextFromProp,
     textInputRef,
     notifyInputTextReset,
@@ -175,18 +169,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     [messageIdGenerator, onSend, user, resetInputToolbar, scrollToBottom]
   )
 
-  const onInputSizeChanged = useCallback(
-    (size: { height: number }) => {
-      const newComposerHeight = Math.max(
-        minComposerHeight!,
-        Math.min(maxComposerHeight!, size.height)
-      )
-
-      setComposerHeight(newComposerHeight)
-    },
-    [maxComposerHeight, minComposerHeight]
-  )
-
   const _onChangeText = useCallback(
     (text: string) => {
       props.textInputProps?.onChangeText?.(text)
@@ -211,10 +193,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       notifyInputTextReset()
 
       setIsInitialized(true)
-      setComposerHeight(minComposerHeight!)
       setText(getTextFromProp(initialText))
     },
-    [isInitialized, initialText, minComposerHeight, notifyInputTextReset, getTextFromProp]
+    [isInitialized, initialText, notifyInputTextReset, getTextFromProp]
   )
 
   const inputToolbarFragment = useMemo(() => {
@@ -224,9 +205,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     const inputToolbarProps = {
       ...props,
       text: getTextFromProp(text!),
-      composerHeight: Math.max(minComposerHeight!, composerHeight),
       onSend: _onSend,
-      onInputSizeChanged,
       textInputProps: {
         ...textInputProps,
         onChangeText: _onChangeText,
@@ -242,12 +221,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     isInitialized,
     _onSend,
     getTextFromProp,
-    minComposerHeight,
-    onInputSizeChanged,
     props,
     text,
     renderInputToolbar,
-    composerHeight,
     textInputRef,
     textInputProps,
     _onChangeText,

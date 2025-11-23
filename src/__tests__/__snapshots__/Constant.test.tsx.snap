@@ -3,8 +3,6 @@
 exports[`should compare Constant with snapshot 1`] = `
 {
   "DATE_FORMAT": "D MMMM",
-  "MAX_COMPOSER_HEIGHT": 200,
-  "MIN_COMPOSER_HEIGHT": 33,
   "TEST_ID": {
     "LOADING_WRAPPER": "GC_LOADING_CONTAINER",
     "SEND_TOUCHABLE": "GC_SEND_TOUCHABLE",

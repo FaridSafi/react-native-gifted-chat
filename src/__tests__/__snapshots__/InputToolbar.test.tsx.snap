@@ -43,15 +43,25 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
         enablesReturnKeyAutomatically={true}
         keyboardAppearance="default"
         multiline={true}
+        onChange={[Function]}
         placeholder="Type a message..."
         placeholderTextColor="#b2b2b2"
         style={
           [
+            [
+              {
+                "fontSize": 16,
+                "lineHeight": 22,
+                "paddingBottom": 10,
+                "paddingTop": 8,
+              },
+              undefined,
+            ],
             {
-              "fontSize": 16,
-              "lineHeight": 22,
-              "paddingBottom": 10,
-              "paddingTop": 8,
+              "outlineStyle": "none",
+            },
+            {
+              "height": undefined,
             },
             undefined,
           ]

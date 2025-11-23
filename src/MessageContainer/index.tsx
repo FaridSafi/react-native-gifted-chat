@@ -401,6 +401,8 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
         scrollEventThrottle={1}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
+        keyboardDismissMode='interactive'
+        keyboardShouldPersistTaps='handled'
         {...listProps}
         onScroll={scrollHandler}
         onLayout={onLayoutList}

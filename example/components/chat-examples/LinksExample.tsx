@@ -11,7 +11,7 @@ const LinksExample: React.FC = () => {
   const insets = useSafeAreaInsets()
 
   const tabbarHeight = 50
-  const keyboardBottomOffset = insets.bottom + tabbarHeight
+  const keyboardVerticalOffset = insets.bottom + tabbarHeight
 
   const initialMessages: IMessage[] = useMemo(() => [
     {
@@ -152,7 +152,7 @@ const LinksExample: React.FC = () => {
             phone: false,
             matchers,
           }}
-          keyboardBottomOffset={keyboardBottomOffset}
+          keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
         />
       </View>
     </ActionSheetProvider>

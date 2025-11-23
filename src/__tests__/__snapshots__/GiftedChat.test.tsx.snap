@@ -1,13 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
-<KeyboardProvider>
-  <View
-    style={
-      {
-        "flex": 1,
-      }
+<View
+  style={
+    {
+      "flex": 1,
     }
+  }
+>
+  <KeyboardProvider
+    navigationBarTranslucent={false}
+    statusBarTranslucent={false}
   >
     <View
       style={
@@ -17,55 +20,29 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
       }
     >
       <View
-        onLayout={[Function]}
+        behavior="padding"
         style={
-          [
-            {
-              "flex": 1,
-            },
-            {
-              "overflow": "hidden",
-            },
-          ]
+          {
+            "flex": 1,
+          }
         }
-        testID="GC_WRAPPER"
-      />
+      >
+        <View
+          onLayout={[Function]}
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              {
+                "overflow": "hidden",
+              },
+            ]
+          }
+          testID="GC_WRAPPER"
+        />
+      </View>
     </View>
-  </View>
-</KeyboardProvider>
-`;
-
-exports[`should render <GiftedChat/> with isKeyboardInternallyHandled=false 1`] = `
-<KeyboardProvider>
-  <View
-    style={
-      {
-        "flex": 1,
-      }
-    }
-  >
-    <View
-      style={
-        {
-          "flex": 1,
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          [
-            {
-              "flex": 1,
-            },
-            {
-              "overflow": "hidden",
-            },
-          ]
-        }
-        testID="GC_WRAPPER"
-      />
-    </View>
-  </View>
-</KeyboardProvider>
+  </KeyboardProvider>
+</View>
 `;

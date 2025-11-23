@@ -69,7 +69,7 @@ const initialMessages: IMessage[] = [
       name: 'React Native',
     },
     image:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Paris_-_Eiffelturm_und_Marsfeld2.jpg/280px-Paris_-_Eiffelturm_und_Marsfeld2.jpg',
+      'https://static.vecteezy.com/system/resources/thumbnails/003/407/768/small/eiffel-tower-at-paris-france-free-photo.jpg',
     sent: true,
     received: true,
   },
@@ -377,7 +377,7 @@ const CustomActions = ({
   }, [showActionSheetWithOptions, handlePickImage, handleTakePicture, handleSendLocation])
 
   const renderIconComponent = useCallback(() => {
-    if (renderIcon) 
+    if (renderIcon)
       return renderIcon()
 
     const wrapperColorStyle = colorScheme === 'dark' ? customActionsStyles.wrapper_dark : {}

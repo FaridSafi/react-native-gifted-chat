@@ -12,7 +12,7 @@ export default function SlackExample () {
   const insets = useSafeAreaInsets()
 
   const tabbarHeight = 50
-  const keyboardBottomOffset = insets.bottom + tabbarHeight
+  const keyboardVerticalOffset = insets.bottom + tabbarHeight
 
   const user = useMemo(() => ({
     _id: 1,
@@ -41,7 +41,7 @@ export default function SlackExample () {
         textInputProps={{
           style: getColorSchemeStyle(styles, 'composer', colorScheme),
         }}
-        keyboardBottomOffset={keyboardBottomOffset}
+        keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
       />
     </View>
   )

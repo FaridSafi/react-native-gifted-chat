@@ -19,36 +19,6 @@ import Zoom from 'react-native-zoom-reanimated'
 import { IMessage } from './Models'
 import commonStyles from './styles'
 
-const styles = StyleSheet.create({
-  image: {
-    width: 150,
-    height: 100,
-    borderRadius: 13,
-    margin: 3,
-    resizeMode: 'cover',
-  },
-  modalContent: {
-    backgroundColor: '#000',
-  },
-  modalImageContainer: {
-    width: '100%',
-    height: '100%',
-  },
-
-  closeButtonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  closeButtonContent: {
-    padding: 10,
-  },
-  closeButtonIcon: {
-    fontSize: 20,
-    lineHeight: 20,
-    color: 'white',
-  },
-})
-
 export interface MessageImageProps<TMessage extends IMessage> {
   currentMessage: TMessage
   containerStyle?: StyleProp<ViewStyle>
@@ -140,6 +110,7 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
           style={computedImageStyle}
           source={imageSource}
           onLayout={handleImageLayout}
+          resizeMode='cover'
         />
       </TouchableOpacity>
 
@@ -179,3 +150,32 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  image: {
+    width: 150,
+    height: 100,
+    borderRadius: 13,
+    margin: 3,
+  },
+  modalContent: {
+    backgroundColor: '#000',
+  },
+  modalImageContainer: {
+    width: '100%',
+    height: '100%',
+  },
+
+  closeButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  closeButtonContent: {
+    padding: 20,
+  },
+  closeButtonIcon: {
+    fontSize: 20,
+    lineHeight: 20,
+    color: 'white',
+  },
+})

@@ -8,21 +8,26 @@
    yarn install
    ```
 
-2. Install iOS pods:
-
+2. Install iOS dev build (only needed once or after rebuilding native dependencies):
    ```bash
-   yarn pod:install
+   yarn installDevBuild:ios
    ```
 
-3. Switch to development build:
+   or
+
+   ```bash
+   yarn installDevBuild:android
+   ```
+
+3. Start metro bundler:
+
+   ```bash
+   yarn start
+   ```
+
+4. Switch to development build:
 
 Press `s` in terminal with metro
-
-4. Install iOS dev build (only needed once or after rebuilding native dependencies):
-
-   ```bash
-   yarn ios:installDevBuild
-   ```
 
 5. Start the example app on iOS simulator:
 

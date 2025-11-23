@@ -42,7 +42,7 @@ const messages: IMessage[] = [
       name: 'React Native',
     },
     image:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Paris_-_Eiffelturm_und_Marsfeld2.jpg/280px-Paris_-_Eiffelturm_und_Marsfeld2.jpg',
+      'https://static.vecteezy.com/system/resources/thumbnails/003/407/768/small/eiffel-tower-at-paris-france-free-photo.jpg',
     sent: true,
     received: true,
   },

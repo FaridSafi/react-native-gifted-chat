@@ -8,6 +8,7 @@ import {
 import {
   ActionSheetOptions,
 } from '@expo/react-native-action-sheet'
+import { KeyboardProvider, KeyboardAvoidingViewProps } from 'react-native-keyboard-controller'
 import { ActionsProps } from '../Actions'
 import { AvatarProps } from '../Avatar'
 import { BubbleProps } from '../Bubble'
@@ -50,8 +51,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   dateFormat?: string
   /* Format to use for rendering relative times; Today - for now. See more: https://day.js.org/docs/en/plugin/calendar */
   dateFormatCalendar?: object
-  /* Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true` */
-  isKeyboardInternallyHandled?: boolean
   /* Whether to render an avatar for the current user; default is false, only show avatars for other users */
   isUserAvatarVisible?: boolean
   /* When false, avatars will only be displayed when a consecutive message is from the same user on the same day; default is false */
@@ -60,10 +59,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   isAvatarOnTop?: boolean
   /* Extra props to be passed to the <Image> component created by the default renderMessageImage */
   imageProps?: MessageImageProps<TMessage>
-  /* Distance of the chat from the bottom of the screen (e.g. useful if you display a tab bar); default is 0 */
-  keyboardBottomOffset?: number
-  /* Focus on <TextInput> automatically when opening the keyboard; default is true */
-  shouldFocusInputOnKeyboardOpen?: boolean
   /* Minimum height of the input toolbar; default is 44 */
   minInputToolbarHeight?: number
   /*  Extra props to be passed to the <TextInput>. See https://reactnative.dev/docs/textinput */
@@ -146,4 +141,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
     quickReplies: QuickRepliesProps<TMessage>,
   ) => React.ReactNode
   renderQuickReplySend?: () => React.ReactNode
+  keyboardProviderProps?: React.ComponentProps<typeof KeyboardProvider>
+  keyboardAvoidingViewProps?: KeyboardAvoidingViewProps
 }

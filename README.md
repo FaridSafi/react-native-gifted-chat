@@ -113,18 +113,18 @@
 
 Yarn:
 ```bash
-yarn add react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context
+yarn add react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context react-native-keyboard-controller
 ```
 
 Npm:
 
 ```bash
-npm install --save react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context
+npm install --save react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context react-native-keyboard-controller
 ```
 
 Expo
 ```bash
-npx expo install react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context
+npx expo install react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context react-native-keyboard-controller
 ```
 
 ### Non-expo users
@@ -152,7 +152,7 @@ export function Example() {
 
   // If you have a tab bar, include its height
   const tabbarHeight = 50
-  const keyboardBottomOffset = insets.bottom + tabbarHeight
+  const keyboardVerticalOffset = insets.bottom + tabbarHeight
 
   useEffect(() => {
     setMessages([
@@ -182,7 +182,8 @@ export function Example() {
       user={{
         _id: 1,
       }}
-      keyboardBottomOffset={keyboardBottomOffset}
+
+      keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
     />
   )
 }
@@ -213,9 +214,8 @@ Messages, system messages, quick replies etc.: [data structure](src/Models.ts)
 
 ### Keyboard & Layout
 
-- **`keyboardBottomOffset`** _(Integer)_ - Distance between the bottom of the screen and bottom of the `GiftedChat` component. Useful when you have a tab bar or navigation bar; default is `0`. Needed for correct keyboard avoiding behavior. Without it you might see gap between the keyboard and the input toolbar if you have a tab bar, navigation bar, or safe area.
-- **`isKeyboardInternallyHandled`** _(Bool)_ - Determine whether to handle keyboard awareness inside the plugin. If you have your own keyboard handling outside the plugin set this to false; default is `true`
-- **`shouldFocusInputOnKeyboardOpen`** _(Bool)_ - Focus on <TextInput> automatically when opening the keyboard; default `true`
+- **`keyboardProviderProps`** _(Object)_ - Props to be passed to the [`KeyboardProvider`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/keyboard-provider) for keyboard handling.
+- **`keyboardAvoidingViewProps`** _(Object)_ - Props to be passed to the [`KeyboardAvoidingView`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/keyboard-avoiding-view). The `behavior` prop defaults to `'padding'`.
 - **`isAlignedTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 - **`isInverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
 

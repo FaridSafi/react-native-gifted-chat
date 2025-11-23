@@ -1,10 +1,12 @@
 import React, { useCallback } from 'react'
-import { Platform } from 'react-native'
+import { Platform, View, Text } from 'react-native'
 import * as Linking from 'expo-linking'
 import { RectButton } from 'react-native-gesture-handler'
 import MapView from 'react-native-maps'
+import commonStyles from '../../styles'
 import { styles } from './styles'
 import type { CustomViewProps } from './types'
+import Constants from 'expo-constants'
 
 const CustomView = ({
   currentMessage,
@@ -35,25 +37,41 @@ const CustomView = ({
     }
   }, [currentMessage])
 
-  if (currentMessage.location)
+  if (currentMessage.location) {
+    // Check if Google Maps API key is configured for Android
+    const androidApiKey = Constants.expoConfig?.android?.config?.googleMaps?.apiKey
+    const hasAndroidApiKey = androidApiKey && androidApiKey !== 'YOUR_GOOGLE_MAPS_API_KEY'
+    const shouldShowPlaceholder = Platform.OS === 'android' && !hasAndroidApiKey
+
+    // Use native MapView for iOS or Android with API key
     return (
       <RectButton
         style={containerStyle}
         onPress={openMapAsync}
       >
-        <MapView
-          style={[styles.mapView, mapViewStyle]}
-          region={{
-            latitude: currentMessage.location.latitude,
-            longitude: currentMessage.location.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-          scrollEnabled={false}
-          zoomEnabled={false}
-        />
+        {
+          shouldShowPlaceholder
+            ? (
+              <View style={[commonStyles.center, styles.mapView, styles.mapViewPlaceholder, mapViewStyle]}>
+                <Text style={commonStyles.textCenter}>Google Maps API key is not configured.</Text>
+              </View>
+            ) : (
+              <MapView
+                style={[styles.mapView, mapViewStyle]}
+                region={{
+                  latitude: currentMessage.location.latitude,
+                  longitude: currentMessage.location.longitude,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                }}
+                scrollEnabled={false}
+                zoomEnabled={false}
+              />
+            )
+        }
       </RectButton>
     )
+  }
 
   return null
 }

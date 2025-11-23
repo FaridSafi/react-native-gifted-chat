@@ -7,4 +7,8 @@ export const styles = StyleSheet.create({
     borderRadius: 13,
     margin: 3,
   },
+
+  mapViewPlaceholder: {
+    padding: 5,
+  },
 })

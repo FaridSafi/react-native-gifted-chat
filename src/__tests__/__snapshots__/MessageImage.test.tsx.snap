@@ -38,6 +38,7 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
   >
     <Image
       onLayout={[Function]}
+      resizeMode="cover"
       source={
         {
           "uri": "url://to/image.png",
@@ -49,7 +50,6 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
             "borderRadius": 13,
             "height": 100,
             "margin": 3,
-            "resizeMode": "cover",
             "width": 150,
           },
           undefined,

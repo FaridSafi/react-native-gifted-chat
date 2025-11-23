@@ -21,7 +21,7 @@ const Chats = () => {
   const insets = useSafeAreaInsets()
 
   const tabbarHeight = 50
-  const keyboardBottomOffset = insets.bottom + tabbarHeight
+  const keyboardVerticalOffset = insets.bottom + tabbarHeight
 
   useEffect(() => {
     setMessages(initialMessages.reverse())
@@ -65,7 +65,7 @@ const Chats = () => {
         style: isDark && { backgroundColor: '#2a2a2a', color: '#fff' },
         onChangeText: setText,
       }}
-      keyboardBottomOffset={keyboardBottomOffset}
+      keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
     />
   )
 }

@@ -19,14 +19,7 @@ import {
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import Animated, {
-  useAnimatedStyle,
-  useAnimatedReaction,
-  useSharedValue,
-  withTiming,
-  runOnJS,
-  useAnimatedKeyboard,
-} from 'react-native-reanimated'
+import { KeyboardAvoidingView, KeyboardProvider } from 'react-native-keyboard-controller'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { MAX_COMPOSER_HEIGHT, MIN_COMPOSER_HEIGHT, TEST_ID } from '../Constant'
 import { GiftedChatContext } from '../GiftedChatContext'
@@ -61,12 +54,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     textInputProps,
     renderChatFooter,
     renderInputToolbar,
-    keyboardBottomOffset = 0,
-    shouldFocusInputOnKeyboardOpen = true,
     isInverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
-    isKeyboardInternallyHandled = true,
   } = props
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
@@ -81,36 +71,11 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     [props.textInputRef]
   )
 
-  const isTextInputWasFocused: RefObject<boolean> = useRef(false)
-
   const [isInitialized, setIsInitialized] = useState<boolean>(false)
   const [composerHeight, setComposerHeight] = useState<number>(
     minComposerHeight!
   )
   const [text, setText] = useState<string | undefined>(() => props.text || '')
-
-  // Always call the hook, but conditionally use its data
-  const keyboardData = useAnimatedKeyboard()
-
-  // Create a mock keyboard object when keyboard is not internally handled
-  const keyboard = useMemo(() => {
-    if (!isKeyboardInternallyHandled)
-      return { height: { value: 0 } }
-
-    return keyboardData
-  }, [isKeyboardInternallyHandled, keyboardData])
-
-  const trackingKeyboardMovement = useSharedValue(false)
-  const keyboardBottomOffsetAnim = useSharedValue(0)
-
-  const contentStyleAnim = useAnimatedStyle(
-    () => ({
-      transform: [
-        { translateY: keyboard.height.value + keyboardBottomOffsetAnim.value },
-      ],
-    }),
-    [keyboard, keyboardBottomOffsetAnim]
-  )
 
   const getTextFromProp = useCallback(
     (fallback: string) => {
@@ -121,34 +86,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     },
     [props.text]
   )
-
-  /**
-   * Store text input focus status when keyboard hide to retrieve
-   * it afterwards if needed.
-   * `onKeyboardWillHide` may be called twice in sequence so we
-   * make a guard condition (eg. showing image picker)
-   */
-  const handleTextInputFocusWhenKeyboardHide = useCallback(() => {
-    if (!isTextInputWasFocused.current)
-      isTextInputWasFocused.current =
-        textInputRef.current?.isFocused() || false
-  }, [textInputRef])
-
-  /**
-   * Refocus the text input only if it was focused before showing keyboard.
-   * This is needed in some cases (eg. showing image picker).
-   */
-  const handleTextInputFocusWhenKeyboardShow = useCallback(() => {
-    if (
-      textInputRef.current &&
-      isTextInputWasFocused.current &&
-      !textInputRef.current.isFocused()
-    )
-      textInputRef.current.focus()
-
-    // Reset the indicator since the keyboard is shown
-    isTextInputWasFocused.current = false
-  }, [textInputRef])
 
   const scrollToBottom = useCallback(
     (isAnimated = true) => {
@@ -334,74 +271,53 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       setText(props.text)
   }, [props.text])
 
-  // Only set up keyboard animation when keyboard is internally handled
-  useAnimatedReaction(
-    () => isKeyboardInternallyHandled ? keyboard.height.value : 0,
-    (value, prevValue) => {
-      // Skip keyboard handling when not internally handled
-      if (!isKeyboardInternallyHandled)
-        return
-
-      if (prevValue !== null && value !== prevValue) {
-        const isKeyboardMovingUp = value < prevValue
-        if (isKeyboardMovingUp !== trackingKeyboardMovement.value) {
-          trackingKeyboardMovement.value = isKeyboardMovingUp
-          keyboardBottomOffsetAnim.value = withTiming(
-            isKeyboardMovingUp ? keyboardBottomOffset : 0,
-            {
-              // If `keyboardBottomOffset` exists, we change the duration to a smaller value to fix the delay in the keyboard animation speed
-              duration: keyboardBottomOffset ? 150 : 400,
-            }
-          )
-
-          if (shouldFocusInputOnKeyboardOpen)
-            if (isKeyboardMovingUp)
-              runOnJS(handleTextInputFocusWhenKeyboardShow)()
-            else
-              runOnJS(handleTextInputFocusWhenKeyboardHide)()
-        }
-      }
-    },
-    [
-      keyboard,
-      trackingKeyboardMovement,
-      shouldFocusInputOnKeyboardOpen,
-      handleTextInputFocusWhenKeyboardHide,
-      handleTextInputFocusWhenKeyboardShow,
-      keyboardBottomOffset,
-      isKeyboardInternallyHandled,
-    ]
-  )
-
   return (
     <GiftedChatContext.Provider value={contextValues}>
       <ActionSheetProvider ref={actionSheetRef}>
-        <View
-          testID={TEST_ID.WRAPPER}
-          style={[stylesCommon.fill, styles.contentContainer]}
-          onLayout={onInitialLayoutViewLayout}
+        {/* @ts-expect-error */}
+        <KeyboardAvoidingView
+          behavior='padding'
+          style={stylesCommon.fill}
+          {...props.keyboardAvoidingViewProps}
         >
-          {isInitialized
-            ? (
-              <Animated.View style={[stylesCommon.fill, isKeyboardInternallyHandled && contentStyleAnim]}>
-                {renderMessages}
-                {inputToolbarFragment}
-              </Animated.View>
-            )
-            : (
-              renderComponentOrElement(renderLoading, {})
-            )}
-        </View>
+          <View
+            testID={TEST_ID.WRAPPER}
+            style={[stylesCommon.fill, styles.contentContainer]}
+            onLayout={onInitialLayoutViewLayout}
+          >
+            {isInitialized
+              ? (
+                <>
+                  {renderMessages}
+                  {inputToolbarFragment}
+                </>
+              )
+              : (
+                renderComponentOrElement(renderLoading, {})
+              )}
+          </View>
+        </KeyboardAvoidingView>
       </ActionSheetProvider>
     </GiftedChatContext.Provider>
   )
 }
 
 function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedChatProps<TMessage>) {
+  const {
+    keyboardProviderProps,
+    ...rest
+  } = props
+
   return (
     <GestureHandlerRootView style={styles.fill}>
       <SafeAreaProvider>
-        <GiftedChat<TMessage> {...props} />
+        <KeyboardProvider
+          statusBarTranslucent={false}
+          navigationBarTranslucent={false}
+          {...keyboardProviderProps}
+        >
+          <GiftedChat<TMessage> {...rest} />
+        </KeyboardProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   )

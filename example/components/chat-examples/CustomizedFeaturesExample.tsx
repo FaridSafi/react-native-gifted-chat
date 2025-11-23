@@ -8,7 +8,6 @@ import CustomView from '../../example-expo/CustomView'
 import earlierMessages from '../../example-expo/data/earlierMessages'
 import messagesData from '../../example-expo/data/messages'
 import { getColorSchemeStyle } from '../../utils/styleUtils'
-import { AutolinkProps } from 'react-native-autolink'
 
 export default function CustomizedFeaturesExample () {
   const [messages, setMessages] = useState<IMessage[]>(messagesData)
@@ -18,7 +17,7 @@ export default function CustomizedFeaturesExample () {
   const insets = useSafeAreaInsets()
 
   const tabbarHeight = 50
-  const keyboardBottomOffset = insets.bottom + tabbarHeight
+  const keyboardVerticalOffset = insets.bottom + tabbarHeight
 
   const user = useMemo(() => ({
     _id: 1,
@@ -76,7 +75,7 @@ export default function CustomizedFeaturesExample () {
         messageTextProps={{
           hashtag: 'twitter',
         }}
-        keyboardBottomOffset={keyboardBottomOffset}
+        keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
         isScrollToBottomEnabled
       />
     </View>

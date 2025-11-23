@@ -4,7 +4,7 @@ import {
   Text,
 } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
-import { styles } from './styles'
+import styles from './styles'
 import type { CustomViewProps } from './types'
 
 const CustomView = ({
@@ -17,13 +17,10 @@ const CustomView = ({
 
   if (currentMessage.location)
     return (
-      <RectButton
-        style={[styles.container, containerStyle]}
-        onPress={openMapAsync}
-      >
-        <View style={{ padding: 15 }}>
-          <Text style={{ color: 'tomato', fontWeight: 'bold' }}>
-            Map not supported in web yet, sorry!
+      <RectButton onPress={openMapAsync}>
+        <View style={[styles.mapView, containerStyle]}>
+          <Text style={styles.text}>
+            Maps are not supported on web, sorry!
           </Text>
         </View>
       </RectButton>

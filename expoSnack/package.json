@@ -23,7 +23,7 @@
     "react-native-worklets": "0.5.1",
     "react-native-reanimated": "~4.1.1",
     "@react-navigation/native": "^7.1.20",
-    "react-native-gifted-chat": "^3.0.0",
+    "react-native-gifted-chat": "^3.0.1",
     "@react-navigation/elements": "^2.8.2",
     "react-native-gesture-handler": "~2.28.0",
     "@react-navigation/bottom-tabs": "^7.8.5",

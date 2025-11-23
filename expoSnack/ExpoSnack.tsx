@@ -549,6 +549,55 @@ const accessoryBarStyles = StyleSheet.create({
 })
 
 // ============================================================================
+// Custom View Component (for location messages)
+// ============================================================================
+
+interface CustomViewProps {
+  currentMessage: IMessage
+  containerStyle?: any
+}
+
+const CustomView = ({ currentMessage, containerStyle }: CustomViewProps) => {
+  const handlePress = useCallback(() => {
+    alert('Opening the map is not supported in this demo.')
+  }, [])
+
+  if (currentMessage.location)
+    return (
+      <RectButton onPress={handlePress}>
+        <View style={[customViewStyles.container, containerStyle]}>
+          <MaterialIcons name='location-on' size={24} color='tomato' />
+          <Text style={customViewStyles.text}>
+            Location: {currentMessage.location.latitude.toFixed(4)}, {currentMessage.location.longitude.toFixed(4)}
+          </Text>
+        </View>
+      </RectButton>
+    )
+
+  return null
+}
+
+const customViewStyles = StyleSheet.create({
+  container: {
+    width: 150,
+    height: 100,
+    borderRadius: 13,
+    margin: 3,
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: 'tomato',
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginTop: 5,
+    textAlign: 'center',
+  },
+})
+
+// ============================================================================
 // Main Chat Component
 // ============================================================================
 
@@ -596,6 +645,11 @@ function ChatExample() {
     [onSend, user]
   )
 
+  const renderCustomView = useCallback(
+    (props: any) => <CustomView {...props} />,
+    []
+  )
+
   return (
     <View style={[styles.container, getColorSchemeStyle(styles, 'container', colorScheme)]}>
       <GiftedChat
@@ -609,11 +663,11 @@ function ChatExample() {
         user={user}
         renderActions={renderActions}
         renderAccessory={renderAccessory}
+        renderCustomView={renderCustomView}
         isTyping={isTyping}
         messagesContainerStyle={getColorSchemeStyle(styles, 'messagesContainer', colorScheme)}
         textInputProps={{
           style: getColorSchemeStyle(styles, 'composer', colorScheme),
-          outlineStyle: 'none',
         }}
       />
     </View>

@@ -4,8 +4,6 @@ PODS:
   - EXImageLoader (6.0.0):
     - ExpoModulesCore
     - React-Core
-  - EXPermissions (14.4.0):
-    - ExpoModulesCore
   - Expo (54.0.23):
     - ExpoModulesCore
     - hermes-engine
@@ -1390,7 +1388,7 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-  - react-native-keyboard-controller (1.19.5):
+  - react-native-keyboard-controller (1.19.6):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1402,7 +1400,7 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-keyboard-controller/common (= 1.19.5)
+    - react-native-keyboard-controller/common (= 1.19.6)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1413,7 +1411,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-keyboard-controller/common (1.19.5):
+  - react-native-keyboard-controller/common (1.19.6):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2086,7 +2084,6 @@ PODS:
 DEPENDENCIES:
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - EXImageLoader (from `../node_modules/expo-image-loader/ios`)
-  - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - Expo (from `../node_modules/expo`)
   - ExpoAsset (from `../node_modules/expo-asset/ios`)
   - ExpoClipboard (from `../node_modules/expo-clipboard/ios`)
@@ -2195,8 +2192,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-constants/ios"
   EXImageLoader:
     :path: "../node_modules/expo-image-loader/ios"
-  EXPermissions:
-    :path: "../node_modules/expo-permissions/ios"
   Expo:
     :path: "../node_modules/expo"
   ExpoAsset:
@@ -2384,7 +2379,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   EXConstants: fd688cef4e401dcf798a021cfb5d87c890c30ba3
   EXImageLoader: 189e3476581efe3ad4d1d3fb4735b7179eb26f05
-  EXPermissions: 490e55ef5b334c5b2072e1ebd40e2bc1950cea73
   Expo: fb09185d798c2876a4c5ca89a5c6b8b72b6dbecf
   ExpoAsset: 9ba6fbd677fb8e241a3899ac00fa735bc911eadf
   ExpoClipboard: af650d14765f19c60ce2a1eaf9dfe6445eff7365
@@ -2440,7 +2434,7 @@ SPEC CHECKSUMS:
   React-logger: 50fdb9a8236da90c0b1072da5c32ee03aeb5bf28
   React-Mapbuffer: 9050ee10c19f4f7fca8963d0211b2854d624973e
   React-microtasksnativemodule: f775db9e991c6f3b8ccbc02bfcde22770f96e23b
-  react-native-keyboard-controller: fadaf059a172bb6e7105166b08c589aa0a0690d3
+  react-native-keyboard-controller: c423a0f677713a1a6ec644d94f9954e5e0af23ec
   react-native-maps: 9febd31278b35cd21e4fad2cf6fa708993be5dab
   react-native-safe-area-context: 37e680fc4cace3c0030ee46e8987d24f5d3bdab2
   React-NativeModulesApple: 8969913947d5b576de4ed371a939455a8daf28aa

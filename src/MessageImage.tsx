@@ -19,13 +19,90 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-  runOnJS,
   Easing,
+  runOnJS,
 } from 'react-native-reanimated'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
 import Zoom from 'react-native-zoom-reanimated'
 import { IMessage } from './Models'
 import commonStyles from './styles'
+
+interface ModalContentProps {
+  isVisible: boolean
+  imageSource: ImageURISource
+  modalImageDimensions: { width: number, height: number } | undefined
+  imageProps?: Partial<ImageProps>
+  onClose: () => void
+}
+
+function ModalContent({ isVisible, imageSource, modalImageDimensions, imageProps, onClose }: ModalContentProps) {
+  const insets = useSafeAreaInsets()
+
+  // Animation values
+  const modalOpacity = useSharedValue(0)
+  const modalScale = useSharedValue(0.9)
+  const modalBorderRadius = useSharedValue(40)
+
+  const handleModalClose = useCallback(() => {
+    modalOpacity.value = withTiming(0, { duration: 200, easing: Easing.in(Easing.ease) })
+    modalScale.value = withTiming(0.9, { duration: 200, easing: Easing.in(Easing.ease) }, () => {
+      runOnJS(onClose)()
+    })
+    modalBorderRadius.value = withTiming(40, { duration: 200, easing: Easing.in(Easing.ease) })
+  }, [onClose, modalOpacity, modalScale, modalBorderRadius])
+
+  // Animate on visibility change
+  useEffect(() => {
+    if (isVisible) {
+      modalOpacity.value = withTiming(1, { duration: 300, easing: Easing.out(Easing.ease) })
+      modalScale.value = withTiming(1, { duration: 300, easing: Easing.out(Easing.ease) })
+      modalBorderRadius.value = withTiming(0, { duration: 300, easing: Easing.out(Easing.ease) })
+    }
+  }, [isVisible, modalOpacity, modalScale, modalBorderRadius])
+
+  const modalAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: modalOpacity.value,
+    transform: [{ scale: modalScale.value }],
+  }), [modalOpacity, modalScale])
+
+  const modalBorderRadiusStyle = useAnimatedStyle(() => ({
+    borderRadius: modalBorderRadius.value,
+  }), [modalBorderRadius])
+
+  return (
+    <>
+      <StatusBar animated barStyle='dark-content' />
+      <Animated.View style={[styles.modalOverlay, modalAnimatedStyle, modalBorderRadiusStyle]}>
+        <GestureHandlerRootView style={commonStyles.fill}>
+          <Animated.View style={[commonStyles.fill, styles.modalContent, modalBorderRadiusStyle, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
+
+            {/* close button */}
+            <View style={styles.closeButtonContainer}>
+              <BaseButton onPress={handleModalClose}>
+                <View style={styles.closeButtonContent}>
+                  <Text style={styles.closeButtonIcon}>
+                    {'X'}
+                  </Text>
+                </View>
+              </BaseButton>
+            </View>
+
+            <View style={[commonStyles.fill, commonStyles.centerItems]}>
+              <Zoom>
+                <Image
+                  style={modalImageDimensions}
+                  source={imageSource}
+                  resizeMode='contain'
+                  {...imageProps}
+                />
+              </Zoom>
+            </View>
+          </Animated.View>
+        </GestureHandlerRootView>
+      </Animated.View>
+    </>
+  )
+}
 
 export interface MessageImageProps<TMessage extends IMessage> {
   currentMessage: TMessage
@@ -46,12 +123,6 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
   const [imageDimensions, setImageDimensions] = useState<{ width: number, height: number }>()
   const windowDimensions = useWindowDimensions()
 
-  const insets = useSafeAreaInsets()
-
-  // Animation values
-  const modalOpacity = useSharedValue(0)
-  const modalScale = useSharedValue(0.9)
-
   const imageSource = useMemo(() => ({
     ...imageSourceProps,
     uri: currentMessage?.image,
@@ -70,23 +141,15 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
 
     setIsModalVisible(true)
 
-    // Animate modal entrance
-    modalOpacity.value = withTiming(1, { duration: 300, easing: Easing.out(Easing.ease) })
-    modalScale.value = withTiming(1, { duration: 300, easing: Easing.out(Easing.ease) })
-
     if (isImageSourceChanged.current || !imageDimensions)
       Image.getSize(imageSource.uri, (width, height) => {
         setImageDimensions({ width, height })
       })
-  }, [imageSource.uri, imageDimensions, modalOpacity, modalScale])
+  }, [imageSource.uri, imageDimensions])
 
   const handleModalClose = useCallback(() => {
-    // Animate modal exit
-    modalOpacity.value = withTiming(0, { duration: 200, easing: Easing.in(Easing.ease) })
-    modalScale.value = withTiming(0.9, { duration: 200, easing: Easing.in(Easing.ease) }, () => {
-      runOnJS(setIsModalVisible)(false)
-    })
-  }, [modalOpacity, modalScale])
+    setIsModalVisible(false)
+  }, [])
 
   const handleImageLayout = useCallback((e: LayoutChangeEvent) => {
     setImageDimensions({
@@ -115,11 +178,6 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
     }
   }, [imageDimensions, windowDimensions.height, windowDimensions.width])
 
-  const modalAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: modalOpacity.value,
-    transform: [{ scale: modalScale.value }],
-  }), [modalOpacity, modalScale])
-
   useEffect(() => {
     isImageSourceChanged.current = true
   }, [imageSource.uri])
@@ -139,39 +197,17 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
         />
       </TouchableOpacity>
 
-      {isModalVisible && (
-        <OverKeyboardView visible={isModalVisible}>
-          <StatusBar animated barStyle='dark-content' />
-          <Animated.View style={[styles.modalOverlay, modalAnimatedStyle]}>
-            <GestureHandlerRootView style={commonStyles.fill}>
-              <View style={[commonStyles.fill, styles.modalContent, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
-
-                {/* close button */}
-                <View style={styles.closeButtonContainer}>
-                  <BaseButton onPress={handleModalClose}>
-                    <View style={styles.closeButtonContent}>
-                      <Text style={styles.closeButtonIcon}>
-                        {'X'}
-                      </Text>
-                    </View>
-                  </BaseButton>
-                </View>
-
-                <View style={[commonStyles.fill, commonStyles.centerItems]}>
-                  <Zoom>
-                    <Image
-                      style={modalImageDimensions}
-                      source={imageSource}
-                      resizeMode='contain'
-                      {...imageProps}
-                    />
-                  </Zoom>
-                </View>
-              </View>
-            </GestureHandlerRootView>
-          </Animated.View>
-        </OverKeyboardView>
-      )}
+      <OverKeyboardView visible={isModalVisible}>
+        <SafeAreaProvider>
+          <ModalContent
+            isVisible={isModalVisible}
+            imageSource={imageSource}
+            modalImageDimensions={modalImageDimensions}
+            imageProps={imageProps}
+            onClose={handleModalClose}
+          />
+        </SafeAreaProvider>
+      </OverKeyboardView>
     </View>
   )
 }
@@ -193,6 +229,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#000',
+    overflow: 'hidden',
   },
   modalImageContainer: {
     width: '100%',

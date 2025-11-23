@@ -53,6 +53,8 @@
 - System message
 - Quick Reply messages (bot)
 - Typing indicator
+- Ticks indicator to display message status ( delivered, read )
+- Scroll to bottom button
 - react-native-web [web configuration](#react-native-web)
 
 ## Sponsor
@@ -254,14 +256,13 @@ Messages, system messages, quick replies etc.: [data structure](src/Models.ts)
 
 ### Message Bubbles & Content
 
-- **`renderBubble`** _(Component | Function)_ - Custom message bubble
+- **`renderBubble`** _(Component | Function(`props: BubbleProps`))_ - Custom message bubble. Receives [BubbleProps](src/Bubble/types.ts) as parameter.
 - **`renderMessageText`** _(Component | Function)_ - Custom message text
 - **`renderMessageImage`** _(Component | Function)_ - Custom message image
 - **`renderMessageVideo`** _(Component | Function)_ - Custom message video
 - **`renderMessageAudio`** _(Component | Function)_ - Custom message audio
 - **`renderCustomView`** _(Component | Function)_ - Custom view inside the bubble
 - **`isCustomViewBottom`** _(Bool)_ - Determine whether renderCustomView is displayed before or after the text, image and video views; default is `false`
-- **`renderTicks`** _(Component | Function(`message`))_ - Custom ticks indicator to display message status
 - **`onPressMessage`** _(Function(`context`, `message`))_ - Callback when a message bubble is pressed
 - **`onLongPressMessage`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; you can use this to show action sheets (e.g., copy, delete, reply)
 - **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://reactnative.dev/docs/image.html) component created by the default `renderMessageImage`

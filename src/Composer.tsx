@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import {
+  Platform,
   StyleSheet,
   TextInput,
+  TextInputChangeEvent,
+  TextInputContentSizeChangeEvent,
   TextInputProps,
   useColorScheme,
   View,
@@ -24,6 +27,37 @@ export function Composer ({
 
   const placeholder = textInputProps?.placeholder ?? 'Type a message...'
 
+  const minHeight = useMemo(() =>
+    Platform.select({
+      web: styles.textInput.lineHeight + styles.textInput.paddingTop + styles.textInput.paddingBottom,
+      default: undefined,
+    })
+  , [])
+
+  const [height, setHeight] = useState<number | undefined>(minHeight)
+
+  const handleContentSizeChange = useMemo(() => {
+    if (Platform.OS === 'web')
+      return (e: TextInputContentSizeChangeEvent) => {
+        const contentHeight = e.nativeEvent.contentSize.height
+        setHeight(Math.max(minHeight ?? 0, contentHeight))
+      }
+
+    return undefined
+  }, [minHeight])
+
+  const handleChange = useCallback((event: TextInputChangeEvent) => {
+    if (Platform.OS === 'web')
+      // Reset height to 0 to get the correct scrollHeight
+      // @ts-expect-error - web-specific code
+      window.requestAnimationFrame(() => {
+        // @ts-expect-error - web-specific code
+        event.nativeEvent.target.style.height = '0px'
+        // @ts-expect-error - web-specific code
+        event.nativeEvent.target.style.height = `${event.nativeEvent.target.scrollHeight}px`
+      })
+  }, [])
+
   return (
     <View style={stylesCommon.fill}>
       <TextInput
@@ -37,8 +71,10 @@ export function Composer ({
         keyboardAppearance={isDark ? 'dark' : 'default'}
         multiline
         placeholder={placeholder}
+        onContentSizeChange={handleContentSizeChange}
+        onChange={handleChange}
         {...textInputProps}
-        style={getColorSchemeStyle(styles, 'textInput', colorScheme)}
+        style={[getColorSchemeStyle(styles, 'textInput', colorScheme), stylesWeb.textInput, { height }, textInputProps?.style]}
       />
     </View>
   )
@@ -53,5 +89,12 @@ const styles = StyleSheet.create({
   },
   textInput_dark: {
     color: '#fff',
+  },
+})
+
+const stylesWeb = StyleSheet.create({
+  textInput: {
+    /* @ts-expect-error - web-specific styles */
+    outlineStyle: 'none',
   },
 })

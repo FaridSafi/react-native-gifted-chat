@@ -13,7 +13,6 @@ import { getCurrentPositionAsync, requestForegroundPermissionsAsync } from 'expo
 import { RectButton } from 'react-native-gesture-handler'
 import { GiftedChat } from 'react-native-gifted-chat'
 import type { IMessage, User } from 'react-native-gifted-chat'
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 // ============================================================================
 // Helper Functions
@@ -399,16 +398,15 @@ const CustomActions = ({
 
 const customActionsStyles = StyleSheet.create({
   container: {
-    width: 26,
-    height: 26,
-    marginLeft: 10,
-    marginBottom: 10,
+    paddingHorizontal: 8,
+    paddingVertical: 7,
   },
   wrapper: {
+    width: 26,
+    height: 26,
     borderRadius: 13,
     borderColor: '#b2b2b2',
     borderWidth: 2,
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -536,13 +534,13 @@ const Button = ({
 const accessoryBarStyles = StyleSheet.create({
   container: {
     height: 44,
-    width: '100%',
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: 'rgba(0,0,0,0.3)',
+    paddingVertical: 5,
   },
   container_dark: {
     backgroundColor: '#1a1a1a',
@@ -559,7 +557,6 @@ function ChatExample() {
   const [isLoadingEarlier, setIsLoadingEarlier] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
   const colorScheme = useColorScheme()
-  const insets = useSafeAreaInsets()
 
   const user = useMemo(
     () => ({
@@ -604,7 +601,11 @@ function ChatExample() {
       <GiftedChat
         messages={messages}
         onSend={onSend}
-        loadEarlierMessagesProps={{ isAvailable: true, isLoading: isLoadingEarlier, onPress: onPressLoadEarlierMessages }}
+        loadEarlierMessagesProps={{
+          isAvailable: true,
+          isLoading: isLoadingEarlier,
+          onPress: onPressLoadEarlierMessages,
+        }}
         user={user}
         renderActions={renderActions}
         renderAccessory={renderAccessory}
@@ -612,8 +613,8 @@ function ChatExample() {
         messagesContainerStyle={getColorSchemeStyle(styles, 'messagesContainer', colorScheme)}
         textInputProps={{
           style: getColorSchemeStyle(styles, 'composer', colorScheme),
+          outlineStyle: 'none',
         }}
-        bottomOffset={insets.bottom}
       />
     </View>
   )
@@ -642,10 +643,8 @@ const styles = StyleSheet.create({
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <ActionSheetProvider>
-        <ChatExample />
-      </ActionSheetProvider>
-    </SafeAreaProvider>
+    <ActionSheetProvider>
+      <ChatExample />
+    </ActionSheetProvider>
   )
 }

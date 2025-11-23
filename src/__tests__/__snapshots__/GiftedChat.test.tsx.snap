@@ -9,8 +9,8 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
   }
 >
   <KeyboardProvider
-    navigationBarTranslucent={false}
-    statusBarTranslucent={false}
+    navigationBarTranslucent={true}
+    statusBarTranslucent={true}
   >
     <View
       style={

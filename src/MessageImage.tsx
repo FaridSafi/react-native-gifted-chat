@@ -8,12 +8,20 @@ import {
   StyleProp,
   ImageStyle,
   ImageURISource,
-  Modal,
   TouchableOpacity,
   LayoutChangeEvent,
   useWindowDimensions,
+  StatusBar,
 } from 'react-native'
 import { BaseButton, GestureHandlerRootView, Text } from 'react-native-gesture-handler'
+import { OverKeyboardView } from 'react-native-keyboard-controller'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+  runOnJS,
+  Easing,
+} from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Zoom from 'react-native-zoom-reanimated'
 import { IMessage } from './Models'
@@ -40,6 +48,10 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
 
   const insets = useSafeAreaInsets()
 
+  // Animation values
+  const modalOpacity = useSharedValue(0)
+  const modalScale = useSharedValue(0.9)
+
   const imageSource = useMemo(() => ({
     ...imageSourceProps,
     uri: currentMessage?.image,
@@ -58,15 +70,23 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
 
     setIsModalVisible(true)
 
+    // Animate modal entrance
+    modalOpacity.value = withTiming(1, { duration: 300, easing: Easing.out(Easing.ease) })
+    modalScale.value = withTiming(1, { duration: 300, easing: Easing.out(Easing.ease) })
+
     if (isImageSourceChanged.current || !imageDimensions)
       Image.getSize(imageSource.uri, (width, height) => {
         setImageDimensions({ width, height })
       })
-  }, [imageSource.uri, imageDimensions])
+  }, [imageSource.uri, imageDimensions, modalOpacity, modalScale])
 
   const handleModalClose = useCallback(() => {
-    setIsModalVisible(false)
-  }, [])
+    // Animate modal exit
+    modalOpacity.value = withTiming(0, { duration: 200, easing: Easing.in(Easing.ease) })
+    modalScale.value = withTiming(0.9, { duration: 200, easing: Easing.in(Easing.ease) }, () => {
+      runOnJS(setIsModalVisible)(false)
+    })
+  }, [modalOpacity, modalScale])
 
   const handleImageLayout = useCallback((e: LayoutChangeEvent) => {
     setImageDimensions({
@@ -95,6 +115,11 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
     }
   }, [imageDimensions, windowDimensions.height, windowDimensions.width])
 
+  const modalAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: modalOpacity.value,
+    transform: [{ scale: modalScale.value }],
+  }), [modalOpacity, modalScale])
+
   useEffect(() => {
     isImageSourceChanged.current = true
   }, [imageSource.uri])
@@ -114,39 +139,39 @@ export function MessageImage<TMessage extends IMessage = IMessage> ({
         />
       </TouchableOpacity>
 
-      <Modal
-        visible={isModalVisible}
-        onRequestClose={handleModalClose}
-        animationType='slide'
-        transparent={false}
-      >
-        <GestureHandlerRootView style={commonStyles.fill}>
-          <View style={[commonStyles.fill, styles.modalContent, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
+      {isModalVisible && (
+        <OverKeyboardView visible={isModalVisible}>
+          <StatusBar animated barStyle='dark-content' />
+          <Animated.View style={[styles.modalOverlay, modalAnimatedStyle]}>
+            <GestureHandlerRootView style={commonStyles.fill}>
+              <View style={[commonStyles.fill, styles.modalContent, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
 
-            {/* close button */}
-            <View style={styles.closeButtonContainer}>
-              <BaseButton onPress={handleModalClose}>
-                <View style={styles.closeButtonContent}>
-                  <Text style={styles.closeButtonIcon}>
-                    {'X'}
-                  </Text>
+                {/* close button */}
+                <View style={styles.closeButtonContainer}>
+                  <BaseButton onPress={handleModalClose}>
+                    <View style={styles.closeButtonContent}>
+                      <Text style={styles.closeButtonIcon}>
+                        {'X'}
+                      </Text>
+                    </View>
+                  </BaseButton>
                 </View>
-              </BaseButton>
-            </View>
 
-            <View style={[commonStyles.fill, commonStyles.centerItems]}>
-              <Zoom>
-                <Image
-                  style={modalImageDimensions}
-                  source={imageSource}
-                  resizeMode='contain'
-                  {...imageProps}
-                />
-              </Zoom>
-            </View>
-          </View>
-        </GestureHandlerRootView>
-      </Modal>
+                <View style={[commonStyles.fill, commonStyles.centerItems]}>
+                  <Zoom>
+                    <Image
+                      style={modalImageDimensions}
+                      source={imageSource}
+                      resizeMode='contain'
+                      {...imageProps}
+                    />
+                  </Zoom>
+                </View>
+              </View>
+            </GestureHandlerRootView>
+          </Animated.View>
+        </OverKeyboardView>
+      )}
     </View>
   )
 }
@@ -157,6 +182,14 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 13,
     margin: 3,
+  },
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1000,
   },
   modalContent: {
     backgroundColor: '#000',

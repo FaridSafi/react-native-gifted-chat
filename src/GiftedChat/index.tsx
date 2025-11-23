@@ -312,8 +312,8 @@ function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedC
     <GestureHandlerRootView style={styles.fill}>
       <SafeAreaProvider>
         <KeyboardProvider
-          statusBarTranslucent={false}
-          navigationBarTranslucent={false}
+          statusBarTranslucent
+          navigationBarTranslucent
           {...keyboardProviderProps}
         >
           <GiftedChat<TMessage> {...rest} />

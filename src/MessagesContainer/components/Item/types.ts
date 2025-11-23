@@ -1,7 +1,7 @@
 import { IMessage } from '../../../Models'
-import { MessageContainerProps, DaysPositions } from '../../types'
+import { MessagesContainerProps, DaysPositions } from '../../types'
 
-export interface ItemProps<TMessage extends IMessage> extends MessageContainerProps<TMessage> {
+export interface ItemProps<TMessage extends IMessage> extends MessagesContainerProps<TMessage> {
   currentMessage: TMessage
   previousMessage?: TMessage
   nextMessage?: TMessage
@@ -9,4 +9,5 @@ export interface ItemProps<TMessage extends IMessage> extends MessageContainerPr
   scrolledY: { value: number }
   daysPositions: { value: DaysPositions }
   listHeight: { value: number }
+  isDayAnimationEnabled?: boolean
 }

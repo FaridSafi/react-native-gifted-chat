@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useColorScheme } from 'react-native'
 import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { RenderInputToolbar, RenderActions, RenderComposer, renderSend } from './InputToolbar'
 import {
   renderAvatar,
   renderBubble,
@@ -10,7 +9,8 @@ import {
   renderMessage,
   renderMessageText,
   renderCustomView,
-} from './MessageContainer'
+} from './customComponents'
+import { RenderInputToolbar, RenderActions, RenderComposer, renderSend } from './InputToolbar'
 import initialMessages from './messages'
 
 const Chats = () => {

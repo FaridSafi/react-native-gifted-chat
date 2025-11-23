@@ -103,6 +103,7 @@ export const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
     scrolledY,
     daysPositions,
     listHeight,
+    isDayAnimationEnabled,
     ...rest
   } = props
 
@@ -121,23 +122,26 @@ export const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
   }, [dayContainerHeight])
 
   const style = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      relativeScrolledPositionToBottomOfDay.value,
-      [
-        -dayTopOffset,
-        -0.0001,
-        0,
-        dayContainerHeight.value + dayTopOffset,
-      ],
-      [
-        0,
-        0,
-        1,
-        1,
-      ],
-      'clamp'
-    ),
-  }), [relativeScrolledPositionToBottomOfDay, dayContainerHeight, dayTopOffset])
+    opacity:
+      isDayAnimationEnabled
+        ? interpolate(
+          relativeScrolledPositionToBottomOfDay.value,
+          [
+            -dayTopOffset,
+            -0.0001,
+            0,
+            dayContainerHeight.value + dayTopOffset,
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+          ],
+          'clamp'
+        )
+        : 1,
+  }), [relativeScrolledPositionToBottomOfDay, dayContainerHeight, dayTopOffset, isDayAnimationEnabled])
 
   return (
     // do not remove key. it helps to get correct position of the day container

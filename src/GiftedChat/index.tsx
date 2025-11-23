@@ -24,7 +24,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { TEST_ID } from '../Constant'
 import { GiftedChatContext } from '../GiftedChatContext'
 import { InputToolbar } from '../InputToolbar'
-import { MessageContainer, AnimatedList } from '../MessageContainer'
+import { MessagesContainer, AnimatedList } from '../MessagesContainer'
 import { IMessage } from '../Models'
 import stylesCommon from '../styles'
 import { renderComponentOrElement } from '../utils'
@@ -59,9 +59,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
 
-  const messageContainerRef = useMemo(
-    () => props.messageContainerRef || createRef<AnimatedList<TMessage>>(),
-    [props.messageContainerRef]
+  const messagesContainerRef = useMemo(
+    () => props.messagesContainerRef || createRef<AnimatedList<TMessage>>(),
+    [props.messagesContainerRef]
   ) as RefObject<AnimatedList<TMessage>>
 
   const textInputRef = useMemo(
@@ -70,7 +70,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   )
 
   const [isInitialized, setIsInitialized] = useState<boolean>(false)
-  const [composerHeight, setComposerHeight] = useState<number>()
   const [text, setText] = useState<string | undefined>(() => props.text || '')
 
   const getTextFromProp = useCallback(
@@ -85,20 +84,20 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const scrollToBottom = useCallback(
     (isAnimated = true) => {
-      if (!messageContainerRef?.current)
+      if (!messagesContainerRef?.current)
         return
 
       if (isInverted) {
-        messageContainerRef.current.scrollToOffset({
+        messagesContainerRef.current.scrollToOffset({
           offset: 0,
           animated: isAnimated,
         })
         return
       }
 
-      messageContainerRef.current.scrollToEnd({ animated: isAnimated })
+      messagesContainerRef.current.scrollToEnd({ animated: isAnimated })
     },
-    [isInverted, messageContainerRef]
+    [isInverted, messagesContainerRef]
   )
 
   const renderMessages = useMemo(() => {
@@ -109,11 +108,11 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
     return (
       <View style={[stylesCommon.fill, messagesContainerStyle]}>
-        <MessageContainer<TMessage>
+        <MessagesContainer<TMessage>
           {...messagesContainerProps}
           isInverted={isInverted}
           messages={messages}
-          forwardRef={messageContainerRef}
+          forwardRef={messagesContainerRef}
           isTyping={isTyping}
         />
         {renderComponentOrElement(renderChatFooter, {})}
@@ -125,7 +124,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     messages,
     props,
     isInverted,
-    messageContainerRef,
+    messagesContainerRef,
     renderChatFooter,
   ])
 

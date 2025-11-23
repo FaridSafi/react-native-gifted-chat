@@ -213,7 +213,7 @@ Messages, system messages, quick replies etc.: [data structure](src/Models.ts)
 
 ### Refs
 
-- **`messageContainerRef`** _(FlatList ref)_ - Ref to the flatlist
+- **`messagesContainerRef`** _(FlatList ref)_ - Ref to the flatlist
 - **`textInputRef`** _(TextInput ref)_ - Ref to the text input
 
 ### Keyboard & Layout
@@ -236,7 +236,7 @@ Messages, system messages, quick replies etc.: [data structure](src/Models.ts)
 - **`renderSend`** _(Component | Function)_ - Custom send button; you can pass children to the original `Send` component quite easily, for example, to use a custom icon ([example](https://github.com/FaridSafi/react-native-gifted-chat/pull/487))
 - **`renderActions`** _(Component | Function)_ - Custom action button on the left of the message composer
 - **`renderAccessory`** _(Component | Function)_ - Custom second line of actions below the message composer
-- **`textInputProps`** _(Object)_ - props to be passed to the [`<TextInput>`](https://reactnative.dev/docs/textinput.html).
+- **`textInputProps`** _(Object)_ - props to be passed to the [`<TextInput>`](https://reactnative.dev/docs/textinput).
 
 ### Actions & Action Sheet
 
@@ -251,8 +251,8 @@ Messages, system messages, quick replies etc.: [data structure](src/Models.ts)
 - **`renderMessage`** _(Component | Function)_ - Custom message container
 - **`renderLoading`** _(Component | Function)_ - Render a loading view when initializing
 - **`renderChatEmpty`** _(Component | Function)_ - Custom component to render in the ListView when messages are empty
-- **`renderChatFooter`** _(Component | Function)_ - Custom component to render below the MessageContainer (separate from the ListView)
-- **`listProps`** _(Object)_ - Extra props to be passed to the messages [`<FlatList>`](https://reactnative.dev/docs/flatlist.html); some props can't be overridden, see the code in `MessageContainer.render()` for details
+- **`renderChatFooter`** _(Component | Function)_ - Custom component to render below the MessagesContainer (separate from the ListView)
+- **`listProps`** _(Object)_ - Extra props to be passed to the messages [`<FlatList>`](https://reactnative.dev/docs/flatlist)
 
 ### Message Bubbles & Content
 
@@ -265,7 +265,7 @@ Messages, system messages, quick replies etc.: [data structure](src/Models.ts)
 - **`isCustomViewBottom`** _(Bool)_ - Determine whether renderCustomView is displayed before or after the text, image and video views; default is `false`
 - **`onPressMessage`** _(Function(`context`, `message`))_ - Callback when a message bubble is pressed
 - **`onLongPressMessage`** _(Function(`context`, `message`))_ - Callback when a message bubble is long-pressed; you can use this to show action sheets (e.g., copy, delete, reply)
-- **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://reactnative.dev/docs/image.html) component created by the default `renderMessageImage`
+- **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://reactnative.dev/docs/image) component created by the default `renderMessageImage`
 - **`imageStyle`** _(Object)_ - Custom style for message images
 - **`videoProps`** _(Object)_ - Extra props to be passed to the video component created by the required `renderMessageVideo`
 - **`messageTextProps`** _(Object)_ - Extra props to be passed to the MessageText component. Useful for customizing link parsing behavior, text styles, and matchers. Supports all [react-native-autolink](https://github.com/joshswan/react-native-autolink) props including:
@@ -347,6 +347,7 @@ See full example in [LinksExample](example/components/chat-examples/LinksExample
 - **`renderDay`** _(Component | Function)_ - Custom day above a message
 - **`renderTime`** _(Component | Function)_ - Custom time inside a message
 - **`timeTextStyle`** _(Object)_ - Custom text style for time inside messages (supports left/right styles)
+- **`isDayAnimationEnabled`** _(Bool)_ - Enable animated day label that appears on scroll; default is `true`
 
 ### System Messages
 
@@ -420,29 +421,7 @@ If you are using Create React Native App / Expo, no Android specific installatio
 </View>
 ```
 
-If you use React Navigation, additional handling may be required to account for navigation headers and tabs. `KeyboardAvoidingView`'s `keyboardVerticalOffset` property can be set to the height of the navigation header and [`tabBarOptions.keyboardHidesTabBar`](https://reactnavigation.org/docs/en/bottom-tab-navigator.html#bottomtabnavigatorconfig) can be set to keep the tab bar from being shown when the keyboard is up. Due to a [bug with calculating height on Android phones with notches](facebook/react-native#23693), `KeyboardAvoidingView` is recommended over other solutions that involve calculating the height of the window.
-
-- adding an opaque background status bar on app.json (even though `android:windowSoftInputMode="adjustResize"` is set internally on Expo's Android apps, the translucent status bar causes it not to work): https://docs.expo.io/versions/latest/guides/configuration.html#androidstatusbar
-
-- If you plan to use `GiftedChat` inside a `Modal`, see [#200](https://github.com/FaridSafi/react-native-gifted-chat/issues/200).
-
 ## Notes for local development
-
-### Native
-
-1. Install `yarn global add expo-cli`
-2. Install dependencies`yarn install`
-3. `expo start`
-
-### react-native-web
-
-#### With expo
-
-1. Install `yarn global add expo-cli`
-2. Install dependencies`yarn install`
-3. `expo start -w`
-
-[Upgrade snack version](https://snackager.expo.io/bundle/react-native-gifted-chat@0.15.0?bypassCache=true)
 
 #### With create-react-app
 

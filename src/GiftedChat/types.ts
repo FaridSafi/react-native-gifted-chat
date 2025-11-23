@@ -14,8 +14,8 @@ import { AvatarProps } from '../Avatar'
 import { BubbleProps } from '../Bubble'
 import { ComposerProps } from '../Composer'
 import { InputToolbarProps } from '../InputToolbar'
-import { AnimatedList, MessageContainerProps } from '../MessageContainer'
 import { MessageImageProps } from '../MessageImage'
+import { AnimatedList, MessagesContainerProps } from '../MessagesContainer'
 import { MessageTextProps } from '../MessageText'
 import {
   IMessage,
@@ -29,9 +29,9 @@ import { SendProps } from '../Send'
 import { SystemMessageProps } from '../SystemMessage'
 import { TimeProps } from '../Time'
 
-export interface GiftedChatProps<TMessage extends IMessage> extends Partial<MessageContainerProps<TMessage>> {
-  /* Message container ref */
-  messageContainerRef?: RefObject<AnimatedList<TMessage>>
+export interface GiftedChatProps<TMessage extends IMessage> extends Partial<MessagesContainerProps<TMessage>> {
+  /* Messages container ref */
+  messagesContainerRef?: RefObject<AnimatedList<TMessage>>
   /* text input ref */
   textInputRef?: RefObject<TextInput>
   /* Controls whether or not to show user.name property in the message bubble */
@@ -115,13 +115,13 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   renderMessageImage?: (props: MessageImageProps<TMessage>) => React.ReactNode
   /* Custom message video */
   renderMessageVideo?: (props: MessageVideoProps<TMessage>) => React.ReactNode
-  /* Custom message video */
+  /* Custom message audio */
   renderMessageAudio?: (props: MessageAudioProps<TMessage>) => React.ReactNode
   /* Custom view inside the bubble */
   renderCustomView?: (props: BubbleProps<TMessage>) => React.ReactNode
   /* Custom time inside a message */
   renderTime?: (props: TimeProps<TMessage>) => React.ReactNode
-  /* Custom component to render below the MessageContainer (separate from the ListView) */
+  /* Custom component to render below the MessagesContainer */
   renderChatFooter?: () => React.ReactNode
   /* Custom message composer container. Can be a component, element, render function, or null */
   renderInputToolbar?: React.ComponentType<InputToolbarProps<TMessage>> | React.ReactElement | ((props: InputToolbarProps<TMessage>) => React.ReactNode) | null
@@ -143,4 +143,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   renderQuickReplySend?: () => React.ReactNode
   keyboardProviderProps?: React.ComponentProps<typeof KeyboardProvider>
   keyboardAvoidingViewProps?: KeyboardAvoidingViewProps
+  /** Enable animated day label that appears on scroll; default is true */
+  isDayAnimationEnabled?: boolean
 }

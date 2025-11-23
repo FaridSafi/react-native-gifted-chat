@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { render } from '@testing-library/react-native'
 import { DayProps } from '../Day'
-import { DayAnimated } from '../MessageContainer/components/DayAnimated'
+import { DayAnimated } from '../MessagesContainer/components/DayAnimated'
 import { DEFAULT_TEST_MESSAGE } from './data'
 
 const mockDaysPositions = { value: {} }

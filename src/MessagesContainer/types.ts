@@ -16,7 +16,7 @@ export type ListProps<TMessage extends IMessage = IMessage> = Partial<FlatListPr
 
 export type AnimatedList<TMessage> = FlatList<TMessage>
 
-export interface MessageContainerProps<TMessage extends IMessage = IMessage>
+export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   extends Omit<TypingIndicatorProps, 'style'> {
   /** Ref for the FlatList message container */
   forwardRef?: RefObject<AnimatedList<TMessage>>
@@ -39,7 +39,7 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage>
   /** Custom component to render when messages are empty */
   renderChatEmpty?: () => React.ReactNode
   /** Custom footer component on the ListView, e.g. 'User is typing...' */
-  renderFooter?: (props: MessageContainerProps<TMessage>) => React.ReactNode
+  renderFooter?: (props: MessagesContainerProps<TMessage>) => React.ReactNode
   /** Custom message container */
   renderMessage?: (props: MessageProps<TMessage>) => React.ReactElement
   /** Custom day above a message */
@@ -56,6 +56,8 @@ export interface MessageContainerProps<TMessage extends IMessage = IMessage>
   loadEarlierMessagesProps?: LoadEarlierMessagesProps
   /** Style for TypingIndicator component */
   typingIndicatorStyle?: StyleProp<ViewStyle>
+  /** Enable animated day label that appears on scroll; default is true */
+  isDayAnimationEnabled?: boolean
 }
 
 export interface State {

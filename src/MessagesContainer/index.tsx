@@ -20,14 +20,14 @@ import { DayAnimated } from './components/DayAnimated'
 import { Item } from './components/Item'
 import { ItemProps } from './components/Item/types'
 import styles from './styles'
-import { MessageContainerProps, DaysPositions } from './types'
+import { MessagesContainerProps, DaysPositions } from './types'
 
 export * from './types'
 
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
-export const MessageContainer = <TMessage extends IMessage>(props: MessageContainerProps<TMessage>) => {
+export const MessagesContainer = <TMessage extends IMessage>(props: MessagesContainerProps<TMessage>) => {
   const {
     messages = [],
     user,
@@ -46,6 +46,7 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
     forwardRef,
     scrollToBottomComponent: scrollToBottomComponentProp,
     renderDay: renderDayProp,
+    isDayAnimationEnabled = true,
   } = props
 
   const listPropsOnScrollProp = listProps?.onScroll
@@ -408,14 +409,16 @@ export const MessageContainer = <TMessage extends IMessage>(props: MessageContai
         CellRendererComponent={renderCell}
       />
       <ScrollToBottomWrapper />
-      <DayAnimated
-        scrolledY={scrolledY}
-        daysPositions={daysPositions}
-        listHeight={listHeight}
-        renderDay={renderDayProp}
-        messages={messages}
-        isLoading={loadEarlierMessagesProps?.isLoading ?? false}
-      />
+      {isDayAnimationEnabled && (
+        <DayAnimated
+          scrolledY={scrolledY}
+          daysPositions={daysPositions}
+          listHeight={listHeight}
+          renderDay={renderDayProp}
+          messages={messages}
+          isLoading={loadEarlierMessagesProps?.isLoading ?? false}
+        />
+      )}
     </View>
   )
 }

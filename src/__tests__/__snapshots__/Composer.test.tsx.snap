@@ -1,36 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render <Composer /> and compare with snapshot 1`] = `
-<TextInput
-  accessibilityLabel="Type a message..."
-  accessible={true}
-  enablesReturnKeyAutomatically={true}
-  keyboardAppearance="default"
-  multiline={true}
-  onContentSizeChange={[Function]}
-  placeholder="Type a message..."
-  placeholderTextColor="#b2b2b2"
+<View
   style={
-    [
-      {
-        "flex": 1,
-      },
-      {
-        "fontSize": 16,
-        "lineHeight": 22,
-        "marginBottom": 5,
-        "marginLeft": 10,
-        "marginTop": 6,
-      },
-      undefined,
-      undefined,
-      {
-        "height": 33,
-      },
-    ]
+    {
+      "flex": 1,
+    }
   }
-  testID="Type a message..."
-  underlineColorAndroid="transparent"
-  value=""
-/>
+>
+  <TextInput
+    accessibilityLabel="Type a message..."
+    accessible={true}
+    enablesReturnKeyAutomatically={true}
+    keyboardAppearance="default"
+    multiline={true}
+    placeholder="Type a message..."
+    placeholderTextColor="#b2b2b2"
+    style={
+      [
+        {
+          "fontSize": 16,
+          "lineHeight": 22,
+          "paddingBottom": 10,
+          "paddingTop": 8,
+        },
+        undefined,
+      ]
+    }
+    testID="Type a message..."
+    underlineColorAndroid="transparent"
+    value=""
+  />
+</View>
 `;

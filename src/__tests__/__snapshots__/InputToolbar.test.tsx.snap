@@ -4,12 +4,14 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
 <View
   style={
     [
-      {
-        "backgroundColor": "#fff",
-        "borderTopColor": "#b2b2b2",
-        "borderTopWidth": 0.5,
-      },
-      false,
+      [
+        {
+          "backgroundColor": "#fff",
+          "borderTopColor": "#b2b2b2",
+          "borderTopWidth": 0.5,
+        },
+        undefined,
+      ],
       undefined,
     ]
   }
@@ -17,46 +19,115 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
   <View
     style={
       [
-        {
-          "alignItems": "flex-end",
-          "flexDirection": "row",
-        },
+        [
+          {
+            "alignItems": "flex-end",
+            "flexDirection": "row",
+          },
+          undefined,
+        ],
         undefined,
       ]
     }
   >
-    <TextInput
-      accessibilityLabel="Type a message..."
-      accessible={true}
-      enablesReturnKeyAutomatically={true}
-      keyboardAppearance="default"
-      multiline={true}
-      onContentSizeChange={[Function]}
-      placeholder="Type a message..."
-      placeholderTextColor="#b2b2b2"
+    <View
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <TextInput
+        accessibilityLabel="Type a message..."
+        accessible={true}
+        enablesReturnKeyAutomatically={true}
+        keyboardAppearance="default"
+        multiline={true}
+        placeholder="Type a message..."
+        placeholderTextColor="#b2b2b2"
+        style={
+          [
+            {
+              "fontSize": 16,
+              "lineHeight": 22,
+              "paddingBottom": 10,
+              "paddingTop": 8,
+            },
+            undefined,
+          ]
+        }
+        testID="Type a message..."
+        underlineColorAndroid="transparent"
+        value=""
+      />
+    </View>
+    <View
+      collapsable={false}
+      jestAnimatedProps={
+        {
+          "value": {},
+        }
+      }
+      jestAnimatedStyle={
+        {
+          "value": {
+            "opacity": 0,
+          },
+        }
+      }
+      jestInlineStyle={
+        [
+          {
+            "justifyContent": "flex-end",
+          },
+          undefined,
+        ]
+      }
+      pointerEvents="none"
       style={
         [
           {
-            "flex": 1,
-          },
-          {
-            "fontSize": 16,
-            "lineHeight": 22,
-            "marginBottom": 5,
-            "marginLeft": 10,
-            "marginTop": 6,
+            "justifyContent": "flex-end",
           },
           undefined,
-          undefined,
           {
-            "height": 33,
+            "opacity": 0,
           },
         ]
       }
-      testID="Type a message..."
-      underlineColorAndroid="transparent"
-      value=""
-    />
+    >
+      <View
+        accessibilityLabel="send"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        testID="GC_SEND_TOUCHABLE"
+      />
+    </View>
   </View>
 </View>
 `;

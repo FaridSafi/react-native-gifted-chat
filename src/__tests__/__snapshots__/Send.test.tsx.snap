@@ -2,70 +2,210 @@
 
 exports[`Send should always render <Send /> and compare with snapshot 1`] = `
 <View
-  accessibilityLabel="send"
-  accessibilityRole="button"
-  accessibilityState={
+  collapsable={false}
+  jestAnimatedProps={
     {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
+      "value": {},
     }
   }
-  accessibilityValue={
+  jestAnimatedStyle={
     {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
+      "value": {
+        "opacity": 0,
+      },
     }
   }
-  accessible={true}
-  focusable={true}
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  testID="GC_SEND_TOUCHABLE"
-/>
+  jestInlineStyle={
+    [
+      {
+        "justifyContent": "flex-end",
+      },
+      undefined,
+    ]
+  }
+  pointerEvents="auto"
+  style={
+    [
+      {
+        "justifyContent": "flex-end",
+      },
+      undefined,
+      {
+        "opacity": 0,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityLabel="send"
+    accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    testID="GC_SEND_TOUCHABLE"
+  />
+</View>
 `;
 
-exports[`Send should not render <Send /> and compare with snapshot 1`] = `null`;
+exports[`Send should not render <Send /> and compare with snapshot 1`] = `
+<View
+  collapsable={false}
+  jestAnimatedProps={
+    {
+      "value": {},
+    }
+  }
+  jestAnimatedStyle={
+    {
+      "value": {
+        "opacity": 0,
+      },
+    }
+  }
+  jestInlineStyle={
+    [
+      {
+        "justifyContent": "flex-end",
+      },
+      undefined,
+    ]
+  }
+  pointerEvents="none"
+  style={
+    [
+      {
+        "justifyContent": "flex-end",
+      },
+      undefined,
+      {
+        "opacity": 0,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityLabel="send"
+    accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    testID="GC_SEND_TOUCHABLE"
+  />
+</View>
+`;
 
 exports[`Send should render <Send /> where there is input and compare with snapshot 1`] = `
 <View
-  accessibilityLabel="send"
-  accessibilityRole="button"
-  accessibilityState={
+  collapsable={false}
+  jestAnimatedProps={
     {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
+      "value": {},
     }
   }
-  accessibilityValue={
+  jestAnimatedStyle={
     {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
+      "value": {
+        "opacity": 0,
+      },
     }
   }
-  accessible={true}
-  focusable={true}
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  testID="GC_SEND_TOUCHABLE"
-/>
+  jestInlineStyle={
+    [
+      {
+        "justifyContent": "flex-end",
+      },
+      undefined,
+    ]
+  }
+  pointerEvents="auto"
+  style={
+    [
+      {
+        "justifyContent": "flex-end",
+      },
+      undefined,
+      {
+        "opacity": 0,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityLabel="send"
+    accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    testID="GC_SEND_TOUCHABLE"
+  />
+</View>
 `;

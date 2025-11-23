@@ -57,6 +57,257 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
       }
     />
   </View>
+  <OverKeyboardView
+    visible={false}
+  >
+    <View
+      collapsable={false}
+      jestAnimatedProps={
+        {
+          "value": {},
+        }
+      }
+      jestAnimatedStyle={
+        {
+          "value": {
+            "borderRadius": 40,
+            "opacity": 0,
+            "transform": [
+              {
+                "scale": 0.9,
+              },
+            ],
+          },
+        }
+      }
+      jestInlineStyle={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+            "zIndex": 1000,
+          },
+        ]
+      }
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+            "zIndex": 1000,
+          },
+          {
+            "opacity": 0,
+            "transform": [
+              {
+                "scale": 0.9,
+              },
+            ],
+          },
+          {
+            "borderRadius": 40,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          jestAnimatedProps={
+            {
+              "value": {},
+            }
+          }
+          jestAnimatedStyle={
+            {
+              "value": {
+                "borderRadius": 40,
+              },
+            }
+          }
+          jestInlineStyle={
+            [
+              {
+                "flex": 1,
+              },
+              {
+                "backgroundColor": "#000",
+                "overflow": "hidden",
+              },
+              {
+                "paddingBottom": 0,
+                "paddingTop": 0,
+              },
+            ]
+          }
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              {
+                "backgroundColor": "#000",
+                "overflow": "hidden",
+              },
+              {
+                "borderRadius": 40,
+              },
+              {
+                "paddingBottom": 0,
+                "paddingTop": 0,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              {
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            />
+          </View>
+          <View
+            style={
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "alignItems": "center",
+                  "justifyContent": "center",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                {
+                  "flex": 1,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                onLayout={[Function]}
+                style={
+                  [
+                    {
+                      "alignItems": "center",
+                      "flex": 1,
+                      "justifyContent": "center",
+                      "overflow": "hidden",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <View
+                  collapsable={false}
+                  jestAnimatedProps={
+                    {
+                      "value": {},
+                    }
+                  }
+                  jestAnimatedStyle={
+                    {
+                      "value": {
+                        "transform": [
+                          {
+                            "scale": 1,
+                          },
+                          {
+                            "translateX": 0,
+                          },
+                          {
+                            "translateY": 0,
+                          },
+                        ],
+                      },
+                    }
+                  }
+                  jestInlineStyle={
+                    [
+                      undefined,
+                    ]
+                  }
+                  onLayout={[Function]}
+                  style={
+                    [
+                      {
+                        "transform": [
+                          {
+                            "scale": 1,
+                          },
+                          {
+                            "translateX": 0,
+                          },
+                          {
+                            "translateY": 0,
+                          },
+                        ],
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  <Image
+                    resizeMode="contain"
+                    source={
+                      {
+                        "uri": "url://to/image.png",
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </OverKeyboardView>
 </View>
 `;
 

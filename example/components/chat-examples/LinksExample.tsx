@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { Linking, StyleSheet, View } from 'react-native'
+import { Linking, Platform, StyleSheet, View } from 'react-native'
 import { ActionSheetProvider, useActionSheet } from '@expo/react-native-action-sheet'
 import { setStringAsync } from 'expo-clipboard'
 import { AutolinkProps, CustomMatch, ReplacerArgs } from 'react-native-autolink'
@@ -11,7 +11,8 @@ const LinksExample: React.FC = () => {
   const insets = useSafeAreaInsets()
 
   const tabbarHeight = 50
-  const keyboardVerticalOffset = insets.bottom + tabbarHeight
+  const keyboardTopToolbarHeight = Platform.select({ ios: 44, default: 0 })
+  const keyboardVerticalOffset = insets.bottom + tabbarHeight + keyboardTopToolbarHeight
 
   const initialMessages: IMessage[] = useMemo(() => [
     {

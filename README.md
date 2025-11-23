@@ -143,6 +143,7 @@ Follow guide: [react-native-reanimated](https://docs.swmansion.com/react-native-
 
 ```jsx
 import React, { useState, useCallback, useEffect } from 'react'
+import { Platform } from 'react-native'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -152,7 +153,8 @@ export function Example() {
 
   // If you have a tab bar, include its height
   const tabbarHeight = 50
-  const keyboardVerticalOffset = insets.bottom + tabbarHeight
+  const keyboardTopToolbarHeight = Platform.select({ ios: 44, default: 0 })
+  const keyboardVerticalOffset = insets.bottom + tabbarHeight + keyboardTopToolbarHeight
 
   useEffect(() => {
     setMessages([

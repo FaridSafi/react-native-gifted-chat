@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { StyleSheet, View, useColorScheme } from 'react-native'
+import { Platform, StyleSheet, View, useColorScheme } from 'react-native'
 import { GiftedChat, IMessage } from 'react-native-gifted-chat'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import AccessoryBar from '../../example-expo/AccessoryBar'
@@ -17,7 +17,8 @@ export default function CustomizedFeaturesExample () {
   const insets = useSafeAreaInsets()
 
   const tabbarHeight = 50
-  const keyboardVerticalOffset = insets.bottom + tabbarHeight
+  const keyboardTopToolbarHeight = Platform.select({ ios: 44, default: 0 })
+  const keyboardVerticalOffset = insets.bottom + tabbarHeight + keyboardTopToolbarHeight
 
   const user = useMemo(() => ({
     _id: 1,

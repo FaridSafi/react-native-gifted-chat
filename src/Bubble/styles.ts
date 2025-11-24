@@ -37,13 +37,19 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 3,
   },
 
-  tick: {
-    fontSize: 10,
-    color: Color.white,
+  messageTimeAndStatusContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
-  tickView: {
+
+  messageStatusContainer: {
     flexDirection: 'row',
     marginLeft: 5,
+  },
+  messageStatus: {
+    fontSize: 10,
+    color: Color.white,
   },
 
   usernameContainer: {

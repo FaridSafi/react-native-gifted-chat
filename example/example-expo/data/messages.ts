@@ -14,6 +14,8 @@ const messages: IMessage[] = [
       _id: 1,
       name: 'Developer',
     },
+    sent: true,
+    received: true,
   },
   {
     _id: 8,
@@ -23,6 +25,8 @@ const messages: IMessage[] = [
       _id: 1,
       name: 'Developer',
     },
+    sent: true,
+    received: true,
   },
   {
     _id: 7,

@@ -237,19 +237,19 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
       (currentMessage.sent || currentMessage.received || currentMessage.pending)
     )
       return (
-        <View style={styles.tickView}>
+        <View style={styles.messageStatusContainer}>
           {!!currentMessage.sent && (
-            <Text style={[styles.tick, props.tickStyle]}>
+            <Text style={[styles.messageStatus, props.tickStyle]}>
               {'✓'}
             </Text>
           )}
           {!!currentMessage.received && (
-            <Text style={[styles.tick, props.tickStyle]}>
+            <Text style={[styles.messageStatus, props.tickStyle]}>
               {'✓'}
             </Text>
           )}
           {!!currentMessage.pending && (
-            <Text style={[styles.tick, props.tickStyle]}>
+            <Text style={[styles.messageStatus, props.tickStyle]}>
               {'🕓'}
             </Text>
           )}
@@ -362,7 +362,7 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
             ]}
           >
             {renderUsername()}
-            <View style={stylesCommon.fill}>
+            <View style={[stylesCommon.fill, styles.messageTimeAndStatusContainer]}>
               {renderTime()}
               {renderTicks()}
             </View>

@@ -13,7 +13,7 @@ import { MessageVideo } from '../MessageVideo'
 import { IMessage } from '../Models'
 import { QuickReplies } from '../QuickReplies'
 
-import stylesCommon, { getStyleWithPosition } from '../styles'
+import { getStyleWithPosition } from '../styles'
 import { Time } from '../Time'
 
 import { isSameUser, isSameDay, renderComponentOrElement } from '../utils'

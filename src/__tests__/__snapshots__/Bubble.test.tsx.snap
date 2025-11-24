@@ -96,9 +96,16 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
       >
         <View
           style={
-            {
-              "flex": 1,
-            }
+            [
+              {
+                "flex": 1,
+              },
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+              },
+            ]
           }
         >
           <View>

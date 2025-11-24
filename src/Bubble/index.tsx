@@ -1,10 +1,10 @@
-import React, { JSX, useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import {
-  Text,
-  Pressable,
   View,
+  Pressable, // don't use Pressable from gesture handler to issues with react-native-autolink (onPress doesn't work)
 } from 'react-native'
 
+import { Text } from 'react-native-gesture-handler'
 import { useChatContext } from '../GiftedChatContext'
 import { MessageAudio } from '../MessageAudio'
 import { MessageImage } from '../MessageImage'
@@ -12,17 +12,17 @@ import { MessageText } from '../MessageText'
 import { MessageVideo } from '../MessageVideo'
 import { IMessage } from '../Models'
 import { QuickReplies } from '../QuickReplies'
-import stylesCommon from '../styles'
 
+import stylesCommon, { getStyleWithPosition } from '../styles'
 import { Time } from '../Time'
-import { isSameUser, isSameDay, renderComponentOrElement } from '../utils'
 
+import { isSameUser, isSameDay, renderComponentOrElement } from '../utils'
 import styles from './styles'
 import { BubbleProps, RenderMessageTextProps } from './types'
 
 export * from './types'
 
-export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessage>): JSX.Element => {
+export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessage>): React.ReactElement => {
   const {
     currentMessage,
     nextMessage,
@@ -56,7 +56,7 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
     onLongPressMessageProp,
   ])
 
-  const styledBubbleToNext = useCallback(() => {
+  const styledBubbleToNext = useMemo(() => {
     if (
       currentMessage &&
       nextMessage &&
@@ -65,7 +65,7 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
       isSameDay(currentMessage, nextMessage)
     )
       return [
-        styles[position].containerToNext,
+        getStyleWithPosition(styles, 'containerToNext', position),
         containerToNextStyle?.[position],
       ]
 
@@ -77,7 +77,7 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
     containerToNextStyle,
   ])
 
-  const styledBubbleToPrevious = useCallback(() => {
+  const styledBubbleToPrevious = useMemo(() => {
     if (
       currentMessage &&
       previousMessage &&
@@ -86,7 +86,7 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
       isSameDay(currentMessage, previousMessage)
     )
       return [
-        styles[position].containerToPrevious,
+        getStyleWithPosition(styles, 'containerToPrevious', position),
         containerToPreviousStyle?.[position],
       ]
 
@@ -147,7 +147,10 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
         ...messageTextPropsRest
       } = props
 
-      const combinedProps = { ...messageTextPropsRest, ...messageTextProps } as RenderMessageTextProps<TMessage>
+      const combinedProps = {
+        ...messageTextPropsRest,
+        ...messageTextProps,
+      } as RenderMessageTextProps<TMessage>
 
       if (props.renderMessageText)
         return renderComponentOrElement(props.renderMessageText, combinedProps)
@@ -234,19 +237,19 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
       (currentMessage.sent || currentMessage.received || currentMessage.pending)
     )
       return (
-        <View style={styles.content.tickView}>
+        <View style={styles.tickView}>
           {!!currentMessage.sent && (
-            <Text style={[styles.content.tick, props.tickStyle]}>
+            <Text style={[styles.tick, props.tickStyle]}>
               {'✓'}
             </Text>
           )}
           {!!currentMessage.received && (
-            <Text style={[styles.content.tick, props.tickStyle]}>
+            <Text style={[styles.tick, props.tickStyle]}>
               {'✓'}
             </Text>
           )}
           {!!currentMessage.pending && (
-            <Text style={[styles.content.tick, props.tickStyle]}>
+            <Text style={[styles.tick, props.tickStyle]}>
               {'🕓'}
             </Text>
           )}
@@ -275,6 +278,7 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
 
       return <Time {...timeProps} />
     }
+
     return null
   }, [props, currentMessage])
 
@@ -292,13 +296,10 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
         return renderComponentOrElement(renderUsername, currentMessage.user)
 
       return (
-        <View style={styles.content.usernameView}>
+        <View style={styles.usernameContainer}>
           <Text
-            style={
-              [styles.content.username, props.usernameStyle]
-            }
+            style={[styles.username, props.usernameStyle]}
           >
-            {'~ '}
             {currentMessage.user.name}
           </Text>
         </View>
@@ -320,14 +321,14 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
 
   const renderBubbleContent = useCallback(() => {
     return (
-      <View>
+      <>
         {!props.isCustomViewBottom && renderCustomView()}
         {renderMessageImage()}
         {renderMessageVideo()}
         {renderMessageAudio()}
         {renderMessageText()}
         {props.isCustomViewBottom && renderCustomView()}
-      </View>
+      </>
     )
   }, [
     renderCustomView,
@@ -339,19 +340,13 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
   ])
 
   return (
-    <View
-      style={[
-        stylesCommon.fill,
-        styles[position].container,
-        containerStyle && containerStyle[position],
-      ]}
-    >
+    <View style={containerStyle?.[position]}>
       <View
         style={[
-          styles[position].wrapper,
-          styledBubbleToNext(),
-          styledBubbleToPrevious(),
-          wrapperStyle && wrapperStyle[position],
+          getStyleWithPosition(styles, 'wrapper', position),
+          styledBubbleToNext,
+          styledBubbleToPrevious,
+          wrapperStyle?.[position],
         ]}
       >
         <Pressable
@@ -359,15 +354,15 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
           onLongPress={onLongPress}
           {...props.touchableProps}
         >
-          <View>
-            {renderBubbleContent()}
-            <View
-              style={[
-                styles[position].bottom,
-                bottomContainerStyle?.[position],
-              ]}
-            >
-              {renderUsername()}
+          {renderBubbleContent()}
+          <View
+            style={[
+              styles.bottom,
+              bottomContainerStyle?.[position],
+            ]}
+          >
+            {renderUsername()}
+            <View style={stylesCommon.fill}>
               {renderTime()}
               {renderTicks()}
             </View>

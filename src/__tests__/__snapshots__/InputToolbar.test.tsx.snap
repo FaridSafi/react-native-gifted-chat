@@ -40,10 +40,15 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
       <TextInput
         accessibilityLabel="Type a message..."
         accessible={true}
+        collapsable={false}
         enablesReturnKeyAutomatically={true}
+        handlerTag={-1}
+        handlerType="NativeViewGestureHandler"
         keyboardAppearance="default"
         multiline={true}
         onChange={[Function]}
+        onGestureHandlerEvent={[Function]}
+        onGestureHandlerStateChange={[Function]}
         placeholder="Type a message..."
         placeholderTextColor="#b2b2b2"
         style={

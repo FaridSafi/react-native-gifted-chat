@@ -10,7 +10,7 @@ const messages = [
     createdAt: new Date(),
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
     },
   },
 ]

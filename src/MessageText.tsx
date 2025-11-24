@@ -26,7 +26,7 @@ export type MessageTextProps<TMessage extends IMessage> = {
 } & Omit<AutolinkProps, 'text' | 'onPress'>
 
 export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
-  currentMessage = {} as IMessage,
+  currentMessage,
   position = 'left',
   containerStyle,
   textStyle,
@@ -69,10 +69,8 @@ export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 10,
-    marginRight: 10,
+    marginVertical: 5,
+    marginHorizontal: 10,
   },
   text: {
     fontSize: 16,

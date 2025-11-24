@@ -1,73 +1,59 @@
 import { StyleSheet } from 'react-native'
 import { Color } from '../Color'
 
-const styles = {
-  left: StyleSheet.create({
-    container: {
-      alignItems: 'flex-start',
-    },
-    wrapper: {
-      borderRadius: 15,
-      backgroundColor: Color.leftBubbleBackground,
-      marginRight: 60,
-      minHeight: 20,
-      justifyContent: 'flex-end',
-    },
-    containerToNext: {
-      borderBottomLeftRadius: 3,
-    },
-    containerToPrevious: {
-      borderTopLeftRadius: 3,
-    },
-    bottom: {
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-    },
-  }),
-  right: StyleSheet.create({
-    container: {
-      alignItems: 'flex-end',
-    },
-    wrapper: {
-      borderRadius: 15,
-      backgroundColor: Color.defaultBlue,
-      marginLeft: 60,
-      minHeight: 20,
-      justifyContent: 'flex-end',
-    },
-    containerToNext: {
-      borderBottomRightRadius: 3,
-    },
-    containerToPrevious: {
-      borderTopRightRadius: 3,
-    },
-    bottom: {
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-    },
-  }),
-  content: StyleSheet.create({
-    tick: {
-      fontSize: 10,
-      backgroundColor: Color.backgroundTransparent,
-      color: Color.white,
-    },
-    tickView: {
-      flexDirection: 'row',
-      marginRight: 10,
-    },
-    username: {
-      top: -3,
-      left: 0,
-      fontSize: 12,
-      backgroundColor: Color.backgroundTransparent,
-      color: '#aaa',
-    },
-    usernameView: {
-      flexDirection: 'row',
-      marginHorizontal: 10,
-    },
-  }),
-}
+const styles = StyleSheet.create({
+  wrapper: {
+    borderRadius: 15,
+    minHeight: 20,
+  },
+  wrapper_left: {
+    backgroundColor: Color.leftBubbleBackground,
+    justifyContent: 'flex-end',
+  },
+  wrapper_right: {
+    backgroundColor: Color.defaultBlue,
+    justifyContent: 'flex-end',
+  },
+
+  bottom: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    paddingHorizontal: 10,
+    paddingBottom: 5,
+  },
+
+  containerToNext_left: {
+    borderBottomLeftRadius: 3,
+  },
+  containerToNext_right: {
+    borderBottomRightRadius: 3,
+  },
+
+  containerToPrevious_left: {
+    borderTopLeftRadius: 3,
+  },
+  containerToPrevious_right: {
+    borderTopRightRadius: 3,
+  },
+
+  tick: {
+    fontSize: 10,
+    color: Color.white,
+  },
+  tickView: {
+    flexDirection: 'row',
+    marginLeft: 5,
+  },
+
+  usernameContainer: {
+    flexDirection: 'row',
+    marginRight: 5,
+  },
+  username: {
+    fontSize: 12,
+    color: '#aaa',
+  },
+})
 
 export default styles

@@ -8,7 +8,6 @@ import {
   StyleProp,
   ImageStyle,
   ImageURISource,
-  TouchableOpacity,
   LayoutChangeEvent,
   useWindowDimensions,
   StatusBar,
@@ -24,6 +23,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
 import Zoom from 'react-native-zoom-reanimated'
+import { TouchableOpacity } from './components/TouchableOpacity'
 import { IMessage } from './Models'
 import commonStyles from './styles'
 

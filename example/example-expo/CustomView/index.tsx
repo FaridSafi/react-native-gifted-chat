@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react'
 import { Platform, View, Text } from 'react-native'
+import Constants from 'expo-constants'
 import * as Linking from 'expo-linking'
 import { RectButton } from 'react-native-gesture-handler'
 import MapView from 'react-native-maps'
 import commonStyles from '../../styles'
-import { styles } from './styles'
+import styles from './styles'
 import type { CustomViewProps } from './types'
-import Constants from 'expo-constants'
 
 const CustomView = ({
   currentMessage,
@@ -52,7 +52,7 @@ const CustomView = ({
         {
           shouldShowPlaceholder
             ? (
-              <View style={[commonStyles.center, styles.mapView, styles.mapViewPlaceholder, mapViewStyle]}>
+              <View style={[commonStyles.center, styles.mapView, mapViewStyle]}>
                 <Text style={commonStyles.textCenter}>Google Maps API key is not configured.</Text>
               </View>
             ) : (

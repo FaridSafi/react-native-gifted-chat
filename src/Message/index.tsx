@@ -4,6 +4,7 @@ import { View } from 'react-native'
 import { Avatar } from '../Avatar'
 import { Bubble } from '../Bubble'
 import { IMessage } from '../Models'
+import { getStyleWithPosition } from '../styles'
 import { SystemMessage } from '../SystemMessage'
 import { isSameUser, renderComponentOrElement } from '../utils'
 import styles from './styles'
@@ -96,15 +97,15 @@ export const Message = <TMessage extends IMessage = IMessage>(props: MessageProp
         : (
           <View
             style={[
-              styles[position].container,
+              getStyleWithPosition(styles, 'container', position),
               { marginBottom: sameUser ? 2 : 10 },
               !props.isInverted && { marginBottom: 2 },
               containerStyle?.[position],
             ]}
           >
-            {position === 'left' ? renderAvatar() : null}
+            {position === 'left' && renderAvatar()}
             {renderBubble()}
-            {position === 'right' ? renderAvatar() : null}
+            {position === 'right' && renderAvatar()}
           </View>
         )}
     </View>

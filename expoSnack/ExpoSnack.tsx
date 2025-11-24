@@ -65,7 +65,7 @@ const initialMessages: IMessage[] = [
     createdAt: date2.toDate(),
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
     },
     image:
       'https://static.vecteezy.com/system/resources/thumbnails/003/407/768/small/eiffel-tower-at-paris-france-free-photo.jpg',
@@ -87,7 +87,7 @@ const initialMessages: IMessage[] = [
     createdAt: date2.toDate(),
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
     },
     sent: true,
     received: true,
@@ -111,7 +111,7 @@ const initialMessages: IMessage[] = [
     createdAt: date3.toDate(),
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
     },
     sent: true,
     received: true,
@@ -149,7 +149,7 @@ const initialMessages: IMessage[] = [
     },
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
     },
   },
   {
@@ -175,7 +175,7 @@ const initialMessages: IMessage[] = [
     },
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
     },
   },
   {
@@ -185,7 +185,7 @@ const initialMessages: IMessage[] = [
     video: 'https://media.giphy.com/media/3o6ZthZjk09Xx4ktZ6/giphy.mp4',
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
     },
   },
   {
@@ -196,7 +196,7 @@ const initialMessages: IMessage[] = [
       'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3',
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
     },
   },
 ]

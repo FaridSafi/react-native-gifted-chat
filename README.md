@@ -166,7 +166,7 @@ export function Example() {
         createdAt: new Date(),
         user: {
           _id: 2,
-          name: 'React Native',
+          name: 'John Doe',
           avatar: 'https://placeimg.com/140/140/any',
         },
       },

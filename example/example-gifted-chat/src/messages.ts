@@ -16,7 +16,7 @@ const messages: IMessage[] = [
     createdAt: new Date(Date.UTC(2016, 5, 12, 17, 20, 0)),
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
       avatar: 'https://placeimg.com/140/140/any',
     },
   },
@@ -26,7 +26,7 @@ const messages: IMessage[] = [
     createdAt: new Date(Date.UTC(2016, 5, 13, 17, 20, 0)),
     user: {
       _id: 1,
-      name: 'React Native',
+      name: 'John Doe',
       avatar: 'https://placeimg.com/140/140/any',
     },
     image: 'https://placeimg.com/960/540/any',
@@ -37,7 +37,7 @@ const messages: IMessage[] = [
     createdAt: new Date(Date.UTC(2016, 5, 14, 17, 20, 0)),
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
       avatar: 'https://placeimg.com/140/140/any',
     },
     quickReplies: {
@@ -65,7 +65,7 @@ const messages: IMessage[] = [
     createdAt: new Date(Date.UTC(2016, 5, 15, 17, 20, 0)),
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
       avatar: 'https://placeimg.com/140/140/any',
     },
     quickReplies: {
@@ -92,7 +92,7 @@ const messages: IMessage[] = [
     createdAt: new Date(Date.UTC(2016, 5, 15, 18, 20, 0)),
     user: {
       _id: 2,
-      name: 'React Native',
+      name: 'John Doe',
       avatar: 'https://placeimg.com/140/140/any',
     },
   },
@@ -105,7 +105,7 @@ const messages: IMessage[] = [
     createdAt: new Date(Date.UTC(2016, 5, 13, 17, 20, 0)),
     user: {
       _id: 1,
-      name: 'React Native',
+      name: 'John Doe',
       avatar: 'https://placeimg.com/140/140/any',
     },
   },

@@ -27,7 +27,7 @@ const LinksExample: React.FC = () => {
       createdAt: new Date(Date.now() - 6 * 60000),
       user: {
         _id: 2,
-        name: 'React Native',
+        name: 'John Doe',
       },
     },
     {
@@ -36,7 +36,7 @@ const LinksExample: React.FC = () => {
       createdAt: new Date(Date.now() - 5 * 60000),
       user: {
         _id: 2,
-        name: 'React Native',
+        name: 'John Doe',
       },
     },
     {
@@ -45,7 +45,7 @@ const LinksExample: React.FC = () => {
       createdAt: new Date(Date.now() - 4 * 60000),
       user: {
         _id: 2,
-        name: 'React Native',
+        name: 'John Doe',
       },
     },
     {
@@ -54,7 +54,7 @@ const LinksExample: React.FC = () => {
       createdAt: new Date(Date.now() - 3 * 60000),
       user: {
         _id: 2,
-        name: 'React Native',
+        name: 'John Doe',
       },
     },
     {
@@ -63,7 +63,7 @@ const LinksExample: React.FC = () => {
       createdAt: new Date(Date.now() - 2 * 60000),
       user: {
         _id: 2,
-        name: 'React Native',
+        name: 'John Doe',
       },
     },
     {
@@ -72,7 +72,7 @@ const LinksExample: React.FC = () => {
       createdAt: new Date(Date.now() - 1 * 60000),
       user: {
         _id: 2,
-        name: 'React Native',
+        name: 'John Doe',
       },
     },
     {
@@ -81,7 +81,7 @@ const LinksExample: React.FC = () => {
       createdAt: new Date(),
       user: {
         _id: 2,
-        name: 'React Native',
+        name: 'John Doe',
       },
     },
   ], [])

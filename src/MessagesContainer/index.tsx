@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   View,
-  Text,
   LayoutChangeEvent,
   ListRenderItemInfo,
   CellRendererProps,
 } from 'react-native'
-import { FlatList, Pressable } from 'react-native-gesture-handler'
+import { FlatList, Pressable, Text } from 'react-native-gesture-handler'
 import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { LoadEarlierMessages } from '../LoadEarlierMessages'
 import { warning } from '../logging'

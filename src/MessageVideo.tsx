@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import { Text } from 'react-native-gesture-handler'
 import { Color } from './Color'
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 10,
   },
   text: {
     color: Color.alizarin,

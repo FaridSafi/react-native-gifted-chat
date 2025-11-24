@@ -7,7 +7,7 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
       {
         "busy": undefined,
         "checked": undefined,
-        "disabled": undefined,
+        "disabled": false,
         "expanded": undefined,
         "selected": undefined,
       }
@@ -21,7 +21,6 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
       }
     }
     accessible={true}
-    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -30,33 +29,7 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    style={
-      {
-        "opacity": 1,
-      }
-    }
-  >
-    <Image
-      onLayout={[Function]}
-      resizeMode="cover"
-      source={
-        {
-          "uri": "url://to/image.png",
-        }
-      }
-      style={
-        [
-          {
-            "borderRadius": 13,
-            "height": 100,
-            "margin": 3,
-            "width": 150,
-          },
-          undefined,
-        ]
-      }
-    />
-  </View>
+  />
   <OverKeyboardView
     visible={false}
   >

@@ -8,7 +8,6 @@ import React, {
   RefObject,
 } from 'react'
 import {
-  TextInput,
   View,
   LayoutChangeEvent,
 } from 'react-native'
@@ -18,7 +17,7 @@ import {
 } from '@expo/react-native-action-sheet'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler'
 import { KeyboardAvoidingView, KeyboardProvider } from 'react-native-keyboard-controller'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { TEST_ID } from '../Constant'

@@ -1,13 +1,13 @@
 import React, { useCallback, useMemo } from 'react'
 import {
   Image,
-  Text,
   View,
   StyleSheet,
   StyleProp,
   ImageStyle,
   TextStyle,
 } from 'react-native'
+import { Text } from 'react-native-gesture-handler'
 import { Color } from './Color'
 import { TouchableOpacity } from './components/TouchableOpacity'
 import { User } from './Models'
@@ -170,7 +170,7 @@ export function GiftedAvatar (
 
   return (
     <TouchableOpacity
-      disabled={!onPress}
+      enabled={!!onPress}
       onPress={handleOnPress}
       onLongPress={handleOnLongPress}
       style={[

@@ -5,9 +5,6 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
   style={
     [
       {
-        "flex": 1,
-      },
-      {
         "alignItems": "flex-start",
       },
       undefined,
@@ -21,7 +18,6 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
           "backgroundColor": "#f0f0f0",
           "borderRadius": 15,
           "justifyContent": "flex-end",
-          "marginRight": 60,
           "minHeight": 20,
         },
         null,
@@ -61,81 +57,65 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
     >
-      <View>
-        <View>
-          <View
-            style={
-              [
-                {
-                  "marginBottom": 5,
-                  "marginLeft": 10,
-                  "marginRight": 10,
-                  "marginTop": 5,
-                },
-                undefined,
-              ]
-            }
-          >
-            <Text
-              style={
-                [
-                  {
-                    "color": "black",
-                  },
-                  undefined,
-                  undefined,
-                ]
-              }
-              user={
-                {
-                  "_id": 1,
-                }
-              }
-            >
-              <Text>
-                test
-              </Text>
-            </Text>
-          </View>
-        </View>
-        <View
+      <View
+        style={
+          [
+            {
+              "marginHorizontal": 10,
+              "marginVertical": 5,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
           style={
             [
               {
-                "flexDirection": "row",
-                "justifyContent": "flex-start",
+                "color": "black",
               },
+              undefined,
               undefined,
             ]
           }
+          user={
+            {
+              "_id": 1,
+            }
+          }
         >
-          <View
+          <Text>
+            test
+          </Text>
+        </Text>
+      </View>
+      <View
+        style={
+          [
+            {
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "paddingHorizontal": 10,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View>
+          <Text
             style={
               [
                 {
-                  "marginBottom": 5,
-                  "marginLeft": 10,
-                  "marginRight": 10,
+                  "color": "#aaa",
+                  "fontSize": 10,
+                  "textAlign": "right",
                 },
                 undefined,
               ]
             }
           >
-            <Text
-              style={
-                [
-                  {
-                    "color": "#aaa",
-                    "fontSize": 10,
-                    "textAlign": "right",
-                  },
-                  undefined,
-                ]
-              }
-            >
-              12:00 AM
-            </Text>
-          </View>
+            12:00 AM
+          </Text>
         </View>
       </View>
     </View>

@@ -2,13 +2,13 @@ import React, { useCallback, useMemo, useState } from 'react'
 import {
   Platform,
   StyleSheet,
-  TextInput,
   TextInputChangeEvent,
   TextInputContentSizeChangeEvent,
   TextInputProps,
   useColorScheme,
   View,
 } from 'react-native'
+import { TextInput } from 'react-native-gesture-handler'
 import { Color } from './Color'
 import stylesCommon, { getColorSchemeStyle } from './styles'
 

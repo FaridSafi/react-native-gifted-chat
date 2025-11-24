@@ -1,22 +1,18 @@
 import { StyleSheet } from 'react-native'
 
-export default {
-  left: StyleSheet.create({
-    container: {
-      flexDirection: 'row',
-      alignItems: 'flex-end',
-      justifyContent: 'flex-start',
-      marginLeft: 8,
-      marginRight: 0,
-    },
-  }),
-  right: StyleSheet.create({
-    container: {
-      flexDirection: 'row',
-      alignItems: 'flex-end',
-      justifyContent: 'flex-end',
-      marginLeft: 0,
-      marginRight: 8,
-    },
-  }),
-}
+export default StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    maxWidth: '80%',
+  },
+  container_left: {
+    justifyContent: 'flex-start',
+    marginLeft: 8,
+  },
+  container_right: {
+    justifyContent: 'flex-end',
+    marginRight: 8,
+    alignSelf: 'flex-end',
+  },
+})

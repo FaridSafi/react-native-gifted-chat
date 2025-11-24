@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { ComponentProps } from 'react'
 import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  Pressable,
 } from 'react-native'
 import { MessageImageProps } from '../MessageImage'
 import { MessageTextProps } from '../MessageText'
@@ -46,7 +47,7 @@ export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
 
 export interface BubbleProps<TMessage extends IMessage> {
   user?: User
-  touchableProps?: object
+  touchableProps?: ComponentProps<typeof Pressable>
   isUsernameVisible?: boolean
   isCustomViewBottom?: boolean
   isInverted?: boolean

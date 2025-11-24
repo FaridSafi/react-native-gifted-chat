@@ -2,12 +2,12 @@ import React from 'react'
 import {
   ActivityIndicator,
   StyleSheet,
-  Text,
   View,
   StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native'
+import { Text } from 'react-native-gesture-handler'
 import { Color } from './Color'
 import { TouchableOpacity } from './components/TouchableOpacity'
 import stylesCommon from './styles'
@@ -41,7 +41,7 @@ export const LoadEarlierMessages: React.FC<LoadEarlierMessagesProps> = ({
     <TouchableOpacity
       style={[styles.container, containerStyle]}
       onPress={onPress}
-      disabled={isLoading}
+      enabled={!isLoading}
       accessibilityRole='button'
     >
       <View style={[stylesCommon.centerItems, styles.wrapper, wrapperStyle]}>

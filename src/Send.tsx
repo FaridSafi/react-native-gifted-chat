@@ -1,15 +1,15 @@
 import React, { useMemo, useCallback, useEffect } from 'react'
 import {
   StyleSheet,
-  Text,
   StyleProp,
   ViewStyle,
   TextStyle,
   useColorScheme,
 } from 'react-native'
+import { Text } from 'react-native-gesture-handler'
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated'
-import { Color } from './Color'
 
+import { Color } from './Color'
 import { TouchableOpacity, TouchableOpacityProps } from './components/TouchableOpacity'
 import { TEST_ID } from './Constant'
 import { IMessage } from './Models'

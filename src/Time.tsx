@@ -1,47 +1,26 @@
 import React, { useMemo } from 'react'
-import { StyleSheet, Text, View, ViewStyle, TextStyle } from 'react-native'
+import { StyleSheet, View, ViewStyle, TextStyle } from 'react-native'
 import dayjs from 'dayjs'
 
+import { Text } from 'react-native-gesture-handler'
 import { Color } from './Color'
 import { TIME_FORMAT } from './Constant'
 import { useChatContext } from './GiftedChatContext'
 import { LeftRightStyle, IMessage } from './Models'
+import { getStyleWithPosition } from './styles'
 
-const { containerStyle } = StyleSheet.create({
-  containerStyle: {
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 5,
-  },
-})
-
-const { textStyle } = StyleSheet.create({
-  textStyle: {
+const styles = StyleSheet.create({
+  text: {
     fontSize: 10,
     textAlign: 'right',
   },
+  text_left: {
+    color: Color.timeTextColor,
+  },
+  text_right: {
+    color: Color.white,
+  },
 })
-
-const styles = {
-  left: StyleSheet.create({
-    container: {
-      ...containerStyle,
-    },
-    text: {
-      color: Color.timeTextColor,
-      ...textStyle,
-    },
-  }),
-  right: StyleSheet.create({
-    container: {
-      ...containerStyle,
-    },
-    text: {
-      color: Color.white,
-      ...textStyle,
-    },
-  }),
-}
 
 export interface TimeProps<TMessage extends IMessage> {
   position?: 'left' | 'right'
@@ -71,15 +50,10 @@ export const Time = <TMessage extends IMessage = IMessage>({
     return null
 
   return (
-    <View
-      style={[
-        styles[position].container,
-        containerStyle?.[position],
-      ]}
-    >
+    <View style={containerStyle?.[position]}>
       <Text
         style={[
-          styles[position].text,
+          getStyleWithPosition(styles, 'text', position),
           timeTextStyle?.[position],
         ]}
       >

@@ -1,16 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render <Bubble /> and compare with snapshot 1`] = `
-<View
-  style={
-    [
-      {
-        "alignItems": "flex-start",
-      },
-      undefined,
-    ]
-  }
->
+<View>
   <View
     style={
       [
@@ -93,29 +84,39 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
         style={
           [
             {
+              "alignItems": "flex-end",
               "flexDirection": "row",
-              "justifyContent": "flex-start",
+              "justifyContent": "space-between",
+              "paddingBottom": 5,
               "paddingHorizontal": 10,
             },
             undefined,
           ]
         }
       >
-        <View>
-          <Text
-            style={
-              [
-                {
-                  "color": "#aaa",
-                  "fontSize": 10,
-                  "textAlign": "right",
-                },
-                undefined,
-              ]
+        <View
+          style={
+            {
+              "flex": 1,
             }
-          >
-            12:00 AM
-          </Text>
+          }
+        >
+          <View>
+            <Text
+              style={
+                [
+                  {
+                    "color": "#aaa",
+                    "fontSize": 10,
+                    "textAlign": "right",
+                  },
+                  undefined,
+                ]
+              }
+            >
+              12:00 AM
+            </Text>
+          </View>
         </View>
       </View>
     </View>

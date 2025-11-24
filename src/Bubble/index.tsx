@@ -362,7 +362,7 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
             ]}
           >
             {renderUsername()}
-            <View style={[stylesCommon.fill, styles.messageTimeAndStatusContainer]}>
+            <View style={styles.messageTimeAndStatusContainer}>
               {renderTime()}
               {renderTicks()}
             </View>

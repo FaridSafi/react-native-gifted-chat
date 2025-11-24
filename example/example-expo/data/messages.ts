@@ -7,6 +7,28 @@ const date3 = date2.clone().subtract(1, 'week')
 
 const messages: IMessage[] = [
   {
+    _id: 10,
+    text: '👋',
+    createdAt: date1.toDate(),
+    user: {
+      _id: 1,
+      name: 'Developer',
+    },
+    sent: true,
+    received: true,
+  },
+  {
+    _id: 9,
+    text: 'Hi',
+    createdAt: date1.toDate(),
+    user: {
+      _id: 1,
+      name: 'Developer',
+    },
+    sent: true,
+    received: true,
+  },
+  {
     _id: 9,
     text: '#awesome 3',
     createdAt: date1.toDate(),

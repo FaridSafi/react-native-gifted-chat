@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   },
 
   messageTimeAndStatusContainer: {
+    flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',

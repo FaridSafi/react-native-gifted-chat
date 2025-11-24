@@ -119,16 +119,12 @@ exports[`Message component should render <Message /> and compare with snapshot 1
           >
             <View
               style={
-                [
-                  {
-                    "flex": 1,
-                  },
-                  {
-                    "alignItems": "center",
-                    "flexDirection": "row",
-                    "justifyContent": "flex-end",
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "justifyContent": "flex-end",
+                }
               }
             >
               <View>
@@ -313,16 +309,12 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
           >
             <View
               style={
-                [
-                  {
-                    "flex": 1,
-                  },
-                  {
-                    "alignItems": "center",
-                    "flexDirection": "row",
-                    "justifyContent": "flex-end",
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "justifyContent": "flex-end",
+                }
               }
             >
               <View>
@@ -507,16 +499,12 @@ exports[`Message component should render null if user has no Avatar 1`] = `
           >
             <View
               style={
-                [
-                  {
-                    "flex": 1,
-                  },
-                  {
-                    "alignItems": "center",
-                    "flexDirection": "row",
-                    "justifyContent": "flex-end",
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "flexGrow": 1,
+                  "justifyContent": "flex-end",
+                }
               }
             >
               <View>

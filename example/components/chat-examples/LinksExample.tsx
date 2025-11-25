@@ -32,7 +32,7 @@ const LinksExample: React.FC = () => {
       },
     },
     {
-      text: 'Phone numbers are also parsed:\n\n• +79931234567\n\n• 89931234567\n\n• +1-215-456-7890',
+      text: 'Phone numbers are also parsed:\n\n• +79931234567\n\n• 89931234567\n\n• +1-215-456-7890.\n\nIt shouldn\'t parse phone numbers in file names like IMG_20220101_123456.jpg, 89201234567_today.pdf, or in addresses like 1234 React St., JS City, 56789.',
       createdAt: new Date(Date.now() - 2 * 60000),
       user: {
         _id: 2,
@@ -74,6 +74,10 @@ const LinksExample: React.FC = () => {
     {
       text: 'System message with link: Check out our documentation at https://github.com/FaridSafi/react-native-gifted-chat',
       createdAt: new Date(Date.now() - 7 * 60000),
+      user: {
+        _id: 2,
+        name: 'John Doe',
+      },
       system: true,
     },
   ].map((message, index) => ({
@@ -153,16 +157,17 @@ const LinksExample: React.FC = () => {
   const matchers = useMemo<LinkMatcher[]>(() => [
     {
       type: 'phone',
-      pattern: /(?:\+?\d{1,3}[\s.-]?)?\(?\d{1,4}\)?[\s.-]?\d{1,4}[\s.-]?\d{1,9}/g,
-      getLinkUrl: (text: string): string => {
-        return getValidPhoneNumber(text) || ''
+      // Pattern that excludes numbers adjacent to underscores or part of filenames
+      pattern: /(?<![A-Za-z0-9_])(?:\+?\d{1,3}[\s.-]?)?\(?\d{1,4}\)?[\s.-]?\d{1,4}[\s.-]?\d{1,9}(?![A-Za-z0-9_]|\.[a-z]{2,4})/gi,
+      getLinkUrl: (matchedText: string): string => {
+        return getValidPhoneNumber(matchedText) || ''
       },
       getLinkText: (text: string): string => {
         return text
       },
       renderLink: (text: string, url: string, index: number) => {
         const validPhoneNumber = getValidPhoneNumber(text)
-        const isDisabled = !validPhoneNumber
+        const isDisabled = !validPhoneNumber || !url
 
         return (
           <Text
@@ -186,11 +191,12 @@ const LinksExample: React.FC = () => {
           user={user}
           messageTextProps={{
             phone: false,
+            url: true,
             matchers,
             mention: true,
             hashtag: true,
-            mentionUrl: 'https://twitter.com',
-            hashtagUrl: 'https://twitter.com/hashtag',
+            mentionUrl: 'https://x.com',
+            hashtagUrl: 'https://x.com/hashtag',
           }}
           keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
           colorScheme='light'

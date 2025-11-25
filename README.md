@@ -277,8 +277,8 @@ Messages, system messages, quick replies etc.: [data structure](src/Models.ts)
   - `url` - Enable/disable URL parsing (default: true)
   - `hashtag` - Enable/disable hashtag parsing (default: false)
   - `mention` - Enable/disable mention parsing (default: false)
-  - `hashtagUrl` - Base URL for hashtags (e.g., 'https://twitter.com/hashtag')
-  - `mentionUrl` - Base URL for mentions (e.g., 'https://twitter.com')
+  - `hashtagUrl` - Base URL for hashtags (e.g., 'https://x.com/hashtag')
+  - `mentionUrl` - Base URL for mentions (e.g., 'https://x.com')
   - `stripPrefix` - Strip 'http://' or 'https://' from URL display (default: false)
   - `TextComponent` - Custom Text component to use (e.g., from react-native-gesture-handler)
 
@@ -507,7 +507,7 @@ Looking for a React Native freelance expert with more than 14 years of experienc
 
 ## Author
 
-Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi) or [@xcapetir](https://www.twitter.com/xcapetir)
+Feel free to ask me questions on Twitter [@FaridSafi](https://www.x.com/FaridSafi) or [@xcapetir](https://www.x.com/xcapetir)
 
 ## Maintainer
 

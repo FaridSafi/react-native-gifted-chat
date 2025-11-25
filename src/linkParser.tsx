@@ -42,7 +42,7 @@ interface LinkParserProps {
 const DEFAULT_MATCHERS: LinkMatcher[] = [
   {
     type: 'url',
-    pattern: /(?:(?:https?:\/\/)|(?:www\.))[^\s]+|[a-zA-Z0-9][a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?/gi,
+    pattern: /(?:https?:\/\/(?:www\.)?|www\.)[^\s]+|(?<![A-Za-z0-9_.@])(?![A-Za-z0-9._%+-]*@)[a-zA-Z0-9][a-zA-Z0-9-]*\.(?!@)[a-zA-Z]{2,}(?![A-Za-z0-9._%+-]*@)(?:\/[^\s]*)?/gi,
     getLinkUrl: (text: string) => {
       if (!/^https?:\/\//i.test(text))
         return `http://${text}`
@@ -52,12 +52,12 @@ const DEFAULT_MATCHERS: LinkMatcher[] = [
   },
   {
     type: 'email',
-    pattern: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi,
+    pattern: /(?<![A-Za-z0-9])([a-zA-Z0-9][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/gi,
     getLinkUrl: (text: string) => `mailto:${text}`,
   },
   {
     type: 'phone',
-    pattern: /(?:\+?\d{1,3}[\s.\-]?)?\(?\d{1,4}\)?[\s.\-]?\d{1,4}[\s.\-]?\d{1,9}/g,
+    pattern: /(?<![A-Za-z0-9_])(?:\+?\d{1,3}[\s.\-]?)?\(?\d{1,4}\)?[\s.\-]?\d{1,4}[\s.\-]?\d{1,9}(?![A-Za-z0-9_]|\.[a-z]{2,4})/gi,
     getLinkUrl: (text: string) => {
       const cleaned = text.replace(/[\s.()\-]/g, '')
       return `tel:${cleaned}`
@@ -71,7 +71,7 @@ const DEFAULT_MATCHERS: LinkMatcher[] = [
   },
   {
     type: 'mention',
-    pattern: /@[\w-]+/g,
+    pattern: /(?<![a-zA-Z0-9._%+-])@[\w-]+/g,
     getLinkUrl: (text: string) => text,
     baseUrl: undefined,
   },

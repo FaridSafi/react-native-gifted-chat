@@ -121,8 +121,8 @@ const LinksExample: React.FC = () => {
       if (phoneNumber && phoneNumber.isValid())
         return cleaned
 
-    } catch (event) {
-      console.warn('Invalid phone number:', event)
+    } catch (error) {
+      console.warn('Invalid phone number:', error)
     }
 
     return undefined

@@ -514,3 +514,5 @@ Feel free to ask me questions on Twitter [@FaridSafi](https://www.x.com/FaridSaf
 Have any questions? Reach out to [Kesha Antonov](https://github.com/kesha-antonov)
 
 Please note that I'm maintaining this project in my free time for free. If you find any issues, feel free to open them, and I'll do my best to address them as time permits.
+
+If you consider my work helpful please consider [become a backer](https://github.com/sponsors/kesha-antonov), I'll have more time to work on open source. Thanks!

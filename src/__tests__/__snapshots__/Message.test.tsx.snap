@@ -12,7 +12,7 @@ exports[`Message component should render <Message /> and compare with snapshot 1
           "flexDirection": "row",
           "justifyContent": "flex-start",
           "marginLeft": 8,
-          "maxWidth": "80%",
+          "maxWidth": "70%",
         },
         {
           "marginBottom": 10,
@@ -155,7 +155,7 @@ exports[`Message component should render <Message /> with Avatar 1`] = `
           "flexDirection": "row",
           "justifyContent": "flex-start",
           "marginLeft": 8,
-          "maxWidth": "80%",
+          "maxWidth": "70%",
         },
         {
           "marginBottom": 10,
@@ -337,7 +337,7 @@ exports[`Message component should render null if user has no Avatar 1`] = `
           "flexDirection": "row",
           "justifyContent": "flex-start",
           "marginLeft": 8,
-          "maxWidth": "80%",
+          "maxWidth": "70%",
         },
         {
           "marginBottom": 10,

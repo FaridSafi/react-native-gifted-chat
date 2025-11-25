@@ -68,7 +68,12 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
             {
               "height": undefined,
             },
-            undefined,
+            [
+              {
+                "paddingLeft": 10,
+              },
+              undefined,
+            ],
           ]
         }
         testID="Type a message..."

@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
   },
   text: {
     backgroundColor: Color.backgroundTransparent,
-    fontStyle: 'italic',
     fontSize: 12,
     fontWeight: '300',
   },

@@ -16,58 +16,14 @@ const LinksExample: React.FC = () => {
 
   const initialMessages: IMessage[] = useMemo(() => [
     {
-      _id: 8,
-      text: 'System message with link: Check out our documentation at https://github.com/FaridSafi/react-native-gifted-chat',
-      createdAt: new Date(Date.now() - 7 * 60000),
-      system: true,
-    },
-    {
-      _id: 7,
-      text: 'You can mention people like @kesha-antonov or @john-doe',
-      createdAt: new Date(Date.now() - 6 * 60000),
+      text: 'Welcome! 👋',
+      createdAt: new Date(),
       user: {
         _id: 2,
         name: 'John Doe',
       },
     },
     {
-      _id: 6,
-      text: 'Use hashtags to categorize: #giftedchat #reactnative #opensource',
-      createdAt: new Date(Date.now() - 5 * 60000),
-      user: {
-        _id: 2,
-        name: 'John Doe',
-      },
-    },
-    {
-      _id: 5,
-      text: 'Different link formats work:\n• www.google.com\n• google.com\n• https://google.com',
-      createdAt: new Date(Date.now() - 4 * 60000),
-      user: {
-        _id: 2,
-        name: 'John Doe',
-      },
-    },
-    {
-      _id: 4,
-      text: 'Email addresses are clickable: cool.guy@example.com or contact@reactnative.dev',
-      createdAt: new Date(Date.now() - 3 * 60000),
-      user: {
-        _id: 2,
-        name: 'John Doe',
-      },
-    },
-    {
-      _id: 3,
-      text: 'Phone numbers are also parsed:\n\n• +79931234567\n\n• 89931234567\n\n• +1-555-123-4567',
-      createdAt: new Date(Date.now() - 2 * 60000),
-      user: {
-        _id: 2,
-        name: 'John Doe',
-      },
-    },
-    {
-      _id: 2,
       text: 'This example shows how GiftedChat handles different types of links in messages. Try tapping on any link!',
       createdAt: new Date(Date.now() - 1 * 60000),
       user: {
@@ -76,15 +32,54 @@ const LinksExample: React.FC = () => {
       },
     },
     {
-      _id: 1,
-      text: 'Welcome! 👋',
-      createdAt: new Date(),
+      text: 'Phone numbers are also parsed:\n\n• +79931234567\n\n• 89931234567\n\n• +1-555-123-4567',
+      createdAt: new Date(Date.now() - 2 * 60000),
       user: {
         _id: 2,
         name: 'John Doe',
       },
     },
-  ], [])
+    {
+      text: 'Email addresses are clickable: cool.guy@example.com or contact@reactnative.dev',
+      createdAt: new Date(Date.now() - 3 * 60000),
+      user: {
+        _id: 2,
+        name: 'John Doe',
+      },
+    },
+    {
+      text: 'Different link formats work:\n• www.google.com\n• google.com\n• https://google.com',
+      createdAt: new Date(Date.now() - 4 * 60000),
+      user: {
+        _id: 2,
+        name: 'John Doe',
+      },
+    },
+    {
+      text: 'Use hashtags to categorize: #giftedchat #reactnative #opensource',
+      createdAt: new Date(Date.now() - 5 * 60000),
+      user: {
+        _id: 2,
+        name: 'John Doe',
+      },
+    },
+    {
+      text: 'You can mention people like @kesha-antonov or @john-doe',
+      createdAt: new Date(Date.now() - 6 * 60000),
+      user: {
+        _id: 2,
+        name: 'John Doe',
+      },
+    },
+    {
+      text: 'System message with link: Check out our documentation at https://github.com/FaridSafi/react-native-gifted-chat',
+      createdAt: new Date(Date.now() - 7 * 60000),
+      system: true,
+    },
+  ].map((message, index) => ({
+    ...message,
+    _id: index + 1,
+  })).reverse(), [])
 
   const [messages, setMessages] = useState<IMessage[]>(initialMessages)
 

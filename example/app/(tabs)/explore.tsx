@@ -16,9 +16,9 @@ type ChatExample = 'customizedFeatures' | 'customizedRendering' | 'slack' | 'lin
 
 const examples: Array<{ id: ChatExample, title: string, description: string }> = [
   { id: 'customizedFeatures', title: 'Customized Features', description: 'Full featured example with custom actions, accessories, and media' },
+  { id: 'links', title: 'Links & Patterns', description: 'Phone numbers, emails, URLs, hashtags, and mentions' },
   { id: 'customizedRendering', title: 'Customized Rendering', description: 'Customized chat with all rendering options' },
   { id: 'slack', title: 'Slack Style', description: 'Slack-like message styling' },
-  { id: 'links', title: 'Links & Patterns', description: 'Phone numbers, emails, URLs, hashtags, and mentions' },
 ]
 
 export default function ExploreScreen () {

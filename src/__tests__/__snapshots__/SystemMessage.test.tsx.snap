@@ -52,7 +52,6 @@ exports[`SystemMessage should render <SystemMessage /> and compare with snapshot
             {
               "backgroundColor": "transparent",
               "fontSize": 12,
-              "fontStyle": "italic",
               "fontWeight": "300",
             },
             undefined,

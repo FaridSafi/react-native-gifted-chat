@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react'
 import {
   View,
-  Pressable, // don't use Pressable from gesture handler to issues with react-native-autolink (onPress doesn't work)
+  Pressable,
 } from 'react-native'
 
 import { Text } from 'react-native-gesture-handler'

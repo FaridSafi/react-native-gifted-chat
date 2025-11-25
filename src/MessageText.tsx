@@ -7,8 +7,8 @@ import {
   View,
 } from 'react-native'
 
-import { Match } from 'autolinker/dist/es2015'
-import Autolink, { AutolinkProps } from 'react-native-autolink'
+import { Text } from 'react-native-gesture-handler'
+import { LinkParser, LinkMatcher, LinkType } from './linkParser'
 import { LeftRightStyle, IMessage } from './Models'
 
 export type MessageTextProps<TMessage extends IMessage> = {
@@ -21,9 +21,19 @@ export type MessageTextProps<TMessage extends IMessage> = {
   onPress?: (
     message: TMessage,
     url: string,
-    match: Match
+    type: LinkType
   ) => void
-} & Omit<AutolinkProps, 'text' | 'onPress'>
+  // Link parser options
+  matchers?: LinkMatcher[]
+  email?: boolean
+  phone?: boolean
+  url?: boolean
+  hashtag?: boolean
+  mention?: boolean
+  hashtagUrl?: string
+  mentionUrl?: string
+  stripPrefix?: boolean
+}
 
 export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
   currentMessage,
@@ -33,7 +43,15 @@ export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
   linkStyle: linkStyleProp,
   customTextStyle,
   onPress: onPressProp,
-  ...rest
+  matchers,
+  email = true,
+  phone = true,
+  url = true,
+  hashtag = false,
+  mention = false,
+  hashtagUrl,
+  mentionUrl,
+  stripPrefix = false,
 }) => {
   const linkStyle = useMemo(() => StyleSheet.flatten([
     styles.link,
@@ -46,22 +64,27 @@ export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
     customTextStyle,
   ], [position, textStyle, customTextStyle])
 
-  const handlePress = useCallback((url: string, match: Match) => {
-    onPressProp?.(currentMessage, url, match)
+  const handlePress = useCallback((url: string, type: LinkType) => {
+    onPressProp?.(currentMessage, url, type)
   }, [onPressProp, currentMessage])
 
   return (
     <View style={[styles.container, containerStyle?.[position]]}>
-      <Autolink
-        email
-        phone
-        url
-        stripPrefix={false}
-        {...rest}
-        onPress={onPressProp ? handlePress : undefined}
-        linkStyle={linkStyle}
-        style={style}
+      <LinkParser
         text={currentMessage!.text}
+        matchers={matchers}
+        email={email}
+        phone={phone}
+        url={url}
+        hashtag={hashtag}
+        mention={mention}
+        hashtagUrl={hashtagUrl}
+        mentionUrl={mentionUrl}
+        stripPrefix={stripPrefix}
+        linkStyle={linkStyle}
+        textStyle={style}
+        onPress={onPressProp ? handlePress : undefined}
+        TextComponent={Text}
       />
     </View>
   )

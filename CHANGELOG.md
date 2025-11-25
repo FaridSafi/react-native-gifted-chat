@@ -199,7 +199,6 @@ These props moved from `GiftedChatProps` to `MessagesContainerProps` but are sti
 - `@types/lodash.isequal`: ^4.5.8
 - `dayjs`: ^1.11.19
 - `lodash.isequal`: ^4.5.0
-- `react-native-autolink`: ^4.2.0
 - `react-native-zoom-reanimated`: ^1.4.10
 
 #### Peer Dependencies (now required)

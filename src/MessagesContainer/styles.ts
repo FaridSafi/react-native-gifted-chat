@@ -9,6 +9,7 @@ export default StyleSheet.create({
   contentContainerStyle: {
     flexGrow: 1,
     justifyContent: 'flex-start',
+    paddingBottom: 10,
   },
   emptyChatContainer: {
     transform: [{ scaleY: -1 }],

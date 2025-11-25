@@ -45,7 +45,7 @@
 - Composer actions (to attach photos, etc.)
 - Load earlier messages
 - Copy messages to clipboard
-- Touchable links using [react-native-autolink](https://github.com/joshswan/react-native-autolink)
+- Touchable links with customizable parsing (URLs, emails, phone numbers, hashtags, mentions)
 - Avatar as user's initials
 - Localized dates
 - Multi-line TextInput
@@ -269,12 +269,18 @@ Messages, system messages, quick replies etc.: [data structure](src/Models.ts)
 - **`imageProps`** _(Object)_ - Extra props to be passed to the [`<Image>`](https://reactnative.dev/docs/image) component created by the default `renderMessageImage`
 - **`imageStyle`** _(Object)_ - Custom style for message images
 - **`videoProps`** _(Object)_ - Extra props to be passed to the video component created by the required `renderMessageVideo`
-- **`messageTextProps`** _(Object)_ - Extra props to be passed to the MessageText component. Useful for customizing link parsing behavior, text styles, and matchers. Supports all [react-native-autolink](https://github.com/joshswan/react-native-autolink) props including:
+- **`messageTextProps`** _(Object)_ - Extra props to be passed to the MessageText component. Useful for customizing link parsing behavior, text styles, and matchers. Supports the following props:
   - `matchers` - Custom matchers for linking message content (like URLs, phone numbers, hashtags, mentions)
   - `linkStyle` - Custom style for links
   - `email` - Enable/disable email parsing (default: true)
   - `phone` - Enable/disable phone number parsing (default: true)
   - `url` - Enable/disable URL parsing (default: true)
+  - `hashtag` - Enable/disable hashtag parsing (default: false)
+  - `mention` - Enable/disable mention parsing (default: false)
+  - `hashtagUrl` - Base URL for hashtags (e.g., 'https://twitter.com/hashtag')
+  - `mentionUrl` - Base URL for mentions (e.g., 'https://twitter.com')
+  - `stripPrefix` - Strip 'http://' or 'https://' from URL display (default: false)
+  - `TextComponent` - Custom Text component to use (e.g., from react-native-gesture-handler)
 
 Example:
 

@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { Linking, Platform, StyleSheet, View } from 'react-native'
+import { Linking, Platform, StyleSheet, Text, View } from 'react-native'
 import { ActionSheetProvider, useActionSheet } from '@expo/react-native-action-sheet'
 import { setStringAsync } from 'expo-clipboard'
-import { AutolinkProps, CustomMatch, ReplacerArgs } from 'react-native-autolink'
-import { GiftedChat, IMessage } from 'react-native-gifted-chat'
+import { isValidPhoneNumber, parsePhoneNumberWithError } from 'libphonenumber-js'
+import { GiftedChat, IMessage, LinkMatcher } from 'react-native-gifted-chat'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const LinksExample: React.FC = () => {
@@ -32,7 +32,7 @@ const LinksExample: React.FC = () => {
       },
     },
     {
-      text: 'Phone numbers are also parsed:\n\n• +79931234567\n\n• 89931234567\n\n• +1-555-123-4567',
+      text: 'Phone numbers are also parsed:\n\n• +79931234567\n\n• 89931234567\n\n• +1-215-456-7890',
       createdAt: new Date(Date.now() - 2 * 60000),
       user: {
         _id: 2,
@@ -99,43 +99,83 @@ const LinksExample: React.FC = () => {
     )
   }, [user])
 
-  const matchers = useMemo<AutolinkProps['matchers']>(() => [
+  const getValidPhoneNumber = useCallback((text: string): string | undefined => {
+    const cleaned = text.replace(/[\-\(\)\s\.]/g, '')
+
+    // Validate with libphonenumber-js
+    try {
+      // Try direct validation first
+      if (isValidPhoneNumber(cleaned))
+        return cleaned
+
+      // Try with RU region for local numbers
+      if (isValidPhoneNumber(cleaned, 'RU'))
+        return cleaned
+
+      // Try parsing to check validity
+      const phoneNumber = parsePhoneNumberWithError(cleaned, 'RU')
+      if (phoneNumber && phoneNumber.isValid())
+        return cleaned
+
+    } catch (event) {
+      console.warn('Invalid phone number:', event)
+    }
+
+    return undefined
+  }, [])
+
+  const handlePressPhoneNumber = useCallback((url: string) => {
+    if (!url)
+      return // Skip if validation failed
+
+    const options: {
+      title: string
+      action?: () => void
+    }[] = [
+      { title: 'Call', action: () => Linking.openURL(`tel:${url}`) },
+      { title: 'Send SMS', action: () => Linking.openURL(`sms:${url}`) },
+      { title: 'Copy Phone Number', action: () => setStringAsync(url) },
+      { title: 'Cancel' },
+    ]
+
+    showActionSheetWithOptions({
+      options: options.map(o => o.title),
+      cancelButtonIndex: options.length - 1,
+    }, (buttonIndex?: number) => {
+      if (buttonIndex === undefined)
+        return
+
+      const option = options[buttonIndex]
+      option.action?.()
+    })
+  }, [showActionSheetWithOptions])
+
+  const matchers = useMemo<LinkMatcher[]>(() => [
     {
       type: 'phone',
-      pattern: /\+?[1-9][0-9\-\(\) ]{7,}[0-9]/g,
-      getLinkUrl: (replacerArgs: ReplacerArgs): string => {
-        return replacerArgs[0].replace(/[\-\(\) ]/g, '')
+      pattern: /(?:\+?\d{1,3}[\s.-]?)?\(?\d{1,4}\)?[\s.-]?\d{1,4}[\s.-]?\d{1,9}/g,
+      getLinkUrl: (text: string): string => {
+        return getValidPhoneNumber(text) || ''
       },
-      getLinkText: (replacerArgs: ReplacerArgs): string => {
-        return replacerArgs[0]
+      getLinkText: (text: string): string => {
+        return text
       },
-      style: styles.linkStyle,
-      onPress: (match: CustomMatch) => {
-        const url = match.getAnchorHref()
+      renderLink: (text: string, url: string, index: number) => {
+        const validPhoneNumber = getValidPhoneNumber(text)
+        const isDisabled = !validPhoneNumber
 
-        const options: {
-          title: string
-          action?: () => void
-        }[] = [
-          { title: 'Copy', action: () => setStringAsync(url) },
-          { title: 'Call', action: () => Linking.openURL(`tel:${url}`) },
-          { title: 'Send SMS', action: () => Linking.openURL(`sms:${url}`) },
-          { title: 'Cancel' },
-        ]
-
-        showActionSheetWithOptions({
-          options: options.map(o => o.title),
-          cancelButtonIndex: options.length - 1,
-        }, (buttonIndex?: number) => {
-          if (buttonIndex === undefined)
-            return
-
-          const option = options[buttonIndex]
-          option.action?.()
-        })
+        return (
+          <Text
+            key={index}
+            style={[styles.link, isDisabled && styles.linkDisabled]}
+            onPress={() => !isDisabled && handlePressPhoneNumber(url)}
+          >
+            {text}
+          </Text>
+        )
       },
     },
-  ], [showActionSheetWithOptions])
+  ], [getValidPhoneNumber, handlePressPhoneNumber])
 
   return (
     <ActionSheetProvider>
@@ -147,6 +187,10 @@ const LinksExample: React.FC = () => {
           messageTextProps={{
             phone: false,
             matchers,
+            mention: true,
+            hashtag: true,
+            mentionUrl: 'https://twitter.com',
+            hashtagUrl: 'https://twitter.com/hashtag',
           }}
           keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
           colorScheme='light'
@@ -168,8 +212,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  linkStyle: {
+  link: {
     textDecorationLine: 'underline',
-    fontStyle: 'italic',
+  },
+  linkDisabled: {
+    textDecorationLine: 'none',
   },
 })

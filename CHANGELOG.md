@@ -1,5 +1,75 @@
 # Changelog
 
+## [3.2.0] - 2025-11-25
+
+### ✨ Features
+- **Custom Link Parser**: Replaced `react-native-autolink` dependency with custom link parser implementation for better control and performance
+  - Removed external dependency on `react-native-autolink`
+  - Improved link parsing with custom implementation in `linkParser.tsx`
+  - Updated `MessageText` component to use new parser
+  - Enhanced links example in example app
+
+### 🐛 Bug Fixes
+- Adjusted message bubble styles for better rendering
+- Updated test snapshots to reflect parser changes
+
+## [3.1.5] - 2025-11-25
+
+### ✨ Features
+- **Color Scheme Support**: Added `colorScheme` prop to `GiftedChat` component
+  - New `useColorScheme` hook for consistent color scheme handling
+  - Automatically adapts UI elements (Composer, InputToolbar, Send) based on color scheme
+  - Added comprehensive tests for color scheme functionality
+
+### 📝 Documentation
+- Updated README with `colorScheme` prop documentation
+
+## [3.1.4] - 2025-11-25
+
+### 🐛 Bug Fixes
+- Added left padding to `TextInput` when no accessory is present for better visual alignment
+- Adjusted input toolbar styles for improved layout
+
+## [3.1.3] - 2025-11-25
+
+### 🔧 Improvements
+- Removed unused imports for cleaner codebase
+
+## [3.1.2] - 2025-11-24
+
+### 🐛 Bug Fixes
+- Fixed message bubble styles for small messages
+- Improved rendering of compact message content
+
+### 🧪 Testing
+- Updated test snapshots
+
+## [3.1.1] - 2025-11-24
+
+### 🐛 Bug Fixes
+- Fixed Bubble component styles for better message rendering
+- Corrected style inconsistencies in message bubbles
+
+### 🧪 Testing
+- Updated test snapshots to reflect style fixes
+
+## [3.1.0] - 2025-11-24
+
+### 🔧 Improvements
+- Refactored component styles for better maintainability
+- Updated Expo Snack example with latest changes
+
+### 🧪 Testing
+- Updated test snapshots
+
+## [3.0.1] - 2025-11-24
+
+### 🐛 Bug Fixes
+- Fixed Composer auto-resize height behavior on web platform
+
+### 🧪 Testing
+- Updated test snapshots
+
 ## [3.0.0] - 2025-11-23
 
 This is a major release with significant breaking changes, new features, and improvements. The library has been completely rewritten in TypeScript with improved type safety, better keyboard handling, and enhanced customization options.

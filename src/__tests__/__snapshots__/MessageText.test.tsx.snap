@@ -23,9 +23,7 @@ exports[`should render <MessageText /> and compare with snapshot 1`] = `
       ]
     }
   >
-    <Text>
-      test
-    </Text>
+    test
   </Text>
 </View>
 `;

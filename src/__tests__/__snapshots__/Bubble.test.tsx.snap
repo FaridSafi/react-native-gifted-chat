@@ -69,15 +69,8 @@ exports[`should render <Bubble /> and compare with snapshot 1`] = `
               undefined,
             ]
           }
-          user={
-            {
-              "_id": 1,
-            }
-          }
         >
-          <Text>
-            test
-          </Text>
+          test
         </Text>
       </View>
       <View

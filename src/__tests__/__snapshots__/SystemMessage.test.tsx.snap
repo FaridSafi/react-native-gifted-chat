@@ -59,9 +59,7 @@ exports[`SystemMessage should render <SystemMessage /> and compare with snapshot
         ]
       }
     >
-      <Text>
-        test
-      </Text>
+      test
     </Text>
   </View>
 </View>

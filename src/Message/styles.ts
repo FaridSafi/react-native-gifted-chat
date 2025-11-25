@@ -4,7 +4,7 @@ export default StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    maxWidth: '80%',
+    maxWidth: '70%',
   },
   container_left: {
     justifyContent: 'flex-start',

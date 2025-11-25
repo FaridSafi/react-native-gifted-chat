@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     paddingTop: 8,
     paddingBottom: 10,
+    paddingHorizontal: 8,
   },
   textInput_dark: {
     color: '#fff',

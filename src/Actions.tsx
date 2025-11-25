@@ -89,7 +89,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   button: {
-    paddingHorizontal: 8,
+    paddingLeft: 10,
+    paddingRight: 4,
     paddingVertical: 7,
   },
 

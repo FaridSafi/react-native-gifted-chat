@@ -133,7 +133,8 @@ export default CustomActions
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 8,
+    paddingLeft: 8,
+    paddingRight: 4,
     paddingVertical: 7,
   },
   wrapper: {

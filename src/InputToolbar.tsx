@@ -69,21 +69,13 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
   ])
 
   const composerFragment = useMemo(() => {
-    let composerProps = props as ComposerProps
-
-    if (!actionsFragment)
-      composerProps = {
-        ...composerProps,
-        textInputProps: {
-          style: [styles.textInputWithPadding, composerProps.textInputProps?.style],
-        },
-      }
+    const composerProps = props as ComposerProps
 
     if (renderComposer)
       return renderComponentOrElement(renderComposer, composerProps)
 
     return <Composer {...composerProps} />
-  }, [renderComposer, props, actionsFragment])
+  }, [renderComposer, props])
 
   const sendFragment = useMemo(() => {
     if (renderSend)
@@ -126,9 +118,5 @@ const styles = StyleSheet.create({
   primary: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-  },
-
-  textInputWithPadding: {
-    paddingLeft: 10,
   },
 })

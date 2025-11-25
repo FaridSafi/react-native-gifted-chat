@@ -28,3 +28,33 @@ it('should render <GiftedChat/> and compare with snapshot', () => {
 
   expect(toJSON()).toMatchSnapshot()
 })
+
+it('should render <GiftedChat/> with light colorScheme and compare with snapshot', () => {
+  const { toJSON } = render(
+    <GiftedChat
+      messages={messages}
+      onSend={() => {}}
+      user={{
+        _id: 1,
+      }}
+      colorScheme='light'
+    />
+  )
+
+  expect(toJSON()).toMatchSnapshot()
+})
+
+it('should render <GiftedChat/> with dark colorScheme and compare with snapshot', () => {
+  const { toJSON } = render(
+    <GiftedChat
+      messages={messages}
+      onSend={() => {}}
+      user={{
+        _id: 1,
+      }}
+      colorScheme='dark'
+    />
+  )
+
+  expect(toJSON()).toMatchSnapshot()
+})

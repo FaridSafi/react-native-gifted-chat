@@ -11,6 +11,7 @@ export interface IGiftedChatContext {
     ) => void
   }
   getLocale(): string
+  getColorScheme(): 'light' | 'dark' | null | undefined
 }
 
 export const GiftedChatContext = createContext<IGiftedChatContext>({
@@ -18,6 +19,7 @@ export const GiftedChatContext = createContext<IGiftedChatContext>({
   actionSheet: () => ({
     showActionSheetWithOptions: () => {},
   }),
+  getColorScheme: () => undefined,
 })
 
 export const useChatContext = () => useContext(GiftedChatContext)

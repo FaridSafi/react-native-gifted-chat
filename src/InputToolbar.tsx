@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react'
-import { StyleSheet, View, StyleProp, ViewStyle, useColorScheme } from 'react-native'
+import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native'
 
 import { Actions, ActionsProps } from './Actions'
 import { Color } from './Color'
 import { Composer, ComposerProps } from './Composer'
+import { useColorScheme } from './hooks/useColorScheme'
 import { IMessage } from './Models'
 import { Send, SendProps } from './Send'
 import { getColorSchemeStyle } from './styles'

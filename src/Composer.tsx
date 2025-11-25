@@ -5,11 +5,11 @@ import {
   TextInputChangeEvent,
   TextInputContentSizeChangeEvent,
   TextInputProps,
-  useColorScheme,
   View,
 } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { Color } from './Color'
+import { useColorScheme } from './hooks/useColorScheme'
 import stylesCommon, { getColorSchemeStyle } from './styles'
 
 export interface ComposerProps {

@@ -45,6 +45,8 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   user?: User
   /*  Locale to localize the dates */
   locale?: string
+  /* Force color scheme (light/dark); default is undefined (uses system color scheme) */
+  colorScheme?: 'light' | 'dark'
   /* Format to use for rendering times; default is 'LT' */
   timeFormat?: string
   /* Format to use for rendering dates; default is 'll' */

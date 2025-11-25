@@ -4,7 +4,6 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
-  useColorScheme,
 } from 'react-native'
 import { Text } from 'react-native-gesture-handler'
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated'
@@ -12,6 +11,7 @@ import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-na
 import { Color } from './Color'
 import { TouchableOpacity, TouchableOpacityProps } from './components/TouchableOpacity'
 import { TEST_ID } from './Constant'
+import { useColorScheme } from './hooks/useColorScheme'
 import { IMessage } from './Models'
 import { getColorSchemeStyle } from './styles'
 

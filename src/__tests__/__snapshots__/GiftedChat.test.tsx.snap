@@ -46,3 +46,97 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
   </KeyboardProvider>
 </View>
 `;
+
+exports[`should render <GiftedChat/> with dark colorScheme and compare with snapshot 1`] = `
+<View
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <KeyboardProvider
+    navigationBarTranslucent={true}
+    statusBarTranslucent={true}
+  >
+    <View
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <View
+        behavior="padding"
+        style={
+          {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          onLayout={[Function]}
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              {
+                "overflow": "hidden",
+              },
+            ]
+          }
+          testID="GC_WRAPPER"
+        />
+      </View>
+    </View>
+  </KeyboardProvider>
+</View>
+`;
+
+exports[`should render <GiftedChat/> with light colorScheme and compare with snapshot 1`] = `
+<View
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <KeyboardProvider
+    navigationBarTranslucent={true}
+    statusBarTranslucent={true}
+  >
+    <View
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <View
+        behavior="padding"
+        style={
+          {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          onLayout={[Function]}
+          style={
+            [
+              {
+                "flex": 1,
+              },
+              {
+                "overflow": "hidden",
+              },
+            ]
+          }
+          testID="GC_WRAPPER"
+        />
+      </View>
+    </View>
+  </KeyboardProvider>
+</View>
+`;

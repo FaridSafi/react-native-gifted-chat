@@ -149,6 +149,7 @@ const LinksExample: React.FC = () => {
             matchers,
           }}
           keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
+          colorScheme='light'
         />
       </View>
     </ActionSheetProvider>

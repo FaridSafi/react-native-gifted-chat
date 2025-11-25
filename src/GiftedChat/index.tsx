@@ -10,6 +10,7 @@ import React, {
 import {
   View,
   LayoutChangeEvent,
+  useColorScheme,
 } from 'react-native'
 import {
   ActionSheetProvider,
@@ -48,6 +49,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     user = {},
     onSend,
     locale = 'en',
+    colorScheme: colorSchemeProp,
     renderLoading,
     actionSheet,
     textInputProps,
@@ -55,6 +57,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     renderInputToolbar,
     isInverted = true,
   } = props
+
+  const systemColorScheme = useColorScheme()
+  const colorScheme = colorSchemeProp !== undefined ? colorSchemeProp : systemColorScheme
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
 
@@ -236,8 +241,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
             actionSheetRef.current!.showActionSheetWithOptions,
         })),
       getLocale: () => locale,
+      getColorScheme: () => colorScheme,
     }),
-    [actionSheet, locale]
+    [actionSheet, locale, colorScheme]
   )
 
   useEffect(() => {

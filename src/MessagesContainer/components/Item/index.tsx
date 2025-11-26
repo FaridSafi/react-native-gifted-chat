@@ -97,13 +97,11 @@ const DayWrapper = <TMessage extends IMessage>(props: MessageProps<TMessage>) =>
   )
 }
 
-export const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
+const AnimatedDayWrapper = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
   const {
-    renderMessage: renderMessageProp,
     scrolledY,
     daysPositions,
     listHeight,
-    isDayAnimationEnabled,
     ...rest
   } = props
 
@@ -122,36 +120,52 @@ export const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
   }, [dayContainerHeight])
 
   const style = useAnimatedStyle(() => ({
-    opacity:
-      isDayAnimationEnabled
-        ? interpolate(
-          relativeScrolledPositionToBottomOfDay.value,
-          [
-            -dayTopOffset,
-            -0.0001,
-            0,
-            dayContainerHeight.value + dayTopOffset,
-          ],
-          [
-            0,
-            0,
-            1,
-            1,
-          ],
-          'clamp'
-        )
-        : 1,
-  }), [relativeScrolledPositionToBottomOfDay, dayContainerHeight, dayTopOffset, isDayAnimationEnabled])
+    opacity: interpolate(
+      relativeScrolledPositionToBottomOfDay.value,
+      [
+        -dayTopOffset,
+        -0.0001,
+        0,
+        dayContainerHeight.value + dayTopOffset,
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+      ],
+      'clamp'
+    ),
+  }), [relativeScrolledPositionToBottomOfDay, dayContainerHeight, dayTopOffset])
+
+  return (
+    <Animated.View
+      style={style}
+      onLayout={handleLayoutDayContainer}
+    >
+      <DayWrapper<TMessage> {...rest as MessageProps<TMessage>} />
+    </Animated.View>
+  )
+}
+
+export const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
+  const {
+    renderMessage: renderMessageProp,
+    isDayAnimationEnabled,
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    scrolledY: _scrolledY,
+    daysPositions: _daysPositions,
+    listHeight: _listHeight,
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+    ...rest
+  } = props
 
   return (
     // do not remove key. it helps to get correct position of the day container
     <View key={props.currentMessage._id.toString()}>
-      <Animated.View
-        style={style}
-        onLayout={handleLayoutDayContainer}
-      >
-        <DayWrapper<TMessage> {...rest as MessageProps<TMessage>} />
-      </Animated.View>
+      {isDayAnimationEnabled
+        ? <AnimatedDayWrapper<TMessage> {...props} />
+        : <DayWrapper<TMessage> {...rest as MessageProps<TMessage>} />}
       {
         renderMessageProp
           ? renderMessageProp(rest as MessageProps<TMessage>)

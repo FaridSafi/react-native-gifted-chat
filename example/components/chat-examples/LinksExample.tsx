@@ -80,6 +80,15 @@ const LinksExample: React.FC = () => {
       },
       system: true,
     },
+    {
+      text: 'System message with data and phone numbers: Contact support at +79931234567 or +1-215-456-7890. We have holidays on 2025-12-25 and until 2026-01-01 12:00.',
+      createdAt: new Date(Date.now() - 7 * 60000),
+      user: {
+        _id: 2,
+        name: 'John Doe',
+      },
+      system: true,
+    },
   ].map((message, index) => ({
     ...message,
     _id: index + 1,

@@ -7,7 +7,7 @@ import {
   TextStyle,
 } from 'react-native'
 import { Color } from './Color'
-import { MessageText } from './MessageText'
+import { MessageText, MessageTextProps } from './MessageText'
 import { IMessage } from './Models'
 import stylesCommon from './styles'
 
@@ -16,6 +16,7 @@ export interface SystemMessageProps<TMessage extends IMessage> {
   containerStyle?: StyleProp<ViewStyle>
   messageContainerStyle?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
+  messageTextProps?: Partial<MessageTextProps<TMessage>>
   children?: React.ReactNode
 }
 
@@ -24,6 +25,7 @@ export function SystemMessage<TMessage extends IMessage> ({
   containerStyle,
   messageContainerStyle,
   textStyle,
+  messageTextProps,
   children,
 }: SystemMessageProps<TMessage>) {
   if (currentMessage == null)
@@ -38,6 +40,7 @@ export function SystemMessage<TMessage extends IMessage> ({
             customTextStyle={[styles.text, textStyle]}
             position='left'
             containerStyle={{ left: [styles.messageContainer, messageContainerStyle] }}
+            {...messageTextProps}
           />
         )
       }

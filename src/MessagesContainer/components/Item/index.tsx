@@ -32,28 +32,31 @@ export const useRelativeScrolledPositionToBottomOfDay = (
 
   const absoluteScrolledPositionToBottomOfDay = useAbsoluteScrolledPositionToBottomOfDay(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
 
-  // sorted array of days positions by y
-  const daysPositionsArray = useDerivedValue(() => {
-    return Object.values(daysPositions.value).sort((a, b) => {
-      'worklet'
-
-      return a.y - b.y
-    })
-  })
-
   // find current day position by scrolled position
   const currentDayPosition = useDerivedValue(() => {
+    'worklet'
+
+    // When createdAt is provided (called from AnimatedDayWrapper for a specific message),
+    // directly find the day position by createdAt without sorting the entire array.
+    // This avoids O(n log n) sorting and O(n) search for each message item.
     if (createdAt != null) {
-      const currentDayPosition = daysPositionsArray.value.find(day => day.createdAt === createdAt)
-      if (currentDayPosition)
-        return currentDayPosition
+      const values = Object.values(daysPositions.value)
+      for (let i = 0; i < values.length; i++)
+        if (values[i].createdAt === createdAt)
+          return values[i]
     }
 
-    return daysPositionsArray.value.find((day, index) => {
+    // Fallback: sort and search when createdAt is not provided (e.g., from DayAnimated)
+    const sortedArray = Object.values(daysPositions.value).sort((a, b) => a.y - b.y)
+    for (let i = 0; i < sortedArray.length; i++) {
+      const day = sortedArray[i]
       const dayPosition = day.y + day.height
-      return (absoluteScrolledPositionToBottomOfDay.value < dayPosition) || index === daysPositionsArray.value.length - 1
-    })
-  }, [daysPositionsArray, absoluteScrolledPositionToBottomOfDay, createdAt])
+      if (absoluteScrolledPositionToBottomOfDay.value < dayPosition || i === sortedArray.length - 1)
+        return day
+    }
+
+    return undefined
+  }, [daysPositions, absoluteScrolledPositionToBottomOfDay, createdAt])
 
   const relativeScrolledPositionToBottomOfDay = useDerivedValue(() => {
     const scrolledBottomY = listHeight.value + scrolledY.value - (

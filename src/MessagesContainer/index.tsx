@@ -301,6 +301,10 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
     const handleOnLayout = (event: LayoutChangeEvent) => {
       onLayoutProp?.(event)
 
+      // Only track positions when day animation is enabled
+      if (!isDayAnimationEnabled)
+        return
+
       const { y, height } = event.nativeEvent.layout
 
       const newValue = {
@@ -343,7 +347,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         {children}
       </View>
     )
-  }, [daysPositions, isInverted])
+  }, [daysPositions, isInverted, isDayAnimationEnabled])
 
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: event => {
@@ -355,6 +359,10 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
 
   // removes unrendered days positions when messages are added/removed
   useEffect(() => {
+    // Skip cleanup when day animation is disabled
+    if (!isDayAnimationEnabled)
+      return
+
     Object.keys(daysPositions.value).forEach(key => {
       const messageIndex = messages.findIndex(m => m._id.toString() === key)
       let shouldRemove = messageIndex === -1
@@ -373,7 +381,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
           return value
         })
     })
-  }, [messages, daysPositions, isInverted])
+  }, [messages, daysPositions, isInverted, isDayAnimationEnabled])
 
   return (
     <View

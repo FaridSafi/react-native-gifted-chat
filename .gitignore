@@ -2,6 +2,7 @@
 node_modules/
 .expo/
 npm-debug.log
+lib/
 TODO.md
 .idea
 .vscode

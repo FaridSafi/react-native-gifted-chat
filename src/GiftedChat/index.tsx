@@ -201,6 +201,12 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     [isInitialized, initialText, notifyInputTextReset, getTextFromProp]
   )
 
+  const memoizedTextInputProps = useMemo(() => ({
+    ...textInputProps,
+    onChangeText: _onChangeText,
+    ref: textInputRef,
+  }), [textInputProps, _onChangeText, textInputRef])
+
   const inputToolbarFragment = useMemo(() => {
     if (!isInitialized)
       return null
@@ -209,11 +215,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       ...props,
       text: getTextFromProp(text!),
       onSend: _onSend,
-      textInputProps: {
-        ...textInputProps,
-        onChangeText: _onChangeText,
-        ref: textInputRef,
-      },
+      textInputProps: memoizedTextInputProps,
     }
 
     if (renderInputToolbar)
@@ -227,9 +229,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     props,
     text,
     renderInputToolbar,
-    textInputRef,
-    textInputProps,
-    _onChangeText,
+    memoizedTextInputProps,
   ])
 
   const contextValues = useMemo(

@@ -9,6 +9,8 @@ export default StyleSheet.create({
   contentContainerStyle: {
     flexGrow: 1,
     justifyContent: 'flex-start',
+  },
+  messagesContainer: {
     paddingBottom: 10,
   },
   emptyChatContainer: {

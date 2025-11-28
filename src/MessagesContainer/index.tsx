@@ -398,6 +398,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         inverted={isInverted}
         automaticallyAdjustContentInsets={false}
         style={stylesCommon.fill}
+        contentContainerStyle={styles.messagesContainer}
         ListEmptyComponent={renderChatEmpty}
         ListFooterComponent={
           isInverted ? ListHeaderComponent : ListFooterComponent

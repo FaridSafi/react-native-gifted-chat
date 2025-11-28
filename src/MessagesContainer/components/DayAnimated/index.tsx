@@ -19,7 +19,11 @@ export const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, m
   const isScrolledOnMount = useSharedValue(false)
   const isLoadingAnim = useSharedValue(isLoading)
 
-  const daysPositionsArray = useDerivedValue(() => Object.values(daysPositions.value).sort((a, b) => a.y - b.y))
+  const daysPositionsArray = useDerivedValue(() => Object.values(daysPositions.value).sort((a, b) => {
+    'worklet'
+
+    return a.y - b.y
+  }))
 
   const [createdAt, setCreatedAt] = useState<number | undefined>()
 

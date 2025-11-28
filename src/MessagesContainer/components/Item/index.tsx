@@ -47,7 +47,11 @@ export const useRelativeScrolledPositionToBottomOfDay = (
     }
 
     // Fallback: sort and search when createdAt is not provided (e.g., from DayAnimated)
-    const sortedArray = Object.values(daysPositions.value).sort((a, b) => a.y - b.y)
+    const sortedArray = Object.values(daysPositions.value).sort((a, b) => {
+      'worklet'
+
+      return a.y - b.y
+    })
     for (let i = 0; i < sortedArray.length; i++) {
       const day = sortedArray[i]
       const dayPosition = day.y + day.height

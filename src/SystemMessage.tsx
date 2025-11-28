@@ -32,34 +32,39 @@ export function SystemMessage<TMessage extends IMessage> ({
     return null
 
   return (
-    <View style={[stylesCommon.fill, styles.container, containerStyle]}>
-      {
-        !!currentMessage.text && (
-          <MessageText
-            currentMessage={currentMessage}
-            customTextStyle={[styles.text, textStyle]}
-            position='left'
-            containerStyle={{ left: [styles.messageContainer, messageContainerStyle] }}
-            {...messageTextProps}
-          />
-        )
-      }
-      {children}
+    <View style={[stylesCommon.fill, styles.wrapper]}>
+      <View style={[styles.container, containerStyle]}>
+        {
+          !!currentMessage.text && (
+            <MessageText
+              currentMessage={currentMessage}
+              customTextStyle={[styles.text, textStyle]}
+              position='left'
+              containerStyle={{ left: [styles.messageContainer, messageContainerStyle] }}
+              {...messageTextProps}
+            />
+          )
+        }
+        {children}
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    alignItems: 'center',
+    marginVertical: 5,
+    marginHorizontal: 10,
+  },
   container: {
+    maxWidth: '70%',
     borderRadius: 20,
     borderWidth: 1,
     borderColor: 'rgba(0,0,0,0.1)',
     paddingHorizontal: 10,
     paddingVertical: 10,
     backgroundColor: 'rgba(0,0,0,0.05)',
-    marginVertical: 5,
-    marginHorizontal: 10,
-    alignItems: 'flex-end',
   },
   messageContainer: {
     marginVertical: 0,
@@ -69,5 +74,6 @@ const styles = StyleSheet.create({
     backgroundColor: Color.backgroundTransparent,
     fontSize: 12,
     fontWeight: '300',
+    textAlign: 'center',
   },
 })

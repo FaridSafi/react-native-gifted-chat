@@ -11,14 +11,16 @@ import SlackExample from '@/components/chat-examples/SlackExample'
 import { ThemedText } from '@/components/themed-text'
 import { ThemedView } from '@/components/themed-view'
 import { useThemeColor } from '@/hooks/use-theme-color'
+import ReplyExample from '@/components/chat-examples/ReplyExample'
 
-type ChatExample = 'customizedFeatures' | 'customizedRendering' | 'slack' | 'links'
+type ChatExample = 'customizedFeatures' | 'customizedRendering' | 'slack' | 'links' | 'reply'
 
 const examples: Array<{ id: ChatExample, title: string, description: string }> = [
   { id: 'customizedFeatures', title: 'Customized Features', description: 'Full featured example with custom actions, accessories, and media' },
   { id: 'links', title: 'Links & Patterns', description: 'Phone numbers, emails, URLs, hashtags, and mentions' },
   { id: 'customizedRendering', title: 'Customized Rendering', description: 'Customized chat with all rendering options' },
   { id: 'slack', title: 'Slack Style', description: 'Slack-like message styling' },
+  { id: 'reply', title: 'Reply Example', description: 'Example demonstrating reply functionality' },
 ]
 
 export default function ExploreScreen () {
@@ -43,6 +45,7 @@ export default function ExploreScreen () {
           {selectedExample === 'customizedRendering' && <CustomizedRenderingExample />}
           {selectedExample === 'slack' && <SlackExample />}
           {selectedExample === 'links' && <LinksExample />}
+          {selectedExample === 'reply' && <ReplyExample />}
         </View>
       </>
     )

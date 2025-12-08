@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react'
-import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native'
+import { StyleSheet, View, StyleProp, ViewStyle, TextStyle } from 'react-native'
 
 import { Actions, ActionsProps } from './Actions'
 import { Color } from './Color'
+import { TouchableOpacityProps } from './components/TouchableOpacity'
 import { Composer, ComposerProps } from './Composer'
 import { useColorScheme } from './hooks/useColorScheme'
 import { IMessage } from './Models'
@@ -22,6 +23,21 @@ export interface InputToolbarProps<TMessage extends IMessage> {
   onPressActionButton?: () => void
   icon?: () => React.ReactNode
   wrapperStyle?: StyleProp<ViewStyle>
+  // ComposerProps
+  composerHeight?: number
+  text?: string
+  textInputProps?: ComposerProps['textInputProps']
+  // SendProps
+  label?: string
+  sendContainerStyle?: StyleProp<ViewStyle>
+  sendTextStyle?: StyleProp<TextStyle>
+  sendChildren?: React.ReactNode
+  isSendButtonAlwaysVisible?: boolean
+  sendButtonProps?: Partial<TouchableOpacityProps>
+  onSend?(
+    messages: Partial<TMessage> | Partial<TMessage>[],
+    shouldResetInputToolbar: boolean,
+  ): void
 }
 
 export function InputToolbar<TMessage extends IMessage = IMessage> (
@@ -38,6 +54,19 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
     icon,
     wrapperStyle,
     containerStyle,
+    primaryStyle,
+    // ComposerProps
+    composerHeight,
+    text,
+    textInputProps,
+    // SendProps
+    label,
+    sendContainerStyle,
+    sendTextStyle,
+    sendChildren,
+    isSendButtonAlwaysVisible,
+    sendButtonProps,
+    onSend,
   } = props
 
   const colorScheme = useColorScheme()
@@ -70,20 +99,31 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
   ])
 
   const composerFragment = useMemo(() => {
-    const composerProps = props as ComposerProps
+    const composerProps: ComposerProps = { composerHeight, text, textInputProps }
 
     if (renderComposer)
       return renderComponentOrElement(renderComposer, composerProps)
 
     return <Composer {...composerProps} />
-  }, [renderComposer, props])
+  }, [renderComposer, composerHeight, text, textInputProps])
 
   const sendFragment = useMemo(() => {
-    if (renderSend)
-      return renderComponentOrElement(renderSend, props)
+    const sendProps: SendProps<TMessage> = {
+      text,
+      label,
+      containerStyle: sendContainerStyle,
+      textStyle: sendTextStyle,
+      children: sendChildren,
+      isSendButtonAlwaysVisible,
+      sendButtonProps,
+      onSend,
+    }
 
-    return <Send {...props} />
-  }, [renderSend, props])
+    if (renderSend)
+      return renderComponentOrElement(renderSend, sendProps)
+
+    return <Send {...sendProps} />
+  }, [renderSend, text, label, sendContainerStyle, sendTextStyle, sendChildren, isSendButtonAlwaysVisible, sendButtonProps, onSend])
 
   const accessoryFragment = useMemo(() => {
     if (!renderAccessory)
@@ -96,7 +136,7 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
     <View
       style={[getColorSchemeStyle(styles, 'container', colorScheme), containerStyle]}
     >
-      <View style={[getColorSchemeStyle(styles, 'primary', colorScheme), props.primaryStyle]}>
+      <View style={[getColorSchemeStyle(styles, 'primary', colorScheme), primaryStyle]}>
         {actionsFragment}
         {composerFragment}
         {sendFragment}

@@ -3,15 +3,18 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  ImageStyle,
   Pressable,
 } from 'react-native'
 import { MessageImageProps } from '../MessageImage'
+import { MessageReplyProps } from '../MessageReply'
 import { MessageTextProps } from '../MessageText'
 import {
   User,
   IMessage,
   LeftRightStyle,
   Reply,
+  ReplyMessage,
   Omit,
   MessageVideoProps,
   MessageAudioProps,
@@ -71,13 +74,13 @@ export interface BubbleProps<TMessage extends IMessage> {
   onLongPressMessage?: (context?: unknown, message?: unknown) => void
   onQuickReply?: (replies: Reply[]) => void
   renderMessageImage?: (
-    props: RenderMessageImageProps<TMessage>,
+    props: RenderMessageImageProps<TMessage>
   ) => React.ReactNode
   renderMessageVideo?: (
-    props: RenderMessageVideoProps<TMessage>,
+    props: RenderMessageVideoProps<TMessage>
   ) => React.ReactNode
   renderMessageAudio?: (
-    props: RenderMessageAudioProps<TMessage>,
+    props: RenderMessageAudioProps<TMessage>
   ) => React.ReactNode
   renderMessageText?: (props: RenderMessageTextProps<TMessage>) => React.ReactNode
   renderCustomView?: (bubbleProps: BubbleProps<TMessage>) => React.ReactNode
@@ -86,6 +89,22 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderUsername?: (user?: TMessage['user']) => React.ReactNode
   renderQuickReplySend?: () => React.ReactNode
   renderQuickReplies?: (
-    quickReplies: QuickRepliesProps<TMessage>,
+    quickReplies: QuickRepliesProps<TMessage>
   ) => React.ReactNode
+  /** Custom render for message reply; rendered on top of message content */
+  renderMessageReply?: (
+    props: MessageReplyProps<TMessage>
+  ) => React.ReactNode
+  /** Callback when message reply is pressed */
+  onPressMessageReply?: (replyMessage: ReplyMessage) => void
+  /** Style for message reply container */
+  messageReplyContainerStyle?: LeftRightStyle<ViewStyle>
+  /** Style for message reply content container */
+  messageReplyContentContainerStyle?: LeftRightStyle<ViewStyle>
+  /** Style for message reply image */
+  messageReplyImageStyle?: StyleProp<ImageStyle>
+  /** Style for message reply username */
+  messageReplyUsernameStyle?: StyleProp<TextStyle>
+  /** Style for message reply text */
+  messageReplyTextStyle?: StyleProp<TextStyle>
 }

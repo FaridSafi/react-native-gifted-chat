@@ -6,6 +6,7 @@ import {
   Pressable,
 } from 'react-native'
 import { MessageImageProps } from '../MessageImage'
+import { MessageReplyProps } from '../MessageReply'
 import { MessageTextProps } from '../MessageText'
 import {
   User,
@@ -71,13 +72,13 @@ export interface BubbleProps<TMessage extends IMessage> {
   onLongPressMessage?: (context?: unknown, message?: unknown) => void
   onQuickReply?: (replies: Reply[]) => void
   renderMessageImage?: (
-    props: RenderMessageImageProps<TMessage>,
+    props: RenderMessageImageProps<TMessage>
   ) => React.ReactNode
   renderMessageVideo?: (
-    props: RenderMessageVideoProps<TMessage>,
+    props: RenderMessageVideoProps<TMessage>
   ) => React.ReactNode
   renderMessageAudio?: (
-    props: RenderMessageAudioProps<TMessage>,
+    props: RenderMessageAudioProps<TMessage>
   ) => React.ReactNode
   renderMessageText?: (props: RenderMessageTextProps<TMessage>) => React.ReactNode
   renderCustomView?: (bubbleProps: BubbleProps<TMessage>) => React.ReactNode
@@ -86,6 +87,10 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderUsername?: (user?: TMessage['user']) => React.ReactNode
   renderQuickReplySend?: () => React.ReactNode
   renderQuickReplies?: (
-    quickReplies: QuickRepliesProps<TMessage>,
+    quickReplies: QuickRepliesProps<TMessage>
+  ) => React.ReactNode
+  /** Custom render for message reply; rendered on top of message content */
+  renderMessageReply?: (
+    props: MessageReplyProps<TMessage>
   ) => React.ReactNode
 }

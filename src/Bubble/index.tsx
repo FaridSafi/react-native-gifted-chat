@@ -8,6 +8,7 @@ import { Text } from 'react-native-gesture-handler'
 import { useChatContext } from '../GiftedChatContext'
 import { MessageAudio } from '../MessageAudio'
 import { MessageImage } from '../MessageImage'
+import { MessageReply } from '../MessageReply'
 import { MessageText } from '../MessageText'
 import { MessageVideo } from '../MessageVideo'
 import { IMessage } from '../Models'
@@ -319,10 +320,26 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
     return null
   }, [props])
 
+  const renderMessageReply = useCallback(() => {
+    if (!currentMessage?.replyMessage)
+      return null
+
+    const messageReplyProps = {
+      currentMessage,
+      position,
+    }
+
+    if (props.renderMessageReply)
+      return renderComponentOrElement(props.renderMessageReply, messageReplyProps)
+
+    return <MessageReply {...messageReplyProps} />
+  }, [props.renderMessageReply, currentMessage, position])
+
   const renderBubbleContent = useCallback(() => {
     return (
       <>
         {!props.isCustomViewBottom && renderCustomView()}
+        {renderMessageReply()}
         {renderMessageImage()}
         {renderMessageVideo()}
         {renderMessageAudio()}
@@ -331,6 +348,7 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
       </>
     )
   }, [
+    renderMessageReply,
     renderCustomView,
     renderMessageImage,
     renderMessageVideo,

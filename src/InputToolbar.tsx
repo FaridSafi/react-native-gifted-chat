@@ -1,14 +1,16 @@
-import React, { useMemo } from 'react'
-import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native'
+import React, { useCallback, useMemo } from 'react'
+import { StyleSheet, View, StyleProp, ViewStyle, TextStyle } from 'react-native'
 
 import { Actions, ActionsProps } from './Actions'
 import { Color } from './Color'
 import { Composer, ComposerProps } from './Composer'
 import { useColorScheme } from './hooks/useColorScheme'
-import { IMessage } from './Models'
+import { IMessage, ReplyMessage } from './Models'
+import { ReplyPreview, ReplyPreviewProps } from './ReplyPreview'
 import { Send, SendProps } from './Send'
-import { getColorSchemeStyle } from './styles'
 import { renderComponentOrElement } from './utils'
+
+export { ReplyPreviewProps } from './ReplyPreview'
 
 export interface InputToolbarProps<TMessage extends IMessage> {
   actions?: Array<{ title: string, action: () => void }>
@@ -22,6 +24,18 @@ export interface InputToolbarProps<TMessage extends IMessage> {
   onPressActionButton?: () => void
   icon?: () => React.ReactNode
   wrapperStyle?: StyleProp<ViewStyle>
+  /** Reply message to show in preview */
+  replyMessage?: ReplyMessage | null
+  /** Callback to clear reply */
+  onClearReply?: () => void
+  /** Custom render for reply preview */
+  renderReplyPreview?: (props: ReplyPreviewProps) => React.ReactNode
+  /** Style for reply preview container */
+  replyPreviewContainerStyle?: StyleProp<ViewStyle>
+  /** Style for reply preview username */
+  replyPreviewUsernameStyle?: StyleProp<TextStyle>
+  /** Style for reply preview text */
+  replyPreviewTextStyle?: StyleProp<TextStyle>
 }
 
 export function InputToolbar<TMessage extends IMessage = IMessage> (
@@ -38,9 +52,26 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
     icon,
     wrapperStyle,
     containerStyle,
+    replyMessage,
+    onClearReply,
+    renderReplyPreview: renderReplyPreviewProp,
+    replyPreviewContainerStyle,
+    replyPreviewUsernameStyle,
+    replyPreviewTextStyle,
   } = props
 
   const colorScheme = useColorScheme()
+
+  const containerStyles = useMemo(() => [
+    styles.container,
+    colorScheme === 'dark' && styles.container_dark,
+    containerStyle,
+  ], [colorScheme, containerStyle])
+
+  const primaryStyles = useMemo(() => [
+    styles.primary,
+    props.primaryStyle,
+  ], [props.primaryStyle])
 
   const actionsFragment = useMemo(() => {
     const actionsProps = {
@@ -92,11 +123,39 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
     return renderComponentOrElement(renderAccessory, props)
   }, [renderAccessory, props])
 
+  const handleClearReply = useCallback(() => {
+    onClearReply?.()
+  }, [onClearReply])
+
+  const replyPreviewFragment = useMemo(() => {
+    if (!replyMessage)
+      return null
+
+    const replyPreviewProps: ReplyPreviewProps = {
+      replyMessage,
+      onClearReply: handleClearReply,
+      containerStyle: replyPreviewContainerStyle,
+      usernameStyle: replyPreviewUsernameStyle,
+      textStyle: replyPreviewTextStyle,
+    }
+
+    if (renderReplyPreviewProp)
+      return renderComponentOrElement(renderReplyPreviewProp, replyPreviewProps)
+
+    return <ReplyPreview {...replyPreviewProps} />
+  }, [
+    replyMessage,
+    handleClearReply,
+    renderReplyPreviewProp,
+    replyPreviewContainerStyle,
+    replyPreviewUsernameStyle,
+    replyPreviewTextStyle,
+  ])
+
   return (
-    <View
-      style={[getColorSchemeStyle(styles, 'container', colorScheme), containerStyle]}
-    >
-      <View style={[getColorSchemeStyle(styles, 'primary', colorScheme), props.primaryStyle]}>
+    <View style={containerStyles}>
+      {replyPreviewFragment}
+      <View style={primaryStyles}>
         {actionsFragment}
         {composerFragment}
         {sendFragment}

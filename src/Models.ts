@@ -27,6 +27,8 @@ export interface QuickReplies {
   keepIt?: boolean
 }
 
+export interface ReplyMessage extends Pick<IMessage, '_id' | 'text' | 'user' | 'audio' | 'image'> {}
+
 export interface IMessage {
   _id: string | number
   text: string
@@ -40,6 +42,7 @@ export interface IMessage {
   received?: boolean
   pending?: boolean
   quickReplies?: QuickReplies
+  replyMessage?: ReplyMessage
   location?: {
     latitude: number
     longitude: number

@@ -9,6 +9,7 @@ import { FlatList } from 'react-native-gesture-handler'
 import { DayProps } from '../Day'
 import { LoadEarlierMessagesProps } from '../LoadEarlierMessages'
 import { MessageProps } from '../Message'
+import { MessageReplyProps } from '../MessageReply'
 import { User, IMessage, Reply } from '../Models'
 import { TypingIndicatorProps } from '../TypingIndicator/types'
 
@@ -58,6 +59,22 @@ export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   typingIndicatorStyle?: StyleProp<ViewStyle>
   /** Enable animated day label that appears on scroll; default is true */
   isDayAnimationEnabled?: boolean
+  /** Enable swipe to reply on messages; default is false */
+  isSwipeToReplyEnabled?: boolean
+  /** Swipe direction for reply; default is 'right' (swipe left to reveal) */
+  swipeToReplyDirection?: 'left' | 'right'
+  /** Callback when swipe to reply is triggered */
+  onSwipeToReply?: (message: TMessage) => void
+  /** Custom render for swipe action indicator */
+  renderSwipeToReplyAction?: (
+    progress: any,
+    dragX: any,
+    position: 'left' | 'right'
+  ) => React.ReactNode
+  /** Style for the swipe action container */
+  swipeToReplyActionContainerStyle?: StyleProp<ViewStyle>
+  /** Custom render for message reply inside bubble */
+  renderMessageReply?: (props: MessageReplyProps<TMessage>) => React.ReactNode
 }
 
 export interface State {

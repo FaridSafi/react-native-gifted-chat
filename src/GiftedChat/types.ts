@@ -4,6 +4,7 @@ import {
   StyleProp,
   TextStyle,
   ViewStyle,
+  ImageStyle,
 } from 'react-native'
 import {
   ActionSheetOptions,
@@ -178,4 +179,16 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   replyPreviewTextStyle?: StyleProp<TextStyle>
   /** Custom render for message reply inside bubble */
   renderMessageReply?: (props: MessageReplyProps<TMessage>) => React.ReactNode
+  /** Callback when message reply is pressed */
+  onPressMessageReply?: (replyMessage: ReplyMessage) => void
+  /** Style for message reply container */
+  messageReplyContainerStyle?: LeftRightStyle<ViewStyle>
+  /** Style for message reply content container */
+  messageReplyContentContainerStyle?: LeftRightStyle<ViewStyle>
+  /** Style for message reply image */
+  messageReplyImageStyle?: StyleProp<ImageStyle>
+  /** Style for message reply username */
+  messageReplyUsernameStyle?: StyleProp<TextStyle>
+  /** Style for message reply text */
+  messageReplyTextStyle?: StyleProp<TextStyle>
 }

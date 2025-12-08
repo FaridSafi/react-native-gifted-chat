@@ -327,13 +327,29 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
     const messageReplyProps = {
       currentMessage,
       position,
+      onPress: props.onPressMessageReply,
+      containerStyle: props.messageReplyContainerStyle,
+      contentContainerStyle: props.messageReplyContentContainerStyle,
+      imageStyle: props.messageReplyImageStyle,
+      usernameStyle: props.messageReplyUsernameStyle,
+      textStyle: props.messageReplyTextStyle,
     }
 
     if (props.renderMessageReply)
       return renderComponentOrElement(props.renderMessageReply, messageReplyProps)
 
     return <MessageReply {...messageReplyProps} />
-  }, [props.renderMessageReply, currentMessage, position])
+  }, [
+    props.renderMessageReply,
+    props.onPressMessageReply,
+    props.messageReplyContainerStyle,
+    props.messageReplyContentContainerStyle,
+    props.messageReplyImageStyle,
+    props.messageReplyUsernameStyle,
+    props.messageReplyTextStyle,
+    currentMessage,
+    position,
+  ])
 
   const renderBubbleContent = useCallback(() => {
     return (

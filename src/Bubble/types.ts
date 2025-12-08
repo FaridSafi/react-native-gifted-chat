@@ -3,6 +3,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  ImageStyle,
   Pressable,
 } from 'react-native'
 import { MessageImageProps } from '../MessageImage'
@@ -13,6 +14,7 @@ import {
   IMessage,
   LeftRightStyle,
   Reply,
+  ReplyMessage,
   Omit,
   MessageVideoProps,
   MessageAudioProps,
@@ -93,4 +95,16 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderMessageReply?: (
     props: MessageReplyProps<TMessage>
   ) => React.ReactNode
+  /** Callback when message reply is pressed */
+  onPressMessageReply?: (replyMessage: ReplyMessage) => void
+  /** Style for message reply container */
+  messageReplyContainerStyle?: LeftRightStyle<ViewStyle>
+  /** Style for message reply content container */
+  messageReplyContentContainerStyle?: LeftRightStyle<ViewStyle>
+  /** Style for message reply image */
+  messageReplyImageStyle?: StyleProp<ImageStyle>
+  /** Style for message reply username */
+  messageReplyUsernameStyle?: StyleProp<TextStyle>
+  /** Style for message reply text */
+  messageReplyTextStyle?: StyleProp<TextStyle>
 }

@@ -35,7 +35,7 @@ export type MessageTextProps<TMessage extends IMessage> = {
   stripPrefix?: boolean
 }
 
-export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
+export function MessageText<TMessage extends IMessage>({
   currentMessage,
   position = 'left',
   containerStyle,
@@ -52,7 +52,7 @@ export const MessageText: React.FC<MessageTextProps<IMessage>> = ({
   hashtagUrl,
   mentionUrl,
   stripPrefix = false,
-}) => {
+}: MessageTextProps<TMessage>) {
   const linkStyle = useMemo(() => StyleSheet.flatten([
     styles.link,
     linkStyleProp?.[position],

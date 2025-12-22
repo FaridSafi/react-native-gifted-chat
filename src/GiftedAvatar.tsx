@@ -159,7 +159,7 @@ export function GiftedAvatar (
   if (user.avatar)
     return (
       <TouchableOpacity
-        disabled={!onPress}
+        enabled={!!onPress}
         onPress={handleOnPress}
         onLongPress={handleOnLongPress}
         accessibilityRole='image'

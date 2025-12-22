@@ -49,8 +49,7 @@ export function Composer ({
   const handleChange = useCallback((event: TextInputChangeEvent) => {
     if (Platform.OS === 'web')
       // Reset height to 0 to get the correct scrollHeight
-      // @ts-expect-error - web-specific code
-      window.requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
         // @ts-expect-error - web-specific code
         event.nativeEvent.target.style.height = '0px'
         // @ts-expect-error - web-specific code

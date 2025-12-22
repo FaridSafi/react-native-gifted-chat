@@ -23,15 +23,15 @@
   "license": "MIT",
   "author": "Farid Safi",
   "type": "module",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "src"
+    "lib"
   ],
   "scripts": {
     "lint": "yarn eslint src",
     "lint:fix": "yarn eslint --cache --fix",
-    "prepublishOnly": "yarn lint && yarn test",
+    "prepublishOnly": "yarn lint && yarn test && yarn tsc:write",
     "start": "cd example && expo start",
     "start:web": "cd example && expo start -w --dev",
     "test": "TZ=Europe/Paris jest --no-watchman",

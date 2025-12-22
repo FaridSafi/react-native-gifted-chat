@@ -1,4 +1,4 @@
-import { ViewStyle, LayoutChangeEvent } from 'react-native'
+import { ViewStyle, LayoutChangeEvent, StyleProp } from 'react-native'
 import { AvatarProps } from '../Avatar'
 import { BubbleProps } from '../Bubble'
 import { DayProps } from '../Day'
@@ -19,4 +19,18 @@ export interface MessageProps<TMessage extends IMessage> {
   renderSystemMessage?: (props: SystemMessageProps<TMessage>) => React.ReactNode
   renderAvatar?: (props: AvatarProps<TMessage>) => React.ReactNode
   onMessageLayout?: (event: LayoutChangeEvent) => void
+  /** Enable swipe to reply on messages; default is false */
+  isSwipeToReplyEnabled?: boolean
+  /** Swipe direction for reply; default is 'right' (swipe left to reveal) */
+  swipeToReplyDirection?: 'left' | 'right'
+  /** Callback when swipe to reply is triggered */
+  onSwipeToReply?: (message: TMessage) => void
+  /** Custom render for swipe action indicator */
+  renderSwipeToReplyAction?: (
+    progress: any,
+    dragX: any,
+    position: 'left' | 'right'
+  ) => React.ReactNode
+  /** Style for the swipe action container */
+  swipeToReplyActionContainerStyle?: StyleProp<ViewStyle>
 }

@@ -10,17 +10,10 @@ exports[`SystemMessage should render <SystemMessage /> and compare with snapshot
         "flex": 1,
       },
       {
-        "alignItems": "flex-end",
-        "backgroundColor": "rgba(0,0,0,0.05)",
-        "borderColor": "rgba(0,0,0,0.1)",
-        "borderRadius": 20,
-        "borderWidth": 1,
+        "alignItems": "center",
         "marginHorizontal": 10,
         "marginVertical": 5,
-        "paddingHorizontal": 10,
-        "paddingVertical": 10,
       },
-      undefined,
     ]
   }
 >
@@ -28,39 +21,57 @@ exports[`SystemMessage should render <SystemMessage /> and compare with snapshot
     style={
       [
         {
-          "marginHorizontal": 10,
-          "marginVertical": 5,
+          "backgroundColor": "rgba(0,0,0,0.05)",
+          "borderColor": "rgba(0,0,0,0.1)",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "maxWidth": "70%",
+          "paddingHorizontal": 10,
+          "paddingVertical": 10,
         },
-        [
-          {
-            "marginHorizontal": 0,
-            "marginVertical": 0,
-          },
-          undefined,
-        ],
+        undefined,
       ]
     }
   >
-    <Text
+    <View
       style={
         [
           {
-            "color": "black",
+            "marginHorizontal": 10,
+            "marginVertical": 5,
           },
-          undefined,
           [
             {
-              "backgroundColor": "transparent",
-              "fontSize": 12,
-              "fontWeight": "300",
+              "marginHorizontal": 0,
+              "marginVertical": 0,
             },
             undefined,
           ],
         ]
       }
     >
-      test
-    </Text>
+      <Text
+        style={
+          [
+            {
+              "color": "black",
+            },
+            undefined,
+            [
+              {
+                "backgroundColor": "transparent",
+                "fontSize": 12,
+                "fontWeight": "300",
+                "textAlign": "center",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        test
+      </Text>
+    </View>
   </View>
 </View>
 `;

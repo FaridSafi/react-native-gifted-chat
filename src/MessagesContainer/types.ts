@@ -1,10 +1,10 @@
-import React, { RefObject } from 'react'
+import { RefObject } from 'react'
 import {
   FlatListProps,
   StyleProp,
   ViewStyle,
 } from 'react-native'
-import { FlatList } from 'react-native-gesture-handler'
+import Animated, { AnimatedProps, ScrollEvent } from 'react-native-reanimated'
 
 import { DayProps } from '../Day'
 import { LoadEarlierMessagesProps } from '../LoadEarlierMessages'
@@ -12,9 +12,13 @@ import { MessageProps } from '../Message'
 import { User, IMessage, Reply } from '../Models'
 import { TypingIndicatorProps } from '../TypingIndicator/types'
 
-export type ListProps<TMessage extends IMessage = IMessage> = Partial<FlatListProps<TMessage>>
+export type AnimatedListProps<TMessage extends IMessage = IMessage> = Partial<
+  Omit<AnimatedProps<FlatListProps<TMessage>>, 'onScroll'> & {
+    onScroll?: (event: ScrollEvent) => void
+  }
+>
 
-export type AnimatedList<TMessage> = FlatList<TMessage>
+export type AnimatedList<TMessage> = Animated.FlatList<TMessage>
 
 export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   extends Omit<TypingIndicatorProps, 'style'> {
@@ -25,7 +29,7 @@ export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   /** User sending the messages: { _id, name, avatar } */
   user?: User
   /** Additional props for FlatList */
-  listProps?: ListProps<TMessage>
+  listProps?: AnimatedListProps<TMessage>
   /** Reverses display order of messages; default is true */
   isInverted?: boolean
   /** Controls whether or not the message bubbles appear at the top of the chat */

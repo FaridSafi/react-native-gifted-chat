@@ -19,20 +19,10 @@
    yarn installDevBuild:android
    ```
 
-3. Start metro bundler:
+3. Start the example app on iOS simulator:
 
    ```bash
-   yarn start
-   ```
-
-4. Switch to development build:
-
-Press `s` in terminal with metro
-
-5. Start the example app on iOS simulator:
-
-   ```bash
-   yarn ios:start
+   yarn start:ios
    ```
 
 # Dark Theme Support

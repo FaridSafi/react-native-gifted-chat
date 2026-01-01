@@ -5,12 +5,11 @@ import {
   ListRenderItemInfo,
   CellRendererProps,
 } from 'react-native'
-import { FlatList, Pressable, Text } from 'react-native-gesture-handler'
-import Animated, { runOnJS, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
+import { Pressable, Text } from 'react-native-gesture-handler'
+import Animated, { runOnJS, ScrollEvent, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { LoadEarlierMessages } from '../LoadEarlierMessages'
 import { warning } from '../logging'
 import { IMessage } from '../Models'
-import { ReanimatedScrollEvent } from '../reanimatedCompat'
 import stylesCommon from '../styles'
 import { TypingIndicator } from '../TypingIndicator'
 import { isSameDay, useCallbackThrottled } from '../utils'
@@ -22,8 +21,6 @@ import styles from './styles'
 import { MessagesContainerProps, DaysPositions } from './types'
 
 export * from './types'
-
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList) as React.ComponentType<any>
 
 export const MessagesContainer = <TMessage extends IMessage>(props: MessagesContainerProps<TMessage>) => {
   const {
@@ -114,8 +111,8 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
       forwardRef.current.scrollToEnd({ animated })
   }, [forwardRef, isInverted, scrollTo, isScrollingDown, changeScrollToBottomVisibility])
 
-  const handleOnScroll = useCallback((event: ReanimatedScrollEvent) => {
-    listPropsOnScrollProp?.(event as any)
+  const handleOnScroll = useCallback((event: ScrollEvent) => {
+    listPropsOnScrollProp?.(event)
 
     const {
       contentOffset: { y: contentOffsetY },
@@ -390,7 +387,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         isAlignedTop ? styles.containerAlignTop : stylesCommon.fill,
       ]}
     >
-      <AnimatedFlatList
+      <Animated.FlatList
         ref={forwardRef}
         keyExtractor={keyExtractor}
         data={messages}

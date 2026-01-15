@@ -411,7 +411,8 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         {...listProps}
         onScroll={scrollHandler}
         onLayout={onLayoutList}
-        CellRendererComponent={renderCell}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        CellRendererComponent={renderCell as any}
       />
       <ScrollToBottomWrapper />
       {isDayAnimationEnabled && (

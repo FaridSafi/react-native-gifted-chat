@@ -1,6 +1,7 @@
 import { RefObject } from 'react'
 import {
   FlatListProps,
+  LayoutChangeEvent,
   StyleProp,
   ViewStyle,
 } from 'react-native'
@@ -13,8 +14,9 @@ import { User, IMessage, Reply } from '../Models'
 import { TypingIndicatorProps } from '../TypingIndicator/types'
 
 export type AnimatedListProps<TMessage extends IMessage = IMessage> = Partial<
-  Omit<AnimatedProps<FlatListProps<TMessage>>, 'onScroll'> & {
+  Omit<AnimatedProps<FlatListProps<TMessage>>, 'onScroll' | 'onLayout'> & {
     onScroll?: (event: ScrollEvent) => void
+    onLayout?: (event: LayoutChangeEvent) => void
   }
 >
 
@@ -41,19 +43,19 @@ export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   /** Distance from bottom before showing scroll to bottom button */
   scrollToBottomOffset?: number
   /** Custom component to render when messages are empty */
-  renderChatEmpty?: () => React.ReactNode
+  renderChatEmpty?: () => React.ReactElement | null
   /** Custom footer component on the ListView, e.g. 'User is typing...' */
-  renderFooter?: (props: MessagesContainerProps<TMessage>) => React.ReactNode
+  renderFooter?: (props: MessagesContainerProps<TMessage>) => React.ReactElement | null
   /** Custom message container */
   renderMessage?: (props: MessageProps<TMessage>) => React.ReactElement
   /** Custom day above a message */
-  renderDay?: (props: DayProps) => React.ReactNode
+  renderDay?: (props: DayProps) => React.ReactElement | null
   /** Custom "Load earlier messages" button */
-  renderLoadEarlier?: (props: LoadEarlierMessagesProps) => React.ReactNode
+  renderLoadEarlier?: (props: LoadEarlierMessagesProps) => React.ReactElement | null
   /** Custom typing indicator */
-  renderTypingIndicator?: () => React.ReactNode
+  renderTypingIndicator?: () => React.ReactElement | null
   /** Scroll to bottom custom component */
-  scrollToBottomComponent?: () => React.ReactNode
+  scrollToBottomComponent?: () => React.ReactElement | null
   /** Callback when quick reply is sent */
   onQuickReply?: (replies: Reply[]) => void
   /** Props to pass to the LoadEarlierMessages component. The LoadEarlierMessages button is only visible when isAvailable is true. Includes isAvailable (controls button visibility), isInfiniteScrollEnabled (infinite scroll up when reach the top of messages container, automatically call onPress function if it exists - not yet supported for web), onPress (callback when button is pressed), isLoading (display loading indicator), label (override default "Load earlier messages" text), and styling props (containerStyle, wrapperStyle, textStyle, activityIndicatorStyle, activityIndicatorColor, activityIndicatorSize). */

@@ -20,7 +20,7 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
       }
     >
       <View
-        behavior="padding"
+        behavior="translate-with-padding"
         style={
           {
             "flex": 1,
@@ -67,7 +67,7 @@ exports[`should render <GiftedChat/> with dark colorScheme and compare with snap
       }
     >
       <View
-        behavior="padding"
+        behavior="translate-with-padding"
         style={
           {
             "flex": 1,
@@ -114,7 +114,7 @@ exports[`should render <GiftedChat/> with light colorScheme and compare with sna
       }
     >
       <View
-        behavior="padding"
+        behavior="translate-with-padding"
         style={
           {
             "flex": 1,

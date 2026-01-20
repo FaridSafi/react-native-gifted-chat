@@ -14,9 +14,17 @@ export function renderComponentOrElement<TProps extends Record<string, any>>(
     return React.cloneElement(component, props as any)
 
   if (typeof component === 'function') {
-    // If it's a component or render function
-    const Component = component as React.ComponentType<TProps>
-    return React.createElement(Component, props as any)
+    // Check if it's a class component (has prototype.isReactComponent)
+    // Class components must use React.createElement
+    const isClassComponent = component.prototype && component.prototype.isReactComponent
+
+    if (isClassComponent)
+      return React.createElement(component as React.ComponentType<TProps>, props as any)
+
+    // For function components and render functions, call directly
+    // Using createElement with inline arrow functions causes unmount/remount
+    // when function reference changes, this matches v2.x behavior
+    return (component as (props: TProps) => React.ReactNode)(props)
   }
 
   // If it's neither, return it as-is

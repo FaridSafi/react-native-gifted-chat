@@ -256,7 +256,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       <ActionSheetProvider ref={actionSheetRef}>
         {/* @ts-expect-error */}
         <KeyboardAvoidingView
-          behavior='padding'
+          behavior='translate-with-padding'
           style={stylesCommon.fill}
           {...props.keyboardAvoidingViewProps}
         >

@@ -18,7 +18,7 @@ import { DayAnimated } from './components/DayAnimated'
 import { Item } from './components/Item'
 import { ItemProps } from './components/Item/types'
 import styles from './styles'
-import { MessagesContainerProps, DaysPositions } from './types'
+import { MessagesContainerProps, DaysPositions, AnimatedFlatList } from './types'
 
 export * from './types'
 
@@ -390,7 +390,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         isAlignedTop ? styles.containerAlignTop : stylesCommon.fill,
       ]}
     >
-      <Animated.FlatList
+      <AnimatedFlatList
         ref={forwardRef}
         keyExtractor={keyExtractor}
         data={messages}
@@ -414,7 +414,6 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         {...listProps}
         onScroll={scrollHandler}
         onLayout={onLayoutList}
-        // @ts-expect-error CellRendererComponent is marked as never in Reanimated types but works at runtime
         CellRendererComponent={renderCell}
       />
       <ScrollToBottomWrapper />

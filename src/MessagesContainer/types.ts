@@ -4,7 +4,8 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native'
-import Animated, { AnimatedProps, ScrollEvent } from 'react-native-reanimated'
+import { FlatList } from 'react-native-gesture-handler'
+import Animated, { ScrollEvent } from 'react-native-reanimated'
 
 import { DayProps } from '../Day'
 import { LoadEarlierMessagesProps } from '../LoadEarlierMessages'
@@ -12,13 +13,26 @@ import { MessageProps } from '../Message'
 import { User, IMessage, Reply } from '../Models'
 import { TypingIndicatorProps } from '../TypingIndicator/types'
 
+/** Animated FlatList created from react-native-gesture-handler's FlatList */
+const RNGHAnimatedFlatList = Animated.createAnimatedComponent(FlatList)
+
+/**
+ * Typed AnimatedFlatList component that preserves generic type parameter.
+ * Uses react-native-gesture-handler's FlatList which respects keyboardShouldPersistTaps.
+ */
+export const AnimatedFlatList = RNGHAnimatedFlatList as <TMessage>(
+  props: FlatListProps<TMessage> & {
+    ref?: RefObject<FlatList<TMessage>>
+  }
+) => React.ReactElement
+
 export type AnimatedListProps<TMessage extends IMessage = IMessage> = Partial<
-  Omit<AnimatedProps<FlatListProps<TMessage>>, 'onScroll'> & {
+  Omit<FlatListProps<TMessage>, 'onScroll'> & {
     onScroll?: (event: ScrollEvent) => void
   }
 >
 
-export type AnimatedList<TMessage> = Animated.FlatList<TMessage>
+export type AnimatedList<TMessage> = FlatList<TMessage>
 
 export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   extends Omit<TypingIndicatorProps, 'style'> {

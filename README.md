@@ -1,33 +1,48 @@
-<h3 align="center">
-  💬 Gifted Chat
-</h3>
+<p align="center">
+  <img width="300" src="https://github.com/user-attachments/assets/c9da88f5-0b20-471c-8cd7-373bdb767517" />
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
+  <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm downloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>
+  <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=shield" alt="build"></a>
+  <img src="https://img.shields.io/badge/platforms-iOS%20%7C%20Android%20%7C%20Web-lightgrey.svg" alt="platforms">
+  <img src="https://img.shields.io/badge/TypeScript-supported-blue.svg" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Expo-compatible-000020.svg" alt="Expo compatible">
+</p>
+
+<h1 align="center">React Native Gifted Chat</h1>
+
 <p align="center">
   The most complete chat UI for React Native & Web
 </p>
+
 <p align="center">
-  <a href="https://www.npmjs.com/package/react-native-gifted-chat">
-  <img alt="npm downloads" src="https://img.shields.io/npm/dm/react-native-gifted-chat.svg"/></a>
-  <a href="https://www.npmjs.com/package/react-native-gifted-chat"><img alt="npm version" src="https://badge.fury.io/js/react-native-gifted-chat.svg"/></a>
-  <a href="https://circleci.com/gh/FaridSafi/react-native-gifted-chat"><img src="https://circleci.com/gh/FaridSafi/react-native-gifted-chat.svg?style=shield" alt="build"></a>
+  <a href="https://snack.expo.dev/@kesha-antonov/gifted-chat-playground" target="_blank">
+    <img src="https://img.shields.io/badge/▶️_Try_in_Browser-4630EB?style=for-the-badge&logo=expo&logoColor=white" alt="Try GiftedChat on Expo Snack"/>
+  </a>
 </p>
 
 ---
 
-<h3 align="center">
-  🚀 Try it now in your browser!
-</h3>
-<p align="center">
-  <a href="https://snack.expo.dev/@kesha-antonov/gifted-chat-playground" target="_blank">
-    <img src="https://img.shields.io/badge/▶️_Try_GiftedChat_Playground-4630EB?style=for-the-badge&logo=expo&logoColor=white" alt="Try GiftedChat on Expo Snack"/>
-  </a>
-</p>
-<p align="center">
-  <strong>No installation required • Interactive examples • Edit and run in real-time</strong>
-</p>
+## ✨ Features
 
-<br />
-
-<!-- previews -->
+- 🎨 **Fully Customizable** - Override any component with your own implementation
+- 📎 **Composer Actions** - Attach photos, files, or trigger custom actions
+- ⏮️ **Load Earlier Messages** - Infinite scroll with pagination support
+- 📋 **Copy to Clipboard** - Long-press messages to copy text
+- 🔗 **Smart Link Parsing** - Auto-detect URLs, emails, phone numbers, hashtags, mentions
+- 👤 **Avatars** - User initials or custom avatar images
+- 🌍 **Localized Dates** - Full i18n support via Day.js
+- ⌨️ **Keyboard Handling** - Smart keyboard avoidance for all platforms
+- 💬 **System Messages** - Display system notifications in chat
+- ⚡ **Quick Replies** - Bot-style quick reply buttons
+- ✍️ **Typing Indicator** - Show when users are typing
+- ✅ **Message Status** - Tick indicators for sent/delivered/read states
+- ⬇️ **Scroll to Bottom** - Quick navigation button
+- 🌐 **Web Support** - Works with react-native-web
+- 📱 **Expo Support** - Easy integration with Expo projects
+- 📝 **TypeScript** - Complete TypeScript definitions included
 
 <p align="center">
   <img width="200" src="https://github.com/user-attachments/assets/c9da88f5-0b20-471c-8cd7-373bdb767517" />
@@ -39,109 +54,70 @@
 
 ---
 
-## Features
+## 📖 Table of Contents
 
-- Fully customizable components
-- Composer actions (to attach photos, etc.)
-- Load earlier messages
-- Copy messages to clipboard
-- Touchable links with customizable parsing (URLs, emails, phone numbers, hashtags, mentions)
-- Avatar as user's initials
-- Localized dates
-- Multi-line TextInput
-- InputToolbar avoiding keyboard
-- System message
-- Quick Reply messages (bot)
-- Typing indicator
-- Ticks indicator to display message status ( delivered, read )
-- Scroll to bottom button
-- react-native-web [web configuration](#react-native-web)
+- [Features](#-features)
+- [Requirements](#-requirements)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Props Reference](#-props-reference)
+- [Data Structure](#-data-structure)
+- [Platform Notes](#-platform-notes)
+- [Example App](#-example-app)
+- [Troubleshooting](#-troubleshooting)
+- [Contributing](#-contributing)
+- [Authors](#-authors)
+- [License](#-license)
 
-## Sponsor
+---
 
-<p align="center">
-  <br/>
-  <a href="https://www.lereacteur.io" target="_blank">
-    <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/logo_sponsor.png" height="60">
-  </a>
-  <br>
-  <p align="center">
-    Coding Bootcamp in Paris co-founded by Farid Safi
-  </p>
-  <a href="https://www.lereacteur.io" target="_blank">
-    <p align="center">
-      Click to learn more
-    </p>
-  </a>
-</p>
+## 📋 Requirements
 
-<p align="center">
-  <br/>
-  <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">
-    <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/stream-logo.png" height="40">
-  </a>
-  <br>
-  <p align="center">
-    Scalable <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">chat API/Server</a> written in Go
-  </p>
-  <p align="center">
-    <a href="https://getstream.io/chat/get_started/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">API Tour</a> | <a href="https://dev.to/nickparsons/react-native-chat-with-chuck-norris-3h7m?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">React Native Gifted tutorial</a>
-  </p>
-</p>
+| Requirement | Version |
+|-------------|---------|
+| React Native | >= 0.70.0 |
+| iOS | >= 13.4 |
+| Android | API 21+ (Android 5.0) |
+| Expo | SDK 50+ |
+| TypeScript | >= 5.0 (optional) |
 
-<p align="center">
-  <br/>
-  <a href="https://www.ethora.com" target="_blank">
-    <img src="https://www.dappros.com/wp-content/uploads/2023/12/Ethora-Logo.png" height="60">
-  </a>
-  <br>
-  <p align="center">
-    A complete app engine featuring GiftedChat
-  </p>
-  <p align="center">
-    <a href="https://bit.ly/ethorachat" target="_blank">Check out our GitHub</a>
-  </p>
-</p>
-<br>
-<p align="center">
- <a href="https://amzn.to/3ZmTyb2" target="_blank">React Key Concepts: Consolidate your knowledge of React’s core features (2nd ed. Edition)</a>
-</p>
+---
 
-# Getting started
+## 📦 Installation
 
-## Installation
+### Expo Projects
 
-### Install dependencies
-
-Yarn:
-```bash
-yarn add react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context react-native-keyboard-controller
-```
-
-Npm:
-
-```bash
-npm install --save react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context react-native-keyboard-controller
-```
-
-Expo
 ```bash
 npx expo install react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context react-native-keyboard-controller
 ```
 
-### Non-expo users
+### Bare React Native Projects
+
+**Step 1:** Install the packages
+
+```bash
+# Using yarn
+yarn add react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context react-native-keyboard-controller
+
+# Using npm
+npm install --save react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context react-native-keyboard-controller
+```
+
+**Step 2:** Install iOS pods
 
 ```bash
 npx pod-install
 ```
 
-### Setup react-native-reanimated
+**Step 3:** Configure react-native-reanimated
 
-Follow guide: [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/#step-2-add-reanimateds-babel-plugin)
+Follow the [react-native-reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/#step-2-add-reanimateds-babel-plugin) to add the Babel plugin.
 
-## Examples
+---
 
-### Basic usage
+## 🚀 Usage
+
+### Basic Example
 
 ```jsx
 import React, { useState, useCallback, useEffect } from 'react'
@@ -193,15 +169,45 @@ export function Example() {
 }
 ```
 
-### Other examples
+> **💡 Tip:** Check out more examples in the [`example`](example) directory including Slack-style messages, quick replies, and custom components.
 
-Check out code of [`examples`](example)
+---
 
-## Data structure
+## 📊 Data Structure
 
-Messages, system messages, quick replies etc.: [data structure](src/Models.ts)
+Messages, system messages, and quick replies follow the structure defined in [Models.ts](src/Models.ts).
 
-## Props
+<details>
+<summary><strong>Message Object Structure</strong></summary>
+
+```typescript
+interface IMessage {
+  _id: string | number
+  text: string
+  createdAt: Date | number
+  user: User
+  image?: string
+  video?: string
+  audio?: string
+  system?: boolean
+  sent?: boolean
+  received?: boolean
+  pending?: boolean
+  quickReplies?: QuickReplies
+}
+
+interface User {
+  _id: string | number
+  name?: string
+  avatar?: string | number | (() => React.ReactNode)
+}
+```
+
+</details>
+
+---
+
+## 📖 Props Reference
 
 ### Core Configuration
 
@@ -401,39 +407,45 @@ See [Quick Replies example in messages.ts](example/example-expo/data/messages.ts
 - **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)
 - **`scrollToBottomStyle`** _(Object)_ - Custom style for Bottom Component container
 
-## Notes for Android
+---
 
-If you are using Create React Native App / Expo, no Android specific installation steps are required -- you can skip this section. Otherwise, we recommend modifying your project configuration as follows.
+## 📱 Platform Notes
 
-- Make sure you have `android:windowSoftInputMode="adjustResize"` in your `AndroidManifest.xml`:
+### Android
 
-  ```xml
-  <activity
-    android:name=".MainActivity"
-    android:label="@string/app_name"
-    android:windowSoftInputMode="adjustResize"
-    android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
-  ```
+<details>
+<summary><strong>Keyboard configuration</strong></summary>
 
-- For **Expo**, there are at least 2 solutions to fix it:
+If you are using Create React Native App / Expo, no Android specific installation steps are required. Otherwise, we recommend modifying your project configuration:
 
-  - Append [`KeyboardAvoidingView`](https://reactnative.dev/docs/keyboardavoidingview) after GiftedChat. This should only be done for Android, as `KeyboardAvoidingView` may conflict with the iOS keyboard avoidance already built into GiftedChat, e.g.:
+Make sure you have `android:windowSoftInputMode="adjustResize"` in your `AndroidManifest.xml`:
 
+```xml
+<activity
+  android:name=".MainActivity"
+  android:label="@string/app_name"
+  android:windowSoftInputMode="adjustResize"
+  android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
 ```
+
+For **Expo**, you can append `KeyboardAvoidingView` after GiftedChat (Android only):
+
+```jsx
 <View style={{ flex: 1 }}>
    <GiftedChat />
-   {
-      Platform.OS === 'android' && <KeyboardAvoidingView behavior="padding" />
-   }
+   {Platform.OS === 'android' && <KeyboardAvoidingView behavior="padding" />}
 </View>
 ```
 
-## Notes for local development
+</details>
 
-#### With create-react-app
+### Web (react-native-web)
 
-1. `yarn add -D react-app-rewired`
-2. `touch config-overrides.js`
+<details>
+<summary><strong>With create-react-app</strong></summary>
+
+1. Install react-app-rewired: `yarn add -D react-app-rewired`
+2. Create `config-overrides.js`:
 
 ```js
 module.exports = function override(config, env) {
@@ -453,23 +465,30 @@ module.exports = function override(config, env) {
       },
     },
   })
-
   return config
 }
 ```
 
-> You will find an example and a **web demo** here: [xcarpentier/gifted-chat-web-demo](https://github.com/xcarpentier/gifted-chat-web-demo)
+> **Examples:**
+> - [xcarpentier/gifted-chat-web-demo](https://github.com/xcarpentier/gifted-chat-web-demo)
+> - [Gatsby example](https://github.com/xcarpentier/clean-archi-boilerplate/tree/develop/apps/web)
 
-> Another example with **Gatsby** : [xcarpentier/clean-archi-boilerplate](https://github.com/xcarpentier/clean-archi-boilerplate/tree/develop/apps/web)
+</details>
 
-## Testing
-`TEST_ID` is exported as constants that can be used in your testing library of choice
+---
 
-Gifted Chat uses `onLayout` to determine the height of the chat container. To trigger `onLayout` during your tests, you can run the following bits of code.
+## 🧪 Testing
+
+<details>
+<summary><strong>Triggering layout events in tests</strong></summary>
+
+`TEST_ID` is exported as constants that can be used in your testing library of choice.
+
+Gifted Chat uses `onLayout` to determine the height of the chat container. To trigger `onLayout` during your tests:
 
 ```typescript
-const WIDTH = 200; // or any number
-const HEIGHT = 2000; // or any number
+const WIDTH = 200
+const HEIGHT = 2000
 
 const loadingWrapper = getByTestId(TEST_ID.LOADING_WRAPPER)
 fireEvent(loadingWrapper, 'layout', {
@@ -482,37 +501,143 @@ fireEvent(loadingWrapper, 'layout', {
 })
 ```
 
-## Questions
+</details>
 
-- [How can I set Bubble color for each user?](https://github.com/FaridSafi/react-native-gifted-chat/issues/672)
-- [How can I pass style props to InputToolbar design and customize its color and other styles properties?](https://github.com/FaridSafi/react-native-gifted-chat/issues/662)
-- [How can I change the color of the message box?](https://github.com/FaridSafi/react-native-gifted-chat/issues/640)
-- [Is there a way to manually dismiss the keyboard?](https://github.com/FaridSafi/react-native-gifted-chat/issues/647)
-- [I want to implement a popover that pops right after clicking on a specific avatar,
-  what is the best implementation in this case and how?](https://github.com/FaridSafi/react-native-gifted-chat/issues/660)
-- [Why TextInput is hidden on Android?](https://github.com/FaridSafi/react-native-gifted-chat/issues/680#issuecomment-359699364)
-- [How to use renderLoading?](https://github.com/FaridSafi/react-native-gifted-chat/issues/298)
-- [Can I use MySql to save the message?](https://github.com/FaridSafi/react-native-gifted-chat/issues/738)
+---
 
-## You have a question?
+## 📦 Example App
 
-1. Please check this readme and you might find a response
-1. Please ask on StackOverflow first: https://stackoverflow.com/questions/tagged/react-native-gifted-chat
-1. Find responses in existing issues
-1. Try to keep issues for issues
+The repository includes a comprehensive example app demonstrating all features:
 
-## Hire an expert
+```bash
+# Clone and install
+git clone https://github.com/FaridSafi/react-native-gifted-chat.git
+cd react-native-gifted-chat/example
+yarn install
 
-Looking for a React Native freelance expert with more than 14 years of experience? Contact Xavier from his [website](https://xaviercarpentier.com)
+# Run on iOS
+npx expo run:ios
 
-## Author
+# Run on Android
+npx expo run:android
 
-Feel free to ask me questions on Twitter [@FaridSafi](https://www.x.com/FaridSafi) or [@xcapetir](https://www.x.com/xcapetir)
+# Run on Web
+npx expo start --web
+```
 
-## Maintainer
+The example app showcases:
+- 💬 Basic chat functionality
+- 🎨 Custom message bubbles and avatars
+- ⚡ Quick replies (bot-style)
+- ✍️ Typing indicators
+- 📎 Attachment actions
+- 🔗 Link parsing and custom matchers
+- 🌐 Web compatibility
 
-Have any questions? Reach out to [Kesha Antonov](https://github.com/kesha-antonov)
+---
 
-Please note that I'm maintaining this project in my free time for free. If you find any issues, feel free to open them, and I'll do my best to address them as time permits.
+## ❓ Troubleshooting
 
-If you consider my work helpful please consider [become a backer](https://github.com/sponsors/kesha-antonov), I'll have more time to work on open source. Thanks!
+<details>
+<summary><strong>TextInput is hidden on Android</strong></summary>
+
+Make sure you have `android:windowSoftInputMode="adjustResize"` in your `AndroidManifest.xml`. See [Android configuration](#android) above.
+
+</details>
+
+<details>
+<summary><strong>How to set Bubble color for each user?</strong></summary>
+
+See [this issue](https://github.com/FaridSafi/react-native-gifted-chat/issues/672) for examples.
+
+</details>
+
+<details>
+<summary><strong>How to customize InputToolbar styles?</strong></summary>
+
+See [this issue](https://github.com/FaridSafi/react-native-gifted-chat/issues/662) for examples.
+
+</details>
+
+<details>
+<summary><strong>How to manually dismiss the keyboard?</strong></summary>
+
+See [this issue](https://github.com/FaridSafi/react-native-gifted-chat/issues/647) for examples.
+
+</details>
+
+<details>
+<summary><strong>How to use renderLoading?</strong></summary>
+
+See [this issue](https://github.com/FaridSafi/react-native-gifted-chat/issues/298) for examples.
+
+</details>
+
+---
+
+## 🤔 Have a Question?
+
+1. Check this README first
+2. Search [existing issues](https://github.com/FaridSafi/react-native-gifted-chat/issues)
+3. Ask on [StackOverflow](https://stackoverflow.com/questions/tagged/react-native-gifted-chat)
+4. Open a new issue if needed
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Install dependencies (`yarn install`)
+4. Make your changes
+5. Run tests (`yarn test`)
+6. Run linting (`yarn lint`)
+7. Build the library (`yarn build`)
+8. Commit your changes (`git commit -m 'Add amazing feature'`)
+9. Push to the branch (`git push origin feature/amazing-feature`)
+10. Open a Pull Request
+
+### Development Setup
+
+```bash
+# Install dependencies
+yarn install
+
+# Build the library
+yarn build
+
+# Run tests
+yarn test
+
+# Run linting
+yarn lint
+
+# Full validation
+yarn prepublishOnly
+```
+
+---
+
+## 👥 Authors
+
+**Original Author:** [Farid Safi](https://www.x.com/FaridSafi)
+
+**Co-maintainer:** [Xavier Carpentier](https://www.x.com/xcapetir) - [Hire Xavier](https://xaviercarpentier.com)
+
+**Maintainer:** [Kesha Antonov](https://github.com/kesha-antonov)
+
+> Please note that this project is maintained in free time. If you find it helpful, please consider [becoming a sponsor](https://github.com/sponsors/kesha-antonov).
+
+---
+
+## 📄 License
+
+MIT © [Farid Safi](https://github.com/FaridSafi)
+
+---
+
+<p align="center">
+  <sub>Built with ❤️ by the React Native community</sub>
+</p>

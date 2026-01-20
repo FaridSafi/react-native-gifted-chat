@@ -238,14 +238,13 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         style={[
           stylesCommon.centerItems,
           styles.scrollToBottomContent,
-          scrollToBottomStyle,
           scrollToBottomStyleAnim,
         ]}
       >
         {renderScrollBottomComponent()}
       </Animated.View>
     )
-  }, [scrollToBottomStyle, scrollToBottomStyleAnim, renderScrollBottomComponent])
+  }, [scrollToBottomStyleAnim, renderScrollBottomComponent])
 
   const ScrollToBottomWrapper = useCallback(() => {
     if (!isScrollToBottomEnabled)
@@ -256,13 +255,13 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
 
     return (
       <Pressable
-        style={styles.scrollToBottom}
+        style={[styles.scrollToBottom, scrollToBottomStyle]}
         onPress={handleScrollToBottomPress}
       >
         {scrollToBottomContent}
       </Pressable>
     )
-  }, [isScrollToBottomEnabled, isScrollToBottomVisible, handleScrollToBottomPress, scrollToBottomContent])
+  }, [isScrollToBottomEnabled, isScrollToBottomVisible, handleScrollToBottomPress, scrollToBottomContent, scrollToBottomStyle])
 
   const onLayoutList = useCallback((event: LayoutChangeEvent) => {
     listHeight.value = event.nativeEvent.layout.height

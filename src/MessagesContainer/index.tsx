@@ -276,7 +276,9 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         doScrollToBottom(false)
       }, 500)
 
-    listProps?.onLayout?.(event)
+    // listProps.onLayout may be a SharedValue in Reanimated types, but we only accept functions
+    const onLayoutProp = listProps?.onLayout as ((event: LayoutChangeEvent) => void) | undefined
+    onLayoutProp?.(event)
   }, [isInverted, messages, doScrollToBottom, listHeight, listProps, isScrollToBottomEnabled])
 
   const onEndReached = useCallback(() => {
@@ -398,10 +400,10 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         contentContainerStyle={styles.messagesContainer}
         ListEmptyComponent={renderChatEmpty}
         ListFooterComponent={
-          isInverted ? ListHeaderComponent : ListFooterComponent
+          isInverted ? ListHeaderComponent : <>{ListFooterComponent}</>
         }
         ListHeaderComponent={
-          isInverted ? ListFooterComponent : ListHeaderComponent
+          isInverted ? <>{ListFooterComponent}</> : ListHeaderComponent
         }
         scrollEventThrottle={1}
         onEndReached={onEndReached}
@@ -411,6 +413,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         {...listProps}
         onScroll={scrollHandler}
         onLayout={onLayoutList}
+        // @ts-expect-error CellRendererComponent is marked as never in Reanimated types but works at runtime
         CellRendererComponent={renderCell}
       />
       <ScrollToBottomWrapper />

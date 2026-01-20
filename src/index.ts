@@ -1,6 +1,8 @@
+import * as utils from './utils'
+
 export * from './GiftedChat'
 export * from './Constant'
-export * as utils from './utils'
+export { utils }
 export * from './GiftedChatContext'
 export * from './types'
 export * from './linkParser'

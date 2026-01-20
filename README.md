@@ -223,7 +223,7 @@ interface User {
 
 ### Keyboard & Layout
 
-- **`keyboardProviderProps`** _(Object)_ - Props to be passed to the [`KeyboardProvider`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/keyboard-provider) for keyboard handling.
+- **`keyboardProviderProps`** _(Object)_ - Props to be passed to the [`KeyboardProvider`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/keyboard-provider) for keyboard handling. Use `{ enabled: false }` to disable on Android if you experience layout shifts.
 - **`keyboardAvoidingViewProps`** _(Object)_ - Props to be passed to the [`KeyboardAvoidingView`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/keyboard-avoiding-view). The `behavior` prop defaults to `'padding'`.
 - **`isAlignedTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 - **`isInverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
@@ -233,6 +233,7 @@ interface User {
 - **`text`** _(String)_ - Input text; default is `undefined`, but if specified, it will override GiftedChat's internal state. Useful for managing text state outside of GiftedChat (e.g. with Redux). Don't forget to implement `textInputProps.onChangeText` to update the text state.
 - **`initialText`** _(String)_ - Initial text to display in the input field
 - **`isSendButtonAlwaysVisible`** _(Bool)_ - Always show send button in input text composer; default `false`, show only when text input is not empty
+- **`isTextOptional`** _(Bool)_ - Allow sending messages without text (useful for media-only messages); default `false`. Use with `isSendButtonAlwaysVisible` for media attachments.
 - **`minComposerHeight`** _(Object)_ - Custom min-height of the composer.
 - **`maxComposerHeight`** _(Object)_ - Custom max height of the composer.
 - **`minInputToolbarHeight`** _(Integer)_ - Minimum height of the input toolbar; default is `44`
@@ -403,7 +404,8 @@ See [Quick Replies example in messages.ts](example/example-expo/data/messages.ts
 - **`isScrollToBottomEnabled`** _(Bool)_ - Enables the scroll to bottom Component (Default is false)
 - **`scrollToBottomComponent`** _(Function)_ - Custom Scroll To Bottom Component container
 - **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)
-- **`scrollToBottomStyle`** _(Object)_ - Custom style for Bottom Component container
+- **`scrollToBottomStyle`** _(Object)_ - Custom style for Scroll To Bottom wrapper (position, bottom, right, etc.)
+- **`scrollToBottomContentStyle`** _(Object)_ - Custom style for Scroll To Bottom content (size, background, shadow, etc.)
 
 ---
 

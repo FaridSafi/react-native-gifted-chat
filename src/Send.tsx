@@ -21,7 +21,10 @@ export interface SendProps<TMessage extends IMessage> {
   containerStyle?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
   children?: React.ReactNode
+  /** Always show send button, even when text is empty */
   isSendButtonAlwaysVisible?: boolean
+  /** Text is optional, allow sending empty messages (useful for media-only messages) */
+  isTextOptional?: boolean
   sendButtonProps?: Partial<TouchableOpacityProps>
   onSend?(
     messages: Partial<TMessage> | Partial<TMessage>[],
@@ -36,6 +39,7 @@ export const Send = <TMessage extends IMessage = IMessage>({
   textStyle,
   label = 'Send',
   isSendButtonAlwaysVisible = false,
+  isTextOptional = false,
   sendButtonProps,
   onSend,
 }: SendProps<TMessage>) => {
@@ -43,11 +47,12 @@ export const Send = <TMessage extends IMessage = IMessage>({
   const opacity = useSharedValue(0)
 
   const handleOnPress = useCallback(() => {
-    const message = { text: text?.trim() } as Partial<TMessage>
+    const trimmedText = text?.trim() ?? ''
+    const message = { text: trimmedText } as Partial<TMessage>
 
-    if (onSend && message.text?.length)
+    if (onSend && (trimmedText.length || isTextOptional))
       onSend(message, true)
-  }, [text, onSend])
+  }, [text, onSend, isTextOptional])
 
   const isVisible = useMemo(
     () => isSendButtonAlwaysVisible || !!text?.trim().length,

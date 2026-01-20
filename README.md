@@ -25,6 +25,7 @@
 
 - 🎨 **Fully Customizable** - Override any component with your own implementation
 - 📎 **Composer Actions** - Attach photos, files, or trigger custom actions
+- ↩️ **Reply to Messages** - Swipe-to-reply with reply preview and message threading
 - ⏮️ **Load Earlier Messages** - Infinite scroll with pagination support
 - 📋 **Copy to Clipboard** - Long-press messages to copy text
 - 🔗 **Smart Link Parsing** - Auto-detect URLs, emails, phone numbers, hashtags, mentions
@@ -405,6 +406,76 @@ See [Quick Replies example in messages.ts](example/example-expo/data/messages.ts
 - **`quickReplyContainerStyle`** _(StyleProp<ViewStyle>)_ - Custom container style for quick replies
 - **`renderQuickReplySend`** _(Function)_ - Custom quick reply **send** view
 
+### Reply to Messages
+
+Gifted Chat supports swipe-to-reply functionality out of the box. When enabled, users can swipe on a message to reply to it, displaying a reply preview in the input toolbar and the replied message above the new message bubble.
+
+#### Basic Usage
+
+```tsx
+<GiftedChat
+  messages={messages}
+  onSend={onSend}
+  user={{ _id: 1 }}
+  isSwipeToReplyEnabled
+  swipeToReplyDirection='left' // or 'right'
+/>
+```
+
+#### Reply Props
+
+- **`isSwipeToReplyEnabled`** _(Bool)_ - Enable swipe-to-reply gesture on messages; default is `false`
+- **`swipeToReplyDirection`** _('left' | 'right')_ - Direction to swipe for reply; default is `'left'`
+- **`replyMessage`** _(ReplyMessage)_ - Controlled reply message state. When provided, you manage the reply state externally
+- **`onSwipeToReply`** _(Function(`message`))_ - Callback when user swipes to reply on a message. Receives the message being replied to
+- **`onClearReply`** _(Function)_ - Callback when reply is cleared (X button pressed in preview)
+- **`renderSwipeToReplyAction`** _(Function)_ - Custom swipe action component (the reply icon shown while swiping)
+- **`swipeToReplyActionContainerStyle`** _(StyleProp<ViewStyle>)_ - Custom style for swipe action container
+- **`renderReplyPreview`** _(Function)_ - Custom reply preview component above the input toolbar
+- **`replyPreviewContainerStyle`** _(StyleProp<ViewStyle>)_ - Custom style for reply preview container
+- **`replyPreviewTextStyle`** _(StyleProp<TextStyle>)_ - Custom style for reply preview text
+- **`renderMessageReply`** _(Function)_ - Custom component to render the replied message inside bubbles
+- **`messageReplyContainerStyle`** _(LeftRightStyle<ViewStyle>)_ - Custom style for message reply container (supports left/right)
+
+#### ReplyMessage Structure
+
+When a message has a reply, it includes a `replyMessage` property:
+
+```typescript
+interface ReplyMessage {
+  _id: string | number
+  text: string
+  user: User
+  image?: string
+  audio?: string
+}
+```
+
+#### Advanced Example with External State
+
+```tsx
+const [replyMessage, setReplyMessage] = useState<ReplyMessage | null>(null)
+
+<GiftedChat
+  messages={messages}
+  onSend={messages => {
+    // Access replyMessage in onSend
+    const newMessages = messages.map(msg => ({
+      ...msg,
+      replyMessage: replyMessage || undefined,
+    }))
+    setMessages(prev => GiftedChat.append(prev, newMessages))
+    setReplyMessage(null)
+  }}
+  user={{ _id: 1 }}
+  isSwipeToReplyEnabled
+  swipeToReplyDirection='right'
+  replyMessage={replyMessage}
+  onSwipeToReply={message => setReplyMessage(message)}
+  onClearReply={() => setReplyMessage(null)}
+/>
+```
+
 ### Scroll to Bottom
 
 - **`isScrollToBottomEnabled`** _(Bool)_ - Enables the scroll to bottom Component (Default is false)
@@ -573,6 +644,7 @@ npx expo start --web
 The example app showcases:
 - 💬 Basic chat functionality
 - 🎨 Custom message bubbles and avatars
+- ↩️ Reply to messages with swipe gesture
 - ⚡ Quick replies (bot-style)
 - ✍️ Typing indicators
 - 📎 Attachment actions

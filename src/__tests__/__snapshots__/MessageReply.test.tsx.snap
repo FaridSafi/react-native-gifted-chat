@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <MessageReply /> and compare with snapshot 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+>
+  <View
+    style={
+      [
+        {
+          "borderRadius": 8,
+          "marginBottom": 4,
+          "paddingHorizontal": 10,
+          "paddingVertical": 6,
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0.06)",
+          "borderLeftColor": "#0084ff",
+          "borderLeftWidth": 3,
+        },
+        undefined,
+        undefined,
+      ]
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        [
+          {
+            "fontWeight": "600",
+            "marginBottom": 2,
+          },
+          {
+            "color": "#0084ff",
+          },
+          undefined,
+          undefined,
+        ]
+      }
+    >
+      John Doe
+    </Text>
+    <Text
+      numberOfLines={2}
+      style={
+        [
+          {
+            "fontSize": 13,
+          },
+          {
+            "color": "#333",
+          },
+          undefined,
+          undefined,
+        ]
+      }
+    >
+      Original message text
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`should render <MessageReply /> on right position and compare with snapshot 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+>
+  <View
+    style={
+      [
+        {
+          "borderRadius": 8,
+          "marginBottom": 4,
+          "paddingHorizontal": 10,
+          "paddingVertical": 6,
+        },
+        {
+          "backgroundColor": "rgba(255, 255, 255, 0.15)",
+          "borderLeftColor": "rgba(255, 255, 255, 0.6)",
+          "borderLeftWidth": 3,
+        },
+        undefined,
+        undefined,
+      ]
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        [
+          {
+            "fontWeight": "600",
+            "marginBottom": 2,
+          },
+          {
+            "color": "rgba(255, 255, 255, 0.9)",
+          },
+          undefined,
+          undefined,
+        ]
+      }
+    >
+      You
+    </Text>
+    <Text
+      numberOfLines={2}
+      style={
+        [
+          {
+            "fontSize": 13,
+          },
+          {
+            "color": "rgba(255, 255, 255, 0.9)",
+          },
+          undefined,
+          undefined,
+        ]
+      }
+    >
+      Original message text
+    </Text>
+  </View>
+</View>
+`;

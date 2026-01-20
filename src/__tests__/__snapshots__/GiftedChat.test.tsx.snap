@@ -8,7 +8,10 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
     }
   }
 >
-  <KeyboardProvider>
+  <KeyboardProvider
+    navigationBarTranslucent={true}
+    statusBarTranslucent={true}
+  >
     <View
       style={
         {
@@ -31,7 +34,7 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
         testID="GC_WRAPPER"
       >
         <View
-          behavior="translate-with-padding"
+          behavior="padding"
           keyboardVerticalOffset={50}
           style={
             {
@@ -61,7 +64,10 @@ exports[`should render <GiftedChat/> with dark colorScheme and compare with snap
     }
   }
 >
-  <KeyboardProvider>
+  <KeyboardProvider
+    navigationBarTranslucent={true}
+    statusBarTranslucent={true}
+  >
     <View
       style={
         {
@@ -84,7 +90,7 @@ exports[`should render <GiftedChat/> with dark colorScheme and compare with snap
         testID="GC_WRAPPER"
       >
         <View
-          behavior="translate-with-padding"
+          behavior="padding"
           keyboardVerticalOffset={50}
           style={
             {
@@ -114,7 +120,10 @@ exports[`should render <GiftedChat/> with light colorScheme and compare with sna
     }
   }
 >
-  <KeyboardProvider>
+  <KeyboardProvider
+    navigationBarTranslucent={true}
+    statusBarTranslucent={true}
+  >
     <View
       style={
         {
@@ -137,7 +146,7 @@ exports[`should render <GiftedChat/> with light colorScheme and compare with sna
         testID="GC_WRAPPER"
       >
         <View
-          behavior="translate-with-padding"
+          behavior="padding"
           keyboardVerticalOffset={50}
           style={
             {

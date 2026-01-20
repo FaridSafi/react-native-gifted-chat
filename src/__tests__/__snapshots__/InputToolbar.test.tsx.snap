@@ -4,14 +4,12 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
 <View
   style={
     [
-      [
-        {
-          "backgroundColor": "#fff",
-          "borderTopColor": "#b2b2b2",
-          "borderTopWidth": 0.5,
-        },
-        undefined,
-      ],
+      {
+        "backgroundColor": "#fff",
+        "borderTopColor": "#b2b2b2",
+        "borderTopWidth": 0.5,
+      },
+      false,
       undefined,
     ]
   }
@@ -19,13 +17,10 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
   <View
     style={
       [
-        [
-          {
-            "alignItems": "flex-end",
-            "flexDirection": "row",
-          },
-          undefined,
-        ],
+        {
+          "alignItems": "flex-end",
+          "flexDirection": "row",
+        },
         undefined,
       ]
     }

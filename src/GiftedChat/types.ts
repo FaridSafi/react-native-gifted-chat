@@ -4,14 +4,18 @@ import {
   StyleProp,
   TextStyle,
   ViewStyle,
+  ImageStyle,
 } from 'react-native'
 import {
   ActionSheetOptions,
 } from '@expo/react-native-action-sheet'
 import { KeyboardProvider, KeyboardAvoidingViewProps } from 'react-native-keyboard-controller'
+
 import { ActionsProps } from '../Actions'
 import { AvatarProps } from '../Avatar'
 import { BubbleProps } from '../Bubble'
+import { MessageReplyProps } from '../components/MessageReply'
+import { ReplyPreviewProps } from '../components/ReplyPreview'
 import { ComposerProps } from '../Composer'
 import { InputToolbarProps } from '../InputToolbar'
 import { MessageImageProps } from '../MessageImage'
@@ -22,6 +26,7 @@ import {
   LeftRightStyle,
   MessageAudioProps,
   MessageVideoProps,
+  ReplyMessage,
   User,
 } from '../Models'
 import { QuickRepliesProps } from '../QuickReplies'
@@ -29,7 +34,7 @@ import { SendProps } from '../Send'
 import { SystemMessageProps } from '../SystemMessage'
 import { TimeProps } from '../Time'
 
-export interface GiftedChatProps<TMessage extends IMessage> extends Partial<MessagesContainerProps<TMessage>> {
+export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Omit<MessagesContainerProps<TMessage>, 'messageReplyContainerStyle'>> {
   /* Messages container ref */
   messagesContainerRef?: RefObject<AnimatedList<TMessage>>
   /* text input ref */
@@ -85,7 +90,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   actionSheet?: () => {
     showActionSheetWithOptions: (
       options: ActionSheetOptions,
-      callback: (buttonIndex: number) => void | Promise<void>,
+      callback: (buttonIndex: number) => void | Promise<void>
     ) => void
   }
   /* Callback when a message avatar is tapped */
@@ -140,7 +145,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   /* Extra props to be passed to the MessageText component */
   messageTextProps?: Partial<MessageTextProps<TMessage>>
   renderQuickReplies?: (
-    quickReplies: QuickRepliesProps<TMessage>,
+    quickReplies: QuickRepliesProps<TMessage>
   ) => React.ReactNode
   renderQuickReplySend?: () => React.ReactNode
   keyboardProviderProps?: React.ComponentProps<typeof KeyboardProvider>
@@ -148,4 +153,46 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   keyboardAvoidingViewProps?: KeyboardAvoidingViewProps
   /** Enable animated day label that appears on scroll; default is true */
   isDayAnimationEnabled?: boolean
+  /** Enable swipe to reply on messages; default is false */
+  isSwipeToReplyEnabled?: boolean
+  /** Swipe direction for reply; default is 'right' (swipe left to reveal) */
+  swipeToReplyDirection?: 'left' | 'right'
+  /** Callback when swipe to reply is triggered */
+  onSwipeToReply?: (message: TMessage) => void
+  /** Custom render for swipe action indicator */
+  renderSwipeToReplyAction?: (
+    progress: any,
+    dragX: any,
+    position: 'left' | 'right'
+  ) => React.ReactNode
+  /** Style for the swipe action container */
+  swipeToReplyActionContainerStyle?: StyleProp<ViewStyle>
+  /** Reply message to show in input toolbar preview; default is undefined (controlled externally) or managed internally when using onSwipeToReply without replyMessage prop */
+  replyMessage?: ReplyMessage | null
+  /** Callback when reply is cleared */
+  onClearReply?: () => void
+  /** Custom render for reply preview in input toolbar */
+  renderReplyPreview?: (props: ReplyPreviewProps) => React.ReactNode
+  /** Style for reply preview container */
+  replyPreviewContainerStyle?: StyleProp<ViewStyle>
+  /** Style for reply preview text */
+  replyPreviewTextStyle?: StyleProp<TextStyle>
+  /** Custom render for message reply inside bubble */
+  renderMessageReply?: (props: MessageReplyProps<TMessage>) => React.ReactNode
+  /** Callback when message reply is pressed */
+  onPressMessageReply?: (replyMessage: ReplyMessage) => void
+  /** Style for message reply container */
+  messageReplyContainerStyle?: StyleProp<ViewStyle>
+  /** Style for message reply container on left side */
+  messageReplyContainerStyleLeft?: StyleProp<ViewStyle>
+  /** Style for message reply container on right side */
+  messageReplyContainerStyleRight?: StyleProp<ViewStyle>
+  /** Style for message reply image */
+  messageReplyImageStyle?: StyleProp<ImageStyle>
+  /** Style for message reply text */
+  messageReplyTextStyle?: StyleProp<TextStyle>
+  /** Style for message reply text on left side */
+  messageReplyTextStyleLeft?: StyleProp<TextStyle>
+  /** Style for message reply text on right side */
+  messageReplyTextStyleRight?: StyleProp<TextStyle>
 }

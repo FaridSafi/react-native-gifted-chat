@@ -5,6 +5,8 @@ import {
 } from 'react-native'
 
 import { Text } from 'react-native-gesture-handler'
+
+import { MessageReply } from '../components/MessageReply'
 import { useChatContext } from '../GiftedChatContext'
 import { MessageAudio } from '../MessageAudio'
 import { MessageImage } from '../MessageImage'
@@ -12,10 +14,8 @@ import { MessageText } from '../MessageText'
 import { MessageVideo } from '../MessageVideo'
 import { IMessage } from '../Models'
 import { QuickReplies } from '../QuickReplies'
-
 import { getStyleWithPosition } from '../styles'
 import { Time } from '../Time'
-
 import { isSameUser, isSameDay, renderComponentOrElement } from '../utils'
 import styles from './styles'
 import { BubbleProps, RenderMessageTextProps } from './types'
@@ -319,10 +319,39 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
     return null
   }, [props])
 
+  const renderMessageReply = useCallback(() => {
+    if (!currentMessage?.replyMessage)
+      return null
+
+    const messageReplyProps = {
+      replyMessage: currentMessage.replyMessage,
+      currentMessage,
+      position,
+      onPress: props.onPressMessageReply,
+      containerStyle: props.messageReplyContainerStyle?.[position],
+      textStyle: props.messageReplyTextStyle,
+      imageStyle: props.messageReplyImageStyle,
+    }
+
+    if (props.renderMessageReply)
+      return renderComponentOrElement(props.renderMessageReply, messageReplyProps)
+
+    return <MessageReply {...messageReplyProps} />
+  }, [
+    props.renderMessageReply,
+    props.onPressMessageReply,
+    props.messageReplyContainerStyle,
+    props.messageReplyImageStyle,
+    props.messageReplyTextStyle,
+    currentMessage,
+    position,
+  ])
+
   const renderBubbleContent = useCallback(() => {
     return (
       <>
         {!props.isCustomViewBottom && renderCustomView()}
+        {renderMessageReply()}
         {renderMessageImage()}
         {renderMessageVideo()}
         {renderMessageAudio()}
@@ -331,6 +360,7 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
       </>
     )
   }, [
+    renderMessageReply,
     renderCustomView,
     renderMessageImage,
     renderMessageVideo,

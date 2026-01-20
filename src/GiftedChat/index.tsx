@@ -26,7 +26,7 @@ import { TEST_ID } from '../Constant'
 import { GiftedChatContext } from '../GiftedChatContext'
 import { InputToolbar } from '../InputToolbar'
 import { MessagesContainer, AnimatedList } from '../MessagesContainer'
-import { IMessage } from '../Models'
+import { IMessage, ReplyMessage } from '../Models'
 import stylesCommon from '../styles'
 import { renderComponentOrElement } from '../utils'
 import styles from './styles'
@@ -74,6 +74,27 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     renderChatFooter,
     renderInputToolbar,
     isInverted = true,
+
+    // Reply props
+    isSwipeToReplyEnabled = false,
+    swipeToReplyDirection = 'right',
+    onSwipeToReply,
+    renderSwipeToReplyAction,
+    swipeToReplyActionContainerStyle,
+    replyMessage: replyMessageProp,
+    onClearReply,
+    renderReplyPreview,
+    replyPreviewContainerStyle,
+    replyPreviewTextStyle,
+    renderMessageReply,
+    onPressMessageReply,
+    messageReplyContainerStyle,
+    messageReplyContainerStyleLeft,
+    messageReplyContainerStyleRight,
+    messageReplyTextStyle,
+    messageReplyTextStyleLeft,
+    messageReplyTextStyleRight,
+    messageReplyImageStyle,
   } = props
 
   const systemColorScheme = useColorScheme()
@@ -93,6 +114,10 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const [isInitialized, setIsInitialized] = useState<boolean>(false)
   const [text, setText] = useState<string | undefined>(() => props.text || '')
+  const [internalReplyMessage, setInternalReplyMessage] = useState<ReplyMessage | null>(null)
+
+  // Use controlled or uncontrolled reply state
+  const replyMessage = replyMessageProp !== undefined ? replyMessageProp : internalReplyMessage
 
   const getTextFromProp = useCallback(
     (fallback: string) => {
@@ -122,6 +147,31 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     [isInverted, messagesContainerRef]
   )
 
+  const handleSwipeToReply = useCallback(
+    (message: TMessage) => {
+      if (replyMessageProp === undefined)
+        // Uncontrolled mode: manage state internally
+        setInternalReplyMessage({
+          _id: message._id,
+          text: message.text,
+          user: message.user,
+          image: message.image,
+          audio: message.audio,
+        })
+
+      onSwipeToReply?.(message)
+    },
+    [replyMessageProp, onSwipeToReply]
+  )
+
+  const clearReply = useCallback(() => {
+    if (replyMessageProp === undefined)
+      // Uncontrolled mode: manage state internally
+      setInternalReplyMessage(null)
+
+    onClearReply?.()
+  }, [replyMessageProp, onClearReply])
+
   const renderMessages = useMemo(() => {
     if (!isInitialized)
       return null
@@ -136,6 +186,22 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
           messages={messages}
           forwardRef={messagesContainerRef}
           isTyping={isTyping}
+          // Swipe to reply props
+          isSwipeToReplyEnabled={isSwipeToReplyEnabled}
+          swipeToReplyDirection={swipeToReplyDirection}
+          onSwipeToReply={handleSwipeToReply}
+          renderSwipeToReplyAction={renderSwipeToReplyAction}
+          swipeToReplyActionContainerStyle={swipeToReplyActionContainerStyle}
+          // Message reply props
+          renderMessageReply={renderMessageReply}
+          onPressMessageReply={onPressMessageReply}
+          messageReplyContainerStyle={messageReplyContainerStyle}
+          messageReplyContainerStyleLeft={messageReplyContainerStyleLeft}
+          messageReplyContainerStyleRight={messageReplyContainerStyleRight}
+          messageReplyTextStyle={messageReplyTextStyle}
+          messageReplyTextStyleLeft={messageReplyTextStyleLeft}
+          messageReplyTextStyleRight={messageReplyTextStyleRight}
+          messageReplyImageStyle={messageReplyImageStyle}
         />
         {renderComponentOrElement(renderChatFooter, {})}
       </View>
@@ -148,6 +214,20 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     isInverted,
     messagesContainerRef,
     renderChatFooter,
+    isSwipeToReplyEnabled,
+    swipeToReplyDirection,
+    handleSwipeToReply,
+    renderSwipeToReplyAction,
+    swipeToReplyActionContainerStyle,
+    renderMessageReply,
+    onPressMessageReply,
+    messageReplyContainerStyle,
+    messageReplyContainerStyleLeft,
+    messageReplyContainerStyleRight,
+    messageReplyTextStyle,
+    messageReplyTextStyleLeft,
+    messageReplyTextStyleRight,
+    messageReplyImageStyle,
   ])
 
   const notifyInputTextReset = useCallback(() => {
@@ -177,17 +257,22 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
           user: user!,
           createdAt: new Date(),
           _id: messageIdGenerator?.(),
+          // Attach reply message if exists
+          ...(replyMessage ? { replyMessage } : {}),
         }
       })
 
       if (shouldResetInputToolbar === true)
         resetInputToolbar()
 
+      // Clear reply after sending
+      clearReply()
+
       onSend?.(newMessages)
 
       setTimeout(() => scrollToBottom(), 10)
     },
-    [messageIdGenerator, onSend, user, resetInputToolbar, scrollToBottom]
+    [messageIdGenerator, onSend, user, resetInputToolbar, scrollToBottom, replyMessage, clearReply]
   )
 
   const _onChangeText = useCallback(
@@ -232,6 +317,12 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         onChangeText: _onChangeText,
         ref: textInputRef,
       },
+      // Reply preview props
+      replyMessage,
+      onClearReply: clearReply,
+      renderReplyPreview,
+      replyPreviewContainerStyle,
+      replyPreviewTextStyle,
     }
 
     if (renderInputToolbar)
@@ -248,6 +339,11 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     textInputRef,
     textInputProps,
     _onChangeText,
+    replyMessage,
+    clearReply,
+    renderReplyPreview,
+    replyPreviewContainerStyle,
+    replyPreviewTextStyle,
   ])
 
   const contextValues = useMemo(

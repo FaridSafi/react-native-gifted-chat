@@ -258,7 +258,7 @@ interface User {
 - **`renderLoading`** _(Component | Function)_ - Render a loading view when initializing
 - **`renderChatEmpty`** _(Component | Function)_ - Custom component to render in the ListView when messages are empty
 - **`renderChatFooter`** _(Component | Function)_ - Custom component to render below the MessagesContainer (separate from the ListView)
-- **`listProps`** _(Object)_ - Extra props to be passed to the messages [`<FlatList>`](https://reactnative.dev/docs/flatlist)
+- **`listProps`** _(Object)_ - Extra props to be passed to the messages [`<FlatList>`](https://reactnative.dev/docs/flatlist). Supports all FlatList props including `maintainVisibleContentPosition` for keeping scroll position when new messages arrive (useful for AI chatbots).
 
 ### Message Bubbles & Content
 
@@ -406,6 +406,45 @@ See [Quick Replies example in messages.ts](example/example-expo/data/messages.ts
 - **`scrollToBottomOffset`** _(Integer)_ - Custom Height Offset upon which to begin showing Scroll To Bottom Component (Default is 200)
 - **`scrollToBottomStyle`** _(Object)_ - Custom style for Scroll To Bottom wrapper (position, bottom, right, etc.)
 - **`scrollToBottomContentStyle`** _(Object)_ - Custom style for Scroll To Bottom content (size, background, shadow, etc.)
+
+### Maintaining Scroll Position (AI Chatbots)
+
+For AI chat interfaces where long responses arrive and you don't want to disrupt the user's reading position, use [`maintainVisibleContentPosition`](https://reactnative.dev/docs/scrollview#maintainvisiblecontentposition) via `listProps`:
+
+```tsx
+// Basic usage - always maintain scroll position
+<GiftedChat
+  listProps={{
+    maintainVisibleContentPosition: {
+      minIndexForVisible: 0,
+    },
+  }}
+/>
+
+// With auto-scroll threshold - auto-scroll if within 10 pixels of newest content
+<GiftedChat
+  listProps={{
+    maintainVisibleContentPosition: {
+      minIndexForVisible: 0,
+      autoscrollToTopThreshold: 10,
+    },
+  }}
+/>
+
+// Conditionally enable based on scroll state (recommended for chatbots)
+const [isScrolledUp, setIsScrolledUp] = useState(false)
+
+<GiftedChat
+  listProps={{
+    onScroll: (event) => {
+      setIsScrolledUp(event.contentOffset.y > 50)
+    },
+    maintainVisibleContentPosition: isScrolledUp
+      ? { minIndexForVisible: 0, autoscrollToTopThreshold: 10 }
+      : undefined,
+  }}
+/>
+```
 
 ---
 

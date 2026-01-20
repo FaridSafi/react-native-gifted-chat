@@ -159,6 +159,7 @@ export const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
   const {
     renderMessage: renderMessageProp,
     isDayAnimationEnabled,
+    reply,
     /* eslint-disable @typescript-eslint/no-unused-vars */
     scrolledY: _scrolledY,
     daysPositions: _daysPositions,
@@ -167,16 +168,29 @@ export const Item = <TMessage extends IMessage>(props: ItemProps<TMessage>) => {
     ...rest
   } = props
 
+  // Transform reply props for Message and Bubble
+  const messageProps = useMemo(() => ({
+    ...rest,
+    // Swipe to reply for Message component
+    swipeToReply: reply?.swipe,
+    // Message reply styling for Bubble component
+    messageReply: reply ? {
+      renderMessageReply: reply.renderMessageReply,
+      onPress: reply.onPress,
+      ...reply.messageStyle,
+    } : undefined,
+  }), [rest, reply])
+
   return (
     // do not remove key. it helps to get correct position of the day container
     <View key={props.currentMessage._id.toString()}>
       {isDayAnimationEnabled
         ? <AnimatedDayWrapper<TMessage> {...props} />
-        : <DayWrapper<TMessage> {...rest as MessageProps<TMessage>} />}
+        : <DayWrapper<TMessage> {...messageProps as MessageProps<TMessage>} />}
       {
         renderMessageProp
-          ? renderMessageProp(rest as MessageProps<TMessage>)
-          : <Message<TMessage> {...rest as MessageProps<TMessage>} />
+          ? renderMessageProp(messageProps as MessageProps<TMessage>)
+          : <Message<TMessage> {...messageProps as MessageProps<TMessage>} />
       }
     </View>
   )

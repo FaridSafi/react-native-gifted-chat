@@ -410,6 +410,8 @@ See [Quick Replies example in messages.ts](example/example-expo/data/messages.ts
 
 Gifted Chat supports swipe-to-reply functionality out of the box. When enabled, users can swipe on a message to reply to it, displaying a reply preview in the input toolbar and the replied message above the new message bubble.
 
+> **Note:** This feature uses `ReanimatedSwipeable` from `react-native-gesture-handler` and `react-native-reanimated` for smooth, performant animations.
+
 #### Basic Usage
 
 ```tsx
@@ -417,25 +419,62 @@ Gifted Chat supports swipe-to-reply functionality out of the box. When enabled, 
   messages={messages}
   onSend={onSend}
   user={{ _id: 1 }}
-  isSwipeToReplyEnabled
-  swipeToReplyDirection='left' // or 'right'
+  reply={{
+    swipe: {
+      isEnabled: true,
+      direction: 'left', // swipe left to reply
+    },
+  }}
 />
 ```
 
-#### Reply Props
+#### Reply Props (Grouped)
 
-- **`isSwipeToReplyEnabled`** _(Bool)_ - Enable swipe-to-reply gesture on messages; default is `false`
-- **`swipeToReplyDirection`** _('left' | 'right')_ - Direction to swipe for reply; default is `'left'`
-- **`replyMessage`** _(ReplyMessage)_ - Controlled reply message state. When provided, you manage the reply state externally
-- **`onSwipeToReply`** _(Function(`message`))_ - Callback when user swipes to reply on a message. Receives the message being replied to
-- **`onClearReply`** _(Function)_ - Callback when reply is cleared (X button pressed in preview)
-- **`renderSwipeToReplyAction`** _(Function)_ - Custom swipe action component (the reply icon shown while swiping)
-- **`swipeToReplyActionContainerStyle`** _(StyleProp<ViewStyle>)_ - Custom style for swipe action container
-- **`renderReplyPreview`** _(Function)_ - Custom reply preview component above the input toolbar
-- **`replyPreviewContainerStyle`** _(StyleProp<ViewStyle>)_ - Custom style for reply preview container
-- **`replyPreviewTextStyle`** _(StyleProp<TextStyle>)_ - Custom style for reply preview text
-- **`renderMessageReply`** _(Function)_ - Custom component to render the replied message inside bubbles
-- **`messageReplyContainerStyle`** _(LeftRightStyle<ViewStyle>)_ - Custom style for message reply container (supports left/right)
+The `reply` prop accepts an object with the following structure:
+
+```typescript
+interface ReplyProps<TMessage> {
+  // Swipe gesture configuration
+  swipe?: {
+    isEnabled?: boolean              // Enable swipe-to-reply; default false
+    direction?: 'left' | 'right'     // Swipe direction; default 'left'
+    onSwipe?: (message: TMessage) => void  // Callback when swiped
+    renderAction?: (                 // Custom swipe action component
+      progress: SharedValue<number>,
+      translation: SharedValue<number>,
+      position: 'left' | 'right'
+    ) => React.ReactNode
+    actionContainerStyle?: StyleProp<ViewStyle>
+  }
+
+  // Reply preview styling (above input toolbar)
+  previewStyle?: {
+    containerStyle?: StyleProp<ViewStyle>
+    textStyle?: StyleProp<TextStyle>
+    imageStyle?: StyleProp<ImageStyle>
+  }
+
+  // In-bubble reply styling
+  messageStyle?: {
+    containerStyle?: StyleProp<ViewStyle>
+    containerStyleLeft?: StyleProp<ViewStyle>
+    containerStyleRight?: StyleProp<ViewStyle>
+    textStyle?: StyleProp<TextStyle>
+    textStyleLeft?: StyleProp<TextStyle>
+    textStyleRight?: StyleProp<TextStyle>
+    imageStyle?: StyleProp<ImageStyle>
+  }
+
+  // Callbacks and state
+  message?: ReplyMessage             // Controlled reply state
+  onClear?: () => void               // Called when reply cleared
+  onPress?: (message: TMessage) => void  // Called when reply preview tapped
+
+  // Custom renderers
+  renderPreview?: (props: ReplyPreviewProps) => React.ReactNode
+  renderMessageReply?: (props: MessageReplyProps) => React.ReactNode
+}
+```
 
 #### ReplyMessage Structure
 
@@ -459,7 +498,6 @@ const [replyMessage, setReplyMessage] = useState<ReplyMessage | null>(null)
 <GiftedChat
   messages={messages}
   onSend={messages => {
-    // Access replyMessage in onSend
     const newMessages = messages.map(msg => ({
       ...msg,
       replyMessage: replyMessage || undefined,
@@ -468,13 +506,27 @@ const [replyMessage, setReplyMessage] = useState<ReplyMessage | null>(null)
     setReplyMessage(null)
   }}
   user={{ _id: 1 }}
-  isSwipeToReplyEnabled
-  swipeToReplyDirection='right'
-  replyMessage={replyMessage}
-  onSwipeToReply={message => setReplyMessage(message)}
-  onClearReply={() => setReplyMessage(null)}
+  reply={{
+    swipe: {
+      isEnabled: true,
+      direction: 'right',
+      onSwipe: setReplyMessage,
+    },
+    message: replyMessage,
+    onClear: () => setReplyMessage(null),
+    onPress: (msg) => scrollToMessage(msg._id),
+  }}
 />
 ```
+
+#### Smooth Animations
+
+The reply preview automatically animates when:
+- **Appearing**: Smoothly expands from zero height with fade-in effect
+- **Disappearing**: Smoothly collapses with fade-out effect
+- **Content changes**: Smoothly transitions when replying to a different message
+
+These animations use `react-native-reanimated` for 60fps performance.
 
 ### Scroll to Bottom
 

@@ -6,6 +6,7 @@ export { utils }
 export * from './GiftedChatContext'
 export * from './types'
 export * from './linkParser'
+export * from './Reply'
 export { Actions } from './Actions'
 export { Avatar } from './Avatar'
 export { Bubble } from './Bubble'

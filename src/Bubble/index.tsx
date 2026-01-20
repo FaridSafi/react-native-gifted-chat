@@ -323,26 +323,28 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
     if (!currentMessage?.replyMessage)
       return null
 
+    const { messageReply } = props
+
     const messageReplyProps = {
       replyMessage: currentMessage.replyMessage,
       currentMessage,
       position,
-      onPress: props.onPressMessageReply,
-      containerStyle: props.messageReplyContainerStyle?.[position],
-      textStyle: props.messageReplyTextStyle,
-      imageStyle: props.messageReplyImageStyle,
+      onPress: messageReply?.onPress,
+      containerStyle: position === 'left'
+        ? messageReply?.containerStyleLeft ?? messageReply?.containerStyle
+        : messageReply?.containerStyleRight ?? messageReply?.containerStyle,
+      textStyle: position === 'left'
+        ? messageReply?.textStyleLeft ?? messageReply?.textStyle
+        : messageReply?.textStyleRight ?? messageReply?.textStyle,
+      imageStyle: messageReply?.imageStyle,
     }
 
-    if (props.renderMessageReply)
-      return renderComponentOrElement(props.renderMessageReply, messageReplyProps)
+    if (messageReply?.renderMessageReply)
+      return renderComponentOrElement(messageReply.renderMessageReply, messageReplyProps)
 
     return <MessageReply {...messageReplyProps} />
   }, [
-    props.renderMessageReply,
-    props.onPressMessageReply,
-    props.messageReplyContainerStyle,
-    props.messageReplyImageStyle,
-    props.messageReplyTextStyle,
+    props,
     currentMessage,
     position,
   ])

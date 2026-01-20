@@ -1,19 +1,17 @@
 import { RefObject } from 'react'
 import {
   FlatListProps,
-  ImageStyle,
   StyleProp,
-  TextStyle,
   ViewStyle,
 } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import Animated, { ScrollEvent } from 'react-native-reanimated'
 
-import { MessageReplyProps } from '../components/MessageReply'
 import { DayProps } from '../Day'
 import { LoadEarlierMessagesProps } from '../LoadEarlierMessages'
 import { MessageProps } from '../Message'
-import { User, IMessage, Reply, ReplyMessage } from '../Models'
+import { User, IMessage, Reply } from '../Models'
+import { ReplyProps } from '../Reply'
 import { TypingIndicatorProps } from '../TypingIndicator/types'
 
 /** Animated FlatList created from react-native-gesture-handler's FlatList */
@@ -85,38 +83,8 @@ export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   typingIndicatorStyle?: StyleProp<ViewStyle>
   /** Enable animated day label that appears on scroll; default is true */
   isDayAnimationEnabled?: boolean
-  /** Enable swipe-to-reply gesture on messages */
-  isSwipeToReplyEnabled?: boolean
-  /** Direction of swipe gesture for reply; 'left' or 'right' (default: 'right') */
-  swipeToReplyDirection?: 'left' | 'right'
-  /** Callback when message is swiped to reply */
-  onSwipeToReply?: (message: TMessage) => void
-  /** Custom render function for swipe action */
-  renderSwipeToReplyAction?: (
-    progressAnimatedValue: any,
-    dragAnimatedValue: any,
-    swipeDirection: 'left' | 'right'
-  ) => React.ReactNode
-  /** Style for swipe action container */
-  swipeToReplyActionContainerStyle?: StyleProp<ViewStyle>
-  /** Custom render function for message reply */
-  renderMessageReply?: (props: MessageReplyProps<TMessage>) => React.ReactNode
-  /** Callback when message reply is pressed */
-  onPressMessageReply?: (replyMessage: ReplyMessage) => void
-  /** Style for message reply container */
-  messageReplyContainerStyle?: StyleProp<ViewStyle>
-  /** Style for message reply container on left side */
-  messageReplyContainerStyleLeft?: StyleProp<ViewStyle>
-  /** Style for message reply container on right side */
-  messageReplyContainerStyleRight?: StyleProp<ViewStyle>
-  /** Style for message reply text */
-  messageReplyTextStyle?: StyleProp<TextStyle>
-  /** Style for message reply text on left side */
-  messageReplyTextStyleLeft?: StyleProp<TextStyle>
-  /** Style for message reply text on right side */
-  messageReplyTextStyleRight?: StyleProp<TextStyle>
-  /** Style for message reply image */
-  messageReplyImageStyle?: StyleProp<ImageStyle>
+  /** Reply functionality configuration */
+  reply?: ReplyProps<TMessage>
 }
 
 export interface State {

@@ -1,11 +1,13 @@
-import React, { useCallback, useMemo } from 'react'
-import { View, StyleSheet, Animated } from 'react-native'
-import { Swipeable } from 'react-native-gesture-handler'
+import React, { useCallback, useMemo, useRef } from 'react'
+import { View, StyleSheet } from 'react-native'
+import ReanimatedSwipeable, { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable'
+import Animated, { SharedValue, useAnimatedStyle } from 'react-native-reanimated'
 
 import { Avatar } from '../Avatar'
 import { Bubble } from '../Bubble'
 import { Color } from '../Color'
 import { IMessage } from '../Models'
+import { SwipeToReplyProps } from '../Reply'
 import { getStyleWithPosition } from '../styles'
 import { SystemMessage } from '../SystemMessage'
 import { isSameUser, renderComponentOrElement } from '../utils'
@@ -14,14 +16,43 @@ import { MessageProps } from './types'
 
 export * from './types'
 
-const ReplyIcon = () => (
-  <View style={localStyles.replyIconContainer}>
-    <View style={localStyles.replyIcon}>
-      <View style={localStyles.replyIconArrow} />
-      <View style={localStyles.replyIconLine} />
-    </View>
-  </View>
-)
+interface ReplyIconProps {
+  progress: SharedValue<number>
+  translation: SharedValue<number>
+  direction: 'left' | 'right'
+  position: 'left' | 'right'
+  style?: SwipeToReplyProps<IMessage>['actionContainerStyle']
+}
+
+const ReplyIcon = ({ progress, direction, position, style }: ReplyIconProps) => {
+  const animatedStyle = useAnimatedStyle(() => {
+    'worklet'
+
+    const scale = Math.min(progress.value, 1)
+    // When swiping left (icon on right), icon should move left (negative)
+    // When swiping right (icon on left), icon should move right (positive)
+    const translateX = direction === 'left'
+      ? Math.min(progress.value * -12, -12)
+      : Math.max(progress.value * 12, 12)
+
+    return {
+      transform: [{ scale }, { translateX }],
+      marginLeft: position === 'left' ? 0 : 16,
+      marginRight: position === 'right' ? 0 : 16,
+    }
+  })
+
+  return (
+    <Animated.View style={[localStyles.swipeActionContainer, animatedStyle, style]}>
+      <View style={localStyles.replyIconContainer}>
+        <View style={localStyles.replyIcon}>
+          <View style={localStyles.replyIconArrow} />
+          <View style={localStyles.replyIconLine} />
+        </View>
+      </View>
+    </Animated.View>
+  )
+}
 
 export const Message = <TMessage extends IMessage = IMessage>(props: MessageProps<TMessage>) => {
   const {
@@ -34,23 +65,24 @@ export const Message = <TMessage extends IMessage = IMessage>(props: MessageProp
     containerStyle,
     user,
     isUserAvatarVisible,
-    isSwipeToReplyEnabled = false,
-    swipeToReplyDirection = 'right',
-    onSwipeToReply,
-    renderSwipeToReplyAction: renderSwipeToReplyActionProp,
-    swipeToReplyActionContainerStyle,
+    swipeToReply,
   } = props
+
+  // Extract swipe props
+  const isSwipeToReplyEnabled = swipeToReply?.isEnabled ?? false
+  const swipeToReplyDirection = swipeToReply?.direction ?? 'left'
+  const onSwipeToReply = swipeToReply?.onSwipe
+  const renderSwipeToReplyActionProp = swipeToReply?.renderAction
+  const swipeToReplyActionContainerStyle = swipeToReply?.actionContainerStyle
+
+  const swipeableRef = useRef<SwipeableMethods>(null)
 
   const renderBubble = useCallback(() => {
     const {
       /* eslint-disable @typescript-eslint/no-unused-vars */
       containerStyle,
       onMessageLayout,
-      isSwipeToReplyEnabled,
-      swipeToReplyDirection,
-      onSwipeToReply,
-      renderSwipeToReplyAction,
-      swipeToReplyActionContainerStyle,
+      swipeToReply,
       /* eslint-enable @typescript-eslint/no-unused-vars */
       ...rest
     } = props
@@ -66,11 +98,7 @@ export const Message = <TMessage extends IMessage = IMessage>(props: MessageProp
       /* eslint-disable @typescript-eslint/no-unused-vars */
       containerStyle,
       onMessageLayout,
-      isSwipeToReplyEnabled,
-      swipeToReplyDirection,
-      onSwipeToReply,
-      renderSwipeToReplyAction,
-      swipeToReplyActionContainerStyle,
+      swipeToReply,
       /* eslint-enable @typescript-eslint/no-unused-vars */
       ...rest
     } = props
@@ -97,11 +125,7 @@ export const Message = <TMessage extends IMessage = IMessage>(props: MessageProp
       /* eslint-disable @typescript-eslint/no-unused-vars */
       containerStyle,
       onMessageLayout,
-      isSwipeToReplyEnabled,
-      swipeToReplyDirection,
-      onSwipeToReply,
-      renderSwipeToReplyAction,
-      swipeToReplyActionContainerStyle,
+      swipeToReply,
       /* eslint-enable @typescript-eslint/no-unused-vars */
       ...rest
     } = props
@@ -115,41 +139,25 @@ export const Message = <TMessage extends IMessage = IMessage>(props: MessageProp
   ])
 
   const renderSwipeAction = useCallback((
-    progress: Animated.AnimatedInterpolation<string | number>,
-    dragX: Animated.AnimatedInterpolation<string | number>
+    progress: SharedValue<number>,
+    translation: SharedValue<number>
   ) => {
     if (renderSwipeToReplyActionProp)
-      return renderSwipeToReplyActionProp(progress, dragX, position)
-
-    const scale = progress.interpolate({
-      inputRange: [0, 1, 100],
-      outputRange: [0, 1, 1],
-    })
-
-    const translateX = progress.interpolate({
-      inputRange: [0, 1, 2],
-      outputRange: swipeToReplyDirection === 'right' ? [0, -12, -20] : [0, 12, 20],
-    })
+      return renderSwipeToReplyActionProp(progress, translation, position)
 
     return (
-      <Animated.View
-        style={[
-          localStyles.swipeActionContainer,
-          swipeToReplyActionContainerStyle,
-          {
-            transform: [{ scale }, { translateX }],
-            marginLeft: position === 'left' ? 0 : 16,
-            marginRight: position === 'right' ? 0 : 16,
-          },
-        ]}
-      >
-        <ReplyIcon />
-      </Animated.View>
+      <ReplyIcon
+        progress={progress}
+        translation={translation}
+        direction={swipeToReplyDirection}
+        position={position}
+        style={swipeToReplyActionContainerStyle}
+      />
     )
   }, [position, renderSwipeToReplyActionProp, swipeToReplyDirection, swipeToReplyActionContainerStyle])
 
-  const handleSwipeableOpen = useCallback((_direction: 'left' | 'right', swipeable: Swipeable) => {
-    swipeable.close()
+  const handleSwipeableOpen = useCallback(() => {
+    swipeableRef.current?.close()
   }, [])
 
   const handleSwipeableWillOpen = useCallback(() => {
@@ -203,16 +211,17 @@ export const Message = <TMessage extends IMessage = IMessage>(props: MessageProp
 
   return (
     <View onLayout={onMessageLayout}>
-      <Swipeable
+      <ReanimatedSwipeable
+        ref={swipeableRef}
         friction={2}
         overshootFriction={8}
-        renderRightActions={swipeToReplyDirection === 'right' ? renderSwipeAction : undefined}
-        renderLeftActions={swipeToReplyDirection === 'left' ? renderSwipeAction : undefined}
+        renderRightActions={swipeToReplyDirection === 'left' ? renderSwipeAction : undefined}
+        renderLeftActions={swipeToReplyDirection === 'right' ? renderSwipeAction : undefined}
         onSwipeableOpen={handleSwipeableOpen}
         onSwipeableWillOpen={handleSwipeableWillOpen}
       >
         {messageContent}
-      </Swipeable>
+      </ReanimatedSwipeable>
     </View>
   )
 }
@@ -222,7 +231,6 @@ const localStyles = StyleSheet.create({
     width: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 12,
   },
   replyIconContainer: {
     width: 28,

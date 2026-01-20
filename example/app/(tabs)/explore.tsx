@@ -7,11 +7,11 @@ import CustomizedFeaturesExample from '@/components/chat-examples/CustomizedFeat
 import CustomizedRenderingExample from '@/components/chat-examples/CustomizedRenderingExample'
 import LinksExample from '@/components/chat-examples/LinksExample'
 
+import ReplyExample from '@/components/chat-examples/ReplyExample'
 import SlackExample from '@/components/chat-examples/SlackExample'
 import { ThemedText } from '@/components/themed-text'
 import { ThemedView } from '@/components/themed-view'
 import { useThemeColor } from '@/hooks/use-theme-color'
-import ReplyExample from '@/components/chat-examples/ReplyExample'
 
 type ChatExample = 'customizedFeatures' | 'customizedRendering' | 'slack' | 'links' | 'reply'
 

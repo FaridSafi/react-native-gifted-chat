@@ -50,10 +50,14 @@ export default function ReplyExample () {
         textInputProps={{
           style: getColorSchemeStyle(styles, 'composer', colorScheme),
         }}
-        // Built-in swipe to reply
-        isSwipeToReplyEnabled
-        swipeToReplyDirection='right'
-        onPressMessageReply={handlePressReply}
+        // New grouped reply props
+        reply={{
+          swipe: {
+            isEnabled: true,
+            direction: 'left', // swipe left to reply
+          },
+          onPress: handlePressReply,
+        }}
         keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
       />
     </View>

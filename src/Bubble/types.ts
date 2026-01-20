@@ -3,7 +3,6 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
-  ImageStyle,
   Pressable,
 } from 'react-native'
 
@@ -21,6 +20,7 @@ import {
   MessageAudioProps,
 } from '../Models'
 import { QuickRepliesProps } from '../QuickReplies'
+import { MessageReplyStyleProps } from '../Reply'
 import { TimeProps } from '../Time'
 
 
@@ -48,6 +48,13 @@ export type RenderMessageTextProps<TMessage extends IMessage> = Omit<
 > &
   MessageTextProps<TMessage>
 
+/** Props for message reply functionality in bubble */
+export interface BubbleReplyProps<TMessage extends IMessage> extends MessageReplyStyleProps {
+  /** Custom render for message reply; rendered on top of message content */
+  renderMessageReply?: (props: MessageReplyProps<TMessage>) => React.ReactNode
+  /** Callback when message reply is pressed */
+  onPress?: (replyMessage: ReplyMessage) => void
+}
 
 export interface BubbleProps<TMessage extends IMessage> {
   user?: User
@@ -92,16 +99,6 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderQuickReplies?: (
     quickReplies: QuickRepliesProps<TMessage>
   ) => React.ReactNode
-  /** Custom render for message reply; rendered on top of message content */
-  renderMessageReply?: (
-    props: MessageReplyProps<TMessage>
-  ) => React.ReactNode
-  /** Callback when message reply is pressed */
-  onPressMessageReply?: (replyMessage: ReplyMessage) => void
-  /** Style for message reply container */
-  messageReplyContainerStyle?: LeftRightStyle<ViewStyle>
-  /** Style for message reply image */
-  messageReplyImageStyle?: StyleProp<ImageStyle>
-  /** Style for message reply text */
-  messageReplyTextStyle?: StyleProp<TextStyle>
+  /** Message reply configuration */
+  messageReply?: BubbleReplyProps<TMessage>
 }

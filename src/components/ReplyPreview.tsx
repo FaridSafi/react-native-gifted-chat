@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Image,
   ImageStyle,
@@ -10,9 +10,20 @@ import {
   View,
   ViewStyle,
 } from 'react-native'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+  Easing,
+  interpolate,
+  runOnJS,
+} from 'react-native-reanimated'
 
 import { useColorScheme } from '../hooks/useColorScheme'
 import { ReplyMessage } from '../Models'
+
+const ANIMATION_DURATION = 250
+const ANIMATION_EASING = Easing.bezier(0.25, 0.1, 0.25, 1)
 
 export interface ReplyPreviewProps {
   /** The reply message to preview */
@@ -88,6 +99,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: 2,
   },
+  wrapper: {
+    overflow: 'hidden',
+  },
 })
 
 export function ReplyPreview ({
@@ -100,58 +114,126 @@ export function ReplyPreview ({
   const colorScheme = useColorScheme()
   const isDark = colorScheme === 'dark'
 
+  const animationProgress = useSharedValue(0)
+  const contentHeight = useSharedValue(0)
+  const messageId = useSharedValue(replyMessage._id)
+
+  // Animate in on mount
+  useEffect(() => {
+    animationProgress.value = withTiming(1, {
+      duration: ANIMATION_DURATION,
+      easing: ANIMATION_EASING,
+    })
+  }, [animationProgress])
+
+  // Animate content changes smoothly
+  useEffect(() => {
+    if (messageId.value !== replyMessage._id) {
+      // New message - animate content change
+      animationProgress.value = 0.8
+      animationProgress.value = withTiming(1, {
+        duration: ANIMATION_DURATION / 2,
+        easing: ANIMATION_EASING,
+      })
+      messageId.value = replyMessage._id
+    }
+  }, [replyMessage._id, messageId, animationProgress])
+
+  const handleClear = () => {
+    'worklet'
+    animationProgress.value = withTiming(0, {
+      duration: ANIMATION_DURATION,
+      easing: ANIMATION_EASING,
+    }, finished => {
+      if (finished && onClearReply)
+        runOnJS(onClearReply)()
+    })
+  }
+
+  const wrapperAnimatedStyle = useAnimatedStyle(() => {
+    const height = interpolate(
+      animationProgress.value,
+      [0, 1],
+      [0, contentHeight.value || 60]
+    )
+
+    const opacity = interpolate(
+      animationProgress.value,
+      [0, 0.5, 1],
+      [0, 0.5, 1]
+    )
+
+    const translateY = interpolate(
+      animationProgress.value,
+      [0, 1],
+      [20, 0]
+    )
+
+    return {
+      height: contentHeight.value > 0 ? height : undefined,
+      opacity,
+      transform: [{ translateY }],
+    }
+  })
+
   const displayName = replyMessage.user?.name || 'Unknown'
 
   return (
-    <View
-      style={[
-        styles.container,
-        isDark ? styles.containerDark : styles.containerLight,
-        containerStyle,
-      ]}
-    >
-      <View style={styles.borderIndicator} />
-      <View style={styles.content}>
-        <View style={styles.row}>
-          {replyMessage.image && (
-            <Image
-              source={{ uri: replyMessage.image }}
-              style={[styles.image, imageStyle]}
-            />
-          )}
-          <View style={{ flex: 1 }}>
-            <Text style={styles.username} numberOfLines={1}>
-              Replying to {displayName}
-            </Text>
-            {replyMessage.text && (
-              <Text
-                style={[
-                  styles.text,
-                  isDark ? styles.textDark : styles.textLight,
-                  textStyle,
-                ]}
-                numberOfLines={2}
-              >
-                {replyMessage.text}
-              </Text>
+    <Animated.View style={[styles.wrapper, wrapperAnimatedStyle]}>
+      <View
+        style={[
+          styles.container,
+          isDark ? styles.containerDark : styles.containerLight,
+          containerStyle,
+        ]}
+        onLayout={e => {
+          if (contentHeight.value === 0)
+            contentHeight.value = e.nativeEvent.layout.height + 8 // Include margin
+        }}
+      >
+        <View style={styles.borderIndicator} />
+        <View style={styles.content}>
+          <View style={styles.row}>
+            {replyMessage.image && (
+              <Image
+                source={{ uri: replyMessage.image }}
+                style={[styles.image, imageStyle]}
+              />
             )}
+            <View style={{ flex: 1 }}>
+              <Text style={styles.username} numberOfLines={1}>
+                Replying to {displayName}
+              </Text>
+              {replyMessage.text && (
+                <Text
+                  style={[
+                    styles.text,
+                    isDark ? styles.textDark : styles.textLight,
+                    textStyle,
+                  ]}
+                  numberOfLines={2}
+                >
+                  {replyMessage.text}
+                </Text>
+              )}
+            </View>
           </View>
         </View>
-      </View>
-      <Pressable
-        style={styles.clearButton}
-        onPress={onClearReply}
-        hitSlop={8}
-      >
-        <Text
-          style={[
-            styles.clearButtonText,
-            isDark ? styles.textDark : styles.textLight,
-          ]}
+        <Pressable
+          style={styles.clearButton}
+          onPress={handleClear}
+          hitSlop={8}
         >
-          ×
-        </Text>
-      </Pressable>
-    </View>
+          <Text
+            style={[
+              styles.clearButtonText,
+              isDark ? styles.textDark : styles.textLight,
+            ]}
+          >
+            ×
+          </Text>
+        </Pressable>
+      </View>
+    </Animated.View>
   )
 }

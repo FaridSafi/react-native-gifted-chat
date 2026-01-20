@@ -29,8 +29,8 @@
     "src"
   ],
   "scripts": {
-    "lint": "yarn eslint src",
-    "lint:fix": "yarn eslint --cache --fix",
+    "lint": "yarn eslint src example",
+    "lint:fix": "yarn eslint --cache --fix src example",
     "prepublishOnly": "yarn lint && yarn test",
     "start": "cd example && expo start",
     "start:web": "cd example && expo start -w --dev",

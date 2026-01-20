@@ -76,26 +76,16 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     isInverted = true,
 
     // Reply props
-    isSwipeToReplyEnabled = false,
-    swipeToReplyDirection = 'right',
-    onSwipeToReply,
-    renderSwipeToReplyAction,
-    swipeToReplyActionContainerStyle,
-    replyMessage: replyMessageProp,
-    onClearReply,
-    renderReplyPreview,
-    replyPreviewContainerStyle,
-    replyPreviewTextStyle,
-    renderMessageReply,
-    onPressMessageReply,
-    messageReplyContainerStyle,
-    messageReplyContainerStyleLeft,
-    messageReplyContainerStyleRight,
-    messageReplyTextStyle,
-    messageReplyTextStyleLeft,
-    messageReplyTextStyleRight,
-    messageReplyImageStyle,
+    reply,
   } = props
+
+  // Extract reply props for internal use
+  const replyMessageProp = reply?.message
+  const onClearReply = reply?.onClear
+  const onSwipeToReply = reply?.swipe?.onSwipe
+  const renderReplyPreview = reply?.renderPreview
+  const replyPreviewContainerStyle = reply?.previewStyle?.containerStyle
+  const replyPreviewTextStyle = reply?.previewStyle?.textStyle
 
   const systemColorScheme = useColorScheme()
   const colorScheme = colorSchemeProp !== undefined ? colorSchemeProp : systemColorScheme
@@ -186,22 +176,13 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
           messages={messages}
           forwardRef={messagesContainerRef}
           isTyping={isTyping}
-          // Swipe to reply props
-          isSwipeToReplyEnabled={isSwipeToReplyEnabled}
-          swipeToReplyDirection={swipeToReplyDirection}
-          onSwipeToReply={handleSwipeToReply}
-          renderSwipeToReplyAction={renderSwipeToReplyAction}
-          swipeToReplyActionContainerStyle={swipeToReplyActionContainerStyle}
-          // Message reply props
-          renderMessageReply={renderMessageReply}
-          onPressMessageReply={onPressMessageReply}
-          messageReplyContainerStyle={messageReplyContainerStyle}
-          messageReplyContainerStyleLeft={messageReplyContainerStyleLeft}
-          messageReplyContainerStyleRight={messageReplyContainerStyleRight}
-          messageReplyTextStyle={messageReplyTextStyle}
-          messageReplyTextStyleLeft={messageReplyTextStyleLeft}
-          messageReplyTextStyleRight={messageReplyTextStyleRight}
-          messageReplyImageStyle={messageReplyImageStyle}
+          reply={{
+            ...reply,
+            swipe: reply?.swipe ? {
+              ...reply.swipe,
+              onSwipe: handleSwipeToReply,
+            } : undefined,
+          }}
         />
         {renderComponentOrElement(renderChatFooter, {})}
       </View>
@@ -214,20 +195,8 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     isInverted,
     messagesContainerRef,
     renderChatFooter,
-    isSwipeToReplyEnabled,
-    swipeToReplyDirection,
+    reply,
     handleSwipeToReply,
-    renderSwipeToReplyAction,
-    swipeToReplyActionContainerStyle,
-    renderMessageReply,
-    onPressMessageReply,
-    messageReplyContainerStyle,
-    messageReplyContainerStyleLeft,
-    messageReplyContainerStyleRight,
-    messageReplyTextStyle,
-    messageReplyTextStyleLeft,
-    messageReplyTextStyleRight,
-    messageReplyImageStyle,
   ])
 
   const notifyInputTextReset = useCallback(() => {

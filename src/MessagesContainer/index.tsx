@@ -163,18 +163,18 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
       messageItem.user = { _id: 0 }
     }
 
-    if (messages && user) {
+    if (messages) {
       const previousMessage =
         (isInverted ? messages[index + 1] : messages[index - 1]) || {}
       const nextMessage =
         (isInverted ? messages[index - 1] : messages[index + 1]) || {}
 
       const messageProps: ItemProps<TMessage> = {
+        position: user?._id != null && messageItem.user?._id === user._id ? 'right' : 'left',
         ...restProps,
         currentMessage: messageItem,
         previousMessage,
         nextMessage,
-        position: messageItem.user._id === user._id ? 'right' : 'left',
         scrolledY,
         daysPositions,
         listHeight,

@@ -11,11 +11,11 @@ exports[`should render <ReplyPreview /> and compare with snapshot 1`] = `
   jestAnimatedStyle={
     {
       "value": {
-        "height": undefined,
+        "height": 0,
         "opacity": 0,
         "transform": [
           {
-            "translateY": 20,
+            "translateY": 10,
           },
         ],
       },
@@ -35,11 +35,11 @@ exports[`should render <ReplyPreview /> and compare with snapshot 1`] = `
         "overflow": "hidden",
       },
       {
-        "height": undefined,
+        "height": 0,
         "opacity": 0,
         "transform": [
           {
-            "translateY": 20,
+            "translateY": 10,
           },
         ],
       },
@@ -203,11 +203,11 @@ exports[`should render <ReplyPreview /> with image and compare with snapshot 1`]
   jestAnimatedStyle={
     {
       "value": {
-        "height": undefined,
+        "height": 0,
         "opacity": 0,
         "transform": [
           {
-            "translateY": 20,
+            "translateY": 10,
           },
         ],
       },
@@ -227,11 +227,11 @@ exports[`should render <ReplyPreview /> with image and compare with snapshot 1`]
         "overflow": "hidden",
       },
       {
-        "height": undefined,
+        "height": 0,
         "opacity": 0,
         "transform": [
           {
-            "translateY": 20,
+            "translateY": 10,
           },
         ],
       },

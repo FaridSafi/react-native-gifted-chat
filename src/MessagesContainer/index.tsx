@@ -425,6 +425,8 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
           renderDay={renderDayProp}
           messages={messages}
           isLoading={loadEarlierMessagesProps?.isLoading ?? false}
+          dateFormat={props.dateFormat}
+          dateFormatCalendar={props.dateFormatCalendar}
         />
       )}
     </View>

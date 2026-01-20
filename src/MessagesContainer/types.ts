@@ -26,6 +26,10 @@ export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   forwardRef?: RefObject<AnimatedList<TMessage>>
   /** Messages to display */
   messages?: TMessage[]
+  /** Format to use for rendering dates; default is 'll' */
+  dateFormat?: string
+  /** Format to use for rendering relative times */
+  dateFormatCalendar?: object
   /** User sending the messages: { _id, name, avatar } */
   user?: User
   /** Additional props for FlatList */

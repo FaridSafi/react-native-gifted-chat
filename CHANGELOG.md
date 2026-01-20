@@ -1,5 +1,60 @@
 # Changelog
 
+## [3.3.0] - 2026-01-21
+
+### ✨ Features
+- **Swipe to Reply**: New swipe-to-reply functionality using `ReanimatedSwipeable` (based on #2692)
+  - Replaced deprecated `Swipeable` with `ReanimatedSwipeable` from react-native-gesture-handler
+  - Added `reply` prop to `GiftedChat` with grouped configuration options
+  - Swipe direction support: `'left'` (swipe left, icon on right) or `'right'` (swipe right, icon on left)
+  - Custom swipe action rendering via `renderAction`
+  - Built-in animated `ReplyIcon` component
+  - `ReplyPreview` component with smooth enter/exit animations
+  - Reply message display in `Bubble` component via `messageReply` prop
+- **New Props**:
+  - `scrollToBottomContentStyle` - style for scroll to bottom button content
+
+### 🐛 Bug Fixes
+- Fixed #2702 - typing issues
+- Fixed #2708 - component issues
+- Fixed #2607 - edge case handling
+- Fixed #2701 - rendering issues
+- Fixed #2691 - prop handling
+- Fixed #2688 - style issues
+- Fixed #2687 - component behavior
+- Fixed #2618 - scroll issues
+- Fixed #2677, #2682, #2602 - multiple fixes
+- Fixed #2684, #2686 - component issues
+- Fixed `onScroll` type definition
+- Fixed messages padding
+- Fixed SystemMessage styles
+- Added missing worklets for animations
+- Removed `ts-expect-error` for `requestAnimationFrame` (now properly typed for React Native)
+- Fixed two typing issues (#2698)
+
+### 🔧 Improvements
+- Grouped reply-related props into `ReplyProps` interface for cleaner API
+- Added `SwipeToReplyProps` for Message-level swipe configuration
+- Added `BubbleReplyProps` for Bubble-level reply message styling
+- Added example app to lint command with proper path alias support
+- Improved reply animations (enter/exit transitions)
+- Changes from #2705
+
+### 📝 Documentation
+- Updated README with swipe-to-reply feature documentation and examples
+- Updated license link
+- Added reply message implementation example (#2690)
+
+### 🧪 Testing
+- Updated test snapshots
+- Added tests for `MessageReply` component
+- Added tests for `ReplyPreview` component
+
+## [3.2.3] - 2025-12-XX
+
+### 🐛 Bug Fixes
+- Fixed `onScroll` type definition
+
 ## [3.2.0] - 2025-11-25
 
 ### ✨ Features

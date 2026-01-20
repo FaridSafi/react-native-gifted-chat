@@ -99,6 +99,7 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
           undefined,
         ]
       }
+      nativeID="0"
       pointerEvents="none"
       style={
         [

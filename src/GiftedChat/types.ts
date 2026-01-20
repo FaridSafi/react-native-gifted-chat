@@ -144,6 +144,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Mess
   ) => React.ReactNode
   renderQuickReplySend?: () => React.ReactNode
   keyboardProviderProps?: React.ComponentProps<typeof KeyboardProvider>
+  /** Props for KeyboardAvoidingView. Use `keyboardVerticalOffset` to account for headers or iOS predictive text bar (~44pt). */
   keyboardAvoidingViewProps?: KeyboardAvoidingViewProps
   /** Enable animated day label that appears on scroll; default is true */
   isDayAnimationEnabled?: boolean

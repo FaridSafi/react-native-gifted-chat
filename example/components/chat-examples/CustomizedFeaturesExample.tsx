@@ -17,7 +17,7 @@ export default function CustomizedFeaturesExample () {
   const insets = useSafeAreaInsets()
 
   const tabbarHeight = 50
-  const keyboardTopToolbarHeight = Platform.select({ ios: 44, default: 0 })
+  const keyboardTopToolbarHeight = Platform.select({ ios: 50, default: 0 })
   const keyboardVerticalOffset = insets.bottom + tabbarHeight + keyboardTopToolbarHeight
 
   const user = useMemo(() => ({

@@ -23,6 +23,7 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
       undefined,
     ]
   }
+  nativeID="1"
   pointerEvents="auto"
   style={
     [
@@ -93,6 +94,7 @@ exports[`Send should not render <Send /> and compare with snapshot 1`] = `
       undefined,
     ]
   }
+  nativeID="0"
   pointerEvents="none"
   style={
     [
@@ -163,6 +165,7 @@ exports[`Send should render <Send /> where there is input and compare with snaps
       undefined,
     ]
   }
+  nativeID="2"
   pointerEvents="auto"
   style={
     [

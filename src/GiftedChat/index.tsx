@@ -8,6 +8,7 @@ import React, {
   RefObject,
 } from 'react'
 import {
+  Platform,
   View,
   LayoutChangeEvent,
   useColorScheme,
@@ -32,6 +33,23 @@ import styles from './styles'
 import { GiftedChatProps } from './types'
 
 dayjs.extend(localizedFormat)
+
+/**
+ * Default keyboard vertical offset values (similar to Stream Chat SDK)
+ * iOS: Compensates for predictive/suggestion text bar (~44-50pt) and headers
+ * Android: Negative offset to account for navigation bar in edge-to-edge mode
+ */
+const DEFAULT_KEYBOARD_VERTICAL_OFFSET = Platform.select({
+  ios: 50,
+  android: 0,
+  default: 0,
+})
+
+const DEFAULT_KEYBOARD_BEHAVIOR = Platform.select({
+  ios: 'padding' as const,
+  android: 'padding' as const,
+  default: 'padding' as const,
+})
 
 function GiftedChat<TMessage extends IMessage = IMessage> (
   props: GiftedChatProps<TMessage>
@@ -254,29 +272,32 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   return (
     <GiftedChatContext.Provider value={contextValues}>
       <ActionSheetProvider ref={actionSheetRef}>
-        {/* @ts-expect-error */}
-        <KeyboardAvoidingView
-          behavior='translate-with-padding'
-          style={stylesCommon.fill}
-          {...props.keyboardAvoidingViewProps}
+        <View
+          testID={TEST_ID.WRAPPER}
+          style={[stylesCommon.fill, styles.contentContainer]}
+          onLayout={onInitialLayoutViewLayout}
         >
-          <View
-            testID={TEST_ID.WRAPPER}
-            style={[stylesCommon.fill, styles.contentContainer]}
-            onLayout={onInitialLayoutViewLayout}
+          {/* @ts-expect-error */}
+          <KeyboardAvoidingView
+            behavior={DEFAULT_KEYBOARD_BEHAVIOR}
+            keyboardVerticalOffset={DEFAULT_KEYBOARD_VERTICAL_OFFSET}
+            style={stylesCommon.fill}
+            {...props.keyboardAvoidingViewProps}
           >
-            {isInitialized
-              ? (
-                <>
-                  {renderMessages}
-                  {inputToolbarFragment}
-                </>
-              )
-              : (
-                renderComponentOrElement(renderLoading, {})
-              )}
-          </View>
-        </KeyboardAvoidingView>
+            <View style={stylesCommon.fill}>
+              {isInitialized
+                ? (
+                  <>
+                    {renderMessages}
+                    {inputToolbarFragment}
+                  </>
+                )
+                : (
+                  renderComponentOrElement(renderLoading, {})
+                )}
+            </View>
+          </KeyboardAvoidingView>
+        </View>
       </ActionSheetProvider>
     </GiftedChatContext.Provider>
   )
@@ -291,11 +312,7 @@ function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedC
   return (
     <GestureHandlerRootView style={styles.fill}>
       <SafeAreaProvider>
-        <KeyboardProvider
-          statusBarTranslucent
-          navigationBarTranslucent
-          {...keyboardProviderProps}
-        >
+        <KeyboardProvider {...keyboardProviderProps}>
           <GiftedChat<TMessage> {...rest} />
         </KeyboardProvider>
       </SafeAreaProvider>

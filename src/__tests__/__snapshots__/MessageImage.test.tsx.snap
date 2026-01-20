@@ -65,6 +65,7 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
           },
         ]
       }
+      nativeID="0"
       style={
         [
           {
@@ -125,6 +126,7 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
               },
             ]
           }
+          nativeID="1"
           style={
             [
               {
@@ -196,24 +198,27 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
           >
             <View
               style={
-                {
-                  "flex": 1,
-                }
+                [
+                  {
+                    "alignItems": "center",
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "overflow": "hidden",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
                 collapsable={false}
                 onLayout={[Function]}
                 style={
-                  [
-                    {
-                      "alignItems": "center",
-                      "flex": 1,
-                      "justifyContent": "center",
-                      "overflow": "hidden",
-                    },
-                    undefined,
-                  ]
+                  {
+                    "alignItems": "center",
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "overflow": "hidden",
+                  }
                 }
               >
                 <View
@@ -228,13 +233,13 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
                       "value": {
                         "transform": [
                           {
-                            "scale": 1,
-                          },
-                          {
                             "translateX": 0,
                           },
                           {
                             "translateY": 0,
+                          },
+                          {
+                            "scale": 1,
                           },
                         ],
                       },
@@ -245,19 +250,20 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
                       undefined,
                     ]
                   }
+                  nativeID="2"
                   onLayout={[Function]}
                   style={
                     [
                       {
                         "transform": [
                           {
-                            "scale": 1,
-                          },
-                          {
                             "translateX": 0,
                           },
                           {
                             "translateY": 0,
+                          },
+                          {
+                            "scale": 1,
                           },
                         ],
                       },

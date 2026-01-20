@@ -223,8 +223,8 @@ interface User {
 
 ### Keyboard & Layout
 
-- **`keyboardProviderProps`** _(Object)_ - Props to be passed to the [`KeyboardProvider`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/keyboard-provider) for keyboard handling. Use `{ enabled: false }` to disable on Android if you experience layout shifts.
-- **`keyboardAvoidingViewProps`** _(Object)_ - Props to be passed to the [`KeyboardAvoidingView`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/keyboard-avoiding-view). The `behavior` prop defaults to `'padding'`.
+- **`keyboardProviderProps`** _(Object)_ - Props to be passed to the [`KeyboardProvider`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/keyboard-provider) for keyboard handling.
+- **`keyboardAvoidingViewProps`** _(Object)_ - Props to be passed to the [`KeyboardAvoidingView`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/components/keyboard-avoiding-view). Use `keyboardVerticalOffset` to account for headers or iOS predictive text bar (~50pt).
 - **`isAlignedTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 - **`isInverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
 

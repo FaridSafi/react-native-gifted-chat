@@ -8,10 +8,7 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
     }
   }
 >
-  <KeyboardProvider
-    navigationBarTranslucent={true}
-    statusBarTranslucent={true}
-  >
+  <KeyboardProvider>
     <View
       style={
         {
@@ -20,27 +17,36 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
       }
     >
       <View
-        behavior="translate-with-padding"
+        onLayout={[Function]}
         style={
-          {
-            "flex": 1,
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "overflow": "hidden",
+            },
+          ]
         }
+        testID="GC_WRAPPER"
       >
         <View
-          onLayout={[Function]}
+          behavior="translate-with-padding"
+          keyboardVerticalOffset={50}
           style={
-            [
+            {
+              "flex": 1,
+            }
+          }
+        >
+          <View
+            style={
               {
                 "flex": 1,
-              },
-              {
-                "overflow": "hidden",
-              },
-            ]
-          }
-          testID="GC_WRAPPER"
-        />
+              }
+            }
+          />
+        </View>
       </View>
     </View>
   </KeyboardProvider>
@@ -55,10 +61,7 @@ exports[`should render <GiftedChat/> with dark colorScheme and compare with snap
     }
   }
 >
-  <KeyboardProvider
-    navigationBarTranslucent={true}
-    statusBarTranslucent={true}
-  >
+  <KeyboardProvider>
     <View
       style={
         {
@@ -67,27 +70,36 @@ exports[`should render <GiftedChat/> with dark colorScheme and compare with snap
       }
     >
       <View
-        behavior="translate-with-padding"
+        onLayout={[Function]}
         style={
-          {
-            "flex": 1,
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "overflow": "hidden",
+            },
+          ]
         }
+        testID="GC_WRAPPER"
       >
         <View
-          onLayout={[Function]}
+          behavior="translate-with-padding"
+          keyboardVerticalOffset={50}
           style={
-            [
+            {
+              "flex": 1,
+            }
+          }
+        >
+          <View
+            style={
               {
                 "flex": 1,
-              },
-              {
-                "overflow": "hidden",
-              },
-            ]
-          }
-          testID="GC_WRAPPER"
-        />
+              }
+            }
+          />
+        </View>
       </View>
     </View>
   </KeyboardProvider>
@@ -102,10 +114,7 @@ exports[`should render <GiftedChat/> with light colorScheme and compare with sna
     }
   }
 >
-  <KeyboardProvider
-    navigationBarTranslucent={true}
-    statusBarTranslucent={true}
-  >
+  <KeyboardProvider>
     <View
       style={
         {
@@ -114,27 +123,36 @@ exports[`should render <GiftedChat/> with light colorScheme and compare with sna
       }
     >
       <View
-        behavior="translate-with-padding"
+        onLayout={[Function]}
         style={
-          {
-            "flex": 1,
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "overflow": "hidden",
+            },
+          ]
         }
+        testID="GC_WRAPPER"
       >
         <View
-          onLayout={[Function]}
+          behavior="translate-with-padding"
+          keyboardVerticalOffset={50}
           style={
-            [
+            {
+              "flex": 1,
+            }
+          }
+        >
+          <View
+            style={
               {
                 "flex": 1,
-              },
-              {
-                "overflow": "hidden",
-              },
-            ]
-          }
-          testID="GC_WRAPPER"
-        />
+              }
+            }
+          />
+        </View>
       </View>
     </View>
   </KeyboardProvider>

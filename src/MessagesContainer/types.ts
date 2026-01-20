@@ -42,6 +42,8 @@ export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   isScrollToBottomEnabled?: boolean
   /** Scroll to bottom wrapper style */
   scrollToBottomStyle?: StyleProp<ViewStyle>
+  /** Scroll to bottom content style */
+  scrollToBottomContentStyle?: StyleProp<ViewStyle>
   /** Distance from bottom before showing scroll to bottom button */
   scrollToBottomOffset?: number
   /** Custom component to render when messages are empty */

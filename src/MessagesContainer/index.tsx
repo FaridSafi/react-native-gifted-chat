@@ -34,6 +34,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
     scrollToBottomOffset = 200,
     isAlignedTop = false,
     scrollToBottomStyle,
+    scrollToBottomContentStyle,
     loadEarlierMessagesProps,
     renderTypingIndicator: renderTypingIndicatorProp,
     renderFooter: renderFooterProp,
@@ -238,13 +239,14 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         style={[
           stylesCommon.centerItems,
           styles.scrollToBottomContent,
+          scrollToBottomContentStyle,
           scrollToBottomStyleAnim,
         ]}
       >
         {renderScrollBottomComponent()}
       </Animated.View>
     )
-  }, [scrollToBottomStyleAnim, renderScrollBottomComponent])
+  }, [scrollToBottomStyleAnim, scrollToBottomContentStyle, renderScrollBottomComponent])
 
   const ScrollToBottomWrapper = useCallback(() => {
     if (!isScrollToBottomEnabled)

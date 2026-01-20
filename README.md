@@ -632,7 +632,7 @@ yarn prepublishOnly
 
 ## 📄 License
 
-MIT © [Farid Safi](https://github.com/FaridSafi)
+[MIT](LICENSE)
 
 ---
 

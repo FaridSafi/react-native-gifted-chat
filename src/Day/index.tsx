@@ -25,7 +25,7 @@ export function Day ({
   createdAt,
   containerStyle,
   wrapperStyle,
-  textStyle,
+  textProps,
 }: DayProps) {
   const { getLocale } = useChatContext()
 
@@ -54,7 +54,7 @@ export function Day ({
   return (
     <View style={[stylesCommon.centerItems, styles.container, containerStyle]}>
       <View style={[styles.wrapper, wrapperStyle]}>
-        <Text style={[styles.text, textStyle]}>
+        <Text {...textProps} style={[styles.text, textProps?.style]}>
           {dateStr}
         </Text>
       </View>

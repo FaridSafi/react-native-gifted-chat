@@ -1,7 +1,7 @@
 import {
   StyleProp,
   ViewStyle,
-  TextStyle,
+  TextProps,
 } from 'react-native'
 
 export interface DayProps {
@@ -10,5 +10,6 @@ export interface DayProps {
   dateFormatCalendar?: object
   containerStyle?: StyleProp<ViewStyle>
   wrapperStyle?: StyleProp<ViewStyle>
-  textStyle?: StyleProp<TextStyle>
+  /** Props to pass to the Text component (e.g., style, allowFontScaling, numberOfLines) */
+  textProps?: Partial<TextProps>
 }

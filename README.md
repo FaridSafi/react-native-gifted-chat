@@ -357,6 +357,10 @@ See full example in [LinksExample](example/components/chat-examples/LinksExample
 - **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'D MMMM'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`dateFormatCalendar`** _(Object)_ - Format to use for rendering relative times; default is `{ sameDay: '[Today]' }` (see [Day.js Calendar](https://day.js.org/docs/en/plugin/calendar))
 - **`renderDay`** _(Component | Function)_ - Custom day above a message
+- **`dayProps`** _(Object)_ - Props to pass to the Day component:
+  - `containerStyle` - Custom style for the day container
+  - `wrapperStyle` - Custom style for the day wrapper
+  - `textProps` - Props to pass to the Text component (e.g., `style`, `allowFontScaling`, `numberOfLines`)
 - **`renderTime`** _(Component | Function)_ - Custom time inside a message
 - **`timeTextStyle`** _(Object)_ - Custom text style for time inside messages (supports left/right styles)
 - **`isDayAnimationEnabled`** _(Bool)_ - Enable animated day label that appears on scroll; default is `true`

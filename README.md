@@ -91,11 +91,13 @@ npx expo install react-native-gifted-chat react-native-reanimated react-native-g
 
 **Step 1:** Install the packages
 
+Using yarn:
 ```bash
-# Using yarn
 yarn add react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context react-native-keyboard-controller
+```
 
-# Using npm
+Using npm:
+```bash
 npm install --save react-native-gifted-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context react-native-keyboard-controller
 ```
 

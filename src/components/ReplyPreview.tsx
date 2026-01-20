@@ -22,8 +22,9 @@ import Animated, {
 import { useColorScheme } from '../hooks/useColorScheme'
 import { ReplyMessage } from '../Models'
 
-const ANIMATION_DURATION = 250
+const ANIMATION_DURATION = 200
 const ANIMATION_EASING = Easing.bezier(0.25, 0.1, 0.25, 1)
+const DEFAULT_HEIGHT = 68
 
 export interface ReplyPreviewProps {
   /** The reply message to preview */
@@ -115,8 +116,7 @@ export function ReplyPreview ({
   const isDark = colorScheme === 'dark'
 
   const animationProgress = useSharedValue(0)
-  const contentHeight = useSharedValue(0)
-  const messageId = useSharedValue(replyMessage._id)
+  const contentHeight = useSharedValue(DEFAULT_HEIGHT)
 
   // Animate in on mount
   useEffect(() => {
@@ -125,19 +125,6 @@ export function ReplyPreview ({
       easing: ANIMATION_EASING,
     })
   }, [animationProgress])
-
-  // Animate content changes smoothly
-  useEffect(() => {
-    if (messageId.value !== replyMessage._id) {
-      // New message - animate content change
-      animationProgress.value = 0.8
-      animationProgress.value = withTiming(1, {
-        duration: ANIMATION_DURATION / 2,
-        easing: ANIMATION_EASING,
-      })
-      messageId.value = replyMessage._id
-    }
-  }, [replyMessage._id, messageId, animationProgress])
 
   const handleClear = () => {
     'worklet'
@@ -154,7 +141,7 @@ export function ReplyPreview ({
     const height = interpolate(
       animationProgress.value,
       [0, 1],
-      [0, contentHeight.value || 60]
+      [0, contentHeight.value]
     )
 
     const opacity = interpolate(
@@ -166,11 +153,11 @@ export function ReplyPreview ({
     const translateY = interpolate(
       animationProgress.value,
       [0, 1],
-      [20, 0]
+      [10, 0]
     )
 
     return {
-      height: contentHeight.value > 0 ? height : undefined,
+      height,
       opacity,
       transform: [{ translateY }],
     }
@@ -187,8 +174,12 @@ export function ReplyPreview ({
           containerStyle,
         ]}
         onLayout={e => {
-          if (contentHeight.value === 0)
-            contentHeight.value = e.nativeEvent.layout.height + 8 // Include margin
+          const newHeight = e.nativeEvent.layout.height + 8
+          // Animate height change smoothly when content changes
+          contentHeight.value = withTiming(newHeight, {
+            duration: ANIMATION_DURATION,
+            easing: ANIMATION_EASING,
+          })
         }}
       >
         <View style={styles.borderIndicator} />

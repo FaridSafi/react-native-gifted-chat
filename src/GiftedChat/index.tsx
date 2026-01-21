@@ -56,7 +56,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     renderChatFooter,
     renderInputToolbar,
     isInverted = true,
-    onLayout: onLayoutProp,
 
     // Reply props
     reply,
@@ -242,9 +241,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
   const onInitialLayoutViewLayout = useCallback(
     (e: LayoutChangeEvent) => {
-      // Call user's onLayout callback if provided
-      onLayoutProp?.(e)
-
       if (isInitialized)
         return
 
@@ -258,7 +254,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
       setIsInitialized(true)
       setText(getTextFromProp(initialText))
     },
-    [isInitialized, initialText, notifyInputTextReset, getTextFromProp, onLayoutProp]
+    [isInitialized, initialText, notifyInputTextReset, getTextFromProp]
   )
 
   const inputToolbarFragment = useMemo(() => {

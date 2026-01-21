@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.3.2] - 2026-01-22
+
+### 🐛 Bug Fixes
+- Fixed `React.memo` and `React.forwardRef` components not rendering correctly when passed as render props
+  - `renderComponentOrElement` now properly handles components with `$$typeof` property
+- Fixed layout jump on initial render - content now renders with `opacity: 0` until initialized
+- Fixed keyboard vertical offset documentation and examples
+
+### 🔧 Improvements
+- Updated `keyboardVerticalOffset` documentation in README with clearer explanation
+- Added `hidden` style for smoother initial render transitions
+
+### 📝 Documentation
+- Improved `keyboardVerticalOffset` section explaining that it equals distance from screen top to container top
+- Added recommendation to use `useHeaderHeight()` from `@react-navigation/elements`
+
 ## [3.3.0] - 2026-01-21
 
 ### ✨ Features

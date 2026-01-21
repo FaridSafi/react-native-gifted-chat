@@ -229,7 +229,7 @@ interface User {
 
 #### Understanding `keyboardVerticalOffset`
 
-The [`keyboardVerticalOffset`](https://reactnative.dev/docs/keyboardavoidingview#keyboardverticaloffset) tells the KeyboardAvoidingView where its container starts relative to the top of the screen. This is essential when GiftedChat is not positioned at the very top of the screen (e.g., when you have a navigation header).
+The [`keyboardVerticalOffset`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/components/keyboard-avoiding-view#keyboardverticaloffset) tells the KeyboardAvoidingView where its container starts relative to the top of the screen. This is essential when GiftedChat is not positioned at the very top of the screen (e.g., when you have a navigation header).
 
 **Default value:** `insets.top` (status bar height from `useSafeAreaInsets()`). This works correctly only when GiftedChat fills the entire screen without a navigation header. If you have a navigation header, you need to pass the correct offset via `keyboardAvoidingViewProps`.
 

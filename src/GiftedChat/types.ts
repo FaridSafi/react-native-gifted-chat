@@ -1,6 +1,5 @@
 import React, { RefObject } from 'react'
 import {
-  LayoutChangeEvent,
   TextInput,
   StyleProp,
   TextStyle,
@@ -151,8 +150,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Omit
   keyboardAvoidingViewProps?: KeyboardAvoidingViewProps
   /** Enable animated day label that appears on scroll; default is true */
   isDayAnimationEnabled?: boolean
-  /** Callback when the container layout changes */
-  onLayout?: (event: LayoutChangeEvent) => void
 
   /** Reply functionality configuration */
   reply?: ReplyProps<TMessage>

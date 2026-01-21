@@ -73,28 +73,6 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
       />
     </View>
     <View
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "opacity": 0,
-          },
-        }
-      }
-      jestInlineStyle={
-        [
-          {
-            "justifyContent": "flex-end",
-          },
-          undefined,
-        ]
-      }
-      nativeID="0"
       pointerEvents="none"
       style={
         [

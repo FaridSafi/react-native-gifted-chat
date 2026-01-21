@@ -34,8 +34,8 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
         testID="GC_WRAPPER"
       >
         <View
-          behavior="padding"
-          keyboardVerticalOffset={50}
+          behavior="translate-with-padding"
+          keyboardVerticalOffset={0}
           style={
             {
               "flex": 1,
@@ -44,9 +44,14 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
         >
           <View
             style={
-              {
-                "flex": 1,
-              }
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
             }
           />
         </View>
@@ -90,8 +95,8 @@ exports[`should render <GiftedChat/> with dark colorScheme and compare with snap
         testID="GC_WRAPPER"
       >
         <View
-          behavior="padding"
-          keyboardVerticalOffset={50}
+          behavior="translate-with-padding"
+          keyboardVerticalOffset={0}
           style={
             {
               "flex": 1,
@@ -100,9 +105,14 @@ exports[`should render <GiftedChat/> with dark colorScheme and compare with snap
         >
           <View
             style={
-              {
-                "flex": 1,
-              }
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
             }
           />
         </View>
@@ -146,8 +156,8 @@ exports[`should render <GiftedChat/> with light colorScheme and compare with sna
         testID="GC_WRAPPER"
       >
         <View
-          behavior="padding"
-          keyboardVerticalOffset={50}
+          behavior="translate-with-padding"
+          keyboardVerticalOffset={0}
           style={
             {
               "flex": 1,
@@ -156,9 +166,14 @@ exports[`should render <GiftedChat/> with light colorScheme and compare with sna
         >
           <View
             style={
-              {
-                "flex": 1,
-              }
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "opacity": 0,
+                },
+              ]
             }
           />
         </View>

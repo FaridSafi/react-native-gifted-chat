@@ -1,4 +1,10 @@
-require('react-native-reanimated').setUpTests()
+jest.mock('react-native-worklets', () =>
+  require('react-native-worklets/lib/module/mock')
+)
+
+jest.mock('react-native-reanimated', () =>
+  require('react-native-reanimated/mock')
+)
 
 jest.mock('react-native-safe-area-context', () => {
   const inset = { top: 0, right: 0, bottom: 0, left: 0 }

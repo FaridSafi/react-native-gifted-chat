@@ -34,38 +34,6 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
     visible={false}
   >
     <View
-      collapsable={false}
-      jestAnimatedProps={
-        {
-          "value": {},
-        }
-      }
-      jestAnimatedStyle={
-        {
-          "value": {
-            "borderRadius": 40,
-            "opacity": 0,
-            "transform": [
-              {
-                "scale": 0.9,
-              },
-            ],
-          },
-        }
-      }
-      jestInlineStyle={
-        [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1000,
-          },
-        ]
-      }
-      nativeID="0"
       style={
         [
           {
@@ -98,35 +66,6 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
         }
       >
         <View
-          collapsable={false}
-          jestAnimatedProps={
-            {
-              "value": {},
-            }
-          }
-          jestAnimatedStyle={
-            {
-              "value": {
-                "borderRadius": 40,
-              },
-            }
-          }
-          jestInlineStyle={
-            [
-              {
-                "flex": 1,
-              },
-              {
-                "backgroundColor": "#000",
-                "overflow": "hidden",
-              },
-              {
-                "paddingBottom": 0,
-                "paddingTop": 0,
-              },
-            ]
-          }
-          nativeID="1"
           style={
             [
               {
@@ -222,35 +161,6 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
                 }
               >
                 <View
-                  collapsable={false}
-                  jestAnimatedProps={
-                    {
-                      "value": {},
-                    }
-                  }
-                  jestAnimatedStyle={
-                    {
-                      "value": {
-                        "transform": [
-                          {
-                            "translateX": 0,
-                          },
-                          {
-                            "translateY": 0,
-                          },
-                          {
-                            "scale": 1,
-                          },
-                        ],
-                      },
-                    }
-                  }
-                  jestInlineStyle={
-                    [
-                      undefined,
-                    ]
-                  }
-                  nativeID="2"
                   onLayout={[Function]}
                   style={
                     [

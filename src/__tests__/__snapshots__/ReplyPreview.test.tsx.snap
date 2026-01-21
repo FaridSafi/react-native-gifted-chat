@@ -2,44 +2,17 @@
 
 exports[`should render <ReplyPreview /> and compare with snapshot 1`] = `
 <View
-  collapsable={false}
-  jestAnimatedProps={
-    {
-      "value": {},
-    }
-  }
-  jestAnimatedStyle={
-    {
-      "value": {
-        "height": 0,
-        "opacity": 0,
-        "transform": [
-          {
-            "translateY": 10,
-          },
-        ],
-      },
-    }
-  }
-  jestInlineStyle={
-    [
-      {
-        "overflow": "hidden",
-      },
-    ]
-  }
-  nativeID="0"
   style={
     [
       {
         "overflow": "hidden",
       },
       {
-        "height": 0,
-        "opacity": 0,
+        "height": undefined,
+        "opacity": undefined,
         "transform": [
           {
-            "translateY": 10,
+            "translateY": undefined,
           },
         ],
       },
@@ -194,44 +167,17 @@ exports[`should render <ReplyPreview /> and compare with snapshot 1`] = `
 
 exports[`should render <ReplyPreview /> with image and compare with snapshot 1`] = `
 <View
-  collapsable={false}
-  jestAnimatedProps={
-    {
-      "value": {},
-    }
-  }
-  jestAnimatedStyle={
-    {
-      "value": {
-        "height": 0,
-        "opacity": 0,
-        "transform": [
-          {
-            "translateY": 10,
-          },
-        ],
-      },
-    }
-  }
-  jestInlineStyle={
-    [
-      {
-        "overflow": "hidden",
-      },
-    ]
-  }
-  nativeID="1"
   style={
     [
       {
         "overflow": "hidden",
       },
       {
-        "height": 0,
-        "opacity": 0,
+        "height": undefined,
+        "opacity": undefined,
         "transform": [
           {
-            "translateY": 10,
+            "translateY": undefined,
           },
         ],
       },

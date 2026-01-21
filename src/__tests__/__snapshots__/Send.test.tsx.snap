@@ -2,28 +2,6 @@
 
 exports[`Send should always render <Send /> and compare with snapshot 1`] = `
 <View
-  collapsable={false}
-  jestAnimatedProps={
-    {
-      "value": {},
-    }
-  }
-  jestAnimatedStyle={
-    {
-      "value": {
-        "opacity": 0,
-      },
-    }
-  }
-  jestInlineStyle={
-    [
-      {
-        "justifyContent": "flex-end",
-      },
-      undefined,
-    ]
-  }
-  nativeID="1"
   pointerEvents="auto"
   style={
     [
@@ -73,28 +51,6 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
 
 exports[`Send should not render <Send /> and compare with snapshot 1`] = `
 <View
-  collapsable={false}
-  jestAnimatedProps={
-    {
-      "value": {},
-    }
-  }
-  jestAnimatedStyle={
-    {
-      "value": {
-        "opacity": 0,
-      },
-    }
-  }
-  jestInlineStyle={
-    [
-      {
-        "justifyContent": "flex-end",
-      },
-      undefined,
-    ]
-  }
-  nativeID="0"
   pointerEvents="none"
   style={
     [
@@ -144,28 +100,6 @@ exports[`Send should not render <Send /> and compare with snapshot 1`] = `
 
 exports[`Send should render <Send /> where there is input and compare with snapshot 1`] = `
 <View
-  collapsable={false}
-  jestAnimatedProps={
-    {
-      "value": {},
-    }
-  }
-  jestAnimatedStyle={
-    {
-      "value": {
-        "opacity": 0,
-      },
-    }
-  }
-  jestInlineStyle={
-    [
-      {
-        "justifyContent": "flex-end",
-      },
-      undefined,
-    ]
-  }
-  nativeID="2"
   pointerEvents="auto"
   style={
     [

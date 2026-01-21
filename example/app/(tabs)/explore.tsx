@@ -1,8 +1,8 @@
 import React from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
+import { useRouter } from 'expo-router'
 import { RectButton } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useRouter } from 'expo-router'
 
 import { ThemedText } from '@/components/themed-text'
 import { ThemedView } from '@/components/themed-view'

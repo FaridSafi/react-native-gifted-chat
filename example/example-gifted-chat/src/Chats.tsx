@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useColorScheme } from 'react-native'
 import { GiftedChat, IMessage } from 'react-native-gifted-chat'
+import { useKeyboardVerticalOffset } from '../../hooks/useKeyboardVerticalOffset'
 import {
   renderAvatar,
   renderBubble,
@@ -11,7 +12,6 @@ import {
 } from './customComponents'
 import { RenderInputToolbar, RenderActions, RenderComposer, RenderSend } from './InputToolbar'
 import initialMessages from './messages'
-import { useKeyboardVerticalOffset } from '../../hooks/useKeyboardVerticalOffset'
 
 const Chats = () => {
   const [text, setText] = useState('')

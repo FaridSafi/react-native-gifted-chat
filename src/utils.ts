@@ -27,6 +27,11 @@ export function renderComponentOrElement<TProps extends Record<string, any>>(
     return (component as (props: TProps) => React.ReactNode)(props)
   }
 
+  // Check for React.memo or React.forwardRef wrapped components
+  // These have $$typeof property and should be rendered with createElement
+  if (typeof component === 'object' && component !== null && '$$typeof' in component)
+    return React.createElement(component as React.ComponentType<TProps>, props as any)
+
   // If it's neither, return it as-is
   return component
 }

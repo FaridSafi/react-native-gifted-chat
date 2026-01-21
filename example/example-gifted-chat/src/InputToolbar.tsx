@@ -12,7 +12,8 @@ import {
   SendProps,
 } from 'react-native-gifted-chat'
 
-export const RenderInputToolbar = (props: InputToolbarProps<IMessage>) => {
+// These are React components (not render functions) so they can use hooks
+export const RenderInputToolbar = React.memo((props: InputToolbarProps<IMessage>) => {
   const colorScheme = useColorScheme()
   const isDark = colorScheme === 'dark'
 
@@ -26,9 +27,9 @@ export const RenderInputToolbar = (props: InputToolbarProps<IMessage>) => {
       primaryStyle={{ alignItems: 'center' }}
     />
   )
-}
+})
 
-export const RenderActions = (props: ActionsProps) => {
+export const RenderActions = React.memo((props: ActionsProps) => {
   const colorScheme = useColorScheme()
   const isDark = colorScheme === 'dark'
 
@@ -63,9 +64,9 @@ export const RenderActions = (props: ActionsProps) => {
       optionTintColor={isDark ? '#ffffff' : '#222B45'}
     />
   )
-}
+})
 
-export const RenderComposer = (props: ComposerProps) => {
+export const RenderComposer = React.memo((props: ComposerProps) => {
   const colorScheme = useColorScheme()
   const isDark = colorScheme === 'dark'
 
@@ -87,9 +88,9 @@ export const RenderComposer = (props: ComposerProps) => {
       }}
     />
   )
-}
+})
 
-export const renderSend = (props: SendProps<IMessage>) => (
+export const RenderSend = React.memo((props: SendProps<IMessage>) => (
   <Send
     {...props}
     isDisabled={!props.text}
@@ -108,4 +109,4 @@ export const renderSend = (props: SendProps<IMessage>) => (
       }}
     />
   </Send>
-)
+))

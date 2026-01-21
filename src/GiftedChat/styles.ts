@@ -7,4 +7,7 @@ export default StyleSheet.create({
   contentContainer: {
     overflow: 'hidden',
   },
+  hidden: {
+    opacity: 0,
+  },
 })

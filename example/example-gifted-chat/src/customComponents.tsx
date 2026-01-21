@@ -90,7 +90,7 @@ interface CustomViewProps {
   user: User
 }
 
-export const renderCustomView: React.FC<CustomViewProps> = ({ user }) => (
+export const renderCustomView = ({ user }: CustomViewProps) => (
   <View style={{ minHeight: 20, alignItems: 'center' }}>
     <Text>
       Current user:

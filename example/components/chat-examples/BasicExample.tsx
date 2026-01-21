@@ -1,24 +1,21 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { Platform, StyleSheet, View, useColorScheme } from 'react-native'
+import { StyleSheet, View, useColorScheme } from 'react-native'
 import { GiftedChat, IMessage } from 'react-native-gifted-chat'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import AccessoryBar from '../../example-expo/AccessoryBar'
 import CustomActions from '../../example-expo/CustomActions'
 import CustomView from '../../example-expo/CustomView'
 import earlierMessages from '../../example-expo/data/earlierMessages'
 import messagesData from '../../example-expo/data/messages'
+import { useKeyboardVerticalOffset } from '../../hooks/useKeyboardVerticalOffset'
 import { getColorSchemeStyle } from '../../utils/styleUtils'
 
-export default function CustomizedFeaturesExample () {
+export default function BasicExample () {
   const [messages, setMessages] = useState<IMessage[]>(messagesData)
   const [isLoadingEarlier, setIsLoadingEarlier] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
   const colorScheme = useColorScheme()
-  const insets = useSafeAreaInsets()
 
-  const tabbarHeight = 50
-  const keyboardTopToolbarHeight = Platform.select({ ios: 50, default: 0 })
-  const keyboardVerticalOffset = insets.bottom + tabbarHeight + keyboardTopToolbarHeight
+  const keyboardVerticalOffset = useKeyboardVerticalOffset()
 
   const user = useMemo(() => ({
     _id: 1,

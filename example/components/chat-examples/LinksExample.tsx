@@ -1,18 +1,14 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { Linking, Platform, StyleSheet, Text, View } from 'react-native'
+import { Linking, StyleSheet, Text, View } from 'react-native'
 import { ActionSheetProvider, useActionSheet } from '@expo/react-native-action-sheet'
 import { setStringAsync } from 'expo-clipboard'
 import { isValidPhoneNumber, parsePhoneNumberWithError } from 'libphonenumber-js'
 import { GiftedChat, IMessage, LinkMatcher } from 'react-native-gifted-chat'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useKeyboardVerticalOffset } from '../../hooks/useKeyboardVerticalOffset'
 
 const LinksExample: React.FC = () => {
   const { showActionSheetWithOptions } = useActionSheet()
-  const insets = useSafeAreaInsets()
-
-  const tabbarHeight = 50
-  const keyboardTopToolbarHeight = Platform.select({ ios: 44, default: 0 })
-  const keyboardVerticalOffset = insets.bottom + tabbarHeight + keyboardTopToolbarHeight
+  const keyboardVerticalOffset = useKeyboardVerticalOffset()
 
   const initialMessages: IMessage[] = useMemo(() => [
     {

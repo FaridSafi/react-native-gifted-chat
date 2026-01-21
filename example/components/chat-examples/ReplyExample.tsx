@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { Platform, StyleSheet, View, useColorScheme } from 'react-native'
+import { StyleSheet, View, useColorScheme } from 'react-native'
 import { GiftedChat, IMessage, ReplyMessage } from 'react-native-gifted-chat'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import messagesData from '../../example-expo/data/messages'
+import { useKeyboardVerticalOffset } from '../../hooks/useKeyboardVerticalOffset'
 import { getColorSchemeStyle } from '../../utils/styleUtils'
 
 export interface IChatMessage extends IMessage {
@@ -13,11 +13,7 @@ export interface IChatMessage extends IMessage {
 export default function ReplyExample () {
   const [messages, setMessages] = useState<IChatMessage[]>(messagesData)
   const colorScheme = useColorScheme()
-  const insets = useSafeAreaInsets()
-
-  const tabbarHeight = 50
-  const keyboardTopToolbarHeight = Platform.select({ ios: 44, default: 0 })
-  const keyboardVerticalOffset = insets.bottom + tabbarHeight + keyboardTopToolbarHeight
+  const keyboardVerticalOffset = useKeyboardVerticalOffset()
 
   const user = useMemo(() => ({
     _id: 1,

@@ -120,18 +120,15 @@ Follow the [react-native-reanimated installation guide](https://docs.swmansion.c
 
 ```jsx
 import React, { useState, useCallback, useEffect } from 'react'
-import { Platform } from 'react-native'
 import { GiftedChat } from 'react-native-gifted-chat'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useHeaderHeight } from '@react-navigation/elements'
 
 export function Example() {
   const [messages, setMessages] = useState([])
-  const insets = useSafeAreaInsets()
 
-  // If you have a tab bar, include its height
-  const tabbarHeight = 50
-  const keyboardTopToolbarHeight = Platform.select({ ios: 44, default: 0 })
-  const keyboardVerticalOffset = insets.bottom + tabbarHeight + keyboardTopToolbarHeight
+  // keyboardVerticalOffset = distance from screen top to GiftedChat container
+  // useHeaderHeight() returns status bar + navigation header height
+  const headerHeight = useHeaderHeight()
 
   useEffect(() => {
     setMessages([
@@ -161,8 +158,7 @@ export function Example() {
       user={{
         _id: 1,
       }}
-
-      keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
+      keyboardAvoidingViewProps={{ keyboardVerticalOffset: headerHeight }}
     />
   )
 }
@@ -227,9 +223,41 @@ interface User {
 - **`keyboardProviderProps`** _(Object)_ - Props to be passed to the [`KeyboardProvider`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/keyboard-provider) for keyboard handling. Default values:
   - `statusBarTranslucent: true` - Required on Android for correct keyboard height calculation when status bar is translucent (edge-to-edge mode)
   - `navigationBarTranslucent: true` - Required on Android for correct keyboard height calculation when navigation bar is translucent (edge-to-edge mode)
-- **`keyboardAvoidingViewProps`** _(Object)_ - Props to be passed to the [`KeyboardAvoidingView`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/components/keyboard-avoiding-view). Use `keyboardVerticalOffset` to account for headers or iOS predictive text bar (~50pt).
+- **`keyboardAvoidingViewProps`** _(Object)_ - Props to be passed to the [`KeyboardAvoidingView`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/components/keyboard-avoiding-view). See **keyboardVerticalOffset** below for proper keyboard handling.
 - **`isAlignedTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 - **`isInverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
+
+#### Understanding `keyboardVerticalOffset`
+
+The [`keyboardVerticalOffset`](https://reactnative.dev/docs/keyboardavoidingview#keyboardverticaloffset) tells the KeyboardAvoidingView where its container starts relative to the top of the screen. This is essential when GiftedChat is not positioned at the very top of the screen (e.g., when you have a navigation header).
+
+**Default value:** `insets.top` (status bar height from `useSafeAreaInsets()`). This works correctly only when GiftedChat fills the entire screen without a navigation header. If you have a navigation header, you need to pass the correct offset via `keyboardAvoidingViewProps`.
+
+**What the value means:** The offset equals the distance (in points) from the top of the screen to the top of your GiftedChat container. This typically includes:
+- Status bar height
+- Navigation header height (on iOS, `useHeaderHeight()` already includes status bar)
+
+**How to use:**
+
+```jsx
+import { useHeaderHeight } from '@react-navigation/elements'
+
+function ChatScreen() {
+  // useHeaderHeight() returns status bar + navigation header height on iOS
+  const headerHeight = useHeaderHeight()
+
+  return (
+    <GiftedChat
+      keyboardAvoidingViewProps={{ keyboardVerticalOffset: headerHeight }}
+      // ... other props
+    />
+  )
+}
+```
+
+> **Note:** `useHeaderHeight()` requires your chat component to be rendered inside a proper navigation screen (not conditional rendering). If it returns `0`, ensure your chat screen is a real navigation screen with a visible header.
+
+**Why this matters:** Without the correct offset, the keyboard may overlap the input field or leave extra space. The KeyboardAvoidingView uses this value to calculate how much to shift the content when the keyboard appears.
 
 ### Text Input & Composer
 

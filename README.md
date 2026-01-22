@@ -51,6 +51,58 @@
 
 ---
 
+## Sponsor
+
+<p align="center">
+  <br/>
+  <a href="https://www.lereacteur.io" target="_blank">
+    <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/logo_sponsor.png" height="60">
+  </a>
+  <br>
+  <p align="center">
+    Coding Bootcamp in Paris co-founded by Farid Safi
+  </p>
+  <a href="https://www.lereacteur.io" target="_blank">
+    <p align="center">
+      Click to learn more
+    </p>
+  </a>
+</p>
+
+<p align="center">
+  <br/>
+  <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">
+    <img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/stream-logo.png" height="40">
+  </a>
+  <br>
+  <p align="center">
+    Scalable <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">chat API/Server</a> written in Go
+  </p>
+  <p align="center">
+    <a href="https://getstream.io/chat/get_started/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">API Tour</a> | <a href="https://dev.to/nickparsons/react-native-chat-with-chuck-norris-3h7m?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">React Native Gifted tutorial</a>
+  </p>
+</p>
+
+<p align="center">
+  <br/>
+  <a href="https://www.ethora.com" target="_blank">
+    <img src="https://www.dappros.com/wp-content/uploads/2023/12/Ethora-Logo.png" height="60">
+  </a>
+  <br>
+  <p align="center">
+    A complete app engine featuring GiftedChat
+  </p>
+  <p align="center">
+    <a href="https://bit.ly/ethorachat" target="_blank">Check out our GitHub</a>
+  </p>
+</p>
+<br>
+<p align="center">
+ <a href="https://amzn.to/3ZmTyb2" target="_blank">React Key Concepts: Consolidate your knowledge of React's core features (2nd ed. Edition)</a>
+</p>
+
+---
+
 ## 📖 Table of Contents
 
 - [Features](#-features)

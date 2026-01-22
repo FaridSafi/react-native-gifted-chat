@@ -51,9 +51,7 @@
 
 ---
 
-<details>
-<summary><strong>💝 Sponsors</strong></summary>
-<br>
+<h3 align="center">Sponsors</h3>
 
 <p align="center">
   <a href="https://www.lereacteur.io" target="_blank"><img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/logo_sponsor.png" height="50"></a>
@@ -72,8 +70,6 @@
   <br><br>
   📚 <a href="https://amzn.to/3ZmTyb2" target="_blank">React Key Concepts (2nd ed.)</a>
 </p>
-
-</details>
 
 ---
 

@@ -849,11 +849,11 @@ yarn prepublishOnly
 
 **Original Author:** [Farid Safi](https://www.x.com/FaridSafi)
 
-**Co-maintainer:** [Xavier Carpentier](https://www.x.com/xcapetir) - [Hire Xavier](https://xaviercarpentier.com)
+**Co-author:** [Xavier Carpentier](https://www.x.com/xcapetir) - [Hire Xavier](https://xaviercarpentier.com)
 
 **Maintainer:** [Kesha Antonov](https://github.com/kesha-antonov)
 
-> Please note that this project is maintained in free time. If you find it helpful, please consider [becoming a sponsor](https://github.com/sponsors/kesha-antonov).
+> I've been maintaining this project for 2 years, completely in my free time and without any compensation. If you find it helpful, please consider [becoming a sponsor](https://github.com/sponsors/kesha-antonov) to support continued development. 💖
 
 ---
 

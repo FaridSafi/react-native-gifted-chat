@@ -54,11 +54,11 @@
 <h3 align="center">Sponsors</h3>
 
 <p align="center">
-  <a href="https://www.lereacteur.io" target="_blank"><img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/logo_sponsor.png" height="50"></a>
+  <a href="https://www.lereacteur.io" target="_blank"><img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/logo_sponsor.png" height="50" style="vertical-align: middle;"></a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank"><img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/stream-logo.png" height="35"></a>
+  <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank"><img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/stream-logo.png" height="35" style="vertical-align: middle;"></a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://www.ethora.com" target="_blank"><img src="https://www.dappros.com/wp-content/uploads/2023/12/Ethora-Logo.png" height="50"></a>
+  <a href="https://www.ethora.com" target="_blank"><img src="https://www.dappros.com/wp-content/uploads/2023/12/Ethora-Logo.png" height="50" style="vertical-align: middle;"></a>
 </p>
 
 <p align="center">

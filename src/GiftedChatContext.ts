@@ -11,7 +11,7 @@ export interface IGiftedChatContext {
     ) => void
   }
   getLocale(): string
-  getColorScheme(): 'light' | 'dark' | null | undefined
+  getColorScheme(): 'light' | 'dark' | 'unspecified' | null | undefined
 }
 
 export const GiftedChatContext = createContext<IGiftedChatContext>({

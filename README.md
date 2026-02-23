@@ -317,6 +317,7 @@ function ChatScreen() {
 - **`renderLoading`** _(Component | Function)_ - Render a loading view when initializing
 - **`renderChatEmpty`** _(Component | Function)_ - Custom component to render in the ListView when messages are empty
 - **`renderChatFooter`** _(Component | Function)_ - Custom component to render below the MessagesContainer (separate from the ListView)
+- **`messagesContainerInsets`** _(Object)_ - Content insets for the messages container FlatList. Accepts `{ top, left, bottom, right }`.
 - **`listProps`** _(Object)_ - Extra props to be passed to the messages [`<FlatList>`](https://reactnative.dev/docs/flatlist). Supports all FlatList props including `maintainVisibleContentPosition` for keeping scroll position when new messages arrive (useful for AI chatbots).
 
 ### Message Bubbles & Content

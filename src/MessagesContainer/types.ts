@@ -1,6 +1,7 @@
 import { RefObject } from 'react'
 import {
   FlatListProps,
+  Insets,
   StyleProp,
   ViewStyle,
 } from 'react-native'
@@ -83,6 +84,8 @@ export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   typingIndicatorStyle?: StyleProp<ViewStyle>
   /** Enable animated day label that appears on scroll; default is true */
   isDayAnimationEnabled?: boolean
+  /** Content insets for the messages container FlatList */
+  messagesContainerInsets?: Insets
   /** Reply functionality configuration */
   reply?: ReplyProps<TMessage>
 }

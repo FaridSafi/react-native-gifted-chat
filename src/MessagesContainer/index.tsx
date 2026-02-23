@@ -43,6 +43,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
     scrollToBottomComponent: scrollToBottomComponentProp,
     renderDay: renderDayProp,
     isDayAnimationEnabled = true,
+    messagesContainerInsets,
   } = props
 
   const listPropsOnScrollProp = listProps?.onScroll
@@ -397,6 +398,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         renderItem={renderItem}
         inverted={isInverted}
         automaticallyAdjustContentInsets={false}
+        contentInset={messagesContainerInsets}
         style={stylesCommon.fill}
         contentContainerStyle={styles.messagesContainer}
         ListEmptyComponent={renderChatEmpty}

@@ -13,7 +13,7 @@ Always reference these instructions first and fallback to search or bash command
 - `yarn test` -- NEVER CANCEL: runs Jest test suite, takes 9 seconds. Set timeout to 60+ seconds.
 
 ### Full validation before publishing:
-- `yarn prepublishOnly` -- NEVER CANCEL: runs lint + build + test, takes 11 seconds total. Set timeout to 60+ seconds.
+- `yarn prepublishOnly` -- NEVER CANCEL: runs lint + test + build, takes 11 seconds total. Set timeout to 60+ seconds.
 
 ### Known Issues:
 - If tests fail due to snapshot mismatches after fresh dependency install, run `yarn test -u` to update snapshots
@@ -29,7 +29,7 @@ Always reference these instructions first and fallback to search or bash command
 
 ### Type checking and development:
 - `yarn tsc:watch` -- runs TypeScript compiler in watch mode for development
-- `yarn tsc:write` -- compiles TypeScript and writes output to /lib directory
+- `yarn typecheck` -- runs TypeScript compiler to check for TS errors
 
 ## Requirements and Setup
 

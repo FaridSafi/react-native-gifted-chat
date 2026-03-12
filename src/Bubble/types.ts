@@ -94,7 +94,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   renderCustomView?: (bubbleProps: BubbleProps<TMessage>) => React.ReactNode
   renderTime?: (timeProps: TimeProps<TMessage>) => React.ReactNode
   renderTicks?: (currentMessage: TMessage) => React.ReactNode
-  renderUsername?: (user?: TMessage['user']) => React.ReactNode
+  renderUsername?: (props: TMessage['user']) => React.ReactNode
   renderQuickReplySend?: () => React.ReactNode
   renderQuickReplies?: (
     quickReplies: QuickRepliesProps<TMessage>

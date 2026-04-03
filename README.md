@@ -252,6 +252,7 @@ interface User {
   - `statusBarTranslucent: true` - Required on Android for correct keyboard height calculation when status bar is translucent (edge-to-edge mode)
   - `navigationBarTranslucent: true` - Required on Android for correct keyboard height calculation when navigation bar is translucent (edge-to-edge mode)
 - **`keyboardAvoidingViewProps`** _(Object)_ - Props to be passed to the [`KeyboardAvoidingView`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/components/keyboard-avoiding-view). See **keyboardVerticalOffset** below for proper keyboard handling.
+- **`keyboardBottomOffset`** _(Number)_ - Extra bottom offset (in pixels) for the KeyboardAvoidingView. Useful on Android when using expo-router or other navigation setups where the keyboard may still cover the input toolbar even with correct `keyboardVerticalOffset`. Default is `0`. Example: `keyboardBottomOffset={50}` adds 50px of extra bottom padding to push the input above the keyboard.
 - **`isAlignedTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 - **`isInverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
 

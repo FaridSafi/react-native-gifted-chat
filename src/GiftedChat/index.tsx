@@ -57,6 +57,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     renderInputToolbar,
     isInverted = true,
 
+    // Keyboard offset
+    keyboardBottomOffset = 0,
+
     // Reply props
     reply,
   } = props
@@ -330,7 +333,10 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
           <KeyboardAvoidingView
             behavior='translate-with-padding'
             keyboardVerticalOffset={insets.top}
-            style={stylesCommon.fill}
+            style={[
+              stylesCommon.fill,
+              keyboardBottomOffset > 0 && { paddingBottom: keyboardBottomOffset },
+            ]}
             {...props.keyboardAvoidingViewProps}
           >
             <View style={[stylesCommon.fill, !isInitialized && styles.hidden]}>

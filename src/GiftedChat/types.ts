@@ -148,6 +148,15 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Omit
   keyboardProviderProps?: React.ComponentProps<typeof KeyboardProvider>
   /** Props for KeyboardAvoidingView. Use `keyboardVerticalOffset` to account for headers or iOS predictive text bar (~44pt). */
   keyboardAvoidingViewProps?: KeyboardAvoidingViewProps
+  /**
+   * Extra bottom offset (in pixels) for the KeyboardAvoidingView.
+   * Useful on Android when using expo-router or other navigation setups where the
+   * keyboard may cover the input toolbar. Default is 0.
+   * On iOS, this adds to the keyboard vertical offset calculation.
+   * On Android, this can compensate for cases where the keyboard avoiding behavior
+   * does not properly account for the full keyboard height.
+   */
+  keyboardBottomOffset?: number
   /** Enable animated day label that appears on scroll; default is true */
   isDayAnimationEnabled?: boolean
 

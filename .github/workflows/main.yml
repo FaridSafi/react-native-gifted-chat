@@ -31,7 +31,7 @@ jobs:
 
       - name: Type Check
         run: |
-          yarn tsc --noEmit
+          yarn typecheck
 
       - name: Build
         run: |

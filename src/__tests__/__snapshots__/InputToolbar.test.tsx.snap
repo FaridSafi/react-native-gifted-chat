@@ -123,6 +123,9 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
             {
               "opacity": 1,
             },
+            {
+              "pointerEvents": "none",
+            },
           ]
         }
         testID="GC_SEND_TOUCHABLE"

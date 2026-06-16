@@ -41,6 +41,9 @@ exports[`should render <LoadEarlierMessages /> and compare with snapshot 1`] = `
       {
         "opacity": 1,
       },
+      {
+        "pointerEvents": "none",
+      },
     ]
   }
 >

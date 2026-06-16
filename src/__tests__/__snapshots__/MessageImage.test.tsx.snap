@@ -35,6 +35,9 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
         {
           "opacity": 1,
         },
+        {
+          "pointerEvents": "none",
+        },
       ]
     }
   >

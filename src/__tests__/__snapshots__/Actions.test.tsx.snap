@@ -48,6 +48,9 @@ exports[`should render <Actions /> and compare with snapshot 1`] = `
         {
           "opacity": 1,
         },
+        {
+          "pointerEvents": "none",
+        },
       ]
     }
   >

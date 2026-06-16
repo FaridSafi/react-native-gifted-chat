@@ -52,6 +52,9 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
         {
           "opacity": 1,
         },
+        {
+          "pointerEvents": "none",
+        },
       ]
     }
     testID="GC_SEND_TOUCHABLE"
@@ -132,6 +135,9 @@ exports[`Send should not render <Send /> and compare with snapshot 1`] = `
         {
           "opacity": 1,
         },
+        {
+          "pointerEvents": "none",
+        },
       ]
     }
     testID="GC_SEND_TOUCHABLE"
@@ -211,6 +217,9 @@ exports[`Send should render <Send /> where there is input and compare with snaps
         },
         {
           "opacity": 1,
+        },
+        {
+          "pointerEvents": "none",
         },
       ]
     }

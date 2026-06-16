@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import { StyleSheet } from 'react-native'
 import { BaseButton } from 'react-native-gesture-handler'
 import Animated, {
   useAnimatedStyle,
@@ -58,10 +59,19 @@ export const TouchableOpacity: React.FC<TouchableOpacityProps> = ({
       onActiveStateChange={handleActiveStateChange}
     >
       <Animated.View
-        style={[style, animatedStyle]}
+        // The content view must not capture touches, otherwise it swallows the
+        // BaseButton's press on Android (see #2714). pointerEvents in style is
+        // the non-deprecated form on RN's New Architecture.
+        style={[style, animatedStyle, styles.content]}
       >
         {children}
       </Animated.View>
     </BaseButton>
   )
 }
+
+const styles = StyleSheet.create({
+  content: {
+    pointerEvents: 'none',
+  },
+})

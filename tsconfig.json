@@ -2,6 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "outDir": "./lib",
+    "rootDir": "./src",
     "strict": true,
     "jsx": "react-native",
     "target": "ES2020",

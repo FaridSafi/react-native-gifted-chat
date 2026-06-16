@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.4.0] - 2026-06-16
+
+### ✨ Features
+- **react-native-gesture-handler v3 support** (#2739): the library now works with both RNGH 2 and 3. RNGH 3 removed the `Text` re-export, so `Text` is now imported from `react-native` across all components. The `peerDependencies` range (`react-native-gesture-handler: ">=2.0.0"`) already spans both majors.
+
+### 🐛 Bug Fixes
+- Fixed #2714 - `MessageImage` `onPress` not firing on Android. The custom `TouchableOpacity`'s content view now sets `pointerEvents: 'none'` so the press reaches the gesture-handler `BaseButton` (iOS was unaffected).
+- Verified #603 (default `text` prop cleared on initial render) is resolved by the current hooks architecture and added a regression test covering it.
+
+### 🔧 Improvements
+- Bumped `react-native-zoom-reanimated` to `^1.5.4` for gesture-type compatibility with RNGH 3.
+- Upgraded the dev/test toolchain to the React Native 0.85 line (migrated to `@react-native/jest-preset`, eslint/typescript bumps, perfectionist v5).
+- Example app upgraded to Expo SDK 56.
+
 ## [3.3.2] - 2026-01-22
 
 ### 🐛 Bug Fixes

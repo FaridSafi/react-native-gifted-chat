@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
-import { StyleSheet, View, StyleProp, ViewStyle, TextStyle, Pressable } from 'react-native'
+import { StyleSheet, View, StyleProp, ViewStyle, TextStyle, Pressable , Text } from 'react-native'
 
-import { Text } from 'react-native-gesture-handler'
 import { Color } from './Color'
 import { useColorScheme } from './hooks/useColorScheme'
 import { ReplyMessage } from './Models'

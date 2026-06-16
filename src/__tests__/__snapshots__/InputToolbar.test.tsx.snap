@@ -115,8 +115,39 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "justifyContent": "flex-end",
+            },
+            {
+              "opacity": 1,
+            },
+          ]
+        }
         testID="GC_SEND_TOUCHABLE"
-      />
+      >
+        <Text
+          style={
+            [
+              [
+                {
+                  "backgroundColor": "transparent",
+                  "color": "#0084ff",
+                  "fontSize": 17,
+                  "fontWeight": "600",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 10,
+                },
+                undefined,
+              ],
+              undefined,
+            ]
+          }
+        >
+          Send
+        </Text>
+      </View>
     </View>
   </View>
 </View>

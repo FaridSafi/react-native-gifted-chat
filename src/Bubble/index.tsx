@@ -2,9 +2,8 @@ import React, { useCallback, useMemo } from 'react'
 import {
   View,
   Pressable,
-} from 'react-native'
+  Text } from 'react-native'
 
-import { Text } from 'react-native-gesture-handler'
 
 import { MessageReply } from '../components/MessageReply'
 import { useChatContext } from '../GiftedChatContext'

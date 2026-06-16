@@ -11,8 +11,8 @@ import {
   LayoutChangeEvent,
   useWindowDimensions,
   StatusBar,
-} from 'react-native'
-import { BaseButton, GestureHandlerRootView, Text } from 'react-native-gesture-handler'
+  Text } from 'react-native'
+import { BaseButton, GestureHandlerRootView } from 'react-native-gesture-handler'
 import { OverKeyboardView } from 'react-native-keyboard-controller'
 import Animated, {
   useAnimatedStyle,

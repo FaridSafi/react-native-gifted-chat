@@ -326,7 +326,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
           style={[stylesCommon.fill, styles.contentContainer]}
           onLayout={onInitialLayoutViewLayout}
         >
-          {/* @ts-expect-error */}
           <KeyboardAvoidingView
             behavior='translate-with-padding'
             keyboardVerticalOffset={insets.top}

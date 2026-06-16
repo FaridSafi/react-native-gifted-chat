@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react'
-import { StyleSheet, View, ViewStyle, TextStyle } from 'react-native'
+import { StyleSheet, View, ViewStyle, TextStyle , Text } from 'react-native'
 import dayjs from 'dayjs'
-
-import { Text } from 'react-native-gesture-handler'
 import { Color } from './Color'
 import { TIME_FORMAT } from './Constant'
 import { useChatContext } from './GiftedChatContext'

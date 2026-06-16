@@ -29,7 +29,36 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-  />
+    style={
+      [
+        undefined,
+        {
+          "opacity": 1,
+        },
+      ]
+    }
+  >
+    <Image
+      onLayout={[Function]}
+      resizeMode="cover"
+      source={
+        {
+          "uri": "url://to/image.png",
+        }
+      }
+      style={
+        [
+          {
+            "borderRadius": 13,
+            "height": 100,
+            "margin": 3,
+            "width": 150,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
   <OverKeyboardView
     visible={false}
   >
@@ -120,7 +149,24 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-            />
+              style={
+                {
+                  "padding": 20,
+                }
+              }
+            >
+              <Text
+                style={
+                  {
+                    "color": "white",
+                    "fontSize": 20,
+                    "lineHeight": 20,
+                  }
+                }
+              >
+                X
+              </Text>
+            </View>
           </View>
           <View
             style={

@@ -44,8 +44,39 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "justifyContent": "flex-end",
+        },
+        {
+          "opacity": 1,
+        },
+      ]
+    }
     testID="GC_SEND_TOUCHABLE"
-  />
+  >
+    <Text
+      style={
+        [
+          [
+            {
+              "backgroundColor": "transparent",
+              "color": "#0084ff",
+              "fontSize": 17,
+              "fontWeight": "600",
+              "paddingHorizontal": 10,
+              "paddingVertical": 10,
+            },
+            undefined,
+          ],
+          undefined,
+        ]
+      }
+    >
+      Send
+    </Text>
+  </View>
 </View>
 `;
 
@@ -93,8 +124,39 @@ exports[`Send should not render <Send /> and compare with snapshot 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "justifyContent": "flex-end",
+        },
+        {
+          "opacity": 1,
+        },
+      ]
+    }
     testID="GC_SEND_TOUCHABLE"
-  />
+  >
+    <Text
+      style={
+        [
+          [
+            {
+              "backgroundColor": "transparent",
+              "color": "#0084ff",
+              "fontSize": 17,
+              "fontWeight": "600",
+              "paddingHorizontal": 10,
+              "paddingVertical": 10,
+            },
+            undefined,
+          ],
+          undefined,
+        ]
+      }
+    >
+      Send
+    </Text>
+  </View>
 </View>
 `;
 
@@ -142,7 +204,38 @@ exports[`Send should render <Send /> where there is input and compare with snaps
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "justifyContent": "flex-end",
+        },
+        {
+          "opacity": 1,
+        },
+      ]
+    }
     testID="GC_SEND_TOUCHABLE"
-  />
+  >
+    <Text
+      style={
+        [
+          [
+            {
+              "backgroundColor": "transparent",
+              "color": "#0084ff",
+              "fontSize": 17,
+              "fontWeight": "600",
+              "paddingHorizontal": 10,
+              "paddingVertical": 10,
+            },
+            undefined,
+          ],
+          undefined,
+        ]
+      }
+    >
+      Send
+    </Text>
+  </View>
 </View>
 `;

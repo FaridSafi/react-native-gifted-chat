@@ -10,7 +10,6 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 import stylesCommon from '../styles'
-
 import styles from './styles'
 import { TypingIndicatorProps } from './types'
 

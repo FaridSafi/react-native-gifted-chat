@@ -8,9 +8,8 @@ import {
   TextStyle,
   StyleProp,
   ImageStyle,
-} from 'react-native'
+  Text } from 'react-native'
 
-import { Text } from 'react-native-gesture-handler'
 import { Color } from './Color'
 import { LeftRightStyle, IMessage, ReplyMessage } from './Models'
 import { getStyleWithPosition } from './styles'

@@ -29,5 +29,62 @@ exports[`should render <LoadEarlierMessages /> and compare with snapshot 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-/>
+  style={
+    [
+      [
+        {
+          "alignItems": "center",
+          "marginVertical": 10,
+        },
+        undefined,
+      ],
+      {
+        "opacity": 1,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+        {
+          "backgroundColor": "#b2b2b2",
+          "borderRadius": 15,
+          "paddingHorizontal": 10,
+          "paddingVertical": 5,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        {
+          "paddingBottom": 4,
+          "paddingTop": 3,
+        }
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "color": "#fff",
+              "fontSize": 12,
+              "lineHeight": 13,
+            },
+            undefined,
+          ]
+        }
+      >
+        Load earlier messages
+      </Text>
+    </View>
+  </View>
+</View>
 `;

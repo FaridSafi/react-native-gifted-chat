@@ -5,9 +5,8 @@ import {
   ViewStyle,
   TextStyle,
   View,
-} from 'react-native'
+  Text } from 'react-native'
 
-import { Text } from 'react-native-gesture-handler'
 import { LinkParser, LinkMatcher, LinkType } from './linkParser'
 import { LeftRightStyle, IMessage } from './Models'
 

@@ -198,11 +198,12 @@ export default [
             ['parent', 'sibling'],
             'index',
           ],
-          customGroups: {
-            value: {
-              react: ['^react$', '^react-native$'],
+          customGroups: [
+            {
+              groupName: 'react',
+              elementNamePattern: ['^react$', '^react-native$'],
             },
-          },
+          ],
           newlinesBetween: 'ignore',
         },
       ],
@@ -374,11 +375,12 @@ export default [
             ['parent', 'sibling'],
             'index',
           ],
-          customGroups: {
-            value: {
-              react: ['^react$', '^react-native$'],
+          customGroups: [
+            {
+              groupName: 'react',
+              elementNamePattern: ['^react$', '^react-native$'],
             },
-          },
+          ],
           newlinesBetween: 'ignore',
         },
       ],

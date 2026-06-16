@@ -5,7 +5,6 @@ import { Day } from '../../../Day'
 import stylesCommon from '../../../styles'
 import { isSameDay } from '../../../utils'
 import { useAbsoluteScrolledPositionToBottomOfDay, useRelativeScrolledPositionToBottomOfDay } from '../Item'
-
 import styles from './styles'
 import { DayAnimatedProps } from './types'
 

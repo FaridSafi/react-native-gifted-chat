@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { Text } from 'react-native-gesture-handler'
+import { View, StyleSheet , Text } from 'react-native'
 import { Color } from './Color'
 
 const styles = StyleSheet.create({

@@ -1,8 +1,7 @@
 module.exports = {
-  preset: 'react-native',
+  preset: '@react-native/jest-preset',
   resetMocks: true,
   setupFilesAfterEnv: [
-    './node_modules/react-native/jest-preset',
     './node_modules/react-native-gesture-handler/jestSetup.js',
     './tests/setup.ts',
   ],
@@ -10,7 +9,9 @@ module.exports = {
   transform: {
     '\\.js$': ['babel-jest', { configFile: './babel.config.cjs' }],
   },
-  transformIgnorePatterns: [],
+  transformIgnorePatterns: [
+    'node_modules/(?!((jest-)?react-native|@react-native|@expo|expo))',
+  ],
   testMatch: ['**/*.test.ts?(x)'],
   modulePathIgnorePatterns: ['./example'],
   coveragePathIgnorePatterns: ['./src/__tests__/'],

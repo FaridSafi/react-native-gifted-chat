@@ -4,8 +4,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
-} from 'react-native'
-import { Text } from 'react-native-gesture-handler'
+  Text } from 'react-native'
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated'
 
 import { Color } from './Color'

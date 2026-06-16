@@ -6,8 +6,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
-} from 'react-native'
-import { Text } from 'react-native-gesture-handler'
+  Text } from 'react-native'
 import { Color } from './Color'
 import { TouchableOpacity } from './components/TouchableOpacity'
 import stylesCommon from './styles'

@@ -4,8 +4,8 @@ import {
   LayoutChangeEvent,
   ListRenderItemInfo,
   CellRendererProps,
-} from 'react-native'
-import { Pressable, Text } from 'react-native-gesture-handler'
+  Text } from 'react-native'
+import { Pressable } from 'react-native-gesture-handler'
 import Animated, { runOnJS, ScrollEvent, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { LoadEarlierMessages } from '../LoadEarlierMessages'
 import { warning } from '../logging'
@@ -14,7 +14,6 @@ import stylesCommon from '../styles'
 import { TypingIndicator } from '../TypingIndicator'
 import { isSameDay, useCallbackThrottled } from '../utils'
 import { DayAnimated } from './components/DayAnimated'
-
 import { Item } from './components/Item'
 import { ItemProps } from './components/Item/types'
 import styles from './styles'

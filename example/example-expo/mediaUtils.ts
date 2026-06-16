@@ -1,5 +1,4 @@
 import * as ImagePicker from 'expo-image-picker'
-
 import { getCurrentPositionAsync, LocationObjectCoords, requestForegroundPermissionsAsync } from 'expo-location'
 
 export async function getLocationAsync (): Promise<LocationObjectCoords | undefined> {

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   Platform,
   StyleSheet,
@@ -35,6 +35,14 @@ export function Composer ({
   , [])
 
   const [height, setHeight] = useState<number | undefined>(minHeight)
+
+  // Reset the (web) auto-grown height back to its minimum once the text is
+  // cleared, e.g. after sending. Without this the composer stays expanded at
+  // the height of the previously sent multiline message. (#2716)
+  useEffect(() => {
+    if (Platform.OS === 'web' && text.length === 0)
+      setHeight(minHeight)
+  }, [text, minHeight])
 
   const handleContentSizeChange = useMemo(() => {
     if (Platform.OS === 'web')

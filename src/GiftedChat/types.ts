@@ -146,6 +146,15 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Omit
   ) => React.ReactNode
   renderQuickReplySend?: () => React.ReactNode
   keyboardProviderProps?: React.ComponentProps<typeof KeyboardProvider>
+  /**
+   * Skip rendering the built-in `KeyboardProvider` wrapper.
+   * Enable this when your app already mounts its own `KeyboardProvider`
+   * (e.g. once at the root), or when the default `statusBarTranslucent` /
+   * `navigationBarTranslucent` edge-to-edge behavior causes layout shift,
+   * flicker on mount, or a header/content jump on Android/Expo.
+   * Default is `false`.
+   */
+  disableKeyboardProvider?: boolean
   /** Props for KeyboardAvoidingView. Use `keyboardVerticalOffset` to account for headers or iOS predictive text bar (~44pt). */
   keyboardAvoidingViewProps?: KeyboardAvoidingViewProps
   /** Enable animated day label that appears on scroll; default is true */

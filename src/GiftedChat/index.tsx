@@ -347,19 +347,26 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedChatProps<TMessage>) {
   const {
     keyboardProviderProps,
+    disableKeyboardProvider = false,
     ...rest
   } = props
+
+  const chat = <GiftedChat<TMessage> {...rest} />
 
   return (
     <GestureHandlerRootView style={styles.fill}>
       <SafeAreaProvider>
-        <KeyboardProvider
-          statusBarTranslucent
-          navigationBarTranslucent
-          {...keyboardProviderProps}
-        >
-          <GiftedChat<TMessage> {...rest} />
-        </KeyboardProvider>
+        {disableKeyboardProvider
+          ? chat
+          : (
+            <KeyboardProvider
+              statusBarTranslucent
+              navigationBarTranslucent
+              {...keyboardProviderProps}
+            >
+              {chat}
+            </KeyboardProvider>
+          )}
       </SafeAreaProvider>
     </GestureHandlerRootView>
   )

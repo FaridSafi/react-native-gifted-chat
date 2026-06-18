@@ -251,6 +251,7 @@ interface User {
 - **`keyboardProviderProps`** _(Object)_ - Props to be passed to the [`KeyboardProvider`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/keyboard-provider) for keyboard handling. Default values:
   - `statusBarTranslucent: true` - Required on Android for correct keyboard height calculation when status bar is translucent (edge-to-edge mode)
   - `navigationBarTranslucent: true` - Required on Android for correct keyboard height calculation when navigation bar is translucent (edge-to-edge mode)
+- **`disableKeyboardProvider`** _(Bool)_ - Skip rendering the built-in `KeyboardProvider` wrapper; default is `false`. Enable this when your app already mounts its own `KeyboardProvider` (e.g. once at the root), or when the default edge-to-edge behavior causes a layout shift, flicker on mount, or a header/content jump on Android/Expo. See [Using your own `KeyboardProvider`](#using-your-own-keyboardprovider) below.
 - **`keyboardAvoidingViewProps`** _(Object)_ - Props to be passed to the [`KeyboardAvoidingView`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/components/keyboard-avoiding-view). See **keyboardVerticalOffset** below for proper keyboard handling.
 - **`isAlignedTop`** _(Boolean)_ Controls whether or not the message bubbles appear at the top of the chat (Default is false - bubbles align to bottom)
 - **`isInverted`** _(Bool)_ - Reverses display order of `messages`; default is `true`
@@ -286,6 +287,36 @@ function ChatScreen() {
 > **Note:** `useHeaderHeight()` requires your chat component to be rendered inside a proper navigation screen (not conditional rendering). If it returns `0`, ensure your chat screen is a real navigation screen with a visible header.
 
 **Why this matters:** Without the correct offset, the keyboard may overlap the input field or leave extra space. The KeyboardAvoidingView uses this value to calculate how much to shift the content when the keyboard appears.
+
+#### Using your own `KeyboardProvider`
+
+By default GiftedChat wraps itself in a [`KeyboardProvider`](https://kirillzyusko.github.io/react-native-keyboard-controller/docs/api/keyboard-provider) with `statusBarTranslucent` and `navigationBarTranslucent` enabled. On some Android/Expo (edge-to-edge) setups this can cause the screen to shift down, flicker on mount, or distort a navigation header - especially when another `KeyboardProvider` already exists higher in the tree.
+
+Set **`disableKeyboardProvider`** to skip the built-in wrapper:
+
+```jsx
+import { KeyboardProvider } from 'react-native-keyboard-controller'
+
+// Mount a single KeyboardProvider once, near the root of your app
+function App() {
+  return (
+    <KeyboardProvider>
+      {/* ...navigation / screens... */}
+    </KeyboardProvider>
+  )
+}
+
+function ChatScreen() {
+  return (
+    <GiftedChat
+      disableKeyboardProvider
+      // ... other props
+    />
+  )
+}
+```
+
+> **Important:** GiftedChat's keyboard avoidance relies on a `KeyboardProvider` being present in the tree. When you set `disableKeyboardProvider`, you **must** mount your own `KeyboardProvider` above GiftedChat - otherwise the keyboard will cover the input. Mounting exactly one provider (yours) is what avoids the double edge-to-edge shift.
 
 ### Text Input & Composer
 

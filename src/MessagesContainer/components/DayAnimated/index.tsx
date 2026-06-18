@@ -46,16 +46,20 @@ export const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, m
   }, [messages])
 
   const createdAtDate = useDerivedValue(() => {
+    // Pick the day the header is currently positioned over. This must use the
+    // same threshold (day.y + day.height) and last-item fallback as
+    // `currentDayPosition` which drives the header's vertical position;
+    // otherwise the displayed date can lag the visible group by one day (#2709).
     for (let i = 0; i < daysPositionsArray.value.length; i++) {
       const day = daysPositionsArray.value[i]
-      const dayPosition = day.y + day.height - containerHeight.value - dayBottomMargin
+      const dayPosition = day.y + day.height
 
-      if (absoluteScrolledPositionToBottomOfDay.value < dayPosition)
+      if (absoluteScrolledPositionToBottomOfDay.value < dayPosition || i === daysPositionsArray.value.length - 1)
         return day.createdAt
     }
 
     return messagesDates[messagesDates.length - 1]
-  }, [daysPositionsArray, absoluteScrolledPositionToBottomOfDay, messagesDates, containerHeight, dayBottomMargin])
+  }, [daysPositionsArray, absoluteScrolledPositionToBottomOfDay, messagesDates])
 
   const style = useAnimatedStyle(() => ({
     top: interpolate(

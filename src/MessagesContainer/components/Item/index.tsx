@@ -97,8 +97,8 @@ const DayWrapper = <TMessage extends IMessage>(props: MessageProps<TMessage>) =>
     <View>
       {
         renderDayProp
-          ? renderDayProp({ ...rest, createdAt: currentMessage.createdAt })
-          : <Day {...rest} createdAt={currentMessage.createdAt} />
+          ? renderDayProp({ ...rest, createdAt: currentMessage.createdAt, isAnimated: false })
+          : <Day {...rest} createdAt={currentMessage.createdAt} isAnimated={false} />
       }
     </View>
   )

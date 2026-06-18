@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   View,
   LayoutChangeEvent,
@@ -56,6 +56,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
 
   const daysPositions = useSharedValue<DaysPositions>({})
   const listHeight = useSharedValue(0)
+  const contentHeight = useSharedValue(0)
   const scrolledY = useSharedValue(0)
 
   const renderTypingIndicator = useCallback(() => {
@@ -125,6 +126,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
       (!isInverted && lastScrolledY.value < contentOffsetY)
 
     lastScrolledY.value = contentOffsetY
+    contentHeight.value = contentSizeHeight
 
     if (isInverted)
       if (contentOffsetY > scrollToBottomOffset!)
@@ -138,7 +140,39 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
       changeScrollToBottomVisibility(false)
     else
       changeScrollToBottomVisibility(false)
-  }, [isInverted, scrollToBottomOffset, changeScrollToBottomVisibility, isScrollingDown, lastScrolledY, listPropsOnScrollProp])
+  }, [isInverted, scrollToBottomOffset, changeScrollToBottomVisibility, isScrollingDown, lastScrolledY, contentHeight, listPropsOnScrollProp])
+
+  // Auto-scroll to the newest message when it arrives in a non-inverted list.
+  // Inverted lists keep the newest message visible on their own, but a
+  // non-inverted list appends new messages off-screen at the end (#2612).
+  // Only scroll when the user is already near the bottom so we don't yank
+  // them away while they are reading earlier messages.
+  const latestMessageId = !isInverted && messages.length > 0
+    ? messages[messages.length - 1]._id
+    : undefined
+  const previousLatestMessageId = useRef(latestMessageId)
+  useEffect(() => {
+    if (isInverted) {
+      previousLatestMessageId.current = latestMessageId
+      return
+    }
+
+    if (
+      latestMessageId != null &&
+      latestMessageId !== previousLatestMessageId.current &&
+      // skip the very first render; initial positioning is handled on layout
+      previousLatestMessageId.current !== undefined
+    ) {
+      const isNearBottom =
+        contentHeight.value === 0 ||
+        lastScrolledY.value + listHeight.value >= contentHeight.value - scrollToBottomOffset!
+
+      if (isNearBottom)
+        doScrollToBottom(true)
+    }
+
+    previousLatestMessageId.current = latestMessageId
+  }, [latestMessageId, isInverted, doScrollToBottom, contentHeight, lastScrolledY, listHeight, scrollToBottomOffset])
 
   const restProps = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

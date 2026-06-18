@@ -446,7 +446,7 @@ See full example in [LinksExample](example/components/chat-examples/LinksExample
 - **`timeFormat`** _(String)_ - Format to use for rendering times; default is `'LT'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`dateFormat`** _(String)_ - Format to use for rendering dates; default is `'D MMMM'` (see [Day.js Format](https://day.js.org/docs/en/display/format))
 - **`dateFormatCalendar`** _(Object)_ - Format to use for rendering relative times; default is `{ sameDay: '[Today]' }` (see [Day.js Calendar](https://day.js.org/docs/en/plugin/calendar))
-- **`renderDay`** _(Component | Function)_ - Custom day above a message
+- **`renderDay`** _(Component | Function)_ - Custom day above a message. The same function renders both the inline day separators and the floating/animated day header that sticks to the top while scrolling. Read `props.isAnimated` (`true` for the floating header, `false` for the inline separator) to give each a different look.
 - **`dayProps`** _(Object)_ - Props to pass to the Day component:
   - `containerStyle` - Custom style for the day container
   - `wrapperStyle` - Custom style for the day wrapper

@@ -135,11 +135,12 @@ export const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, m
       return null
 
     return renderDay
-      ? renderDay({ ...rest, createdAt })
+      ? renderDay({ ...rest, createdAt, isAnimated: true })
       : <Day
         {...rest}
         containerStyle={[styles.dayAnimatedDayContainerStyle, rest.containerStyle]}
         createdAt={createdAt}
+        isAnimated
       />
   }, [createdAt, renderDay, rest])
 

@@ -71,8 +71,17 @@ export const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, m
   }), [relativeScrolledPositionToBottomOfDay, containerHeight, dayTopOffset, isLoadingAnim])
 
   const contentStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-  }), [opacity])
+    // Only show the floating header once the current day's inline separator has
+    // scrolled off the top (relativeScrolledPositionToBottomOfDay < 0). While the
+    // inline separator is still on screen (>= 0) it already shows the date, so
+    // hiding the floating copy avoids a duplicate date badge (#2709).
+    opacity: opacity.value * interpolate(
+      relativeScrolledPositionToBottomOfDay.value,
+      [-0.0001, 0],
+      [1, 0],
+      'clamp'
+    ),
+  }), [opacity, relativeScrolledPositionToBottomOfDay])
 
   const fadeOut = useCallback(() => {
     'worklet'

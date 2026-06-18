@@ -24,6 +24,7 @@ jobs:
       - name: Node modules
         run: |
           yarn install
+          yarn --cwd example install
 
       - name: Lint
         run: |

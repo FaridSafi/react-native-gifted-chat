@@ -7133,13 +7133,13 @@ react-native-gesture-handler@~2.31.1:
     invariant "^2.2.4"
 
 "react-native-gifted-chat@link:..":
-  version "3.3.3"
+  version "3.4.0"
   dependencies:
     "@expo/react-native-action-sheet" "^4.1.1"
     "@types/lodash.isequal" "^4.5.8"
-    dayjs "^1.11.19"
+    dayjs "^1.11.21"
     lodash.isequal "^4.5.0"
-    react-native-zoom-reanimated "^1.5.2"
+    react-native-zoom-reanimated "^1.5.4"
 
 react-native-is-edge-to-edge@^1.2.1:
   version "1.2.1"
@@ -7227,10 +7227,10 @@ react-native-worklets@^0.9.2:
     convert-source-map "^2.0.0"
     semver "^7.7.4"
 
-react-native-zoom-reanimated@^1.5.3:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/react-native-zoom-reanimated/-/react-native-zoom-reanimated-1.5.3.tgz#65a3c43d0e385dcbfd652553f33b1201d390fa14"
-  integrity sha512-IuaRbzs/Ku2lyOcG0p1xMro+1K1bCC+jtWoQecUaqK8/ME97uRwNgwi6k/Fx8cEsx/R60HLA/mqpbw8pfrUECw==
+react-native-zoom-reanimated@^1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/react-native-zoom-reanimated/-/react-native-zoom-reanimated-1.5.4.tgz#739a9f687858a028465acc094a65118a285c85ae"
+  integrity sha512-JbyVX46ieKu/T+jjjd5sMy0x6tTE3bj3t5Yd7Lb78CpZ0HIyR0rBUqHKjBIFuxvDvjeidqKbssX52fVUtyrkRQ==
 
 react-native@0.85.3:
   version "0.85.3"
@@ -8546,9 +8546,9 @@ yallist@^3.0.2:
   integrity sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==
 
 yaml@^2.6.1:
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.8.2.tgz#5694f25eca0ce9c3e7a9d9e00ce0ddabbd9e35c5"
-  integrity sha512-mplynKqc1C2hTVYxd0PU2xQAc22TI1vShAYGksCCfxbn/dFwnHTNi1bvYsBTkhdUNtGIf5xNOg938rrSSYvS9A==
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.9.0.tgz#78274afd93598a1dfdd6130df6a566defcbf9aa4"
+  integrity sha512-2AvhNX3mb8zd6Zy7INTtSpl1F15HW6Wnqj0srWlkKLcpYl/gMIMJiyuGq2KeI2YFxUPjdlB+3Lc10seMLtL4cA==
 
 yargs-parser@^21.1.1:
   version "21.1.1"

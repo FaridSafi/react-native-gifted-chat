@@ -1,16 +1,23 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { LayoutChangeEvent } from 'react-native'
-import Animated, { interpolate, useAnimatedStyle, useDerivedValue, useSharedValue, useAnimatedReaction, withTiming, runOnJS } from 'react-native-reanimated'
+import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, useAnimatedReaction, withTiming, runOnJS } from 'react-native-reanimated'
 import { Day } from '../../../Day'
 import stylesCommon from '../../../styles'
-import { isSameDay } from '../../../utils'
-import { useAbsoluteScrolledPositionToBottomOfDay, useRelativeScrolledPositionToBottomOfDay } from '../Item'
+import { DAY_HANDOFF_OFFSET, DAY_MARGIN_TOP, DAY_PIN_OFFSET } from '../dayLayout'
 import styles from './styles'
 import { DayAnimatedProps } from './types'
 
 export * from './types'
 
-export const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, messages, isLoading, ...rest }: DayAnimatedProps) => {
+// Set to a value > 1 to slow down the fade in/out animations so they can be
+// captured frame-by-frame while debugging (e.g. 20). Keep at 1 for production.
+const DEBUG_TIME_SCALE = 1
+
+const FADE_IN_DURATION = 150 * DEBUG_TIME_SCALE
+const FADE_OUT_DURATION = 300 * DEBUG_TIME_SCALE
+const FADE_OUT_DELAY = 600 * DEBUG_TIME_SCALE
+
+export const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, isLoading, ...rest }: DayAnimatedProps) => {
   const opacity = useSharedValue(0)
   const fadeOutOpacityTimeoutId = useSharedValue<ReturnType<typeof setTimeout> | undefined>(undefined)
   const containerHeight = useSharedValue(0)
@@ -26,73 +33,83 @@ export const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, m
 
   const [createdAt, setCreatedAt] = useState<number | undefined>()
 
-  const dayTopOffset = useMemo(() => 10, [])
-  const dayBottomMargin = useMemo(() => 10, [])
-  const absoluteScrolledPositionToBottomOfDay = useAbsoluteScrolledPositionToBottomOfDay(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
-  const relativeScrolledPositionToBottomOfDay = useRelativeScrolledPositionToBottomOfDay(listHeight, scrolledY, daysPositions, containerHeight, dayBottomMargin, dayTopOffset)
+  // Telegram-style sticky day header (iOS section-header behaviour).
+  //
+  // The list is inverted: older days sit higher on screen, newer days lower.
+  // `daysPositionsArray` is sorted ascending by y, so index 0 is the newest day.
+  //
+  // For each day separator the on-screen Y of its top edge is:
+  //   separatorScreenTop = (listHeight + scrolledY) - (day.y + day.height)
+  // and the separator's pill renders DAY_MARGIN_TOP below that (Day's container
+  // marginTop). The floating header overrides that margin to 0, so when it is
+  // pinned at DAY_PIN_OFFSET its pill lines up with an inline separator whose
+  // separatorScreenTop === DAY_HANDOFF_OFFSET (= DAY_PIN_OFFSET - DAY_MARGIN_TOP).
+  //
+  // The "stuck" day is the newest day whose separator has reached/passed that
+  // handoff line. The floating header shows its date pinned at DAY_PIN_OFFSET,
+  // and the next (newer) day's separator, still below, pushes it up as it rises:
+  //   top = min(DAY_PIN_OFFSET, nextSeparatorScreenTop + DAY_MARGIN_TOP - headerHeight)
+  // so the floating pill's bottom rests exactly on the rising separator's pill.
+  // The rising separator is the visible *incoming* header during the push (it is
+  // rendered inline and hands off at the same pixel), so there is no duplicate
+  // and no jump.
+  const sticky = useDerivedValue(() => {
+    'worklet'
 
-  const messagesDates = useMemo(() => {
-    const messagesDates: number[] = []
+    const days = daysPositionsArray.value
+    const n = days.length
+    if (n === 0)
+      return { top: DAY_PIN_OFFSET, createdAt: undefined as number | undefined }
 
-    for (let i = 1; i < messages.length; i++) {
-      const previousMessage = messages[i - 1]
-      const message = messages[i]
+    const scrolledTop = listHeight.value + scrolledY.value
 
-      if (!isSameDay(previousMessage, message) || !messagesDates.includes(new Date(message.createdAt).getTime()))
-        messagesDates.push(new Date(message.createdAt).getTime())
+    let idx = n - 1
+    for (let i = 0; i < n; i++) {
+      const separatorScreenTop = scrolledTop - (days[i].y + days[i].height)
+      if (separatorScreenTop <= DAY_HANDOFF_OFFSET) {
+        idx = i
+        break
+      }
     }
 
-    return messagesDates
-  }, [messages])
+    const current = days[idx]
 
-  const createdAtDate = useDerivedValue(() => {
-    // Pick the day the header is currently positioned over. This must use the
-    // same threshold (day.y + day.height) and last-item fallback as
-    // `currentDayPosition` which drives the header's vertical position;
-    // otherwise the displayed date can lag the visible group by one day (#2709).
-    for (let i = 0; i < daysPositionsArray.value.length; i++) {
-      const day = daysPositionsArray.value[i]
-      const dayPosition = day.y + day.height
+    // While loading earlier messages the top is occupied by the spinner; keep the
+    // header tucked away above the screen.
+    if (isLoadingAnim.value)
+      return { top: -containerHeight.value, createdAt: current.createdAt }
 
-      if (absoluteScrolledPositionToBottomOfDay.value < dayPosition || i === daysPositionsArray.value.length - 1)
-        return day.createdAt
+    let top = DAY_PIN_OFFSET
+    if (idx > 0) {
+      const next = days[idx - 1]
+      const nextSeparatorScreenTop = scrolledTop - (next.y + next.height)
+      top = Math.min(DAY_PIN_OFFSET, nextSeparatorScreenTop + DAY_MARGIN_TOP - containerHeight.value)
     }
 
-    return messagesDates[messagesDates.length - 1]
-  }, [daysPositionsArray, absoluteScrolledPositionToBottomOfDay, messagesDates])
+    return { top, createdAt: current.createdAt }
+  }, [daysPositionsArray, listHeight, scrolledY, containerHeight, isLoadingAnim])
 
   const style = useAnimatedStyle(() => ({
-    top: interpolate(
-      relativeScrolledPositionToBottomOfDay.value,
-      [-dayTopOffset, -0.0001, 0, isLoadingAnim.value ? 0 : containerHeight.value + dayTopOffset],
-      [dayTopOffset, dayTopOffset, -containerHeight.value, isLoadingAnim.value ? -containerHeight.value : dayTopOffset],
-      'clamp'
-    ),
-  }), [relativeScrolledPositionToBottomOfDay, containerHeight, dayTopOffset, isLoadingAnim])
+    top: sticky.value.top,
+  }), [sticky])
 
   const contentStyle = useAnimatedStyle(() => ({
-    // Only show the floating header once the current day's inline separator has
-    // scrolled off the top (relativeScrolledPositionToBottomOfDay < 0). While the
-    // inline separator is still on screen (>= 0) it already shows the date, so
-    // hiding the floating copy avoids a duplicate date badge (#2709).
-    opacity: opacity.value * interpolate(
-      relativeScrolledPositionToBottomOfDay.value,
-      [-0.0001, 0],
-      [1, 0],
-      'clamp'
-    ),
-  }), [opacity, relativeScrolledPositionToBottomOfDay])
+    // Telegram only shows the sticky date while scrolling; the fade is driven by
+    // the scroll reaction below. The push (above) prevents overlap with the inline
+    // separator, so no extra opacity gate is needed.
+    opacity: opacity.value,
+  }), [opacity])
 
   const fadeOut = useCallback(() => {
     'worklet'
 
-    opacity.value = withTiming(0, { duration: 500 })
+    opacity.value = withTiming(0, { duration: FADE_OUT_DURATION })
   }, [opacity])
 
   const scheduleFadeOut = useCallback(() => {
     clearTimeout(fadeOutOpacityTimeoutId.value)
 
-    fadeOutOpacityTimeoutId.value = setTimeout(fadeOut, 500)
+    fadeOutOpacityTimeoutId.value = setTimeout(fadeOut, FADE_OUT_DELAY)
   }, [fadeOut, fadeOutOpacityTimeoutId])
 
   const handleLayout = useCallback(({ nativeEvent }: LayoutChangeEvent) => {
@@ -110,7 +127,7 @@ export const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, m
       if (value[0] === prevValue?.[0])
         return
 
-      opacity.value = withTiming(1, { duration: 500 })
+      opacity.value = withTiming(1, { duration: FADE_IN_DURATION })
 
       runOnJS(scheduleFadeOut)()
     },
@@ -118,12 +135,12 @@ export const DayAnimated = ({ scrolledY, daysPositions, listHeight, renderDay, m
   )
 
   useAnimatedReaction(
-    () => createdAtDate.value,
+    () => sticky.value.createdAt,
     (value, prevValue) => {
       if (value && value !== prevValue)
         runOnJS(setCreatedAt)(value)
     },
-    [createdAtDate]
+    [sticky]
   )
 
   useEffect(() => {

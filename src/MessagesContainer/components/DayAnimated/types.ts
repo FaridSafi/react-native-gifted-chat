@@ -1,5 +1,4 @@
 import { DayProps } from '../../../Day'
-import { IMessage } from '../../../Models'
 import { DaysPositions } from '../../types'
 
 export interface DayAnimatedProps extends Omit<DayProps, 'createdAt'> {
@@ -7,6 +6,5 @@ export interface DayAnimatedProps extends Omit<DayProps, 'createdAt'> {
   daysPositions: { value: DaysPositions }
   listHeight: { value: number }
   renderDay?: (props: DayProps) => React.ReactNode
-  messages: IMessage[]
   isLoading: boolean
 }

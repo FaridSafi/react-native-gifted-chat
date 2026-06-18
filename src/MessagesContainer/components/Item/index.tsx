@@ -6,6 +6,7 @@ import { Message, MessageProps } from '../../../Message'
 import { IMessage } from '../../../Models'
 import { isSameDay } from '../../../utils'
 import { DaysPositions } from '../../types'
+import { DAY_HANDOFF_FADE, DAY_HANDOFF_OFFSET, DAY_MARGIN_TOP } from '../dayLayout'
 import { ItemProps } from './types'
 
 export * from './types'
@@ -28,7 +29,7 @@ export const useRelativeScrolledPositionToBottomOfDay = (
   dayTopOffset: number,
   createdAt?: number
 ) => {
-  const dayMarginTop = useMemo(() => 5, [])
+  const dayMarginTop = useMemo(() => DAY_MARGIN_TOP, [])
 
   const absoluteScrolledPositionToBottomOfDay = useAbsoluteScrolledPositionToBottomOfDay(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
 
@@ -126,24 +127,24 @@ const AnimatedDayWrapper = <TMessage extends IMessage>(props: ItemProps<TMessage
     dayContainerHeight.value = nativeEvent.layout.height
   }, [dayContainerHeight])
 
-  const style = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      relativeScrolledPositionToBottomOfDay.value,
-      [
-        -dayTopOffset,
-        -0.0001,
-        0,
-        dayContainerHeight.value + dayTopOffset,
-      ],
-      [
-        0,
-        0,
-        1,
-        1,
-      ],
-      'clamp'
-    ),
-  }), [relativeScrolledPositionToBottomOfDay, dayContainerHeight, dayTopOffset])
+  const style = useAnimatedStyle(() => {
+    // rel = separatorScreenTop - DAY_MARGIN_TOP, so separatorScreenTop = rel + DAY_MARGIN_TOP.
+    // The inline separator is the visible "incoming" header while it is below the
+    // handoff line; it fades out right as it reaches it, exactly when the floating
+    // sticky header takes over its date at the same pixel. Sharing DAY_HANDOFF_OFFSET
+    // with the floating header is what makes the Telegram-style push read as one
+    // header (no duplicate, no gap, no jump).
+    const separatorScreenTop = relativeScrolledPositionToBottomOfDay.value + DAY_MARGIN_TOP
+
+    return {
+      opacity: interpolate(
+        separatorScreenTop,
+        [DAY_HANDOFF_OFFSET, DAY_HANDOFF_OFFSET + DAY_HANDOFF_FADE],
+        [0, 1],
+        'clamp'
+      ),
+    }
+  }, [relativeScrolledPositionToBottomOfDay])
 
   return (
     <Animated.View

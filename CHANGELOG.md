@@ -1,6 +1,6 @@
 # Changelog
 
-> **Maintenance notice:** Active development has moved to **[@kesha-antonov/react-native-chat](https://www.npmjs.com/package/@kesha-antonov/react-native-chat)**. This package is now in maintenance mode and won't receive new features. See the fork for streaming AI messages and ongoing updates. Migrating is mostly a rename - see the fork's migration guide.
+> **Maintenance notice:** Active development has moved to **[@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat)**. This package is now in maintenance mode and won't receive new features. See the fork for streaming AI messages and ongoing updates. Migrating is mostly a rename - see the fork's migration guide.
 
 ## [3.4.1] - 2026-06-19
 
@@ -25,7 +25,7 @@
 - Documented emoji reactions in the README with screenshots and linked the Features list to their sections.
 
 ### 🗒️ Maintenance
-- Entered maintenance mode. Added an install-time notice pointing to the maintained fork **[@kesha-antonov/react-native-chat](https://www.npmjs.com/package/@kesha-antonov/react-native-chat)** (printed once on install; silence with `GIFTED_CHAT_NO_NOTICE=1`). No API or runtime changes.
+- Entered maintenance mode. Added an install-time notice pointing to the maintained fork **[@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat)** (printed once on install; silence with `GIFTED_CHAT_NO_NOTICE=1`). No API or runtime changes.
 
 ## [3.4.0] - 2026-06-16
 

@@ -32,7 +32,7 @@ try {
       '',
       '   Active development has moved to a maintained fork:',
       `   ${color.c}${color.b}@kesha-antonov/react-native-chat${color.r}`,
-      `   ${color.c}https://www.npmjs.com/package/@kesha-antonov/react-native-chat${color.r}`,
+      `   ${color.c}https://github.com/kesha-antonov/react-native-chat${color.r}`,
       '',
       '   • Adds streaming AI messages + the latest fixes',
       '   • Migrating is mostly a rename (GiftedChat → Chat)',

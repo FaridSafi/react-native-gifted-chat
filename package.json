@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-chat",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "description": "The most complete chat UI for React Native",
   "keywords": [
     "android",
@@ -26,9 +26,11 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib"
+    "lib",
+    "postinstall.cjs"
   ],
   "scripts": {
+    "postinstall": "node postinstall.cjs",
     "typecheck": "yarn tsc --noEmit",
     "build": "rm -rf lib && yarn tsc",
     "tsc:watch": "yarn typecheck --watch",

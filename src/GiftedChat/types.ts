@@ -26,6 +26,7 @@ import {
   User,
 } from '../Models'
 import { QuickRepliesProps } from '../QuickReplies'
+import { ReactionsProps } from '../Reactions'
 import { ReplyProps } from '../Reply'
 import { SendProps } from '../Send'
 import { SystemMessageProps } from '../SystemMessage'
@@ -162,4 +163,6 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Omit
 
   /** Reply functionality configuration */
   reply?: ReplyProps<TMessage>
+  /** Emoji reactions configuration */
+  reactions?: ReactionsProps<TMessage>
 }

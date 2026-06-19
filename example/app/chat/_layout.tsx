@@ -44,6 +44,10 @@ export default function ChatLayout () {
         name='day-animated'
         options={{ title: 'Day Animated' }}
       />
+      <Stack.Screen
+        name='reactions'
+        options={{ title: 'Reactions' }}
+      />
     </Stack>
   )
 }

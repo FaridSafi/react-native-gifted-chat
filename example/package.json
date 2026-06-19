@@ -20,6 +20,7 @@
   "dependencies": {
     "@expo/react-native-action-sheet": "^4.1.1",
     "@expo/vector-icons": "^15.1.1",
+    "@react-native-async-storage/async-storage": "2.2.0",
     "@react-navigation/bottom-tabs": "^7.18.2",
     "@react-navigation/elements": "^2.9.25",
     "@react-navigation/native": "^7.3.3",
@@ -43,6 +44,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.85.3",
+    "react-native-emoji-chooser": "^0.1.11",
     "react-native-gesture-handler": "~2.31.1",
     "react-native-gifted-chat": "link:..",
     "react-native-keyboard-controller": "^1.21.6",
@@ -51,6 +53,7 @@
     "react-native-reanimated": "^4.3.1",
     "react-native-safe-area-context": "^5.7.0",
     "react-native-screens": "^4.25.2",
+    "react-native-svg": "15.15.4",
     "react-native-web": "~0.21.2",
     "react-native-worklets": "^0.9.2"
   },

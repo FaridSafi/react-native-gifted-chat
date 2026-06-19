@@ -4,7 +4,27 @@
 
 ## [3.4.1] - 2026-06-19
 
-### 🔧 Changes
+### ✨ Features
+- **Emoji message reactions** (#2725): long-press a message to react with emojis; reactions render as toggleable pills below the bubble. Adds the `reactions` prop on `<GiftedChat>`, the `MessageReactions` display and a lightweight `ReactionPicker`, the `MessageReaction` model, and `IMessage.reactions`. A full emoji browser can be supplied via `renderReactionPicker`.
+- **Animated day header `isAnimated` flag** (#2721, #2748): `renderDay` now receives an `isAnimated` flag so custom day renderers can style the floating/sticky header differently from inline day separators.
+
+### 🐛 Bug Fixes
+- Animated day header showed the wrong date while scrolling (#2709, #2746).
+- Duplicate day badge produced by the animated header (#2709, #2747).
+- Reworked the animated day header into a Telegram-style sticky push for smoother transitions.
+- Auto-scroll to the newest message when `inverted` is `false` (#2612, #2745).
+- Composer not resizing after send; added a `disableKeyboardProvider` opt-out for custom keyboard setups.
+
+### 🔧 Improvements
+- Refactored the animated day header (DRY, with a reusable debug helper).
+- Added a **Day Animated** example screen and tidied the example chat header.
+- Refreshed lockfiles to pull in-range security patches (#2744) and bumped transitive deps (launch-editor, brace-expansion, yaml, flatted, lodash, shell-quote, @babel/core).
+- CI: dropped EOL Node 20 (now tests on Node 22 and 24), install example deps so lint can resolve example imports, and stopped tracking `example/ios`.
+
+### 📝 Documentation
+- Documented emoji reactions in the README with screenshots and linked the Features list to their sections.
+
+### 🗒️ Maintenance
 - Entered maintenance mode. Added an install-time notice pointing to the maintained fork **[@kesha-antonov/react-native-chat](https://www.npmjs.com/package/@kesha-antonov/react-native-chat)** (printed once on install; silence with `GIFTED_CHAT_NO_NOTICE=1`). No API or runtime changes.
 
 ## [3.4.0] - 2026-06-16

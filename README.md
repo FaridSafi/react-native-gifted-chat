@@ -23,23 +23,23 @@
 
 ## ✨ Features
 
-- 🎨 **Fully Customizable** - Override any component with your own implementation
-- 📎 **Composer Actions** - Attach photos, files, or trigger custom actions
-- ↩️ **Reply to Messages** - Swipe-to-reply with reply preview and message threading
-- ⏮️ **Load Earlier Messages** - Infinite scroll with pagination support
+- 🎨 **[Fully Customizable](#-props-reference)** - Override any component with your own implementation
+- 📎 **[Composer Actions](#actions--action-sheet)** - Attach photos, files, or trigger custom actions
+- ↩️ **[Reply to Messages](#reply-to-messages)** - Swipe-to-reply with reply preview and message threading
+- ⏮️ **[Load Earlier Messages](#load-earlier-messages)** - Infinite scroll with pagination support
 - 📋 **Copy to Clipboard** - Long-press messages to copy text
 - 🔗 **Smart Link Parsing** - Auto-detect URLs, emails, phone numbers, hashtags, mentions
-- 👤 **Avatars** - User initials or custom avatar images
-- 🌍 **Localized Dates** - Full i18n support via Day.js
-- ⌨️ **Keyboard Handling** - Smart keyboard avoidance for all platforms
-- 💬 **System Messages** - Display system notifications in chat
-- ⚡ **Quick Replies** - Bot-style quick reply buttons
-- 😀 **Emoji Reactions** - Long-press to react, with reaction pills and an optional full emoji browser
-- ✍️ **Typing Indicator** - Show when users are typing
+- 👤 **[Avatars](#avatars)** - User initials or custom avatar images
+- 🌍 **[Localized Dates](#date--time)** - Full i18n support via Day.js
+- ⌨️ **[Keyboard Handling](#keyboard--layout)** - Smart keyboard avoidance for all platforms
+- 💬 **[System Messages](#system-messages)** - Display system notifications in chat
+- ⚡ **[Quick Replies](#quick-replies)** - Bot-style quick reply buttons
+- 😀 **[Emoji Reactions](#emoji-reactions)** - Long-press to react, with reaction pills and an optional full emoji browser
+- ✍️ **[Typing Indicator](#typing-indicator)** - Show when users are typing
 - ✅ **Message Status** - Tick indicators for sent/delivered/read states
-- ⬇️ **Scroll to Bottom** - Quick navigation button
-- 🌐 **Web Support** - Works with react-native-web
-- 📱 **Expo Support** - Easy integration with Expo projects
+- ⬇️ **[Scroll to Bottom](#scroll-to-bottom)** - Quick navigation button
+- 🌐 **[Web Support](#web-react-native-web)** - Works with react-native-web
+- 📱 **[Expo Support](#expo-projects)** - Easy integration with Expo projects
 - 📝 **TypeScript** - Complete TypeScript definitions included
 
 <p align="center">

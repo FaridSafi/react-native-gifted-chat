@@ -4,6 +4,7 @@ import { AvatarProps } from '../Avatar'
 import { BubbleProps } from '../Bubble'
 import { DayProps } from '../Day'
 import { IMessage, User, LeftRightStyle } from '../Models'
+import { ReactionsProps } from '../Reactions'
 import { SwipeToReplyProps } from '../Reply'
 import { SystemMessageProps } from '../SystemMessage'
 
@@ -23,4 +24,6 @@ export interface MessageProps<TMessage extends IMessage> {
   onMessageLayout?: (event: LayoutChangeEvent) => void
   /** Swipe to reply configuration */
   swipeToReply?: SwipeToReplyProps<TMessage>
+  /** Emoji reactions configuration */
+  reactions?: ReactionsProps<TMessage>
 }

@@ -20,6 +20,7 @@ import {
   MessageAudioProps,
 } from '../Models'
 import { QuickRepliesProps } from '../QuickReplies'
+import { ReactionsProps } from '../Reactions'
 import { MessageReplyStyleProps } from '../Reply'
 import { TimeProps } from '../Time'
 
@@ -101,4 +102,6 @@ export interface BubbleProps<TMessage extends IMessage> {
   ) => React.ReactNode
   /** Message reply configuration */
   messageReply?: BubbleReplyProps<TMessage>
+  /** Emoji reactions configuration */
+  reactions?: ReactionsProps<TMessage>
 }

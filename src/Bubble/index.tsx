@@ -1,9 +1,17 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 import {
   View,
   Pressable,
   Text } from 'react-native'
-
+import { Gesture, GestureDetector } from 'react-native-gesture-handler'
+import Animated, {
+  Easing,
+  ReduceMotion,
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated'
 
 import { MessageReply } from '../components/MessageReply'
 import { useChatContext } from '../GiftedChatContext'
@@ -13,6 +21,7 @@ import { MessageText } from '../MessageText'
 import { MessageVideo } from '../MessageVideo'
 import { IMessage } from '../Models'
 import { QuickReplies } from '../QuickReplies'
+import { DEFAULT_REACTION_EMOJIS, MessageReactions, ReactionPicker } from '../Reactions'
 import { getStyleWithPosition } from '../styles'
 import { Time } from '../Time'
 import { isSameUser, isSameDay, renderComponentOrElement } from '../utils'
@@ -20,6 +29,18 @@ import styles from './styles'
 import { BubbleProps, RenderMessageTextProps } from './types'
 
 export * from './types'
+
+interface PickerAnchor {
+  pageX: number
+  pageY: number
+  bubbleWidth: number
+  bubbleHeight: number
+}
+
+const SCALE_PRESSED = 0.85
+const SCALE_DURATION_IN = 400
+const SCALE_DURATION_OUT = 200
+const SCALE_EASING = Easing.inOut(Easing.quad)
 
 export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<TMessage>): React.ReactElement => {
   const {
@@ -39,9 +60,28 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
     bottomContainerStyle,
     onPressMessage: onPressMessageProp,
     onLongPressMessage: onLongPressMessageProp,
+    reactions,
   } = props
 
   const context = useChatContext()
+
+  const bubbleContainerRef = useRef<View>(null)
+
+  const [isPickerVisible, setIsPickerVisible] = useState(false)
+  const [pickerAnchor, setPickerAnchor] = useState<PickerAnchor>({
+    pageX: 0,
+    pageY: 0,
+    bubbleWidth: 0,
+    bubbleHeight: 0,
+  })
+
+  // Scale shared value is declared unconditionally so hooks order stays stable
+  // whether or not reactions are enabled.
+  const messageScale = useSharedValue(1)
+
+  const bubbleScaleStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: messageScale.value }],
+  }))
 
   const onPress = useCallback(() => {
     onPressMessageProp?.(context, currentMessage)
@@ -54,6 +94,55 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
     context,
     onLongPressMessageProp,
   ])
+
+  const measureBubble = useCallback(() => {
+    bubbleContainerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+      setPickerAnchor({ pageX, pageY, bubbleWidth: width, bubbleHeight: height })
+    })
+  }, [])
+
+  const tapGesture = useMemo(
+    () =>
+      Gesture.Tap()
+        .runOnJS(true)
+        .onEnd((_e, success) => {
+          if (success)
+            onPressMessageProp?.(context, currentMessage)
+        }),
+    [onPressMessageProp, context, currentMessage]
+  )
+
+  const longPressGesture = useMemo(
+    () =>
+      Gesture.LongPress()
+        .onBegin(() => {
+          messageScale.value = withTiming(SCALE_PRESSED, {
+            duration: SCALE_DURATION_IN,
+            easing: SCALE_EASING,
+            reduceMotion: ReduceMotion.System,
+          })
+          runOnJS(measureBubble)()
+        })
+        .onStart(() => {
+          runOnJS(setIsPickerVisible)(true)
+        })
+        .onFinalize(() => {
+          messageScale.value = withTiming(1, {
+            duration: SCALE_DURATION_OUT,
+            easing: SCALE_EASING,
+            reduceMotion: ReduceMotion.System,
+          })
+        }),
+    [messageScale, measureBubble]
+  )
+
+  // Exclusive composition: a long-press wins over the tap when held long
+  // enough; a quick lift lets the tap through. Both share the onBegin/onFinalize
+  // scale animation because onBegin always fires before either gesture wins.
+  const reactionsGesture = useMemo(
+    () => Gesture.Exclusive(longPressGesture, tapGesture),
+    [longPressGesture, tapGesture]
+  )
 
   const styledBubbleToNext = useMemo(() => {
     if (
@@ -370,34 +459,116 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
     props.isCustomViewBottom,
   ])
 
-  return (
-    <View style={containerStyle?.[position]}>
+  const renderBubbleBody = useCallback(() => (
+    <>
+      {renderBubbleContent()}
       <View
         style={[
-          getStyleWithPosition(styles, 'wrapper', position),
-          styledBubbleToNext,
-          styledBubbleToPrevious,
-          wrapperStyle?.[position],
+          styles.bottom,
+          bottomContainerStyle?.[position],
         ]}
       >
+        {renderUsername()}
+        <View style={styles.messageTimeAndStatusContainer}>
+          {renderTime()}
+          {renderTicks()}
+        </View>
+      </View>
+    </>
+  ), [
+    position,
+    bottomContainerStyle,
+    renderBubbleContent,
+    renderUsername,
+    renderTime,
+    renderTicks,
+  ])
+
+  const wrapperStyleList = useMemo(() => [
+    getStyleWithPosition(styles, 'wrapper', position),
+    styledBubbleToNext,
+    styledBubbleToPrevious,
+    wrapperStyle?.[position],
+  ], [position, styledBubbleToNext, styledBubbleToPrevious, wrapperStyle])
+
+  const renderReactionsDisplay = useCallback(() => {
+    const currentReactions = currentMessage?.reactions
+    if (!currentReactions || currentReactions.length === 0)
+      return null
+
+    const displayProps = {
+      message: currentMessage,
+      reactions: currentReactions,
+      currentUserId: props.user?._id,
+      position,
+      onReactionPress: (emoji: string) => reactions?.onReactionPress?.(currentMessage, emoji),
+      containerStyle: reactions?.containerStyle,
+      reactionStyle: reactions?.reactionStyle,
+      reactionActiveStyle: reactions?.reactionActiveStyle,
+      reactionTextStyle: reactions?.reactionTextStyle,
+      reactionCountStyle: reactions?.reactionCountStyle,
+    }
+
+    if (reactions?.renderReactions)
+      return renderComponentOrElement(reactions.renderReactions, displayProps)
+
+    return <MessageReactions {...displayProps} />
+  }, [currentMessage, position, props.user, reactions])
+
+  const renderReactionPickerModal = useCallback(() => {
+    if (!reactions?.isEnabled)
+      return null
+
+    const emojis = reactions.emojis ?? DEFAULT_REACTION_EMOJIS
+
+    const pickerProps = {
+      visible: isPickerVisible,
+      message: currentMessage,
+      emojis,
+      onSelect: (emoji: string) => reactions?.onReactionPress?.(currentMessage, emoji),
+      onDismiss: () => setIsPickerVisible(false),
+      position,
+      ...pickerAnchor,
+      pickerContainerStyle: reactions.pickerContainerStyle,
+      pickerEmojiStyle: reactions.pickerEmojiStyle,
+    }
+
+    if (reactions.renderReactionPicker)
+      return renderComponentOrElement(reactions.renderReactionPicker, pickerProps)
+
+    return <ReactionPicker {...pickerProps} />
+  }, [reactions, isPickerVisible, currentMessage, position, pickerAnchor])
+
+  if (reactions?.isEnabled)
+    // Reactions path: the Animated.View carries only the scale transform,
+    // keeping the animation isolated from the static bubble styles on the
+    // inner View. Tap/long-press are handled by the composed gesture.
+    return (
+      <Animated.View style={containerStyle?.[position]} ref={bubbleContainerRef}>
+        <GestureDetector gesture={reactionsGesture}>
+          <Animated.View style={bubbleScaleStyle}>
+            <View style={wrapperStyleList}>
+              {renderBubbleBody()}
+            </View>
+          </Animated.View>
+        </GestureDetector>
+        {renderQuickReplies()}
+        {renderReactionsDisplay()}
+        {renderReactionPickerModal()}
+      </Animated.View>
+    )
+
+  // Default path: unchanged behaviour for existing users, preserving
+  // touchableProps, native press feedback, and the onLongPressMessage callback.
+  return (
+    <View style={containerStyle?.[position]}>
+      <View style={wrapperStyleList}>
         <Pressable
           onPress={onPress}
           onLongPress={onLongPress}
           {...props.touchableProps}
         >
-          {renderBubbleContent()}
-          <View
-            style={[
-              styles.bottom,
-              bottomContainerStyle?.[position],
-            ]}
-          >
-            {renderUsername()}
-            <View style={styles.messageTimeAndStatusContainer}>
-              {renderTime()}
-              {renderTicks()}
-            </View>
-          </View>
+          {renderBubbleBody()}
         </Pressable>
       </View>
       {renderQuickReplies()}

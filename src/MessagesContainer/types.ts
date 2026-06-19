@@ -11,6 +11,7 @@ import { DayProps } from '../Day'
 import { LoadEarlierMessagesProps } from '../LoadEarlierMessages'
 import { MessageProps } from '../Message'
 import { User, IMessage, Reply } from '../Models'
+import { ReactionsProps } from '../Reactions'
 import { ReplyProps } from '../Reply'
 import { TypingIndicatorProps } from '../TypingIndicator/types'
 
@@ -85,6 +86,8 @@ export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   isDayAnimationEnabled?: boolean
   /** Reply functionality configuration */
   reply?: ReplyProps<TMessage>
+  /** Emoji reactions configuration */
+  reactions?: ReactionsProps<TMessage>
 }
 
 export interface State {

@@ -5,20 +5,20 @@
 ## [3.4.1] - 2026-06-19
 
 ### ✨ Features
-- **Emoji message reactions** (#2725): long-press a message to react with emojis; reactions render as toggleable pills below the bubble. Adds the `reactions` prop on `<GiftedChat>`, the `MessageReactions` display and a lightweight `ReactionPicker`, the `MessageReaction` model, and `IMessage.reactions`. A full emoji browser can be supplied via `renderReactionPicker`.
-- **Animated day header `isAnimated` flag** (#2721, #2748): `renderDay` now receives an `isAnimated` flag so custom day renderers can style the floating/sticky header differently from inline day separators.
+- **Emoji message reactions** ([#2725](https://github.com/FaridSafi/react-native-gifted-chat/issues/2725)): long-press a message to react with emojis; reactions render as toggleable pills below the bubble. Adds the `reactions` prop on `<GiftedChat>`, the `MessageReactions` display and a lightweight `ReactionPicker`, the `MessageReaction` model, and `IMessage.reactions`. A full emoji browser can be supplied via `renderReactionPicker`.
+- **Animated day header `isAnimated` flag** ([#2721](https://github.com/FaridSafi/react-native-gifted-chat/issues/2721), [#2748](https://github.com/FaridSafi/react-native-gifted-chat/issues/2748)): `renderDay` now receives an `isAnimated` flag so custom day renderers can style the floating/sticky header differently from inline day separators.
 
 ### 🐛 Bug Fixes
-- Animated day header showed the wrong date while scrolling (#2709, #2746).
-- Duplicate day badge produced by the animated header (#2709, #2747).
+- Animated day header showed the wrong date while scrolling ([#2709](https://github.com/FaridSafi/react-native-gifted-chat/issues/2709), [#2746](https://github.com/FaridSafi/react-native-gifted-chat/issues/2746)).
+- Duplicate day badge produced by the animated header ([#2709](https://github.com/FaridSafi/react-native-gifted-chat/issues/2709), [#2747](https://github.com/FaridSafi/react-native-gifted-chat/issues/2747)).
 - Reworked the animated day header into a Telegram-style sticky push for smoother transitions.
-- Auto-scroll to the newest message when `inverted` is `false` (#2612, #2745).
+- Auto-scroll to the newest message when `inverted` is `false` ([#2612](https://github.com/FaridSafi/react-native-gifted-chat/issues/2612), [#2745](https://github.com/FaridSafi/react-native-gifted-chat/issues/2745)).
 - Composer not resizing after send; added a `disableKeyboardProvider` opt-out for custom keyboard setups.
 
 ### 🔧 Improvements
 - Refactored the animated day header (DRY, with a reusable debug helper).
 - Added a **Day Animated** example screen and tidied the example chat header.
-- Refreshed lockfiles to pull in-range security patches (#2744) and bumped transitive deps (launch-editor, brace-expansion, yaml, flatted, lodash, shell-quote, @babel/core).
+- Refreshed lockfiles to pull in-range security patches ([#2744](https://github.com/FaridSafi/react-native-gifted-chat/issues/2744)) and bumped transitive deps (launch-editor, brace-expansion, yaml, flatted, lodash, shell-quote, @babel/core).
 - CI: dropped EOL Node 20 (now tests on Node 22 and 24), install example deps so lint can resolve example imports, and stopped tracking `example/ios`.
 
 ### 📝 Documentation
@@ -30,11 +30,11 @@
 ## [3.4.0] - 2026-06-16
 
 ### ✨ Features
-- **react-native-gesture-handler v3 support** (#2739): the library now works with both RNGH 2 and 3. RNGH 3 removed the `Text` re-export, so `Text` is now imported from `react-native` across all components. The `peerDependencies` range (`react-native-gesture-handler: ">=2.0.0"`) already spans both majors.
+- **react-native-gesture-handler v3 support** ([#2739](https://github.com/FaridSafi/react-native-gifted-chat/issues/2739)): the library now works with both RNGH 2 and 3. RNGH 3 removed the `Text` re-export, so `Text` is now imported from `react-native` across all components. The `peerDependencies` range (`react-native-gesture-handler: ">=2.0.0"`) already spans both majors.
 
 ### 🐛 Bug Fixes
-- Fixed #2714 - `MessageImage` `onPress` not firing on Android. The custom `TouchableOpacity`'s content view now sets `pointerEvents: 'none'` so the press reaches the gesture-handler `BaseButton` (iOS was unaffected).
-- Verified #603 (default `text` prop cleared on initial render) is resolved by the current hooks architecture and added a regression test covering it.
+- Fixed [#2714](https://github.com/FaridSafi/react-native-gifted-chat/issues/2714) - `MessageImage` `onPress` not firing on Android. The custom `TouchableOpacity`'s content view now sets `pointerEvents: 'none'` so the press reaches the gesture-handler `BaseButton` (iOS was unaffected).
+- Verified [#603](https://github.com/FaridSafi/react-native-gifted-chat/issues/603) (default `text` prop cleared on initial render) is resolved by the current hooks architecture and added a regression test covering it.
 
 ### 🔧 Improvements
 - Bumped `react-native-zoom-reanimated` to `^1.5.4` for gesture-type compatibility with RNGH 3.
@@ -60,7 +60,7 @@
 ## [3.3.0] - 2026-01-21
 
 ### ✨ Features
-- **Swipe to Reply**: New swipe-to-reply functionality using `ReanimatedSwipeable` (based on #2692)
+- **Swipe to Reply**: New swipe-to-reply functionality using `ReanimatedSwipeable` (based on [#2692](https://github.com/FaridSafi/react-native-gifted-chat/issues/2692))
   - Replaced deprecated `Swipeable` with `ReanimatedSwipeable` from react-native-gesture-handler
   - Added `reply` prop to `GiftedChat` with grouped configuration options
   - Swipe direction support: `'left'` (swipe left, icon on right) or `'right'` (swipe right, icon on left)
@@ -72,22 +72,22 @@
   - `scrollToBottomContentStyle` - style for scroll to bottom button content
 
 ### 🐛 Bug Fixes
-- Fixed #2702 - typing issues
-- Fixed #2708 - component issues
-- Fixed #2607 - edge case handling
-- Fixed #2701 - rendering issues
-- Fixed #2691 - prop handling
-- Fixed #2688 - style issues
-- Fixed #2687 - component behavior
-- Fixed #2618 - scroll issues
-- Fixed #2677, #2682, #2602 - multiple fixes
-- Fixed #2684, #2686 - component issues
+- Fixed [#2702](https://github.com/FaridSafi/react-native-gifted-chat/issues/2702) - typing issues
+- Fixed [#2708](https://github.com/FaridSafi/react-native-gifted-chat/issues/2708) - component issues
+- Fixed [#2607](https://github.com/FaridSafi/react-native-gifted-chat/issues/2607) - edge case handling
+- Fixed [#2701](https://github.com/FaridSafi/react-native-gifted-chat/issues/2701) - rendering issues
+- Fixed [#2691](https://github.com/FaridSafi/react-native-gifted-chat/issues/2691) - prop handling
+- Fixed [#2688](https://github.com/FaridSafi/react-native-gifted-chat/issues/2688) - style issues
+- Fixed [#2687](https://github.com/FaridSafi/react-native-gifted-chat/issues/2687) - component behavior
+- Fixed [#2618](https://github.com/FaridSafi/react-native-gifted-chat/issues/2618) - scroll issues
+- Fixed [#2677](https://github.com/FaridSafi/react-native-gifted-chat/issues/2677), [#2682](https://github.com/FaridSafi/react-native-gifted-chat/issues/2682), [#2602](https://github.com/FaridSafi/react-native-gifted-chat/issues/2602) - multiple fixes
+- Fixed [#2684](https://github.com/FaridSafi/react-native-gifted-chat/issues/2684), [#2686](https://github.com/FaridSafi/react-native-gifted-chat/issues/2686) - component issues
 - Fixed `onScroll` type definition
 - Fixed messages padding
 - Fixed SystemMessage styles
 - Added missing worklets for animations
 - Removed `ts-expect-error` for `requestAnimationFrame` (now properly typed for React Native)
-- Fixed two typing issues (#2698)
+- Fixed two typing issues ([#2698](https://github.com/FaridSafi/react-native-gifted-chat/issues/2698))
 
 ### 🔧 Improvements
 - Grouped reply-related props into `ReplyProps` interface for cleaner API
@@ -95,12 +95,12 @@
 - Added `BubbleReplyProps` for Bubble-level reply message styling
 - Added example app to lint command with proper path alias support
 - Improved reply animations (enter/exit transitions)
-- Changes from #2705
+- Changes from [#2705](https://github.com/FaridSafi/react-native-gifted-chat/issues/2705)
 
 ### 📝 Documentation
 - Updated README with swipe-to-reply feature documentation and examples
 - Updated license link
-- Added reply message implementation example (#2690)
+- Added reply message implementation example ([#2690](https://github.com/FaridSafi/react-native-gifted-chat/issues/2690))
 
 ### 🧪 Testing
 - Updated test snapshots
@@ -271,7 +271,7 @@ These props moved from `GiftedChatProps` to `MessagesContainerProps` but are sti
 - `isDayAnimationEnabled` prop to control day separator animations
 - Support for passing custom components in render functions
 - Improved message parsing with better link detection
-- Parse links in system messages (fixes #2105)
+- Parse links in system messages (fixes [#2105](https://github.com/FaridSafi/react-native-gifted-chat/issues/2105))
 - Better phone number parsing with custom matchers support
 - Improved URL parsing (email, phone, URL detection)
 
@@ -299,9 +299,9 @@ These props moved from `GiftedChatProps` to `MessagesContainerProps` but are sti
 ### 🐛 Bug Fixes
 
 - Fixed duplicate paragraph tags in README
-- Fixed scroll to bottom when `isScrollToBottomEnabled=false` (#2652)
-- Fixed TypeScript type inconsistencies and ESLint errors (#2653)
-- Fixed automatic scroll to bottom issues (#2630, #2621, #2644)
+- Fixed scroll to bottom when `isScrollToBottomEnabled=false` ([#2652](https://github.com/FaridSafi/react-native-gifted-chat/issues/2652))
+- Fixed TypeScript type inconsistencies and ESLint errors ([#2653](https://github.com/FaridSafi/react-native-gifted-chat/issues/2653))
+- Fixed automatic scroll to bottom issues ([#2630](https://github.com/FaridSafi/react-native-gifted-chat/issues/2630), [#2621](https://github.com/FaridSafi/react-native-gifted-chat/issues/2621), [#2644](https://github.com/FaridSafi/react-native-gifted-chat/issues/2644))
 - Fixed DayAnimated test import and added proper test coverage for renderDay prop
 - Fixed not passed `isDayAnimationEnabled` prop
 - Fixed MessageContainer scroll to bottom press on Android
@@ -311,14 +311,14 @@ These props moved from `GiftedChatProps` to `MessagesContainerProps` but are sti
 - Fixed reanimated issue in MessageContainer
 - Fixed construct messages on send in example
 - Fixed web support in example
-- Fixed #2659 (memoization issues)
-- Fixed #2640 (various bug fixes)
+- Fixed [#2659](https://github.com/FaridSafi/react-native-gifted-chat/issues/2659) (memoization issues)
+- Fixed [#2640](https://github.com/FaridSafi/react-native-gifted-chat/issues/2640) (various bug fixes)
 - Fixed show location in example
 - Fixed errors in keyboard handling
 - Fixed load earlier messages functionality
-- Fixed Bubble type parameter to re-enable generics on message prop (#2639)
-- Fixed listViewProps typing with Partial<FlatListProps> (#2628)
-- Fixed MessageContainer to add renderDay prop and insert DayAnimated Component (#2632)
+- Fixed Bubble type parameter to re-enable generics on message prop ([#2639](https://github.com/FaridSafi/react-native-gifted-chat/issues/2639))
+- Fixed listViewProps typing with Partial<FlatListProps> ([#2628](https://github.com/FaridSafi/react-native-gifted-chat/issues/2628))
+- Fixed MessageContainer to add renderDay prop and insert DayAnimated Component ([#2632](https://github.com/FaridSafi/react-native-gifted-chat/issues/2632))
 - Fixed dateFormatCalendar default value in README
 
 ### 🔧 Improvements

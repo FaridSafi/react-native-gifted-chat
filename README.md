@@ -34,6 +34,7 @@
 - ⌨️ **Keyboard Handling** - Smart keyboard avoidance for all platforms
 - 💬 **System Messages** - Display system notifications in chat
 - ⚡ **Quick Replies** - Bot-style quick reply buttons
+- 😀 **Emoji Reactions** - Long-press to react, with reaction pills and an optional full emoji browser
 - ✍️ **Typing Indicator** - Show when users are typing
 - ✅ **Message Status** - Tick indicators for sent/delivered/read states
 - ⬇️ **Scroll to Bottom** - Quick navigation button
@@ -661,6 +662,77 @@ const [isScrolledUp, setIsScrolledUp] = useState(false)
   }}
 />
 ```
+
+### Emoji Reactions
+
+Long-press a message to open a quick emoji picker; selected reactions render as pills below the bubble and toggle on tap. The core ships a lightweight quick picker (built on `react-native-gesture-handler` and `react-native-reanimated`, no extra dependencies). A full emoji browser is optional and demonstrated in the example app via the `renderReactionPicker` override.
+
+<p align="center">
+  <img width="200" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/reactions-picker.png" />
+  &nbsp;&nbsp;
+  <img width="200" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/reactions-pills.png" />
+  &nbsp;&nbsp;
+  <img width="200" src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/reactions-emoji-browser.png" />
+</p>
+
+Store reactions on each message as a `reactions` array, then enable the feature and handle the toggle. Reaction state is owned by you, so it works with any backend:
+
+```tsx
+interface IChatMessage extends IMessage {
+  reactions?: MessageReaction[] // { emoji: string, userIds: (string | number)[] }[]
+}
+
+const CURRENT_USER_ID = 1
+
+const handleReactionPress = useCallback((message: IChatMessage, emoji: string) => {
+  setMessages(prev =>
+    prev.map(m => {
+      if (m._id !== message._id)
+        return m
+
+      const existing = (m.reactions ?? []).find(r => r.emoji === emoji)
+      if (!existing)
+        return { ...m, reactions: [...(m.reactions ?? []), { emoji, userIds: [CURRENT_USER_ID] }] }
+
+      const userIds = existing.userIds.includes(CURRENT_USER_ID)
+        ? existing.userIds.filter(id => id !== CURRENT_USER_ID)
+        : [...existing.userIds, CURRENT_USER_ID]
+
+      return {
+        ...m,
+        reactions: userIds.length === 0
+          ? (m.reactions ?? []).filter(r => r.emoji !== emoji)
+          : (m.reactions ?? []).map(r => (r.emoji === emoji ? { ...r, userIds } : r)),
+      }
+    })
+  )
+}, [])
+
+<GiftedChat
+  messages={messages}
+  onSend={onSend}
+  user={{ _id: CURRENT_USER_ID }}
+  reactions={{
+    isEnabled: true,
+    onReactionPress: handleReactionPress,
+    // Optional: provide a richer picker (e.g. a full emoji browser).
+    // See example/components/chat-examples/ReactionsExample.tsx
+    // renderReactionPicker: props => <MyEmojiPicker {...props} />,
+  }}
+/>
+```
+
+#### Reactions Props (Grouped)
+
+The `reactions` prop accepts:
+
+- **`isEnabled`** _(Bool)_ - Enable emoji reactions (default `false`)
+- **`emojis`** _(String[])_ - Emojis shown in the quick picker (default `['👍', '❤️', '😂', '😮', '😢', '👎']`)
+- **`onReactionPress`** _(Function)_ - `(message, emoji) => void` called when an emoji is selected or a pill is tapped. Toggle logic is left to you
+- **`renderReactions`** _(Function)_ - Override the reactions-display component rendered below the bubble
+- **`renderReactionPicker`** _(Function)_ - Override the picker shown on long-press (use for a full emoji browser)
+- **`containerStyle`**, **`reactionStyle`**, **`reactionActiveStyle`**, **`reactionTextStyle`**, **`reactionCountStyle`** - Styles for the reaction pills
+- **`pickerContainerStyle`**, **`pickerEmojiStyle`** - Styles for the quick picker
 
 ---
 

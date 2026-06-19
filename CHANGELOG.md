@@ -1,5 +1,7 @@
 # Changelog
 
+> **Maintenance notice:** Active development has moved to **[@kesha-antonov/react-native-chat](https://www.npmjs.com/package/@kesha-antonov/react-native-chat)**. This package is now in maintenance mode and won't receive new features. See the fork for streaming AI messages and ongoing updates. Migrating is mostly a rename - see the fork's migration guide.
+
 ## [3.4.0] - 2026-06-16
 
 ### ✨ Features

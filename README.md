@@ -19,6 +19,9 @@
   </a>
 </p>
 
+> [!NOTE]
+> **Active development has moved.** This package is now in maintenance mode and isn't receiving new features. Development continues - including streaming AI messages and the latest fixes - in a maintained fork: **[@kesha-antonov/react-native-chat](https://www.npmjs.com/package/@kesha-antonov/react-native-chat)**. New projects are encouraged to use it; migrating is mostly a rename (see the fork's migration guide).
+
 ---
 
 ## ✨ Features

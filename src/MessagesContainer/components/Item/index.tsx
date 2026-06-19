@@ -1,11 +1,12 @@
 import React, { useCallback, useMemo } from 'react'
 import { LayoutChangeEvent, View } from 'react-native'
-import Animated, { interpolate, useAnimatedStyle, useDerivedValue, useSharedValue } from 'react-native-reanimated'
+import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue } from 'react-native-reanimated'
 import { Day } from '../../../Day'
 import { Message, MessageProps } from '../../../Message'
 import { IMessage } from '../../../Models'
 import { isSameDay } from '../../../utils'
 import { DaysPositions } from '../../types'
+import { DAY_HANDOFF_OFFSET, DAY_MARGIN_TOP } from '../dayLayout'
 import { ItemProps } from './types'
 
 export * from './types'
@@ -28,7 +29,7 @@ export const useRelativeScrolledPositionToBottomOfDay = (
   dayTopOffset: number,
   createdAt?: number
 ) => {
-  const dayMarginTop = useMemo(() => 5, [])
+  const dayMarginTop = useMemo(() => DAY_MARGIN_TOP, [])
 
   const absoluteScrolledPositionToBottomOfDay = useAbsoluteScrolledPositionToBottomOfDay(listHeight, scrolledY, containerHeight, dayBottomMargin, dayTopOffset)
 
@@ -109,6 +110,7 @@ const AnimatedDayWrapper = <TMessage extends IMessage>(props: ItemProps<TMessage
     scrolledY,
     daysPositions,
     listHeight,
+    floatingRenderedDate,
     ...rest
   } = props
 
@@ -126,24 +128,26 @@ const AnimatedDayWrapper = <TMessage extends IMessage>(props: ItemProps<TMessage
     dayContainerHeight.value = nativeEvent.layout.height
   }, [dayContainerHeight])
 
-  const style = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      relativeScrolledPositionToBottomOfDay.value,
-      [
-        -dayTopOffset,
-        -0.0001,
-        0,
-        dayContainerHeight.value + dayTopOffset,
-      ],
-      [
-        0,
-        0,
-        1,
-        1,
-      ],
-      'clamp'
-    ),
-  }), [relativeScrolledPositionToBottomOfDay, dayContainerHeight, dayTopOffset])
+  const style = useAnimatedStyle(() => {
+    // rel = separatorScreenTop - DAY_MARGIN_TOP, so separatorScreenTop = rel + DAY_MARGIN_TOP.
+    // The inline separator is the in-conversation date marker. It is shown while its
+    // day is below the handoff line, and hidden once its day is the one the floating
+    // header is actually rendering at the pin - a hard step (no fade) so the date
+    // goes floating(1) <-> inline(1) at the same pixel with no dip and no duplicate.
+    //
+    // Hiding on `floatingRenderedDate` (the header's *rendered* date) rather than on
+    // position alone is what kills the 1-frame flash when scrolling into a newer day:
+    // the worklet picks the new stuck day instantly but the header's text only
+    // updates ~1 frame later on the JS thread; until it does, this inline separator
+    // stays up and shows the correct date, so the header never flashes the old one.
+    const separatorScreenTop = relativeScrolledPositionToBottomOfDay.value + DAY_MARGIN_TOP
+    const belowHandoff = separatorScreenTop > DAY_HANDOFF_OFFSET
+    const headerShowsThisDay = floatingRenderedDate != null && floatingRenderedDate.value === createdAt
+
+    return {
+      opacity: belowHandoff || !headerShowsThisDay ? 1 : 0,
+    }
+  }, [relativeScrolledPositionToBottomOfDay, floatingRenderedDate, createdAt])
 
   return (
     <Animated.View

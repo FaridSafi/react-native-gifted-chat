@@ -58,6 +58,14 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
   const listHeight = useSharedValue(0)
   const contentHeight = useSharedValue(0)
   const scrolledY = useSharedValue(0)
+  // The date (createdAt ms) the floating day header is currently rendering. Used to
+  // keep the inline separator visible until the header's text has caught up, hiding
+  // the 1-frame JS-thread lag of the header on each day change.
+  const floatingRenderedDate = useSharedValue<number | undefined>(undefined)
+  // true while the user is actively scrolling (finger down dragging or momentum
+  // running). Drives the floating day header visibility so it stays opaque for the
+  // whole gesture and only fades once scrolling fully stops.
+  const isScrollActive = useSharedValue(false)
 
   const renderTypingIndicator = useCallback(() => {
     if (renderTypingIndicatorProp)
@@ -211,6 +219,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         scrolledY,
         daysPositions,
         listHeight,
+        floatingRenderedDate,
         isDayAnimationEnabled,
       }
 
@@ -220,7 +229,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
     }
 
     return null
-  }, [messages, restProps, isInverted, scrolledY, daysPositions, listHeight, isDayAnimationEnabled, user])
+  }, [messages, restProps, isInverted, scrolledY, daysPositions, listHeight, floatingRenderedDate, isDayAnimationEnabled, user])
 
   const emptyContent = useMemo(() => {
     if (!renderChatEmptyProp)
@@ -388,7 +397,21 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
 
       runOnJS(handleOnScroll)(event)
     },
-  }, [handleOnScroll])
+    onBeginDrag: () => {
+      isScrollActive.value = true
+    },
+    onEndDrag: () => {
+      // Momentum (if any) re-asserts isScrollActive via onMomentumBegin within the
+      // header's fade-out delay, so a flick keeps the header visible.
+      isScrollActive.value = false
+    },
+    onMomentumBegin: () => {
+      isScrollActive.value = true
+    },
+    onMomentumEnd: () => {
+      isScrollActive.value = false
+    },
+  }, [handleOnScroll, isScrollActive])
 
   // removes unrendered days positions when messages are added/removed
   useEffect(() => {
@@ -455,8 +478,9 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
           scrolledY={scrolledY}
           daysPositions={daysPositions}
           listHeight={listHeight}
+          isScrollActive={isScrollActive}
+          floatingRenderedDate={floatingRenderedDate}
           renderDay={renderDayProp}
-          messages={messages}
           isLoading={loadEarlierMessagesProps?.isLoading ?? false}
           dateFormat={props.dateFormat}
           dateFormatCalendar={props.dateFormatCalendar}

@@ -27,8 +27,8 @@
 - 📎 **[Composer Actions](#actions--action-sheet)** - Attach photos, files, or trigger custom actions
 - ↩️ **[Reply to Messages](#reply-to-messages)** - Swipe-to-reply with reply preview and message threading
 - ⏮️ **[Load Earlier Messages](#load-earlier-messages)** - Infinite scroll with pagination support
-- 📋 **Copy to Clipboard** - Long-press messages to copy text
-- 🔗 **Smart Link Parsing** - Auto-detect URLs, emails, phone numbers, hashtags, mentions
+- 📋 **[Copy to Clipboard](#copy-to-clipboard)** - Long-press messages to copy text
+- 🔗 **[Smart Link Parsing](#smart-link-parsing)** - Auto-detect URLs, emails, phone numbers, hashtags, mentions
 - 👤 **[Avatars](#avatars)** - User initials or custom avatar images
 - 🌍 **[Localized Dates](#date--time)** - Full i18n support via Day.js
 - ⌨️ **[Keyboard Handling](#keyboard--layout)** - Smart keyboard avoidance for all platforms
@@ -36,11 +36,11 @@
 - ⚡ **[Quick Replies](#quick-replies)** - Bot-style quick reply buttons
 - 😀 **[Emoji Reactions](#emoji-reactions)** - Long-press to react, with reaction pills and an optional full emoji browser
 - ✍️ **[Typing Indicator](#typing-indicator)** - Show when users are typing
-- ✅ **Message Status** - Tick indicators for sent/delivered/read states
+- ✅ **[Message Status](#message-status)** - Tick indicators for sent/delivered/read states
 - ⬇️ **[Scroll to Bottom](#scroll-to-bottom)** - Quick navigation button
 - 🌐 **[Web Support](#web-react-native-web)** - Works with react-native-web
 - 📱 **[Expo Support](#expo-projects)** - Easy integration with Expo projects
-- 📝 **TypeScript** - Complete TypeScript definitions included
+- 📝 **[TypeScript](#typescript)** - Complete TypeScript definitions included
 
 <p align="center">
   <img width="200" src="https://github.com/user-attachments/assets/c9da88f5-0b20-471c-8cd7-373bdb767517" />
@@ -733,6 +733,96 @@ The `reactions` prop accepts:
 - **`renderReactionPicker`** _(Function)_ - Override the picker shown on long-press (use for a full emoji browser)
 - **`containerStyle`**, **`reactionStyle`**, **`reactionActiveStyle`**, **`reactionTextStyle`**, **`reactionCountStyle`** - Styles for the reaction pills
 - **`pickerContainerStyle`**, **`pickerEmojiStyle`** - Styles for the quick picker
+
+### Smart Link Parsing
+
+Message text is automatically scanned for URLs, emails, and phone numbers; hashtags and mentions are opt-in. Configure it via `messageTextProps`:
+
+```tsx
+<GiftedChat
+  messageTextProps={{
+    url: true,        // default true
+    email: true,      // default true
+    phone: true,      // default true
+    hashtag: true,    // default false
+    mention: true,    // default false
+    hashtagUrl: 'https://example.com/hashtag',
+    mentionUrl: 'https://example.com',
+    linkStyle: { left: { color: '#1d9bf0' }, right: { color: '#fff' } },
+    onPress: (message, url, type) => {
+      // type: 'url' | 'email' | 'phone' | 'mention' | 'hashtag'
+      Linking.openURL(url)
+    },
+  }}
+/>
+```
+
+For full control, pass custom `matchers` (`{ type, pattern, getLinkUrl?, getLinkText?, renderLink?, onPress? }[]`) to add or override patterns. See the Links example in the [example app](#-example-app).
+
+### Copy to Clipboard
+
+Long-press handling is exposed via `onLongPressMessage`. GiftedChat wraps [`@expo/react-native-action-sheet`](https://github.com/expo/react-native-action-sheet), so you can show a "Copy Text" action sheet and copy with the clipboard library of your choice:
+
+```tsx
+import { useActionSheet } from '@expo/react-native-action-sheet'
+import { setStringAsync } from 'expo-clipboard'
+
+const { showActionSheetWithOptions } = useActionSheet()
+
+<GiftedChat
+  onLongPressMessage={(_context, message) => {
+    showActionSheetWithOptions(
+      { options: ['Copy Text', 'Cancel'], cancelButtonIndex: 1 },
+      buttonIndex => {
+        if (buttonIndex === 0)
+          setStringAsync(message.text)
+      }
+    )
+  }}
+/>
+```
+
+### Message Status
+
+Set `sent`, `received`, or `pending` on a message to show its delivery status. By default these render as tick indicators next to the timestamp (`✓` sent, `✓✓` received, `🕓` pending):
+
+```tsx
+const message: IMessage = {
+  _id: 1,
+  text: 'Delivered!',
+  createdAt: new Date(),
+  user: { _id: 1 },
+  sent: true,
+  received: true,
+}
+```
+
+Customize the indicators with `renderTicks` (full override) or `tickStyle` (style only):
+
+```tsx
+<GiftedChat
+  renderTicks={message => (message.received ? <MyReadIcon /> : null)}
+  tickStyle={{ color: '#1d9bf0' }}
+/>
+```
+
+### TypeScript
+
+GiftedChat ships complete type definitions and is generic over your message type. Extend `IMessage` to add custom fields and everything stays typed end to end:
+
+```tsx
+import { GiftedChat, IMessage } from 'react-native-gifted-chat'
+
+interface MyMessage extends IMessage {
+  reactions?: { emoji: string, userIds: (string | number)[] }[]
+}
+
+<GiftedChat<MyMessage>
+  messages={messages}
+  onSend={msgs => {/* msgs is typed as MyMessage[] */}}
+  user={{ _id: 1 }}
+/>
+```
 
 ---
 

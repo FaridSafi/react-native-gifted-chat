@@ -36,11 +36,13 @@ export function Day ({
     if (!now.isSame(date, 'year'))
       return date.format('D MMMM YYYY')
 
-    if (now.diff(date, 'days') < 1)
+    if (now.diff(date, 'days') < 1) {
+      const sameDay = new Intl.RelativeTimeFormat(getLocale(), { numeric: 'auto' }).format(0, 'day')
       return date.calendar(now, {
-        sameDay: '[Today]',
+        sameDay: sameDay.charAt(0).toUpperCase() + sameDay.slice(1),
         ...dateFormatCalendar,
       })
+    }
 
     return date.format(dateFormat)
   }, [createdAt, dateFormat, getLocale, dateFormatCalendar])

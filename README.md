@@ -20,7 +20,7 @@
 </p>
 
 > [!NOTE]
-> **Active development has moved.** This package is now in maintenance mode and isn't receiving new features. Development continues - including streaming AI messages and the latest fixes - in a maintained fork: **[@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat)**. New projects are encouraged to use it; migrating is mostly a rename (see the fork's migration guide).
+> **Active development has moved.** This package is now in maintenance mode and isn't receiving new features. Development continues - including streaming AI messages and the latest fixes - in a maintained fork: **[@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat)**. New projects are encouraged to use it; migrating is mostly a rename ([migration guide with a codemod](https://github.com/kesha-antonov/react-native-chat/blob/main/docs/MIGRATION.md)).
 
 ---
 
@@ -113,6 +113,15 @@
 ---
 
 ## 📦 Installation
+
+> [!TIP]
+> Starting a new project? Install the maintained fork instead - same API and `IMessage` model, `GiftedChat` is renamed to `Chat`:
+>
+> ```bash
+> npx expo install @kesha-antonov/react-native-chat react-native-reanimated react-native-gesture-handler react-native-safe-area-context react-native-keyboard-controller
+> ```
+>
+> See [@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat) and the [migration guide](https://github.com/kesha-antonov/react-native-chat/blob/main/docs/MIGRATION.md).
 
 ### Expo Projects
 
@@ -629,6 +638,9 @@ These animations use `react-native-reanimated` for 60fps performance.
 
 ### Maintaining Scroll Position (AI Chatbots)
 
+> [!TIP]
+> Building an AI chat? The maintained fork [@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat) has built-in [streaming AI messages](https://github.com/kesha-antonov/react-native-chat/blob/main/docs/STREAMING.md): token-by-token replies with a typing caret and a stop control.
+
 For AI chat interfaces where long responses arrive and you don't want to disrupt the user's reading position, use [`maintainVisibleContentPosition`](https://reactnative.dev/docs/scrollview#maintainvisiblecontentposition) via `listProps`:
 
 ```tsx
@@ -1000,12 +1012,16 @@ See [this issue](https://github.com/FaridSafi/react-native-gifted-chat/issues/29
 
 1. Check this README first
 2. Search [existing issues](https://github.com/FaridSafi/react-native-gifted-chat/issues)
-3. Ask on [StackOverflow](https://stackoverflow.com/questions/tagged/react-native-gifted-chat)
-4. Open a new issue if needed
+3. Check whether it's already fixed in the maintained fork [@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat) ([its issues](https://github.com/kesha-antonov/react-native-chat/issues))
+4. Ask on [StackOverflow](https://stackoverflow.com/questions/tagged/react-native-gifted-chat)
+5. Open a new issue if needed
 
 ---
 
 ## 🤝 Contributing
+
+> [!NOTE]
+> This package is in maintenance mode. New features and most fixes land in [@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat), so please open feature PRs [there](https://github.com/kesha-antonov/react-native-chat/pulls). Critical fixes for this package are still accepted here.
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -1050,6 +1066,8 @@ yarn prepublishOnly
 **Maintainer:** [Kesha Antonov](https://github.com/kesha-antonov)
 
 > I've been maintaining this project for 2 years, completely in my free time and without any compensation. If you find it helpful, please consider [becoming a sponsor](https://github.com/sponsors/kesha-antonov) to support continued development. 💖
+>
+> Active development now happens in [@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat) - a star there helps others find it.
 
 ---
 

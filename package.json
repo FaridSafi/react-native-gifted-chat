@@ -1,7 +1,7 @@
 {
   "name": "react-native-gifted-chat",
   "version": "3.4.1",
-  "description": "The most complete chat UI for React Native",
+  "description": "The most complete chat UI for React Native. Maintenance mode - active development continues in @kesha-antonov/react-native-chat",
   "keywords": [
     "android",
     "ios",

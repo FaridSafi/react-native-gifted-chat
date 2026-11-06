@@ -206,6 +206,7 @@ Once you have this working, you can:
 ## 📚 Additional Resources
 
 - [React Native Gifted Chat Documentation](https://github.com/FaridSafi/react-native-gifted-chat)
+- [@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat) - the maintained fork with streaming AI messages and ongoing updates
 - [Expo Documentation](https://docs.expo.dev)
 - [Expo Snack](https://snack.expo.dev)
 

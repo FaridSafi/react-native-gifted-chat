@@ -13,5 +13,8 @@ markComment: >
   Sorry, but this issue has been automatically marked as stale because it has not had
   recent activity. It will be closed if no further activity occurs. BTW Thank you
   for your contributions 😀 !!!
+
+  This package is in maintenance mode. If the issue is still relevant, please check
+  the maintained fork @kesha-antonov/react-native-chat: https://github.com/kesha-antonov/react-native-chat
 # Comment to post when closing a stale issue. Set to `false` to disable
 closeComment: false

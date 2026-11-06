@@ -24,6 +24,7 @@ import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-cont
 import { TEST_ID } from '../Constant'
 import { GiftedChatContext } from '../GiftedChatContext'
 import { InputToolbar } from '../InputToolbar'
+import { showMaintenanceNotice } from '../maintenanceNotice'
 import { MessagesContainer, AnimatedList } from '../MessagesContainer'
 import { IMessage, ReplyMessage } from '../Models'
 import stylesCommon from '../styles'
@@ -350,6 +351,10 @@ function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedC
     disableKeyboardProvider = false,
     ...rest
   } = props
+
+  useEffect(() => {
+    showMaintenanceNotice()
+  }, [])
 
   const chat = <GiftedChat<TMessage> {...rest} />
 

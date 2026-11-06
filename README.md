@@ -21,6 +21,8 @@
 
 > [!NOTE]
 > **Active development has moved.** This package is now in maintenance mode and isn't receiving new features. Development continues - including streaming AI messages and the latest fixes - in a maintained fork: **[@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat)**. New projects are encouraged to use it; migrating is mostly a rename ([migration guide with a codemod](https://github.com/kesha-antonov/react-native-chat/blob/main/docs/MIGRATION.md)).
+>
+> In development builds, `GiftedChat` logs this notice once per session (never in production). To hide it, call `disableMaintenanceNotice()` (exported from `react-native-gifted-chat`) before the first render.
 
 ---
 

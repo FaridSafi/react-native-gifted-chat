@@ -2,6 +2,15 @@
 
 > **Maintenance notice:** Active development has moved to **[@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat)**. This package is now in maintenance mode and won't receive new features. See the fork for streaming AI messages and ongoing updates. Migrating is mostly a rename - see the fork's [migration guide](https://github.com/kesha-antonov/react-native-chat/blob/main/docs/MIGRATION.md).
 
+## [3.4.2] - 2026-11-06
+
+### ✨ Features
+- Dev-only notice: in development builds `GiftedChat` logs a one-time `console.warn` pointing to **[@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat)**, since the install-time notice is hidden by npm 7+ and skipped by pnpm 10 and bun. Never shown in production or under Jest. Turn it off with the new `disableMaintenanceNotice()` export.
+
+### 🗒️ Maintenance
+- Added links to the maintained fork **[@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat)** in the README (installation, AI chat, questions, contributing), the issue template, the stale-bot comment and the Expo Snack README.
+- The npm package description and the install-time notice now point to the fork and its [migration guide](https://github.com/kesha-antonov/react-native-chat/blob/main/docs/MIGRATION.md). No API or runtime changes.
+
 ## [3.4.1] - 2026-06-19
 
 ### ✨ Features

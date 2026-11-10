@@ -3,6 +3,16 @@ jest.mock('react-native-worklets', () =>
 )
 
 jest.mock('react-native-reanimated', () => {
+  // Reanimated deliberately selects its JS-only module under Jest, but since 4.6 the native
+  // initializer unconditionally installs a CSS event handler - and that module's
+  // `setCSSEventHandler` throws. Loading the library's own mock crashes on the way in, so
+  // neutralise the one method first. Nothing here animates via CSS, so a noop is enough.
+  const {
+    createJSReanimatedModule,
+  } = require('react-native-reanimated/src/ReanimatedModule/js-reanimated/JSReanimated')
+
+  Object.getPrototypeOf(createJSReanimatedModule()).setCSSEventHandler = () => {}
+
   const Reanimated = require('react-native-reanimated/mock')
   // The reanimated mock ships isSharedValue as an empty "ADD ME IF NEEDED" stub,
   // but react-native-gesture-handler 3 probes Reanimated.isSharedValue on import.

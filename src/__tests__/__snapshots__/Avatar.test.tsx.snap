@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`should render <Avatar /> and compare with snapshot 1`] = `
 <View
@@ -12,6 +12,8 @@ exports[`should render <Avatar /> and compare with snapshot 1`] = `
     ]
   }
 >
-  renderAvatar
+  <Text>
+    renderAvatar
+  </Text>
 </View>
 `;

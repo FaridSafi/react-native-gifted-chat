@@ -63,11 +63,11 @@ function ModalContent({ isVisible, imageSource, modalImageDimensions, imageProps
   const modalAnimatedStyle = useAnimatedStyle(() => ({
     opacity: modalOpacity.value,
     transform: [{ scale: modalScale.value }],
-  }), [modalOpacity, modalScale])
+  }))
 
   const modalBorderRadiusStyle = useAnimatedStyle(() => ({
     borderRadius: modalBorderRadius.value,
-  }), [modalBorderRadius])
+  }))
 
   return (
     <>

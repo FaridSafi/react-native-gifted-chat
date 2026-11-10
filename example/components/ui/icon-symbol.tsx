@@ -1,11 +1,11 @@
 // Fallback for using MaterialIcons on Android and web.
 
 import { ComponentProps } from 'react'
-import { OpaqueColorValue, type StyleProp, type TextStyle } from 'react-native'
+import { type ColorValue, type StyleProp, type TextStyle } from 'react-native'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { SymbolWeight, SymbolViewProps } from 'expo-symbols'
 
-type IconMapping = Record<SymbolViewProps['name'], ComponentProps<typeof MaterialIcons>['name']>
+type IconMapping = Record<Extract<SymbolViewProps['name'], string>, ComponentProps<typeof MaterialIcons>['name']>
 type IconSymbolName = keyof typeof MAPPING
 
 /**
@@ -33,9 +33,13 @@ export function IconSymbol ({
 }: {
   name: IconSymbolName
   size?: number
-  color: string | OpaqueColorValue
+  color: ColorValue
   style?: StyleProp<TextStyle>
   weight?: SymbolWeight
 }) {
-  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />
+  // @expo/vector-icons still types `color` without React Native 0.88's internal ColorValue
+  // member, which is what a tab bar hands its icons.
+  const iconColor = color as ComponentProps<typeof MaterialIcons>['color']
+
+  return <MaterialIcons color={iconColor} size={size} name={MAPPING[name]} style={style} />
 }

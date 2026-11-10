@@ -24,8 +24,8 @@ const currentMessage: IMessage = {
   replyMessage,
 }
 
-it('should render <MessageReply /> and compare with snapshot', () => {
-  const { toJSON } = render(
+it('should render <MessageReply /> and compare with snapshot', async () => {
+  const { toJSON } = await render(
     <MessageReply
       replyMessage={replyMessage}
       currentMessage={currentMessage}
@@ -36,13 +36,13 @@ it('should render <MessageReply /> and compare with snapshot', () => {
   expect(toJSON()).toMatchSnapshot()
 })
 
-it('should render <MessageReply /> on right position and compare with snapshot', () => {
+it('should render <MessageReply /> on right position and compare with snapshot', async () => {
   const currentMessageFromCurrentUser: IMessage = {
     ...currentMessage,
     user: replyMessage.user,
   }
 
-  const { toJSON } = render(
+  const { toJSON } = await render(
     <MessageReply
       replyMessage={replyMessage}
       currentMessage={currentMessageFromCurrentUser}

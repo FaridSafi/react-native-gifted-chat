@@ -1,3 +1,7 @@
+// Time snapshots render local time, so pin the zone - otherwise they change with the
+// machine's timezone and with daylight saving.
+process.env.TZ = 'UTC'
+
 module.exports = {
   preset: '@react-native/jest-preset',
   resetMocks: true,

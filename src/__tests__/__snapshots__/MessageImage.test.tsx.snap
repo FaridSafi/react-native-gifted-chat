@@ -1,66 +1,62 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`MessageImage should  render <MessageImage /> and compare with snapshot 1`] = `
 <View>
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": false,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
+    handlerTags={
       [
-        undefined,
-        {
-          "opacity": 1,
-        },
-        {
-          "pointerEvents": "none",
-        },
+        1,
       ]
     }
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    onGestureHandlerTouchEvent={[Function]}
+    onStartShouldSetResponder={[Function]}
+    pointerEvents="box-none"
+    style={
+      {
+        "display": "contents",
+      }
+    }
   >
-    <Image
-      onLayout={[Function]}
-      resizeMode="cover"
-      source={
-        {
-          "uri": "url://to/image.png",
+    <RNGestureHandlerButton
+      needsOffscreenAlphaCompositing={true}
+    >
+      <View
+        style={
+          [
+            undefined,
+            {
+              "opacity": 1,
+            },
+            {
+              "pointerEvents": "none",
+            },
+          ]
         }
-      }
-      style={
-        [
-          {
-            "borderRadius": 13,
-            "height": 100,
-            "margin": 3,
-            "width": 150,
-          },
-          undefined,
-        ]
-      }
-    />
+      >
+        <Image
+          onLayout={[Function]}
+          resizeMode="cover"
+          source={
+            {
+              "uri": "url://to/image.png",
+            }
+          }
+          style={
+            [
+              {
+                "borderRadius": 13,
+                "height": 100,
+                "margin": 3,
+                "width": 150,
+              },
+              undefined,
+            ]
+          }
+        />
+      </View>
+    </RNGestureHandlerButton>
   </View>
   <OverKeyboardView
     visible={false}
@@ -126,49 +122,45 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
             }
           >
             <View
-              accessibilityState={
-                {
-                  "busy": undefined,
-                  "checked": undefined,
-                  "disabled": false,
-                  "expanded": undefined,
-                  "selected": undefined,
-                }
+              handlerTags={
+                [
+                  2,
+                ]
               }
-              accessibilityValue={
-                {
-                  "max": undefined,
-                  "min": undefined,
-                  "now": undefined,
-                  "text": undefined,
-                }
-              }
-              accessible={true}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
+              onGestureHandlerEvent={[Function]}
+              onGestureHandlerStateChange={[Function]}
+              onGestureHandlerTouchEvent={[Function]}
               onStartShouldSetResponder={[Function]}
+              pointerEvents="box-none"
               style={
                 {
-                  "padding": 20,
+                  "display": "contents",
                 }
               }
             >
-              <Text
-                style={
-                  {
-                    "color": "white",
-                    "fontSize": 20,
-                    "lineHeight": 20,
-                  }
-                }
+              <RNGestureHandlerButton
+                needsOffscreenAlphaCompositing={true}
               >
-                X
-              </Text>
+                <View
+                  style={
+                    {
+                      "padding": 20,
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      {
+                        "color": "white",
+                        "fontSize": 20,
+                        "lineHeight": 20,
+                      }
+                    }
+                  >
+                    X
+                  </Text>
+                </View>
+              </RNGestureHandlerButton>
             </View>
           </View>
           <View
@@ -198,46 +190,66 @@ exports[`MessageImage should  render <MessageImage /> and compare with snapshot 
               }
             >
               <View
-                collapsable={false}
-                onLayout={[Function]}
+                handlerTags={
+                  [
+                    3,
+                    4,
+                    5,
+                  ]
+                }
+                onGestureHandlerEvent={[Function]}
+                onGestureHandlerStateChange={[Function]}
+                onGestureHandlerTouchEvent={[Function]}
+                onStartShouldSetResponder={[Function]}
+                pointerEvents="box-none"
                 style={
                   {
-                    "alignItems": "center",
-                    "flex": 1,
-                    "justifyContent": "center",
-                    "overflow": "hidden",
+                    "display": "contents",
                   }
                 }
               >
                 <View
+                  collapsable={false}
                   onLayout={[Function]}
                   style={
-                    [
-                      {
-                        "transform": [
-                          {
-                            "translateX": 0,
-                          },
-                          {
-                            "translateY": 0,
-                          },
-                          {
-                            "scale": 1,
-                          },
-                        ],
-                      },
-                      undefined,
-                    ]
+                    {
+                      "alignItems": "center",
+                      "flex": 1,
+                      "justifyContent": "center",
+                      "overflow": "hidden",
+                    }
                   }
                 >
-                  <Image
-                    resizeMode="contain"
-                    source={
-                      {
-                        "uri": "url://to/image.png",
-                      }
+                  <View
+                    onLayout={[Function]}
+                    style={
+                      [
+                        {
+                          "transform": [
+                            {
+                              "translateX": 0,
+                            },
+                            {
+                              "translateY": 0,
+                            },
+                            {
+                              "scale": 1,
+                            },
+                          ],
+                        },
+                        undefined,
+                      ]
                     }
-                  />
+                  >
+                    <Image
+                      resizeMode="contain"
+                      source={
+                        {
+                          "uri": "url://to/image.png",
+                        }
+                      }
+                    />
+                  </View>
                 </View>
               </View>
             </View>

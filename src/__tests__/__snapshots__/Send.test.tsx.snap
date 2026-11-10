@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Send should always render <Send /> and compare with snapshot 1`] = `
 <View
@@ -16,69 +16,66 @@ exports[`Send should always render <Send /> and compare with snapshot 1`] = `
   }
 >
   <View
-    accessibilityLabel="send"
-    accessibilityRole="button"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": false,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
+    handlerTags={
       [
-        {
-          "justifyContent": "flex-end",
-        },
-        {
-          "opacity": 1,
-        },
-        {
-          "pointerEvents": "none",
-        },
+        2,
       ]
     }
-    testID="GC_SEND_TOUCHABLE"
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    onGestureHandlerTouchEvent={[Function]}
+    onStartShouldSetResponder={[Function]}
+    pointerEvents="box-none"
+    style={
+      {
+        "display": "contents",
+      }
+    }
   >
-    <Text
-      style={
-        [
+    <RNGestureHandlerButton
+      accessibilityLabel="send"
+      accessibilityRole="button"
+      accessible={true}
+      needsOffscreenAlphaCompositing={true}
+      testID="GC_SEND_TOUCHABLE"
+    >
+      <View
+        style={
           [
             {
-              "backgroundColor": "transparent",
-              "color": "#0084ff",
-              "fontSize": 17,
-              "fontWeight": "600",
-              "paddingHorizontal": 10,
-              "paddingVertical": 10,
+              "justifyContent": "flex-end",
             },
-            undefined,
-          ],
-          undefined,
-        ]
-      }
-    >
-      Send
-    </Text>
+            {
+              "opacity": 1,
+            },
+            {
+              "pointerEvents": "none",
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              [
+                {
+                  "backgroundColor": "transparent",
+                  "color": "#0084ff",
+                  "fontSize": 17,
+                  "fontWeight": "600",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 10,
+                },
+                undefined,
+              ],
+              undefined,
+            ]
+          }
+        >
+          Send
+        </Text>
+      </View>
+    </RNGestureHandlerButton>
   </View>
 </View>
 `;
@@ -99,69 +96,66 @@ exports[`Send should not render <Send /> and compare with snapshot 1`] = `
   }
 >
   <View
-    accessibilityLabel="send"
-    accessibilityRole="button"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": false,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
+    handlerTags={
       [
-        {
-          "justifyContent": "flex-end",
-        },
-        {
-          "opacity": 1,
-        },
-        {
-          "pointerEvents": "none",
-        },
+        1,
       ]
     }
-    testID="GC_SEND_TOUCHABLE"
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    onGestureHandlerTouchEvent={[Function]}
+    onStartShouldSetResponder={[Function]}
+    pointerEvents="box-none"
+    style={
+      {
+        "display": "contents",
+      }
+    }
   >
-    <Text
-      style={
-        [
+    <RNGestureHandlerButton
+      accessibilityLabel="send"
+      accessibilityRole="button"
+      accessible={true}
+      needsOffscreenAlphaCompositing={true}
+      testID="GC_SEND_TOUCHABLE"
+    >
+      <View
+        style={
           [
             {
-              "backgroundColor": "transparent",
-              "color": "#0084ff",
-              "fontSize": 17,
-              "fontWeight": "600",
-              "paddingHorizontal": 10,
-              "paddingVertical": 10,
+              "justifyContent": "flex-end",
             },
-            undefined,
-          ],
-          undefined,
-        ]
-      }
-    >
-      Send
-    </Text>
+            {
+              "opacity": 1,
+            },
+            {
+              "pointerEvents": "none",
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              [
+                {
+                  "backgroundColor": "transparent",
+                  "color": "#0084ff",
+                  "fontSize": 17,
+                  "fontWeight": "600",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 10,
+                },
+                undefined,
+              ],
+              undefined,
+            ]
+          }
+        >
+          Send
+        </Text>
+      </View>
+    </RNGestureHandlerButton>
   </View>
 </View>
 `;
@@ -182,69 +176,66 @@ exports[`Send should render <Send /> where there is input and compare with snaps
   }
 >
   <View
-    accessibilityLabel="send"
-    accessibilityRole="button"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": false,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
+    handlerTags={
       [
-        {
-          "justifyContent": "flex-end",
-        },
-        {
-          "opacity": 1,
-        },
-        {
-          "pointerEvents": "none",
-        },
+        3,
       ]
     }
-    testID="GC_SEND_TOUCHABLE"
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    onGestureHandlerTouchEvent={[Function]}
+    onStartShouldSetResponder={[Function]}
+    pointerEvents="box-none"
+    style={
+      {
+        "display": "contents",
+      }
+    }
   >
-    <Text
-      style={
-        [
+    <RNGestureHandlerButton
+      accessibilityLabel="send"
+      accessibilityRole="button"
+      accessible={true}
+      needsOffscreenAlphaCompositing={true}
+      testID="GC_SEND_TOUCHABLE"
+    >
+      <View
+        style={
           [
             {
-              "backgroundColor": "transparent",
-              "color": "#0084ff",
-              "fontSize": 17,
-              "fontWeight": "600",
-              "paddingHorizontal": 10,
-              "paddingVertical": 10,
+              "justifyContent": "flex-end",
             },
-            undefined,
-          ],
-          undefined,
-        ]
-      }
-    >
-      Send
-    </Text>
+            {
+              "opacity": 1,
+            },
+            {
+              "pointerEvents": "none",
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              [
+                {
+                  "backgroundColor": "transparent",
+                  "color": "#0084ff",
+                  "fontSize": 17,
+                  "fontWeight": "600",
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 10,
+                },
+                undefined,
+              ],
+              undefined,
+            ]
+          }
+        >
+          Send
+        </Text>
+      </View>
+    </RNGestureHandlerButton>
   </View>
 </View>
 `;

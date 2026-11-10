@@ -10,6 +10,7 @@ import React, {
 import {
   View,
   LayoutChangeEvent,
+  TextInput,
   useColorScheme,
 } from 'react-native'
 import {
@@ -18,7 +19,7 @@ import {
 } from '@expo/react-native-action-sheet'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
-import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { KeyboardAvoidingView, KeyboardProvider } from 'react-native-keyboard-controller'
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { TEST_ID } from '../Constant'
@@ -83,7 +84,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   ) as RefObject<AnimatedList<TMessage>>
 
   const textInputRef = useMemo(
-    () => props.textInputRef || createRef<TextInput>(),
+    () => props.textInputRef || createRef<React.ComponentRef<typeof TextInput>>(),
     [props.textInputRef]
   )
 
@@ -364,11 +365,15 @@ function GiftedChatWrapper<TMessage extends IMessage = IMessage> (props: GiftedC
         {disableKeyboardProvider
           ? chat
           : (
-            <KeyboardProvider
-              statusBarTranslucent
-              navigationBarTranslucent
-              {...keyboardProviderProps}
-            >
+            // No `statusBarTranslucent` / `navigationBarTranslucent` here on purpose.
+            // On Android those tell the provider that the app already draws behind the
+            // system bars, and it answers by zeroing the *activity* content view's
+            // margins - a window-level change it never undoes, so a chat screen would
+            // leave the whole app under the navigation bar after you navigate away
+            // (#2755). react-native-keyboard-controller turns both on by itself when
+            // the app really is edge-to-edge, so forcing them only ever mismatches a
+            // window that is not. Override via `keyboardProviderProps` if needed.
+            <KeyboardProvider {...keyboardProviderProps}>
               {chat}
             </KeyboardProvider>
           )}

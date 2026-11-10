@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Message component should NOT render <Message /> 1`] = `null`;
 
@@ -133,7 +133,7 @@ exports[`Message component should render <Message /> and compare with snapshot 1
                     ]
                   }
                 >
-                  7:20 PM
+                  5:20 PM
                 </Text>
               </View>
             </View>

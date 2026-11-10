@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
 <View
@@ -8,10 +8,7 @@ exports[`should render <GiftedChat/> and compare with snapshot 1`] = `
     }
   }
 >
-  <KeyboardProvider
-    navigationBarTranslucent={true}
-    statusBarTranslucent={true}
-  >
+  <KeyboardProvider>
     <View
       style={
         {
@@ -69,10 +66,7 @@ exports[`should render <GiftedChat/> with dark colorScheme and compare with snap
     }
   }
 >
-  <KeyboardProvider
-    navigationBarTranslucent={true}
-    statusBarTranslucent={true}
-  >
+  <KeyboardProvider>
     <View
       style={
         {
@@ -130,10 +124,7 @@ exports[`should render <GiftedChat/> with light colorScheme and compare with sna
     }
   }
 >
-  <KeyboardProvider
-    navigationBarTranslucent={true}
-    statusBarTranslucent={true}
-  >
+  <KeyboardProvider>
     <View
       style={
         {

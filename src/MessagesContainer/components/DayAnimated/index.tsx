@@ -76,11 +76,11 @@ export const DayAnimated = ({ scrolledY, daysPositions, listHeight, isScrollActi
     }
 
     return { top, createdAt: current.createdAt, curSep }
-  }, [daysPositionsArray, listHeight, scrolledY, containerHeight, isLoadingAnim])
+  })
 
   const style = useAnimatedStyle(() => ({
     top: sticky.value.top,
-  }), [sticky])
+  }))
 
   const contentStyle = useAnimatedStyle(() => {
     // The scroll-gated fade (see useScrollGatedOpacity); DAY_DEBUG.forceOpacity pins
@@ -102,7 +102,7 @@ export const DayAnimated = ({ scrolledY, daysPositions, listHeight, isScrollActi
     const renderGate = sticky.value.createdAt === floatingRenderedDate.value ? 1 : 0
 
     return { opacity: fade * stuckGate * renderGate }
-  }, [opacity, sticky, floatingRenderedDate])
+  })
 
   const handleLayout = useCallback(({ nativeEvent }: LayoutChangeEvent) => {
     containerHeight.value = nativeEvent.layout.height
@@ -113,8 +113,7 @@ export const DayAnimated = ({ scrolledY, daysPositions, listHeight, isScrollActi
     (value, prevValue) => {
       if (value && value !== prevValue)
         runOnJS(setCreatedAt)(value)
-    },
-    [sticky]
+    }
   )
 
   const debugOverlay = useDayDebugOverlay(() => {
@@ -122,7 +121,7 @@ export const DayAnimated = ({ scrolledY, daysPositions, listHeight, isScrollActi
 
     const v = sticky.value
     return `top=${Math.round(v.top)} cur=${Math.round(v.curSep)} ch=${Math.round(containerHeight.value)} load=${isLoadingAnim.value ? 1 : 0}`
-  }, [sticky, containerHeight, isLoadingAnim])
+  })
 
   useEffect(() => {
     isLoadingAnim.value = isLoading

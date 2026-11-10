@@ -28,19 +28,19 @@ const DotsAnimation = () => {
     transform: [{
       translateY: dot1.value,
     }],
-  }), [dot1])
+  }))
 
   const dot2Style = useAnimatedStyle(() => ({
     transform: [{
       translateY: dot2.value,
     }],
-  }), [dot2])
+  }))
 
   const dot3Style = useAnimatedStyle(() => ({
     transform: [{
       translateY: dot3.value,
     }],
-  }), [dot3])
+  }))
 
   useEffect(() => {
     dot1.value = withRepeat(
@@ -103,7 +103,7 @@ export const TypingIndicator = ({ isTyping, style }: TypingIndicatorProps) => {
     ],
     height: heightScale.value,
     marginBottom: marginScale.value,
-  }), [yCoords, heightScale, marginScale])
+  }))
 
   const slideIn = useCallback(() => {
     const duration = 250

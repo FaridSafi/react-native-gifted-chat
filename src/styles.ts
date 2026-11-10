@@ -21,5 +21,5 @@ export function getStyleWithPosition<T>(styles: T, baseName: string, position?: 
     const key = `${baseName}_${position}` as keyof T
     stylesArray.push(styles[key])
   }
-  return StyleSheet.flatten(stylesArray) as StyleProp<ViewStyle> | StyleProp<TextStyle>
+  return StyleSheet.flatten(stylesArray as StyleProp<ViewStyle | TextStyle>) as StyleProp<ViewStyle> | StyleProp<TextStyle>
 }

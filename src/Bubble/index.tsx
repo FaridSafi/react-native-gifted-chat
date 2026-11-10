@@ -65,7 +65,7 @@ export const Bubble = <TMessage extends IMessage = IMessage>(props: BubbleProps<
 
   const context = useChatContext()
 
-  const bubbleContainerRef = useRef<View>(null)
+  const bubbleContainerRef = useRef<React.ComponentRef<typeof View>>(null)
 
   const [isPickerVisible, setIsPickerVisible] = useState(false)
   const [pickerAnchor, setPickerAnchor] = useState<PickerAnchor>({

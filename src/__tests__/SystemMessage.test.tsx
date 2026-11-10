@@ -5,13 +5,13 @@ import { SystemMessage } from '..'
 import { DEFAULT_TEST_MESSAGE } from './data'
 
 describe('SystemMessage', () => {
-  it('should not render <SystemMessage /> and compare with snapshot', () => {
-    const { toJSON } = render(<SystemMessage />)
+  it('should not render <SystemMessage /> and compare with snapshot', async () => {
+    const { toJSON } = await render(<SystemMessage />)
     expect(toJSON()).toMatchSnapshot()
   })
 
-  it('should render <SystemMessage /> and compare with snapshot', () => {
-    const { toJSON } = render(
+  it('should render <SystemMessage /> and compare with snapshot', async () => {
+    const { toJSON } = await render(
       <SystemMessage
         currentMessage={{
           ...DEFAULT_TEST_MESSAGE,

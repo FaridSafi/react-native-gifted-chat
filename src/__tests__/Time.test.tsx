@@ -5,14 +5,14 @@ import { Time } from '..'
 import { DEFAULT_TEST_MESSAGE } from './data'
 
 describe('Time', () => {
-  it('should not render <Time /> and compare with snapshot', () => {
-    const { toJSON } = render(<Time />)
+  it('should not render <Time /> and compare with snapshot', async () => {
+    const { toJSON } = await render(<Time />)
 
     expect(toJSON()).toMatchSnapshot()
   })
 
-  it('should render <Time /> and compare with snapshot', () => {
-    const { toJSON } = render(
+  it('should render <Time /> and compare with snapshot', async () => {
+    const { toJSON } = await render(
       <Time
         currentMessage={{
           ...DEFAULT_TEST_MESSAGE,

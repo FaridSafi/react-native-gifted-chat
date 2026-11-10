@@ -16,7 +16,7 @@ export const DAY_DEBUG = {
 
 // On-screen readout for the header, driven by a worklet `select` that returns the
 // readout string. Returns null (and runs nothing) when DAY_DEBUG.overlay is off.
-export function useDayDebugOverlay (select: () => string, deps: unknown[]): React.ReactElement | null {
+export function useDayDebugOverlay (select: () => string): React.ReactElement | null {
   const [text, setText] = useState('')
 
   useAnimatedReaction(
@@ -24,8 +24,7 @@ export function useDayDebugOverlay (select: () => string, deps: unknown[]): Reac
     value => {
       if (value)
         runOnJS(setText)(value)
-    },
-    deps
+    }
   )
 
   if (!DAY_DEBUG.overlay)

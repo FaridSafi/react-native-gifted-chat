@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`should render <Composer /> and compare with snapshot 1`] = `
 <View
@@ -8,44 +8,57 @@ exports[`should render <Composer /> and compare with snapshot 1`] = `
     }
   }
 >
-  <TextInput
-    accessibilityLabel="Type a message..."
-    accessible={true}
-    collapsable={false}
-    enablesReturnKeyAutomatically={true}
-    handlerTag={-1}
-    handlerType="NativeViewGestureHandler"
-    keyboardAppearance="default"
-    multiline={true}
-    onChange={[Function]}
-    onGestureHandlerEvent={[Function]}
-    onGestureHandlerStateChange={[Function]}
-    placeholder="Type a message..."
-    placeholderTextColor="#b2b2b2"
-    style={
+  <View
+    handlerTags={
       [
-        [
-          {
-            "fontSize": 16,
-            "lineHeight": 22,
-            "paddingBottom": 10,
-            "paddingHorizontal": 8,
-            "paddingTop": 8,
-          },
-          undefined,
-        ],
-        {
-          "outlineStyle": "none",
-        },
-        {
-          "height": undefined,
-        },
-        undefined,
+        1,
       ]
     }
-    testID="Type a message..."
-    underlineColorAndroid="transparent"
-    value=""
-  />
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    onGestureHandlerTouchEvent={[Function]}
+    onStartShouldSetResponder={[Function]}
+    pointerEvents="box-none"
+    style={
+      {
+        "display": "contents",
+      }
+    }
+  >
+    <TextInput
+      accessibilityLabel="Type a message..."
+      accessible={true}
+      enablesReturnKeyAutomatically={true}
+      keyboardAppearance="default"
+      multiline={true}
+      onChange={[Function]}
+      placeholder="Type a message..."
+      placeholderTextColor="#b2b2b2"
+      style={
+        [
+          [
+            {
+              "fontSize": 16,
+              "lineHeight": 22,
+              "paddingBottom": 10,
+              "paddingHorizontal": 8,
+              "paddingTop": 8,
+            },
+            undefined,
+          ],
+          {
+            "outlineStyle": "none",
+          },
+          {
+            "height": undefined,
+          },
+          undefined,
+        ]
+      }
+      testID="Type a message..."
+      underlineColorAndroid="transparent"
+      value=""
+    />
+  </View>
 </View>
 `;

@@ -40,8 +40,7 @@ export function useScrollGatedOpacity (isScrollActive: { value: boolean }) {
       } else {
         runOnJS(scheduleFadeOut)()
       }
-    },
-    [isScrollActive, scheduleFadeOut, fadeOutTimeoutId]
+    }
   )
 
   return opacity

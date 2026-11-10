@@ -62,7 +62,7 @@ const AnimatedDayWrapper = <TMessage extends IMessage>(props: ItemProps<TMessage
       return Infinity
 
     return dayPositionScreenTop(listHeight.value + scrolledY.value, day)
-  }, [daysPositions, listHeight, scrolledY, createdAt])
+  })
 
   const style = useAnimatedStyle(() => {
     // The inline separator is the in-conversation date marker. It is shown while its
@@ -81,7 +81,7 @@ const AnimatedDayWrapper = <TMessage extends IMessage>(props: ItemProps<TMessage
     return {
       opacity: belowHandoff || !headerShowsThisDay ? 1 : 0,
     }
-  }, [separatorScreenTop, floatingRenderedDate, createdAt])
+  })
 
   return (
     <Animated.View style={style}>

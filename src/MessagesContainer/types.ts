@@ -52,8 +52,19 @@ export interface MessagesContainerProps<TMessage extends IMessage = IMessage>
   listProps?: AnimatedListProps<TMessage>
   /** Reverses display order of messages; default is true */
   isInverted?: boolean
-  /** Controls whether or not the message bubbles appear at the top of the chat */
-  isAlignedTop?: boolean
+  /**
+   * Where the bubbles sit while the whole conversation fits on screen. Once it is taller
+   * than the list this has no effect - the messages fill it either way.
+   *
+   * - `false` (default) - bottom, the usual chat look.
+   * - `true` - top.
+   * - `'auto'` - top while the keyboard is closed, bottom while it is open, so a short
+   *   conversation starts under the header and re-anchors above the keyboard when the
+   *   composer is focused.
+   *
+   * Works with both `isInverted` settings.
+   */
+  isAlignedTop?: boolean | 'auto'
   /** Enables the isScrollToBottomEnabled Component */
   isScrollToBottomEnabled?: boolean
   /** Scroll to bottom wrapper style */

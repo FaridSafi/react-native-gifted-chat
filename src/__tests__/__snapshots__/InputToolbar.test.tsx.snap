@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
 <View
@@ -32,45 +32,58 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
         }
       }
     >
-      <TextInput
-        accessibilityLabel="Type a message..."
-        accessible={true}
-        collapsable={false}
-        enablesReturnKeyAutomatically={true}
-        handlerTag={-1}
-        handlerType="NativeViewGestureHandler"
-        keyboardAppearance="default"
-        multiline={true}
-        onChange={[Function]}
-        onGestureHandlerEvent={[Function]}
-        onGestureHandlerStateChange={[Function]}
-        placeholder="Type a message..."
-        placeholderTextColor="#b2b2b2"
-        style={
+      <View
+        handlerTags={
           [
-            [
-              {
-                "fontSize": 16,
-                "lineHeight": 22,
-                "paddingBottom": 10,
-                "paddingHorizontal": 8,
-                "paddingTop": 8,
-              },
-              undefined,
-            ],
-            {
-              "outlineStyle": "none",
-            },
-            {
-              "height": undefined,
-            },
-            undefined,
+            1,
           ]
         }
-        testID="Type a message..."
-        underlineColorAndroid="transparent"
-        value=""
-      />
+        onGestureHandlerEvent={[Function]}
+        onGestureHandlerStateChange={[Function]}
+        onGestureHandlerTouchEvent={[Function]}
+        onStartShouldSetResponder={[Function]}
+        pointerEvents="box-none"
+        style={
+          {
+            "display": "contents",
+          }
+        }
+      >
+        <TextInput
+          accessibilityLabel="Type a message..."
+          accessible={true}
+          enablesReturnKeyAutomatically={true}
+          keyboardAppearance="default"
+          multiline={true}
+          onChange={[Function]}
+          placeholder="Type a message..."
+          placeholderTextColor="#b2b2b2"
+          style={
+            [
+              [
+                {
+                  "fontSize": 16,
+                  "lineHeight": 22,
+                  "paddingBottom": 10,
+                  "paddingHorizontal": 8,
+                  "paddingTop": 8,
+                },
+                undefined,
+              ],
+              {
+                "outlineStyle": "none",
+              },
+              {
+                "height": undefined,
+              },
+              undefined,
+            ]
+          }
+          testID="Type a message..."
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
     </View>
     <View
       pointerEvents="none"
@@ -87,69 +100,66 @@ exports[`should render <InputToolbar /> and compare with snapshot 1`] = `
       }
     >
       <View
-        accessibilityLabel="send"
-        accessibilityRole="button"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": false,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
-        accessible={true}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
+        handlerTags={
           [
-            {
-              "justifyContent": "flex-end",
-            },
-            {
-              "opacity": 1,
-            },
-            {
-              "pointerEvents": "none",
-            },
+            2,
           ]
         }
-        testID="GC_SEND_TOUCHABLE"
+        onGestureHandlerEvent={[Function]}
+        onGestureHandlerStateChange={[Function]}
+        onGestureHandlerTouchEvent={[Function]}
+        onStartShouldSetResponder={[Function]}
+        pointerEvents="box-none"
+        style={
+          {
+            "display": "contents",
+          }
+        }
       >
-        <Text
-          style={
-            [
+        <RNGestureHandlerButton
+          accessibilityLabel="send"
+          accessibilityRole="button"
+          accessible={true}
+          needsOffscreenAlphaCompositing={true}
+          testID="GC_SEND_TOUCHABLE"
+        >
+          <View
+            style={
               [
                 {
-                  "backgroundColor": "transparent",
-                  "color": "#0084ff",
-                  "fontSize": 17,
-                  "fontWeight": "600",
-                  "paddingHorizontal": 10,
-                  "paddingVertical": 10,
+                  "justifyContent": "flex-end",
                 },
-                undefined,
-              ],
-              undefined,
-            ]
-          }
-        >
-          Send
-        </Text>
+                {
+                  "opacity": 1,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+              ]
+            }
+          >
+            <Text
+              style={
+                [
+                  [
+                    {
+                      "backgroundColor": "transparent",
+                      "color": "#0084ff",
+                      "fontSize": 17,
+                      "fontWeight": "600",
+                      "paddingHorizontal": 10,
+                      "paddingVertical": 10,
+                    },
+                    undefined,
+                  ],
+                  undefined,
+                ]
+              }
+            >
+              Send
+            </Text>
+          </View>
+        </RNGestureHandlerButton>
       </View>
     </View>
   </View>

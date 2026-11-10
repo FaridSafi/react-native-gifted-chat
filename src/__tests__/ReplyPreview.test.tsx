@@ -13,8 +13,8 @@ const replyMessage: ReplyMessage = {
   },
 }
 
-it('should render <ReplyPreview /> and compare with snapshot', () => {
-  const { toJSON } = render(
+it('should render <ReplyPreview /> and compare with snapshot', async () => {
+  const { toJSON } = await render(
     <ReplyPreview
       replyMessage={replyMessage}
       onClearReply={() => {}}
@@ -24,13 +24,13 @@ it('should render <ReplyPreview /> and compare with snapshot', () => {
   expect(toJSON()).toMatchSnapshot()
 })
 
-it('should render <ReplyPreview /> with image and compare with snapshot', () => {
+it('should render <ReplyPreview /> with image and compare with snapshot', async () => {
   const replyWithImage: ReplyMessage = {
     ...replyMessage,
     image: 'https://example.com/image.jpg',
   }
 
-  const { toJSON } = render(
+  const { toJSON } = await render(
     <ReplyPreview
       replyMessage={replyWithImage}
       onClearReply={() => {}}

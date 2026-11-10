@@ -2,6 +2,20 @@
 
 > **Maintenance notice:** Active development has moved to **[@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat)**. This package is now in maintenance mode and won't receive new features. See the fork for streaming AI messages and ongoing updates. Migrating is mostly a rename - see the fork's [migration guide](https://github.com/kesha-antonov/react-native-chat/blob/main/docs/MIGRATION.md).
 
+## [Unreleased]
+
+### Features
+- `isAlignedTop='auto'` ([#2736](https://github.com/FaridSafi/react-native-gifted-chat/issues/2736)): a short conversation sits at the top while the keyboard is closed and moves to the bottom while it is open. Works with both `isInverted` settings.
+
+### Bug Fixes
+- Android navigation bar overlapping the app after leaving the chat ([#2755](https://github.com/FaridSafi/react-native-gifted-chat/issues/2755)): the built-in `KeyboardProvider` no longer forces `statusBarTranslucent` / `navigationBarTranslucent`, which changed the activity window and stayed changed. Set them via `keyboardProviderProps` if you need them.
+- `isAlignedTop` cut off chats taller than the screen, which then could not be scrolled.
+- Reanimated 4 logged "Dependencies should only be used on the web" on every render.
+
+### Maintenance
+- Example app on Expo SDK 58 (React Native 0.88, gesture-handler 3, Reanimated 4.7); iOS builds again. New "Top Aligned (short chat)" screen.
+- Dev toolchain on React Native 0.88, Jest 30, `@testing-library/react-native` 14, ESLint 10. Peer dependency ranges unchanged.
+
 ## [3.4.2] - 2026-11-06
 
 ### ✨ Features

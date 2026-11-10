@@ -2,10 +2,6 @@ import { Platform, StyleSheet } from 'react-native'
 import { Color } from '../Color'
 
 export default StyleSheet.create({
-  containerAlignTop: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
   contentContainerStyle: {
     flexGrow: 1,
     justifyContent: 'flex-start',

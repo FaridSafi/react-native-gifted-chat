@@ -128,7 +128,7 @@ export default [
         'warn',
         {
           additionalHooks:
-            '(useAnimatedStyle|useSharedValue|useAnimatedGestureHandler|useAnimatedScrollHandler|useAnimatedProps|useDerivedValue|useAnimatedRef|useAnimatedReact|useAnimatedReaction|useCallbackDebounced|useCallbackThrottled)',
+            '(useAnimatedStyle|useAnimatedGestureHandler|useAnimatedScrollHandler|useAnimatedProps|useDerivedValue|useCallbackDebounced|useCallbackThrottled)',
         },
       ],
 
@@ -305,7 +305,7 @@ export default [
         'warn',
         {
           additionalHooks:
-            '(useAnimatedStyle|useSharedValue|useAnimatedGestureHandler|useAnimatedScrollHandler|useAnimatedProps|useDerivedValue|useAnimatedRef|useAnimatedReact|useAnimatedReaction|useCallbackDebounced|useCallbackThrottled)',
+            '(useAnimatedStyle|useAnimatedGestureHandler|useAnimatedScrollHandler|useAnimatedProps|useDerivedValue|useCallbackDebounced|useCallbackThrottled)',
         },
       ],
 

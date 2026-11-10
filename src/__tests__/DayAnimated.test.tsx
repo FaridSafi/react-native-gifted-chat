@@ -11,8 +11,8 @@ const mockIsScrollActive = { value: false }
 const mockFloatingRenderedDate = { value: undefined }
 
 describe('DayAnimated', () => {
-  it('should render DayAnimated with default Day component', () => {
-    const { toJSON } = render(
+  it('should render DayAnimated with default Day component', async () => {
+    const { toJSON } = await render(
       <DayAnimated
         scrolledY={mockScrolledY}
         daysPositions={mockDaysPositions}
@@ -25,14 +25,14 @@ describe('DayAnimated', () => {
     expect(toJSON()).toMatchSnapshot()
   })
 
-  it('should use custom renderDay when provided', () => {
+  it('should use custom renderDay when provided', async () => {
     const customRenderDay = jest.fn((props: DayProps) => (
       <View testID='custom-day'>
         <Text>Custom Day: {props.createdAt.toLocaleString()}</Text>
       </View>
     ))
 
-    const { toJSON } = render(
+    const { toJSON } = await render(
       <DayAnimated
         scrolledY={mockScrolledY}
         daysPositions={mockDaysPositions}

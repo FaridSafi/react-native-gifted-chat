@@ -1,93 +1,90 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`should render <LoadEarlierMessages /> and compare with snapshot 1`] = `
 <View
-  accessibilityRole="button"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
-  accessible={true}
-  focusable={true}
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  style={
+  handlerTags={
     [
-      [
-        {
-          "alignItems": "center",
-          "marginVertical": 10,
-        },
-        undefined,
-      ],
-      {
-        "opacity": 1,
-      },
-      {
-        "pointerEvents": "none",
-      },
+      1,
     ]
   }
->
-  <View
-    style={
-      [
-        {
-          "alignItems": "center",
-          "justifyContent": "center",
-        },
-        {
-          "backgroundColor": "#b2b2b2",
-          "borderRadius": 15,
-          "paddingHorizontal": 10,
-          "paddingVertical": 5,
-        },
-        undefined,
-      ]
+  onGestureHandlerEvent={[Function]}
+  onGestureHandlerStateChange={[Function]}
+  onGestureHandlerTouchEvent={[Function]}
+  onStartShouldSetResponder={[Function]}
+  pointerEvents="box-none"
+  style={
+    {
+      "display": "contents",
     }
+  }
+>
+  <RNGestureHandlerButton
+    accessibilityRole="button"
+    enabled={true}
+    needsOffscreenAlphaCompositing={true}
   >
     <View
       style={
-        {
-          "paddingBottom": 4,
-          "paddingTop": 3,
-        }
+        [
+          [
+            {
+              "alignItems": "center",
+              "marginVertical": 10,
+            },
+            undefined,
+          ],
+          {
+            "opacity": 1,
+          },
+          {
+            "pointerEvents": "none",
+          },
+        ]
       }
     >
-      <Text
+      <View
         style={
           [
             {
-              "backgroundColor": "transparent",
-              "color": "#fff",
-              "fontSize": 12,
-              "lineHeight": 13,
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            {
+              "backgroundColor": "#b2b2b2",
+              "borderRadius": 15,
+              "paddingHorizontal": 10,
+              "paddingVertical": 5,
             },
             undefined,
           ]
         }
       >
-        Load earlier messages
-      </Text>
+        <View
+          style={
+            {
+              "paddingBottom": 4,
+              "paddingTop": 3,
+            }
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "backgroundColor": "transparent",
+                  "color": "#fff",
+                  "fontSize": 12,
+                  "lineHeight": 13,
+                },
+                undefined,
+              ]
+            }
+          >
+            Load earlier messages
+          </Text>
+        </View>
+      </View>
     </View>
-  </View>
+  </RNGestureHandlerButton>
 </View>
 `;

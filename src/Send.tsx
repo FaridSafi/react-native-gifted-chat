@@ -64,7 +64,7 @@ export const Send = <TMessage extends IMessage = IMessage>({
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
-  }), [opacity])
+  }))
 
   return (
     <Animated.View style={[styles.container, containerStyle, animatedStyle]} pointerEvents={isVisible ? 'auto' : 'none'}>

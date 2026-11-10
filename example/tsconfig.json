@@ -1,10 +1,15 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "customConditions": ["react-native"],
+    "customConditions": [
+      "react-native"
+    ],
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "lib": ["DOM", "ESNext"],
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
     "module": "preserve",
     "moduleDetection": "force",
     "moduleResolution": "bundler",
@@ -32,5 +37,6 @@
     "jest.config.js",
     "android",
     "ios"
-  ]
+  ],
+  "extends": "expo/tsconfig.base"
 }

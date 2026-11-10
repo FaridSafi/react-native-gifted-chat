@@ -35,7 +35,8 @@ module.exports = {
       acc[name] = path.join(__dirname, 'node_modules', name)
       return acc
     }, {}),
-    unstable_enablePackageExports: false,
+    // Left at Metro's default (on): Expo SDK 58 packages reach each other through
+    // `exports` subpaths, e.g. @expo/metro-runtime importing `@expo/log-box/LogBox`.
   },
 
   transformer: {

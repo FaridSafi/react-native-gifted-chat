@@ -36,7 +36,7 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Omit
   /* Messages container ref */
   messagesContainerRef?: RefObject<AnimatedList<TMessage>>
   /* text input ref */
-  textInputRef?: RefObject<TextInput>
+  textInputRef?: RefObject<React.ComponentRef<typeof TextInput> | null>
   /* Controls whether or not to show user.name property in the message bubble */
   isUsernameVisible?: boolean
   /* Messages container style */
@@ -146,13 +146,16 @@ export interface GiftedChatProps<TMessage extends IMessage> extends Partial<Omit
     quickReplies: QuickRepliesProps<TMessage>
   ) => React.ReactNode
   renderQuickReplySend?: () => React.ReactNode
+  /**
+   * Props for the built-in `KeyboardProvider`. No defaults are applied: in particular
+   * `statusBarTranslucent` / `navigationBarTranslucent` are left to
+   * react-native-keyboard-controller, which turns them on when the app is edge-to-edge.
+   */
   keyboardProviderProps?: React.ComponentProps<typeof KeyboardProvider>
   /**
    * Skip rendering the built-in `KeyboardProvider` wrapper.
    * Enable this when your app already mounts its own `KeyboardProvider`
-   * (e.g. once at the root), or when the default `statusBarTranslucent` /
-   * `navigationBarTranslucent` edge-to-edge behavior causes layout shift,
-   * flicker on mount, or a header/content jump on Android/Expo.
+   * (e.g. once at the root), so that only one provider is in the tree.
    * Default is `false`.
    */
   disableKeyboardProvider?: boolean

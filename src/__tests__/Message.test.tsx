@@ -5,8 +5,8 @@ import { Message } from '..'
 import { DEFAULT_TEST_MESSAGE } from './data'
 
 describe('Message component', () => {
-  it('should render <Message /> and compare with snapshot', () => {
-    const { toJSON } = render(
+  it('should render <Message /> and compare with snapshot', async () => {
+    const { toJSON } = await render(
       <Message
         key='123'
         user={{ _id: 1 }}
@@ -23,16 +23,16 @@ describe('Message component', () => {
     expect(toJSON()).toMatchSnapshot()
   })
 
-  it('should NOT render <Message />', () => {
-    const { toJSON } = render(
+  it('should NOT render <Message />', async () => {
+    const { toJSON } = await render(
       <Message key='123' user={{ _id: 1 }} currentMessage={null} position='left' />
     )
 
     expect(toJSON()).toMatchSnapshot()
   })
 
-  it('should render <Message /> with Avatar', () => {
-    const { toJSON } = render(
+  it('should render <Message /> with Avatar', async () => {
+    const { toJSON } = await render(
       <Message
         key='123'
         user={{ _id: 1 }}
@@ -45,8 +45,8 @@ describe('Message component', () => {
     expect(toJSON()).toMatchSnapshot()
   })
 
-  it('should render null if user has no Avatar', () => {
-    const { toJSON } = render(
+  it('should render null if user has no Avatar', async () => {
+    const { toJSON } = await render(
       <Message
         key='123'
         user={{ _id: 1 }}

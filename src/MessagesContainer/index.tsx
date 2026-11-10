@@ -3,10 +3,11 @@ import {
   View,
   LayoutChangeEvent,
   ListRenderItemInfo,
-  CellRendererProps,
+  ViewProps,
   Text } from 'react-native'
 import { Pressable } from 'react-native-gesture-handler'
 import Animated, { runOnJS, ScrollEvent, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
+import { useIsKeyboardVisible } from '../hooks/useIsKeyboardVisible'
 import { LoadEarlierMessages } from '../LoadEarlierMessages'
 import { warning } from '../logging'
 import { IMessage } from '../Models'
@@ -20,6 +21,15 @@ import styles from './styles'
 import { MessagesContainerProps, DaysPositions, AnimatedFlatList } from './types'
 
 export * from './types'
+
+// React Native 0.88 stopped exporting `CellRendererProps`, so the shape the list hands
+// to `CellRendererComponent` is spelled out here.
+interface CellRendererProps<ItemT> extends ViewProps {
+  item: ItemT
+  index: number
+  cellKey: string
+  children?: React.ReactNode
+}
 
 export const MessagesContainer = <TMessage extends IMessage>(props: MessagesContainerProps<TMessage>) => {
   const {
@@ -44,6 +54,29 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
     isDayAnimationEnabled = true,
   } = props
 
+  // `'auto'` is the only mode that cares about the keyboard, so the other two never
+  // subscribe - and never re-render the whole list when the keyboard moves.
+  const isKeyboardVisible = useIsKeyboardVisible(isAlignedTop === 'auto')
+
+  const isTopAligned = isAlignedTop === 'auto'
+    ? !isKeyboardVisible
+    : isAlignedTop === true
+
+  // Alignment lives on the list's content container rather than on the wrapper: with
+  // `flexGrow` the content is at least a viewport tall, so `justifyContent` places a
+  // short conversation and is a no-op once the messages outgrow the list - which keeps
+  // long chats scrollable instead of letting the list size itself to its content.
+  // An inverted list is flipped, so its content-container start is the visual bottom.
+  const alignmentStyle = useMemo(() => {
+    if (!isAlignedTop)
+      return undefined
+
+    return {
+      flexGrow: 1,
+      justifyContent: isTopAligned === isInverted ? 'flex-end' : 'flex-start',
+    } as const
+  }, [isAlignedTop, isTopAligned, isInverted])
+
   const listPropsOnScrollProp = listProps?.onScroll
 
   const scrollToBottomOpacity = useSharedValue(0)
@@ -52,7 +85,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
   const [isScrollToBottomVisible, setIsScrollToBottomVisible] = useState(false)
   const scrollToBottomStyleAnim = useAnimatedStyle(() => ({
     opacity: scrollToBottomOpacity.value,
-  }), [scrollToBottomOpacity])
+  }))
 
   const daysPositions = useSharedValue<DaysPositions>({})
   const listHeight = useSharedValue(0)
@@ -257,7 +290,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
     const content = renderLoadEarlier()
 
     if (!content)
-      return null
+      return undefined
 
     return (
       <View style={stylesCommon.fill}>{content}</View>
@@ -411,7 +444,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
     onMomentumEnd: () => {
       isScrollActive.value = false
     },
-  }, [handleOnScroll, isScrollActive])
+  })
 
   // removes unrendered days positions when messages are added/removed
   useEffect(() => {
@@ -440,12 +473,7 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
   }, [messages, daysPositions, isInverted, isDayAnimationEnabled])
 
   return (
-    <View
-      style={[
-        styles.contentContainerStyle,
-        isAlignedTop ? styles.containerAlignTop : stylesCommon.fill,
-      ]}
-    >
+    <View style={[styles.contentContainerStyle, stylesCommon.fill]}>
       <AnimatedFlatList
         ref={forwardRef}
         keyExtractor={keyExtractor}
@@ -454,7 +482,6 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         inverted={isInverted}
         automaticallyAdjustContentInsets={false}
         style={stylesCommon.fill}
-        contentContainerStyle={styles.messagesContainer}
         ListEmptyComponent={renderChatEmpty}
         ListFooterComponent={
           isInverted ? ListHeaderComponent : <>{ListFooterComponent}</>
@@ -468,6 +495,12 @@ export const MessagesContainer = <TMessage extends IMessage>(props: MessagesCont
         keyboardDismissMode='interactive'
         keyboardShouldPersistTaps='handled'
         {...listProps}
+        // Applied after `listProps` so a custom `contentContainerStyle` keeps working
+        // together with `isAlignedTop`.
+        contentContainerStyle={[
+          listProps?.contentContainerStyle ?? styles.messagesContainer,
+          alignmentStyle,
+        ]}
         onScroll={scrollHandler}
         onLayout={onLayoutList}
         CellRendererComponent={renderCell}

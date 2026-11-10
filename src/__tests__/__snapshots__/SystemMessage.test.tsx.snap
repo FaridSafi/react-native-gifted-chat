@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`SystemMessage should not render <SystemMessage /> and compare with snapshot 1`] = `null`;
 

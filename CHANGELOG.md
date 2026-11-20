@@ -2,6 +2,14 @@
 
 > **Maintenance notice:** Active development has moved to **[@kesha-antonov/react-native-chat](https://github.com/kesha-antonov/react-native-chat)**. This package is now in maintenance mode and won't receive new features. See the fork for streaming AI messages and ongoing updates. Migrating is mostly a rename - see the fork's [migration guide](https://github.com/kesha-antonov/react-native-chat/blob/main/docs/MIGRATION.md).
 
+## [3.6.0] - 2026-11-20
+
+No changes to the library code. This release updates the README shown on npm.
+
+### Documentation
+
+- The Stream sponsor block and its logo are removed from the README
+
 ## [3.5.0] - 2026-11-10
 
 ### Features

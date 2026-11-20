@@ -65,9 +65,6 @@
       <a href="https://www.lereacteur.io" target="_blank"><img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/logo_sponsor.png" height="50"></a>
     </td>
     <td align="center" valign="middle">
-      <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank"><img src="https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/media/stream-logo.png" height="35"></a>
-    </td>
-    <td align="center" valign="middle">
       <a href="https://www.ethora.com" target="_blank"><img src="https://www.dappros.com/wp-content/uploads/2023/12/Ethora-Logo.png" height="50"></a>
     </td>
   </tr>
@@ -75,8 +72,6 @@
 
 <p align="center">
   <a href="https://www.lereacteur.io" target="_blank"><strong>Le Reacteur</strong></a> - Coding Bootcamp in Paris co-founded by Farid Safi
-  <br>
-  <a href="https://getstream.io/chat/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank"><strong>Stream</strong></a> - Scalable chat API/Server written in Go (<a href="https://getstream.io/chat/get_started/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">API Tour</a> | <a href="https://dev.to/nickparsons/react-native-chat-with-chuck-norris-3h7m?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_Chat&utm_term=react-native-gifted-chat" target="_blank">Tutorial</a>)
   <br>
   <a href="https://www.ethora.com" target="_blank"><strong>Ethora</strong></a> - A complete app engine featuring GiftedChat (<a href="https://bit.ly/ethorachat" target="_blank">GitHub</a>)
   <br><br>
